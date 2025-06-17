@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ab_rss_back">Indietro</string>
+    <string name="ab_rss_refresh">Aggiorna</string>
+    <string name="ab_rss_settings">Impostazioni</string>
+    <string name="ab_rss_configure_supported_remove">Rimuovi dal feed</string>
+    <string name="ab_rss_configure_supported_add">Aggiungi al feed</string>
+    <string name="ab_rss_configure_add">Aggiungi feed</string>
+    <string name="ab_refresh">Aggiorna</string>
+    <string name="ab_menu">Menu</string>
+    <string name="ab_close">Chiudi</string>
+    <string name="ab_back">Indietro</string>
+    <string name="ab_hide">Nascondi</string>
+    <string name="ab_points">Punti</string>
+    <string name="ab_status">Stato</string>
+    <string name="ab_result_race_overview">%s, %s, alla guida per %s</string>
+    <string name="ab_result_qualifying_overview">%s, alla guida per %s, qualificato P %s</string>
+    <string name="ab_result_qualifying_overview_dnq">%s, alla guida per %s, non qualificato</string>
+    <string name="ab_result_overview_fastest_lap">%s, %s, alla guida per %s. Ha ottenuto il giro più veloce</string>
+    <string name="ab_did_not_qualify">Non qualificato</string>
+    <string name="ab_result_fastest_lap">Ha ottenuto il giro più veloce</string>
+    <string name="ab_result_finish_time">Arrivato %s dietro il vincitore</string>
+    <string name="ab_result_finish_p1">Arrivato in %s</string>
+    <string name="ab_result_finish_dnf">Non arrivato. %s</string>
+    <string name="ab_race_overview">%s, round %s a %s. Ha guidato per %s</string>
+    <string name="ab_scored">%s ha ottenuto %s punti</string>
+    <string name="ab_notifications_enabled">Notifica abilitata</string>
+    <string name="ab_has_qualifying_results">Risultati delle qualifiche disponibili</string>
+    <string name="ab_no_qualifying_results">Qualifiche non ancora disponibili</string>
+    <string name="ab_has_sprint_results">Risultati della gara sprint disponibili</string>
+    <string name="ab_no_sprint_results">Gara sprint non ancora disponibile</string>
+    <string name="ab_has_race_results">Risultati della gara disponibili</string>
+    <string name="ab_no_race_results">Risultati della gara non ancora disponibili</string>
+    <string name="ab_positions_gained">Partito %s, arrivato %s, guadagnato %d posizioni</string>
+    <string name="ab_positions_neutral">Partito %s, arrivato %s</string>
+    <string name="ab_positions_lost">Partito %s, guadagnato %d, perso %d posizioni</string>
+    <string name="ab_fastest_lap">Giro più veloce</string>
+    <string name="ab_constructor_logo">Logo %s</string>
+    <string name="ab_preseason_events">Eventi di preseason</string>
+    <string name="ab_rss_open_in_browser">Apri nel browser</string>
+    <string name="ab_rss_share">Condividi</string>
+    <string name="ab_collapsed_section">%s, round %d a %s, round %d.</string>
+    <string name="ab_schedule_date_card">%s, alle %s ora del dispositivo</string>
+    <string name="ab_schedule_date_card_notifications_enabled">%s, alle %s ora del dispositivo. Notifiche abilitate</string>
+    <string name="ab_change_of_rain">Probabilità di pioggia</string>
+</resources>

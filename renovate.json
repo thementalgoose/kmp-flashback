@@ -1,0 +1,19 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "labels": [
+    "Dependency Update"
+  ],
+  "rebaseWhen": "conflicted",
+  "packageRules": [
+    {
+      "groupName": "kotlin",
+      "matchPackageNames": [
+        "/^org.jetbrains.kotlin.$/",
+        "/^com.google.devtools.ksp/"
+      ]
+    }
+  ]
+}

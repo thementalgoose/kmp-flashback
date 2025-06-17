@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="ab_rss_back">Back</string>
+    <string name="ab_rss_refresh">Refresh</string>
+    <string name="ab_rss_settings">Settings</string>
+
+    <string name="ab_rss_configure_supported_remove">Remove from feed</string>
+    <string name="ab_rss_configure_supported_add">Add to feed</string>
+    <string name="ab_rss_configure_add">Add feed</string>
+
+    <string name="ab_refresh">Refresh</string>
+    <string name="ab_menu">Menu</string>
+    <string name="ab_close">Close</string>
+    <string name="ab_back">Back</string>
+    <string name="ab_hide">Hide</string>
+
+    <string name="ab_points">Points</string>
+    <string name="ab_status">Status</string>
+
+    <string name="ab_result_race_overview">%s, %s, driving for %s</string>
+    <string name="ab_result_qualifying_overview">%s, driving for %s, qualified P %s</string>
+    <string name="ab_result_qualifying_overview_dnq">%s, driving for %s, did not qualify</string>
+    <string name="ab_result_overview_fastest_lap">%s, %s, driving for %s. They had the fastest lap</string>
+    <string name="ab_did_not_qualify">Did not qualify</string>
+    <string name="ab_result_fastest_lap">They had the fastest lap</string>
+
+    <string name="ab_result_finish_time">Finished %s behind the winner</string>
+    <string name="ab_result_finish_p1">Finished in %s</string>
+    <string name="ab_result_finish_dnf">Did not finish. %s</string>
+
+    <string name="ab_race_overview">%s, round %s at %s. Drove for %s</string>
+
+    <string name="ab_scored">%s scored %s points</string>
+    <string name="ab_notifications_enabled">Notification enabled</string>
+
+    <string name="ab_has_qualifying_results">Qualifying results available</string>
+    <string name="ab_no_qualifying_results">Qualifying not yet available</string>
+    <string name="ab_has_sprint_results">Sprint results available</string>
+    <string name="ab_no_sprint_results">Sprint not yet available</string>
+    <string name="ab_has_race_results">Race results available</string>
+    <string name="ab_no_race_results">Race results not yet available</string>
+
+    <string name="ab_positions_gained">Started %s, finished %s, gained %d places</string>
+    <string name="ab_positions_neutral">Started %s, finished %s</string>
+    <string name="ab_positions_lost">Started %s, gained %d, lost %d places</string>
+
+    <string name="ab_fastest_lap">Fastest Lap</string>
+
+    <string name="ab_constructor_logo">%s logo</string>
+
+    <string name="ab_preseason_events">Preseason events</string>
+
+    <string name="ab_rss_open_in_browser">Open in browser</string>
+    <string name="ab_rss_share">Share</string>
+
+    <string name="ab_collapsed_section">%s, round %d to %s, round %d.</string>
+    <string name="ab_schedule_date_card">%s, at %s device time</string>
+    <string name="ab_schedule_date_card_notifications_enabled">%s, at %s device time. Notifications enabled</string>
+
+    <string name="ab_change_of_rain">Chance of rain</string>
+</resources>

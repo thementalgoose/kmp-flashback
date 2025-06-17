@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Splash -->
+    <string name="splash_continue">继续</string>
+    <string name="splash_sync_info">由于这是您首次打开应用，我们正在获取一些与一级方程式世界相关的数据，以便您了解最新情况…</string>
+    <string name="splash_sync_try_again">重试</string>
+    <string name="splash_sync_required_failed">我们需要同步一些信息才能继续。请确保您有有效的互联网连接，然后重试（您只需执行此操作一次）</string>
+    <string name="splash_sync_config">配置…</string>
+    <string name="splash_sync_races">比赛…</string>
+    <string name="splash_sync_constructors">车队…</string>
+    <string name="splash_sync_drivers">车手…</string>
+    <string name="splash_sync_circuits">赛道…</string>
+
+    <!-- Search -->
+    <string name="search_title">搜索</string>
+    <string name="search_category_option_title">类别</string>
+    <string name="search_category_option_description">选择要搜索的类别</string>
+    <string name="search_category_driver">车手</string>
+    <string name="search_category_constructors">车队</string>
+    <string name="search_category_races">比赛</string>
+    <string name="search_category_circuits">赛道</string>
+    <string name="search_placeholder">从一级方程式历史中查找任何车手、车队、赛道或比赛</string>
+
+    <!-- Navigation -->
+    <string name="nav_drivers">车手</string>
+    <string name="nav_constructors">车队</string>
+    <string name="nav_calendar">日历</string>
+    <string name="nav_schedule">赛程</string>
+    <string name="nav_seasons">赛季</string>
+    <string name="nav_settings">赛季</string>
+    <string name="nav_search">搜索</string>
+    <string name="nav_rss">RSS</string>
+    <string name="nav_details">详细信息</string>
+    <string name="nav_qualifying">排位赛</string>
+    <string name="nav_race">比赛</string>
+    <string name="nav_sprint_qualifying">冲刺赛排位赛</string>
+    <string name="nav_sprint">冲刺赛</string>
+
+    <!-- Race -->
+    <plurals name="race_points">
+        <item quantity="other">%s 分</item>
+    </plurals>
+    <string name="race_status_retired">退赛</string>
+
+    <!-- Qualifying -->
+    <string name="qualifying_header_q1">Q1</string>
+    <string name="qualifying_header_q2">Q2</string>
+    <string name="qualifying_header_q3">Q3</string>
+    <string name="sprint_qualifying_header_q1">SQ1</string>
+    <string name="sprint_qualifying_header_q2">SQ2</string>
+    <string name="sprint_qualifying_header_q3">SQ3</string>
+    <string name="qualifying_penalty_starts">处罚，从第 %s 位发车</string>
+    <string name="qualifying_penalty">处罚，维修区发车</string>
+    <string name="qualifying_penalty_starts_sprint">处罚，从第 %s 位发车</string>
+
+    <!-- Results -->
+    <string name="weekend_race_round">第 %d 轮</string>
+    <string name="weekend_race_round_season" formatted="false">第 %d 轮，%d</string>
+    <string name="world_champion">世界冠军</string>
+
+    <!-- Details -->
+    <string name="weekend_info_laps">%s 圈</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_now">最近的精彩瞬间…</string>
+    <string name="dashboard_search">搜索</string>
+    <string name="dashboard_links_title">链接</string>
+    <string name="dashboard_links_rss">RSS 订阅</string>
+    <string name="dashboard_links_search">搜索</string>
+    <string name="dashboard_links_settings">设置</string>
+    <string name="dashboard_links_reaction">反应游戏</string>
+    <string name="dashboard_links_contact">联系</string>
+    <string name="dashboard_links_dark_mode">深色模式</string>
+    <string name="dashboard_all_title">全部</string>
+    <string name="dashboard_tab_results">结果</string>
+    <string name="dashboard_tab_calendar">日历</string>
+    <string name="dashboard_tab_drivers">车手</string>
+    <string name="dashboard_tab_constructors">车队</string>
+    <string name="season_standings_driver">车手积分榜</string>
+    <string name="season_standings_constructor">车队积分榜</string>
+
+    <!-- Driver overview -->
+    <string name="driver_overview_stat_career_drivers_title">车手锦标赛</string>
+    <string name="driver_overview_stat_career_best_championship_position">最佳锦标赛排名</string>
+    <string name="driver_overview_stat_career_championship_standing">锦标赛排名</string>
+    <string name="driver_overview_stat_career_championship_standing_so_far">当前锦标赛排名</string>
+    <string name="driver_overview_stat_career_wins">获胜次数</string>
+    <string name="driver_overview_stat_career_podiums">登上领奖台次数</string>
+    <string name="driver_overview_stat_race_starts">比赛发车次数</string>
+    <string name="driver_overview_stat_race_finishes">比赛完赛次数</string>
+    <string name="driver_overview_stat_race_retirements">比赛退赛次数</string>
+    <string name="driver_overview_stat_career_points">积分</string>
+    <string name="driver_overview_stat_career_best_finish">最佳完赛成绩</string>
+    <string name="driver_overview_stat_career_points_finishes">积分完赛次数</string>
+    <string name="driver_overview_stat_career_qualifying_pole">获得杆位次数</string>
+    <string name="driver_overview_stat_career_qualifying_top_3">获得前三名发车位次数</string>
+    <string name="driver_overview_stat_career_qualifying_top_10">获得前十名发车位次数</string>
+    <string name="driver_overview_stat_career_team_history">历史</string>
+    <string name="driver_overview_stat_career_team">车队</string>
+    <string name="driver_overview_constructor">车队：%s</string>
+    <string name="driver_overview_stat_birthday">出生于 %s</string>
+
+    <!-- Driver Comparison -->
+    <string name="driver_comparison_no_races_in_common">本赛季中，没有哪场比赛是这两位车手同时参加的。</string>
+    <string name="driver_comparison_title">比较驱动程序</string>
+    <string name="driver_comparison_swap_drivers">互换选择</string>
+    <string name="driver_comparison_stat_races">比赛</string>
+    <string name="driver_comparison_stat_qualifying">排位赛</string>
+    <string name="driver_comparison_stat_points">分数</string>
+    <string name="driver_comparison_stat_points_finishes">分数完赛</string>
+    <string name="driver_comparison_stat_podiums">颁奖台</string>
+    <string name="driver_comparison_stat_wins">胜利</string>
+    <string name="driver_comparison_stat_highest_finish">最佳比赛成绩</string>
+    <string name="driver_comparison_stat_dnfs">未完赛</string>
+
+    <!-- Constructor Overview -->
+    <string name="constructor_overview_stat_titles">车队锦标赛</string>
+    <string name="constructor_overview_stat_drivers_titles">车手锦标赛</string>
+    <string name="constructor_overview_stat_championship_standing">锦标赛排名</string>
+    <string name="constructor_overview_stat_championship_standing_so_far">当前锦标赛排名</string>
+    <string name="constructor_overview_stat_races">比赛</string>
+    <string name="constructor_overview_stat_race_wins">获胜次数</string>
+    <string name="constructor_overview_stat_race_podiums">登上领奖台次数</string>
+    <string name="constructor_overview_stat_qualifying_poles">获得杆位次数</string>
+    <string name="constructor_overview_stat_qualifying_top_3">获得前三名发车位次数</string>
+    <string name="constructor_overview_stat_points">积分</string>
+    <string name="constructor_overview_stat_points_finishes">积分完赛次数</string>
+    <string name="constructor_overview_stat_best_finish">最佳完赛成绩</string>
+    <string name="constructor_overview_stat_best_championship_position">最佳锦标赛排名</string>
+    <string name="constructor_overview_stat_position">排名</string>
+    <string name="constructor_overview_in_progress">赛季进行中</string>
+
+    <!-- Stats -->
+    <string name="stat_history_championships">锦标赛</string>
+    <string name="stat_history_wins">获胜次数</string>
+    <string name="stat_history_poles">杆位次数</string>
+    <string name="stat_history_podiums">登上领奖台次数</string>
+    <string name="stat_history_empty">未找到结果！</string>
+
+    <!-- Circuits -->
+    <string name="circuit_race_round" formatted="false">%s，第 %d 轮</string>
+    <string name="circuit_hosted_grand_prix_from" formatted="false">在 %d 至 %d 年间举办了 %d 场大奖赛</string>
+    <string name="circuit_hosted_grand_prix" formatted="false">举办了 %d 场大奖赛</string>
+
+    <!-- Results disclaimer -->
+    <string name="results_accurate_for" formatted="false">截至 %s（第 %d 轮）的结果</string>
+    <string name="results_accurate_for_round" formatted="false">截至 %d，第 %s 轮的结果</string>
+    <string name="results_accurate_for_year" formatted="false">截至 %d %s（第 %d 轮）的结果</string>
+
+    <!-- Links -->
+    <string name="details_link_youtube">YouTube</string>
+    <string name="details_link_circuit">赛道历史</string>
+    <string name="details_link_map">位置</string>
+    <string name="details_link_laps">%s 圈</string>
+    <string name="details_link_wikipedia">维基百科</string>
+
+    <!-- Feature banners -->
+    <string name="feature_banner_runtime_notifications">授予 Flashback 发送通知的权限</string>
+    <string name="feature_banner_notifications">获取即将到来的比赛周末的练习赛、排位赛和比赛活动的通知！</string>
+    <string name="feature_banner_notifications_finished">您随时可以在设置中更改此设置</string>
+    <string name="feature_banner_soft_upgrade">Play 商店中有可用更新</string>
+
+    <!-- Errors -->
+    <string name="network_error_network">发生网络错误。请确保您已连接到互联网，然后重试</string>
+    <string name="network_error_internal">发生未知错误</string>
+    <string name="error_weekend_not_available">很遗憾，我们没有这些结果。</string>
+    <string name="error_data_not_available_try_again">获取这些结果时发生错误。请检查您的互联网连接，然后重试</string>
+    <string name="error_weekend_not_available_yet">我们目前还没有这些结果，请在比赛结束后查看。结果通常在每个周末活动后的 2–12 小时内出现</string>
+    <string name="error_search_not_found">未找到结果</string>
+    <string name="rss_internal_error">发生网络错误，我们无法找到任何文章。请检查您的互联网连接或稍后重试</string>
+    <string name="rss_network_error">发生网络错误！请检查您是否已添加了一组有效的 RSS 源，并且您已连接到互联网，然后重试。</string>
+    <string name="rss_no_articles">欢迎使用 RSS 源！\n您尚未启用任何 RSS 源 - 单击此处立即配置它们。设置后下拉刷新</string>
+
+    <!-- Events -->
+    <string name="event_type_testing">测试赛</string>
+    <string name="event_type_car_launch">赛车发布会</string>
+    <string name="event_type_netflix">Netflix</string>
+    <string name="event_type_other">其他</string>
+    <string name="events_title">季前活动</string>
+    <string name="events_list_title">%s 活动</string>
+    <string name="events_list_subtitle">本赛季的季前活动</string>
+
+    <!-- Tyres -->
+    <string name="tyres_label">轮胎配方</string>
+    <string name="tyres_list_title">%s 轮胎</string>
+    <string name="tyres_list_subtitle">这些是本赛季使用的倍耐力轮胎配方</string>
+    <string name="tyres_dry_compounds">干地</string>
+    <string name="tyres_wet_compounds">湿地</string>
+    <string name="tyres_size">%d 英寸轮辋</string>
+    <string name="tyre_hyper_soft">超软胎</string>
+    <string name="tyre_ultra_soft">极软胎</string>
+    <string name="tyre_super_soft">软胎</string>
+    <string name="tyre_soft">中性胎</string>
+    <string name="tyre_medium">硬胎</string>
+    <string name="tyre_hard">超硬胎</string>
+    <string name="tyre_super_hard">极硬胎</string>
+    <string name="tyre_intermediate">半雨胎</string>
+    <string name="tyre_wet">全雨胎</string>
+
+    <!-- Permissions -->
+    <string name="permissions_rationale_title">我们需要您的许可</string>
+    <string name="permissions_rationale_confirm">确认</string>
+    <string name="permissions_rationale_cancel">现在不</string>
+    <plurals name="permissions_rationale_permissions_denied">
+        <item quantity="other">%d 个权限被拒绝，请检查您的应用设置</item>
+    </plurals>
+    <string name="permissions_rationale_permission_denied">权限被拒绝，请检查您的应用设置</string>
+    <string name="permissions_rationale_runtime_notifications_description">为了让 Flashback 团队通知您比赛结果可用或 F1 周末活动即将开始，我们需要获得向您发送通知的权限</string>
+    <string name="permissions_rationale_exact_alarms_description">为了在比赛前准确通知您，我们需要获得在特定时间安排这些提醒的权限</string>
+
+    <!-- Adverts -->
+    <string name="admob_advertisement">广告</string>
+
+    <!-- RSS -->
+    <string name="title_rss">RSS</string>
+
+    <!-- Settings -->
+    <string name="settings_title">设置</string>
+    <string name="settings_search">搜索设置</string>
+
+    <string name="settings_header_appearance">外观</string>
+    <string name="settings_header_data">数据</string>
+    <string name="settings_header_rss_feed">RSS 源</string>
+    <string name="settings_header_web_browser">网络浏览器</string>
+    <string name="settings_header_notifications">通知</string>
+    <string name="settings_header_notifications_upcoming">通知（即将开始）</string>
+    <string name="settings_header_notifications_results_available">通知（结果可用）</string>
+    <string name="settings_header_other">其他</string>
+    <string name="settings_section_dark_mode_title">深色模式</string>
+    <string name="settings_section_dark_mode_description">强制深色模式或浅色模式</string>
+    <string name="settings_section_theme_title">主题</string>
+    <string name="settings_section_theme_description">遵循 Material You 配色方案</string>
+    <string name="settings_section_weather_title">天气</string>
+    <string name="settings_section_weather_description">更改天气显示方式</string>
+    <string name="settings_header_weather">天气</string>
+    <string name="settings_header_weather_metrics">度量</string>
+    <string name="settings_pref_temperature_unit_title">温度</string>
+    <string name="settings_pref_temperature_unit_description">以公制单位 (°C) 显示温度</string>
+    <string name="settings_pref_wind_speed_unit_title">风速</string>
+    <string name="settings_pref_wind_speed_unit_description">以公制单位 (kph) 显示风速</string>
+    <string name="settings_section_home_title">布局</string>
+    <string name="settings_section_home_description">自定义菜单和仪表板布局</string>
+    <string name="settings_header_home">主页</string>
+    <string name="settings_build_version">构建版本</string>
+    <string name="settings_pref_collapsed_list_title">折叠比赛</string>
+    <string name="settings_pref_collapsed_list_description">隐藏当前赛季中除一场之外的所有已完成比赛，在信息流中显示即将举行的比赛</string>
+    <string name="settings_pref_empty_week_title">显示空周</string>
+    <string name="settings_pref_empty_week_description">在比赛之间显示一个小间距指示器，以突出即将到来的赛季中的双重和三重比赛</string>
+    <string name="settings_pref_recent_highlights_title">近期亮点</string>
+    <string name="settings_pref_recent_highlights_description">如果已连接到互联网，则在主页上显示近期亮点横幅。这通常包含过去一周左右的重要商店的链接</string>
+    <string name="settings_pref_remember_season_change_title">记住季节变化</string>
+    <string name="settings_pref_remember_season_change_description">记住应用重启期间观看的最后一个季节</string>
+    <string name="settings_section_rss_configure_title">配置</string>
+    <string name="settings_section_rss_configure_description">设置 RSS 源或自定义外观</string>
+    <string name="settings_section_web_browser_title">应用内浏览器</string>
+    <string name="settings_section_web_browser_description">自定义或禁用应用内浏览器</string>
+    <string name="settings_header_in_app_browser">应用内浏览器</string>
+    <string name="settings_switch_enable_web_browser_title">启用</string>
+    <string name="settings_switch_enable_web_browser_description">启用应用内网络浏览器</string>
+    <string name="settings_switch_enable_javascript_title">启用 Javascript</string>
+    <string name="settings_switch_enable_javascript_description">在应用内浏览器中呈现 Javascript。如果禁用此功能，网页可能无法正常运行</string>
+    <string name="settings_help_adverts_title">广告</string>
+    <string name="settings_help_adverts_description">您是否希望显示广告！每个开发人员都感谢您支持启用广告</string>
+    <string name="settings_help_adverts_long_description">自定义广告在整个应用中的显示方式</string>
+    <string name="settings_section_notifications_upcoming_title">即将举行的比赛</string>
+    <string name="settings_section_notifications_upcoming_description">获取即将举行的比赛的通知</string>
+    <string name="settings_section_notifications_results_title">比赛结果</string>
+    <string name="settings_section_notifications_results_description">在比赛结果可用时获取通知</string>
+    <string name="settings_header_notice">通知</string>
+    <string name="settings_header_permissions">权限</string>
+    <string name="settings_pref_notification_permission_title">启用通知</string>
+    <string name="settings_pref_notification_permission_description">授予 Flashback 向您发送通知的权限</string>
+    <string name="settings_pref_schedule_exact_alarm_title">准确时间</string>
+    <string name="settings_pref_schedule_exact_alarm_description">授予 Flashback 在特定时间向您发送提醒的权限。否则，通知将在活动开始前大约 1 小时发送</string>
+    <string name="settings_pref_notification_notice_period_title">通知</string>
+    <string name="settings_pref_notification_notice_period_description">选择在上述活动之一开始前 15、30 或 60 分钟收到通知</string>
+    <string name="settings_switch_notification_upcoming_fp_title">自由练习赛</string>
+    <string name="settings_switch_notification_upcoming_qualifying_title">排位赛</string>
+    <string name="settings_switch_notification_upcoming_sprint_title">冲刺赛</string>
+    <string name="settings_switch_notification_upcoming_sprint_qualifying_title">冲刺排位赛</string>
+    <string name="settings_switch_notification_upcoming_race_title">比赛</string>
+    <string name="settings_switch_notification_upcoming_other_title">其他</string>
+    <string name="settings_switch_notification_results_qualifying_title">排位赛</string>
+    <string name="settings_switch_notification_results_sprint_qualifying_title">冲刺排位赛</string>
+    <string name="settings_switch_notification_results_sprint_title">冲刺赛</string>
+    <string name="settings_switch_notification_results_race_title">比赛</string>
+
+    <string name="settings_header_widgets">小部件</string>
+    <string name="settings_section_widgets_title">小部件</string>
+    <string name="settings_section_widgets_description">小部件定制</string>
+    <string name="settings_section_widgets_show_background_title">显示背景？</string>
+    <string name="settings_section_widgets_show_background_description">显示纯色背景而不是透明背景</string>
+    <string name="settings_section_widgets_deeplink_event_title">活动链接？</string>
+    <string name="settings_section_widgets_deeplink_event_description">单击小部件将带您进入特定比赛，而不是主页</string>
+    <string name="settings_section_refresh_title">刷新</string>
+    <string name="settings_section_refresh_widget_title">刷新小部件</string>
+    <string name="settings_section_refresh_widget_description">强制刷新当前活动的小部件</string>
+    <string name="settings_section_refresh_widget_message">小工具已刷新</string>
+
+    <string name="settings_section_ads_title">广告</string>
+    <string name="settings_section_ads_description">广告设置</string>
+    <string name="settings_header_ads">广告</string>
+    <string name="settings_switch_ads_enable_title">显示广告？</string>
+    <string name="settings_switch_ads_enable_description">您是否希望显示广告？每个开发人员都感谢您支持启用广告</string>
+    <string name="settings_section_privacy_title">隐私</string>
+    <string name="settings_section_privacy_description">Crashlytics、分析、隐私政策</string>
+    <string name="settings_header_legal">法律</string>
+    <string name="settings_pref_privacy_policy_title">隐私政策</string>
+    <string name="settings_pref_privacy_policy_description">应用的隐私政策</string>
+    <string name="settings_header_device_info">设备信息</string>
+    <string name="settings_pref_crash_reporting_title">崩溃报告</string>
+    <string name="settings_pref_crash_reporting_description">允许在发生问题时将崩溃报告发送给开发人员</string>
+    <string name="settings_pref_analytics_title">匿名分析</string>
+    <string name="settings_pref_analytics_description">发送有关您的应用体验的匿名分析数据。这也有助于崩溃报告</string>
+    <string name="settings_section_about_title">关于</string>
+    <string name="settings_section_about_description">关于此应用</string>
+    <string name="settings_header_about">关于</string>
+    <string name="settings_switch_about_this_app_title">关于此应用</string>
+    <string name="settings_switch_about_this_app_description">关于应用、开发人员和依赖项</string>
+    <string name="settings_switch_review_title">评论</string>
+    <string name="settings_switch_review_description">在 Play 商店中评论应用</string>
+    <string name="settings_pref_shake_to_report_title">摇一摇报告</string>
+    <string name="settings_pref_shake_to_report_description">摇动屏幕以向开发人员提供反馈或错误报告</string>
+    <string name="settings_header_reset">重置</string>
+    <string name="settings_pref_reset_title">首次同步</string>
+    <string name="settings_pref_reset_description">重新运行首次同步。这将刷新所有车手、车队、比赛和赛道。</string>
+    <string name="settings_theme_title">自定义</string>
+    <string name="settings_theme_nightmode_title">深色模式</string>
+    <string name="settings_theme_nightmode_description">选择您的应用主题深色模式偏好</string>
+    <string name="settings_theme_nightmode_follow_system">遵循系统偏好</string>
+    <string name="settings_theme_nightmode_light">浅色模式</string>
+    <string name="settings_theme_nightmode_dark">深色模式</string>
+    <string name="settings_theme_theme_title">应用主题</string>
+    <string name="settings_theme_theme_description">选择您的应用配色方案</string>
+    <string name="settings_theme_theme_default">默认</string>
+    <string name="settings_theme_theme_material_you">Material You</string>
+    <string name="settings_theme_theme_applied_later">您的主题将在您重新启动应用后应用</string>
+    <string name="settings_theme_animation_speed_title">动画速度</string>
+    <string name="settings_theme_animation_speed_description">选择整个应用中动画视图的速度</string>
+    <string name="settings_home">主页</string>
+    <string name="settings_statistics">统计数据</string>
+    <string name="settings_default_season_title">重置默认赛季</string>
+    <string name="settings_default_season_description">重置您的默认赛季选择，让 Flashback 管理当前活动赛季</string>
+    <string name="settings_default_season_updated">Flashback 现在正在管理当前活动赛季</string>
+    <string name="settings_customisation_season_all_expanded_title">所有部分</string>
+    <string name="settings_customisation_season_all_expanded_description">默认情况下在菜单中展开所有部分</string>
+    <string name="settings_customisation_season_favourited_expanded_title">收藏部分</string>
+    <string name="settings_customisation_season_favourited_expanded_description">默认情况下在菜单中展开收藏部分</string>
+    <string name="settings_information_title">信息</string>
+    <string name="settings_information_at_top_title">由在顶部显示</string>
+    <string name="settings_information_at_top_description">在每个屏幕的顶部显示“数据由”选项。否则，它将显示在底部</string>
+    <string name="settings_dashboard_title">仪表板</string>
+    <string name="settings_dashboard_default_to_schedule_title">启动时的日程表选项卡</string>
+    <string name="settings_dashboard_default_to_schedule_description">打开应用时，默认转到日程表选项卡。如果禁用，则日历选项卡将首先加载</string>
+    <string name="settings_dashboard_autoscroll_title">自动滚动</string>
+    <string name="settings_dashboard_autoscroll_description">当您查看当前赛季时，在您加载应用时自动滚动到下一场比赛</string>
+    <string name="settings_notifications_runtime_enabled">权限</string>
+    <string name="settings_notifications_runtime_title">启用通知</string>
+    <string name="settings_notifications_runtime_description">授予 Flashback 向您发送通知的权限</string>
+    <string name="settings_notifications_title">通知</string>
+    <string name="settings_notifications_channel_qualifying_title">排位赛</string>
+    <string name="settings_notifications_channel_qualifying_description">在排位赛开始前 30 分钟收到通知。在此处配置它们</string>
+    <string name="settings_notifications_channel_race_title">比赛</string>
+    <string name="settings_notifications_channel_race_description">在比赛开始前 30 分钟收到通知。在此处配置它们</string>
+    <string name="settings_notifications_nonchannel_title">通知</string>
+    <string name="settings_notifications_nonchannel_description">通过在设置中关闭应用通知来关闭它们</string>
+    <string name="settings_up_next_category_title">类别</string>
+    <string name="settings_up_next_category_race_title">比赛</string>
+    <string name="settings_up_next_category_race_descrition">在比赛或冲刺赛开始前收到通知</string>
+    <string name="settings_up_next_category_qualifying_title">排位赛</string>
+    <string name="settings_up_next_category_qualifying_descrition">在排位赛开始前收到通知</string>
+    <string name="settings_up_next_category_free_practice_title">自由练习赛</string>
+    <string name="settings_up_next_category_free_practice_descrition">在自由练习赛开始前收到通知</string>
+    <string name="settings_up_next_category_other_title">其他</string>
+    <string name="settings_up_next_category_other_descrition">在其他 F1 赛事开始前收到通知（例如冬季测试）</string>
+    <string name="settings_up_next_results_available_title">结果可用</string>
+    <string name="settings_up_next_results_qualifying_title">排位赛</string>
+    <string name="settings_up_next_results_qualifying_descrition">在排位赛结果可用时收到通知</string>
+    <string name="settings_up_next_results_sprint_title">冲刺赛</string>
+    <string name="settings_up_next_results_sprint_descrition">在冲刺赛结果可用时收到通知</string>
+    <string name="settings_up_next_results_race_title">比赛</string>
+    <string name="settings_up_next_results_race_descrition">在比赛结果可用时收到通知</string>
+    <string name="settings_up_next_title">通知时间</string>
+    <string name="settings_up_next_time_before_title">通知</string>
+    <string name="settings_up_next_time_before_description">您希望在事件开始前多久收到通知？</string>
+    <string name="settings_up_next_reminder_title">提醒</string>
+    <string name="settings_up_next_reminder_description">您希望 Flashback 在事件开始前多久通知您？</string>
+    <string name="settings_web_browser_title">网络浏览器</string>
+    <string name="settings_web_browser_in_app_title">在外部浏览器中打开</string>
+    <string name="settings_web_browser_in_app_description">在设备浏览器中打开任何链接或网页，而不是在应用内浏览器中打开</string>
+    <string name="settings_web_browser_javascript_title">启用 Javascript？</string>
+    <string name="settings_web_browser_javascript_description">在应用内浏览器中启用 javascript。这可以帮助网页更快加载，但可能会影响页面功能</string>
+    <string name="settings_restart_app_required">您的更改将在应用重新启动后生效</string>
+    <string name="settings_experimental">实验性</string>
+    <string name="settings_experimental_description">此功能处于测试阶段，因此可能无法正常工作。</string>
+    <string name="settings_rss_title">RSS</string>
+    <string name="settings_rss_appearance_title">布局</string>
+    <string name="settings_rss_show_description_title">显示描述</string>
+    <string name="settings_rss_show_description_description">如果 RSS 源有描述，则在 RSS 源旁边显示文章描述</string>
+    <string name="settings_rss_configure">您的列表</string>
+    <string name="settings_rss_configure_sources_title">配置源</string>
+    <string name="settings_rss_configure_sources_description">设置您希望订阅的 RSS 源</string>
+    <string name="settings_rss_add_custom">自定义 RSS 源</string>
+    <string name="settings_rss_contact_link">联系链接</string>
+    <string name="settings_rss_add_title">添加自定义 RSS 源</string>
+    <string name="settings_rss_add_description">将自定义 RSS 源 URL 添加到您的源。联系开发人员以将其作为上面的快速链接添加！</string>
+    <string name="settings_rss_add_confirm">添加</string>
+    <string name="settings_rss_add_cancel">取消</string>
+
+    <!-- 天气 -->
+    <string name="weather_type_clear_sky">晴朗</string>
+    <string name="weather_type_clouds_light">少云</string>
+    <string name="weather_type_clouds_scattered">分散的云</string>
+    <string name="weather_type_clouds_broken">分散的云</string>
+    <string name="weather_type_clouds_overcast">阴天</string>
+    <string name="weather_type_rain_light">小雨</string>
+    <string name="weather_type_rain_moderate">中雨</string>
+    <string name="weather_type_rain_heavy">大雨</string>
+    <string name="weather_type_thunderstorm">雷暴</string>
+    <string name="weather_type_snow">雪</string>
+    <string name="weather_type_sand">沙</string>
+    <string name="weather_type_fog">雾</string>
+    <string name="weather_type_mist">薄雾</string>
+    <string name="weather_rain_percent">%s \%%</string>
+    <string name="weather_temp_degrees_c">%s °C</string>
+    <string name="weather_temp_degrees_f">%s °F</string>
+    <string name="weather_wind_metre_per_second">%s m/s</string>
+    <string name="weather_wind_mph">%s 英里/小时</string>
+    <string name="weather_wind_kph">%s 公里/小时</string>
+
+    <!-- RSS 配置 -->
+    <string name="rss_configure_title">配置 RSS</string>
+    <string name="rss_configure_header_items">您的 RSS 列表</string>
+    <string name="rss_configure_header_items_subtitle">在此处配置您的个性化 RSS 源！</string>
+    <string name="rss_configure_header_items_no_items">0 项</string>
+    <string name="rss_configure_header_add">添加自定义</string>
+    <string name="rss_configure_header_add_subtitle">添加您自己的 RSS 链接或源以策划您自己的 F1 新闻。</string>
+    <string name="rss_configure_header_quick_add">快速链接</string>
+    <string name="rss_configure_header_quick_add_subtitle">F1 的一些热门新闻来源的快速链接。Flashback 绝不隶属于任何列出的来源，您可以通过点击下面每个项目旁边的网站链接访问这些来源的网站和联系信息。如果您希望在此列表中包含另一个 RSS 源，请给我们发送电子邮件！</string>
+    <string name="rss_configure_malformed_url">URL 错误</string>
+    <string name="rss_configure_hint">www.formula1.com/link/to/rss</string>
+    <string name="rss_configure_valid_url">需要有效的 URL</string>
+    <string name="rss_configure_visit_website">网站</string>
+    <string name="rss_configure_cannot_open_page">无法打开网站</string>
+    <string name="rss_configure_cannot_open_page_action">将 URL 复制到剪贴板</string>
+
+    <!-- 通知 -->
+    <string name="notification_content_title" formatted="false">%s 在 %s 开始</string>
+    <string name="notification_content_title_inexact" formatted="false">%s 在 %s 开始</string>
+    <string name="notification_content_text" formatted="false">%s %s 在 %s 的 %s 开始</string>
+    <string name="notification_content_text_inexact" formatted="false">%s %s 在 %s 开始</string>
+    <string name="notification_content_text_device_time" formatted="false">%s %s（设备时间）</string>
+    <string name="notification_reminder_mins_60">60 分钟</string>
+    <string name="notification_reminder_mins_30">30 分钟</string>
+    <string name="notification_reminder_mins_15">15 分钟</string>
+    <string name="notification_onboarding_title">通知</string>
+    <string name="notification_onboarding_title_howlong">提前多长时间通知</string>
+    <string name="notification_onboarding_description">在 F1 中即将举行的比赛、排位赛、自由练习赛或测试活动之前收到通知。您可以在设置中随时更改这些设置，以及您希望提前多长时间收到通知</string>
+
+    <string name="notification_channel_title_upcoming">即将到来的提醒</string>
+    <string name="notification_channel_title_results">结果可用</string>
+    <string name="notification_channel_race">比赛</string>
+    <string name="notification_channel_sprint">冲刺赛</string>
+    <string name="notification_channel_sprint_qualifying">冲刺赛资格赛</string>
+    <string name="notification_channel_qualifying">排位赛</string>
+    <string name="notification_channel_free_practice">自由练习赛</string>
+    <string name="notification_channel_race_notify">比赛</string>
+    <string name="notification_channel_sprint_notify">冲刺赛</string>
+    <string name="notification_channel_sprint_qualifying_notify">冲刺赛资格赛</string>
+    <string name="notification_channel_qualifying_notify">排位赛</string>
+    <string name="notification_channel_info">赛季信息</string>
+
+    <!-- 应用快捷方式 -->
+    <string name="app_shortcut_search_shorttitle">搜索</string>
+    <string name="app_shortcut_search_longtitle">搜索 F1 车手、车队和赛道</string>
+    <string name="app_shortcut_search_disabled">搜索（不可用）</string>
+    <string name="app_shortcut_rss_shorttitle">RSS</string>
+    <string name="app_shortcut_rss_longtitle">F1 RSS 源</string>
+    <string name="app_shortcut_rss_disabled">RSS（不可用）</string>
+
+    <!-- 关于 -->
+    <string name="about_name">Flashback</string>
+    <string name="about_desc">联系信息</string>
+    <string name="about_this_app_dependency_rss">RSS 源：%s</string>
+    <string name="dependency_thank_you">本应用中的 F1 统计数据由 Flashback 团队提供。特别感谢 Ergast API 提供 2023 年之前的内容。我们无法保证所提供数据的准确性（如果您发现问题，请通过上面的链接向我们发送电子邮件，让我们知道）\n\n非常感谢下面列出的所有人，让这款应用成为可能！点击列表中的任何一项以查找有关应用中使用的库和服务的信息。</string>
+    <string name="about_additional">特别感谢以上所有人！如果我们遗漏了任何人或任何内容，请告诉我们！</string>
+    <string name="app_version_placeholder">应用版本：%s</string>
+
+    <!-- 小部件 -->
+    <string name="widget_up_next_title">即将到来</string>
+    <string name="widget_up_next_description">获取下一场比赛的时间表</string>
+    <string name="widget_up_next_nothing_title">没有即将到来的比赛</string>
+    <string name="widget_up_next_nothing_title_compact">不适用</string>
+    <string name="widget_up_next_nothing_subtitle">一旦有信息，我们会立即获取。点击此处查看更新</string>
+    <string name="dashboard_up_next_title">即将到来</string>
+    <string name="dashboard_new_season_available">新赛季\n可用</string>
+    <plurals name="dashboard_up_next_suffix_days">
+        <item quantity="other">还有 %d 天</item>
+    </plurals>
+    <string name="dashboard_up_next_your_time">设备时间</string>
+    <string name="dashboard_up_next_shown_in_device_time">所有时间均显示在您的时区</string>
+    <plurals name="dashboard_up_next_starts_in">
+        <item quantity="other">第一场比赛在 %d 天后开始</item>
+    </plurals>
+    <string name="dashboard_up_next_starts_in">所有时间均显示在您的时区</string>
+    <string name="dashboard_up_next_all_day">全天</string>
+    <string name="dashboard_up_next_date_today">今天</string>
+    <string name="dashboard_up_next_date_next">%s 天</string>
+    <string name="dashboard_up_next_date_previous">%s 天前</string>
+    <string name="intent_chooser_open_maps">打开位置</string>
+    <string name="intent_chooser_open_website">打开网站</string>
+    <string name="intent_chooser_share">分享</string>
+
+    <!-- 网络浏览器 -->
+    <string name="choose_browser">在浏览器中打开</string>
+    <string name="choose_share">分享到</string>
+    <string name="copy_to_clipboard">URL 已复制到剪贴板</string>
+    <string name="unable_to_open_url">无法打开 URL</string>
+    <string name="home_last_updated">上次更新 %s</string>
+
+    <!-- 隐私政策 -->
+    <string name="privacy_policy_title">隐私政策</string>
+
+    <!-- Reaction screen -->
+    <string name="reaction_screen_title">反应测试</string>
+    <string name="reaction_screen_heading">测试你的反应</string>
+    <string name="reaction_screen_subtitle">你认为你能在熄灯时与 F1 车手的反应时间相匹敌吗？\n\n在下方开始游戏，然后在看到灯熄灭时点击屏幕上的任意位置即可获得分数</string>
+    <string name="reaction_screen_action_start">开始游戏</string>
+    <string name="reaction_screen_action_reset">重置</string>
+    <string name="reaction_screen_action_again">再玩一次？</string>
+    <string name="reaction_screen_action_react">反应</string>
+    <string name="reaction_screen_instructions">灯熄灭时点击任意位置…</string>
+
+    <string name="reaction_screen_miss_title">错过了！</string>
+    <string name="reaction_screen_miss_subtitle">记住，当你注意到灯熄灭时，点击屏幕上的任意位置</string>
+    <string name="reaction_screen_jump_title">抢跑！</string>
+    <string name="reaction_screen_jump_subtitle">你在灯熄灭前就做出了反应，并且会因为抢跑而被罚时。再试一次，确保不要反应太快</string>
+
+    <string name="reaction_tier_superhuman">超人</string>
+    <string name="reaction_tier_superhuman_desc">你的反应时间是超人的！</string>
+    <string name="reaction_tier_great">很棒</string>
+    <string name="reaction_tier_great_desc">你的反应时间比 F1 车手的平均反应时间快，恭喜！</string>
+    <string name="reaction_tier_good">良好</string>
+    <string name="reaction_tier_good_desc">你的反应时间与 F1 车手的平均反应时间相似，恭喜！</string>
+    <string name="reaction_tier_average">平均</string>
+    <string name="reaction_tier_average_desc">你的反应时间与 F1 车手的平均反应时间相似，恭喜！</string>
+    <string name="reaction_tier_not_good">高于平均水平</string>
+    <string name="reaction_tier_not_good_desc">你的反应时间比 F1 车手的平均反应时间稍慢。平均反应时间约为 250 毫秒，请务必多加练习</string>
+    <string name="reaction_tier_poor">慢</string>
+    <string name="reaction_tier_poor_desc">你的反应时间比平均水平慢。平均反应时间约为 250 毫秒，在你开始你的 F1 车手生涯之前，请务必多加练习</string>
+
+    <!-- Easter Eggs -->
+    <string name="easter_egg_menu_new_years">新年快乐！</string>
+    <string name="easter_egg_menu_chinese_new_year">春节快乐！</string>
+    <string name="easter_egg_menu_valentines">情人节快乐！</string>
+    <string name="easter_egg_menu_easter">复活节快乐！</string>
+    <string name="easter_egg_menu_halloween">万圣节快乐！</string>
+    <string name="easter_egg_menu_diwali">排灯节快乐！</string>
+    <string name="easter_egg_menu_christmas">圣诞快乐！</string>
+</resources>

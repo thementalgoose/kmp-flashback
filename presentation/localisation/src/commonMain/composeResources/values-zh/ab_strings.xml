@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="ab_rss_back">返回</string>
+    <string name="ab_rss_refresh">刷新</string>
+    <string name="ab_rss_settings">设置</string>
+    <string name="ab_rss_configure_supported_remove">从订阅中移除</string>
+    <string name="ab_rss_configure_supported_add">添加到订阅</string>
+    <string name="ab_rss_configure_add">添加订阅</string>
+    <string name="ab_refresh">刷新</string>
+    <string name="ab_menu">菜单</string>
+    <string name="ab_close">关闭</string>
+    <string name="ab_back">返回</string>
+    <string name="ab_hide">隐藏</string>
+    <string name="ab_points">积分</string>
+    <string name="ab_status">状态</string>
+    <string name="ab_result_race_overview">%s，%s，驾驶 %s</string>
+    <string name="ab_result_qualifying_overview">%s，驾驶 %s，排位赛第 %s</string>
+    <string name="ab_result_qualifying_overview_dnq">%s，驾驶 %s，未晋级</string>
+    <string name="ab_result_overview_fastest_lap">%s，%s，驾驶 %s。他们跑出了最快圈速</string>
+    <string name="ab_did_not_qualify">未晋级</string>
+    <string name="ab_result_fastest_lap">他们跑出了最快圈速</string>
+    <string name="ab_result_finish_time">落后冠军 %s 完赛</string>
+    <string name="ab_result_finish_p1">以第 %s 完赛</string>
+    <string name="ab_result_finish_dnf">未完赛。%s</string>
+    <string name="ab_race_overview">%s，第 %s 轮，在 %s。驾驶 %s</string>
+    <string name="ab_scored">%s 获得 %s 分</string>
+    <string name="ab_notifications_enabled">已启用通知</string>
+    <string name="ab_has_qualifying_results">排位赛结果已出</string>
+    <string name="ab_no_qualifying_results">排位赛结果尚未出炉</string>
+    <string name="ab_has_sprint_results">冲刺赛结果已出</string>
+    <string name="ab_no_sprint_results">冲刺赛结果尚未出炉</string>
+    <string name="ab_has_race_results">正赛结果已出</string>
+    <string name="ab_no_race_results">正赛结果尚未出炉</string>
+    <string name="ab_positions_gained">从第 %s 发车，以第 %s 完赛，上升 %d 位</string>
+    <string name="ab_positions_neutral">从第 %s 发车，以第 %s 完赛</string>
+    <string name="ab_positions_lost">从第 %s 发车，上升 %d 位，下降 %d 位</string>
+    <string name="ab_fastest_lap">最快圈速</string>
+    <string name="ab_constructor_logo">%s 标志</string>
+    <string name="ab_preseason_events">季前赛</string>
+    <string name="ab_rss_open_in_browser">在浏览器中打开</string>
+    <string name="ab_rss_share">分享</string>
+    <string name="ab_collapsed_section">%s，第 %d 轮至 %s，第 %d 轮。</string>
+    <string name="ab_schedule_date_card">%s，设备时间 %s</string>
+    <string name="ab_schedule_date_card_notifications_enabled">%s，设备时间 %s。已启用通知</string>
+    <string name="ab_change_of_rain">降雨概率</string>
+
+</resources>

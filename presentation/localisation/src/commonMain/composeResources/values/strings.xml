@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="empty" translatable="false" />
+
+    <!-- Splash -->
+    <string name="splash_continue">Continue</string>
+    <string name="splash_sync_info">As this is the first time you\'re opening the app, we\'re grabbing some data related to the world of formula 1 to get you up to speed…</string>
+    <string name="splash_sync_try_again">Try again</string>
+    <string name="splash_sync_required_failed">We need to sync some information to continue. Please make sure you have an active internet connection and try again (you\'ll only need to do this once)</string>
+    <string name="splash_sync_config">Configuration…</string>
+    <string name="splash_sync_races">Races…</string>
+    <string name="splash_sync_constructors">Teams…</string>
+    <string name="splash_sync_drivers">Drivers…</string>
+    <string name="splash_sync_circuits">Circuits…</string>
+
+
+    <!-- Search -->
+    <string name="search_title">Search</string>
+    <string name="search_category_option_title">Category</string>
+    <string name="search_category_option_description">Pick a category to search</string>
+    <string name="search_category_driver">Drivers</string>
+    <string name="search_category_constructors">Teams</string>
+    <string name="search_category_races">Races</string>
+    <string name="search_category_circuits">Circuits</string>
+    <string name="search_placeholder">Find any driver, constructor, circuit or race from the history of Formula 1</string>
+
+
+    <!-- Navigation -->
+    <string name="nav_drivers">Drivers</string>
+    <string name="nav_constructors">Teams</string>
+    <string name="nav_calendar">Calendar</string>
+    <string name="nav_schedule">Schedule</string>
+    <string name="nav_seasons">Seasons</string>
+    <string name="nav_settings">Seasons</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_rss">RSS</string>
+    <string name="nav_details">Details</string>
+    <string name="nav_qualifying">Qualifying</string>
+    <string name="nav_race">Race</string>
+    <string name="nav_sprint_qualifying">Sprint Qualifying</string>
+    <string name="nav_sprint">Sprint</string>
+
+
+    <!-- Race -->
+    <plurals name="race_points">
+        <item quantity="one">%s points</item>
+        <item quantity="other">%s points</item>
+    </plurals>
+    <string name="race_status_retired">DNF</string>
+
+
+    <!-- Qualifying -->
+    <string name="qualifying_header_q1">Q1</string>
+    <string name="qualifying_header_q2">Q2</string>
+    <string name="qualifying_header_q3">Q3</string>
+    <string name="sprint_qualifying_header_q1">SQ1</string>
+    <string name="sprint_qualifying_header_q2">SQ2</string>
+    <string name="sprint_qualifying_header_q3">SQ3</string>
+    <string name="qualifying_penalty_starts">Penalty, starts %s</string>
+    <string name="qualifying_penalty">Penalty, pit-lane start</string>
+    <string name="qualifying_penalty_starts_sprint">Penalty, starts sprint %s</string>
+    <string name="qualifying_visualisation_subtitle">Visualise the qualifying gaps in the qualifying session</string>
+    <string name="qualifying_visualisation_title">Qualifying gaps</string>
+    <string name="qualifying_visualisation_not_found">No qualifying data is available to visualise</string>
+
+
+    <!-- Results -->
+    <string name="weekend_race_round">Round %d</string>
+    <string name="weekend_race_round_season" formatted="false">Round %d, %d</string>
+    <string name="world_champion">World Champion</string>
+
+
+    <!-- Details -->
+    <string name="weekend_info_laps">%s laps</string>
+
+
+    <!-- Dashboard -->
+    <string name="dashboard_now">Recent highlights…</string>
+    <string name="dashboard_search">Search</string>
+    <string name="dashboard_links_title">Links</string>
+    <string name="dashboard_links_rss">RSS feed</string>
+    <string name="dashboard_links_reaction">Reaction game</string>
+    <string name="dashboard_links_search">Search</string>
+    <string name="dashboard_links_settings">Settings</string>
+    <string name="dashboard_links_contact">Contact</string>
+    <string name="dashboard_links_dark_mode">Dark Mode</string>
+    <string name="dashboard_all_title">All</string>
+    <string name="dashboard_tab_results">Results</string>
+    <string name="dashboard_tab_calendar">Calendar</string>
+    <string name="dashboard_tab_drivers">Drivers</string>
+    <string name="dashboard_tab_constructors">Teams</string>
+    <string name="season_standings_driver">Driver Standings</string>
+    <string name="season_standings_constructor">Constructor Standings</string>
+
+
+    <!-- Driver overview -->
+    <string name="driver_overview_stat_career_drivers_title">Drivers championships</string>
+    <string name="driver_overview_stat_career_best_championship_position">Best championship position</string>
+    <string name="driver_overview_stat_career_championship_standing">Championship standing</string>
+    <string name="driver_overview_stat_career_championship_standing_so_far">Current championship standing</string>
+    <string name="driver_overview_stat_career_wins">Wins</string>
+    <string name="driver_overview_stat_career_podiums">Podiums</string>
+    <string name="driver_overview_stat_race_starts">Race starts</string>
+    <string name="driver_overview_stat_race_finishes">Race finishes</string>
+    <string name="driver_overview_stat_race_retirements">Race retirements</string>
+    <string name="driver_overview_stat_career_points">Points</string>
+    <string name="driver_overview_stat_career_best_finish">Best finish</string>
+    <string name="driver_overview_stat_career_points_finishes">Points finishes</string>
+    <string name="driver_overview_stat_career_qualifying_pole">Qualified on pole</string>
+    <string name="driver_overview_stat_career_qualifying_top_3">Qualified in top 3</string>
+    <string name="driver_overview_stat_career_qualifying_top_10">Qualified within top 10</string>
+    <string name="driver_overview_stat_career_team_history">History</string>
+    <string name="driver_overview_stat_career_team">Team</string>
+    <string name="driver_overview_constructor">Constructor: %s</string>
+    <string name="driver_overview_stat_birthday">Born %s</string>
+
+
+    <!-- Driver Comparison -->
+    <string name="driver_comparison_no_races_in_common">There are no races during the season where these two drivers both participated in the same race.</string>
+    <string name="driver_comparison_title">Compare drivers</string>
+    <string name="driver_comparison_swap_drivers">Swap drivers</string>
+    <string name="driver_comparison_stat_races">Races head to head</string>
+    <string name="driver_comparison_stat_qualifying">Qualifying head to head</string>
+    <string name="driver_comparison_stat_points">Points (season total)</string>
+    <string name="driver_comparison_stat_points_finishes">Points finishes</string>
+    <string name="driver_comparison_stat_podiums">Podiums</string>
+    <string name="driver_comparison_stat_wins">Wins</string>
+    <string name="driver_comparison_stat_highest_finish">Best race finish</string>
+    <string name="driver_comparison_stat_dnfs">DNFs</string>
+
+
+    <!-- Constructor Overview -->
+    <string name="constructor_overview_stat_titles">Teams championships</string>
+    <string name="constructor_overview_stat_drivers_titles">Drivers championships</string>
+    <string name="constructor_overview_stat_championship_standing">Championship standing</string>
+    <string name="constructor_overview_stat_championship_standing_so_far">Current championship standing</string>
+    <string name="constructor_overview_stat_races">Races</string>
+    <string name="constructor_overview_stat_race_wins">Wins</string>
+    <string name="constructor_overview_stat_race_podiums">Podiums</string>
+    <string name="constructor_overview_stat_qualifying_poles">Qualifying on pole</string>
+    <string name="constructor_overview_stat_qualifying_top_3">Qualifying in the top 3</string>
+    <string name="constructor_overview_stat_points">Points</string>
+    <string name="constructor_overview_stat_points_finishes">Points finishes</string>
+    <string name="constructor_overview_stat_best_finish">Best finish</string>
+    <string name="constructor_overview_stat_best_championship_position">Best championship position</string>
+    <string name="constructor_overview_stat_position">Position</string>
+    <string name="constructor_overview_in_progress">Season in progress</string>
+
+
+    <!-- Stats -->
+    <string name="stat_history_championships">Championships</string>
+    <string name="stat_history_wins">Wins</string>
+    <string name="stat_history_poles">Pole Positions</string>
+    <string name="stat_history_podiums">Podiums</string>
+    <string name="stat_history_empty">No results found!</string>
+
+
+    <!-- Circuits -->
+    <string name="circuit_race_round" formatted="false">%s, round %d</string>
+    <string name="circuit_hosted_grand_prix_from" formatted="false">Hosted %d grand prix between %d and %d</string>
+    <string name="circuit_hosted_grand_prix" formatted="false">Hosted %d grand prix</string>
+
+
+    <!-- Results disclaimer -->
+    <string name="results_accurate_for" formatted="false">Results as of the %s (round %d)</string>
+    <string name="results_accurate_for_round" formatted="false">Results as of the %d, round %s</string>
+    <string name="results_accurate_for_year" formatted="false">Results as of the %d %s (round %d)</string>
+
+
+    <!-- Links -->
+    <string name="details_link_youtube">Youtube</string>
+    <string name="details_link_circuit">Circuit History</string>
+    <string name="details_link_map">Location</string>
+    <string name="details_link_laps">%s laps</string>
+    <string name="details_link_wikipedia">Wikipedia</string>
+
+
+    <!-- Feature banners -->
+    <string name="feature_banner_runtime_notifications">Grant permission for Flashback to send you notifications</string>
+    <string name="feature_banner_notifications">Get notifications for practice, qualifying and race events for upcoming race weekends!</string>
+    <string name="feature_banner_notifications_finished">You can change this in the settings at any time</string>
+    <string name="feature_banner_soft_upgrade">An update is available on the play store</string>
+
+
+    <!-- Errors -->
+    <string name="network_error_network">A network error occurred. Please make sure you are connected to the internet and try again</string>
+    <string name="network_error_internal">A unknown error occurred</string>
+    <string name="error_weekend_not_available">Unfortunately we don\'t have these results.</string>
+    <string name="error_data_not_available_try_again">An error occurred while getting these results. Please check your internet connection and try again</string>
+    <string name="error_weekend_not_available_yet">We don\'t have these results just yet, please check back after the race. Results usually appear 2–12 hours after every weekend event</string>
+    <string name="error_search_not_found">No results found</string>
+    <string name="rss_internal_error">A network error occurred and we weren\'t able to find any articles. Please check your internet connection or try again later</string>
+    <string name="rss_network_error">A network error occurred! Please check you have added a valid set of RSS sources and you are connected to the internet and try again. </string>
+    <string name="rss_no_articles">Welcome to the RSS feed!\nYou don\'t have any RSS sources enabled - Click here to configure them now. Pull to refresh when setup</string>
+
+
+    <!-- Events -->
+    <string name="event_type_testing">Test Session</string>
+    <string name="event_type_car_launch">Car Launch</string>
+    <string name="event_type_netflix">Netflix</string>
+    <string name="event_type_other">Other</string>
+    <string name="events_title">Preseason events</string>
+    <string name="events_list_title">%s events</string>
+    <string name="events_list_subtitle">Pre-season events for this season</string>
+
+
+    <!-- Tyres -->
+    <string name="tyres_label">Tyre compounds</string>
+    <string name="tyres_list_title">%s tyres</string>
+    <string name="tyres_list_subtitle">These are the Pirelli tyre compounds used in this season</string>
+    <string name="tyres_dry_compounds">Dry</string>
+    <string name="tyres_wet_compounds">Wet</string>
+    <string name="tyres_size">%d inch wheel rims</string>
+
+    <string name="tyre_hyper_soft">Hyper Soft</string>
+    <string name="tyre_ultra_soft">Ultra Soft</string>
+    <string name="tyre_super_soft">Super Soft</string>
+    <string name="tyre_soft">Soft</string>
+    <string name="tyre_medium">Medium</string>
+    <string name="tyre_hard">Hard</string>
+    <string name="tyre_super_hard">Super Hard</string>
+    <string name="tyre_intermediate">Intermediate</string>
+    <string name="tyre_wet">Wet</string>
+
+
+    <!-- Permissions -->
+    <string name="permissions_rationale_title">We need your permission</string>
+    <string name="permissions_rationale_confirm">Confirm</string>
+    <string name="permissions_rationale_cancel">Not now</string>
+    <plurals name="permissions_rationale_permissions_denied">
+        <item quantity="one">Permission denied, please check your app settings</item>
+        <item quantity="other">%d permissions denied, please check your app settings</item>
+    </plurals>
+    <string name="permissions_rationale_permission_denied">Permission denied, please check your app settings</string>
+    <string name="permissions_rationale_runtime_notifications_description">To get notified by the flashback team for race results being available or f1 weekend events about to begin, we need permission to send you notifications</string>
+    <string name="permissions_rationale_exact_alarms_description">In order to notify you accurately before a race, we need permission to schedule these reminders at a specific time</string>
+
+
+    <!-- Adverts -->
+    <string name="admob_advertisement">Advertisement</string>
+
+
+    <!-- RSS -->
+    <string name="title_rss">RSS</string>
+
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_search">Search settings</string>
+
+    <string name="settings_header_appearance">Appearance</string>
+    <string name="settings_header_data">Data</string>
+    <string name="settings_header_rss_feed">RSS Feed</string>
+    <string name="settings_header_web_browser">Web Browser</string>
+    <string name="settings_header_notifications">Notifications</string>
+    <string name="settings_header_notifications_upcoming">Notifications (Upcoming)</string>
+    <string name="settings_header_notifications_results_available">Notifications (Results available)</string>
+    <string name="settings_header_other">Other</string>
+
+    <string name="settings_section_dark_mode_title">Dark mode</string>
+    <string name="settings_section_dark_mode_description">Force dark mode or light mode</string>
+    <string name="settings_section_theme_title">Theme</string>
+    <string name="settings_section_theme_description">Follow Material You colour schemes</string>
+
+    <string name="settings_section_weather_title">Weather</string>
+    <string name="settings_section_weather_description">Change how the weather is displayed to you</string>
+    <string name="settings_header_weather">Weather</string>
+    <string name="settings_header_weather_metrics">Metrics</string>
+    <string name="settings_pref_temperature_unit_title">Temperature</string>
+    <string name="settings_pref_temperature_unit_description">Show the temperature in metric units (°C)</string>
+    <string name="settings_pref_wind_speed_unit_title">Wind speed</string>
+    <string name="settings_pref_wind_speed_unit_description">Show the wind speed in metric units (kph)</string>
+
+    <string name="settings_section_home_title">Layout</string>
+    <string name="settings_section_home_description">Customise the menu and dashboard layouts</string>
+    <string name="settings_header_home">Home</string>
+    <string name="settings_pref_collapsed_list_title">Collapse races</string>
+    <string name="settings_pref_collapsed_list_description">Hide all but one of the completed races for the current season, showing the upcoming events higher in the feed</string>
+    <string name="settings_pref_empty_week_title">Show empty weeks</string>
+    <string name="settings_pref_empty_week_description">Show a little spacing indicator between races to highlight double and triple headers in the upcoming season</string>
+    <string name="settings_pref_recent_highlights_title">Recent highlights</string>
+    <string name="settings_pref_recent_highlights_description">Show the recent highlights banner on the home page if connected to the internet. This usually contains links to significant stores within the past week or so</string>
+    <string name="settings_pref_remember_season_change_title">Keep last season</string>
+    <string name="settings_pref_remember_season_change_description">Resume from the season that was last being viewed</string>
+
+    <string name="settings_section_rss_configure_title">Configure</string>
+    <string name="settings_section_rss_configure_description">Setup RSS sources or customise appearance</string>
+
+    <string name="settings_section_web_browser_title">In-app Browser</string>
+    <string name="settings_section_web_browser_description">Customise or disable the in app browser</string>
+    <string name="settings_header_in_app_browser">In App Browser</string>
+    <string name="settings_switch_enable_web_browser_title">Enable</string>
+    <string name="settings_switch_enable_web_browser_description">Turn on the in-app web browser instead of loading webpages in a custom tab</string>
+    <string name="settings_switch_enable_javascript_title">Enable Javascript</string>
+    <string name="settings_switch_enable_javascript_description">Render Javascript in the in-app browser. Web pages should load quicker but may not function correctly with this setting disabled</string>
+
+    <string name="settings_help_adverts_title">Adverts</string>
+    <string name="settings_help_adverts_description">Do you want ads to be displayed! Every developer appreciates your support leaving adverts enabled</string>
+    <string name="settings_help_adverts_long_description">Customise how adverts are displayed throughout the app</string>
+
+    <string name="settings_section_notifications_upcoming_title">Upcoming races</string>
+    <string name="settings_section_notifications_upcoming_description">Get notified for upcoming races</string>
+    <string name="settings_section_notifications_results_title">Race results</string>
+    <string name="settings_section_notifications_results_description">Get notified when race results are available</string>
+    <string name="settings_header_notice">Notice</string>
+    <string name="settings_header_permissions">Permission</string>
+    <string name="settings_pref_notification_permission_title">Enable notifications</string>
+    <string name="settings_pref_notification_permission_description">Grant permission for Flashback to send you notifications</string>
+    <string name="settings_pref_schedule_exact_alarm_title">Exact timings</string>
+    <string name="settings_pref_schedule_exact_alarm_description">Grant permission for Flashback to send you reminders at specific times. Otherwise, notifications will be roughly 1h before the start of the event</string>
+    <string name="settings_pref_notification_notice_period_title">Notice</string>
+    <string name="settings_pref_notification_notice_period_description">Choose between notified 15, 30 or 60 minutes before one of the above events starts</string>
+    <string name="settings_switch_notification_upcoming_fp_title">Free Practice</string>
+    <string name="settings_switch_notification_upcoming_qualifying_title">Qualifying</string>
+    <string name="settings_switch_notification_upcoming_sprint_title">Sprint</string>
+    <string name="settings_switch_notification_upcoming_sprint_qualifying_title">Sprint Qualifying</string>
+    <string name="settings_switch_notification_upcoming_race_title">Race</string>
+    <string name="settings_switch_notification_upcoming_other_title">Other</string>
+    <string name="settings_switch_notification_results_qualifying_title">Qualifying</string>
+    <string name="settings_switch_notification_results_sprint_qualifying_title">Sprint Qualifying</string>
+    <string name="settings_switch_notification_results_sprint_title">Sprint</string>
+    <string name="settings_switch_notification_results_race_title">Race</string>
+
+    <string name="settings_header_widgets">Widgets</string>
+    <string name="settings_section_widgets_title">Widgets</string>
+    <string name="settings_section_widgets_description">Widget customisations</string>
+    <string name="settings_section_widgets_show_background_title">Show background?</string>
+    <string name="settings_section_widgets_show_background_description">Show a solid background instead of a transparent one</string>
+    <string name="settings_section_widgets_deeplink_event_title">Link to event?</string>
+    <string name="settings_section_widgets_deeplink_event_description">Clicking the widget will take you to the specific race, rather than the homepage</string>
+    <string name="settings_section_refresh_title">Refresh</string>
+    <string name="settings_section_refresh_widget_title">Refresh Widgets</string>
+    <string name="settings_section_refresh_widget_description">Force a refresh of the widgets currently active</string>
+    <string name="settings_section_refresh_widget_message">Widgets refreshed</string>
+
+    <string name="settings_section_ads_title">Ads</string>
+    <string name="settings_section_ads_description">Ads settings</string>
+    <string name="settings_header_ads">Ads</string>
+    <string name="settings_switch_ads_enable_title">Show ads?</string>
+    <string name="settings_switch_ads_enable_description">Do you want ads to be displayed? Every developer appreciates your support leaving adverts enabled</string>
+
+    <string name="settings_section_privacy_title">Privacy</string>
+    <string name="settings_section_privacy_description">Crashlytics, Analytics, Privacy Policy</string>
+    <string name="settings_header_legal">Legal</string>
+    <string name="settings_pref_privacy_policy_title">Privacy Policy</string>
+    <string name="settings_pref_privacy_policy_description">The apps privacy policy</string>
+    <string name="settings_header_device_info">Device Info</string>
+    <string name="settings_pref_crash_reporting_title">Crash Reporting</string>
+    <string name="settings_pref_crash_reporting_description">Allow crash reports to be sent to the developer when an issue occurs</string>
+    <string name="settings_pref_analytics_title">Anonymous Analytics</string>
+    <string name="settings_pref_analytics_description">Send anonymous analytics data about your app experience. This can also aid crash reporting</string>
+
+    <string name="settings_section_about_title">About</string>
+    <string name="settings_section_about_description">About this app</string>
+    <string name="settings_header_about">About</string>
+    <string name="settings_switch_about_this_app_title">About this app</string>
+    <string name="settings_switch_about_this_app_description">About the app, the devs and the dependencies</string>
+    <string name="settings_switch_review_title">Review</string>
+    <string name="settings_switch_review_description">Review the app on the play store</string>
+    <string name="settings_build_version">Build version</string>
+    <string name="settings_pref_shake_to_report_title">Shake to report</string>
+    <string name="settings_pref_shake_to_report_description">Shake the screen to provide feedback or bug reports to the developer</string>
+    <string name="settings_header_reset">Reset</string>
+    <string name="settings_pref_reset_title">First time sync</string>
+    <string name="settings_pref_reset_description">Re-run the first time sync again. This will refresh all drivers, constructors, races and circuits</string>
+
+    <string name="settings_theme_title">Customisation</string>
+    <string name="settings_theme_nightmode_title">Dark mode</string>
+    <string name="settings_theme_nightmode_description">Pick your app theme dark mode preference</string>
+    <string name="settings_theme_nightmode_follow_system">Follow system preferences</string>
+    <string name="settings_theme_nightmode_light">Light mode</string>
+    <string name="settings_theme_nightmode_dark">Dark mode</string>
+    <string name="settings_theme_theme_title">App theme</string>
+    <string name="settings_theme_theme_description">Pick your app colour schemes</string>
+    <string name="settings_theme_theme_default">Default</string>
+    <string name="settings_theme_theme_material_you">Material You</string>
+    <string name="settings_theme_theme_applied_later">Your theme will be applied after you restart the app</string>
+    <string name="settings_theme_animation_speed_title">Animation speed</string>
+    <string name="settings_theme_animation_speed_description">Pick the speed of the animated views throughout the app.</string>
+
+    <string name="settings_home">Home</string>
+    <string name="settings_statistics">Statistics</string>
+    <string name="settings_default_season_title">Reset default season</string>
+    <string name="settings_default_season_description">Reset your default season selection let flashback manage the currently active season</string>
+    <string name="settings_default_season_updated">Flashback is now managing the currently active season</string>
+    <string name="settings_customisation_season_all_expanded_title">All section</string>
+    <string name="settings_customisation_season_all_expanded_description">Expand the all section in the menu by default</string>
+    <string name="settings_customisation_season_favourited_expanded_title">Favourites section</string>
+    <string name="settings_customisation_season_favourited_expanded_description">Expand the favourites section in the menu by default</string>
+    <string name="settings_information_title">Information</string>
+    <string name="settings_information_at_top_title">Show provided by at top</string>
+    <string name="settings_information_at_top_description">Show the "Data provided by" option at the top of each screen. Otherwise it will be displayed at the bottom</string>
+    <string name="settings_dashboard_title">Dashboard</string>
+    <string name="settings_dashboard_default_to_schedule_title">Schedule tab on startup</string>
+    <string name="settings_dashboard_default_to_schedule_description">When opening the app, go to the schedule tab by default. If disabled, the calendar tab will load first</string>
+    <string name="settings_dashboard_autoscroll_title">Autoscroll</string>
+    <string name="settings_dashboard_autoscroll_description">Autoscroll to the next race when you load the app when you\'re viewing the current season</string>
+
+    <string name="settings_notifications_runtime_enabled">Permissions</string>
+    <string name="settings_notifications_runtime_title">Enable Notifications</string>
+    <string name="settings_notifications_runtime_description">Grant permission for Flashback to send you notifications</string>
+
+    <string name="settings_notifications_title">Notifications</string>
+    <string name="settings_notifications_channel_qualifying_title">Qualifying</string>
+    <string name="settings_notifications_channel_qualifying_description">Receive notifications 30 minutes before qualifying starts. Configure them here</string>
+    <string name="settings_notifications_channel_race_title">Race</string>
+    <string name="settings_notifications_channel_race_description">Receive notifications 30 minutes before a race starts. Configure them here</string>
+    <string name="settings_notifications_nonchannel_title">Notifications</string>
+    <string name="settings_notifications_nonchannel_description">Turn off the app notifications by turning them off in your settings</string>
+
+    <string name="settings_up_next_category_title">Categories</string>
+    <string name="settings_up_next_category_race_title">Race</string>
+    <string name="settings_up_next_category_race_descrition">Get notified before race or sprints starts</string>
+    <string name="settings_up_next_category_qualifying_title">Qualifying</string>
+    <string name="settings_up_next_category_qualifying_descrition">Get notified before qualifying starts</string>
+    <string name="settings_up_next_category_free_practice_title">Free Practice</string>
+    <string name="settings_up_next_category_free_practice_descrition">Get notified before free practice starts</string>
+    <string name="settings_up_next_category_other_title">Other</string>
+    <string name="settings_up_next_category_other_descrition">Get notified before other F1 events starts (ie. Winter testing)</string>
+
+    <string name="settings_up_next_results_available_title">Results available</string>
+    <string name="settings_up_next_results_qualifying_title">Qualifying</string>
+    <string name="settings_up_next_results_qualifying_descrition">Get notified when qualifying results are available</string>
+    <string name="settings_up_next_results_sprint_title">Sprint</string>
+    <string name="settings_up_next_results_sprint_descrition">Get notified when sprint results are available</string>
+    <string name="settings_up_next_results_race_title">Race</string>
+    <string name="settings_up_next_results_race_descrition">Get notified when race results are available</string>
+
+    <string name="settings_up_next_title">Notice Period</string>
+    <string name="settings_up_next_time_before_title">Notice</string>
+    <string name="settings_up_next_time_before_description">How far before an event do you want a notification?</string>
+    <string name="settings_up_next_reminder_title">Reminder</string>
+    <string name="settings_up_next_reminder_description">How long before an event do you want Flashback to notify you?</string>
+
+    <string name="settings_web_browser_title">Web Browser</string>
+    <string name="settings_web_browser_in_app_title">Open in external browser</string>
+    <string name="settings_web_browser_in_app_description">Open any links or webpages in your device browser instead of the in-app one</string>
+    <string name="settings_web_browser_javascript_title">Enable Javascript?</string>
+    <string name="settings_web_browser_javascript_description">Enable javascript in the in-app browser. This can help webpages load quicker, but may affect page functionality</string>
+
+    <string name="settings_restart_app_required">Your change will take effect when the app restarts</string>
+    <string name="settings_experimental">BETA</string>
+    <string name="settings_experimental_description">This feature is in beta, and as such may not be working correctly.</string>
+
+    <string name="settings_rss_title">RSS</string>
+    <string name="settings_rss_appearance_title">Layout</string>
+    <string name="settings_rss_show_description_title">Show description</string>
+    <string name="settings_rss_show_description_description">Show the article description alongside the rss source if it has one</string>
+    <string name="settings_rss_configure">Your list</string>
+    <string name="settings_rss_configure_sources_title">Configure sources</string>
+    <string name="settings_rss_configure_sources_description">Setup which RSS feeds you wish to subscribe too</string>
+    <string name="settings_rss_add_custom">Custom RSS feed</string>
+    <string name="settings_rss_contact_link">Contact Link</string>
+    <string name="settings_rss_add_title">Add custom RSS feed</string>
+    <string name="settings_rss_add_description">Add a custom RSS feed url to your feed. Contact the developer to get this added as a quick link above!</string>
+    <string name="settings_rss_add_confirm">Add</string>
+    <string name="settings_rss_add_cancel">Cancel</string>
+
+
+    <!-- Weather -->
+    <string name="weather_type_clear_sky">Sunny</string>
+    <string name="weather_type_clouds_light">Light clouds</string>
+    <string name="weather_type_clouds_scattered">Scattered clouds</string>
+    <string name="weather_type_clouds_broken">Scattered clouds</string>
+    <string name="weather_type_clouds_overcast">Overcast</string>
+    <string name="weather_type_rain_light">Light Rain</string>
+    <string name="weather_type_rain_moderate">Moderate Rain</string>
+    <string name="weather_type_rain_heavy">Heavy Rain</string>
+    <string name="weather_type_thunderstorm">Thunderstorm</string>
+    <string name="weather_type_snow">Snow</string>
+    <string name="weather_type_sand">Sand</string>
+    <string name="weather_type_fog">Fog</string>
+    <string name="weather_type_mist">Mist</string>
+
+    <string name="weather_rain_percent">%s \%%</string>
+    <string name="weather_temp_degrees_c">%s °C</string>
+    <string name="weather_temp_degrees_f">%s °F</string>
+    <string name="weather_wind_metre_per_second">%s m/s</string>
+    <string name="weather_wind_mph">%s mph</string>
+    <string name="weather_wind_kph">%s kph</string>
+
+
+    <!-- RSS Configure -->
+    <string name="rss_configure_title">Configure RSS</string>
+    <string name="rss_configure_header_items">Your RSS list</string>
+    <string name="rss_configure_header_items_subtitle">Configure your personalised RSS feed here!</string>
+    <string name="rss_configure_header_items_no_items">0 items</string>
+    <string name="rss_configure_header_add">Add custom</string>
+    <string name="rss_configure_header_add_subtitle">Add your own RSS link or feed to curate your own formula 1 news.</string>
+    <string name="rss_configure_header_quick_add">Quick links</string>
+    <string name="rss_configure_header_quick_add_subtitle">Quick links for some popular news sources for formula 1. Flashback is in no way affiliated with any sources listed, you can visit the websites and contact information of these sources by clicking the website link next each item below. If you wish to include another RSS feed in this list, send us an email!</string>
+    <string name="rss_configure_malformed_url">Error in URL</string>
+    <string name="rss_configure_hint">www.formula1.com/link/to/rss</string>
+    <string name="rss_configure_valid_url">Valid URL required</string>
+    <string name="rss_configure_visit_website">Website</string>
+    <string name="rss_configure_cannot_open_page">Cannot open website</string>
+    <string name="rss_configure_cannot_open_page_action">Copy URL to clipboard</string>
+
+
+    <!-- Notifications -->
+    <string name="notification_content_title" formatted="false">%s starts in %s</string>
+    <string name="notification_content_title_inexact" formatted="false">%s starts at %s</string>
+    <string name="notification_content_text" formatted="false">%s %s starts in %s at %s</string>
+    <string name="notification_content_text_inexact" formatted="false">%s %s starts at %s</string>
+    <string name="notification_content_text_device_time" formatted="false">%s %s (device time)</string>
+    <string name="notification_reminder_mins_60">60 minutes</string>
+    <string name="notification_reminder_mins_30">30 minutes</string>
+    <string name="notification_reminder_mins_15">15 minutes</string>
+    <string name="notification_onboarding_title">Notifications</string>
+    <string name="notification_onboarding_title_howlong">Notified how long before</string>
+    <string name="notification_onboarding_description">Get notified just before race, qualifying, free practice or testing events are coming up next in the formula 1. You can change these anytime in the settings, as well as how long before you wish to be notified</string>
+
+    <string name="notification_channel_title_upcoming">Upcoming reminders</string>
+    <string name="notification_channel_title_results">Results available</string>
+    <string name="notification_channel_race">Race</string>
+    <string name="notification_channel_sprint">Sprint</string>
+    <string name="notification_channel_sprint_qualifying">Sprint Qualifying</string>
+    <string name="notification_channel_qualifying">Qualifying</string>
+    <string name="notification_channel_free_practice">Free Practice</string>
+    <string name="notification_channel_race_notify">Race</string>
+    <string name="notification_channel_sprint_notify">Sprint</string>
+    <string name="notification_channel_sprint_qualifying_notify">Sprint Qualifying</string>
+    <string name="notification_channel_qualifying_notify">Qualifying</string>
+    <string name="notification_channel_info">Season information</string>
+
+
+    <!-- App Shortcuts -->
+    <string name="app_shortcut_search_shorttitle">Search</string>
+    <string name="app_shortcut_search_longtitle">Search Formula 1 Drivers, Teams and Circuits</string>
+    <string name="app_shortcut_search_disabled">Search (Unavailable)</string>
+    <string name="app_shortcut_rss_shorttitle">RSS</string>
+    <string name="app_shortcut_rss_longtitle">Formula 1 RSS feed</string>
+    <string name="app_shortcut_rss_disabled">RSS (Unavailable)</string>
+
+
+    <!-- About -->
+    <string name="about_name">Flashback</string>
+    <string name="about_desc">Contact Information</string>
+    <string name="about_this_app_dependency_rss">RSS source: %s</string>
+    <string name="dependency_thank_you">The Formula 1 statistics in this app are sourced by the Flashback team. Special thanks to Ergast API for content up to 2023. We cannot guarantee the accuracy of the data provided (let us know however if you spot an issue by sending us an email with the link above)\n\nA big thank you to everyone listed below for making this app possible! Click any one of the items in the list below to find more information about the libraries and services used within the app.</string>
+    <string name="about_additional">Special thanks to everyone above! If we\'ve missed anyone or anything please let us know!</string>
+    <string name="app_version_placeholder">App Version: %s</string>
+
+
+    <!-- Widgets -->
+    <string name="widget_up_next_title">Up next</string>
+    <string name="widget_up_next_description">Get the schedule for the next race</string>
+    <string name="widget_up_next_nothing_title">Nothing coming up</string>
+    <string name="widget_up_next_nothing_title_compact">N/A</string>
+    <string name="widget_up_next_nothing_subtitle">We will get this information as soon as it\'s available. Click here to check for updates</string>
+    <string name="dashboard_up_next_title">Up next</string>
+    <string name="dashboard_new_season_available">New season\navailable</string>
+    <plurals name="dashboard_up_next_suffix_days">
+        <item quantity="one">Tomorrow</item>
+        <item quantity="other">%d days to go</item>
+    </plurals>
+
+    <string name="dashboard_up_next_your_time">Device time</string>
+    <string name="dashboard_up_next_shown_in_device_time">All times shown in your timezone</string>
+    <plurals name="dashboard_up_next_starts_in">
+        <item quantity="zero">The first event starts today</item>
+        <item quantity="one">The first event starts in %d day</item>
+        <item quantity="other">The first event starts in %d days</item>
+    </plurals>
+    <string name="dashboard_up_next_starts_in">All times shown in your timezone</string>
+    <string name="dashboard_up_next_all_day">All day</string>
+    <string name="dashboard_up_next_date_today">Today</string>
+    <string name="dashboard_up_next_date_next">%s days</string>
+    <string name="dashboard_up_next_date_previous">%s days ago</string>
+
+
+    <string name="intent_chooser_open_maps">Open location</string>
+    <string name="intent_chooser_open_website">Open website</string>
+    <string name="intent_chooser_share">Share</string>
+
+
+    <!-- Web Browser -->
+    <string name="choose_browser">Open in browser</string>
+    <string name="choose_share">Share with</string>
+    <string name="copy_to_clipboard">URL Copied to clipboard</string>
+    <string name="unable_to_open_url">Unable to open url</string>
+    <string name="home_last_updated">Last updated %s</string>
+
+
+
+    <!-- Privacy Policy -->
+    <string name="privacy_policy_title">Privacy Policy</string>
+    <string name="privacy_policy_data" translatable="false"><![CDATA[<h1>Flashback</h1>
+    <p>Jordan Fisher built the Flashback app. This SERVICE is provided by Jordan Fisher at no cost and is intended for use as is.</p>
+    <p>This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service.</p>
+    <p>If you choose to use my Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that I collect is used for providing and improving the Service. I will not use or share your information with anyone except as described in this Privacy Policy.</p>
+    <p><strong>Information Collection and Use</strong></p>
+    <p>For a better experience, while using our Service, I may require you to provide us with certain personally identifiable information. The information that I request will be retained on your device and is not collected by me in any way.</p>
+    <p>The app does use third party services that may collect information used to identify you.</p>
+    <p>Link to privacy policy of third party service providers used by the app</p>
+    <ul>
+        <li><a href="https://www.google.com/policies/privacy/" target="_blank">Google Play Services</a></li>
+        <li><a href="https://firebase.google.com/policies/analytics" target="_blank">Firebase Analytics</a></li>
+        <li><a href="http://try.crashlytics.com/terms/privacy-policy.pdf" target="_blank">Crashlytics</a></li>
+    </ul>
+    <p><strong>Log Data</strong></p>
+    <p> I want to inform you that whenever you use my Service, in a case of an error in the app I collect data and information (through third party products) on your phone called a crash report. This crash report may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing my Service, the time and date of your use of the Service, and other statistics. You can opt out of this crash reporting in the settings</p>
+    <p><strong>Service Providers</strong></p>
+    <p> I may employ third-party companies and individuals due to the following reasons:</p>
+    <ul>
+        <li>To facilitate our Service;</li>
+        <li>To provide the Service on our behalf;</li>
+        <li>To perform Service-related services; or</li>
+        <li>To assist us in analyzing how our Service is used.</li>
+    </ul>
+    <p> I want to inform users of this Service that these third parties have access to your Personal Information. The reason is to perform the tasks assigned to them on our behalf. However, they are obligated not to disclose or use the information for any other purpose.</p>
+    <p><strong>Security</strong></p>
+    <p> I value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and I cannot guarantee its absolute security. I have taken steps to aid in this security, please feel free to <a href="mailto:thementalgoose@gmail.com">email me</a> if you wish me to provide more information</p>
+    <p><strong>Links to Other Sites</strong></p>
+    <p>This Service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by me. Therefore, I strongly advise you to review the Privacy Policy of these websites. I have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.</p>
+    <p><strong>Children’s Privacy</strong></p>
+    <p>These Services do not address anyone under the age of 13. I do not knowingly collect personally identifiable information from children under 13. In the case I discover that a child under 13 has provided me with personal information, I immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact me so that I will be able to do necessary actions.</p>
+    <p><strong>Changes to This Privacy Policy</strong></p>
+    <p> I may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. I will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately after they are posted on this page.</p>
+    <p><strong>Contact Us</strong></p>
+    <p>If you have any questions or suggestions about my Privacy Policy, do not hesitate to <a href="mailto:thementalgoose@gmail.com">contact me at thementalgoose@gmail.com</a> about your issues.</p>
+    <p>This privacy policy page was created at <a href="https://privacypolicytemplate.net" target="_blank">privacypolicytemplate.net</a> and modified/generated by <a href="https://app-privacy-policy-generator.firebaseapp.com/" target="_blank">App Privacy Policy Generator</a></p>]]></string>
+
+    <!-- Easter Eggs -->
+    <string name="easter_egg_slava_ukraine" translatable="false">Slava Ukraini 🇺🇦</string>
+    <string name="easter_egg_menu_new_years">Happy New Year!</string>
+    <string name="easter_egg_menu_chinese_new_year">Happy Chinese New Year!</string>
+    <string name="easter_egg_menu_valentines">Happy Valentines Day!</string>
+    <string name="easter_egg_menu_easter">Happy Easter!</string>
+    <string name="easter_egg_menu_halloween">Happy Halloween!</string>
+    <string name="easter_egg_menu_diwali">Happy Diwali!!</string>
+    <string name="easter_egg_menu_christmas">Merry Christmas!</string>
+
+    <!-- Reaction screen -->
+    <string name="reaction_screen_title">Reaction game</string>
+    <string name="reaction_screen_heading">Test your reactions</string>
+    <string name="reaction_screen_subtitle">Do you think you could match the reaction times of a F1 driver when the lights go out?\n\nStart the game below, and then tap the screen anywhere when you see the lights go out to get a score</string>
+    <string name="reaction_screen_action_start">Start the game</string>
+    <string name="reaction_screen_action_reset">Reset</string>
+    <string name="reaction_screen_action_again">Play again?</string>
+    <string name="reaction_screen_action_react">React</string>
+    <string name="reaction_screen_instructions">Tap anywhere when the lights go out…</string>
+
+    <string name="reaction_screen_miss_title">Missed!</string>
+    <string name="reaction_screen_miss_subtitle">Remember to tap on the screen anywhere when you notice the lights go out</string>
+    <string name="reaction_screen_jump_title">Jump start!</string>
+    <string name="reaction_screen_jump_subtitle">You reacted before the lights went out, and would have been given a time penalty for a jump start. Try again and make sure not to react too early</string>
+
+    <string name="reaction_tier_superhuman">Superhuman</string>
+    <string name="reaction_tier_superhuman_desc">Your reaction time was superhuman!</string>
+    <string name="reaction_tier_great">Great</string>
+    <string name="reaction_tier_great_desc">Your reaction time was faster than the average reaction time of an F1 driver, congratulations!</string>
+    <string name="reaction_tier_good">Good</string>
+    <string name="reaction_tier_good_desc">Your reaction time was similar to the average reaction time of an F1 driver, congratulations!</string>
+    <string name="reaction_tier_average">Average</string>
+    <string name="reaction_tier_average_desc">Your reaction time was similar to the average reaction time of an F1 driver, congratulations!</string>
+    <string name="reaction_tier_not_good">Over average</string>
+    <string name="reaction_tier_not_good_desc">Your reaction time is slightly slower than the average reaction time of an F1 driver. The average reaction time is around 250ms, be sure to practice some more</string>
+    <string name="reaction_tier_poor">Slow</string>
+    <string name="reaction_tier_poor_desc">Your reaction time is slower than average. The average reaction time is around 250ms, be sure to get some more practice in before you start your career as an F1 driver</string>
+
+    <string name="percentage" translatable="false">%s%</string>
+
+</resources>
