@@ -1,7 +1,7 @@
 package tmg.flashback.formula1.model
 
 import kotlinx.datetime.LocalTime
-import tmg.flashback.formula1.utils.extend
+import tmg.flashback.infrastructure.int.extend
 import kotlin.math.abs
 
 data class LapTime(

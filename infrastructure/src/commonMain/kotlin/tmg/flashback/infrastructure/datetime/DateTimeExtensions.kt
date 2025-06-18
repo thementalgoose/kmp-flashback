@@ -1,4 +1,4 @@
-package tmg.flashback.formula1.utils
+package tmg.flashback.infrastructure.datetime
 
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDate

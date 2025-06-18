@@ -4,5 +4,13 @@
 <dict>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<!-- In your iosApp/Info.plist -->
+    <key>UIAppFonts</key>
+    <array>
+        <string>montserrat_semibold.ttf</string>
+        <string>montserrat.ttf</string>
+        <string>goodtimes.ttf</string>
+        <string>closeness.ttf</string>
+    </array>
 </dict>
 </plist>

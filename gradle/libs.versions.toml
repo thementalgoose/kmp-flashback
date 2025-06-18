@@ -30,6 +30,7 @@ datastore = "1.1.7"
 # Test
 mockk = "1.13.13"
 kotest = "5.9.1"
+uiTooling = "1.8.3"
 
 [libraries]
 # Kotlin
@@ -69,6 +70,7 @@ kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref 
 # Gradle Plugins
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
 
 [bundles]
 kotlin = ["kotlinx-dateTime", "coroutines-core", "kotlinx-serialization"]

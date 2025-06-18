@@ -12,7 +12,7 @@ import kotlinx.datetime.format.Padding
 import kotlinx.datetime.format.char
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
-import tmg.flashback.formula1.utils.now
+import tmg.flashback.infrastructure.datetime.now
 import kotlin.time.Duration.Companion.seconds
 
 data class Timestamp(

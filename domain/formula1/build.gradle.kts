@@ -25,7 +25,12 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.foundation)
 
+            implementation(projects.infrastructure)
             implementation(projects.presentation.localisation)
+        }
+        commonTest.dependencies {
+            implementation(projects.test.formula1)
+            implementation(kotlin("test"))
         }
     }
 }

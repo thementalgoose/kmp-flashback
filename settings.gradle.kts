@@ -61,7 +61,11 @@ include(":domain:formula1")
 //include(":feature:season")
 //include(":feature:weekend")
 
+include(":infrastructure")
+
 //include(":presentation:navigation")
 include(":presentation:localisation")
 include(":presentation:style")
 //include(":presentation:ui")
+
+include(":test:formula1")
