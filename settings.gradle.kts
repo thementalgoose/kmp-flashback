@@ -44,7 +44,7 @@ include(":composeApp")
 //include(":core:webbrowser")
 
 //include(":data:persistence")
-//include(":data:network:flashback")
+include(":data:network:flashback")
 //include(":data:network:flashback-news")
 //include(":data:network:rss")
 
@@ -63,7 +63,7 @@ include(":domain:formula1")
 
 include(":infrastructure")
 
-//include(":presentation:navigation")
+include(":presentation:navigation")
 include(":presentation:localisation")
 include(":presentation:style")
 //include(":presentation:ui")
