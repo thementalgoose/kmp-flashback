@@ -2,8 +2,8 @@ package tmg.flashback.style
 
 import androidx.annotation.RequiresApi
 import androidx.compose.material.Colors
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -64,9 +64,9 @@ data class AppColors(
     val isLight: Boolean
 ) {
 
-    val appColors: Colors by lazy {
+    val appColors: ColorScheme by lazy {
         if (isLight) {
-            lightColors(
+            lightColorScheme(
                 primary = primary,
                 secondary = accent,
                 background = backgroundContainer,
@@ -79,7 +79,7 @@ data class AppColors(
                 onError = Color(0xFFF8F8F8)
             )
         } else {
-            darkColors(
+            darkColorScheme(
                 primary = primary,
                 secondary = accent,
                 background = backgroundContainer,

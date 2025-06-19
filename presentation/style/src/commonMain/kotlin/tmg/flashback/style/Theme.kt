@@ -1,7 +1,7 @@
 package tmg.flashback.style
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -56,7 +56,7 @@ fun AppTheme(
         LocalColors provides colors
     ) {
         MaterialTheme(
-            colors = colors.appColors
+            colorScheme = colors.appColors
         ) {
             content()
         }

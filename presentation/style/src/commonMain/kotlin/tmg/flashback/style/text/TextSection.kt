@@ -1,44 +1,30 @@
 package tmg.flashback.style.text
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.preview.PreviewDarkMode
 import tmg.flashback.style.preview.PreviewLightMode
 
+
 @Composable
-fun TextHeadline1(
+fun TextSection(
     text: String,
     modifier: Modifier = Modifier,
-    brand: Boolean = false
-) {
-    Text(
-        text,
-        modifier = modifier.fillMaxWidth(),
-        style = AppTheme.typography.h1.copy(
-            color = when (brand) {
-                true -> AppTheme.colors.primary
-                false -> AppTheme.colors.contentPrimary
-            }
-        )
-    )
-}
-@Composable
-fun TextHeadline1Inline(
-    text: String,
-    modifier: Modifier = Modifier,
+    textAlign: TextAlign = TextAlign.Center,
     brand: Boolean = false
 ) {
     Text(
         text,
         modifier = modifier,
-        style = AppTheme.typography.h1.copy(
+        textAlign = textAlign,
+        style = AppTheme.typography.section.copy(
             color = when (brand) {
                 true -> AppTheme.colors.primary
-                false -> AppTheme.colors.contentPrimary
+                false -> AppTheme.colors.contentSecondary
             }
         )
     )
@@ -47,24 +33,24 @@ fun TextHeadline1Inline(
 @Preview
 @Composable
 private fun PreviewLight() = PreviewLightMode {
-    TextHeadline1(
-        text = "Headline 1"
+    TextSection(
+        text = "Section"
     )
 }
 
 @Preview
 @Composable
 private fun PreviewDark() = PreviewDarkMode {
-    TextHeadline1(
-        text = "Headline 1"
+    TextSection(
+        text = "Section"
     )
 }
 
 @Preview
 @Composable
 private fun PreviewBrandLight() = PreviewLightMode {
-    TextHeadline1(
-        text = "Headline 1 Brand",
+    TextSection(
+        text = "Section Brand",
         brand = true
     )
 }
@@ -72,8 +58,8 @@ private fun PreviewBrandLight() = PreviewLightMode {
 @Preview
 @Composable
 private fun PreviewBrandDark() = PreviewDarkMode {
-    TextHeadline1(
-        text = "Headline 1 Brand",
+    TextSection(
+        text = "Section Brand",
         brand = true
     )
 }
