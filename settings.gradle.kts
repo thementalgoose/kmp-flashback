@@ -43,7 +43,7 @@ include(":composeApp")
 //include(":core:preferences")
 //include(":core:webbrowser")
 
-//include(":data:persistence")
+include(":data:persistence:flashback")
 include(":data:network:flashback")
 //include(":data:network:flashback-news")
 //include(":data:network:rss")
