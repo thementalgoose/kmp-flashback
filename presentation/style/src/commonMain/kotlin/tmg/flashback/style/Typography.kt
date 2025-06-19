@@ -1,10 +1,7 @@
 package tmg.flashback.style
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.TextStyle
-import org.jetbrains.compose.resources.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
@@ -12,6 +9,7 @@ import flashback.presentation.style.generated.resources.Res
 import flashback.presentation.style.generated.resources.closeness
 import flashback.presentation.style.generated.resources.montserrat
 import flashback.presentation.style.generated.resources.montserrat_semibold
+import org.jetbrains.compose.resources.Font
 
 @get:Composable
 private val montserrat
