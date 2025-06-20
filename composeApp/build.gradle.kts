@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.googleServices)
 }
 
 val versionCodeProperty = 1
@@ -26,7 +27,8 @@ kotlin {
         val desktopMain by getting
 
         androidMain.dependencies {
-
+            implementation(project.dependencies.platform(libs.firebase.bom))
+            implementation(libs.firebase.remoteconfig)
         }
         commonMain.dependencies {
 
@@ -95,6 +97,22 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    flavorDimensions.add("variant")
+
+    productFlavors {
+        create("sandbox") {
+            dimension = "variant"
+            isDefault = true
+            applicationIdSuffix = ".sandbox"
+            resValue("string", "app_name", "Flashback Sandbox")
+        }
+
+        create("production") {
+            dimension = "variant"
+            resValue("string", "app_name", "Flashback")
+        }
     }
 }
 
