@@ -1,5 +1,6 @@
 package tmg.flashback.formula1.extensions
 
+import tmg.flashback.infrastructure.extensions.roundToHalf
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -27,7 +28,7 @@ internal class DoubleExtensionsTest {
     @Test
     fun `display method on points double displays the points in a readable format`() {
         testCases.forEach { (input, expected) ->
-            assertEquals(expected, input.pointsDisplay())
+            assertEquals(expected, input.roundToHalf())
         }
     }
 }

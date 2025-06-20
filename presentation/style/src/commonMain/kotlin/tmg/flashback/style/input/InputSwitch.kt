@@ -9,9 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.preview.PreviewDarkMode
-import tmg.flashback.style.preview.PreviewLightMode
+import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.preview.PreviewConfig
+import tmg.flashback.style.preview.PreviewConfigProvider
 
 @Composable
 fun InputSwitch(
@@ -34,26 +36,17 @@ fun InputSwitch(
 
 @Preview
 @Composable
-private fun PreviewLight() = PreviewLightMode {
-    Row(Modifier.fillMaxWidth()) {
-        Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
-            InputSwitch(isChecked = true)
-        }
-        Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
-            InputSwitch(isChecked = false)
-        }
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewDark() = PreviewDarkMode {
-    Row(Modifier.fillMaxWidth()) {
-        Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
-            InputSwitch(isChecked = true)
-        }
-        Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
-            InputSwitch(isChecked = false)
+private fun Preview(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        Row(Modifier.fillMaxWidth()) {
+            Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
+                InputSwitch(isChecked = true)
+            }
+            Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
+                InputSwitch(isChecked = false)
+            }
         }
     }
 }

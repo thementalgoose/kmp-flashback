@@ -7,9 +7,11 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.preview.PreviewDarkMode
-import tmg.flashback.style.preview.PreviewLightMode
+import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.preview.PreviewConfig
+import tmg.flashback.style.preview.PreviewConfigProvider
 
 @Composable
 fun TextCaption(
@@ -34,16 +36,12 @@ fun TextCaption(
 
 @Preview
 @Composable
-private fun PreviewLight() = PreviewLightMode {
-    TextCaption(
-        text = "Caption"
-    )
-}
-
-@Preview
-@Composable
-private fun PreviewDark() = PreviewDarkMode {
-    TextCaption(
-        text = "Caption"
-    )
+private fun Preview(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        TextCaption(
+            text = "Caption"
+        )
+    }
 }

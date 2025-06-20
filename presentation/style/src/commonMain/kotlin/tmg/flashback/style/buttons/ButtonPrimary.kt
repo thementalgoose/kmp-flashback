@@ -12,10 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
+import tmg.flashback.style.AppThemePreview
 import tmg.flashback.style.FlashbackTheme
-import tmg.flashback.style.preview.PreviewDarkMode
-import tmg.flashback.style.preview.PreviewLightMode
+import tmg.flashback.style.preview.PreviewConfig
+import tmg.flashback.style.preview.PreviewConfigProvider
 
 
 @Composable
@@ -54,46 +56,31 @@ fun ButtonPrimary(
 
 @Preview
 @Composable
-private fun PreviewLight() = PreviewLightMode {
-    Box(Modifier.padding(16.dp)) {
-        ButtonPrimary(
-            text = "Primary Button",
-            onClick = { }
-        )
+private fun Preview(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        Box(Modifier.padding(16.dp)) {
+            ButtonPrimary(
+                text = "Primary Button",
+                onClick = { }
+            )
+        }
     }
 }
 
 @Preview
 @Composable
-private fun PreviewDark() = PreviewDarkMode {
-    Box(Modifier.padding(16.dp)) {
-        ButtonPrimary(
-            text = "Primary Button",
-            onClick = { }
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewDisabledLight() = PreviewLightMode {
-    Box(Modifier.padding(16.dp)) {
-        ButtonPrimary(
-            enabled = false,
-            text = "Primary Button",
-            onClick = { }
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewDisabledDark() = PreviewDarkMode {
-    Box(Modifier.padding(16.dp)) {
-        ButtonPrimary(
-            enabled = false,
-            text = "Primary Button",
-            onClick = { }
-        )
+private fun PreviewDisabled(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        Box(Modifier.padding(16.dp)) {
+            ButtonPrimary(
+                enabled = false,
+                text = "Primary Button",
+                onClick = { }
+            )
+        }
     }
 }

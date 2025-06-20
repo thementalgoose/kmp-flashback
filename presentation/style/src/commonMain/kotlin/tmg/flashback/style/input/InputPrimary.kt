@@ -32,10 +32,13 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewDarkMode
 import tmg.flashback.style.preview.PreviewLightMode
+import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextTitle
 
 @Composable
@@ -132,74 +135,49 @@ fun InputPrimary(
 
 @Preview
 @Composable
-private fun PreviewLight() = PreviewLightMode {
-    Box(modifier = Modifier.padding(16.dp)) {
-        val textState = remember { mutableStateOf(TextFieldValue("Input Field")) }
-        InputPrimary(
-            text = textState,
-            placeholder = "https://flashback.pages.dev"
-        )
+private fun Preview(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        Box(modifier = Modifier.padding(16.dp)) {
+            val textState = remember { mutableStateOf(TextFieldValue("Input Field")) }
+            InputPrimary(
+                text = textState,
+                placeholder = "https://flashback.pages.dev"
+            )
+        }
     }
 }
 
 @Preview
 @Composable
-private fun PreviewDark() = PreviewDarkMode {
-    Box(modifier = Modifier.padding(16.dp)) {
-        val textState = remember { mutableStateOf(TextFieldValue("Input Field")) }
-        InputPrimary(
-            text = textState,
-            placeholder = "https://flashback.pages.dev"
-        )
+private fun PreviewClear(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        Box(modifier = Modifier.padding(16.dp)) {
+            val textState = remember { mutableStateOf(TextFieldValue("Input Field")) }
+            InputPrimary(
+                text = textState,
+                clear = { },
+                placeholder = "https://flashback.pages.dev"
+            )
+        }
     }
 }
 
 @Preview
 @Composable
-private fun PreviewClearLight() = PreviewLightMode {
-    Box(modifier = Modifier.padding(16.dp)) {
-        val textState = remember { mutableStateOf(TextFieldValue("Input Field")) }
-        InputPrimary(
-            text = textState,
-            clear = { },
-            placeholder = "https://flashback.pages.dev"
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewClearDark() = PreviewDarkMode {
-    Box(modifier = Modifier.padding(16.dp)) {
-        val textState = remember { mutableStateOf(TextFieldValue("Input Field")) }
-        InputPrimary(
-            text = textState,
-            clear = { },
-            placeholder = "https://flashback.pages.dev"
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewEmptyLight() = PreviewLightMode {
-    Box(modifier = Modifier.padding(16.dp)) {
-        val textState = remember { mutableStateOf(TextFieldValue("")) }
-        InputPrimary(
-            text = textState,
-            placeholder = "https://flashback.pages.dev"
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewEmptyDark() = PreviewDarkMode {
-    Box(modifier = Modifier.padding(16.dp)) {
-        val textState = remember { mutableStateOf(TextFieldValue("")) }
-        InputPrimary(
-            text = textState,
-            placeholder = "https://flashback.pages.dev"
-        )
+private fun PreviewEmpty(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        Box(modifier = Modifier.padding(16.dp)) {
+            val textState = remember { mutableStateOf(TextFieldValue("")) }
+            InputPrimary(
+                text = textState,
+                placeholder = "https://flashback.pages.dev"
+            )
+        }
     }
 }

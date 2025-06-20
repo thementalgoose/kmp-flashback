@@ -20,9 +20,11 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.preview.PreviewDarkMode
-import tmg.flashback.style.preview.PreviewLightMode
+import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.preview.PreviewConfig
+import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody2
 
 @Composable
@@ -74,36 +76,26 @@ fun ButtonTertiary(
 
 @Preview
 @Composable
-private fun PreviewLight() = PreviewLightMode {
-    ButtonTertiary(
-        text = "Tertiary Button",
-        onClick = { }
-    )
+private fun Preview(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        ButtonTertiary(
+            text = "Tertiary Button",
+            onClick = { }
+        )
+    }
 }
 
 @Preview
 @Composable
-private fun PreviewDark() = PreviewDarkMode {
-    ButtonTertiary(
-        text = "Tertiary Button",
-        onClick = { }
-    )
-}
-
-@Preview
-@Composable
-private fun PreviewWithIconLight() = PreviewLightMode {
-    ButtonTertiary(
-        text = "Tertiary Button",
-        onClick = { }
-    )
-}
-
-@Preview
-@Composable
-private fun PreviewWithIconDark() = PreviewDarkMode {
-    ButtonTertiary(
-        text = "Tertiary Button",
-        onClick = { }
-    )
+private fun PreviewWithIcon(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        ButtonTertiary(
+            text = "Tertiary Button",
+            onClick = { }
+        )
+    }
 }

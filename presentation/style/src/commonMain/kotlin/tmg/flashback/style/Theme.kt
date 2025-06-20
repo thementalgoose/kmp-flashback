@@ -1,10 +1,14 @@
 package tmg.flashback.style
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.ui.Modifier
+import tmg.flashback.style.preview.PreviewConfig
 
 object AppTheme {
     val colors: AppColors
@@ -65,15 +69,31 @@ fun AppTheme(
 
 @Composable
 fun AppThemePreview(
+    previewConfig: PreviewConfig,
+    content: @Composable () -> Unit,
+) {
+    AppThemePreview(
+        isLight = previewConfig.isLightMode,
+        theme = previewConfig.theme,
+        content = content
+    )
+}
+
+@Composable
+fun AppThemePreview(
     isLight: Boolean = !isSystemInDarkTheme(),
     theme: SupportedTheme = SupportedTheme.Default,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     return AppTheme(
         isLight = isLight,
         theme = theme,
         content = {
-            content()
+            Box(modifier = Modifier
+                .background(AppTheme.colors.backgroundPrimary)
+            ) {
+                content()
+            }
         }
     )
 }

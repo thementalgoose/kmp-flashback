@@ -25,16 +25,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import flashback.presentation.style.generated.resources.Res
-import flashback.presentation.style.generated.resources.*
-import org.jetbrains.compose.resources.ResourceItem
+import flashback.presentation.style.generated.resources.preview
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.AppThemePreview
 import tmg.flashback.style.FlashbackTheme
-import tmg.flashback.style.preview.PreviewDarkMode
-import tmg.flashback.style.preview.PreviewLightMode
+import tmg.flashback.style.preview.PreviewConfig
+import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody2
 
 private val colour: Color
@@ -121,42 +121,29 @@ fun ButtonSecondarySegments(
 
 @Preview
 @Composable
-private fun PreviewLight() = PreviewLightMode {
-    ButtonSecondarySegments(
-        items = listOf(Res.string.preview, Res.string.preview, Res.string.preview),
-        selected = Res.string.preview,
-        onClick = { }
-    )
+private fun Preview(
+    @PreviewParameter(PreviewConfigProvider ::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        ButtonSecondarySegments(
+            items = listOf(Res.string.preview, Res.string.preview, Res.string.preview),
+            selected = Res.string.preview,
+            onClick = { }
+        )
+    }
 }
 
 @Preview
 @Composable
-private fun PreviewDark() = PreviewDarkMode {
-    ButtonSecondarySegments(
-        items = listOf(Res.string.preview, Res.string.preview, Res.string.preview),
-        selected = Res.string.preview,
-        onClick = { }
-    )
-}
-
-@Preview
-@Composable
-private fun PreviewShowTickLight() = PreviewLightMode {
-    ButtonSecondarySegments(
-        items = listOf(Res.string.preview, Res.string.preview, Res.string.preview),
-        selected = Res.string.preview,
-        onClick = { },
-        showTick = true
-    )
-}
-
-@Preview
-@Composable
-private fun PreviewShowTickDark() = PreviewDarkMode {
-    ButtonSecondarySegments(
-        items = listOf(Res.string.preview, Res.string.preview, Res.string.preview),
-        selected = Res.string.preview,
-        onClick = { },
-        showTick = true
-    )
+private fun PreviewShowTick(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        ButtonSecondarySegments(
+            items = listOf(Res.string.preview, Res.string.preview, Res.string.preview),
+            selected = Res.string.preview,
+            onClick = { },
+            showTick = true
+        )
+    }
 }

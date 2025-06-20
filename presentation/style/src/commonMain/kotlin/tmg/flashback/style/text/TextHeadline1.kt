@@ -5,9 +5,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
+import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewDarkMode
 import tmg.flashback.style.preview.PreviewLightMode
+import tmg.flashback.style.preview.PreviewConfigProvider
 
 @Composable
 fun TextHeadline1(
@@ -46,34 +50,25 @@ fun TextHeadline1Inline(
 
 @Preview
 @Composable
-private fun PreviewLight() = PreviewLightMode {
-    TextHeadline1(
-        text = "Headline 1"
-    )
+private fun Preview(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        TextHeadline1(
+            text = "Headline 1"
+        )
+    }
 }
 
 @Preview
 @Composable
-private fun PreviewDark() = PreviewDarkMode {
-    TextHeadline1(
-        text = "Headline 1"
-    )
-}
-
-@Preview
-@Composable
-private fun PreviewBrandLight() = PreviewLightMode {
-    TextHeadline1(
-        text = "Headline 1 Brand",
-        brand = true
-    )
-}
-
-@Preview
-@Composable
-private fun PreviewBrandDark() = PreviewDarkMode {
-    TextHeadline1(
-        text = "Headline 1 Brand",
-        brand = true
-    )
+private fun PreviewBrand(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        TextHeadline1(
+            text = "Headline 1 Brand",
+            brand = true
+        )
+    }
 }

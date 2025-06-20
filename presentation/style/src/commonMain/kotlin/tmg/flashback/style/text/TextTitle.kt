@@ -1,30 +1,18 @@
 package tmg.flashback.style.text
 
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.preview.PreviewDarkMode
-import tmg.flashback.style.preview.PreviewLightMode
+import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.preview.PreviewConfig
+import tmg.flashback.style.preview.PreviewConfigProvider
 
 
 @Composable
@@ -53,34 +41,25 @@ fun TextTitle(
 
 @Preview
 @Composable
-private fun PreviewLight() = PreviewLightMode {
-    TextTitle(
-        text = "Title"
-    )
+private fun Preview(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        TextTitle(
+            text = "Title"
+        )
+    }
 }
 
 @Preview
 @Composable
-private fun PreviewDark() = PreviewDarkMode {
-    TextTitle(
-        text = "Title"
-    )
-}
-
-@Preview
-@Composable
-private fun PreviewBoldLight() = PreviewLightMode {
-    TextTitle(
-        text = "Title Bold",
-        bold = true
-    )
-}
-
-@Preview
-@Composable
-private fun PreviewBoldDark() = PreviewDarkMode {
-    TextTitle(
-        text = "Title Bold",
-        bold = true
-    )
+private fun PreviewBold(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        TextTitle(
+            text = "Title Bold",
+            bold = true
+        )
+    }
 }

@@ -60,9 +60,9 @@ kotlin {
             implementation(projects.infrastructure)
 
             implementation(projects.presentation.localisation)
-//            implementation(projects.presentation.navigation)
+            implementation(projects.presentation.navigation)
             implementation(projects.presentation.style)
-//            implementation(projects.presentation.ui)
+            implementation(projects.presentation.ui)
 
 
             implementation(libs.bundles.kotlin)

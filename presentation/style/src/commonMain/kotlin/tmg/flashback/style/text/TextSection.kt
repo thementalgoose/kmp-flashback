@@ -5,9 +5,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
+import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewDarkMode
 import tmg.flashback.style.preview.PreviewLightMode
+import tmg.flashback.style.preview.PreviewConfigProvider
 
 
 @Composable
@@ -32,34 +36,25 @@ fun TextSection(
 
 @Preview
 @Composable
-private fun PreviewLight() = PreviewLightMode {
-    TextSection(
-        text = "Section"
-    )
+private fun Preview(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        TextSection(
+            text = "Section"
+        )
+    }
 }
 
 @Preview
 @Composable
-private fun PreviewDark() = PreviewDarkMode {
-    TextSection(
-        text = "Section"
-    )
-}
-
-@Preview
-@Composable
-private fun PreviewBrandLight() = PreviewLightMode {
-    TextSection(
-        text = "Section Brand",
-        brand = true
-    )
-}
-
-@Preview
-@Composable
-private fun PreviewBrandDark() = PreviewDarkMode {
-    TextSection(
-        text = "Section Brand",
-        brand = true
-    )
+private fun PreviewBrand(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        TextSection(
+            text = "Section Brand",
+            brand = true
+        )
+    }
 }

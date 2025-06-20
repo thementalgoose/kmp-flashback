@@ -24,6 +24,9 @@ Flashback provides race results and statistics from every race in the history of
   - [ ] iOS
 - [x] Get compose style library setup
 - [ ] Add initial stats experience
+- [ ] Adds analytics
+- [ ] Adds crashlytics reporting
+- [x] Adds remote config setup
 - [ ] Support tablet mode
 - [ ] Add RSS
 - [ ] Add Settings

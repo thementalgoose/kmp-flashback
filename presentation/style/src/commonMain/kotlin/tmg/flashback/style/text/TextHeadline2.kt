@@ -19,9 +19,13 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
+import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewDarkMode
 import tmg.flashback.style.preview.PreviewLightMode
+import tmg.flashback.style.preview.PreviewConfigProvider
 
 private val RainbowColors = listOf(
     Color(0xff9c4f96),
@@ -102,78 +106,55 @@ fun TextHeadline2WithIcon(
 
 @Preview
 @Composable
-private fun PreviewLight() = PreviewLightMode {
-    TextHeadline2(
-        text = "Headline 2"
-    )
+private fun Preview(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        TextHeadline2(
+            text = "Headline 2"
+        )
+    }
 }
 
 @Preview
 @Composable
-private fun PreviewDark() = PreviewDarkMode {
-    TextHeadline2(
-        text = "Headline 2"
-    )
+private fun PreviewIcon(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        TextHeadline2WithIcon(
+            text = "Headline 2",
+            icon = rememberVectorPainter(Icons.Default.Home),
+            iconModifier = Modifier.rotate(40f),
+            colourType = ColourType.DEFAULT
+        )
+    }
 }
 
 @Preview
 @Composable
-private fun PreviewIconLight() = PreviewLightMode {
-    TextHeadline2WithIcon(
-        text = "Headline 2",
-        icon = rememberVectorPainter(Icons.Default.Home),
-        iconModifier = Modifier.rotate(40f),
-        colourType = ColourType.DEFAULT
-    )
+private fun PreviewIconRainbow(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        TextHeadline2WithIcon(
+            text = "Headline 2",
+            icon = rememberVectorPainter(Icons.Default.Home),
+            iconModifier = Modifier.rotate(40f),
+            colourType = ColourType.RAINBOW
+        )
+    }
 }
 
 @Preview
 @Composable
-private fun PreviewIconDark() = PreviewDarkMode {
-    TextHeadline2WithIcon(
-        text = "Headline 2",
-        icon = rememberVectorPainter(Icons.Default.Home),
-        iconModifier = Modifier.rotate(40f),
-        colourType = ColourType.DEFAULT
-    )
-}
-
-@Preview
-@Composable
-private fun PreviewIconRainbowLight() = PreviewLightMode {
-    TextHeadline2WithIcon(
-        text = "Headline 2",
-        icon = rememberVectorPainter(Icons.Default.Home),
-        iconModifier = Modifier.rotate(40f),
-        colourType = ColourType.RAINBOW
-    )
-}
-
-@Preview
-@Composable
-private fun PreviewIconRainbowDark() = PreviewDarkMode {
-    TextHeadline2WithIcon(
-        text = "Headline 2",
-        icon = rememberVectorPainter(Icons.Default.Home),
-        iconModifier = Modifier.rotate(40f),
-        colourType = ColourType.RAINBOW
-    )
-}
-
-@Preview
-@Composable
-private fun PreviewBrandLight() = PreviewLightMode {
-    TextHeadline2(
-        text = "Headline 2 Brand",
-        brand = true
-    )
-}
-
-@Preview
-@Composable
-private fun PreviewBrandDark() = PreviewDarkMode {
-    TextHeadline2(
-        text = "Headline 2 Brand",
-        brand = true
-    )
+private fun PreviewBrand(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        TextHeadline2(
+            text = "Headline 2 Brand",
+            brand = true
+        )
+    }
 }

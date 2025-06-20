@@ -66,6 +66,6 @@ include(":infrastructure")
 include(":presentation:navigation")
 include(":presentation:localisation")
 include(":presentation:style")
-//include(":presentation:ui")
+include(":presentation:ui")
 
 include(":test:formula1")

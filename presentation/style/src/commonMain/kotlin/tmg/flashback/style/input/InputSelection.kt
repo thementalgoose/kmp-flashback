@@ -26,6 +26,8 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameterProvider
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.preview.PreviewConfig
+import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.preview.PreviewDarkMode
 import tmg.flashback.style.preview.PreviewLightMode
 import tmg.flashback.style.text.TextBody1
@@ -79,27 +81,29 @@ fun InputSelection(
 @Composable
 private fun PreviewSwitchLight(
     @PreviewParameter(BooleanParamProvider::class) isSelected: Boolean
-) = PreviewLightMode {
-    Column {
-        InputSelection(
-            label = "Night mode",
-            icon = Res.drawable.ic_preview_icon,
-            isSelected = isSelected
-        )
-        Spacer(Modifier.height(16.dp))
-        InputSelection(
-            label = "Night mode",
-            icon = Res.drawable.ic_preview_icon,
-            isSelected = isSelected,
-            isChecked = true
-        )
-        Spacer(Modifier.height(16.dp))
-        InputSelection(
-            label = "Night mode",
-            icon = Res.drawable.ic_preview_icon,
-            isSelected = isSelected,
-            isChecked = false
-        )
+) {
+    AppThemePreview(isLight = true) {
+        Column {
+            InputSelection(
+                label = "Night mode",
+                icon = Res.drawable.ic_preview_icon,
+                isSelected = isSelected
+            )
+            Spacer(Modifier.height(16.dp))
+            InputSelection(
+                label = "Night mode",
+                icon = Res.drawable.ic_preview_icon,
+                isSelected = isSelected,
+                isChecked = true
+            )
+            Spacer(Modifier.height(16.dp))
+            InputSelection(
+                label = "Night mode",
+                icon = Res.drawable.ic_preview_icon,
+                isSelected = isSelected,
+                isChecked = false
+            )
+        }
     }
 }
 
@@ -107,30 +111,32 @@ private fun PreviewSwitchLight(
 @Composable
 private fun PreviewSwitchDark(
     @PreviewParameter(BooleanParamProvider::class) isSelected: Boolean
-) = PreviewDarkMode {
-    Column {
-        InputSelection(
-            label = "Night mode",
-            icon = Res.drawable.ic_preview_icon,
-            isSelected = isSelected
-        )
-        Spacer(Modifier.height(16.dp))
-        InputSelection(
-            label = "Night mode",
-            icon = Res.drawable.ic_preview_icon,
-            isSelected = isSelected,
-            isChecked = true
-        )
-        Spacer(Modifier.height(16.dp))
-        InputSelection(
-            label = "Night mode",
-            icon = Res.drawable.ic_preview_icon,
-            isSelected = isSelected,
-            isChecked = false
-        )
+) {
+    AppThemePreview(isLight = true) {
+        Column {
+            InputSelection(
+                label = "Night mode",
+                icon = Res.drawable.ic_preview_icon,
+                isSelected = isSelected
+            )
+            Spacer(Modifier.height(16.dp))
+            InputSelection(
+                label = "Night mode",
+                icon = Res.drawable.ic_preview_icon,
+                isSelected = isSelected,
+                isChecked = true
+            )
+            Spacer(Modifier.height(16.dp))
+            InputSelection(
+                label = "Night mode",
+                icon = Res.drawable.ic_preview_icon,
+                isSelected = isSelected,
+                isChecked = false
+            )
+        }
     }
 }
 
-private class BooleanParamProvider: PreviewParameterProvider<Boolean> {
+internal class BooleanParamProvider: PreviewParameterProvider<Boolean> {
     override val values: Sequence<Boolean> = sequenceOf(true, false)
 }

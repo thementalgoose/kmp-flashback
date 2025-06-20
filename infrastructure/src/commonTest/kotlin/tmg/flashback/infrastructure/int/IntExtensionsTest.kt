@@ -1,5 +1,7 @@
 package tmg.flashback.infrastructure.int
 
+import tmg.flashback.infrastructure.extensions.extend
+import tmg.flashback.infrastructure.extensions.itemsOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

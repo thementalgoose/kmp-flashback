@@ -16,10 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.AppThemePreview
-import tmg.flashback.style.preview.PreviewDarkMode
-import tmg.flashback.style.preview.PreviewLightMode
+import tmg.flashback.style.preview.PreviewConfig
+import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody2
 
 private val colour: Color
@@ -76,71 +77,47 @@ fun ButtonSecondary(
 
 @Preview
 @Composable
-private fun PreviewLight() = PreviewLightMode {
-    Box(Modifier.padding(16.dp)) {
-        ButtonSecondary(
-            text = "Secondary Button",
-            onClick = { }
-        )
-    }
-}
-
-
-@Preview
-@Composable
-private fun PreviewDark() = PreviewDarkMode {
-    Box(Modifier.padding(16.dp)) {
-        ButtonSecondary(
-            text = "Secondary Button",
-            onClick = { }
-        )
+private fun Preview(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        Box(Modifier.padding(16.dp)) {
+            ButtonSecondary(
+                text = "Secondary Button",
+                onClick = { }
+            )
+        }
     }
 }
 
 @Preview
 @Composable
-private fun PreviewSelectedLight() = PreviewLightMode {
-    Box(Modifier.padding(16.dp)) {
-        ButtonSecondary(
-            text = "Secondary Button",
-            onClick = { },
-            selected = true
-        )
+private fun PreviewSelected(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        Box(Modifier.padding(16.dp)) {
+            ButtonSecondary(
+                text = "Secondary Button",
+                onClick = { },
+                selected = true
+            )
+        }
     }
 }
 
 @Preview
 @Composable
-private fun PreviewSelectedDark() = PreviewDarkMode {
-    Box(Modifier.padding(16.dp)) {
-        ButtonSecondary(
-            text = "Secondary Button",
-            onClick = { },
-            selected = true
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewDisabledLight() = PreviewLightMode {
-    Box(Modifier.padding(16.dp)) {
-        ButtonSecondary(
-            enabled = false,
-            text = "Secondary Button",
-            onClick = { }
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewDisabledDark() = PreviewDarkMode {
-    Box(Modifier.padding(16.dp)) {
-        ButtonSecondary(
-            enabled = false,
-            text = "Secondary Button",
-            onClick = { }
-        )
+private fun PreviewDisabled(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        Box(Modifier.padding(16.dp)) {
+            ButtonSecondary(
+                enabled = false,
+                text = "Secondary Button",
+                onClick = { }
+            )
+        }
     }
 }

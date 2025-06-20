@@ -9,9 +9,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.preview.PreviewDarkMode
-import tmg.flashback.style.preview.PreviewLightMode
+import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.preview.PreviewConfig
+import tmg.flashback.style.preview.PreviewConfigProvider
 
 @Composable
 fun TextBody2(
@@ -59,16 +61,12 @@ fun TextBody2(
 
 @Preview
 @Composable
-private fun PreviewLight() = PreviewLightMode {
-    TextBody2(
-        text = "Body 2"
-    )
-}
-
-@Preview
-@Composable
-private fun PreviewDark() = PreviewDarkMode {
-    TextBody2(
-        text = "Body 2"
-    )
+private fun Preview(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        TextBody2(
+            text = "Body 2"
+        )
+    }
 }
