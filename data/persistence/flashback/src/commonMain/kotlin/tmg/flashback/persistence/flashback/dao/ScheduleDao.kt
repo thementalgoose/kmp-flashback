@@ -25,26 +25,33 @@ interface ScheduleDao {
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(schedule: Schedule)
+    suspend fun insert(schedule: Schedule)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(schedule: List<Schedule>)
+    suspend fun insertAll(schedule: List<Schedule>)
 
     @Transaction
-    fun replaceAllForRace(season: Int, round: Int, schedule: List<Schedule>) {
+    suspend fun replaceAllForRace(
+        season: Int,
+        round: Int,
+        schedule: List<Schedule>
+    ) {
         deleteForRace(season, round)
         insertAll(schedule)
     }
 
     @Transaction
-    fun replaceAllForSeason(season: Int, schedule: List<Schedule>) {
+    suspend fun replaceAllForSeason(
+        season: Int,
+        schedule: List<Schedule>
+    ) {
         deleteForSeason(season)
         insertAll(schedule)
     }
 
     @Query("DELETE FROM Schedule WHERE season == :season AND round == :round")
-    fun deleteForRace(season: Int, round: Int)
+    suspend fun deleteForRace(season: Int, round: Int)
 
     @Query("DELETE FROM Schedule WHERE season == :season")
-    fun deleteForSeason(season: Int)
+    suspend fun deleteForSeason(season: Int)
 }

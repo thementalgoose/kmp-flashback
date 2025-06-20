@@ -1,10 +1,12 @@
 import SwiftUI
+import ComposeApp
+import Firebase
 
 @main
 struct iOSApp: App {
     
     init() {
-        KoinSetupKt.initKoin()
+        KoinSetupKt.doInitKoin()
         FirebaseApp.configure()
     }
     

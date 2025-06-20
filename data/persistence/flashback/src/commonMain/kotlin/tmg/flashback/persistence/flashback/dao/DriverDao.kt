@@ -24,21 +24,25 @@ interface DriverDao {
     suspend fun getDriverSeasonCount(id: String): Int
 
     @Transaction
-    fun insertDriver(driver: Driver, driverSeasons: List<DriverSeason>, driverSeasonRaces: List<DriverSeasonRace>) {
+    suspend fun insertDriver(
+        driver: Driver,
+        driverSeasons: List<DriverSeason>,
+        driverSeasonRaces: List<DriverSeasonRace>
+    ) {
         insertDriverSeasonRaces(driverSeasonRaces)
         insertDriverSeasons(driverSeasons)
         insert(driver)
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(driver: Driver)
+    suspend fun insert(driver: Driver)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(drivers: List<Driver>)
+    suspend fun insertAll(drivers: List<Driver>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertDriverSeasons(driverSeasons: List<DriverSeason>)
+    suspend fun insertDriverSeasons(driverSeasons: List<DriverSeason>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertDriverSeasonRaces(driverSeasonRaces: List<DriverSeasonRace>)
+    suspend fun insertDriverSeasonRaces(driverSeasonRaces: List<DriverSeasonRace>)
 }

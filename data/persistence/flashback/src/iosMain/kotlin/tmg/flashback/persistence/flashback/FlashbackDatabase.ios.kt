@@ -16,11 +16,14 @@ actual class FlashbackDatabaseFactory {
         val migrationsArray = Migrations.entries
             .map { it.migration }
             .toTypedArray()
+
         val dbFile = "${fileDirectory()}/$DB_NAME"
+
         return Room
             .databaseBuilder<FlashbackDatabase>(
                 name = dbFile,
-            ).setDriver(BundledSQLiteDriver())
+            )
+            .setDriver(BundledSQLiteDriver())
             .setQueryCoroutineContext(Dispatchers.IO)
             .addMigrations(*migrationsArray)
             .build()
@@ -35,6 +38,6 @@ actual class FlashbackDatabaseFactory {
             create = false,
             error = null,
         )
-        return requireNotNull(documentDirectory).path!!
+        return requireNotNull(documentDirectory?.path)
     }
 }

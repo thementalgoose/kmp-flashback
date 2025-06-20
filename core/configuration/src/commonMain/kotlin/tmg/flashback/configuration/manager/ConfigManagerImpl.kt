@@ -2,7 +2,6 @@ package tmg.flashback.configuration.manager
 
 import tmg.flashback.configuration.firebase.FirebaseService
 import tmg.flashback.configuration.firebase.FirebaseSettings
-import tmg.flashback.infrastructure.log.logException
 
 internal class ConfigManagerImpl(
     private val firebaseService: FirebaseService
@@ -33,7 +32,8 @@ internal class ConfigManagerImpl(
             val result = firebaseService.activate()
             return result
         } catch (e: Exception) {
-            logException(e)
+            e.printStackTrace()
+//            logInfo(e)
             return false
         }
     }
@@ -57,7 +57,8 @@ internal class ConfigManagerImpl(
                 }
             }
         } catch (e: Exception) {
-            logException(e)
+            e.printStackTrace()
+//            logException(e)
             return false
         }
     }

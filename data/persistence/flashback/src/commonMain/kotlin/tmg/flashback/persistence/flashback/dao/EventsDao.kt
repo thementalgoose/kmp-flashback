@@ -13,13 +13,13 @@ interface EventsDao {
     fun getEvents(season: Int): Flow<List<Event>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertEvents(winterTesting: List<Event>)
+    suspend fun insertEvents(winterTesting: List<Event>)
 
     @Query("DELETE FROM Event WHERE season == :season")
-    fun deleteEventsForSeason(season: Int)
+    suspend fun deleteEventsForSeason(season: Int)
 
     @Transaction
-    fun replaceEventsForSeason(season: Int, testing: List<Event>) {
+    suspend fun replaceEventsForSeason(season: Int, testing: List<Event>) {
         deleteEventsForSeason(season)
         insertEvents(testing)
     }

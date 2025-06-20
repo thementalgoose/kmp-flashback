@@ -7,7 +7,10 @@ import tmg.flashback.flashbackapi.api.di.dataNetworkFlashbackModules
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.persistence.flashback.di.dataPersistenceFlashbackModules
 
-fun initKoin(platformModules: KoinApplication.() -> Unit = { }) {
+fun doInitKoin() {
+    doInitKoin { }
+}
+fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
     logInfo("Initialising Koin")
     startKoin {
         platformModules(this)

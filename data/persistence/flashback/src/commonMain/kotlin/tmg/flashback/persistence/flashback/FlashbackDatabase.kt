@@ -1,5 +1,6 @@
 package tmg.flashback.persistence.flashback
 
+import androidx.room.ConstructedBy
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.RoomDatabaseConstructor
@@ -66,6 +67,7 @@ expect class FlashbackDatabaseFactory {
     ],
     exportSchema = false
 )
+@ConstructedBy(FlashbackDatabaseConstructor::class)
 abstract class FlashbackDatabase: RoomDatabase() {
     abstract fun overviewDao(): OverviewDao
     abstract fun circuitDao(): CircuitDao
@@ -78,7 +80,7 @@ abstract class FlashbackDatabase: RoomDatabase() {
 }
 
 // The Room compiler generates the `actual` implementations.
-//@Suppress("KotlinNoActualForExpect")
-//expect object FlashbackDatabaseConstructor : RoomDatabaseConstructor<FlashbackDatabase> {
-//    override fun initialize(): FlashbackDatabase
-//}
+@Suppress("KotlinNoActualForExpect")
+expect object FlashbackDatabaseConstructor : RoomDatabaseConstructor<FlashbackDatabase> {
+    override fun initialize(): FlashbackDatabase
+}

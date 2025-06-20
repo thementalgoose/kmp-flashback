@@ -24,11 +24,11 @@ interface CircuitDao {
     fun getCircuits(): Flow<List<Circuit>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertCircuit(circuit: List<Circuit>)
+    suspend fun insertCircuit(circuit: List<Circuit>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertCircuitRounds(rounds: List<CircuitRound>)
+    suspend fun insertCircuitRounds(rounds: List<CircuitRound>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertCircuitRoundResults(results: List<CircuitRoundResult>)
+    suspend fun insertCircuitRoundResults(results: List<CircuitRoundResult>)
 }

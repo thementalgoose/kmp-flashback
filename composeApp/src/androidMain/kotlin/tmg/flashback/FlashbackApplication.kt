@@ -6,7 +6,7 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import tmg.flashback.configuration.manager.ConfigManager
-import tmg.flashback.di.initKoin
+import tmg.flashback.di.doInitKoin
 
 class FlashbackApplication: Application(), KoinComponent {
 
@@ -15,7 +15,7 @@ class FlashbackApplication: Application(), KoinComponent {
     override fun onCreate() {
         super.onCreate()
 
-        initKoin {
+        doInitKoin {
             androidContext(this@FlashbackApplication)
             androidLogger()
         }

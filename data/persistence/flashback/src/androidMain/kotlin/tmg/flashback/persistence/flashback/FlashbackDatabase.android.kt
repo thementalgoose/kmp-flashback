@@ -12,7 +12,11 @@ actual class FlashbackDatabaseFactory(
             .toTypedArray()
 
         return Room
-            .databaseBuilder(applicationContext, FlashbackDatabase::class.java, DB_NAME)
+            .databaseBuilder(
+                context = applicationContext,
+                klass = FlashbackDatabase::class.java,
+                name = DB_NAME
+            )
             .addMigrations(*migrationsArray)
             .build()
     }

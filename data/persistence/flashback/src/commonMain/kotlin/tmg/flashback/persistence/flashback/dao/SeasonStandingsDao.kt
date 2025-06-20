@@ -14,7 +14,7 @@ interface SeasonStandingsDao {
     fun getDriverStandings(season: Int): Flow<List<DriverStandingWithConstructors>>
 
     @Transaction
-    fun insertDriverStandings(standing: List<DriverStanding>, constructors: List<DriverStandingConstructor>) {
+    suspend fun insertDriverStandings(standing: List<DriverStanding>, constructors: List<DriverStandingConstructor>) {
         val seasons = standing
             .map { it.season }
             .distinctBy { it }
@@ -28,19 +28,19 @@ interface SeasonStandingsDao {
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertDriverStandings(standing: DriverStanding)
+    suspend fun insertDriverStandings(standing: DriverStanding)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertDriverStandings(standing: List<DriverStanding>)
+    suspend fun insertDriverStandings(standing: List<DriverStanding>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertDriverStandingConstructors(constructors: List<DriverStandingConstructor>)
+    suspend fun insertDriverStandingConstructors(constructors: List<DriverStandingConstructor>)
 
     @Query("DELETE FROM DriverStandingConstructor WHERE season == :season")
-    fun deleteDriverStandingDrivers(season: Int)
+    suspend fun deleteDriverStandingDrivers(season: Int)
 
     @Query("DELETE FROM DriverStanding WHERE season == :season")
-    fun deleteDriverStanding(season: Int)
+    suspend fun deleteDriverStanding(season: Int)
 
     //endregion
 
@@ -51,7 +51,10 @@ interface SeasonStandingsDao {
     fun getConstructorStandings(season: Int): Flow<List<ConstructorStandingWithDrivers>>
 
     @Transaction
-    fun insertConstructorStandings(standing: List<ConstructorStanding>, drivers: List<ConstructorStandingDriver>) {
+    suspend fun insertConstructorStandings(
+        standing: List<ConstructorStanding>,
+        drivers: List<ConstructorStandingDriver>
+    ) {
         val seasons = standing
             .map { it.season }
             .distinctBy { it }
@@ -65,19 +68,19 @@ interface SeasonStandingsDao {
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertConstructorStandings(standing: ConstructorStanding)
+    suspend fun insertConstructorStandings(standing: ConstructorStanding)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertConstructorStandings(standing: List<ConstructorStanding>)
+    suspend fun insertConstructorStandings(standing: List<ConstructorStanding>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertConstructorStandingDrivers(drivers: List<ConstructorStandingDriver>)
+    suspend  fun insertConstructorStandingDrivers(drivers: List<ConstructorStandingDriver>)
 
     @Query("DELETE FROM ConstructorStandingDriver WHERE season == :season")
-    fun deleteConstructorStandingDrivers(season: Int)
+    suspend fun deleteConstructorStandingDrivers(season: Int)
 
     @Query("DELETE FROM ConstructorStanding WHERE season == :season")
-    fun deleteConstructorStanding(season: Int)
+    suspend fun deleteConstructorStanding(season: Int)
 
     //endregion
 }
