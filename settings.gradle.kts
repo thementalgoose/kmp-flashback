@@ -36,7 +36,7 @@ includeBuild("build-logic")
 
 include(":composeApp")
 
-//include(":core:configuration")
+include(":core:configuration")
 //include(":core:device")
 //include(":core:metrics")
 //include(":core:notifications")
