@@ -63,7 +63,9 @@ data class Timestamp(
 
     private val dateFormat = LocalDate.Format {
         year()
+        char('-')
         monthNumber(Padding.ZERO)
+        char('-')
         dayOfMonth(Padding.ZERO)
     }
     private val timeFormat = LocalTime.Format {

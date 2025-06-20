@@ -1,13 +1,31 @@
 package tmg.flashback.configuration.firebase
 
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigInfo
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
-import kotlin.jvm.Throws
+import kotlinx.coroutines.tasks.await
 
 actual class FirebaseService {
 
     private val remoteConfig = FirebaseRemoteConfig.getInstance()
+
+    @Throws(Exception::class)
+    actual suspend fun activate(): Boolean {
+        return remoteConfig.activate().await()
+    }
+
+    @Throws(Exception::class)
+    actual suspend fun reset() {
+        remoteConfig.reset().await()
+    }
+
+    @Throws(Exception::class)
+    actual suspend fun fetch(minimumFetchInterval: Int?) {
+        if (minimumFetchInterval == null) {
+            remoteConfig.fetch().await()
+        } else {
+            remoteConfig.fetch(minimumFetchInterval.toLong()).await()
+        }
+    }
 
     actual fun setConfigSettingsAsync(
         minimumFetchInterval: Int

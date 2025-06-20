@@ -22,3 +22,9 @@ kotlin {
         }
     }
 }
+
+android {
+    buildFeatures {
+        buildConfig = true
+    }
+}

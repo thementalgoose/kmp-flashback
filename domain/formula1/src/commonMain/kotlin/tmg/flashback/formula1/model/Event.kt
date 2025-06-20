@@ -1,6 +1,6 @@
 package tmg.flashback.formula1.model
 
-import java.time.LocalDate
+import kotlinx.datetime.LocalDate
 import tmg.flashback.formula1.enums.EventType
 
 data class Event(

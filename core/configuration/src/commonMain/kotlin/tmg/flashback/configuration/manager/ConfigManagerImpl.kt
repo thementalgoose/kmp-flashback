@@ -2,6 +2,7 @@ package tmg.flashback.configuration.manager
 
 import tmg.flashback.configuration.firebase.FirebaseService
 import tmg.flashback.configuration.firebase.FirebaseSettings
+import tmg.flashback.infrastructure.log.logException
 
 internal class ConfigManagerImpl(
     private val firebaseService: FirebaseService
@@ -28,14 +29,36 @@ internal class ConfigManagerImpl(
     }
 
     override suspend fun activate(): Boolean {
-        return true
+        try {
+            val result = firebaseService.activate()
+            return result
+        } catch (e: Exception) {
+            logException(e)
+            return false
+        }
     }
 
     override suspend fun reset(): Boolean {
+        firebaseService.reset()
         return true
     }
 
     override suspend fun fetch(andActivate: Boolean): Boolean {
-        return true
+        try {
+            when (andActivate) {
+                true -> {
+                    firebaseService.fetch(0)
+                    val activate = firebaseService.activate()
+                    return activate
+                }
+                false -> {
+                    firebaseService.fetch()
+                    return false
+                }
+            }
+        } catch (e: Exception) {
+            logException(e)
+            return false
+        }
     }
 }

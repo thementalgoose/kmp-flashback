@@ -14,6 +14,7 @@ kotlin {
             implementation(libs.bundles.kotlin)
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
+            implementation(projects.infrastructure)
         }
         iosMain.dependencies {
         }

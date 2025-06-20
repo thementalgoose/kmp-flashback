@@ -2,14 +2,10 @@ package tmg.flashback.flashbackapi.api.client
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.darwin.Darwin
-import io.ktor.client.plugins.HttpRequestRetry
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
-import kotlin.experimental.ExperimentalNativeApi
-
-@OptIn(ExperimentalNativeApi::class)
-actual fun isDebug(): Boolean = Platform.isDebugBinary
+import tmg.flashback.infrastructure.debug.isDebug
 
 actual val KtorClient: HttpClient by lazy {
     HttpClient(Darwin) {

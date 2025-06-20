@@ -32,17 +32,17 @@ kotlin {
         }
         commonMain.dependencies {
 
-//            implementation(projects.core.configuration)
+            implementation(projects.core.configuration)
 //            implementation(projects.core.device)
 //            implementation(projects.core.metrics)
 //            implementation(projects.core.notifications)
 //            implementation(projects.core.preferences)
 //            implementation(projects.core.webbrowser)
 
-//            implementation(projects.data.network.flashback)
+            implementation(projects.data.network.flashback)
 //            implementation(projects.data.network.flashbackNews)
 //            implementation(projects.data.network.rss)
-//            implementation(projects.data.persistence)
+            implementation(projects.data.persistence.flashback)
 
             implementation(projects.domain.formula1)
 
@@ -57,11 +57,15 @@ kotlin {
 //            implementation(projects.feature.season)
 //            implementation(projects.feature.weekend)
 
+            implementation(projects.infrastructure)
+
             implementation(projects.presentation.localisation)
 //            implementation(projects.presentation.navigation)
             implementation(projects.presentation.style)
 //            implementation(projects.presentation.ui)
 
+
+            implementation(libs.bundles.kotlin)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.koin.core)
@@ -118,6 +122,10 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
+}
+
+compose.resources {
+    publicResClass = true
 }
 
 compose.desktop {

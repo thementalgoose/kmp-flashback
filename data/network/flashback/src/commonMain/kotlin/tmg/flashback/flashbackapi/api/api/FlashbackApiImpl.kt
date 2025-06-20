@@ -6,7 +6,6 @@ import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.request.get
 import kotlinx.io.IOException
 import tmg.flashback.flashbackapi.api.NetworkConfigurationManager
-import tmg.flashback.flashbackapi.api.client.isDebug
 import tmg.flashback.flashbackapi.api.models.MetadataWrapper
 import tmg.flashback.flashbackapi.api.models.circuits.AllCircuits
 import tmg.flashback.flashbackapi.api.models.circuits.CircuitHistory
@@ -18,6 +17,7 @@ import tmg.flashback.flashbackapi.api.models.overview.Event
 import tmg.flashback.flashbackapi.api.models.overview.Overview
 import tmg.flashback.flashbackapi.api.models.races.Round
 import tmg.flashback.flashbackapi.api.models.races.Season
+import tmg.flashback.infrastructure.debug.isDebug
 
 class FlashbackApiImpl(
     private val httpClient: HttpClient,

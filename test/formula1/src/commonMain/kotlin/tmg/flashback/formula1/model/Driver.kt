@@ -1,6 +1,6 @@
 package tmg.flashback.formula1.model
 
-import java.time.LocalDate
+import kotlinx.datetime.LocalDate
 
 fun Driver.Companion.model(
     id: String = "driverId",

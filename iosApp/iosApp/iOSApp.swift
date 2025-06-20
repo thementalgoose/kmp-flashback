@@ -4,6 +4,7 @@ import SwiftUI
 struct iOSApp: App {
     
     init() {
+        KoinSetupKt.initKoin()
         FirebaseApp.configure()
     }
     

@@ -1,6 +1,6 @@
 package tmg.flashback.formula1.model
 
-import java.time.LocalDate
+import kotlinx.datetime.LocalDate
 
 data class Driver(
     val id: String,

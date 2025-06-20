@@ -1,10 +1,11 @@
 package tmg.flashback.persistence.flashback.dao
 
 import androidx.room.*
-import java.time.LocalDate
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.format
+import tmg.flashback.infrastructure.datetime.dateFormatYYYYMMDD
 import tmg.flashback.persistence.flashback.models.overview.OverviewWithCircuit
 import tmg.flashback.persistence.flashback.models.overview.Schedule
-import tmg.utilities.extensions.format
 
 @Dao
 interface ScheduleDao {
@@ -15,7 +16,11 @@ interface ScheduleDao {
 
     @Transaction
     suspend fun getUpcomingEvents(fromDate: LocalDate): List<OverviewWithCircuit> {
-        val fromDateString = fromDate.format("yyyy-MM-dd") ?: return emptyList()
+        val fromDateString = try {
+            fromDate.format(dateFormatYYYYMMDD)
+        } catch (e: IllegalArgumentException) {
+            return emptyList()
+        }
         return getUpcomingEvents(fromDateString)
     }
 

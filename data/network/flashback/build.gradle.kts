@@ -11,6 +11,7 @@ kotlin {
             implementation(libs.okhttp.loggingInterceptor)
         }
         commonMain.dependencies {
+            implementation(projects.infrastructure)
             implementation(libs.bundles.common.ktor)
             implementation(libs.coroutines.core)
         }
