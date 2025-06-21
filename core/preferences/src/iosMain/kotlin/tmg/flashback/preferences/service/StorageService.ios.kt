@@ -23,18 +23,33 @@ actual class StorageService {
         NSUserDefaults.standardUserDefaults.setObject(saveString, forKey = key)
     }
     actual fun getInt(key: String, value: Int): Int {
+        if (NSUserDefaults.standardUserDefaults.objectForKey(key) == null) {
+            return value
+        }
         return NSUserDefaults.standardUserDefaults.integerForKey(key).toInt()
     }
     actual fun getString(key: String, value: String?): String? {
+        if (NSUserDefaults.standardUserDefaults.objectForKey(key) == null) {
+            return value
+        }
         return NSUserDefaults.standardUserDefaults.objectForKey(key) as? String
     }
     actual fun getLong(key: String, value: Long): Long {
+        if (NSUserDefaults.standardUserDefaults.objectForKey(key) == null) {
+            return value
+        }
         return NSUserDefaults.standardUserDefaults.integerForKey(key)
     }
     actual fun getFloat(key: String, value: Float): Float {
+        if (NSUserDefaults.standardUserDefaults.objectForKey(key) == null) {
+            return value
+        }
         return NSUserDefaults.standardUserDefaults.floatForKey(key)
     }
     actual fun getBoolean(key: String, value: Boolean): Boolean {
+        if (NSUserDefaults.standardUserDefaults.objectForKey(key) == null) {
+            return value
+        }
         return NSUserDefaults.standardUserDefaults.boolForKey(key)
     }
     actual fun getSet(key: String, value: Set<String>): MutableSet<String> {

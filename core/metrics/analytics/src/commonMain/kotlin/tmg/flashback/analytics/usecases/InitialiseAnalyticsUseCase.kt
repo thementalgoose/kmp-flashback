@@ -7,6 +7,7 @@ import tmg.flashback.analytics.model.UserProperty.DEVICE_BRAND
 import tmg.flashback.analytics.model.UserProperty.DEVICE_MANUFACTURER
 import tmg.flashback.analytics.model.UserProperty.DEVICE_MODEL
 import tmg.flashback.analytics.model.UserProperty.OS_VERSION
+import tmg.flashback.analytics.repositories.AnalyticsRepository
 import tmg.flashback.infrastructure.device.Device
 
 interface InitialiseAnalyticsUseCase {
@@ -14,11 +15,12 @@ interface InitialiseAnalyticsUseCase {
 }
 
 internal class InitialiseAnalyticsUseCaseImpl(
-    private val firebaseAnalyticsService: FirebaseAnalyticsService
+    private val firebaseAnalyticsService: FirebaseAnalyticsService,
+    private val analyticsRepository: AnalyticsRepository
 ): InitialiseAnalyticsUseCase {
     override fun initialise(userId: String) {
         firebaseAnalyticsService.setUserId(userId)
-        firebaseAnalyticsService.setAnalyticsCollectionEnabled(true)
+        firebaseAnalyticsService.setAnalyticsCollectionEnabled(analyticsRepository.analyticsEnabled)
         firebaseAnalyticsService.setProperty(APP_VERSION.key, Device.versionName)
         firebaseAnalyticsService.setProperty(OS_VERSION.key, Device.osVersion)
         firebaseAnalyticsService.setProperty(DEVICE_BOARD.key, Device.board)

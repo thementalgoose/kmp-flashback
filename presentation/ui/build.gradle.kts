@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.flashback.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.mokkery)
 }
 
 compose.resources {
@@ -33,10 +34,16 @@ kotlin {
             implementation(compose.components.resources)
             implementation(libs.bundles.compose.adaptive)
 
-            implementation(projects.infrastructure)
+            implementation(projects.core.preferences)
 
             implementation(projects.presentation.style)
             implementation(projects.presentation.localisation)
+
+            implementation(projects.infrastructure)
+        }
+
+        commonTest.dependencies {
+            implementation(kotlin("test"))
         }
 
         desktopMain.dependencies {

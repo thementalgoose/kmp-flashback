@@ -34,6 +34,7 @@ buildkonfig = "0.15.1"
 mockk = "1.13.13"
 kotest = "5.9.1"
 uiTooling = "1.8.3"
+mokkery = "2.8.0"
 
 [libraries]
 # Kotlin
@@ -140,6 +141,7 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }
 googleServices = { id = "com.google.gms.google-services" }
 crashlytics = { id = "com.google.firebase.crashlytics" }
+mokkery = {id = "dev.mokkery", version.ref = "mokkery"}
 
 # Custom Gradle Plugins
 flashback-kotlinMultiplatform = { id = "tmg.flashback.kotlin.multiplatform" }
