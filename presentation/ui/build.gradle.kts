@@ -31,6 +31,7 @@ kotlin {
             implementation(libs.flagkit)
 
             implementation(compose.components.resources)
+            implementation(libs.bundles.compose.adaptive)
 
             implementation(projects.infrastructure)
 

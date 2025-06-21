@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.googleServices)
+    alias(libs.plugins.crashlytics)
 }
 
 val versionCodeProperty = 1
@@ -56,7 +57,7 @@ kotlin {
 //            implementation(projects.feature.rss)
 //            implementation(projects.feature.sandbox)
 //            implementation(projects.feature.search)
-//            implementation(projects.feature.season)
+            implementation(projects.feature.season)
 //            implementation(projects.feature.weekend)
 
             implementation(projects.infrastructure)

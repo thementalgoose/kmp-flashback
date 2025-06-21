@@ -21,6 +21,7 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(libs.bundles.kotlin)
+            implementation(libs.bundles.compose.adaptive)
 
             implementation(projects.core.configuration)
             implementation(projects.core.metrics.analytics)

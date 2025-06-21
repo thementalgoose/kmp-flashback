@@ -6,6 +6,7 @@ import tmg.flashback.analytics.di.coreMetricsAnalyticsModule
 import tmg.flashback.configuration.di.coreConfigurationModule
 import tmg.flashback.crashlytics.di.coreMetricsCrashlyticsModule
 import tmg.flashback.data.repo.di.dataFlashbackModule
+import tmg.flashback.feature.season.di.featureSeasonModule
 import tmg.flashback.flashbackapi.api.di.dataNetworkFlashbackModule
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.persistence.flashback.di.dataPersistenceFlashbackModule
@@ -25,5 +26,7 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
         modules(dataNetworkFlashbackModule)
         modules(dataPersistenceFlashbackModule)
         modules(dataFlashbackModule)
+
+        modules(featureSeasonModule)
     }
 }

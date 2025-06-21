@@ -36,8 +36,8 @@ Flashback provides race results and statistics from every race in the history of
 - [ ] Add Settings
 - [ ] Add notification support
 - [ ] Add scheduled job support for periodically refreshing content (maybe Android only?)
-- [ ] Get tests working 
-- [ ] Get test fixtures setup going
+- [x] Get tests working 
+- [x] Get test fixtures setup going
 - [ ] Support material theme
   - [ ] Android
   - [ ] iOS

@@ -7,4 +7,5 @@ plugins {
     alias(libs.plugins.composeCompiler) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.googleServices) version libs.versions.google.services apply false
+    alias(libs.plugins.crashlytics) version libs.versions.crashlytics apply false
 }
