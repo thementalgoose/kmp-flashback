@@ -71,3 +71,5 @@ include(":presentation:style")
 include(":presentation:ui")
 
 include(":test:formula1")
+include(":test:data:network:flashback")
+include(":test:data:persistence:flashback")
