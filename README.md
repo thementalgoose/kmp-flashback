@@ -13,13 +13,17 @@ Flashback provides race results and statistics from every race in the history of
 - [x] Setup dependency injection with koin
 - [x] Mirror module structure from android project
 - [x] Get modules to talk to one another
+- [ ] Latest news events
 - [x] Get firebase working on 
   - [x] Android
   - [ ] iOS
 - [ ] Get network layer working
   - [x] Android
   - [ ] iOS
-- [ ] Get database layer working
+- [x] Get database layer working
+  - [ ] Android
+  - [ ] iOS
+- [ ] Add repository layer for offline first
   - [ ] Android
   - [ ] iOS
 - [x] Get compose style library setup
@@ -37,7 +41,11 @@ Flashback provides race results and statistics from every race in the history of
 - [ ] Support material theme
   - [ ] Android
   - [ ] iOS
-- [ ] Create UI components module with shared resources
+- [x] Create UI components module with shared resources
 - [ ] Configure app building in the CI
+  - [ ] Android
+  - [ ] iOS
 - [ ] Setup distribution CI
+  - [ ] Android
+  - [ ] iOS
 - [ ] Configure Proguard

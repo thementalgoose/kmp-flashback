@@ -9,8 +9,6 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.AppThemePreview
 import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewDarkMode
-import tmg.flashback.style.preview.PreviewLightMode
 import tmg.flashback.style.preview.PreviewConfigProvider
 
 

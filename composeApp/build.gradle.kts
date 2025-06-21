@@ -34,9 +34,10 @@ kotlin {
 
             implementation(projects.core.configuration)
 //            implementation(projects.core.device)
-//            implementation(projects.core.metrics)
+            implementation(projects.core.metrics.analytics)
+            implementation(projects.core.metrics.crashlytics)
 //            implementation(projects.core.notifications)
-//            implementation(projects.core.preferences)
+            implementation(projects.core.preferences)
 //            implementation(projects.core.webbrowser)
 
             implementation(projects.data.network.flashback)

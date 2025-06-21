@@ -19,11 +19,9 @@ kotlin {
         androidMain.dependencies {
             implementation(project.dependencies.platform(libs.firebase.bom))
             implementation(libs.firebase.remoteconfig)
-
-            implementation(projects.infrastructure)
         }
         commonMain.dependencies {
-
+            implementation(projects.infrastructure)
         }
         iosMain.dependencies {
 

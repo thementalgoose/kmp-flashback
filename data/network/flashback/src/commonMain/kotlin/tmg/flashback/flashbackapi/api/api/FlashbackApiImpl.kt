@@ -17,7 +17,7 @@ import tmg.flashback.flashbackapi.api.models.overview.Event
 import tmg.flashback.flashbackapi.api.models.overview.Overview
 import tmg.flashback.flashbackapi.api.models.races.Round
 import tmg.flashback.flashbackapi.api.models.races.Season
-import tmg.flashback.infrastructure.debug.isDebug
+import tmg.flashback.infrastructure.log.logException
 
 class FlashbackApiImpl(
     private val httpClient: HttpClient,
@@ -69,25 +69,8 @@ class FlashbackApiImpl(
     private suspend inline fun <reified T> makeRequest(endpoint: String): T? {
         return try {
             httpClient.get("$baseUrl/$endpoint").body()
-        } catch (e: IOException) {
-            if (isDebug()) {
-                e.printStackTrace()
-            }
-            null
-        } catch (e: ClientRequestException) {
-            if (isDebug()) {
-                e.printStackTrace()
-            }
-            null
-        } catch (e: RuntimeException) {
-            if (isDebug()) {
-                e.printStackTrace()
-            }
-            null
         } catch (e: Exception) {
-            if (isDebug()) {
-                e.printStackTrace()
-            }
+            logException(e)
             null
         }
     }

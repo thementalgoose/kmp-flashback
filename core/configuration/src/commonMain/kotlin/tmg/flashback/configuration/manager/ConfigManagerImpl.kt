@@ -1,17 +1,17 @@
 package tmg.flashback.configuration.manager
 
-import tmg.flashback.configuration.firebase.FirebaseService
+import tmg.flashback.configuration.firebase.FirebaseRemoteConfigService
 import tmg.flashback.configuration.firebase.FirebaseSettings
 
 internal class ConfigManagerImpl(
-    private val firebaseService: FirebaseService
+    private val firebaseRemoteConfigService: FirebaseRemoteConfigService
 ): ConfigManager {
     override fun getBoolean(key: String): Boolean {
-        return firebaseService.getValue(key).asBoolean()
+        return firebaseRemoteConfigService.getValue(key).asBoolean()
     }
 
     override fun getString(key: String): String? {
-        return firebaseService.getValue(key).asString()
+        return firebaseRemoteConfigService.getValue(key).asString()
     }
 
     override fun <T> getJson(key: String): T? {
@@ -19,17 +19,17 @@ internal class ConfigManagerImpl(
     }
 
     override fun initialiseRemoteConfig(defaultValues: Map<String, Any>) {
-        firebaseService.setConfigSettingsAsync(
+        firebaseRemoteConfigService.setConfigSettingsAsync(
             minimumFetchInterval = FirebaseSettings.minimumFetchInterval
         )
-        firebaseService.setDefaultsAsync(
+        firebaseRemoteConfigService.setDefaultsAsync(
             defaultValues = defaultValues
         )
     }
 
     override suspend fun activate(): Boolean {
         try {
-            val result = firebaseService.activate()
+            val result = firebaseRemoteConfigService.activate()
             return result
         } catch (e: Exception) {
             e.printStackTrace()
@@ -39,7 +39,7 @@ internal class ConfigManagerImpl(
     }
 
     override suspend fun reset(): Boolean {
-        firebaseService.reset()
+        firebaseRemoteConfigService.reset()
         return true
     }
 
@@ -47,12 +47,12 @@ internal class ConfigManagerImpl(
         try {
             when (andActivate) {
                 true -> {
-                    firebaseService.fetch(0)
-                    val activate = firebaseService.activate()
+                    firebaseRemoteConfigService.fetch(0)
+                    val activate = firebaseRemoteConfigService.activate()
                     return activate
                 }
                 false -> {
-                    firebaseService.fetch()
+                    firebaseRemoteConfigService.fetch()
                     return false
                 }
             }

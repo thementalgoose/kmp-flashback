@@ -1,9 +1,9 @@
 package tmg.flashback.infrastructure.log
 
-import tmg.flashback.infrastructure.debug.isDebug
+import tmg.flashback.infrastructure.device.Device
 
 fun logException(throwable: Throwable) {
-    if (isDebug()) {
+    if (Device.isDebug) {
         throwable.printStackTrace()
     }
 }

@@ -28,6 +28,8 @@ kotlin {
             api(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
+            implementation(libs.flagkit)
+
             implementation(compose.components.resources)
 
             implementation(projects.infrastructure)

@@ -7,7 +7,7 @@ import tmg.flashback.flashbackapi.api.api.FlashbackApi
 import tmg.flashback.flashbackapi.api.api.FlashbackApiImpl
 import tmg.flashback.flashbackapi.api.client.KtorClient
 
-val dataNetworkFlashbackModules = listOf(module())
+val dataNetworkFlashbackModule = listOf(module())
 
 internal fun module() = module {
     singleOf(::KtorClient)

@@ -70,7 +70,7 @@
 
 -keep class tmg.flashback.flashbackapi.api.models.**
 
--keep class tmg.flashback.data.persistence.models.**
+-keep class tmg.flashback.persistence.flashback.models.**
 
 -keep class tmg.flashback.data.repo.json.*
 -keep class tmg.flashback.data.repo.models.*

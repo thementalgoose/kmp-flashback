@@ -4,7 +4,7 @@ import org.koin.dsl.module
 import tmg.flashback.persistence.flashback.FlashbackDatabase
 import tmg.flashback.persistence.flashback.FlashbackDatabaseFactory
 
-val dataPersistenceFlashbackModules = listOf(
+val dataPersistenceFlashbackModule = listOf(
     platformModule(),
     module()
 )
