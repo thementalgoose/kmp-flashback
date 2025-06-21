@@ -1,6 +1,5 @@
 package tmg.flashback.flashbackapi.api.api
 
-import io.ktor.client.HttpClient
 import tmg.flashback.flashbackapi.api.models.MetadataWrapper
 import tmg.flashback.flashbackapi.api.models.circuits.AllCircuits
 import tmg.flashback.flashbackapi.api.models.circuits.CircuitHistory

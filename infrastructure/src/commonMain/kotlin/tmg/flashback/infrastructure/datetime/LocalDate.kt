@@ -1,10 +1,13 @@
 package tmg.flashback.infrastructure.datetime
 
 import kotlinx.datetime.Clock
+import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.daysUntil
+import kotlinx.datetime.minus
 import kotlinx.datetime.toLocalDateTime
 
 fun LocalDateTime.Companion.now(): LocalDateTime {
@@ -19,6 +22,9 @@ fun LocalTime.Companion.now(): LocalTime {
     return Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).time
 }
 
+fun daysBetween(start: LocalDate, end: LocalDate): Int {
+    return start.daysUntil(end)
+}
 
 @Throws(IllegalArgumentException::class)
 fun requireFromDate(date: String): LocalDate {
@@ -41,24 +47,7 @@ fun fromDate(date: String?): LocalDate? {
     }
 }
 
-@Throws(IllegalArgumentException::class)
-fun requireFromTime(time: String, ): LocalTime {
-    return timeFormats.firstNotNullOfOrNull { pattern ->
-        try {
-            LocalTime.parse(time, pattern)
-        } catch (e: RuntimeException) {
-            null
-        }
-    } ?: throw IllegalArgumentException("Failed to parse time string $time with no supported patterns.")
-}
-
-fun fromTime(time: String?): LocalTime? {
-    if (time == null) {
-        return null
-    }
-    return try {
-        return requireFromTime(time)
-    } catch (e: Exception) {
-        null
-    }
+fun LocalDate.startOfWeek(): LocalDate {
+    val current = this.dayOfWeek
+    return this.minus(current.ordinal, DateTimeUnit.DAY)
 }

@@ -4,6 +4,7 @@ import androidx.room.migration.Migration
 import androidx.sqlite.SQLiteConnection
 import androidx.sqlite.execSQL
 
+
 enum class Migrations(
     val migration: Migration
 ) {

@@ -60,7 +60,7 @@ include(":domain:formula1")
 //include(":feature:rss")
 //include(":feature:sandbox")
 //include(":feature:search")
-//include(":feature:season")
+include(":feature:season")
 //include(":feature:weekend")
 
 include(":infrastructure")

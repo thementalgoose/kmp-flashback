@@ -57,7 +57,7 @@ internal class NetworkRaceMapperTest {
     @Test
     fun `mapSprintResults maps fields correctly`() {
         initUnderTest()
-        
+
         val inputSeason = 2020
         val inputRound = 1
         val inputData = NetworkSprintResult.model()

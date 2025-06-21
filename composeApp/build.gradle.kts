@@ -40,6 +40,7 @@ kotlin {
             implementation(projects.core.preferences)
 //            implementation(projects.core.webbrowser)
 
+            implementation(projects.data.flashback)
             implementation(projects.data.network.flashback)
 //            implementation(projects.data.network.flashbackNews)
 //            implementation(projects.data.network.rss)
