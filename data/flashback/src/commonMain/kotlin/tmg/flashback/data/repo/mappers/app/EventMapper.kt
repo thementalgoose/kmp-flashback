@@ -2,8 +2,8 @@ package tmg.flashback.data.repo.mappers.app
 
 import tmg.flashback.formula1.enums.EventType
 import tmg.flashback.formula1.model.Event
-import tmg.utilities.extensions.toEnum
-import tmg.utilities.utils.LocalDateUtils.Companion.fromDate
+import tmg.flashback.infrastructure.datetime.fromDate
+import tmg.flashback.infrastructure.extensions.toEnum
 
 class EventMapper() {
 

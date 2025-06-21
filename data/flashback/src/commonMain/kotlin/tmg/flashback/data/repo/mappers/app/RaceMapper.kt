@@ -23,9 +23,8 @@ import tmg.flashback.formula1.model.SprintQualifyingType.SQ3
 import tmg.flashback.formula1.model.SprintRaceResult
 import tmg.flashback.formula1.model.SprintResult
 import tmg.flashback.formula1.utils.toLapTime
-import tmg.utilities.utils.LocalDateUtils.Companion.requireFromDate
-import tmg.utilities.utils.LocalTimeUtils.Companion.fromTime
-import javax.inject.Inject
+import tmg.flashback.infrastructure.datetime.fromTime
+import tmg.flashback.infrastructure.datetime.requireFromDate
 
 class RaceMapper(
     private val circuitMapper: CircuitMapper,
@@ -33,8 +32,6 @@ class RaceMapper(
     private val constructorDataMapper: ConstructorDataMapper,
     private val scheduleMapper: ScheduleMapper
 ) {
-
-    private enum class Qualifying { Q1, Q2, Q3 }
 
     fun mapRaceInfo(data: tmg.flashback.persistence.flashback.models.race.Race): RaceInfo {
         return RaceInfo(

@@ -1,28 +1,26 @@
 package tmg.flashback.data.repo.mappers.app
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
-import tmg.flashback.data.persistence.RoomConstructor
 import tmg.flashback.persistence.flashback.models.constructors.model
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.model
+import tmg.flashback.persistence.flashback.RoomConstructor
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class ConstructorDataMapperTest {
 
     private lateinit var underTest: ConstructorDataMapper
 
-    @BeforeEach
-    internal fun setUp() {
+    internal fun initUnderTest() {
         underTest = ConstructorDataMapper()
     }
 
     @Test
     fun `mapConstructorData maps fields correctly`() {
+        initUnderTest()
+
         val input = RoomConstructor.model()
-        val expected = Constructor.model(
-            color = 0 /* .toColorInt() doesnt work from unit tests */
-        )
+        val expected = Constructor.model()
 
         assertEquals(expected, underTest.mapConstructorData(input))
     }

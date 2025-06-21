@@ -3,6 +3,8 @@ package tmg.flashback.data.repo.mappers.app
 import tmg.flashback.persistence.flashback.models.circuit.CircuitRoundResultWithDriverConstructor
 import tmg.flashback.persistence.flashback.models.circuit.CircuitRoundWithResults
 import tmg.flashback.formula1.model.*
+import tmg.flashback.infrastructure.datetime.fromTime
+import tmg.flashback.infrastructure.datetime.requireFromDate
 
 class CircuitMapper(
     private val driverMapper: DriverDataMapper,

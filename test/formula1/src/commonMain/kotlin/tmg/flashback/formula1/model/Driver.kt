@@ -10,7 +10,7 @@ fun Driver.Companion.model(
     number: Int? = 23,
     wikiUrl: String? = "wikiUrl",
     photoUrl: String? = "photoUrl",
-    dateOfBirth: LocalDate = LocalDate.of(1995, 10, 12),
+    dateOfBirth: LocalDate = LocalDate(1995, 10, 12),
     nationality: String = "nationality",
     nationalityISO: String = "nationalityISO"
 ): Driver = Driver(

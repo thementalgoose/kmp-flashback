@@ -1,6 +1,7 @@
 package tmg.flashback.data.repo.mappers.app
 
 import tmg.flashback.formula1.model.Constructor
+import tmg.flashback.infrastructure.extensions.toColourInt
 
 class ConstructorDataMapper {
 
@@ -12,7 +13,7 @@ class ConstructorDataMapper {
             photoUrl = constructor.photoUrl,
             nationality = constructor.nationality,
             nationalityISO = constructor.nationalityISO,
-            color = constructor.colour,
+            color = constructor.colour.toColourInt(),
         )
     }
 }

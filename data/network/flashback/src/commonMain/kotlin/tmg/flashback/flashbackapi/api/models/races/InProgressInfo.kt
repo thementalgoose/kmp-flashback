@@ -9,4 +9,6 @@ data class InProgressInfo(
     val name: String,
     @SerialName("round")
     val round: Int
-)
+) {
+    companion object
+}

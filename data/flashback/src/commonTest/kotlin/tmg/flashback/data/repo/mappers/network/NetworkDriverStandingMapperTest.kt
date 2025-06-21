@@ -1,47 +1,51 @@
 package tmg.flashback.data.repo.mappers.network
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 import tmg.flashback.persistence.flashback.models.standings.DriverStanding
 import tmg.flashback.persistence.flashback.models.standings.DriverStandingConstructor
 import tmg.flashback.persistence.flashback.models.standings.model
 import tmg.flashback.flashbackapi.api.models.races.DriverStandings
 import tmg.flashback.flashbackapi.api.models.races.model
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 
 internal class NetworkDriverStandingMapperTest {
 
-    private lateinit var sut: NetworkDriverStandingMapper
+    private lateinit var underTest: NetworkDriverStandingMapper
 
-    @BeforeEach
-    internal fun setUp() {
-        sut = NetworkDriverStandingMapper()
+    internal fun initUnderTest() {
+        underTest = NetworkDriverStandingMapper()
     }
 
     @Test
     fun `mapDriverStanding maps fields correctly`() {
+        initUnderTest()
+
         val inputSeason = 2020
         val inputData = DriverStandings.model()
         val expected = DriverStanding.model()
 
-        assertEquals(expected, sut.mapDriverStanding(inputSeason, inputData))
+        assertEquals(expected, underTest.mapDriverStanding(inputSeason, inputData))
     }
 
     @Test
     fun `mapDriverStanding null progress defaults to false`() {
+        initUnderTest()
+
         val inputSeason = 2020
         val inputData = DriverStandings.model(inProgress = null)
 
-        assertFalse(sut.mapDriverStanding(inputSeason, inputData).inProgress)
+        assertFalse(underTest.mapDriverStanding(inputSeason, inputData).inProgress)
     }
 
     @Test
     fun `mapDriverStandingConstructor maps fields correctly`() {
+        initUnderTest()
+
         val inputSeason = 2020
         val inputData = DriverStandings.model()
         val expected = listOf(DriverStandingConstructor.model())
 
-        assertEquals(expected, sut.mapDriverStandingConstructor(inputSeason, inputData))
+        assertEquals(expected, underTest.mapDriverStandingConstructor(inputSeason, inputData))
     }
 }

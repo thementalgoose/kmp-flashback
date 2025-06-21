@@ -19,4 +19,6 @@ data class SprintQualifyingResult(
     val sq2: String? = null,
     @SerialName("sq3")
     val sq3: String? = null
-)
+) {
+    companion object
+}

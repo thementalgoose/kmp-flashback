@@ -2,9 +2,8 @@ package tmg.flashback.data.repo.mappers.app
 
 import tmg.flashback.persistence.flashback.models.overview.OverviewWithCircuit
 import tmg.flashback.formula1.model.OverviewRace
-import tmg.utilities.utils.LocalDateUtils.Companion.requireFromDate
-import tmg.utilities.utils.LocalTimeUtils.Companion.fromTime
-import javax.inject.Inject
+import tmg.flashback.infrastructure.datetime.fromTime
+import tmg.flashback.infrastructure.datetime.requireFromDate
 
 class OverviewMapper(
     private val scheduleMapper: ScheduleMapper

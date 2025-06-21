@@ -14,3 +14,8 @@ fun Int.extend(numberOfDigits: Int, extendWithChar: Char = '0'): String {
 fun <T> Int.itemsOf(runner: (index: Int) -> T): List<T> {
     return List(this) { runner(it) }
 }
+
+
+inline fun <reified T : Enum<T>> Int.toEnum(by: (enum: T) -> Int = { it.ordinal }): T? {
+    return enumValues<T>().firstOrNull { by(it) == this }
+}

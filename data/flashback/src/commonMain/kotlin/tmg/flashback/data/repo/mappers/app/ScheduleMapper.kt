@@ -3,6 +3,8 @@ package tmg.flashback.data.repo.mappers.app
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.ScheduleWeather
 import tmg.flashback.formula1.model.WeatherType
+import tmg.flashback.infrastructure.datetime.fromDate
+import tmg.flashback.infrastructure.datetime.fromTime
 
 class ScheduleMapper() {
 
@@ -52,6 +54,6 @@ class ScheduleMapper() {
             WeatherType.MIST -> "mist"
         }
     private fun String.toWeatherType(): WeatherType? {
-        return WeatherType.values().firstOrNull { it.expectedKey == this }
+        return WeatherType.entries.firstOrNull { it.expectedKey == this }
     }
 }

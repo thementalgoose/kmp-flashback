@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.flashback.dataModule)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -14,6 +15,12 @@ kotlin {
             implementation(projects.domain.formula1)
             implementation(projects.data.network.flashback)
             implementation(projects.data.persistence.flashback)
+        }
+        commonTest.dependencies {
+            implementation(projects.test.data.persistence.flashback)
+            implementation(projects.test.data.network.flashback)
+            implementation(projects.test.formula1)
+            implementation(kotlin("test"))
         }
         iosMain.dependencies {
         }

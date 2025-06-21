@@ -4,6 +4,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
+import tmg.flashback.infrastructure.device.Device
 
 actual val KtorClient: HttpClient by lazy {
     HttpClient {
@@ -11,7 +12,7 @@ actual val KtorClient: HttpClient by lazy {
             json
         }
 
-        if (isDebug()) {
+        if (Device.isDebug) {
             install(Logging) {
                 level = LogLevel.ALL
             }

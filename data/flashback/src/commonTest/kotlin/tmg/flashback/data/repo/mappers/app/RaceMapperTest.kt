@@ -1,102 +1,101 @@
 package tmg.flashback.data.repo.mappers.app
 
-import io.mockk.every
-import io.mockk.mockk
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNull
-import org.junit.jupiter.api.Assertions.assertThrows
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
-import java.time.format.DateTimeParseException
-import tmg.flashback.data.persistence.RoomRace
-import tmg.flashback.data.persistence.RoomRaceInfo
-import tmg.flashback.data.persistence.RoomRaceInfoWithCircuit
+import tmg.flashback.data.repo.fakes.fakeCircuitMapper
+import tmg.flashback.data.repo.fakes.fakeConstructorDataMapper
+import tmg.flashback.data.repo.fakes.fakeDriverDataMapper
+import tmg.flashback.data.repo.fakes.fakeScheduleMapper
 import tmg.flashback.persistence.flashback.models.race.model
-import tmg.flashback.formula1.model.Circuit
-import tmg.flashback.formula1.model.Constructor
-import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.model.Race
 import tmg.flashback.formula1.model.RaceInfo
-import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.model
+import tmg.flashback.persistence.flashback.RoomRace
+import tmg.flashback.persistence.flashback.RoomRaceInfo
+import tmg.flashback.persistence.flashback.RoomRaceInfoWithCircuit
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFails
+import kotlin.test.assertNull
 
 internal class RaceMapperTest {
 
-    private val mockCircuitMapper: CircuitMapper = mockk(relaxed = true)
-    private val mockDriverDataMapper: DriverDataMapper = mockk(relaxed = true)
-    private val mockConstructorDataMapper: ConstructorDataMapper = mockk(relaxed = true)
-    private val mockScheduleMapper: ScheduleMapper = mockk(relaxed = true)
+    private lateinit var underTest: RaceMapper
 
-    private lateinit var sut: RaceMapper
-
-    @BeforeEach
-    internal fun setUp() {
-        sut = RaceMapper(
-            mockCircuitMapper,
-            mockDriverDataMapper,
-            mockConstructorDataMapper,
-            mockScheduleMapper
+    internal fun initUnderTest() {
+        underTest = RaceMapper(
+            circuitMapper = fakeCircuitMapper(),
+            driverDataMapper = fakeDriverDataMapper(),
+            constructorDataMapper = fakeConstructorDataMapper(),
+            scheduleMapper = fakeScheduleMapper()
         )
-
-        every { mockCircuitMapper.mapCircuit(any()) } returns Circuit.model()
-        every { mockDriverDataMapper.mapDriver(any()) } returns Driver.model()
-        every { mockConstructorDataMapper.mapConstructorData(any()) } returns Constructor.model()
-        every { mockScheduleMapper.mapSchedule(any()) } returns Schedule.model()
     }
 
     @Test
     fun `mapRaceInfo maps fields correctly`() {
+        initUnderTest()
+
         val input = RoomRace.model()
         val expected = RaceInfo.model()
 
-        assertEquals(expected, sut.mapRaceInfo(input))
+        assertEquals(expected, underTest.mapRaceInfo(input))
     }
 
     @Test
     fun `mapRaceInfo throws error if date is invalid`() {
+        initUnderTest()
+
         val input = RoomRace.model(raceInfo = RoomRaceInfo.model(date = "invalid"))
 
-        assertThrows(DateTimeParseException::class.java) {
-            sut.mapRaceInfo(input)
+        assertFails {
+            underTest.mapRaceInfo(input)
         }
     }
 
     @Test
     fun `mapRaceInfo returns null if time is invalid`() {
+        initUnderTest()
+
         val input = RoomRace.model(raceInfo = RoomRaceInfo.model(time = "invalid"))
 
-        assertNull(sut.mapRaceInfo(input).time)
+        assertNull(underTest.mapRaceInfo(input).time)
     }
 
     @Test
     fun `mapRaceInfoWithCircuit maps fields correctly`() {
+        initUnderTest()
+
         val input = RoomRaceInfoWithCircuit.model()
         val expected = RaceInfo.model()
 
-        assertEquals(expected, sut.mapRaceInfoWithCircuit(input))
+        assertEquals(expected, underTest.mapRaceInfoWithCircuit(input))
     }
 
     @Test
     fun `mapRaceInfoWithCircuit throws error if date is invalid`() {
+        initUnderTest()
+
         val input = RoomRaceInfoWithCircuit.model(raceInfo = RoomRaceInfo.model(date = "invalid"))
 
-        assertThrows(DateTimeParseException::class.java) {
-            sut.mapRaceInfoWithCircuit(input)
+        assertFails {
+            underTest.mapRaceInfoWithCircuit(input)
         }
     }
 
     @Test
     fun `mapRaceInfoWithCircuit returns null if time is invalid`() {
+        initUnderTest()
+
         val input = RoomRaceInfoWithCircuit.model(raceInfo = RoomRaceInfo.model(time = "invalid"))
 
-        assertNull(sut.mapRaceInfoWithCircuit(input).time)
+        assertNull(underTest.mapRaceInfoWithCircuit(input).time)
     }
 
     @Test
     fun `mapRace maps fields correctly`() {
+        initUnderTest()
+
         val input = RoomRace.model()
         val expected = Race.model()
 
-        assertEquals(expected, sut.mapRace(input))
+        assertEquals(expected, underTest.mapRace(input))
     }
 }

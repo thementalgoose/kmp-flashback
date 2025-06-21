@@ -1,38 +1,30 @@
 package tmg.flashback.data.repo.mappers.app
 
-import io.mockk.every
-import io.mockk.mockk
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNull
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import tmg.flashback.data.repo.fakes.fakeConstructorDataMapper
+import tmg.flashback.data.repo.fakes.fakeDriverDataMapper
 import tmg.flashback.persistence.flashback.models.circuit.model
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.CircuitHistory
-import tmg.flashback.formula1.model.Constructor
-import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.model.model
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 internal class CircuitMapperTest {
 
-    private val mockDriverDataMapper: DriverDataMapper = mockk(relaxed = true)
-    private val mockConstructorDataMapper: ConstructorDataMapper = mockk(relaxed = true)
-
     private lateinit var underTest: CircuitMapper
 
-    @BeforeEach
-    internal fun setUp() {
+    internal fun initUnderTest() {
         underTest = CircuitMapper(
-            driverMapper = mockDriverDataMapper,
-            constructorMapper = mockConstructorDataMapper
+            driverMapper = fakeDriverDataMapper(),
+            constructorMapper = fakeConstructorDataMapper()
         )
-
-        every { mockDriverDataMapper.mapDriver(any()) } returns Driver.model()
-        every { mockConstructorDataMapper.mapConstructorData(any()) } returns Constructor.model()
     }
 
     @Test
     fun `mapCircuit maps fields correctly`() {
+        initUnderTest()
+
         val input = tmg.flashback.persistence.flashback.models.circuit.Circuit.model()
         val expected = Circuit.model()
 
@@ -41,6 +33,8 @@ internal class CircuitMapperTest {
 
     @Test
     fun `mapCircuit maps location to null if lat is null`() {
+        initUnderTest()
+
         val input = tmg.flashback.persistence.flashback.models.circuit.Circuit.model(locationLat = null)
 
         assertNull(underTest.mapCircuit(input)!!.location)
@@ -48,6 +42,8 @@ internal class CircuitMapperTest {
 
     @Test
     fun `mapCircuit maps location to null if lng is null`() {
+        initUnderTest()
+
         val input = tmg.flashback.persistence.flashback.models.circuit.Circuit.model(locationLng = null)
 
         assertNull(underTest.mapCircuit(input)!!.location)
@@ -55,6 +51,8 @@ internal class CircuitMapperTest {
 
     @Test
     fun `mapCircuitHistory maps fields correctly`() {
+        initUnderTest()
+
         val input = tmg.flashback.persistence.flashback.models.circuit.CircuitHistory.model()
         val expected = CircuitHistory.model()
 
@@ -63,6 +61,8 @@ internal class CircuitMapperTest {
 
     @Test
     fun `mapCircuitHistory returns null when input is null`() {
+        initUnderTest()
+
         assertNull(underTest.mapCircuitHistory(null))
     }
 }

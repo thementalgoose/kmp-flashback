@@ -1,5 +1,6 @@
 package tmg.flashback.data.repo.mappers.network
 
+import tmg.flashback.infrastructure.datetime.fromDate
 import tmg.flashback.persistence.flashback.models.overview.Event
 
 class NetworkEventMapper {

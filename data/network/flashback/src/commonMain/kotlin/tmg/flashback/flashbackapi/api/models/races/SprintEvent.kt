@@ -9,4 +9,6 @@ data class SprintEvent(
     val qualifying: Map<String, SprintQualifyingResult>?,
     @SerialName("race")
     val race: Map<String, SprintRaceResult>?,
-)
+) {
+    companion object
+}

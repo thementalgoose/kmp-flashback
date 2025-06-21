@@ -2,7 +2,7 @@ package tmg.flashback.persistence.flashback.models.constructors
 
 fun Constructor.Companion.model(
     id: String = "constructorId",
-    colour: String = "#00FFFF",
+    colour: String = "#8899EF",
     name: String = "name",
     photoUrl: String? = "photoUrl",
     nationality: String = "nationality",

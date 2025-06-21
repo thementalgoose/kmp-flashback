@@ -24,6 +24,7 @@ kotlin {
 
 dependencies {
     add("kspAndroid", libs.room.compiler)
+    add("kspDesktop", libs.room.compiler)
     add("kspIosSimulatorArm64", libs.room.compiler)
     add("kspIosX64", libs.room.compiler)
     add("kspIosArm64", libs.room.compiler)

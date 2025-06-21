@@ -1,6 +1,7 @@
 package tmg.flashback.data.repo.mappers.app
 
 import tmg.flashback.formula1.model.Driver
+import tmg.flashback.infrastructure.datetime.requireFromDate
 
 class DriverDataMapper() {
 
@@ -9,7 +10,7 @@ class DriverDataMapper() {
             id = driver.id,
             firstName = driver.firstName,
             lastName = driver.lastName,
-            dateOfBirth = LocalDateUtils.requireFromDate(driver.dob),
+            dateOfBirth = requireFromDate(driver.dob),
             nationality = driver.nationality,
             nationalityISO = driver.nationalityISO,
             photoUrl = driver.photoUrl,

@@ -1,39 +1,31 @@
 package tmg.flashback.data.repo.mappers.app
 
-import io.mockk.every
-import io.mockk.mockk
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNull
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import tmg.flashback.data.repo.fakes.fakeConstructorDataMapper
+import tmg.flashback.data.repo.fakes.fakeDriverDataMapper
 import tmg.flashback.persistence.flashback.models.standings.ConstructorStandingWithDrivers
 import tmg.flashback.persistence.flashback.models.standings.model
-import tmg.flashback.formula1.model.Constructor
-import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.model.SeasonConstructorStandingSeason
 import tmg.flashback.formula1.model.SeasonConstructorStandings
 import tmg.flashback.formula1.model.model
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 internal class ConstructorStandingMapperTest {
 
-    private val mockConstructorDataMapper: ConstructorDataMapper = mockk(relaxed = true)
-    private val mockDriverDataMapper: DriverDataMapper = mockk(relaxed = true)
-
     private lateinit var underTest: ConstructorStandingMapper
 
-    @BeforeEach
-    internal fun setUp() {
+    internal fun initUnderTest() {
         underTest = ConstructorStandingMapper(
-            mockDriverDataMapper,
-            mockConstructorDataMapper
+            driverDataMapper = fakeDriverDataMapper(),
+            constructorDataMapper = fakeConstructorDataMapper()
         )
-
-        every { mockDriverDataMapper.mapDriver(any()) } returns Driver.model()
-        every { mockConstructorDataMapper.mapConstructorData(any()) } returns Constructor.model()
     }
 
     @Test
     fun `mapConstructorStanding model maps fields correctly`() {
+        initUnderTest()
+
         val input = ConstructorStandingWithDrivers.model()
         val expected = SeasonConstructorStandingSeason.model()
 
@@ -42,6 +34,8 @@ internal class ConstructorStandingMapperTest {
 
     @Test
     fun `mapConstructorStanding list maps fields correctly`() {
+        initUnderTest()
+
         val input = listOf(ConstructorStandingWithDrivers.model())
         val expected = SeasonConstructorStandings.model()
 
@@ -50,6 +44,8 @@ internal class ConstructorStandingMapperTest {
 
     @Test
     fun `mapConstructorStanding list returns null if list is empty`() {
+        initUnderTest()
+
         val input = emptyList<ConstructorStandingWithDrivers>()
 
         assertNull(underTest.mapConstructorStanding(input))

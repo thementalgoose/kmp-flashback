@@ -6,7 +6,7 @@ import tmg.flashback.formula1.enums.EventType
 fun Event.Companion.model(
     label: String = "label",
     type: EventType = EventType.TESTING,
-    date: LocalDate = LocalDate.of(2020, 10, 12)
+    date: LocalDate = LocalDate(2020, 10, 12)
 ): Event = Event(
     label = label,
     type = type,

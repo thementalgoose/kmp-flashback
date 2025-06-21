@@ -1,35 +1,37 @@
 package tmg.flashback.data.repo.mappers.network
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNull
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 import tmg.flashback.flashbackapi.NetworkDriver
 import tmg.flashback.persistence.flashback.models.drivers.Driver
 import tmg.flashback.persistence.flashback.models.drivers.model
 import tmg.flashback.flashbackapi.api.models.drivers.model
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 internal class NetworkDriverDataMapperTest {
 
-    private lateinit var sut: NetworkDriverDataMapper
+    private lateinit var underTest: NetworkDriverDataMapper
 
-    @BeforeEach
-    internal fun setUp() {
-        sut = NetworkDriverDataMapper()
+    internal fun initUnderTest() {
+        underTest = NetworkDriverDataMapper()
     }
 
     @Test
     fun `mapDriverData maps fields correctly`() {
+        initUnderTest()
+
         val input = NetworkDriver.model()
         val expected = Driver.model()
 
-        assertEquals(expected, sut.mapDriverData(input))
+        assertEquals(expected, underTest.mapDriverData(input))
     }
 
     @Test
     fun `mapDriverData invalid permanent number is set to null`() {
+        initUnderTest()
+
         val input = NetworkDriver.model(permanentNumber = "invalid")
 
-        assertNull(sut.mapDriverData(input).number)
+        assertNull(underTest.mapDriverData(input).number)
     }
 }
