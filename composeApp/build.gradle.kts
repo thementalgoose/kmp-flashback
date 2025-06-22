@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.googleServices)
     alias(libs.plugins.crashlytics)
 }
@@ -71,6 +72,8 @@ kotlin {
             implementation(projects.presentation.ui)
 
             implementation(compose.components.resources)
+            implementation(compose.material3AdaptiveNavigationSuite)
+            implementation(libs.navigation.compose)
             implementation(libs.bundles.compose.adaptive)
             implementation(libs.bundles.kotlin)
             implementation(libs.androidx.lifecycle.viewmodel)

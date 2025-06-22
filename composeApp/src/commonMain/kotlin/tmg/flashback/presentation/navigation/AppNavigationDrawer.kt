@@ -101,17 +101,6 @@ internal fun AppNavigationDrawer(
 }
 
 @Composable
-private fun MenuDivider() {
-    HorizontalDivider(
-        modifier = Modifier.padding(
-            horizontal = AppTheme.dimens.medium,
-            vertical = AppTheme.dimens.xsmall
-        ),
-        color = AppTheme.colors.surfaceContainer5
-    )
-}
-
-@Composable
 private fun NavigationItem(
     menuItem: MenuItem,
     isSelected: Boolean,

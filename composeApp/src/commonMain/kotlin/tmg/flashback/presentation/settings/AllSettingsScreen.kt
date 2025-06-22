@@ -81,6 +81,10 @@ private fun SettingsScreen(
         )
         if (uiState.isWidgetsSupported) {
             PrefHeader(string.settings_header_widgets)
+            PrefCategory(
+                item = Settings.WidgetCategory,
+                itemClicked = { }
+            )
         }
         PrefHeader(string.settings_header_other)
         PrefCategory(

@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.flashback.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {

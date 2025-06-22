@@ -10,6 +10,7 @@ import flashback.composeapp.generated.resources.dashboard_search
 import flashback.composeapp.generated.resources.dashboard_settings
 import flashback.composeapp.generated.resources.dashboard_contact
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.dashboard_tab_results
 import flashback.presentation.localisation.generated.resources.nav_calendar
 import flashback.presentation.localisation.generated.resources.nav_constructors
 import flashback.presentation.localisation.generated.resources.nav_contact
@@ -20,20 +21,25 @@ import flashback.presentation.localisation.generated.resources.nav_search
 import flashback.presentation.localisation.generated.resources.nav_settings
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
+import tmg.flashback.ui.navigation.NavigationItem
 
-enum class MenuItem {
-    Calendar,
-    DriversStandings,
-    TeamsStandings,
-    Search,
-    Rss,
-    ReactionGame,
-    Settings,
-    Contact
+enum class MenuItem(
+    val key: String
+) {
+    Results(key = "Results"),
+    Calendar(key = "Calendar"),
+    DriversStandings(key = "DriversStandings"),
+    TeamsStandings(key = "TeamsStandings"),
+    Search(key = "Search"),
+    Rss(key = "Rss"),
+    ReactionGame(key = "ReactionGame"),
+    Settings(key = "Settings"),
+    Contact(key = "Contact"),
 }
 
 val MenuItem.label: StringResource
     get() = when (this) {
+        MenuItem.Results -> string.dashboard_tab_results
         MenuItem.Calendar -> string.nav_calendar
         MenuItem.DriversStandings -> string.nav_drivers
         MenuItem.TeamsStandings -> string.nav_constructors
@@ -46,6 +52,7 @@ val MenuItem.label: StringResource
 
 val MenuItem.icon: DrawableResource
     get() = when (this) {
+        MenuItem.Results -> Res.drawable.dashboard_nav_calendar
         MenuItem.Calendar -> Res.drawable.dashboard_nav_calendar
         MenuItem.DriversStandings -> Res.drawable.dashboard_nav_drivers
         MenuItem.TeamsStandings -> Res.drawable.dashboard_nav_constructor
@@ -55,3 +62,12 @@ val MenuItem.icon: DrawableResource
         MenuItem.Settings -> Res.drawable.dashboard_settings
         MenuItem.Contact -> Res.drawable.dashboard_contact
     }
+
+fun MenuItem.toNavigationItem(
+    isSelected: Boolean? = null
+) = NavigationItem(
+    id = this.key,
+    label = this.label,
+    icon = this.icon,
+    isSelected = isSelected
+)

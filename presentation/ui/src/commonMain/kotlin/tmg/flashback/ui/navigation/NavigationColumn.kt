@@ -48,7 +48,25 @@ fun NavigationColumn(
     itemClicked: (NavigationItem) -> Unit,
     modifier: Modifier = Modifier,
     lockExpanded: Boolean = false,
-    contentHeader: @Composable ColumnScope.() -> Unit = {}
+) {
+    NavigationColumn(
+        primary = list,
+        divider = { },
+        secondary = emptyList(),
+        itemClicked = itemClicked,
+        modifier = modifier,
+        lockExpanded = lockExpanded
+    )
+}
+
+@Composable
+fun NavigationColumn(
+    primary: List<NavigationItem>,
+    divider: @Composable () -> Unit,
+    secondary: List<NavigationItem>,
+    itemClicked: (NavigationItem) -> Unit,
+    modifier: Modifier = Modifier,
+    lockExpanded: Boolean = false,
 ) {
     val expanded = remember { mutableStateOf(lockExpanded) }
     val width = animateDpAsState(targetValue = when (expanded.value) {
@@ -69,12 +87,38 @@ fun NavigationColumn(
                 .weight(1f)
                 .fillMaxWidth(),
             content = {
+                if (!lockExpanded) {
+                    item {
+                        NavigationItem(
+                            item = NavigationItem(
+                                id = "menu",
+                                label = string.empty,
+                                icon = Res.drawable.ic_menu_expanded
+                            ),
+                            onClick = {
+                                expanded.value = !expanded.value
+                            },
+                            isExpanded = expanded.value
+                        )
+                    }
+                }
                 item {
                     Column(Modifier.fillMaxWidth()) {
                         Spacer(modifier = Modifier.height(AppTheme.dimens.small))
                     }
                 }
-                items(list) {
+                items(primary) {
+                    NavigationItem(
+                        item = it,
+                        isExpanded = expanded.value,
+                        onClick = itemClicked,
+                    )
+                    Spacer(Modifier.height(AppTheme.dimens.small))
+                }
+                item {
+                    divider()
+                }
+                items(secondary) {
                     NavigationItem(
                         item = it,
                         isExpanded = expanded.value,
@@ -87,19 +131,6 @@ fun NavigationColumn(
                 }
             }
         )
-        if (!lockExpanded) {
-            NavigationItem(
-                item = NavigationItem(
-                    id = "menu",
-                    label = string.empty,
-                    icon = Res.drawable.ic_menu_expanded
-                ),
-                onClick = {
-                    expanded.value = !expanded.value
-                },
-                isExpanded = expanded.value
-            )
-        }
     }
 }
 

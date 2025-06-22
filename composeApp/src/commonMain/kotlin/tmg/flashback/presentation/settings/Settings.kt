@@ -11,6 +11,7 @@ import flashback.composeapp.generated.resources.ic_settings_rss_configure
 import flashback.composeapp.generated.resources.ic_settings_theme
 import flashback.composeapp.generated.resources.ic_settings_weather
 import flashback.composeapp.generated.resources.ic_settings_web
+import flashback.composeapp.generated.resources.ic_settings_widgets
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.settings_build_version
 import flashback.presentation.localisation.generated.resources.settings_pref_analytics_description
@@ -49,12 +50,16 @@ import flashback.presentation.localisation.generated.resources.settings_section_
 import flashback.presentation.localisation.generated.resources.settings_section_notifications_upcoming_title
 import flashback.presentation.localisation.generated.resources.settings_section_privacy_description
 import flashback.presentation.localisation.generated.resources.settings_section_privacy_title
+import flashback.presentation.localisation.generated.resources.settings_section_refresh_widget_description
+import flashback.presentation.localisation.generated.resources.settings_section_refresh_widget_title
 import flashback.presentation.localisation.generated.resources.settings_section_rss_configure_description
 import flashback.presentation.localisation.generated.resources.settings_section_rss_configure_title
 import flashback.presentation.localisation.generated.resources.settings_section_weather_description
 import flashback.presentation.localisation.generated.resources.settings_section_weather_title
 import flashback.presentation.localisation.generated.resources.settings_section_web_browser_description
 import flashback.presentation.localisation.generated.resources.settings_section_web_browser_title
+import flashback.presentation.localisation.generated.resources.settings_section_widgets_description
+import flashback.presentation.localisation.generated.resources.settings_section_widgets_title
 import flashback.presentation.localisation.generated.resources.settings_switch_about_this_app_description
 import flashback.presentation.localisation.generated.resources.settings_switch_about_this_app_title
 import flashback.presentation.localisation.generated.resources.settings_switch_enable_javascript_description
@@ -166,7 +171,7 @@ object Settings {
     }
 
     val RssCategory = Setting.Category(
-        _id = "theme",
+        _id = "rss",
         title = string.settings_section_rss_configure_title,
         subtitle = string.settings_section_rss_configure_description,
         icon = Res.drawable.ic_settings_rss_configure
@@ -213,6 +218,20 @@ object Settings {
         title = string.settings_pref_notification_notice_period_title,
         subtitle = string.settings_pref_notification_notice_period_description,
     )
+
+    val WidgetCategory = Setting.Category(
+        _id = "widgets",
+        title = string.settings_section_widgets_title,
+        subtitle = string.settings_section_widgets_description,
+        icon = Res.drawable.ic_settings_widgets
+    )
+    object Widgets {
+        val RefreshWidgets = Setting.Link(
+            _id = "widgets_refresh",
+            title = string.settings_section_refresh_widget_title,
+            subtitle = string.settings_section_refresh_widget_description,
+        )
+    }
 
     val PrivacyCategory = Setting.Category(
         _id = "privacy",

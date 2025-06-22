@@ -123,7 +123,7 @@ fun SettingHeader(
 fun SettingLink(
     item: Setting.Link,
     itemClicked: (Setting.Link) -> Unit,
-    modifier: Modifier = defaultSettingModifier
+    modifier: Modifier = Modifier
 ) {
     SettingLink(
         item = item,
@@ -133,7 +133,8 @@ fun SettingLink(
                 onClick = {
                     itemClicked(item)
                 }
-            ),
+            )
+            .then(defaultSettingModifier),
         content = { }
     )
 }
@@ -143,7 +144,7 @@ fun SettingRadio(
     item: Setting.Link,
     itemClicked: (Setting.Link) -> Unit,
     isChecked: Boolean,
-    modifier: Modifier = defaultSettingModifier
+    modifier: Modifier = Modifier
 ) {
     SettingLink(
         item = item,
@@ -152,7 +153,8 @@ fun SettingRadio(
                 value = isChecked,
                 onValueChange = { itemClicked(item) },
                 enabled = item.isEnabled
-            ),
+            )
+            .then(defaultSettingModifier),
         content = {
             InputRadio(
                 isChecked = isChecked,
@@ -166,7 +168,7 @@ fun SettingSwitch(
     item: Setting.Link,
     itemClicked: (Setting.Link) -> Unit,
     isChecked: Boolean,
-    modifier: Modifier = defaultSettingModifier
+    modifier: Modifier = Modifier
 ) {
     SettingLink(
         item = item,
@@ -175,7 +177,8 @@ fun SettingSwitch(
                 value = isChecked,
                 onValueChange = { itemClicked(item) },
                 enabled = item.isEnabled
-            ),
+            )
+            .then(defaultSettingModifier),
         content = {
             InputSwitch(
                 isChecked = isChecked,
@@ -225,7 +228,7 @@ private fun SettingLink(
 fun SettingCategory(
     item: Setting.Category,
     itemClicked: (Setting.Category) -> Unit,
-    modifier: Modifier = defaultSettingModifier
+    modifier: Modifier = Modifier
 ) {
     Row(modifier = modifier
         .clickable(
@@ -234,6 +237,7 @@ fun SettingCategory(
                 itemClicked(item)
             }
         )
+        .then(defaultSettingModifier)
         .appearDisabled(item.isEnabled)
     ) {
         if (item.icon != null) {
