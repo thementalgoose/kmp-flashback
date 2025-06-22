@@ -52,12 +52,14 @@ include(":data:network:flashback")
 
 include(":domain:formula1")
 
+include(":eastereggs")
+
 //include(":feature:circuits")
 //include(":feature:constructors")
 //include(":feature:drivers")
 //include(":feature:maintenance")
 //include(":feature:privacypolicy")
-//include(":feature:rss")
+include(":feature:rss")
 //include(":feature:sandbox")
 //include(":feature:search")
 include(":feature:season")

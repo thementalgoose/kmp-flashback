@@ -7,6 +7,11 @@ import kotlinx.datetime.format.MonthNames.Companion.ENGLISH_FULL
 import kotlinx.datetime.format.Padding
 import kotlinx.datetime.format.char
 
+val dateFormatMMDD = LocalDate.Format {
+    monthNumber(Padding.ZERO)
+    char('-')
+    dayOfMonth(Padding.ZERO)
+}
 val dateFormatYYYYMD = LocalDate.Format {
     year()
     char('-')

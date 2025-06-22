@@ -14,27 +14,39 @@ import tmg.flashback.flashbackapi.api.models.races.Season
 
 interface FlashbackApi {
 
+    @Throws(RuntimeException::class)
     suspend fun getOverview(): MetadataWrapper<Overview>?
 
+    @Throws(RuntimeException::class)
     suspend fun getOverview(season: Int): MetadataWrapper<Overview>?
 
+    @Throws(RuntimeException::class)
     suspend fun getOverviewEvents(season: Int): MetadataWrapper<List<Event>>?
 
+    @Throws(RuntimeException::class)
     suspend fun getDrivers(): MetadataWrapper<AllDrivers>?
 
+    @Throws(RuntimeException::class)
     suspend fun getConstructors(): MetadataWrapper<AllConstructors>?
 
+    @Throws(RuntimeException::class)
     suspend fun getCircuits(): MetadataWrapper<AllCircuits>?
 
+    @Throws(RuntimeException::class)
     suspend fun getCircuit(id: String): MetadataWrapper<CircuitHistory>?
 
+    @Throws(RuntimeException::class)
     suspend fun getDriver(id: String): MetadataWrapper<DriverHistory>?
 
+    @Throws(RuntimeException::class)
     suspend fun getConstructor(id: String): MetadataWrapper<ConstructorHistory>?
 
+    @Throws(RuntimeException::class)
     suspend fun getSeason(season: Int): MetadataWrapper<Season>?
 
+    @Throws(RuntimeException::class)
     suspend fun getSeason(season: Int, round: Int): MetadataWrapper<Round>?
 
+    @Throws(RuntimeException::class)
     suspend fun getSeasonEvents(season: Int): MetadataWrapper<List<Event>>?
 }

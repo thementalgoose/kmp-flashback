@@ -31,6 +31,8 @@
     <string name="nav_settings">Stagioni</string>
     <string name="nav_search">Cerca</string>
     <string name="nav_rss">RSS</string>
+    <string name="nav_reaction_game">Gioco di reazion</string>
+    <string name="nav_contact">Contatti</string>
     <string name="nav_details">Dettagli</string>
     <string name="nav_qualifying">Qualifiche</string>
     <string name="nav_race">Gara</string>

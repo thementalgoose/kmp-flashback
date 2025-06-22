@@ -20,6 +20,7 @@ Flashback provides race results and statistics from every race in the history of
 - [ ] Get network layer working
   - [x] Android
   - [ ] iOS
+- [ ] Get network layer using remote config value
 - [x] Get database layer working
   - [ ] Android
   - [ ] iOS
@@ -27,21 +28,24 @@ Flashback provides race results and statistics from every race in the history of
   - [ ] Android
   - [ ] iOS
 - [x] Get compose style library setup
-- [ ] Add initial stats experience
+- [ ] Add initial app startup experience
 - [ ] Adds analytics
 - [ ] Adds crashlytics reporting
 - [x] Adds remote config setup
+  - [ ] Configure defaults setup for both platforms
 - [ ] Support tablet mode
 - [ ] Add RSS
 - [ ] Add Settings
 - [ ] Add notification support
-- [ ] Add scheduled job support for periodically refreshing content (maybe Android only?)
+- [ ] Add scheduled job support for periodically refreshing content (ANDROID ONLY)
+- [ ] Add widgets (ANDROID ONLY)
 - [x] Get tests working 
 - [x] Get test fixtures setup going
 - [ ] Support material theme
   - [ ] Android
   - [ ] iOS
 - [x] Create UI components module with shared resources
+- [ ] Configure unit tests running on the CI
 - [ ] Configure app building in the CI
   - [ ] Android
   - [ ] iOS

@@ -5,14 +5,14 @@ import io.ktor.client.engine.darwin.Darwin
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
-import tmg.flashback.infrastructure.debug.isDebug
+import tmg.flashback.infrastructure.device.Device
 
 actual val KtorClient: HttpClient by lazy {
     HttpClient(Darwin) {
         // default validation to throw exceptions for non-2xx responses
         expectSuccess = true
 
-        if (isDebug()) {
+        if (Device.isDebug) {
             install(Logging) {
                 level = LogLevel.ALL
             }

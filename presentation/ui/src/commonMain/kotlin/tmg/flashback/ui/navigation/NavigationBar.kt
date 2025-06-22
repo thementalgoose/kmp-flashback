@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -16,6 +17,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -35,10 +37,12 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.AppThemePreview
 import tmg.flashback.style.text.TextBody1
 
-private val selectedPillWidth: Dp = 64.dp
-private val pillHeight: Dp = 32.dp
+private val verticalSelectedPillWidth: Dp = 64.dp
+private val verticalPillHeight: Dp = 32.dp
+private val horizontalWidthThreshold: Dp = 180.dp
 private val iconSize: Dp = 24.dp
-val appBarHeight: Dp = 80.dp
+val appBarHeightWhenVertical: Dp = 80.dp
+val appBarHeightWhenHorizontal: Dp = 60.dp
 
 @Composable
 fun NavigationBar(
@@ -47,42 +51,115 @@ fun NavigationBar(
     modifier: Modifier = Modifier,
     bottomPadding: Dp = 0.dp
 ) {
-    Column(modifier
-        .shadow(8.dp)
-        .background(AppTheme.colors.surfaceNav)
-        .padding(bottom = bottomPadding)
+    BoxWithConstraints(
+        modifier = modifier
+            .fillMaxWidth()
+            .shadow(8.dp)
+            .background(AppTheme.colors.surfaceNav)
+            .padding(bottom = bottomPadding)
     ) {
+        val displayAsVertical = (horizontalWidthThreshold * list.size) > minWidth
+        val appBarHeight = animateDpAsState(
+            targetValue = if (displayAsVertical) appBarHeightWhenVertical else appBarHeightWhenHorizontal
+        )
         Row(
             modifier = Modifier
-                .height(appBarHeight)
+                .height(appBarHeight.value)
                 .background(AppTheme.colors.surfaceNav),
-            horizontalArrangement = Arrangement.Start,
+            horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            list.forEach { item ->
-                Item(
-                    item = item,
-                    itemClicked = itemClicked,
-                    modifier = Modifier.weight(1f)
-                )
+            if (displayAsVertical) {
+                // Vertical Items
+                list.forEach { item ->
+                    VerticalItem(
+                        item = item,
+                        itemClicked = itemClicked,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+            } else {
+                // Horizontal Items
+                list.forEach { item ->
+                    HorizontalItem(
+                        item = item,
+                        itemClicked = itemClicked,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
             }
         }
     }
 }
 
 @Composable
-private fun Item(
+private fun HorizontalItem(
+    item: NavigationItem,
+    itemClicked: (NavigationItem) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val backgroundColor = animateColorAsState(targetValue = when (item.isSelected ?: false) {
+        true -> AppTheme.colors.primary.copy(alpha = 0.3f)
+        false -> Color.Transparent
+    }, label = "backgroundColor")
+    Row(
+        modifier = modifier
+            .wrapContentWidth()
+            .clip(RoundedCornerShape(100.dp))
+            .background(backgroundColor.value)
+            .height(iconSize + (AppTheme.dimens.small * 2))
+            .combinedClickable(
+                onClick = {
+                    if (item.isSelected != true) {
+                        itemClicked(item)
+                    }
+                }
+            )
+    ) {
+        Row(
+            modifier = Modifier
+                .align(Alignment.CenterVertically)
+                .padding(
+                    vertical = AppTheme.dimens.small,
+                    horizontal = AppTheme.dimens.medium
+                ),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                modifier = Modifier
+                    .size(iconSize),
+                painter = painterResource(resource = item.icon),
+                tint = AppTheme.colors.onSurface,
+                contentDescription = null,
+            )
+            TextBody1(
+                textAlign = TextAlign.Center,
+                maxLines = 1,
+                modifier = Modifier
+                    .padding(
+                        start = 10.dp,
+                    ),
+                text = stringResource(resource = item.label),
+                textColor = AppTheme.colors.onSurface,
+                bold = item.isSelected == true
+            )
+        }
+    }
+}
+
+@Composable
+private fun VerticalItem(
     item: NavigationItem,
     itemClicked: (NavigationItem) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val selectedWidth = animateDpAsState(targetValue = when (item.isSelected ?: false) {
-        true -> selectedPillWidth
+        true -> verticalSelectedPillWidth
         false -> iconSize
     }, label = "selectedWidth")
     val selectedX = animateDpAsState(targetValue = when (item.isSelected ?: false) {
         true -> 0.dp
-        false -> (selectedPillWidth - iconSize) / 2
+        false -> (verticalSelectedPillWidth - iconSize) / 2
     }, label = "selectedX")
     val backgroundColor = animateColorAsState(targetValue = when (item.isSelected ?: false) {
         true -> AppTheme.colors.primary.copy(alpha = 0.3f)
@@ -101,15 +178,15 @@ private fun Item(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Box(modifier = modifier
-            .width(selectedPillWidth)
-            .height(pillHeight)
+            .width(verticalSelectedPillWidth)
+            .height(verticalPillHeight)
         ) {
             Box(modifier = Modifier
                 .width(selectedWidth.value)
-                .height(pillHeight)
+                .height(verticalPillHeight)
                 .align(Alignment.CenterStart)
                 .offset(x = selectedX.value)
-                .clip(RoundedCornerShape(pillHeight / 2))
+                .clip(RoundedCornerShape(verticalPillHeight / 2))
                 .background(backgroundColor.value))
             Icon(
                 modifier = Modifier
@@ -161,7 +238,7 @@ private fun Item(
 @Composable
 private fun PreviewLight() {
     AppThemePreview(isLight = true) {
-        Preview()
+        PreviewNoPadding()
     }
 }
 
@@ -169,15 +246,41 @@ private fun PreviewLight() {
 @Composable
 private fun PreviewDark() {
     AppThemePreview(isLight = false) {
-        Preview()
+        PreviewNoPadding()
     }
 }
 
 @Composable
-private fun Preview() {
+private fun PreviewNoPadding() {
     Box(Modifier.padding(16.dp)) {
         NavigationBar(
             list = fakeNavigationItems,
+            itemClicked = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun PreviewFewLight() {
+    AppThemePreview(isLight = true) {
+        PreviewFew()
+    }
+}
+
+@Preview
+@Composable
+private fun PreviewFewDark() {
+    AppThemePreview(isLight = false) {
+        PreviewFew()
+    }
+}
+
+@Composable
+private fun PreviewFew() {
+    Box(Modifier.padding(16.dp)) {
+        NavigationBar(
+            list = fakeNavigationItems.take(2),
             itemClicked = {}
         )
     }
@@ -204,7 +307,7 @@ private fun PreviewWithBottomPadding() {
     Box(Modifier.padding(16.dp)) {
         NavigationBar(
             bottomPadding = 10.dp,
-            list = fakeNavigationItems,
+            list = fakeNavigationItems.take(3),
             itemClicked = {}
         )
     }

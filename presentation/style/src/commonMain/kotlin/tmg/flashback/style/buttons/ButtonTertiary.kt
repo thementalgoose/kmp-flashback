@@ -52,8 +52,8 @@ fun ButtonTertiary(
         colors = ButtonDefaults.outlinedButtonColors(
             containerColor = AppTheme.colors.tertiary,
             contentColor = AppTheme.colors.onTertiary,
-            disabledContainerColor = AppTheme.colors.tertiary.copy(alpha = disabledAlpha),
-            disabledContentColor = AppTheme.colors.onTertiary.copy(alpha = disabledAlpha)
+            disabledContainerColor = AppTheme.colors.tertiary,
+            disabledContentColor = AppTheme.colors.onTertiary
         ),
         enabled = enabled,
         shape = RoundedCornerShape(AppTheme.dimens.radiusMedium),

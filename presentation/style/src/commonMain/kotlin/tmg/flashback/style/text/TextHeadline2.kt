@@ -62,7 +62,7 @@ enum class ColourType {
 }
 
 @Composable
-fun TextHeadline2WithIcon(
+fun TextHeadline2(
     text: String,
     icon: Painter?,
     modifier: Modifier = Modifier,
@@ -120,7 +120,7 @@ private fun PreviewIcon(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
     AppThemePreview(previewConfig) {
-        TextHeadline2WithIcon(
+        TextHeadline2(
             text = "Headline 2",
             icon = rememberVectorPainter(Icons.Default.Home),
             iconModifier = Modifier.rotate(40f),
@@ -135,7 +135,7 @@ private fun PreviewIconRainbow(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
     AppThemePreview(previewConfig) {
-        TextHeadline2WithIcon(
+        TextHeadline2(
             text = "Headline 2",
             icon = rememberVectorPainter(Icons.Default.Home),
             iconModifier = Modifier.rotate(40f),

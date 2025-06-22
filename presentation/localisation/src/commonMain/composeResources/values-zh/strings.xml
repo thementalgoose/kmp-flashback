@@ -31,6 +31,8 @@
     <string name="nav_settings">赛季</string>
     <string name="nav_search">搜索</string>
     <string name="nav_rss">RSS</string>
+    <string name="nav_reaction_game">反应游戏</string>
+    <string name="nav_contact">联系</string>
     <string name="nav_details">详细信息</string>
     <string name="nav_qualifying">排位赛</string>
     <string name="nav_race">比赛</string>

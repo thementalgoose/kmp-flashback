@@ -49,12 +49,14 @@ kotlin {
 
             implementation(projects.domain.formula1)
 
+            implementation(projects.eastereggs)
+
 //            implementation(projects.feature.circuits)
 //            implementation(projects.feature.constructors)
 //            implementation(projects.feature.drivers)
 //            implementation(projects.feature.maintenance)
 //            implementation(projects.feature.privacypolicy)
-//            implementation(projects.feature.rss)
+            implementation(projects.feature.rss)
 //            implementation(projects.feature.sandbox)
 //            implementation(projects.feature.search)
             implementation(projects.feature.season)
@@ -67,7 +69,8 @@ kotlin {
             implementation(projects.presentation.style)
             implementation(projects.presentation.ui)
 
-
+            implementation(compose.components.resources)
+            implementation(libs.bundles.compose.adaptive)
             implementation(libs.bundles.kotlin)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)

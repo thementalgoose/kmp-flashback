@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
+import tmg.flashback.style.AppTheme.disabledAlpha
 import tmg.flashback.style.AppThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
@@ -30,8 +31,8 @@ fun ButtonPrimary(
             .focusable(true),
         colors = ButtonDefaults.textButtonColors(
             containerColor = AppTheme.colors.primary,
-            disabledContainerColor = AppTheme.colors.primary.copy(alpha = 0.4f),
-            disabledContentColor = AppTheme.colors.onPrimary.copy(alpha = 0.4f),
+            disabledContainerColor = AppTheme.colors.primary.copy(alpha = disabledAlpha),
+            disabledContentColor = AppTheme.colors.onPrimary.copy(alpha = disabledAlpha),
             contentColor = AppTheme.colors.onPrimary
         ),
         enabled = enabled,
@@ -40,7 +41,7 @@ fun ButtonPrimary(
     ) {
         Text(
             text,
-            color = AppTheme.colors.onPrimary.copy(alpha = if (enabled) 1f else 0.4f),
+            color = AppTheme.colors.onPrimary.copy(alpha = if (enabled) 1f else disabledAlpha),
             modifier = Modifier
                 .padding(
                     horizontal = AppTheme.dimens.medium,

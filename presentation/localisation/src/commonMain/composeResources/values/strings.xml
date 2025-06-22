@@ -3,6 +3,8 @@
 
     <string name="empty" translatable="false" />
 
+    <string name="app_name" translatable="false">Flashback</string>
+
     <!-- Splash -->
     <string name="splash_continue">Continue</string>
     <string name="splash_sync_info">As this is the first time you\'re opening the app, we\'re grabbing some data related to the world of formula 1 to get you up to speed…</string>
@@ -35,6 +37,8 @@
     <string name="nav_settings">Seasons</string>
     <string name="nav_search">Search</string>
     <string name="nav_rss">RSS</string>
+    <string name="nav_reaction_game">Reaction Game</string>
+    <string name="nav_contact">Contact</string>
     <string name="nav_details">Details</string>
     <string name="nav_qualifying">Qualifying</string>
     <string name="nav_race">Race</string>

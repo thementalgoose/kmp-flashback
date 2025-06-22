@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
+import tmg.flashback.style.AppTheme.disabledAlpha
 import tmg.flashback.style.AppThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
@@ -37,12 +38,12 @@ fun ButtonSecondary(
             .focusable(true),
         border = BorderStroke(1.dp, when (enabled) {
             true -> AppTheme.colors.outline
-            false -> AppTheme.colors.outline.copy(alpha = 0.4f)
+            false -> AppTheme.colors.outline.copy(alpha = disabledAlpha)
         }),
         colors = ButtonDefaults.buttonColors(
             containerColor = AppTheme.colors.secondary,
             contentColor = AppTheme.colors.onSecondary,
-            disabledContainerColor = AppTheme.colors.secondary.copy(alpha = 0.4f),
+            disabledContainerColor = AppTheme.colors.secondary.copy(alpha = disabledAlpha),
             disabledContentColor = AppTheme.colors.onSecondary,
         ),
         enabled = enabled,
@@ -54,7 +55,7 @@ fun ButtonSecondary(
             bold = true,
             textColor = when (enabled) {
                 true -> AppTheme.colors.onSecondary
-                false -> AppTheme.colors.onSecondary.copy(alpha = 0.4f)
+                false -> AppTheme.colors.onSecondary.copy(alpha = disabledAlpha)
             },
             modifier = Modifier
                 .padding(

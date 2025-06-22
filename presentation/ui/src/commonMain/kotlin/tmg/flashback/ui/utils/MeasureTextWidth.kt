@@ -4,12 +4,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.SubcomposeLayout
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
+import tmg.flashback.style.AppTheme
 
 @Composable
 fun MeasureTextWidth(
     text: String,
+    textStyle: TextStyle = AppTheme.typography.title,
     modifier: Modifier = Modifier,
     content: @Composable (width: Dp) -> Unit
 ) {
@@ -17,7 +20,7 @@ fun MeasureTextWidth(
         modifier = modifier
     ) { constraints ->
         val textWidth = subcompose("sampleText") {
-            Text(text)
+            Text(text, style = textStyle)
         }[0].measure(Constraints()).width.toDp()
 
         val contentPlaceable = subcompose("content") {

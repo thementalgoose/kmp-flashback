@@ -6,7 +6,7 @@ import tmg.flashback.flashbackapi.api.models.races.Race
 
 class NetworkScheduleMapper {
 
-    @Throws
+    @Throws(RuntimeException::class)
     fun mapSchedules(race: OverviewRace): List<Schedule> {
         return race.schedule
             ?.map { mapSchedule(race.season, race.round, it) }

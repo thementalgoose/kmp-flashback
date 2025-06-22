@@ -2,20 +2,16 @@ package tmg.flashback.infrastructure.log
 
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.ptr
-import platform.Foundation.NSThread
 import platform.darwin.OS_LOG_DEFAULT
-import platform.darwin.OS_LOG_TYPE_DEBUG
 import platform.darwin.OS_LOG_TYPE_DEFAULT
-import platform.darwin.OS_LOG_TYPE_ERROR
-import platform.darwin.OS_LOG_TYPE_FAULT
 import platform.darwin.OS_LOG_TYPE_INFO
 import platform.darwin.__dso_handle
 import platform.darwin._os_log_internal
-import tmg.flashback.infrastructure.debug.isDebug
+import tmg.flashback.infrastructure.device.Device
 
 @OptIn(ExperimentalForeignApi::class)
 actual fun logDebug(tag: String, msg: String) {
-    if (isDebug()) {
+    if (Device.isDebug) {
         _os_log_internal(
             __dso_handle.ptr,
             OS_LOG_DEFAULT,
