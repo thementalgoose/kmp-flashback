@@ -32,7 +32,7 @@ datastore = "1.1.7"
 buildkonfig = "0.15.1"
 
 # Testing
-mockk = "1.13.13"
+mockk = "1.14.4"
 kotest = "5.9.1"
 uiTooling = "1.8.3"
 mokkery = "2.8.0"
