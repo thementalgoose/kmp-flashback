@@ -12,6 +12,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.compose.rememberNavController
 //import androidx.compose.ui.backhandler.BackHandler
 import androidx.window.core.layout.WindowWidthSizeClass
 import kotlinx.coroutines.launch
@@ -35,6 +36,8 @@ fun AppContainer(
     windowAdaptiveInfo: WindowAdaptiveInfo,
     appNavigationViewModel: AppNavigationViewModel = koinViewModel()
 ) {
+    val navController = rememberNavController()
+
     val windowSizeClass = windowAdaptiveInfo.windowSizeClass
     val panelsState = rememberOverlappingPanelsState(OverlappingPanelsValue.Closed)
     val coroutineScope = rememberCoroutineScope()
@@ -77,7 +80,10 @@ fun AppContainer(
                 Row(modifier = Modifier
                     .weight(1f)
                 ) {
-                    AppGraph()
+                    AppGraph(
+                        appNavigationViewModel = appNavigationViewModel,
+                        navController = navController
+                    )
                 }
             }
         }

@@ -35,7 +35,9 @@ Flashback provides race results and statistics from every race in the history of
   - [ ] Configure defaults setup for both platforms
 - [ ] Support tablet mode
 - [ ] Add RSS
+- [ ] Add Compose Navigation 
 - [ ] Add Settings
+- - [x] Add Settings structure
 - [ ] Add notification support
 - [ ] Add scheduled job support for periodically refreshing content (ANDROID ONLY)
 - [ ] Add widgets (ANDROID ONLY)

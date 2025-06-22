@@ -18,7 +18,7 @@ import tmg.flashback.persistence.flashback.di.dataPersistenceFlashbackModule
 import tmg.flashback.preferences.di.corePreferencesModule
 import tmg.flashback.presentation.AppContainerViewModel
 import tmg.flashback.presentation.navigation.AppNavigationViewModel
-import tmg.flashback.presentation.settings.SettingsViewModel
+import tmg.flashback.presentation.settings.AllSettingsViewModel
 import tmg.flashback.ui.di.presentationUiModule
 
 fun doInitKoin() {
@@ -53,5 +53,5 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
 internal fun module() = module {
     viewModel { AppContainerViewModel() }
     viewModel { AppNavigationViewModel(get(), get(), get(), get(), get()) }
-    viewModel { SettingsViewModel() }
+    viewModel { AllSettingsViewModel(get()) }
 }

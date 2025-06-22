@@ -61,6 +61,7 @@ kotlin {
 //            implementation(projects.feature.search)
             implementation(projects.feature.season)
 //            implementation(projects.feature.weekend)
+            implementation(projects.feature.widgetUpnext)
 
             implementation(projects.infrastructure)
 

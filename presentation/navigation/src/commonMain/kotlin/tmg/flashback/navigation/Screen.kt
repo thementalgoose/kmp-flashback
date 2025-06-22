@@ -1,15 +1,16 @@
 package tmg.flashback.navigation
 
+import kotlinx.serialization.Serializable
+
 sealed class Screen {
 
-    data object Races: Screen()
+    @Serializable
+    data object Results: Screen()
 
-    data object DriverStandings: Screen()
-
-    data object ConstructorStandings: Screen()
-
+    @Serializable
     data object Search: Screen()
 
+    @Serializable
     data class Circuit(
         val circuitId: String,
         val circuitName: String,
@@ -17,6 +18,7 @@ sealed class Screen {
         companion object
     }
 
+    @Serializable
     data class Constructor(
         val constructorId: String,
         val constructorName: String
@@ -24,6 +26,7 @@ sealed class Screen {
         companion object
     }
 
+    @Serializable
     data class Driver(
         val driverId: String,
         val driverName: String
@@ -31,12 +34,15 @@ sealed class Screen {
         companion object
     }
 
+    @Serializable
     data object Rss: Screen()
 
+    @Serializable
     data object ReactionGame: Screen()
 
+    @Serializable
     data object Settings: Screen()
 
-    data object PrivacyPolicy: Screen()
-
+    @Serializable
+    data object About: Screen()
 }

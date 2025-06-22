@@ -64,6 +64,7 @@ include(":feature:rss")
 //include(":feature:search")
 include(":feature:season")
 //include(":feature:weekend")
+include(":feature:widget-upnext")
 
 include(":infrastructure")
 
