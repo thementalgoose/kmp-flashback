@@ -1,4 +1,4 @@
-package tmg.flashback.style.input
+package tmg.flashback.style.textinput
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -16,6 +16,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -40,11 +41,12 @@ import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextTitle
 
 @Composable
-fun InputPrimary(
+fun TextInput(
     text: MutableState<TextFieldValue>,
     placeholder: String,
     modifier: Modifier = Modifier,
     icon: DrawableResource? = null,
+    error: String? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
     keyboardActions: KeyboardActions = KeyboardActions(),
     imeAction: ImeAction = ImeAction.Default,
@@ -56,13 +58,13 @@ fun InputPrimary(
 ) {
     Box(
         modifier = modifier
-            .clip(RoundedCornerShape(50.dp))
+            .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
             .border(
                 width = if (showBorder) 1.dp else 0.dp,
-                color = AppTheme.colors.backgroundSecondary,
-                shape = RoundedCornerShape(50.dp)
+                color = AppTheme.colors.outline,
+                shape = RoundedCornerShape(AppTheme.dimens.radiusMedium)
             )
-            .background(AppTheme.colors.backgroundTertiary)
+            .background(AppTheme.colors.surface)
     ) {
         if (text.value.text.isEmpty()) {
             Row(
@@ -77,7 +79,7 @@ fun InputPrimary(
                     Icon(
                         painter = painterResource(resource = it),
                         contentDescription = null,
-                        tint = AppTheme.colors.contentTertiary.copy(alpha = 0.5f)
+                        tint = AppTheme.colors.onSurfaceVariant.copy(alpha = 0.5f)
                     )
                     Spacer(Modifier.width(AppTheme.dimens.small))
                 }
@@ -85,7 +87,7 @@ fun InputPrimary(
                     modifier = Modifier.padding(start = 1.dp),
                     text = placeholder,
                     bold = true,
-                    textColor = AppTheme.colors.contentTertiary.copy(alpha = 0.5f)
+                    textColor = AppTheme.colors.onSurfaceVariant.copy(alpha = 0.5f)
                 )
             }
         }
@@ -102,9 +104,9 @@ fun InputPrimary(
             onValueChange = onValueChange,
             maxLines = maxLines,
             singleLine = singleLine,
-            cursorBrush = SolidColor(AppTheme.colors.contentPrimary),
+            cursorBrush = SolidColor(AppTheme.colors.onSurface),
             textStyle = AppTheme.typography.title.copy(
-                color = AppTheme.colors.contentPrimary
+                color = AppTheme.colors.onSurface
             ),
             keyboardActions = keyboardActions,
             keyboardOptions = KeyboardOptions.Default.copy(
@@ -116,7 +118,7 @@ fun InputPrimary(
         if (clear != null && text.value.text.isNotEmpty()) {
             Icon(
                 imageVector = Icons.Default.Clear,
-                tint = AppTheme.colors.contentTertiary,
+                tint = AppTheme.colors.onSurfaceVariant,
                 contentDescription = null,
                 modifier = Modifier
                     .align(Alignment.CenterEnd)
@@ -139,7 +141,7 @@ private fun Preview(
     AppThemePreview(previewConfig) {
         Box(modifier = Modifier.padding(16.dp)) {
             val textState = remember { mutableStateOf(TextFieldValue("Input Field")) }
-            InputPrimary(
+            TextInput(
                 text = textState,
                 placeholder = "https://flashback.pages.dev"
             )
@@ -155,8 +157,26 @@ private fun PreviewClear(
     AppThemePreview(previewConfig) {
         Box(modifier = Modifier.padding(16.dp)) {
             val textState = remember { mutableStateOf(TextFieldValue("Input Field")) }
-            InputPrimary(
+            TextInput(
                 text = textState,
+                clear = { },
+                placeholder = "https://flashback.pages.dev"
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun PreviewError(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        Box(modifier = Modifier.padding(16.dp)) {
+            val textState = remember { mutableStateOf(TextFieldValue("Input Field")) }
+            TextInput(
+                text = textState,
+                error = "Warning bro",
                 clear = { },
                 placeholder = "https://flashback.pages.dev"
             )
@@ -172,7 +192,7 @@ private fun PreviewEmpty(
     AppThemePreview(previewConfig) {
         Box(modifier = Modifier.padding(16.dp)) {
             val textState = remember { mutableStateOf(TextFieldValue("")) }
-            InputPrimary(
+            TextInput(
                 text = textState,
                 placeholder = "https://flashback.pages.dev"
             )

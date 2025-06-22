@@ -44,7 +44,7 @@ fun Header(
                     Icon(
                         painter = painterResource(resource = action.icon),
                         contentDescription = stringResource(resource = action.contentDescription),
-                        tint = AppTheme.colors.contentPrimary
+                        tint = AppTheme.colors.onSurface
                     )
                 }
                 Spacer(Modifier.weight(1f))
@@ -147,7 +147,7 @@ private fun PreviewWithOverride() {
                     Icon(
                         painter = painterResource(resource = Res.drawable.ic_close),
                         contentDescription = stringResource(resource = string.tyres_label),
-                        tint = AppTheme.colors.contentSecondary
+                        tint = AppTheme.colors.onSurfaceVariant
                     )
                 }
             }
@@ -210,7 +210,7 @@ private fun PreviewNoIconWithOverride() {
                     Icon(
                         painter = painterResource(resource = Res.drawable.ic_close),
                         contentDescription = stringResource(resource = string.tyres_label),
-                        tint = AppTheme.colors.contentSecondary
+                        tint = AppTheme.colors.onSurfaceVariant
                     )
                 }
             }

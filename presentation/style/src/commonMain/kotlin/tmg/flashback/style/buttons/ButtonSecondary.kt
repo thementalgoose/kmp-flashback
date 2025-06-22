@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
@@ -23,10 +24,6 @@ import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody2
 
-private val colour: Color
-    @Composable
-    get() = AppTheme.colors.contentPrimary
-
 @Composable
 fun ButtonSecondary(
     text: String,
@@ -37,39 +34,32 @@ fun ButtonSecondary(
 ) {
     return Button(
         modifier = modifier
-            .focusable(true)
-            .wrapContentHeight(Alignment.CenterVertically)
-            .padding(0.dp)
-            .defaultMinSize(1.dp, 1.dp),
+            .focusable(true),
         border = BorderStroke(1.dp, when (enabled) {
-            true -> colour
-            false -> colour.copy(alpha = 0.4f)
+            true -> AppTheme.colors.outline
+            false -> AppTheme.colors.outline.copy(alpha = 0.4f)
         }),
-        colors = ButtonDefaults.textButtonColors(
-            containerColor = when (selected) {
-                true -> AppTheme.colors.backgroundTertiary
-                false -> AppTheme.colors.backgroundPrimary
-            },
-            contentColor = colour
+        colors = ButtonDefaults.buttonColors(
+            containerColor = AppTheme.colors.secondary,
+            contentColor = AppTheme.colors.onSecondary,
+            disabledContainerColor = AppTheme.colors.secondary.copy(alpha = 0.4f),
+            disabledContentColor = AppTheme.colors.onSecondary,
         ),
-        contentPadding = PaddingValues(),
         enabled = enabled,
-        shape = CircleShape,
+        shape = RoundedCornerShape(AppTheme.dimens.radiusMedium),
         onClick = onClick
     ) {
         TextBody2(
             text,
             bold = true,
             textColor = when (enabled) {
-                true -> colour
-                false -> colour.copy(alpha = 0.4f)
+                true -> AppTheme.colors.onSecondary
+                false -> AppTheme.colors.onSecondary.copy(alpha = 0.4f)
             },
             modifier = Modifier
                 .padding(
-                    start = AppTheme.dimens.medium,
-                    top = AppTheme.dimens.small,
-                    end = AppTheme.dimens.medium,
-                    bottom = AppTheme.dimens.small
+                    vertical = AppTheme.dimens.xsmall,
+                    horizontal = AppTheme.dimens.medium,
                 )
         )
     }

@@ -22,13 +22,7 @@ fun InputSwitch(
 ) {
     Switch(
         modifier = modifier,
-        colors = SwitchDefaults.colors(
-            checkedThumbColor = AppTheme.colors.primary,
-            checkedTrackColor = AppTheme.colors.primaryDark.copy(alpha = 0.5f),
-            uncheckedBorderColor = AppTheme.colors.primaryDark.copy(alpha = 0.5f),
-            uncheckedThumbColor = AppTheme.colors.primaryDark.copy(alpha = 0.5f),
-            uncheckedTrackColor = AppTheme.colors.backgroundTertiary
-        ),
+        colors = SwitchDefaults.colors(),
         checked = isChecked,
         onCheckedChange = null
     )

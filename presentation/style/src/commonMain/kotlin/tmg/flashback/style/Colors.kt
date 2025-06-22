@@ -12,55 +12,74 @@ import androidx.compose.ui.unit.dp
 
 internal val LocalColors = staticCompositionLocalOf { lightColours }
 
+// https://material-foundation.github.io/material-theme-builder/
+
 data class AppColors(
     // Theme
     val primary: Color,
-    val primaryDark: Color,
-    val primaryLight: Color,
-    val accent: Color,
+    val primaryInverse: Color,
+    val onPrimary: Color,
+    val secondary: Color,
+    val onSecondary: Color,
+    val tertiary: Color,
+    val onTertiary: Color,
+
+    val primaryContainer: Color,
+    val onPrimaryContainer: Color,
+    val secondaryContainer: Color,
+    val onSecondaryContainer: Color,
+    val tertiaryContainer: Color,
+    val onTertiaryContainer: Color,
+
     val error: Color,
-    // Content
-    val contentPrimary: Color,
-    val contentSecondary: Color,
-    val contentTertiary: Color,
-    val contentPrimaryInverse: Color,
-    val contentSecondaryInverse: Color,
-    val contentTertiaryInverse: Color,
+    val onError: Color,
+    val errorContainer: Color,
+    val onErrorContainer: Color,
+
+    val surfaceDim: Color,
+    val surface: Color,
+    val surfaceBright: Color,
+    val surfaceContainer1: Color,
+    val surfaceContainer2: Color,
+    val surfaceContainer3: Color,
+    val surfaceContainer4: Color,
+    val surfaceContainer5: Color,
+    val onSurface: Color,
+    val onSurfaceVariant: Color,
+    val outline: Color,
+    val outlineVariant: Color,
+
+    val surfaceInverse: Color,
+    val onSurfaceInverse: Color,
+
+    val surfaceNav: Color = surfaceContainer3,
+
     // System
     val systemStatusBarColor: Color,
     val systemNavigationBarColor: Color,
-    // Background
-    val backgroundContainer: Color,
-    val backgroundPrimary: Color,
-    val backgroundSecondary: Color,
-    val backgroundTertiary: Color,
-    val backgroundPrimaryInverse: Color,
-    val backgroundSecondaryInverse: Color,
-    val backgroundTertiaryInverse: Color,
-    val backgroundNav: Color,
-    val backgroundSplash: Color,
+
     // F1
     val f1Podium1: Color,
     val f1Podium2: Color,
     val f1Podium3: Color,
     val f1DeltaPositive: Color,
-    val f1DeltaNeutral: Color = contentSecondary,
+    val f1DeltaNeutral: Color = onSurface,
     val f1DeltaNegative: Color,
     val f1ResultsFull: Color,
-    val f1ResultsNeutral: Color = contentSecondary,
+    val f1ResultsNeutral: Color = onSurface,
     val f1ResultsPartial: Color,
     val f1ResultsUpcoming: Color = primary,
     val f1FastestSector: Color,
     val f1FavouriteSeason: Color,
     val f1Championship: Color,
-    val f1PipeColor: Color = contentTertiary,
+    val f1PipeColor: Color = onSurfaceVariant,
     val f1StartLightGreen: Color,
     val f1StartLightAmber: Color,
     val f1StartLightRed: Color,
+
     // RSS
     val rssAdd: Color,
     val rssRemove: Color,
-    val rssNewsBar: Color = backgroundSecondary,
     val isLight: Boolean
 ) {
 
@@ -68,28 +87,84 @@ data class AppColors(
         if (isLight) {
             lightColorScheme(
                 primary = primary,
-                secondary = accent,
-                background = backgroundContainer,
-                surface = backgroundSecondary,
-                error = Color(0xFFCC0000),
-                onPrimary = Color(0xFFF8F8F8),
-                onSecondary = Color(0xFFF8F8F8),
-                onBackground = contentPrimary,
-                onSurface = contentSecondary,
-                onError = Color(0xFFF8F8F8)
+                inversePrimary = primaryInverse,
+                onPrimary = onPrimary,
+                secondary = secondary,
+                onSecondary = onSecondary,
+                tertiary = tertiary,
+                onTertiary = onTertiary,
+
+                primaryContainer = primaryContainer,
+                onPrimaryContainer = onPrimaryContainer,
+                secondaryContainer = secondaryContainer,
+                onSecondaryContainer = onSecondaryContainer,
+                tertiaryContainer = tertiaryContainer,
+                onTertiaryContainer = onTertiaryContainer,
+
+                error = error,
+                onError = onError,
+                errorContainer = errorContainer,
+                onErrorContainer = onErrorContainer,
+
+                surfaceDim = surfaceDim,
+                surface = surface,
+                surfaceBright = surfaceBright,
+                surfaceContainerLowest = surfaceContainer1,
+                surfaceContainerLow = surfaceContainer2,
+                surfaceContainer = surfaceContainer3,
+                surfaceContainerHigh = surfaceContainer4,
+                surfaceContainerHighest = surfaceContainer5,
+                onSurface = onSurface,
+                onSurfaceVariant = onSurfaceVariant,
+                outline = outline,
+                outlineVariant = outlineVariant,
+
+                inverseSurface = surfaceInverse,
+                inverseOnSurface = onSurfaceInverse,
+
+                background = surfaceContainer1,
+                onBackground = onSurface
             )
         } else {
             darkColorScheme(
                 primary = primary,
-                secondary = accent,
-                background = backgroundContainer,
-                surface = backgroundSecondary,
-                error = Color(0xFFCC0000),
-                onPrimary = Color(0xFFF8F8F8),
-                onSecondary = Color(0xFFF8F8F8),
-                onBackground = contentPrimary,
-                onSurface = contentSecondary,
-                onError = Color(0xFFF8F8F8)
+                inversePrimary = primaryInverse,
+                onPrimary = onPrimary,
+                secondary = secondary,
+                onSecondary = onSecondary,
+                tertiary = tertiary,
+                onTertiary = onTertiary,
+
+                primaryContainer = primaryContainer,
+                onPrimaryContainer = onPrimaryContainer,
+                secondaryContainer = secondaryContainer,
+                onSecondaryContainer = onSecondaryContainer,
+                tertiaryContainer = tertiaryContainer,
+                onTertiaryContainer = onTertiaryContainer,
+
+                error = error,
+                onError = onError,
+                errorContainer = errorContainer,
+                onErrorContainer = onErrorContainer,
+
+                surfaceDim = surfaceDim,
+                surface = surface,
+                surfaceBright = surfaceBright,
+                surfaceContainerLowest = surfaceContainer1,
+                surfaceContainerLow = surfaceContainer2,
+                surfaceContainer = surfaceContainer3,
+                surfaceContainerHigh = surfaceContainer4,
+                surfaceContainerHighest = surfaceContainer5,
+                onSurface = onSurface,
+                onSurfaceVariant = onSurfaceVariant,
+                outline = outline,
+                outlineVariant = outlineVariant,
+
+                inverseSurface = surfaceInverse,
+                inverseOnSurface = onSurfaceInverse,
+
+                background = surfaceContainer1,
+                onBackground = onSurface
             )
         }
     }
@@ -99,28 +174,45 @@ internal val textDark: Color = Color(0xFF181818)
 internal val textLight: Color = Color(0xFFF8F8F8)
 
 val lightColours = AppColors(
-    primary = Color(0xFF0274D1),
-    primaryDark = Color(0xFF02589e),
-    primaryLight = Color(0xFFCBDDEE),
-    accent = Color(0xFF00E2E4),
-    error = Color(0xFFF44336),
-    contentPrimary = Color(0xFF181818),
-    contentSecondary = Color(0xFF383838),
-    contentTertiary = Color(0xFF585858),
-    contentPrimaryInverse = Color(0xFFF8F8F8),
-    contentSecondaryInverse = Color(0xFFF2F2F2),
-    contentTertiaryInverse = Color(0xFFEEEEEE),
+    primary = Color(0xFF006879),
+    primaryInverse = Color(0xFF84d2e5),
+    onPrimary = Color(0xFFffffff),
+    secondary = Color(0xFF1d6586),
+    onSecondary = Color(0xFFffffff),
+    tertiary = Color(0xFF3d5f90),
+    onTertiary = Color(0xFFffffff),
+
+    primaryContainer = Color(0xFFa8edff),
+    onPrimaryContainer = Color(0xFF004e5b),
+    secondaryContainer = Color(0xFFc4e7ff),
+    onSecondaryContainer = Color(0xFF004c6a),
+    tertiaryContainer = Color(0xFFdde1ff),
+    onTertiaryContainer = Color(0xFF3e4565),
+
+    error = Color(0xFFba1a1a),
+    onError = Color(0xFFffffff),
+    errorContainer = Color(0xFFffdad6),
+    onErrorContainer = Color(0xFF93000a),
+
+    surfaceDim = Color(0xffd5dbdd),
+    surface = Color(0xfff2f8f9),
+    surfaceBright = Color(0xfff5fafc),
+    surfaceContainer1 = Color(0xfffdfeff),
+    surfaceContainer2 = Color(0xffeff4f6),
+    surfaceContainer3 = Color(0xffe9eff0),
+    surfaceContainer4 = Color(0xffe3e9eb),
+    surfaceContainer5 = Color(0xffdee3e5),
+    onSurface = Color(0xff171d1e),
+    onSurfaceVariant = Color(0xff3f484b),
+    outline = Color(0xff6f797b),
+    outlineVariant = Color(0xffbfc8cb),
+
+    surfaceInverse = Color(0xff2b3133),
+    onSurfaceInverse = Color(0xffecf2f3),
+
     systemStatusBarColor = Color(0xFF0274D1),
     systemNavigationBarColor = Color(0xFFFCFCFC),
-    backgroundContainer = Color(0xFFF4F4F4),
-    backgroundPrimary = Color(0xFFF8F8F8),
-    backgroundSecondary = Color(0xFFEEEEEE),
-    backgroundTertiary = Color(0xFFDDDDDD),
-    backgroundPrimaryInverse = Color(0xFF181818),
-    backgroundSecondaryInverse = Color(0xFF383838),
-    backgroundTertiaryInverse = Color(0xFF484848),
-    backgroundNav = Color(0xFFFCFCFC),
-    backgroundSplash = Color(0xFF01A5D9),
+
     f1Podium1 = Color(0xFFD3BC4D),
     f1Podium2 = Color(0xFFC2C2C2),
     f1Podium3 = Color(0xFFD29342),
@@ -140,33 +232,49 @@ val lightColours = AppColors(
     rssAdd = Color(0xFF4CAF50),
     rssRemove = Color(0xFFF44336),
 
-//    rssNewsBar =
     isLight = true
 )
 
 val darkColours = AppColors(
-    primary = Color(0xFF00E2E4),
-    primaryDark = Color(0xFF009698),
-    primaryLight = Color(0xFF203F40),
-    accent = Color(0xFF0274D1),
-    error = Color(0xFFF44336),
-    contentPrimary = Color(0xFFF8F8F8),
-    contentSecondary = Color(0xFFF2F2F2),
-    contentTertiary = Color(0xFFDDDDDD),
-    contentPrimaryInverse = Color(0xFF181818),
-    contentSecondaryInverse = Color(0xFF383838),
-    contentTertiaryInverse = Color(0xFF484848),
+    primary = Color(0xFF84d2e5),
+    primaryInverse = Color(0xFF006879),
+    onPrimary = Color(0xFF00363f),
+    secondary = Color(0xFF90cef4),
+    onSecondary = Color(0xFF00344a),
+    tertiary = Color(0xFFbec5eb),
+    onTertiary = Color(0xFF272f4d),
+
+    primaryContainer = Color(0xFF004e5b),
+    onPrimaryContainer = Color(0xFFa8edff),
+    secondaryContainer = Color(0xFF004c6a),
+    onSecondaryContainer = Color(0xFFc4e7ff),
+    tertiaryContainer = Color(0xFF3e4565),
+    onTertiaryContainer = Color(0xFFdde1ff),
+
+    error = Color(0xFFffb4ab),
+    onError = Color(0xFF690005),
+    errorContainer = Color(0xFF93000a),
+    onErrorContainer = Color(0xFFffdad6),
+
+    surfaceDim = Color(0xff0e1416),
+    surface = Color(0xff0e1416),
+    surfaceBright = Color(0xff343a3c),
+    surfaceContainer1 = Color(0xff090f11),
+    surfaceContainer2 = Color(0xff171d1e),
+    surfaceContainer3 = Color(0xff1b2122),
+    surfaceContainer4 = Color(0xff252b2c),
+    surfaceContainer5 = Color(0xff303637),
+    onSurface = Color(0xffdee3e5),
+    onSurfaceVariant = Color(0xffbfc8cb),
+    outline = Color(0xff899295),
+    outlineVariant = Color(0xff3f484b),
+
+    surfaceInverse = Color(0xffdee3e5),
+    onSurfaceInverse = Color(0xff2b3133),
+
     systemStatusBarColor = Color(0xFF181818),
     systemNavigationBarColor = Color(0xFF383838),
-    backgroundContainer = Color(0xFF111111),
-    backgroundPrimary = Color(0xFF181818),
-    backgroundSecondary = Color(0xFF303030),
-    backgroundTertiary = Color(0xFF585858),
-    backgroundPrimaryInverse = Color(0xFFF8F8F8),
-    backgroundSecondaryInverse = Color(0xFFF2F2F2),
-    backgroundTertiaryInverse = Color(0xFFEEEEEE),
-    backgroundNav = Color(0xFF383838),
-    backgroundSplash = Color(0xFF01A5D9),
+
     f1Podium1 = Color(0xFFD3BC4D),
     f1Podium2 = Color(0xFFC2C2C2),
     f1Podium3 = Color(0xFFD29342),
@@ -185,34 +293,47 @@ val darkColours = AppColors(
 //    f1PipeColor = ,
     rssAdd = Color(0xFF4CAF50),
     rssRemove = Color(0xFFF44336),
-//    rssNewsBar =
+
     isLight = false
 )
 
 fun AppColors.dynamic(colorScheme: ColorScheme, isLightMode: Boolean) = copy(
-    primary = colorScheme.primary,
-    primaryDark = colorScheme.primary,
-    accent = colorScheme.surfaceTint,
 
-    backgroundContainer = when (isLightMode) {
-        true -> colorScheme.surface
-        false -> colorScheme.surface.copy(
-            alpha = colorScheme.surface.alpha,
-            red = colorScheme.surface.red * 0.8f,
-            green = colorScheme.surface.green * 0.8f,
-            blue = colorScheme.surface.blue * 0.8f
-        )
-    },
-    backgroundPrimary = colorScheme.background,
-    backgroundSecondary = colorScheme.surfaceContainer,
-    backgroundTertiary = colorScheme.surfaceContainerHighest,
-    backgroundPrimaryInverse = colorScheme.onBackground,
-    backgroundSecondaryInverse = colorScheme.onSurface,
-    backgroundTertiaryInverse = colorScheme.onSurface,
-    backgroundNav = colorScheme.surfaceColorAtElevation(6.dp),
-    backgroundSplash = colorScheme.primary,
+    primary = primary,
+    primaryInverse = primaryInverse,
+    onPrimary = onPrimary,
+    secondary = secondary,
+    onSecondary = onSecondary,
+    tertiary = tertiary,
+    onTertiary = onTertiary,
 
-    error = colorScheme.error,
+    primaryContainer = primaryContainer,
+    onPrimaryContainer = onPrimaryContainer,
+    secondaryContainer = secondaryContainer,
+    onSecondaryContainer = onSecondaryContainer,
+    tertiaryContainer = tertiaryContainer,
+    onTertiaryContainer = onTertiaryContainer,
+
+    error = error,
+    onError = onError,
+    errorContainer = errorContainer,
+    onErrorContainer = onErrorContainer,
+
+    surfaceDim = surfaceDim,
+    surface = surface,
+    surfaceBright = surfaceBright,
+    surfaceContainer1 = surfaceContainer1,
+    surfaceContainer2 = surfaceContainer2,
+    surfaceContainer3 = surfaceContainer3,
+    surfaceContainer4 = surfaceContainer4,
+    surfaceContainer5 = surfaceContainer5,
+    onSurface = onSurface,
+    onSurfaceVariant = onSurfaceVariant,
+    outline = outline,
+    outlineVariant = outlineVariant,
+
+    surfaceInverse = surfaceInverse,
+    onSurfaceInverse = onSurfaceInverse,
 
     systemStatusBarColor = when (isLightMode) {
         true -> colorScheme.background

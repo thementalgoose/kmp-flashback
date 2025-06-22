@@ -81,8 +81,8 @@ fun ProgressBar(
         true -> Color.White
         false -> Color.Black
     },
-    backgroundColor: Color = AppTheme.colors.backgroundPrimary,
-    backgroundOnColor: Color = AppTheme.colors.contentPrimary,
+    backgroundColor: Color = AppTheme.colors.surface,
+    backgroundOnColor: Color = AppTheme.colors.onSurface,
 ) {
     val endProgress = if (endProgress.isNaN()) { 0f } else { endProgress }
 

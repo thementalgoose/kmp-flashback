@@ -2,9 +2,8 @@ package tmg.flashback.style.buttons
 
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -15,7 +14,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.AppThemePreview
-import tmg.flashback.style.FlashbackTheme
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 
@@ -29,26 +27,24 @@ fun ButtonPrimary(
 ) {
     return Button(
         modifier = modifier
-            .focusable(true)
-            .fillMaxWidth(),
+            .focusable(true),
         colors = ButtonDefaults.textButtonColors(
-            containerColor = FlashbackTheme.colors.primary,
-            disabledContainerColor = FlashbackTheme.colors.primary.copy(alpha = 0.4f),
-            disabledContentColor = FlashbackTheme.colors.contentPrimaryInverse,
-            contentColor = FlashbackTheme.colors.contentTertiaryInverse
+            containerColor = AppTheme.colors.primary,
+            disabledContainerColor = AppTheme.colors.primary.copy(alpha = 0.4f),
+            disabledContentColor = AppTheme.colors.onPrimary.copy(alpha = 0.4f),
+            contentColor = AppTheme.colors.onPrimary
         ),
         enabled = enabled,
-        shape = CircleShape,
+        shape = RoundedCornerShape(AppTheme.dimens.radiusMedium),
         onClick = onClick
     ) {
         Text(
             text,
+            color = AppTheme.colors.onPrimary.copy(alpha = if (enabled) 1f else 0.4f),
             modifier = Modifier
                 .padding(
-                    start = AppTheme.dimens.medium,
-                    top = AppTheme.dimens.small,
-                    end = AppTheme.dimens.medium,
-                    bottom = AppTheme.dimens.small
+                    horizontal = AppTheme.dimens.medium,
+                    vertical = AppTheme.dimens.xsmall
                 )
         )
     }

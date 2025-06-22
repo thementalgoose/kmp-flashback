@@ -55,14 +55,14 @@ fun BadgesView(
 fun BadgeView(
     model: Badge,
     modifier: Modifier = Modifier,
-    tintIcon: Color? = AppTheme.colors.contentPrimary,
+    tintIcon: Color? = AppTheme.colors.onSurface,
 ) {
     Row(modifier = modifier
         .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
-        .background(AppTheme.colors.backgroundSecondary)
+        .background(AppTheme.colors.surfaceContainer2)
         .border(
             1.dp,
-            color = AppTheme.colors.backgroundTertiary.copy(alpha = 0.35f),
+            color = AppTheme.colors.outline.copy(alpha = 0.35f),
             shape = RoundedCornerShape(AppTheme.dimens.radiusSmall)
         )
         .padding(

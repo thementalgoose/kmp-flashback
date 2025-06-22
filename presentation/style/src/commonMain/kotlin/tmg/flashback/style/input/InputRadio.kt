@@ -22,12 +22,7 @@ fun InputRadio(
 ) {
     RadioButton(
         modifier = modifier,
-        colors = RadioButtonDefaults.colors(
-            selectedColor = AppTheme.colors.primary,
-            disabledUnselectedColor = AppTheme.colors.primaryDark.copy(alpha = 0.5f),
-            unselectedColor = AppTheme.colors.primaryDark.copy(alpha = 0.5f),
-            disabledSelectedColor = AppTheme.colors.backgroundTertiary
-        ),
+        colors = RadioButtonDefaults.colors(),
         selected = isChecked,
         onClick = null
     )

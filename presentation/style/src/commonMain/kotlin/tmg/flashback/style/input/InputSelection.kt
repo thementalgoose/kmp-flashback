@@ -1,6 +1,7 @@
 package tmg.flashback.style.input
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -39,14 +40,18 @@ fun InputSelection(
 ) {
     Row(
         modifier = modifier
-            .clip(RoundedCornerShape(100.dp))
+            .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
             .clickable(
                 enabled = itemClicked != null,
                 onClick = itemClicked ?: {}
             )
             .background(
-                if (isSelected) AppTheme.colors.backgroundTertiary else Color.Transparent
+                if (isSelected) AppTheme.colors.tertiaryContainer else Color.Transparent
             )
+            .border(1.dp, when (isSelected) {
+                true -> AppTheme.colors.outline
+                false -> Color.Transparent
+            }, RoundedCornerShape(AppTheme.dimens.radiusMedium))
             .padding(
                 vertical = AppTheme.dimens.nsmall,
                 horizontal = AppTheme.dimens.medium
@@ -56,7 +61,7 @@ fun InputSelection(
         Icon(
             painter = painterResource(resource = icon),
             contentDescription = null,
-            tint = AppTheme.colors.contentSecondary,
+            tint = AppTheme.colors.onSurface,
             modifier = Modifier.size(24.dp)
         )
         Spacer(Modifier.width(AppTheme.dimens.nsmall))

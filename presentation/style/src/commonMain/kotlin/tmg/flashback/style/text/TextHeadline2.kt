@@ -49,7 +49,7 @@ fun TextHeadline2(
         style = AppTheme.typography.h2.copy(
             color = when (brand) {
                 true -> AppTheme.colors.primary
-                false -> AppTheme.colors.contentPrimary
+                false -> AppTheme.colors.onSurface
             }
         )
     )
@@ -74,10 +74,10 @@ fun TextHeadline2WithIcon(
         Row {
             val style = when (colourType) {
                 ColourType.DEFAULT -> AppTheme.typography.h2.copy(
-                    color = AppTheme.colors.contentPrimary
+                    color = AppTheme.colors.onSurface
                 )
                 ColourType.BRAND -> AppTheme.typography.h2.copy(
-                    color = AppTheme.colors.contentPrimary
+                    color = AppTheme.colors.onSurface
                 )
                 ColourType.RAINBOW -> AppTheme.typography.h2.copy(
                     brush = Brush.horizontalGradient(RainbowColors)

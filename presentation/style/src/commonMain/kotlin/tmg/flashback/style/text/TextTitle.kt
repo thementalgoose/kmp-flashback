@@ -34,7 +34,7 @@ fun TextTitle(
                 true -> FontWeight.Bold
                 false -> FontWeight.Normal
             },
-            color = textColor ?: AppTheme.colors.contentPrimary
+            color = textColor ?: AppTheme.colors.onSurface
         )
     )
 }

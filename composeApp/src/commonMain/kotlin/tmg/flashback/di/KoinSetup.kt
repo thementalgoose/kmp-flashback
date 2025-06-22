@@ -11,6 +11,7 @@ import tmg.flashback.flashbackapi.api.di.dataNetworkFlashbackModule
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.persistence.flashback.di.dataPersistenceFlashbackModule
 import tmg.flashback.preferences.di.corePreferencesModule
+import tmg.flashback.ui.di.presentationUiModule
 
 fun doInitKoin() {
     doInitKoin { }
@@ -28,5 +29,7 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
         modules(dataFlashbackModule)
 
         modules(featureSeasonModule)
+
+        modules(presentationUiModule)
     }
 }

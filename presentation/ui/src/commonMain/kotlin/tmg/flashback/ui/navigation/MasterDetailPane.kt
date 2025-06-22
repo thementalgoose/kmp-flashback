@@ -92,7 +92,7 @@ fun <T> MasterDetailsPane(
                     Box(
                         Modifier
                             .fillMaxSize()
-                            .background(AppTheme.colors.backgroundPrimary)
+                            .background(AppTheme.colors.surface)
                     )
                     if (navigator.destination != null) {
                         details(navigator.destination!!, detailsActionUpClicked)
@@ -107,14 +107,14 @@ fun <T> MasterDetailsPane(
                     .offset(detailsOffset.value)
                     .width(detailsWidth)
                     .fillMaxHeight()
-                    .background(AppTheme.colors.backgroundPrimary),
+                    .background(AppTheme.colors.surface),
                 contentAlignment = Alignment.Center
             ) {
                 Fade(visible = navigator.destination != null) {
                     Box(
                         Modifier
                             .fillMaxSize()
-                            .background(AppTheme.colors.backgroundPrimary)
+                            .background(AppTheme.colors.surface)
                     )
                     if (navigator.destination != null) {
                         details(navigator.destination!!, detailsActionUpClicked)

@@ -49,13 +49,13 @@ fun NavigationBar(
 ) {
     Column(modifier
         .shadow(8.dp)
-        .background(AppTheme.colors.backgroundNav)
+        .background(AppTheme.colors.surfaceNav)
         .padding(bottom = bottomPadding)
     ) {
         Row(
             modifier = Modifier
                 .height(appBarHeight)
-                .background(AppTheme.colors.backgroundNav),
+                .background(AppTheme.colors.surfaceNav),
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -116,7 +116,7 @@ private fun Item(
                     .size(iconSize)
                     .align(Alignment.Center),
                 painter = painterResource(resource = item.icon),
-                tint = AppTheme.colors.contentPrimary,
+                tint = AppTheme.colors.onSurface,
                 contentDescription = null,
             )
         }
@@ -136,7 +136,7 @@ private fun Item(
                         end = 4.dp
                     ),
                 text = stringResource(resource = item.label),
-                textColor = AppTheme.colors.contentPrimary,
+                textColor = AppTheme.colors.onSurface,
                 bold = item.isSelected == true
             )
             Box(
@@ -148,7 +148,7 @@ private fun Item(
                         Brush.horizontalGradient(
                             listOf(
                                 Color.Transparent,
-                                AppTheme.colors.backgroundNav
+                                AppTheme.colors.surfaceNav
                             )
                         )
                     )

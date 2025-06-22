@@ -7,6 +7,7 @@ data class AppDimensions(
     val radiusSmall: Dp = 6.dp,
     val radiusMedium: Dp = 12.dp,
     val radiusLarge: Dp = 24.dp,
+
     val xxxlarge: Dp = 120.dp,
     val xxlarge: Dp = 96.dp,
     val xlarge: Dp = 64.dp,

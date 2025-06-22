@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="preview" translatable="false">Preview</string>
+    <string name="preview_2" translatable="false">Preview 2</string>
 </resources>

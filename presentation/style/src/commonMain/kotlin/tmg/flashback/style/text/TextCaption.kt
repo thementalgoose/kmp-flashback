@@ -31,7 +31,7 @@ fun TextCaption(
         style = AppTheme.typography.caption.copy(
             fontStyle = fontStyle,
             fontWeight = FontWeight.Bold,
-            color = AppTheme.colors.contentTertiary
+            color = AppTheme.colors.onSurfaceVariant
         )
     )
 }

@@ -59,7 +59,7 @@ fun NavigationColumn(
     Column(modifier = modifier
         .width(width.value)
         .fillMaxHeight()
-        .background(AppTheme.colors.backgroundNav)
+        .background(AppTheme.colors.surfaceNav)
         .padding(
             vertical = AppTheme.dimens.small
         )
@@ -112,7 +112,7 @@ private fun NavigationItem(
 ) {
     val backgroundColor = animateColorAsState(targetValue = when (item.isSelected) {
         true -> AppTheme.colors.primary.copy(alpha = 0.2f)
-        else -> AppTheme.colors.backgroundNav
+        else -> AppTheme.colors.surfaceNav
     }, label = "backgroundColor")
     val iconPadding = animateDpAsState(targetValue = when (isExpanded) {
         true -> AppTheme.dimens.medium
@@ -142,7 +142,7 @@ private fun NavigationItem(
                 .size(iconSize)
                 .align(Alignment.CenterVertically),
             painter = painterResource(resource = item.icon),
-            tint = AppTheme.colors.contentPrimary,
+            tint = AppTheme.colors.onSurface,
             contentDescription = stringResource(resource = item.label)
         )
         if (isExpanded) {

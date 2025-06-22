@@ -3,6 +3,8 @@ package tmg.flashback.crashlytics.di
 import org.koin.dsl.module
 import tmg.flashback.crashlytics.manager.CrashlyticsManager
 import tmg.flashback.crashlytics.manager.CrashlyticsManagerImpl
+import tmg.flashback.crashlytics.repositories.CrashlyticsRepository
+import tmg.flashback.crashlytics.repositories.CrashlyticsRepositoryImpl
 import tmg.flashback.crashlytics.usecases.AddCustomKeyUseCase
 import tmg.flashback.crashlytics.usecases.AddCustomKeyUseCaseImpl
 import tmg.flashback.crashlytics.usecases.InitialiseCrashlyticsUseCase
@@ -14,4 +16,5 @@ internal fun module() = module {
     single<CrashlyticsManager> { CrashlyticsManagerImpl(get()) }
     single<InitialiseCrashlyticsUseCase> { InitialiseCrashlyticsUseCaseImpl(get()) }
     single<AddCustomKeyUseCase> { AddCustomKeyUseCaseImpl(get()) }
+    single<CrashlyticsRepository> { CrashlyticsRepositoryImpl(get()) }
 }

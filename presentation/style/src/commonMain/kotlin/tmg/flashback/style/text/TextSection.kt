@@ -26,7 +26,7 @@ fun TextSection(
         style = AppTheme.typography.section.copy(
             color = when (brand) {
                 true -> AppTheme.colors.primary
-                false -> AppTheme.colors.contentSecondary
+                false -> AppTheme.colors.onSurface
             }
         )
     )

@@ -17,7 +17,7 @@ import tmg.flashback.style.text.TextBody1
 fun Modifier.edgeFade(
     edgeWidth: Dp = AppTheme.dimens.medium,
 ): Modifier = composed {
-    val backgroundColor = AppTheme.colors.backgroundPrimary
+    val backgroundColor = AppTheme.colors.surface
     this.drawWithContent {
         this.drawContent()
         this.drawRect(

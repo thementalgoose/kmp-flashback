@@ -5,8 +5,6 @@ import tmg.flashback.analytics.manager.AnalyticsManager
 import tmg.flashback.analytics.manager.AnalyticsManagerImpl
 import tmg.flashback.analytics.repositories.AnalyticsRepository
 import tmg.flashback.analytics.repositories.AnalyticsRepositoryImpl
-import tmg.flashback.analytics.usecases.EnableAnalyticsUseCase
-import tmg.flashback.analytics.usecases.EnableAnalyticsUseCaseImpl
 import tmg.flashback.analytics.usecases.InitialiseAnalyticsUseCase
 import tmg.flashback.analytics.usecases.InitialiseAnalyticsUseCaseImpl
 import tmg.flashback.analytics.usecases.SetUserPropertyUseCase
@@ -19,5 +17,4 @@ internal fun module() = module {
     single<AnalyticsRepository> { AnalyticsRepositoryImpl(get()) }
     single<InitialiseAnalyticsUseCase> { InitialiseAnalyticsUseCaseImpl(get(), get()) }
     single<SetUserPropertyUseCase> { SetUserPropertyUseCaseImpl(get()) }
-    single<EnableAnalyticsUseCase> { EnableAnalyticsUseCaseImpl(get()) }
 }

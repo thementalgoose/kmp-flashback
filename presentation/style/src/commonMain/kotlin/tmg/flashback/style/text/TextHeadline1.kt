@@ -23,7 +23,7 @@ fun TextHeadline1(
         style = AppTheme.typography.h1.copy(
             color = when (brand) {
                 true -> AppTheme.colors.primary
-                false -> AppTheme.colors.contentPrimary
+                false -> AppTheme.colors.onSurface
             }
         )
     )
@@ -40,7 +40,7 @@ fun TextHeadline1Inline(
         style = AppTheme.typography.h1.copy(
             color = when (brand) {
                 true -> AppTheme.colors.primary
-                false -> AppTheme.colors.contentPrimary
+                false -> AppTheme.colors.onSurface
             }
         )
     )

@@ -27,7 +27,7 @@ fun AppScaffold(
         contentWindowInsets = contentInsets,
         modifier = modifier,
         bottomBar = bottomBar,
-        containerColor = AppTheme.colors.backgroundContainer,
+        containerColor = AppTheme.colors.surface,
         content = {
             val paddingValues = WindowInsets.safeDrawing
                 .exclude(it.asInsets())
@@ -35,7 +35,7 @@ fun AppScaffold(
                 .asPaddingValues()
             Box(Modifier
                 .fillMaxSize()
-                .background(AppTheme.colors.backgroundContainer)
+                .background(AppTheme.colors.surface)
                 .windowInsetsPadding(contentInsets)
             ) {
                 content(paddingValues)
