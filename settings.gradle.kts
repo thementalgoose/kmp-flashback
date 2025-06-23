@@ -54,6 +54,7 @@ include(":domain:formula1")
 
 include(":eastereggs")
 
+include(":feature:about")
 include(":feature:circuits")
 include(":feature:constructors")
 include(":feature:drivers")

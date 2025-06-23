@@ -18,6 +18,7 @@ kotlin {
             implementation(projects.domain.formula1)
             implementation(projects.data.network.flashback)
             implementation(projects.data.persistence.flashback)
+            implementation(projects.core.configuration)
         }
         commonTest.dependencies {
             implementation(projects.test.data.persistence.flashback)

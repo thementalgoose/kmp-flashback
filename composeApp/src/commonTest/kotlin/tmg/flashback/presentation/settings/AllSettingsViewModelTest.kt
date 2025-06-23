@@ -1,4 +1,45 @@
 package tmg.flashback.presentation.settings
 
-class AllSettingsViewModelTest {
+import app.cash.turbine.test
+import dev.mokkery.MockMode.autoUnit
+import dev.mokkery.answering.returns
+import dev.mokkery.every
+import dev.mokkery.mock
+import kotlinx.coroutines.runBlocking
+import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
+import tmg.flashback.widget.upnext.usecases.IsWidgetsEnabledUseCase
+import kotlin.test.Test
+import kotlin.test.assertEquals
+
+internal class AllSettingsViewModelTest {
+
+    private lateinit var underTest: AllSettingsViewModel
+
+    private val mockIsWidgetEnabledUseCase: IsWidgetsEnabledUseCase = mock(autoUnit)
+    private val mockIsRssEnabledUseCase: IsRssEnabledUseCase = mock(autoUnit)
+
+    private fun initUnderTest() {
+        underTest = AllSettingsViewModel(
+            isWidgetsEnabledUseCase = mockIsWidgetEnabledUseCase,
+            isRssEnabledUseCase = mockIsRssEnabledUseCase,
+        )
+    }
+
+    @Test
+    fun `widgets enabled if app supports it`() = runBlocking {
+        every { mockIsWidgetEnabledUseCase.invoke() } returns true
+        initUnderTest()
+        underTest.uiState.test {
+            assertEquals(true, awaitItem().isWidgetsSupported)
+        }
+    }
+
+    @Test
+    fun `rss enabled if feature enabled`() = runBlocking {
+        every { mockIsRssEnabledUseCase.invoke() } returns true
+        initUnderTest()
+        underTest.uiState.test {
+            assertEquals(true, awaitItem().isRssEnabled)
+        }
+    }
 }

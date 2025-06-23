@@ -7,6 +7,8 @@ import tmg.flashback.configuration.repositories.ConfigRepository
 import tmg.flashback.configuration.repositories.ConfigRepositoryImpl
 import tmg.flashback.configuration.usecases.ApplyConfigUseCase
 import tmg.flashback.configuration.usecases.ApplyConfigUseCaseImpl
+import tmg.flashback.configuration.usecases.DoesConfigRequireSyncUseCase
+import tmg.flashback.configuration.usecases.DoesConfigRequireSyncUseCaseImpl
 import tmg.flashback.configuration.usecases.FetchConfigUseCase
 import tmg.flashback.configuration.usecases.FetchConfigUseCaseImpl
 import tmg.flashback.configuration.usecases.InitialiseConfigUseCase
@@ -25,5 +27,6 @@ internal fun module() = module {
     single<FetchConfigUseCase> { FetchConfigUseCaseImpl(get(), get()) }
     single<InitialiseConfigUseCase> { InitialiseConfigUseCaseImpl(get()) }
     single<ResetConfigUseCase> { ResetConfigUseCaseImpl(get(), get()) }
+    single<DoesConfigRequireSyncUseCase> { DoesConfigRequireSyncUseCaseImpl(get()) }
 
 }

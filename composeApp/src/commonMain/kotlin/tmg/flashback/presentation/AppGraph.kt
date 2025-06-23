@@ -19,6 +19,10 @@ fun AppGraph(
     windowAdaptiveInfo: WindowAdaptiveInfo,
     modifier: Modifier = Modifier,
 ) {
+
+    navController.navigate(Screen.Results) {
+    }
+
     NavHost(
         navController = navController,
         startDestination = Screen.Settings,

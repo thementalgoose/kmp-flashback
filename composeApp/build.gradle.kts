@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.googleServices)
     alias(libs.plugins.crashlytics)
+    alias(libs.plugins.mokkery)
 }
 
 val versionCodeProperty = 1
@@ -51,6 +52,7 @@ kotlin {
 
             implementation(projects.eastereggs)
 
+            implementation(projects.feature.about)
             implementation(projects.feature.circuits)
             implementation(projects.feature.constructors)
             implementation(projects.feature.drivers)
@@ -79,6 +81,10 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.koin.core)
             implementation(libs.bundles.koin.compose)
+        }
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+            implementation(libs.turbine)
         }
         desktopMain.dependencies {
 

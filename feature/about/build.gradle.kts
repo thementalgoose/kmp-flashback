@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.flashback.featureModule)
     alias(libs.plugins.kotlinSerialization)
-    alias(libs.plugins.mokkery)
 }
 
 kotlin {
@@ -27,9 +26,6 @@ kotlin {
             implementation(projects.core.configuration)
             implementation(projects.core.metrics.analytics)
             implementation(projects.core.metrics.crashlytics)
-            implementation(projects.core.preferences)
-            implementation(projects.domain.formula1)
-            implementation(projects.data.flashback)
             implementation(projects.infrastructure)
             implementation(projects.presentation.ui)
             implementation(projects.presentation.style)
@@ -37,7 +33,6 @@ kotlin {
             implementation(projects.presentation.localisation)
         }
         commonTest.dependencies {
-            implementation(projects.test.formula1)
             implementation(kotlin("test"))
         }
         iosMain.dependencies {

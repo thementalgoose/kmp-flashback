@@ -24,6 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import flashback.presentation.localisation.generated.resources.Res
+import flashback.presentation.localisation.generated.resources.app_version_placeholder
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.presentation.MenuItem
@@ -32,6 +34,7 @@ import tmg.flashback.presentation.label
 import tmg.flashback.presentation.navigation.hero.DashboardHero
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextBody1
+import tmg.flashback.style.text.TextBody2
 
 @Composable
 internal fun AppNavigationDrawer(
@@ -95,6 +98,11 @@ internal fun AppNavigationDrawer(
                 }
                 item("footer_div") {
                     MenuDivider()
+                }
+                item("app_version") {
+                    TextBody2(
+                        text = stringResource(Res.string.app_version_placeholder, "1.0.0")
+                    )
                 }
             }
         )

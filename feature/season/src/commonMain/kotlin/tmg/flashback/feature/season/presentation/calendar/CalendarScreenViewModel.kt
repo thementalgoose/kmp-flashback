@@ -15,11 +15,11 @@ class CalendarScreenViewModel(
         2025
     )
 
-    val uiState: StateFlow<CalendarScreenState> = currentSeason
-        .flatMapLatest { seasonRepository.getSeason(it) }
-        .map { season ->
-            CalendarScreenState()
-        }
+//    val uiState: StateFlow<CalendarScreenState> = currentSeason
+//        .flatMapLatest { seasonRepository.getSeason(it) }
+//        .map { season ->
+//            CalendarScreenState()
+//        }
 
     fun test() {
         seasonRepository.getSeason(2025)

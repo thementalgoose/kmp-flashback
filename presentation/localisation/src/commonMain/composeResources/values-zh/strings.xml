@@ -28,7 +28,7 @@
     <string name="nav_calendar">日历</string>
     <string name="nav_schedule">赛程</string>
     <string name="nav_seasons">赛季</string>
-    <string name="nav_settings">赛季</string>
+    <string name="nav_settings">设置</string>
     <string name="nav_search">搜索</string>
     <string name="nav_rss">RSS</string>
     <string name="nav_reaction_game">反应游戏</string>
