@@ -13,7 +13,8 @@ fun App() {
         AppScaffold(
             content = {
                 AppContainer(
-                    windowAdaptiveInfo = windowAdaptiveInfo
+                    windowAdaptiveInfo = windowAdaptiveInfo,
+                    paddingValues = it
                 )
             }
         )

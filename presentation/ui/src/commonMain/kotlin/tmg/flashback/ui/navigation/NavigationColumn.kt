@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -24,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
@@ -47,6 +49,7 @@ fun NavigationColumn(
     list: List<NavigationItem>,
     itemClicked: (NavigationItem) -> Unit,
     modifier: Modifier = Modifier,
+    padding: PaddingValues = PaddingValues(0.dp),
     lockExpanded: Boolean = false,
 ) {
     NavigationColumn(
@@ -55,6 +58,7 @@ fun NavigationColumn(
         secondary = emptyList(),
         itemClicked = itemClicked,
         modifier = modifier,
+        padding = padding,
         lockExpanded = lockExpanded
     )
 }
@@ -66,6 +70,7 @@ fun NavigationColumn(
     secondary: List<NavigationItem>,
     itemClicked: (NavigationItem) -> Unit,
     modifier: Modifier = Modifier,
+    padding: PaddingValues = PaddingValues(0.dp),
     lockExpanded: Boolean = false,
 ) {
     val expanded = remember { mutableStateOf(lockExpanded) }
@@ -77,7 +82,6 @@ fun NavigationColumn(
     Column(modifier = modifier
         .width(width.value)
         .fillMaxHeight()
-        .background(AppTheme.colors.surfaceNav)
         .padding(
             vertical = AppTheme.dimens.small
         )
@@ -86,6 +90,7 @@ fun NavigationColumn(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth(),
+            contentPadding = padding,
             content = {
                 if (!lockExpanded) {
                     item {
@@ -142,9 +147,13 @@ private fun NavigationItem(
     modifier: Modifier = Modifier,
 ) {
     val backgroundColor = animateColorAsState(targetValue = when (item.isSelected) {
-        true -> AppTheme.colors.primary.copy(alpha = 0.2f)
-        else -> AppTheme.colors.surfaceNav
+        true -> AppTheme.colors.primaryContainer
+        else -> Color.Transparent
     }, label = "backgroundColor")
+    val contentColor = animateColorAsState(targetValue = when (item.isSelected) {
+        true -> AppTheme.colors.onPrimaryContainer
+        else -> AppTheme.colors.onSurface
+    })
     val iconPadding = animateDpAsState(targetValue = when (isExpanded) {
         true -> AppTheme.dimens.medium
         false -> (itemSize - iconSize) / 2
@@ -173,7 +182,7 @@ private fun NavigationItem(
                 .size(iconSize)
                 .align(Alignment.CenterVertically),
             painter = painterResource(resource = item.icon),
-            tint = AppTheme.colors.onSurface,
+            tint = contentColor.value,
             contentDescription = stringResource(resource = item.label)
         )
         if (isExpanded) {
@@ -182,7 +191,8 @@ private fun NavigationItem(
                     .padding(start = AppTheme.dimens.small)
                     .align(Alignment.CenterVertically)
                     .fillMaxWidth(),
-                text = item.label.let { stringResource(resource = it) }
+                textColor = contentColor.value,
+                text = stringResource(resource = item.label)
             )
         }
     }

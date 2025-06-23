@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.safeDrawing
@@ -37,6 +38,7 @@ fun AppScaffold(
                 .fillMaxSize()
                 .background(AppTheme.colors.surface)
                 .windowInsetsPadding(contentInsets)
+                .consumeWindowInsets(contentInsets)
             ) {
                 content(paddingValues)
             }

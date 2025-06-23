@@ -1,8 +1,6 @@
 package tmg.flashback.presentation.settings
 
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -18,21 +16,24 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun SettingsScreen(
-    viewModel: AllSettingsViewModel = koinViewModel()
+    viewModel: AllSettingsViewModel = koinViewModel(),
+    insetPadding: PaddingValues
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
     SettingsScreen(
-        uiState = uiState.value
+        uiState = uiState.value,
+        paddingValues = insetPadding
     )
 }
 
 @Composable
 private fun SettingsScreen(
-    uiState: AllSettingsUiState
+    uiState: AllSettingsUiState,
+    paddingValues: PaddingValues,
 ) {
     LazyColumn(
-        contentPadding = WindowInsets.safeDrawing.asPaddingValues()
+        contentPadding = paddingValues
     ) {
         PrefHeader(string.settings_header_appearance)
         PrefCategory(

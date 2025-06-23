@@ -1,7 +1,7 @@
 package tmg.flashback.presentation.navigation
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
-import tmg.flashback.navigation.Screen
 import tmg.flashback.presentation.MenuItem.Calendar
 import tmg.flashback.presentation.MenuItem.Contact
 import tmg.flashback.presentation.MenuItem.DriversStandings
@@ -15,9 +15,10 @@ import tmg.flashback.ui.navigation.NavigationColumn
 @Composable
 internal fun AppNavigationRail(
     appNavigationUiState: AppNavigationUIState,
+    insetPadding: PaddingValues,
 ) {
     val primaryItems = listOfNotNull(Calendar, DriversStandings, TeamsStandings)
-        .map { it.toNavigationItem(false) }
+        .map { it.toNavigationItem(true) }
     val secondaryItems = listOfNotNull(Search, Rss.takeIf { appNavigationUiState.showRss }, Settings, Contact)
         .map { it.toNavigationItem(false) }
 
@@ -26,5 +27,6 @@ internal fun AppNavigationRail(
         divider = { MenuDivider() },
         secondary = secondaryItems,
         itemClicked = { },
+        padding = insetPadding
     )
 }

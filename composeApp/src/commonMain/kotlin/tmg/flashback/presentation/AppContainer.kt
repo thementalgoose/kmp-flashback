@@ -1,6 +1,7 @@
 package tmg.flashback.presentation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.adaptive.WindowAdaptiveInfo
@@ -22,7 +23,6 @@ import tmg.flashback.eastereggs.presentation.summer
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.presentation.navigation.AppNavigationDrawer
 import tmg.flashback.presentation.navigation.AppNavigationRail
-import tmg.flashback.presentation.navigation.AppNavigationUIState
 import tmg.flashback.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.style.AppTheme
 import tmg.flashback.ui.navigation.OverlappingPanels
@@ -34,6 +34,7 @@ import tmg.flashback.ui.navigation.rememberOverlappingPanelsState
 @Composable
 fun AppContainer(
     windowAdaptiveInfo: WindowAdaptiveInfo,
+    paddingValues: PaddingValues,
     appNavigationViewModel: AppNavigationViewModel = koinViewModel()
 ) {
     val navController = rememberNavController()
@@ -63,6 +64,7 @@ fun AppContainer(
             AppNavigationDrawer(
                 appNavigationUiState = appNavigationUiState.value,
                 navigationItemClicked = { },
+                insetPadding = paddingValues,
                 modifier = if (isCompact) easterEggModifier else Modifier
             )
         },
@@ -74,7 +76,8 @@ fun AppContainer(
             ) {
                 if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT) {
                     AppNavigationRail(
-                        appNavigationUiState = appNavigationUiState.value
+                        appNavigationUiState = appNavigationUiState.value,
+                        insetPadding = paddingValues
                     )
                 }
                 Row(modifier = Modifier
@@ -82,7 +85,9 @@ fun AppContainer(
                 ) {
                     AppGraph(
                         appNavigationViewModel = appNavigationViewModel,
-                        navController = navController
+                        navController = navController,
+                        insetPadding = paddingValues,
+                        windowAdaptiveInfo = windowAdaptiveInfo
                     )
                 }
             }
