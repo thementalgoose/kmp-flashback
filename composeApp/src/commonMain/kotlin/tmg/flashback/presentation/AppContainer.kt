@@ -1,5 +1,6 @@
 package tmg.flashback.presentation
 
+//import androidx.compose.ui.backhandler.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -13,11 +14,10 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.compose.rememberNavController
-//import androidx.compose.ui.backhandler.BackHandler
+import androidx.navigation.NavHostController
+import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
 import kotlinx.coroutines.launch
-import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.eastereggs.presentation.snow
 import tmg.flashback.eastereggs.presentation.summer
 import tmg.flashback.infrastructure.log.logDebug
@@ -28,26 +28,24 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.ui.navigation.OverlappingPanels
 import tmg.flashback.ui.navigation.OverlappingPanelsState
 import tmg.flashback.ui.navigation.OverlappingPanelsValue
-import tmg.flashback.ui.navigation.rememberOverlappingPanelsState
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun AppContainer(
     windowAdaptiveInfo: WindowAdaptiveInfo,
+    windowSizeClass: WindowSizeClass,
+    navController: NavHostController,
+    panelsState: OverlappingPanelsState,
     paddingValues: PaddingValues,
-    appNavigationViewModel: AppNavigationViewModel = koinViewModel()
+    appNavigationViewModel: AppNavigationViewModel
 ) {
-    val navController = rememberNavController()
-
-    val windowSizeClass = windowAdaptiveInfo.windowSizeClass
-    val panelsState = rememberOverlappingPanelsState(OverlappingPanelsValue.Closed)
     val coroutineScope = rememberCoroutineScope()
     val menuAccessible = true // Derive from VM
 
     val appNavigationUiState = appNavigationViewModel.uiState.collectAsStateWithLifecycle()
     val easterEggModifier = Modifier
-        .snow(appNavigationUiState.value.snow)
-        .summer(appNavigationUiState.value.summer)
+        .snow(appNavigationUiState.value.easterEggs.snow)
+        .summer(appNavigationUiState.value.easterEggs.summer)
 
     val isCompact = windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT
 
@@ -63,7 +61,7 @@ fun AppContainer(
         panelStart = {
             AppNavigationDrawer(
                 appNavigationUiState = appNavigationUiState.value,
-                navigationItemClicked = { },
+                navigationItemClicked = { navController.navigate(it) },
                 insetPadding = paddingValues,
                 modifier = if (isCompact) easterEggModifier else Modifier
             )
@@ -77,6 +75,9 @@ fun AppContainer(
                 if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT) {
                     AppNavigationRail(
                         appNavigationUiState = appNavigationUiState.value,
+                        navigationItemClicked = {
+                            navController.navigate(it)
+                        },
                         insetPadding = paddingValues
                     )
                 }

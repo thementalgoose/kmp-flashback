@@ -14,7 +14,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import tmg.flashback.style.AppTheme
-import tmg.flashback.ui.insets.asInsets
 import tmg.flashback.ui.insets.safeDrawingHorizontalOnly
 
 @Composable
@@ -31,7 +30,6 @@ fun AppScaffold(
         containerColor = AppTheme.colors.surface,
         content = {
             val paddingValues = WindowInsets.safeDrawing
-                .exclude(it.asInsets())
                 .exclude(contentInsets)
                 .asPaddingValues()
             Box(Modifier

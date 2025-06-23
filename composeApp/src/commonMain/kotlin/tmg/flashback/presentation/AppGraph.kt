@@ -3,10 +3,12 @@ package tmg.flashback.presentation
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.adaptive.WindowAdaptiveInfo
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
 import tmg.flashback.navigation.Screen
 import tmg.flashback.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.presentation.settings.SettingsScreen
@@ -20,15 +22,18 @@ fun AppGraph(
     modifier: Modifier = Modifier,
 ) {
 
-    navController.navigate(Screen.Results) {
-    }
-
     NavHost(
         navController = navController,
         startDestination = Screen.Settings,
         modifier = modifier
     ) {
-        composable<Screen.Results> {
+        composable<Screen.Calendar> {
+
+        }
+        composable<Screen.DriverStandings> {
+
+        }
+        composable<Screen.TeamStandings> {
 
         }
         composable<Screen.Search> {

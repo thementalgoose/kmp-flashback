@@ -21,6 +21,7 @@ import flashback.presentation.localisation.generated.resources.nav_search
 import flashback.presentation.localisation.generated.resources.nav_settings
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
+import tmg.flashback.navigation.Screen
 import tmg.flashback.ui.navigation.NavigationItem
 
 enum class MenuItem(
@@ -71,3 +72,17 @@ fun MenuItem.toNavigationItem(
     icon = this.icon,
     isSelected = isSelected
 )
+
+fun MenuItem.toScreen(): Screen {
+    return when (this) {
+        MenuItem.Results -> Screen.Calendar
+        MenuItem.Calendar -> Screen.Calendar
+        MenuItem.DriversStandings -> Screen.DriverStandings
+        MenuItem.TeamsStandings -> Screen.TeamStandings
+        MenuItem.Search -> Screen.Search
+        MenuItem.Rss -> Screen.Rss
+        MenuItem.ReactionGame -> Screen.ReactionGame
+        MenuItem.Settings -> Screen.Settings
+        MenuItem.Contact -> Screen.About
+    }
+}

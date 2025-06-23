@@ -6,31 +6,37 @@ import kotlinx.serialization.Serializable
 sealed interface Screen {
 
     @Serializable
-    data object Results: Screen
+    data object Calendar: Screen
+
+    @Serializable
+    data object DriverStandings: Screen
+
+    @Serializable
+    data object TeamStandings: Screen
 
     @Serializable
     data object Search: Screen
 
     @Serializable
     data class Circuit(
-        val circuitId: String,
-        val circuitName: String,
+        val id: String,
+        val name: String,
     ): Screen {
         companion object
     }
 
     @Serializable
     data class Constructor(
-        val constructorId: String,
-        val constructorName: String
+        val id: String,
+        val name: String
     ): Screen {
         companion object
     }
 
     @Serializable
     data class Driver(
-        val driverId: String,
-        val driverName: String
+        val id: String,
+        val name: String
     ): Screen {
         companion object
     }

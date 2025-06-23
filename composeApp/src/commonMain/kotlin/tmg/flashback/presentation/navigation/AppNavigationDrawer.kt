@@ -28,6 +28,7 @@ import flashback.presentation.localisation.generated.resources.Res
 import flashback.presentation.localisation.generated.resources.app_version_placeholder
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import tmg.flashback.navigation.Screen
 import tmg.flashback.presentation.MenuItem
 import tmg.flashback.presentation.icon
 import tmg.flashback.presentation.label
@@ -39,7 +40,7 @@ import tmg.flashback.style.text.TextBody2
 @Composable
 internal fun AppNavigationDrawer(
     appNavigationUiState: AppNavigationUIState,
-    navigationItemClicked: (MenuItem) -> Unit,
+    navigationItemClicked: (Screen) -> Unit,
     modifier: Modifier = Modifier,
     insetPadding: PaddingValues = WindowInsets.safeContent.asPaddingValues()
 ) {
@@ -52,8 +53,8 @@ internal fun AppNavigationDrawer(
                 item("header") {
                     DashboardHero(
                         modifier = Modifier.padding(horizontal = AppTheme.dimens.medium),
-                        menuIcons = appNavigationUiState.menuIcon,
-                        showUkraine = appNavigationUiState.ukraine
+                        menuIcons = appNavigationUiState.easterEggs.menuIcon,
+                        showUkraine = appNavigationUiState.easterEggs.ukraine
                     )
                 }
                 item("header_div") {
@@ -61,39 +62,48 @@ internal fun AppNavigationDrawer(
                 }
                 item("nav_results") {
                     NavigationItem(
-                        menuItem = MenuItem.Calendar,
-                        isSelected = true,
-                        onClick = { navigationItemClicked(MenuItem.Calendar) }
+                        menuItem = MenuItem.Results,
+                        isSelected = appNavigationUiState.screen == Screen.Calendar ||
+                                appNavigationUiState.screen == Screen.DriverStandings ||
+                                appNavigationUiState.screen == Screen.TeamStandings,
+                        onClick = { navigationItemClicked(Screen.Calendar) }
                     )
                 }
                 item("nav_search") {
                     NavigationItem(
                         menuItem = MenuItem.Search,
-                        isSelected = false,
-                        onClick = { navigationItemClicked(MenuItem.Search) }
+                        isSelected = appNavigationUiState.screen == Screen.Search,
+                        onClick = { navigationItemClicked(Screen.Search) }
                     )
                 }
                 if (appNavigationUiState.showRss) {
                     item("nav_rss") {
                         NavigationItem(
                             menuItem = MenuItem.Rss,
-                            isSelected = false,
-                            onClick = { navigationItemClicked(MenuItem.Rss) }
+                            isSelected = appNavigationUiState.screen == Screen.Rss,
+                            onClick = { navigationItemClicked(Screen.Rss) }
                         )
                     }
+                }
+                item("nav_reaction_game") {
+                    NavigationItem(
+                        menuItem = MenuItem.ReactionGame,
+                        isSelected = appNavigationUiState.screen == Screen.ReactionGame,
+                        onClick = { navigationItemClicked(Screen.ReactionGame) }
+                    )
                 }
                 item("nav_settings") {
                     NavigationItem(
                         menuItem = MenuItem.Settings,
-                        isSelected = false,
-                        onClick = { navigationItemClicked(MenuItem.Settings) }
+                        isSelected = appNavigationUiState.screen == Screen.Settings,
+                        onClick = { navigationItemClicked(Screen.Settings) }
                     )
                 }
                 item("nav_contact") {
                     NavigationItem(
                         menuItem = MenuItem.Contact,
-                        isSelected = false,
-                        onClick = { navigationItemClicked(MenuItem.Contact) }
+                        isSelected = appNavigationUiState.screen == Screen.About,
+                        onClick = { navigationItemClicked(Screen.About) }
                     )
                 }
                 item("footer_div") {
@@ -101,6 +111,7 @@ internal fun AppNavigationDrawer(
                 }
                 item("app_version") {
                     TextBody2(
+                        modifier = Modifier.padding(horizontal = AppTheme.dimens.medium),
                         text = stringResource(Res.string.app_version_placeholder, "1.0.0")
                     )
                 }
