@@ -4,6 +4,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.flashback.kotlinMultiplatform)
     alias(libs.plugins.flashback.androidLibrary)
+    alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.mokkery)
 }
 
 kotlin {
@@ -21,11 +23,19 @@ kotlin {
             implementation(libs.firebase.remoteconfig)
         }
         commonMain.dependencies {
+            implementation(libs.bundles.kotlin)
             implementation(projects.core.metrics.crashlytics)
+            implementation(projects.core.preferences)
             implementation(projects.infrastructure)
+        }
+        commonTest.dependencies {
+            implementation(kotlin("test"))
         }
         iosMain.dependencies {
 
         }
+    }
+    sourceSets.commonTest.dependencies {
+        implementation(kotlin("test"))
     }
 }
