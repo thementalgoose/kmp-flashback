@@ -35,12 +35,11 @@ kotlin {
         commonMain.dependencies {
 
             implementation(projects.core.configuration)
-//            implementation(projects.core.device)
             implementation(projects.core.metrics.analytics)
             implementation(projects.core.metrics.crashlytics)
 //            implementation(projects.core.notifications)
             implementation(projects.core.preferences)
-//            implementation(projects.core.webbrowser)
+            implementation(projects.core.webbrowser)
 
             implementation(projects.data.flashback)
             implementation(projects.data.network.flashback)
@@ -52,16 +51,16 @@ kotlin {
 
             implementation(projects.eastereggs)
 
-//            implementation(projects.feature.circuits)
-//            implementation(projects.feature.constructors)
-//            implementation(projects.feature.drivers)
-//            implementation(projects.feature.maintenance)
-//            implementation(projects.feature.privacypolicy)
+            implementation(projects.feature.circuits)
+            implementation(projects.feature.constructors)
+            implementation(projects.feature.drivers)
+            implementation(projects.feature.maintenance)
+            implementation(projects.feature.privacypolicy)
             implementation(projects.feature.rss)
-//            implementation(projects.feature.sandbox)
-//            implementation(projects.feature.search)
+            implementation(projects.feature.sandbox)
+            implementation(projects.feature.search)
             implementation(projects.feature.season)
-//            implementation(projects.feature.weekend)
+            implementation(projects.feature.weekend)
             implementation(projects.feature.widgetUpnext)
 
             implementation(projects.infrastructure)

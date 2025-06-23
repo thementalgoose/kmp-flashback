@@ -14,6 +14,7 @@ Flashback provides race results and statistics from every race in the history of
 - [x] Mirror module structure from android project
 - [x] Get modules to talk to one another
 - [ ] Latest news events
+- [x] Add insets management
 - [x] Get firebase working on 
   - [x] Android
   - [ ] iOS
@@ -35,7 +36,8 @@ Flashback provides race results and statistics from every race in the history of
   - [ ] Configure defaults setup for both platforms
 - [ ] Support tablet mode
 - [ ] Add RSS
-- [ ] Add Compose Navigation 
+- [x] Figure out Compose Navigation 
+- [ ] Figure out Tablet Master/Detail navigation
 - [ ] Add Settings
 - - [x] Add Settings structure
 - [ ] Add notification support
