@@ -41,6 +41,7 @@ import tmg.flashback.style.text.TextBody2
 internal fun AppNavigationDrawer(
     appNavigationUiState: AppNavigationUIState,
     navigationItemClicked: (Screen) -> Unit,
+    closeMenu: () -> Unit,
     modifier: Modifier = Modifier,
     insetPadding: PaddingValues = WindowInsets.safeContent.asPaddingValues()
 ) {
@@ -66,14 +67,20 @@ internal fun AppNavigationDrawer(
                         isSelected = appNavigationUiState.screen == Screen.Calendar ||
                                 appNavigationUiState.screen == Screen.DriverStandings ||
                                 appNavigationUiState.screen == Screen.TeamStandings,
-                        onClick = { navigationItemClicked(Screen.Calendar) }
+                        onClick = {
+                            navigationItemClicked(Screen.Calendar)
+                            closeMenu()
+                        }
                     )
                 }
                 item("nav_search") {
                     NavigationItem(
                         menuItem = MenuItem.Search,
                         isSelected = appNavigationUiState.screen == Screen.Search,
-                        onClick = { navigationItemClicked(Screen.Search) }
+                        onClick = {
+                            navigationItemClicked(Screen.Search)
+                            closeMenu()
+                        }
                     )
                 }
                 if (appNavigationUiState.showRss) {
@@ -81,7 +88,10 @@ internal fun AppNavigationDrawer(
                         NavigationItem(
                             menuItem = MenuItem.Rss,
                             isSelected = appNavigationUiState.screen == Screen.Rss,
-                            onClick = { navigationItemClicked(Screen.Rss) }
+                            onClick = {
+                                navigationItemClicked(Screen.Rss)
+                                closeMenu()
+                            }
                         )
                     }
                 }
@@ -89,21 +99,30 @@ internal fun AppNavigationDrawer(
                     NavigationItem(
                         menuItem = MenuItem.ReactionGame,
                         isSelected = appNavigationUiState.screen == Screen.ReactionGame,
-                        onClick = { navigationItemClicked(Screen.ReactionGame) }
+                        onClick = {
+                            navigationItemClicked(Screen.ReactionGame)
+                            closeMenu()
+                        }
                     )
                 }
                 item("nav_settings") {
                     NavigationItem(
                         menuItem = MenuItem.Settings,
                         isSelected = appNavigationUiState.screen == Screen.Settings,
-                        onClick = { navigationItemClicked(Screen.Settings) }
+                        onClick = {
+                            navigationItemClicked(Screen.Settings)
+                            closeMenu()
+                        }
                     )
                 }
                 item("nav_contact") {
                     NavigationItem(
                         menuItem = MenuItem.Contact,
                         isSelected = appNavigationUiState.screen == Screen.About,
-                        onClick = { navigationItemClicked(Screen.About) }
+                        onClick = {
+                            navigationItemClicked(Screen.About)
+                            closeMenu()
+                        }
                     )
                 }
                 item("footer_div") {

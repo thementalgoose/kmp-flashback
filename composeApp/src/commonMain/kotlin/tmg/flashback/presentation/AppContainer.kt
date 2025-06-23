@@ -21,6 +21,7 @@ import kotlinx.coroutines.launch
 import tmg.flashback.eastereggs.presentation.snow
 import tmg.flashback.eastereggs.presentation.summer
 import tmg.flashback.infrastructure.log.logDebug
+import tmg.flashback.navigation.Screen
 import tmg.flashback.presentation.navigation.AppNavigationDrawer
 import tmg.flashback.presentation.navigation.AppNavigationRail
 import tmg.flashback.presentation.navigation.AppNavigationViewModel
@@ -61,8 +62,16 @@ fun AppContainer(
         panelStart = {
             AppNavigationDrawer(
                 appNavigationUiState = appNavigationUiState.value,
-                navigationItemClicked = { navController.navigate(it) },
+                navigationItemClicked = {
+                    navController.navigate(it) {
+                        this.launchSingleTop = true
+                        this.popUpTo(Screen.Calendar)
+                    }
+                },
                 insetPadding = paddingValues,
+                closeMenu = {
+                    coroutineScope.launch { panelsState.closePanels() }
+                },
                 modifier = if (isCompact) easterEggModifier else Modifier
             )
         },
@@ -76,7 +85,10 @@ fun AppContainer(
                     AppNavigationRail(
                         appNavigationUiState = appNavigationUiState.value,
                         navigationItemClicked = {
-                            navController.navigate(it)
+                            navController.navigate(it) {
+                                this.launchSingleTop = true
+                                this.popUpTo(Screen.Calendar)
+                            }
                         },
                         insetPadding = paddingValues
                     )

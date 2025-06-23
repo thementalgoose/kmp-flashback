@@ -2,7 +2,6 @@ package tmg.flashback.presentation.navigation
 
 import tmg.flashback.eastereggs.model.MenuIcons
 import tmg.flashback.navigation.Screen
-import tmg.flashback.presentation.MenuItem
 
 data class AppNavigationUIState(
     val showRss: Boolean,
