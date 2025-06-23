@@ -21,6 +21,7 @@ kotlin {
             implementation(libs.firebase.remoteconfig)
         }
         commonMain.dependencies {
+            implementation(projects.core.metrics.crashlytics)
             implementation(projects.infrastructure)
         }
         iosMain.dependencies {

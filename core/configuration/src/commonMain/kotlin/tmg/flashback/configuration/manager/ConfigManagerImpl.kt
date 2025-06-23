@@ -1,5 +1,8 @@
 package tmg.flashback.configuration.manager
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.json.Json
 import tmg.flashback.configuration.firebase.FirebaseRemoteConfigService
 import tmg.flashback.configuration.firebase.FirebaseSettings
 
@@ -14,8 +17,17 @@ internal class ConfigManagerImpl(
         return firebaseRemoteConfigService.getValue(key).asString()
     }
 
-    override fun <T> getJson(key: String): T? {
-        return null
+    override fun <T> getJson(key: String, serializer: KSerializer<T>): T? {
+        val string = firebaseRemoteConfigService.getValue(key).asString() ?: return null
+        if (string.isEmpty() == true) return null
+        if (string == "false") return null
+        if (string == "true") return null
+        return try {
+            Json.decodeFromString(serializer, string)
+        } catch (e: SerializationException) {
+            // TODO: Log this!
+            null
+        }
     }
 
     override fun initialiseRemoteConfig(defaultValues: Map<String, Any>) {

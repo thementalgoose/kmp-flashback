@@ -34,6 +34,8 @@ import tmg.flashback.data.repo.repository.DriverRepository
 import tmg.flashback.data.repo.repository.DriverRepositoryImpl
 import tmg.flashback.data.repo.repository.EventRepository
 import tmg.flashback.data.repo.repository.EventRepositoryImpl
+import tmg.flashback.data.repo.repository.InfoRepository
+import tmg.flashback.data.repo.repository.InfoRepositoryImpl
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.OverviewRepositoryImpl
 import tmg.flashback.data.repo.repository.RaceRepository
@@ -78,4 +80,6 @@ internal fun module() = module {
     single<DriverRepository> { DriverRepositoryImpl(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
     single<ConstructorRepository> { ConstructorRepositoryImpl(get(), get(), get(), get(), get(), get(), get()) }
     single<CircuitRepository> { CircuitRepositoryImpl(get(), get(), get(), get(), get(), get(), get()) }
+
+    single<InfoRepository> { InfoRepositoryImpl(get()) }
 }

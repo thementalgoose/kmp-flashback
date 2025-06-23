@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.flashback.dataModule)
+    alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.ksp)
 }
 
