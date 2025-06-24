@@ -28,8 +28,7 @@ composeNavigation = "2.9.0-beta03"
 koin = "4.1.0"
 room = "2.7.2"
 sqlite = "2.5.2"
-datastore = "1.1.7"
-buildkonfig = "0.15.1"
+coil = "3.2.0"
 
 # Testing
 kotest = "5.9.1"
@@ -76,12 +75,12 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 
-
-
+# Flags
 flagkit = "dev.carlsen.flagkit:flagkit:1.1.0"
 
-# Settings
-datastore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "datastore" }
+# Coil
+coil_compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil_network_ktor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
 
 # Networking
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
@@ -124,6 +123,10 @@ common-ktor = [
     "ktor-client-logging",
     "ktor-serialization-kotlinx-json",
     "ktor-client-content-negotiation",
+]
+coil = [
+    "coil_compose",
+    "coil_network_ktor3"
 ]
 
 [plugins]

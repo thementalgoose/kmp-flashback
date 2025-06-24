@@ -33,6 +33,7 @@ kotlin {
 
             implementation(compose.components.resources)
             implementation(libs.bundles.compose.adaptive)
+            implementation(libs.bundles.coil)
 
             implementation(projects.core.preferences)
 
