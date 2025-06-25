@@ -1,4 +1,4 @@
-package tmg.flashback.feature.season.presentation.driver_standings
+package tmg.flashback.feature.season.presentation.team_standings
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
@@ -13,22 +13,20 @@ import tmg.flashback.ui.navigation.MasterDetailsPane
 import tmg.flashback.ui.navigation.appBarMaximumHeight
 import tmg.flashback.ui.navigation.rememberMasterDetailPaneState
 
-private interface Navigation {
-    data class Driver(
-        val id: String,
-        val name: String
-    ): Navigation
-}
+data class NavigationTeam(
+    val id: String,
+    val name: String
+)
 
 @Composable
-fun DriverStandingsGraph(
+fun TeamStandingsGraph(
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
-    viewModel: DriverStandingsViewModel = koinViewModel()
+    viewModel: TeamStandingsViewModel = koinViewModel()
 ) {
     val state = viewModel.uiState.collectAsState()
-    val navigator = rememberMasterDetailPaneState<Navigation>()
+    val navigator = rememberMasterDetailPaneState<NavigationTeam>()
 
     // Add custom padding for nav bar
     val direction = LocalLayoutDirection.current
@@ -43,18 +41,15 @@ fun DriverStandingsGraph(
         navigator = navigator,
         windowSizeClass = windowSizeClass,
         master = {
-            DriverStandingsScreen(
+            TeamStandingsScreen(
                 paddingValues = masterPadding,
                 actionUpClicked = actionUpClicked,
-                uiState = state.value,
                 windowSizeClass = windowSizeClass,
-                driverClicked = {
-                    navigator.navigateTo(Navigation.Driver(id = it.driver.id, name = it.driver.name))
+                uiState = state.value,
+                constructorClicked = {
+                    navigator.navigateTo(NavigationTeam(id = it.constructor.id, it.constructor.name))
                 },
-                refresh = viewModel::refresh,
-                comparisonClicked = {
-                    // TODO
-                }
+                refresh = viewModel::refresh
             )
         },
         detailsActionUpClicked = {

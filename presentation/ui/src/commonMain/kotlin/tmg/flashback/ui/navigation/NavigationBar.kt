@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -43,6 +44,8 @@ private val horizontalWidthThreshold: Dp = 180.dp
 private val iconSize: Dp = 24.dp
 val appBarHeightWhenVertical: Dp = 80.dp
 val appBarHeightWhenHorizontal: Dp = 60.dp
+
+val appBarMaximumHeight = max(appBarHeightWhenVertical, appBarHeightWhenHorizontal)
 
 @Composable
 fun NavigationBar(

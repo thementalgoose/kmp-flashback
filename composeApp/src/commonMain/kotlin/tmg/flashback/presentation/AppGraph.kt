@@ -10,7 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import tmg.flashback.feature.season.presentation.calendar.CalendarGraph
 import tmg.flashback.feature.season.presentation.driver_standings.DriverStandingsGraph
+import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsGraph
 import tmg.flashback.navigation.Screen
 import tmg.flashback.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.presentation.settings.SettingsScreen
@@ -31,9 +33,11 @@ fun AppGraph(
         modifier = modifier
     ) {
         composable<Screen.Calendar> {
-            Box(Modifier.fillMaxSize()) {
-                TextTitle("Calendar", Modifier.align(Alignment.Center))
-            }
+            CalendarGraph(
+                paddingValues = insetPadding,
+                actionUpClicked = { },
+                windowSizeClass = windowAdaptiveInfo.windowSizeClass
+            )
         }
         composable<Screen.DriverStandings> {
             DriverStandingsGraph(
@@ -43,9 +47,11 @@ fun AppGraph(
             )
         }
         composable<Screen.TeamStandings> {
-            Box(Modifier.fillMaxSize()) {
-                TextTitle("Team Standings", Modifier.align(Alignment.Center))
-            }
+            TeamStandingsGraph(
+                paddingValues = insetPadding,
+                actionUpClicked = { },
+                windowSizeClass = windowAdaptiveInfo.windowSizeClass,
+            )
         }
         composable<Screen.Search> {
             Box(Modifier.fillMaxSize()) {

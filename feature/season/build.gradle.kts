@@ -24,6 +24,8 @@ kotlin {
             implementation(libs.bundles.kotlin)
             implementation(libs.bundles.compose.adaptive)
 
+            implementation(compose.components.resources)
+
             implementation(projects.core.configuration)
             implementation(projects.core.metrics.analytics)
             implementation(projects.core.metrics.crashlytics)

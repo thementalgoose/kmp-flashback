@@ -1,4 +1,4 @@
-package tmg.flashback.feature.season.presentation.driver_standings
+package tmg.flashback.feature.season.presentation.calendar
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
@@ -13,22 +13,21 @@ import tmg.flashback.ui.navigation.MasterDetailsPane
 import tmg.flashback.ui.navigation.appBarMaximumHeight
 import tmg.flashback.ui.navigation.rememberMasterDetailPaneState
 
-private interface Navigation {
-    data class Driver(
-        val id: String,
-        val name: String
-    ): Navigation
-}
+data class NavigationWeekend(
+    val season: Int,
+    val round: Int
+)
 
 @Composable
-fun DriverStandingsGraph(
+fun CalendarGraph(
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
-    viewModel: DriverStandingsViewModel = koinViewModel()
+    viewModel: CalendarScreenViewModel = koinViewModel()
 ) {
-    val state = viewModel.uiState.collectAsState()
-    val navigator = rememberMasterDetailPaneState<Navigation>()
+    val uiState = viewModel.uiState.collectAsState()
+    val navigator = rememberMasterDetailPaneState<NavigationWeekend>()
+
 
     // Add custom padding for nav bar
     val direction = LocalLayoutDirection.current
@@ -43,18 +42,15 @@ fun DriverStandingsGraph(
         navigator = navigator,
         windowSizeClass = windowSizeClass,
         master = {
-            DriverStandingsScreen(
+            CalendarScreen(
                 paddingValues = masterPadding,
                 actionUpClicked = actionUpClicked,
-                uiState = state.value,
                 windowSizeClass = windowSizeClass,
-                driverClicked = {
-                    navigator.navigateTo(Navigation.Driver(id = it.driver.id, name = it.driver.name))
-                },
+                uiState = uiState.value,
                 refresh = viewModel::refresh,
-                comparisonClicked = {
-                    // TODO
-                }
+                itemClicked = {
+
+                },
             )
         },
         detailsActionUpClicked = {
