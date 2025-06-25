@@ -23,7 +23,7 @@ fun Flag(
     modifier: Modifier = Modifier,
     nationality: String? = null,
 ) {
-    val imageVector = FlagKit.getFlag(countryCode = iso)
+    val imageVector = countryCodesMap[iso]?.let { FlagKit.getFlag(countryCode = it) }
     if (imageVector != null) {
         Image(
             modifier = modifier,

@@ -38,7 +38,7 @@ kotlin {
             implementation(projects.core.configuration)
             implementation(projects.core.metrics.analytics)
             implementation(projects.core.metrics.crashlytics)
-//            implementation(projects.core.notifications)
+            implementation(projects.core.notifications)
             implementation(projects.core.preferences)
             implementation(projects.core.webbrowser)
 

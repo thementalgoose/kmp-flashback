@@ -29,6 +29,7 @@ koin = "4.1.0"
 room = "2.7.2"
 sqlite = "2.5.2"
 coil = "3.2.0"
+kmpnotifier = "1.5.1"
 
 # Testing
 kotest = "5.9.1"
@@ -61,6 +62,9 @@ firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "fir
 firebase-remoteconfig = { module = "com.google.firebase:firebase-config" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+
+# Notifications
+kmpnotifier = { module = "io.github.mirzemehdi:kmpnotifier", version.ref = "kmpnotifier" }
 
 # Compose
 compose-adaptive = { module = "org.jetbrains.compose.material3.adaptive:adaptive", version.ref = "composeAdaptive" }

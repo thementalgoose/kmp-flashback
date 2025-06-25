@@ -15,7 +15,6 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -39,14 +38,14 @@ import tmg.flashback.style.text.TextHeadline1Inline
 import tmg.flashback.style.text.TextTitle
 
 @Composable
-fun SeasonTitle(
+fun SeasonPicker(
     subtitle: String?,
     viewModel: SeasonPickerViewModel = koinViewModel()
 ) {
     val seasons = viewModel.supportedSeasons.collectAsState()
     val currentSeason = viewModel.currentSeason.collectAsState()
     val newSeasonAvailable = viewModel.newSeasonAvailable.collectAsState()
-    SeasonTitle(
+    SeasonPicker(
         subtitle = subtitle,
         currentSeason = currentSeason.value,
         supportedSeasons = seasons.value,
@@ -56,7 +55,7 @@ fun SeasonTitle(
 }
 
 @Composable
-fun SeasonTitle(
+fun SeasonPicker(
     subtitle: String?,
     currentSeason: Int,
     supportedSeasons: List<Int>,
@@ -126,7 +125,7 @@ private fun PreviewWithNewSeason(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
     AppThemePreview(previewConfig) {
-        SeasonTitle(
+        SeasonPicker(
             subtitle = "Subtitle",
             currentSeason = 2023,
             supportedSeasons = listOf(2023, 2024),
@@ -142,7 +141,7 @@ private fun Preview(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
     AppThemePreview(previewConfig) {
-        SeasonTitle(
+        SeasonPicker(
             subtitle = "Subtitle",
             currentSeason = 2023,
             supportedSeasons = listOf(2023, 2024),

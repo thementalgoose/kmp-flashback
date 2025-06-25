@@ -1,6 +1,9 @@
 package tmg.flashback
 
 import android.app.Application
+import android.app.NotificationManager
+import com.mmk.kmpnotifier.notification.NotifierManager
+import com.mmk.kmpnotifier.notification.configuration.NotificationPlatformConfiguration
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.component.KoinComponent
@@ -20,10 +23,15 @@ class FlashbackApplication: Application(), KoinComponent {
             androidLogger()
         }
 
-        configManager.initialiseRemoteConfig(
-            defaultValues = mapOf(
-                "config_url" to "https://flashback.pages.dev"
+        NotifierManager.initialize(
+            configuration = NotificationPlatformConfiguration.Android(
+                notificationIconResId = R.drawable.ic_launcher_foreground,
+                showPushNotification = true,
+                notificationChannelData = NotificationPlatformConfiguration.Android.NotificationChannelData()
             )
+        )
+        configManager.initialiseRemoteConfig(
+            defaultValues = RemoteConfigDefaults.defaults
         )
     }
 }

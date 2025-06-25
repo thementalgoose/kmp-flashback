@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import tmg.flashback.feature.season.presentation.driver_standings.DriverStandingsGraph
 import tmg.flashback.navigation.Screen
 import tmg.flashback.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.presentation.settings.SettingsScreen
@@ -35,9 +36,11 @@ fun AppGraph(
             }
         }
         composable<Screen.DriverStandings> {
-            Box(Modifier.fillMaxSize()) {
-                TextTitle("Driver Standings", Modifier.align(Alignment.Center))
-            }
+            DriverStandingsGraph(
+                paddingValues = insetPadding,
+                actionUpClicked = { },
+                windowSizeClass = windowAdaptiveInfo.windowSizeClass,
+            )
         }
         composable<Screen.TeamStandings> {
             Box(Modifier.fillMaxSize()) {

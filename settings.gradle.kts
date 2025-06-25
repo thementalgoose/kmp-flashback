@@ -40,7 +40,7 @@ include(":core:configuration")
 //include(":core:device")
 include(":core:metrics:crashlytics")
 include(":core:metrics:analytics")
-//include(":core:notifications")
+include(":core:notifications")
 include(":core:preferences")
 include(":core:webbrowser")
 
