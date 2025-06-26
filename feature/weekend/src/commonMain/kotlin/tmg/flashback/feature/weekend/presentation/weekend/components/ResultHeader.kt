@@ -35,7 +35,7 @@ fun RaceHeader(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    painter = painterResource(resource = Res.drawable.ic_race_finishes),
+                    painter = painterResource(resource = flashback.domain.formula1.generated.resources.Res.drawable.ic_race_finishes),
                     contentDescription = stringResource(resource = string.ab_status),
                     tint = AppTheme.colors.onSurface
                 )
@@ -48,7 +48,7 @@ fun RaceHeader(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    painter = painterResource(resource = Res.drawable.ic_race_points),
+                    painter = painterResource(resource = flashback.domain.formula1.generated.resources.Res.drawable.ic_race_points),
                     contentDescription = stringResource(resource = string.ab_points),
                     tint = AppTheme.colors.onSurface
                 )

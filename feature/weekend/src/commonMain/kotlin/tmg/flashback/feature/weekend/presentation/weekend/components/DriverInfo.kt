@@ -115,7 +115,7 @@ fun DriverInfoWithIcon(
                 BadgeView(
                     model = Badge(
                         label = stringResource(resource = string.ab_fastest_lap),
-                        icon = Res.drawable.ic_fastest_lap
+                        icon = flashback.domain.formula1.generated.resources.Res.drawable.ic_fastest_lap
                     ),
                     tintIcon = AppTheme.colors.onSurface
                 )
