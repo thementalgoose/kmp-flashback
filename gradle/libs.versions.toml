@@ -17,7 +17,7 @@ androidx-lifecycle = "2.9.1"
 # Firebase
 google-services = "4.4.2"
 crashlytics = "3.0.4"
-firebase-bom = "33.15.0"
+firebase-bom = "33.16.0"
 
 # Shared
 ktor = "3.1.3"
