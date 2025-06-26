@@ -9,7 +9,7 @@ class SeasonPickerViewModel (
 
     val currentSeason: StateFlow<Int> = currentSeasonHolder.currentSeasonFlow
 
-    val supportedSeasons: StateFlow<List<Int>> = currentSeasonHolder.supportedSeasonFlow
+    val supportedSeasons: StateFlow<List<Int>> = currentSeasonHolder.supportedSeasonsFlow
 
     val newSeasonAvailable: StateFlow<Boolean> = currentSeasonHolder.newSeasonAvailableFlow
 

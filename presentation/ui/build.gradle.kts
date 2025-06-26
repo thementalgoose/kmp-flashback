@@ -32,7 +32,7 @@ kotlin {
             implementation(libs.flagkit)
 
             implementation(compose.components.resources)
-            implementation(libs.bundles.compose.adaptive)
+            implementation(libs.bundles.compose)
             implementation(libs.bundles.coil)
 
             implementation(projects.core.preferences)

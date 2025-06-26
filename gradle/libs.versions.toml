@@ -70,6 +70,7 @@ kmpnotifier = { module = "io.github.mirzemehdi:kmpnotifier", version.ref = "kmpn
 compose-adaptive = { module = "org.jetbrains.compose.material3.adaptive:adaptive", version.ref = "composeAdaptive" }
 compose-adaptivelayout = { module = "org.jetbrains.compose.material3.adaptive:adaptive-layout", version.ref = "composeAdaptive" }
 compose-adaptivenavigation = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation", version.ref = "composeAdaptive" }
+compose-backhandler = { module = "org.jetbrains.compose.ui:ui-backhandler", version.ref = "compose"}
 
 # Navigation
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "composeNavigation"}
@@ -112,10 +113,11 @@ kotlin = [
     "coroutines-core",
     "kotlinx-serialization"
 ]
-compose-adaptive = [
+compose = [
     "compose-adaptive",
     "compose-adaptivelayout",
     "compose-adaptivenavigation",
+    "compose-backhandler"
 ]
 koin-compose = [
     "koin-compose",

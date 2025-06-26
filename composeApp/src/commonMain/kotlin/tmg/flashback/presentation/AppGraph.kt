@@ -15,7 +15,7 @@ import tmg.flashback.feature.season.presentation.driver_standings.DriverStanding
 import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsGraph
 import tmg.flashback.navigation.Screen
 import tmg.flashback.presentation.navigation.AppNavigationViewModel
-import tmg.flashback.presentation.settings.SettingsScreen
+import tmg.flashback.presentation.settings.AllSettingsGraph
 import tmg.flashback.style.text.TextTitle
 
 @Composable
@@ -64,7 +64,9 @@ fun AppGraph(
             }
         }
         composable<Screen.Settings> {
-            SettingsScreen(
+            AllSettingsGraph(
+                windowSizeClass = windowAdaptiveInfo.windowSizeClass,
+                actionUpClicked = { },
                 insetPadding = insetPadding
             )
         }

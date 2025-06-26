@@ -1,10 +1,13 @@
 package tmg.flashback.presentation.settings
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.nav_settings
 import flashback.presentation.localisation.generated.resources.settings_header_appearance
 import flashback.presentation.localisation.generated.resources.settings_header_data
 import flashback.presentation.localisation.generated.resources.settings_header_notifications
@@ -12,33 +15,53 @@ import flashback.presentation.localisation.generated.resources.settings_header_o
 import flashback.presentation.localisation.generated.resources.settings_header_rss_feed
 import flashback.presentation.localisation.generated.resources.settings_header_widgets
 import flashback.presentation.localisation.generated.resources.settings_web_browser_title
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.ui.components.header.Header
+import tmg.flashback.ui.components.header.HeaderAction
 
 @Composable
-fun SettingsScreen(
+internal fun AllSettingsScreen(
+    actionUpClicked: () -> Unit,
+    showMenu: Boolean,
+    navigateTo: (SettingNavigation) -> Unit,
     viewModel: AllSettingsViewModel = koinViewModel(),
-    insetPadding: PaddingValues
+    insetPadding: PaddingValues,
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
-    SettingsScreen(
+    AllSettingsScreen(
+        actionUpClicked = actionUpClicked,
+        navigateTo = navigateTo,
+        showMenu = showMenu,
         uiState = uiState.value,
         paddingValues = insetPadding
     )
 }
 
 @Composable
-private fun SettingsScreen(
+private fun AllSettingsScreen(
+    actionUpClicked: () -> Unit,
+    showMenu: Boolean,
+    navigateTo: (SettingNavigation) -> Unit,
     uiState: AllSettingsUiState,
     paddingValues: PaddingValues,
 ) {
     LazyColumn(
+        modifier = Modifier.fillMaxSize(),
         contentPadding = paddingValues
     ) {
+        item("header") {
+            Header(
+                text = stringResource(string.nav_settings),
+                actionUpClicked = actionUpClicked,
+                action = HeaderAction.MENU.takeIf { showMenu }
+            )
+        }
         PrefHeader(string.settings_header_appearance)
         PrefCategory(
             item = Settings.DarkModeCategory,
-            itemClicked = { }
+            itemClicked = { navigateTo(SettingNavigation.DarkMode) }
         )
         if (uiState.isThemeSupported) {
             PrefCategory(

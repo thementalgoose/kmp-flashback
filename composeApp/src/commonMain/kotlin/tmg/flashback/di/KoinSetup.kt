@@ -19,6 +19,7 @@ import tmg.flashback.preferences.di.corePreferencesModule
 import tmg.flashback.presentation.AppContainerViewModel
 import tmg.flashback.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.presentation.settings.AllSettingsViewModel
+import tmg.flashback.presentation.settings.darkmode.SettingsDarkModeViewModel
 import tmg.flashback.presentation.sync.SyncViewModel
 import tmg.flashback.ui.di.presentationUiModule
 import tmg.flashback.widget.upnext.di.featureWidgetUpNextModule
@@ -58,6 +59,7 @@ internal fun module() = module {
     viewModel { AppNavigationViewModel(get(), get(), get(), get(), get()) }
 
     viewModel { AllSettingsViewModel(get(), get()) }
+    viewModel { SettingsDarkModeViewModel(get()) }
 
     viewModel { SyncViewModel(get(), get(), get(), get(), get(), get(), get()) }
 }

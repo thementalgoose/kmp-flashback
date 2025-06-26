@@ -75,7 +75,7 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.material3AdaptiveNavigationSuite)
             implementation(libs.navigation.compose)
-            implementation(libs.bundles.compose.adaptive)
+            implementation(libs.bundles.compose)
             implementation(libs.bundles.kotlin)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)

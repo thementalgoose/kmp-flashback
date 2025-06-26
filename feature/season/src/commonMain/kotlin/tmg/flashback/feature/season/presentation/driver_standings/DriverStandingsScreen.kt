@@ -26,6 +26,7 @@ import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.results_accurate_for
 import flashback.presentation.localisation.generated.resources.season_standings_driver
 import org.jetbrains.compose.resources.stringResource
+import tmg.flashback.feature.season.presentation.shared.ongoing_banner.ResultAsOf
 import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedBy
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.SeasonPicker
 import tmg.flashback.formula1.model.SeasonDriverStandingSeason
@@ -72,13 +73,7 @@ internal fun DriverStandingsScreen(
                 }
                 uiState.inProgress?.let { (raceName, round) ->
                     item(key = "banner") {
-                        TextBody2(
-                            text = stringResource(
-                                resource = string.results_accurate_for,
-                                raceName,
-                                round
-                            )
-                        )
+                        ResultAsOf(raceName, round)
                     }
                 }
                 if (uiState.standings.isEmpty()) {

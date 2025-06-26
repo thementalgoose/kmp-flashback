@@ -26,7 +26,7 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(libs.bundles.kotlin)
-            implementation(libs.bundles.compose.adaptive)
+            implementation(libs.bundles.compose)
 
             implementation(compose.components.resources)
 

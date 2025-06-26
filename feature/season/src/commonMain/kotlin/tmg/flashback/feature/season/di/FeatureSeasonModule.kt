@@ -6,6 +6,7 @@ import tmg.flashback.feature.season.presentation.calendar.CalendarScreenViewMode
 import tmg.flashback.feature.season.presentation.driver_standings.DriverStandingsViewModel
 import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedByViewModel
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
+import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolderImpl
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.SeasonPickerViewModel
 import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsViewModel
 import tmg.flashback.feature.season.repositories.CalendarRepository
@@ -21,7 +22,7 @@ internal fun module() = module {
     viewModel { TeamStandingsViewModel(get(), get(), get(), get()) }
     viewModel { CalendarScreenViewModel(get(), get(), get(), get(), get()) }
     viewModel { SeasonPickerViewModel(get()) }
-    single { CurrentSeasonHolder(get(), get(), get()) }
+    single<CurrentSeasonHolder> { CurrentSeasonHolderImpl(get(), get(), get()) }
 
     single<CalendarRepository> { CalendarRepositoryImpl(get()) }
 

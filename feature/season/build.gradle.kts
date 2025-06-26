@@ -22,7 +22,7 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(libs.bundles.kotlin)
-            implementation(libs.bundles.compose.adaptive)
+            implementation(libs.bundles.compose)
 
             implementation(compose.components.resources)
 
@@ -42,6 +42,7 @@ kotlin {
         commonTest.dependencies {
             implementation(projects.test.formula1)
             implementation(kotlin("test"))
+            implementation(libs.turbine)
         }
         iosMain.dependencies {
 

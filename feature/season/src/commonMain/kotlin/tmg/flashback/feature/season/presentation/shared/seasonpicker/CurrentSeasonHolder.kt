@@ -6,47 +6,56 @@ import tmg.flashback.data.repo.repository.InfoRepository
 import tmg.flashback.feature.season.repositories.CalendarRepository
 import tmg.flashback.feature.season.usecases.DefaultSeasonUseCase
 
-class CurrentSeasonHolder(
+interface CurrentSeasonHolder {
+    val currentSeasonFlow: StateFlow<Int>
+    val currentSeason: Int
+    val supportedSeasonsFlow: StateFlow<List<Int>>
+    val supportedSeasons: List<Int>
+    val newSeasonAvailableFlow: StateFlow<Boolean>
+    val defaultSeason: Int
+
+    fun updateTo(season: Int)
+    fun refresh()
+}
+
+class CurrentSeasonHolderImpl(
     private val defaultSeasonUseCase: DefaultSeasonUseCase,
     private val calendarRepository: CalendarRepository,
     private val infoRepository: InfoRepository
-) {
+): CurrentSeasonHolder {
 
-    private val _currentSeason: MutableStateFlow<Int> = MutableStateFlow(defaultSeasonUseCase.defaultSeason)
-    val currentSeasonFlow: StateFlow<Int> = _currentSeason
-    val currentSeason: Int
+    override val currentSeasonFlow: MutableStateFlow<Int> = MutableStateFlow(defaultSeasonUseCase.defaultSeason)
+    override val currentSeason: Int
         get() = currentSeasonFlow.value
 
-    private val _supportedSeasons: MutableStateFlow<List<Int>> = MutableStateFlow(infoRepository.supportedSeasons.sortedByDescending { it })
-    val supportedSeasonFlow: StateFlow<List<Int>> = _supportedSeasons
-    val supportedSeasons: List<Int>
-        get() = _supportedSeasons.value
+    override val supportedSeasonsFlow: MutableStateFlow<List<Int>> = MutableStateFlow(infoRepository.supportedSeasons.sortedByDescending { it })
+    override val supportedSeasons: List<Int>
+        get() = supportedSeasonsFlow.value
 
-    private val _newSeasonAvailable: MutableStateFlow<Boolean> = MutableStateFlow(newSeasonAvailable())
-    val newSeasonAvailableFlow: StateFlow<Boolean> = _newSeasonAvailable
+    override val newSeasonAvailableFlow: MutableStateFlow<Boolean> = MutableStateFlow(newSeasonAvailable())
 
-    val defaultSeason: Int
+    override val defaultSeason: Int
         get() = defaultSeasonUseCase.defaultSeason
 
     init {
         calendarRepository.viewedSeasons = calendarRepository.viewedSeasons + currentSeason
     }
 
-    fun updateTo(season: Int) {
+    override fun updateTo(season: Int) {
         calendarRepository.viewedSeasons = (calendarRepository.viewedSeasons + season)
         calendarRepository.userSelectedSeason = season
         if (supportedSeasons.contains(season)) {
-            _currentSeason.value = season
+            currentSeasonFlow.value = season
         }
         refresh()
     }
 
-    fun refresh() {
+    override fun refresh() {
         val seasons = infoRepository.supportedSeasons.sortedByDescending { it }
-        _supportedSeasons.value = seasons
-        _newSeasonAvailable.value = newSeasonAvailable()
+        supportedSeasonsFlow.value = seasons
+        newSeasonAvailableFlow.value = newSeasonAvailable()
         if (!seasons.contains(currentSeason)) {
-            _currentSeason.value = defaultSeasonUseCase.defaultSeason
+            currentSeasonFlow.value = defaultSeasonUseCase.defaultSeason
         }
     }
 

@@ -23,11 +23,14 @@ internal class AllSettingsViewModelTest {
             isWidgetsEnabledUseCase = mockIsWidgetEnabledUseCase,
             isRssEnabledUseCase = mockIsRssEnabledUseCase,
         )
+        every { mockIsWidgetEnabledUseCase.invoke() } returns false
+        every { mockIsRssEnabledUseCase.invoke() } returns false
     }
 
     @Test
     fun `widgets enabled if app supports it`() = runBlocking {
         every { mockIsWidgetEnabledUseCase.invoke() } returns true
+        every { mockIsRssEnabledUseCase.invoke() } returns true
         initUnderTest()
         underTest.uiState.test {
             assertEquals(true, awaitItem().isWidgetsSupported)
@@ -37,6 +40,7 @@ internal class AllSettingsViewModelTest {
     @Test
     fun `rss enabled if feature enabled`() = runBlocking {
         every { mockIsRssEnabledUseCase.invoke() } returns true
+        every { mockIsWidgetEnabledUseCase.invoke() } returns true
         initUnderTest()
         underTest.uiState.test {
             assertEquals(true, awaitItem().isRssEnabled)

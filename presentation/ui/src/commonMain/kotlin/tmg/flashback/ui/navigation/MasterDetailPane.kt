@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalComposeUiApi::class)
+
 package tmg.flashback.ui.navigation
 
 import androidx.compose.animation.core.animateDpAsState
@@ -18,7 +20,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.backhandler.BackHandler
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -96,7 +100,7 @@ fun <T> MasterDetailsPane(
                     )
                     if (navigator.destination != null) {
                         details(navigator.destination!!, detailsActionUpClicked)
-//                        BackHandler(onBack = detailsActionUpClicked)
+                        BackHandler(onBack = detailsActionUpClicked)
                     }
                 }
             }
@@ -118,8 +122,7 @@ fun <T> MasterDetailsPane(
                     )
                     if (navigator.destination != null) {
                         details(navigator.destination!!, detailsActionUpClicked)
-
-//                        BackHandler(onBack = detailsActionUpClicked)
+                        BackHandler(onBack = detailsActionUpClicked)
                     }
                 }
             }
