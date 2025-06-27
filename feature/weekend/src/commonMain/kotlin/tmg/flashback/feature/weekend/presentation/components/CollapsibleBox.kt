@@ -1,4 +1,4 @@
-package tmg.flashback.feature.weekend.presentation.weekend.components
+package tmg.flashback.feature.weekend.presentation.components
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState

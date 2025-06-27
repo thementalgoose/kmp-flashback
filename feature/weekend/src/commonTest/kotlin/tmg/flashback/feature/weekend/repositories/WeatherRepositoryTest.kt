@@ -1,12 +1,18 @@
 package tmg.flashback.feature.weekend.repositories
 
+import dev.mokkery.MockMode
+import dev.mokkery.MockMode.autoUnit
+import dev.mokkery.answering.returns
+import dev.mokkery.every
+import dev.mokkery.mock
+import dev.mokkery.verify
 import tmg.flashback.preferences.manager.PreferenceManager
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
 internal class WeatherRepositoryTest {
 
-    private val mockPreferenceManager: PreferenceManager = mock(relaxed = true)
+    private val mockPreferenceManager: PreferenceManager = mock(autoUnit)
 
     private lateinit var underTest: WeatherRepositoryImpl
 

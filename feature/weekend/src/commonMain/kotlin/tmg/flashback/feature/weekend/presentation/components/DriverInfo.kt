@@ -1,4 +1,4 @@
-package tmg.flashback.feature.weekend.presentation.weekend.components
+package tmg.flashback.feature.weekend.presentation.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
