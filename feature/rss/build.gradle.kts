@@ -27,6 +27,9 @@ kotlin {
             implementation(projects.core.configuration)
             implementation(projects.core.metrics.analytics)
             implementation(projects.core.metrics.crashlytics)
+
+            implementation(projects.data.network.rss)
+
             implementation(projects.infrastructure)
             implementation(projects.presentation.ui)
             implementation(projects.presentation.style)

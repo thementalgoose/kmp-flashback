@@ -48,7 +48,7 @@ include(":data:flashback")
 include(":data:persistence:flashback")
 include(":data:network:flashback")
 //include(":data:network:flashback-news")
-//include(":data:network:rss")
+include(":data:network:rss")
 
 include(":domain:formula1")
 
