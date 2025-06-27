@@ -73,7 +73,7 @@ internal fun module() = module {
     single { NetworkRaceMapper() }
     single { NetworkScheduleMapper() }
 
-    single<RaceRepository> { RaceRepositoryImpl(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
+    single<RaceRepository> { RaceRepositoryImpl(get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
     single<OverviewRepository> { OverviewRepositoryImpl(get(), get(), get(), get(), get(), get()) }
     single<SeasonRepository> { SeasonRepositoryImpl(get(), get(), get(), get()) }
     single<EventRepository> { EventRepositoryImpl(get(), get(), get(), get()) }

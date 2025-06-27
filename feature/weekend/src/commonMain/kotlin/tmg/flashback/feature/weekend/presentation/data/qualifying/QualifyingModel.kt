@@ -1,7 +1,9 @@
 package tmg.flashback.feature.weekend.presentation.data.qualifying
 
 import tmg.flashback.formula1.model.DriverEntry
+import tmg.flashback.formula1.model.LapTime
 import tmg.flashback.formula1.model.QualifyingResult
+import tmg.flashback.formula1.preview.preview
 
 sealed class QualifyingModel(
     val id: String,
@@ -38,3 +40,26 @@ sealed class QualifyingModel(
         companion object
     }
 }
+
+fun QualifyingModel.Q1.Companion.preview() = QualifyingModel.Q1(
+    driver = DriverEntry.preview(),
+    finalQualifyingPosition = 1,
+    q1 = QualifyingResult(DriverEntry.preview(), LapTime.preview(), 1)
+)
+
+fun QualifyingModel.Q1Q2.Companion.preview() = QualifyingModel.Q1Q2(
+    driver = DriverEntry.preview(),
+    finalQualifyingPosition = 1,
+    q1 = QualifyingResult(DriverEntry.preview(), LapTime.preview(), 1),
+    q2 = QualifyingResult(DriverEntry.preview(), LapTime.preview(), 1)
+)
+
+fun QualifyingModel.Q1Q2Q3.Companion.preview() = QualifyingModel.Q1Q2Q3(
+    driver = DriverEntry.preview(),
+    finalQualifyingPosition = 1,
+    q1 = QualifyingResult(DriverEntry.preview(), LapTime.preview(), 1),
+    q2 = QualifyingResult(DriverEntry.preview(), LapTime.preview(), 1),
+    q3 = QualifyingResult(DriverEntry.preview(), LapTime.preview(), 1),
+    grid = 1,
+    sprintRaceGrid = null
+)

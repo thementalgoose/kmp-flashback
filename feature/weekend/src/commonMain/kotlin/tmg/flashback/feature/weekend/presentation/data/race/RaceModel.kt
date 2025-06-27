@@ -3,6 +3,7 @@ package tmg.flashback.feature.weekend.presentation.data.race
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.model.RaceResult
+import tmg.flashback.formula1.preview.preview
 
 sealed class RaceModel(
     val id: String
@@ -32,3 +33,25 @@ sealed class RaceModel(
         companion object
     }
 }
+
+fun RaceModel.ConstructorResult.Companion.preview() = RaceModel.ConstructorResult(
+    constructor = Constructor.preview(),
+    position = 1,
+    points = 25.0,
+    drivers = listOf(
+        Driver.preview() to 10.0,
+        Driver.preview() to 15.0
+    ),
+    maxTeamPoints = 25.0,
+    highestDriverPosition = 1
+)
+
+fun RaceModel.DriverPodium.Companion.preview() = RaceModel.DriverPodium(
+    p1 = RaceResult.preview("1"),
+    p2 = RaceResult.preview("2"),
+    p3 = RaceResult.preview("3"),
+)
+
+fun RaceModel.DriverResult.Companion.preview() = RaceModel.DriverResult(
+    result = RaceResult.preview("4")
+)

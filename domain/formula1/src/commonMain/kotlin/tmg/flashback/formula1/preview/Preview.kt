@@ -1,0 +1,95 @@
+package tmg.flashback.formula1.preview
+
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalTime
+import tmg.flashback.formula1.enums.RaceStatus
+import tmg.flashback.formula1.model.Circuit
+import tmg.flashback.formula1.model.Constructor
+import tmg.flashback.formula1.model.Driver
+import tmg.flashback.formula1.model.DriverEntry
+import tmg.flashback.formula1.model.FastestLap
+import tmg.flashback.formula1.model.LapTime
+import tmg.flashback.formula1.model.Location
+import tmg.flashback.formula1.model.RaceInfo
+import tmg.flashback.formula1.model.RaceResult
+import tmg.flashback.formula1.model.SprintRaceResult
+
+fun Driver.Companion.preview(
+    id: String = "driverId"
+) = Driver(
+    id = id,
+    firstName = "Sonny",
+    lastName = "Hayes",
+    code = "SMI",
+    number = 12,
+    wikiUrl = "wikiUrl",
+    photoUrl = "https://i.imgur.com/ftD4H0D.png",
+    dateOfBirth = LocalDate(1990, 1, 1),
+    nationality = "British",
+    nationalityISO = "GBR"
+)
+
+fun Constructor.Companion.preview() = Constructor(
+    id = "apex",
+    name = "Apex GP",
+    wikiUrl = "wikiUrl",
+    photoUrl = "https://i.imgur.com/ftD4H0D.png",
+    nationality = "British",
+    nationalityISO = "GBR",
+    color = 0xFFC9B68C.toInt()
+)
+
+fun DriverEntry.Companion.preview(
+    driverId: String = "driverId"
+) = DriverEntry(
+    driver = Driver.preview(driverId),
+    constructor = Constructor.preview()
+)
+
+fun Circuit.Companion.preview() = Circuit(
+    id = "circuitId",
+    name = "Silverstone",
+    wikiUrl = "wikiUrl",
+    city = "Towcester",
+    country = "United Kingdom",
+    countryISO = "GBR",
+    location = Location(52.073618, -1.022214)
+)
+
+fun RaceInfo.Companion.preview() = RaceInfo(
+    season = 2020,
+    round = 1,
+    date = LocalDate(2020, 1, 1),
+    time = LocalTime(12, 0),
+    name = "Apex Grand Prix",
+    laps = "100",
+    youtube = "youtubeUrl",
+    wikipediaUrl = "wikipediaUrl",
+    circuit = Circuit.preview()
+)
+
+fun LapTime.Companion.preview() = LapTime(0, 1, 2, 123)
+
+fun RaceResult.Companion.preview(
+    driverId: String = "driverId"
+) = RaceResult(
+    entry = DriverEntry.preview(
+        driverId = driverId
+    ),
+    time = LapTime.preview(),
+    points = 25.0,
+    grid = 1,
+    qualified = 1,
+    finish = 1,
+    status = RaceStatus.FINISHED,
+    fastestLap = FastestLap(1, LapTime.preview())
+)
+
+fun SprintRaceResult.Companion.preview() = SprintRaceResult(
+    entry = DriverEntry.preview(),
+    time = LapTime.preview(),
+    points = 25.0,
+    grid = 1,
+    finish = 1,
+    status = RaceStatus.FINISHED,
+)
