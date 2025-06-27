@@ -85,11 +85,13 @@ private fun AllSettingsScreen(
                 itemClicked = { }
             )
         }
-        PrefHeader(string.settings_web_browser_title)
-        PrefCategory(
-            item = Settings.WebBrowserCategory,
-            itemClicked = { }
-        )
+        if (uiState.isInAppBrowserSupported) {
+            PrefHeader(string.settings_web_browser_title)
+            PrefCategory(
+                item = Settings.WebBrowserCategory,
+                itemClicked = { }
+            )
+        }
         PrefHeader(string.settings_header_notifications)
         PrefCategory(
             item = Settings.NotificationsRaceCategory,

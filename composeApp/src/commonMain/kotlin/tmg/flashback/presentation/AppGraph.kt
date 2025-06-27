@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import tmg.flashback.feature.rss.presentation.feed.RssFeedGraph
 import tmg.flashback.feature.season.presentation.calendar.CalendarGraph
 import tmg.flashback.feature.season.presentation.driver_standings.DriverStandingsGraph
 import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsGraph
@@ -59,9 +60,11 @@ fun AppGraph(
             }
         }
         composable<Screen.Rss> {
-            Box(Modifier.fillMaxSize()) {
-                TextTitle("Rss", Modifier.align(Alignment.Center))
-            }
+            RssFeedGraph(
+                paddingValues = insetPadding,
+                actionUpClicked = { },
+                windowSizeClass = windowAdaptiveInfo.windowSizeClass
+            )
         }
         composable<Screen.Settings> {
             AllSettingsGraph(

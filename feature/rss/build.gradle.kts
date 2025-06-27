@@ -23,10 +23,15 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.bundles.kotlin)
             implementation(libs.bundles.compose)
+            implementation(libs.bundles.common.ktor)
+
+            implementation(compose.components.resources)
 
             implementation(projects.core.configuration)
             implementation(projects.core.metrics.analytics)
             implementation(projects.core.metrics.crashlytics)
+            implementation(projects.core.preferences)
+            implementation(projects.core.webbrowser)
 
             implementation(projects.data.network.rss)
 

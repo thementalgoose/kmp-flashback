@@ -45,7 +45,7 @@ kotlin {
             implementation(projects.data.flashback)
             implementation(projects.data.network.flashback)
 //            implementation(projects.data.network.flashbackNews)
-//            implementation(projects.data.network.rss)
+            implementation(projects.data.network.rss)
             implementation(projects.data.persistence.flashback)
 
             implementation(projects.domain.formula1)

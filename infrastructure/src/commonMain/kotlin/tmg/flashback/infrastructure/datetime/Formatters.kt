@@ -1,6 +1,7 @@
 package tmg.flashback.infrastructure.datetime
 
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.format.DayOfWeekNames
 import kotlinx.datetime.format.MonthNames
@@ -113,3 +114,16 @@ val timeFormats = listOf(
     timeFormatHHmmss,
     timeFormatHHmmssZ
 )
+
+
+val dateTimeFormatHHmmAtDMMM = LocalDateTime.Format {
+    hour(Padding.ZERO)
+    char(':')
+    minute(Padding.ZERO)
+    char(' ')
+    char('@')
+    char(' ')
+    dayOfMonth(Padding.ZERO)
+    char(' ')
+    monthName(ENGLISH_ABBREVIATED)
+}

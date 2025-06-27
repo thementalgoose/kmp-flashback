@@ -11,9 +11,11 @@ import tmg.flashback.data.repo.di.dataFlashbackModule
 import tmg.flashback.eastereggs.di.easterEggsModule
 import tmg.flashback.feature.rss.di.featureRssModule
 import tmg.flashback.feature.season.di.featureSeasonModule
+import tmg.flashback.feature.weekend.di.featureWeekendModule
 import tmg.flashback.flashbackapi.api.di.dataNetworkFlashbackModule
 import tmg.flashback.infrastructure.di.infrastructureModule
 import tmg.flashback.infrastructure.log.logInfo
+import tmg.flashback.network.rss.di.dataNetworkRssModule
 import tmg.flashback.persistence.flashback.di.dataPersistenceFlashbackModule
 import tmg.flashback.preferences.di.corePreferencesModule
 import tmg.flashback.presentation.AppContainerViewModel
@@ -22,6 +24,7 @@ import tmg.flashback.presentation.settings.AllSettingsViewModel
 import tmg.flashback.presentation.settings.darkmode.SettingsDarkModeViewModel
 import tmg.flashback.presentation.sync.SyncViewModel
 import tmg.flashback.ui.di.presentationUiModule
+import tmg.flashback.webbrowser.di.coreWebBrowserModule
 import tmg.flashback.widget.upnext.di.featureWidgetUpNextModule
 
 fun doInitKoin() {
@@ -35,10 +38,12 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
         modules(coreMetricsCrashlyticsModule)
         modules(coreMetricsAnalyticsModule)
         modules(corePreferencesModule)
+        modules(coreWebBrowserModule)
 
         modules(dataNetworkFlashbackModule)
         modules(dataPersistenceFlashbackModule)
         modules(dataFlashbackModule)
+        modules(dataNetworkRssModule)
 
         modules(easterEggsModule)
 
@@ -47,6 +52,7 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
         modules(featureSeasonModule)
         modules(featureRssModule)
         modules(featureWidgetUpNextModule)
+        modules(featureWeekendModule)
 
         modules(presentationUiModule)
 
@@ -58,7 +64,7 @@ internal fun module() = module {
     viewModel { AppContainerViewModel() }
     viewModel { AppNavigationViewModel(get(), get(), get(), get(), get()) }
 
-    viewModel { AllSettingsViewModel(get(), get()) }
+    viewModel { AllSettingsViewModel(get(), get(), get()) }
     viewModel { SettingsDarkModeViewModel(get()) }
 
     viewModel { SyncViewModel(get(), get(), get(), get(), get(), get(), get()) }
