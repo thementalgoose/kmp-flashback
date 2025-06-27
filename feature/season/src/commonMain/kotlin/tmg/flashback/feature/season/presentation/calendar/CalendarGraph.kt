@@ -5,17 +5,22 @@ import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowWidthSizeClass
+import androidx.window.core.layout.WindowWidthSizeClass.Companion.COMPACT
 import org.koin.compose.viewmodel.koinViewModel
-import tmg.flashback.style.text.TextTitle
+import tmg.flashback.feature.weekend.presentation.WeekendScreen
+import tmg.flashback.feature.weekend.presentation.WeekendScreenData
 import tmg.flashback.ui.navigation.MasterDetailsPane
 import tmg.flashback.ui.navigation.appBarMaximumHeight
 import tmg.flashback.ui.navigation.rememberMasterDetailPaneState
 
 data class NavigationWeekend(
     val season: Int,
-    val round: Int
+    val round: Int,
+    val raceName: String,
 )
 
 @Composable
@@ -27,7 +32,6 @@ fun CalendarGraph(
 ) {
     val uiState = viewModel.uiState.collectAsState()
     val navigator = rememberMasterDetailPaneState<NavigationWeekend>()
-
 
     // Add custom padding for nav bar
     val direction = LocalLayoutDirection.current
@@ -48,8 +52,12 @@ fun CalendarGraph(
                 windowSizeClass = windowSizeClass,
                 uiState = uiState.value,
                 refresh = viewModel::refresh,
-                itemClicked = {
-
+                goToWeekend = {
+                    navigator.navigateTo(NavigationWeekend(
+                        season = it.model.season,
+                        round = it.model.round,
+                        raceName = it.model.raceName
+                    ))
                 },
             )
         },
@@ -57,7 +65,16 @@ fun CalendarGraph(
             navigator.clear()
         },
         details = { model, actionUpClicked ->
-            TextTitle("Model $model")
+            val screenData = remember(model) {
+                WeekendScreenData(model.season, model.round, model.raceName)
+            }
+            WeekendScreen(
+                screenData = screenData,
+                paddingValues = paddingValues,
+                showBack = windowSizeClass.windowWidthSizeClass == COMPACT,
+                actionUpClicked = actionUpClicked,
+                windowSizeClass = windowSizeClass
+            )
         }
     )
 }

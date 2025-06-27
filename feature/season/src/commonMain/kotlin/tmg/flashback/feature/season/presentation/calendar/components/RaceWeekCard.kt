@@ -79,8 +79,9 @@ internal fun RaceWeekCard(
         false -> 1f
     }
 
-    Column(modifier = Modifier
+    Column(modifier = modifier
         .fillMaxWidth()
+        .clickable { itemClicked(model) }
     ) {
         Row {
             Box(modifier = Modifier

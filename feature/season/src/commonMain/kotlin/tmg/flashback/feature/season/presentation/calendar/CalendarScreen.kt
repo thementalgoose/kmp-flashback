@@ -67,7 +67,7 @@ fun CalendarScreen(
     windowSizeClass: WindowSizeClass,
     uiState: CalendarScreenState,
     refresh: () -> Unit,
-    itemClicked: (CalendarItem) -> Unit,
+    goToWeekend: (CalendarItem.RaceWeek) -> Unit,
 ) {
     SwipeRefresh(
         isLoading = uiState.isLoading,
@@ -109,7 +109,7 @@ fun CalendarScreen(
                         is CalendarItem.RaceWeek -> {
                             RaceWeekCard(
                                 model = item,
-                                itemClicked = itemClicked
+                                itemClicked = { goToWeekend(it) }
                             )
                         }
 
@@ -121,7 +121,7 @@ fun CalendarScreen(
                             Spacer(Modifier.height(AppTheme.dimens.xsmall))
                             CollapsableList(
                                 model = item,
-                                itemClicked = itemClicked
+                                itemClicked = {  }
                             )
                             Spacer(Modifier.height(AppTheme.dimens.xsmall))
                         }

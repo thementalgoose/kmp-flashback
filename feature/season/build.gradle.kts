@@ -31,9 +31,15 @@ kotlin {
             implementation(projects.core.metrics.crashlytics)
             implementation(projects.core.notifications)
             implementation(projects.core.preferences)
+
             implementation(projects.domain.formula1)
+
             implementation(projects.data.flashback)
+
             implementation(projects.infrastructure)
+
+            implementation(projects.feature.weekend)
+
             implementation(projects.presentation.ui)
             implementation(projects.presentation.style)
             implementation(projects.presentation.navigation)

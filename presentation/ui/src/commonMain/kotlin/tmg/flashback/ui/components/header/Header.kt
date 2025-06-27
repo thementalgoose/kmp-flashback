@@ -50,7 +50,7 @@ fun Header(
                 Spacer(Modifier.weight(1f))
                 overrideIcons()
             }
-            Spacer(Modifier.height(AppTheme.dimens.large))
+//            Spacer(Modifier.height(AppTheme.dimens.large))
         }
         Row(
             verticalAlignment = Alignment.Top
@@ -197,23 +197,20 @@ private fun PreviewNoIconWithOverrideDark() {
     }
 }
 
-@Preview
 @Composable
 private fun PreviewNoIconWithOverride() {
-    AppThemePreview {
-        Header(
-            text = "2022",
-            action = null,
-            actionUpClicked = { },
-            overrideIcons = {
-                IconButton(onClick = { }) {
-                    Icon(
-                        painter = painterResource(resource = Res.drawable.ic_close),
-                        contentDescription = stringResource(resource = string.tyres_label),
-                        tint = AppTheme.colors.onSurfaceVariant
-                    )
-                }
+    Header(
+        text = "2022",
+        action = null,
+        actionUpClicked = { },
+        overrideIcons = {
+            IconButton(onClick = { }) {
+                Icon(
+                    painter = painterResource(resource = Res.drawable.ic_close),
+                    contentDescription = stringResource(resource = string.tyres_label),
+                    tint = AppTheme.colors.onSurfaceVariant
+                )
             }
-        )
-    }
+        }
+    )
 }
