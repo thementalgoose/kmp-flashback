@@ -1,4 +1,4 @@
-package tmg.flashback.feature.weekend.presentation.weekend
+package tmg.flashback.feature.weekend.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,31 +16,56 @@ import kotlinx.coroutines.launch
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
 import tmg.flashback.data.repo.repository.SeasonRepository
+import tmg.flashback.feature.weekend.presentation.data.ResultType
+import tmg.flashback.feature.weekend.presentation.data.info.InfoDataMapper
+import tmg.flashback.feature.weekend.presentation.data.info.InfoModel
+import tmg.flashback.feature.weekend.presentation.data.qualifying.QualifyingDataMapper
+import tmg.flashback.feature.weekend.presentation.data.race.RaceDataMapper
+import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.SprintQualifyingDataMapper
+import tmg.flashback.feature.weekend.presentation.data.sprint_race.SprintRaceDataMapper
 
 class WeekendViewModel(
     private val racesRepository: RaceRepository,
     private val overviewRepository: OverviewRepository,
-    private val seasonRepository: SeasonRepository
+    private val infoDataMapper: InfoDataMapper,
+    private val raceDataMapper: RaceDataMapper,
+    private val qualifyingDataMapper: QualifyingDataMapper,
+    private val sprintQualifyingDataMapper: SprintQualifyingDataMapper,
+    private val sprintRaceDataMapper: SprintRaceDataMapper
 ): ViewModel() {
 
-    private val season: MutableStateFlow<Int?> = MutableStateFlow(null)
+    private val seasonRound: MutableStateFlow<Pair<Int, Int>?> = MutableStateFlow(null)
+
+    private val resultType: MutableStateFlow<ResultType> = MutableStateFlow(ResultType.DRIVERS)
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val uiState: StateFlow<WeekendUiState> = season
+    val uiState: StateFlow<WeekendUiState> = seasonRound
         .filterNotNull()
-        .flatMapLatest { seasonRepository.getSeason(it) }
-        .map { season ->
-            return@map WeekendUiState.Initial
+        .flatMapLatest { (season, round) -> racesRepository.getRace(season, round) }
+        .combine(resultType) { race, resultType ->
+            if (race == null) {
+                return@combine WeekendUiState.NotFound
+            }
+            return@combine WeekendUiState.Data(
+                season = race.raceInfo.season,
+                info = infoDataMapper(race),
+                qualifyingResults = qualifyingDataMapper(race),
+                raceResults = raceDataMapper(race, resultType),
+                sprintQualifyingResults = sprintQualifyingDataMapper(race),
+                sprintRaceResults = sprintRaceDataMapper(race, resultType),
+            )
         }
         .stateIn(viewModelScope, SharingStarted.Lazily, WeekendUiState.Initial)
 
-    fun loadSeason(season: Int) {
-        this.season.update { season }
+    fun load(season: Int, round: Int) {
+        this.seasonRound.update {
+            season to round
+        }
     }
 
     fun refresh() {
         viewModelScope.launch {
-            val season = season.value ?: return@launch
+            val (season, _) = seasonRound.value ?: return@launch
             racesRepository.populateRaces(season)
             overviewRepository.populateOverview(season)
         }

@@ -1,11 +1,10 @@
-package tmg.flashback.feature.weekend.presentation.weekend
+package tmg.flashback.feature.weekend.presentation
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.window.core.layout.WindowSizeClass
 import org.koin.compose.viewmodel.koinViewModel
-import tmg.flashback.formula1.model.Driver
 
 @Composable
 fun WeekendScreen(

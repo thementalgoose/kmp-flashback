@@ -1,6 +1,9 @@
 package tmg.flashback.data.repo.repository
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import tmg.flashback.data.repo.extensions.valueList
+import tmg.flashback.data.repo.mappers.app.RaceMapper
 import tmg.flashback.data.repo.mappers.network.NetworkConstructorDataMapper
 import tmg.flashback.data.repo.mappers.network.NetworkConstructorStandingMapper
 import tmg.flashback.data.repo.mappers.network.NetworkDriverDataMapper
@@ -15,11 +18,13 @@ import tmg.flashback.flashbackapi.api.models.constructors.Constructor
 import tmg.flashback.flashbackapi.api.models.drivers.Driver
 import tmg.flashback.flashbackapi.api.models.races.ConstructorStandings
 import tmg.flashback.flashbackapi.api.models.races.DriverStandings
+import tmg.flashback.formula1.model.Race
 import tmg.flashback.persistence.flashback.FlashbackDatabase
 
 interface RaceRepository {
     suspend fun populateRaces(season: Int): Response
     suspend fun populateRace(season: Int, round: Int): Response
+    fun getRace(season: Int, round: Int): Flow<Race?>
 }
 
 internal class RaceRepositoryImpl(
@@ -32,6 +37,7 @@ internal class RaceRepositoryImpl(
     private val networkDriverStandingMapper: NetworkDriverStandingMapper,
     private val networkConstructorStandingMapper: NetworkConstructorStandingMapper,
     private val networkScheduleMapper: NetworkScheduleMapper,
+    private val raceMapper: RaceMapper
 ): RaceRepository {
     override suspend fun populateRaces(season: Int) = api.makeRequest(
         request = { api.getSeason(season) },
@@ -102,6 +108,13 @@ internal class RaceRepositoryImpl(
             return@makeRequest true
         }
     )
+
+    override fun getRace(season: Int, round: Int): Flow<Race?> {
+        return persistence.seasonDao().getRace(season, round)
+            .map { race ->
+                raceMapper.mapRace(race)
+            }
+    }
 
     private suspend fun saveConstructorStandings(season: Int, constructors: Map<String, ConstructorStandings>?) {
         if (constructors == null) return
