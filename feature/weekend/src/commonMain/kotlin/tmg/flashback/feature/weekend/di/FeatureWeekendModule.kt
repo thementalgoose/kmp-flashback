@@ -23,7 +23,7 @@ internal fun module() = module {
 
     single<WeatherRepository> { WeatherRepositoryImpl(get()) }
 
-    single<InfoDataMapper> { InfoDataMapperImpl() }
+    single<InfoDataMapper> { InfoDataMapperImpl(get()) }
     single<QualifyingDataMapper> { QualifyingDataMapperImpl() }
     single<RaceDataMapper> { RaceDataMapperImpl() }
     single<SprintQualifyingDataMapper> { SprintQualifyingDataMapperImpl() }

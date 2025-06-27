@@ -1,5 +1,6 @@
 package tmg.flashback.feature.weekend.presentation.data.info
 
+import kotlinx.datetime.LocalDate
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.model
@@ -12,7 +13,8 @@ fun InfoModel.Companion.model(
     laps: String? = "12",
     youtubeUrl: String? = "youtube",
     wikipediaUrl: String? = "wikiUrl",
-    schedule: List<Schedule> = listOf(Schedule.model()),
+    temperatureMetric: Boolean = true,
+    windspeedMetric: Boolean = true
 ): InfoModel = InfoModel(
     season = season,
     round = round,
@@ -21,5 +23,11 @@ fun InfoModel.Companion.model(
     laps = laps,
     youtubeUrl = youtubeUrl,
     wikipediaUrl = wikipediaUrl,
-    schedule = schedule
+    days = listOf(
+        LocalDate(2020, 1, 1) to listOf(
+            Schedule.model() to false
+        )
+    ),
+    temperatureMetric = temperatureMetric,
+    windspeedMetric = windspeedMetric
 )

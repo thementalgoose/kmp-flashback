@@ -12,7 +12,9 @@ import tmg.flashback.formula1.model.LapTime
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.model.RaceInfo
 import tmg.flashback.formula1.model.RaceResult
+import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.SprintRaceResult
+import tmg.flashback.infrastructure.datetime.now
 
 fun Driver.Companion.preview(
     id: String = "driverId"
@@ -92,4 +94,11 @@ fun SprintRaceResult.Companion.preview() = SprintRaceResult(
     grid = 1,
     finish = 1,
     status = RaceStatus.FINISHED,
+)
+
+fun Schedule.Companion.preview(label: String) = Schedule(
+    label = label,
+    date = LocalDate.now(),
+    time = LocalTime.now(),
+    weather = null
 )
