@@ -16,7 +16,7 @@ sealed class SprintQualifyingModel(
         val sq3: SprintQualifyingResult?,
         val qualified: Int? = finalQualifyingPosition ?: sq3?.position ?: sq2?.position ?: sq1?.position,
         val grid: Int?
-    ) : SprintQualifyingModel(driver.driver.id) {
+    ) : SprintQualifyingModel("driver-${driver.driver.id}") {
         companion object
     }
 }

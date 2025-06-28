@@ -14,21 +14,7 @@ internal class RaceDataMapperImpl(): RaceDataMapper {
     ): List<RaceModel> {
         return when (resultType) {
             ResultType.DRIVERS -> {
-                buildList {
-                    if (race.race.size >= 3) {
-                        val podium = RaceModel.DriverPodium(
-                            p1 = race.race[0],
-                            p2 = race.race[1],
-                            p3 = race.race[2]
-                        )
-                        add(podium)
-                        for (x in race.race.drop(3)) {
-                            add(RaceModel.DriverResult(x))
-                        }
-                    } else {
-                        addAll(race.race.map { RaceModel.DriverResult(it) })
-                    }
-                }
+                race.race.map { RaceModel.DriverResult(it) }
             }
             ResultType.CONSTRUCTORS -> race.race
                 .groupBy { it.entry.constructor }

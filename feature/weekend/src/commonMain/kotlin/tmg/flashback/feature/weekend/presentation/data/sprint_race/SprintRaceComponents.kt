@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,23 +22,21 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.ab_scored
+import flashback.presentation.localisation.generated.resources.nav_race
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
+import tmg.flashback.feature.weekend.presentation.WeekendUiState
 import tmg.flashback.feature.weekend.presentation.components.DriverInfoWithIcon
 import tmg.flashback.feature.weekend.presentation.components.PointsBox
+import tmg.flashback.feature.weekend.presentation.components.RaceHeader
 import tmg.flashback.feature.weekend.presentation.components.Time
+import tmg.flashback.feature.weekend.presentation.components.TypeHeader
 import tmg.flashback.feature.weekend.presentation.components.finishingPositionWidth
 import tmg.flashback.feature.weekend.presentation.components.status
 import tmg.flashback.feature.weekend.presentation.components.timeWidth
-import tmg.flashback.feature.weekend.presentation.data.race.RaceConstructorResult
-import tmg.flashback.feature.weekend.presentation.data.race.RaceDriverResult
-import tmg.flashback.feature.weekend.presentation.data.race.RaceModel
-import tmg.flashback.feature.weekend.presentation.data.race.preview
-import tmg.flashback.formula1.constants.Formula1
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.DriverEntry
-import tmg.flashback.formula1.model.RaceResult
 import tmg.flashback.formula1.model.SprintRaceResult
 import tmg.flashback.formula1.preview.preview
 import tmg.flashback.infrastructure.extensions.roundToHalf
@@ -49,10 +49,39 @@ import tmg.flashback.ui.components.driver.DriverPoints
 import tmg.flashback.ui.components.driver.driverIconSize
 import tmg.flashback.ui.components.edgeBar
 
+fun LazyListScope.addSprintRaceData(
+    uiState: WeekendUiState.Data,
+    keyPrefix: String = ""
+) {
+    item("sprint_race_label") {
+        TypeHeader(
+            resource = string.nav_race
+        )
+    }
+    item("sprint_race_header") {
+        RaceHeader()
+    }
+    items(uiState.sprintRaceResults, key = { "${keyPrefix}-${it.id}" }) {
+        when (it) {
+            is SprintRaceModel.ConstructorResult -> {
+                SprintRaceConstructorResult(
+                    model = it,
+                    constructorClicked = { }
+                )
+            }
+            is SprintRaceModel.DriverResult -> {
+                SprintRaceDriverResult(
+                    model = it.result,
+                    driverClicked = { }
+                )
+            }
+        }
+    }
+}
+
 @Composable
 internal fun SprintRaceDriverResult(
     model: SprintRaceResult,
-    season: Int,
     driverClicked: (DriverEntry) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -78,7 +107,6 @@ internal fun SprintRaceDriverResult(
         }
         PointsBox(
             points = model.points,
-            maxPoints = Formula1.maxDriverPointsBySeason(season).toDouble(),
             colour = model.entry.constructor.colour,
         )
     }
@@ -149,7 +177,6 @@ internal fun SprintRaceConstructorResult(
             Spacer(Modifier.width(AppTheme.dimens.small))
             PointsBox(
                 points = model.points,
-                maxPoints = model.maxTeamPoints,
                 colour = model.constructor.colour
             )
         }
@@ -165,7 +192,6 @@ private fun Preview(
         Column {
             SprintRaceDriverResult(
                 model = SprintRaceResult.preview(),
-                season = 2020,
                 driverClicked = { }
             )
             SprintRaceConstructorResult(

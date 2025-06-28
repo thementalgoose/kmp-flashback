@@ -9,20 +9,20 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
-import tmg.flashback.data.repo.repository.SeasonRepository
 import tmg.flashback.feature.weekend.presentation.data.ResultType
 import tmg.flashback.feature.weekend.presentation.data.info.InfoDataMapper
-import tmg.flashback.feature.weekend.presentation.data.info.InfoModel
 import tmg.flashback.feature.weekend.presentation.data.qualifying.QualifyingDataMapper
 import tmg.flashback.feature.weekend.presentation.data.race.RaceDataMapper
 import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.SprintQualifyingDataMapper
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.SprintRaceDataMapper
+import tmg.flashback.feature.weekend.utils.getWeekendEventOrder
+import tmg.flashback.infrastructure.log.logDebug
+import tmg.flashback.infrastructure.log.logInfo
 
 class WeekendViewModel(
     private val racesRepository: RaceRepository,
@@ -41,11 +41,18 @@ class WeekendViewModel(
 
     private val resultType: MutableStateFlow<ResultType> = MutableStateFlow(ResultType.DRIVERS)
 
+    private val tab: MutableStateFlow<WeekendTabs> = MutableStateFlow(WeekendTabs.Qualifying)
+
     @OptIn(ExperimentalCoroutinesApi::class)
-    val uiState: StateFlow<WeekendUiState> = seasonRound
-        .filterNotNull()
-        .flatMapLatest { (season, round) -> racesRepository.getRace(season, round) }
-        .combine(resultType) { race, resultType ->
+    val uiState: StateFlow<WeekendUiState> =
+        combine(
+            seasonRound
+                .filterNotNull()
+                .flatMapLatest { (season, round) -> racesRepository.getRace(season, round) },
+            resultType,
+            tab
+        ) { race, resultType, tab ->
+            logDebug("WeekendVM", "Calculating WeekendUiState ${race?.raceInfo} - $resultType - $tab")
             if (race == null) {
                 return@combine WeekendUiState.NotFound
             }
@@ -53,7 +60,13 @@ class WeekendViewModel(
             return@combine WeekendUiState.Data(
                 season = race.raceInfo.season,
                 info = infoDataMapper(race),
+                tab = tab,
+                tabs = getWeekendEventOrder(
+                    isSprint = race.hasSprint,
+                    season = race.raceInfo.season
+                ),
                 qualifyingResults = qualifyingDataMapper(race),
+                qualifyingColumns = race.qualifying.maxOfOrNull { it.label },
                 raceResults = raceDataMapper(race, resultType),
                 sprintQualifyingResults = sprintQualifyingDataMapper(race),
                 sprintRaceResults = sprintRaceDataMapper(race, resultType),
@@ -65,6 +78,10 @@ class WeekendViewModel(
         this.seasonRound.update {
             season to round
         }
+    }
+
+    fun updateTab(tab: WeekendTabs) {
+        this.tab.update { tab }
     }
 
     fun refresh() {

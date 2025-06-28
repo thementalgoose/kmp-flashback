@@ -27,7 +27,6 @@ fun PointsBox(
     points: Double,
     colour: Color,
     modifier: Modifier = Modifier,
-    maxPoints: Double = 60.0
 ) {
     val pointsLabel =
         pluralStringResource(resource = plurals.race_points, quantity = points.roundToInt(), points.roundToHalf())

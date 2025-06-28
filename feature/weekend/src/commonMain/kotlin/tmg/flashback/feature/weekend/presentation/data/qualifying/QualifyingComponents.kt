@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.ab_result_qualifying_overview
 import flashback.presentation.localisation.generated.resources.ab_result_qualifying_overview_dnq
+import flashback.presentation.localisation.generated.resources.nav_qualifying
 import flashback.presentation.localisation.generated.resources.qualifying_header_q1
 import flashback.presentation.localisation.generated.resources.qualifying_header_q2
 import flashback.presentation.localisation.generated.resources.qualifying_header_q3
@@ -33,10 +36,15 @@ import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
+import tmg.flashback.feature.weekend.presentation.WeekendUiState.Data
 import tmg.flashback.feature.weekend.presentation.components.Position
+import tmg.flashback.feature.weekend.presentation.components.TypeHeader
 import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.model.DriverEntry
 import tmg.flashback.formula1.model.LapTime
+import tmg.flashback.formula1.model.QualifyingType.Q1
+import tmg.flashback.formula1.model.QualifyingType.Q2
+import tmg.flashback.formula1.model.QualifyingType.Q3
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.AppThemePreview
 import tmg.flashback.style.badge.Badge
@@ -47,9 +55,43 @@ import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextSection
 import tmg.flashback.ui.components.driver.DriverName
 import tmg.flashback.ui.components.edgeBar
-
+import kotlin.collections.contains
 
 private val lapTimeWidth: Dp = 64.dp
+
+fun LazyListScope.addQualifyingData(
+    uiState: Data,
+    keyPrefix: String = ""
+) {
+    item("qualifying_label") {
+        TypeHeader(
+            resource = string.nav_qualifying,
+        )
+    }
+    item("qualifying_header") {
+        QualifyingHeader(
+            showQ1 = uiState.qualifyingColumns in listOf(Q1, Q2, Q3),
+            showQ2 = uiState.qualifyingColumns in listOf(Q2, Q3),
+            showQ3 = uiState.qualifyingColumns in listOf(Q3)
+        )
+    }
+    items(uiState.qualifyingResults, key = { "${keyPrefix}-${it.id}" }) {
+        when (it) {
+            is QualifyingModel.Q1 -> QualifyingResult(
+                model = it,
+                driverClicked = { },
+            )
+            is QualifyingModel.Q1Q2 -> QualifyingResult(
+                model = it,
+                driverClicked = { },
+            )
+            is QualifyingModel.Q1Q2Q3 -> QualifyingResult(
+                model = it,
+                driverClicked = { },
+            )
+        }
+    }
+}
 
 @Composable
 internal fun QualifyingHeader(

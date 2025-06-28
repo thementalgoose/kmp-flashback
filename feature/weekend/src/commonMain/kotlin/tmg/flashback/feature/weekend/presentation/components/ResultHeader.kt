@@ -22,8 +22,8 @@ import tmg.flashback.style.AppThemePreview
 @Composable
 fun RaceHeader(
     modifier: Modifier = Modifier,
-    showPoints: Boolean,
-    showStatus: Boolean
+    showPoints: Boolean = true,
+    showStatus: Boolean = true
 ) {
     Row(modifier) {
 

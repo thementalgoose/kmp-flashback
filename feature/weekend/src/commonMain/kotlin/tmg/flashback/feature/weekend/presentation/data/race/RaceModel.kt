@@ -19,14 +19,6 @@ sealed class RaceModel(
         companion object
     }
 
-    data class DriverPodium(
-        val p1: RaceResult,
-        val p2: RaceResult,
-        val p3: RaceResult
-    ): RaceModel(id = "podium") {
-        companion object
-    }
-
     data class DriverResult(
         val result: RaceResult
     ): RaceModel(id = "driver-${result.entry.driver.id}") {
@@ -44,12 +36,6 @@ fun RaceModel.ConstructorResult.Companion.preview() = RaceModel.ConstructorResul
     ),
     maxTeamPoints = 25.0,
     highestDriverPosition = 1
-)
-
-fun RaceModel.DriverPodium.Companion.preview() = RaceModel.DriverPodium(
-    p1 = RaceResult.preview("1"),
-    p2 = RaceResult.preview("2"),
-    p3 = RaceResult.preview("3"),
 )
 
 fun RaceModel.DriverResult.Companion.preview() = RaceModel.DriverResult(

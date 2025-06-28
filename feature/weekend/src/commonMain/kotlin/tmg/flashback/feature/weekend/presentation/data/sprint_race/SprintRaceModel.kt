@@ -1,9 +1,7 @@
 package tmg.flashback.feature.weekend.presentation.data.sprint_race
 
-import tmg.flashback.feature.weekend.presentation.data.race.RaceModel
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.Driver
-import tmg.flashback.formula1.model.RaceResult
 import tmg.flashback.formula1.model.SprintRaceResult
 import tmg.flashback.formula1.preview.preview
 

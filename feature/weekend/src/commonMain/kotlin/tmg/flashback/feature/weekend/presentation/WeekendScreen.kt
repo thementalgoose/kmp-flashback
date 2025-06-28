@@ -1,34 +1,41 @@
 package tmg.flashback.feature.weekend.presentation
 
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.window.core.layout.WindowSizeClass
-import flashback.presentation.localisation.generated.resources.Res
-import flashback.presentation.localisation.generated.resources.Res.string
-import flashback.presentation.localisation.generated.resources.nav_qualifying
-import org.jetbrains.compose.resources.StringResource
-import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.feature.weekend.presentation.WeekendUiState.Data
+import tmg.flashback.feature.weekend.presentation.data.info.InfoModel
 import tmg.flashback.feature.weekend.presentation.data.info.RaceDetails
 import tmg.flashback.feature.weekend.presentation.data.info.Schedule
-import tmg.flashback.feature.weekend.presentation.data.qualifying.QualifyingHeader
-import tmg.flashback.feature.weekend.presentation.data.qualifying.QualifyingModel
-import tmg.flashback.feature.weekend.presentation.data.qualifying.QualifyingResult
+import tmg.flashback.feature.weekend.presentation.data.qualifying.addQualifyingData
+import tmg.flashback.feature.weekend.presentation.data.race.addRaceData
+import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.addSprintQualifyingData
+import tmg.flashback.feature.weekend.presentation.data.sprint_race.addSprintRaceData
+import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.text.TextHeadline2
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
+import tmg.flashback.ui.navigation.NavigationBar
+import tmg.flashback.ui.navigation.NavigationItem
+import tmg.flashback.ui.navigation.appBarMaximumHeight
 
 @Composable
 fun WeekendScreen(
@@ -47,7 +54,7 @@ fun WeekendScreen(
             round = screenData.round
         )
     }
-    WeekendScreen(
+    WeekendScreenTab(
         isLoading = isLoading.value,
         screenData = screenData,
         paddingValues = paddingValues,
@@ -55,89 +62,129 @@ fun WeekendScreen(
         actionUpClicked = actionUpClicked,
         windowSizeClass = windowSizeClass,
         uiState = uiState.value,
+        clickWeekendTab = viewModel::updateTab,
         refresh = viewModel::refresh
     )
 }
 
-
 @Composable
-fun WeekendScreen(
+fun WeekendScreenTab(
     screenData: WeekendScreenData,
     isLoading: Boolean,
     paddingValues: PaddingValues,
     showBack: Boolean,
     actionUpClicked: () -> Unit,
+    clickWeekendTab: (WeekendTabs) -> Unit,
     windowSizeClass: WindowSizeClass,
     uiState: WeekendUiState,
     refresh: () -> Unit,
 ) {
-    SwipeRefresh(
-        isLoading = isLoading,
-        onRefresh = refresh,
-        content = {
-            LazyColumn(
-                contentPadding = paddingValues,
-                modifier = Modifier.fillMaxSize()
-            ) {
-                item("header") {
-                    Header(
-                        actionUpClicked = actionUpClicked,
-                        action = HeaderAction.BACK.takeIf { showBack },
-                        text = (uiState as? Data)?.info?.raceName ?: screenData.raceName
-                    )
-                }
-                if (uiState is Data) {
-                    item("schedule") {
-                        Column {
-                            RaceDetails(
-                                model = uiState.info,
-                                modifier = Modifier.padding(
-                                    horizontal = AppTheme.dimens.medium,
-                                    vertical = AppTheme.dimens.xsmall
-                                )
-                            )
-                            Schedule(
-                                model = uiState.info
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        SwipeRefresh(
+            isLoading = isLoading,
+            onRefresh = refresh,
+            content = {
+
+
+                // Add custom padding for nav bar
+                val direction = LocalLayoutDirection.current
+                val masterPadding = PaddingValues(
+                    top = paddingValues.calculateTopPadding(),
+                    bottom = paddingValues.calculateBottomPadding() + appBarMaximumHeight,
+                    start = paddingValues.calculateStartPadding(direction),
+                    end = paddingValues.calculateEndPadding(direction)
+                )
+
+                LazyColumn(
+                    contentPadding = masterPadding,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    item("header") {
+                        Header(
+                            actionUpClicked = actionUpClicked,
+                            action = HeaderAction.BACK.takeIf { showBack },
+                            text = (uiState as? Data)?.info?.raceName ?: screenData.raceName
+                        )
+                    }
+
+                    if (uiState is Data) {
+
+                        addDetails(uiState.info)
+                        addSchedule(uiState.info)
+
+                        if (uiState.tab == WeekendTabs.Qualifying) {
+                            addQualifyingData(
+                                uiState
                             )
                         }
-                    }
-                    item("qualifying_header") {
-                        TypeHeader(string.nav_qualifying)
-                    }
-                    items(uiState.qualifyingResults, key = { it.id }) {
-                        when (it) {
-                            is QualifyingModel.Q1 -> QualifyingResult(
-                                model = it,
-                                driverClicked = { }
+                        if (uiState.tab == WeekendTabs.Race) {
+                            addRaceData(
+                                uiState
                             )
-                            is QualifyingModel.Q1Q2 -> QualifyingResult(
-                                model = it,
-                                driverClicked = { }
+                        }
+                        if (uiState.tab == WeekendTabs.SprintQualifying) {
+                            addSprintQualifyingData(
+                                uiState
                             )
-                            is QualifyingModel.Q1Q2Q3 -> QualifyingResult(
-                                model = it,
-                                driverClicked = { }
+                        }
+                        if (uiState.tab == WeekendTabs.SprintRace) {
+                            addSprintRaceData(
+                                uiState
                             )
                         }
                     }
                 }
             }
+        )
+        if (uiState is Data) {
+            val navigationItems = remember(uiState.tabs, uiState.tab) {
+                uiState.tabs.toNavigationItem(uiState.tab)
+            }
+            NavigationBar(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter),
+                list = navigationItems,
+                itemClicked = {
+                    val tab = it.id.toEnum<WeekendTabs> { it.id }
+                    if (tab != null) {
+                        clickWeekendTab(tab)
+                    }
+                },
+                bottomPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+            )
         }
-    )
+    }
 }
 
-@Composable
-private fun TypeHeader(
-    resource: StringResource,
-    modifier: Modifier = Modifier
-        .fillMaxWidth()
-        .padding(
-            horizontal = AppTheme.dimens.medium,
-            vertical = AppTheme.dimens.small
+private fun List<WeekendTabs>.toNavigationItem(selected: WeekendTabs): List<NavigationItem> {
+    return this.map {
+        NavigationItem(
+            id = it.id,
+            label = it.label,
+            icon = it.icon,
+            isSelected = selected == it
         )
-) {
-    TextHeadline2(
-        text = stringResource(resource),
-        modifier = modifier
-    )
+    }
+}
+
+fun LazyListScope.addDetails(info: InfoModel) {
+    item("details") {
+        RaceDetails(
+            model = info,
+            modifier = Modifier.padding(
+                horizontal = AppTheme.dimens.medium,
+                vertical = AppTheme.dimens.xsmall
+            )
+        )
+    }
+}
+
+fun LazyListScope.addSchedule(info: InfoModel) {
+    item("schedule") {
+        Schedule(
+            model = info
+        )
+    }
 }

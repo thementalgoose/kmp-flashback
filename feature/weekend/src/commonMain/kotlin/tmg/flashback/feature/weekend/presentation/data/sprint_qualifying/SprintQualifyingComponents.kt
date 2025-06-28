@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.ab_result_qualifying_overview
 import flashback.presentation.localisation.generated.resources.ab_result_qualifying_overview_dnq
+import flashback.presentation.localisation.generated.resources.nav_sprint_qualifying
 import flashback.presentation.localisation.generated.resources.qualifying_penalty
 import flashback.presentation.localisation.generated.resources.qualifying_penalty_starts_sprint
 import flashback.presentation.localisation.generated.resources.sprint_qualifying_header_q1
@@ -32,7 +35,9 @@ import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
+import tmg.flashback.feature.weekend.presentation.WeekendUiState.Data
 import tmg.flashback.feature.weekend.presentation.components.Position
+import tmg.flashback.feature.weekend.presentation.components.TypeHeader
 import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.model.DriverEntry
 import tmg.flashback.formula1.model.LapTime
@@ -48,6 +53,28 @@ import tmg.flashback.ui.components.driver.DriverName
 import tmg.flashback.ui.components.edgeBar
 
 private val lapTimeWidth: Dp = 64.dp
+
+fun LazyListScope.addSprintQualifyingData(
+    uiState: Data,
+    keyPrefix: String = ""
+) {
+    item("qualifying_label") {
+        TypeHeader(
+            resource = string.nav_sprint_qualifying
+        )
+    }
+    item("qualifying_header") {
+        SprintQualifyingHeader()
+    }
+    items(uiState.sprintQualifyingResults, key = { "${keyPrefix}-${it.id}" }) {
+        when (it) {
+            is SprintQualifyingModel.Result -> SprintQualifying(
+                model = it,
+                driverClicked = { }
+            )
+        }
+    }
+}
 
 @Composable
 internal fun SprintQualifyingHeader(

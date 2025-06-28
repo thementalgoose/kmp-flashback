@@ -57,8 +57,8 @@ fun NavigationBar(
     BoxWithConstraints(
         modifier = modifier
             .fillMaxWidth()
-            .background(AppTheme.colors.surfaceNav)
             .shadow(8.dp)
+            .background(AppTheme.colors.surfaceNav)
             .padding(bottom = bottomPadding)
     ) {
         val displayAsVertical = (horizontalWidthThreshold * list.size) > minWidth
