@@ -42,19 +42,19 @@ fun AppContainer(
     appNavigationViewModel: AppNavigationViewModel
 ) {
     val coroutineScope = rememberCoroutineScope()
-    val menuAccessible = true // Derive from VM
 
     val appNavigationUiState = appNavigationViewModel.uiState.collectAsStateWithLifecycle()
     val easterEggModifier = Modifier
         .snow(appNavigationUiState.value.easterEggs.snow)
         .summer(appNavigationUiState.value.easterEggs.summer)
 
+    val menuAccessible = !appNavigationUiState.value.intoSubNavigation // Derive from VM
     val isCompact = windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT
 
     OverlappingPanels(
         modifier = Modifier
             .background(AppTheme.colors.surface),
-        panelsState = when (isCompact || appNavigationUiState.value.intoSubNavigation) {
+        panelsState = when (isCompact && menuAccessible) {
             true -> panelsState
             false -> OverlappingPanelsState(OverlappingPanelsValue.Closed)
         },

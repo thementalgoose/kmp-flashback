@@ -139,9 +139,7 @@ fun WeekendScreenTab(
             }
         )
         if (uiState is Data) {
-            val navigationItems = remember(uiState.tabs, uiState.tab) {
-                uiState.tabs.toNavigationItem(uiState.tab)
-            }
+            val navigationItems = uiState.tabs.toNavigationItem(uiState.tab)
             NavigationBar(
                 modifier = Modifier
                     .align(Alignment.BottomCenter),

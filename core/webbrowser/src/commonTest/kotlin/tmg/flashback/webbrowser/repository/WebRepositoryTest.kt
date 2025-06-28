@@ -22,19 +22,19 @@ internal class WebBrowserRepositoryTest {
     }
 
     @Test
-    fun `open in external reads from preferences`() {
-        every { mockPreferenceManager.getBoolean(keyOpenInExternal, true) } returns true
+    fun `enabled reads from preferences`() {
+        every { mockPreferenceManager.getBoolean(keyOpenInExternal, false) } returns true
         initUnderTest()
-        assertTrue(underTest.openInExternal)
+        assertTrue(underTest.enabled)
         verify {
             mockPreferenceManager.getBoolean(keyOpenInExternal, true)
         }
     }
 
     @Test
-    fun `open in external writes to preferences`() {
+    fun `enabled writes to preferences`() {
         initUnderTest()
-        underTest.openInExternal = true
+        underTest.enabled = true
         verify {
             mockPreferenceManager.save(keyOpenInExternal, true)
         }

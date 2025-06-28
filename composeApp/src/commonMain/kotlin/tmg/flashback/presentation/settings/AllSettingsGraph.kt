@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass.Companion.COMPACT
 import tmg.flashback.presentation.settings.about.SettingsAboutScreen
+import tmg.flashback.presentation.settings.browser.SettingsBrowserScreen
 import tmg.flashback.presentation.settings.darkmode.SettingsDarkModeScreen
 import tmg.flashback.presentation.settings.layout.SettingsLayoutScreen
 import tmg.flashback.presentation.settings.privacy.SettingsPrivacyScreen
@@ -68,6 +69,11 @@ fun AllSettingsGraph(
                     showBack = windowSizeClass.windowWidthSizeClass == COMPACT
                 )
                 is SettingNavigation.Weather -> SettingsWeatherScreen(
+                    actionUpClicked = { navigator.clear() },
+                    insetPadding = insetPadding,
+                    showBack = windowSizeClass.windowWidthSizeClass == COMPACT
+                )
+                is SettingNavigation.InAppBrowser -> SettingsBrowserScreen(
                     actionUpClicked = { navigator.clear() },
                     insetPadding = insetPadding,
                     showBack = windowSizeClass.windowWidthSizeClass == COMPACT

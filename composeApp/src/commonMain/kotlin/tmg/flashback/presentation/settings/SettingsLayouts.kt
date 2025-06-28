@@ -15,6 +15,7 @@ import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.test.isEnabled
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
@@ -69,11 +70,13 @@ fun LazyListScope.PrefCategory(
 fun LazyListScope.PrefLink(
     item: Setting.Link,
     itemClicked: (Setting.Link) -> Unit,
+    isEnabled: Boolean = item.isEnabled
 ) {
     item(item.id) {
         SettingLink(
             item = item,
-            itemClicked = itemClicked
+            itemClicked = itemClicked,
+            isEnabled = isEnabled
         )
     }
 }
@@ -82,12 +85,14 @@ fun LazyListScope.PrefRadio(
     item: Setting.Link,
     itemClicked: (Setting.Link) -> Unit,
     isChecked: Boolean,
+    isEnabled: Boolean = item.isEnabled
 ) {
     item(item.id) {
         SettingRadio(
             item = item,
             itemClicked = itemClicked,
-            isChecked = isChecked
+            isChecked = isChecked,
+            isEnabled = isEnabled
         )
     }
 }
@@ -95,13 +100,15 @@ fun LazyListScope.PrefRadio(
 fun LazyListScope.PrefSwitch(
     item: Setting.Link,
     itemClicked: (Setting.Link) -> Unit,
-    isChecked: Boolean
+    isChecked: Boolean,
+    isEnabled: Boolean = item.isEnabled
 ) {
     item(item.id) {
         SettingSwitch(
             item = item,
             itemClicked = itemClicked,
-            isChecked = isChecked
+            isChecked = isChecked,
+            isEnabled = isEnabled
         )
     }
 }
@@ -123,13 +130,15 @@ fun SettingHeader(
 fun SettingLink(
     item: Setting.Link,
     itemClicked: (Setting.Link) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isEnabled: Boolean = true,
 ) {
     SettingLink(
         item = item,
+        isEnabled = isEnabled,
         modifier = modifier
             .clickable(
-                enabled = item.isEnabled,
+                enabled = isEnabled,
                 onClick = {
                     itemClicked(item)
                 }
@@ -144,15 +153,17 @@ fun SettingRadio(
     item: Setting.Link,
     itemClicked: (Setting.Link) -> Unit,
     isChecked: Boolean,
+    isEnabled: Boolean = true,
     modifier: Modifier = Modifier
 ) {
     SettingLink(
         item = item,
+        isEnabled = isEnabled,
         modifier = modifier
             .toggleable(
                 value = isChecked,
                 onValueChange = { itemClicked(item) },
-                enabled = item.isEnabled
+                enabled = isEnabled
             )
             .then(defaultSettingModifier),
         content = {
@@ -168,15 +179,17 @@ fun SettingSwitch(
     item: Setting.Link,
     itemClicked: (Setting.Link) -> Unit,
     isChecked: Boolean,
+    isEnabled: Boolean = true,
     modifier: Modifier = Modifier
 ) {
     SettingLink(
         item = item,
+        isEnabled = isEnabled,
         modifier = modifier
             .toggleable(
                 value = isChecked,
                 onValueChange = { itemClicked(item) },
-                enabled = item.isEnabled
+                enabled = isEnabled
             )
             .then(defaultSettingModifier),
         content = {
@@ -190,11 +203,12 @@ fun SettingSwitch(
 @Composable
 private fun SettingLink(
     item: Setting.Link,
+    isEnabled: Boolean,
     modifier: Modifier,
     content: @Composable () -> Unit = { }
 ) {
     Row(modifier = modifier
-        .appearDisabled(item.isEnabled),
+        .appearDisabled(isEnabled),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(
@@ -228,17 +242,18 @@ private fun SettingLink(
 fun SettingCategory(
     item: Setting.Category,
     itemClicked: (Setting.Category) -> Unit,
+    isEnabled: Boolean = true,
     modifier: Modifier = Modifier
 ) {
     Row(modifier = modifier
         .clickable(
-            enabled = item.isEnabled,
+            enabled = isEnabled,
             onClick = {
                 itemClicked(item)
             }
         )
         .then(defaultSettingModifier)
-        .appearDisabled(item.isEnabled)
+        .appearDisabled(isEnabled)
     ) {
         if (item.icon != null) {
             Icon(
