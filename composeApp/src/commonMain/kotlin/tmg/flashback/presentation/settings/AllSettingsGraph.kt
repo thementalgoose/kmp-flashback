@@ -4,8 +4,12 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass.Companion.COMPACT
+import tmg.flashback.presentation.settings.about.SettingsAboutScreen
 import tmg.flashback.presentation.settings.darkmode.SettingsDarkModeScreen
+import tmg.flashback.presentation.settings.layout.SettingsLayoutScreen
+import tmg.flashback.presentation.settings.privacy.SettingsPrivacyScreen
 import tmg.flashback.presentation.settings.theme.SettingsThemeScreen
+import tmg.flashback.presentation.settings.weather.SettingsWeatherScreen
 import tmg.flashback.ui.navigation.MasterDetailsPane
 import tmg.flashback.ui.navigation.rememberMasterDetailPaneState
 
@@ -53,6 +57,26 @@ fun AllSettingsGraph(
                     showBack = windowSizeClass.windowWidthSizeClass == COMPACT
                 )
                 is SettingNavigation.Theme -> SettingsThemeScreen(
+                    actionUpClicked = { navigator.clear() },
+                    insetPadding = insetPadding,
+                    showBack = windowSizeClass.windowWidthSizeClass == COMPACT
+                )
+                is SettingNavigation.Layout -> SettingsLayoutScreen(
+                    actionUpClicked = { navigator.clear() },
+                    insetPadding = insetPadding,
+                    showBack = windowSizeClass.windowWidthSizeClass == COMPACT
+                )
+                is SettingNavigation.Weather -> SettingsWeatherScreen(
+                    actionUpClicked = { navigator.clear() },
+                    insetPadding = insetPadding,
+                    showBack = windowSizeClass.windowWidthSizeClass == COMPACT
+                )
+                is SettingNavigation.Privacy -> SettingsPrivacyScreen(
+                    actionUpClicked = { navigator.clear() },
+                    insetPadding = insetPadding,
+                    showBack = windowSizeClass.windowWidthSizeClass == COMPACT
+                )
+                is SettingNavigation.About -> SettingsAboutScreen(
                     actionUpClicked = { navigator.clear() },
                     insetPadding = insetPadding,
                     showBack = windowSizeClass.windowWidthSizeClass == COMPACT

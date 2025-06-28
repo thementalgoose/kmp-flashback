@@ -1,5 +1,6 @@
 package tmg.flashback.presentation.settings
 
+import androidx.compose.ui.test.isEnabled
 import flashback.composeapp.generated.resources.Res
 import flashback.composeapp.generated.resources.ic_settings_about
 import flashback.composeapp.generated.resources.ic_settings_dark_mode
@@ -132,7 +133,8 @@ object Settings {
         val RecentHighlights = Setting.Link(
             _id = "layout_recents",
             title = string.settings_pref_recent_highlights_title,
-            subtitle = string.settings_pref_recent_highlights_description
+            subtitle = string.settings_pref_recent_highlights_description,
+            isEnabled = false
         )
         val CollapsibleRaces = Setting.Link(
             _id = "layout_recents",
