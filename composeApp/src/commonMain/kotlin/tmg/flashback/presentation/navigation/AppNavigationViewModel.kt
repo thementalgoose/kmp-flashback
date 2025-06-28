@@ -9,9 +9,6 @@ import androidx.savedstate.read
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.internal.NamedValueDecoder
-import kotlinx.serialization.json.JsonDecoder
 import tmg.flashback.eastereggs.usecases.IsMenuIconEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSnowEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSummerEnabledUseCase
@@ -19,7 +16,6 @@ import tmg.flashback.eastereggs.usecases.IsUkraineEnabledUseCase
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.navigation.Screen
-import tmg.flashback.presentation.MenuItem
 
 class AppNavigationViewModel(
     isRssEnabledUseCase: IsRssEnabledUseCase,
@@ -40,7 +36,7 @@ class AppNavigationViewModel(
         showRss = isRssEnabledUseCase(),
         easterEggs = easterEggs,
         screen = null,
-        forceHideNavigationBar = false
+        intoSubNavigation = false
     ))
     val uiState: StateFlow<AppNavigationUIState> = _uiState
 
@@ -84,7 +80,7 @@ class AppNavigationViewModel(
 
     fun hideBar(hide: Boolean) {
         _uiState.update {
-            it.copy(forceHideNavigationBar = hide)
+            it.copy(intoSubNavigation = hide)
         }
     }
 }

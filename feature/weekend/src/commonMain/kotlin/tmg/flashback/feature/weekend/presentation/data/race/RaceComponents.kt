@@ -70,7 +70,7 @@ fun LazyListScope.addRaceData(
                 )
             }
             is RaceModel.DriverResult -> {
-                RaceDriverResult(model = it.result, driverClicked = { }, modifier = Modifier.animateItem())
+                RaceDriverResult(model = it.result, driverClicked = { })
             }
         }
     }

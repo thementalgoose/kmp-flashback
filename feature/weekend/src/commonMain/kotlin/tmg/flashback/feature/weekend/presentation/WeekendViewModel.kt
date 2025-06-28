@@ -78,9 +78,11 @@ class WeekendViewModel(
         this.seasonRound.update {
             season to round
         }
+        this.tab.update { WeekendTabs.Qualifying }
     }
 
     fun updateTab(tab: WeekendTabs) {
+        logDebug("Weeekend", "Selecting tab $tab")
         this.tab.update { tab }
     }
 

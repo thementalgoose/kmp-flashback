@@ -54,7 +54,7 @@ fun AppContainer(
     OverlappingPanels(
         modifier = Modifier
             .background(AppTheme.colors.surface),
-        panelsState = when (isCompact) {
+        panelsState = when (isCompact || appNavigationUiState.value.intoSubNavigation) {
             true -> panelsState
             false -> OverlappingPanelsState(OverlappingPanelsValue.Closed)
         },

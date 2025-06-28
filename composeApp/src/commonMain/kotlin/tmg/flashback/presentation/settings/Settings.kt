@@ -248,12 +248,12 @@ object Settings {
             subtitle = string.settings_pref_privacy_policy_description
         )
         val CrashReporting = Setting.Link(
-            _id = "privacy_policy",
+            _id = "crash_reporting",
             title = string.settings_pref_crash_reporting_title,
             subtitle = string.settings_pref_crash_reporting_description
         )
         val Analytics = Setting.Link(
-            _id = "privacy_policy",
+            _id = "analytics",
             title = string.settings_pref_analytics_title,
             subtitle = string.settings_pref_analytics_description
         )

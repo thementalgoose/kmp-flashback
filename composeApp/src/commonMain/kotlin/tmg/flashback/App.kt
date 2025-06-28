@@ -4,7 +4,6 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
@@ -24,7 +23,6 @@ import tmg.flashback.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.presentation.toNavigationItem
 import tmg.flashback.presentation.toScreen
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.text.TextBody1
 import tmg.flashback.ui.components.AppScaffold
 import tmg.flashback.ui.navigation.NavigationBar
 import tmg.flashback.ui.navigation.OverlappingPanelsValue
@@ -49,7 +47,7 @@ fun App() {
 
     val panelsState = rememberOverlappingPanelsState(OverlappingPanelsValue.Closed)
 
-    val showBottomBar = isCompact && appNavigationUiState.value.screen in listOf(Screen.Calendar, Screen.DriverStandings, Screen.TeamStandings) && !appNavigationUiState.value.forceHideNavigationBar
+    val showBottomBar = isCompact && appNavigationUiState.value.screen in listOf(Screen.Calendar, Screen.DriverStandings, Screen.TeamStandings) && !appNavigationUiState.value.intoSubNavigation
     val systemNavigationBarHeight = WindowInsets.safeDrawing.asPaddingValues().calculateBottomPadding()
     val navigationBarHeight = appBarHeightWhenVertical + systemNavigationBarHeight
     val navigationBarPosition = animateDpAsState(
