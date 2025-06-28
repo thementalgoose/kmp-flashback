@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.adaptive.WindowAdaptiveInfo
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -12,12 +13,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import tmg.flashback.feature.rss.presentation.feed.RssFeedGraph
 import tmg.flashback.feature.season.presentation.calendar.CalendarGraph
+import tmg.flashback.feature.season.presentation.calendar.NavigationWeekend
 import tmg.flashback.feature.season.presentation.driver_standings.DriverStandingsGraph
+import tmg.flashback.feature.season.presentation.driver_standings.DriverStandingsNavigation
 import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsGraph
+import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsNavigation
 import tmg.flashback.navigation.Screen
 import tmg.flashback.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.presentation.settings.AllSettingsGraph
 import tmg.flashback.style.text.TextTitle
+import tmg.flashback.ui.navigation.rememberMasterDetailPaneState
 
 @Composable
 fun AppGraph(
@@ -27,6 +32,19 @@ fun AppGraph(
     windowAdaptiveInfo: WindowAdaptiveInfo,
     modifier: Modifier = Modifier,
 ) {
+    val calendarNavigator = rememberMasterDetailPaneState<NavigationWeekend>()
+    val driverStandingsNavigator = rememberMasterDetailPaneState<DriverStandingsNavigation>()
+    val teamStandingsNavigator = rememberMasterDetailPaneState<TeamStandingsNavigation>()
+    LaunchedEffect(
+        calendarNavigator.destination,
+        driverStandingsNavigator.destination,
+        teamStandingsNavigator.destination
+    ) {
+        val forceHide = calendarNavigator.destination != null ||
+                driverStandingsNavigator.destination != null ||
+                teamStandingsNavigator.destination != null
+        appNavigationViewModel.hideBar(forceHide)
+    }
 
     NavHost(
         navController = navController,
@@ -35,6 +53,7 @@ fun AppGraph(
     ) {
         composable<Screen.Calendar> {
             CalendarGraph(
+                navigator = calendarNavigator,
                 paddingValues = insetPadding,
                 actionUpClicked = { },
                 windowSizeClass = windowAdaptiveInfo.windowSizeClass
@@ -42,6 +61,7 @@ fun AppGraph(
         }
         composable<Screen.DriverStandings> {
             DriverStandingsGraph(
+                navigator = driverStandingsNavigator,
                 paddingValues = insetPadding,
                 actionUpClicked = { },
                 windowSizeClass = windowAdaptiveInfo.windowSizeClass,
@@ -49,6 +69,7 @@ fun AppGraph(
         }
         composable<Screen.TeamStandings> {
             TeamStandingsGraph(
+                navigator = teamStandingsNavigator,
                 paddingValues = insetPadding,
                 actionUpClicked = { },
                 windowSizeClass = windowAdaptiveInfo.windowSizeClass,

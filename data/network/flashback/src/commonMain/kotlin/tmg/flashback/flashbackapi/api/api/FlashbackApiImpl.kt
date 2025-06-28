@@ -3,8 +3,13 @@ package tmg.flashback.flashbackapi.api.api
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.client.request.headers
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
+import io.ktor.util.reflect.TypeInfo
 import kotlinx.io.IOException
+import kotlinx.serialization.Serializable
+import tmg.flashback.flashbackapi.api.client.json
 import tmg.flashback.flashbackapi.api.models.MetadataWrapper
 import tmg.flashback.flashbackapi.api.models.circuits.AllCircuits
 import tmg.flashback.flashbackapi.api.models.circuits.CircuitHistory
@@ -78,16 +83,23 @@ class FlashbackApiImpl(
     @Throws(RuntimeException::class, IOException::class)
     private suspend inline fun <reified T> makeRequest(endpoint: String): T? {
         logInfo(">> $baseUrl/$endpoint")
-        val httpResponse = httpClient.get("$baseUrl/$endpoint")
-        when {
-            httpResponse.status == HttpStatusCode.NotFound -> {
+        val httpResponse = httpClient.get("$baseUrl/$endpoint") {
+            headers {
+                set("Accept", "application/json")
+                set("ContentType", "application/json")
+                set("content-type", "application/json")
+            }
+        }
+        when (httpResponse.status) {
+            HttpStatusCode.NotFound -> {
                 throw NotFoundException()
             }
-            httpResponse.status == HttpStatusCode.InternalServerError -> {
+            HttpStatusCode.InternalServerError -> {
                 throw RuntimeException()
             }
         }
-        return httpResponse.body()
+        // body decoding ktor strategy not working for some reason
+        return json.decodeFromString<T>(httpResponse.bodyAsText())
     }
 }
 

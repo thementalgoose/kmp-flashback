@@ -13,6 +13,7 @@ import androidx.window.core.layout.WindowWidthSizeClass.Companion.COMPACT
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.feature.weekend.presentation.WeekendScreen
 import tmg.flashback.feature.weekend.presentation.WeekendScreenData
+import tmg.flashback.ui.navigation.MasterDetailPaneState
 import tmg.flashback.ui.navigation.MasterDetailsPane
 import tmg.flashback.ui.navigation.appBarMaximumHeight
 import tmg.flashback.ui.navigation.rememberMasterDetailPaneState
@@ -26,12 +27,12 @@ data class NavigationWeekend(
 @Composable
 fun CalendarGraph(
     paddingValues: PaddingValues,
+    navigator: MasterDetailPaneState<NavigationWeekend>,
     actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
     viewModel: CalendarScreenViewModel = koinViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsState()
-    val navigator = rememberMasterDetailPaneState<NavigationWeekend>()
 
     // Add custom padding for nav bar
     val direction = LocalLayoutDirection.current

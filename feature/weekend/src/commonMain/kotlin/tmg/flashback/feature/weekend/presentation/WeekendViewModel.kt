@@ -36,6 +36,9 @@ class WeekendViewModel(
 
     private val seasonRound: MutableStateFlow<Pair<Int, Int>?> = MutableStateFlow(null)
 
+    private val _isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading
+
     private val resultType: MutableStateFlow<ResultType> = MutableStateFlow(ResultType.DRIVERS)
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -46,6 +49,7 @@ class WeekendViewModel(
             if (race == null) {
                 return@combine WeekendUiState.NotFound
             }
+            _isLoading.update { false }
             return@combine WeekendUiState.Data(
                 season = race.raceInfo.season,
                 info = infoDataMapper(race),
@@ -65,9 +69,11 @@ class WeekendViewModel(
 
     fun refresh() {
         viewModelScope.launch {
+            _isLoading.update { true }
             val (season, _) = seasonRound.value ?: return@launch
             racesRepository.populateRaces(season)
             overviewRepository.populateOverview(season)
+            _isLoading.update { false }
         }
     }
 }

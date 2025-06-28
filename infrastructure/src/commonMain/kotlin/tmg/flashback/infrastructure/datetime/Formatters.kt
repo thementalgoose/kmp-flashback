@@ -20,6 +20,13 @@ val dateFormatDMMM = LocalDate.Format {
     char(' ')
     monthName(ENGLISH_ABBREVIATED)
 }
+val dateFormatDMMMYYYY = LocalDate.Format {
+    dayOfMonth(Padding.NONE)
+    char(' ')
+    monthName(ENGLISH_ABBREVIATED)
+    char(' ')
+    year(Padding.NONE)
+}
 val dateFormatEEEEDMMM = LocalDate.Format {
     dayOfWeek(DayOfWeekNames.ENGLISH_FULL)
     char(' ')

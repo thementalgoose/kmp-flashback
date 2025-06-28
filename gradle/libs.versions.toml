@@ -128,8 +128,6 @@ koin-compose = [
 common-ktor = [
     "ktor-client-core",
     "ktor-client-logging",
-    "ktor-serialization-kotlinx-json",
-    "ktor-serialization-kotlinx-xml",
     "ktor-client-content-negotiation",
 ]
 coil = [

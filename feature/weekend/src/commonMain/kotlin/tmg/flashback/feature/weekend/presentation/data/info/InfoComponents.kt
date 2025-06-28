@@ -40,6 +40,7 @@ import flashback.presentation.localisation.generated.resources.weather_temp_degr
 import flashback.presentation.localisation.generated.resources.weather_temp_degrees_f
 import flashback.presentation.localisation.generated.resources.weather_wind_kph
 import flashback.presentation.localisation.generated.resources.weather_wind_mph
+import flashback.presentation.localisation.generated.resources.weekend_race_round
 import flashback.presentation.ui.generated.resources.Res
 import flashback.presentation.ui.generated.resources.ic_notification_indicator_bell
 import kotlinx.datetime.LocalDate
@@ -48,12 +49,9 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
-import tmg.flashback.feature.weekend.presentation.data.qualifying.QualifyingHeader
-import tmg.flashback.feature.weekend.presentation.data.qualifying.QualifyingModel
-import tmg.flashback.feature.weekend.presentation.data.qualifying.QualifyingResult
-import tmg.flashback.feature.weekend.presentation.data.qualifying.preview
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.ScheduleWeather
+import tmg.flashback.infrastructure.datetime.dateFormatDMMM
 import tmg.flashback.infrastructure.datetime.dateFormatEEEEDMMM
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.timeFormatHHmm
@@ -65,11 +63,60 @@ import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.edgeFade
+import tmg.flashback.ui.components.flag.Flag
 import kotlin.math.roundToInt
 
 private val trackSize: Dp = 200.dp
 private val weatherIconSize: Dp = 48.dp
 private val weatherMetadataIconSize: Dp = 20.dp
+
+@Composable
+internal fun RaceDetails(
+    model: InfoModel,
+    modifier: Modifier = Modifier
+) {
+    Row(modifier = modifier) {
+        Column(modifier = Modifier.weight(1f)) {
+            TextBody1(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        top = AppTheme.dimens.xsmall,
+                        bottom = AppTheme.dimens.xsmall
+                    ),
+                text = model.circuit.name
+            )
+            TextBody1(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = AppTheme.dimens.xsmall),
+                text = model.circuit.country
+            )
+            TextBody2(
+                bold = true,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = AppTheme.dimens.xsmall),
+                text = model.date.format(dateFormatDMMM)
+            )
+        }
+        Column(
+            horizontalAlignment = Alignment.End
+        ) {
+            Flag(
+                iso = model.circuit.countryISO,
+                nationality = model.circuit.country,
+                modifier = Modifier.size(48.dp),
+            )
+            TextBody2(
+                text = stringResource(resource = string.weekend_race_round, model.round),
+                bold = true,
+                modifier = Modifier.padding(vertical = 2.dp)
+            )
+        }
+    }
+}
+
 
 @Composable
 internal fun Schedule(
@@ -276,12 +323,27 @@ private fun ScheduleWeather.getWindspeed(metric: Boolean): String = when (metric
 
 @Preview
 @Composable
-private fun Preview(
+private fun PreviewSchedule(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
     AppThemePreview(previewConfig) {
         Column {
             Schedule(
+                model = InfoModel.preview()
+            )
+        }
+    }
+}
+
+
+@Preview
+@Composable
+private fun PreviewDetails(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    AppThemePreview(previewConfig) {
+        Column {
+            RaceDetails(
                 model = InfoModel.preview()
             )
         }

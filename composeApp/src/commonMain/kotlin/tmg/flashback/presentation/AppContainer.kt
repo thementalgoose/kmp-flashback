@@ -12,6 +12,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.backhandler.BackHandler
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
@@ -121,10 +122,10 @@ fun AppContainer(
         }
     })
 
-//    // Close the menu if bck is pressed on the menu
-//    BackHandler(panelsState.isStartPanelOpen) {
-//        coroutineScope.launch {
-//            panelsState.closePanels()
-//        }
-//    }
+    // Close the menu if bck is pressed on the menu
+    BackHandler(panelsState.isStartPanelOpen) {
+        coroutineScope.launch {
+            panelsState.closePanels()
+        }
+    }
 }

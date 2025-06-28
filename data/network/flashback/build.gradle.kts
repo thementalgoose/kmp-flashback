@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.flashback.dataModule)
+    alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.mokkery)
 }
 
@@ -15,6 +16,7 @@ kotlin {
             implementation(projects.infrastructure)
             implementation(projects.core.configuration)
             implementation(libs.bundles.common.ktor)
+            implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.coroutines.core)
         }
         commonTest.dependencies {

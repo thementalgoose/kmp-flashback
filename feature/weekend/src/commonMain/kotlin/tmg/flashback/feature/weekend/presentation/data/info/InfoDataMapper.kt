@@ -17,6 +17,8 @@ internal class InfoDataMapperImpl(
             round = race.raceInfo.round,
             raceName = race.raceInfo.name,
             circuit = race.raceInfo.circuit,
+            date = race.raceInfo.date,
+            time = race.raceInfo.time,
             laps = race.raceInfo.laps,
             youtubeUrl = race.raceInfo.youtube,
             wikipediaUrl = race.raceInfo.wikipediaUrl,

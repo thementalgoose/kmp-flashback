@@ -1,6 +1,7 @@
 package tmg.flashback.feature.weekend.presentation.data.info
 
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalTime
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.preview.preview
@@ -9,6 +10,8 @@ data class InfoModel(
     val season: Int,
     val round: Int,
     val raceName: String,
+    val date: LocalDate,
+    val time: LocalTime?,
     val circuit: Circuit,
     val laps: String?,
     val youtubeUrl: String?,
@@ -24,6 +27,8 @@ fun InfoModel.Companion.preview() = InfoModel(
     season = 2020,
     round = 1,
     raceName = "Apex Grand Prix",
+    date = LocalDate(2020, 1, 1),
+    time = LocalTime(12, 0),
     circuit = Circuit.preview(),
     laps = "100",
     youtubeUrl = "youtube",

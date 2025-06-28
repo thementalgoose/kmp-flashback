@@ -7,6 +7,7 @@ data class AppNavigationUIState(
     val showRss: Boolean,
     val easterEggs: AppNavigationEasterEggs,
     val screen: Screen?,
+    val forceHideNavigationBar: Boolean
 )
 
 data class AppNavigationEasterEggs(

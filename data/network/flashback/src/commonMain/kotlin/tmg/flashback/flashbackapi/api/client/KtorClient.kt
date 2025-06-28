@@ -10,4 +10,5 @@ val json = Json {
     ignoreUnknownKeys = true
     isLenient = true
     prettyPrint = Device.isDebug
+    useArrayPolymorphism = true
 }

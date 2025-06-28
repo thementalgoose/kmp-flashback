@@ -49,7 +49,7 @@ fun App() {
 
     val panelsState = rememberOverlappingPanelsState(OverlappingPanelsValue.Closed)
 
-    val showBottomBar = isCompact && appNavigationUiState.value.screen in listOf(Screen.Calendar, Screen.DriverStandings, Screen.TeamStandings)
+    val showBottomBar = isCompact && appNavigationUiState.value.screen in listOf(Screen.Calendar, Screen.DriverStandings, Screen.TeamStandings) && !appNavigationUiState.value.forceHideNavigationBar
     val systemNavigationBarHeight = WindowInsets.safeDrawing.asPaddingValues().calculateBottomPadding()
     val navigationBarHeight = appBarHeightWhenVertical + systemNavigationBarHeight
     val navigationBarPosition = animateDpAsState(

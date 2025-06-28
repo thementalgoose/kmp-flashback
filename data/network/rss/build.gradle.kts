@@ -15,6 +15,7 @@ kotlin {
             implementation(projects.infrastructure)
             implementation(projects.core.configuration)
             implementation(libs.bundles.common.ktor)
+            implementation(libs.ktor.serialization.kotlinx.xml)
             implementation(libs.coroutines.core)
         }
         commonTest.dependencies {

@@ -9,26 +9,26 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.window.core.layout.WindowSizeClass
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.style.text.TextTitle
+import tmg.flashback.ui.navigation.MasterDetailPaneState
 import tmg.flashback.ui.navigation.MasterDetailsPane
 import tmg.flashback.ui.navigation.appBarMaximumHeight
-import tmg.flashback.ui.navigation.rememberMasterDetailPaneState
 
-private interface Navigation {
+sealed interface DriverStandingsNavigation {
     data class Driver(
         val id: String,
         val name: String
-    ): Navigation
+    ): DriverStandingsNavigation
 }
 
 @Composable
 fun DriverStandingsGraph(
+    navigator: MasterDetailPaneState<DriverStandingsNavigation>,
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
     viewModel: DriverStandingsViewModel = koinViewModel()
 ) {
     val state = viewModel.uiState.collectAsState()
-    val navigator = rememberMasterDetailPaneState<Navigation>()
 
     // Add custom padding for nav bar
     val direction = LocalLayoutDirection.current
@@ -49,7 +49,7 @@ fun DriverStandingsGraph(
                 uiState = state.value,
                 windowSizeClass = windowSizeClass,
                 driverClicked = {
-                    navigator.navigateTo(Navigation.Driver(id = it.driver.id, name = it.driver.name))
+                    navigator.navigateTo(DriverStandingsNavigation.Driver(id = it.driver.id, name = it.driver.name))
                 },
                 refresh = viewModel::refresh,
                 comparisonClicked = {

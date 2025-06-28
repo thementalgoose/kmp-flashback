@@ -39,7 +39,8 @@ class AppNavigationViewModel(
     private val _uiState: MutableStateFlow<AppNavigationUIState> = MutableStateFlow(AppNavigationUIState(
         showRss = isRssEnabledUseCase(),
         easterEggs = easterEggs,
-        screen = null
+        screen = null,
+        forceHideNavigationBar = false
     ))
     val uiState: StateFlow<AppNavigationUIState> = _uiState
 
@@ -78,6 +79,12 @@ class AppNavigationViewModel(
         logDebug("AppNavigation", "onDestination updated to $screen")
         _uiState.update {
             it.copy(screen = screen)
+        }
+    }
+
+    fun hideBar(hide: Boolean) {
+        _uiState.update {
+            it.copy(forceHideNavigationBar = hide)
         }
     }
 }

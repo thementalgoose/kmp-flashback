@@ -8,9 +8,7 @@ import tmg.flashback.feature.weekend.presentation.data.sprint_race.SprintRaceMod
 
 sealed class WeekendUiState {
     data object Initial: WeekendUiState()
-
     data object NotFound: WeekendUiState()
-
     data class Data(
         val season: Int,
         val info: InfoModel,
