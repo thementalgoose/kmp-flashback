@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -71,6 +72,7 @@ fun RSSScreen(
     SwipeRefresh(
         isLoading = (uiState as? RssFeedUiState.Data)?.isLoading == true,
         onRefresh = refresh,
+        modifier = Modifier.fillMaxSize(),
         content = {
             LazyColumn(
                 contentPadding = paddingValues,
@@ -84,7 +86,7 @@ fun RSSScreen(
                                     Icon(
                                         painter = painterResource(resource = Res.drawable.ic_rss_settings),
                                         contentDescription = stringResource(resource = string.ab_rss_settings),
-                                        tint = AppTheme.colors.surface
+                                        tint = AppTheme.colors.onSurface
                                     )
                                 }
                             },
@@ -110,6 +112,9 @@ fun RSSScreen(
                                         )
                                     )
                                 }
+                            }
+                            item("debug") {
+                                TextBody2("Rss items ${uiState.rssItems}")
                             }
                             items(uiState.rssItems, key = { it.link }) {
                                 Item(it, itemClicked)

@@ -67,6 +67,7 @@ fun CalendarScreen(
     windowSizeClass: WindowSizeClass,
     uiState: CalendarScreenState,
     refresh: () -> Unit,
+    expandGroupedRaces: () -> Unit,
     goToWeekend: (CalendarItem.RaceWeek) -> Unit,
 ) {
     SwipeRefresh(
@@ -86,20 +87,14 @@ fun CalendarScreen(
                             false -> null
                         },
                         actionUpClicked = actionUpClicked,
-                        overrideIcons = {
-
-                        }
+                        overrideIcons = { }
                     )
                 }
-
-//                item(key = "info") {
-//                    DashboardQuickLinks(season = uiState.season)
-//                }
 
                 if (uiState.items.isNullOrEmpty()) {
                     if (uiState.isLoading) {
                         item(key = "loading") {
-                            SkeletonViewList()
+                            SkeletonViewList(modifier = Modifier.animateItem())
                         }
                     }
                 }
@@ -109,25 +104,35 @@ fun CalendarScreen(
                         is CalendarItem.RaceWeek -> {
                             RaceWeekCard(
                                 model = item,
-                                itemClicked = { goToWeekend(it) }
+                                itemClicked = { goToWeekend(it) },
+                                modifier = Modifier.animateItem()
                             )
                         }
 
                         is CalendarItem.Event -> {
-                            Event(event = item)
+                            Event(
+                                event = item,
+                                modifier = Modifier.animateItem()
+                            )
                         }
 
                         is CalendarItem.GroupedCompletedRaces -> {
                             Spacer(Modifier.height(AppTheme.dimens.xsmall))
                             CollapsableList(
                                 model = item,
-                                itemClicked = {  }
+                                itemClicked = {
+                                    expandGroupedRaces()
+                                },
+                                modifier = Modifier.animateItem()
                             )
                             Spacer(Modifier.height(AppTheme.dimens.xsmall))
                         }
 
                         is CalendarItem.EmptyWeek -> {
-                            EmptyWeek(model = item)
+                            EmptyWeek(
+                                model = item,
+                                modifier = Modifier.animateItem()
+                            )
                         }
                     }
                 }
@@ -216,10 +221,11 @@ private fun CollapsableList(
 
 @Composable
 private fun EmptyWeek(
-    model: CalendarItem.EmptyWeek
+    model: CalendarItem.EmptyWeek,
+    modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(AppTheme.dimens.medium)
     ) {
@@ -264,9 +270,10 @@ private fun Expand(
 
 @Composable
 private fun Event(
-    event: CalendarItem.Event
+    event: CalendarItem.Event,
+    modifier: Modifier = Modifier
 ) {
-    Row(modifier = Modifier
+    Row(modifier = modifier
         .alpha(if (event.date <= LocalDate.now()) 1f else listAlpha)
         .padding(
             vertical = AppTheme.dimens.xsmall,

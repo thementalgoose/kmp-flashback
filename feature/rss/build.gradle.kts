@@ -43,6 +43,7 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
+            implementation(libs.turbine)
         }
         iosMain.dependencies {
 

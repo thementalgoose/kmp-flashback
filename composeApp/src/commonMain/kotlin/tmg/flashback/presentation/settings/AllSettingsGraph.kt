@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass.Companion.COMPACT
+import tmg.flashback.feature.rss.presentation.configure.RssConfigureScreen
 import tmg.flashback.presentation.settings.about.SettingsAboutScreen
 import tmg.flashback.presentation.settings.browser.SettingsBrowserScreen
 import tmg.flashback.presentation.settings.darkmode.SettingsDarkModeScreen
@@ -11,11 +12,11 @@ import tmg.flashback.presentation.settings.layout.SettingsLayoutScreen
 import tmg.flashback.presentation.settings.privacy.SettingsPrivacyScreen
 import tmg.flashback.presentation.settings.theme.SettingsThemeScreen
 import tmg.flashback.presentation.settings.weather.SettingsWeatherScreen
+import tmg.flashback.ui.navigation.MasterDetailPaneState
 import tmg.flashback.ui.navigation.MasterDetailsPane
 import tmg.flashback.ui.navigation.rememberMasterDetailPaneState
 
-
-internal interface SettingNavigation {
+interface SettingNavigation {
     data object DarkMode: SettingNavigation
     data object Theme: SettingNavigation
     data object Layout: SettingNavigation
@@ -33,10 +34,9 @@ internal interface SettingNavigation {
 fun AllSettingsGraph(
     insetPadding: PaddingValues,
     actionUpClicked: () -> Unit,
+    navigator: MasterDetailPaneState<SettingNavigation>,
     windowSizeClass: WindowSizeClass,
 ) {
-    val navigator = rememberMasterDetailPaneState<SettingNavigation>()
-
     MasterDetailsPane(
         navigator = navigator,
         windowSizeClass = windowSizeClass,
@@ -74,6 +74,11 @@ fun AllSettingsGraph(
                     showBack = windowSizeClass.windowWidthSizeClass == COMPACT
                 )
                 is SettingNavigation.InAppBrowser -> SettingsBrowserScreen(
+                    actionUpClicked = { navigator.clear() },
+                    insetPadding = insetPadding,
+                    showBack = windowSizeClass.windowWidthSizeClass == COMPACT
+                )
+                is SettingNavigation.RssConfigure -> RssConfigureScreen(
                     actionUpClicked = { navigator.clear() },
                     insetPadding = insetPadding,
                     showBack = windowSizeClass.windowWidthSizeClass == COMPACT

@@ -11,9 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import tmg.flashback.feature.rss.presentation.feed.RssNavigation
 import tmg.flashback.feature.rss.presentation.feed.RssFeedGraph
 import tmg.flashback.feature.season.presentation.calendar.CalendarGraph
-import tmg.flashback.feature.season.presentation.calendar.NavigationWeekend
+import tmg.flashback.feature.season.presentation.calendar.WeekendNavigation
 import tmg.flashback.feature.season.presentation.driver_standings.DriverStandingsGraph
 import tmg.flashback.feature.season.presentation.driver_standings.DriverStandingsNavigation
 import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsGraph
@@ -21,28 +22,36 @@ import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsNav
 import tmg.flashback.navigation.Screen
 import tmg.flashback.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.presentation.settings.AllSettingsGraph
+import tmg.flashback.presentation.settings.SettingNavigation
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.navigation.rememberMasterDetailPaneState
 
 @Composable
 fun AppGraph(
+    openPanel: () -> Unit,
     appNavigationViewModel: AppNavigationViewModel,
     navController: NavHostController,
     insetPadding: PaddingValues,
     windowAdaptiveInfo: WindowAdaptiveInfo,
     modifier: Modifier = Modifier,
 ) {
-    val calendarNavigator = rememberMasterDetailPaneState<NavigationWeekend>()
+    val calendarNavigator = rememberMasterDetailPaneState<WeekendNavigation>()
     val driverStandingsNavigator = rememberMasterDetailPaneState<DriverStandingsNavigation>()
     val teamStandingsNavigator = rememberMasterDetailPaneState<TeamStandingsNavigation>()
+    val rssNavigator = rememberMasterDetailPaneState<RssNavigation>()
+    val settingsNavigator = rememberMasterDetailPaneState<SettingNavigation>()
     LaunchedEffect(
         calendarNavigator.destination,
         driverStandingsNavigator.destination,
-        teamStandingsNavigator.destination
+        teamStandingsNavigator.destination,
+        rssNavigator.destination,
+        settingsNavigator.destination
     ) {
         val forceHide = calendarNavigator.destination != null ||
                 driverStandingsNavigator.destination != null ||
-                teamStandingsNavigator.destination != null
+                teamStandingsNavigator.destination != null ||
+                rssNavigator.destination != null ||
+                settingsNavigator.destination != null
         appNavigationViewModel.hideBar(forceHide)
     }
 
@@ -55,7 +64,7 @@ fun AppGraph(
             CalendarGraph(
                 navigator = calendarNavigator,
                 paddingValues = insetPadding,
-                actionUpClicked = { },
+                actionUpClicked = openPanel,
                 windowSizeClass = windowAdaptiveInfo.windowSizeClass
             )
         }
@@ -63,7 +72,7 @@ fun AppGraph(
             DriverStandingsGraph(
                 navigator = driverStandingsNavigator,
                 paddingValues = insetPadding,
-                actionUpClicked = { },
+                actionUpClicked = openPanel,
                 windowSizeClass = windowAdaptiveInfo.windowSizeClass,
             )
         }
@@ -71,7 +80,7 @@ fun AppGraph(
             TeamStandingsGraph(
                 navigator = teamStandingsNavigator,
                 paddingValues = insetPadding,
-                actionUpClicked = { },
+                actionUpClicked = openPanel,
                 windowSizeClass = windowAdaptiveInfo.windowSizeClass,
             )
         }
@@ -83,14 +92,16 @@ fun AppGraph(
         composable<Screen.Rss> {
             RssFeedGraph(
                 paddingValues = insetPadding,
-                actionUpClicked = { },
+                actionUpClicked = openPanel,
+                navigator = rssNavigator,
                 windowSizeClass = windowAdaptiveInfo.windowSizeClass
             )
         }
         composable<Screen.Settings> {
             AllSettingsGraph(
                 windowSizeClass = windowAdaptiveInfo.windowSizeClass,
-                actionUpClicked = { },
+                actionUpClicked = openPanel,
+                navigator = settingsNavigator,
                 insetPadding = insetPadding
             )
         }

@@ -6,6 +6,7 @@ import kotlinx.coroutines.coroutineScope
 import tmg.flashback.feature.rss.mapper.RssXMLMapper
 import tmg.flashback.feature.rss.models.Article
 import tmg.flashback.feature.rss.repositories.RssRepository
+import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.network.rss.api.RssApi
 
 interface GetRssArticleUseCase {
@@ -52,6 +53,8 @@ class GetRssArticlesUseCaseImpl(
             val model = rssXmlMapper.convert(response, url, showDescription = rssRepository.rssShowDescription)
             Response.Success(model)
         } catch (e: Exception) {
+            logDebug("RSS", "EXCEPTION ${e.message}")
+            e.printStackTrace()
             Response.Error(500)
         }
     }

@@ -19,7 +19,7 @@ class CalendarScreenViewModel(
     private val overviewRepository: OverviewRepository,
     private val raceRepository: RaceRepository,
     private val currentSeasonHolder: CurrentSeasonHolder,
-    private val calendarRepository: CalendarRepository,
+    calendarRepository: CalendarRepository,
     private val eventsRepository: EventRepository,
 ): ViewModel() {
 
@@ -85,19 +85,8 @@ class CalendarScreenViewModel(
         return true
     }
 
-    private var hasProcessedBefore: Boolean = false
-
-    fun clickItem(model: CalendarItem) {
-        when (model) {
-            is CalendarItem.EmptyWeek -> {}
-            is CalendarItem.RaceWeek -> {
-
-            }
-            is CalendarItem.GroupedCompletedRaces -> {
-                collapseRaces = false
-                viewModelScope.launch { populate(uiState.value.season) }
-            }
-            is CalendarItem.Event -> { }
-        }
+    fun clickGroupedRaces() {
+        collapseRaces = false
+        viewModelScope.launch { populate(uiState.value.season) }
     }
 }

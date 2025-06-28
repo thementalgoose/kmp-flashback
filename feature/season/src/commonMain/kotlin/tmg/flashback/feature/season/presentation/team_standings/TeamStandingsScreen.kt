@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.presentation.localisation.generated.resources.Res.string
-import flashback.presentation.localisation.generated.resources.results_accurate_for
 import flashback.presentation.localisation.generated.resources.season_standings_constructor
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.feature.season.presentation.shared.ongoing_banner.ResultAsOf

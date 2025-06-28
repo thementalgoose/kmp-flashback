@@ -34,6 +34,7 @@ import tmg.flashback.ui.navigation.OverlappingPanelsValue
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun AppContainer(
+    openPanel: () -> Unit,
     windowAdaptiveInfo: WindowAdaptiveInfo,
     windowSizeClass: WindowSizeClass,
     navController: NavHostController,
@@ -98,6 +99,7 @@ fun AppContainer(
                     .weight(1f)
                 ) {
                     AppGraph(
+                        openPanel = openPanel,
                         appNavigationViewModel = appNavigationViewModel,
                         navController = navController,
                         insetPadding = paddingValues,

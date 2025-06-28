@@ -8,11 +8,13 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowWidthSizeClass
+import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.infrastructure.log.logInfo
@@ -46,6 +48,7 @@ fun App() {
     })
 
     val panelsState = rememberOverlappingPanelsState(OverlappingPanelsValue.Closed)
+    val coroutineScope = rememberCoroutineScope()
 
     val showBottomBar = isCompact && appNavigationUiState.value.screen in listOf(Screen.Calendar, Screen.DriverStandings, Screen.TeamStandings) && !appNavigationUiState.value.intoSubNavigation
     val systemNavigationBarHeight = WindowInsets.safeDrawing.asPaddingValues().calculateBottomPadding()
@@ -59,6 +62,9 @@ fun App() {
         AppScaffold(
             content = { paddingValues ->
                 AppContainer(
+                    openPanel = {
+                        coroutineScope.launch { panelsState.openStartPanel() }
+                    },
                     panelsState = panelsState,
                     windowAdaptiveInfo = windowAdaptiveInfo,
                     windowSizeClass = windowSizeClass,

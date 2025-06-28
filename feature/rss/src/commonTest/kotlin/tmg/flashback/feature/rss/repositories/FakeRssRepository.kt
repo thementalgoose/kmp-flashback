@@ -5,7 +5,7 @@ import tmg.flashback.feature.rss.models.SupportedSource
 class FakeRssRepository(
     override var isEnabled: Boolean = false,
     override var isAddCustomSourcesEnabled: Boolean = false,
-    override var supportedSources: List<SupportedSource>,
-    override var rssUrls: Set<String>,
-    override var rssShowDescription: Boolean
+    override var supportedSources: List<SupportedSource> = listOf(),
+    override var rssUrls: Set<String> = setOf(),
+    override var rssShowDescription: Boolean = false
 ) : RssRepository

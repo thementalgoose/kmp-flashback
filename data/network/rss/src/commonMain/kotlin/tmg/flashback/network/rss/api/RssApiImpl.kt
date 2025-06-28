@@ -1,12 +1,12 @@
 package tmg.flashback.network.rss.api
 
 import io.ktor.client.HttpClient
-import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
-import io.ktor.http.headers
 import kotlinx.io.IOException
 import tmg.flashback.infrastructure.log.logInfo
+import tmg.flashback.network.rss.client.xml
 import tmg.flashback.network.rss.models.RssXMLModel
 
 class RssApiImpl(
@@ -16,11 +16,7 @@ class RssApiImpl(
     @Throws(RuntimeException::class, IOException::class)
     override suspend fun getRssXML(url: String): RssXMLModel {
         logInfo(">> $url")
-        val httpResponse = httpClient.get(url) {
-            headers {
-                this.set("Accept", "application/rss+xml, application/xml")
-            }
-        }
+        val httpResponse = httpClient.get(url)
         when (httpResponse.status) {
             HttpStatusCode.NotFound -> {
                 throw NotFoundException()
@@ -29,7 +25,7 @@ class RssApiImpl(
                 throw RuntimeException()
             }
         }
-        return httpResponse.body()
+        return xml.decodeFromString<RssXMLModel>(RssXMLModel.serializer(), httpResponse.bodyAsText())
     }
 }
 

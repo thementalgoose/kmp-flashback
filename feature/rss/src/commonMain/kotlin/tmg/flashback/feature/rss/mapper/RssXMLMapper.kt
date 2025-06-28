@@ -24,6 +24,7 @@ internal class RssXMLMapperImpl(): RssXMLMapper {
         fromSource: String,
         showDescription: Boolean
     ): List<Article> {
+
         if (model.channel == null) {
             logDebug("RSS", "Failed to parse RSS model from channel $fromSource")
             return emptyList()
