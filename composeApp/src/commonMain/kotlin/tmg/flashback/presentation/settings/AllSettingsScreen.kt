@@ -66,30 +66,30 @@ private fun AllSettingsScreen(
         if (uiState.isThemeSupported) {
             PrefCategory(
                 item = Settings.ThemeCategory,
-                itemClicked = { }
+                itemClicked = { navigateTo(SettingNavigation.Theme) }
             )
         }
         PrefHeader(string.settings_header_data)
         PrefCategory(
             item = Settings.LayoutCategory,
-            itemClicked = { }
+            itemClicked = { navigateTo(SettingNavigation.Layout)  }
         )
         PrefCategory(
             item = Settings.WeatherCategory,
-            itemClicked = { }
+            itemClicked = { navigateTo(SettingNavigation.Weather)  }
         )
         if (uiState.isRssEnabled) {
             PrefHeader(string.settings_header_rss_feed)
             PrefCategory(
                 item = Settings.RssCategory,
-                itemClicked = { }
+                itemClicked = { navigateTo(SettingNavigation.RssConfigure) }
             )
         }
         if (uiState.isInAppBrowserSupported) {
             PrefHeader(string.settings_web_browser_title)
             PrefCategory(
                 item = Settings.WebBrowserCategory,
-                itemClicked = { }
+                itemClicked = { navigateTo(SettingNavigation.InAppBrowser)  }
             )
         }
         PrefHeader(string.settings_header_notifications)
@@ -109,17 +109,17 @@ private fun AllSettingsScreen(
             PrefHeader(string.settings_header_widgets)
             PrefCategory(
                 item = Settings.WidgetCategory,
-                itemClicked = { }
+                itemClicked = { navigateTo(SettingNavigation.Widgets) }
             )
         }
         PrefHeader(string.settings_header_other)
         PrefCategory(
             item = Settings.PrivacyCategory,
-            itemClicked = { }
+            itemClicked = { navigateTo(SettingNavigation.Privacy) }
         )
         PrefCategory(
             item = Settings.AboutCategory,
-            itemClicked = { }
+            itemClicked = { navigateTo(SettingNavigation.About) }
         )
     }
 }

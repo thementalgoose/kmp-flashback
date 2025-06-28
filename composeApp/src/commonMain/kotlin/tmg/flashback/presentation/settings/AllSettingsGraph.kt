@@ -23,6 +23,7 @@ internal interface SettingNavigation {
     data object InAppBrowser: SettingNavigation
     data object NotificationResults: SettingNavigation
     data object NotificationUpcoming: SettingNavigation
+    data object Widgets: SettingNavigation
     data object Privacy: SettingNavigation
     data object About: SettingNavigation
 }
