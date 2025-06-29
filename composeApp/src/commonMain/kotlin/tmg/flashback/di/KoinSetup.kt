@@ -15,6 +15,7 @@ import tmg.flashback.feature.constructors.di.featureConstructorsModule
 import tmg.flashback.feature.drivers.di.featureDriversModule
 import tmg.flashback.feature.maintenance.di.featureMaintenanceModule
 import tmg.flashback.feature.privacypolicy.di.featurePrivacyPolicyModule
+import tmg.flashback.feature.reactiongame.di.featureReactionGameModule
 import tmg.flashback.feature.rss.di.featureRssModule
 import tmg.flashback.feature.search.di.featureSearchModule
 import tmg.flashback.feature.season.di.featureSeasonModule
@@ -69,6 +70,7 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
         modules(featureDriversModule)
         modules(featureMaintenanceModule)
         modules(featurePrivacyPolicyModule)
+        modules(featureReactionGameModule)
         modules(featureRssModule)
         modules(featureSearchModule)
         modules(featureSeasonModule)

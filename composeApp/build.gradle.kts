@@ -58,6 +58,7 @@ kotlin {
             implementation(projects.feature.drivers)
             implementation(projects.feature.maintenance)
             implementation(projects.feature.privacypolicy)
+            implementation(projects.feature.reactiongame)
             implementation(projects.feature.rss)
             implementation(projects.feature.sandbox)
             implementation(projects.feature.search)

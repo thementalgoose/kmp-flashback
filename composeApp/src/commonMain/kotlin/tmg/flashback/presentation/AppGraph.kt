@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import tmg.flashback.feature.reactiongame.presentation.ReactionGameScreen
 import tmg.flashback.feature.rss.presentation.feed.RssNavigation
 import tmg.flashback.feature.rss.presentation.feed.RssFeedGraph
 import tmg.flashback.feature.season.presentation.calendar.CalendarGraph
@@ -106,9 +107,11 @@ fun AppGraph(
             )
         }
         composable<Screen.ReactionGame> {
-            Box(Modifier.fillMaxSize()) {
-                TextTitle("Reaction Game", Modifier.align(Alignment.Center))
-            }
+            ReactionGameScreen(
+                paddingValues = insetPadding,
+                actionUpClicked = openPanel,
+                windowSizeClass = windowAdaptiveInfo.windowSizeClass
+            )
         }
         composable<Screen.About> {
             Box(Modifier.fillMaxSize()) {
