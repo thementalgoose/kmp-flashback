@@ -137,7 +137,7 @@ object Settings {
             isEnabled = false
         )
         val CollapsibleRaces = Setting.Link(
-            _id = "layout_recents",
+            _id = "layout_collapsible_races",
             title = string.settings_pref_collapsed_list_title,
             subtitle = string.settings_pref_collapsed_list_description
         )

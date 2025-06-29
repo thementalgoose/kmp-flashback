@@ -11,6 +11,7 @@ import tmg.flashback.data.repo.model.Response
 import tmg.flashback.data.repo.utils.makeRequest
 import tmg.flashback.flashbackapi.api.api.FlashbackApi
 import tmg.flashback.formula1.model.ConstructorHistory
+import tmg.flashback.formula1.model.ConstructorHistorySeason
 import tmg.flashback.persistence.flashback.FlashbackDatabase
 
 interface ConstructorRepository {

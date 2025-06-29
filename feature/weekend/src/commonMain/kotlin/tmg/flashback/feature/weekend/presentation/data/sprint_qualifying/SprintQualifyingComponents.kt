@@ -36,6 +36,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.feature.weekend.presentation.WeekendUiState.Data
+import tmg.flashback.feature.weekend.presentation.components.DataMissing
 import tmg.flashback.feature.weekend.presentation.components.Position
 import tmg.flashback.feature.weekend.presentation.components.TypeHeader
 import tmg.flashback.formula1.model.Driver
@@ -58,13 +59,19 @@ fun LazyListScope.addSprintQualifyingData(
     uiState: Data,
     keyPrefix: String = ""
 ) {
-    item("qualifying_label") {
+    item("sprint_qualifying_label") {
         TypeHeader(
             resource = string.nav_sprint_qualifying
         )
     }
-    item("qualifying_header") {
-        SprintQualifyingHeader()
+    if (uiState.sprintQualifyingResults.isEmpty()) {
+        item("sprint_qualifying_not_found") {
+            DataMissing()
+        }
+    } else {
+        item("sprint_qualifying_header") {
+            SprintQualifyingHeader()
+        }
     }
     items(uiState.sprintQualifyingResults, key = { "${keyPrefix}-${it.id}" }) {
         when (it) {

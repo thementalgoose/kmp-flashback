@@ -37,6 +37,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.feature.weekend.presentation.WeekendUiState.Data
+import tmg.flashback.feature.weekend.presentation.components.DataMissing
 import tmg.flashback.feature.weekend.presentation.components.Position
 import tmg.flashback.feature.weekend.presentation.components.TypeHeader
 import tmg.flashback.formula1.model.Driver
@@ -68,12 +69,18 @@ fun LazyListScope.addQualifyingData(
             resource = string.nav_qualifying,
         )
     }
-    item("qualifying_header") {
-        QualifyingHeader(
-            showQ1 = uiState.qualifyingColumns in listOf(Q1, Q2, Q3),
-            showQ2 = uiState.qualifyingColumns in listOf(Q2, Q3),
-            showQ3 = uiState.qualifyingColumns in listOf(Q3)
-        )
+    if (uiState.qualifyingResults.isEmpty()) {
+        item("qualifying_not_found") {
+            DataMissing()
+        }
+    } else {
+        item("qualifying_header") {
+            QualifyingHeader(
+                showQ1 = uiState.qualifyingColumns in listOf(Q1, Q2, Q3),
+                showQ2 = uiState.qualifyingColumns in listOf(Q2, Q3),
+                showQ3 = uiState.qualifyingColumns in listOf(Q3)
+            )
+        }
     }
     items(uiState.qualifyingResults, key = { "${keyPrefix}-${it.id}" }) {
         when (it) {

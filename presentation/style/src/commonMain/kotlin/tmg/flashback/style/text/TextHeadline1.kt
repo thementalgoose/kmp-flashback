@@ -1,6 +1,5 @@
 package tmg.flashback.style.text
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,7 +18,7 @@ fun TextHeadline1(
 ) {
     Text(
         text,
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier,
         style = AppTheme.typography.h1.copy(
             color = when (brand) {
                 true -> AppTheme.colors.primary

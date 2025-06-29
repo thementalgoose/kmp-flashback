@@ -80,7 +80,7 @@ class CalendarScreenViewModel(
         _uiState.value = _uiState.value.copy(
             items = raceList,
             isLoading = false,
-            showEvents = events?.isNotEmpty() ?: false
+            showEvents = events?.isNotEmpty() == true
         )
         return true
     }

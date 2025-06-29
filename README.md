@@ -31,14 +31,14 @@ Flashback provides race results and statistics from every race in the history of
 - [x] Get compose style library setup
 - [ ] Add initial app startup experience
 - [ ] Adds analytics
-- [ ] Adds crashlytics reporting
+- [x] Adds crashlytics reporting
 - [x] Adds remote config setup
   - [ ] Configure defaults setup for both platforms
-- [ ] Support tablet mode
+- [x] Support tablet mode
 - [ ] Add RSS
 - [x] Figure out Compose Navigation 
-- [ ] Figure out Tablet Master/Detail navigation
-- [ ] Add Settings
+- [x] Figure out Tablet Master/Detail navigation
+- [x] Add Settings
 - - [x] Add Settings structure
 - [ ] Add notification support
 - [ ] Add scheduled job support for periodically refreshing content (ANDROID ONLY)

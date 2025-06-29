@@ -14,11 +14,13 @@ import tmg.flashback.eastereggs.usecases.IsSnowEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSummerEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsUkraineEnabledUseCase
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
+import tmg.flashback.feature.search.usecases.IsSearchEnabledUseCase
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.navigation.Screen
 
 class AppNavigationViewModel(
     isRssEnabledUseCase: IsRssEnabledUseCase,
+    isSearchEnabledUseCase: IsSearchEnabledUseCase,
     isMenuIconEnabledUseCase: IsMenuIconEnabledUseCase,
     isSnowEnabledUseCase: IsSnowEnabledUseCase,
     isSummerEnabledUseCase: IsSummerEnabledUseCase,
@@ -34,6 +36,7 @@ class AppNavigationViewModel(
 
     private val _uiState: MutableStateFlow<AppNavigationUIState> = MutableStateFlow(AppNavigationUIState(
         showRss = isRssEnabledUseCase(),
+        showSearch = isSearchEnabledUseCase(),
         easterEggs = easterEggs,
         screen = null,
         intoSubNavigation = false

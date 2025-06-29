@@ -73,15 +73,17 @@ internal fun AppNavigationDrawer(
                         }
                     )
                 }
-                item("nav_search") {
-                    NavigationItem(
-                        menuItem = MenuItem.Search,
-                        isSelected = appNavigationUiState.screen == Screen.Search,
-                        onClick = {
-                            navigationItemClicked(Screen.Search)
-                            closeMenu()
-                        }
-                    )
+                if (appNavigationUiState.showSearch) {
+                    item("nav_search") {
+                        NavigationItem(
+                            menuItem = MenuItem.Search,
+                            isSelected = appNavigationUiState.screen == Screen.Search,
+                            onClick = {
+                                navigationItemClicked(Screen.Search)
+                                closeMenu()
+                            }
+                        )
+                    }
                 }
                 if (appNavigationUiState.showRss) {
                     item("nav_rss") {

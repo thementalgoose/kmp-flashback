@@ -9,10 +9,14 @@ import tmg.flashback.configuration.di.coreConfigurationModule
 import tmg.flashback.crashlytics.di.coreMetricsCrashlyticsModule
 import tmg.flashback.data.repo.di.dataFlashbackModule
 import tmg.flashback.eastereggs.di.easterEggsModule
+import tmg.flashback.feature.about.di.featureAboutModule
 import tmg.flashback.feature.circuits.di.featureCircuitsModule
 import tmg.flashback.feature.constructors.di.featureConstructorsModule
 import tmg.flashback.feature.drivers.di.featureDriversModule
+import tmg.flashback.feature.maintenance.di.featureMaintenanceModule
+import tmg.flashback.feature.privacypolicy.di.featurePrivacyPolicyModule
 import tmg.flashback.feature.rss.di.featureRssModule
+import tmg.flashback.feature.search.di.featureSearchModule
 import tmg.flashback.feature.season.di.featureSeasonModule
 import tmg.flashback.feature.weekend.di.featureWeekendModule
 import tmg.flashback.flashbackapi.api.di.dataNetworkFlashbackModule
@@ -59,13 +63,17 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
 
         modules(infrastructureModule)
 
-        modules(featureSeasonModule)
+        modules(featureAboutModule)
         modules(featureCircuitsModule)
-        modules(featureDriversModule)
         modules(featureConstructorsModule)
+        modules(featureDriversModule)
+        modules(featureMaintenanceModule)
+        modules(featurePrivacyPolicyModule)
         modules(featureRssModule)
-        modules(featureWidgetUpNextModule)
+        modules(featureSearchModule)
+        modules(featureSeasonModule)
         modules(featureWeekendModule)
+        modules(featureWidgetUpNextModule)
 
         modules(presentationUiModule)
 
@@ -75,7 +83,7 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
 
 internal fun module() = module {
     viewModel { AppContainerViewModel() }
-    viewModel { AppNavigationViewModel(get(), get(), get(), get(), get()) }
+    viewModel { AppNavigationViewModel(get(), get(), get(), get(), get(), get()) }
 
     viewModel { AllSettingsViewModel(get(), get(), get()) }
     viewModel { SettingsDarkModeViewModel(get()) }

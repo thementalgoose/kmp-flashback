@@ -27,6 +27,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.feature.weekend.presentation.WeekendUiState.Data
+import tmg.flashback.feature.weekend.presentation.components.DataMissing
 import tmg.flashback.feature.weekend.presentation.components.DriverInfoWithIcon
 import tmg.flashback.feature.weekend.presentation.components.PointsBox
 import tmg.flashback.feature.weekend.presentation.components.RaceHeader
@@ -58,8 +59,14 @@ fun LazyListScope.addRaceData(
             resource = string.nav_race,
         )
     }
-    item("race_header") {
-        RaceHeader()
+    if (uiState.raceResults.isEmpty()) {
+        item("race_not_found") {
+            DataMissing()
+        }
+    } else {
+        item("race_header") {
+            RaceHeader()
+        }
     }
     items(uiState.raceResults, key = { "${keyPrefix}-${it.id}" }) {
         when (it) {

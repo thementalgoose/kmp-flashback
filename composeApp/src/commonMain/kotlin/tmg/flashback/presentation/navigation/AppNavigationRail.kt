@@ -30,7 +30,7 @@ internal fun AppNavigationRail(
         TeamsStandings.toNavigationItem(appNavigationUiState.screen == Screen.TeamStandings)
     )
     val secondaryItems = listOfNotNull(
-        Search.toNavigationItem(appNavigationUiState.screen == Screen.Search),
+        Search.toNavigationItem(appNavigationUiState.screen == Screen.Search).takeIf { appNavigationUiState.showSearch },
         Rss.toNavigationItem(appNavigationUiState.screen == Screen.Rss).takeIf { appNavigationUiState.showRss },
         ReactionGame.toNavigationItem(appNavigationUiState.screen == Screen.ReactionGame),
         Settings.toNavigationItem(appNavigationUiState.screen == Screen.Settings),

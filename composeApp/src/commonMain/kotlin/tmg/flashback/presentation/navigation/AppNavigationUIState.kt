@@ -5,6 +5,7 @@ import tmg.flashback.navigation.Screen
 
 data class AppNavigationUIState(
     val showRss: Boolean,
+    val showSearch: Boolean,
     val easterEggs: AppNavigationEasterEggs,
     val screen: Screen?,
     val intoSubNavigation: Boolean
