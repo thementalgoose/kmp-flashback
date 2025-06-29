@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -45,8 +46,8 @@ fun WeekendScreen(
     windowSizeClass: WindowSizeClass,
     viewModel: WeekendViewModel = koinViewModel()
 ) {
-    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
-    val isLoading = viewModel.isLoading.collectAsStateWithLifecycle()
+    val uiState = viewModel.uiState.collectAsState()
+    val isLoading = viewModel.isLoading.collectAsState()
     LaunchedEffect(screenData) {
         viewModel.load(
             season = screenData.season,
