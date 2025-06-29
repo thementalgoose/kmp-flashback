@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -40,6 +41,10 @@ fun Flag(
                 }
         )
     }
+}
+
+fun getFlagVector(iso: String): ImageVector? {
+    return countryCodesMap[iso]?.let { FlagKit.getFlag(countryCode = it) }
 }
 
 @Preview

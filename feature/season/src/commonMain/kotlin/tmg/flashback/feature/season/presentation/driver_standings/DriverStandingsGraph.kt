@@ -8,6 +8,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.window.core.layout.WindowSizeClass
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.feature.drivers.presentation.season.DriverSeasonInfo
+import tmg.flashback.feature.drivers.presentation.season.DriverSeasonScreen
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.navigation.MasterDetailPaneState
 import tmg.flashback.ui.navigation.MasterDetailsPane
@@ -15,6 +17,7 @@ import tmg.flashback.ui.navigation.appBarMaximumHeight
 
 sealed interface DriverStandingsNavigation {
     data class Driver(
+        val season: Int,
         val id: String,
         val name: String
     ): DriverStandingsNavigation
@@ -49,7 +52,11 @@ fun DriverStandingsGraph(
                 uiState = state.value,
                 windowSizeClass = windowSizeClass,
                 driverClicked = {
-                    navigator.navigateTo(DriverStandingsNavigation.Driver(id = it.driver.id, name = it.driver.name))
+                    navigator.navigateTo(DriverStandingsNavigation.Driver(
+                        season = it.season,
+                        id = it.driver.id,
+                        name = it.driver.name
+                    ))
                 },
                 refresh = viewModel::refresh,
                 comparisonClicked = {
@@ -61,7 +68,19 @@ fun DriverStandingsGraph(
             navigator.clear()
         },
         details = { model, actionUpClicked ->
-            TextTitle("Model $model")
+            when (model) {
+                is DriverStandingsNavigation.Driver -> DriverSeasonScreen(
+                    driverSeasonInfo = DriverSeasonInfo(
+                        season = model.season,
+                        id = model.id,
+                        name = model.name,
+                    ),
+                    paddingValues = paddingValues,
+                    actionUpClicked = actionUpClicked,
+                    showBack = true,
+                    windowSizeClass = windowSizeClass
+                )
+            }
         }
     )
 }

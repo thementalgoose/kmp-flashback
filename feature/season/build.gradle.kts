@@ -39,6 +39,8 @@ kotlin {
             implementation(projects.infrastructure)
 
             implementation(projects.feature.weekend)
+            implementation(projects.feature.drivers)
+            implementation(projects.feature.constructors)
 
             implementation(projects.presentation.ui)
             implementation(projects.presentation.style)

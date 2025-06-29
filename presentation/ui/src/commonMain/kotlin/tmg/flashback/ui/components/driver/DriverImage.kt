@@ -76,8 +76,6 @@ fun DriverIcon(
 fun DriverImage(
     photoUrl: String?,
     modifier: Modifier = Modifier,
-    number: Int? = null,
-    code: String? = null,
     size: Dp = 48.dp,
 ) {
     Box(
@@ -92,33 +90,6 @@ fun DriverImage(
             contentDescription = null,
             error = painterResource(resource = Res.drawable.unknown_avatar)
         )
-        if (number != null || code != null) {
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .background(AppTheme.colors.surface.copy(alpha = 0.8f))
-                    .padding(
-                        horizontal = AppTheme.dimens.small,
-                        vertical = AppTheme.dimens.xsmall
-                    )
-                    .align(Alignment.BottomCenter)
-            ) {
-                code?.let { code ->
-                    DriverNumber(
-                        modifier = Modifier.weight(1f),
-                        number = code,
-                        textAlign = TextAlign.Start
-                    )
-                }
-                number?.let { number ->
-                    DriverNumber(
-                        modifier = Modifier.weight(1f),
-                        number = number.toString(),
-                        textAlign = TextAlign.End
-                    )
-                }
-            }
-        }
     }
 }
 
