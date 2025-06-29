@@ -15,11 +15,11 @@ sealed interface DriverSeasonUiState {
         val races: List<DriverSeasonRace> = emptyList()
     ): DriverSeasonUiState {
         val latestConstructor: Constructor? by lazy {
-            races.mapNotNull { it.result.constructor }
+            races.map { it.result.constructor }
                 .lastOrNull()
         }
         val constructors: List<Constructor> by lazy {
-            races.mapNotNull { it.result.constructor }
+            races.map { it.result.constructor }
                 .distinct()
         }
     }

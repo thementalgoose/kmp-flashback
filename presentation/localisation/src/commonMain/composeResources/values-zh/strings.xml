@@ -102,6 +102,8 @@
     <string name="driver_overview_stat_career_team">车队</string>
     <string name="driver_overview_constructor">车队：%s</string>
     <string name="driver_overview_stat_birthday">出生于 %s</string>
+    <string name="driver_overview_no_races">我们未能找到该车手在本赛季参加过的任何比赛</string>
+    <string name="driver_overview_not_found">暂无此车手的相关信息。请稍后重试</string>
 
     <!-- Driver Comparison -->
     <string name="driver_comparison_no_races_in_common">本赛季中，没有哪场比赛是这两位车手同时参加的。</string>

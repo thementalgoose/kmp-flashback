@@ -104,6 +104,8 @@
     <string name="driver_overview_stat_career_team">Team</string>
     <string name="driver_overview_constructor">Team: %s</string>
     <string name="driver_overview_stat_birthday">Nato il %s</string>
+    <string name="driver_overview_no_races">Non siamo riusciti a trovare nessuna gara a cui questo pilota ha partecipato in questa stagione</string>
+    <string name="driver_overview_not_found">Nessuna informazione su questo pilota è disponibile. Riprova più tardi</string>
 
     <!-- Driver Comparison -->
     <string name="driver_comparison_no_races_in_common">Non ci sono gare durante la stagione in cui questi due piloti abbiano partecipato entrambi alla stessa gara.</string>

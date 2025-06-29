@@ -9,7 +9,7 @@ data class DriverHistorySeasonRace(
     val points: Double,
     val qualified: Int?,
     val gridPos: Int?,
-    val constructor: Constructor?,
+    val constructor: Constructor,
     val raceInfo: RaceInfo
 ) {
     companion object

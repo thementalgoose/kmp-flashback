@@ -26,7 +26,7 @@ data class InfoModel(
 fun InfoModel.Companion.preview() = InfoModel(
     season = 2020,
     round = 1,
-    raceName = "Apex Grand Prix",
+    raceName = "British Grand Prix",
     date = LocalDate(2020, 1, 1),
     time = LocalTime(12, 0),
     circuit = Circuit.preview(),

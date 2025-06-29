@@ -118,6 +118,8 @@
     <string name="driver_overview_stat_career_team">Team</string>
     <string name="driver_overview_constructor">Constructor: %s</string>
     <string name="driver_overview_stat_birthday">Born %s</string>
+    <string name="driver_overview_no_races">We cannot find any races that this driver has competed in for this season</string>
+    <string name="driver_overview_not_found">No information about this driver is available. Please try again later</string>
 
 
     <!-- Driver Comparison -->

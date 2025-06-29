@@ -1,29 +1,23 @@
 package tmg.flashback.feature.drivers.presentation.season
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.GridItemSpan
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -36,13 +30,16 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.feature.drivers.presentation.shared.DriverBadges
-import tmg.flashback.feature.drivers.presentation.shared.DriverCard
+import tmg.flashback.feature.drivers.presentation.shared.DriverHeader
+import tmg.flashback.feature.drivers.presentation.shared.DriverNotFound
+import tmg.flashback.feature.drivers.presentation.shared.ResultHeader
+import tmg.flashback.feature.drivers.presentation.shared.ResultRace
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.AppThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
-import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 
 data class DriverSeasonInfo(
@@ -100,8 +97,7 @@ fun DriverSeasonScreen(
         isLoading = isLoading,
         onRefresh = refresh
     ) {
-        LazyVerticalGrid(
-            columns = GridCells.Adaptive(minSize = 180.dp),
+        LazyColumn(
             modifier = Modifier.fillMaxSize(),
             contentPadding = bottomOnlyPadding
         ) {
@@ -110,8 +106,8 @@ fun DriverSeasonScreen(
                 is DriverSeasonUiState.NoRaces -> uiState.driver
                 else -> null
             }
-            item("header", span = { GridItemSpan(maxLineSpan) }) {
-                DriverCard(
+            item("header") {
+                DriverHeader(
                     label = "${driverSeasonInfo.name}\n${driverSeasonInfo.season}",
                     driverImage = driver?.photoUrl,
                     insetPadding = paddingValues,
@@ -121,35 +117,42 @@ fun DriverSeasonScreen(
                 )
             }
 
-            when (uiState) {
-                is DriverSeasonUiState.Data -> {
-                    item("badges", span = { GridItemSpan(maxLineSpan) }) {
-                        DriverBadges(
-                            driver = uiState.driver,
-                            constructors = uiState.constructors
-                        )
-                    }
-                    items(uiState.stats) {
-                        Stat(it)
-                    }
-                    items(uiState.races, key = { "${it.result.raceInfo.season}-${it.result.raceInfo.round}-${it.result.isSprint}}" }) {
-
+            if (uiState is DriverSeasonUiState.Data) {
+                item("badges") {
+                    DriverBadges(
+                        driver = uiState.driver,
+                        constructors = uiState.constructors
+                    )
+                }
+                items(uiState.stats) {
+                    Stat(it)
+                }
+                item("races_header") {
+                    Column {
+                        Spacer(Modifier.height(AppTheme.dimens.small))
+                        ResultHeader()
                     }
                 }
-                is DriverSeasonUiState.NoRaces -> {
-                    item("badges", span = { GridItemSpan(maxLineSpan) }) {
-                        DriverBadges(
-                            driver = uiState.driver,
-                            constructors = emptyList()
-                        )
-                    }
+                items(
+                    items = uiState.races,
+                    key = { "${it.result.raceInfo.season}-${it.result.raceInfo.round}-${it.result.isSprint}}" }
+                ) {
+                    ResultRace(
+                        model = it,
+                        clickResult = { }
+                    )
                 }
-                DriverSeasonUiState.NotFound -> {
-                    item("not_found", span = { GridItemSpan(maxLineSpan) }) {
-
-                    }
+            }
+            else if (uiState is DriverSeasonUiState.NoRaces) {
+                item("badges") {
+                    DriverBadges(
+                        driver = uiState.driver,
+                        constructors = emptyList()
+                    )
                 }
-                else -> { }
+                item("no_races") {
+                    DriverNotFound()
+                }
             }
         }
     }
@@ -160,38 +163,30 @@ private fun Stat(
     model: DriverSeasonStat,
     modifier: Modifier = Modifier
 ) {
-    Row(
-        modifier = modifier
+    Row(modifier = modifier
             .padding(
                 horizontal = AppTheme.dimens.medium,
-                vertical = AppTheme.dimens.small
-            )
-            .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
-            .background(AppTheme.colors.surfaceContainer3)
-            .padding(AppTheme.dimens.small),
-        verticalAlignment = Alignment.CenterVertically
+                vertical = AppTheme.dimens.xsmall
+            ),
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
     ) {
         Icon(
             modifier = Modifier
                 .background(AppTheme.colors.surfaceContainer4)
-                .clip(CircleShape),
+                .clip(CircleShape)
+                .size(16.dp),
             painter = painterResource(model.icon),
             contentDescription = null,
             tint = AppTheme.colors.onSurface
         )
-        Column(
-            modifier = Modifier.padding(start = 8.dp),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            TextTitle(
-                text = model.value,
-                bold = true
-            )
-            HorizontalDivider()
-            TextBody2(
-                text = stringResource(model.string),
-            )
-        }
+        TextBody2(
+            modifier = Modifier.weight(1f),
+            text = stringResource(model.string),
+        )
+        TextBody1(
+            bold = true,
+            text = model.value,
+        )
     }
 }
 

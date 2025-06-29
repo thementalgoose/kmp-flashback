@@ -82,6 +82,7 @@ class DriverSeasonViewModel(
 
     fun load(season: Int, driverId: String) {
         seasonDriver.value = season to driverId
+        refresh()
     }
 
     fun refresh() {

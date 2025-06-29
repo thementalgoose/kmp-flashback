@@ -53,6 +53,21 @@ fun BadgesView(
 
 @Composable
 fun BadgeView(
+    label: String,
+    icon: DrawableResource? = null,
+    modifier: Modifier = Modifier,
+    tintIcon: Color? = AppTheme.colors.onSurface
+) {
+    val badge = Badge(label = label, icon = icon)
+    BadgeView(
+        model = badge,
+        modifier = modifier,
+        tintIcon = tintIcon
+    )
+}
+
+@Composable
+fun BadgeView(
     model: Badge,
     modifier: Modifier = Modifier,
     tintIcon: Color? = AppTheme.colors.onSurface,
