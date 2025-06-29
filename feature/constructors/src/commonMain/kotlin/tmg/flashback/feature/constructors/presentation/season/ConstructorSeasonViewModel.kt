@@ -132,8 +132,8 @@ class ConstructorSeasonViewModel(
     }
 
     private fun getAllDrivers(history: ConstructorHistorySeason): List<ConstructorSeasonDriver> {
-        return buildList {
-
-        }
+        return history.drivers
+            .map { it.value }
+            .map { ConstructorSeasonDriver(it) }
     }
 }

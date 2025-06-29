@@ -116,7 +116,7 @@ internal fun ResultRace(
             .alpha(
                 when (model.result.status.isStatusFinished()) {
                     true -> 1.0f
-                    false -> 0.7f
+                    false -> 0.5f
                 }
             )
             .padding(

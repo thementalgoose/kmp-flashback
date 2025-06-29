@@ -24,6 +24,10 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.window.core.layout.WindowSizeClass
+import flashback.domain.formula1.generated.resources.ic_championship_order
+import flashback.presentation.localisation.generated.resources.Res
+import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.stat_history_championships
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -34,6 +38,12 @@ import tmg.flashback.feature.drivers.presentation.shared.DriverHeader
 import tmg.flashback.feature.drivers.presentation.shared.DriverNotFound
 import tmg.flashback.feature.drivers.presentation.shared.ResultHeader
 import tmg.flashback.feature.drivers.presentation.shared.ResultRace
+import tmg.flashback.formula1.enums.RaceStatus
+import tmg.flashback.formula1.model.Constructor
+import tmg.flashback.formula1.model.Driver
+import tmg.flashback.formula1.model.DriverHistorySeasonRace
+import tmg.flashback.formula1.model.RaceInfo
+import tmg.flashback.formula1.preview.preview
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.AppThemePreview
 import tmg.flashback.style.preview.PreviewConfig
@@ -68,7 +78,6 @@ fun DriverSeasonScreen(
         driverSeasonInfo = driverSeasonInfo,
         paddingValues = paddingValues,
         actionUpClicked = actionUpClicked,
-        windowSizeClass = windowSizeClass,
         showBack = showBack,
         uiState = uiState.value,
         refresh = viewModel::refresh,
@@ -84,7 +93,6 @@ fun DriverSeasonScreen(
     showBack: Boolean,
     isLoading: Boolean,
     uiState: DriverSeasonUiState?,
-    windowSizeClass: WindowSizeClass,
     refresh: () -> Unit
 ) {
     val direction = LocalLayoutDirection.current
@@ -196,6 +204,39 @@ private fun Preview(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
     AppThemePreview(previewConfig) {
-
+        DriverSeasonScreen(
+            driverSeasonInfo = DriverSeasonInfo(2020, "driver", "name"),
+            paddingValues = PaddingValues(0.dp),
+            actionUpClicked = { },
+            showBack = true,
+            isLoading = false,
+            uiState = fakeDriverSeasonUiState,
+            refresh = { }
+        )
     }
 }
+
+private val fakeDriverSeasonUiState = DriverSeasonUiState.Data(
+    season = 2020,
+    driver = Driver.preview(),
+    isInProgress = true,
+    stats = listOf(
+        DriverSeasonStat(
+            string = string.stat_history_championships,
+            icon = flashback.domain.formula1.generated.resources.Res.drawable.ic_championship_order,
+            value = "x"
+        )
+    ),
+    races = listOf(
+        DriverSeasonRace(result = DriverHistorySeasonRace(
+            isSprint = false,
+            status = RaceStatus.FINISHED,
+            finished = 1,
+            points = 10.0,
+            qualified = 1,
+            gridPos = 1,
+            constructor = Constructor.preview(),
+            raceInfo = RaceInfo.preview()
+        ))
+    )
+)

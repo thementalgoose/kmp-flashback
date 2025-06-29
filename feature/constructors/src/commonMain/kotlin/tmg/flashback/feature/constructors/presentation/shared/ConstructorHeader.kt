@@ -36,6 +36,7 @@ import tmg.flashback.style.AppThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextHeadline2
+import tmg.flashback.ui.components.constructor.ConstructorImage
 
 private val backgroundHeight: Dp = 100.dp
 private val iconSize: Dp = 120.dp
@@ -85,25 +86,25 @@ fun ConstructorHeader(
             }
         }
 
-//        ConstructorIcon(
-//            modifier = Modifier
-//                .padding(
-//                    top = iconOffset + insetTop,
-//                    start = AppTheme.dimens.medium,
-//                    end = AppTheme.dimens.medium + insetEnd,
-//                    bottom = AppTheme.dimens.medium
-//                )
-//                .align(Alignment.TopEnd),
-//            size = 100.dp,
-//            photoUrl = driverImage,
-//            constructorColor = colour.value
-//        )
+        ConstructorImage(
+            photoUrl = constructorImage,
+            modifier = Modifier
+                .padding(
+                    top = iconOffset + insetTop,
+                    start = AppTheme.dimens.medium,
+                    end = AppTheme.dimens.medium + insetEnd,
+                    bottom = AppTheme.dimens.medium
+                )
+                .align(Alignment.TopEnd),
+            size = 100.dp,
+            constructorColor = colour.value
+        )
 
         Column(modifier = Modifier
             .padding(
                 top = backgroundHeight + insetTop,
                 end = iconSize + (AppTheme.dimens.medium * 2) + insetEnd,
-                start = insetStart
+                start = insetStart,
             )
             .defaultMinSize(minHeight = iconOffset)
             .fillMaxWidth()
