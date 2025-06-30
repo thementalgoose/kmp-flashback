@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_up_next_title">Up next</string>
+    <string name="widget_up_next_description">Get the schedule for the next race</string>
+    <string name="widget_up_next_nothing_title">Nothing coming up</string>
+    <string name="widget_up_next_nothing_title_compact">N/A</string>
+    <string name="widget_up_next_nothing_subtitle">We will get this information as soon as it\'s available. Click here to check for updates</string>
+</resources>

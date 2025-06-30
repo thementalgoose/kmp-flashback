@@ -2,6 +2,7 @@ package tmg.flashback.data.repo.repository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.datetime.LocalDate
 import tmg.flashback.data.repo.mappers.app.OverviewMapper
 import tmg.flashback.data.repo.mappers.network.NetworkCircuitDataMapper
 import tmg.flashback.data.repo.mappers.network.NetworkOverviewMapper
@@ -11,6 +12,7 @@ import tmg.flashback.data.repo.utils.makeRequest
 import tmg.flashback.flashbackapi.api.api.FlashbackApi
 import tmg.flashback.formula1.model.Overview
 import tmg.flashback.formula1.model.OverviewRace
+import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.persistence.flashback.FlashbackDatabase
 
 interface OverviewRepository {
@@ -18,6 +20,7 @@ interface OverviewRepository {
     suspend fun populateOverview(season: Int): Response
     fun getOverview(season: Int, round: Int): Flow<OverviewRace?>
     fun getOverview(season: Int): Flow<Overview?>
+    suspend fun getUpcomingOverviews(): List<OverviewRace>?
 }
 
 internal class OverviewRepositoryImpl(
@@ -107,5 +110,11 @@ internal class OverviewRepositoryImpl(
                         .sortedBy { it.round }
                 )
             }
+    }
+
+    override suspend fun getUpcomingOverviews(): List<OverviewRace>? {
+        return persistence.scheduleDao()
+            .getUpcomingEvents(LocalDate.now())
+            .map { overviewMapper.mapOverview(it) }
     }
 }

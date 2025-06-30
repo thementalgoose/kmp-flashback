@@ -84,6 +84,14 @@ val dateFormatYYYYMMMMDD = LocalDate.Format {
     dayOfMonth(Padding.ZERO)
 }
 
+val dateFormatEEEE = LocalDate.Format {
+    dayOfWeek(DayOfWeekNames.ENGLISH_ABBREVIATED)
+}
+
+val dateFormatMMM = LocalDate.Format {
+    monthName(ENGLISH_ABBREVIATED)
+}
+
 val dateFormats = listOf(
     dateFormatYYYYMD,
     dateFormatYYYYMMD,

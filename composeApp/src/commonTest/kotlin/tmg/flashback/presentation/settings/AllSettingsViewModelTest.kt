@@ -8,7 +8,7 @@ import dev.mokkery.mock
 import kotlinx.coroutines.runBlocking
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
 import tmg.flashback.webbrowser.usecases.IsInAppBrowserEnabledUseCase
-import tmg.flashback.widget.upnext.usecases.IsWidgetsEnabledUseCase
+import tmg.flashback.widgets.upnext.usecases.IsWidgetsEnabledUseCase
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

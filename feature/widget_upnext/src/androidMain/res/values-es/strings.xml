@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_up_next_title">Próximo</string>
+    <string name="widget_up_next_description">Obtén el calendario de la próxima carrera</string>
+    <string name="widget_up_next_nothing_title">No hay nada próximo</string>
+    <string name="widget_up_next_nothing_title_compact">N/A</string>
+    <string name="widget_up_next_nothing_subtitle">Obtendremos esta información tan pronto como esté disponible. Haz clic aquí para buscar actualizaciones</string>
+</resources>

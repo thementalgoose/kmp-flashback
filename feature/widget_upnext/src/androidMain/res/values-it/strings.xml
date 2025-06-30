@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_up_next_title">Prossimo</string>
+    <string name="widget_up_next_description">Ottieni il programma per la prossima gara</string>
+    <string name="widget_up_next_nothing_title">Niente in arrivo</string>
+    <string name="widget_up_next_nothing_title_compact">N/A</string>
+    <string name="widget_up_next_nothing_subtitle">Otterremo queste informazioni non appena saranno disponibili. Fai clic qui per controllare gli aggiornamenti</string>
+</resources>

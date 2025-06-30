@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.StateFlow
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
 import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.webbrowser.usecases.IsInAppBrowserEnabledUseCase
-import tmg.flashback.widget.upnext.usecases.IsWidgetsEnabledUseCase
+import tmg.flashback.widgets.upnext.usecases.IsWidgetsEnabledUseCase
 
 class AllSettingsViewModel(
     isWidgetsEnabledUseCase: IsWidgetsEnabledUseCase,

@@ -146,7 +146,7 @@ enum class TrackLayout(
     companion object {
 
         fun getTrack(circuitId: String): TrackLayout? {
-            return TrackLayout.values().firstOrNull { it.circuitId == circuitId }
+            return entries.firstOrNull { it.circuitId == circuitId }
         }
     }
 }

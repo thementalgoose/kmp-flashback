@@ -34,13 +34,12 @@ import tmg.flashback.presentation.settings.browser.SettingsBrowserViewModel
 import tmg.flashback.presentation.settings.darkmode.SettingsDarkModeViewModel
 import tmg.flashback.presentation.settings.layout.SettingsLayoutViewModel
 import tmg.flashback.presentation.settings.privacy.SettingsPrivacyViewModel
-import tmg.flashback.presentation.settings.theme.SettingsThemeScreen
 import tmg.flashback.presentation.settings.theme.SettingsThemeViewModel
 import tmg.flashback.presentation.settings.weather.SettingsWeatherViewModel
 import tmg.flashback.presentation.sync.SyncViewModel
 import tmg.flashback.ui.di.presentationUiModule
 import tmg.flashback.webbrowser.di.coreWebBrowserModule
-import tmg.flashback.widget.upnext.di.featureWidgetUpNextModule
+import tmg.flashback.widgets.upnext.di.featureWidgetUpNextModule
 
 fun doInitKoin() {
     doInitKoin { }

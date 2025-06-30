@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_up_next_title">即将到来</string>
+    <string name="widget_up_next_description">获取下一场比赛的时间表</string>
+    <string name="widget_up_next_nothing_title">没有即将到来的比赛</string>
+    <string name="widget_up_next_nothing_title_compact">不适用</string>
+    <string name="widget_up_next_nothing_subtitle">一旦有信息，我们会立即获取。点击此处查看更新</string>
+</resources>
