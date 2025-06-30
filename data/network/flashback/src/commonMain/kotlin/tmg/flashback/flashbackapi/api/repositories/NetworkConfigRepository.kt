@@ -13,7 +13,9 @@ internal class NetworkConfigRepositoryImpl(
 ): NetworkConfigRepository {
 
     override val baseUrl: String
-        get() = configManager.getString(keyBaseUrl) ?: FALLBACK_BASE_URL
+        get() = configManager.getString(keyBaseUrl)
+            ?.ifEmpty { FALLBACK_BASE_URL }
+            ?: FALLBACK_BASE_URL
 
     companion object {
         private const val keyBaseUrl: String = "config_url"

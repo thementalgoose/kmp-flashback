@@ -41,7 +41,7 @@ internal class SettingsWeatherViewModelTest {
         every { mockUpNextWidgetRepository.deeplinkToEvent } returns false
         initUnderTest()
         underTest.uiState.test {
-            assertEquals(true, awaitItem().linkToEvent)
+            assertEquals(true, awaitItem().showWeather)
         }
     }
 

@@ -38,7 +38,11 @@ import tmg.flashback.presentation.settings.theme.SettingsThemeViewModel
 import tmg.flashback.presentation.settings.weather.SettingsWeatherViewModel
 import tmg.flashback.presentation.settings.widgets.SettingsWidgetsViewModel
 import tmg.flashback.presentation.sync.SyncViewModel
+import tmg.flashback.repositories.ContentSyncRepository
+import tmg.flashback.repositories.ContentSyncRepositoryImpl
 import tmg.flashback.ui.di.presentationUiModule
+import tmg.flashback.usecases.RequiresSyncUseCase
+import tmg.flashback.usecases.RequiresSyncUseCaseImpl
 import tmg.flashback.webbrowser.di.coreWebBrowserModule
 import tmg.flashback.widgets.upnext.di.featureWidgetUpNextModule
 
@@ -85,7 +89,11 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
 
 internal fun module() = module {
     viewModel { AppContainerViewModel() }
-    viewModel { AppNavigationViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModel { AppNavigationViewModel(get(), get(), get(), get(), get(), get(), get()) }
+
+    single<ContentSyncRepository> { ContentSyncRepositoryImpl(get()) }
+
+    single<RequiresSyncUseCase> { RequiresSyncUseCaseImpl(get(), get()) }
 
     viewModel { AllSettingsViewModel(get(), get(), get()) }
     viewModel { SettingsDarkModeViewModel(get()) }
@@ -97,5 +105,5 @@ internal fun module() = module {
     viewModel { SettingsPrivacyViewModel(get(), get()) }
     viewModel { SettingsWidgetsViewModel(get()) }
 
-    viewModel { SyncViewModel(get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { SyncViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
 }

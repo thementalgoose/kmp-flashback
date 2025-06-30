@@ -2,6 +2,7 @@
 <resources>
 
     <!-- Splash -->
+    <string name="splash_title">Ciao</string>
     <string name="splash_continue">Continua</string>
     <string name="splash_sync_info">Dato che è la prima volta che apri l\'app, stiamo recuperando alcuni dati relativi al mondo della Formula 1 per metterti al passo…</string>
     <string name="splash_sync_try_again">Riprova</string>

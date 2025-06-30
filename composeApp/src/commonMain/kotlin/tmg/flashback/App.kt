@@ -5,9 +5,15 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.ModalBottomSheetProperties
+import androidx.compose.material3.SheetValue
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -22,6 +28,7 @@ import tmg.flashback.navigation.Screen
 import tmg.flashback.presentation.AppContainer
 import tmg.flashback.presentation.MenuItem
 import tmg.flashback.presentation.navigation.AppNavigationViewModel
+import tmg.flashback.presentation.sync.SyncBottomSheet
 import tmg.flashback.presentation.toNavigationItem
 import tmg.flashback.presentation.toScreen
 import tmg.flashback.style.AppTheme
@@ -31,6 +38,7 @@ import tmg.flashback.ui.navigation.OverlappingPanelsValue
 import tmg.flashback.ui.navigation.appBarHeightWhenVertical
 import tmg.flashback.ui.navigation.rememberOverlappingPanelsState
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun App() {
     val appNavigationViewModel: AppNavigationViewModel = koinViewModel()
@@ -83,7 +91,8 @@ fun App() {
                     )
                     NavigationBar(
                         bottomPadding = systemNavigationBarHeight,
-                        modifier = Modifier.offset(y = navigationBarPosition.value),
+                        modifier = Modifier
+                            .offset(y = navigationBarPosition.value),
                         list = items,
                         itemClicked = { item ->
                             val menuItem = item.id.toEnum<MenuItem> { it.key } ?: return@NavigationBar
@@ -93,5 +102,40 @@ fun App() {
                 }
             }
         )
+
+        // Initial sync
+        val requiresContentSync = remember(appNavigationUiState.value.requiresContentSync) {
+            mutableStateOf(appNavigationUiState.value.requiresContentSync)
+        }
+        val lockBottomSheetOnScreen = remember { mutableStateOf(true) }
+        if (requiresContentSync.value) {
+            ModalBottomSheet(
+                onDismissRequest = {
+                    requiresContentSync.value = false
+                },
+                sheetState = androidx.compose.material3.rememberModalBottomSheetState(
+                    skipPartiallyExpanded = true,
+                    confirmValueChange = {
+                        if (it == SheetValue.Hidden) {
+                            !lockBottomSheetOnScreen.value
+                        } else {
+                            true
+                        }
+                    }
+                ),
+                properties = ModalBottomSheetProperties(
+                    shouldDismissOnBackPress = !lockBottomSheetOnScreen.value
+                )
+            ) {
+                AppTheme {
+                    SyncBottomSheet(
+                        windowSizeClass = windowSizeClass,
+                        unlock = {
+                            lockBottomSheetOnScreen.value = false
+                        },
+                    )
+                }
+            }
+        }
     }
 }

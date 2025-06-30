@@ -2,9 +2,12 @@ package tmg.flashback.feature.season.presentation.shared.seasonpicker
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.datetime.LocalDate
 import tmg.flashback.data.repo.repository.InfoRepository
 import tmg.flashback.feature.season.repositories.CalendarRepository
 import tmg.flashback.feature.season.usecases.DefaultSeasonUseCase
+import tmg.flashback.infrastructure.datetime.now
+import tmg.flashback.infrastructure.log.logInfo
 
 interface CurrentSeasonHolder {
     val currentSeasonFlow: StateFlow<Int>
@@ -61,7 +64,8 @@ class CurrentSeasonHolderImpl(
 
     private fun newSeasonAvailable(): Boolean {
         val viewedSeasons = calendarRepository.viewedSeasons
-        val newSeasons = supportedSeasons
+        val thisYear = LocalDate.now().year
+        val newSeasons = supportedSeasons.filter { it > thisYear }
         return newSeasons.any { season -> season !in viewedSeasons }
     }
 }

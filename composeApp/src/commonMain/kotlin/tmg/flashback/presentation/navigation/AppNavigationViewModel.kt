@@ -17,6 +17,7 @@ import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
 import tmg.flashback.feature.search.usecases.IsSearchEnabledUseCase
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.navigation.Screen
+import tmg.flashback.usecases.RequiresSyncUseCase
 
 class AppNavigationViewModel(
     isRssEnabledUseCase: IsRssEnabledUseCase,
@@ -24,7 +25,8 @@ class AppNavigationViewModel(
     isMenuIconEnabledUseCase: IsMenuIconEnabledUseCase,
     isSnowEnabledUseCase: IsSnowEnabledUseCase,
     isSummerEnabledUseCase: IsSummerEnabledUseCase,
-    isUkraineEnabledUseCase: IsUkraineEnabledUseCase
+    isUkraineEnabledUseCase: IsUkraineEnabledUseCase,
+    requiresSyncUseCase: RequiresSyncUseCase
 ): ViewModel(), NavController.OnDestinationChangedListener {
 
     val easterEggs = AppNavigationEasterEggs(
@@ -39,7 +41,8 @@ class AppNavigationViewModel(
         showSearch = isSearchEnabledUseCase(),
         easterEggs = easterEggs,
         screen = null,
-        intoSubNavigation = false
+        intoSubNavigation = false,
+        requiresContentSync = requiresSyncUseCase()
     ))
     val uiState: StateFlow<AppNavigationUIState> = _uiState
 

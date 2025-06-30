@@ -2,6 +2,7 @@
 <resources>
 
     <!-- Splash -->
+    <string name="splash_title">嗨</string>
     <string name="splash_continue">继续</string>
     <string name="splash_sync_info">由于这是您首次打开应用，我们正在获取一些与一级方程式世界相关的数据，以便您了解最新情况…</string>
     <string name="splash_sync_try_again">重试</string>

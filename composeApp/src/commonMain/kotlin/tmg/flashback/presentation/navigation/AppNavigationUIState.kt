@@ -8,7 +8,8 @@ data class AppNavigationUIState(
     val showSearch: Boolean,
     val easterEggs: AppNavigationEasterEggs,
     val screen: Screen?,
-    val intoSubNavigation: Boolean
+    val intoSubNavigation: Boolean,
+    val requiresContentSync: Boolean
 )
 
 data class AppNavigationEasterEggs(

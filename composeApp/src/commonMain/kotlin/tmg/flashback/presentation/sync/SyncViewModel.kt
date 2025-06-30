@@ -20,6 +20,7 @@ import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.presentation.sync.SyncState.DONE
 import tmg.flashback.presentation.sync.SyncState.FAILED
 import tmg.flashback.presentation.sync.SyncState.LOADING
+import tmg.flashback.repositories.ContentSyncRepository
 
 class SyncViewModel(
     private val circuitRepository: CircuitRepository,
@@ -28,7 +29,8 @@ class SyncViewModel(
     private val overviewRepository: OverviewRepository,
     private val doesConfigRequireSyncUseCase: DoesConfigRequireSyncUseCase,
     private val resetConfigUseCase: ResetConfigUseCase,
-    private val fetchConfigRepository: FetchConfigUseCase
+    private val fetchConfigRepository: FetchConfigUseCase,
+    private val contentSyncRepository: ContentSyncRepository
 ): ViewModel() {
 
     private val _circuitsState: MutableStateFlow<SyncState> = MutableStateFlow(LOADING)
@@ -55,6 +57,7 @@ class SyncViewModel(
     ) { circuits, constructors, drivers, races, config ->
         val all = listOf(circuits, constructors, drivers, races, config)
         if (all.all { it == DONE }) {
+            contentSyncRepository.initialSyncCompleted = true
             return@combine DONE
         }
         if (all.all { it != LOADING }) {
@@ -97,7 +100,6 @@ class SyncViewModel(
             }
         }
     }
-
 
     private fun startSyncDrivers() {
         if (_driversState.value != DONE) {

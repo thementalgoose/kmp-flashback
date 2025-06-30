@@ -5,7 +5,9 @@
 
     <string name="app_name" translatable="false">Flashback</string>
 
+
     <!-- Splash -->
+    <string name="splash_title">Hey</string>
     <string name="splash_continue">Continue</string>
     <string name="splash_sync_info">As this is the first time you\'re opening the app, we\'re grabbing some data related to the world of formula 1 to get you up to speed…</string>
     <string name="splash_sync_try_again">Try again</string>

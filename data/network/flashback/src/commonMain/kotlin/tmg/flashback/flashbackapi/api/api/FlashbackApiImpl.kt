@@ -1,14 +1,11 @@
 package tmg.flashback.flashbackapi.api.api
 
 import io.ktor.client.HttpClient
-import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.headers
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
-import io.ktor.util.reflect.TypeInfo
 import kotlinx.io.IOException
-import kotlinx.serialization.Serializable
 import tmg.flashback.flashbackapi.api.client.json
 import tmg.flashback.flashbackapi.api.models.MetadataWrapper
 import tmg.flashback.flashbackapi.api.models.circuits.AllCircuits

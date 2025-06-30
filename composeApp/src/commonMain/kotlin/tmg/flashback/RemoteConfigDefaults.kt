@@ -149,7 +149,7 @@ object RemoteConfigDefaults {
 
     private fun generateSeasonArray(): String {
         val allSeasons = (LocalDate.now().year) - FIRST_SEASON
-        val seasons = List(allSeasons) { FIRST_SEASON + it }
+        val seasons = List(allSeasons + 1) { FIRST_SEASON + it }
         val seasonArray = seasons.joinToString(separator = ",") { """{"s":$it}"""}
         return """{"seasons":[${seasonArray}]}"""
     }
