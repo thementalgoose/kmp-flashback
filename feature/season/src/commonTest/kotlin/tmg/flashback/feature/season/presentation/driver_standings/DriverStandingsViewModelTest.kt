@@ -1,17 +1,23 @@
 package tmg.flashback.feature.season.presentation.driver_standings
 
 import app.cash.turbine.test
-import dev.mokkery.MockMode
 import dev.mokkery.MockMode.autoUnit
 import dev.mokkery.answering.returns
 import dev.mokkery.every
+import dev.mokkery.everySuspend
 import dev.mokkery.matcher.any
 import dev.mokkery.mock
-import dev.mokkery.verify.VerifyMode.Companion.exactly
 import dev.mokkery.verifySuspend
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
+import tmg.flashback.data.repo.model.Response
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
 import tmg.flashback.data.repo.repository.SeasonRepository
@@ -25,84 +31,130 @@ import kotlin.test.assertEquals
 
 internal class DriverStandingsViewModelTest {
 
+    private val testDispatcher = StandardTestDispatcher()
+
     private val mockSeasonRepository: SeasonRepository = mock(autoUnit)
     private val mockCurrentSeasonHolder: CurrentSeasonHolder = mock(autoUnit)
     private val mockOverviewRepository: OverviewRepository = mock(autoUnit)
     private val mockRaceRepository: RaceRepository = mock(autoUnit)
 
+    private val standing1 = SeasonDriverStandingSeason.model()
+    private val standing2 = SeasonDriverStandingSeason.model(driver = Driver.model(id = "2"))
+
+    private val _fakeCurrentSeasonFlow: MutableStateFlow<Int> = MutableStateFlow(2020)
+
     private lateinit var underTest: DriverStandingsViewModel
 
-    private fun initUnderTest() {
+    private fun initUnderTest() = runBlocking {
         every { mockSeasonRepository.getDriverStandings(2020) } returns flow { emit(SeasonDriverStandings.model(
             standings = listOf(standing1)
         )) }
         every { mockSeasonRepository.getDriverStandings(2021) } returns flow { emit(SeasonDriverStandings.model(
             standings = listOf(standing2)
         )) }
-        every { mockCurrentSeasonHolder.currentSeason } returns 2020
-        every { mockCurrentSeasonHolder.currentSeasonFlow } returns mockCurrentSeasonFlow
+        every { mockCurrentSeasonHolder.currentSeason } returns 2019
+        every { mockCurrentSeasonHolder.currentSeasonFlow } returns _fakeCurrentSeasonFlow
+        everySuspend { mockOverviewRepository.populateOverview(any()) } returns Response.Successful
+        everySuspend { mockRaceRepository.populateRaces(any()) } returns Response.Successful
         underTest = DriverStandingsViewModel(
             seasonRepository = mockSeasonRepository,
             currentSeasonHolder = mockCurrentSeasonHolder,
             overviewRepository = mockOverviewRepository,
             racesRepository = mockRaceRepository,
+            mainDispatcher = testDispatcher
         )
     }
 
-    private val standing1 = SeasonDriverStandingSeason.model()
-    private val standing2 = SeasonDriverStandingSeason.model(driver = Driver.model(id = "2"))
-    private val mockCurrentSeasonFlow: MutableStateFlow<Int> = MutableStateFlow(2020)
-
     @Test
-    fun `current season holder emits new season calls populate and refresh`() = runTest {
+    fun `initialise loads season into state`() = runTest {
         initUnderTest()
         underTest.uiState.test {
-            assertEquals(2020, awaitItem().season)
+            val initial = awaitItem()
+            assertEquals(2019, initial.season)
 
-            mockCurrentSeasonFlow.emit(2021)
-
-            val item = awaitItem()
-            assertEquals(2021, item.season)
-            assertEquals(listOf(standing2), item.standings)
+            cancelAndIgnoreRemainingEvents()
         }
     }
 
     @Test
-    fun `initial load sets default season`() = runTest {
+    fun `initialise standings populates current season`() = runTest {
         initUnderTest()
         underTest.uiState.test {
-            assertEquals(2020, awaitItem().season)
+            val initial = awaitItem()
+            assertEquals(2019, initial.season)
+
+            testDispatcher.scheduler.advanceUntilIdle()
+
+            val initialObservable = awaitItem()
+            assertEquals(2020, initialObservable.season)
+
+            val afterPopulate = awaitItem()
+            assertEquals(listOf(standing1), afterPopulate.standings)
+            assertEquals(1.0, afterPopulate.maxPoints)
+            assertEquals(false, afterPopulate.isLoading)
         }
     }
 
     @Test
-    fun `refresh calls fetch`() = runTest {
+    fun `current season update causes re-load`() = runTest {
         initUnderTest()
         underTest.uiState.test {
-            assertEquals(listOf(standing1), awaitItem().standings)
+            val initial = awaitItem()
+            assertEquals(2019, initial.season)
+
+            testDispatcher.scheduler.advanceUntilIdle()
+
+            val initialObservable = awaitItem()
+            assertEquals(2020, initialObservable.season)
+
+            val afterPopulate = awaitItem()
+            assertEquals(listOf(standing1), afterPopulate.standings)
+
+            _fakeCurrentSeasonFlow.emit(2021)
+
+            testDispatcher.scheduler.advanceUntilIdle()
+
+            val updatesInitial = awaitItem()
+            assertEquals(2021, updatesInitial.season)
+
+            val afterUpdate = awaitItem()
+            assertEquals(listOf(standing2), afterUpdate.standings)
+        }
+    }
+
+    @Test
+    fun `refresh kicks off re-populate calls`() = runTest {
+        initUnderTest()
+        underTest.uiState.test {
+            val initial = awaitItem()
+            assertEquals(2019, initial.season)
+
+            testDispatcher.scheduler.advanceUntilIdle()
+
+            val initialObservable = awaitItem()
+            assertEquals(2020, initialObservable.season)
+
+            val afterPopulate = awaitItem()
+            assertEquals(listOf(standing1), afterPopulate.standings)
 
             every { mockSeasonRepository.getDriverStandings(2020) } returns flow { emit(SeasonDriverStandings.model(
-                standings = listOf(standing1, standing2)
+                standings = listOf(standing2)
             )) }
 
             underTest.refresh()
+
+            testDispatcher.scheduler.advanceUntilIdle()
+
+            val afterRefresh = awaitItem()
+            assertEquals(true, afterRefresh.isLoading)
+
+            val afterRefreshPopulate = awaitItem()
+            assertEquals(listOf(standing2), afterRefreshPopulate.standings)
+
             verifySuspend {
                 mockOverviewRepository.populateOverview(2020)
                 mockRaceRepository.populateRaces(2020)
             }
-            assertEquals(listOf(standing1, standing2), awaitItem().standings)
-        }
-    }
-
-    @Test
-    fun `initial load populates data from repo`() = runTest {
-        initUnderTest()
-        underTest.uiState.test {
-            assertEquals(listOf(standing1), awaitItem().standings)
-        }
-        verifySuspend(exactly(0)) {
-            mockOverviewRepository.populateOverview(any<Int>())
-            mockRaceRepository.populateRaces(any<Int>())
         }
     }
 }

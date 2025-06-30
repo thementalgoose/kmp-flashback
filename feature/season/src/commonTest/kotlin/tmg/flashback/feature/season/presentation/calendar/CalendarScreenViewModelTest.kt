@@ -1,17 +1,18 @@
 package tmg.flashback.feature.season.presentation.calendar
 
 import app.cash.turbine.test
-import dev.mokkery.MockMode
 import dev.mokkery.MockMode.autoUnit
 import dev.mokkery.answering.returns
 import dev.mokkery.every
 import dev.mokkery.everySuspend
 import dev.mokkery.matcher.any
 import dev.mokkery.mock
+import dev.mokkery.verify
 import dev.mokkery.verify.VerifyMode.Companion.exactly
 import dev.mokkery.verifySuspend
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
@@ -21,7 +22,6 @@ import tmg.flashback.data.repo.model.Response
 import tmg.flashback.data.repo.repository.EventRepository
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
-import tmg.flashback.data.repo.repository.SeasonRepository
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
 import tmg.flashback.feature.season.repositories.CalendarRepository
 import tmg.flashback.formula1.model.Overview
@@ -34,6 +34,8 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 internal class CalendarScreenViewModelTest {
+
+    private val testDispatcher = StandardTestDispatcher()
 
     private val mockOverviewRepository: OverviewRepository = mock(autoUnit)
     private val mockRaceRepository: RaceRepository = mock(autoUnit)
@@ -58,26 +60,15 @@ internal class CalendarScreenViewModelTest {
     private lateinit var underTest: CalendarScreenViewModel
 
     private fun initUnderTest() {
-        every { mockOverviewRepository.getOverview(2020) } returns flow { emit(
-            Overview.model(
-                overviewRaces = listOf(overview1, overview2)
-            ))
-        }
-        every { mockOverviewRepository.getOverview(2021) } returns flow {
-            emit(
-                Overview.model(
-                    overviewRaces = listOf(overview5)
-                )
-            )
+        every { mockOverviewRepository.getOverview(2022) } returns flow {
+            emit(Overview.model(overviewRaces = listOf(overview5)))
         }
 
         everySuspend { mockOverviewRepository.populateOverview(any())} returns Response.Successful
         everySuspend { mockRaceRepository.populateRaces(any())} returns Response.Successful
         every { mockCalendarRepository.emptyWeeksInCalendar } returns false
-        every { mockCalendarRepository.collapseList } returns false
         every { mockEventsRepository.getEvents(any<Int>()) } returns flow { emit(emptyList()) }
-        every { mockCurrentSeasonHolder.currentSeason } returns 2020
-        every { mockCurrentSeasonHolder.defaultSeason } returns 2021
+        every { mockCurrentSeasonHolder.currentSeason } returns 2019
         every { mockCurrentSeasonHolder.currentSeasonFlow } returns currentSeasonFlow
 
         underTest = CalendarScreenViewModel(
@@ -86,118 +77,197 @@ internal class CalendarScreenViewModelTest {
             currentSeasonHolder = mockCurrentSeasonHolder,
             eventsRepository = mockEventsRepository,
             calendarRepository = mockCalendarRepository,
+            mainDispatcher = testDispatcher
         )
     }
 
     @Test
-    fun `content refreshed when current season flow changes`() = runTest {
+    fun `initialse viewmodel will load race week data`() = runTest {
+        every { mockCurrentSeasonHolder.defaultSeason } returns 2021
+        every { mockCalendarRepository.collapseList } returns false
+        every { mockOverviewRepository.getOverview(2020) } returns flow { emit(
+            Overview.model(overviewRaces = listOf(overview1, overview2)))
+        }
         initUnderTest()
         underTest.uiState.test {
-            assertEquals(listOf(expectedRaceWeek1, expectedRaceWeek2), awaitItem().items)
+            val seasonInState = awaitItem()
+            assertEquals(2019, seasonInState.season)
 
-            currentSeasonFlow.emit(2021)
-            val item = awaitItem()
-            assertEquals(listOf(expectedRaceWeek5), item.items)
-            assertEquals(2021, item.season)
+            testDispatcher.scheduler.advanceUntilIdle()
+
+            val newSeason = awaitItem()
+            assertEquals(2020, newSeason.season)
+
+            val data = awaitItem()
+            assertEquals(listOf(expectedRaceWeek1, expectedRaceWeek2), data.items)
         }
     }
 
     @Test
-    fun `initial load sets default season`() = runTest {
+    fun `current season changing updates data`() = runTest {
+        every { mockCurrentSeasonHolder.defaultSeason } returns 2021
+        every { mockCalendarRepository.collapseList } returns false
+        every { mockOverviewRepository.getOverview(2020) } returns flow { emit(
+            Overview.model(overviewRaces = listOf(overview1, overview2)))
+        }
         initUnderTest()
         underTest.uiState.test {
-            assertEquals(2020, awaitItem().season)
+            val seasonInState = awaitItem()
+            assertEquals(2019, seasonInState.season)
+
+            testDispatcher.scheduler.advanceUntilIdle()
+
+            val newSeason = awaitItem()
+            assertEquals(2020, newSeason.season)
+
+            val data = awaitItem()
+            assertEquals(listOf(expectedRaceWeek1, expectedRaceWeek2), data.items)
+
+            currentSeasonFlow.emit(2022)
+
+            testDispatcher.scheduler.advanceUntilIdle()
+
+            // Updating season
+            val newData = awaitItem()
+            assertEquals(2022, newData.season)
+            assertEquals(listOf(expectedRaceWeek1, expectedRaceWeek2), newData.items)
+
+            // Updating data from DB
+            val dbData = awaitItem()
+            assertEquals(2022, dbData.season)
+            assertEquals(listOf(expectedRaceWeek5), dbData.items)
+        }
+    }
+
+
+    @Test
+    fun `refreshing view model repopulates data`() = runTest {
+        every { mockCurrentSeasonHolder.defaultSeason } returns 2021
+        every { mockCalendarRepository.collapseList } returns false
+        every { mockOverviewRepository.getOverview(2020) } returns flow { emit(
+            Overview.model(overviewRaces = listOf(overview1, overview2)))
+        }
+        initUnderTest()
+        underTest.uiState.test {
+            val seasonInState = awaitItem()
+            assertEquals(2019, seasonInState.season)
+
+            testDispatcher.scheduler.advanceUntilIdle()
+
+            val newSeason = awaitItem()
+            assertEquals(2020, newSeason.season)
+
+            val data = awaitItem()
+            assertEquals(listOf(expectedRaceWeek1, expectedRaceWeek2), data.items)
+
+            underTest.refresh()
+
+            testDispatcher.scheduler.advanceUntilIdle()
+
+            assertEquals(true, awaitItem().isLoading)
+
+            assertEquals(false, awaitItem().isLoading)
+
+            verifySuspend {
+                mockOverviewRepository.populateOverview(2020)
+                mockRaceRepository.populateRaces(2020)
+            }
         }
     }
 
     @Test
-    fun `initial load calls refresh if in current year`() = runTest {
+    fun `initialse viewmodel will call refresh if current season matches default season`() = runTest {
+        every { mockOverviewRepository.getOverview(2020) } returns flow { emit(
+            Overview.model(overviewRaces = listOf(overview1, overview2)))
+        }
+        every { mockCalendarRepository.collapseList } returns false
         every { mockCurrentSeasonHolder.defaultSeason } returns 2020
         initUnderTest()
-        verifySuspend {
-            mockRaceRepository.populateRaces(2020)
-            mockOverviewRepository.populateOverview(2020)
-        }
-    }
-
-    @Test
-    fun `initial load does not calls refresh if not in current year`() = runTest {
-        every { mockCurrentSeasonHolder.defaultSeason } returns 2021
-        initUnderTest()
-        verifySuspend(exactly(0)) {
-            mockRaceRepository.populateRaces(2021)
-            mockOverviewRepository.populateOverview(2021)
-        }
-    }
-
-    @Test
-    fun `initial load sets scheduled list of items`() = runTest {
-        initUnderTest()
         underTest.uiState.test {
-            assertEquals(listOf(expectedRaceWeek1, expectedRaceWeek2), awaitItem().items)
-        }
-    }
+            val seasonInState = awaitItem()
+            assertEquals(2019, seasonInState.season)
 
-    @Test
-    fun `initial load with empty overview sets items to null`() = runTest {
-        every { mockOverviewRepository.getOverview(2020) } returns flow { emit(
-            Overview(
-                season = 2020,
-                overviewRaces = emptyList()
-            ))
-        }
-        initUnderTest()
-        underTest.uiState.test {
-            val item = awaitItem()
-            assertEquals(emptyList(), item.items)
-            assertEquals(false, item.isLoading)
-        }
-    }
+            testDispatcher.scheduler.advanceUntilIdle()
 
-    @Test
-    fun `refresh calls refresh`() = runTest {
-        initUnderTest()
-        underTest.uiState.test {
-            assertEquals(listOf(expectedRaceWeek1, expectedRaceWeek2), awaitItem().items)
+            val data = awaitItem()
+            assertEquals(emptyList(), data.items)
 
-            every { mockOverviewRepository.getOverview(2020) } returns flow { emit(
-                Overview.model(
-                    overviewRaces = listOf(overview1, overview2, overview3)
-                ))
-            }
-            underTest.refresh()
+            testDispatcher.scheduler.advanceUntilIdle()
+
+            awaitItem().also { println(it) }
+
             verifySuspend {
-                mockRaceRepository.populateRaces(2020)
                 mockOverviewRepository.populateOverview(2020)
+                mockRaceRepository.populateRaces(2020)
             }
-            assertEquals(listOf(expectedRaceWeek1, expectedRaceWeek2, expectedRaceWeek3), awaitItem().items)
+
+            cancelAndIgnoreRemainingEvents()
         }
     }
 
     @Test
-    fun `clicking grouped races uncollapses races`() = runTest {
+    fun `initialse viewmodel will call refresh if no DB values found for given season`() = runTest {
+        every { mockCurrentSeasonHolder.defaultSeason } returns 2021
+        every { mockCalendarRepository.collapseList } returns false
         every { mockOverviewRepository.getOverview(2020) } returns flow { emit(
-            Overview.model(
-                overviewRaces = listOf(
-                    OverviewRace.model(round = 1, date = LocalDate.now().minus(5, DateTimeUnit.DAY)),
-                    OverviewRace.model(round = 2, date = LocalDate.now().minus(2, DateTimeUnit.DAY)),
-                    OverviewRace.model(round = 3, date = LocalDate.now().minus(1, DateTimeUnit.DAY)),
-                    OverviewRace.model(round = 4, date = LocalDate.now().plus(5, DateTimeUnit.DAY)),
-                )
-            ))
+            Overview.model(overviewRaces = emptyList()))
+        }
+        initUnderTest()
+        underTest.uiState.test {
+            val seasonInState = awaitItem()
+            assertEquals(2019, seasonInState.season)
+
+            testDispatcher.scheduler.advanceUntilIdle()
+
+            val newSeason = awaitItem()
+            assertEquals(2020, newSeason.season)
+
+            val data = awaitItem()
+            assertEquals(null, data.items)
+
+            testDispatcher.scheduler.advanceUntilIdle()
+
+            assertEquals(true, awaitItem().isLoading)
+
+            verifySuspend {
+                mockOverviewRepository.populateOverview(2020)
+                mockRaceRepository.populateRaces(2020)
+            }
+
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
+
+    @Test
+    fun `clicking grouped races expands list`() = runTest {
+        every { mockCurrentSeasonHolder.defaultSeason } returns 2021
+        every { mockOverviewRepository.getOverview(2020) } returns flow { emit(
+            Overview.model(overviewRaces = listOf(
+                OverviewRace.model(round = 1, date = LocalDate.now().minus(5, DateTimeUnit.DAY)),
+                OverviewRace.model(round = 2, date = LocalDate.now().minus(4, DateTimeUnit.DAY)),
+                OverviewRace.model(round = 3, date = LocalDate.now().minus(3, DateTimeUnit.DAY)),
+                OverviewRace.model(round = 4, date = LocalDate.now().minus(2, DateTimeUnit.DAY)),
+                OverviewRace.model(round = 5, date = LocalDate.now().plus(1, DateTimeUnit.DAY)),
+            )))
         }
         every { mockCalendarRepository.collapseList } returns true
         initUnderTest()
         underTest.uiState.test {
-            assertTrue(awaitItem().items?.any { it is CalendarItem.GroupedCompletedRaces } == true)
+            val seasonInState = awaitItem()
+            assertEquals(2019, seasonInState.season)
 
-            val groupedRaces: CalendarItem.GroupedCompletedRaces = CalendarItem.GroupedCompletedRaces(
-                OverviewRace.model(), OverviewRace.model())
-            underTest.clickItem(groupedRaces)
+            testDispatcher.scheduler.advanceUntilIdle()
 
-            testScheduler.advanceUntilIdle()
+            val newSeason = awaitItem()
+            assertEquals(2020, newSeason.season)
 
-            assertTrue(awaitItem().items?.none { it is CalendarItem.GroupedCompletedRaces } == true)
+            val data = awaitItem()
+            assertEquals(true, data.items!!.any { it is CalendarItem.GroupedCompletedRaces })
+
+            underTest.clickGroupedRaces()
+
+            val uncollapsed = awaitItem()
+            assertEquals(true, uncollapsed.items!!.none { it is CalendarItem.GroupedCompletedRaces })
         }
     }
 }

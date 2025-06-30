@@ -62,7 +62,7 @@ internal class CalendarRepositoryTest {
 
     @Test
     fun `collapse list reads from prefs`() {
-        every { mockPreferenceManager.getBoolean(expectedKeyDashboardCollapseList, false) } returns true
+        every { mockPreferenceManager.getBoolean(expectedKeyDashboardCollapseList, true) } returns true
 
         initUnderTest()
         assertTrue(underTest.collapseList)

@@ -2,6 +2,8 @@ package tmg.flashback.feature.season.presentation.driver_standings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -17,6 +19,7 @@ class DriverStandingsViewModel(
     private val overviewRepository: OverviewRepository,
     private val racesRepository: RaceRepository,
     private val currentSeasonHolder: CurrentSeasonHolder,
+    private val mainDispatcher: CoroutineDispatcher = Dispatchers.Main
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<DriverStandingsState> = MutableStateFlow(
@@ -28,7 +31,7 @@ class DriverStandingsViewModel(
         get() = _uiState.value.season
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(mainDispatcher) {
             currentSeasonHolder.currentSeasonFlow.collectLatest {
                 _uiState.value = _uiState.value.copy(season = it)
                 if (!populate()) {
@@ -39,7 +42,7 @@ class DriverStandingsViewModel(
     }
 
     fun refresh() {
-        viewModelScope.launch {
+        viewModelScope.launch(mainDispatcher) {
             if (_uiState.value.standings.isEmpty()) {
                 populate()
             }

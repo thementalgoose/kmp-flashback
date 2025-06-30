@@ -2,6 +2,8 @@ package tmg.flashback.feature.season.presentation.calendar
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -14,6 +16,7 @@ import tmg.flashback.feature.season.presentation.calendar.ScheduleBuilder.genera
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
 import tmg.flashback.feature.season.repositories.CalendarRepository
 import tmg.flashback.formula1.model.notifications.NotificationSchedule
+import tmg.flashback.infrastructure.log.logInfo
 
 class CalendarScreenViewModel(
     private val overviewRepository: OverviewRepository,
@@ -21,6 +24,7 @@ class CalendarScreenViewModel(
     private val currentSeasonHolder: CurrentSeasonHolder,
     calendarRepository: CalendarRepository,
     private val eventsRepository: EventRepository,
+    private val mainDispatcher: CoroutineDispatcher = Dispatchers.Main
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<CalendarScreenState> = MutableStateFlow(CalendarScreenState(
@@ -32,11 +36,10 @@ class CalendarScreenViewModel(
     private var showEmptyWeeks: Boolean = calendarRepository.emptyWeeksInCalendar
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(mainDispatcher) {
             currentSeasonHolder.currentSeasonFlow.collectLatest {
                 _uiState.value = _uiState.value.copy(season = it)
-                populate(it)
-                if (it == currentSeasonHolder.defaultSeason) {
+                if (!populate(it) || it == currentSeasonHolder.defaultSeason) {
                     refresh()
                 }
             }
@@ -44,7 +47,7 @@ class CalendarScreenViewModel(
     }
 
     fun refresh() {
-        viewModelScope.launch {
+        viewModelScope.launch(mainDispatcher) {
             val season = uiState.value.season
             if (_uiState.value.items.isNullOrEmpty() || _uiState.value.items?.none { it is CalendarItem.RaceWeek } == true) {
                 populate(season)
@@ -59,13 +62,14 @@ class CalendarScreenViewModel(
     private suspend fun populate(season: Int): Boolean {
         val overview = overviewRepository.getOverview(season).firstOrNull()
         val events = eventsRepository.getEvents(season).firstOrNull()
-
+        println("Populate $season -> $overview")
         if (overview == null || overview.overviewRaces.isEmpty()) {
             _uiState.value = _uiState.value.copy(
                 items = null,
                 isLoading = false,
                 showEvents = events?.isNotEmpty() ?: false
             )
+            println(" << Returning false")
             return false
         }
 
@@ -82,6 +86,7 @@ class CalendarScreenViewModel(
             isLoading = false,
             showEvents = events?.isNotEmpty() == true
         )
+        println(" << Returning true")
         return true
     }
 

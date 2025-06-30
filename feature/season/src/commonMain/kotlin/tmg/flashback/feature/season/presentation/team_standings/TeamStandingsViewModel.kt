@@ -2,6 +2,8 @@ package tmg.flashback.feature.season.presentation.team_standings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -17,6 +19,7 @@ class TeamStandingsViewModel(
     private val overviewRepository: OverviewRepository,
     private val raceRepository: RaceRepository,
     private val currentSeasonHolder: CurrentSeasonHolder,
+    private val mainDispatcher: CoroutineDispatcher = Dispatchers.Main
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<TeamStandingsState> = MutableStateFlow(
@@ -29,7 +32,7 @@ class TeamStandingsViewModel(
 
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(mainDispatcher) {
             currentSeasonHolder.currentSeasonFlow.collectLatest {
                 _uiState.value = _uiState.value.copy(season = it)
                 if (!populate()) {
@@ -40,7 +43,7 @@ class TeamStandingsViewModel(
     }
 
     fun refresh() {
-        viewModelScope.launch {
+        viewModelScope.launch(mainDispatcher) {
             if (_uiState.value.standings.isEmpty()) {
                 populate()
             }

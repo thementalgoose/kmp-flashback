@@ -23,11 +23,11 @@ internal class WebBrowserRepositoryTest {
 
     @Test
     fun `enabled reads from preferences`() {
-        every { mockPreferenceManager.getBoolean(keyOpenInExternal, false) } returns true
+        every { mockPreferenceManager.getBoolean(expectedKeyEnabled, false) } returns true
         initUnderTest()
         assertTrue(underTest.enabled)
         verify {
-            mockPreferenceManager.getBoolean(keyOpenInExternal, true)
+            mockPreferenceManager.getBoolean(expectedKeyEnabled, false)
         }
     }
 
@@ -36,17 +36,17 @@ internal class WebBrowserRepositoryTest {
         initUnderTest()
         underTest.enabled = true
         verify {
-            mockPreferenceManager.save(keyOpenInExternal, true)
+            mockPreferenceManager.save(expectedKeyEnabled, true)
         }
     }
 
     @Test
     fun `enable javascript reads from preferences`() {
-        every { mockPreferenceManager.getBoolean(keyEnableJavascript, true) } returns true
+        every { mockPreferenceManager.getBoolean(expectedKeyEnableJavascript, true) } returns true
         initUnderTest()
         assertTrue(underTest.enableJavascript)
         verify {
-            mockPreferenceManager.getBoolean(keyEnableJavascript, true)
+            mockPreferenceManager.getBoolean(expectedKeyEnableJavascript, true)
         }
     }
 
@@ -55,12 +55,12 @@ internal class WebBrowserRepositoryTest {
         initUnderTest()
         underTest.enableJavascript = true
         verify {
-            mockPreferenceManager.save(keyEnableJavascript, true)
+            mockPreferenceManager.save(expectedKeyEnableJavascript, true)
         }
     }
 
     companion object {
-        private const val keyOpenInExternal = "WEB_BROWSER_OPEN_IN_EXTERNAL"
-        private const val keyEnableJavascript = "WEB_BROWSER_ENABLE_JAVASCRIPT"
+        private const val expectedKeyEnabled = "WEB_BROWSER_ENABLED"
+        private const val expectedKeyEnableJavascript = "WEB_BROWSER_ENABLE_JAVASCRIPT"
     }
 }
