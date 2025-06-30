@@ -3,6 +3,7 @@ package tmg.flashback.eastereggs.usecases
 import tmg.flashback.eastereggs.repository.FakeEasterEggsRepository
 import kotlin.test.Test
 import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 internal class IsSummerEnabledUseCaseTest {
 
@@ -27,6 +28,6 @@ internal class IsSummerEnabledUseCaseTest {
         fakeEasterEggsRepository.isSummerEnabled = true
 
         initUnderTest()
-        assertFalse(underTest.invoke())
+        assertTrue(underTest.invoke())
     }
 }

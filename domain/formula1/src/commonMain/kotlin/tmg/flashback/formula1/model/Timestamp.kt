@@ -58,7 +58,7 @@ data class Timestamp(
      * Get a string representation of the date
      */
     fun string(): String {
-        return this.originalDate.format(dateFormat) + this.originalTime.format(timeFormat)
+        return this.originalDate.format(dateFormat) + " " + this.originalTime.format(timeFormat)
     }
 
     private val dateFormat = LocalDate.Format {

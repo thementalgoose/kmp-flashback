@@ -85,7 +85,7 @@ internal class TimestampTest {
 
         val sut = Timestamp(localDate, localTime, zone)
 
-        assertEquals("2020010112:00:00", sut.string())
+        assertEquals("2020-01-01 12:00:00", sut.string())
     }
 
     //region isInPast
