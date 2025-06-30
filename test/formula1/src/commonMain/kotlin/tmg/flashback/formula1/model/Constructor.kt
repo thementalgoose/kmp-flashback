@@ -7,7 +7,7 @@ fun Constructor.Companion.model(
     wikiUrl: String? = "wikiUrl",
     nationality: String = "nationality",
     nationalityISO: String = "nationalityISO",
-    color: Int = 0x8899EF,
+    color: Int = "#8899EF".toColourInt(),
 ): Constructor = Constructor(
     id = id,
     name = name,

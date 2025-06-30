@@ -82,7 +82,7 @@ internal class CalendarScreenViewModelTest {
     }
 
     @Test
-    fun `initialse viewmodel will load race week data`() = runTest {
+    fun `initialise viewmodel will load race week data`() = runTest {
         every { mockCurrentSeasonHolder.defaultSeason } returns 2021
         every { mockCalendarRepository.collapseList } returns false
         every { mockOverviewRepository.getOverview(2020) } returns flow { emit(
