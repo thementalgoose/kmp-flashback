@@ -12,6 +12,7 @@ import androidx.compose.material3.SheetValue
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -20,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowWidthSizeClass
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.infrastructure.extensions.toEnum
@@ -103,10 +105,14 @@ fun App() {
             }
         )
 
+
+
         // Initial sync
         val requiresContentSync = remember(appNavigationUiState.value.requiresContentSync) {
             mutableStateOf(appNavigationUiState.value.requiresContentSync)
         }
+
+        // Disable bottom sheet back / dismiss actions when active, re-enable when done
         val lockBottomSheetOnScreen = remember { mutableStateOf(true) }
         if (requiresContentSync.value) {
             ModalBottomSheet(
@@ -135,6 +141,14 @@ fun App() {
                         },
                     )
                 }
+            }
+        }
+
+        // Dismiss sync bottom sheet
+        LaunchedEffect(lockBottomSheetOnScreen.value) {
+            if (!lockBottomSheetOnScreen.value) {
+                delay(1000)
+                requiresContentSync.value = false
             }
         }
     }

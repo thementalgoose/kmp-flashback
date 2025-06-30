@@ -1,6 +1,5 @@
 package tmg.flashback.presentation
 
-//import androidx.compose.ui.backhandler.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
