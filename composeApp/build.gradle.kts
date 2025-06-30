@@ -15,14 +15,14 @@ plugins {
     alias(libs.plugins.mokkery)
 }
 
-val versionCodeProperty = 1
-val versionNameProperty = "1.0.0"
+val versionCodeProperty: Int = System.getenv("VERSION_CODE").toIntOrNull() ?: 1
+val versionNameProperty: String = System.getenv("VERSION_NAME") ?: "1.0.0"
 
 kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_17)
+            jvmTarget.set(JvmTarget.JVM_21)
         }
     }
 
@@ -102,7 +102,7 @@ android {
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = versionCodeProperty
-        versionName = versionNameProperty
+        versionName = "${versionNameProperty}.${versionCodeProperty}"
     }
     packaging {
         resources {
@@ -114,9 +114,20 @@ android {
             isMinifyEnabled = false
         }
     }
+
+
+    signingConfigs {
+        getByName("release") {
+            storeFile = file(System.getenv("KEYSTORE") ?: "flashback.keystore")
+            storePassword = System.getenv("KEYSTORE_PASSWORD")
+            keyAlias = System.getenv("KEYSTORE_ALIAS")
+            keyPassword = System.getenv("KEYSTORE_PASSWORD")
+        }
+    }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     flavorDimensions.add("variant")

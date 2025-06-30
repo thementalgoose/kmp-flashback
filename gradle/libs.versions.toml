@@ -10,7 +10,7 @@ kotlinx-coroutines = "1.10.2"
 agp = "8.10.1"
 android-compileSdk = "35"
 android-minSdk = "24"
-android-targetSdk = "35"
+android-targetSdk = "36"
 androidx-activityCompose = "1.10.1"
 androidx-lifecycle = "2.9.1"
 androidx-glance = "1.1.1"
@@ -18,7 +18,7 @@ androidx-glance = "1.1.1"
 # Firebase
 google-services = "4.4.2"
 crashlytics = "3.0.4"
-firebase-bom = "33.15.0"
+firebase-bom = "33.16.0"
 
 # Shared
 ktor = "3.1.3"
