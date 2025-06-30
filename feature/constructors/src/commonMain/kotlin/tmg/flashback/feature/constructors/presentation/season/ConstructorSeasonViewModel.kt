@@ -68,8 +68,8 @@ class ConstructorSeasonViewModel(
         }
         .stateIn(viewModelScope, SharingStarted.Lazily, null)
 
-    fun load(season: Int, driverId: String) {
-        seasonConstructor.value = season to driverId
+    fun load(season: Int, constructorId: String) {
+        seasonConstructor.value = season to constructorId
         refresh()
     }
 

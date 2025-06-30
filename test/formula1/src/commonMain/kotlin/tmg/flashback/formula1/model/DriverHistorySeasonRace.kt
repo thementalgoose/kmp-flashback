@@ -9,7 +9,7 @@ fun DriverHistorySeasonRace.Companion.model(
     points: Double = 1.0,
     qualified: Int? = 1,
     gridPos: Int? = 1,
-    constructor: Constructor? = Constructor.model(),
+    constructor: Constructor = Constructor.model(),
     raceInfo: RaceInfo = RaceInfo.model(),
 ): DriverHistorySeasonRace = DriverHistorySeasonRace(
     isSprint = isSprint,
