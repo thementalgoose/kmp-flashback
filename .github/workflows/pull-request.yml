@@ -1,0 +1,44 @@
+name: Pull Request
+'on':
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+      - '**.png'
+jobs:
+  unit_test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      # Checkout
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Setup Java 21
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '21'
+
+      # Caching gradle
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/*.toml*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # Running unit tests
+      - name: Unit tests
+        run: ./gradlew cleanTestDebugUnitTest testDebugUnitTest :app:testSandboxDebugUnitTest
+
+      # Publish test report
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v5
+        if: always()
+        with:
+          report_paths: '**/build/test-results/**/TEST-*.xml'
