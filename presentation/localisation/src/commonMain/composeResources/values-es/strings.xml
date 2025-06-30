@@ -494,6 +494,11 @@
     <string name="dependency_thank_you">Las estadísticas de Fórmula 1 de esta aplicación provienen del equipo de Flashback. Agradecimiento especial a Ergast API por el contenido hasta 2023. No podemos garantizar la exactitud de los datos proporcionados (sin embargo, avísanos si detectas algún problema enviándonos un correo electrónico con el enlace de arriba)\n\n¡Un gran agradecimiento a todos los que se enumeran a continuación por hacer posible esta aplicación! Haz clic en cualquiera de los elementos de la lista a continuación para obtener más información sobre las bibliotecas y los servicios utilizados en la aplicación.</string>
     <string name="about_additional">¡Agradecimiento especial a todos los anteriores! Si nos hemos olvidado de alguien o de algo, ¡háznoslo saber!</string>
     <string name="app_version_placeholder">Versión de la aplicación: %s</string>
+    <string name="app_version">Versión de la aplicación</string>
+    <string name="device_uuid">ID: </string>
+    <string name="installation_id">ID de Instalación: </string>
+    <string name="about_dependencies">Dependencias</string>
+
     <!-- Widgets -->
     <string name="widget_up_next_title">Próximo</string>
     <string name="widget_up_next_description">Obtén el calendario de la próxima carrera</string>

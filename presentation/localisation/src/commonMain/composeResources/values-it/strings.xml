@@ -492,6 +492,10 @@
     <string name="dependency_thank_you">Le statistiche di Formula 1 in questa app provengono dal team Flashback. Un ringraziamento speciale a Ergast API per i contenuti fino al 2023. Non possiamo garantire l\'accuratezza dei dati forniti (faccelo sapere comunque se noti un problema inviandoci un\'e-mail con il link sopra)\n\nUn grande grazie a tutti quelli elencati di seguito per aver reso possibile questa app! Fai clic su uno qualsiasi degli elementi nell\'elenco sottostante per trovare maggiori informazioni sulle librerie e i servizi utilizzati nell\'app.</string>
     <string name="about_additional">Un ringraziamento speciale a tutti quelli sopra! Se abbiamo dimenticato qualcuno o qualcosa, faccelo sapere!</string>
     <string name="app_version_placeholder">Versione app: %s</string>
+    <string name="app_version">Versione app</string>
+    <string name="device_uuid">ID: </string>
+    <string name="installation_id">ID Installazione: </string>
+    <string name="about_dependencies">Dipendenze</string>
 
     <!-- Widget -->
     <string name="widget_up_next_title">Prossimo</string>

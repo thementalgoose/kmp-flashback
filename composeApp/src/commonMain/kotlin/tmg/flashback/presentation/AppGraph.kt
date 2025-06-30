@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import tmg.flashback.feature.about.presentation.AboutScreen
 import tmg.flashback.feature.reactiongame.presentation.ReactionGameScreen
 import tmg.flashback.feature.rss.presentation.feed.RssNavigation
 import tmg.flashback.feature.rss.presentation.feed.RssFeedGraph
@@ -114,9 +115,11 @@ fun AppGraph(
             )
         }
         composable<Screen.About> {
-            Box(Modifier.fillMaxSize()) {
-                TextTitle("About", Modifier.align(Alignment.Center))
-            }
+            AboutScreen(
+                paddingValues = insetPadding,
+                actionUpClicked = openPanel,
+                windowSizeClass = windowAdaptiveInfo.windowSizeClass
+            )
         }
         composable<Screen.Driver> {
             Box(Modifier.fillMaxSize()) {

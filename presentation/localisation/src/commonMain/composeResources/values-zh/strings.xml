@@ -490,6 +490,10 @@
     <string name="dependency_thank_you">本应用中的 F1 统计数据由 Flashback 团队提供。特别感谢 Ergast API 提供 2023 年之前的内容。我们无法保证所提供数据的准确性（如果您发现问题，请通过上面的链接向我们发送电子邮件，让我们知道）\n\n非常感谢下面列出的所有人，让这款应用成为可能！点击列表中的任何一项以查找有关应用中使用的库和服务的信息。</string>
     <string name="about_additional">特别感谢以上所有人！如果我们遗漏了任何人或任何内容，请告诉我们！</string>
     <string name="app_version_placeholder">应用版本：%s</string>
+    <string name="app_version">应用版本</string>
+    <string name="device_uuid">ID: </string>
+    <string name="installation_id">安装 ID: </string>
+    <string name="about_dependencies">依赖项</string>
 
     <!-- 小部件 -->
     <string name="widget_up_next_title">即将到来</string>

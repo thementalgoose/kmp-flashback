@@ -66,7 +66,7 @@ internal fun Modifier.summer() = composed {
 
 private val sunrayDarkPaint = Paint().apply {
     isAntiAlias = true
-    color = Color(0xFFFCBA03).copy(alpha = 0.03f)
+    color = Color(0xFFFCBA03).copy(alpha = 0.015f)
     style = PaintingStyle.Fill
 }
 private val sunrayLightPaint = Paint().apply {
