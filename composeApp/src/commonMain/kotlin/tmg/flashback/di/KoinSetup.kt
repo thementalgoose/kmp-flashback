@@ -36,6 +36,7 @@ import tmg.flashback.presentation.settings.layout.SettingsLayoutViewModel
 import tmg.flashback.presentation.settings.privacy.SettingsPrivacyViewModel
 import tmg.flashback.presentation.settings.theme.SettingsThemeViewModel
 import tmg.flashback.presentation.settings.weather.SettingsWeatherViewModel
+import tmg.flashback.presentation.settings.widgets.SettingsWidgetsViewModel
 import tmg.flashback.presentation.sync.SyncViewModel
 import tmg.flashback.ui.di.presentationUiModule
 import tmg.flashback.webbrowser.di.coreWebBrowserModule
@@ -94,6 +95,7 @@ internal fun module() = module {
     viewModel { SettingsBrowserViewModel(get()) }
     viewModel { SettingsAboutViewModel() }
     viewModel { SettingsPrivacyViewModel(get(), get()) }
+    viewModel { SettingsWidgetsViewModel(get()) }
 
     viewModel { SyncViewModel(get(), get(), get(), get(), get(), get(), get()) }
 }

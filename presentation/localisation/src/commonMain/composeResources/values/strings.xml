@@ -335,6 +335,8 @@
     <string name="settings_section_widgets_show_background_description">Show a solid background instead of a transparent one</string>
     <string name="settings_section_widgets_deeplink_event_title">Link to event?</string>
     <string name="settings_section_widgets_deeplink_event_description">Clicking the widget will take you to the specific race, rather than the homepage</string>
+    <string name="settings_section_widgets_show_weather_title">Show weather?</string>
+    <string name="settings_section_widgets_show_weather_description">Show the weather for the event. This is only visible in larger widget layouts</string>
     <string name="settings_section_refresh_title">Refresh</string>
     <string name="settings_section_refresh_widget_title">Refresh Widgets</string>
     <string name="settings_section_refresh_widget_description">Force a refresh of the widgets currently active</string>

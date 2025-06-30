@@ -59,7 +59,13 @@ import flashback.presentation.localisation.generated.resources.settings_section_
 import flashback.presentation.localisation.generated.resources.settings_section_weather_title
 import flashback.presentation.localisation.generated.resources.settings_section_web_browser_description
 import flashback.presentation.localisation.generated.resources.settings_section_web_browser_title
+import flashback.presentation.localisation.generated.resources.settings_section_widgets_deeplink_event_description
+import flashback.presentation.localisation.generated.resources.settings_section_widgets_deeplink_event_title
 import flashback.presentation.localisation.generated.resources.settings_section_widgets_description
+import flashback.presentation.localisation.generated.resources.settings_section_widgets_show_background_description
+import flashback.presentation.localisation.generated.resources.settings_section_widgets_show_background_title
+import flashback.presentation.localisation.generated.resources.settings_section_widgets_show_weather_description
+import flashback.presentation.localisation.generated.resources.settings_section_widgets_show_weather_title
 import flashback.presentation.localisation.generated.resources.settings_section_widgets_title
 import flashback.presentation.localisation.generated.resources.settings_switch_about_this_app_description
 import flashback.presentation.localisation.generated.resources.settings_switch_about_this_app_title
@@ -232,6 +238,23 @@ object Settings {
             _id = "widgets_refresh",
             title = string.settings_section_refresh_widget_title,
             subtitle = string.settings_section_refresh_widget_description,
+        )
+        val ShowBackground = Setting.Link(
+            _id = "widgets_show_background",
+            title = string.settings_section_widgets_show_background_title,
+            subtitle = string.settings_section_widgets_show_background_description,
+        )
+        val DeeplinkToEvent = Setting.Link(
+            _id = "widgets_deeplink_to_event",
+            title = string.settings_section_widgets_deeplink_event_title,
+            subtitle = string.settings_section_widgets_deeplink_event_description,
+            isEnabled = false,
+        )
+        val ShowWeather = Setting.Link(
+            _id = "widgets_weather",
+            title = string.settings_section_widgets_show_weather_title,
+            subtitle = string.settings_section_widgets_show_weather_description,
+            isEnabled = false,
         )
     }
 

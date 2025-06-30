@@ -300,6 +300,8 @@
     <string name="settings_section_widgets_show_background_description">Mostra uno sfondo solido anziché trasparente</string>
     <string name="settings_section_widgets_deeplink_event_title">Collegamento all\'evento?</string>
     <string name="settings_section_widgets_deeplink_event_description">Facendo clic sul widget verrai indirizzato alla gara specifica, anziché alla pagina iniziale</string>
+    <string name="settings_section_widgets_show_weather_title">Mostrare il meteo?</string>
+    <string name="settings_section_widgets_show_weather_description">Mostra le condizioni meteorologiche per l'evento. Visibile solo nei layout widget più grandi</string>
     <string name="settings_section_refresh_title">Aggiornare</string>
     <string name="settings_section_refresh_widget_title">Aggiorna widget</string>
     <string name="settings_section_refresh_widget_description">Forza un aggiornamento dei widget attualmente attivi</string>

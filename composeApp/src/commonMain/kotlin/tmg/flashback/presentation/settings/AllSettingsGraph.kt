@@ -12,6 +12,7 @@ import tmg.flashback.presentation.settings.layout.SettingsLayoutScreen
 import tmg.flashback.presentation.settings.privacy.SettingsPrivacyScreen
 import tmg.flashback.presentation.settings.theme.SettingsThemeScreen
 import tmg.flashback.presentation.settings.weather.SettingsWeatherScreen
+import tmg.flashback.presentation.settings.widgets.SettingsWidgetScreen
 import tmg.flashback.ui.navigation.MasterDetailPaneState
 import tmg.flashback.ui.navigation.MasterDetailsPane
 import tmg.flashback.ui.navigation.rememberMasterDetailPaneState
@@ -79,6 +80,11 @@ fun AllSettingsGraph(
                     showBack = windowSizeClass.windowWidthSizeClass == COMPACT
                 )
                 is SettingNavigation.RssConfigure -> RssConfigureScreen(
+                    actionUpClicked = { navigator.clear() },
+                    insetPadding = insetPadding,
+                    showBack = windowSizeClass.windowWidthSizeClass == COMPACT
+                )
+                is SettingNavigation.Widgets -> SettingsWidgetScreen(
                     actionUpClicked = { navigator.clear() },
                     insetPadding = insetPadding,
                     showBack = windowSizeClass.windowWidthSizeClass == COMPACT

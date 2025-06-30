@@ -297,6 +297,8 @@
     <string name="settings_section_widgets_show_background_description">显示纯色背景而不是透明背景</string>
     <string name="settings_section_widgets_deeplink_event_title">活动链接？</string>
     <string name="settings_section_widgets_deeplink_event_description">单击小部件将带您进入特定比赛，而不是主页</string>
+    <string name="settings_section_widgets_show_weather_title">显示天气？</string>
+    <string name="settings_section_widgets_show_weather_description">显示活动的天气信息。此选项仅在较大的小部件布局中可见</string>
     <string name="settings_section_refresh_title">刷新</string>
     <string name="settings_section_refresh_widget_title">刷新小部件</string>
     <string name="settings_section_refresh_widget_description">强制刷新当前活动的小部件</string>
