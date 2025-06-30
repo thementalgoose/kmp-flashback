@@ -15,8 +15,16 @@ plugins {
     alias(libs.plugins.mokkery)
 }
 
-val versionCodeProperty: Int = System.getenv("VERSION_CODE").toIntOrNull() ?: 1
-val versionNameProperty: String = System.getenv("VERSION_NAME") ?: "1.0.0"
+val versionCodeProperty: Int = try {
+    System.getenv("VERSION_CODE").toInt()
+} catch (e: Exception) {
+    1
+}
+val versionNameProperty: String = try {
+    System.getenv("VERSION_NAME")
+} catch (e: Exception) {
+    "1.0.0"
+}
 
 kotlin {
     androidTarget {
@@ -117,7 +125,7 @@ android {
 
 
     signingConfigs {
-        getByName("release") {
+        create("release") {
             storeFile = file(System.getenv("KEYSTORE") ?: "flashback.keystore")
             storePassword = System.getenv("KEYSTORE_PASSWORD")
             keyAlias = System.getenv("KEYSTORE_ALIAS")
