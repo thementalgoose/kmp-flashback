@@ -35,7 +35,7 @@ jobs:
 
       # Running unit tests
       - name: Unit tests
-        run: ./gradlew cleanTestDebugUnitTest testDebugUnitTest :app:testSandboxDebugUnitTest
+        run: ./gradlew testDebugUnitTest testSandboxDebugUnitTest
 
       # Publish test report
       - name: Publish Test Report
