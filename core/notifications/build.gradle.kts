@@ -23,7 +23,8 @@ kotlin {
             implementation(libs.firebase.remoteconfig)
         }
         commonMain.dependencies {
-            api(libs.kmpnotifier)
+            implementation(libs.alarmee)
+            implementation(libs.bundles.compose)
             implementation(libs.bundles.kotlin)
             implementation(projects.core.metrics.crashlytics)
             implementation(projects.core.preferences)

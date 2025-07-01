@@ -1,19 +1,14 @@
 package tmg.flashback.notifications.manager
 
-actual class NotificationManagerImpl: NotificationManager {
-    actual override fun isChannelEnabled(channelId: String): Boolean {
-        return true
-    }
+import androidx.compose.ui.graphics.Color
+import com.tweener.alarmee.channel.AlarmeeNotificationChannel
+import com.tweener.alarmee.configuration.AlarmeeAndroidPlatformConfiguration
+import com.tweener.alarmee.configuration.AlarmeePlatformConfiguration
+import tmg.flashback.core.notifications.R
 
-    actual override fun createChannel(
-        channelId: String,
-        title: String,
-        body: String
-    ) {
-
-    }
-
-    actual override fun cancelChannel(channelId: String) {
-
-    }
-}
+internal actual fun createAlarmeePlatformConfiguration(): AlarmeePlatformConfiguration =
+    AlarmeeAndroidPlatformConfiguration(
+        notificationIconResId = R.drawable.ic_notification,
+        notificationIconColor = Color(0xFF01A5D9),
+        notificationChannels = emptyList()
+    )

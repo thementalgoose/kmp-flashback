@@ -5,6 +5,7 @@ import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
+import tmg.flashback.AppStartup
 import tmg.flashback.analytics.di.coreMetricsAnalyticsModule
 import tmg.flashback.analytics.firebase.FirebaseAnalyticsService
 import tmg.flashback.configuration.di.coreConfigurationModule
@@ -95,10 +96,15 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
         modules(module())
 
         modules(firebaseModule())
+
+        this.koin.get<AppStartup>().start()
     }
 }
 
 internal fun module() = module {
+
+    single { AppStartup(get()) }
+
     viewModel { AppContainerViewModel() }
     viewModel { AppNavigationViewModel(get(), get(), get(), get(), get(), get(), get()) }
 

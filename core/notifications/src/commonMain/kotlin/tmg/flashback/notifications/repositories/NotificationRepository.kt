@@ -6,7 +6,9 @@ import tmg.flashback.preferences.manager.PreferenceManager
 interface NotificationRepository {
     var remoteNotificationToken: String?
     var remoteNotificationTopics: Set<String>
+    @Deprecated("No longer used for notification scheduling")
     var notificationIds: Set<Int>
+    var notificationUuids: Set<String>
 }
 
 internal class NotificationRepositoryImpl(
@@ -17,6 +19,7 @@ internal class NotificationRepositoryImpl(
     companion object {
         private const val keyNotificationRemoteTopics: String = "NOTIFICATION_REMOTE_TOPICS"
         private const val keyNotificationIds: String = "NOTIFICATION_IDS"
+        private const val keyNotificationUuids: String = "NOTIFICATION_UUIDS"
         private const val keyNotificationRemoteToken: String = "NOTIFICATION_REMOTE_TOKEN"
     }
 
@@ -34,7 +37,7 @@ internal class NotificationRepositoryImpl(
             .toSet()
         set(value) = preferenceManager.save(keyNotificationIds, value.map { it.toString() }.toSet())
 
-    fun isChannelEnabled(channelId: String): Boolean {
-        return notificationManager.isChannelEnabled(channelId)
-    }
+    override var notificationUuids: Set<String>
+        get() = preferenceManager.getSet(keyNotificationUuids, setOf())
+        set(value) = preferenceManager.save(keyNotificationUuids, value)
 }

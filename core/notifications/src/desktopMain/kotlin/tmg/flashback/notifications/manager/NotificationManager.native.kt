@@ -1,19 +1,7 @@
 package tmg.flashback.notifications.manager
 
-actual class NotificationManagerImpl: NotificationManager {
-    actual override fun isChannelEnabled(channelId: String): Boolean {
-        return true
-    }
+import com.tweener.alarmee.configuration.AlarmeePlatformConfiguration
+import com.tweener.alarmee.configuration.AlarmeePlatformConfigurationNonMobile
 
-    actual override fun createChannel(
-        channelId: String,
-        title: String,
-        body: String
-    ) {
-
-    }
-
-    actual override fun cancelChannel(channelId: String) {
-
-    }
-}
+internal actual fun createAlarmeePlatformConfiguration(): AlarmeePlatformConfiguration =
+    AlarmeePlatformConfigurationNonMobile()

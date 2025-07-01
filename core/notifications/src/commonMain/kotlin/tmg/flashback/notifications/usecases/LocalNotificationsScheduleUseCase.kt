@@ -1,7 +1,5 @@
 package tmg.flashback.notifications.usecases
 
-import com.mmk.kmpnotifier.notification.NotifierManager
-import com.mmk.kmpnotifier.notification.PayloadData
 import tmg.flashback.notifications.repositories.NotificationRepository
 
 interface LocalNotificationsScheduleUseCase {
