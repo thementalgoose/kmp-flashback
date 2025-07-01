@@ -8,20 +8,12 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.settings_header_about
-import flashback.presentation.localisation.generated.resources.settings_theme_nightmode_dark
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.presentation.settings.PrefLink
-import tmg.flashback.presentation.settings.PrefRadio
 import tmg.flashback.presentation.settings.Settings
-import tmg.flashback.presentation.settings.darkmode.SettingsDarkModeUiState
-import tmg.flashback.presentation.settings.darkmode.SettingsDarkModeViewModel
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
-import tmg.flashback.ui.theme.NightMode
-import tmg.flashback.ui.theme.NightMode.DAY
-import tmg.flashback.ui.theme.NightMode.DEFAULT
-import tmg.flashback.ui.theme.NightMode.NIGHT
 
 @Composable
 fun SettingsAboutScreen(

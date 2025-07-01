@@ -1,4 +1,4 @@
-package tmg.flashback.ui.theme
+package tmg.flashback.style.theme
 
 enum class Theme {
     Default,

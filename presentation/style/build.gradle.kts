@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.flashback.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.mokkery)
 }
 
 kotlin {
@@ -35,6 +36,14 @@ kotlin {
             api(compose.materialIconsExtended)
             @OptIn(ExperimentalComposeLibrary::class)
             api(compose.uiTest)
+
+            implementation(projects.infrastructure)
+            implementation(projects.core.preferences)
+
+            implementation(libs.bundles.koin.compose)
+        }
+        commonTest.dependencies {
+            implementation(kotlin("test"))
         }
 
         desktopMain.dependencies {

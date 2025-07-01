@@ -42,9 +42,9 @@
 
     <!-- Race -->
     <plurals name="race_points">
-        <item quantity="one">%s punti</item>
-        <item quantity="many">%s punti</item>
-        <item quantity="other">%s punti</item>
+        <item quantity="one">%1$s punti</item>
+        <item quantity="many">%1$s punti</item>
+        <item quantity="other">%1$s punti</item>
     </plurals>
     <string name="race_status_retired">DNF</string>
 
@@ -55,17 +55,17 @@
     <string name="sprint_qualifying_header_q1">SQ1</string>
     <string name="sprint_qualifying_header_q2">SQ2</string>
     <string name="sprint_qualifying_header_q3">SQ3</string>
-    <string name="qualifying_penalty_starts">Penalità, parte %s</string>
+    <string name="qualifying_penalty_starts">Penalità, parte %1$s</string>
     <string name="qualifying_penalty">Penalità, partenza dalla pit-lane</string>
-    <string name="qualifying_penalty_starts_sprint">Penalità, parte sprint %s</string>
+    <string name="qualifying_penalty_starts_sprint">Penalità, parte sprint %1$s</string>
 
     <!-- Results -->
-    <string name="weekend_race_round">Round %d</string>
-    <string name="weekend_race_round_season" formatted="false">Round %d, %d</string>
+    <string name="weekend_race_round">Round %1$d</string>
+    <string name="weekend_race_round_season" formatted="false">Round %1$d, %1$d</string>
     <string name="world_champion">Campione del mondo</string>
 
     <!-- Details -->
-    <string name="weekend_info_laps">%s giri</string>
+    <string name="weekend_info_laps">%1$s giri</string>
 
     <!-- Dashboard -->
     <string name="dashboard_now">Momenti salienti recenti…</string>
@@ -103,8 +103,8 @@
     <string name="driver_overview_stat_career_qualifying_top_10">Qualificato tra i primi 10</string>
     <string name="driver_overview_stat_career_team_history">Storia</string>
     <string name="driver_overview_stat_career_team">Team</string>
-    <string name="driver_overview_constructor">Team: %s</string>
-    <string name="driver_overview_stat_birthday">Nato il %s</string>
+    <string name="driver_overview_constructor">Team: %1$s</string>
+    <string name="driver_overview_stat_birthday">Nato il %1$s</string>
     <string name="driver_overview_no_races">Non siamo riusciti a trovare nessuna gara a cui questo pilota ha partecipato in questa stagione</string>
     <string name="driver_overview_not_found">Nessuna informazione su questo pilota è disponibile. Riprova più tardi</string>
 
@@ -146,20 +146,20 @@
     <string name="stat_history_empty">Nessun risultato trovato!</string>
 
     <!-- Circuits -->
-    <string name="circuit_race_round" formatted="false">%s, round %d</string>
-    <string name="circuit_hosted_grand_prix_from" formatted="false">Ospitato %d gran premi tra %d e %d</string>
-    <string name="circuit_hosted_grand_prix" formatted="false">Ospitato %d gran premi</string>
+    <string name="circuit_race_round" formatted="false">%1$s, round %1$d</string>
+    <string name="circuit_hosted_grand_prix_from" formatted="false">Ospitato %1$d gran premi tra %1$d e %1$d</string>
+    <string name="circuit_hosted_grand_prix" formatted="false">Ospitato %1$d gran premi</string>
 
     <!-- Results disclaimer -->
-    <string name="results_accurate_for" formatted="false">Risultati aggiornati al %s (round %d)</string>
-    <string name="results_accurate_for_round" formatted="false">Risultati aggiornati al %d, round %s</string>
-    <string name="results_accurate_for_year" formatted="false">Risultati aggiornati al %d %s (round %d)</string>
+    <string name="results_accurate_for" formatted="false">Risultati aggiornati al %1$s (round %1$d)</string>
+    <string name="results_accurate_for_round" formatted="false">Risultati aggiornati al %1$d, round %1$s</string>
+    <string name="results_accurate_for_year" formatted="false">Risultati aggiornati al %1$d %1$s (round %1$d)</string>
 
     <!-- Links -->
     <string name="details_link_youtube">Youtube</string>
     <string name="details_link_circuit">Storia del circuito</string>
     <string name="details_link_map">Posizione</string>
-    <string name="details_link_laps">%s giri</string>
+    <string name="details_link_laps">%1$s giri</string>
     <string name="details_link_wikipedia">Wikipedia</string>
 
     <!-- Feature banners -->
@@ -185,16 +185,16 @@
     <string name="event_type_netflix">Netflix</string>
     <string name="event_type_other">Altro</string>
     <string name="events_title">Eventi di preseason</string>
-    <string name="events_list_title">%s eventi</string>
+    <string name="events_list_title">%1$s eventi</string>
     <string name="events_list_subtitle">Eventi di preseason per questa stagione</string>
 
     <!-- Tyres -->
     <string name="tyres_label">Mescole di pneumatici</string>
-    <string name="tyres_list_title">%s pneumatici</string>
+    <string name="tyres_list_title">%1$s pneumatici</string>
     <string name="tyres_list_subtitle">Queste sono le mescole di pneumatici Pirelli utilizzate in questa stagione</string>
     <string name="tyres_dry_compounds">Asciutto</string>
     <string name="tyres_wet_compounds">Bagnato</string>
-    <string name="tyres_size">Cerchi da %d pollici</string>
+    <string name="tyres_size">Cerchi da %1$d pollici</string>
     <string name="tyre_hyper_soft">Ipermorbido</string>
     <string name="tyre_ultra_soft">Ultramorbido</string>
     <string name="tyre_super_soft">Supermorbido</string>
@@ -211,8 +211,8 @@
     <string name="permissions_rationale_cancel">Non ora</string>
     <plurals name="permissions_rationale_permissions_denied">
         <item quantity="one">Permesso negato, controlla le impostazioni dell\'app</item>
-        <item quantity="many">%d permessi negati, controlla le impostazioni dell\'app</item>
-        <item quantity="other">%d permessi negati, controlla le impostazioni dell\'app</item>
+        <item quantity="many">%1$d permessi negati, controlla le impostazioni dell\'app</item>
+        <item quantity="other">%1$d permessi negati, controlla le impostazioni dell\'app</item>
     </plurals>
     <string name="permissions_rationale_permission_denied">Permesso negato, controlla le impostazioni dell\'app</string>
     <string name="permissions_rationale_runtime_notifications_description">Per ricevere notifiche dal team di Flashback sulla disponibilità dei risultati di gara o sull\'inizio degli eventi del weekend di F1, abbiamo bisogno del permesso di inviarti notifiche</string>
@@ -432,12 +432,12 @@
     <string name="weather_type_sand">Sabbia</string>
     <string name="weather_type_fog">Nebbia</string>
     <string name="weather_type_mist">Foschia</string>
-    <string name="weather_rain_percent">%s \%%</string>
-    <string name="weather_temp_degrees_c">%s °C</string>
-    <string name="weather_temp_degrees_f">%s °F</string>
-    <string name="weather_wind_metre_per_second">%s m/s</string>
-    <string name="weather_wind_mph">%s mph</string>
-    <string name="weather_wind_kph">%s km/h</string>
+    <string name="weather_rain_percent">%1$d %</string>
+    <string name="weather_temp_degrees_c">%1$d °C</string>
+    <string name="weather_temp_degrees_f">%1$d °F</string>
+    <string name="weather_wind_metre_per_second">%1$d m/s</string>
+    <string name="weather_wind_mph">%1$d mph</string>
+    <string name="weather_wind_kph">%1$d km/h</string>
 
     <!-- Configurazione RSS -->
     <string name="rss_configure_title">Configura RSS</string>
@@ -456,11 +456,11 @@
     <string name="rss_configure_cannot_open_page_action">Copia l\'URL negli appunti</string>
 
     <!-- Notifiche -->
-    <string name="notification_content_title" formatted="false">%s inizia tra %s</string>
-    <string name="notification_content_title_inexact" formatted="false">%s inizia alle %s</string>
-    <string name="notification_content_text" formatted="false">%s %s inizia tra %s alle %s</string>
-    <string name="notification_content_text_inexact" formatted="false">%s %s inizia alle %s</string>
-    <string name="notification_content_text_device_time" formatted="false">%s %s (ora del dispositivo)</string>
+    <string name="notification_content_title" formatted="false">%1$s inizia tra %1$s</string>
+    <string name="notification_content_title_inexact" formatted="false">%1$s inizia alle %1$s</string>
+    <string name="notification_content_text" formatted="false">%1$s %1$s inizia tra %1$s alle %1$s</string>
+    <string name="notification_content_text_inexact" formatted="false">%1$s %1$s inizia alle %1$s</string>
+    <string name="notification_content_text_device_time" formatted="false">%1$s %1$s (ora del dispositivo)</string>
     <string name="notification_reminder_mins_60">60 minuti</string>
     <string name="notification_reminder_mins_30">30 minuti</string>
     <string name="notification_reminder_mins_15">15 minuti</string>
@@ -491,10 +491,10 @@
     <!-- Informazioni -->
     <string name="about_name">Flashback</string>
     <string name="about_desc">Informazioni di contatto</string>
-    <string name="about_this_app_dependency_rss">Fonte RSS: %s</string>
+    <string name="about_this_app_dependency_rss">Fonte RSS: %1$s</string>
     <string name="dependency_thank_you">Le statistiche di Formula 1 in questa app provengono dal team Flashback. Un ringraziamento speciale a Ergast API per i contenuti fino al 2023. Non possiamo garantire l\'accuratezza dei dati forniti (faccelo sapere comunque se noti un problema inviandoci un\'e-mail con il link sopra)\n\nUn grande grazie a tutti quelli elencati di seguito per aver reso possibile questa app! Fai clic su uno qualsiasi degli elementi nell\'elenco sottostante per trovare maggiori informazioni sulle librerie e i servizi utilizzati nell\'app.</string>
     <string name="about_additional">Un ringraziamento speciale a tutti quelli sopra! Se abbiamo dimenticato qualcuno o qualcosa, faccelo sapere!</string>
-    <string name="app_version_placeholder">Versione app: %s</string>
+    <string name="app_version_placeholder">Versione app: %1$s</string>
     <string name="app_version">Versione app</string>
     <string name="device_uuid">ID: </string>
     <string name="installation_id">ID Installazione: </string>
@@ -510,21 +510,21 @@
     <string name="dashboard_new_season_available">Nuova stagione\ndisponibile</string>
     <plurals name="dashboard_up_next_suffix_days">
         <item quantity="one">Domani</item>
-        <item quantity="many">Mancano %d giorni</item>
-        <item quantity="other">Mancano %d giorni</item>
+        <item quantity="many">Mancano %1$d giorni</item>
+        <item quantity="other">Mancano %1$d giorni</item>
     </plurals>
     <string name="dashboard_up_next_your_time">Ora del dispositivo</string>
     <string name="dashboard_up_next_shown_in_device_time">Tutti gli orari mostrati nel tuo fuso orario</string>
     <plurals name="dashboard_up_next_starts_in">
-        <item quantity="one">Il primo evento inizia tra %d giorno</item>
-        <item quantity="many">Il primo evento inizia tra %d giorno</item>
-        <item quantity="other">Il primo evento inizia tra %d giorni</item>
+        <item quantity="one">Il primo evento inizia tra %1$d giorno</item>
+        <item quantity="many">Il primo evento inizia tra %1$d giorno</item>
+        <item quantity="other">Il primo evento inizia tra %1$d giorni</item>
     </plurals>
     <string name="dashboard_up_next_starts_in">Tutti gli orari mostrati nel tuo fuso orario</string>
     <string name="dashboard_up_next_all_day">Tutto il giorno</string>
     <string name="dashboard_up_next_date_today">Oggi</string>
-    <string name="dashboard_up_next_date_next">%s giorni</string>
-    <string name="dashboard_up_next_date_previous">%s giorni fa</string>
+    <string name="dashboard_up_next_date_next">%1$s giorni</string>
+    <string name="dashboard_up_next_date_previous">%1$s giorni fa</string>
     <string name="intent_chooser_open_maps">Apri posizione</string>
     <string name="intent_chooser_open_website">Apri sito web</string>
     <string name="intent_chooser_share">Condividi</string>
@@ -534,7 +534,7 @@
     <string name="choose_share">Condividi con</string>
     <string name="copy_to_clipboard">URL copiato negli appunti</string>
     <string name="unable_to_open_url">Impossibile aprire l\'URL</string>
-    <string name="home_last_updated">Ultimo aggiornamento %s</string>
+    <string name="home_last_updated">Ultimo aggiornamento %1$s</string>
 
     <!-- Informativa sulla privacy -->
     <string name="privacy_policy_title">Informativa sulla privacy</string>

@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
-import tmg.flashback.ui.theme.Theme
-import tmg.flashback.ui.theme.ThemeManager
+import tmg.flashback.style.theme.Theme
+import tmg.flashback.style.theme.ThemeManager
 
 class SettingsThemeViewModel(
     private val themeManager: ThemeManager

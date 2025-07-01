@@ -42,9 +42,9 @@
 
     <!-- Race -->
     <plurals name="race_points">
-        <item quantity="one">%s punto</item>
-        <item quantity="many">%s puntos</item>
-        <item quantity="other">%s puntos</item>
+        <item quantity="one">%1$s punto</item>
+        <item quantity="many">%1$s puntos</item>
+        <item quantity="other">%1$s puntos</item>
     </plurals>
     <string name="race_status_retired">DNF</string>
 
@@ -55,17 +55,17 @@
     <string name="sprint_qualifying_header_q1">SQ1</string>
     <string name="sprint_qualifying_header_q2">SQ2</string>
     <string name="sprint_qualifying_header_q3">SQ3</string>
-    <string name="qualifying_penalty_starts">Penalización, comienza %s</string>
+    <string name="qualifying_penalty_starts">Penalización, comienza %1$s</string>
     <string name="qualifying_penalty">Penalización, comienza en el pit lane</string>
-    <string name="qualifying_penalty_starts_sprint">Penalización, comienza el sprint %s</string>
+    <string name="qualifying_penalty_starts_sprint">Penalización, comienza el sprint %1$s</string>
 
     <!-- Results -->
-    <string name="weekend_race_round">Ronda %d</string>
-    <string name="weekend_race_round_season" formatted="false">Ronda %d, %d</string>
+    <string name="weekend_race_round">Ronda %1$d</string>
+    <string name="weekend_race_round_season" formatted="false">Ronda %1$d, %1$d</string>
     <string name="world_champion">Campeón del mundo</string>
 
     <!-- Details -->
-    <string name="weekend_info_laps">%s vueltas</string>
+    <string name="weekend_info_laps">%1$s vueltas</string>
 
     <!-- Dashboard -->
     <string name="dashboard_now">Lo más destacado reciente…</string>
@@ -103,8 +103,8 @@
     <string name="driver_overview_stat_career_qualifying_top_10">Clasificaciones entre los 10 primeros</string>
     <string name="driver_overview_stat_career_team_history">Historial</string>
     <string name="driver_overview_stat_career_team">Equipo</string>
-    <string name="driver_overview_constructor">Equipo: %s</string>
-    <string name="driver_overview_stat_birthday">Nacido el %s</string>
+    <string name="driver_overview_constructor">Equipo: %1$s</string>
+    <string name="driver_overview_stat_birthday">Nacido el %1$s</string>
     <string name="driver_overview_no_races">No hemos podido encontrar ninguna carrera en la que este piloto haya competido esta temporada</string>
     <string name="driver_overview_not_found">No hay información disponible sobre este piloto. Por favor, inténtalo de nuevo más tarde</string>
 
@@ -146,20 +146,20 @@
     <string name="stat_history_empty">¡No se encontraron resultados!</string>
 
     <!-- Circuits -->
-    <string name="circuit_race_round" formatted="false">%s, ronda %d</string>
-    <string name="circuit_hosted_grand_prix_from" formatted="false">Alojó %d grandes premios entre %d y %d</string>
-    <string name="circuit_hosted_grand_prix" formatted="false">Alojó %d grandes premios</string>
+    <string name="circuit_race_round" formatted="false">%1$s, ronda %1$d</string>
+    <string name="circuit_hosted_grand_prix_from" formatted="false">Alojó %1$d grandes premios entre %1$d y %1$d</string>
+    <string name="circuit_hosted_grand_prix" formatted="false">Alojó %1$d grandes premios</string>
 
     <!-- Results disclaimer -->
-    <string name="results_accurate_for" formatted="false">Resultados a fecha de %s (ronda %d)</string>
-    <string name="results_accurate_for_round" formatted="false">Resultados a fecha de %d, ronda %s</string>
-    <string name="results_accurate_for_year" formatted="false">Resultados a fecha de %d %s (ronda %d)</string>
+    <string name="results_accurate_for" formatted="false">Resultados a fecha de %1$s (ronda %1$d)</string>
+    <string name="results_accurate_for_round" formatted="false">Resultados a fecha de %1$d, ronda %1$s</string>
+    <string name="results_accurate_for_year" formatted="false">Resultados a fecha de %1$d %1$s (ronda %1$d)</string>
 
     <!-- Links -->
     <string name="details_link_youtube">Youtube</string>
     <string name="details_link_circuit">Historial del circuito</string>
     <string name="details_link_map">Ubicación</string>
-    <string name="details_link_laps">%s vueltas</string>
+    <string name="details_link_laps">%1$s vueltas</string>
     <string name="details_link_wikipedia">Wikipedia</string>
 
     <!-- Feature banners -->
@@ -186,16 +186,16 @@
     <string name="event_type_netflix">Netflix</string>
     <string name="event_type_other">Otro</string>
     <string name="events_title">Eventos de pretemporada</string>
-    <string name="events_list_title">%s eventos</string>
+    <string name="events_list_title">%1$s eventos</string>
     <string name="events_list_subtitle">Eventos de pretemporada para esta temporada</string>
 
     <!-- Tyres -->
     <string name="tyres_label">Compuestos de neumáticos</string>
-    <string name="tyres_list_title">%s neumáticos</string>
+    <string name="tyres_list_title">%1$s neumáticos</string>
     <string name="tyres_list_subtitle">Estos son los compuestos de neumáticos Pirelli utilizados en esta temporada</string>
     <string name="tyres_dry_compounds">Seco</string>
     <string name="tyres_wet_compounds">Mojado</string>
-    <string name="tyres_size">Llantas de %d pulgadas</string>
+    <string name="tyres_size">Llantas de %1$d pulgadas</string>
     <string name="tyre_hyper_soft">Hiperblando</string>
     <string name="tyre_ultra_soft">Ultrablando</string>
     <string name="tyre_super_soft">Superblando</string>
@@ -212,8 +212,8 @@
     <string name="permissions_rationale_cancel">Ahora no</string>
     <plurals name="permissions_rationale_permissions_denied">
         <item quantity="one">Permiso denegado, comprueba la configuración de tu aplicación</item>
-        <item quantity="many">%d permisos denegados, comprueba la configuración de tu aplicación</item>
-        <item quantity="other">%d permisos denegados, comprueba la configuración de tu aplicación</item>
+        <item quantity="many">%1$d permisos denegados, comprueba la configuración de tu aplicación</item>
+        <item quantity="other">%1$d permisos denegados, comprueba la configuración de tu aplicación</item>
     </plurals>
     <string name="permissions_rationale_permission_denied">Permiso denegado, comprueba la configuración de tu aplicación</string>
     <string name="permissions_rationale_runtime_notifications_description">Para que el equipo de Flashback te notifique cuando los resultados de la carrera estén disponibles o los eventos del fin de semana de F1 estén a punto de comenzar, necesitamos permiso para enviarte notificaciones</string>
@@ -437,12 +437,12 @@
     <string name="weather_type_sand">Arena</string>
     <string name="weather_type_fog">Niebla</string>
     <string name="weather_type_mist">Neblina</string>
-    <string name="weather_rain_percent">%s \%%</string>
-    <string name="weather_temp_degrees_c">%s °C</string>
-    <string name="weather_temp_degrees_f">%s °F</string>
-    <string name="weather_wind_metre_per_second">%s m/s</string>
-    <string name="weather_wind_mph">%s mph</string>
-    <string name="weather_wind_kph">%s kph</string>
+    <string name="weather_rain_percent">%1$d %</string>
+    <string name="weather_temp_degrees_c">%1$d °C</string>
+    <string name="weather_temp_degrees_f">%1$d °F</string>
+    <string name="weather_wind_metre_per_second">%1$d m/s</string>
+    <string name="weather_wind_mph">%1$d mph</string>
+    <string name="weather_wind_kph">%1$d kph</string>
     <!-- Configurar RSS -->
     <string name="rss_configure_title">Configurar RSS</string>
     <string name="rss_configure_header_items">Tu lista RSS</string>
@@ -459,11 +459,11 @@
     <string name="rss_configure_cannot_open_page">No se puede abrir el sitio web</string>
     <string name="rss_configure_cannot_open_page_action">Copiar URL al portapapeles</string>
     <!-- Notificaciones -->
-    <string name="notification_content_title" formatted="false">%s empieza en %s</string>
-    <string name="notification_content_title_inexact" formatted="false">%s empieza a las %s</string>
-    <string name="notification_content_text" formatted="false">%s %s empieza en %s a las %s</string>
-    <string name="notification_content_text_inexact" formatted="false">%s %s empieza a las %s</string>
-    <string name="notification_content_text_device_time" formatted="false">%s %s (hora del dispositivo)</string>
+    <string name="notification_content_title" formatted="false">%1$s empieza en %1$s</string>
+    <string name="notification_content_title_inexact" formatted="false">%1$s empieza a las %1$s</string>
+    <string name="notification_content_text" formatted="false">%1$s %1$s empieza en %1$s a las %1$s</string>
+    <string name="notification_content_text_inexact" formatted="false">%1$s %1$s empieza a las %1$s</string>
+    <string name="notification_content_text_device_time" formatted="false">%1$s %1$s (hora del dispositivo)</string>
     <string name="notification_reminder_mins_60">60 minutos</string>
     <string name="notification_reminder_mins_30">30 minutos</string>
     <string name="notification_reminder_mins_15">15 minutos</string>
@@ -493,10 +493,10 @@
     <!-- Acerca de -->
     <string name="about_name">Flashback</string>
     <string name="about_desc">Información de contacto</string>
-    <string name="about_this_app_dependency_rss">Fuente RSS: %s</string>
+    <string name="about_this_app_dependency_rss">Fuente RSS: %1$s</string>
     <string name="dependency_thank_you">Las estadísticas de Fórmula 1 de esta aplicación provienen del equipo de Flashback. Agradecimiento especial a Ergast API por el contenido hasta 2023. No podemos garantizar la exactitud de los datos proporcionados (sin embargo, avísanos si detectas algún problema enviándonos un correo electrónico con el enlace de arriba)\n\n¡Un gran agradecimiento a todos los que se enumeran a continuación por hacer posible esta aplicación! Haz clic en cualquiera de los elementos de la lista a continuación para obtener más información sobre las bibliotecas y los servicios utilizados en la aplicación.</string>
     <string name="about_additional">¡Agradecimiento especial a todos los anteriores! Si nos hemos olvidado de alguien o de algo, ¡háznoslo saber!</string>
-    <string name="app_version_placeholder">Versión de la aplicación: %s</string>
+    <string name="app_version_placeholder">Versión de la aplicación: %1$s</string>
     <string name="app_version">Versión de la aplicación</string>
     <string name="device_uuid">ID: </string>
     <string name="installation_id">ID de Instalación: </string>
@@ -512,21 +512,21 @@
     <string name="dashboard_new_season_available">Nueva temporada\ndisponible</string>
     <plurals name="dashboard_up_next_suffix_days">
         <item quantity="one">Mañana</item>
-        <item quantity="many">Faltan %d días</item>
-        <item quantity="other">Faltan %d días</item>
+        <item quantity="many">Faltan %1$d días</item>
+        <item quantity="other">Faltan %1$d días</item>
     </plurals>
     <string name="dashboard_up_next_your_time">Hora del dispositivo</string>
     <string name="dashboard_up_next_shown_in_device_time">Todas las horas se muestran en tu zona horaria</string>
     <plurals name="dashboard_up_next_starts_in">
-        <item quantity="one">El primer evento comienza en %d día</item>
-        <item quantity="many">El primer evento comienza en %d días</item>
-        <item quantity="other">El primer evento comienza en %d días</item>
+        <item quantity="one">El primer evento comienza en %1$d día</item>
+        <item quantity="many">El primer evento comienza en %1$d días</item>
+        <item quantity="other">El primer evento comienza en %1$d días</item>
     </plurals>
     <string name="dashboard_up_next_starts_in">Todas las horas se muestran en tu zona horaria</string>
     <string name="dashboard_up_next_all_day">Todo el día</string>
     <string name="dashboard_up_next_date_today">Hoy</string>
-    <string name="dashboard_up_next_date_next">%s días</string>
-    <string name="dashboard_up_next_date_previous">%s días atrás</string>
+    <string name="dashboard_up_next_date_next">%1$s días</string>
+    <string name="dashboard_up_next_date_previous">%1$s días atrás</string>
     <string name="intent_chooser_open_maps">Abrir ubicación</string>
     <string name="intent_chooser_open_website">Abrir sitio web</string>
     <string name="intent_chooser_share">Compartir</string>
@@ -535,7 +535,7 @@
     <string name="choose_share">Compartir con</string>
     <string name="copy_to_clipboard">URL copiada al portapapeles</string>
     <string name="unable_to_open_url">No se puede abrir la URL</string>
-    <string name="home_last_updated">Última actualización %s</string>
+    <string name="home_last_updated">Última actualización %1$s</string>
     <!-- Política de privacidad -->
     <string name="privacy_policy_title">Política de privacidad</string>
 

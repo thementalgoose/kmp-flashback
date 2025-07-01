@@ -1,6 +1,5 @@
-package tmg.flashback.ui.theme
+package tmg.flashback.style.theme
 
-import dev.mokkery.MockMode
 import dev.mokkery.MockMode.autoUnit
 import dev.mokkery.answering.returns
 import dev.mokkery.every

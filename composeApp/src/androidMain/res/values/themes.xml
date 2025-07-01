@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="FlashbackAppTheme.Default" parent="FlashbackAppTheme" />
+
+    <style name="FlashbackAppTheme.MaterialYou" parent="FlashbackAppTheme" />
+
+    <style name="FlashbackAppTheme.Sync" parent="FlashbackAppTheme">
+        <item name="android:statusBarColor">@color/splash_screen</item>
+    </style>
+
+    <!-- DAY -->
+
+    <style name="FlashbackAppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!-- Material theme colours -->
+
+        <item name="colorPrimary">#0297d1</item>
+        <item name="colorPrimaryDark">#0297d1</item>
+        <item name="colorAccent">#00BCDA</item>
+
+        <item name="android:statusBarColor">#0297d1</item>
+
+    </style>
+
+</resources>

@@ -14,10 +14,10 @@ import tmg.flashback.presentation.settings.PrefRadio
 import tmg.flashback.presentation.settings.Settings
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
-import tmg.flashback.ui.theme.NightMode
-import tmg.flashback.ui.theme.NightMode.DAY
-import tmg.flashback.ui.theme.NightMode.DEFAULT
-import tmg.flashback.ui.theme.NightMode.NIGHT
+import tmg.flashback.style.theme.NightMode
+import tmg.flashback.style.theme.NightMode.DAY
+import tmg.flashback.style.theme.NightMode.DEFAULT
+import tmg.flashback.style.theme.NightMode.NIGHT
 
 @Composable
 fun SettingsDarkModeScreen(

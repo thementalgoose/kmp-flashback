@@ -7,9 +7,9 @@ import dev.mokkery.every
 import dev.mokkery.mock
 import dev.mokkery.verify
 import kotlinx.coroutines.test.runTest
-import tmg.flashback.ui.theme.Theme.Default
-import tmg.flashback.ui.theme.Theme.MaterialYou
-import tmg.flashback.ui.theme.ThemeManager
+import tmg.flashback.style.theme.Theme.Default
+import tmg.flashback.style.theme.Theme.MaterialYou
+import tmg.flashback.style.theme.ThemeManager
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

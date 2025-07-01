@@ -7,9 +7,9 @@ import dev.mokkery.every
 import dev.mokkery.mock
 import dev.mokkery.verify
 import kotlinx.coroutines.test.runTest
-import tmg.flashback.ui.theme.NightMode.DAY
-import tmg.flashback.ui.theme.NightMode.NIGHT
-import tmg.flashback.ui.theme.ThemeManager
+import tmg.flashback.style.theme.NightMode.DAY
+import tmg.flashback.style.theme.NightMode.NIGHT
+import tmg.flashback.style.theme.ThemeManager
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

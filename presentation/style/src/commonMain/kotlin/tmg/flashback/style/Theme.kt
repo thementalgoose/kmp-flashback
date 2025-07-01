@@ -18,6 +18,7 @@ import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ProvidedValue
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
@@ -30,6 +31,7 @@ import flashback.presentation.style.generated.resources.Res
 import flashback.presentation.style.generated.resources.ic_preview_icon
 import flashback.presentation.style.generated.resources.preview
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.koinInject
 import tmg.flashback.style.buttons.ButtonItem
 import tmg.flashback.style.buttons.ButtonPrimary
 import tmg.flashback.style.buttons.ButtonSecondary
@@ -46,6 +48,8 @@ import tmg.flashback.style.text.TextCaption
 import tmg.flashback.style.text.TextHeadline1
 import tmg.flashback.style.text.TextHeadline2
 import tmg.flashback.style.text.TextTitle
+import tmg.flashback.style.theme.NightMode
+import tmg.flashback.style.theme.ThemeManager
 
 object AppTheme {
     val colors: AppColors
@@ -74,6 +78,13 @@ fun AppTheme(
     theme: SupportedTheme = AppTheme.appTheme,
     content: @Composable () -> Unit
 ) {
+//    val themeManager = koinInject<ThemeManager>()
+//    val isLightMode = when (themeManager.currentNightMode) {
+//        NightMode.DEFAULT -> isSystemInDarkTheme()
+//        NightMode.DAY -> true
+//        NightMode.NIGHT -> false
+//    }
+
     AppTheme.appTheme = theme
     AppTheme.isLight = isLight
 

@@ -1,6 +1,6 @@
 package tmg.flashback.presentation.settings.theme
 
-import tmg.flashback.ui.theme.Theme
+import tmg.flashback.style.theme.Theme
 
 data class SettingsThemeUIState(
     val theme: Theme

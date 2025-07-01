@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
-import tmg.flashback.ui.theme.NightMode
-import tmg.flashback.ui.theme.ThemeManager
+import tmg.flashback.style.theme.NightMode
+import tmg.flashback.style.theme.ThemeManager
 
 class SettingsDarkModeViewModel(
     private val themeManager: ThemeManager

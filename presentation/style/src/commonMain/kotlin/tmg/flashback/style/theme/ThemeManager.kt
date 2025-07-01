@@ -1,4 +1,4 @@
-package tmg.flashback.ui.theme
+package tmg.flashback.style.theme
 
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.preferences.manager.PreferenceManager

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="FlashbackAppTheme.Default" parent="FlashbackAppTheme" />
+
+    <style name="FlashbackAppTheme.MaterialYou" parent="FlashbackAppTheme" />
+
+    <!-- NIGHT -->
+
+    <style name="FlashbackAppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!-- Material theme colours -->
+
+        <item name="colorPrimary">#00BCDA</item>
+        <item name="colorPrimaryDark">#0297d1</item>
+        <item name="colorAccent">#0297d1</item>
+
+    </style>
+
+</resources>

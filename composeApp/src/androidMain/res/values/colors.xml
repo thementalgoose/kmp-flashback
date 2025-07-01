@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="brand_primary">#0274D1</color>
+    <color name="brand_secondary">#00E2E4</color>
+
+    <color name="splash_screen">#01A5D9</color>
+
+    <color name="logo_gradient_1">#0274D1</color>
+    <color name="logo_gradient_2">#00E2E4</color>
+</resources>

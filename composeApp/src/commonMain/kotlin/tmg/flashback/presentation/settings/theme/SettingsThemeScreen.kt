@@ -14,9 +14,9 @@ import tmg.flashback.presentation.settings.PrefRadio
 import tmg.flashback.presentation.settings.Settings
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
-import tmg.flashback.ui.theme.Theme
-import tmg.flashback.ui.theme.Theme.Default
-import tmg.flashback.ui.theme.Theme.MaterialYou
+import tmg.flashback.style.theme.Theme
+import tmg.flashback.style.theme.Theme.Default
+import tmg.flashback.style.theme.Theme.MaterialYou
 
 @Composable
 fun SettingsThemeScreen(

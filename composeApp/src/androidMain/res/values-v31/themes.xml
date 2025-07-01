@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="FlashbackAppTheme.Default" parent="FlashbackAppTheme" />
+
+    <style name="FlashbackAppTheme.MaterialYou" parent="FlashbackAppTheme">
+
+        <item name="colorPrimary">@android:color/system_accent1_400</item>
+        <item name="colorPrimaryDark">@android:color/system_accent1_600</item>
+        <item name="colorAccent">@android:color/system_accent2_300</item>
+
+        <item name="android:statusBarColor">@android:color/system_accent1_300</item>
+
+    </style>
+
+</resources>
