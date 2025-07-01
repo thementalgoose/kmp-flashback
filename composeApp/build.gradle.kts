@@ -49,6 +49,7 @@ kotlin {
         framework {
             baseName = "ComposeApp"
             isStatic = true
+
             // Dependency export
             // Uncomment and specify another project module if you have one:
             // export(project(":<your other KMP module>"))
@@ -94,6 +95,8 @@ kotlin {
         androidMain.dependencies {
             implementation(project.dependencies.platform(libs.firebase.bom))
             implementation(libs.firebase.remoteconfig)
+            implementation(libs.firebase.crashlytics)
+            implementation(libs.firebase.analytics)
             implementation(libs.androidx.splashscreen)
         }
         commonMain.dependencies {

@@ -1,6 +1,6 @@
 package tmg.flashback.crashlytics.firebase
 
-expect class FirebaseCrashlyticsService {
+interface FirebaseCrashlyticsService {
     fun setCrashlyticsCollectionEnabled(enabled: Boolean)
     fun setCustomKey(key: String, value: String)
     fun setCustomKey(key: String, value: Boolean)

@@ -1,25 +1,30 @@
-package tmg.flashback.analytics.firebase
+package tmg.flashback.firebase
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
+import org.koin.java.KoinJavaComponent
+import tmg.flashback.analytics.firebase.FirebaseAnalyticsService
 import kotlin.reflect.KClass
 
-actual class FirebaseAnalyticsService(
-    private val applicationContext: Context
-) {
+internal actual class FirebaseAnalyticsServiceImpl actual constructor(): FirebaseAnalyticsService {
+
+    private fun getApplicationContext(): Context {
+        return KoinJavaComponent.get(Context::class.java)
+    }
+
     private val analytics: FirebaseAnalytics
         @SuppressLint("MissingPermission")
-        get() = FirebaseAnalytics.getInstance(applicationContext)
+        get() = FirebaseAnalytics.getInstance(getApplicationContext())
 
-    actual fun setUserId(userId: String) {
+    actual override fun setUserId(userId: String) {
         analytics.setUserId(userId)
     }
-    actual fun setAnalyticsCollectionEnabled(enabled: Boolean) {
+    actual override fun setAnalyticsCollectionEnabled(enabled: Boolean) {
         analytics.setAnalyticsCollectionEnabled(enabled)
     }
-    actual fun logEvent(event: String, params: Map<String, String>) {
+    actual override fun logEvent(event: String, params: Map<String, String>) {
         val bundle = Bundle().apply {
             params.forEach { (key, value) ->
                 putString(key, value)
@@ -27,10 +32,10 @@ actual class FirebaseAnalyticsService(
         }
         analytics.logEvent(event, bundle)
     }
-    actual fun setProperty(key: String, value: String) {
+    actual override fun setProperty(key: String, value: String) {
         analytics.setUserProperty(key, value)
     }
-    actual fun logViewScreen(screenName: String, params: Map<String, String>, clazz: KClass<*>?) {
+    actual override fun logViewScreen(screenName: String, params: Map<String, String>, clazz: KClass<*>?) {
         val bundle = Bundle().apply {
             putString(FirebaseAnalytics.Param.SCREEN_NAME, screenName)
             if (clazz != null) {

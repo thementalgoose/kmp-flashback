@@ -2,7 +2,7 @@ package tmg.flashback.analytics.firebase
 
 import kotlin.reflect.KClass
 
-expect class FirebaseAnalyticsService {
+interface FirebaseAnalyticsService {
     fun setUserId(userId: String)
     fun setAnalyticsCollectionEnabled(enabled: Boolean)
     fun logEvent(event: String, params: Map<String, String> = emptyMap())

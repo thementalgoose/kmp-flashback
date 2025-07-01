@@ -6,9 +6,11 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import tmg.flashback.analytics.di.coreMetricsAnalyticsModule
+import tmg.flashback.analytics.firebase.FirebaseAnalyticsService
 import tmg.flashback.configuration.di.coreConfigurationModule
 import tmg.flashback.configuration.firebase.FirebaseRemoteConfigService
 import tmg.flashback.crashlytics.di.coreMetricsCrashlyticsModule
+import tmg.flashback.crashlytics.firebase.FirebaseCrashlyticsService
 import tmg.flashback.data.repo.di.dataFlashbackModule
 import tmg.flashback.eastereggs.di.easterEggsModule
 import tmg.flashback.feature.about.di.featureAboutModule
@@ -22,6 +24,8 @@ import tmg.flashback.feature.rss.di.featureRssModule
 import tmg.flashback.feature.search.di.featureSearchModule
 import tmg.flashback.feature.season.di.featureSeasonModule
 import tmg.flashback.feature.weekend.di.featureWeekendModule
+import tmg.flashback.firebase.FirebaseAnalyticsServiceImpl
+import tmg.flashback.firebase.FirebaseCrashlyticsServiceImpl
 import tmg.flashback.firebase.FirebaseRemoteConfigServiceImpl
 import tmg.flashback.flashbackapi.api.di.dataNetworkFlashbackModule
 import tmg.flashback.infrastructure.di.infrastructureModule
@@ -117,4 +121,6 @@ internal fun module() = module {
 
 internal fun firebaseModule() = module {
     singleOf<FirebaseRemoteConfigService>(::FirebaseRemoteConfigServiceImpl)
+    singleOf<FirebaseCrashlyticsService>(::FirebaseCrashlyticsServiceImpl)
+    singleOf<FirebaseAnalyticsService>(::FirebaseAnalyticsServiceImpl)
 }

@@ -18,8 +18,7 @@ kotlin {
         val desktopMain by getting
 
         androidMain.dependencies {
-            implementation(project.dependencies.platform(libs.firebase.bom))
-            implementation(libs.firebase.crashlytics)
+
         }
         commonMain.dependencies {
             implementation(projects.core.preferences)
