@@ -67,7 +67,6 @@
 				EFAE67577E1C562887595BEB /* Pods-iosApp.sandbox release.xcconfig */,
 				5886BB5B516C3FAD2B8880EC /* Pods-iosApp.production release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -112,6 +111,7 @@
 				B9DA97AF2DC1472C00A4DA20 /* Resources */,
 				17CF7ACA2E05BFDC00658AB1 /* Run Script */,
 				A4A0E5B9C880EED334C50149 /* [CP] Embed Pods Frameworks */,
+				C0611911E9E670F0931FC0ED /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -245,7 +245,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n  echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \\\"YES\\\"\"\n  exit 0\nfi\ncd \"$SRCROOT/..\"\n./gradlew :composeApp:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "# cd \"$SRCROOT/..\"\n# ./gradlew :composeApp:embedAndSignAppleFrameworkForXcode\n";
+		};
+		C0611911E9E670F0931FC0ED /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -322,8 +339,6 @@
 		17CF7A852E05B5B500658AB1 /* Sandbox Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EFAE67577E1C562887595BEB /* Pods-iosApp.sandbox release.xcconfig */;
-			baseConfigurationReferenceAnchor = B9DA98002DC14AA900A4DA20 /* Configuration */;
-			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -427,8 +442,6 @@
 		17CF7A872E05B5CB00658AB1 /* Production Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3E103BB6706701B72EC4007D /* Pods-iosApp.production debug.xcconfig */;
-			baseConfigurationReferenceAnchor = B9DA98002DC14AA900A4DA20 /* Configuration */;
-			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -524,8 +537,6 @@
 		17CF7A892E05B5D400658AB1 /* Production Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5886BB5B516C3FAD2B8880EC /* Pods-iosApp.production release.xcconfig */;
-			baseConfigurationReferenceAnchor = B9DA98002DC14AA900A4DA20 /* Configuration */;
-			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -627,8 +638,6 @@
 		B9DA97C02DC1472D00A4DA20 /* Sandbox Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C7D73D02CAC86E5562954190 /* Pods-iosApp.sandbox debug.xcconfig */;
-			baseConfigurationReferenceAnchor = B9DA98002DC14AA900A4DA20 /* Configuration */;
-			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

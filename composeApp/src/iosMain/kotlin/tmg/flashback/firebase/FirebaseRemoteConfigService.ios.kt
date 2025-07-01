@@ -20,25 +20,29 @@ internal actual class FirebaseRemoteConfigServiceImpl actual constructor(): Fire
             if (error == null) {
                 continuation.resumeWith(Result.success(successful))
             } else {
-                continuation.resumeWith(Result.failure(Exception(error?.description ?: "Remote config didn't activate successfully")))
+                continuation.resumeWith(Result.failure(Exception(error.description ?: "Remote config didn't activate successfully")))
             }
         })
     }
 
     @Throws(Exception::class)
     actual override suspend fun reset() {
-
+        // No ability to reset
     }
 
     @Throws(Exception::class)
     actual override suspend fun fetch(minimumFetchInterval: Int?) {
-        if (minimumFetchInterval == null) {
-            remoteConfig.fetchWithCompletionHandler { status, error ->
-                logInfo("RemoteConfig", "Fetch $status")
-            }
-        } else {
-            remoteConfig.fetchWithExpirationDuration(minimumFetchInterval.toDouble()) { status, error ->
-                logInfo("RemoteConfig", "Fetch $status")
+        suspendCoroutine { continuation ->
+            if (minimumFetchInterval == null) {
+                remoteConfig.fetchWithCompletionHandler { status, error ->
+                    logInfo("RemoteConfig", "Fetch $status")
+                    continuation.resumeWith(Result.success(Unit))
+                }
+            } else {
+                remoteConfig.fetchWithExpirationDuration(minimumFetchInterval.toDouble()) { status, error ->
+                    logInfo("RemoteConfig", "Fetch $status")
+                    continuation.resumeWith(Result.success(Unit))
+                }
             }
         }
     }
@@ -59,11 +63,13 @@ internal actual class FirebaseRemoteConfigServiceImpl actual constructor(): Fire
 
     @Throws(IllegalArgumentException::class)
     actual override fun getValueString(key: String): String? {
+        logInfo("RemoteConfig", "Getting value for key $key")
         return remoteConfig.configValueForKey(key).stringValue.takeIf { it.isNotEmpty() }
     }
 
     @Throws(IllegalArgumentException::class)
     actual override fun getValueBoolean(key: String): Boolean {
+        logInfo("RemoteConfig", "Getting value for key $key")
         return remoteConfig.configValueForKey(key).boolValue
     }
 }

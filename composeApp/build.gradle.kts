@@ -70,6 +70,11 @@ kotlin {
             extraOpts += listOf("-compiler-option", "-fmodules")
         }
 
+        pod("FirebaseMessaging") {
+            version = "~> 11.13"
+            extraOpts += listOf("-compiler-option", "-fmodules")
+        }
+
         pod("FirebaseAnalytics") {
             version = "~> 11.13"
             extraOpts += listOf("-compiler-option", "-fmodules")

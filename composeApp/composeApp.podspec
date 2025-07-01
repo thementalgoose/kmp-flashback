@@ -12,6 +12,7 @@ Pod::Spec.new do |spec|
     spec.dependency 'FirebaseAnalytics', '~> 11.13'
     spec.dependency 'FirebaseCore', '~> 11.13'
     spec.dependency 'FirebaseCrashlytics', '~> 11.13'
+    spec.dependency 'FirebaseMessaging', '~> 11.13'
     spec.dependency 'FirebaseRemoteConfig', '~> 11.13'
                 
     if !Dir.exist?('build/cocoapods/framework/ComposeApp.framework') || Dir.empty?('build/cocoapods/framework/ComposeApp.framework')
