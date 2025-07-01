@@ -160,6 +160,7 @@ room = { id = "androidx.room", version.ref = "room" }
 googleServices = { id = "com.google.gms.google-services" }
 crashlytics = { id = "com.google.firebase.crashlytics" }
 mokkery = {id = "dev.mokkery", version.ref = "mokkery"}
+kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 
 # Custom Gradle Plugins
 flashback-kotlinMultiplatform = { id = "tmg.flashback.kotlin.multiplatform" }

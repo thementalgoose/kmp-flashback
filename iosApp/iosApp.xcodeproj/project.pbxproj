@@ -7,15 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		17CF7ABE2E05BE6400658AB1 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 17CF7ABD2E05BE6400658AB1 /* FirebaseCore */; };
-		17CF7AC02E05BE6400658AB1 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 17CF7ABF2E05BE6400658AB1 /* FirebaseCrashlytics */; };
-		17CF7AC22E05BE6400658AB1 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 17CF7AC12E05BE6400658AB1 /* FirebaseMessaging */; };
-		17CF7AC42E05BE6400658AB1 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 17CF7AC32E05BE6400658AB1 /* FirebasePerformance */; };
-		17CF7AC62E05BE6400658AB1 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 17CF7AC52E05BE6400658AB1 /* FirebaseRemoteConfig */; };
+		566B766FB1BEDCECAC9D0D20 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1542EFCC3015EA5D5EA33645 /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1542EFCC3015EA5D5EA33645 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E103BB6706701B72EC4007D /* Pods-iosApp.production debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.production debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.production debug.xcconfig"; sourceTree = "<group>"; };
+		5886BB5B516C3FAD2B8880EC /* Pods-iosApp.production release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.production release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.production release.xcconfig"; sourceTree = "<group>"; };
 		B9DA97B12DC1472C00A4DA20 /* Flashback Sandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flashback Sandbox.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7D73D02CAC86E5562954190 /* Pods-iosApp.sandbox debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.sandbox debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.sandbox debug.xcconfig"; sourceTree = "<group>"; };
+		EFAE67577E1C562887595BEB /* Pods-iosApp.sandbox release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.sandbox release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.sandbox release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -39,6 +40,8 @@
 		};
 		B9DA98002DC14AA900A4DA20 /* Configuration */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = Configuration;
 			sourceTree = "<group>";
 		};
@@ -49,23 +52,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17CF7AC22E05BE6400658AB1 /* FirebaseMessaging in Frameworks */,
-				17CF7ABE2E05BE6400658AB1 /* FirebaseCore in Frameworks */,
-				17CF7AC42E05BE6400658AB1 /* FirebasePerformance in Frameworks */,
-				17CF7AC02E05BE6400658AB1 /* FirebaseCrashlytics in Frameworks */,
-				17CF7AC62E05BE6400658AB1 /* FirebaseRemoteConfig in Frameworks */,
+				566B766FB1BEDCECAC9D0D20 /* Pods_iosApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		487040F0887022EA1F8C86ED /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C7D73D02CAC86E5562954190 /* Pods-iosApp.sandbox debug.xcconfig */,
+				3E103BB6706701B72EC4007D /* Pods-iosApp.production debug.xcconfig */,
+				EFAE67577E1C562887595BEB /* Pods-iosApp.sandbox release.xcconfig */,
+				5886BB5B516C3FAD2B8880EC /* Pods-iosApp.production release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		B9DA97A82DC1472C00A4DA20 = {
 			isa = PBXGroup;
 			children = (
 				B9DA98002DC14AA900A4DA20 /* Configuration */,
 				B9DA97B32DC1472C00A4DA20 /* iosApp */,
 				B9DA97B22DC1472C00A4DA20 /* Products */,
+				487040F0887022EA1F8C86ED /* Pods */,
+				DEA4F12B80FB69138CB92553 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,6 +90,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		DEA4F12B80FB69138CB92553 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1542EFCC3015EA5D5EA33645 /* Pods_iosApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -84,11 +105,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B9DA97BF2DC1472D00A4DA20 /* Build configuration list for PBXNativeTarget "iosApp" */;
 			buildPhases = (
+				4195A06AD4EDC3B954AE54D2 /* [CP] Check Pods Manifest.lock */,
 				B9DA97F42DC1497100A4DA20 /* Compile Kotlin Framework */,
 				B9DA97AD2DC1472C00A4DA20 /* Sources */,
 				B9DA97AE2DC1472C00A4DA20 /* Frameworks */,
 				B9DA97AF2DC1472C00A4DA20 /* Resources */,
 				17CF7ACA2E05BFDC00658AB1 /* Run Script */,
+				A4A0E5B9C880EED334C50149 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -98,13 +121,6 @@
 				B9DA97B32DC1472C00A4DA20 /* iosApp */,
 			);
 			name = iosApp;
-			packageProductDependencies = (
-				17CF7ABD2E05BE6400658AB1 /* FirebaseCore */,
-				17CF7ABF2E05BE6400658AB1 /* FirebaseCrashlytics */,
-				17CF7AC12E05BE6400658AB1 /* FirebaseMessaging */,
-				17CF7AC32E05BE6400658AB1 /* FirebasePerformance */,
-				17CF7AC52E05BE6400658AB1 /* FirebaseRemoteConfig */,
-			);
 			productName = iosApp;
 			productReference = B9DA97B12DC1472C00A4DA20 /* Flashback Sandbox.app */;
 			productType = "com.apple.product-type.application";
@@ -133,9 +149,6 @@
 			);
 			mainGroup = B9DA97A82DC1472C00A4DA20;
 			minimizedProjectReferenceProxies = 1;
-			packageReferences = (
-				17CF7ABC2E05BE6400658AB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B9DA97B22DC1472C00A4DA20 /* Products */;
 			projectDirPath = "";
@@ -175,6 +188,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\necho \"Google Services Plist Path: ${GOOGLESERVICE_PATH}\"\n\nif [ -z \"${GOOGLESERVICE_PATH}\" ]; then\n    echo \"GOOGLESERVICE_PATH is unset or set to the empty string\"\n    exit 1\nfi\n\nif [ ! -f \"${GOOGLESERVICE_PATH}\" ]; then\n    echo \"GOOGLESERVICE_PATH does not exist\"\n    exit 2\nfi\n\nPLIST_DESTINATION=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\necho \"DESTINATION ${PLIST_DESTINATION}\"\ncp \"${GOOGLESERVICE_PATH}\" \"${PLIST_DESTINATION}\"\n\necho \"Copied ${GOOGLESERVICE_PATH} to final destination: ${PLIST_DESTINATION}\"\n";
+		};
+		4195A06AD4EDC3B954AE54D2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iosApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A4A0E5B9C880EED334C50149 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		B9DA97F42DC1497100A4DA20 /* Compile Kotlin Framework */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -269,6 +321,7 @@
 		};
 		17CF7A852E05B5B500658AB1 /* Sandbox Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EFAE67577E1C562887595BEB /* Pods-iosApp.sandbox release.xcconfig */;
 			baseConfigurationReferenceAnchor = B9DA98002DC14AA900A4DA20 /* Configuration */;
 			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
@@ -373,6 +426,7 @@
 		};
 		17CF7A872E05B5CB00658AB1 /* Production Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E103BB6706701B72EC4007D /* Pods-iosApp.production debug.xcconfig */;
 			baseConfigurationReferenceAnchor = B9DA98002DC14AA900A4DA20 /* Configuration */;
 			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
@@ -469,6 +523,7 @@
 		};
 		17CF7A892E05B5D400658AB1 /* Production Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5886BB5B516C3FAD2B8880EC /* Pods-iosApp.production release.xcconfig */;
 			baseConfigurationReferenceAnchor = B9DA98002DC14AA900A4DA20 /* Configuration */;
 			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
@@ -571,6 +626,7 @@
 		};
 		B9DA97C02DC1472D00A4DA20 /* Sandbox Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7D73D02CAC86E5562954190 /* Pods-iosApp.sandbox debug.xcconfig */;
 			baseConfigurationReferenceAnchor = B9DA98002DC14AA900A4DA20 /* Configuration */;
 			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
@@ -633,45 +689,6 @@
 			defaultConfigurationName = "Sandbox Debug";
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		17CF7ABC2E05BE6400658AB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 11.14.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		17CF7ABD2E05BE6400658AB1 /* FirebaseCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 17CF7ABC2E05BE6400658AB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCore;
-		};
-		17CF7ABF2E05BE6400658AB1 /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 17CF7ABC2E05BE6400658AB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
-		};
-		17CF7AC12E05BE6400658AB1 /* FirebaseMessaging */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 17CF7ABC2E05BE6400658AB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseMessaging;
-		};
-		17CF7AC32E05BE6400658AB1 /* FirebasePerformance */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 17CF7ABC2E05BE6400658AB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebasePerformance;
-		};
-		17CF7AC52E05BE6400658AB1 /* FirebaseRemoteConfig */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 17CF7ABC2E05BE6400658AB1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseRemoteConfig;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B9DA97A92DC1472C00A4DA20 /* Project object */;
 }

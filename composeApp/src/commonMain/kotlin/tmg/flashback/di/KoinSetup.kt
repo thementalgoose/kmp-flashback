@@ -2,10 +2,12 @@ package tmg.flashback.di
 
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
+import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import tmg.flashback.analytics.di.coreMetricsAnalyticsModule
 import tmg.flashback.configuration.di.coreConfigurationModule
+import tmg.flashback.configuration.firebase.FirebaseRemoteConfigService
 import tmg.flashback.crashlytics.di.coreMetricsCrashlyticsModule
 import tmg.flashback.data.repo.di.dataFlashbackModule
 import tmg.flashback.eastereggs.di.easterEggsModule
@@ -20,6 +22,7 @@ import tmg.flashback.feature.rss.di.featureRssModule
 import tmg.flashback.feature.search.di.featureSearchModule
 import tmg.flashback.feature.season.di.featureSeasonModule
 import tmg.flashback.feature.weekend.di.featureWeekendModule
+import tmg.flashback.firebase.FirebaseRemoteConfigServiceImpl
 import tmg.flashback.flashbackapi.api.di.dataNetworkFlashbackModule
 import tmg.flashback.infrastructure.di.infrastructureModule
 import tmg.flashback.infrastructure.log.logInfo
@@ -86,6 +89,8 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
         modules(presentationUiModule)
 
         modules(module())
+
+        modules(firebaseModule())
     }
 }
 
@@ -108,4 +113,8 @@ internal fun module() = module {
     viewModel { SettingsWidgetsViewModel(get()) }
 
     viewModel { SyncViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
+}
+
+internal fun firebaseModule() = module {
+    singleOf<FirebaseRemoteConfigService>(::FirebaseRemoteConfigServiceImpl)
 }

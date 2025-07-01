@@ -1,25 +1,26 @@
-package tmg.flashback.configuration.firebase
+package tmg.flashback.firebase
 
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import kotlinx.coroutines.tasks.await
+import tmg.flashback.configuration.firebase.FirebaseRemoteConfigService
 
-actual class FirebaseRemoteConfigService actual constructor() {
+internal actual class FirebaseRemoteConfigServiceImpl actual constructor(): FirebaseRemoteConfigService {
 
     private val remoteConfig = FirebaseRemoteConfig.getInstance()
 
     @Throws(Exception::class)
-    actual suspend fun activate(): Boolean {
+    actual override suspend fun activate(): Boolean {
         return remoteConfig.activate().await()
     }
 
     @Throws(Exception::class)
-    actual suspend fun reset() {
+    actual override suspend fun reset() {
         remoteConfig.reset().await()
     }
 
     @Throws(Exception::class)
-    actual suspend fun fetch(minimumFetchInterval: Int?) {
+    actual override suspend fun fetch(minimumFetchInterval: Int?) {
         if (minimumFetchInterval == null) {
             remoteConfig.fetch().await()
         } else {
@@ -27,7 +28,7 @@ actual class FirebaseRemoteConfigService actual constructor() {
         }
     }
 
-    actual fun setConfigSettingsAsync(
+    actual override fun setConfigSettingsAsync(
         minimumFetchInterval: Int
     ) {
         val settings = FirebaseRemoteConfigSettings
@@ -37,12 +38,17 @@ actual class FirebaseRemoteConfigService actual constructor() {
         remoteConfig.setConfigSettingsAsync(settings)
     }
 
-    actual fun setDefaultsAsync(defaultValues: Map<String, Any>) {
+    actual override fun setDefaultsAsync(defaultValues: Map<String, Any>) {
         remoteConfig.setDefaultsAsync(defaultValues)
     }
 
     @Throws(IllegalArgumentException::class)
-    actual fun getValue(key: String): RemoteConfigValue {
-        return RemoteConfigValue(remoteConfig.getValue(key))
+    actual override fun getValueString(key: String): String? {
+        return remoteConfig.getValue(key).asString().takeIf { it.isNotEmpty() }
+    }
+
+    @Throws(IllegalArgumentException::class)
+    actual override fun getValueBoolean(key: String): Boolean {
+        return remoteConfig.getValue(key).asBoolean()
     }
 }

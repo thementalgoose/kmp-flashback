@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.flashback.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.mokkery)
+//    alias(libs.plugins.kotlinCocoapods)
 }
 
 kotlin {
@@ -32,7 +33,6 @@ kotlin {
             implementation(kotlin("test"))
         }
         iosMain.dependencies {
-
         }
     }
     sourceSets.commonTest.dependencies {

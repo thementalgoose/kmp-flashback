@@ -12,7 +12,7 @@ internal class ConfigManagerImpl(
 ): ConfigManager {
     override fun getBoolean(key: String): Boolean {
         try {
-            return firebaseRemoteConfigService.getValue(key).asBoolean()
+            return firebaseRemoteConfigService.getValueBoolean(key)
         } catch (e: IllegalArgumentException) {
             logDebug("Failed to get boolean behind key $key")
             e.printStackTrace()
@@ -22,7 +22,7 @@ internal class ConfigManagerImpl(
 
     override fun getString(key: String): String? {
         try {
-            return firebaseRemoteConfigService.getValue(key).asString()
+            return firebaseRemoteConfigService.getValueString(key)
         } catch (e: IllegalArgumentException) {
             logDebug("Failed to get string key $key")
             e.printStackTrace()

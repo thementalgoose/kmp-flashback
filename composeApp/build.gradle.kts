@@ -1,6 +1,7 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import java.io.FileInputStream
 import java.util.Properties
 
@@ -13,6 +14,7 @@ plugins {
     alias(libs.plugins.googleServices)
     alias(libs.plugins.crashlytics)
     alias(libs.plugins.mokkery)
+    alias(libs.plugins.kotlinCocoapods)
 }
 
 val versionCodeProperty: Int = try {
@@ -32,6 +34,53 @@ kotlin {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
+    }
+
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    cocoapods {
+        summary = "Flashback"
+        version = "1.0"
+        homepage = "https://flashback.pages.dev"
+        ios.deploymentTarget = "18.2"
+
+        framework {
+            baseName = "ComposeApp"
+            isStatic = true
+            // Dependency export
+            // Uncomment and specify another project module if you have one:
+            // export(project(":<your other KMP module>"))
+            // transitiveExport = false // This is default.
+        }
+
+        pod("FirebaseCore") {
+            version = "~> 11.13"
+            extraOpts += listOf("-compiler-option", "-fmodules")
+        }
+
+        pod("FirebaseCrashlytics") {
+            version = "~> 11.13"
+            extraOpts += listOf("-compiler-option", "-fmodules")
+        }
+
+        pod("FirebaseRemoteConfig") {
+            version = "~> 11.13"
+            extraOpts += listOf("-compiler-option", "-fmodules")
+        }
+
+        pod("FirebaseAnalytics") {
+            version = "~> 11.13"
+            extraOpts += listOf("-compiler-option", "-fmodules")
+        }
+
+        podfile = project.file("../iosApp/Podfile")
+
+        xcodeConfigurationToNativeBuildType["Sandbox Debug"]=NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["Sandbox Release"]=NativeBuildType.RELEASE
+        xcodeConfigurationToNativeBuildType["Production Debug"]=NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["Production Release"]=NativeBuildType.RELEASE
     }
 
     sourceSets {
