@@ -4,7 +4,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import kotlinx.coroutines.tasks.await
 
-internal actual class FirebaseRemoteConfigService {
+actual class FirebaseRemoteConfigService actual constructor() {
 
     private val remoteConfig = FirebaseRemoteConfig.getInstance()
 

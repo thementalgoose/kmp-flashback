@@ -1,6 +1,6 @@
 package tmg.flashback.configuration.firebase
 
-internal expect class FirebaseRemoteConfigService {
+expect class FirebaseRemoteConfigService() {
 
     suspend fun activate(): Boolean
     suspend fun reset()

@@ -5,20 +5,33 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import tmg.flashback.configuration.firebase.FirebaseRemoteConfigService
 import tmg.flashback.configuration.firebase.FirebaseSettings
+import tmg.flashback.infrastructure.log.logDebug
 
 internal class ConfigManagerImpl(
     private val firebaseRemoteConfigService: FirebaseRemoteConfigService
 ): ConfigManager {
     override fun getBoolean(key: String): Boolean {
-        return firebaseRemoteConfigService.getValue(key).asBoolean()
+        try {
+            return firebaseRemoteConfigService.getValue(key).asBoolean()
+        } catch (e: IllegalArgumentException) {
+            logDebug("Failed to get boolean behind key $key")
+            e.printStackTrace()
+            return false
+        }
     }
 
     override fun getString(key: String): String? {
-        return firebaseRemoteConfigService.getValue(key).asString()
+        try {
+            return firebaseRemoteConfigService.getValue(key).asString()
+        } catch (e: IllegalArgumentException) {
+            logDebug("Failed to get string key $key")
+            e.printStackTrace()
+            return null
+        }
     }
 
     override fun <T> getJson(key: String, serializer: KSerializer<T>): T? {
-        val string = firebaseRemoteConfigService.getValue(key).asString() ?: return null
+        val string = getString(key) ?: return null
         if (string.isEmpty() == true) return null
         if (string == "false") return null
         if (string == "true") return null

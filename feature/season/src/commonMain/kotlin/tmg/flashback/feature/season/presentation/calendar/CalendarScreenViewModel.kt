@@ -62,14 +62,12 @@ class CalendarScreenViewModel(
     private suspend fun populate(season: Int): Boolean {
         val overview = overviewRepository.getOverview(season).firstOrNull()
         val events = eventsRepository.getEvents(season).firstOrNull()
-        println("Populate $season -> $overview")
         if (overview == null || overview.overviewRaces.isEmpty()) {
             _uiState.value = _uiState.value.copy(
                 items = null,
                 isLoading = false,
                 showEvents = events?.isNotEmpty() ?: false
             )
-            println(" << Returning false")
             return false
         }
 
@@ -86,7 +84,6 @@ class CalendarScreenViewModel(
             isLoading = false,
             showEvents = events?.isNotEmpty() == true
         )
-        println(" << Returning true")
         return true
     }
 

@@ -1,6 +1,6 @@
 package tmg.flashback.configuration.firebase
 
-internal actual class FirebaseRemoteConfigService {
+actual class FirebaseRemoteConfigService actual constructor() {
 
     @Throws(Exception::class)
     actual suspend fun activate(): Boolean {

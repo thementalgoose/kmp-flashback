@@ -40,6 +40,7 @@ import tmg.flashback.presentation.settings.widgets.SettingsWidgetsViewModel
 import tmg.flashback.presentation.sync.SyncViewModel
 import tmg.flashback.repositories.ContentSyncRepository
 import tmg.flashback.repositories.ContentSyncRepositoryImpl
+import tmg.flashback.style.di.presentationStyleModule
 import tmg.flashback.ui.di.presentationUiModule
 import tmg.flashback.usecases.RequiresSyncUseCase
 import tmg.flashback.usecases.RequiresSyncUseCaseImpl
@@ -81,6 +82,7 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
         modules(featureWeekendModule)
         modules(featureWidgetUpNextModule)
 
+        modules(presentationStyleModule)
         modules(presentationUiModule)
 
         modules(module())
