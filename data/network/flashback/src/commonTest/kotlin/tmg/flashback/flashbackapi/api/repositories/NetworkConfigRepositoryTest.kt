@@ -23,6 +23,9 @@ internal class NetworkConfigRepositoryTest {
 
     @Test
     fun `base url falls back to known fallback if not available in config`() {
+
+        every { mockConfigManager.getString(expectedKeyBaseUrl) } returns null
+
         initUnderTest()
         assertEquals(expectedFallbackUrl, underTest.baseUrl)
         verify {
@@ -35,7 +38,7 @@ internal class NetworkConfigRepositoryTest {
         initUnderTest()
         every { mockConfigManager.getString(expectedKeyBaseUrl) } returns "https://flashback.custom.dev"
 
-        assertEquals(expectedFallbackUrl, underTest.baseUrl)
+        assertEquals("https://flashback.custom.dev", underTest.baseUrl)
     }
 
     companion object {
