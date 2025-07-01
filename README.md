@@ -4,6 +4,11 @@
 
 Flashback provides race results and statistics from every race in the history of Formula 1 and the latest Formula 1 news from around the web!
 
+### Setup
+
+- Build the project
+- `cd iosApp/ && pod install`
+
 ### TODO List
 
 - [x] Gets initial KMP Project setup
@@ -33,7 +38,7 @@ Flashback provides race results and statistics from every race in the history of
 - [ ] Adds analytics
 - [x] Adds crashlytics reporting
 - [x] Adds remote config setup
-  - [ ] Configure defaults setup for both platforms
+  - [x] Configure defaults setup for both platforms
 - [x] Support tablet mode
 - [ ] Add RSS
 - [x] Figure out Compose Navigation 
