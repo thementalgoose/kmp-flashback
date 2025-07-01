@@ -10,6 +10,7 @@ import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.settings_theme_nightmode_dark
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.presentation.settings.PrefRadio
 import tmg.flashback.presentation.settings.Settings
 import tmg.flashback.ui.components.header.Header
@@ -26,6 +27,8 @@ fun SettingsDarkModeScreen(
     showBack: Boolean,
     viewModel: SettingsDarkModeViewModel = koinViewModel()
 ) {
+    ScreenView(screenName = "Settings - Dark Mode")
+
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     SettingsDarkModeScreen(
         actionUpClicked = actionUpClicked,

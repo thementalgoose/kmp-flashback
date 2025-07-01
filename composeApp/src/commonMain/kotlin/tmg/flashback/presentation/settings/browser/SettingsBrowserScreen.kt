@@ -10,6 +10,7 @@ import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.settings_header_in_app_browser
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.presentation.settings.PrefSwitch
 import tmg.flashback.presentation.settings.Settings
 import tmg.flashback.ui.components.header.Header
@@ -22,6 +23,8 @@ fun SettingsBrowserScreen(
     showBack: Boolean,
     viewModel: SettingsBrowserViewModel = koinViewModel()
 ) {
+    ScreenView(screenName = "Settings - Web")
+
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     SettingsBrowserScreen(
         actionUpClicked = actionUpClicked,

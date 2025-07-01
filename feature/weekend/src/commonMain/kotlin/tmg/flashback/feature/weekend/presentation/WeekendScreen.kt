@@ -20,6 +20,8 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.window.core.layout.WindowSizeClass
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.analytics.constants.AnalyticsConstants
+import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.feature.weekend.presentation.WeekendUiState.Data
 import tmg.flashback.feature.weekend.presentation.data.info.InfoModel
 import tmg.flashback.feature.weekend.presentation.data.info.RaceDetails
@@ -46,6 +48,15 @@ fun WeekendScreen(
     windowSizeClass: WindowSizeClass,
     viewModel: WeekendViewModel = koinViewModel()
 ) {
+
+    ScreenView(
+        screenName = "Weekend", args = mapOf(
+            AnalyticsConstants.analyticsSeason to screenData.season.toString(),
+            AnalyticsConstants.analyticsRound to screenData.round.toString()
+        )
+    )
+
+
     val uiState = viewModel.uiState.collectAsState()
     val isLoading = viewModel.isLoading.collectAsState()
     LaunchedEffect(screenData) {

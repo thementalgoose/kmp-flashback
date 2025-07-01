@@ -12,6 +12,7 @@ import flashback.presentation.localisation.generated.resources.settings_header_l
 import flashback.presentation.localisation.generated.resources.settings_section_privacy_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.presentation.settings.PrefHeader
 import tmg.flashback.presentation.settings.PrefLink
 import tmg.flashback.presentation.settings.PrefSwitch
@@ -26,6 +27,8 @@ fun SettingsPrivacyScreen(
     showBack: Boolean,
     viewModel: SettingsPrivacyViewModel = koinViewModel()
 ) {
+    ScreenView(screenName = "Settings - Privacy")
+
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     SettingsPrivacyScreen(
         insetPadding = insetPadding,

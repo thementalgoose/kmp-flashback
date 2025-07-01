@@ -23,6 +23,9 @@ import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.season_standings_constructor
 import org.jetbrains.compose.resources.stringResource
+import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsConstructorId
+import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
+import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.feature.season.presentation.shared.ongoing_banner.ResultAsOf
 import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedBy
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.SeasonPicker
@@ -47,6 +50,9 @@ fun TeamStandingsScreen(
     constructorClicked: (SeasonConstructorStandingSeason) -> Unit,
     refresh: () -> Unit
 ) {
+    ScreenView(screenName = "Team Standings", updateKey = uiState.season, args = mapOf(
+        analyticsSeason to uiState.season.toString()
+    ))
     SwipeRefresh(
         isLoading = uiState.isLoading,
         onRefresh = refresh

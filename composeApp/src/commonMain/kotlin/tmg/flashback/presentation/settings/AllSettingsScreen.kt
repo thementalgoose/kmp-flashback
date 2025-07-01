@@ -17,6 +17,7 @@ import flashback.presentation.localisation.generated.resources.settings_header_w
 import flashback.presentation.localisation.generated.resources.settings_web_browser_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 
@@ -28,6 +29,7 @@ internal fun AllSettingsScreen(
     viewModel: AllSettingsViewModel = koinViewModel(),
     insetPadding: PaddingValues,
 ) {
+    ScreenView(screenName = "Settings")
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
     AllSettingsScreen(

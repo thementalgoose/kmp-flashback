@@ -22,6 +22,9 @@ kotlin {
             implementation(libs.firebase.analytics)
         }
         commonMain.dependencies {
+            implementation(libs.bundles.kotlin)
+            implementation(libs.bundles.koin.compose)
+            implementation(libs.bundles.compose)
             implementation(projects.core.preferences)
             implementation(projects.infrastructure)
         }

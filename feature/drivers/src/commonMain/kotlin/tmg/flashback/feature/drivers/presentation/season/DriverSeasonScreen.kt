@@ -33,6 +33,10 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsConstructorId
+import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsDriverId
+import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
+import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.feature.drivers.presentation.shared.DriverBadges
 import tmg.flashback.feature.drivers.presentation.shared.DriverHeader
 import tmg.flashback.feature.drivers.presentation.shared.DriverNotFound
@@ -67,6 +71,10 @@ fun DriverSeasonScreen(
     windowSizeClass: WindowSizeClass,
     viewModel: DriverSeasonViewModel = koinViewModel()
 ) {
+    ScreenView(screenName = "Driver Season", args = mapOf(
+        analyticsDriverId to driverSeasonInfo.id,
+        analyticsSeason to driverSeasonInfo.season.toString()
+    ))
     LaunchedEffect(driverSeasonInfo) {
         viewModel.load(driverSeasonInfo.season, driverSeasonInfo.id)
     }

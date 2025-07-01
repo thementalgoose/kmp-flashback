@@ -50,6 +50,7 @@ import flashback.presentation.localisation.generated.resources.reaction_screen_s
 import flashback.presentation.localisation.generated.resources.reaction_screen_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.buttons.ButtonPrimary
 import tmg.flashback.style.text.TextBody1
@@ -68,7 +69,7 @@ fun ReactionGameScreen(
     windowSizeClass: WindowSizeClass,
     viewModel: ReactionGameViewModel = koinViewModel()
 ) {
-//    ScreenView(screenName = "Reaction Game", args = mapOf())
+    ScreenView(screenName = "Reaction Game")
 
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     ReactionScreen(

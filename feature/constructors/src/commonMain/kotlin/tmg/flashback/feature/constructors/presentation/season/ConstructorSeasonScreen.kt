@@ -45,6 +45,9 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsConstructorId
+import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
+import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.feature.constructors.presentation.shared.ConstructorHeader
 import tmg.flashback.feature.drivers.presentation.shared.ConstructorNotFound
 import tmg.flashback.formula1.enums.RaceStatus
@@ -84,6 +87,11 @@ fun ConstructorSeasonScreen(
     windowSizeClass: WindowSizeClass,
     viewModel: ConstructorSeasonViewModel = koinViewModel()
 ) {
+    ScreenView(screenName = "Constructor Season", args = mapOf(
+        analyticsConstructorId to constructorSeasonInfo.id,
+        analyticsSeason to constructorSeasonInfo.season.toString()
+    ))
+
     LaunchedEffect(constructorSeasonInfo) {
         viewModel.load(constructorSeasonInfo.season, constructorSeasonInfo.id)
     }

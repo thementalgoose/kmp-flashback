@@ -36,6 +36,8 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.format
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
+import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.feature.season.presentation.calendar.components.RaceWeekCard
 import tmg.flashback.feature.season.presentation.calendar.components.Round
 import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedBy
@@ -70,6 +72,10 @@ fun CalendarScreen(
     expandGroupedRaces: () -> Unit,
     goToWeekend: (CalendarItem.RaceWeek) -> Unit,
 ) {
+    ScreenView(screenName = "Calendar", updateKey = uiState.season, args = mapOf(
+        analyticsSeason to uiState.season.toString()
+    ))
+
     SwipeRefresh(
         isLoading = uiState.isLoading,
         onRefresh = refresh

@@ -10,6 +10,7 @@ import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.settings_theme_theme_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.presentation.settings.PrefRadio
 import tmg.flashback.presentation.settings.Settings
 import tmg.flashback.ui.components.header.Header
@@ -25,6 +26,8 @@ fun SettingsThemeScreen(
     showBack: Boolean,
     viewModel: SettingsThemeViewModel = koinViewModel()
 ) {
+    ScreenView(screenName = "Settings - Widgets")
+
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     SettingsThemeScreen(
         actionUpClicked = actionUpClicked,

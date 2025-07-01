@@ -10,6 +10,7 @@ import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.settings_home
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.presentation.settings.PrefSwitch
 import tmg.flashback.presentation.settings.Settings
 import tmg.flashback.ui.components.header.Header
@@ -23,6 +24,8 @@ fun SettingsLayoutScreen(
     showBack: Boolean,
     viewModel: SettingsLayoutViewModel = koinViewModel(),
 ) {
+    ScreenView(screenName = "Settings - Layout")
+
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     SettingsLayoutScreen(
         actionUpClicked = actionUpClicked,
