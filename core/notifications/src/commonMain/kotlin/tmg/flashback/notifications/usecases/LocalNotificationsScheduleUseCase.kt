@@ -1,33 +1,34 @@
 package tmg.flashback.notifications.usecases
 
-import tmg.flashback.notifications.repositories.NotificationRepository
+import kotlinx.datetime.LocalDateTime
+import tmg.flashback.notifications.manager.NotificationManager
 
 interface LocalNotificationsScheduleUseCase {
     fun schedule(
+        uuid: String,
         channelId: String,
-        id: Int,
         title: String,
-        body: String,
-        payloadData: Map<String, String>
+        text: String,
+        timestamp: LocalDateTime
     )
 }
 
 internal class LocalNotificationsScheduleUseCaseImpl(
-    private val notificationRepository: NotificationRepository
+    private val notificationManager: NotificationManager
 ): LocalNotificationsScheduleUseCase {
     override fun schedule(
+        uuid: String,
         channelId: String,
-        id: Int,
         title: String,
-        body: String,
-        payloadData: Map<String, String>
+        text: String,
+        timestamp: LocalDateTime
     ) {
-        NotifierManager.getLocalNotifier().notify(
-            id = id,
+        notificationManager.schedule(
+            uuid = uuid,
+            channelId = channelId,
             title = title,
-            body = body,
-            payloadData = payloadData,
+            text = text,
+            timestamp = timestamp,
         )
-        notificationRepository.notificationIds += id
     }
 }

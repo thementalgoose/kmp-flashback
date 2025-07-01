@@ -11,7 +11,7 @@ fun ScreenView(
     args: Map<String, String> = mapOf(),
     updateKey: Any? = Unit
 ) {
-    val analyticsManager = koinInject<AnalyticsManager>()
+    val analyticsManager: AnalyticsManager = koinInject()
     DisposableEffect(key1 = updateKey, effect = {
         analyticsManager.viewScreen(screenName, args)
         this.onDispose { }

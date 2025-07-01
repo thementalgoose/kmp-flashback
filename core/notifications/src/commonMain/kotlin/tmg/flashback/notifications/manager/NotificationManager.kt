@@ -16,15 +16,12 @@ interface NotificationManager {
         channelId: String,
         title: String,
         text: String,
-        timestamp: LocalDateTime,
-        exact: Boolean = true
+        timestamp: LocalDateTime
     )
 
     fun cancel(
         uuid: String
     )
-
-    fun cancelAll()
 }
 
 internal class NotificationManagerImpl(
@@ -39,8 +36,7 @@ internal class NotificationManagerImpl(
         channelId: String,
         title: String,
         text: String,
-        timestamp: LocalDateTime,
-        exact: Boolean
+        timestamp: LocalDateTime
     ) {
         val alarmee = Alarmee(
             uuid = uuid,
@@ -64,10 +60,6 @@ internal class NotificationManagerImpl(
     override fun cancel(uuid: String) {
         notificationRepository.notificationUuids -= uuid
         service.local.cancel(uuid)
-    }
-
-    override fun cancelAll() {
-        notificationRepository.notificationUuids.forEach { cancel(it) }
     }
 }
 
