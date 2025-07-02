@@ -3,6 +3,11 @@ package tmg.flashback.feature.about.presentation
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 
+data class AboutUiState(
+    val deviceUuid: String,
+    val contactEmail: String,
+)
+
 enum class AboutButtons(
     val icon: DrawableResource,
     val label: StringResource,

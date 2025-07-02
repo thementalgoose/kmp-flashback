@@ -14,7 +14,9 @@ actual object Device {
     actual val versionCode: Int
         get() = NSBundle.version().toInt()
     actual val versionName: String
-        get() = (NSBundle.mainBundle().infoDictionary?.getOrElse("CFBundleVersion") { IOS_UNKNOWN } as? String) ?: IOS_UNKNOWN
+        get() = (NSBundle.mainBundle().infoDictionary
+            ?.getOrElse("CFBundleShortVersionString") { IOS_UNKNOWN } as? String)
+            ?: IOS_UNKNOWN
 
     actual val isMonetThemeSupported: Boolean
         get() = false
@@ -33,7 +35,7 @@ actual object Device {
     actual val brand: String
         get() = "Apple"
     actual val hardware: String
-        get() = "Unknown"
+        get() = UIDevice.currentDevice.model()
     actual val board: String
         get() = "Unknown"
     actual val fingerprint: String
@@ -43,7 +45,7 @@ actual object Device {
     actual val manufacturer: String
         get() = "Apple"
     actual val product: String
-        get() = "Unknown"
+        get() = UIDevice.currentDevice.model()
     actual val device: String
-        get() =  UIDevice.currentDevice.model()
+        get() = UIDevice.currentDevice.model()
 }

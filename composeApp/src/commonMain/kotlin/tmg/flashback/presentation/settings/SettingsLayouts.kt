@@ -233,6 +233,14 @@ private fun SettingLink(
                         .padding(top = 6.dp)
                 )
             }
+            item.subtitleString?.let {
+                TextBody2(
+                    text = it,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 6.dp)
+                )
+            }
         }
         content()
     }

@@ -1,5 +1,6 @@
-package tmg.flashback.repositories
+package tmg.flashback.device.repositories
 
+import dev.mokkery.MockMode
 import dev.mokkery.MockMode.autoUnit
 import dev.mokkery.answering.returns
 import dev.mokkery.every
@@ -7,6 +8,7 @@ import dev.mokkery.matcher.any
 import dev.mokkery.mock
 import dev.mokkery.verify
 import dev.mokkery.verify.VerifyMode.Companion.exactly
+import tmg.flashback.configuration.manager.ConfigManager
 import tmg.flashback.preferences.manager.PreferenceManager
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -16,10 +18,12 @@ internal class DeviceRepositoryTest {
     private lateinit var underTest: DeviceRepositoryImpl
 
     private val mockPreferenceManager: PreferenceManager = mock(autoUnit)
+    private val mockConfigManager: ConfigManager = mock(autoUnit)
 
     private fun initUnderTest() {
         underTest = DeviceRepositoryImpl(
-            preferenceManager = mockPreferenceManager
+            preferenceManager = mockPreferenceManager,
+            configManager = mockConfigManager
         )
     }
 
@@ -85,7 +89,17 @@ internal class DeviceRepositoryTest {
 
     //endregion
 
+    @Test
+    fun `contact email gets from prefs`() {
+        every { mockConfigManager.getString(expectedKeyContactEmail) } returns "test"
+
+        initUnderTest()
+
+        assertEquals("test", underTest.contactEmail)
+    }
+
     companion object {
+        private const val expectedKeyContactEmail: String = "email"
 
         private const val expectedKeyDeviceUdid: String = "UDID"
         private const val expectedKeyInstallationId: String = "INSTALLATION_ID"

@@ -1,5 +1,6 @@
-package tmg.flashback.repositories
+package tmg.flashback.device.repositories
 
+import tmg.flashback.configuration.manager.ConfigManager
 import tmg.flashback.preferences.manager.PreferenceManager
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
@@ -7,11 +8,13 @@ import kotlin.uuid.Uuid
 interface DeviceRepository {
     var deviceUdid: String
     var installationId: String
+    val contactEmail: String
 }
 
 @OptIn(ExperimentalUuidApi::class)
 internal class DeviceRepositoryImpl(
-    private val preferenceManager: PreferenceManager
+    private val preferenceManager: PreferenceManager,
+    private val configManager: ConfigManager
 ): DeviceRepository {
 
     /**
@@ -35,7 +38,13 @@ internal class DeviceRepositoryImpl(
         }
         get() = preferenceManager.getString(keyInstallationId, "") ?: ""
 
+    override val contactEmail: String
+        get() = configManager.getString(keyContactEmail) ?: "thementalgoose@gmail.com"
+
     companion object {
+
+        private const val keyContactEmail: String = "email"
+
         private const val keyDeviceUDID: String = "UDID"
         private const val keyInstallationId: String = "INSTALLATION_ID"
     }

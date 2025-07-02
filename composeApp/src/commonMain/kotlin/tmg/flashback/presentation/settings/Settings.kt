@@ -87,6 +87,7 @@ import flashback.presentation.localisation.generated.resources.settings_theme_th
 import flashback.presentation.localisation.generated.resources.settings_theme_theme_title
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
+import tmg.flashback.infrastructure.device.Device
 
 object Settings {
     val DarkModeCategory = Setting.Category(
@@ -324,7 +325,7 @@ object Settings {
         val BuildVersion = Setting.Link(
             _id = "about_build",
             title = string.settings_build_version,
-            subtitle = string.settings_build_version
+            subtitleString = Device.versionName
         )
         val FirstTimeSync = Setting.Link(
             _id = "about_reset",
@@ -350,6 +351,7 @@ sealed class Setting(
         private val _id: String,
         val title: StringResource,
         val subtitle: StringResource? = null,
+        val subtitleString: String? = null,
         val isBeta: Boolean = false,
         val isEnabled: Boolean = true
     ): Setting(_id)

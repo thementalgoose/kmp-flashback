@@ -13,6 +13,7 @@ import tmg.flashback.configuration.firebase.FirebaseRemoteConfigService
 import tmg.flashback.crashlytics.di.coreMetricsCrashlyticsModule
 import tmg.flashback.crashlytics.firebase.FirebaseCrashlyticsService
 import tmg.flashback.data.repo.di.dataFlashbackModule
+import tmg.flashback.device.di.coreDeviceModules
 import tmg.flashback.eastereggs.di.easterEggsModule
 import tmg.flashback.feature.about.di.featureAboutModule
 import tmg.flashback.feature.circuits.di.featureCircuitsModule
@@ -53,8 +54,6 @@ import tmg.flashback.presentation.settings.widgets.SettingsWidgetsViewModel
 import tmg.flashback.presentation.sync.SyncViewModel
 import tmg.flashback.repositories.ContentSyncRepository
 import tmg.flashback.repositories.ContentSyncRepositoryImpl
-import tmg.flashback.repositories.DeviceRepository
-import tmg.flashback.repositories.DeviceRepositoryImpl
 import tmg.flashback.style.di.presentationStyleModule
 import tmg.flashback.ui.di.presentationUiModule
 import tmg.flashback.usecases.RequiresSyncUseCase
@@ -70,6 +69,7 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
     startKoin {
         platformModules(this)
         modules(coreConfigurationModule)
+        modules(coreDeviceModules)
         modules(coreMetricsCrashlyticsModule)
         modules(coreMetricsAnalyticsModule)
         modules(coreNotificationsModule)
@@ -118,7 +118,6 @@ internal fun module() = module {
     viewModel { AppNavigationViewModel(get(), get(), get(), get(), get(), get(), get()) }
 
     single<ContentSyncRepository> { ContentSyncRepositoryImpl(get()) }
-    single<DeviceRepository> { DeviceRepositoryImpl(get()) }
 
     single<RequiresSyncUseCase> { RequiresSyncUseCaseImpl(get(), get()) }
 

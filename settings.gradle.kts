@@ -40,7 +40,7 @@ includeBuild("build-logic")
 include(":composeApp")
 
 include(":core:configuration")
-//include(":core:device")
+include(":core:device")
 include(":core:metrics:crashlytics")
 include(":core:metrics:analytics")
 include(":core:notifications")

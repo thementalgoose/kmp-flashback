@@ -29,6 +29,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -56,6 +57,8 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
+import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.AppThemePreview
 import tmg.flashback.style.LOGO_GRADIENT_1
@@ -73,24 +76,26 @@ fun AboutScreen(
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
+    viewModel: AboutViewModel = koinViewModel()
 ) {
+    val uiState = viewModel.uiState.collectAsState()
     if (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
         AboutListScreen(
             icon = appIcon,
             paddingValues = paddingValues,
             actionUpClicked = actionUpClicked,
-            email = "thementalgoose@gmail.com",
-            deviceId = "uuid",
-            installationId = "installation-uuid"
+            email = uiState.value.contactEmail,
+            deviceId = uiState.value.deviceUuid,
+            installationId = "n/a"
         )
     } else {
         AboutPaneScreen(
             icon = appIcon,
             paddingValues = paddingValues,
             actionUpClicked = actionUpClicked,
-            email = "thementalgoose@gmail.com",
-            deviceId = "uuid",
-            installationId = "installation-uuid"
+            email = uiState.value.contactEmail,
+            deviceId = uiState.value.deviceUuid,
+            installationId = "n/a"
         )
     }
 }
@@ -161,7 +166,7 @@ private fun AboutListScreen(
                 modifier = Modifier
                     .animateItem()
                     .padding(horizontal = AppTheme.dimens.medium),
-                version = "1.0.0",
+                version = Device.versionName,
                 debugIds = "$deviceId\n$installationId"
             )
         }
@@ -209,7 +214,7 @@ private fun AboutPaneScreen(
                     modifier = Modifier
                         .animateItem()
                         .padding(horizontal = AppTheme.dimens.medium),
-                    version = "1.0.0",
+                    version = Device.versionName,
                     debugIds = "$deviceId\n$installationId"
                 )
             }
@@ -388,8 +393,9 @@ private fun Dependency(
                 ),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall),
         ) {
-            TextTitle(
-                text = dependency.dependencyName
+            TextBody1(
+                text = dependency.dependencyName,
+                bold = true,
             )
             HorizontalDivider()
             TextBody1(

@@ -1,6 +1,7 @@
 package tmg.flashback.infrastructure.device
 
 import tmg.flashback.infrastructure.log.logDebug
+import tmg.flashback.infrastructure.log.logInfo
 
 expect object Device {
     val applicationId: String
@@ -28,22 +29,22 @@ enum class Platform {
     Other
 }
 
-fun Device.logDebug() {
-    logDebug("Device", "applicationId: $applicationId")
-    logDebug("Device", "versionCode: $versionCode")
-    logDebug("Device", "versionName: $versionName")
-    logDebug("Device", "isMonetThemeSupported: $isMonetThemeSupported")
-    logDebug("Device", "isRuntimeNotificationsSupported: $isRuntimeNotificationsSupported")
-    logDebug("Device", "isEmulator: $isEmulator")
-    logDebug("Device", "isDebug: $isDebug")
-    logDebug("Device", "platform: $platform")
-    logDebug("Device", "osVersion: $osVersion")
-    logDebug("Device", "brand: $brand")
-    logDebug("Device", "hardware: $hardware")
-    logDebug("Device", "board: $board")
-    logDebug("Device", "fingerprint: $fingerprint")
-    logDebug("Device", "model: $model")
-    logDebug("Device", "manufacturer: $manufacturer")
-    logDebug("Device", "product: $product")
-    logDebug("Device", "device: $device")
+fun Device.log() {
+    logInfo("Device", "applicationId: $applicationId")
+    logInfo("Device", "versionCode: $versionCode")
+    logInfo("Device", "versionName: $versionName")
+    logInfo("Device", "isMonetThemeSupported: $isMonetThemeSupported")
+    logInfo("Device", "isRuntimeNotificationsSupported: $isRuntimeNotificationsSupported")
+    logInfo("Device", "isEmulator: $isEmulator")
+    logInfo("Device", "isDebug: $isDebug")
+    logInfo("Device", "platform: $platform")
+    logInfo("Device", "osVersion: $osVersion")
+    logInfo("Device", "brand: $brand")
+    logInfo("Device", "hardware: $hardware")
+    logInfo("Device", "board: $board")
+    logInfo("Device", "fingerprint: $fingerprint")
+    logInfo("Device", "model: $model")
+    logInfo("Device", "manufacturer: $manufacturer")
+    logInfo("Device", "product: $product")
+    logInfo("Device", "device: $device")
 }

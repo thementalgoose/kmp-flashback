@@ -18,7 +18,9 @@ struct iOSApp: App {
     init() {
         KoinSetupKt.doInitKoin()
 
-        FirebaseApp.configure()
+        if FirebaseApp.app() == nil {
+            FirebaseApp.configure()
+        }
 //         NotifierManager.shared.initialize(
 //             configuration: NotificationPlatformConfigurationIos(
 //                 showPushNotification: true,

@@ -28,6 +28,7 @@ import flashback.presentation.localisation.generated.resources.Res
 import flashback.presentation.localisation.generated.resources.app_version_placeholder
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.navigation.Screen
 import tmg.flashback.presentation.MenuItem
 import tmg.flashback.presentation.icon
@@ -133,7 +134,7 @@ internal fun AppNavigationDrawer(
                 item("app_version") {
                     TextBody2(
                         modifier = Modifier.padding(horizontal = AppTheme.dimens.medium),
-                        text = stringResource(Res.string.app_version_placeholder, "1.0.0")
+                        text = stringResource(Res.string.app_version_placeholder, Device.versionName)
                     )
                 }
             }
