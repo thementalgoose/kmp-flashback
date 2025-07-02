@@ -151,9 +151,9 @@
     <string name="circuit_hosted_grand_prix" formatted="false">Alojó %1$d grandes premios</string>
 
     <!-- Results disclaimer -->
-    <string name="results_accurate_for" formatted="false">Resultados a fecha de %1$s (ronda %1$d)</string>
-    <string name="results_accurate_for_round" formatted="false">Resultados a fecha de %1$d, ronda %1$s</string>
-    <string name="results_accurate_for_year" formatted="false">Resultados a fecha de %1$d %1$s (ronda %1$d)</string>
+    <string name="results_accurate_for" formatted="false">Resultados a fecha de %1$s (ronda %2$d)</string>
+    <string name="results_accurate_for_round" formatted="false">Resultados a fecha de %1$d, ronda %2$s</string>
+    <string name="results_accurate_for_year" formatted="false">Resultados a fecha de %1$d %2$s (ronda %3$d)</string>
 
     <!-- Links -->
     <string name="details_link_youtube">Youtube</string>

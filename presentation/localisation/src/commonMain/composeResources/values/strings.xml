@@ -171,9 +171,9 @@
 
 
     <!-- Results disclaimer -->
-    <string name="results_accurate_for" formatted="false">Results as of the %1$s (round %1$d)</string>
-    <string name="results_accurate_for_round" formatted="false">Results as of the %1$d, round %1$s</string>
-    <string name="results_accurate_for_year" formatted="false">Results as of the %1$d %1$s (round %1$d)</string>
+    <string name="results_accurate_for" formatted="false">Results as of the %1$s (round %2$d)</string>
+    <string name="results_accurate_for_round" formatted="false">Results as of the %1$d, round %2$s</string>
+    <string name="results_accurate_for_year" formatted="false">Results as of the %1$d %2$s (round %3$d)</string>
 
 
     <!-- Links -->

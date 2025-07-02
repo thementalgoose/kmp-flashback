@@ -149,9 +149,9 @@
     <string name="circuit_hosted_grand_prix" formatted="false">举办了 %1$d 场大奖赛</string>
 
     <!-- Results disclaimer -->
-    <string name="results_accurate_for" formatted="false">截至 %1$s（第 %1$d 轮）的结果</string>
-    <string name="results_accurate_for_round" formatted="false">截至 %1$d，第 %1$s 轮的结果</string>
-    <string name="results_accurate_for_year" formatted="false">截至 %1$d %1$s（第 %1$d 轮）的结果</string>
+    <string name="results_accurate_for" formatted="false">截至 %1$s（第 %2$d 轮）的结果</string>
+    <string name="results_accurate_for_round" formatted="false">截至 %1$d，第 %2$s 轮的结果</string>
+    <string name="results_accurate_for_year" formatted="false">截至 %1$d %2$s（第 %3$d 轮）的结果</string>
 
     <!-- Links -->
     <string name="details_link_youtube">YouTube</string>
