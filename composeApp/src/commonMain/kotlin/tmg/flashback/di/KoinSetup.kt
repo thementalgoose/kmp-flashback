@@ -53,6 +53,8 @@ import tmg.flashback.presentation.settings.widgets.SettingsWidgetsViewModel
 import tmg.flashback.presentation.sync.SyncViewModel
 import tmg.flashback.repositories.ContentSyncRepository
 import tmg.flashback.repositories.ContentSyncRepositoryImpl
+import tmg.flashback.repositories.DeviceRepository
+import tmg.flashback.repositories.DeviceRepositoryImpl
 import tmg.flashback.style.di.presentationStyleModule
 import tmg.flashback.ui.di.presentationUiModule
 import tmg.flashback.usecases.RequiresSyncUseCase
@@ -110,12 +112,13 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
 
 internal fun module() = module {
 
-    single { AppStartup(get(), get(), get()) }
+    single { AppStartup(get(), get(), get(),get(), get()) }
 
     viewModel { AppContainerViewModel() }
     viewModel { AppNavigationViewModel(get(), get(), get(), get(), get(), get(), get()) }
 
     single<ContentSyncRepository> { ContentSyncRepositoryImpl(get()) }
+    single<DeviceRepository> { DeviceRepositoryImpl(get()) }
 
     single<RequiresSyncUseCase> { RequiresSyncUseCaseImpl(get(), get()) }
 

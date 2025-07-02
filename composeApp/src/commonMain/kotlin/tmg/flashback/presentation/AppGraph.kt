@@ -11,6 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import flashback.composeapp.generated.resources.Res
+import flashback.composeapp.generated.resources.logo
 import tmg.flashback.feature.about.presentation.AboutScreen
 import tmg.flashback.feature.reactiongame.presentation.ReactionGameScreen
 import tmg.flashback.feature.rss.presentation.feed.RssNavigation
@@ -116,6 +118,7 @@ fun AppGraph(
         }
         composable<Screen.About> {
             AboutScreen(
+                appIcon = Res.drawable.logo,
                 paddingValues = insetPadding,
                 actionUpClicked = openPanel,
                 windowSizeClass = windowAdaptiveInfo.windowSizeClass

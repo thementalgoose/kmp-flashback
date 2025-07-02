@@ -1,14 +1,21 @@
 package tmg.flashback.style
 
-import androidx.annotation.RequiresApi
-import androidx.compose.material.Colors
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
-import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+
+
+val BRAND_PRIMARY = Color(0xFF0274D1)
+val BRAND_SECONDARY = Color(0xFF00E2E4)
+
+val SPLASH_SCREEN = Color(0xFF01A5D9)
+
+val LOGO_GRADIENT_1 = Color(0xFF0274D1)
+val LOGO_GRADIENT_2 = Color(0xFF00E2E4)
 
 internal val LocalColors = staticCompositionLocalOf { lightColours }
 

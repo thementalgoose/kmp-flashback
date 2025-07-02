@@ -1,6 +1,7 @@
 package tmg.flashback.feature.about.presentation
 
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -34,7 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Brush.Companion.linearGradient
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
@@ -46,14 +47,19 @@ import flashback.presentation.localisation.generated.resources.about_dependencie
 import flashback.presentation.localisation.generated.resources.app_name
 import flashback.presentation.localisation.generated.resources.app_version
 import flashback.presentation.localisation.generated.resources.dependency_thank_you
+import flashback.presentation.ui.generated.resources.Res
 import flashback.presentation.ui.generated.resources.arrow_down
 import flashback.presentation.ui.generated.resources.ic_menu
+import flashback.presentation.ui.generated.resources.unknown_avatar
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.LOGO_GRADIENT_1
+import tmg.flashback.style.LOGO_GRADIENT_2
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody1
@@ -63,12 +69,14 @@ import tmg.flashback.style.text.TextTitle
 
 @Composable
 fun AboutScreen(
+    appIcon: DrawableResource,
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
 ) {
     if (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
         AboutListScreen(
+            icon = appIcon,
             paddingValues = paddingValues,
             actionUpClicked = actionUpClicked,
             email = "thementalgoose@gmail.com",
@@ -77,6 +85,7 @@ fun AboutScreen(
         )
     } else {
         AboutPaneScreen(
+            icon = appIcon,
             paddingValues = paddingValues,
             actionUpClicked = actionUpClicked,
             email = "thementalgoose@gmail.com",
@@ -88,6 +97,7 @@ fun AboutScreen(
 
 @Composable
 private fun AboutListScreen(
+    icon: DrawableResource,
     email: String,
     deviceId: String,
     installationId: String,
@@ -105,13 +115,21 @@ private fun AboutListScreen(
         }
         item("hero") {
             Hero(
-                modifier = Modifier.padding(horizontal = AppTheme.dimens.medium),
-                email = email
+                modifier = Modifier
+                    .animateItem()
+                    .padding(horizontal = AppTheme.dimens.medium),
+                email = email,
+                icon = icon,
             )
         }
         item("header") {
             Header(
-                modifier = Modifier.padding(horizontal = AppTheme.dimens.medium)
+                modifier = Modifier
+                    .animateItem()
+                    .padding(
+                        horizontal = AppTheme.dimens.medium,
+                        vertical = AppTheme.dimens.medium
+                    )
             )
         }
 
@@ -120,6 +138,7 @@ private fun AboutListScreen(
                 title = stringResource(string.about_dependencies),
                 isExpanded = showDependencies,
                 modifier = Modifier
+                    .animateItem()
                     .clickable { showDependencies.value = !showDependencies.value }
                     .padding(horizontal = AppTheme.dimens.medium)
             )
@@ -139,7 +158,9 @@ private fun AboutListScreen(
 
         item("footer") {
             Footer(
-                modifier = Modifier.padding(horizontal = AppTheme.dimens.medium),
+                modifier = Modifier
+                    .animateItem()
+                    .padding(horizontal = AppTheme.dimens.medium),
                 version = "1.0.0",
                 debugIds = "$deviceId\n$installationId"
             )
@@ -150,6 +171,7 @@ private fun AboutListScreen(
 @Composable
 private fun AboutPaneScreen(
     paddingValues: PaddingValues,
+    icon: DrawableResource,
     email: String,
     deviceId: String,
     installationId: String,
@@ -163,14 +185,30 @@ private fun AboutPaneScreen(
                 .fillMaxHeight()
         ) {
             item("hero") {
-                Hero(email = email)
+                Hero(
+                    modifier = Modifier
+                        .animateItem()
+                        .padding(
+                            start = AppTheme.dimens.medium,
+                            end = AppTheme.dimens.medium,
+                            top = AppTheme.dimens.medium,
+                            bottom = AppTheme.dimens.small
+                        ),
+                    icon = icon,
+                    email = email
+                )
             }
             item("header") {
-                Header()
+                Header(modifier = Modifier
+                    .animateItem()
+                    .padding(horizontal = AppTheme.dimens.medium))
             }
 
             item("footer") {
                 Footer(
+                    modifier = Modifier
+                        .animateItem()
+                        .padding(horizontal = AppTheme.dimens.medium),
                     version = "1.0.0",
                     debugIds = "$deviceId\n$installationId"
                 )
@@ -181,6 +219,7 @@ private fun AboutPaneScreen(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxHeight()
+                .padding(paddingValues)
                 .padding(AppTheme.dimens.medium)
                 .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
                 .background(AppTheme.colors.surfaceContainer3),
@@ -214,10 +253,24 @@ private fun ActionUpButton(
 
 @Composable
 private fun Hero(
+    icon: DrawableResource,
     email: String,
     modifier: Modifier = Modifier,
 ) {
-    Row(modifier) {
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.medium)
+    ) {
+        Image(
+            painter = painterResource(resource = icon),
+            contentDescription = null,
+            modifier = Modifier
+                .size(80.dp)
+                .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
+                .background(linearGradient(
+                    colors = listOf(LOGO_GRADIENT_2, LOGO_GRADIENT_1),
+                ))
+        )
         Column(
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
         ) {
@@ -374,7 +427,8 @@ private fun PreviewList(
             email = "thementalgoose@gmail.com",
             deviceId = "uuid",
             installationId = "installation-uuid",
-            actionUpClicked = { }
+            actionUpClicked = { },
+            icon = Res.drawable.unknown_avatar,
         )
     }
 }
@@ -391,6 +445,7 @@ private fun PreviewPane(
             email = "thementalgoose@gmail.com",
             deviceId = "uuid",
             installationId = "installation-uuid",
+            icon = Res.drawable.unknown_avatar,
             actionUpClicked = { }
         )
     }
