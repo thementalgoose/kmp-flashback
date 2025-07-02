@@ -3,13 +3,16 @@ package tmg.flashback.feature.notifications.usecases
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.format
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
 import tmg.flashback.feature.notifications.utils.NotificationUtils
 import tmg.flashback.formula1.enums.RaceWeekend
 import tmg.flashback.formula1.model.Timestamp
 import tmg.flashback.feature.notifications.model.NotificationUpcoming
+import tmg.flashback.infrastructure.datetime.dateTimeFormatHHmmAtDMMM
 import tmg.flashback.infrastructure.datetime.plus
+import tmg.flashback.infrastructure.datetime.timeFormatHHmm
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.notifications.repositories.NotificationRepository
 import tmg.flashback.notifications.usecases.LocalNotificationsCancelUseCase
@@ -38,7 +41,7 @@ internal class ScheduleUpcomingNotificationsUseCaseImpl(
                         title = event.raceName,
                         label = item.label,
                         timestamp = item.timestamp,
-                        uuid = "${event.season}-${event.round}-${item.label}",
+                        uuid = "${event.season}-${event.round}-${item.label}-${item.timestamp.deviceLocalDateTime.time.format(timeFormatHHmm)}",
                         utcDateTime = item.timestamp.utcLocalDateTime,
                         channel = item.label.toChannel()
                     )
@@ -46,6 +49,11 @@ internal class ScheduleUpcomingNotificationsUseCaseImpl(
             }
             .flatten()
             .filter { !it.timestamp.isInPastRelativeToo(notificationSettingsRepository.notificationReminderPeriod.seconds.toLong()) }
+
+        if (upNextItemsToSchedule.isEmpty()) {
+            logInfo("Notifications", "Skipping rescheduling of notifications")
+            return ScheduleResult.Unchanged
+        }
 
         if (upNextItemsToSchedule.map { it.uuid }.toSet() == notificationRepository.notificationUuids && !force) {
             logInfo("Notifications", "Skipping rescheduling of notifications as it remains unchanged")

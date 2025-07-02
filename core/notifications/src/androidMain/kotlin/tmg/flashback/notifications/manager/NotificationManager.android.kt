@@ -10,5 +10,7 @@ internal actual fun createAlarmeePlatformConfiguration(): AlarmeePlatformConfigu
     AlarmeeAndroidPlatformConfiguration(
         notificationIconResId = R.drawable.ic_notification,
         notificationIconColor = Color(0xFF01A5D9),
-        notificationChannels = emptyList()
+        notificationChannels = listOf(AlarmeeNotificationChannel(
+            id = "other", name = "Other"
+        ))
     )

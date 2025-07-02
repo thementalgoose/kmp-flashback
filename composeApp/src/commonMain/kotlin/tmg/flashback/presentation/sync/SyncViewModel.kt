@@ -17,6 +17,7 @@ import tmg.flashback.data.repo.repository.CircuitRepository
 import tmg.flashback.data.repo.repository.ConstructorRepository
 import tmg.flashback.data.repo.repository.DriverRepository
 import tmg.flashback.data.repo.repository.OverviewRepository
+import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
 import tmg.flashback.presentation.sync.SyncState.DONE
 import tmg.flashback.presentation.sync.SyncState.FAILED
 import tmg.flashback.presentation.sync.SyncState.LOADING
@@ -29,6 +30,7 @@ class SyncViewModel(
     private val overviewRepository: OverviewRepository,
     private val doesConfigRequireSyncUseCase: DoesConfigRequireSyncUseCase,
     private val resetConfigUseCase: ResetConfigUseCase,
+    private val scheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase,
     private val fetchConfigRepository: FetchConfigUseCase,
     private val contentSyncRepository: ContentSyncRepository
 ): ViewModel() {
@@ -149,6 +151,7 @@ class SyncViewModel(
                     Response.Successful -> DONE
                     else -> FAILED
                 }
+                scheduleUpcomingNotificationsUseCase(false)
             }
         }
     }

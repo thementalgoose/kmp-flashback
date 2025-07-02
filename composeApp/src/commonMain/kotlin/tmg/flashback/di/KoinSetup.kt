@@ -110,7 +110,7 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
 
 internal fun module() = module {
 
-    single { AppStartup(get(), get()) }
+    single { AppStartup(get(), get(), get()) }
 
     viewModel { AppContainerViewModel() }
     viewModel { AppNavigationViewModel(get(), get(), get(), get(), get(), get(), get()) }
@@ -130,7 +130,7 @@ internal fun module() = module {
     viewModel { SettingsWidgetsViewModel(get()) }
     viewModel { SettingsNotificationUpcomingViewModel(get(), get()) }
 
-    viewModel { SyncViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { SyncViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
 }
 
 internal fun firebaseModule() = module {
