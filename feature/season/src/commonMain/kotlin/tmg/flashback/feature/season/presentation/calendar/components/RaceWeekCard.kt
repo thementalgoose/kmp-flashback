@@ -46,7 +46,6 @@ import tmg.flashback.feature.season.presentation.calendar.CalendarItem
 import tmg.flashback.formula1.constants.Formula1.qualifyingDataAvailableFrom
 import tmg.flashback.formula1.constants.Formula1.sprintsIntroducedIn
 import tmg.flashback.formula1.model.Schedule
-import tmg.flashback.formula1.model.notifications.NotificationSchedule
 import tmg.flashback.infrastructure.datetime.dateFormatDMMM
 import tmg.flashback.infrastructure.datetime.dateFormatEEEEDMMM
 import tmg.flashback.infrastructure.datetime.now
@@ -255,7 +254,7 @@ private fun Dates(
                                 DateCard(
                                     schedule = it,
                                     showWeather = showWeather,
-                                    showNotificationBadge = notificationSchedule.getByLabel(it.label)
+                                    showNotificationBadge = false
                                 )
                                 Spacer(Modifier.width(AppTheme.dimens.small))
                             }

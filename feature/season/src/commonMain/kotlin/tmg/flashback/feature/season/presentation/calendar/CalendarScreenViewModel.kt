@@ -15,7 +15,6 @@ import tmg.flashback.data.repo.repository.RaceRepository
 import tmg.flashback.feature.season.presentation.calendar.ScheduleBuilder.generateScheduleModel
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
 import tmg.flashback.feature.season.repositories.CalendarRepository
-import tmg.flashback.formula1.model.notifications.NotificationSchedule
 import tmg.flashback.infrastructure.log.logInfo
 
 class CalendarScreenViewModel(

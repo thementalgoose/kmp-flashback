@@ -2,7 +2,6 @@ package tmg.flashback.feature.season.presentation.calendar
 
 import kotlinx.datetime.LocalDate
 import tmg.flashback.formula1.model.OverviewRace
-import tmg.flashback.formula1.model.notifications.NotificationSchedule
 import tmg.flashback.infrastructure.datetime.now
 
 data class CalendarScreenState(

@@ -1,9 +1,8 @@
-package tmg.flashback.formula1.model.notifications
+package tmg.flashback.feature.notifications.model
 
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.*
 import org.jetbrains.compose.resources.StringResource
-
 
 enum class NotificationUpcoming(
     val channelId: String,

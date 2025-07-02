@@ -8,7 +8,6 @@ import tmg.flashback.formula1.model.Event
 import tmg.flashback.formula1.model.Overview
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.model
-import tmg.flashback.formula1.model.notifications.NotificationSchedule
 import tmg.flashback.infrastructure.datetime.now
 import kotlin.test.Test
 import kotlin.test.assertEquals

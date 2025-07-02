@@ -5,8 +5,8 @@ import android.app.NotificationChannel
 import android.app.NotificationChannelGroup
 import android.app.NotificationManager
 import android.content.Context.NOTIFICATION_SERVICE
-import tmg.flashback.formula1.model.notifications.NotificationResultsAvailable
-import tmg.flashback.formula1.model.notifications.NotificationUpcoming
+import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
+import tmg.flashback.feature.notifications.model.NotificationUpcoming
 import tmg.flashback.notifications.repositories.NotificationRepository
 
 class FlashbackAndroidStartup {

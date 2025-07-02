@@ -4,7 +4,7 @@ import kotlinx.datetime.LocalDateTime
 import tmg.flashback.notifications.manager.NotificationManager
 
 interface LocalNotificationsScheduleUseCase {
-    fun schedule(
+    operator fun invoke(
         uuid: String,
         channelId: String,
         title: String,
@@ -16,7 +16,7 @@ interface LocalNotificationsScheduleUseCase {
 internal class LocalNotificationsScheduleUseCaseImpl(
     private val notificationManager: NotificationManager
 ): LocalNotificationsScheduleUseCase {
-    override fun schedule(
+    override operator fun invoke(
         uuid: String,
         channelId: String,
         title: String,

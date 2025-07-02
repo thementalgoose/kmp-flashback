@@ -27,7 +27,6 @@ import tmg.flashback.feature.season.repositories.CalendarRepository
 import tmg.flashback.formula1.model.Overview
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.model
-import tmg.flashback.formula1.model.notifications.NotificationSchedule
 import tmg.flashback.infrastructure.datetime.now
 import kotlin.test.Test
 import kotlin.test.assertEquals
