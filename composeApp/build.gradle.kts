@@ -98,6 +98,7 @@ kotlin {
             implementation(libs.firebase.crashlytics)
             implementation(libs.firebase.analytics)
             implementation(libs.androidx.splashscreen)
+            implementation(libs.firebase.messaging)
         }
         commonMain.dependencies {
 

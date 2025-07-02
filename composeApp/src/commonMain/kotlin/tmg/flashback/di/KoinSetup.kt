@@ -28,12 +28,14 @@ import tmg.flashback.feature.season.di.featureSeasonModule
 import tmg.flashback.feature.weekend.di.featureWeekendModule
 import tmg.flashback.firebase.FirebaseAnalyticsServiceImpl
 import tmg.flashback.firebase.FirebaseCrashlyticsServiceImpl
+import tmg.flashback.firebase.FirebaseMessagingServiceImpl
 import tmg.flashback.firebase.FirebaseRemoteConfigServiceImpl
 import tmg.flashback.flashbackapi.api.di.dataNetworkFlashbackModule
 import tmg.flashback.infrastructure.di.infrastructureModule
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.network.rss.di.dataNetworkRssModule
 import tmg.flashback.notifications.di.coreNotificationsModule
+import tmg.flashback.notifications.firebase.FirebaseMessagingService
 import tmg.flashback.persistence.flashback.di.dataPersistenceFlashbackModule
 import tmg.flashback.preferences.di.corePreferencesModule
 import tmg.flashback.presentation.AppContainerViewModel
@@ -108,7 +110,7 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
 
 internal fun module() = module {
 
-    single { AppStartup(get()) }
+    single { AppStartup(get(), get()) }
 
     viewModel { AppContainerViewModel() }
     viewModel { AppNavigationViewModel(get(), get(), get(), get(), get(), get(), get()) }
@@ -135,4 +137,5 @@ internal fun firebaseModule() = module {
     singleOf<FirebaseRemoteConfigService>(::FirebaseRemoteConfigServiceImpl)
     singleOf<FirebaseCrashlyticsService>(::FirebaseCrashlyticsServiceImpl)
     singleOf<FirebaseAnalyticsService>(::FirebaseAnalyticsServiceImpl)
+    singleOf<FirebaseMessagingService>(::FirebaseMessagingServiceImpl)
 }
