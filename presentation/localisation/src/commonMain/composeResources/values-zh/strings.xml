@@ -453,11 +453,11 @@
     <string name="rss_configure_cannot_open_page_action">将 URL 复制到剪贴板</string>
 
     <!-- 通知 -->
-    <string name="notification_content_title" formatted="false">%1$s 在 %1$s 开始</string>
-    <string name="notification_content_title_inexact" formatted="false">%1$s 在 %1$s 开始</string>
-    <string name="notification_content_text" formatted="false">%1$s %1$s 在 %1$s 的 %1$s 开始</string>
-    <string name="notification_content_text_inexact" formatted="false">%1$s %1$s 在 %1$s 开始</string>
-    <string name="notification_content_text_device_time" formatted="false">%1$s %1$s（设备时间）</string>
+    <string name="notification_content_title" formatted="false">%1$s 在 %2$s 开始</string>
+    <string name="notification_content_title_inexact" formatted="false">%1$s 在 %2$s 开始</string>
+    <string name="notification_content_text" formatted="false">%1$s %2$s 在 %3$s 的 %4$s 开始</string>
+    <string name="notification_content_text_inexact" formatted="false">%1$s %2$s 在 %3$s 开始</string>
+    <string name="notification_content_text_device_time" formatted="false">%1$s %2$s（设备时间）</string>
     <string name="notification_reminder_mins_60">60 分钟</string>
     <string name="notification_reminder_mins_30">30 分钟</string>
     <string name="notification_reminder_mins_15">15 分钟</string>

@@ -13,7 +13,6 @@ interface NotificationRepository {
 
 internal class NotificationRepositoryImpl(
     private val preferenceManager: PreferenceManager,
-    private val notificationManager: NotificationManager
 ): NotificationRepository {
 
     companion object {

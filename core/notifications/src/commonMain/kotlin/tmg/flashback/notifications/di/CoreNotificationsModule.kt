@@ -1,6 +1,8 @@
 package tmg.flashback.notifications.di
 
 import org.koin.dsl.module
+import tmg.flashback.notifications.manager.NotificationManager
+import tmg.flashback.notifications.manager.NotificationManagerImpl
 import tmg.flashback.notifications.repositories.NotificationRepository
 import tmg.flashback.notifications.repositories.NotificationRepositoryImpl
 import tmg.flashback.notifications.usecases.LocalNotificationsCancelUseCase
@@ -15,7 +17,9 @@ import tmg.flashback.notifications.usecases.RemoteNotificationsUnsubscribeUseCas
 val coreNotificationsModule = listOf(module(), platformModule())
 
 internal fun module() = module {
-    single<NotificationRepository> { NotificationRepositoryImpl(get(), get()) }
+    single<NotificationManager> { NotificationManagerImpl(get()) }
+
+    single<NotificationRepository> { NotificationRepositoryImpl(get()) }
 
     single<LocalNotificationsScheduleUseCase> { LocalNotificationsScheduleUseCaseImpl(get()) }
     single<LocalNotificationsCancelUseCase> { LocalNotificationsCancelUseCaseImpl(get(), get()) }

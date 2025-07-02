@@ -50,8 +50,8 @@
 
     <!-- Race -->
     <plurals name="race_points">
-        <item quantity="one">$1$s points</item>
-        <item quantity="other">$1$s points</item>
+        <item quantity="one">%1$s points</item>
+        <item quantity="other">%1$s points</item>
     </plurals>
     <string name="race_status_retired">DNF</string>
 
@@ -63,9 +63,9 @@
     <string name="sprint_qualifying_header_q1">SQ1</string>
     <string name="sprint_qualifying_header_q2">SQ2</string>
     <string name="sprint_qualifying_header_q3">SQ3</string>
-    <string name="qualifying_penalty_starts">Penalty, starts $1$s</string>
+    <string name="qualifying_penalty_starts">Penalty, starts %1$s</string>
     <string name="qualifying_penalty">Penalty, pit-lane start</string>
-    <string name="qualifying_penalty_starts_sprint">Penalty, starts sprint $1$s</string>
+    <string name="qualifying_penalty_starts_sprint">Penalty, starts sprint %1$s</string>
     <string name="qualifying_visualisation_subtitle">Visualise the qualifying gaps in the qualifying session</string>
     <string name="qualifying_visualisation_title">Qualifying gaps</string>
     <string name="qualifying_visualisation_not_found">No qualifying data is available to visualise</string>
@@ -78,7 +78,7 @@
 
 
     <!-- Details -->
-    <string name="weekend_info_laps">$1$s laps</string>
+    <string name="weekend_info_laps">%1$s laps</string>
 
 
     <!-- Dashboard -->
@@ -118,8 +118,8 @@
     <string name="driver_overview_stat_career_qualifying_top_10">Qualified within top 10</string>
     <string name="driver_overview_stat_career_team_history">History</string>
     <string name="driver_overview_stat_career_team">Team</string>
-    <string name="driver_overview_constructor">Constructor: $1$s</string>
-    <string name="driver_overview_stat_birthday">Born $1$s</string>
+    <string name="driver_overview_constructor">Constructor: %1$s</string>
+    <string name="driver_overview_stat_birthday">Born %1$s</string>
     <string name="driver_overview_no_races">We cannot find any races that this driver has competed in for this season</string>
     <string name="driver_overview_not_found">No information about this driver is available. Please try again later</string>
 
@@ -165,22 +165,22 @@
 
 
     <!-- Circuits -->
-    <string name="circuit_race_round" formatted="false">$1$s, round %1$d</string>
+    <string name="circuit_race_round" formatted="false">%1$s, round %1$d</string>
     <string name="circuit_hosted_grand_prix_from" formatted="false">Hosted %1$d grand prix between %1$d and %1$d</string>
     <string name="circuit_hosted_grand_prix" formatted="false">Hosted %1$d grand prix</string>
 
 
     <!-- Results disclaimer -->
-    <string name="results_accurate_for" formatted="false">Results as of the $1$s (round %1$d)</string>
-    <string name="results_accurate_for_round" formatted="false">Results as of the %1$d, round $1$s</string>
-    <string name="results_accurate_for_year" formatted="false">Results as of the %1$d $1$s (round %1$d)</string>
+    <string name="results_accurate_for" formatted="false">Results as of the %1$s (round %1$d)</string>
+    <string name="results_accurate_for_round" formatted="false">Results as of the %1$d, round %1$s</string>
+    <string name="results_accurate_for_year" formatted="false">Results as of the %1$d %1$s (round %1$d)</string>
 
 
     <!-- Links -->
     <string name="details_link_youtube">Youtube</string>
     <string name="details_link_circuit">Circuit History</string>
     <string name="details_link_map">Location</string>
-    <string name="details_link_laps">$1$s laps</string>
+    <string name="details_link_laps">%1$s laps</string>
     <string name="details_link_wikipedia">Wikipedia</string>
 
 
@@ -209,13 +209,13 @@
     <string name="event_type_netflix">Netflix</string>
     <string name="event_type_other">Other</string>
     <string name="events_title">Preseason events</string>
-    <string name="events_list_title">$1$s events</string>
+    <string name="events_list_title">%1$s events</string>
     <string name="events_list_subtitle">Pre-season events for this season</string>
 
 
     <!-- Tyres -->
     <string name="tyres_label">Tyre compounds</string>
-    <string name="tyres_list_title">$1$s tyres</string>
+    <string name="tyres_list_title">%1$s tyres</string>
     <string name="tyres_list_subtitle">These are the Pirelli tyre compounds used in this season</string>
     <string name="tyres_dry_compounds">Dry</string>
     <string name="tyres_wet_compounds">Wet</string>
@@ -483,12 +483,12 @@
     <string name="weather_type_fog">Fog</string>
     <string name="weather_type_mist">Mist</string>
 
-    <string name="weather_rain_percent">$1$d %</string>
-    <string name="weather_temp_degrees_c">$1$d °C</string>
-    <string name="weather_temp_degrees_f">$1$d °F</string>
-    <string name="weather_wind_metre_per_second">$1$d m/s</string>
-    <string name="weather_wind_mph">$1$d mph</string>
-    <string name="weather_wind_kph">$1$d kph</string>
+    <string name="weather_rain_percent">%1$d %</string>
+    <string name="weather_temp_degrees_c">%1$d °C</string>
+    <string name="weather_temp_degrees_f">%1$d °F</string>
+    <string name="weather_wind_metre_per_second">%1$d m/s</string>
+    <string name="weather_wind_mph">%1$d mph</string>
+    <string name="weather_wind_kph">%1$d kph</string>
 
 
     <!-- RSS Configure -->
@@ -509,11 +509,11 @@
 
 
     <!-- Notifications -->
-    <string name="notification_content_title" formatted="false">$1$s starts in $1$s</string>
-    <string name="notification_content_title_inexact" formatted="false">$1$s starts at $1$s</string>
-    <string name="notification_content_text" formatted="false">$1$s $1$s starts in $1$s at $1$s</string>
-    <string name="notification_content_text_inexact" formatted="false">$1$s $1$s starts at $1$s</string>
-    <string name="notification_content_text_device_time" formatted="false">$1$s $1$s (device time)</string>
+    <string name="notification_content_title" formatted="false">%1$s starts in %2$s</string>
+    <string name="notification_content_title_inexact" formatted="false">%1$s starts at %2$s</string>
+    <string name="notification_content_text" formatted="false">%1$s %2$s starts in %3$s at %4$s</string>
+    <string name="notification_content_text_inexact" formatted="false">%1$s %2$s starts at %3$s</string>
+    <string name="notification_content_text_device_time" formatted="false">%1$s %2$s (device time)</string>
     <string name="notification_reminder_mins_60">60 minutes</string>
     <string name="notification_reminder_mins_30">30 minutes</string>
     <string name="notification_reminder_mins_15">15 minutes</string>
@@ -547,7 +547,7 @@
     <!-- About -->
     <string name="about_name">Flashback</string>
     <string name="about_desc">Contact Information</string>
-    <string name="about_this_app_dependency_rss">RSS source: $1$s</string>
+    <string name="about_this_app_dependency_rss">RSS source: %1$s</string>
     <string name="dependency_thank_you">The Formula 1 statistics in this app are sourced by the Flashback team. Special thanks to Ergast API for content up to 2023. We cannot guarantee the accuracy of the data provided (let us know however if you spot an issue by sending us an email with the link above)\n\nA big thank you to everyone listed below for making this app possible! Click any one of the items in the list below to find more information about the libraries and services used within the app.</string>
     <string name="about_additional">Special thanks to everyone above! If we\'ve missed anyone or anything please let us know!</string>
     <string name="app_version_placeholder">App Version: %1$s</string>
@@ -580,8 +580,8 @@
     <string name="dashboard_up_next_starts_in">All times shown in your timezone</string>
     <string name="dashboard_up_next_all_day">All day</string>
     <string name="dashboard_up_next_date_today">Today</string>
-    <string name="dashboard_up_next_date_next">$1$s days</string>
-    <string name="dashboard_up_next_date_previous">$1$s days ago</string>
+    <string name="dashboard_up_next_date_next">%1$s days</string>
+    <string name="dashboard_up_next_date_previous">%1$s days ago</string>
 
 
     <string name="intent_chooser_open_maps">Open location</string>
@@ -594,7 +594,7 @@
     <string name="choose_share">Share with</string>
     <string name="copy_to_clipboard">URL Copied to clipboard</string>
     <string name="unable_to_open_url">Unable to open url</string>
-    <string name="home_last_updated">Last updated $1$s</string>
+    <string name="home_last_updated">Last updated %1$s</string>
 
 
 
@@ -674,6 +674,6 @@
     <string name="reaction_tier_poor">Slow</string>
     <string name="reaction_tier_poor_desc">Your reaction time is slower than average. The average reaction time is around 250ms, be sure to get some more practice in before you start your career as an F1 driver</string>
 
-    <string name="percentage" translatable="false">$1$s%</string>
+    <string name="percentage" translatable="false">%1$s%</string>
 
 </resources>

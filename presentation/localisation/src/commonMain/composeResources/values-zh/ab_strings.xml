@@ -14,17 +14,17 @@
     <string name="ab_hide">隐藏</string>
     <string name="ab_points">积分</string>
     <string name="ab_status">状态</string>
-    <string name="ab_result_race_overview">%1$s，%1$s，驾驶 %1$s</string>
-    <string name="ab_result_qualifying_overview">%1$s，驾驶 %1$s，排位赛第 %1$s</string>
-    <string name="ab_result_qualifying_overview_dnq">%1$s，驾驶 %1$s，未晋级</string>
-    <string name="ab_result_overview_fastest_lap">%1$s，%1$s，驾驶 %1$s。他们跑出了最快圈速</string>
+    <string name="ab_result_race_overview">%1$s，%2$s，驾驶 %3$s</string>
+    <string name="ab_result_qualifying_overview">%1$s，驾驶 %2$s，排位赛第 %3$s</string>
+    <string name="ab_result_qualifying_overview_dnq">%1$s，驾驶 %2$s，未晋级</string>
+    <string name="ab_result_overview_fastest_lap">%1$s，%2$s，驾驶 %3$s。他们跑出了最快圈速</string>
     <string name="ab_did_not_qualify">未晋级</string>
     <string name="ab_result_fastest_lap">他们跑出了最快圈速</string>
     <string name="ab_result_finish_time">落后冠军 %1$s 完赛</string>
     <string name="ab_result_finish_p1">以第 %1$s 完赛</string>
     <string name="ab_result_finish_dnf">未完赛。%1$s</string>
-    <string name="ab_race_overview">%1$s，第 %1$s 轮，在 %1$s。驾驶 %1$s</string>
-    <string name="ab_scored">%1$s 获得 %1$s 分</string>
+    <string name="ab_race_overview">%1$s，第 %2$s 轮，在 %3$s。驾驶 %1$s</string>
+    <string name="ab_scored">%1$s 获得 %2$s 分</string>
     <string name="ab_notifications_enabled">已启用通知</string>
     <string name="ab_has_qualifying_results">排位赛结果已出</string>
     <string name="ab_no_qualifying_results">排位赛结果尚未出炉</string>
@@ -32,17 +32,17 @@
     <string name="ab_no_sprint_results">冲刺赛结果尚未出炉</string>
     <string name="ab_has_race_results">正赛结果已出</string>
     <string name="ab_no_race_results">正赛结果尚未出炉</string>
-    <string name="ab_positions_gained">从第 %1$s 发车，以第 %1$s 完赛，上升 %1$d 位</string>
-    <string name="ab_positions_neutral">从第 %1$s 发车，以第 %1$s 完赛</string>
-    <string name="ab_positions_lost">从第 %1$s 发车，上升 %1$d 位，下降 %1$d 位</string>
+    <string name="ab_positions_gained">从第 %1$s 发车，以第 %2$s 完赛，上升 %3$d 位</string>
+    <string name="ab_positions_neutral">从第 %1$s 发车，以第 %2$s 完赛</string>
+    <string name="ab_positions_lost">从第 %1$s 发车，上升 %2$d 位，下降 %3$d 位</string>
     <string name="ab_fastest_lap">最快圈速</string>
     <string name="ab_constructor_logo">%1$s 标志</string>
     <string name="ab_preseason_events">季前赛</string>
     <string name="ab_rss_open_in_browser">在浏览器中打开</string>
     <string name="ab_rss_share">分享</string>
-    <string name="ab_collapsed_section">%1$s，第 %1$d 轮至 %1$s，第 %1$d 轮。</string>
-    <string name="ab_schedule_date_card">%1$s，设备时间 %1$s</string>
-    <string name="ab_schedule_date_card_notifications_enabled">%1$s，设备时间 %1$s。已启用通知</string>
+    <string name="ab_collapsed_section">%1$s，第 %2$d 轮至 %3$s，第 %4$d 轮。</string>
+    <string name="ab_schedule_date_card">%1$s，设备时间 %2$s</string>
+    <string name="ab_schedule_date_card_notifications_enabled">%1$s，设备时间 %2$s。已启用通知</string>
     <string name="ab_change_of_rain">降雨概率</string>
 
 </resources>

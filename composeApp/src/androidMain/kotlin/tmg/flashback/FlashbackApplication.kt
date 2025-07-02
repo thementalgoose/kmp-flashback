@@ -5,6 +5,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import org.koin.dsl.module
 import tmg.flashback.di.doInitKoin
 import tmg.flashback.notifications.repositories.NotificationRepository
 
@@ -19,6 +20,9 @@ class FlashbackApplication: Application(), KoinComponent {
         doInitKoin {
             androidContext(this@FlashbackApplication)
             androidLogger()
+            modules(module {
+                single { FlashbackAndroidStartup() }
+            })
         }
 
         flashbackAndroidStartup.startup(

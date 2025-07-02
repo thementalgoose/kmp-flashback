@@ -459,11 +459,11 @@
     <string name="rss_configure_cannot_open_page">No se puede abrir el sitio web</string>
     <string name="rss_configure_cannot_open_page_action">Copiar URL al portapapeles</string>
     <!-- Notificaciones -->
-    <string name="notification_content_title" formatted="false">%1$s empieza en %1$s</string>
-    <string name="notification_content_title_inexact" formatted="false">%1$s empieza a las %1$s</string>
-    <string name="notification_content_text" formatted="false">%1$s %1$s empieza en %1$s a las %1$s</string>
-    <string name="notification_content_text_inexact" formatted="false">%1$s %1$s empieza a las %1$s</string>
-    <string name="notification_content_text_device_time" formatted="false">%1$s %1$s (hora del dispositivo)</string>
+    <string name="notification_content_title" formatted="false">%1$s empieza en %2$s</string>
+    <string name="notification_content_title_inexact" formatted="false">%1$s empieza a las %2$s</string>
+    <string name="notification_content_text" formatted="false">%1$s %2$s empieza en %3$s a las %4$s</string>
+    <string name="notification_content_text_inexact" formatted="false">%1$s %2$s empieza a las %3$s</string>
+    <string name="notification_content_text_device_time" formatted="false">%1$s %2$s (hora del dispositivo)</string>
     <string name="notification_reminder_mins_60">60 minutos</string>
     <string name="notification_reminder_mins_30">30 minutos</string>
     <string name="notification_reminder_mins_15">15 minutos</string>

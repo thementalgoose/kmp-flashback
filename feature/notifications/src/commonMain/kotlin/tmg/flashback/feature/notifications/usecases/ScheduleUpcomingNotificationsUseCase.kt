@@ -16,7 +16,7 @@ import tmg.flashback.notifications.usecases.LocalNotificationsCancelUseCase
 import tmg.flashback.notifications.usecases.LocalNotificationsScheduleUseCase
 
 interface ScheduleUpcomingNotificationsUseCase {
-    suspend operator fun invoke(): ScheduleResult
+    suspend operator fun invoke(force: Boolean = false): ScheduleResult
 }
 
 internal class ScheduleUpcomingNotificationsUseCaseImpl(
@@ -26,7 +26,7 @@ internal class ScheduleUpcomingNotificationsUseCaseImpl(
     private val localNotificationsScheduleUseCase: LocalNotificationsScheduleUseCase,
     private val notificationSettingsRepository: NotificationSettingsRepository,
 ): ScheduleUpcomingNotificationsUseCase {
-    override suspend fun invoke(): ScheduleResult {
+    override suspend fun invoke(force: Boolean): ScheduleResult {
 
         val upNextItemsToSchedule = (overviewRepository.getUpcomingOverviews() ?: emptyList())
             .map { event ->
@@ -47,7 +47,7 @@ internal class ScheduleUpcomingNotificationsUseCaseImpl(
             .flatten()
             .filter { !it.timestamp.isInPastRelativeToo(notificationSettingsRepository.notificationReminderPeriod.seconds.toLong()) }
 
-        if (upNextItemsToSchedule.map { it.uuid }.toSet() == notificationRepository.notificationUuids) {
+        if (upNextItemsToSchedule.map { it.uuid }.toSet() == notificationRepository.notificationUuids && !force) {
             logInfo("Notifications", "Skipping rescheduling of notifications as it remains unchanged")
             return ScheduleResult.Unchanged
         }

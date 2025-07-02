@@ -14,6 +14,9 @@ import flashback.composeapp.generated.resources.ic_settings_weather
 import flashback.composeapp.generated.resources.ic_settings_web
 import flashback.composeapp.generated.resources.ic_settings_widgets
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.notification_reminder_mins_15
+import flashback.presentation.localisation.generated.resources.notification_reminder_mins_30
+import flashback.presentation.localisation.generated.resources.notification_reminder_mins_60
 import flashback.presentation.localisation.generated.resources.settings_build_version
 import flashback.presentation.localisation.generated.resources.settings_pref_analytics_description
 import flashback.presentation.localisation.generated.resources.settings_pref_analytics_title
@@ -226,6 +229,20 @@ object Settings {
         title = string.settings_pref_notification_notice_period_title,
         subtitle = string.settings_pref_notification_notice_period_description,
     )
+    object NotificationsNotice {
+        val Minutes15 = Setting.Link(
+            _id = "notification_notice_15",
+            title = string.notification_reminder_mins_15
+        )
+        val Minutes30 = Setting.Link(
+            _id = "notification_notice_30",
+            title = string.notification_reminder_mins_30
+        )
+        val Minutes60 = Setting.Link(
+            _id = "notification_notice_60",
+            title = string.notification_reminder_mins_60
+        )
+    }
 
     val WidgetCategory = Setting.Category(
         _id = "widgets",

@@ -18,20 +18,20 @@
     <string name="ab_points">Points</string>
     <string name="ab_status">Status</string>
 
-    <string name="ab_result_race_overview">$1$s, $1$s, driving for $1$s</string>
-    <string name="ab_result_qualifying_overview">$1$s, driving for $1$s, qualified P $1$s</string>
-    <string name="ab_result_qualifying_overview_dnq">$1$s, driving for $1$s, did not qualify</string>
-    <string name="ab_result_overview_fastest_lap">$1$s, $1$s, driving for $1$s. They had the fastest lap</string>
+    <string name="ab_result_race_overview">%1$s, %2$s, driving for %3$s</string>
+    <string name="ab_result_qualifying_overview">%1$s, driving for %2$s, qualified P %3$s</string>
+    <string name="ab_result_qualifying_overview_dnq">%1$s, driving for %2$s, did not qualify</string>
+    <string name="ab_result_overview_fastest_lap">%1$s, %2$s, driving for %3$s. They had the fastest lap</string>
     <string name="ab_did_not_qualify">Did not qualify</string>
     <string name="ab_result_fastest_lap">They had the fastest lap</string>
 
-    <string name="ab_result_finish_time">Finished $1$s behind the winner</string>
-    <string name="ab_result_finish_p1">Finished in $1$s</string>
-    <string name="ab_result_finish_dnf">Did not finish. $1$s</string>
+    <string name="ab_result_finish_time">Finished %1$s behind the winner</string>
+    <string name="ab_result_finish_p1">Finished in %1$s</string>
+    <string name="ab_result_finish_dnf">Did not finish. %1$s</string>
 
-    <string name="ab_race_overview">$1$s, round $1$s at $1$s. Drove for $1$s</string>
+    <string name="ab_race_overview">%1$s, round %2$s at %3$s. Drove for %4$s</string>
 
-    <string name="ab_scored">$1$s scored $1$s points</string>
+    <string name="ab_scored">%1$s scored %2$s points</string>
     <string name="ab_notifications_enabled">Notification enabled</string>
 
     <string name="ab_has_qualifying_results">Qualifying results available</string>
@@ -41,22 +41,22 @@
     <string name="ab_has_race_results">Race results available</string>
     <string name="ab_no_race_results">Race results not yet available</string>
 
-    <string name="ab_positions_gained">Started $1$s, finished $1$s, gained %1$d places</string>
-    <string name="ab_positions_neutral">Started $1$s, finished $1$s</string>
-    <string name="ab_positions_lost">Started $1$s, gained %1$d, lost %1$d places</string>
+    <string name="ab_positions_gained">Started %1$s, finished %2$s, gained %3$d places</string>
+    <string name="ab_positions_neutral">Started %1$s, finished %2$s</string>
+    <string name="ab_positions_lost">Started %1$s, gained %2$d, lost %3$d places</string>
 
     <string name="ab_fastest_lap">Fastest Lap</string>
 
-    <string name="ab_constructor_logo">$1$s logo</string>
+    <string name="ab_constructor_logo">%1$s logo</string>
 
     <string name="ab_preseason_events">Preseason events</string>
 
     <string name="ab_rss_open_in_browser">Open in browser</string>
     <string name="ab_rss_share">Share</string>
 
-    <string name="ab_collapsed_section">$1$s, round %1$d to $1$s, round %1$d.</string>
-    <string name="ab_schedule_date_card">$1$s, at $1$s device time</string>
-    <string name="ab_schedule_date_card_notifications_enabled">$1$s, at $1$s device time. Notifications enabled</string>
+    <string name="ab_collapsed_section">%1$s, round %2$d to %3$s, round %4$d.</string>
+    <string name="ab_schedule_date_card">%1$s, at %2$s device time</string>
+    <string name="ab_schedule_date_card_notifications_enabled">%1$s, at %2$s device time. Notifications enabled</string>
 
     <string name="ab_change_of_rain">Chance of rain</string>
 </resources>

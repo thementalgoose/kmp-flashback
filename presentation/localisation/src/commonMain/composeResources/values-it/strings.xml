@@ -456,11 +456,11 @@
     <string name="rss_configure_cannot_open_page_action">Copia l\'URL negli appunti</string>
 
     <!-- Notifiche -->
-    <string name="notification_content_title" formatted="false">%1$s inizia tra %1$s</string>
-    <string name="notification_content_title_inexact" formatted="false">%1$s inizia alle %1$s</string>
-    <string name="notification_content_text" formatted="false">%1$s %1$s inizia tra %1$s alle %1$s</string>
-    <string name="notification_content_text_inexact" formatted="false">%1$s %1$s inizia alle %1$s</string>
-    <string name="notification_content_text_device_time" formatted="false">%1$s %1$s (ora del dispositivo)</string>
+    <string name="notification_content_title" formatted="false">%1$s inizia tra %2$s</string>
+    <string name="notification_content_title_inexact" formatted="false">%1$s inizia alle %2$s</string>
+    <string name="notification_content_text" formatted="false">%1$s %2$s inizia tra %3$s alle %4$s</string>
+    <string name="notification_content_text_inexact" formatted="false">%1$s %2$s inizia alle %3$s</string>
+    <string name="notification_content_text_device_time" formatted="false">%1$s %2$s (ora del dispositivo)</string>
     <string name="notification_reminder_mins_60">60 minuti</string>
     <string name="notification_reminder_mins_30">30 minuti</string>
     <string name="notification_reminder_mins_15">15 minuti</string>

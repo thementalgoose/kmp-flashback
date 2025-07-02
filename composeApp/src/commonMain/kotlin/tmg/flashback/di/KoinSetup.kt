@@ -33,6 +33,7 @@ import tmg.flashback.flashbackapi.api.di.dataNetworkFlashbackModule
 import tmg.flashback.infrastructure.di.infrastructureModule
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.network.rss.di.dataNetworkRssModule
+import tmg.flashback.notifications.di.coreNotificationsModule
 import tmg.flashback.persistence.flashback.di.dataPersistenceFlashbackModule
 import tmg.flashback.preferences.di.corePreferencesModule
 import tmg.flashback.presentation.AppContainerViewModel
@@ -42,6 +43,7 @@ import tmg.flashback.presentation.settings.about.SettingsAboutViewModel
 import tmg.flashback.presentation.settings.browser.SettingsBrowserViewModel
 import tmg.flashback.presentation.settings.darkmode.SettingsDarkModeViewModel
 import tmg.flashback.presentation.settings.layout.SettingsLayoutViewModel
+import tmg.flashback.presentation.settings.notifications.SettingsNotificationUpcomingViewModel
 import tmg.flashback.presentation.settings.privacy.SettingsPrivacyViewModel
 import tmg.flashback.presentation.settings.theme.SettingsThemeViewModel
 import tmg.flashback.presentation.settings.weather.SettingsWeatherViewModel
@@ -66,6 +68,7 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
         modules(coreConfigurationModule)
         modules(coreMetricsCrashlyticsModule)
         modules(coreMetricsAnalyticsModule)
+        modules(coreNotificationsModule)
         modules(corePreferencesModule)
         modules(coreWebBrowserModule)
 
@@ -123,6 +126,7 @@ internal fun module() = module {
     viewModel { SettingsAboutViewModel() }
     viewModel { SettingsPrivacyViewModel(get(), get()) }
     viewModel { SettingsWidgetsViewModel(get()) }
+    viewModel { SettingsNotificationUpcomingViewModel(get(), get()) }
 
     viewModel { SyncViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
 }

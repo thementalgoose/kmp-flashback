@@ -105,7 +105,7 @@ private fun AllSettingsScreen(
         )
         PrefCategory(
             item = Settings.NotificationsUpcomingNotice,
-            itemClicked = { }
+            itemClicked = { navigateTo(SettingNavigation.NotificationUpcomingNotice) }
         )
         if (uiState.isWidgetsSupported) {
             PrefHeader(string.settings_header_widgets)

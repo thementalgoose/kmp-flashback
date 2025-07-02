@@ -9,6 +9,7 @@ import tmg.flashback.presentation.settings.about.SettingsAboutScreen
 import tmg.flashback.presentation.settings.browser.SettingsBrowserScreen
 import tmg.flashback.presentation.settings.darkmode.SettingsDarkModeScreen
 import tmg.flashback.presentation.settings.layout.SettingsLayoutScreen
+import tmg.flashback.presentation.settings.notifications.SettingsNotificationUpcomingScreen
 import tmg.flashback.presentation.settings.privacy.SettingsPrivacyScreen
 import tmg.flashback.presentation.settings.theme.SettingsThemeScreen
 import tmg.flashback.presentation.settings.weather.SettingsWeatherScreen
@@ -26,6 +27,7 @@ interface SettingNavigation {
     data object InAppBrowser: SettingNavigation
     data object NotificationResults: SettingNavigation
     data object NotificationUpcoming: SettingNavigation
+    data object NotificationUpcomingNotice: SettingNavigation
     data object Widgets: SettingNavigation
     data object Privacy: SettingNavigation
     data object About: SettingNavigation
@@ -80,6 +82,11 @@ fun AllSettingsGraph(
                     showBack = windowSizeClass.windowWidthSizeClass == COMPACT
                 )
                 is SettingNavigation.RssConfigure -> RssConfigureScreen(
+                    actionUpClicked = { navigator.clear() },
+                    insetPadding = insetPadding,
+                    showBack = windowSizeClass.windowWidthSizeClass == COMPACT
+                )
+                is SettingNavigation.NotificationUpcomingNotice -> SettingsNotificationUpcomingScreen(
                     actionUpClicked = { navigator.clear() },
                     insetPadding = insetPadding,
                     showBack = windowSizeClass.windowWidthSizeClass == COMPACT

@@ -193,8 +193,7 @@ internal class CalendarScreenViewModelTest {
 
             testDispatcher.scheduler.advanceUntilIdle()
 
-            awaitItem().also { println(it) }
-
+            awaitItem()
             verifySuspend {
                 mockOverviewRepository.populateOverview(2020)
                 mockRaceRepository.populateRaces(2020)

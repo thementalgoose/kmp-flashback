@@ -19,6 +19,8 @@ internal class NotificationSettingsRepositoryImpl(
             .toEnum<NotificationReminder> { it.seconds } ?: MINUTES_30
         set(value) = preferenceManager.save(keyNotificationReminder, value.seconds)
 
+
+
     companion object {
         private const val keyNotificationReminder: String = "UP_NEXT_NOTIFICATION_REMINDER"
     }
