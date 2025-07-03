@@ -11,6 +11,7 @@ import kotlinx.coroutines.test.runTest
 import tmg.flashback.feature.notifications.model.NotificationReminder
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
 import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
+import tmg.flashback.presentation.settings.notifications.upcoming.SettingsNotificationUpcomingViewModel
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

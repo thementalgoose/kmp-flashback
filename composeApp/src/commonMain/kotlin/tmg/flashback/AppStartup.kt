@@ -3,6 +3,7 @@ package tmg.flashback
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import tmg.flashback.analytics.usecases.InitialiseAnalyticsUseCase
 import tmg.flashback.configuration.manager.ConfigManager
 import tmg.flashback.crashlytics.usecases.InitialiseCrashlyticsUseCase
 import tmg.flashback.device.repositories.DeviceRepository
@@ -22,11 +23,15 @@ class AppStartup(
     private val subscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase,
     private val scheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase,
     private val deviceRepository: DeviceRepository,
-    private val initialiseCrashlyticsUseCase: InitialiseCrashlyticsUseCase
+    private val initialiseCrashlyticsUseCase: InitialiseCrashlyticsUseCase,
+    private val initialiseAnalyticsUseCase: InitialiseAnalyticsUseCase
 ) {
     fun start() {
         // Crashlytics
         initialiseCrashlyticsUseCase.initialise(deviceRepository.deviceUdid, emptyMap())
+
+        // Analytics
+        initialiseAnalyticsUseCase.initialise(deviceRepository.deviceUdid)
 
         // Remote config
         configManager.initialiseRemoteConfig(RemoteConfigDefaults.defaults)

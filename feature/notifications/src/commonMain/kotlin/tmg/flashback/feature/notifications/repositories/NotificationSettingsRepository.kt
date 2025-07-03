@@ -40,7 +40,6 @@ internal class NotificationSettingsRepositoryImpl(
             .toSet()
         set(value) = preferenceManager.save(keyNotificationUpcoming, value.map { it.saveKey }.toSet())
 
-
     companion object {
 
         internal val NotificationUpcoming.saveKey: String

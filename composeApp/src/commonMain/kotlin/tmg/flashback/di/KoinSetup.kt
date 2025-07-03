@@ -46,7 +46,8 @@ import tmg.flashback.presentation.settings.about.SettingsAboutViewModel
 import tmg.flashback.presentation.settings.browser.SettingsBrowserViewModel
 import tmg.flashback.presentation.settings.darkmode.SettingsDarkModeViewModel
 import tmg.flashback.presentation.settings.layout.SettingsLayoutViewModel
-import tmg.flashback.presentation.settings.notifications.SettingsNotificationUpcomingViewModel
+import tmg.flashback.presentation.settings.notifications.results.SettingsNotificationResultsViewModel
+import tmg.flashback.presentation.settings.notifications.upcoming.SettingsNotificationUpcomingViewModel
 import tmg.flashback.presentation.settings.privacy.SettingsPrivacyViewModel
 import tmg.flashback.presentation.settings.theme.SettingsThemeViewModel
 import tmg.flashback.presentation.settings.weather.SettingsWeatherViewModel
@@ -131,6 +132,7 @@ internal fun module() = module {
     viewModel { SettingsPrivacyViewModel(get(), get()) }
     viewModel { SettingsWidgetsViewModel(get()) }
     viewModel { SettingsNotificationUpcomingViewModel(get(), get()) }
+    viewModel { SettingsNotificationResultsViewModel(get(), get()) }
 
     viewModel { SyncViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
 }

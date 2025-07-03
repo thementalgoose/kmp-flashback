@@ -96,16 +96,12 @@ private fun AllSettingsScreen(
         }
         PrefHeader(string.settings_header_notifications)
         PrefCategory(
-            item = Settings.NotificationsRaceCategory,
-            itemClicked = { }
+            item = Settings.NotificationsResultCategory,
+            itemClicked = { navigateTo(SettingNavigation.NotificationResults) }
         )
         PrefCategory(
             item = Settings.NotificationsUpcomingCategory,
-            itemClicked = { }
-        )
-        PrefCategory(
-            item = Settings.NotificationsUpcomingNotice,
-            itemClicked = { navigateTo(SettingNavigation.NotificationUpcomingNotice) }
+            itemClicked = { navigateTo(SettingNavigation.NotificationUpcoming) }
         )
         if (uiState.isWidgetsSupported) {
             PrefHeader(string.settings_header_widgets)

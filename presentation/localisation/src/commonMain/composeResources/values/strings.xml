@@ -318,7 +318,7 @@
     <string name="settings_pref_schedule_exact_alarm_title">Exact timings</string>
     <string name="settings_pref_schedule_exact_alarm_description">Grant permission for Flashback to send you reminders at specific times. Otherwise, notifications will be roughly 1h before the start of the event</string>
     <string name="settings_pref_notification_notice_period_title">Notice</string>
-    <string name="settings_pref_notification_notice_period_description">Choose between notified 15, 30 or 60 minutes before one of the above events starts</string>
+    <string name="settings_pref_notification_notice_period_description">Get notified 15, 30 or 60 minutes before an weekend event starts</string>
     <string name="settings_switch_notification_upcoming_fp_title">Free Practice</string>
     <string name="settings_switch_notification_upcoming_qualifying_title">Qualifying</string>
     <string name="settings_switch_notification_upcoming_sprint_title">Sprint</string>
@@ -367,7 +367,7 @@
     <string name="settings_switch_about_this_app_title">About this app</string>
     <string name="settings_switch_about_this_app_description">About the app, the devs and the dependencies</string>
     <string name="settings_switch_review_title">Review</string>
-    <string name="settings_switch_review_description">Review the app on the play store</string>
+    <string name="settings_switch_review_description">Review the app on the app store</string>
     <string name="settings_build_version">Build version</string>
     <string name="settings_pref_shake_to_report_title">Shake to report</string>
     <string name="settings_pref_shake_to_report_description">Shake the screen to provide feedback or bug reports to the developer</string>

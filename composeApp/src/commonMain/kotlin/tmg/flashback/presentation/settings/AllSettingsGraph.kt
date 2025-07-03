@@ -9,14 +9,14 @@ import tmg.flashback.presentation.settings.about.SettingsAboutScreen
 import tmg.flashback.presentation.settings.browser.SettingsBrowserScreen
 import tmg.flashback.presentation.settings.darkmode.SettingsDarkModeScreen
 import tmg.flashback.presentation.settings.layout.SettingsLayoutScreen
-import tmg.flashback.presentation.settings.notifications.SettingsNotificationUpcomingScreen
+import tmg.flashback.presentation.settings.notifications.results.SettingsNotificationResultsScreen
+import tmg.flashback.presentation.settings.notifications.upcoming.SettingsNotificationUpcomingScreen
 import tmg.flashback.presentation.settings.privacy.SettingsPrivacyScreen
 import tmg.flashback.presentation.settings.theme.SettingsThemeScreen
 import tmg.flashback.presentation.settings.weather.SettingsWeatherScreen
 import tmg.flashback.presentation.settings.widgets.SettingsWidgetScreen
 import tmg.flashback.ui.navigation.MasterDetailPaneState
 import tmg.flashback.ui.navigation.MasterDetailsPane
-import tmg.flashback.ui.navigation.rememberMasterDetailPaneState
 
 interface SettingNavigation {
     data object DarkMode: SettingNavigation
@@ -27,7 +27,6 @@ interface SettingNavigation {
     data object InAppBrowser: SettingNavigation
     data object NotificationResults: SettingNavigation
     data object NotificationUpcoming: SettingNavigation
-    data object NotificationUpcomingNotice: SettingNavigation
     data object Widgets: SettingNavigation
     data object Privacy: SettingNavigation
     data object About: SettingNavigation
@@ -86,7 +85,12 @@ fun AllSettingsGraph(
                     insetPadding = insetPadding,
                     showBack = windowSizeClass.windowWidthSizeClass == COMPACT
                 )
-                is SettingNavigation.NotificationUpcomingNotice -> SettingsNotificationUpcomingScreen(
+                is SettingNavigation.NotificationResults -> SettingsNotificationResultsScreen(
+                    actionUpClicked = { navigator.clear() },
+                    insetPadding = insetPadding,
+                    showBack = windowSizeClass.windowWidthSizeClass == COMPACT
+                )
+                is SettingNavigation.NotificationUpcoming -> SettingsNotificationUpcomingScreen(
                     actionUpClicked = { navigator.clear() },
                     insetPadding = insetPadding,
                     showBack = windowSizeClass.windowWidthSizeClass == COMPACT

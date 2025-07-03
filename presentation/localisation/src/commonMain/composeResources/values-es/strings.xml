@@ -330,7 +330,7 @@
     <string name="settings_switch_about_this_app_title">Acerca de esta aplicación</string>
     <string name="settings_switch_about_this_app_description">Acerca de la aplicación, los desarrolladores y las dependencias</string>
     <string name="settings_switch_review_title">Reseña</string>
-    <string name="settings_switch_review_description">Reseña la aplicación en la Play Store</string>
+    <string name="settings_switch_review_description">Reseña la aplicación en la app store</string>
     <string name="settings_header_reset">Restablecer</string>
     <string name="settings_pref_reset_title">Sincronización inicial</string>
     <string name="settings_pref_reset_description">Volver a ejecutar la sincronización inicial. Esto actualizará todos los pilotos, constructores, carreras y circuitos.</string>

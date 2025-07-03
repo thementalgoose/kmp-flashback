@@ -31,6 +31,13 @@ internal class ScheduleUpcomingNotificationsUseCaseImpl(
 ): ScheduleUpcomingNotificationsUseCase {
     override suspend fun invoke(force: Boolean): ScheduleResult {
 
+        val enabledUpcomingNotifications = notificationSettingsRepository.notificationUpcomingEnabled
+
+        if (enabledUpcomingNotifications.isEmpty()) {
+            logInfo("Notifications", "All notifications disabled, skipping")
+            return ScheduleResult.Disabled
+        }
+
         val upNextItemsToSchedule = (overviewRepository.getUpcomingOverviews() ?: emptyList())
             .map { event ->
                 event.schedule.mapIndexed { index, item ->
@@ -51,7 +58,7 @@ internal class ScheduleUpcomingNotificationsUseCaseImpl(
             .filter { !it.timestamp.isInPastRelativeToo(notificationSettingsRepository.notificationReminderPeriod.seconds.toLong()) }
 
         if (upNextItemsToSchedule.isEmpty()) {
-            logInfo("Notifications", "Skipping rescheduling of notifications")
+            logInfo("Notifications", "Skipping rescheduling of notifications as there are no items to schedule for")
             return ScheduleResult.Unchanged
         }
 
@@ -64,23 +71,23 @@ internal class ScheduleUpcomingNotificationsUseCaseImpl(
         val reminderPeriod = notificationSettingsRepository.notificationReminderPeriod
 
         upNextItemsToSchedule.forEach { item ->
-            val time = item.utcDateTime.plus(-reminderPeriod.seconds, DateTimeUnit.SECOND, timeZone = TimeZone.UTC)
-            val (title, text) = NotificationUtils.getInexactNotificationTitleText(
-                item.title,
-                item.label,
-                item.timestamp
-            )
+            if (enabledUpcomingNotifications.contains(item.channel)) {
+                val time = item.utcDateTime.plus(-reminderPeriod.seconds, DateTimeUnit.SECOND, timeZone = TimeZone.UTC)
+                val (title, text) = NotificationUtils.getInexactNotificationTitleText(
+                    item.title,
+                    item.label,
+                    item.timestamp
+                )
+                localNotificationsScheduleUseCase(
+                    uuid = item.uuid,
+                    channelId = item.channel.channelId,
+                    title = title,
+                    text = text,
+                    timestamp = time,
+                )
 
-            localNotificationsScheduleUseCase(
-                uuid = item.uuid,
-                channelId = item.channel.channelId,
-                title = title,
-                text = text,
-                timestamp = time,
-            )
-
-            logInfo("Notification", " s${item.season} r${item.round} [${item.label}] ${item.title} has been scheduled at $time")
-
+                logInfo("Notification", " s${item.season} r${item.round} [${item.label}] ${item.title} has been scheduled at $time")
+            }
         }
 
         return ScheduleResult.Scheduled
@@ -113,5 +120,6 @@ internal class ScheduleUpcomingNotificationsUseCaseImpl(
 sealed interface ScheduleResult {
     data object Unchanged: ScheduleResult
     data object Scheduled: ScheduleResult
+    data object Disabled: ScheduleResult
     data object Error: ScheduleResult
 }

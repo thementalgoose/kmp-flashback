@@ -25,8 +25,6 @@ import flashback.presentation.localisation.generated.resources.settings_pref_cra
 import flashback.presentation.localisation.generated.resources.settings_pref_crash_reporting_title
 import flashback.presentation.localisation.generated.resources.settings_pref_empty_week_description
 import flashback.presentation.localisation.generated.resources.settings_pref_empty_week_title
-import flashback.presentation.localisation.generated.resources.settings_pref_notification_notice_period_description
-import flashback.presentation.localisation.generated.resources.settings_pref_notification_notice_period_title
 import flashback.presentation.localisation.generated.resources.settings_pref_notification_permission_description
 import flashback.presentation.localisation.generated.resources.settings_pref_notification_permission_title
 import flashback.presentation.localisation.generated.resources.settings_pref_privacy_policy_description
@@ -77,6 +75,15 @@ import flashback.presentation.localisation.generated.resources.settings_switch_e
 import flashback.presentation.localisation.generated.resources.settings_switch_enable_javascript_title
 import flashback.presentation.localisation.generated.resources.settings_switch_enable_web_browser_description
 import flashback.presentation.localisation.generated.resources.settings_switch_enable_web_browser_title
+import flashback.presentation.localisation.generated.resources.settings_switch_notification_results_qualifying_title
+import flashback.presentation.localisation.generated.resources.settings_switch_notification_results_race_title
+import flashback.presentation.localisation.generated.resources.settings_switch_notification_results_sprint_qualifying_title
+import flashback.presentation.localisation.generated.resources.settings_switch_notification_results_sprint_title
+import flashback.presentation.localisation.generated.resources.settings_switch_notification_upcoming_fp_title
+import flashback.presentation.localisation.generated.resources.settings_switch_notification_upcoming_qualifying_title
+import flashback.presentation.localisation.generated.resources.settings_switch_notification_upcoming_race_title
+import flashback.presentation.localisation.generated.resources.settings_switch_notification_upcoming_sprint_qualifying_title
+import flashback.presentation.localisation.generated.resources.settings_switch_notification_upcoming_sprint_title
 import flashback.presentation.localisation.generated.resources.settings_switch_review_description
 import flashback.presentation.localisation.generated.resources.settings_switch_review_title
 import flashback.presentation.localisation.generated.resources.settings_theme_nightmode_dark
@@ -212,7 +219,7 @@ object Settings {
         )
     }
 
-    val NotificationsRaceCategory = Setting.Category(
+    val NotificationsResultCategory = Setting.Category(
         _id = "notifications_race",
         title = string.settings_section_notifications_results_title,
         subtitle = string.settings_section_notifications_results_description,
@@ -223,6 +230,22 @@ object Settings {
             _id = "results_enable",
             title = string.settings_pref_notification_permission_title,
             subtitle = string.settings_pref_notification_permission_description
+        )
+        val SprintQualifying = Setting.Pref(
+            _id = "results_sprint_qualifying",
+            title = string.settings_switch_notification_results_sprint_qualifying_title
+        )
+        val SprintRace = Setting.Pref(
+            _id = "results_sprint_race",
+            title = string.settings_switch_notification_results_sprint_title
+        )
+        val Qualifying = Setting.Pref(
+            _id = "results_qualifying",
+            title = string.settings_switch_notification_results_qualifying_title
+        )
+        val Race = Setting.Pref(
+            _id = "results_race",
+            title = string.settings_switch_notification_results_race_title
         )
     }
 
@@ -238,13 +261,32 @@ object Settings {
             title = string.settings_pref_notification_permission_title,
             subtitle = string.settings_pref_notification_permission_description
         )
+        val GoToSettings = Setting.Pref(
+            _id = "upcoming_gotosettings",
+            title = string.settings_pref_notification_permission_title,
+            subtitle = string.settings_pref_notification_permission_description
+        )
+        val FreePractice = Setting.Pref(
+            _id = "upcoming_fp",
+            title = string.settings_switch_notification_upcoming_fp_title
+        )
+        val SprintQualifying = Setting.Pref(
+            _id = "upcoming_sprint_qualifying",
+            title = string.settings_switch_notification_upcoming_sprint_qualifying_title
+        )
+        val SprintRace = Setting.Pref(
+            _id = "upcoming_sprint_race",
+            title = string.settings_switch_notification_upcoming_sprint_title
+        )
+        val Qualifying = Setting.Pref(
+            _id = "upcoming_qualifying",
+            title = string.settings_switch_notification_upcoming_qualifying_title
+        )
+        val Race = Setting.Pref(
+            _id = "upcoming_race",
+            title = string.settings_switch_notification_upcoming_race_title
+        )
     }
-
-    val NotificationsUpcomingNotice = Setting.Category(
-        _id = "notifications_upcomingnotice",
-        title = string.settings_pref_notification_notice_period_title,
-        subtitle = string.settings_pref_notification_notice_period_description,
-    )
     object NotificationsNotice {
         val Minutes15 = Setting.Pref(
             _id = "notification_notice_15",

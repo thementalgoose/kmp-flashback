@@ -1,4 +1,4 @@
-package tmg.flashback.presentation.settings.notifications
+package tmg.flashback.presentation.settings.notifications.upcoming
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,11 +8,9 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.notification_onboarding_title_howlong
-import flashback.presentation.localisation.generated.resources.settings_header_device_info
-import flashback.presentation.localisation.generated.resources.settings_header_legal
+import flashback.presentation.localisation.generated.resources.settings_header_permissions
 import flashback.presentation.localisation.generated.resources.settings_section_notifications_upcoming_description
 import flashback.presentation.localisation.generated.resources.settings_section_notifications_upcoming_title
-import flashback.presentation.localisation.generated.resources.settings_section_privacy_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
@@ -20,6 +18,12 @@ import tmg.flashback.feature.notifications.model.NotificationReminder
 import tmg.flashback.feature.notifications.model.NotificationReminder.MINUTES_15
 import tmg.flashback.feature.notifications.model.NotificationReminder.MINUTES_30
 import tmg.flashback.feature.notifications.model.NotificationReminder.MINUTES_60
+import tmg.flashback.feature.notifications.model.NotificationUpcoming
+import tmg.flashback.feature.notifications.model.NotificationUpcoming.FREE_PRACTICE
+import tmg.flashback.feature.notifications.model.NotificationUpcoming.QUALIFYING
+import tmg.flashback.feature.notifications.model.NotificationUpcoming.RACE
+import tmg.flashback.feature.notifications.model.NotificationUpcoming.SPRINT
+import tmg.flashback.feature.notifications.model.NotificationUpcoming.SPRINT_QUALIFYING
 import tmg.flashback.presentation.settings.PrefHeader
 import tmg.flashback.presentation.settings.PrefLink
 import tmg.flashback.presentation.settings.PrefRadio
@@ -44,6 +48,7 @@ fun SettingsNotificationUpcomingScreen(
         uiState = uiState.value,
         actionUpClicked = actionUpClicked,
         notificationReminderClicked = viewModel::notificationReminderClicked,
+        notificationUpcomingClicked = viewModel::setNotificationUpcoming
     )
 }
 
@@ -54,6 +59,7 @@ private fun SettingsNotificationUpcomingScreen(
     insetPadding: PaddingValues,
     actionUpClicked: () -> Unit,
     notificationReminderClicked: (NotificationReminder) -> Unit,
+    notificationUpcomingClicked: (NotificationUpcoming, Boolean) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -66,6 +72,47 @@ private fun SettingsNotificationUpcomingScreen(
                 action = HeaderAction.BACK.takeIf { showBack }
             )
         }
+        PrefHeader(string.settings_header_permissions)
+        PrefLink(
+            item = Settings.NotificationsUpcoming.Enable,
+            itemClicked = { }
+        )
+        PrefHeader(string.settings_section_notifications_upcoming_description)
+        PrefSwitch(
+            item = Settings.NotificationsUpcoming.FreePractice,
+            itemClicked = {
+                notificationUpcomingClicked(FREE_PRACTICE, !uiState.enabled.contains(FREE_PRACTICE))
+            },
+            isChecked = uiState.enabled.contains(FREE_PRACTICE)
+        )
+        PrefSwitch(
+            item = Settings.NotificationsUpcoming.SprintQualifying,
+            itemClicked = {
+                notificationUpcomingClicked(SPRINT_QUALIFYING, !uiState.enabled.contains(SPRINT_QUALIFYING))
+            },
+            isChecked = uiState.enabled.contains(SPRINT_QUALIFYING)
+        )
+        PrefSwitch(
+            item = Settings.NotificationsUpcoming.SprintRace,
+            itemClicked = {
+                notificationUpcomingClicked(SPRINT, !uiState.enabled.contains(SPRINT))
+            },
+            isChecked = uiState.enabled.contains(SPRINT)
+        )
+        PrefSwitch(
+            item = Settings.NotificationsUpcoming.Qualifying,
+            itemClicked = {
+                notificationUpcomingClicked(QUALIFYING, !uiState.enabled.contains(QUALIFYING))
+            },
+            isChecked = uiState.enabled.contains(QUALIFYING)
+        )
+        PrefSwitch(
+            item = Settings.NotificationsUpcoming.Race,
+            itemClicked = {
+                notificationUpcomingClicked(RACE, !uiState.enabled.contains(RACE))
+            },
+            isChecked = uiState.enabled.contains(RACE)
+        )
         PrefHeader(string.notification_onboarding_title_howlong)
         PrefRadio(
             item = Settings.NotificationsNotice.Minutes15,
