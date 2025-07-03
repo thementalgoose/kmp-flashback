@@ -1,6 +1,5 @@
 package tmg.flashback.presentation.settings
 
-import androidx.compose.ui.test.isEnabled
 import flashback.composeapp.generated.resources.Res
 import flashback.composeapp.generated.resources.ic_settings_about
 import flashback.composeapp.generated.resources.ic_settings_dark_mode
@@ -97,17 +96,17 @@ object Settings {
         icon = Res.drawable.ic_settings_dark_mode
     )
     object DarkMode {
-        val DarkModeAuto = Setting.Link(
+        val DarkModeAuto = Setting.Pref(
             _id = "dark_mode_auto",
             title = string.settings_theme_nightmode_follow_system,
             subtitle = string.settings_theme_nightmode_follow_system
         )
-        val DarkModeLight = Setting.Link(
+        val DarkModeLight = Setting.Pref(
             _id = "dark_mode_light",
             title = string.settings_theme_nightmode_light,
             subtitle = string.settings_theme_nightmode_light
         )
-        val DarkModeDark = Setting.Link(
+        val DarkModeDark = Setting.Pref(
             _id = "dark_mode_dark",
             title = string.settings_theme_nightmode_dark,
             subtitle = string.settings_theme_nightmode_dark
@@ -121,12 +120,12 @@ object Settings {
         icon = Res.drawable.ic_settings_theme
     )
     object Theme {
-        val ThemeDefault = Setting.Link(
+        val ThemeDefault = Setting.Pref(
             _id = "theme_default",
             title = string.settings_theme_theme_default,
             subtitle = string.settings_theme_theme_default
         )
-        val ThemeMaterialYou = Setting.Link(
+        val ThemeMaterialYou = Setting.Pref(
             _id = "theme_material_you",
             title = string.settings_theme_theme_material_you,
             subtitle = string.settings_theme_theme_material_you
@@ -140,23 +139,23 @@ object Settings {
         icon = Res.drawable.ic_settings_home
     )
     object Layout {
-        val RecentHighlights = Setting.Link(
+        val RecentHighlights = Setting.Pref(
             _id = "layout_recents",
             title = string.settings_pref_recent_highlights_title,
             subtitle = string.settings_pref_recent_highlights_description,
             isEnabled = false
         )
-        val CollapsibleRaces = Setting.Link(
+        val CollapsibleRaces = Setting.Pref(
             _id = "layout_collapsible_races",
             title = string.settings_pref_collapsed_list_title,
             subtitle = string.settings_pref_collapsed_list_description
         )
-        val EmptyWeeks = Setting.Link(
+        val EmptyWeeks = Setting.Pref(
             _id = "layout_emptyweeks",
             title = string.settings_pref_empty_week_title,
             subtitle = string.settings_pref_empty_week_description
         )
-        val KeepSeason = Setting.Link(
+        val KeepSeason = Setting.Pref(
             _id = "layout_keepseason",
             title = string.settings_pref_remember_season_change_title,
             subtitle = string.settings_pref_remember_season_change_description
@@ -170,12 +169,12 @@ object Settings {
         icon = Res.drawable.ic_settings_weather
     )
     object Weather {
-        val TemperatureUnit = Setting.Link(
+        val TemperatureUnit = Setting.Pref(
             _id = "weather_temp",
             title = string.settings_pref_temperature_unit_title,
             subtitle = string.settings_pref_temperature_unit_description
         )
-        val WindSpeed = Setting.Link(
+        val WindSpeed = Setting.Pref(
             _id = "weather_wind",
             title = string.settings_pref_wind_speed_unit_title,
             subtitle = string.settings_pref_wind_speed_unit_description
@@ -199,12 +198,12 @@ object Settings {
         icon = Res.drawable.ic_settings_web
     )
     object WebBrowser {
-        val Enabled = Setting.Link(
+        val Enabled = Setting.Pref(
             _id = "webbrowser_enabled",
             title = string.settings_switch_enable_web_browser_title,
             subtitle = string.settings_switch_enable_web_browser_description
         )
-        val EnableJavascript = Setting.Link(
+        val EnableJavascript = Setting.Pref(
             _id = "webbrowser_javascript",
             title = string.settings_switch_enable_javascript_title,
             subtitle = string.settings_switch_enable_javascript_description
@@ -231,15 +230,15 @@ object Settings {
         subtitle = string.settings_pref_notification_notice_period_description,
     )
     object NotificationsNotice {
-        val Minutes15 = Setting.Link(
+        val Minutes15 = Setting.Pref(
             _id = "notification_notice_15",
             title = string.notification_reminder_mins_15
         )
-        val Minutes30 = Setting.Link(
+        val Minutes30 = Setting.Pref(
             _id = "notification_notice_30",
             title = string.notification_reminder_mins_30
         )
-        val Minutes60 = Setting.Link(
+        val Minutes60 = Setting.Pref(
             _id = "notification_notice_60",
             title = string.notification_reminder_mins_60
         )
@@ -252,23 +251,23 @@ object Settings {
         icon = Res.drawable.ic_settings_widgets
     )
     object Widgets {
-        val RefreshWidgets = Setting.Link(
+        val RefreshWidgets = Setting.Pref(
             _id = "widgets_refresh",
             title = string.settings_section_refresh_widget_title,
             subtitle = string.settings_section_refresh_widget_description,
         )
-        val ShowBackground = Setting.Link(
+        val ShowBackground = Setting.Pref(
             _id = "widgets_show_background",
             title = string.settings_section_widgets_show_background_title,
             subtitle = string.settings_section_widgets_show_background_description,
         )
-        val DeeplinkToEvent = Setting.Link(
+        val DeeplinkToEvent = Setting.Pref(
             _id = "widgets_deeplink_to_event",
             title = string.settings_section_widgets_deeplink_event_title,
             subtitle = string.settings_section_widgets_deeplink_event_description,
             isEnabled = false,
         )
-        val ShowWeather = Setting.Link(
+        val ShowWeather = Setting.Pref(
             _id = "widgets_weather",
             title = string.settings_section_widgets_show_weather_title,
             subtitle = string.settings_section_widgets_show_weather_description,
@@ -283,17 +282,17 @@ object Settings {
         icon = Res.drawable.ic_settings_privacy
     )
     object Privacy {
-        val PrivacyPolicy = Setting.Link(
+        val PrivacyPolicy = Setting.Pref(
             _id = "privacy_policy",
             title = string.settings_pref_privacy_policy_title,
             subtitle = string.settings_pref_privacy_policy_description
         )
-        val CrashReporting = Setting.Link(
+        val CrashReporting = Setting.Pref(
             _id = "crash_reporting",
             title = string.settings_pref_crash_reporting_title,
             subtitle = string.settings_pref_crash_reporting_description
         )
-        val Analytics = Setting.Link(
+        val Analytics = Setting.Pref(
             _id = "analytics",
             title = string.settings_pref_analytics_title,
             subtitle = string.settings_pref_analytics_description
@@ -307,27 +306,27 @@ object Settings {
         icon = Res.drawable.ic_settings_about
     )
     object About {
-        val AboutThisApp = Setting.Link(
+        val AboutThisApp = Setting.Pref(
             _id = "about_aboutthisapp",
             title = string.settings_switch_about_this_app_title,
             subtitle = string.settings_switch_about_this_app_description
         )
-        val Review = Setting.Link(
+        val Review = Setting.Pref(
             _id = "about_review",
             title = string.settings_switch_review_title,
             subtitle = string.settings_switch_review_description
         )
-        val ShakeToReport = Setting.Link(
+        val ShakeToReport = Setting.Pref(
             _id = "about_shake",
             title = string.settings_pref_shake_to_report_title,
             subtitle = string.settings_pref_shake_to_report_description
         )
-        val BuildVersion = Setting.Link(
+        val BuildVersion = Setting.Pref(
             _id = "about_build",
             title = string.settings_build_version,
             subtitleString = Device.versionName
         )
-        val FirstTimeSync = Setting.Link(
+        val FirstTimeSync = Setting.Pref(
             _id = "about_reset",
             title = string.settings_pref_reset_title,
             subtitle = string.settings_pref_reset_description
@@ -347,7 +346,7 @@ sealed class Setting(
         val isEnabled: Boolean = true
     ): Setting(_id)
 
-    data class Link(
+    data class Pref(
         private val _id: String,
         val title: StringResource,
         val subtitle: StringResource? = null,

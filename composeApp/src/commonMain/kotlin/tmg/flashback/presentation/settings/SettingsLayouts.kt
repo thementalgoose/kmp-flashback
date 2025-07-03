@@ -15,7 +15,6 @@ import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.test.isEnabled
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
@@ -68,8 +67,8 @@ fun LazyListScope.PrefCategory(
 }
 
 fun LazyListScope.PrefLink(
-    item: Setting.Link,
-    itemClicked: (Setting.Link) -> Unit,
+    item: Setting.Pref,
+    itemClicked: (Setting.Pref) -> Unit,
     isEnabled: Boolean = item.isEnabled
 ) {
     item(item.id) {
@@ -82,8 +81,8 @@ fun LazyListScope.PrefLink(
 }
 
 fun LazyListScope.PrefRadio(
-    item: Setting.Link,
-    itemClicked: (Setting.Link) -> Unit,
+    item: Setting.Pref,
+    itemClicked: (Setting.Pref) -> Unit,
     isChecked: Boolean,
     isEnabled: Boolean = item.isEnabled
 ) {
@@ -98,8 +97,8 @@ fun LazyListScope.PrefRadio(
 }
 
 fun LazyListScope.PrefSwitch(
-    item: Setting.Link,
-    itemClicked: (Setting.Link) -> Unit,
+    item: Setting.Pref,
+    itemClicked: (Setting.Pref) -> Unit,
     isChecked: Boolean,
     isEnabled: Boolean = item.isEnabled
 ) {
@@ -128,8 +127,8 @@ fun SettingHeader(
 
 @Composable
 fun SettingLink(
-    item: Setting.Link,
-    itemClicked: (Setting.Link) -> Unit,
+    item: Setting.Pref,
+    itemClicked: (Setting.Pref) -> Unit,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
 ) {
@@ -150,8 +149,8 @@ fun SettingLink(
 
 @Composable
 fun SettingRadio(
-    item: Setting.Link,
-    itemClicked: (Setting.Link) -> Unit,
+    item: Setting.Pref,
+    itemClicked: (Setting.Pref) -> Unit,
     isChecked: Boolean,
     isEnabled: Boolean = true,
     modifier: Modifier = Modifier
@@ -176,8 +175,8 @@ fun SettingRadio(
 
 @Composable
 fun SettingSwitch(
-    item: Setting.Link,
-    itemClicked: (Setting.Link) -> Unit,
+    item: Setting.Pref,
+    itemClicked: (Setting.Pref) -> Unit,
     isChecked: Boolean,
     isEnabled: Boolean = true,
     modifier: Modifier = Modifier
@@ -202,7 +201,7 @@ fun SettingSwitch(
 
 @Composable
 private fun SettingLink(
-    item: Setting.Link,
+    item: Setting.Pref,
     isEnabled: Boolean,
     modifier: Modifier,
     content: @Composable () -> Unit = { }
