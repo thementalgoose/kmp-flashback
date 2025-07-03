@@ -22,21 +22,22 @@ Flashback provides race results and statistics from every race in the history of
 - [x] Add insets management
 - [x] Get firebase working on 
   - [x] Android
-  - [ ] iOS
-- [ ] Get network layer working
+  - [x] iOS
+- [x] Get network layer working
   - [x] Android
-  - [ ] iOS
+  - [x] iOS
 - [x] Get network layer using remote config value
 - [x] Get database layer working
-  - [ ] Android
-  - [ ] iOS
-- [ ] Add repository layer for offline first
-  - [ ] Android
-  - [ ] iOS
+  - [x] Android
+  - [x] iOS
+- [x] Add repository layer for offline first
+  - [x] Android
+  - [x] iOS
 - [x] Get compose style library setup
 - [x] Add initial app startup experience
 - [x] Adds analytics
 - [x] Adds crashlytics reporting
+- [ ] Adds Firebase performance
 - [x] Adds remote config setup
   - [x] Configure defaults setup for both platforms
 - [x] Support tablet mode

@@ -1,4 +1,4 @@
-package tmg.flashback.webbrowser.utils
+package tmg.flashback.device.utils
 
 object UrlUtils {
 
