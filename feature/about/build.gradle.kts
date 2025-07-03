@@ -24,6 +24,8 @@ kotlin {
             implementation(libs.bundles.compose)
             implementation(libs.bundles.coil)
 
+            implementation(compose.components.resources)
+
             implementation(projects.core.configuration)
             implementation(projects.core.device)
             implementation(projects.core.metrics.analytics)

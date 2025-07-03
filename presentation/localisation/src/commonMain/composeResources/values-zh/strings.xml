@@ -497,6 +497,10 @@
     <string name="device_uuid">ID: </string>
     <string name="installation_id">安装 ID: </string>
     <string name="about_dependencies">依赖项</string>
+    <string name="button_play">Play</string>
+    <string name="button_apple_app">App Store</string>
+    <string name="button_email">电邮</string>
+    <string name="button_github">Github</string>
 
     <!-- 小部件 -->
     <string name="widget_up_next_title">即将到来</string>

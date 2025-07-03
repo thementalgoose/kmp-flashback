@@ -501,6 +501,10 @@
     <string name="device_uuid">ID: </string>
     <string name="installation_id">ID de Instalación: </string>
     <string name="about_dependencies">Dependencias</string>
+    <string name="button_play">Play</string>
+    <string name="button_apple_app">App Store</string>
+    <string name="button_email">Email</string>
+    <string name="button_github">Github</string>
 
     <!-- Widgets -->
     <string name="widget_up_next_title">Próximo</string>

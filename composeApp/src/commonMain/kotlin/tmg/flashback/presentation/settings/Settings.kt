@@ -27,6 +27,8 @@ import flashback.presentation.localisation.generated.resources.settings_pref_emp
 import flashback.presentation.localisation.generated.resources.settings_pref_empty_week_title
 import flashback.presentation.localisation.generated.resources.settings_pref_notification_notice_period_description
 import flashback.presentation.localisation.generated.resources.settings_pref_notification_notice_period_title
+import flashback.presentation.localisation.generated.resources.settings_pref_notification_permission_description
+import flashback.presentation.localisation.generated.resources.settings_pref_notification_permission_title
 import flashback.presentation.localisation.generated.resources.settings_pref_privacy_policy_description
 import flashback.presentation.localisation.generated.resources.settings_pref_privacy_policy_title
 import flashback.presentation.localisation.generated.resources.settings_pref_recent_highlights_description
@@ -216,6 +218,13 @@ object Settings {
         subtitle = string.settings_section_notifications_results_description,
         icon = Res.drawable.ic_settings_notifications_results
     )
+    object NotificationsResults {
+        val Enable = Setting.Pref(
+            _id = "results_enable",
+            title = string.settings_pref_notification_permission_title,
+            subtitle = string.settings_pref_notification_permission_description
+        )
+    }
 
     val NotificationsUpcomingCategory = Setting.Category(
         _id = "notifications_upcoming",
@@ -223,6 +232,13 @@ object Settings {
         subtitle = string.settings_section_notifications_upcoming_description,
         icon = Res.drawable.ic_settings_notifications_upcoming
     )
+    object NotificationsUpcoming {
+        val Enable = Setting.Pref(
+            _id = "upcoming_enable",
+            title = string.settings_pref_notification_permission_title,
+            subtitle = string.settings_pref_notification_permission_description
+        )
+    }
 
     val NotificationsUpcomingNotice = Setting.Category(
         _id = "notifications_upcomingnotice",

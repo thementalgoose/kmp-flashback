@@ -37,6 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush.Companion.linearGradient
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
@@ -127,6 +128,20 @@ private fun AboutListScreen(
                 icon = icon,
             )
         }
+        item("buttons") {
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .animateItem()
+            ) {
+                AboutButtons.entries.forEach {
+                    Button(
+                        button = it,
+                        buttonClicked = { },
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+            }
+        }
         item("header") {
             Header(
                 modifier = Modifier
@@ -137,7 +152,6 @@ private fun AboutListScreen(
                     )
             )
         }
-
         item("section") {
             Section(
                 title = stringResource(string.about_dependencies),
@@ -202,6 +216,20 @@ private fun AboutPaneScreen(
                     icon = icon,
                     email = email
                 )
+            }
+            item("buttons") {
+                Row(modifier = Modifier
+                    .fillMaxWidth()
+                    .animateItem()
+                ) {
+                    AboutButtons.entries.forEach {
+                        Button(
+                            button = it,
+                            buttonClicked = { },
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
             }
             item("header") {
                 Header(modifier = Modifier
@@ -364,6 +392,36 @@ private fun Footer(
         TextBody2(
             text = version,
             bold = true
+        )
+    }
+}
+
+@Composable
+private fun Button(
+    button: AboutButtons,
+    buttonClicked: (AboutButtons) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .clickable {
+                buttonClicked(button)
+            }
+            .padding(
+                vertical = AppTheme.dimens.small,
+                horizontal = AppTheme.dimens.xsmall
+            ),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Icon(
+            painter = painterResource(button.icon),
+            contentDescription = null,
+            tint = AppTheme.colors.onSurface
+        )
+        TextBody1(
+            text = stringResource(button.label),
+            textAlign = TextAlign.Center,
         )
     }
 }
