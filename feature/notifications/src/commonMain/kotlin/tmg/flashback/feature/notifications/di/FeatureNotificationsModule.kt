@@ -13,6 +13,6 @@ val featureNotificationsModule = listOf(module())
 internal fun module() = module {
     single<NotificationSettingsRepository> { NotificationSettingsRepositoryImpl(get()) }
 
-    single<SubscribeResultNotificationsUseCase> { SubscribeResultNotificationsUseCaseImpl(get(), get()) }
+    single<SubscribeResultNotificationsUseCase> { SubscribeResultNotificationsUseCaseImpl(get(), get(), get()) }
     single<ScheduleUpcomingNotificationsUseCase> { ScheduleUpcomingNotificationsUseCaseImpl(get(), get(), get(), get(), get()) }
 }
