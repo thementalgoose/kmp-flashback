@@ -9,8 +9,6 @@ import kotlinx.coroutines.launch
 import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
 import tmg.flashback.feature.notifications.usecases.SubscribeResultNotificationsUseCase
-import kotlin.collections.minus
-import kotlin.collections.plus
 
 class SettingsNotificationResultsViewModel(
     private val notificationSettingsRepository: NotificationSettingsRepository,

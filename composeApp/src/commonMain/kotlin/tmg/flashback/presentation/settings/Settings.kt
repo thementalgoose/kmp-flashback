@@ -219,6 +219,12 @@ object Settings {
         )
     }
 
+    val NotificationsPermissionsEnable = Setting.Category(
+        _id = "notifications_permissions",
+        title = string.settings_pref_notification_permission_title,
+        subtitle = string.settings_pref_notification_permission_description,
+        icon = null
+    )
     val NotificationsResultCategory = Setting.Category(
         _id = "notifications_race",
         title = string.settings_section_notifications_results_title,
@@ -226,11 +232,6 @@ object Settings {
         icon = Res.drawable.ic_settings_notifications_results
     )
     object NotificationsResults {
-        val Enable = Setting.Pref(
-            _id = "results_enable",
-            title = string.settings_pref_notification_permission_title,
-            subtitle = string.settings_pref_notification_permission_description
-        )
         val SprintQualifying = Setting.Pref(
             _id = "results_sprint_qualifying",
             title = string.settings_switch_notification_results_sprint_qualifying_title
@@ -256,16 +257,6 @@ object Settings {
         icon = Res.drawable.ic_settings_notifications_upcoming
     )
     object NotificationsUpcoming {
-        val Enable = Setting.Pref(
-            _id = "upcoming_enable",
-            title = string.settings_pref_notification_permission_title,
-            subtitle = string.settings_pref_notification_permission_description
-        )
-        val GoToSettings = Setting.Pref(
-            _id = "upcoming_gotosettings",
-            title = string.settings_pref_notification_permission_title,
-            subtitle = string.settings_pref_notification_permission_description
-        )
         val FreePractice = Setting.Pref(
             _id = "upcoming_fp",
             title = string.settings_switch_notification_upcoming_fp_title

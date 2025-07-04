@@ -4,7 +4,10 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.test.isEnabled
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.nav_settings
@@ -18,6 +21,7 @@ import flashback.presentation.localisation.generated.resources.settings_web_brow
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
+import tmg.flashback.device.models.PermissionState
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 
@@ -32,11 +36,15 @@ internal fun AllSettingsScreen(
     ScreenView(screenName = "Settings")
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
+    val notificationState = viewModel.notificationPermissionEnabled.collectAsState()
+
     AllSettingsScreen(
         actionUpClicked = actionUpClicked,
         navigateTo = navigateTo,
         showMenu = showMenu,
         uiState = uiState.value,
+        notificationPermissionState = notificationState.value,
+        refreshNotificationPermissionState = viewModel::refresh,
         paddingValues = insetPadding
     )
 }
@@ -47,8 +55,14 @@ private fun AllSettingsScreen(
     showMenu: Boolean,
     navigateTo: (SettingNavigation) -> Unit,
     uiState: AllSettingsUiState,
+    notificationPermissionState: PermissionState,
     paddingValues: PaddingValues,
+    refreshNotificationPermissionState: () -> Unit
 ) {
+    LaunchedEffect(Unit) {
+        refreshNotificationPermissionState()
+    }
+
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = paddingValues
@@ -95,13 +109,21 @@ private fun AllSettingsScreen(
             )
         }
         PrefHeader(string.settings_header_notifications)
+        if (notificationPermissionState != PermissionState.Granted) {
+            PrefCategory(
+                item = Settings.NotificationsPermissionsEnable,
+                itemClicked = { }
+            )
+        }
         PrefCategory(
             item = Settings.NotificationsResultCategory,
-            itemClicked = { navigateTo(SettingNavigation.NotificationResults) }
+            itemClicked = { navigateTo(SettingNavigation.NotificationResults) },
+            isEnabled = notificationPermissionState == PermissionState.Granted,
         )
         PrefCategory(
             item = Settings.NotificationsUpcomingCategory,
-            itemClicked = { navigateTo(SettingNavigation.NotificationUpcoming) }
+            itemClicked = { navigateTo(SettingNavigation.NotificationUpcoming) },
+            isEnabled = notificationPermissionState == PermissionState.Granted,
         )
         if (uiState.isWidgetsSupported) {
             PrefHeader(string.settings_header_widgets)

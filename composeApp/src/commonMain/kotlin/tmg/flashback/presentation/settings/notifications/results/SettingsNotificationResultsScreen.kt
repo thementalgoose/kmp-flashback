@@ -63,11 +63,6 @@ private fun SettingsNotificationResultsScreen(
                 action = HeaderAction.BACK.takeIf { showBack }
             )
         }
-        PrefHeader(string.settings_header_permissions)
-        PrefLink(
-            item = Settings.NotificationsResults.Enable,
-            itemClicked = { }
-        )
         PrefHeader(string.settings_section_notifications_results_description)
         PrefSwitch(
             item = Settings.NotificationsResults.SprintQualifying,

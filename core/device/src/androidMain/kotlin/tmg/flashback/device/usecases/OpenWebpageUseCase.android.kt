@@ -19,7 +19,7 @@ actual class OpenWebpageUseCaseImpl actual constructor(): OpenWebpageUseCase {
         return KoinJavaComponent.get(Context::class.java)
     }
 
-    actual override fun invoke(url: String) {
+    actual override fun invoke(url: String, title: String) {
         try {
             val intent = webpageIntent(url)
             getApplicationContext().startActivity(intent)

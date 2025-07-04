@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.format
+import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.feature.rss.models.Article
 import tmg.flashback.feature.rss.presentation.feed.RssFeedUiState
 import tmg.flashback.feature.rss.repositories.RssRepository
@@ -16,7 +17,6 @@ import tmg.flashback.infrastructure.datetime.TimeManager
 import tmg.flashback.infrastructure.datetime.timeFormatHHmmss
 import tmg.flashback.network.rss.api.RssApi
 import tmg.flashback.webbrowser.repository.WebRepository
-import tmg.flashback.webbrowser.usecases.OpenWebpageUseCase
 import kotlin.Boolean
 import kotlin.String
 
@@ -71,11 +71,11 @@ class RSSFeedViewModel(
      * @return if article was handled
      */
     fun openArticle(article: Article): Boolean {
-        return openWebpageUseCase(
+        openWebpageUseCase(
             url = article.link,
-            title = article.title,
-            forceExternal = false
+            title = article.title
         )
+        return true
     }
 
     private fun MutableStateFlow<RssFeedUiState>.updateData(updateCallback: (RssFeedUiState.Data) -> RssFeedUiState.Data) {

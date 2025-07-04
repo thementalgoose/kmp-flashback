@@ -28,6 +28,7 @@ kotlin {
             implementation(compose.components.resources)
 
             implementation(projects.core.configuration)
+            implementation(projects.core.device)
             implementation(projects.core.metrics.analytics)
             implementation(projects.core.metrics.crashlytics)
             implementation(projects.core.preferences)

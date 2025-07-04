@@ -72,11 +72,6 @@ private fun SettingsNotificationUpcomingScreen(
                 action = HeaderAction.BACK.takeIf { showBack }
             )
         }
-        PrefHeader(string.settings_header_permissions)
-        PrefLink(
-            item = Settings.NotificationsUpcoming.Enable,
-            itemClicked = { }
-        )
         PrefHeader(string.settings_section_notifications_upcoming_description)
         PrefSwitch(
             item = Settings.NotificationsUpcoming.FreePractice,

@@ -122,7 +122,7 @@ internal fun module() = module {
 
     single<RequiresSyncUseCase> { RequiresSyncUseCaseImpl(get(), get()) }
 
-    viewModel { AllSettingsViewModel(get(), get(), get()) }
+    viewModel { AllSettingsViewModel(get(), get(), get(), get()) }
     viewModel { SettingsDarkModeViewModel(get()) }
     viewModel { SettingsThemeViewModel(get()) }
     viewModel { SettingsLayoutViewModel(get()) }

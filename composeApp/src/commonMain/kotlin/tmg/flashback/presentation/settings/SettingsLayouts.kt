@@ -57,11 +57,13 @@ fun LazyListScope.PrefHeader(
 fun LazyListScope.PrefCategory(
     item: Setting.Category,
     itemClicked: (Setting.Category) -> Unit,
+    isEnabled: Boolean = item.isEnabled,
 ) {
     item(item.id) {
         SettingCategory(
             item = item,
-            itemClicked = itemClicked
+            itemClicked = itemClicked,
+            isEnabled = isEnabled
         )
     }
 }

@@ -6,6 +6,8 @@ import tmg.flashback.device.models.PermissionState
 import platform.UserNotifications.UNUserNotificationCenter
 import platform.UserNotifications.UNNotificationSettings
 import platform.UserNotifications.UNAuthorizationStatusAuthorized
+import tmg.flashback.infrastructure.log.logDebug
+import tmg.flashback.infrastructure.log.logInfo
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -21,11 +23,13 @@ actual class IsPermissionGrantedUseCaseImpl actual constructor(): IsPermissionGr
             val currentCenter = UNUserNotificationCenter.currentNotificationCenter()
             currentCenter.getNotificationSettingsWithCompletionHandler { settings: UNNotificationSettings? ->
                 if (settings == null) {
+                    logDebug("Permissions", "Permission state unknown (settings is null)")
                     continuation.resume(PermissionState.Unknown)
                     return@getNotificationSettingsWithCompletionHandler
                 }
 
                 val isAuthorized = settings.authorizationStatus == UNAuthorizationStatusAuthorized
+                logDebug("Permissions", "Permission state $isAuthorized")
                 continuation.resume(when (isAuthorized) {
                     true -> PermissionState.Granted
                     false -> PermissionState.Denied
