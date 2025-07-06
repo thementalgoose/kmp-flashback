@@ -10,10 +10,14 @@ import tmg.flashback.feature.notifications.model.NotificationReminder
 import tmg.flashback.feature.notifications.model.NotificationUpcoming
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
 import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
+import tmg.flashback.ui.permissions.Permission
+import tmg.flashback.ui.permissions.PermissionManager
+import tmg.flashback.ui.permissions.PermissionState
 
 class SettingsNotificationUpcomingViewModel(
     private val notificationSettingsRepository: NotificationSettingsRepository,
-    private val scheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase
+    private val scheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase,
+    private val permissionManager: PermissionManager
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<SettingsNotificationUpcomingUiState> = MutableStateFlow(SettingsNotificationUpcomingUiState(
@@ -22,9 +26,30 @@ class SettingsNotificationUpcomingViewModel(
     ))
     val uiState: StateFlow<SettingsNotificationUpcomingUiState> = _uiState
 
+
+    private val _permissionState: MutableStateFlow<PermissionState> = MutableStateFlow(PermissionState.NotDetermined)
+    val permissionState: StateFlow<PermissionState> = _permissionState
+
+    init {
+        viewModelScope.launch {
+            _permissionState.value = permissionManager.getPermissionState(Permission.Notifications)
+        }
+    }
+
+    fun requestPermissions() {
+        viewModelScope.launch {
+            _permissionState.value = permissionManager.providePermission(Permission.Notifications)
+        }
+    }
+
+    fun goToSettings() {
+        permissionManager.openAppSettings()
+    }
+
     fun refresh() {
         viewModelScope.launch {
             scheduleUpcomingNotificationsUseCase(true)
+            _permissionState.value = permissionManager.providePermission(Permission.Notifications)
         }
         _uiState.update {
             SettingsNotificationUpcomingUiState(

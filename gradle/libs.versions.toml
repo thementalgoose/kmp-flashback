@@ -31,6 +31,7 @@ room = "2.7.2"
 sqlite = "2.5.2"
 coil = "3.2.0"
 alarmee = "2.0.2"
+moko = "0.19.1"
 
 # Testing
 kotest = "5.9.1"
@@ -92,6 +93,10 @@ flagkit = "dev.carlsen.flagkit:flagkit:1.1.0"
 coil_compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil_network_ktor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
 
+# Permissions
+moko_permissions_notifications = { module = "dev.icerock.moko:permissions-notifications", version.ref = "moko" }
+moko_permissions_compose = { module = "dev.icerock.moko:permissions-compose", version.ref = "moko" }
+
 # Networking
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
 ktor-client-ios = { module = "io.ktor:ktor-client-ios", version.ref = "ktor" }
@@ -147,6 +152,10 @@ common-ktor = [
 coil = [
     "coil_compose",
     "coil_network_ktor3"
+]
+moko = [
+    "moko_permissions_compose",
+    "moko_permissions_notifications"
 ]
 
 [plugins]

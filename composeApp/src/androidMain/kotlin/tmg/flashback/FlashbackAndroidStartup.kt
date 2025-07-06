@@ -5,16 +5,28 @@ import android.app.NotificationChannel
 import android.app.NotificationChannelGroup
 import android.app.NotificationManager
 import android.content.Context.NOTIFICATION_SERVICE
+import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.notification_channel_free_practice
+import flashback.presentation.localisation.generated.resources.notification_channel_info
+import flashback.presentation.localisation.generated.resources.notification_channel_qualifying
+import flashback.presentation.localisation.generated.resources.notification_channel_qualifying_notify
+import flashback.presentation.localisation.generated.resources.notification_channel_race
+import flashback.presentation.localisation.generated.resources.notification_channel_race_notify
+import flashback.presentation.localisation.generated.resources.notification_channel_sprint
+import flashback.presentation.localisation.generated.resources.notification_channel_sprint_notify
+import flashback.presentation.localisation.generated.resources.notification_channel_sprint_qualifying
+import flashback.presentation.localisation.generated.resources.notification_channel_sprint_qualifying_notify
+import kotlinx.coroutines.runBlocking
+import org.jetbrains.compose.resources.getString
 import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
 import tmg.flashback.feature.notifications.model.NotificationUpcoming
 import tmg.flashback.notifications.repositories.NotificationRepository
 
-class FlashbackAndroidStartup {
+class FlashbackAndroidStartup(
+    private val notificationRepository: NotificationRepository
+) {
 
-    fun startup(
-        application: FlashbackApplication,
-        notificationRepository: NotificationRepository
-    ) {
+    fun startup(application: FlashbackApplication) {
         // Android specific notification channels
         //  Rest of it is handled by [NotificationManager]
         application.setupNotifications(notificationRepository)
@@ -37,14 +49,13 @@ class FlashbackAndroidStartup {
         notificationRepository.notificationIds = emptySet()
         //endregion
 
-
         // Upcoming
         val upcomingGroupId = "upcoming"
         val upcomingGroup = NotificationChannelGroup(upcomingGroupId, "Upcoming")
         notificationManager.createNotificationChannelGroup(upcomingGroup)
         NotificationUpcoming.entries
             .filter { it != NotificationUpcoming.OTHER }
-            .map { NotificationChannel(it.channelId, getString(it.labelId), NotificationManager.IMPORTANCE_HIGH) }
+            .map { NotificationChannel(it.channelId, it.labelId(), NotificationManager.IMPORTANCE_HIGH) }
             .forEach {
                 it.group = upcomingGroupId
                 notificationManager.createNotificationChannel(it)
@@ -55,27 +66,29 @@ class FlashbackAndroidStartup {
         val resultsGroup = NotificationChannelGroup(resultsGroupId, "Results Available")
         notificationManager.createNotificationChannelGroup(resultsGroup)
         NotificationResultsAvailable.entries
-            .map { NotificationChannel(it.channelId, getString(it.labelId), NotificationManager.IMPORTANCE_HIGH) }
+            .map { NotificationChannel(it.channelId, it.labelId(), NotificationManager.IMPORTANCE_HIGH) }
             .forEach {
-                it.group = upcomingGroupId
+                it.group = resultsGroupId
                 notificationManager.createNotificationChannel(it)
             }
     }
 
-    private val NotificationUpcoming.labelId: Int
-        get() = when (this) {
-            NotificationUpcoming.RACE -> R.string.app_name
-            NotificationUpcoming.SPRINT -> R.string.app_name
-            NotificationUpcoming.SPRINT_QUALIFYING -> R.string.app_name
-            NotificationUpcoming.QUALIFYING -> R.string.app_name
-            NotificationUpcoming.FREE_PRACTICE -> R.string.app_name
-            NotificationUpcoming.OTHER -> R.string.app_name
+    private fun NotificationUpcoming.labelId(): String {
+        return when (this) {
+            NotificationUpcoming.RACE -> runBlocking { getString(string.notification_channel_race) }
+            NotificationUpcoming.SPRINT -> runBlocking { getString(string.notification_channel_sprint) }
+            NotificationUpcoming.SPRINT_QUALIFYING -> runBlocking { getString(string.notification_channel_sprint_qualifying) }
+            NotificationUpcoming.QUALIFYING -> runBlocking { getString(string.notification_channel_qualifying) }
+            NotificationUpcoming.FREE_PRACTICE -> runBlocking { getString(string.notification_channel_free_practice) }
+            NotificationUpcoming.OTHER -> runBlocking { getString(string.notification_channel_info) }
         }
-    private val NotificationResultsAvailable.labelId: Int
-        get() = when (this) {
-            NotificationResultsAvailable.RACE -> R.string.app_name
-            NotificationResultsAvailable.SPRINT -> R.string.app_name
-            NotificationResultsAvailable.SPRINT_QUALIFYING -> R.string.app_name
-            NotificationResultsAvailable.QUALIFYING -> R.string.app_name
+    }
+    private fun NotificationResultsAvailable.labelId(): String {
+        return when (this) {
+            NotificationResultsAvailable.RACE -> runBlocking { getString(string.notification_channel_race_notify) }
+            NotificationResultsAvailable.SPRINT -> runBlocking { getString(string.notification_channel_sprint_notify) }
+            NotificationResultsAvailable.SPRINT_QUALIFYING -> runBlocking { getString(string.notification_channel_sprint_qualifying_notify) }
+            NotificationResultsAvailable.QUALIFYING -> runBlocking { getString(string.notification_channel_qualifying_notify) }
         }
+    }
 }

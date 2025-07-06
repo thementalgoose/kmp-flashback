@@ -24,7 +24,7 @@ class AppStartup(
     private val scheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase,
     private val deviceRepository: DeviceRepository,
     private val initialiseCrashlyticsUseCase: InitialiseCrashlyticsUseCase,
-    private val initialiseAnalyticsUseCase: InitialiseAnalyticsUseCase
+    private val initialiseAnalyticsUseCase: InitialiseAnalyticsUseCase,
 ) {
     fun start() {
         // Crashlytics

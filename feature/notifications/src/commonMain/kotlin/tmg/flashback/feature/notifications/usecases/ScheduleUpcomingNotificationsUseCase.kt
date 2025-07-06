@@ -72,12 +72,13 @@ internal class ScheduleUpcomingNotificationsUseCaseImpl(
 
         upNextItemsToSchedule.forEach { item ->
             if (enabledUpcomingNotifications.contains(item.channel)) {
-                val time = item.utcDateTime.plus(-reminderPeriod.seconds, DateTimeUnit.SECOND, timeZone = TimeZone.UTC)
+                val time = item.timestamp.deviceLocalDateTime.plus(-reminderPeriod.seconds, DateTimeUnit.SECOND, timeZone = TimeZone.UTC)
                 val (title, text) = NotificationUtils.getInexactNotificationTitleText(
                     item.title,
                     item.label,
                     item.timestamp
                 )
+
                 localNotificationsScheduleUseCase(
                     uuid = item.uuid,
                     channelId = item.channel.channelId,
@@ -85,8 +86,6 @@ internal class ScheduleUpcomingNotificationsUseCaseImpl(
                     text = text,
                     timestamp = time,
                 )
-
-                logInfo("Notification", " s${item.season} r${item.round} [${item.label}] ${item.title} has been scheduled at $time")
             }
         }
 

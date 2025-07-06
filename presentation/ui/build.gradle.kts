@@ -27,6 +27,7 @@ kotlin {
         androidMain.dependencies {
             api(compose.preview)
             api(libs.androidx.activity.compose)
+            implementation(libs.bundles.moko)
         }
         commonMain.dependencies {
             implementation(libs.flagkit)
@@ -50,6 +51,10 @@ kotlin {
         desktopMain.dependencies {
             api(compose.desktop.currentOs)
             api(libs.kotlinx.coroutines.swing)
+        }
+
+        iosMain.dependencies {
+            implementation(libs.bundles.moko)
         }
     }
 }

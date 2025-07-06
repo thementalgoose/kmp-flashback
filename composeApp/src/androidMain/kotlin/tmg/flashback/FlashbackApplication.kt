@@ -11,8 +11,7 @@ import tmg.flashback.notifications.repositories.NotificationRepository
 
 class FlashbackApplication: Application(), KoinComponent {
 
-    val notificationRepository: NotificationRepository by inject()
-    val flashbackAndroidStartup: FlashbackAndroidStartup by inject()
+    private val flashbackAndroidStartup by inject<FlashbackAndroidStartup>()
 
     override fun onCreate() {
         super.onCreate()
@@ -20,14 +19,8 @@ class FlashbackApplication: Application(), KoinComponent {
         doInitKoin {
             androidContext(this@FlashbackApplication)
             androidLogger()
-            modules(module {
-                single { FlashbackAndroidStartup() }
-            })
         }
 
-        flashbackAndroidStartup.startup(
-            application = this,
-            notificationRepository = notificationRepository
-        )
+        flashbackAndroidStartup.startup(application = this)
     }
 }

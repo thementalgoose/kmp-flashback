@@ -279,6 +279,9 @@
     <string name="settings_header_permissions">Permesso</string>
     <string name="settings_pref_notification_permission_title">Abilita le notifiche</string>
     <string name="settings_pref_notification_permission_description">Concedi il permesso a Flashback di inviarti notifiche</string>
+    <string name="settings_pref_notification_manage_title">Impostazioni di notifica</string>
+    <string name="settings_pref_notification_manage_description">Personalizza le tue impostazioni di notifica</string>
+    <string name="settings_pref_notification_system_settings">Gestisci le tue notifiche nelle impostazioni dell\'app</string>
     <string name="settings_pref_schedule_exact_alarm_title">Tempi esatti</string>
     <string name="settings_pref_schedule_exact_alarm_description">Concedi il permesso a Flashback di inviarti promemoria in orari specifici. Altrimenti, le notifiche arriveranno circa 1 ora prima dell\'inizio dell\'evento</string>
     <string name="settings_pref_notification_notice_period_title">Avviso</string>

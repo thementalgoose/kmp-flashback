@@ -233,7 +233,7 @@
 
 
     <!-- Permissions -->
-    <string name="permissions_rationale_title">We need your permission</string>
+        <string name="permissions_rationale_title">We need your permission</string>
     <string name="permissions_rationale_confirm">Confirm</string>
     <string name="permissions_rationale_cancel">Not now</string>
     <plurals name="permissions_rationale_permissions_denied">
@@ -315,6 +315,9 @@
     <string name="settings_header_permissions">Permission</string>
     <string name="settings_pref_notification_permission_title">Enable notifications</string>
     <string name="settings_pref_notification_permission_description">Grant permission for Flashback to send you notifications</string>
+    <string name="settings_pref_notification_manage_title">Notification Settings</string>
+    <string name="settings_pref_notification_manage_description">Customise your notification settings</string>
+    <string name="settings_pref_notification_system_settings">Manage your notifications in app settings</string>
     <string name="settings_pref_schedule_exact_alarm_title">Exact timings</string>
     <string name="settings_pref_schedule_exact_alarm_description">Grant permission for Flashback to send you reminders at specific times. Otherwise, notifications will be roughly 1h before the start of the event</string>
     <string name="settings_pref_notification_notice_period_title">Notice</string>

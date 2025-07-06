@@ -2,6 +2,7 @@ package tmg.flashback.di
 
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
+import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
@@ -62,6 +63,7 @@ import tmg.flashback.usecases.RequiresSyncUseCaseImpl
 import tmg.flashback.webbrowser.di.coreWebBrowserModule
 import tmg.flashback.widgets.upnext.di.featureWidgetUpNextModule
 
+
 fun doInitKoin() {
     doInitKoin { }
 }
@@ -104,12 +106,14 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
         modules(presentationUiModule)
 
         modules(module())
-
+        modules(platformModule())
         modules(firebaseModule())
 
         this.koin.get<AppStartup>().start()
     }
 }
+
+expect fun platformModule(): Module
 
 internal fun module() = module {
 
@@ -122,7 +126,7 @@ internal fun module() = module {
 
     single<RequiresSyncUseCase> { RequiresSyncUseCaseImpl(get(), get()) }
 
-    viewModel { AllSettingsViewModel(get(), get(), get(), get()) }
+    viewModel { AllSettingsViewModel(get(), get(), get()) }
     viewModel { SettingsDarkModeViewModel(get()) }
     viewModel { SettingsThemeViewModel(get()) }
     viewModel { SettingsLayoutViewModel(get()) }
@@ -131,8 +135,8 @@ internal fun module() = module {
     viewModel { SettingsAboutViewModel() }
     viewModel { SettingsPrivacyViewModel(get(), get()) }
     viewModel { SettingsWidgetsViewModel(get()) }
-    viewModel { SettingsNotificationUpcomingViewModel(get(), get()) }
-    viewModel { SettingsNotificationResultsViewModel(get(), get()) }
+    viewModel { SettingsNotificationUpcomingViewModel(get(), get(), get()) }
+    viewModel { SettingsNotificationResultsViewModel(get(), get(), get()) }
 
     viewModel { SyncViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
 }
