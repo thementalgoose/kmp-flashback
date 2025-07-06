@@ -25,7 +25,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody2
@@ -115,7 +115,7 @@ fun BadgeView(
 private fun PreviewList(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         BadgesView(list = listOf(fakeMenuBadge, fakeBackIconBadge))
     }
 }
@@ -125,7 +125,7 @@ private fun PreviewList(
 private fun Preview(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         BadgeView(fakeBackBadge)
     }
 }

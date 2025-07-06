@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.text.TextTitle
 
 internal val finishingPositionWidth: Dp = 42.dp
@@ -39,14 +39,14 @@ internal fun Position(
 @Preview
 @Composable
 private fun Preview() {
-    AppThemePreview {
+    ApplicationThemePreview {
         Position("1")
     }
 }
 @Preview
 @Composable
 private fun PreviewMax() {
-    AppThemePreview {
+    ApplicationThemePreview {
         Position("20")
     }
 }

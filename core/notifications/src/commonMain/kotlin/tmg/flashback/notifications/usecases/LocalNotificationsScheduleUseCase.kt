@@ -5,7 +5,7 @@ import tmg.flashback.notifications.manager.NotificationManager
 
 interface LocalNotificationsScheduleUseCase {
     operator fun invoke(
-        uuid: String,
+        uuid: Int,
         channelId: String,
         title: String,
         text: String,
@@ -17,7 +17,7 @@ internal class LocalNotificationsScheduleUseCaseImpl(
     private val notificationManager: NotificationManager
 ): LocalNotificationsScheduleUseCase {
     override operator fun invoke(
-        uuid: String,
+        uuid: Int,
         channelId: String,
         title: String,
         text: String,

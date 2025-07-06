@@ -11,7 +11,7 @@ import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody1
@@ -46,7 +46,7 @@ fun DriverName(
 private fun Preview(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         DriverName(firstName = "Alex", lastName = "Albon")
     }
 }

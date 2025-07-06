@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 
@@ -50,7 +50,7 @@ fun TextHeadline1Inline(
 private fun Preview(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         TextHeadline1(
             text = "Headline 1"
         )
@@ -62,7 +62,7 @@ private fun Preview(
 private fun PreviewBrand(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         TextHeadline1(
             text = "Headline 1 Brand",
             brand = true

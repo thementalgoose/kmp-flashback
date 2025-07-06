@@ -61,7 +61,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.LOGO_GRADIENT_1
 import tmg.flashback.style.LOGO_GRADIENT_2
 import tmg.flashback.style.preview.PreviewConfig
@@ -485,7 +485,7 @@ private fun Dependency(
 private fun PreviewList(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         AboutListScreen(
             paddingValues = PaddingValues(0.dp),
             email = "thementalgoose@gmail.com",
@@ -503,7 +503,7 @@ private fun PreviewList(
 private fun PreviewPane(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         AboutPaneScreen(
             paddingValues = PaddingValues(0.dp),
             email = "thementalgoose@gmail.com",

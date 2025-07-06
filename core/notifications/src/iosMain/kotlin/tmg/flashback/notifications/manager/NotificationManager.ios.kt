@@ -1,6 +1,19 @@
 package tmg.flashback.notifications.manager
 
-import com.tweener.alarmee.configuration.AlarmeeIosPlatformConfiguration
-import com.tweener.alarmee.configuration.AlarmeePlatformConfiguration
+import kotlinx.datetime.LocalDateTime
 
-internal actual fun createAlarmeePlatformConfiguration(): AlarmeePlatformConfiguration = AlarmeeIosPlatformConfiguration
+actual class NotificationManagerImpl actual constructor(): NotificationManager {
+    actual override fun schedule(
+        uuid: Int,
+        channelId: String,
+        title: String,
+        text: String,
+        timestamp: LocalDateTime
+    ) {
+        TODO("Not yet implemented")
+    }
+
+    actual override fun cancel(uuid: Int) {
+        TODO("Not yet implemented")
+    }
+}

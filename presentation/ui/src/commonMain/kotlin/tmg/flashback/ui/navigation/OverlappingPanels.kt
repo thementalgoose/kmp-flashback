@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
@@ -326,7 +326,7 @@ private class DefaultCenterPanelAlpha(
 @Preview
 @Composable
 private fun PreviewStart() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         val panelsState = rememberOverlappingPanelsState(OverlappingPanelsValue.OpenEnd)
         OverlappingPanels(
             modifier = Modifier.fillMaxSize(),
@@ -344,7 +344,7 @@ private fun PreviewStart() {
 @Preview
 @Composable
 private fun PreviewCenter() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         val panelsState = rememberOverlappingPanelsState(OverlappingPanelsValue.Closed)
         OverlappingPanels(
             modifier = Modifier.fillMaxSize(),

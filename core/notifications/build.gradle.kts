@@ -21,9 +21,10 @@ kotlin {
         androidMain.dependencies {
             implementation(project.dependencies.platform(libs.firebase.bom))
             implementation(libs.firebase.remoteconfig)
+            implementation(libs.firebase.messaging)
+            implementation(libs.firebase.messagingktx)
         }
         commonMain.dependencies {
-            implementation(libs.alarmee)
             implementation(libs.bundles.compose)
             implementation(libs.bundles.kotlin)
             implementation(projects.core.metrics.crashlytics)

@@ -35,7 +35,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.AppTheme.disabledAlpha
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody2
@@ -173,7 +173,7 @@ private val fakeItems = listOf(
 private fun Preview(
     @PreviewParameter(PreviewConfigProvider ::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         Box(Modifier.padding(16.dp)) {
             Segments(
                 items = fakeItems,
@@ -189,7 +189,7 @@ private fun Preview(
 private fun PreviewShowTick(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         Box(Modifier.padding(16.dp)) {
             Segments(
                 items = fakeItems,
@@ -206,7 +206,7 @@ private fun PreviewShowTick(
 private fun PreviewDisabled(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         Box(Modifier.padding(16.dp)) {
             Segments(
                 items = fakeItems,

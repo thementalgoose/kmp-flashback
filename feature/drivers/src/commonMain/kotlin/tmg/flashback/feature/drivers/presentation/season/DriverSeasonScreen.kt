@@ -49,7 +49,7 @@ import tmg.flashback.formula1.model.DriverHistorySeasonRace
 import tmg.flashback.formula1.model.RaceInfo
 import tmg.flashback.formula1.preview.preview
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody1
@@ -211,7 +211,7 @@ private fun Stat(
 private fun Preview(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         DriverSeasonScreen(
             driverSeasonInfo = DriverSeasonInfo(2020, "driver", "name"),
             paddingValues = PaddingValues(0.dp),

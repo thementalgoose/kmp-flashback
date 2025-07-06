@@ -22,7 +22,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.text.TextHeadline1
 
 @Composable
@@ -119,7 +119,7 @@ enum class HeaderAction(
 @Preview
 @Composable
 private fun Preview() {
-    AppThemePreview {
+    ApplicationThemePreview {
         Header(
             text = "2022",
             action = HeaderAction.MENU,
@@ -131,13 +131,13 @@ private fun Preview() {
 @Preview
 @Composable
 private fun PreviewWithOverrideLight() {
-    AppThemePreview(isLight = true) {  }
+    ApplicationThemePreview(isLight = true) {  }
 }
 
 @Preview
 @Composable
 private fun PreviewWithOverride() {
-    AppThemePreview {
+    ApplicationThemePreview {
         Header(
             text = "2022",
             action = HeaderAction.MENU,
@@ -158,7 +158,7 @@ private fun PreviewWithOverride() {
 @Preview
 @Composable
 private fun PreviewNoIconLight() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         PreviewNoIcon()
     }
 }
@@ -166,7 +166,7 @@ private fun PreviewNoIconLight() {
 @Preview
 @Composable
 private fun PreviewNoIconDark() {
-    AppThemePreview(isLight = false) {
+    ApplicationThemePreview(isLight = false) {
         PreviewNoIcon()
     }
 }
@@ -184,7 +184,7 @@ private fun PreviewNoIcon() {
 @Preview
 @Composable
 private fun PreviewNoIconWithOverrideLight() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         PreviewNoIconWithOverride()
     }
 }
@@ -192,7 +192,7 @@ private fun PreviewNoIconWithOverrideLight() {
 @Preview
 @Composable
 private fun PreviewNoIconWithOverrideDark() {
-    AppThemePreview(isLight = false) {
+    ApplicationThemePreview(isLight = false) {
         PreviewNoIconWithOverride()
     }
 }

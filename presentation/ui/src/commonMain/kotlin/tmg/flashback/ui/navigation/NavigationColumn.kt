@@ -36,7 +36,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.text.TextBody1
 
 val columnWidthCollapsed: Dp = 64.dp
@@ -201,7 +201,7 @@ private fun NavigationItem(
 @Preview
 @Composable
 private fun PreviewCompactLight() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         PreviewCompact()
     }
 }
@@ -209,7 +209,7 @@ private fun PreviewCompactLight() {
 @Preview
 @Composable
 private fun PreviewCompactDark() {
-    AppThemePreview(isLight = false) {
+    ApplicationThemePreview(isLight = false) {
         PreviewCompact()
     }
 }
@@ -227,7 +227,7 @@ private fun PreviewCompact() {
 @Preview
 @Composable
 private fun PreviewExpandedLight() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         PreviewExpanded()
     }
 }
@@ -235,7 +235,7 @@ private fun PreviewExpandedLight() {
 @Preview
 @Composable
 private fun PreviewExpandedDark() {
-    AppThemePreview(isLight = false) {
+    ApplicationThemePreview(isLight = false) {
         PreviewExpanded()
     }
 }

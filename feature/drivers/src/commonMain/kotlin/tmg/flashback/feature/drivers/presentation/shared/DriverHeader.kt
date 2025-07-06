@@ -31,7 +31,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.preview.preview
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextHeadline2
@@ -125,7 +125,7 @@ fun DriverHeader(
 private fun Preview(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         Column {
             val driver = Driver.preview()
             DriverHeader(
@@ -144,7 +144,7 @@ private fun Preview(
 private fun PreviewAlt(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         Column {
             val driver = Driver.preview()
             DriverHeader(
@@ -163,7 +163,7 @@ private fun PreviewAlt(
 private fun PreviewInset(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         val insetPadding = PaddingValues(
             top = 48.dp,
             start = 12.dp,

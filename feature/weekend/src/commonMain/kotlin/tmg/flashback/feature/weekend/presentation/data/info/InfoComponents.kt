@@ -56,7 +56,7 @@ import tmg.flashback.infrastructure.datetime.dateFormatEEEEDMMM
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.timeFormatHHmm
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody1
@@ -326,7 +326,7 @@ private fun ScheduleWeather.getWindspeed(metric: Boolean): String = when (metric
 private fun PreviewSchedule(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         Column {
             Schedule(
                 model = InfoModel.preview()
@@ -341,7 +341,7 @@ private fun PreviewSchedule(
 private fun PreviewDetails(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         Column {
             RaceDetails(
                 model = InfoModel.preview()

@@ -36,7 +36,7 @@ import flashback.presentation.localisation.generated.resources.*
 import org.jetbrains.compose.resources.pluralStringResource
 import tmg.flashback.infrastructure.extensions.roundToHalf
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.ui.utils.MeasureTextWidth
 import tmg.flashback.ui.utils.contrastTextLight
 import kotlin.math.roundToInt
@@ -204,7 +204,7 @@ private val PREVIEW_COLOUR = Color(0xFF00D2BE)
 @Preview
 @Composable
 private fun Preview10() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         Box(modifier = Modifier.size(width = 180.dp, height = 40.dp)) {
             ProgressBar(
                 barColor = PREVIEW_COLOUR,
@@ -219,7 +219,7 @@ private fun Preview10() {
 @Preview
 @Composable
 private fun Preview50() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         Box(modifier = Modifier.size(width = 100.dp, height = 50.dp)) {
             ProgressBar(
                 barColor = PREVIEW_COLOUR,
@@ -235,7 +235,7 @@ private fun Preview50() {
 @Preview
 @Composable
 private fun Preview95() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         Box(modifier = Modifier.size(width = 100.dp, height = 30.dp)) {
             ProgressBar(
                 barColor = PREVIEW_COLOUR,
@@ -250,7 +250,7 @@ private fun Preview95() {
 @Preview
 @Composable
 private fun Preview10Reverse() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         Box(modifier = Modifier.size(width = 180.dp, height = 40.dp)) {
             ProgressBar(
                 barColor = PREVIEW_COLOUR,
@@ -266,7 +266,7 @@ private fun Preview10Reverse() {
 @Preview
 @Composable
 private fun Preview50Reverse() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         Box(modifier = Modifier.size(width = 100.dp, height = 50.dp)) {
             ProgressBar(
                 barColor = PREVIEW_COLOUR,
@@ -283,7 +283,7 @@ private fun Preview50Reverse() {
 @Preview
 @Composable
 private fun Preview95Reverse() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         Box(modifier = Modifier.size(width = 100.dp, height = 30.dp)) {
             ProgressBar(
                 barColor = PREVIEW_COLOUR,
@@ -299,7 +299,7 @@ private fun Preview95Reverse() {
 @Preview
 @Composable
 private fun PreviewContractColor() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         Column(modifier = Modifier.width(100.dp)) {
             listOf(
                 PREVIEW_COLOUR,

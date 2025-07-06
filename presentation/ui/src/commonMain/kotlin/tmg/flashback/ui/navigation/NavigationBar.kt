@@ -35,7 +35,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.text.TextBody1
 
 private val verticalSelectedPillWidth: Dp = 64.dp
@@ -240,7 +240,7 @@ private fun VerticalItem(
 @Preview
 @Composable
 private fun PreviewLight() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         PreviewNoPadding()
     }
 }
@@ -248,7 +248,7 @@ private fun PreviewLight() {
 @Preview
 @Composable
 private fun PreviewDark() {
-    AppThemePreview(isLight = false) {
+    ApplicationThemePreview(isLight = false) {
         PreviewNoPadding()
     }
 }
@@ -266,7 +266,7 @@ private fun PreviewNoPadding() {
 @Preview
 @Composable
 private fun PreviewFewLight() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         PreviewFew()
     }
 }
@@ -274,7 +274,7 @@ private fun PreviewFewLight() {
 @Preview
 @Composable
 private fun PreviewFewDark() {
-    AppThemePreview(isLight = false) {
+    ApplicationThemePreview(isLight = false) {
         PreviewFew()
     }
 }
@@ -292,7 +292,7 @@ private fun PreviewFew() {
 @Preview
 @Composable
 private fun PreviewWithBottomPaddingLight() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         PreviewWithBottomPadding()
     }
 }
@@ -300,7 +300,7 @@ private fun PreviewWithBottomPaddingLight() {
 @Preview
 @Composable
 private fun PreviewWithBottomPaddingDark() {
-    AppThemePreview(isLight = false) {
+    ApplicationThemePreview(isLight = false) {
         PreviewWithBottomPadding()
     }
 }

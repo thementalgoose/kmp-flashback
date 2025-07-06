@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 
@@ -107,7 +107,7 @@ fun TextHeadline2(
 private fun Preview(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         TextHeadline2(
             text = "Headline 2"
         )
@@ -119,7 +119,7 @@ private fun Preview(
 private fun PreviewIcon(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         TextHeadline2(
             text = "Headline 2",
             icon = rememberVectorPainter(Icons.Default.Home),
@@ -134,7 +134,7 @@ private fun PreviewIcon(
 private fun PreviewIconRainbow(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         TextHeadline2(
             text = "Headline 2",
             icon = rememberVectorPainter(Icons.Default.Home),
@@ -149,7 +149,7 @@ private fun PreviewIconRainbow(
 private fun PreviewBrand(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         TextHeadline2(
             text = "Headline 2 Brand",
             brand = true

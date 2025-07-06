@@ -24,7 +24,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextHeadline2
@@ -81,7 +81,7 @@ internal fun TypeHeader(
 private fun PreviewTypeHeaderRegular(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         TypeHeader(
             resource = string.nav_race
         )
@@ -93,7 +93,7 @@ private fun PreviewTypeHeaderRegular(
 private fun PreviewTypeHeaderCollapsed(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         val isCollapsed = remember { mutableStateOf(false) }
         TypeHeader(
             isCollapsed = isCollapsed,
@@ -107,7 +107,7 @@ private fun PreviewTypeHeaderCollapsed(
 private fun PreviewTypeHeaderExpanded(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         val isCollapsed = remember { mutableStateOf(true) }
         TypeHeader(
             isCollapsed = isCollapsed,

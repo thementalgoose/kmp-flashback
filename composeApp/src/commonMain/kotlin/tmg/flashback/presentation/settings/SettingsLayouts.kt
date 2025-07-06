@@ -26,7 +26,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.badge.Badge
 import tmg.flashback.style.badge.BadgeView
 import tmg.flashback.style.input.InputRadio
@@ -316,7 +316,7 @@ private fun ExperimentalLabel(
 private fun PreviewHeader(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         SettingHeader(string.settings_header_appearance)
     }
 }
@@ -327,7 +327,7 @@ private fun PreviewHeader(
 private fun PreviewCategory(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         SettingCategory(
             item = Settings.AboutCategory,
             itemClicked = { }
@@ -340,7 +340,7 @@ private fun PreviewCategory(
 private fun PreviewCategoryBeta(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         SettingCategory(
             item = Settings.AboutCategory.copy(isBeta = true),
             itemClicked = { }
@@ -354,7 +354,7 @@ private fun PreviewCategoryBeta(
 private fun PreviewCategoryDisabled(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         SettingCategory(
             item = Settings.AboutCategory.copy(isEnabled = false),
             itemClicked = { }
@@ -367,7 +367,7 @@ private fun PreviewCategoryDisabled(
 private fun PreviewCategoryNoIcon(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         SettingCategory(
             item = Settings.NotificationsUpcomingCategory,
             itemClicked = { }
@@ -380,7 +380,7 @@ private fun PreviewCategoryNoIcon(
 private fun PreviewLink(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         SettingLink(
             item = Settings.DarkMode.DarkModeAuto,
             itemClicked = { }
@@ -393,7 +393,7 @@ private fun PreviewLink(
 private fun PreviewLinkNoSubtitle(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         SettingSwitch(
             item = Settings.DarkMode.DarkModeAuto.copy(subtitle = null),
             itemClicked = { },
@@ -407,7 +407,7 @@ private fun PreviewLinkNoSubtitle(
 private fun PreviewLinkRadioOption(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         Column {
             SettingRadio(
                 item = Settings.DarkMode.DarkModeDark,
@@ -428,7 +428,7 @@ private fun PreviewLinkRadioOption(
 private fun PreviewLinkSwitch(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         Column {
             SettingSwitch(
                 item = Settings.DarkMode.DarkModeDark,
@@ -449,7 +449,7 @@ private fun PreviewLinkSwitch(
 private fun PreviewLinkBeta(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         SettingLink(
             item = Settings.Theme.ThemeMaterialYou.copy(isBeta = true),
             itemClicked = { }
@@ -462,7 +462,7 @@ private fun PreviewLinkBeta(
 private fun PreviewLinkDisabled(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         SettingLink(
             item = Settings.Theme.ThemeMaterialYou.copy(isEnabled = false),
             itemClicked = { }

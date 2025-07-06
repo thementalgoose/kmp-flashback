@@ -21,8 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowWidthSizeClass
-import dev.icerock.moko.permissions.PermissionsController
-import dev.icerock.moko.permissions.compose.rememberPermissionsControllerFactory
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.compose.getKoin
@@ -39,6 +37,7 @@ import tmg.flashback.presentation.sync.SyncBottomSheet
 import tmg.flashback.presentation.toNavigationItem
 import tmg.flashback.presentation.toScreen
 import tmg.flashback.style.AppTheme
+import tmg.flashback.style.ApplicationTheme
 import tmg.flashback.ui.components.AppScaffold
 import tmg.flashback.ui.navigation.NavigationBar
 import tmg.flashback.ui.navigation.OverlappingPanelsValue
@@ -73,7 +72,7 @@ fun App() {
         label = "navigationBarPosition"
     )
 
-    AppTheme {
+    ApplicationTheme {
         AppScaffold(
             content = { paddingValues ->
                 AppContainer(
@@ -138,7 +137,7 @@ fun App() {
                     shouldDismissOnBackPress = !lockBottomSheetOnScreen.value
                 )
             ) {
-                AppTheme {
+                ApplicationTheme {
                     SyncBottomSheet(
                         windowSizeClass = windowSizeClass,
                         unlock = {

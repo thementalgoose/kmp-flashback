@@ -10,7 +10,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameterProvider
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 
 @Composable
 fun DriverNumber(
@@ -38,7 +38,7 @@ private fun PreviewLight(
     @PreviewParameter(TeamColourProvider::class) teamExample: Pair<String, Color>
 ) {
     val (driverNumber, color) = teamExample
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         DriverNumber(
             number = driverNumber,
             highlightNumber = color
@@ -52,7 +52,7 @@ private fun PreviewDark(
     @PreviewParameter(TeamColourProvider::class) teamExample: Pair<String, Color>
 ) {
     val (driverNumber, color) = teamExample
-    AppThemePreview(isLight = false) {
+    ApplicationThemePreview(isLight = false) {
         DriverNumber(
             number = driverNumber,
             highlightNumber = color

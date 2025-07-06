@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.text.TextBody1
 
 fun Modifier.edgeFade(
@@ -34,7 +34,7 @@ fun Modifier.edgeFade(
 @Preview
 @Composable
 private fun PreviewLight() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         Preview()
     }
 }
@@ -42,7 +42,7 @@ private fun PreviewLight() {
 @Preview
 @Composable
 private fun PreviewDark() {
-    AppThemePreview(isLight = false) {
+    ApplicationThemePreview(isLight = false) {
         Preview()
     }
 }

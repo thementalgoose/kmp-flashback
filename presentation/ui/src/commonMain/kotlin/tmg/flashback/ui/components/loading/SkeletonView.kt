@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 
 @Composable
 fun SkeletonViewList(
@@ -57,7 +57,7 @@ fun SkeletonView(
 @Preview
 @Composable
 private fun Preview() {
-    AppThemePreview {
+    ApplicationThemePreview {
         SkeletonView()
     }
 }

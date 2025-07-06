@@ -22,31 +22,18 @@ import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
 import tmg.flashback.feature.notifications.model.NotificationUpcoming
 import tmg.flashback.notifications.repositories.NotificationRepository
 
-class FlashbackAndroidStartup(
-    private val notificationRepository: NotificationRepository
-) {
+class FlashbackAndroidStartup() {
 
     fun startup(application: FlashbackApplication) {
-        // Android specific notification channels
-        //  Rest of it is handled by [NotificationManager]
-        application.setupNotifications(notificationRepository)
+        application.setupNotificationChannels()
     }
 
-    private fun Application.setupNotifications(
-        notificationRepository: NotificationRepository
-    ) {
+    private fun Application.setupNotificationChannels() {
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
         //region Legacy: Remove these existing channels which were previously used for remote notifications
         notificationManager.deleteNotificationChannel("race")
         notificationManager.deleteNotificationChannel("qualifying")
-        //endregion
-
-        //region Legacy: Unschedule existing notification ids as we shift to guids
-        notificationRepository.notificationIds.forEach {
-            notificationManager.cancel(it)
-        }
-        notificationRepository.notificationIds = emptySet()
         //endregion
 
         // Upcoming

@@ -32,7 +32,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameterProvider
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.ui.components.fade.Fade
 
@@ -135,7 +135,7 @@ fun <T> MasterDetailsPane(
 private fun PreviewPhoneNoDetails(
     @PreviewParameter(BooleanParamProvider::class) isLight: Boolean
 ) {
-    AppThemePreview(isLight) {
+    ApplicationThemePreview(isLight) {
         Box(Modifier.size(DpSize(500.dp, 600.dp))) {
             MasterDetailsPane<Any>(
                 windowSizeClass = WindowSizeClass.compute(500f, 600f),
@@ -152,7 +152,7 @@ private fun PreviewPhoneNoDetails(
 private fun PreviewPhoneMasterDetails(
     @PreviewParameter(BooleanParamProvider::class) isLight: Boolean
 ) {
-    AppThemePreview(isLight) {
+    ApplicationThemePreview(isLight) {
         Box(Modifier.size(DpSize(500.dp, 600.dp))) {
             MasterDetailsPane<Any>(
                 windowSizeClass = WindowSizeClass.compute(500f, 600f),
@@ -169,7 +169,7 @@ private fun PreviewPhoneMasterDetails(
 private fun PreviewTabletNoDetails(
     @PreviewParameter(BooleanParamProvider::class) isLight: Boolean
 ) {
-    AppThemePreview(isLight) {
+    ApplicationThemePreview(isLight) {
         Box(Modifier.size(DpSize(1000.dp, 400.dp))) {
             MasterDetailsPane<Any>(
                 windowSizeClass = WindowSizeClass.compute(1000f, 400f),
@@ -186,7 +186,7 @@ private fun PreviewTabletNoDetails(
 private fun PreviewTabletMasterDetails(
     @PreviewParameter(BooleanParamProvider::class) isLight: Boolean
 ) {
-    AppThemePreview(isLight) {
+    ApplicationThemePreview(isLight) {
         Box(Modifier.size(DpSize(1000.dp, 400.dp))) {
             MasterDetailsPane<Any>(
                 windowSizeClass = WindowSizeClass.compute(1000f, 400f),

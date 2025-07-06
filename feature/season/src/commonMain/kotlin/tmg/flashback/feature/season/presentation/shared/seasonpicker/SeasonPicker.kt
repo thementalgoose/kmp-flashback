@@ -28,7 +28,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.badge.Badge
 import tmg.flashback.style.badge.BadgeView
 import tmg.flashback.style.preview.PreviewConfig
@@ -124,7 +124,7 @@ fun SeasonPicker(
 private fun PreviewWithNewSeason(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         SeasonPicker(
             subtitle = "Subtitle",
             currentSeason = 2023,
@@ -140,7 +140,7 @@ private fun PreviewWithNewSeason(
 private fun Preview(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         SeasonPicker(
             subtitle = "Subtitle",
             currentSeason = 2023,

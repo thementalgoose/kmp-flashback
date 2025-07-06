@@ -27,13 +27,13 @@ kotlin {
         androidMain.dependencies {
             api(compose.preview)
             api(libs.androidx.activity.compose)
-            implementation(libs.bundles.moko)
         }
         commonMain.dependencies {
             implementation(libs.flagkit)
 
             implementation(compose.components.resources)
             implementation(libs.bundles.compose)
+            implementation(libs.bundles.koin.compose)
             implementation(libs.bundles.coil)
 
             implementation(projects.core.preferences)
@@ -51,10 +51,6 @@ kotlin {
         desktopMain.dependencies {
             api(compose.desktop.currentOs)
             api(libs.kotlinx.coroutines.swing)
-        }
-
-        iosMain.dependencies {
-            implementation(libs.bundles.moko)
         }
     }
 }

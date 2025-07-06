@@ -26,7 +26,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.eastereggs.model.MenuIcons
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.ColourType
@@ -84,7 +84,7 @@ internal fun DashboardHero(
 private fun PreviewValentinesDay(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         DashboardHero(
             menuIcons = MenuIcons.VALENTINES_DAY,
             showUkraine = false
@@ -97,7 +97,7 @@ private fun PreviewValentinesDay(
 private fun PreviewChristmas(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         DashboardHero(
             menuIcons = MenuIcons.CHRISTMAS,
             showUkraine = false
@@ -110,7 +110,7 @@ private fun PreviewChristmas(
 private fun PreviewUkraine(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         DashboardHero(
             menuIcons = null,
             showUkraine = true
@@ -123,7 +123,7 @@ private fun PreviewUkraine(
 private fun PreviewPride(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         DashboardHero(
             menuIcons = null,
             showUkraine = false,

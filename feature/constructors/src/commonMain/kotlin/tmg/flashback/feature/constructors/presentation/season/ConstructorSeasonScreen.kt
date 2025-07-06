@@ -61,7 +61,7 @@ import tmg.flashback.formula1.preview.preview
 import tmg.flashback.infrastructure.extensions.ordinalAbbreviation
 import tmg.flashback.infrastructure.extensions.roundToHalf
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody1
@@ -300,7 +300,7 @@ private fun DriverStat(
 private fun Preview(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         ConstructorSeasonScreen(
             constructorSeasonInfo = ConstructorSeasonInfo(2020, "id", "name"),
             paddingValues = PaddingValues(0.dp),

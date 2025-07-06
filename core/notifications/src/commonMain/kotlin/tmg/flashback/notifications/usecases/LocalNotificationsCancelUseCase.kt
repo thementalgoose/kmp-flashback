@@ -4,7 +4,7 @@ import tmg.flashback.notifications.manager.NotificationManager
 import tmg.flashback.notifications.repositories.NotificationRepository
 
 interface LocalNotificationsCancelUseCase {
-    fun cancel(notificationId: String)
+    fun cancel(notificationId: Int)
     fun cancelAll()
 }
 
@@ -12,12 +12,12 @@ internal class LocalNotificationsCancelUseCaseImpl(
     private val notificationManager: NotificationManager,
     private val notificationRepository: NotificationRepository,
 ): LocalNotificationsCancelUseCase {
-    override fun cancel(notificationId: String) {
+    override fun cancel(notificationId: Int) {
         notificationManager.cancel(notificationId)
     }
 
     override fun cancelAll() {
-        notificationRepository.notificationUuids
+        notificationRepository.notificationIds
             .forEach { cancel(it) }
     }
 }

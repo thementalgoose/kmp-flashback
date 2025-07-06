@@ -17,7 +17,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import tmg.flashback.formula1.enums.RaceStatus
 import tmg.flashback.formula1.enums.isStatusFinished
 import tmg.flashback.formula1.model.LapTime
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.text.TextCaption
 
 internal val timeWidth = 70.dp
@@ -52,7 +52,7 @@ internal fun Time(
 @Preview
 @Composable
 private fun Preview() {
-    AppThemePreview {
+    ApplicationThemePreview {
         Column {
             Time(LapTime.noTime, RaceStatus.FINISHED)
             Time(LapTime(1, 1, 3, 4), RaceStatus.FINISHED)

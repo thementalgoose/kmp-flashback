@@ -31,7 +31,7 @@ import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.preview.preview
 import tmg.flashback.infrastructure.datetime.dateFormatDMMMYYYY
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.badge.Badge
 import tmg.flashback.style.badge.BadgeView
 import tmg.flashback.style.preview.PreviewConfig
@@ -134,7 +134,7 @@ private fun NationalityBadge(
 private fun PreviewAlt(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         Column {
             DriverBadges(
                 driver = Driver.preview(),

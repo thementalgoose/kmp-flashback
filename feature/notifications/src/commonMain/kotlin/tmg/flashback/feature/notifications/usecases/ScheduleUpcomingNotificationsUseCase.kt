@@ -3,16 +3,14 @@ package tmg.flashback.feature.notifications.usecases
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
-import kotlinx.datetime.format
+import kotlinx.datetime.toInstant
 import tmg.flashback.data.repo.repository.OverviewRepository
+import tmg.flashback.feature.notifications.model.NotificationUpcoming
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
 import tmg.flashback.feature.notifications.utils.NotificationUtils
 import tmg.flashback.formula1.enums.RaceWeekend
 import tmg.flashback.formula1.model.Timestamp
-import tmg.flashback.feature.notifications.model.NotificationUpcoming
-import tmg.flashback.infrastructure.datetime.dateTimeFormatHHmmAtDMMM
 import tmg.flashback.infrastructure.datetime.plus
-import tmg.flashback.infrastructure.datetime.timeFormatHHmm
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.notifications.repositories.NotificationRepository
 import tmg.flashback.notifications.usecases.LocalNotificationsCancelUseCase
@@ -48,7 +46,7 @@ internal class ScheduleUpcomingNotificationsUseCaseImpl(
                         title = event.raceName,
                         label = item.label,
                         timestamp = item.timestamp,
-                        uuid = "${event.season}-${event.round}-${item.label}-${item.timestamp.deviceLocalDateTime.time.format(timeFormatHHmm)}",
+                        uuid = (item.timestamp.deviceLocalDateTime.toInstant(TimeZone.currentSystemDefault()).toEpochMilliseconds() / 1000L).toInt(),
                         utcDateTime = item.timestamp.utcLocalDateTime,
                         channel = item.label.toChannel()
                     )
@@ -62,7 +60,7 @@ internal class ScheduleUpcomingNotificationsUseCaseImpl(
             return ScheduleResult.Unchanged
         }
 
-        if (upNextItemsToSchedule.map { it.uuid }.toSet() == notificationRepository.notificationUuids && !force) {
+        if (upNextItemsToSchedule.map { it.uuid }.toSet() == notificationRepository.notificationIds && !force) {
             logInfo("Notifications", "Skipping rescheduling of notifications as it remains unchanged")
             return ScheduleResult.Unchanged
         }
@@ -98,7 +96,7 @@ internal class ScheduleUpcomingNotificationsUseCaseImpl(
         val value: Int,
         val title: String,
         val label: String,
-        val uuid: String,
+        val uuid: Int,
         val channel: NotificationUpcoming,
         val timestamp: Timestamp,
         val utcDateTime: LocalDateTime,

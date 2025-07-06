@@ -26,7 +26,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameterProvider
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.text.TextBody1
 
 @Composable
@@ -83,7 +83,7 @@ fun InputSelection(
 private fun PreviewSwitchLight(
     @PreviewParameter(BooleanParamProvider::class) isSelected: Boolean
 ) {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         Column {
             InputSelection(
                 label = "Night mode",
@@ -113,7 +113,7 @@ private fun PreviewSwitchLight(
 private fun PreviewSwitchDark(
     @PreviewParameter(BooleanParamProvider::class) isSelected: Boolean
 ) {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         Column {
             InputSelection(
                 label = "Night mode",

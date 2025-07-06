@@ -36,18 +36,22 @@ class SettingsNotificationResultsViewModel(
 
     fun requestPermissions() {
         viewModelScope.launch {
-            _permissionState.value = permissionManager.providePermission(Permission.Notifications)
+            val result = permissionManager.requestPermission(Permission.Notifications).await()
+            if (result == PermissionState.NotGranted) {
+                goToSettings()
+            }
+            _permissionState.value = result
         }
     }
 
     fun goToSettings() {
-        permissionManager.openAppSettings()
+        permissionManager.openNotificationSettings()
     }
 
     fun refresh() {
         viewModelScope.launch {
             subscribeResultNotificationsUseCase()
-            _permissionState.value = permissionManager.providePermission(Permission.Notifications)
+            _permissionState.value = permissionManager.getPermissionState(Permission.Notifications)
         }
         _uiState.update {
             SettingsNotificationResultsUiState(

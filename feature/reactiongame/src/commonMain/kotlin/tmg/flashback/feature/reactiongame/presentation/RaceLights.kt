@@ -27,7 +27,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameterProvider
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 
@@ -289,7 +289,7 @@ private fun ColumnScope.Light(
 private fun PreviewAborted(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         PreviewLights(StartLightState.AbortedStart)
     }
 }
@@ -299,7 +299,7 @@ private fun PreviewAborted(
 private fun PreviewReady(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         PreviewLights(StartLightState.Ready)
     }
 }
@@ -309,7 +309,7 @@ private fun PreviewReady(
 private fun Preview10(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         PreviewLights(StartLightState.StartSequence(1))
     }
 }
@@ -319,7 +319,7 @@ private fun Preview10(
 private fun Preview20(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         PreviewLights(StartLightState.StartSequence(2))
     }
 }
@@ -329,7 +329,7 @@ private fun Preview20(
 private fun Preview30(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         PreviewLights(StartLightState.StartSequence(3))
     }
 }
@@ -339,7 +339,7 @@ private fun Preview30(
 private fun Preview40(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         PreviewLights(StartLightState.StartSequence(4))
     }
 }
@@ -349,7 +349,7 @@ private fun Preview40(
 private fun Preview50(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         PreviewLights(StartLightState.StartSequence(5))
     }
 }

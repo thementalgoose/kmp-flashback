@@ -18,7 +18,7 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.text.TextBody2
 import kotlin.math.abs
 
@@ -93,7 +93,7 @@ private fun Delta(
 @Preview
 @Composable
 private fun PreviewPositive() {
-    AppThemePreview {
+    ApplicationThemePreview {
         Box(modifier = Modifier.padding(8.dp)) {
             Delta(grid = 3, finish = 2)
         }
@@ -103,7 +103,7 @@ private fun PreviewPositive() {
 @Preview
 @Composable
 private fun PreviewNeutral() {
-    AppThemePreview {
+    ApplicationThemePreview {
         Box(modifier = Modifier.padding(8.dp)) {
             Delta(grid = 2, finish = 2)
         }
@@ -113,7 +113,7 @@ private fun PreviewNeutral() {
 @Preview
 @Composable
 private fun PreviewNegative() {
-    AppThemePreview {
+    ApplicationThemePreview {
         Box(modifier = Modifier.padding(8.dp)) {
             Delta(grid = 3, finish = 4)
         }

@@ -47,7 +47,7 @@ import tmg.flashback.infrastructure.datetime.dateTimeFormatHHmmAtDMMM
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.extensions.toColourInt
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody1
@@ -227,7 +227,7 @@ private fun SourcesDisabled(
 private fun Preview(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         RSSScreen(
             paddingValues = PaddingValues.Absolute(),
             uiState = RssFeedUiState.Data(

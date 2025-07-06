@@ -49,7 +49,7 @@ import tmg.flashback.style.textinput.TextInput
 @Preview
 @Composable
 private fun PreviewTextLight() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         PreviewTexts()
     }
 }
@@ -57,7 +57,7 @@ private fun PreviewTextLight() {
 @Preview
 @Composable
 private fun PreviewTextDark() {
-    AppThemePreview(isLight = false) {
+    ApplicationThemePreview(isLight = false) {
         PreviewTexts()
     }
 }
@@ -80,7 +80,7 @@ private fun PreviewTexts() {
 @Preview
 @Composable
 private fun PreviewButtonLight() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         PreviewButtons()
     }
 }
@@ -88,7 +88,7 @@ private fun PreviewButtonLight() {
 @Preview
 @Composable
 private fun PreviewButtonDark() {
-    AppThemePreview(isLight = false) {
+    ApplicationThemePreview(isLight = false) {
         PreviewButtons()
     }
 }
@@ -119,7 +119,7 @@ private fun PreviewButtons() {
 @Preview
 @Composable
 private fun PreviewInputLight() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         PreviewInputs()
     }
 }
@@ -127,7 +127,7 @@ private fun PreviewInputLight() {
 @Preview
 @Composable
 private fun PreviewInputDark() {
-    AppThemePreview(isLight = false) {
+    ApplicationThemePreview(isLight = false) {
         PreviewInputs()
     }
 }
@@ -159,7 +159,7 @@ private fun PreviewInputs() {
 @Preview
 @Composable
 private fun PreviewSurfacesLight() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         PreviewSurfacess()
     }
 }
@@ -167,7 +167,7 @@ private fun PreviewSurfacesLight() {
 @Preview
 @Composable
 private fun PreviewSurfacesDark() {
-    AppThemePreview(isLight = false) {
+    ApplicationThemePreview(isLight = false) {
         PreviewSurfacess()
     }
 }
@@ -224,7 +224,7 @@ private fun PreviewSurfacess() {
 @Preview
 @Composable
 private fun PreviewFormula1Light() {
-    AppThemePreview(isLight = true) {
+    ApplicationThemePreview(isLight = true) {
         PreviewFormula1s()
     }
 }
@@ -232,7 +232,7 @@ private fun PreviewFormula1Light() {
 @Preview
 @Composable
 private fun PreviewFormula1Dark() {
-    AppThemePreview(isLight = false) {
+    ApplicationThemePreview(isLight = false) {
         PreviewFormula1s()
     }
 }

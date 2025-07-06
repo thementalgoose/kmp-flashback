@@ -27,7 +27,7 @@ import tmg.flashback.feature.rss.models.SupportedSource
 import tmg.flashback.feature.rss.presentation.configure.ConfiguredSupportedSource
 import tmg.flashback.infrastructure.extensions.toColourInt
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.buttons.ButtonSecondary
 import tmg.flashback.style.input.InputSwitch
 import tmg.flashback.style.preview.PreviewConfig
@@ -117,7 +117,7 @@ private fun SourceBadge(
 private fun PreviewSelected(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         Source(
             model = ConfiguredSupportedSource(fakeSource, true),
             sourceAdded = { },
@@ -133,7 +133,7 @@ private fun PreviewSelected(
 private fun PreviewNotSelected(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         Source(
             model = ConfiguredSupportedSource(fakeSource, false),
             sourceAdded = { },

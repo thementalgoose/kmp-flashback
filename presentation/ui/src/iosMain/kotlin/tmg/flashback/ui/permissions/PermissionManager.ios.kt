@@ -1,33 +1,22 @@
 package tmg.flashback.ui.permissions
 
-import dev.icerock.moko.permissions.DeniedAlwaysException
-import dev.icerock.moko.permissions.DeniedException
-import dev.icerock.moko.permissions.PermissionsController
+import kotlinx.coroutines.CompletableDeferred
 
-actual class PermissionManager actual constructor() {
+actual class PermissionManagerImpl actual constructor(): PermissionManager {
 
-    lateinit var permissionsController: PermissionsController
-
-    actual suspend fun providePermission(permission: Permission): PermissionState {
-        try {
-            permissionsController.providePermission(permission.toMoko())
-            return getPermissionState(permission)
-        } catch (e: DeniedException) {
-            return PermissionState.Denied
-        } catch (e: DeniedAlwaysException) {
-            return PermissionState.DeniedAlways
-        }
+    actual override suspend fun requestPermission(permission: Permission): CompletableDeferred<PermissionState> {
+        return CompletableDeferred(PermissionState.NotGranted)
     }
 
-    actual suspend fun isPermissionGranted(permission: Permission): Boolean {
-        return permissionsController.isPermissionGranted(permission.toMoko())
+    actual override suspend fun getPermissionState(permission: Permission): PermissionState {
+        return PermissionState.NotGranted
     }
 
-    actual suspend fun getPermissionState(permission: Permission): PermissionState {
-        return permissionsController.getPermissionState(permission.toMoko()).fromMoko()
+    actual override fun openAppSettings() {
+
     }
 
-    actual fun openAppSettings() {
-        permissionsController.openAppSettings()
+    actual override fun openNotificationSettings() {
+
     }
 }

@@ -14,9 +14,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameterProvider
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
-import tmg.flashback.style.SupportedTheme
-import tmg.flashback.style.preview.PreviewConfig
+import tmg.flashback.style.ApplicationThemePreview
 
 @Composable
 fun Flag(
@@ -52,7 +50,7 @@ fun getFlagVector(iso: String): ImageVector? {
 private fun Preview(
     @PreviewParameter(FlagProvider::class) flag: String
 ) {
-    AppThemePreview {
+    ApplicationThemePreview {
         Flag(flag)
     }
 }

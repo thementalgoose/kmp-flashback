@@ -2,53 +2,15 @@ package tmg.flashback.style
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Divider
-import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.ProvidedValue
 import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.unit.dp
-import flashback.presentation.style.generated.resources.Res
-import flashback.presentation.style.generated.resources.ic_preview_icon
-import flashback.presentation.style.generated.resources.preview
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.koinInject
-import tmg.flashback.style.buttons.ButtonItem
-import tmg.flashback.style.buttons.ButtonPrimary
-import tmg.flashback.style.buttons.ButtonSecondary
-import tmg.flashback.style.buttons.ButtonTertiary
-import tmg.flashback.style.buttons.Segments
-import tmg.flashback.style.textinput.TextInput
-import tmg.flashback.style.input.InputRadio
-import tmg.flashback.style.input.InputSelection
-import tmg.flashback.style.input.InputSwitch
 import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.text.TextBody1
-import tmg.flashback.style.text.TextBody2
-import tmg.flashback.style.text.TextCaption
-import tmg.flashback.style.text.TextHeadline1
-import tmg.flashback.style.text.TextHeadline2
-import tmg.flashback.style.text.TextTitle
-import tmg.flashback.style.theme.NightMode
+import tmg.flashback.style.theme.Theme
 import tmg.flashback.style.theme.ThemeManager
 
 object AppTheme {
@@ -57,9 +19,7 @@ object AppTheme {
         @ReadOnlyComposable
         get() = LocalColors.current
 
-    var appTheme: SupportedTheme = SupportedTheme.Default
-
-    var isLight: Boolean = true
+    var appTheme: Theme = Theme.Default
 
     val typography: AppTypography
         @Composable
@@ -73,35 +33,32 @@ object AppTheme {
 val Dimens = AppTheme.dimens
 
 @Composable
-fun AppTheme(
+fun ApplicationTheme(
     isLight: Boolean = !isSystemInDarkTheme(),
-    theme: SupportedTheme = AppTheme.appTheme,
     content: @Composable () -> Unit
 ) {
-//    val themeManager = koinInject<ThemeManager>()
-//    val isLightMode = when (themeManager.currentNightMode) {
-//        NightMode.DEFAULT -> isSystemInDarkTheme()
-//        NightMode.DAY -> true
-//        NightMode.NIGHT -> false
-//    }
+    val themeManager = koinInject<ThemeManager>()
+    val theme = themeManager.currentTheme
 
     AppTheme.appTheme = theme
-    AppTheme.isLight = isLight
 
-    val colors = when {
-//        Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && theme == SupportedTheme.MaterialYou && isLight -> {
-//            SupportedTheme.MaterialYou.lightColors(LocalContext.current)
-//        }
-//        Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && theme == SupportedTheme.MaterialYou && !isLight -> {
-//            SupportedTheme.MaterialYou.darkColors(LocalContext.current)
-//        }
-        theme == SupportedTheme.Default && isLight -> {
-            SupportedTheme.Default.lightColors
-        }
-        theme == SupportedTheme.Default && !isLight -> {
-            SupportedTheme.Default.darkColors
-        }
-        else -> SupportedTheme.Default.lightColors
+    ApplicationTheme(
+        isLight = isLight,
+        theme = theme,
+        content = content
+    )
+}
+
+@Composable
+fun ApplicationTheme(
+    isLight: Boolean = !isSystemInDarkTheme(),
+    theme: Theme,
+    content: @Composable () -> Unit
+) {
+    val appColours = getColours(theme)
+    val colors = when (isLight) {
+        true -> appColours.lightColours
+        false -> appColours.darkColours
     }
 
     LocalColors.provides(colors)
@@ -118,24 +75,24 @@ fun AppTheme(
 }
 
 @Composable
-fun AppThemePreview(
+fun ApplicationThemePreview(
     previewConfig: PreviewConfig?,
     content: @Composable () -> Unit,
 ) {
-    AppThemePreview(
-        isLight = previewConfig?.isLightMode ?: false,
-        theme = previewConfig?.theme ?: SupportedTheme.Default,
+    ApplicationThemePreview(
+        isLight = previewConfig?.isLightMode == true,
+        theme = previewConfig?.theme ?: Theme.Default,
         content = content
     )
 }
 
 @Composable
-fun AppThemePreview(
+fun ApplicationThemePreview(
     isLight: Boolean = !isSystemInDarkTheme(),
-    theme: SupportedTheme = SupportedTheme.Default,
+    theme: Theme = Theme.Default,
     content: @Composable () -> Unit,
 ) {
-    return AppTheme(
+    return ApplicationTheme(
         isLight = isLight,
         theme = theme,
         content = {
@@ -148,14 +105,23 @@ fun AppThemePreview(
     )
 }
 
-sealed class SupportedTheme{
+data class ThemeColours(
+    val lightColours: AppColors,
+    val darkColours: AppColors,
+)
 
-    data object Default: SupportedTheme() {
-        val lightColors: AppColors = lightColours
-        val darkColors: AppColors = darkColours
-    }
+expect fun getColours(theme: Theme): ThemeColours
+
+//sealed class SupportedTheme(
+//    val themePref: Theme
+//){
 //
-//    object MaterialYou: SupportedTheme() {
+//    data object Default: SupportedTheme(Theme.Default) {
+//        val lightColors: AppColors = lightColours
+//        val darkColors: AppColors = darkColours
+//    }
+//
+//    object MaterialYou: SupportedTheme(Theme.MaterialYou) {
 //        @RequiresApi(Build.VERSION_CODES.S)
 //        fun lightColors(context: Context): AppColors {
 //            return lightColours.dynamic(dynamicLightColorScheme(context), isLightMode = true)
@@ -166,5 +132,5 @@ sealed class SupportedTheme{
 //            return darkColours.dynamic(dynamicDarkColorScheme(context), isLightMode = false)
 //        }
 //    }
-
-}
+//
+//}

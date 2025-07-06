@@ -47,7 +47,7 @@ import tmg.flashback.formula1.model.QualifyingType.Q1
 import tmg.flashback.formula1.model.QualifyingType.Q2
 import tmg.flashback.formula1.model.QualifyingType.Q3
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.badge.Badge
 import tmg.flashback.style.badge.BadgeView
 import tmg.flashback.style.preview.PreviewConfig
@@ -339,7 +339,7 @@ private fun Time(
 private fun Preview(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         Column {
             QualifyingHeader(showQ1 = true, showQ2 = false, showQ3 = false)
             QualifyingResult(QualifyingModel.Q1.preview(), driverClicked = { })

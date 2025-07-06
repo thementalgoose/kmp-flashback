@@ -1,8 +1,8 @@
 package tmg.flashback.style.preview
 
-import tmg.flashback.style.SupportedTheme
+import tmg.flashback.style.theme.Theme
 
 data class PreviewConfig(
-    val theme: SupportedTheme,
+    val theme: Theme,
     val isLightMode: Boolean
 )

@@ -99,7 +99,7 @@ kotlin {
             implementation(libs.firebase.analytics)
             implementation(libs.androidx.splashscreen)
             implementation(libs.firebase.messaging)
-            implementation(libs.bundles.moko)
+            implementation(libs.firebase.messagingktx)
         }
         commonMain.dependencies {
 
@@ -159,9 +159,6 @@ kotlin {
         }
         desktopMain.dependencies {
 
-        }
-        iosMain.dependencies {
-            implementation(libs.bundles.moko)
         }
     }
 }

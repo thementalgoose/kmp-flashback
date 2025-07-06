@@ -17,7 +17,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 
 @Composable
 fun RaceHeader(
@@ -60,7 +60,7 @@ fun RaceHeader(
 @Composable
 @Preview
 private fun Preview() {
-    AppThemePreview {
+    ApplicationThemePreview {
         RaceHeader(showPoints = true, showStatus = true)
     }
 }

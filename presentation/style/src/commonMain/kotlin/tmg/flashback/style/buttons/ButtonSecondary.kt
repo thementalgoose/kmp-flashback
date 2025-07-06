@@ -20,7 +20,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.AppTheme.disabledAlpha
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody2
@@ -71,7 +71,7 @@ fun ButtonSecondary(
 private fun Preview(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         Box(Modifier.padding(16.dp)) {
             ButtonSecondary(
                 text = "Secondary Button",
@@ -86,7 +86,7 @@ private fun Preview(
 private fun PreviewSelected(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         Box(Modifier.padding(16.dp)) {
             ButtonSecondary(
                 text = "Secondary Button",
@@ -102,7 +102,7 @@ private fun PreviewSelected(
 private fun PreviewDisabled(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         Box(Modifier.padding(16.dp)) {
             ButtonSecondary(
                 enabled = false,

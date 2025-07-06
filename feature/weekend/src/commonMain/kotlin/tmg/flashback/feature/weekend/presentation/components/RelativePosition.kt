@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import kotlin.math.absoluteValue
 
 private const val alpha = 0.3f
@@ -161,7 +161,7 @@ private fun Position(
 @Preview
 @Composable
 private fun PreviewPositive() {
-    AppThemePreview {
+    ApplicationThemePreview {
         RelativePosition(
             delta = 3,
             modifier = Modifier.size(64.dp, 64.dp)
@@ -172,7 +172,7 @@ private fun PreviewPositive() {
 @Preview
 @Composable
 private fun PreviewNeutral() {
-    AppThemePreview {
+    ApplicationThemePreview {
         RelativePosition(
             delta = 0,
             modifier = Modifier.size(64.dp, 64.dp)
@@ -183,7 +183,7 @@ private fun PreviewNeutral() {
 @Preview
 @Composable
 private fun PreviewNegative() {
-    AppThemePreview {
+    ApplicationThemePreview {
         RelativePosition(
             delta = -3,
             modifier = Modifier.size(64.dp, 64.dp)

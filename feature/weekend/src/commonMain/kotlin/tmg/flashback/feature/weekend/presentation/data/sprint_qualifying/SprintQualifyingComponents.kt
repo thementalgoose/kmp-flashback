@@ -43,7 +43,7 @@ import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.model.DriverEntry
 import tmg.flashback.formula1.model.LapTime
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.badge.Badge
 import tmg.flashback.style.badge.BadgeView
 import tmg.flashback.style.preview.PreviewConfig
@@ -236,7 +236,7 @@ private fun Time(
 private fun Preview(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         Column {
             SprintQualifyingHeader()
             SprintQualifying(SprintQualifyingModel.Result.preview(), driverClicked = { })

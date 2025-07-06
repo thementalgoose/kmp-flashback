@@ -11,7 +11,7 @@ import flashback.presentation.ui.generated.resources.ic_current_indicator
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 
 @Composable
 fun Now(
@@ -30,7 +30,7 @@ fun Now(
 @Preview
 @Composable
 private fun Preview() {
-    AppThemePreview {
+    ApplicationThemePreview {
         Now()
     }
 }

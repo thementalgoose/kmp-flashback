@@ -21,6 +21,8 @@ import flashback.presentation.localisation.generated.resources.settings_web_brow
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
+import tmg.flashback.infrastructure.device.Device
+import tmg.flashback.infrastructure.device.Platform
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 
@@ -97,15 +99,17 @@ private fun AllSettingsScreen(
                 itemClicked = { navigateTo(SettingNavigation.InAppBrowser)  }
             )
         }
-        PrefHeader(string.settings_header_notifications)
-        PrefCategory(
-            item = Settings.NotificationsResultCategory,
-            itemClicked = { navigateTo(SettingNavigation.NotificationResults) },
-        )
-        PrefCategory(
-            item = Settings.NotificationsUpcomingCategory,
-            itemClicked = { navigateTo(SettingNavigation.NotificationUpcoming) },
-        )
+        if (Device.platform == Platform.Android) {
+            PrefHeader(string.settings_header_notifications)
+            PrefCategory(
+                item = Settings.NotificationsResultCategory,
+                itemClicked = { navigateTo(SettingNavigation.NotificationResults) },
+            )
+            PrefCategory(
+                item = Settings.NotificationsUpcomingCategory,
+                itemClicked = { navigateTo(SettingNavigation.NotificationUpcoming) },
+            )
+        }
         if (uiState.isWidgetsSupported) {
             PrefHeader(string.settings_header_widgets)
             PrefCategory(

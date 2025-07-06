@@ -1,20 +1,22 @@
 package tmg.flashback.ui.permissions
 
-actual class PermissionManager actual constructor() {
+import kotlinx.coroutines.CompletableDeferred
 
-    actual suspend fun providePermission(permission: Permission): PermissionState {
-        return getPermissionState(permission)
+actual class PermissionManagerImpl actual constructor(): PermissionManager {
+
+    actual override suspend fun requestPermission(permission: Permission): CompletableDeferred<PermissionState> {
+        return CompletableDeferred(PermissionState.NotDetermined)
     }
 
-    actual suspend fun isPermissionGranted(permission: Permission): Boolean {
-        return false
-    }
-
-    actual suspend fun getPermissionState(permission: Permission): PermissionState {
+    actual override suspend fun getPermissionState(permission: Permission): PermissionState {
         return PermissionState.NotDetermined
     }
 
-    actual fun openAppSettings() {
-        // n/a
+    actual override fun openAppSettings() {
+
+    }
+
+    actual override fun openNotificationSettings() {
+
     }
 }

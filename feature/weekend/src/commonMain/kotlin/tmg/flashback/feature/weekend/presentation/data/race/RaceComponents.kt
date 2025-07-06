@@ -42,7 +42,7 @@ import tmg.flashback.formula1.model.RaceResult
 import tmg.flashback.formula1.preview.preview
 import tmg.flashback.infrastructure.extensions.roundToHalf
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.AppThemePreview
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextTitle
@@ -194,7 +194,7 @@ internal fun RaceConstructorResult(
 private fun Preview(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
-    AppThemePreview(previewConfig) {
+    ApplicationThemePreview(previewConfig) {
         Column {
             RaceDriverResult(
                 model = RaceResult.preview(),
