@@ -113,9 +113,6 @@ fun RSSScreen(
                                     )
                                 }
                             }
-                            item("debug") {
-                                TextBody2("Rss items ${uiState.rssItems}")
-                            }
                             items(uiState.rssItems, key = { it.link }) {
                                 Item(it, itemClicked)
                             }

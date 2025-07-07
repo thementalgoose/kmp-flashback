@@ -4,11 +4,13 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.feature.rss.models.SupportedSource
 import tmg.flashback.feature.rss.repositories.RssRepository
 
 class RssConfigureViewModel(
-    private val rssRepository: RssRepository
+    private val rssRepository: RssRepository,
+    private val openWebpageUseCase: OpenWebpageUseCase
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<RssConfigureUiState> = MutableStateFlow(
@@ -31,6 +33,10 @@ class RssConfigureViewModel(
             false -> rssRepository.rssUrls -= source.rssLink
         }
         _uiState.update { it.copy(sources = getSources()) }
+    }
+
+    fun clickContactLink(source: SupportedSource) {
+        openWebpageUseCase.invoke(source.contactLink)
     }
 
     fun updateShowDescription(enabled: Boolean) {

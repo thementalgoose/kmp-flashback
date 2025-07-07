@@ -29,6 +29,7 @@ import tmg.flashback.infrastructure.extensions.toColourInt
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.buttons.ButtonSecondary
+import tmg.flashback.style.buttons.ButtonTertiary
 import tmg.flashback.style.input.InputSwitch
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
@@ -42,7 +43,7 @@ internal fun Source(
     model: ConfiguredSupportedSource,
     sourceAdded: (source: SupportedSource) -> Unit,
     sourceRemoved: (source: SupportedSource) -> Unit,
-    contactLink: (link: String) -> Unit,
+    contactLink: (source: SupportedSource) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(modifier = modifier
@@ -76,11 +77,11 @@ internal fun Source(
                 text = model.article.rssLink,
                 modifier = Modifier.padding(top = 4.dp)
             )
-            ButtonSecondary(
+            ButtonTertiary(
                 modifier = Modifier.padding(top = 4.dp),
                 text = stringResource(resource = string.settings_rss_contact_link),
                 onClick = {
-                    contactLink(model.article.contactLink)
+                    contactLink(model.article)
                 }
             )
         }

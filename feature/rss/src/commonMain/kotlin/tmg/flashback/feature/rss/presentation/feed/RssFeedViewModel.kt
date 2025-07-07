@@ -31,7 +31,7 @@ class RSSFeedViewModel(
 
     private val _uiState: MutableStateFlow<RssFeedUiState> = MutableStateFlow(RssFeedUiState.Data(
         lastUpdated = null,
-        isLoading = true,
+        isLoading = false,
         rssItems = emptyList(),
         hasSources = rssRepository.rssUrls.isNotEmpty(),
     ))

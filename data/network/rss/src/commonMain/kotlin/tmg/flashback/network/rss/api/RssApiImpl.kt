@@ -5,16 +5,17 @@ import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
 import kotlinx.io.IOException
+import kotlinx.serialization.builtins.serializer
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.network.rss.client.xml
-import tmg.flashback.network.rss.models.RssXMLModel
+import tmg.flashback.network.rss.models.RssFeed
 
 class RssApiImpl(
     private val httpClient: HttpClient
 ): RssApi {
 
     @Throws(RuntimeException::class, IOException::class)
-    override suspend fun getRssXML(url: String): RssXMLModel {
+    override suspend fun getRssXML(url: String): RssFeed {
         logInfo(">> $url")
         val httpResponse = httpClient.get(url)
         when (httpResponse.status) {
@@ -25,7 +26,7 @@ class RssApiImpl(
                 throw RuntimeException()
             }
         }
-        return xml.decodeFromString<RssXMLModel>(RssXMLModel.serializer(), httpResponse.bodyAsText())
+        return xml.decodeFromString<RssFeed>(RssFeed.serializer(), httpResponse.bodyAsText())
     }
 }
 

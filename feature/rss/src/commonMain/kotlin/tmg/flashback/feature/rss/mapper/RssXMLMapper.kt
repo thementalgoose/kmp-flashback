@@ -4,23 +4,30 @@ import io.ktor.http.URLProtocol.Companion.HTTP
 import io.ktor.http.URLProtocol.Companion.HTTPS
 import io.ktor.http.Url
 import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.format.DayOfWeekNames
+import kotlinx.datetime.format.MonthNames.Companion.ENGLISH_ABBREVIATED
+import kotlinx.datetime.format.Padding
+import kotlinx.datetime.format.char
 import tmg.flashback.feature.rss.models.Article
 import tmg.flashback.feature.rss.models.ArticleSource
+import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.log.logDebug
-import tmg.flashback.network.rss.models.RssXMLModel
-import tmg.flashback.network.rss.models.RssXMLModelItem
+import tmg.flashback.network.rss.models.Item
+import tmg.flashback.network.rss.models.RssFeed
 
 interface RssXMLMapper {
     fun convert(
-        model: RssXMLModel,
+        model: RssFeed,
         fromSource: String,
         showDescription: Boolean
     ): List<Article>
 }
 
-internal class RssXMLMapperImpl(): RssXMLMapper {
+internal class RssXMLMapperImpl(
+    private val supportedSourceMapper: SupportedSourceMapper
+): RssXMLMapper {
     override fun convert(
-        model: RssXMLModel,
+        model: RssFeed,
         fromSource: String,
         showDescription: Boolean
     ): List<Article> {
@@ -44,7 +51,7 @@ internal class RssXMLMapperImpl(): RssXMLMapper {
             }
         }
 
-        val source = ArticleSource(
+        val source = supportedSourceMapper.invoke(model.channel?.link) ?: ArticleSource(
             title = model.channel!!.title!!,
             colour = "#4A34B6",
             textColor = "#FFFFFF",
@@ -56,7 +63,7 @@ internal class RssXMLMapperImpl(): RssXMLMapper {
 
         return model.channel
             ?.item
-            ?.filter { it?.title != null && it.link != null && it.pubDate != null }
+            ?.filter { it.title != null && it.link != null && it.pubDate != null }
             ?.filterNotNull()
             ?.map {
                 Article(
@@ -70,14 +77,42 @@ internal class RssXMLMapperImpl(): RssXMLMapper {
                             ?.trim()
                     },
                     link = it.link!!.replace("http://", "https://"),
-                    date = LocalDateTime.parse(it.pubDate!!.replace("GMT", "+0000")),
+                    date = attemptParseDate(it.pubDate!!.replace("GMT", "+0000")),
                     source = source
                 )
             } ?: emptyList()
     }
 }
 
-private fun extractLinkSource(items: List<RssXMLModelItem?>?): String? {
+private fun attemptParseDate(date: String): LocalDateTime {
+    for (x in rssDateTimeFormats) {
+        try {
+            return LocalDateTime.parse(date, x)
+        } catch (e: Exception) { }
+    }
+    return LocalDateTime.now()
+}
+
+val rssDateTimeFormats = listOf(
+    LocalDateTime.Format {
+        dayOfWeek(DayOfWeekNames.ENGLISH_ABBREVIATED)
+        chars(", ")
+        dayOfMonth(Padding.ZERO)
+        char(' ')
+        monthName(ENGLISH_ABBREVIATED)
+        char(' ')
+        year()
+        char(' ')
+        hour(Padding.ZERO)
+        char(':')
+        minute(Padding.ZERO)
+        char(':')
+        second(Padding.ZERO)
+    },
+    LocalDateTime.Formats.ISO,
+)
+
+private fun extractLinkSource(items: List<Item?>?): String? {
     val urlString = (items ?: emptyList()).firstNotNullOfOrNull { it?.link } ?: return null
     val url = Url(urlString)
     if (url.protocol != HTTP || url.protocol != HTTPS) {

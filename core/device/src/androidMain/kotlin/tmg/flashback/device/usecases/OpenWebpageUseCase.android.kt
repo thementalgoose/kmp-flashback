@@ -1,12 +1,12 @@
 package tmg.flashback.device.usecases
 
-import android.R.string
 import android.content.ActivityNotFoundException
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
 import android.os.Build
 import android.widget.Toast
@@ -49,6 +49,7 @@ actual class OpenWebpageUseCaseImpl actual constructor(): OpenWebpageUseCase {
             .addCategory(Intent.CATEGORY_BROWSABLE)
             .setData(Uri.parse("https:"))
         val targetIntent = Intent()
+            .setFlags(FLAG_ACTIVITY_NEW_TASK)
             .setAction(Intent.ACTION_VIEW)
             .addCategory(Intent.CATEGORY_BROWSABLE)
             .setData(uri)
