@@ -36,7 +36,7 @@ moko = "0.19.1"
 # Testing
 kotest = "5.9.1"
 uiTooling = "1.8.3"
-mokkery = "2.8.0"
+mokkery = "2.9.0"
 turbine = "1.2.1"
 
 [libraries]
