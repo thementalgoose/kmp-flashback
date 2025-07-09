@@ -1,6 +1,5 @@
 package tmg.flashback.infrastructure.device
 
-import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.infrastructure.log.logInfo
 
 expect object Device {

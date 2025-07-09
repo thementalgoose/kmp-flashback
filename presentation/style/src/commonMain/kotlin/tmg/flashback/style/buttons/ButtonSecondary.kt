@@ -23,6 +23,7 @@ import tmg.flashback.style.AppTheme.disabledAlpha
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 
 @Composable
@@ -50,7 +51,7 @@ fun ButtonSecondary(
         shape = RoundedCornerShape(AppTheme.dimens.radiusMedium),
         onClick = onClick
     ) {
-        TextBody2(
+        TextBody1(
             text,
             bold = true,
             textColor = when (enabled) {
@@ -60,7 +61,7 @@ fun ButtonSecondary(
             modifier = Modifier
                 .padding(
                     vertical = AppTheme.dimens.xsmall,
-                    horizontal = AppTheme.dimens.medium,
+                    horizontal = AppTheme.dimens.small,
                 )
         )
     }

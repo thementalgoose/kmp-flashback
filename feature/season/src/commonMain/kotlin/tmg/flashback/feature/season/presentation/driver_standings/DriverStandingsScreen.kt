@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,9 +24,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
+import flashback.feature.season.generated.resources.Res
+import flashback.feature.season.generated.resources.ic_driver_comparison
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.driver_comparison_title
 import flashback.presentation.localisation.generated.resources.results_accurate_for
 import flashback.presentation.localisation.generated.resources.season_standings_driver
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
 import tmg.flashback.analytics.presentation.ScreenView
@@ -74,7 +80,19 @@ internal fun DriverStandingsScreen(
                             true -> HeaderAction.MENU
                             false -> null
                         },
-                        actionUpClicked = actionUpClicked
+                        actionUpClicked = actionUpClicked,
+                        overrideIcons = {
+                            IconButton(
+                                onClick = comparisonClicked,
+                                content = {
+                                    Icon(
+                                        painter = painterResource(Res.drawable.ic_driver_comparison),
+                                        contentDescription = stringResource(string.driver_comparison_title),
+                                        tint = AppTheme.colors.onSurface
+                                    )
+                                }
+                            )
+                        }
                     )
                 }
                 uiState.inProgress?.let { (raceName, round) ->

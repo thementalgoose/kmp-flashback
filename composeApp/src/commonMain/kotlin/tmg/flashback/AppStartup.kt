@@ -5,6 +5,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import tmg.flashback.analytics.usecases.InitialiseAnalyticsUseCase
 import tmg.flashback.configuration.manager.ConfigManager
+import tmg.flashback.configuration.usecases.FetchConfigUseCase
+import tmg.flashback.configuration.usecases.InitialiseConfigUseCase
 import tmg.flashback.crashlytics.usecases.InitialiseCrashlyticsUseCase
 import tmg.flashback.device.repositories.DeviceRepository
 import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
@@ -19,7 +21,8 @@ import tmg.flashback.infrastructure.device.log
  */
 @OptIn(DelicateCoroutinesApi::class)
 class AppStartup(
-    private val configManager: ConfigManager,
+    private val initialiseConfigUseCase: InitialiseConfigUseCase,
+    private val fetchConfigUseCase: FetchConfigUseCase,
     private val subscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase,
     private val scheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase,
     private val deviceRepository: DeviceRepository,
@@ -34,7 +37,10 @@ class AppStartup(
         initialiseAnalyticsUseCase.initialise(deviceRepository.deviceUdid)
 
         // Remote config
-        configManager.initialiseRemoteConfig(RemoteConfigDefaults.defaults)
+        initialiseConfigUseCase(RemoteConfigDefaults.defaults)
+        GlobalScope.launch {
+            fetchConfigUseCase.fetchAndApply()
+        }
 
         // Subscribe to remote topics
         GlobalScope.launch {

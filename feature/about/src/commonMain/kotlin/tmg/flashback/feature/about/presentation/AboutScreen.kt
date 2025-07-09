@@ -87,6 +87,8 @@ fun AboutScreen(
             actionUpClicked = actionUpClicked,
             email = uiState.value.contactEmail,
             deviceId = uiState.value.deviceUuid,
+            dependencyClicked = viewModel::openDependency,
+            buttonClicked = viewModel::openButton,
             installationId = "n/a"
         )
     } else {
@@ -96,6 +98,8 @@ fun AboutScreen(
             actionUpClicked = actionUpClicked,
             email = uiState.value.contactEmail,
             deviceId = uiState.value.deviceUuid,
+            dependencyClicked = viewModel::openDependency,
+            buttonClicked = viewModel::openButton,
             installationId = "n/a"
         )
     }
@@ -108,6 +112,8 @@ private fun AboutListScreen(
     deviceId: String,
     installationId: String,
     paddingValues: PaddingValues,
+    buttonClicked: (AboutButtons) -> Unit,
+    dependencyClicked: (AboutDependency) -> Unit,
     actionUpClicked: () -> Unit,
 ) {
     val showDependencies = remember { mutableStateOf(true) }
@@ -136,7 +142,7 @@ private fun AboutListScreen(
                 AboutButtons.entries.forEach {
                     Button(
                         button = it,
-                        buttonClicked = { },
+                        buttonClicked = buttonClicked,
                         modifier = Modifier.weight(1f)
                     )
                 }
@@ -167,7 +173,7 @@ private fun AboutListScreen(
             items(AboutDependency.entries, key = { it.name }) {
                 Dependency(
                     dependency = it,
-                    dependencyClicked = { },
+                    dependencyClicked = dependencyClicked,
                     modifier = Modifier
                         .animateItem()
                         .padding(horizontal = AppTheme.dimens.medium)
@@ -194,6 +200,8 @@ private fun AboutPaneScreen(
     email: String,
     deviceId: String,
     installationId: String,
+    buttonClicked: (AboutButtons) -> Unit,
+    dependencyClicked: (AboutDependency) -> Unit,
     actionUpClicked: () -> Unit,
 ) {
     Row(modifier = Modifier.fillMaxWidth()) {
@@ -225,7 +233,7 @@ private fun AboutPaneScreen(
                     AboutButtons.entries.forEach {
                         Button(
                             button = it,
-                            buttonClicked = { },
+                            buttonClicked = buttonClicked,
                             modifier = Modifier.weight(1f)
                         )
                     }
@@ -263,7 +271,7 @@ private fun AboutPaneScreen(
             items(AboutDependency.entries) {
                 Dependency(
                     dependency = it,
-                    dependencyClicked = { },
+                    dependencyClicked = dependencyClicked,
                     modifier = Modifier.animateItem()
                 )
             }
@@ -492,6 +500,8 @@ private fun PreviewList(
             deviceId = "uuid",
             installationId = "installation-uuid",
             actionUpClicked = { },
+            dependencyClicked = { },
+            buttonClicked = { },
             icon = Res.drawable.unknown_avatar,
         )
     }
@@ -510,6 +520,8 @@ private fun PreviewPane(
             deviceId = "uuid",
             installationId = "installation-uuid",
             icon = Res.drawable.unknown_avatar,
+            dependencyClicked = { },
+            buttonClicked = { },
             actionUpClicked = { }
         )
     }

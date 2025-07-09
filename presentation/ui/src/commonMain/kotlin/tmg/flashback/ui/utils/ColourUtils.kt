@@ -12,7 +12,8 @@ fun contrastTextLight(
     val score = (Color(color.toLong()).red * redMultiplier) +
             (Color(color.toLong()).green * greenMultiplier) +
             (Color(color.toLong()).blue * blueMultiplier)
-    return score < threshold
+    val thresholdFraction = threshold / 255f
+    return score < thresholdFraction
 }
 
 fun contrastTextDark(

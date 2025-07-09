@@ -41,18 +41,15 @@ import tmg.flashback.ui.components.flag.getFlagVector
 
 @Composable
 fun DriverBadges(
+    modifier: Modifier = Modifier,
     driver: Driver,
+    alignment: Alignment.Horizontal = Alignment.Start,
     constructors: List<Constructor>
 ) {
     FlowRow(
-        modifier = Modifier
-            .padding(
-                horizontal = AppTheme.dimens.medium,
-                vertical = AppTheme.dimens.small
-            )
-            .fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small),
-        horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.small, alignment = alignment)
     ) {
 
         val flagVector = getFlagVector(driver.nationalityISO)

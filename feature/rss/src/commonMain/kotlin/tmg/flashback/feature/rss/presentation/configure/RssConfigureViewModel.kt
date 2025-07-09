@@ -7,30 +7,34 @@ import kotlinx.coroutines.flow.update
 import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.feature.rss.models.SupportedSource
 import tmg.flashback.feature.rss.repositories.RssRepository
+import tmg.flashback.feature.rss.usecases.GetSourcesUseCase
 
 class RssConfigureViewModel(
     private val rssRepository: RssRepository,
+    private val getSourcesUseCase: GetSourcesUseCase,
     private val openWebpageUseCase: OpenWebpageUseCase
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<RssConfigureUiState> = MutableStateFlow(
         RssConfigureUiState(
             sources = getSources(),
-            showDescription = rssRepository.rssShowDescription
+            showDescription = rssRepository.rssShowDescription,
+            showAddCustom = rssRepository.isAddCustomSourcesEnabled
         ))
     val uiState: StateFlow<RssConfigureUiState> = _uiState
 
     private fun getSources(): List<ConfiguredSupportedSource> {
-        val enabledUrls = rssRepository.rssUrls
-        return rssRepository.supportedSources.map {
-            ConfiguredSupportedSource(article = it, isEnabled = enabledUrls.contains(it.rssLink))
+        val rssUrls = rssRepository.rssUrls
+        val list = getSourcesUseCase()
+        return list.map {
+            ConfiguredSupportedSource(it, rssUrls.contains(it.rssLink))
         }
     }
 
-    fun updateSource(source: SupportedSource, include: Boolean) {
+    fun updateSource(source: String, include: Boolean) {
         when (include) {
-            true -> rssRepository.rssUrls += source.rssLink
-            false -> rssRepository.rssUrls -= source.rssLink
+            true -> rssRepository.rssUrls += source
+            false -> rssRepository.rssUrls -= source
         }
         _uiState.update { it.copy(sources = getSources()) }
     }

@@ -8,9 +8,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.window.core.layout.WindowSizeClass
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.feature.drivers.presentation.comparison.DriverComparisonScreen
 import tmg.flashback.feature.drivers.presentation.season.DriverSeasonInfo
 import tmg.flashback.feature.drivers.presentation.season.DriverSeasonScreen
-import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.navigation.MasterDetailPaneState
 import tmg.flashback.ui.navigation.MasterDetailsPane
 import tmg.flashback.ui.navigation.appBarMaximumHeight
@@ -20,6 +20,9 @@ sealed interface DriverStandingsNavigation {
         val season: Int,
         val id: String,
         val name: String
+    ): DriverStandingsNavigation
+    data class Comparison(
+        val season: Int
     ): DriverStandingsNavigation
 }
 
@@ -60,7 +63,9 @@ fun DriverStandingsGraph(
                 },
                 refresh = viewModel::refresh,
                 comparisonClicked = {
-                    // TODO
+                    navigator.navigateTo(DriverStandingsNavigation.Comparison(
+                        season = state.value.season
+                    ))
                 }
             )
         },
@@ -79,6 +84,12 @@ fun DriverStandingsGraph(
                     actionUpClicked = actionUpClicked,
                     showBack = true,
                     windowSizeClass = windowSizeClass
+                )
+                is DriverStandingsNavigation.Comparison -> DriverComparisonScreen(
+                    paddingValues = paddingValues,
+                    actionUpClicked = actionUpClicked,
+                    windowSizeClass = windowSizeClass,
+                    season = model.season,
                 )
             }
         }

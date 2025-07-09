@@ -9,7 +9,6 @@ import org.koin.java.KoinJavaComponent.getKoin
 import tmg.flashback.style.theme.Theme
 
 actual fun getColours(theme: Theme): ThemeColours {
-    val context = getKoin().get<Context>()
     return when (theme) {
         Theme.Default -> {
             Log.i("Theme", "Applying regular theme ($theme)")
@@ -20,6 +19,7 @@ actual fun getColours(theme: Theme): ThemeColours {
         }
         Theme.MaterialYou -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             Log.i("Theme", "Applying dynamic theme ($theme)")
+            val context = getKoin().get<Context>()
             ThemeColours(
                 lightColours = lightColours.dynamic(dynamicLightColorScheme(context), isLightMode = true),
                 darkColours = darkColours.dynamic(dynamicDarkColorScheme(context), isLightMode = false)

@@ -5,7 +5,8 @@ import tmg.flashback.feature.rss.models.SupportedSource
 
 data class RssConfigureUiState(
     val sources: List<ConfiguredSupportedSource>,
-    val showDescription: Boolean
+    val showDescription: Boolean,
+    val showAddCustom: Boolean,
 )
 
 data class ConfiguredSupportedSource(

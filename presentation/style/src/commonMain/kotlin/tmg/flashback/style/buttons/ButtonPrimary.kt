@@ -17,6 +17,7 @@ import tmg.flashback.style.AppTheme.disabledAlpha
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.text.TextBody1
 
 
 @Composable
@@ -39,9 +40,9 @@ fun ButtonPrimary(
         shape = RoundedCornerShape(AppTheme.dimens.radiusMedium),
         onClick = onClick
     ) {
-        Text(
+        TextBody1(
             text,
-            color = AppTheme.colors.onPrimary.copy(alpha = if (enabled) 1f else disabledAlpha),
+            textColor = AppTheme.colors.onPrimary.copy(alpha = if (enabled) 1f else disabledAlpha),
             modifier = Modifier
                 .padding(
                     horizontal = AppTheme.dimens.medium,

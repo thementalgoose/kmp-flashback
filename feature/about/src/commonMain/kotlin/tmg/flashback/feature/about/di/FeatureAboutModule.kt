@@ -7,5 +7,5 @@ import tmg.flashback.feature.about.presentation.AboutViewModel
 val featureAboutModule = listOf(module())
 
 internal fun module() = module {
-    viewModel { AboutViewModel(get()) }
+    viewModel { AboutViewModel(get(), get()) }
 }
