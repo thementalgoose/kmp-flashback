@@ -19,6 +19,7 @@ import tmg.flashback.ui.components.header.HeaderAction
 @Composable
 fun SettingsAboutScreen(
     actionUpClicked: () -> Unit,
+    navigateToAboutThisApp: () -> Unit,
     insetPadding: PaddingValues,
     showBack: Boolean,
     viewModel: SettingsAboutViewModel = koinViewModel()
@@ -27,6 +28,7 @@ fun SettingsAboutScreen(
 
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     SettingsAboutScreen(
+        navigateToAboutThisApp = navigateToAboutThisApp,
         actionUpClicked = actionUpClicked,
         insetPadding = insetPadding,
         showBack = showBack,
@@ -37,6 +39,7 @@ fun SettingsAboutScreen(
 @Composable
 private fun SettingsAboutScreen(
     uiState: SettingsAboutUiState,
+    navigateToAboutThisApp: () -> Unit,
     showBack: Boolean,
     insetPadding: PaddingValues,
     actionUpClicked: () -> Unit,
@@ -54,7 +57,10 @@ private fun SettingsAboutScreen(
         }
         PrefLink(
             item = Settings.About.AboutThisApp,
-            itemClicked = { }
+            itemClicked = {
+                actionUpClicked()
+                navigateToAboutThisApp()
+            }
         )
         PrefLink(
             item = Settings.About.Review,

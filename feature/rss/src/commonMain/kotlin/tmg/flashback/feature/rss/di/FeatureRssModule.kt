@@ -21,7 +21,7 @@ val featureRssModule = listOf(module())
 
 internal fun module() = module {
     viewModel { RssConfigureViewModel(get(), get(), get()) }
-    viewModel { RSSFeedViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModel { RSSFeedViewModel(get(), get(), get(), get(), get()) }
 
     single<RssRepository> { RssRepositoryImpl(get(), get()) }
 

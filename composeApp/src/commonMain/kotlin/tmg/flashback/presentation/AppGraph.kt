@@ -14,6 +14,7 @@ import androidx.navigation.compose.composable
 import flashback.composeapp.generated.resources.Res
 import flashback.composeapp.generated.resources.logo
 import tmg.flashback.feature.about.presentation.AboutScreen
+import tmg.flashback.feature.privacypolicy.presentation.PrivacyPolicyScreen
 import tmg.flashback.feature.reactiongame.presentation.ReactionGameScreen
 import tmg.flashback.feature.rss.presentation.feed.RssNavigation
 import tmg.flashback.feature.rss.presentation.feed.RssFeedGraph
@@ -106,7 +107,13 @@ fun AppGraph(
                 windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                 actionUpClicked = openPanel,
                 navigator = settingsNavigator,
-                insetPadding = insetPadding
+                insetPadding = insetPadding,
+                navigateToAboutThisApp = {
+                    navController.navigate(Screen.About)
+                },
+                navigateToPrivacyPolicy = {
+                    navController.navigate(Screen.PrivacyPolicy)
+                }
             )
         }
         composable<Screen.ReactionGame> {
@@ -114,6 +121,12 @@ fun AppGraph(
                 paddingValues = insetPadding,
                 actionUpClicked = openPanel,
                 windowSizeClass = windowAdaptiveInfo.windowSizeClass
+            )
+        }
+        composable<Screen.PrivacyPolicy> {
+            PrivacyPolicyScreen(
+                paddingValues = insetPadding,
+                actionUpClicked = openPanel
             )
         }
         composable<Screen.About> {

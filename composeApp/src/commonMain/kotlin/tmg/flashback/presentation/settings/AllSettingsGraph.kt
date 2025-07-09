@@ -38,6 +38,8 @@ fun AllSettingsGraph(
     actionUpClicked: () -> Unit,
     navigator: MasterDetailPaneState<SettingNavigation>,
     windowSizeClass: WindowSizeClass,
+    navigateToAboutThisApp: () -> Unit,
+    navigateToPrivacyPolicy: () -> Unit
 ) {
     MasterDetailsPane(
         navigator = navigator,
@@ -103,12 +105,14 @@ fun AllSettingsGraph(
                 is SettingNavigation.Privacy -> SettingsPrivacyScreen(
                     actionUpClicked = { navigator.clear() },
                     insetPadding = insetPadding,
-                    showBack = windowSizeClass.windowWidthSizeClass == COMPACT
+                    showBack = windowSizeClass.windowWidthSizeClass == COMPACT,
+                    navigateToPrivacyPolicy = navigateToPrivacyPolicy
                 )
                 is SettingNavigation.About -> SettingsAboutScreen(
                     actionUpClicked = { navigator.clear() },
                     insetPadding = insetPadding,
-                    showBack = windowSizeClass.windowWidthSizeClass == COMPACT
+                    showBack = windowSizeClass.windowWidthSizeClass == COMPACT,
+                    navigateToAboutThisApp = navigateToAboutThisApp
                 )
             }
         }

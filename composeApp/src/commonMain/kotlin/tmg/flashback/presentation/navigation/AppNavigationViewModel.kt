@@ -59,6 +59,7 @@ class AppNavigationViewModel(
             destination.hasRoute<Screen.Rss>() -> Screen.Rss
             destination.hasRoute<Screen.ReactionGame>() -> Screen.ReactionGame
             destination.hasRoute<Screen.Settings>() -> Screen.Settings
+            destination.hasRoute<Screen.PrivacyPolicy>() -> Screen.PrivacyPolicy
             destination.hasRoute<Screen.About>() -> Screen.About
             destination.hasRoute<Screen.Circuit>() -> arguments?.read {
                 val id = getString("id")

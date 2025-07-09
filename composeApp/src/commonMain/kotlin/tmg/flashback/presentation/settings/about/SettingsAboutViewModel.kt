@@ -7,9 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 class SettingsAboutViewModel: ViewModel() {
 
     private val _uiState: MutableStateFlow<SettingsAboutUiState> = MutableStateFlow(
-        SettingsAboutUiState(
-            buildVersion = "1.0.0"
-        )
+        SettingsAboutUiState()
     )
     val uiState: StateFlow<SettingsAboutUiState> = _uiState
 }

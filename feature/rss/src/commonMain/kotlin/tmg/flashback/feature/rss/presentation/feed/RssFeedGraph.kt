@@ -38,7 +38,11 @@ fun RssFeedGraph(
                 uiState = uiState.value,
                 refresh = viewModel::refresh,
                 itemClicked = {
-
+                    if (viewModel.inAppBrowserEnabled) {
+                        navigator.navigateTo(RssNavigation.WebPage(it))
+                    } else {
+                        viewModel.openArticle(it)
+                    }
                 },
                 configureSources = {
                     navigator.navigateTo(RssNavigation.Configure)

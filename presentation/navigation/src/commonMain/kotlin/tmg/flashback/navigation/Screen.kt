@@ -51,5 +51,8 @@ sealed interface Screen {
     data object Settings: Screen
 
     @Serializable
+    data object PrivacyPolicy: Screen
+
+    @Serializable
     data object About: Screen
 }

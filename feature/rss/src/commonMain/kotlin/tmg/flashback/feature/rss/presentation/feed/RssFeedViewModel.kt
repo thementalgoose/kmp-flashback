@@ -17,15 +17,15 @@ import tmg.flashback.infrastructure.datetime.TimeManager
 import tmg.flashback.infrastructure.datetime.timeFormatHHmmss
 import tmg.flashback.network.rss.api.RssApi
 import tmg.flashback.webbrowser.repository.WebRepository
+import tmg.flashback.webbrowser.usecases.IsInAppBrowserEnabledUseCase
 import kotlin.Boolean
 import kotlin.String
 
 class RSSFeedViewModel(
-    private val rssService: RssApi,
     private val rssRepository: RssRepository,
     private val openWebpageUseCase: OpenWebpageUseCase,
     private val getRssArticlesUseCase: GetRssArticleUseCase,
-    private val browserRepository: WebRepository,
+    private val isInAppBrowserEnabledUseCase: IsInAppBrowserEnabledUseCase,
     private val timeManager: TimeManager
 ): ViewModel() {
 
@@ -42,6 +42,9 @@ class RSSFeedViewModel(
             refresh()
         }
     }
+
+    val inAppBrowserEnabled: Boolean
+        get() = isInAppBrowserEnabledUseCase()
 
     fun refresh() {
         viewModelScope.launch {
@@ -67,9 +70,6 @@ class RSSFeedViewModel(
         }
     }
 
-    /**
-     * @return if article was handled
-     */
     fun openArticle(article: Article): Boolean {
         openWebpageUseCase(
             url = article.link,
