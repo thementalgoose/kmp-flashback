@@ -10,6 +10,7 @@ import androidx.glance.action.ActionParameters
 import androidx.glance.appwidget.action.ActionCallback
 import androidx.glance.appwidget.state.updateAppWidgetState
 import tmg.flashback.formula1.model.OverviewRace
+import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.widgets.upnext.presentation.style.utils.appWidgetId
 import java.util.UUID
 
@@ -21,8 +22,8 @@ internal class UpNextWidgetOpenAll: ActionCallback {
         parameters: ActionParameters
     ) {
         Log.i("UpNextWidget", "Opening app for $glanceId (${glanceId.appWidgetId})")
-//        val intent = WidgetsEntryPoints.get(context).widgetsNavigationComponent().getLaunchAppIntent(context)
-//        context.startActivity(intent)
+        val intent = context.packageManager.getLaunchIntentForPackage(Device.applicationId)
+        context.startActivity(intent)
     }
 }
 internal class UpNextWidgetOpenEvent: ActionCallback {
@@ -37,6 +38,7 @@ internal class UpNextWidgetOpenEvent: ActionCallback {
     ) {
         val data = parameters[PARAM_DATA] ?: return launchApp(context, glanceId)
         Log.i("UpNextWidget", "Opening app for $glanceId (${glanceId.appWidgetId}) showing ${data.season} / ${data.round}")
+        launchApp(context, glanceId)
 //        val intent = WidgetsEntryPoints.get(context).widgetsNavigationComponent().getLaunchAppWithSeasonRoundIntent(
 //            context = context,
 //            season = data.season,
@@ -53,8 +55,8 @@ internal class UpNextWidgetOpenEvent: ActionCallback {
 
     private fun launchApp(context: Context, glanceId: GlanceId) {
         Log.i("UpNextWidget", "Opening app for $glanceId (${glanceId.appWidgetId})")
-//        val intent = WidgetsEntryPoints.get(context).widgetsNavigationComponent().getLaunchAppIntent(context)
-//        context.startActivity(intent)
+        val intent = context.packageManager.getLaunchIntentForPackage(Device.applicationId)
+        context.startActivity(intent)
     }
 }
 
