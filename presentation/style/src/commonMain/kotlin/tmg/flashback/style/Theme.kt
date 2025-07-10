@@ -7,13 +7,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
 import org.koin.compose.koinInject
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.style.preview.PreviewConfig
+import tmg.flashback.style.theme.LocalDarkMode
+import tmg.flashback.style.theme.NightMode
 import tmg.flashback.style.theme.Theme
 import tmg.flashback.style.theme.ThemeManager
+import tmg.flashback.style.theme.customLightMode
 
 object AppTheme {
     var appTheme: Theme = Theme.Default
@@ -34,24 +37,41 @@ object AppTheme {
 
 @Composable
 fun ApplicationTheme(
-    isLight: Boolean = !isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
     val themeManager = koinInject<ThemeManager>()
     val theme = themeManager.currentTheme
 
+    logInfo("Theme", "Theme: $theme")
+    logInfo("Theme", "DarkMode: ${isSystemInDarkTheme()}")
+
+    customLightMode = when (themeManager.currentNightMode) {
+        NightMode.DEFAULT -> null
+        NightMode.DAY -> true
+        NightMode.NIGHT -> false
+    }
+
     AppTheme.appTheme = theme
 
-    ApplicationTheme(
-        isLight = isLight,
-        theme = theme,
-        content = content
-    )
+    CompositionLocalProvider(
+        LocalDarkMode provides customLightMode,
+    ) {
+        key(customLightMode) {
+            setStatusBarIconColours(!isSystemInDarkTheme())
+            ApplicationTheme(
+                isLight = !isSystemInDarkTheme(),
+                theme = theme,
+                content = content
+            )
+        }
+    }
+
+
 }
 
 @Composable
 fun ApplicationTheme(
-    isLight: Boolean = !isSystemInDarkTheme(),
+    isLight: Boolean,
     theme: Theme,
     content: @Composable () -> Unit
 ) {
@@ -112,25 +132,5 @@ data class ThemeColours(
 
 expect fun getColours(theme: Theme): ThemeColours
 
-//sealed class SupportedTheme(
-//    val themePref: Theme
-//){
-//
-//    data object Default: SupportedTheme(Theme.Default) {
-//        val lightColors: AppColors = lightColours
-//        val darkColors: AppColors = darkColours
-//    }
-//
-//    object MaterialYou: SupportedTheme(Theme.MaterialYou) {
-//        @RequiresApi(Build.VERSION_CODES.S)
-//        fun lightColors(context: Context): AppColors {
-//            return lightColours.dynamic(dynamicLightColorScheme(context), isLightMode = true)
-//        }
-//
-//        @RequiresApi(Build.VERSION_CODES.S)
-//        fun darkColors(context: Context): AppColors {
-//            return darkColours.dynamic(dynamicDarkColorScheme(context), isLightMode = false)
-//        }
-//    }
-//
-//}
+@Composable
+expect fun setStatusBarIconColours(isLight: Boolean)

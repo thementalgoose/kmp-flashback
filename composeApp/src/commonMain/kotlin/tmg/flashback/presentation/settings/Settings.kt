@@ -92,8 +92,10 @@ import flashback.presentation.localisation.generated.resources.settings_theme_ni
 import flashback.presentation.localisation.generated.resources.settings_theme_nightmode_follow_system
 import flashback.presentation.localisation.generated.resources.settings_theme_nightmode_light
 import flashback.presentation.localisation.generated.resources.settings_theme_theme_default
+import flashback.presentation.localisation.generated.resources.settings_theme_theme_default_desc
 import flashback.presentation.localisation.generated.resources.settings_theme_theme_description
 import flashback.presentation.localisation.generated.resources.settings_theme_theme_material_you
+import flashback.presentation.localisation.generated.resources.settings_theme_theme_material_you_desc
 import flashback.presentation.localisation.generated.resources.settings_theme_theme_title
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
@@ -134,12 +136,12 @@ object Settings {
         val ThemeDefault = Setting.Pref(
             _id = "theme_default",
             title = string.settings_theme_theme_default,
-            subtitle = string.settings_theme_theme_default
+            subtitle = string.settings_theme_theme_default_desc
         )
         val ThemeMaterialYou = Setting.Pref(
             _id = "theme_material_you",
             title = string.settings_theme_theme_material_you,
-            subtitle = string.settings_theme_theme_material_you
+            subtitle = string.settings_theme_theme_material_you_desc
         )
     }
 

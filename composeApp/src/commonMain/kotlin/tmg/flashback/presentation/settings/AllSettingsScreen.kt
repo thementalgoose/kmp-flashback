@@ -14,7 +14,6 @@ import flashback.presentation.localisation.generated.resources.settings_header_n
 import flashback.presentation.localisation.generated.resources.settings_header_other
 import flashback.presentation.localisation.generated.resources.settings_header_rss_feed
 import flashback.presentation.localisation.generated.resources.settings_header_widgets
-import flashback.presentation.localisation.generated.resources.settings_web_browser_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
@@ -67,7 +66,7 @@ private fun AllSettingsScreen(
             item = Settings.DarkModeCategory,
             itemClicked = { navigateTo(SettingNavigation.DarkMode) }
         )
-        if (uiState.isThemeSupported) {
+        if (uiState.isThemeChangeSupported) {
             PrefCategory(
                 item = Settings.ThemeCategory,
                 itemClicked = { navigateTo(SettingNavigation.Theme) }

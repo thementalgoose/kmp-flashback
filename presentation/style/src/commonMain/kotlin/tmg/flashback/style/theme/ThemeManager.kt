@@ -44,5 +44,6 @@ internal class ThemeManagerImpl(
             ?: NightMode.DEFAULT
         set(value) {
             preferenceManager.save(PREFERENCE_NIGHT_MODE, value.saveKey)
+            customLightMode = (value == NightMode.DAY).takeIf { value != NightMode.DEFAULT }
         }
 }

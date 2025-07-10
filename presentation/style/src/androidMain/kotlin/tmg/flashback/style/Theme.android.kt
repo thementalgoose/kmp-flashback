@@ -3,8 +3,11 @@ package tmg.flashback.style
 import android.content.Context
 import android.os.Build
 import android.util.Log
+import androidx.activity.compose.LocalActivity
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.runtime.Composable
+import androidx.core.view.WindowCompat
 import org.koin.java.KoinJavaComponent.getKoin
 import tmg.flashback.style.theme.Theme
 
@@ -34,23 +37,10 @@ actual fun getColours(theme: Theme): ThemeColours {
     }
 }
 
-//internal actual object LocalDarkMode {
-//
-//    actual val current: Boolean
-//        @Composable get() = (LocalConfiguration.current.uiMode and UI_MODE_NIGHT_MASK) == UI_MODE_NIGHT_YES
-//
-//    @Composable
-//    actual infix fun provides(value: Boolean?): ProvidedValue<*> {
-//        val new = if (value == null) {
-//            LocalConfiguration.current
-//        } else {
-//            Configuration(LocalConfiguration.current).apply {
-//                uiMode = when (value) {
-//                    false -> (uiMode and UI_MODE_NIGHT_MASK.inv()) or UI_MODE_NIGHT_NO
-//                    true -> (uiMode and UI_MODE_NIGHT_MASK.inv()) or UI_MODE_NIGHT_YES
-//                }
-//            }
-//        }
-//        return LocalConfiguration.provides(new)
-//    }
-//}
+@Composable
+actual fun setStatusBarIconColours(isLight: Boolean) {
+    val context = LocalActivity.current ?: return
+    val controller = WindowCompat.getInsetsController(context.window, context.window.decorView)
+    controller.isAppearanceLightStatusBars = isLight
+
+}

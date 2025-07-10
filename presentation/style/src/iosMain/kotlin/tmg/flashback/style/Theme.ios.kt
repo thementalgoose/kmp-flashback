@@ -14,20 +14,7 @@ actual fun getColours(theme: Theme): ThemeColours {
     )
 }
 
-//@OptIn(InternalComposeUiApi::class)
-//actual object LocalDarkMode {
-//
-//    actual val current: Boolean
-//        @Composable get() = LocalSystemTheme.current == SystemTheme.Dark
-//
-//    @Composable
-//    actual infix fun provides(value: Boolean?): ProvidedValue<*> {
-//        val new = when(value) {
-//            true -> SystemTheme.Dark
-//            false -> SystemTheme.Light
-//            null -> LocalSystemTheme.current
-//        }
-//
-//        return LocalSystemTheme.provides(new)
-//    }
-//}
+@Composable
+actual fun setStatusBarIconColours(isLight: Boolean) {
+
+}
