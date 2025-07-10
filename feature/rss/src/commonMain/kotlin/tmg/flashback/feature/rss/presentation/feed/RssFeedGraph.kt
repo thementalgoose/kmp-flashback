@@ -2,6 +2,7 @@ package tmg.flashback.feature.rss.presentation.feed
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass.Companion.COMPACT
@@ -28,6 +29,10 @@ fun RssFeedGraph(
     viewModel: RSSFeedViewModel = koinViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsState()
+
+    LaunchedEffect(navigator.destination is RssNavigation.Configure) {
+        viewModel.refresh()
+    }
 
     MasterDetailsPane(
         navigator = navigator,
