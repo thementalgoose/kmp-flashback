@@ -2,6 +2,7 @@ package tmg.flashback.device.usecases
 
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
 import org.koin.java.KoinJavaComponent
 
@@ -15,6 +16,7 @@ actual class OpenEmailUseCaseImpl actual constructor(): OpenEmailUseCase {
     actual override fun invoke(email: String) {
         val emailIntent = Intent(Intent.ACTION_SENDTO)
         emailIntent.data = Uri.parse("mailto:$email")
+        emailIntent.flags = FLAG_ACTIVITY_NEW_TASK
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Flashback")
         getApplicationContext().startActivity(emailIntent)
     }
