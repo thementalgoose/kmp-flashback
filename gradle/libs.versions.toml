@@ -32,6 +32,7 @@ sqlite = "2.5.2"
 coil = "3.2.0"
 alarmee = "2.0.2"
 moko = "0.19.1"
+ksoup = "0.6.0"
 
 # Testing
 kotest = "5.9.1"
@@ -64,6 +65,9 @@ androidx_glance_appwidget = { module = "androidx.glance:glance-appwidget", versi
 androidx_glance_appwidgetpreview = { module = "androidx.glance:glance-appwidget-preview", version.ref = "androidx-glance" }
 androidx_splashscreen = "androidx.core:core-splashscreen:1.0.1"
 android_flagkit = "com.github.murgupluoglu:flagkit-android:1.0.5"
+androidx_core = "androidx.core:core-ktx:1.16.0"
+androidx_appcompat = "androidx.appcompat:appcompat:1.7.1"
+androidx_browser = "androidx.browser:browser:1.8.0"
 
 # Firebase
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
@@ -90,13 +94,12 @@ sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sql
 # Flags
 flagkit = "dev.carlsen.flagkit:flagkit:1.1.0"
 
+# HTML
+ksoup = { module = "com.mohamedrejeb.ksoup:ksoup-html", version.ref = "ksoup" }
+
 # Coil
 coil_compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil_network_ktor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
-
-# Permissions
-moko_permissions_notifications = { module = "dev.icerock.moko:permissions-notifications", version.ref = "moko" }
-moko_permissions_compose = { module = "dev.icerock.moko:permissions-compose", version.ref = "moko" }
 
 # Networking
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
@@ -110,9 +113,6 @@ ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "kto
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-serialization-kotlinx-xml = { module = "io.ktor:ktor-serialization-kotlinx-xml", version.ref = "ktor" }
 okhttp-loggingInterceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okHttpLoggingInterceptor" }
-
-# Notifications
-alarmee = { group = "io.github.tweener", name = "alarmee", version.ref = "alarmee" }
 
 # Test
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
@@ -153,10 +153,6 @@ common-ktor = [
 coil = [
     "coil_compose",
     "coil_network_ktor3"
-]
-moko = [
-    "moko_permissions_compose",
-    "moko_permissions_notifications"
 ]
 
 [plugins]

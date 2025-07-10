@@ -25,6 +25,8 @@ kotlin {
             implementation(libs.bundles.compose)
             implementation(libs.bundles.common.ktor)
             implementation(libs.ktor.serialization.kotlinx.xml)
+            implementation(libs.ksoup)
+
             implementation(compose.components.resources)
 
             implementation(projects.core.configuration)

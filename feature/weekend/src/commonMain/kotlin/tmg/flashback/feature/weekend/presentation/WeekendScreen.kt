@@ -2,6 +2,7 @@ package tmg.flashback.feature.weekend.presentation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
@@ -11,14 +12,25 @@ import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.window.core.layout.WindowSizeClass
+import flashback.feature.weekend.generated.resources.Res
+import flashback.feature.weekend.generated.resources.ic_maps
+import flashback.feature.weekend.generated.resources.ic_wikipedia
+import flashback.feature.weekend.generated.resources.ic_youtube
+import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.details_link_map
+import flashback.presentation.localisation.generated.resources.details_link_wikipedia
+import flashback.presentation.localisation.generated.resources.details_link_youtube
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.constants.AnalyticsConstants
 import tmg.flashback.analytics.presentation.ScreenView
@@ -30,6 +42,7 @@ import tmg.flashback.feature.weekend.presentation.data.qualifying.addQualifyingD
 import tmg.flashback.feature.weekend.presentation.data.race.addRaceData
 import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.addSprintQualifyingData
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.addSprintRaceData
+import tmg.flashback.formula1.model.Location
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.style.AppTheme
 import tmg.flashback.ui.components.header.Header
@@ -71,6 +84,8 @@ fun WeekendScreen(
         paddingValues = paddingValues,
         showBack = showBack,
         actionUpClicked = actionUpClicked,
+        openLink = viewModel::openLink,
+        openMap = viewModel::openMap,
         windowSizeClass = windowSizeClass,
         uiState = uiState.value,
         clickWeekendTab = viewModel::updateTab,
@@ -86,6 +101,8 @@ fun WeekendScreenTab(
     showBack: Boolean,
     actionUpClicked: () -> Unit,
     clickWeekendTab: (WeekendTabs) -> Unit,
+    openLink: (String) -> Unit,
+    openMap: (Location, String) -> Unit,
     windowSizeClass: WindowSizeClass,
     uiState: WeekendUiState,
     refresh: () -> Unit,
@@ -97,8 +114,6 @@ fun WeekendScreenTab(
             isLoading = isLoading,
             onRefresh = refresh,
             content = {
-
-
                 // Add custom padding for nav bar
                 val direction = LocalLayoutDirection.current
                 val masterPadding = PaddingValues(
@@ -116,7 +131,15 @@ fun WeekendScreenTab(
                         Header(
                             actionUpClicked = actionUpClicked,
                             action = HeaderAction.BACK.takeIf { showBack },
-                            text = (uiState as? Data)?.info?.raceName ?: screenData.raceName
+                            text = (uiState as? Data)?.info?.raceName ?: screenData.raceName,
+                            overrideIcons = {
+                                Icons(
+                                    uiState = uiState,
+                                    youtubeClicked = openLink,
+                                    wikipediaClicked = openLink,
+                                    mapsClicked = openMap
+                                )
+                            }
                         )
                     }
 
@@ -195,5 +218,54 @@ fun LazyListScope.addSchedule(info: InfoModel) {
         Schedule(
             model = info
         )
+    }
+}
+
+@Composable
+private fun RowScope.Icons(
+    uiState: WeekendUiState?,
+    youtubeClicked: (String) -> Unit,
+    wikipediaClicked: (String) -> Unit,
+    mapsClicked: (Location, String) -> Unit
+) {
+    if (uiState is Data) {
+        if (uiState.info.youtubeUrl?.isNotEmpty() == true) {
+            IconButton(
+                onClick = { youtubeClicked(uiState.info.youtubeUrl) },
+                content = {
+                    Icon(
+                        painter = painterResource(Res.drawable.ic_youtube),
+                        contentDescription = stringResource(string.details_link_youtube),
+                        tint = AppTheme.colors.onSurfaceVariant
+                    )
+                }
+            )
+        }
+        if (uiState.info.wikipediaUrl?.isNotEmpty() == true) {
+            IconButton(
+                onClick = { wikipediaClicked(uiState.info.wikipediaUrl) },
+                content = {
+                    Icon(
+                        painter = painterResource(Res.drawable.ic_wikipedia),
+                        contentDescription = stringResource(string.details_link_wikipedia),
+                        tint = AppTheme.colors.onSurfaceVariant
+                    )
+                }
+            )
+        }
+        if (uiState.info.circuit.location != null) {
+            IconButton(
+                onClick = {
+                    mapsClicked(uiState.info.circuit.location!!, uiState.info.circuit.name)
+                },
+                content = {
+                    Icon(
+                        painter = painterResource(Res.drawable.ic_maps),
+                        contentDescription = stringResource(string.details_link_map),
+                        tint = AppTheme.colors.onSurfaceVariant
+                    )
+                }
+            )
+        }
     }
 }

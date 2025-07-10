@@ -14,6 +14,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
+import tmg.flashback.device.usecases.OpenLocationUseCase
+import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.feature.weekend.presentation.data.ResultType
 import tmg.flashback.feature.weekend.presentation.data.info.InfoDataMapper
 import tmg.flashback.feature.weekend.presentation.data.qualifying.QualifyingDataMapper
@@ -21,6 +23,7 @@ import tmg.flashback.feature.weekend.presentation.data.race.RaceDataMapper
 import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.SprintQualifyingDataMapper
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.SprintRaceDataMapper
 import tmg.flashback.feature.weekend.utils.getWeekendEventOrder
+import tmg.flashback.formula1.model.Location
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.infrastructure.log.logInfo
 
@@ -31,7 +34,9 @@ class WeekendViewModel(
     private val raceDataMapper: RaceDataMapper,
     private val qualifyingDataMapper: QualifyingDataMapper,
     private val sprintQualifyingDataMapper: SprintQualifyingDataMapper,
-    private val sprintRaceDataMapper: SprintRaceDataMapper
+    private val sprintRaceDataMapper: SprintRaceDataMapper,
+    private val openWebpageUseCase: OpenWebpageUseCase,
+    private val openLocationUseCase: OpenLocationUseCase
 ): ViewModel() {
 
     private val seasonRound: MutableStateFlow<Pair<Int, Int>?> = MutableStateFlow(null)
@@ -84,6 +89,18 @@ class WeekendViewModel(
     fun updateTab(tab: WeekendTabs) {
         logDebug("Weeekend", "Selecting tab $tab")
         this.tab.update { tab }
+    }
+
+    fun openLink(link: String) {
+        openWebpageUseCase(link)
+    }
+
+    fun openMap(location: Location, name: String) {
+        openLocationUseCase(
+            lat = location.lat,
+            lng = location.lng,
+            name = name,
+        )
     }
 
     fun refresh() {

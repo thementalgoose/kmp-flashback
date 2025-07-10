@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.CollectionInfo
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.collectionInfo
@@ -71,16 +72,15 @@ private val weatherIconSize = 42.dp
 internal fun RaceWeekCard(
     model: CalendarItem.RaceWeek,
     itemClicked: (CalendarItem.RaceWeek) -> Unit,
-    modifier: Modifier = Modifier,
-    card: Boolean = false
+    modifier: Modifier = Modifier
 ) {
-    val alpha = when (model.fadeItem) {
-        true -> listAlpha
-        false -> 1f
-    }
-
     Column(modifier = modifier
         .fillMaxWidth()
+        .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
+        .background(when (model.shouldShowScheduleList) {
+            true -> AppTheme.colors.surfaceContainer3
+            false -> Color.Transparent
+        })
         .clickable { itemClicked(model) }
     ) {
         Row {
@@ -175,7 +175,7 @@ private fun RowScope.IconRow(
         },
         tint = when (hasQualifying) {
             true -> AppTheme.colors.f1ResultsFull
-            false -> AppTheme.colors.f1ResultsNeutral
+            false -> AppTheme.colors.f1ResultsNeutral.copy(alpha = 0.3f)
         }
     )
     Spacer(Modifier.width(2.dp))
@@ -191,7 +191,7 @@ private fun RowScope.IconRow(
             },
             tint = when (hasSprint) {
                 true -> AppTheme.colors.f1ResultsFull
-                false -> AppTheme.colors.f1ResultsNeutral
+                false -> AppTheme.colors.f1ResultsNeutral.copy(alpha = 0.3f)
             }
         )
         Spacer(Modifier.width(2.dp))
@@ -207,7 +207,7 @@ private fun RowScope.IconRow(
         },
         tint = when (hasRace) {
             true -> AppTheme.colors.f1ResultsFull
-            false -> AppTheme.colors.f1ResultsNeutral
+            false -> AppTheme.colors.f1ResultsNeutral.copy(alpha = 0.3f)
         }
     )
 }

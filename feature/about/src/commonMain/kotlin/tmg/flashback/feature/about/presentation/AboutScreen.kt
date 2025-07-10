@@ -89,7 +89,7 @@ fun AboutScreen(
             deviceId = uiState.value.deviceUuid,
             dependencyClicked = viewModel::openDependency,
             buttonClicked = viewModel::openButton,
-            installationId = "n/a"
+            installationId = uiState.value.installationId
         )
     } else {
         AboutPaneScreen(
@@ -100,7 +100,7 @@ fun AboutScreen(
             deviceId = uiState.value.deviceUuid,
             dependencyClicked = viewModel::openDependency,
             buttonClicked = viewModel::openButton,
-            installationId = "n/a"
+            installationId = uiState.value.installationId
         )
     }
 }

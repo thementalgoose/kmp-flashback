@@ -8,10 +8,8 @@ interface IsInAppBrowserEnabledUseCase {
     operator fun invoke(): Boolean
 }
 
-internal class IsInAppBrowserEnabledUseCaseImpl(
-    private val webRepository: WebRepository
-): IsInAppBrowserEnabledUseCase {
+internal class IsInAppBrowserEnabledUseCaseImpl(): IsInAppBrowserEnabledUseCase {
     override operator fun invoke(): Boolean {
-        return Device.platform == Android && webRepository.enabled
+        return Device.platform == Android
     }
 }

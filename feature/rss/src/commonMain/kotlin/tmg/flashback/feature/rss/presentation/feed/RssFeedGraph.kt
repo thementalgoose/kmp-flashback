@@ -10,6 +10,7 @@ import tmg.flashback.feature.rss.models.Article
 import tmg.flashback.feature.rss.presentation.configure.RssConfigureScreen
 import tmg.flashback.ui.navigation.MasterDetailPaneState
 import tmg.flashback.ui.navigation.MasterDetailsPane
+import tmg.flashback.webbrowser.presentation.WebScreen
 
 sealed interface RssNavigation {
     data object Configure: RssNavigation
@@ -60,9 +61,13 @@ fun RssFeedGraph(
                     insetPadding = paddingValues,
                     showBack = windowSizeClass.windowWidthSizeClass == COMPACT
                 )
-                is RssNavigation.WebPage -> {
-
-                }
+                is RssNavigation.WebPage -> WebScreen(
+                    url = model.article.link,
+                    actionUpClicked = actionUpClicked,
+                    shareClicked = { },
+                    paddingValues = paddingValues,
+                    openInBrowser = { viewModel.openArticle(model.article) }
+                )
             }
         }
     )

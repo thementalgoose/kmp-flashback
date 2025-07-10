@@ -1,5 +1,9 @@
 package tmg.flashback.presentation
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -63,7 +67,9 @@ fun AppGraph(
     NavHost(
         navController = navController,
         startDestination = Screen.Calendar,
-        modifier = modifier
+        enterTransition = { fadeIn() },
+        exitTransition = { fadeOut() },
+        modifier = modifier,
     ) {
         composable<Screen.Calendar> {
             CalendarGraph(

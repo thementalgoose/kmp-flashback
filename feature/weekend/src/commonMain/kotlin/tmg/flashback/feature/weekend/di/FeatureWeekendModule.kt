@@ -19,7 +19,7 @@ import tmg.flashback.feature.weekend.repositories.WeatherRepositoryImpl
 val featureWeekendModule = listOf(module())
 
 internal fun module() = module {
-    viewModel { WeekendViewModel(get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { WeekendViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
 
     single<WeatherRepository> { WeatherRepositoryImpl(get()) }
 

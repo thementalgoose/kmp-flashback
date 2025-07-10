@@ -30,7 +30,7 @@ fun Header(
     actionUpClicked: () -> Unit,
     modifier: Modifier = Modifier,
     action: HeaderAction? = null,
-    overrideIcons: @Composable () -> Unit = { },
+    overrideIcons: @Composable RowScope.() -> Unit = { },
     content: @Composable RowScope.() -> Unit
 ) {
     Column(
@@ -75,7 +75,7 @@ fun Header(
     actionUpClicked: () -> Unit,
     modifier: Modifier = Modifier,
     action: HeaderAction? = null,
-    overrideIcons: @Composable () -> Unit = { },
+    overrideIcons: @Composable RowScope.() -> Unit = { },
 ) {
     Header(
         actionUpClicked = actionUpClicked,

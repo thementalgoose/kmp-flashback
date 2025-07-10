@@ -136,6 +136,10 @@ fun DriverSeasonScreen(
             if (uiState is DriverSeasonUiState.Data) {
                 item("badges") {
                     DriverBadges(
+                        modifier = Modifier.padding(
+                            horizontal = AppTheme.dimens.medium,
+                            vertical = AppTheme.dimens.small
+                        ),
                         driver = uiState.driver,
                         constructors = uiState.constructors
                     )

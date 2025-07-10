@@ -19,7 +19,8 @@ class AboutViewModel(
 
     private val _uiState: MutableStateFlow<AboutUiState> = MutableStateFlow(AboutUiState(
         deviceUuid = deviceRepository.deviceUdid,
-        contactEmail = deviceRepository.contactEmail
+        installationId = deviceRepository.installationId,
+        contactEmail = deviceRepository.contactEmail,
     ))
     val uiState: StateFlow<AboutUiState> = _uiState
 

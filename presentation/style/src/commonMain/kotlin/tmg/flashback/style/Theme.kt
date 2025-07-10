@@ -7,19 +7,21 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import org.koin.compose.koinInject
+import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.theme.Theme
 import tmg.flashback.style.theme.ThemeManager
 
 object AppTheme {
+    var appTheme: Theme = Theme.Default
+
     val colors: AppColors
         @Composable
         @ReadOnlyComposable
         get() = LocalColors.current
-
-    var appTheme: Theme = Theme.Default
 
     val typography: AppTypography
         @Composable
@@ -29,8 +31,6 @@ object AppTheme {
 
     internal val disabledAlpha = 0.4f
 }
-
-val Dimens = AppTheme.dimens
 
 @Composable
 fun ApplicationTheme(

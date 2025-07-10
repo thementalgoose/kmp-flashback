@@ -30,6 +30,7 @@ kotlin {
             implementation(projects.core.metrics.analytics)
             implementation(projects.core.metrics.crashlytics)
             implementation(projects.core.preferences)
+            implementation(projects.core.device)
             implementation(projects.domain.formula1)
             implementation(projects.data.flashback)
             implementation(projects.infrastructure)

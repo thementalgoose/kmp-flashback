@@ -19,6 +19,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,6 +28,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
+import com.mohamedrejeb.ksoup.html.parser.KsoupHtmlHandler
+import com.mohamedrejeb.ksoup.html.parser.KsoupHtmlParser
 import flashback.feature.rss.generated.resources.Res
 import flashback.feature.rss.generated.resources.ic_rss_icon_no_sources
 import flashback.feature.rss.generated.resources.ic_rss_settings
@@ -114,7 +117,10 @@ fun RSSScreen(
                                 }
                             }
                             items(uiState.rssItems, key = { it.link }) {
-                                Item(it, itemClicked)
+                                Item(
+                                    model = it,
+                                    clickItem = itemClicked
+                                )
                             }
                         }
                     }
@@ -154,9 +160,21 @@ private fun Item(
                     .fillMaxWidth()
                     .padding(bottom = 4.dp)
             )
+            
             if (model.description != null) {
+                val description = remember {
+                    var string = ""
+                    val rawTextHandler = KsoupHtmlHandler
+                        .Builder()
+                        .onText { text -> string += text }
+                        .build()
+                    val parser = KsoupHtmlParser(rawTextHandler)
+                    parser.write(model.description)
+                    return@remember string
+                }
+
                 TextBody2(
-                    text = model.description,
+                    text = description,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 4.dp)

@@ -3,6 +3,7 @@ package tmg.flashback.ui.navigation
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -52,13 +53,15 @@ fun NavigationBar(
     list: List<NavigationItem>,
     itemClicked: (NavigationItem) -> Unit,
     modifier: Modifier = Modifier,
+    shadow: Dp = 8.dp,
     bottomPadding: Dp = 0.dp
 ) {
     BoxWithConstraints(
         modifier = modifier
             .fillMaxWidth()
-            .shadow(8.dp)
+            .shadow(shadow)
             .background(AppTheme.colors.surfaceNav)
+            .clickable(enabled = false, onClick = {})
             .padding(bottom = bottomPadding)
     ) {
         val displayAsVertical = (horizontalWidthThreshold * list.size) > minWidth

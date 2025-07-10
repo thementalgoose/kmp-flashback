@@ -4,6 +4,7 @@ import io.ktor.http.URLProtocol.Companion.HTTP
 import io.ktor.http.URLProtocol.Companion.HTTPS
 import io.ktor.http.Url
 import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.format
 import kotlinx.datetime.format.DayOfWeekNames
 import kotlinx.datetime.format.MonthNames.Companion.ENGLISH_ABBREVIATED
 import kotlinx.datetime.format.Padding
@@ -63,9 +64,10 @@ internal class RssXMLMapperImpl(
 
         return model.channel
             ?.item
-            ?.filter { it.title != null && it.link != null && it.pubDate != null }
+            ?.filter { it.title != null && it.link != null }
             ?.filterNotNull()
             ?.map {
+                val pubDate = it.pubDate ?: LocalDateTime.now().format(LocalDateTime.Formats.ISO)
                 Article(
                     id = it.link!!,
                     title = it.title!!.replace("&#039;", "'"),
@@ -77,7 +79,7 @@ internal class RssXMLMapperImpl(
                             ?.trim()
                     },
                     link = it.link!!.replace("http://", "https://"),
-                    date = attemptParseDate(it.pubDate!!.replace("GMT", "+0000")),
+                    date = attemptParseDate(pubDate.replace("GMT", "+0000")),
                     source = source
                 )
             } ?: emptyList()

@@ -6,6 +6,8 @@ import tmg.flashback.device.repositories.DeviceRepository
 import tmg.flashback.device.repositories.DeviceRepositoryImpl
 import tmg.flashback.device.usecases.OpenEmailUseCase
 import tmg.flashback.device.usecases.OpenEmailUseCaseImpl
+import tmg.flashback.device.usecases.OpenLocationUseCase
+import tmg.flashback.device.usecases.OpenLocationUseCaseImpl
 import tmg.flashback.device.usecases.OpenSettingsUseCase
 import tmg.flashback.device.usecases.OpenSettingsUseCaseImpl
 import tmg.flashback.device.usecases.OpenWebpageUseCase
@@ -19,4 +21,5 @@ internal fun module() = module {
     singleOf<OpenSettingsUseCase>(::OpenSettingsUseCaseImpl)
     singleOf<OpenWebpageUseCase>(::OpenWebpageUseCaseImpl)
     singleOf<OpenEmailUseCase>(::OpenEmailUseCaseImpl)
+    singleOf<OpenLocationUseCase>(::OpenLocationUseCaseImpl)
 }

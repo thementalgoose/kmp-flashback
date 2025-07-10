@@ -134,6 +134,7 @@ class ConstructorSeasonViewModel(
     private fun getAllDrivers(history: ConstructorHistorySeason): List<ConstructorSeasonDriver> {
         return history.drivers
             .map { it.value }
+            .sortedBy { it.championshipStanding }
             .map { ConstructorSeasonDriver(it) }
     }
 }

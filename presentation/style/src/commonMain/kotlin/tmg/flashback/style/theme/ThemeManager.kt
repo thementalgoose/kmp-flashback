@@ -45,5 +45,4 @@ internal class ThemeManagerImpl(
         set(value) {
             preferenceManager.save(PREFERENCE_NIGHT_MODE, value.saveKey)
         }
-
 }

@@ -4,10 +4,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.test.isEnabled
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.nav_settings
@@ -91,13 +88,12 @@ private fun AllSettingsScreen(
                 item = Settings.RssCategory,
                 itemClicked = { navigateTo(SettingNavigation.RssConfigure) }
             )
-        }
-        if (uiState.isInAppBrowserSupported) {
-            PrefHeader(string.settings_web_browser_title)
-            PrefCategory(
-                item = Settings.WebBrowserCategory,
-                itemClicked = { navigateTo(SettingNavigation.InAppBrowser)  }
-            )
+            if (uiState.isInAppBrowserSupported) {
+                PrefCategory(
+                    item = Settings.WebBrowserCategory,
+                    itemClicked = { navigateTo(SettingNavigation.InAppBrowser)  }
+                )
+            }
         }
         if (Device.platform == Platform.Android) {
             PrefHeader(string.settings_header_notifications)

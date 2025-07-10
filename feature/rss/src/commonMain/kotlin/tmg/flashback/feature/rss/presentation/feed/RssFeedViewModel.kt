@@ -26,6 +26,7 @@ class RSSFeedViewModel(
     private val openWebpageUseCase: OpenWebpageUseCase,
     private val getRssArticlesUseCase: GetRssArticleUseCase,
     private val isInAppBrowserEnabledUseCase: IsInAppBrowserEnabledUseCase,
+    private val webRepository: WebRepository,
     private val timeManager: TimeManager
 ): ViewModel() {
 
@@ -44,7 +45,7 @@ class RSSFeedViewModel(
     }
 
     val inAppBrowserEnabled: Boolean
-        get() = isInAppBrowserEnabledUseCase()
+        get() = isInAppBrowserEnabledUseCase() && webRepository.enabled
 
     fun refresh() {
         viewModelScope.launch {

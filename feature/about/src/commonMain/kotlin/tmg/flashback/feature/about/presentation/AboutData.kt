@@ -16,6 +16,7 @@ import org.jetbrains.compose.resources.StringResource
 
 data class AboutUiState(
     val deviceUuid: String,
+    val installationId: String,
     val contactEmail: String,
 )
 
@@ -76,6 +77,12 @@ enum class AboutDependency(
         url = "https://firebase.google.com/",
         imageUrl = "https://avatars2.githubusercontent.com/u/1335026"
     ),
+    Room(
+        dependencyName = "AndroidX Room",
+        author = "Google",
+        url = "https://developer.android.com/jetpack/androidx/releases/room",
+        imageUrl = "https://avatars.githubusercontent.com/u/32689599?s=200"
+    ),
     Ktor(
         dependencyName = "Ktor",
         author = "ktorio",
@@ -99,5 +106,11 @@ enum class AboutDependency(
         author = "Anders Carlsen",
         url = "https://github.com/acarlsen/kmp-flagkit",
         imageUrl = "https://avatars.githubusercontent.com/u/6698402?v=4"
-    )
+    ),
+    FlagKit_Android(
+        dependencyName = "FlagKit",
+        author = "murgupluoglu",
+        url = "https://github.com/murgupluoglu/flagkit-android",
+        imageUrl = "https://avatars.githubusercontent.com/u/11410147?v=4"
+    ),
 }
