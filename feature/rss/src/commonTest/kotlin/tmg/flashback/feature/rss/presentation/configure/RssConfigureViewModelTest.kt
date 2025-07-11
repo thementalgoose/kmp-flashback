@@ -10,8 +10,10 @@ import dev.mokkery.verify
 import kotlinx.coroutines.test.TestCoroutineScheduler
 import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.runTest
+import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.feature.rss.models.SupportedSource
 import tmg.flashback.feature.rss.repositories.RssRepository
+import tmg.flashback.feature.rss.usecases.GetSourcesUseCase
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -20,10 +22,15 @@ internal class RssConfigureViewModelTest {
     private lateinit var underTest: RssConfigureViewModel
 
     private val mockRssRepository: RssRepository = mock(autoUnit)
+    private val mockGetSourcesUseCase: GetSourcesUseCase = mock(autoUnit)
+    private val mockOpenWebpageUseCase: OpenWebpageUseCase = mock(autoUnit)
 
     private fun initUnderTest() {
         underTest = RssConfigureViewModel(
-            rssRepository = mockRssRepository
+            rssRepository = mockRssRepository,
+            getSourcesUseCase = mockGetSourcesUseCase,
+            openWebpageUseCase = mockOpenWebpageUseCase
+
         )
     }
 
@@ -70,7 +77,7 @@ internal class RssConfigureViewModelTest {
             val initialState = awaitItem()
             assertEquals(listOf(ConfiguredSupportedSource(fakeSupportedSource, false)), initialState.sources)
 
-            underTest.updateSource(fakeSupportedSource, true)
+            underTest.updateSource(fakeSupportedSource.rssLink, true)
 
             verify {
                 mockRssRepository.rssUrls = setOf(fakeRssLink)
@@ -95,7 +102,7 @@ internal class RssConfigureViewModelTest {
             val initialState = awaitItem()
             assertEquals(listOf(ConfiguredSupportedSource(fakeSupportedSource, true)), initialState.sources)
 
-            underTest.updateSource(fakeSupportedSource, false)
+            underTest.updateSource(fakeSupportedSource.rssLink, false)
 
             verify {
                 mockRssRepository.rssUrls = emptySet()
@@ -127,6 +134,16 @@ internal class RssConfigureViewModelTest {
 
             val nextState = awaitItem()
             assertEquals(true, nextState.showDescription)
+        }
+    }
+
+    @Test
+    fun `clicking contact link launches webpage`() {
+        initUnderTest()
+
+        underTest.clickContactLink(fakeSupportedSource)
+        verify {
+            mockOpenWebpageUseCase.invoke(fakeSupportedSource.rssLink)
         }
     }
 }
