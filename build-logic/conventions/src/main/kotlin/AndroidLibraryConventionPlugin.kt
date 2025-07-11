@@ -8,6 +8,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
     override fun apply(target: Project): Unit = with(target) {
         val libs = getLibs()
+
         plugins.apply(libs.findPlugin("androidLibrary").get().get().pluginId)
 
         extensions.configure<LibraryExtension> {
@@ -23,15 +24,28 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                     excludes += "/META-INF/{AL2.0,LGPL2.1}"
                 }
             }
+            buildFeatures {
+                buildConfig = true
+            }
             buildTypes {
                 getByName("release") {
                     isMinifyEnabled = true
+
+                    buildConfigField("String", "VERSION_NAME", "\"${System.getenv("VERSION_NAME") ?: "1.0.0"}\"")
+                    buildConfigField("String", "VERSION_CODE", "\"${System.getenv("VERSION_CODE") ?: "1"}\"")
                 }
+                getByName("debug") {
+                    buildConfigField("String", "VERSION_NAME", "\"${System.getenv("VERSION_NAME") ?: "1.0.0"}\"")
+                    buildConfigField("String", "VERSION_CODE", "\"${System.getenv("VERSION_CODE") ?: "1"}\"")
+                }
+
             }
             compileOptions {
                 sourceCompatibility = JavaVersion.VERSION_17
                 targetCompatibility = JavaVersion.VERSION_17
             }
+
+
         }
     }
 }

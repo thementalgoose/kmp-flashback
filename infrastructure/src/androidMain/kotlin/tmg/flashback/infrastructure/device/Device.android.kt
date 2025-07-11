@@ -1,17 +1,24 @@
 package tmg.flashback.infrastructure.device
 
+import android.content.Context
 import android.os.Build
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import tmg.flashback.infrastructure.BuildConfig
 
-actual object Device {
+actual object Device: KoinComponent {
+
+    private val applicationContext
+        get() = inject<Context>()
+
     actual val applicationId: String
-        get() = "tmg.flashback"
+        get() = applicationContext.value.packageName
 
     actual val versionCode: Int
-        get() = 1
+        get() = BuildConfig.VERSION_CODE.toIntOrNull() ?: 1
 
     actual val versionName: String
-        get() = "1.0.0"
+        get() = BuildConfig.VERSION_NAME
 
     actual val isMonetThemeSupported: Boolean
         get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S

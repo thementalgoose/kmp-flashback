@@ -13,6 +13,7 @@ actual object Device {
 
     actual val versionCode: Int
         get() = NSBundle.version().toInt()
+
     actual val versionName: String
         get() = (NSBundle.mainBundle().infoDictionary
             ?.getOrElse("CFBundleShortVersionString") { IOS_UNKNOWN } as? String)
