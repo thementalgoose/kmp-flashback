@@ -349,11 +349,6 @@ object Settings {
         icon = Res.drawable.ic_settings_privacy
     )
     object Privacy {
-        val PrivacyPolicy = Setting.Pref(
-            _id = "privacy_policy",
-            title = string.settings_pref_privacy_policy_title,
-            subtitle = string.settings_pref_privacy_policy_description
-        )
         val CrashReporting = Setting.Pref(
             _id = "crash_reporting",
             title = string.settings_pref_crash_reporting_title,
@@ -365,6 +360,11 @@ object Settings {
             subtitle = string.settings_pref_analytics_description
         )
     }
+    val PrivacyPolicy = Setting.Category(
+        _id = "privacy_policy",
+        title = string.settings_pref_privacy_policy_title,
+        subtitle = string.settings_pref_privacy_policy_description
+    )
 
     val AboutCategory = Setting.Category(
         _id = "about",

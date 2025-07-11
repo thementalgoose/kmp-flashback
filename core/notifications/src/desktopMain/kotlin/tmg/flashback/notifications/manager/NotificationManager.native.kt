@@ -10,10 +10,10 @@ actual class NotificationManagerImpl actual constructor(): NotificationManager {
         text: String,
         timestamp: LocalDateTime
     ) {
-        TODO("Not yet implemented")
+        /* TODO */
     }
 
     actual override fun cancel(uuid: Int) {
-        TODO("Not yet implemented")
+        /* TODO */
     }
 }

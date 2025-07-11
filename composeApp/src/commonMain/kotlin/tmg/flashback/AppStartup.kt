@@ -12,6 +12,7 @@ import tmg.flashback.device.repositories.DeviceRepository
 import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
 import tmg.flashback.feature.notifications.usecases.SubscribeResultNotificationsUseCase
 import tmg.flashback.infrastructure.device.Device
+import tmg.flashback.infrastructure.device.Platform
 import tmg.flashback.infrastructure.device.log
 
 /**
@@ -43,9 +44,11 @@ class AppStartup(
         }
 
         // Subscribe to remote topics
-        GlobalScope.launch {
-            scheduleUpcomingNotificationsUseCase.invoke(false)
-            subscribeResultNotificationsUseCase.invoke()
+        if (Device.platform == Platform.Android) {
+            GlobalScope.launch {
+                scheduleUpcomingNotificationsUseCase.invoke(false)
+                subscribeResultNotificationsUseCase.invoke()
+            }
         }
 
         Device.log()

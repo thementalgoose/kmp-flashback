@@ -118,6 +118,10 @@ private fun AllSettingsScreen(
             itemClicked = { navigateTo(SettingNavigation.Privacy) }
         )
         PrefCategory(
+            item = Settings.PrivacyPolicy,
+            itemClicked = { navigateTo(SettingNavigation.PrivacyPolicy) }
+        )
+        PrefCategory(
             item = Settings.AboutCategory,
             itemClicked = { navigateTo(SettingNavigation.About) }
         )

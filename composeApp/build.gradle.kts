@@ -152,6 +152,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.koin.core)
             implementation(libs.bundles.koin.compose)
+            implementation(libs.ksoup)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))

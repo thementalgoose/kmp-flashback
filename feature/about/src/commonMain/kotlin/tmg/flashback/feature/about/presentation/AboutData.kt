@@ -113,4 +113,10 @@ enum class AboutDependency(
         url = "https://github.com/murgupluoglu/flagkit-android",
         imageUrl = "https://avatars.githubusercontent.com/u/11410147?v=4"
     ),
+    Ksoup(
+        dependencyName = "Ksoup",
+        author = "Fleek Soft",
+        url = "https://github.com/fleeksoft/ksoup",
+        imageUrl = "https://avatars.githubusercontent.com/u/35963918"
+    ),
 }

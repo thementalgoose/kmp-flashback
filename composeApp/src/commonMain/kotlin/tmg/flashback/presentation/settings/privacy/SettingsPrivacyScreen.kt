@@ -23,7 +23,6 @@ import tmg.flashback.ui.components.header.HeaderAction
 @Composable
 fun SettingsPrivacyScreen(
     actionUpClicked: () -> Unit,
-    navigateToPrivacyPolicy: () -> Unit,
     insetPadding: PaddingValues,
     showBack: Boolean,
     viewModel: SettingsPrivacyViewModel = koinViewModel()
@@ -33,7 +32,6 @@ fun SettingsPrivacyScreen(
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     SettingsPrivacyScreen(
         insetPadding = insetPadding,
-        navigateToPrivacyPolicy = navigateToPrivacyPolicy,
         showBack = showBack,
         uiState = uiState.value,
         actionUpClicked = actionUpClicked,
@@ -45,7 +43,6 @@ fun SettingsPrivacyScreen(
 @Composable
 private fun SettingsPrivacyScreen(
     uiState: SettingsPrivacyUiState,
-    navigateToPrivacyPolicy: () -> Unit,
     showBack: Boolean,
     insetPadding: PaddingValues,
     actionUpClicked: () -> Unit,
@@ -63,14 +60,6 @@ private fun SettingsPrivacyScreen(
                 action = HeaderAction.BACK.takeIf { showBack }
             )
         }
-        PrefHeader(string.settings_header_legal)
-        PrefLink(
-            item = Settings.Privacy.PrivacyPolicy,
-            itemClicked = {
-                actionUpClicked()
-                navigateToPrivacyPolicy()
-            }
-        )
         PrefHeader(string.settings_header_device_info)
         PrefSwitch(
             item = Settings.Privacy.CrashReporting,

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -99,7 +100,7 @@ fun NavigationBar(
 }
 
 @Composable
-private fun HorizontalItem(
+private fun RowScope.HorizontalItem(
     item: NavigationItem,
     itemClicked: (NavigationItem) -> Unit,
     modifier: Modifier = Modifier
@@ -108,47 +109,53 @@ private fun HorizontalItem(
         true -> AppTheme.colors.primary.copy(alpha = 0.3f)
         false -> Color.Transparent
     }, label = "backgroundColor")
-    Row(
-        modifier = modifier
-            .wrapContentWidth()
-            .clip(RoundedCornerShape(100.dp))
-            .background(backgroundColor.value)
-            .height(iconSize + (AppTheme.dimens.small * 2))
-            .combinedClickable(
-                onClick = {
-                    if (item.isSelected != true) {
-                        itemClicked(item)
-                    }
+    Box(modifier = Modifier
+        .weight(1f)
+        .fillMaxHeight()
+        .combinedClickable(
+            onClick = {
+                if (item.isSelected != true) {
+                    itemClicked(item)
                 }
-            )
+            }
+        ),
+        contentAlignment = Alignment.Center
     ) {
         Row(
-            modifier = Modifier
-                .align(Alignment.CenterVertically)
-                .padding(
-                    vertical = AppTheme.dimens.small,
-                    horizontal = AppTheme.dimens.medium
-                ),
-            verticalAlignment = Alignment.CenterVertically
+            modifier = modifier
+                .wrapContentWidth()
+                .clip(RoundedCornerShape(100.dp))
+                .background(backgroundColor.value)
+                .height(iconSize + (AppTheme.dimens.small * 2))
         ) {
-            Icon(
+            Row(
                 modifier = Modifier
-                    .size(iconSize),
-                painter = painterResource(resource = item.icon),
-                tint = AppTheme.colors.onSurface,
-                contentDescription = null,
-            )
-            TextBody1(
-                textAlign = TextAlign.Center,
-                maxLines = 1,
-                modifier = Modifier
+                    .align(Alignment.CenterVertically)
                     .padding(
-                        start = 10.dp,
+                        vertical = AppTheme.dimens.small,
+                        horizontal = AppTheme.dimens.medium
                     ),
-                text = stringResource(resource = item.label),
-                textColor = AppTheme.colors.onSurface,
-                bold = item.isSelected == true
-            )
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    modifier = Modifier
+                        .size(iconSize),
+                    painter = painterResource(resource = item.icon),
+                    tint = AppTheme.colors.onSurface,
+                    contentDescription = null,
+                )
+                TextBody1(
+                    textAlign = TextAlign.Center,
+                    maxLines = 1,
+                    modifier = Modifier
+                        .padding(
+                            start = 10.dp,
+                        ),
+                    text = stringResource(resource = item.label),
+                    textColor = AppTheme.colors.onSurface,
+                    bold = item.isSelected == true
+                )
+            }
         }
     }
 }

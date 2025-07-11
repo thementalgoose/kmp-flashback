@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass.Companion.COMPACT
+import tmg.flashback.feature.privacypolicy.presentation.PrivacyPolicyScreen
 import tmg.flashback.feature.rss.presentation.configure.RssConfigureScreen
 import tmg.flashback.presentation.settings.about.SettingsAboutScreen
 import tmg.flashback.presentation.settings.browser.SettingsBrowserScreen
@@ -29,6 +30,7 @@ interface SettingNavigation {
     data object NotificationUpcoming: SettingNavigation
     data object Widgets: SettingNavigation
     data object Privacy: SettingNavigation
+    data object PrivacyPolicy: SettingNavigation
     data object About: SettingNavigation
 }
 
@@ -106,7 +108,11 @@ fun AllSettingsGraph(
                     actionUpClicked = { navigator.clear() },
                     insetPadding = insetPadding,
                     showBack = windowSizeClass.windowWidthSizeClass == COMPACT,
-                    navigateToPrivacyPolicy = navigateToPrivacyPolicy
+                )
+                is SettingNavigation.PrivacyPolicy -> PrivacyPolicyScreen(
+                    actionUpClicked = { navigator.clear() },
+                    paddingValues = insetPadding,
+                    showBack = windowSizeClass.windowWidthSizeClass == COMPACT,
                 )
                 is SettingNavigation.About -> SettingsAboutScreen(
                     actionUpClicked = { navigator.clear() },
