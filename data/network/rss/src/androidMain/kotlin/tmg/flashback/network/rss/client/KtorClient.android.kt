@@ -4,9 +4,7 @@ import android.util.Log
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.xml.xml
-import okhttp3.internal.format
 import okhttp3.logging.HttpLoggingInterceptor
 import tmg.flashback.infrastructure.device.Device
 
