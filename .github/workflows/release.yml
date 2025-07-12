@@ -8,7 +8,7 @@ env:
 jobs:
 
   unit-tests:
-    uses: ./.github/workflows/jobs/unit-tests.yml
+    uses: ./.github/workflows/job-unit-tests.yml
 
   versions:
     runs-on: ubuntu-latest
@@ -26,11 +26,11 @@ jobs:
 
   android-assemble:
     needs: [unit-tests]
-    uses: ./.github/workflows/jobs/android-assemble-aab.yml
+    uses: ./.github/workflows/job-android-assemble-aab.yml
     with:
       version_name: ${{ needs.versions.outputs.version_name }}
       version_code: ${{ needs.versions.outputs.version_code }}
 
   android-deploy:
     needs: [android-assemble]
-    uses: ./.github/workflows/jobs/android-deploy-play-store.yml
+    uses: ./.github/workflows/job-android-deploy-play-store.yml

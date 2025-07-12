@@ -9,4 +9,4 @@ name: Main
       - '**.png'
 jobs:
   unit-tests:
-    uses: ./.github/workflows/jobs/unit-tests.yml
+    uses: ./.github/workflows/job-unit-tests.yml
