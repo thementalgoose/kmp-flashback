@@ -7,7 +7,7 @@ on:
       version_code: { required: true, type: string }
     outputs:
       artifact_url:
-        value: ${{ steps.upload.artifact-url }}
+        value: ${{ jobs.build.steps.upload.artifact-url }}
 
 jobs:
   build:
