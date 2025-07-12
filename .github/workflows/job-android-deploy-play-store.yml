@@ -1,4 +1,4 @@
-name: Deploy AAB to Play Store
+name: Job - Android - Deploy AAB to Google Play
 
 on:
   workflow_call:
