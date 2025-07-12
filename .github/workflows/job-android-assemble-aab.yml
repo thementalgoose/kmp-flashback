@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       version_name: { required: true, type: string }
-      version_code: { required: true, type: number }
+      version_code: { required: true, type: string }
     outputs:
       artifact-name:
         value: ${{ jobs.build.outputs.artifact-name }}
