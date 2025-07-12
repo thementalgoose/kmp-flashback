@@ -18,7 +18,7 @@ jobs:
   attach-apk:
     uses: ./.github/workflows/job-comment.yml
     secrets: inherit
-    needs: [assemble-app]
+    needs: [assemble]
     with:
       body_find: Test APK
       body: |
