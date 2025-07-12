@@ -10,3 +10,22 @@ jobs:
   unit-tests:
     uses: ./.github/workflows/job-unit-tests.yml
     secrets: inherit
+
+  assemble:
+    uses: ./.github/workflows/job-android-assemble-sand.yml
+    secrets: inherit
+
+  attach-apk:
+    uses: ./.github/workflows/job-comment.yml
+    secrets: inherit
+    needs: [assemble-app]
+    with:
+      body_find: Test APK
+      body: |
+        ### Test APK
+        
+        A test apk built against this change is available and will be available for 48 hours
+        
+        ${{ needs.assemble.outputs.artifact_url }}
+        
+        <sup>Built at commit ${{ github.sha }}</sup>
