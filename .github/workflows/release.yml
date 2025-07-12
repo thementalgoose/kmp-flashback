@@ -1,6 +1,6 @@
 name: Release
 env:
-  RUN_OFFSET: 450
+  RUN_OFFSET: 100
 'on':
   release:
     types: [published]
@@ -29,7 +29,7 @@ jobs:
     uses: ./.github/workflows/job-android-assemble-aab.yml
     secrets: inherit
     with:
-      version_name: ${{ needs.versions.outputs.version_name }}
+      version_name: ${{ needs.versions.outputs.version_name }}.${{ needs.versions.outputs.version_code }}
       version_code: ${{ needs.versions.outputs.version_code }}
 
   android-deploy:

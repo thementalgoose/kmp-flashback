@@ -15,11 +15,15 @@ jobs:
         with:
           name: AAB
 
+      - name: Logging
+        run: | 
+          ls -R composeApp/build/outputs
+
       # Deploy
       - name: Deploy Bundle to google Play
-        uses: r0adkll/upload-google-play@v1.1.3
+        uses: r0adkll/upload-google-play@v1
         with:
-          serviceAccountJsonPlainText: "{invalid_json}"
+          serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT }}
           packageName: tmg.flashback
           releaseFiles: composeApp/build/outputs/bundle/**/*.aab
           track: internal
