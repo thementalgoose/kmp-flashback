@@ -81,4 +81,4 @@ jobs:
         with:
           name: AAB
           path: |
-            composeApp/build/outputs/bundle/**/*.apk
+            composeApp/build/outputs/apk/**/*.apk

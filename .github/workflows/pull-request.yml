@@ -18,17 +18,17 @@ jobs:
       version_name: 1.0.0
       version_code: 1
 
-  attach-apk:
-    uses: ./.github/workflows/job-comment.yml
-    secrets: inherit
-    needs: [assemble]
-    with:
-      body_find: Test APK
-      body: |
-        ### Test APK
-        
-        A test apk built against this change is available and will be available for 48 hours
-        
-        ${{ needs.assemble.outputs.artifact_url }}
-        
-        <sup>Built at commit ${{ github.sha }}</sup>
+#  attach-apk:
+#    uses: ./.github/workflows/job-comment.yml
+#    secrets: inherit
+#    needs: [assemble]
+#    with:
+#      body_find: Test APK
+#      body: |
+#        ### Test APK
+#
+#        A test apk built against this change is available and will be available for 48 hours
+#
+#        ${{ needs.assemble.outputs.artifact_url }}
+#
+#        <sup>Built at commit ${{ github.sha }}</sup>
