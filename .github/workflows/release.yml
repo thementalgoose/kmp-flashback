@@ -1,13 +1,36 @@
 name: Release
 env:
-  RUN_OFFSET: 400
+  RUN_OFFSET: 450
 'on':
   release:
     types: [published]
   workflow_dispatch:
 jobs:
+
   unit-tests:
     uses: ./.github/workflows/jobs/unit-tests.yml
 
+  versions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      version_name: ${{ steps.get_version_name.outputs.version_name }}
+      version_code: ${{ steps.get_version_name.outputs.version_code }}
+    steps:
+      # Version tag
+      - name: Version Name
+        id: get_version_name
+        run: |
+          echo "version_name=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
+          echo "version_code=$((${{ github.run_number }} + $RUN_OFFSET))" >> $GITHUB_OUTPUT
+
   android-assemble:
-    
+    needs: [unit-tests]
+    uses: ./.github/workflows/jobs/android-assemble-aab.yml
+    with:
+      version_name: ${{ needs.versions.outputs.version_name }}
+      version_code: ${{ needs.versions.outputs.version_code }}
+
+  android-deploy:
+    needs: [android-assemble]
+    uses: ./.github/workflows/jobs/android-deploy-play-store.yml

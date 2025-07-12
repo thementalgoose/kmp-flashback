@@ -1,0 +1,27 @@
+name: Deploy AAB to Play Store
+
+on:
+  workflow_call:
+
+jobs:
+  deploy:
+    name: Deploy to play store
+    runs-on: ubuntu-latest
+    steps:
+
+      # Download AAB + Mapping
+      - name: Download AAB
+        uses: actions/download-artifact@v4
+        with:
+          name: AAB
+
+      # Deploy
+      - name: Deploy Bundle to google Play
+        uses: r0adkll/upload-google-play@v1.1.3
+        with:
+          serviceAccountJsonPlainText: "{invalid_json}"
+          packageName: tmg.flashback
+          releaseFiles: composeApp/build/outputs/bundle/**/*.aab
+          track: internal
+          status: "completed"
+          mappingFile: composeApp/build/outputs/mapping/**/mapping.txt
