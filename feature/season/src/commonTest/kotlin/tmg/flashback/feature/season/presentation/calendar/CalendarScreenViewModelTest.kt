@@ -22,6 +22,7 @@ import tmg.flashback.data.repo.model.Response
 import tmg.flashback.data.repo.repository.EventRepository
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
+import tmg.flashback.feature.season.models.NotificationSchedule
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
 import tmg.flashback.feature.season.repositories.CalendarRepository
 import tmg.flashback.formula1.model.Overview

@@ -26,11 +26,13 @@ internal class RssConfigureViewModelTest {
     private val mockOpenWebpageUseCase: OpenWebpageUseCase = mock(autoUnit)
 
     private fun initUnderTest() {
+        every { mockGetSourcesUseCase.invoke() } returns listOf(fakeSupportedSource)
+        every { mockRssRepository.isAddCustomSourcesEnabled } returns true
+
         underTest = RssConfigureViewModel(
             rssRepository = mockRssRepository,
             getSourcesUseCase = mockGetSourcesUseCase,
             openWebpageUseCase = mockOpenWebpageUseCase
-
         )
     }
 
@@ -139,11 +141,14 @@ internal class RssConfigureViewModelTest {
 
     @Test
     fun `clicking contact link launches webpage`() {
+        every { mockRssRepository.rssShowDescription } returns false
+        every { mockRssRepository.rssUrls } returns setOf(fakeRssLink)
+
         initUnderTest()
 
         underTest.clickContactLink(fakeSupportedSource)
         verify {
-            mockOpenWebpageUseCase.invoke(fakeSupportedSource.rssLink)
+            mockOpenWebpageUseCase.invoke(fakeSupportedSource.contactLink)
         }
     }
 }
