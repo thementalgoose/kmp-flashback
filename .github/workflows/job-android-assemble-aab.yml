@@ -48,11 +48,11 @@ jobs:
           echo $GOOGLE_SERVICES_PLIST_PRODUCTION | base64 --decode >> iosApp/iosApp/Firebase/GoogleService-production.plist
 
       # Testing
-      - name: Logging
-        run: |
-          ls composeApp/src/production
-          cat composeApp/src/production/google-services.json
-          cat iosApp/iosApp/Firebase/GoogleService-production.plist
+#      - name: Logging
+#        run: |
+#          ls composeApp/src/production
+#          cat composeApp/src/production/google-services.json
+#          cat iosApp/iosApp/Firebase/GoogleService-production.plist
 
       # Building version
       - name: Building version

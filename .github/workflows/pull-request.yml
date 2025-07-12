@@ -9,3 +9,4 @@ name: Pull Request
 jobs:
   unit-tests:
     uses: ./.github/workflows/job-unit-tests.yml
+    secrets: inherit

@@ -10,3 +10,4 @@ name: Main
 jobs:
   unit-tests:
     uses: ./.github/workflows/job-unit-tests.yml
+    secrets: inherit

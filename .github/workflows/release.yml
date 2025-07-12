@@ -27,6 +27,7 @@ jobs:
   android-assemble:
     needs: [versions]
     uses: ./.github/workflows/job-android-assemble-aab.yml
+    secrets: inherit
     with:
       version_name: ${{ needs.versions.outputs.version_name }}
       version_code: ${{ needs.versions.outputs.version_code }}
@@ -34,3 +35,4 @@ jobs:
   android-deploy:
     needs: [android-assemble]
     uses: ./.github/workflows/job-android-deploy-play-store.yml
+    secrets: inherit
