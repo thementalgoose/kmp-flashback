@@ -1,0 +1,28 @@
+name: Job - PR Comment
+
+on:
+  workflow_call:
+    inputs:
+      body_find: { required: true, type: string }
+      body: { required: true, type: string }
+
+jobs:
+  unit_test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: Find Comment
+        uses: peter-evans/find-comment@v3
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: ${{ inputs.body_find }}
+
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: ${{ inputs.body }}
+          edit-mode: replace

@@ -1,0 +1,84 @@
+name: Job - Android - Assemble Sandbox APK
+
+on:
+  workflow_call:
+    inputs:
+      version_name: { required: true, type: string }
+      version_code: { required: true, type: string }
+    outputs:
+      artifact_url:
+        value: ${{ steps.upload.artifact-url }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      # Checkout
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Setup Java 17
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      # Caching gradle
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/*.toml*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # Environment
+      - name: Environment variables
+        env:
+          GOOGLE_SERVICES_JSON_SANDBOX: ${{ secrets.GOOGLE_SERVICES_JSON_SANDBOX }}
+          GOOGLE_SERVICES_PLIST_SANDBOX: ${{ secrets.GOOGLE_SERVICES_PLIST_SANDBOX }}
+        run: |
+          mkdir -p composeApp/src/sandbox
+          mkdir -p composeApp/src/production
+          mkdir -p iosApp/iosApp/Firebase
+          echo $GOOGLE_SERVICES_JSON_SANDBOX | base64 --decode >> composeApp/src/sandbox/google-services.json
+          echo $GOOGLE_SERVICES_PLIST_SANDBOX | base64 --decode >> iosApp/iosApp/Firebase/GoogleService-sandbox.plist
+
+      # Building version
+      - name: Building version
+        run: |
+          echo Version name: ${{ inputs.version_name }}
+          echo Version code: ${{ inputs.version_code }}
+
+      # Assemble AAB
+      - name: Assemble bundle
+        env:
+          VERSION_NAME: ${{ inputs.version_name }}
+          VERSION_CODE: ${{ inputs.version_code }}
+        run: |
+          ./gradlew :composeApp:assembleSandboxRelease
+
+      # Sign AAB
+      - name: Sign app
+        uses: r0adkll/sign-android-release@v1
+        id: sign_app
+        with:
+          releaseDirectory: composeApp/build/outputs/apk/sandboxRelease
+          signingKeyBase64: ${{ secrets.ANDROID_KEYSTORE }}
+          alias: ${{ secrets.ANDROID_KEYSTORE_ALIAS }}
+          keyStorePassword: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          keyPassword: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        env:
+          BUILD_TOOLS_VERSION: "34.0.0"
+
+      # Upload signed artifact info
+      - name: Upload artifact info
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: AAB
+          path: |
+            composeApp/build/outputs/bundle/**/*.apk
