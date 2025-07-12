@@ -5,12 +5,14 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import androidx.annotation.Keep
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import tmg.flashback.crashlytics.manager.CrashlyticsManager
 import tmg.flashback.infrastructure.BuildConfig
 import tmg.flashback.notifications.utils.NotificationBuilder
 
+@Keep
 class LocalNotificationBroadcastReceiver(): BroadcastReceiver(), KoinComponent {
 
     private val crashController: CrashlyticsManager by inject()

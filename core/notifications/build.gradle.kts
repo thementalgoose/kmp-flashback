@@ -13,6 +13,7 @@ kotlin {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
+            freeCompilerArgs.add("-Xstring-concat=inline")
         }
     }
     sourceSets {
@@ -38,15 +39,4 @@ kotlin {
 
         }
     }
-//    listOf(
-//        iosX64(),
-//        iosArm64(),
-//        iosSimulatorArm64()
-//    ).forEach { iosTarget ->
-//        iosTarget.binaries.framework {
-//            export(libs.kmpnotifier)
-//            baseName = "shared"
-//            isStatic = true
-//        }
-//    }
 }

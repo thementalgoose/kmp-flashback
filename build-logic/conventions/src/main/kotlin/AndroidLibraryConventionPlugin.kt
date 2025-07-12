@@ -29,8 +29,6 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             }
             buildTypes {
                 getByName("release") {
-                    isMinifyEnabled = true
-
                     buildConfigField("String", "VERSION_NAME", "\"${System.getenv("VERSION_NAME") ?: "1.0.0"}\"")
                     buildConfigField("String", "VERSION_CODE", "\"${System.getenv("VERSION_CODE") ?: "1"}\"")
                 }
@@ -38,14 +36,11 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                     buildConfigField("String", "VERSION_NAME", "\"${System.getenv("VERSION_NAME") ?: "1.0.0"}\"")
                     buildConfigField("String", "VERSION_CODE", "\"${System.getenv("VERSION_CODE") ?: "1"}\"")
                 }
-
             }
             compileOptions {
                 sourceCompatibility = JavaVersion.VERSION_17
                 targetCompatibility = JavaVersion.VERSION_17
             }
-
-
         }
     }
 }

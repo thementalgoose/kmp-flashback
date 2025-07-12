@@ -2,8 +2,6 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
-import java.io.FileInputStream
-import java.util.Properties
 
 plugins {
     alias(libs.plugins.flashback.kotlinMultiplatform)
@@ -33,6 +31,7 @@ kotlin {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
+            freeCompilerArgs.add("-Xstring-concat=inline")
         }
     }
 
@@ -182,10 +181,10 @@ android {
     }
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "./proguard-rules.pro")
         }
     }
-
 
     signingConfigs {
         create("release") {

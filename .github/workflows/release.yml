@@ -1,0 +1,13 @@
+name: Release
+env:
+  RUN_OFFSET: 400
+'on':
+  release:
+    types: [published]
+  workflow_dispatch:
+jobs:
+  unit-tests:
+    uses: ./.github/workflows/jobs/unit-tests.yml
+
+  android-assemble:
+    

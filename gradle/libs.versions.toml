@@ -2,7 +2,7 @@
 # Kotlin
 kotlin = "2.2.0"
 ksp = "2.2.0-2.0.2"
-kotlinx-serialization = "1.9.0"
+kotlinx-serialization = "1.8.1"
 kotlinx-datetime = "0.6.1"
 kotlinx-coroutines = "1.10.2"
 
@@ -68,6 +68,8 @@ android_flagkit = "com.github.murgupluoglu:flagkit-android:1.0.5"
 androidx_core = "androidx.core:core-ktx:1.16.0"
 androidx_appcompat = "androidx.appcompat:appcompat:1.7.1"
 androidx_browser = "androidx.browser:browser:1.8.0"
+
+core_library_desugaring = "com.android.tools:desugar_jdk_libs:2.1.5"
 
 # Firebase
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }

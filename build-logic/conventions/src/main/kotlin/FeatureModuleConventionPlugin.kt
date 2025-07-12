@@ -20,6 +20,7 @@ class FeatureModuleConventionPlugin : Plugin<Project> {
                 @OptIn(ExperimentalKotlinGradlePluginApi::class)
                 compilerOptions {
                     jvmTarget.set(JvmTarget.JVM_17)
+                    freeCompilerArgs.add("-Xstring-concat=inline")
                 }
             }
 
@@ -34,6 +35,5 @@ class FeatureModuleConventionPlugin : Plugin<Project> {
                 }
             }
         }
-
     }
 }

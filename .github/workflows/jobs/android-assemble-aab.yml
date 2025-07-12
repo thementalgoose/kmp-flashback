@@ -1,0 +1,55 @@
+name: Android - Assemble AAB
+
+on:
+  workflow_call:
+    inputs:
+      versionCode: { required: true, type: string }
+      versionName: { required: true, type: number }
+    outputs:
+      artifact-name:
+        value: ${{ jobs.build.outputs.artifact-name }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      # Checkout
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Setup Java 17
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      # Caching gradle
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/*.toml*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # Environment
+      - name: Environment variables
+        run: |
+         mkdir -p composeApp/src/production
+         mkdir -p iosApp/iosApp/Firebase
+         echo ${{ secrets.GOOGLE_SERVICES_JSON_PRODUCTION }} | base64 --decode >> composeApp/src/production/google-services.json
+         echo ${{ secrets.GOOGLE_SERVICES_PLIST_PRODUCTION }} | base64 --decode >> iosApp/iosApp/Firebase/GoogleService-production.plist
+
+      # Assemble AAB
+      - name: Assemble bundle
+        env:
+          VERSION_NAME: ${{ inputs.VERSION_NAME }}
+          VERSION_CODE: ${{ inputs.VERSION_CODE }}
+        run: |
+          ./gradlew :composeApp:bundleProductionRelease
+
+      # Sign AAB
+
