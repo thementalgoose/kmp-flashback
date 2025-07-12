@@ -1,7 +1,11 @@
-package tmg.flashback.formula1.utils
+package tmg.flashback.feature.utils
 
-import tmg.flashback.formula1.enums.RaceWeekend.*
+import tmg.flashback.feature.notifications.utils.NotificationUtils.getCategoryBasedOnLabel
 import tmg.flashback.formula1.enums.RaceWeekend
+import tmg.flashback.formula1.enums.RaceWeekend.FREE_PRACTICE
+import tmg.flashback.formula1.enums.RaceWeekend.QUALIFYING
+import tmg.flashback.formula1.enums.RaceWeekend.RACE
+import tmg.flashback.formula1.enums.RaceWeekend.SPRINT
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

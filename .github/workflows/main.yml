@@ -1,0 +1,56 @@
+name: Main
+'on':
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+      - '**.yml'
+      - '**.png'
+jobs:
+  unit_test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      # Checkout
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Setup Java 17
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      # Caching gradle
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/*.toml*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # Environment
+      - name: Environment variables
+        run: |
+          mkdir -p composeApp/src/sandbox
+          mkdir -p composeApp/src/production
+          mkdir -p iosApp/iosApp/Firebase
+          echo ${{ secrets.GOOGLE_SERVICES_JSON_SANDBOX }} | base64 --decode >> composeApp/src/sandbox/google-services.json
+          echo ${{ secrets.GOOGLE_SERVICES_JSON_PRODUCTION }} | base64 --decode >> composeApp/src/production/google-services.json
+          echo ${{ secrets.GOOGLE_SERVICES_PLIST_PRODUCTION }} | base64 --decode >> iosApp/iosApp/Firebase/GoogleService-production.plist
+          echo ${{ secrets.GOOGLE_SERVICES_PLIST_SANDBOX }} | base64 --decode >> iosApp/iosApp/Firebase/GoogleService-sandbox.plist
+
+      # Running unit tests
+      - name: Unit tests
+        run: ./gradlew testDebugUnitTest testSandboxDebugUnitTest
+
+      # Publish test report
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v5
+        if: always()
+        with:
+          report_paths: '**/build/test-results/**/TEST-*.xml'

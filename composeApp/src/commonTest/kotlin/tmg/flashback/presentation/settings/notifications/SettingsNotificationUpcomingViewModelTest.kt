@@ -15,6 +15,8 @@ import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepo
 import tmg.flashback.feature.notifications.usecases.ScheduleResult
 import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
 import tmg.flashback.presentation.settings.notifications.upcoming.SettingsNotificationUpcomingViewModel
+import tmg.flashback.ui.permissions.PermissionManager
+import tmg.flashback.ui.permissions.PermissionState
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -24,11 +26,15 @@ internal class SettingsNotificationUpcomingViewModelTest {
 
     private val mockScheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase = mock(autoUnit)
     private val mockNotificationSettingsRepository: NotificationSettingsRepository = mock(autoUnit)
+    private val mockPermissionManager: PermissionManager = mock(autoUnit)
 
     private fun initUnderTest() {
+        everySuspend { mockScheduleUpcomingNotificationsUseCase.invoke(any()) } returns ScheduleResult.Scheduled
+        everySuspend { mockPermissionManager.getPermissionState(any()) } returns PermissionState.Granted
         underTest = SettingsNotificationUpcomingViewModel(
             notificationSettingsRepository = mockNotificationSettingsRepository,
-            scheduleUpcomingNotificationsUseCase = mockScheduleUpcomingNotificationsUseCase
+            scheduleUpcomingNotificationsUseCase = mockScheduleUpcomingNotificationsUseCase,
+            permissionManager = mockPermissionManager
         )
     }
 

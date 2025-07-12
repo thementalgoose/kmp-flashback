@@ -1,6 +1,9 @@
 package tmg.flashback.widgets.upnext.usecases
 
+import tmg.flashback.infrastructure.device.Device
+import tmg.flashback.infrastructure.device.Platform
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 
 internal class IsWidgetsEnabledUseCaseTest {
@@ -15,6 +18,7 @@ internal class IsWidgetsEnabledUseCaseTest {
     fun `is widgets enabled`() {
         initUnderTest()
 
-        assertFalse(underTest.invoke())
+        val expected = Device.platform == Platform.Android
+        assertEquals(expected, underTest.invoke())
     }
 }
