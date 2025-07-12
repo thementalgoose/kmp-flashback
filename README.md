@@ -55,7 +55,7 @@ Flashback provides race results and statistics from every race in the history of
   - [ ] Android
   - [ ] iOS
 - [x] Create UI components module with shared resources
-- [ ] Configure unit tests running on the CI
+- [x] Configure unit tests running on the CI
 - [ ] Configure app building in the CI
   - [ ] Android
   - [ ] iOS

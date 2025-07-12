@@ -37,11 +37,15 @@ jobs:
 
       # Environment
       - name: Environment variables
+        env:
+          GOOGLE_SERVICES_JSON_PRODUCTION: ${{ secrets.GOOGLE_SERVICES_JSON_PRODUCTION }}
+          GOOGLE_SERVICES_PLIST_PRODUCTION: ${{ secrets.GOOGLE_SERVICES_PLIST_PRODUCTION }}
         run: |
-         mkdir -p composeApp/src/production
-         mkdir -p iosApp/iosApp/Firebase
-         echo ${{ secrets.GOOGLE_SERVICES_JSON_PRODUCTION }} | base64 --decode >> composeApp/src/production/google-services.json
-         echo ${{ secrets.GOOGLE_SERVICES_PLIST_PRODUCTION }} | base64 --decode >> iosApp/iosApp/Firebase/GoogleService-production.plist
+          mkdir -p composeApp/src/sandbox
+          mkdir -p composeApp/src/production
+          mkdir -p iosApp/iosApp/Firebase
+          echo $GOOGLE_SERVICES_JSON_PRODUCTION | base64 --decode >> composeApp/src/production/google-services.json
+          echo $GOOGLE_SERVICES_PLIST_PRODUCTION | base64 --decode >> iosApp/iosApp/Firebase/GoogleService-production.plist
 
       - name: Building version
         run: |
