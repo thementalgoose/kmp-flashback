@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.ab_scored
 import flashback.presentation.localisation.generated.resources.nav_race
+import flashback.presentation.localisation.generated.resources.nav_sprint
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
@@ -56,7 +57,7 @@ fun LazyListScope.addSprintRaceData(
 ) {
     item("sprint_race_label") {
         TypeHeader(
-            resource = string.nav_race
+            resource = string.nav_sprint
         )
     }
     if (uiState.sprintRaceResults.isEmpty()) {

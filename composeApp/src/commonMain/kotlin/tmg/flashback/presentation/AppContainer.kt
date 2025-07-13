@@ -20,15 +20,21 @@ import androidx.window.core.layout.WindowWidthSizeClass
 import kotlinx.coroutines.launch
 import tmg.flashback.eastereggs.presentation.snow
 import tmg.flashback.eastereggs.presentation.summer
+import tmg.flashback.feature.rss.presentation.feed.RssNavigation
+import tmg.flashback.feature.season.presentation.calendar.WeekendNavigation
+import tmg.flashback.feature.season.presentation.driver_standings.DriverStandingsNavigation
+import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsNavigation
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.navigation.Screen
 import tmg.flashback.presentation.navigation.AppNavigationDrawer
 import tmg.flashback.presentation.navigation.AppNavigationRail
 import tmg.flashback.presentation.navigation.AppNavigationViewModel
+import tmg.flashback.presentation.settings.SettingNavigation
 import tmg.flashback.style.AppTheme
 import tmg.flashback.ui.navigation.OverlappingPanels
 import tmg.flashback.ui.navigation.OverlappingPanelsState
 import tmg.flashback.ui.navigation.OverlappingPanelsValue
+import tmg.flashback.ui.navigation.rememberMasterDetailPaneState
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -51,6 +57,35 @@ fun AppContainer(
     val menuAccessible = !appNavigationUiState.value.intoSubNavigation // Derive from VM
     val isCompact = windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT
 
+    //region Navigators for master / detail pane. To be replaced by nav3 approac
+    val calendarNavigator = rememberMasterDetailPaneState<WeekendNavigation>()
+    val driverStandingsNavigator = rememberMasterDetailPaneState<DriverStandingsNavigation>()
+    val teamStandingsNavigator = rememberMasterDetailPaneState<TeamStandingsNavigation>()
+    val rssNavigator = rememberMasterDetailPaneState<RssNavigation>()
+    val settingsNavigator = rememberMasterDetailPaneState<SettingNavigation>()
+    LaunchedEffect(
+        calendarNavigator.destination,
+        driverStandingsNavigator.destination,
+        teamStandingsNavigator.destination,
+        rssNavigator.destination,
+        settingsNavigator.destination
+    ) {
+        val forceHide = calendarNavigator.destination != null ||
+                driverStandingsNavigator.destination != null ||
+                teamStandingsNavigator.destination != null ||
+                rssNavigator.destination != null ||
+                settingsNavigator.destination != null
+        appNavigationViewModel.hideBar(forceHide)
+    }
+    val clearSubnavs: () -> Unit = {
+        calendarNavigator.clear()
+        driverStandingsNavigator.clear()
+        teamStandingsNavigator.clear()
+        rssNavigator.clear()
+        settingsNavigator.clear()
+    }
+    //endregion
+
     OverlappingPanels(
         modifier = Modifier
             .background(AppTheme.colors.surface),
@@ -64,6 +99,7 @@ fun AppContainer(
             AppNavigationDrawer(
                 appNavigationUiState = appNavigationUiState.value,
                 navigationItemClicked = {
+                    clearSubnavs()
                     navController.navigate(it) {
                         this.launchSingleTop = true
                         this.popUpTo(Screen.Calendar)
@@ -86,6 +122,7 @@ fun AppContainer(
                     AppNavigationRail(
                         appNavigationUiState = appNavigationUiState.value,
                         navigationItemClicked = {
+                            clearSubnavs()
                             navController.navigate(it) {
                                 this.launchSingleTop = true
                                 this.popUpTo(Screen.Calendar)
@@ -102,7 +139,12 @@ fun AppContainer(
                         appNavigationViewModel = appNavigationViewModel,
                         navController = navController,
                         insetPadding = paddingValues,
-                        windowAdaptiveInfo = windowAdaptiveInfo
+                        windowAdaptiveInfo = windowAdaptiveInfo,
+                        calendarNavigator = calendarNavigator,
+                        driverStandingsNavigator = driverStandingsNavigator,
+                        teamStandingsNavigator = teamStandingsNavigator,
+                        rssNavigator = rssNavigator,
+                        settingsNavigator = settingsNavigator,
                     )
                 }
             }

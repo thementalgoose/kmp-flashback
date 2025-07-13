@@ -34,6 +34,7 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.text.TextHeadline1
 import tmg.flashback.style.text.TextHeadline2
 import tmg.flashback.ui.components.driver.DriverIcon
 
@@ -108,7 +109,7 @@ fun DriverHeader(
             .defaultMinSize(minHeight = iconOffset)
             .fillMaxWidth()
         ) {
-            TextHeadline2(
+            TextHeadline1(
                 modifier = Modifier.padding(
                     top = AppTheme.dimens.medium,
                     start = AppTheme.dimens.medium,

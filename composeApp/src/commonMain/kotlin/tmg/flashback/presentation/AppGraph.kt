@@ -1,7 +1,5 @@
 package tmg.flashback.presentation
 
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
@@ -33,6 +31,7 @@ import tmg.flashback.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.presentation.settings.AllSettingsGraph
 import tmg.flashback.presentation.settings.SettingNavigation
 import tmg.flashback.style.text.TextTitle
+import tmg.flashback.ui.navigation.MasterDetailPaneState
 import tmg.flashback.ui.navigation.rememberMasterDetailPaneState
 
 @Composable
@@ -42,28 +41,13 @@ fun AppGraph(
     navController: NavHostController,
     insetPadding: PaddingValues,
     windowAdaptiveInfo: WindowAdaptiveInfo,
+    calendarNavigator: MasterDetailPaneState<WeekendNavigation>,
+    driverStandingsNavigator: MasterDetailPaneState<DriverStandingsNavigation>,
+    teamStandingsNavigator: MasterDetailPaneState<TeamStandingsNavigation>,
+    rssNavigator: MasterDetailPaneState<RssNavigation>,
+    settingsNavigator: MasterDetailPaneState<SettingNavigation>,
     modifier: Modifier = Modifier,
 ) {
-    val calendarNavigator = rememberMasterDetailPaneState<WeekendNavigation>()
-    val driverStandingsNavigator = rememberMasterDetailPaneState<DriverStandingsNavigation>()
-    val teamStandingsNavigator = rememberMasterDetailPaneState<TeamStandingsNavigation>()
-    val rssNavigator = rememberMasterDetailPaneState<RssNavigation>()
-    val settingsNavigator = rememberMasterDetailPaneState<SettingNavigation>()
-    LaunchedEffect(
-        calendarNavigator.destination,
-        driverStandingsNavigator.destination,
-        teamStandingsNavigator.destination,
-        rssNavigator.destination,
-        settingsNavigator.destination
-    ) {
-        val forceHide = calendarNavigator.destination != null ||
-                driverStandingsNavigator.destination != null ||
-                teamStandingsNavigator.destination != null ||
-                rssNavigator.destination != null ||
-                settingsNavigator.destination != null
-        appNavigationViewModel.hideBar(forceHide)
-    }
-
     NavHost(
         navController = navController,
         startDestination = Screen.Calendar,

@@ -52,6 +52,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.ScheduleWeather
 import tmg.flashback.infrastructure.datetime.dateFormatDMMM
+import tmg.flashback.infrastructure.datetime.dateFormatDMMMYYYY
 import tmg.flashback.infrastructure.datetime.dateFormatEEEEDMMM
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.timeFormatHHmm
@@ -97,7 +98,7 @@ internal fun RaceDetails(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = AppTheme.dimens.xsmall),
-                text = model.date.format(dateFormatDMMM)
+                text = model.date.format(dateFormatDMMMYYYY)
             )
         }
         Column(

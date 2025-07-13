@@ -69,7 +69,6 @@ import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextHeadline2
-import tmg.flashback.style.text.TextTitle
 
 @Composable
 fun AboutScreen(
@@ -136,6 +135,7 @@ private fun AboutListScreen(
         }
         item("buttons") {
             Row(modifier = Modifier
+                .padding(horizontal = AppTheme.dimens.medium)
                 .fillMaxWidth()
                 .animateItem()
             ) {
@@ -143,7 +143,9 @@ private fun AboutListScreen(
                     Button(
                         button = it,
                         buttonClicked = buttonClicked,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
+                            .weight(1f)
                     )
                 }
             }
