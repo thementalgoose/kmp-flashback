@@ -79,6 +79,6 @@ jobs:
         id: upload
         uses: actions/upload-artifact@v4
         with:
-          name: AAB
+          name: APK
           path: |
             composeApp/build/outputs/apk/**/*.apk
