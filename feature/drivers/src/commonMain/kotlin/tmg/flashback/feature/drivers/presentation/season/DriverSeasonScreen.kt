@@ -158,6 +158,7 @@ fun DriverSeasonScreen(
                     key = { "${it.result.raceInfo.season}-${it.result.raceInfo.round}-${it.result.isSprint}}" }
                 ) {
                     ResultRace(
+                        multipleConstructors = !uiState.isSingleConstructor,
                         model = it,
                         clickResult = { }
                     )

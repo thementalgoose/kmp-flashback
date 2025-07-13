@@ -22,6 +22,9 @@ sealed interface DriverSeasonUiState {
             races.map { it.result.constructor }
                 .distinct()
         }
+        val isSingleConstructor: Boolean by lazy {
+            constructors.size == 1
+        }
     }
 
     data class NoRaces(

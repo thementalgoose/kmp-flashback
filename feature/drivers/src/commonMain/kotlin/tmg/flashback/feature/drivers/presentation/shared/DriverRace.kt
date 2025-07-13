@@ -107,6 +107,7 @@ internal fun ResultHeader(
 
 @Composable
 internal fun ResultRace(
+    multipleConstructors: Boolean,
     model: DriverSeasonRace,
     clickResult: (DriverSeasonRace) -> Unit,
     modifier: Modifier = Modifier
@@ -140,7 +141,7 @@ internal fun ResultRace(
                     country = model.result.raceInfo.circuit.country,
                     constructor = model.result.constructor,
                     round = model.result.raceInfo.round,
-                    showConstructorLabel = true
+                    showConstructorLabel = multipleConstructors
                 )
             } else {
                 RaceInfo(
@@ -150,7 +151,7 @@ internal fun ResultRace(
                     circuitName = model.result.raceInfo.circuit.name,
                     constructor = model.result.constructor,
                     round = model.result.raceInfo.round,
-                    showConstructorLabel = true
+                    showConstructorLabel = multipleConstructors
                 )
             }
         }
@@ -361,14 +362,17 @@ private fun Preview(
         Column {
             ResultHeader()
             ResultRace(
+                multipleConstructors = true,
                 model = fakeModel,
                 clickResult = { }
             )
             ResultRace(
+                multipleConstructors = true,
                 model = fakeModel.copy(result = fakeModel.result.copy(isSprint = true)),
                 clickResult = { }
             )
             ResultRace(
+                multipleConstructors = false,
                 model = fakeModel,
                 clickResult = { }
             )

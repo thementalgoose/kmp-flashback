@@ -103,7 +103,7 @@ fun DriverHeader(
         Column(modifier = Modifier
             .padding(
                 top = backgroundHeight + insetTop,
-                end = iconSize + (AppTheme.dimens.medium * 2) + insetEnd,
+                end = iconSize + insetEnd,
                 start = insetStart
             )
             .defaultMinSize(minHeight = iconOffset)
@@ -113,7 +113,6 @@ fun DriverHeader(
                 modifier = Modifier.padding(
                     top = AppTheme.dimens.medium,
                     start = AppTheme.dimens.medium,
-                    end = AppTheme.dimens.medium,
                 ),
                 text = label
             )
