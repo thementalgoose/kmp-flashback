@@ -29,6 +29,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.feature.weekend.presentation.WeekendUiState
 import tmg.flashback.feature.weekend.presentation.components.DataMissing
+import tmg.flashback.feature.weekend.presentation.components.DataUnavailable
 import tmg.flashback.feature.weekend.presentation.components.DriverInfoWithIcon
 import tmg.flashback.feature.weekend.presentation.components.PointsBox
 import tmg.flashback.feature.weekend.presentation.components.RaceHeader
@@ -37,6 +38,7 @@ import tmg.flashback.feature.weekend.presentation.components.TypeHeader
 import tmg.flashback.feature.weekend.presentation.components.finishingPositionWidth
 import tmg.flashback.feature.weekend.presentation.components.status
 import tmg.flashback.feature.weekend.presentation.components.timeWidth
+import tmg.flashback.formula1.constants.Formula1
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.DriverEntry
 import tmg.flashback.formula1.model.SprintRaceResult
@@ -62,7 +64,11 @@ fun LazyListScope.addSprintRaceData(
     }
     if (uiState.sprintRaceResults.isEmpty()) {
         item("sprint_race_not_found") {
-            DataMissing()
+            if (Formula1.currentSeasonYear == uiState.season) {
+                DataMissing()
+            } else {
+                DataUnavailable()
+            }
         }
     } else {
         item("sprint_race_header") {

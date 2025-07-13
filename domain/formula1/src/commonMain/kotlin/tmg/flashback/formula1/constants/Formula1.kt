@@ -9,13 +9,9 @@ object Formula1 {
     /**
      * Current Year season
      */
-    val currentSeasonYear: Int
-        get() = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).year
-
-    /**
-     * What season should the API have all the data up too
-     */
-    const val championshipDataCompleteUpTo: Int = 2023
+    val currentSeasonYear: Int by lazy {
+        Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).year
+    }
 
     /**
      * When did F1 start
