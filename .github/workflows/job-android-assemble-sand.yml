@@ -7,7 +7,7 @@ on:
       version_code: { required: true, type: string }
     outputs:
       artifact_url:
-        value: ${{ steps.upload.artifact-url }}
+        value: ${{ jobs.build.steps.upload.artifact-url }}
 
 jobs:
   build:
@@ -66,7 +66,7 @@ jobs:
         uses: r0adkll/sign-android-release@v1
         id: sign_app
         with:
-          releaseDirectory: composeApp/build/outputs/apk/sandboxRelease
+          releaseDirectory: composeApp/build/outputs/apk/sandbox/release
           signingKeyBase64: ${{ secrets.ANDROID_KEYSTORE }}
           alias: ${{ secrets.ANDROID_KEYSTORE_ALIAS }}
           keyStorePassword: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
@@ -81,4 +81,4 @@ jobs:
         with:
           name: AAB
           path: |
-            composeApp/build/outputs/bundle/**/*.apk
+            composeApp/build/outputs/apk/**/*.apk

@@ -7,7 +7,7 @@ on:
       body: { required: true, type: string }
 
 jobs:
-  unit_test:
+  pr_comment:
     runs-on: ubuntu-latest
     timeout-minutes: 1
     steps:
