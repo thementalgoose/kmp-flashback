@@ -110,7 +110,8 @@ private fun PrivacyPolicyScreen(
                         Icon(
                             modifier = Modifier.size(16.dp),
                             imageVector = Icons.AutoMirrored.Default.ArrowRight,
-                            contentDescription = null
+                            contentDescription = null,
+                            tint = AppTheme.colors.onSurfaceVariant
                         )
                         TextBody1(
                             text = it.text
@@ -119,7 +120,8 @@ private fun PrivacyPolicyScreen(
                             Icon(
                                 modifier = Modifier.size(16.dp),
                                 imageVector = Icons.Default.Link,
-                                contentDescription = null
+                                contentDescription = null,
+                                tint = AppTheme.colors.onSurfaceVariant
                             )
                         }
                     }
