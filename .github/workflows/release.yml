@@ -30,7 +30,7 @@ jobs:
     uses: ./.github/workflows/job-android-assemble-prod.yml
     secrets: inherit
     with:
-      version_name: ${{ needs.versions.outputs.version_name }}.${{ needs.versions.outputs.version_code }}
+      version_name: ${{ needs.versions.outputs.version_name }}
       version_code: ${{ needs.versions.outputs.version_code }}
 
   android-deploy:
