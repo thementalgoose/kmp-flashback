@@ -20,7 +20,6 @@ import androidx.glance.preview.Preview
 import tmg.flashback.feature.widget_upnext.R
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.widgets.upnext.presentation.style.WidgetThemePreview
-import tmg.flashback.widgets.upnext.presentation.style.modifiers.surface
 import tmg.flashback.widgets.upnext.presentation.style.text.TextBody
 import tmg.flashback.widgets.upnext.presentation.UpNextWidgetRefreshWidget
 import tmg.flashback.widgets.upnext.presentation.components.CountryIcon
@@ -43,7 +42,6 @@ internal fun ScheduleListRace(
     Column(
         modifier = modifier
             .padding(vertical = 16.dp, horizontal = 16.dp)
-            .surface(GlanceTheme.colors.background.getColor(context))
     ) {
         Row(GlanceModifier.fillMaxWidth()) {
             CountryIcon(

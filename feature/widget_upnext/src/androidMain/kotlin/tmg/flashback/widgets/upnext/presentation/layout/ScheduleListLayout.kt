@@ -47,7 +47,6 @@ internal fun ScheduleList(
     Column(
         modifier = modifier
             .padding(vertical = 16.dp, horizontal = 16.dp)
-            .surface(GlanceTheme.colors.background.getColor(context))
     ) {
         Row(GlanceModifier.fillMaxWidth()) {
             CountryIcon(

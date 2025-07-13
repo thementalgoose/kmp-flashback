@@ -8,6 +8,7 @@ import androidx.compose.ui.unit.dp
 import androidx.datastore.core.DataStore
 import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
+import androidx.glance.GlanceTheme
 import androidx.glance.LocalContext
 import androidx.glance.LocalGlanceId
 import androidx.glance.LocalSize
@@ -17,6 +18,7 @@ import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.SizeMode
 import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.provideContent
+import androidx.glance.background
 import androidx.glance.currentState
 import androidx.glance.state.GlanceStateDefinition
 import org.koin.core.component.KoinComponent
@@ -31,6 +33,7 @@ import tmg.flashback.widgets.upnext.presentation.layout.RaceName
 import tmg.flashback.widgets.upnext.presentation.layout.RaceSmall
 import tmg.flashback.widgets.upnext.presentation.layout.ScheduleList
 import tmg.flashback.widgets.upnext.presentation.layout.ScheduleListRace
+import tmg.flashback.widgets.upnext.presentation.style.modifiers.surface
 import tmg.flashback.widgets.upnext.repositories.UpNextWidgetRepository
 import java.io.File
 
@@ -106,15 +109,18 @@ class UpNextWidget : GlanceAppWidget(), KoinComponent {
         if (upNextConfiguration.scheduleData != null) {
             val config = LocalSize.current
             val modifier = when (upNextConfiguration.deeplinkToEvent) {
-                true -> GlanceModifier.clickable(
-                    actionRunCallback<UpNextWidgetOpenEvent>(
-                        actionParametersOf(
-                            UpNextWidgetOpenEvent.PARAM_DATA to upNextConfiguration.scheduleData,
+                true -> GlanceModifier
+                    .surface(if (upNextConfiguration.showBackground) GlanceTheme.colors.background.getColor(context) else androidx.compose.ui.graphics.Color.Transparent)
+                    .clickable(
+                        actionRunCallback<UpNextWidgetOpenEvent>(
+                            actionParametersOf(
+                                UpNextWidgetOpenEvent.PARAM_DATA to upNextConfiguration.scheduleData,
+                            )
                         )
                     )
-                )
-
-                false -> GlanceModifier.clickable(actionRunCallback<UpNextWidgetOpenAll>())
+                false -> GlanceModifier
+                    .surface(if (upNextConfiguration.showBackground) GlanceTheme.colors.background.getColor(context) else androidx.compose.ui.graphics.Color.Transparent)
+                    .clickable(actionRunCallback<UpNextWidgetOpenAll>())
             }
 
             Log.d("UpNextWidget", "Rendering widget ${LocalGlanceId.current.appWidgetId} with $upNextConfiguration")

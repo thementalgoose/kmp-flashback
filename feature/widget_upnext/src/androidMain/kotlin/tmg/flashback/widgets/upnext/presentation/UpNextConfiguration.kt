@@ -11,7 +11,8 @@ import tmg.flashback.widgets.upnext.repositories.UpNextWidgetRepository
 
 data class UpNextConfiguration(
     val scheduleData: OverviewRace?,
-    val deeplinkToEvent: Boolean
+    val deeplinkToEvent: Boolean,
+    val showBackground: Boolean,
 ) {
     constructor(
         scheduleData: OverviewRace?,
@@ -19,6 +20,7 @@ data class UpNextConfiguration(
         deeplinkToEvent: Boolean,
         context: Context
     ): this(
+        showBackground = showBackground,
         scheduleData = scheduleData,
         deeplinkToEvent = deeplinkToEvent,
     )

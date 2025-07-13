@@ -98,7 +98,7 @@ private fun Race(
     modifier: GlanceModifier,
 ) {
     Column(
-        modifier = modifier.surface(GlanceTheme.colors.background.getColor(context)),
+        modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(

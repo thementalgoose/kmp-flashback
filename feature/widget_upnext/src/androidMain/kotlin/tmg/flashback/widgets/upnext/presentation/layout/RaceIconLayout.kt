@@ -34,7 +34,7 @@ internal fun RaceIcon(
 ) {
     val schedule = overviewRace.raceSchedule()
     Column(
-        modifier = modifier.surface(GlanceTheme.colors.background.getColor(context)),
+        modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
