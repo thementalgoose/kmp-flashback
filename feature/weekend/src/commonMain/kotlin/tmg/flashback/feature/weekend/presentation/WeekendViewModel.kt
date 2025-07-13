@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -84,6 +85,11 @@ class WeekendViewModel(
             season to round
         }
         this.tab.update { WeekendTabs.Qualifying }
+        viewModelScope.launch {
+            if (racesRepository.getRace(season, round).firstOrNull()?.hasData == false) {
+                refresh(season)
+            }
+        }
     }
 
     fun updateTab(tab: WeekendTabs) {
@@ -103,13 +109,17 @@ class WeekendViewModel(
         )
     }
 
+    private suspend fun refresh(season: Int) {
+        _isLoading.update { true }
+        racesRepository.populateRaces(season)
+        overviewRepository.populateOverview(season)
+        _isLoading.update { false }
+    }
+
     fun refresh() {
         viewModelScope.launch {
-            _isLoading.update { true }
             val (season, _) = seasonRound.value ?: return@launch
-            racesRepository.populateRaces(season)
-            overviewRepository.populateOverview(season)
-            _isLoading.update { false }
+            refresh(season)
         }
     }
 }

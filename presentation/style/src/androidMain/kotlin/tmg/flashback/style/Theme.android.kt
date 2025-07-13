@@ -38,9 +38,8 @@ actual fun getColours(theme: Theme): ThemeColours {
 }
 
 @Composable
-actual fun setStatusBarIconColours(isLight: Boolean) {
+actual fun setSystemBarsIconColours(isLight: Boolean) {
     val context = LocalActivity.current ?: return
     val controller = WindowCompat.getInsetsController(context.window, context.window.decorView)
     controller.isAppearanceLightStatusBars = isLight
-
 }

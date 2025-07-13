@@ -11,6 +11,6 @@ actual fun getColours(theme: Theme): ThemeColours {
 }
 
 @Composable
-actual fun setStatusBarIconColours(isLight: Boolean) {
+actual fun setSystemBarsIconColours(isLight: Boolean) {
 
 }

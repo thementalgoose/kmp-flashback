@@ -194,13 +194,13 @@
     <!-- Errors -->
     <string name="network_error_network">A network error occurred. Please make sure you are connected to the internet and try again</string>
     <string name="network_error_internal">A unknown error occurred</string>
-    <string name="error_weekend_not_available">Unfortunately we don\'t have these results.</string>
+    <string name="error_weekend_not_available">Unfortunately we don't have these results.</string>
     <string name="error_data_not_available_try_again">An error occurred while getting these results. Please check your internet connection and try again</string>
-    <string name="error_weekend_not_available_yet">We don\'t have these results just yet, please check back after the race. Results usually appear 2–12 hours after every weekend event</string>
+    <string name="error_weekend_not_available_yet">We don't have these results just yet, please check back after the race. Results usually appear 2–12 hours after every weekend event</string>
     <string name="error_search_not_found">No results found</string>
     <string name="rss_internal_error">A network error occurred and we weren\'t able to find any articles. Please check your internet connection or try again later</string>
     <string name="rss_network_error">A network error occurred! Please check you have added a valid set of RSS sources and you are connected to the internet and try again. </string>
-    <string name="rss_no_articles">Welcome to the RSS feed!\nYou don\'t have any RSS sources enabled - Click here to configure them now. Pull to refresh when setup</string>
+    <string name="rss_no_articles">Welcome to the RSS feed!\nYou don't have any RSS sources enabled - Click here to configure them now. Pull to refresh when setup</string>
 
 
     <!-- Events -->

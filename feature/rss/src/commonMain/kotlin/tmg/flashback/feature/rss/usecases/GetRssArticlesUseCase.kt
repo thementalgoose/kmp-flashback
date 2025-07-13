@@ -21,7 +21,7 @@ class GetRssArticlesUseCaseImpl(
     override suspend operator fun invoke(): Response {
         val responses = getAll()
         val errors = responses.filter { it is Response.Error }
-        if (responses.size != errors.size) {
+        if (responses.size != errors.size || responses.isEmpty()) {
             // Only some requests failed, continue with list
             val validResponses = responses
                 .filterIsInstance<Response.Success>()

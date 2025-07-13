@@ -101,7 +101,7 @@ fun RSSScreen(
 
                         }
                         is RssFeedUiState.Data -> {
-                            if (!uiState.hasSources) {
+                            if (!uiState.hasSources || uiState.rssItems.isEmpty()) {
                                 item(key = "sources-disabled") {
                                     SourcesDisabled(sourceClicked = configureSources)
                                 }

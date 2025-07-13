@@ -62,7 +62,7 @@ internal fun RaceStartLights(
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-            .background(AppTheme.colors.surfaceContainer4)
+            .background(Color.LightGray)
             .padding(16.dp)
             .aspectRatio(if (panelType == LightPanel.HALF_HEIGHT) 2.2f else 1.4f)
     ) {

@@ -57,7 +57,7 @@ fun ApplicationTheme(
         LocalDarkMode provides customLightMode,
     ) {
         key(customLightMode) {
-            setStatusBarIconColours(!isSystemInDarkTheme())
+            setSystemBarsIconColours(!isSystemInDarkTheme())
             ApplicationTheme(
                 isLight = !isSystemInDarkTheme(),
                 theme = theme,
@@ -133,4 +133,4 @@ data class ThemeColours(
 expect fun getColours(theme: Theme): ThemeColours
 
 @Composable
-expect fun setStatusBarIconColours(isLight: Boolean)
+expect fun setSystemBarsIconColours(isLight: Boolean)
