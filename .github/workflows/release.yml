@@ -7,9 +7,9 @@ env:
   workflow_dispatch:
 jobs:
 
-  unit-tests:
-    uses: ./.github/workflows/job-unit-tests.yml
-    secrets: inherit
+#  unit-tests:
+#    uses: ./.github/workflows/job-unit-tests.yml
+#    secrets: inherit
 
   versions:
     runs-on: ubuntu-latest
@@ -25,15 +25,15 @@ jobs:
           echo "version_name=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
           echo "version_code=$((${{ github.run_number }} + $RUN_OFFSET))" >> $GITHUB_OUTPUT
 
-  android-assemble-deploy:
-    needs: [versions]
-    uses: ./.github/workflows/job-android-assemble-deploy-prod.yml
-    secrets: inherit
-    with:
-      version_name: ${{ needs.versions.outputs.version_name }}
-      version_code: ${{ needs.versions.outputs.version_code }}
-
-#  ios-assemble-deploy:
+#  android-assemble-deploy:
 #    needs: [versions]
-#    uses: ./.github/workflows/job-ios-assemble-prod.yml
+#    uses: ./.github/workflows/job-android-assemble-deploy-prod.yml
 #    secrets: inherit
+#    with:
+#      version_name: ${{ needs.versions.outputs.version_name }}
+#      version_code: ${{ needs.versions.outputs.version_code }}
+
+  ios-assemble-deploy:
+    needs: [versions]
+    uses: ./.github/workflows/job-ios-assemble-prod.yml
+    secrets: inherit

@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     runs-on: macos-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
@@ -59,101 +59,47 @@ jobs:
           p12-file-base64: ${{ secrets.APPSTORE_CERTIFICATES_FILE_BASE64 }}
           p12-password: ${{ secrets.APPSTORE_CERTIFICATES_PASSWORD }}
 
+      - name: CDing to directory
+        run: | 
+          cd iosApp
 
+      - name: "Generate ExportOptions.plist"
+        run: |
+          cat <<EOF > ./exportOptions.plist
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+            <dict>
+              <key>destination</key>
+              <string>export</string>
+              <key>method</key>
+              <string>app-store</string>
+              <key>signingStyle</key>
+              <string>manual</string>
+              <key>generateAppStoreInformation</key>
+              <true/>
+              <key>stripSwiftSymbols</key>
+              <true/>
+              <key>teamID</key>
+              <string>${{ secrets.IOS_TEAM_ID }}</string>
+              <key>uploadSymbols</key>
+              <true/>
+            </dict>
+          </plist>
+          EOF
 
+      - name: XCode build
+        run: |
+          xcodebuild -workspace ./iosApp.xcworkspace/ -scheme "Production Release" -destination generic/platform=iOS build
 
+      - name: XCode archive
+        run: |
+          xcodebuild -workspace ./iosApp.xcworkspace/ -scheme "Production Release" -sdk iphoneos -configuration "Production Release" archive -archivePath $PWD/build/iosApp.xcarchive
 
+      - name: XCode IPA
+        run: |
+          xcodebuild -exportArchive -archivePath $PWD/build/iosApp.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $PWD/build
 
-
-
-
-
-
-
-
-
-
-
-#      - name: Download Provisioning Profiles
-#        uses: apple-actions/download-provisioning-profiles@v4
-#        with:
-#          bundle-id: ${{ secrets.BUNDLE_ID }}
-#          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
-#          api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
-#          api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
-#
-#      - name: build archive
-#        run: |
-#          cd iosApp
-#
-#          xcrun xcodebuild \
-#            -workspace iosApp.xcworkspace \
-#            -scheme "Sandbox Debug" \
-#            -configuration "Sandbox Debug" \
-#            OBJROOT=../build/ios \
-#            SYMROOT=../build/ios \
-#            -destination id=1F3992A7-15B7-4933-B5EB-3CF3058F3B0B
-#            -allowProvisioningDeviceRegistration
-#            -allowProvisioningUpdates
-#          xcrun xcodebuild \
-#            -scheme "Production Release" \
-#            -configuration "Production Release" \
-#            -sdk "iphoneos" \
-#            -showBuildTimingSummary \
-#            -disableAutomaticPackageResolution \
-#            -derivedDataPath "${RUNNER_TEMP}/Build/DerivedData" \
-#            -archivePath "${RUNNER_TEMP}/Build/Archives/FeedFlow.xcarchive" \
-#            -resultBundlePath "${RUNNER_TEMP}/Build/Artifacts/FeedFlow.xcresult" \
-#            -destination "generic/platform=iOS" \
-#            DEVELOPMENT_TEAM="${{ secrets.APPSTORE_TEAM_ID }}" \
-#            CODE_SIGN_STYLE="Manual" \
-#            archive | xcbeautify --renderer github-actions
-#
-#      - name: "Generate ExportOptions.plist"
-#        run: |
-#          cat <<EOF > ${RUNNER_TEMP}/Build/ExportOptions.plist
-#          <?xml version="1.0" encoding="UTF-8"?>
-#          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-#          <plist version="1.0">
-#            <dict>
-#              <key>destination</key>
-#              <string>export</string>
-#              <key>method</key>
-#              <string>app-store</string>
-#              <key>signingStyle</key>
-#              <string>manual</string>
-#              <key>generateAppStoreInformation</key>
-#              <true/>
-#              <key>stripSwiftSymbols</key>
-#              <true/>
-#              <key>teamID</key>
-#              <string>${{ secrets.APPSTORE_TEAM_ID }}</string>
-#              <key>uploadSymbols</key>
-#              <true/>
-#              <key>provisioningProfiles</key>
-#              <dict>
-#                <key>${{ secrets.BUNDLE_ID }}</key>
-#                <string>FlashbackDistributionProvisioning</string>
-#              </dict>
-#            </dict>
-#          </plist>
-#          EOF
-#
-#      - id: export_archive
-#        name: export archive
-#        run: |
-#          xcrun xcodebuild \
-#          -exportArchive \
-#          -exportOptionsPlist "${RUNNER_TEMP}/Build/ExportOptions.plist" \
-#          -archivePath "${RUNNER_TEMP}/Build/Archives/Flashback.xcarchive" \
-#          -exportPath "${RUNNER_TEMP}/Build/Archives/Flashback.xcarchive" \
-#          PRODUCT_BUNDLE_IDENTIFIER="${{ secrets.BUNDLE_ID }}" | xcbeautify --renderer github-actions
-#
-#          echo "ipa_path=${RUNNER_TEMP}/Build/Archives/Flashback.xcarchive/Flashback.ipa" >> $GITHUB_ENV
-#
-#      - uses: Apple-Actions/upload-testflight-build@v3
-#        with:
-#          app-path: ${{ env.ipa_path }}
-#          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
-#          api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
-#          api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
+      - name: XCode finished
+        run: | 
+          echo "WIP"

@@ -7,7 +7,7 @@ xcodebuild -workspace ./iosApp.xcworkspace/ -scheme "Production Release" -destin
 #archive
 echo "ARCHIVE"
 echo "================================================================================"
-xcodebuild -workspace ./iosApp.xcworkspace/ -scheme "Production Release" -sdk iphoneos -configuration AppStoreDistribution archive -archivePath $PWD/build/iosApp.xcarchive
+xcodebuild -workspace ./iosApp.xcworkspace/ -scheme "Production Release" -sdk iphoneos -configuration "Production Release" archive -archivePath $PWD/build/iosApp.xcarchive
 
 # create build ipa
 echo "CREATE IPA"
