@@ -197,6 +197,7 @@ private fun CollapsableList(
                         modifier = Modifier
                             .padding(horizontal = AppTheme.dimens.small)
                             .weight(1f),
+                        bold = true,
                         text = model.first.raceName
                     )
                     Round(model.first.round)
@@ -213,6 +214,7 @@ private fun CollapsableList(
                             modifier = Modifier
                                 .padding(horizontal = AppTheme.dimens.small)
                                 .weight(1f),
+                            bold = true,
                             text = model.last.raceName
                         )
                         Round(model.last.round)
