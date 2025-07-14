@@ -91,6 +91,7 @@ class SyncViewModel(
 
         _configState.value = LOADING
         viewModelScope.launch {
+            delay(DELAY_CONFIG_SYNC_MS)
             resetConfigUseCase.ensureReset()
 
             val result = fetchConfigRepository.fetchAndApply()
@@ -158,5 +159,6 @@ class SyncViewModel(
 
     companion object {
         private val DELAY_SYNC_MS = 300L
+        private val DELAY_CONFIG_SYNC_MS = 1000L
     }
 }

@@ -29,12 +29,14 @@ import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.details_link_map
 import flashback.presentation.localisation.generated.resources.details_link_wikipedia
 import flashback.presentation.localisation.generated.resources.details_link_youtube
+import kotlinx.coroutines.selects.select
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.constants.AnalyticsConstants
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.feature.weekend.presentation.WeekendUiState.Data
+import tmg.flashback.feature.weekend.presentation.data.ResultType
 import tmg.flashback.feature.weekend.presentation.data.info.InfoModel
 import tmg.flashback.feature.weekend.presentation.data.info.RaceDetails
 import tmg.flashback.feature.weekend.presentation.data.info.Schedule
@@ -89,6 +91,7 @@ fun WeekendScreen(
         windowSizeClass = windowSizeClass,
         uiState = uiState.value,
         clickWeekendTab = viewModel::updateTab,
+        selectResultType = viewModel::selectResultType,
         refresh = viewModel::refresh
     )
 }
@@ -105,6 +108,7 @@ fun WeekendScreenTab(
     openMap: (Location, String) -> Unit,
     windowSizeClass: WindowSizeClass,
     uiState: WeekendUiState,
+    selectResultType: (ResultType) -> Unit,
     refresh: () -> Unit,
 ) {
     Box(
@@ -150,22 +154,24 @@ fun WeekendScreenTab(
 
                         if (uiState.tab == WeekendTabs.Qualifying) {
                             addQualifyingData(
-                                uiState
+                                uiState = uiState
                             )
                         }
                         if (uiState.tab == WeekendTabs.Race) {
                             addRaceData(
-                                uiState
+                                uiState = uiState,
+                                selectResultType = selectResultType,
                             )
                         }
                         if (uiState.tab == WeekendTabs.SprintQualifying) {
                             addSprintQualifyingData(
-                                uiState
+                                uiState = uiState
                             )
                         }
                         if (uiState.tab == WeekendTabs.SprintRace) {
                             addSprintRaceData(
-                                uiState
+                                uiState = uiState,
+                                selectResultType = selectResultType,
                             )
                         }
                     }

@@ -30,6 +30,7 @@ import tmg.flashback.feature.weekend.presentation.WeekendUiState.Data
 import tmg.flashback.feature.weekend.presentation.components.DataMissing
 import tmg.flashback.feature.weekend.presentation.components.DataUnavailable
 import tmg.flashback.feature.weekend.presentation.components.DriverInfoWithIcon
+import tmg.flashback.feature.weekend.presentation.components.DriverTeamSwitcher
 import tmg.flashback.feature.weekend.presentation.components.PointsBox
 import tmg.flashback.feature.weekend.presentation.components.RaceHeader
 import tmg.flashback.feature.weekend.presentation.components.Time
@@ -37,6 +38,7 @@ import tmg.flashback.feature.weekend.presentation.components.TypeHeader
 import tmg.flashback.feature.weekend.presentation.components.finishingPositionWidth
 import tmg.flashback.feature.weekend.presentation.components.status
 import tmg.flashback.feature.weekend.presentation.components.timeWidth
+import tmg.flashback.feature.weekend.presentation.data.ResultType
 import tmg.flashback.formula1.constants.Formula1
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.DriverEntry
@@ -45,6 +47,8 @@ import tmg.flashback.formula1.preview.preview
 import tmg.flashback.infrastructure.extensions.roundToHalf
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
+import tmg.flashback.style.buttons.Segments
+import tmg.flashback.style.input.InputSelection
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextTitle
@@ -54,12 +58,21 @@ import tmg.flashback.ui.components.edgeBar
 
 fun LazyListScope.addRaceData(
     uiState: Data,
+    selectResultType: (ResultType) -> Unit,
     keyPrefix: String = ""
 ) {
     item("race_label") {
-        TypeHeader(
-            resource = string.nav_race,
-        )
+        Column {
+            TypeHeader(
+                resource = string.nav_race,
+            )
+            DriverTeamSwitcher(
+                modifier = Modifier.padding(horizontal = AppTheme.dimens.medium),
+                isDrivers = uiState.resultType == ResultType.DRIVERS,
+                driversClicked = { selectResultType(ResultType.DRIVERS) },
+                teamsClicked = { selectResultType(ResultType.CONSTRUCTORS) }
+            )
+        }
     }
     if (uiState.raceResults.isEmpty()) {
         item("race_not_found") {

@@ -31,6 +31,7 @@ import tmg.flashback.feature.weekend.presentation.WeekendUiState
 import tmg.flashback.feature.weekend.presentation.components.DataMissing
 import tmg.flashback.feature.weekend.presentation.components.DataUnavailable
 import tmg.flashback.feature.weekend.presentation.components.DriverInfoWithIcon
+import tmg.flashback.feature.weekend.presentation.components.DriverTeamSwitcher
 import tmg.flashback.feature.weekend.presentation.components.PointsBox
 import tmg.flashback.feature.weekend.presentation.components.RaceHeader
 import tmg.flashback.feature.weekend.presentation.components.Time
@@ -38,6 +39,7 @@ import tmg.flashback.feature.weekend.presentation.components.TypeHeader
 import tmg.flashback.feature.weekend.presentation.components.finishingPositionWidth
 import tmg.flashback.feature.weekend.presentation.components.status
 import tmg.flashback.feature.weekend.presentation.components.timeWidth
+import tmg.flashback.feature.weekend.presentation.data.ResultType
 import tmg.flashback.formula1.constants.Formula1
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.DriverEntry
@@ -55,12 +57,21 @@ import tmg.flashback.ui.components.edgeBar
 
 fun LazyListScope.addSprintRaceData(
     uiState: WeekendUiState.Data,
+    selectResultType: (ResultType) -> Unit,
     keyPrefix: String = ""
 ) {
     item("sprint_race_label") {
-        TypeHeader(
-            resource = string.nav_sprint
-        )
+        Column {
+            TypeHeader(
+                resource = string.nav_sprint
+            )
+            DriverTeamSwitcher(
+                modifier = Modifier.padding(horizontal = AppTheme.dimens.medium),
+                isDrivers = uiState.resultType == ResultType.DRIVERS,
+                driversClicked = { selectResultType(ResultType.DRIVERS) },
+                teamsClicked = { selectResultType(ResultType.CONSTRUCTORS) }
+            )
+        }
     }
     if (uiState.sprintRaceResults.isEmpty()) {
         item("sprint_race_not_found") {

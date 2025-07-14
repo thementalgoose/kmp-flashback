@@ -71,6 +71,7 @@ class WeekendViewModel(
                     isSprint = race.hasSprint,
                     season = race.raceInfo.season
                 ),
+                resultType = resultType,
                 qualifyingResults = qualifyingDataMapper(race),
                 qualifyingColumns = race.qualifying.maxOfOrNull { it.label },
                 raceResults = raceDataMapper(race, resultType),
@@ -107,6 +108,10 @@ class WeekendViewModel(
             lng = location.lng,
             name = name,
         )
+    }
+
+    fun selectResultType(resultType: ResultType) {
+        this.resultType.value = resultType
     }
 
     private suspend fun refresh(season: Int) {
