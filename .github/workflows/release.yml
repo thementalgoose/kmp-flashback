@@ -25,7 +25,7 @@ jobs:
           echo "version_name=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
           echo "version_code=$((${{ github.run_number }} + $RUN_OFFSET))" >> $GITHUB_OUTPUT
 
-  android-assemble-deplot:
+  android-assemble-deploy:
     needs: [versions]
     uses: ./.github/workflows/job-android-assemble-deploy-prod.yml
     secrets: inherit
