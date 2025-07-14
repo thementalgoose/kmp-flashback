@@ -1,0 +1,159 @@
+name: Job - iOS - Assemble Prod IPA
+
+on:
+  workflow_call:
+    inputs:
+      version_name: { required: true, type: string }
+      version_code: { required: true, type: string }
+    outputs:
+      artifact-name:
+        value: ${{ jobs.build.outputs.artifact-name }}
+
+jobs:
+  build:
+    runs-on: macos-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Xcode setup
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '16.4'
+
+      - name: Setup Cocoapods
+        uses: maxim-lobanov/setup-cocoapods@v1
+        with:
+          podfile-path: iosApp/Podfile.lock
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/*.toml*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Environment variables
+        env:
+          GOOGLE_SERVICES_JSON_PRODUCTION: ${{ secrets.GOOGLE_SERVICES_JSON_PRODUCTION }}
+          GOOGLE_SERVICES_PLIST_PRODUCTION: ${{ secrets.GOOGLE_SERVICES_PLIST_PRODUCTION }}
+        run: |
+          mkdir -p composeApp/src/sandbox
+          mkdir -p composeApp/src/production
+          mkdir -p iosApp/iosApp/Firebase
+          echo GOOGLE_SERVICES_JSON_PRODUCTION | base64 --decode >> composeApp/src/production/google-services.json
+          echo $GOOGLE_SERVICES_PLIST_PRODUCTION | base64 --decode >> iosApp/iosApp/Firebase/GoogleService-production.plist
+
+      - name: Import certs
+        uses: apple-actions/import-codesign-certs@v3
+        with:
+          p12-file-base64: ${{ secrets.APPSTORE_CERTIFICATES_FILE_BASE64 }}
+          p12-password: ${{ secrets.APPSTORE_CERTIFICATES_PASSWORD }}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#      - name: Download Provisioning Profiles
+#        uses: apple-actions/download-provisioning-profiles@v4
+#        with:
+#          bundle-id: ${{ secrets.BUNDLE_ID }}
+#          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+#          api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
+#          api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
+#
+#      - name: build archive
+#        run: |
+#          cd iosApp
+#
+#          xcrun xcodebuild \
+#            -workspace iosApp.xcworkspace \
+#            -scheme "Sandbox Debug" \
+#            -configuration "Sandbox Debug" \
+#            OBJROOT=../build/ios \
+#            SYMROOT=../build/ios \
+#            -destination id=1F3992A7-15B7-4933-B5EB-3CF3058F3B0B
+#            -allowProvisioningDeviceRegistration
+#            -allowProvisioningUpdates
+#          xcrun xcodebuild \
+#            -scheme "Production Release" \
+#            -configuration "Production Release" \
+#            -sdk "iphoneos" \
+#            -showBuildTimingSummary \
+#            -disableAutomaticPackageResolution \
+#            -derivedDataPath "${RUNNER_TEMP}/Build/DerivedData" \
+#            -archivePath "${RUNNER_TEMP}/Build/Archives/FeedFlow.xcarchive" \
+#            -resultBundlePath "${RUNNER_TEMP}/Build/Artifacts/FeedFlow.xcresult" \
+#            -destination "generic/platform=iOS" \
+#            DEVELOPMENT_TEAM="${{ secrets.APPSTORE_TEAM_ID }}" \
+#            CODE_SIGN_STYLE="Manual" \
+#            archive | xcbeautify --renderer github-actions
+#
+#      - name: "Generate ExportOptions.plist"
+#        run: |
+#          cat <<EOF > ${RUNNER_TEMP}/Build/ExportOptions.plist
+#          <?xml version="1.0" encoding="UTF-8"?>
+#          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+#          <plist version="1.0">
+#            <dict>
+#              <key>destination</key>
+#              <string>export</string>
+#              <key>method</key>
+#              <string>app-store</string>
+#              <key>signingStyle</key>
+#              <string>manual</string>
+#              <key>generateAppStoreInformation</key>
+#              <true/>
+#              <key>stripSwiftSymbols</key>
+#              <true/>
+#              <key>teamID</key>
+#              <string>${{ secrets.APPSTORE_TEAM_ID }}</string>
+#              <key>uploadSymbols</key>
+#              <true/>
+#              <key>provisioningProfiles</key>
+#              <dict>
+#                <key>${{ secrets.BUNDLE_ID }}</key>
+#                <string>FlashbackDistributionProvisioning</string>
+#              </dict>
+#            </dict>
+#          </plist>
+#          EOF
+#
+#      - id: export_archive
+#        name: export archive
+#        run: |
+#          xcrun xcodebuild \
+#          -exportArchive \
+#          -exportOptionsPlist "${RUNNER_TEMP}/Build/ExportOptions.plist" \
+#          -archivePath "${RUNNER_TEMP}/Build/Archives/Flashback.xcarchive" \
+#          -exportPath "${RUNNER_TEMP}/Build/Archives/Flashback.xcarchive" \
+#          PRODUCT_BUNDLE_IDENTIFIER="${{ secrets.BUNDLE_ID }}" | xcbeautify --renderer github-actions
+#
+#          echo "ipa_path=${RUNNER_TEMP}/Build/Archives/Flashback.xcarchive/Flashback.ipa" >> $GITHUB_ENV
+#
+#      - uses: Apple-Actions/upload-testflight-build@v3
+#        with:
+#          app-path: ${{ env.ipa_path }}
+#          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+#          api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
+#          api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}

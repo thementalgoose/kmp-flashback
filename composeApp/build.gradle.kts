@@ -251,3 +251,33 @@ compose.desktop {
         }
     }
 }
+
+tasks.named("generateComposeResClass") {
+//    dependsOn("updatePlistVersion")
+}
+
+tasks.register("updatePlistVersion") {
+    val plistFile = project.file("../iosApp/iosApp/Info.plist") // Path to your `Info.plist` file
+
+    doLast {
+        if (!plistFile.exists()) {
+            throw GradleException("Info.plist not found at ${plistFile.absolutePath}")
+        }
+
+        val appVersion: String = versionNameProperty
+        val buildVersion: String = versionCodeProperty.toString()
+
+        var plistContent = plistFile.readText()
+
+        plistContent = plistContent.replace(
+            Regex("<key>CFBundleShortVersionString</key>\\s*<string>.*?</string>"),
+            "<key>CFBundleShortVersionString</key>\n    <string>$appVersion</string>"
+        )
+        plistContent = plistContent.replace(
+            Regex("<key>CFBundleVersion</key>\\s*<string>.*?</string>"),
+            "<key>CFBundleVersion</key>\n    <string>$buildVersion</string>"
+        )
+
+        plistFile.writeText(plistContent)
+    }
+}
