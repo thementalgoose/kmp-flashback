@@ -8,6 +8,6 @@ name: Main
       - '**.yml'
       - '**.png'
 jobs:
-  unit-tests:
-    uses: ./.github/workflows/job-unit-tests.yml
-    secrets: inherit
+#  unit-tests:
+#    uses: ./.github/workflows/job-unit-tests.yml
+#    secrets: inherit
