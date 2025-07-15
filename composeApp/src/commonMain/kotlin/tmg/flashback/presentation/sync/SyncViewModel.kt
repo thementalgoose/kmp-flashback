@@ -94,13 +94,9 @@ class SyncViewModel(
             delay(DELAY_CONFIG_SYNC_MS)
             resetConfigUseCase.ensureReset()
 
-            val result = fetchConfigRepository.fetchAndApply()
+            fetchConfigRepository.fetchAndApply()
 
-            if (result) {
-                _configState.value = DONE
-            } else {
-                _configState.value = FAILED
-            }
+            _configState.value = DONE
         }
     }
 
