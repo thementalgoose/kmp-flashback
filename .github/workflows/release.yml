@@ -37,3 +37,6 @@ jobs:
     needs: [versions]
     uses: ./.github/workflows/job-ios-assemble-deploy-prod.yml
     secrets: inherit
+    with:
+      version_name: ${{ needs.versions.outputs.version_name }}
+      version_code: ${{ needs.versions.outputs.version_code }}
