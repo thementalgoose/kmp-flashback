@@ -50,6 +50,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      - name: Prep pods initialisations
+        run: |
+          ./gradlew :composeApp:generateDummyFramework
+
       - name: Install pods
         run: | 
           cd iosApp/
