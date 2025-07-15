@@ -23,13 +23,13 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Push a new beta build to TestFlight
 
-### ios beta_local
+### ios load_asc_api_token
 
 ```sh
-[bundle exec] fastlane ios beta_local
+[bundle exec] fastlane ios load_asc_api_token
 ```
 
-
+Load the App Store Connect API token
 
 ----
 

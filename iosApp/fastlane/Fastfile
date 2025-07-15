@@ -16,10 +16,9 @@ default_platform(:ios)
 
 platform :ios do
   desc "Push a new beta build to TestFlight"
-
   lane :beta do
     setup_ci
-#     load_asc_api_token
+    load_asc_api_token
 
     increment_version_number_in_xcodeproj(
       version_number: ENV["VERSION_NAME"],
@@ -30,51 +29,35 @@ platform :ios do
       scheme: "Production Release"
     )
 
-    app_store_connect_api_key(
-      key_id: ENV["ASC_KEY_ID"],
-      issuer_id: ENV["ASC_ISSUER_ID"],
-      key_content: ENV["ASC_KEY_P8"],
-      is_key_content_base64: true,
+    api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
+    sync_code_signing(
+      api_key: api_key,
+      type: "appstore",
+      readonly: true,
     )
 
     build_app(
       workspace: "iosApp.xcworkspace",
       scheme: "Production Release",
-      export_options: {
-        provisioningProfiles: {
-          "tmg.flashback" => "Flashback App Store"
-        }
-      }
+#       export_options: {
+#         provisioningProfiles: {
+#           "tmg.flashback" => "Fastlane Match AppStore tmg.flashback"
+#         },
+#         method: "app-store-connect"
+#       }
     )
+
     upload_to_testflight
   end
 
-  lane :beta_local do
-    increment_version_number_in_xcodeproj(
-      version_number: ENV["VERSION_NAME"],
-      scheme: "Production Release"
-    )
-    increment_version_number_in_plist(
-      version_number: ENV["VERSION_NAME"],
-      scheme: "Production Release"
-    )
-
-    app_store_connect_api_key(
-      key_id: ENV["ASC_KEY_ID"],
-      issuer_id: ENV["ASC_ISSUER_ID"],
-      key_content: ENV["ASC_KEY_P8"],
-      is_key_content_base64: true,
-    )
-
-    build_app(
-      workspace: "iosApp.xcworkspace",
-      scheme: "Production Release",
-      export_options: {
-        provisioningProfiles: {
-          "tmg.flashback" => "Flashback App Store"
-        }
-      }
-    )
-    upload_to_testflight
-  end
+  desc "Load the App Store Connect API token"
+    lane :load_asc_api_token do
+      app_store_connect_api_key(
+        key_id: ENV["ASC_KEY_ID"],
+        issuer_id: ENV["ASC_ISSUER_ID"],
+        key_content: ENV["ASC_KEY_P8"],
+        is_key_content_base64: true,
+        in_house: false
+      )
+    end
 end
