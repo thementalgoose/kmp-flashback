@@ -39,4 +39,4 @@ jobs:
     secrets: inherit
     with:
       version_name: ${{ needs.versions.outputs.version_name }}
-      version_code: ${{ needs.versions.outputs.version_code }}
+      version_code: "1"
