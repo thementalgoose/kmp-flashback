@@ -50,6 +50,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      - name: Install pods
+        run: | 
+          cd iosApp/
+          pod install
+          cd ..
+
       - name: Environment variables
         env:
           GOOGLE_SERVICES_JSON_PRODUCTION: ${{ secrets.GOOGLE_SERVICES_JSON_PRODUCTION }}
