@@ -35,5 +35,5 @@ jobs:
 
   ios-assemble-deploy:
     needs: [versions]
-    uses: ./.github/workflows/job-ios-assemble-prod.yml
+    uses: ./.github/workflows/job-ios-assemble-deploy-prod.yml
     secrets: inherit

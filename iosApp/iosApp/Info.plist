@@ -6,5 +6,9 @@
 	<true/>
 	<key>NSAllowsLocalNetworking</key>
 	<true/>
+	<key>CFBundleShortVersionString</key>
+    <string>1.0.0</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
 </dict>
 </plist>

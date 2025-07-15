@@ -1,0 +1,49 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+
+  before_all do
+    setup_ci
+    load_asc_api_token
+  end
+
+  lane :beta do
+
+    app_identifier("tmg.flashback")
+    itc_team_id("127983857")
+
+    team_id(ENV["ASC_TEAM_ID"])
+
+    app_store_connect_api_key(
+      key_id: ENV["ASC_KEY_ID"],
+      issuer_id: ENV["ASC_ISSUER_ID"],
+      key_content: ENV["ASC_KEY_P8"],
+      is_key_content_base64: true,
+    )
+
+    build_app(
+      workspace: "iosApp.xcworkspace",
+      scheme: "Production Release",
+      export_options: {
+        provisioningProfiles: {
+          "tmg.flashback" => "Flashback App Store"
+        }
+      }
+    )
+    upload_to_testflight
+  end
+
+end

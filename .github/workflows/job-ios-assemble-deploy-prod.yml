@@ -12,7 +12,9 @@ on:
 jobs:
   build:
     runs-on: macos-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/iosApp/Gemfile
     steps:
       - uses: actions/checkout@v4
         with:
@@ -22,6 +24,11 @@ jobs:
         uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '16.4'
+
+      - name: Setup ruby & Bundler
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
 
       - name: Setup Cocoapods
         uses: maxim-lobanov/setup-cocoapods@v1
@@ -53,53 +60,12 @@ jobs:
           echo GOOGLE_SERVICES_JSON_PRODUCTION | base64 --decode >> composeApp/src/production/google-services.json
           echo $GOOGLE_SERVICES_PLIST_PRODUCTION | base64 --decode >> iosApp/iosApp/Firebase/GoogleService-production.plist
 
-      - name: Import certs
-        uses: apple-actions/import-codesign-certs@v3
-        with:
-          p12-file-base64: ${{ secrets.APPSTORE_CERTIFICATES_FILE_BASE64 }}
-          p12-password: ${{ secrets.APPSTORE_CERTIFICATES_PASSWORD }}
-
-      - name: CDing to directory
-        run: | 
-          cd iosApp
-
-      - name: "Generate ExportOptions.plist"
+      - name: Build and Deploy to TestFlight
+        env:
+          ASC_KEY_ID: ${{ secrets.IOS_APPSTORE_CONNECT_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.IOS_APPSTORE_CONNECT_ISSUER_ID }}
+          ASC_KEY_P8: ${{ secrets.IOS_APPSTORE_CONNECT_API_KEY }}
+          ASC_TEAM_ID: ${{ secrets.IOS_TEAM_ID }}
         run: |
-          cat <<EOF > ./exportOptions.plist
-          <?xml version="1.0" encoding="UTF-8"?>
-          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0">
-            <dict>
-              <key>destination</key>
-              <string>export</string>
-              <key>method</key>
-              <string>app-store</string>
-              <key>signingStyle</key>
-              <string>manual</string>
-              <key>generateAppStoreInformation</key>
-              <true/>
-              <key>stripSwiftSymbols</key>
-              <true/>
-              <key>teamID</key>
-              <string>${{ secrets.IOS_TEAM_ID }}</string>
-              <key>uploadSymbols</key>
-              <true/>
-            </dict>
-          </plist>
-          EOF
-
-      - name: XCode build
-        run: |
-          xcodebuild -workspace ./iosApp.xcworkspace/ -scheme "Production Release" -destination generic/platform=iOS build
-
-      - name: XCode archive
-        run: |
-          xcodebuild -workspace ./iosApp.xcworkspace/ -scheme "Production Release" -sdk iphoneos -configuration "Production Release" archive -archivePath $PWD/build/iosApp.xcarchive
-
-      - name: XCode IPA
-        run: |
-          xcodebuild -exportArchive -archivePath $PWD/build/iosApp.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $PWD/build
-
-      - name: XCode finished
-        run: | 
-          echo "WIP"
+          cd ./ios
+          bundle exec fastlane beta
