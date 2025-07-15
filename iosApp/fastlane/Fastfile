@@ -19,7 +19,7 @@ platform :ios do
 
   lane :beta do
     setup_ci
-    load_asc_api_token
+#     load_asc_api_token
 
     increment_version_number_in_xcodeproj(
       version_number: ENV["VERSION_NAME"],
