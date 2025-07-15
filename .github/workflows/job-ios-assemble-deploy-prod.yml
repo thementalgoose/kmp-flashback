@@ -66,6 +66,8 @@ jobs:
           ASC_ISSUER_ID: ${{ secrets.IOS_APPSTORE_CONNECT_ISSUER_ID }}
           ASC_KEY_P8: ${{ secrets.IOS_APPSTORE_CONNECT_API_KEY }}
           ASC_TEAM_ID: ${{ secrets.IOS_TEAM_ID }}
+          VERSION_NAME: ${{ inputs.version_name }}
+          VERSION_CODE: ${{ inputs.version_code }}
         run: |
           cd ./ios
           bundle exec fastlane beta
