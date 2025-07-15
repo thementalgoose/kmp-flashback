@@ -70,5 +70,5 @@ jobs:
           VERSION_NAME: ${{ inputs.version_name }}
           VERSION_CODE: ${{ inputs.version_code }}
         run: |
-          cd ./ios
+          cd ./iosApp
           bundle exec fastlane beta
