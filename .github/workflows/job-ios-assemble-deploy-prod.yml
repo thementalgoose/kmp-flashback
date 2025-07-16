@@ -55,9 +55,9 @@ jobs:
 
       - name: clean pod cache
         run: |
-          pod cache clean --all
-          npm i
-          cd iosApp && arch -x86_64 pod install
+          cd iosApp
+          pod cache clean --all 
+          arch -x86_64 pod install
 
       - uses: actions/setup-java@v4
         with:
