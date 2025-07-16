@@ -162,19 +162,8 @@ private fun Item(
             )
             
             if (model.description != null) {
-                val description = remember {
-                    var string = ""
-                    val rawTextHandler = KsoupHtmlHandler
-                        .Builder()
-                        .onText { text -> string += text }
-                        .build()
-                    val parser = KsoupHtmlParser(rawTextHandler)
-                    parser.write(model.description)
-                    return@remember string
-                }
-
                 TextBody2(
-                    text = description,
+                    text = model.description,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 4.dp)

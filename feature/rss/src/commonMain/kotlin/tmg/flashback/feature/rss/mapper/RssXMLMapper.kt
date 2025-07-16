@@ -1,5 +1,7 @@
 package tmg.flashback.feature.rss.mapper
 
+import com.mohamedrejeb.ksoup.html.parser.KsoupHtmlHandler
+import com.mohamedrejeb.ksoup.html.parser.KsoupHtmlParser
 import io.ktor.http.URLProtocol.Companion.HTTP
 import io.ktor.http.URLProtocol.Companion.HTTPS
 import io.ktor.http.Url
@@ -9,12 +11,16 @@ import kotlinx.datetime.format.DayOfWeekNames
 import kotlinx.datetime.format.MonthNames.Companion.ENGLISH_ABBREVIATED
 import kotlinx.datetime.format.Padding
 import kotlinx.datetime.format.char
+import kotlinx.datetime.format.optional
 import tmg.flashback.feature.rss.models.Article
 import tmg.flashback.feature.rss.models.ArticleSource
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.log.logDebug
+import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.network.rss.models.Item
 import tmg.flashback.network.rss.models.RssFeed
+
+const val RSS_DESC_LENGTH = 500
 
 interface RssXMLMapper {
     fun convert(
@@ -68,18 +74,37 @@ internal class RssXMLMapperImpl(
             ?.filterNotNull()
             ?.map {
                 val pubDate = it.pubDate ?: LocalDateTime.now().format(LocalDateTime.Formats.ISO)
+                val desc = it.description
+                    ?.substringBefore("&lt;/p&gt;")
+                    ?.substringBefore("</p>")
+                    ?.trim()
+                val description = try {
+                    when (showDescription) {
+                        false -> null
+                        true -> {
+                            var string = ""
+                            val rawTextHandler = KsoupHtmlHandler
+                                .Builder()
+                                .onText { text -> string += text }
+                                .build()
+                            val parser = KsoupHtmlParser(rawTextHandler)
+                            parser.write(desc ?: "")
+                            string.take(RSS_DESC_LENGTH)
+                        }
+                    }
+                } catch (_: Exception) {
+                    desc?.take(RSS_DESC_LENGTH)
+                }
+
                 Article(
                     id = it.link!!,
                     title = it.title!!.replace("&#039;", "'"),
-                    description = when (showDescription) {
-                        false -> null
-                        true -> it.description
-                            ?.substringBefore("&lt;/p&gt;")
-                            ?.substringBefore("</p>")
-                            ?.trim()
-                    },
+                    description = description,
                     link = it.link!!.replace("http://", "https://"),
-                    date = attemptParseDate(pubDate.replace("GMT", "+0000")),
+                    date = attemptParseDate(pubDate
+                        .split("+")[0]
+                        .replace("GMT", "")
+                        .trim()),
                     source = source
                 )
             } ?: emptyList()
@@ -87,10 +112,13 @@ internal class RssXMLMapperImpl(
 }
 
 private fun attemptParseDate(date: String): LocalDateTime {
+    logInfo("Attempting to parse '$date'")
     for (x in rssDateTimeFormats) {
         try {
             return LocalDateTime.parse(date, x)
-        } catch (e: Exception) { }
+        } catch (e: Exception) {
+
+        }
     }
     return LocalDateTime.now()
 }
@@ -110,6 +138,9 @@ val rssDateTimeFormats = listOf(
         minute(Padding.ZERO)
         char(':')
         second(Padding.ZERO)
+        optional {
+            char(' ')
+        }
     },
     LocalDateTime.Formats.ISO,
 )

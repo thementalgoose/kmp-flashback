@@ -63,7 +63,7 @@ class RSSFeedViewModel(
                             hasSources = rssRepository.rssUrls.isNotEmpty(),
                             rssItems = resp.data
                                 .distinctBy { it.link }
-                                .sortedBy { it.date }
+                                .sortedByDescending { it.date }
                         )
                     }
                 }

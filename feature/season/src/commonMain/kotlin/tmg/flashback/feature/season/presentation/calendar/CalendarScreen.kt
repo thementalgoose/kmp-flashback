@@ -168,8 +168,10 @@ private fun CollapsableList(
         .semantics(mergeDescendants = true) { }
         .clearAndSetSemantics { this.stateDescription = contentDescription }
         .padding(
-            horizontal = AppTheme.dimens.xsmall,
-            vertical = AppTheme.dimens.xsmall
+            start = AppTheme.dimens.xsmall,
+            end = AppTheme.dimens.small,
+            top = AppTheme.dimens.xsmall,
+            bottom = AppTheme.dimens.xsmall
         ),
         verticalAlignment = Alignment.CenterVertically
     ) {
