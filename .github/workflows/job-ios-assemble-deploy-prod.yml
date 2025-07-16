@@ -53,11 +53,6 @@ jobs:
       - name: Install fastlane dependencies
         run: cd iosApp/ && bundle install
 
-      - name: clean pod cache
-        run: |
-          cd iosApp
-          pod install
-
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
@@ -75,6 +70,11 @@ jobs:
       - name: Generate dummy framework
         run: |
           ./gradlew :composeApp:generateDummyFramework
+
+      - name: clean pod cache
+        run: |
+          cd iosApp
+          pod install
 
       - name: Environment variables
         env:
