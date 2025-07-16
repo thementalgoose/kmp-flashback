@@ -64,7 +64,7 @@ jobs:
       # Sign AAB
       - name: Sign app
         uses: r0adkll/sign-android-release@v1
-        id: sign_app
+        id: sign_aab
         with:
           releaseDirectory: composeApp/build/outputs/bundle/productionRelease
           signingKeyBase64: ${{ secrets.ANDROID_KEYSTORE }}
@@ -77,7 +77,7 @@ jobs:
       # Sign APK
       - name: Sign app
         uses: r0adkll/sign-android-release@v1
-        id: sign_app
+        id: sign_apk
         with:
           releaseDirectory: composeApp/build/outputs/apk/production/release
           signingKeyBase64: ${{ secrets.ANDROID_KEYSTORE }}
