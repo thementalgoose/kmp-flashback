@@ -16,7 +16,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -27,11 +30,14 @@ import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
+import flashback.domain.formula1.generated.resources.Res.drawable
+import flashback.domain.formula1.generated.resources.ic_tyre
 import flashback.feature.season.generated.resources.ic_collapsible_icon_bottom
 import flashback.feature.season.generated.resources.ic_collapsible_icon_top
 import flashback.feature.season.generated.resources.Res
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.ab_collapsed_section
+import flashback.presentation.localisation.generated.resources.tyres_label
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.format
 import org.jetbrains.compose.resources.painterResource
@@ -42,6 +48,10 @@ import tmg.flashback.feature.season.presentation.calendar.components.RaceWeekCar
 import tmg.flashback.feature.season.presentation.calendar.components.Round
 import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedBy
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.SeasonPicker
+import tmg.flashback.feature.season.presentation.tyres.TyreBottomSheet
+import tmg.flashback.formula1.enums.SeasonTyres
+import tmg.flashback.formula1.enums.getBySeason
+import tmg.flashback.formula1.enums.hasEntryForSeason
 import tmg.flashback.formula1.extensions.icon
 import tmg.flashback.formula1.extensions.label
 import tmg.flashback.infrastructure.datetime.dateFormatDMMM
@@ -93,7 +103,9 @@ fun CalendarScreen(
                             false -> null
                         },
                         actionUpClicked = actionUpClicked,
-                        overrideIcons = { }
+                        overrideIcons = {
+                            Tyres(uiState.season)
+                        }
                     )
                 }
 
@@ -305,5 +317,32 @@ private fun Event(
         TextBody2(
             text = event.event.date.format(dateFormatDMMM),
         )
+    }
+}
+
+@Composable
+private fun Tyres(
+    season: Int
+) {
+    val seasonTyres = remember { mutableStateOf<Int?>(null) }
+    if (SeasonTyres.hasEntryForSeason(season)) {
+        IconButton(
+            onClick = {
+                seasonTyres.value = season
+            },
+            content = {
+                Icon(
+                    painter = painterResource(resource = drawable.ic_tyre),
+                    contentDescription = stringResource(resource = string.tyres_label),
+                    tint = AppTheme.colors.onSurfaceVariant
+                )
+            }
+        )
+        if (seasonTyres.value != null) {
+            TyreBottomSheet(
+                season = season,
+                dismissed = { seasonTyres.value = null }
+            )
+        }
     }
 }

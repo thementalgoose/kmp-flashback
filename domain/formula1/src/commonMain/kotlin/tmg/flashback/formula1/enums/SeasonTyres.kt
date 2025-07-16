@@ -23,6 +23,10 @@ fun SeasonTyres.Companion.getBySeason(season: Int): SeasonTyres? {
     return SeasonTyres.entries.firstOrNull { model -> model.season == season }
 }
 
+fun SeasonTyres.Companion.hasEntryForSeason(season: Int): Boolean {
+    return SeasonTyres.entries.any { it.season == season }
+}
+
 enum class SeasonTyres(
     val season: Int,
     val tyres: List<TyreLabel>
