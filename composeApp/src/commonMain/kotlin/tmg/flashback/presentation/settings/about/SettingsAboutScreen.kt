@@ -32,6 +32,7 @@ fun SettingsAboutScreen(
         actionUpClicked = actionUpClicked,
         insetPadding = insetPadding,
         showBack = showBack,
+        openReview = viewModel::openReview,
         uiState = uiState.value,
     )
 }
@@ -42,6 +43,7 @@ private fun SettingsAboutScreen(
     navigateToAboutThisApp: () -> Unit,
     showBack: Boolean,
     insetPadding: PaddingValues,
+    openReview: () -> Unit,
     actionUpClicked: () -> Unit,
 ) {
     LazyColumn(
@@ -64,7 +66,7 @@ private fun SettingsAboutScreen(
         )
         PrefLink(
             item = Settings.About.Review,
-            itemClicked = { }
+            itemClicked = { openReview() }
         )
         PrefLink(
             item = Settings.About.BuildVersion,

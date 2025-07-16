@@ -52,7 +52,7 @@ class GetRssArticlesUseCaseImpl(
             val response = rssApi.getRssXML(url)
             val model = rssXmlMapper.convert(response, url, showDescription = rssRepository.rssShowDescription)
             Response.Success(model)
-        } catch (e: Exception) {
+        } catch (e: Throwable) {
             logDebug("RSS", "EXCEPTION ${e.message}")
             e.printStackTrace()
             Response.Error(500)

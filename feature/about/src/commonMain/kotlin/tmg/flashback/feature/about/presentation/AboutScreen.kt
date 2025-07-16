@@ -139,15 +139,17 @@ private fun AboutListScreen(
                 .fillMaxWidth()
                 .animateItem()
             ) {
-                AboutButtons.entries.forEach {
-                    Button(
-                        button = it,
-                        buttonClicked = buttonClicked,
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-                            .weight(1f)
-                    )
-                }
+                AboutButtons.entries
+                    .filter { it != AboutButtons.Github }
+                    .forEach {
+                        Button(
+                            button = it,
+                            buttonClicked = buttonClicked,
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
+                                .weight(1f)
+                        )
+                    }
             }
         }
         item("header") {
@@ -232,13 +234,15 @@ private fun AboutPaneScreen(
                     .fillMaxWidth()
                     .animateItem()
                 ) {
-                    AboutButtons.entries.forEach {
-                        Button(
-                            button = it,
-                            buttonClicked = buttonClicked,
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
+                    AboutButtons.entries
+                        .filter { it != AboutButtons.Github }
+                        .forEach {
+                            Button(
+                                button = it,
+                                buttonClicked = buttonClicked,
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
                 }
             }
             item("header") {
