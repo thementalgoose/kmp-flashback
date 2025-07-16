@@ -87,7 +87,8 @@ class WeekendViewModel(
         }
         this.tab.update { WeekendTabs.Qualifying }
         viewModelScope.launch {
-            if (racesRepository.getRace(season, round).firstOrNull()?.hasData == false) {
+            val data = racesRepository.getRace(season, round).firstOrNull()
+            if (data?.race?.isEmpty() == true && data.qualifying.isEmpty() == true) {
                 refresh(season)
             }
         }
