@@ -108,6 +108,7 @@ jobs:
           status: "completed"
           mappingFile: composeApp/build/outputs/mapping/**/mapping.txt
 
+      # Rename signed APK
       - name: Rename signed apk
         run: |
           mv composeApp/build/outputs/apk/production/release/composeApp-production-release-unsigned-signed.apk composeApp/build/outputs/apk/production/release/android-production-signed.apk 

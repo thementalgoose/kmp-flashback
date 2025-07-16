@@ -1,15 +1,15 @@
 name: Release
 env:
-  RUN_OFFSET: 100
+  ANDROID_RUN_OFFSET: 1
 'on':
   release:
     types: [published]
   workflow_dispatch:
 jobs:
 
-#  unit-tests:
-#    uses: ./.github/workflows/job-unit-tests.yml
-#    secrets: inherit
+  unit-tests:
+    uses: ./.github/workflows/job-unit-tests.yml
+    secrets: inherit
 
   versions:
     runs-on: ubuntu-latest
@@ -18,23 +18,22 @@ jobs:
       version_name: ${{ steps.get_version_name.outputs.version_name }}
       version_code: ${{ steps.get_version_name.outputs.version_code }}
     steps:
-      # Version tag
       - name: Version Name
         id: get_version_name
         run: |
           echo "version_name=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
-          echo "version_code=$((${{ github.run_number }} + $RUN_OFFSET))" >> $GITHUB_OUTPUT
+          echo "version_code=$((${{ github.run_number }} + $ANDROID_RUN_OFFSET))" >> $GITHUB_OUTPUT
 
-#  android-assemble-deploy:
-#    needs: [versions]
-#    uses: ./.github/workflows/job-android-assemble-deploy-prod.yml
-#    secrets: inherit
-#    with:
-#      version_name: ${{ needs.versions.outputs.version_name }}
-#      version_code: ${{ needs.versions.outputs.version_code }}
+  android-assemble-deploy:
+    needs: [unit-tests, versions]
+    uses: ./.github/workflows/job-android-assemble-deploy-prod.yml
+    secrets: inherit
+    with:
+      version_name: ${{ needs.versions.outputs.version_name }}
+      version_code: ${{ needs.versions.outputs.version_code }}
 
   ios-assemble-deploy:
-    needs: [versions]
+    needs: [unit-tests, versions]
     uses: ./.github/workflows/job-ios-assemble-deploy-prod.yml
     secrets: inherit
     with:
