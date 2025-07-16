@@ -47,10 +47,17 @@ jobs:
         with:
           podfile-path: iosApp/Podfile.lock
 
-      - name: Pod install
+      - name: Install bundler
+        run: gem install bundler
+
+      - name: Install fastlane dependencies
+        run: cd iosApp/ && bundle install
+
+      - name: clean pod cache
         run: |
-          cd iosApp/
-          pod install
+          pod cache clean --all
+          npm i
+          cd iosApp && arch -x86_64 pod install
 
       - uses: actions/setup-java@v4
         with:
