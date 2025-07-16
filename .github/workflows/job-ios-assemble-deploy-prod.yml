@@ -71,6 +71,11 @@ jobs:
         run: |
           ./gradlew :composeApp:generateDummyFramework
 
+      # Compile some tasks ahead of time
+      - name: Compile
+        run: |
+          ./gradlew :composeApp:compileKotlinIosArm64 
+
       - name: clean pod cache
         run: |
           cd iosApp
