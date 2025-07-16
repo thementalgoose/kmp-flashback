@@ -1,6 +1,16 @@
 name: Job - Android - Assemble Prod AAB + APK
 
 on:
+  #  workflow_dispatch:
+  #    inputs:
+  #      version_name:
+  #        type: string
+  #        description: "Version name (1.0.0)"
+  #        default: "1.0.0"
+  #      version_code:
+  #        type: string
+  #        description: "Version code (1)"
+  #        default: "1"
   workflow_call:
     inputs:
       version_name: { required: true, type: string }

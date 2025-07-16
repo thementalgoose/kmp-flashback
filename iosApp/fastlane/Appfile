@@ -1,8 +1,8 @@
 app_identifier("tmg.flashback") # The bundle identifier of your app
-apple_id("thementalgoose@gmail.com") # Your Apple Developer Portal username
+apple_id(ENV["ASC_EMAIL"]) # Your Apple Developer Portal username
 
-itc_team_id("127983857") # App Store Connect Team ID
-team_id("H5TM8F4YGL") # Developer Portal Team ID
+itc_team_id(ENV["ASC_TEAM_ID"]) # App Store Connect Team ID
+team_id(ENV["DP_TEAM_ID"]) # Developer Portal Team ID
 
 # For more information about the Appfile, see:
 #     https://docs.fastlane.tools/advanced/#appfile

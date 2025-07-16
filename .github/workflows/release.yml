@@ -24,13 +24,13 @@ jobs:
           echo "version_name=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
           echo "version_code=$((${{ github.run_number }} + $ANDROID_RUN_OFFSET))" >> $GITHUB_OUTPUT
 
-  android-assemble-deploy:
-    needs: [versions]
-    uses: ./.github/workflows/job-android-assemble-deploy-prod.yml
-    secrets: inherit
-    with:
-      version_name: ${{ needs.versions.outputs.version_name }}
-      version_code: ${{ needs.versions.outputs.version_code }}
+#  android-assemble-deploy:
+#    needs: [versions]
+#    uses: ./.github/workflows/job-android-assemble-deploy-prod.yml
+#    secrets: inherit
+#    with:
+#      version_name: ${{ needs.versions.outputs.version_name }}
+#      version_code: ${{ needs.versions.outputs.version_code }}
 
   ios-assemble-deploy:
     needs: [versions]

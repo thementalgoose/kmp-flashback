@@ -1,16 +1,16 @@
 name: Job - iOS - Assemble Prod IPA
 
 on:
-  workflow_dispatch:
-    inputs:
-      version_name:
-        type: string
-        description: "Version name (1.0.0)"
-        default: "1.0.0"
-      version_code:
-        type: string
-        description: "Version code (1)"
-        default: "1"
+#  workflow_dispatch:
+#    inputs:
+#      version_name:
+#        type: string
+#        description: "Version name (1.0.0)"
+#        default: "1.0.0"
+#      version_code:
+#        type: string
+#        description: "Version code (1)"
+#        default: "1"
 
   workflow_call:
     inputs:
@@ -61,15 +61,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Prep pods initialisations
+      - name: Generate dummy framework
         run: |
           ./gradlew :composeApp:generateDummyFramework
-
-      - name: Install pods
-        run: | 
-          cd iosApp/
-          pod install
-          cd ..
 
       - name: Environment variables
         env:
@@ -82,14 +76,22 @@ jobs:
           echo GOOGLE_SERVICES_JSON_PRODUCTION | base64 --decode >> composeApp/src/production/google-services.json
           echo $GOOGLE_SERVICES_PLIST_PRODUCTION | base64 --decode >> iosApp/iosApp/Firebase/GoogleService-production.plist
 
+      - name: Create .env file
+        run: |
+          echo "${{ secrets.APP_ENV_FILE }}" > iosApp/fastlane/.env.default
+
       - name: Build and Deploy to TestFlight
         env:
-          ASC_KEY_ID: ${{ secrets.IOS_APPSTORE_CONNECT_KEY_ID }}
-          ASC_ISSUER_ID: ${{ secrets.IOS_APPSTORE_CONNECT_ISSUER_ID }}
-          ASC_KEY_P8: ${{ secrets.IOS_APPSTORE_CONNECT_API_KEY }}
-          ASC_TEAM_ID: ${{ secrets.IOS_TEAM_ID }}
           VERSION_NAME: ${{ inputs.version_name }}
           VERSION_CODE: ${{ inputs.version_code }}
         run: |
           cd ./iosApp
-          bundle exec fastlane beta
+          bundle exec fastlane build_upload_testlight
+
+      - name: Upload file to github tag
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            **/Flashback.ipa
+            **/Flashback.app.dSYM.zip

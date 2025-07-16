@@ -1,2 +1,5 @@
 fastlane/.env.default
 fastlane/report.xml
+
+Flashback.app.dSYM.zip
+Flashback.ipa
