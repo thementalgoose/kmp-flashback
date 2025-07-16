@@ -56,8 +56,7 @@ jobs:
       - name: clean pod cache
         run: |
           cd iosApp
-          pod cache clean --all 
-          arch -x86_64 pod install
+          pod install
 
       - uses: actions/setup-java@v4
         with:
