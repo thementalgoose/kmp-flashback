@@ -54,7 +54,7 @@ platform :ios do
 
   desc "Build the iOS app for release"
   lane :build_release do |options|
-    match(type: "appstore")
+    match(type: "appstore", readonly: true)
     build_app(
       workspace: "iosApp.xcworkspace",
       scheme: "Production Release",
