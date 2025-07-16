@@ -47,6 +47,11 @@ jobs:
         with:
           podfile-path: iosApp/Podfile.lock
 
+      - name: Pod install
+        run: |
+          cd iosApp/
+          pod install
+
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
