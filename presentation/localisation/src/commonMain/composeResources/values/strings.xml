@@ -97,7 +97,7 @@
     <string name="dashboard_tab_drivers">Drivers</string>
     <string name="dashboard_tab_constructors">Teams</string>
     <string name="season_standings_driver">Driver Standings</string>
-    <string name="season_standings_constructor">Constructor Standings</string>
+    <string name="season_standings_constructor">Teams Standings</string>
 
 
     <!-- Driver overview -->

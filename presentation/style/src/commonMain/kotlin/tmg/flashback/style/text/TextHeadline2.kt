@@ -37,14 +37,14 @@ private val RainbowColors = listOf(
 @Composable
 fun TextHeadline2(
     text: String,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
+        .fillMaxWidth(),
     maxLines: Int = Int.MAX_VALUE,
     brand: Boolean = false
 ) {
     Text(
         text,
-        modifier = modifier
-            .fillMaxWidth(),
+        modifier = modifier,
         maxLines = maxLines,
         style = AppTheme.typography.h2.copy(
             color = when (brand) {

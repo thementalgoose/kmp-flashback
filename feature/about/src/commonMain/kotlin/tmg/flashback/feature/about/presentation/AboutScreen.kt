@@ -361,6 +361,7 @@ private fun Section(
         verticalAlignment = Alignment.CenterVertically
     ) {
         TextBody1(
+            bold = true,
             text = title,
             modifier = Modifier.weight(1f)
         )

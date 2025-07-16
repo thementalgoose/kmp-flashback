@@ -62,17 +62,11 @@ fun LazyListScope.addRaceData(
     keyPrefix: String = ""
 ) {
     item("race_label") {
-        Column {
-            TypeHeader(
-                resource = string.nav_race,
-            )
-            DriverTeamSwitcher(
-                modifier = Modifier.padding(horizontal = AppTheme.dimens.medium),
-                isDrivers = uiState.resultType == ResultType.DRIVERS,
-                driversClicked = { selectResultType(ResultType.DRIVERS) },
-                teamsClicked = { selectResultType(ResultType.CONSTRUCTORS) }
-            )
-        }
+        TypeHeader(
+            resource = string.nav_race,
+            resultType = uiState.resultType,
+            selectResultType = { selectResultType(it) }
+        )
     }
     if (uiState.raceResults.isEmpty()) {
         item("race_not_found") {

@@ -61,17 +61,11 @@ fun LazyListScope.addSprintRaceData(
     keyPrefix: String = ""
 ) {
     item("sprint_race_label") {
-        Column {
-            TypeHeader(
-                resource = string.nav_sprint
-            )
-            DriverTeamSwitcher(
-                modifier = Modifier.padding(horizontal = AppTheme.dimens.medium),
-                isDrivers = uiState.resultType == ResultType.DRIVERS,
-                driversClicked = { selectResultType(ResultType.DRIVERS) },
-                teamsClicked = { selectResultType(ResultType.CONSTRUCTORS) }
-            )
-        }
+        TypeHeader(
+            resource = string.nav_sprint,
+            resultType = uiState.resultType,
+            selectResultType = { selectResultType(it) }
+        )
     }
     if (uiState.sprintRaceResults.isEmpty()) {
         item("sprint_race_not_found") {

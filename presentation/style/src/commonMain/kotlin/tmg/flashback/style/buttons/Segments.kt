@@ -3,7 +3,9 @@ package tmg.flashback.style.buttons
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
@@ -23,6 +25,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
@@ -125,41 +128,39 @@ private fun SegmentButton(
         true -> AppTheme.colors.tertiaryContainer
         false -> AppTheme.colors.surface
     }
-    TextButton(
-        modifier = modifier.focusable(true),
-        enabled = enabled,
-        colors = ButtonDefaults.textButtonColors(
-            containerColor = background,
-            disabledContainerColor = background
-        ),
-        onClick = {
-            onClick(item)
-        },
-        contentPadding = PaddingValues(0.dp),
-        shape = RectangleShape,
-        content = {
-            TextBody2(
-                stringResource(resource = item.string),
-                maxLines = 1,
-                bold = selected,
-                modifier = Modifier
+    Row(
+        modifier = modifier
+            .background(background)
+            .clickable { onClick(item) }
+            .padding(
+                horizontal = AppTheme.dimens.xsmall,
+                vertical = AppTheme.dimens.small
             )
-            if (showTick) {
-                Box(Modifier.height(16.dp).width(0.dp))
-                AnimatedVisibility(visible = selected) {
-                    Row {
-                        Spacer(Modifier.width(AppTheme.dimens.small))
-                        Icon(
-                            imageVector = Icons.Default.Check,
-                            contentDescription = null,
-                            tint = AppTheme.colors.onSurface,
-                            modifier = Modifier.size(16.dp)
-                        )
-                    }
+            .focusable(true),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        TextBody2(
+            stringResource(resource = item.string),
+            maxLines = 1,
+            bold = selected,
+            modifier = Modifier
+        )
+        if (showTick) {
+            Box(Modifier.height(16.dp).width(0.dp))
+            AnimatedVisibility(visible = selected) {
+                Row {
+                    Spacer(Modifier.width(AppTheme.dimens.small))
+                    Icon(
+                        imageVector = Icons.Default.Check,
+                        contentDescription = null,
+                        tint = AppTheme.colors.onSurface,
+                        modifier = Modifier.size(16.dp)
+                    )
                 }
             }
         }
-    )
+    }
 }
 
 private val fakeItems = listOf(

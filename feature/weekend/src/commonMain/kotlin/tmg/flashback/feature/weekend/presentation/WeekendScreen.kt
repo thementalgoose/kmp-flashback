@@ -29,7 +29,6 @@ import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.details_link_map
 import flashback.presentation.localisation.generated.resources.details_link_wikipedia
 import flashback.presentation.localisation.generated.resources.details_link_youtube
-import kotlinx.coroutines.selects.select
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
