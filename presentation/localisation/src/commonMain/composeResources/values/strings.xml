@@ -365,7 +365,6 @@
     <string name="settings_pref_analytics_description">Send anonymous analytics data about your app experience. This can also aid crash reporting</string>
     <string name="settings_pref_disclaimer_title">Disclaimer</string>
     <string name="settings_pref_disclaimer_description">All data sent for analytics and crash reporting is anonymous and does not contain any personally identifiable information</string>
-
     <string name="settings_section_about_title">About</string>
     <string name="settings_section_about_description">About this app</string>
     <string name="settings_header_about">About</string>
