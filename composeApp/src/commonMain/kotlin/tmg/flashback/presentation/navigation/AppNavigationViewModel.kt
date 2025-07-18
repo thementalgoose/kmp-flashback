@@ -1,6 +1,7 @@
 package tmg.flashback.presentation.navigation
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
@@ -9,6 +10,7 @@ import androidx.savedstate.read
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import tmg.flashback.eastereggs.usecases.IsMenuIconEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSnowEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSummerEnabledUseCase
@@ -17,6 +19,7 @@ import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
 import tmg.flashback.feature.search.usecases.IsSearchEnabledUseCase
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.navigation.Screen
+import tmg.flashback.repositories.OnboardingRepository
 import tmg.flashback.usecases.RequiresSyncUseCase
 
 class AppNavigationViewModel(
@@ -26,7 +29,8 @@ class AppNavigationViewModel(
     isSnowEnabledUseCase: IsSnowEnabledUseCase,
     isSummerEnabledUseCase: IsSummerEnabledUseCase,
     isUkraineEnabledUseCase: IsUkraineEnabledUseCase,
-    requiresSyncUseCase: RequiresSyncUseCase
+    requiresSyncUseCase: RequiresSyncUseCase,
+    private val onboardingRepository: OnboardingRepository,
 ): ViewModel(), NavController.OnDestinationChangedListener {
 
     val easterEggs = AppNavigationEasterEggs(
@@ -42,7 +46,7 @@ class AppNavigationViewModel(
         easterEggs = easterEggs,
         screen = null,
         intoSubNavigation = false,
-        requiresContentSync = requiresSyncUseCase()
+        promptContentSync = requiresSyncUseCase(),
     ))
     val uiState: StateFlow<AppNavigationUIState> = _uiState
 

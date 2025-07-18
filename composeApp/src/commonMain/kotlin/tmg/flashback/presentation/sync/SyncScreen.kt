@@ -17,11 +17,17 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.ModalBottomSheetProperties
+import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -42,6 +48,7 @@ import flashback.presentation.localisation.generated.resources.splash_sync_info
 import flashback.presentation.localisation.generated.resources.splash_sync_races
 import flashback.presentation.localisation.generated.resources.splash_sync_try_again
 import flashback.presentation.localisation.generated.resources.splash_title
+import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -50,6 +57,7 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.style.AppTheme
+import tmg.flashback.style.ApplicationTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.buttons.ButtonPrimary
 import tmg.flashback.style.preview.PreviewConfig
@@ -57,9 +65,55 @@ import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextHeadline1
 
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SyncBottomSheet(
+    show: Boolean,
+    unlock: () -> Unit,
+    windowSizeClass: WindowSizeClass,
+) {
+
+    // Disable bottom sheet back / dismiss actions when active, re-enable when done
+    val lockBottomSheetOnScreen = remember { mutableStateOf(true) }
+    if (show) {
+        ModalBottomSheet(
+            onDismissRequest = unlock,
+            sheetState = androidx.compose.material3.rememberModalBottomSheetState(
+                skipPartiallyExpanded = true,
+                confirmValueChange = {
+                    if (it == SheetValue.Hidden) {
+                        !lockBottomSheetOnScreen.value
+                    } else {
+                        true
+                    }
+                }
+            ),
+            properties = ModalBottomSheetProperties(
+                shouldDismissOnBackPress = !lockBottomSheetOnScreen.value
+            )
+        ) {
+            ApplicationTheme {
+                SyncScreen(
+                    windowSizeClass = windowSizeClass,
+                    unlock = {
+                        lockBottomSheetOnScreen.value = false
+                    },
+                )
+            }
+        }
+    }
+
+    // Dismiss sync bottom sheet
+    LaunchedEffect(lockBottomSheetOnScreen.value) {
+        if (!lockBottomSheetOnScreen.value) {
+            delay(1000)
+            unlock()
+        }
+    }
+}
+
+@Composable
+fun SyncScreen(
     unlock: () -> Unit,
     windowSizeClass: WindowSizeClass,
     viewModel: SyncViewModel = koinViewModel()
@@ -74,7 +128,7 @@ fun SyncBottomSheet(
 
     val overall = viewModel.overall.collectAsState()
 
-    SyncBottomSheet(
+    SyncScreen(
         windowSizeClass = windowSizeClass,
         drivers = stateDrivers.value,
         circuits = stateCircuits.value,
@@ -97,7 +151,7 @@ fun SyncBottomSheet(
 }
 
 @Composable
-fun SyncBottomSheet(
+fun SyncScreen(
     windowSizeClass: WindowSizeClass,
     drivers: SyncState,
     circuits: SyncState,
@@ -264,7 +318,7 @@ private fun PreviewLoading(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
     ApplicationThemePreview(previewConfig) {
-        SyncBottomSheet(
+        SyncScreen(
             drivers = SyncState.LOADING,
             circuits = SyncState.LOADING,
             config = SyncState.DONE,
@@ -283,7 +337,7 @@ private fun PreviewFailed(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
     ApplicationThemePreview(previewConfig) {
-        SyncBottomSheet(
+        SyncScreen(
             drivers = SyncState.DONE,
             circuits = SyncState.LOADING,
             config = SyncState.FAILED,

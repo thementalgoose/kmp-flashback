@@ -45,6 +45,7 @@ include(":core:metrics:crashlytics")
 include(":core:metrics:analytics")
 include(":core:notifications")
 include(":core:preferences")
+include(":core:tracking")
 include(":core:webbrowser")
 
 include(":data:flashback")

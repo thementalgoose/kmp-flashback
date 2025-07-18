@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowRight
 import androidx.compose.material.icons.filled.Link
@@ -20,12 +21,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.privacy_policy_title
+import flashback.presentation.ui.generated.resources.Res
+import flashback.presentation.ui.generated.resources.ic_more
+import flashback.presentation.ui.generated.resources.ic_website
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
+import tmg.flashback.style.buttons.ButtonTertiary
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody1
@@ -46,6 +52,7 @@ fun PrivacyPolicyScreen(
         paddingValues = paddingValues,
         actionUpClicked = actionUpClicked,
         showBack = showBack,
+        openPolicy = viewModel::openPolicy,
         openWebpage = viewModel::openWebpage
     )
 }
@@ -55,6 +62,7 @@ private fun PrivacyPolicyScreen(
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     showBack: Boolean = true,
+    openPolicy: () -> Unit,
     openWebpage: (String) -> Unit
 ) {
     val elements = remember { getPolicy().elements }
@@ -67,7 +75,19 @@ private fun PrivacyPolicyScreen(
             Header(
                 actionUpClicked = actionUpClicked,
                 action = HeaderAction.BACK.takeIf { showBack },
-                text = stringResource(string.privacy_policy_title)
+                text = stringResource(string.privacy_policy_title),
+                overrideIcons = {
+                    IconButton(
+                        onClick = { openPolicy() },
+                        content = {
+                            Icon(
+                                painter = painterResource(Res.drawable.ic_website),
+                                tint = AppTheme.colors.onSurface,
+                                contentDescription = null
+                            )
+                        }
+                    )
+                }
             )
         }
         items(elements) {
@@ -162,6 +182,7 @@ private fun Preview(
             paddingValues = PaddingValues(0.dp),
             actionUpClicked = { },
             showBack = true,
+            openPolicy = { },
             openWebpage = { }
         )
     }

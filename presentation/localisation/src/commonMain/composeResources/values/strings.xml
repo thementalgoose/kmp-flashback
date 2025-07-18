@@ -360,9 +360,11 @@
     <string name="settings_pref_privacy_policy_description">The apps privacy policy</string>
     <string name="settings_header_device_info">Device Info</string>
     <string name="settings_pref_crash_reporting_title">Crash Reporting</string>
-    <string name="settings_pref_crash_reporting_description">Allow crash reports to be sent to the developer when an issue occurs</string>
+    <string name="settings_pref_crash_reporting_description">Allow crash reports to be sent to the developer when an issue occurs.</string>
     <string name="settings_pref_analytics_title">Anonymous Analytics</string>
     <string name="settings_pref_analytics_description">Send anonymous analytics data about your app experience. This can also aid crash reporting</string>
+    <string name="settings_pref_disclaimer_title">Disclaimer</string>
+    <string name="settings_pref_disclaimer_description">All data sent for analytics and crash reporting is anonymous and does not contain any personally identifiable information</string>
 
     <string name="settings_section_about_title">About</string>
     <string name="settings_section_about_description">About this app</string>

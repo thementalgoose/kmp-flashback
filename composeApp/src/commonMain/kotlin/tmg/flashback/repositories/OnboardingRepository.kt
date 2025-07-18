@@ -2,13 +2,13 @@ package tmg.flashback.repositories
 
 import tmg.flashback.preferences.manager.PreferenceManager
 
-interface ContentSyncRepository {
+interface OnboardingRepository {
     var initialSyncCompleted: Boolean
 }
 
-internal class ContentSyncRepositoryImpl(
+internal class OnboardingRepositoryImpl(
     private val preferenceManager: PreferenceManager
-): ContentSyncRepository {
+): OnboardingRepository {
     override var initialSyncCompleted: Boolean
         get() = preferenceManager.getBoolean(keyInitialSync, false)
         set(value) { preferenceManager.save(keyInitialSync, value) }

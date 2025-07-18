@@ -327,6 +327,8 @@
     <string name="settings_pref_crash_reporting_description">Permitir que se envíen informes de fallos al desarrollador cuando se produzca un problema</string>
     <string name="settings_pref_analytics_title">Análisis anónimo</string>
     <string name="settings_pref_analytics_description">Enviar datos analíticos anónimos sobre tu experiencia con la aplicación. Esto también puede ayudar a los informes de fallos</string>
+    <string name="settings_pref_disclaimer_title">Descargo de responsabilidad</string>
+    <string name="settings_pref_disclaimer_description">Todos y cada uno de los datos enviados para análisis e informes de errores son anónimos y no están vinculados a usted de ninguna manera</string>
     <string name="settings_section_about_title">Acerca de</string>
     <string name="settings_section_about_description">Acerca de esta aplicación</string>
     <string name="settings_header_about">Acerca de</string>

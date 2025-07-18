@@ -23,6 +23,8 @@ import flashback.presentation.localisation.generated.resources.settings_pref_col
 import flashback.presentation.localisation.generated.resources.settings_pref_collapsed_list_title
 import flashback.presentation.localisation.generated.resources.settings_pref_crash_reporting_description
 import flashback.presentation.localisation.generated.resources.settings_pref_crash_reporting_title
+import flashback.presentation.localisation.generated.resources.settings_pref_disclaimer_description
+import flashback.presentation.localisation.generated.resources.settings_pref_disclaimer_title
 import flashback.presentation.localisation.generated.resources.settings_pref_empty_week_description
 import flashback.presentation.localisation.generated.resources.settings_pref_empty_week_title
 import flashback.presentation.localisation.generated.resources.settings_pref_notification_manage_description
@@ -358,6 +360,11 @@ object Settings {
             _id = "analytics",
             title = string.settings_pref_analytics_title,
             subtitle = string.settings_pref_analytics_description
+        )
+        val Disclaimer = Setting.Pref(
+            _id = "disclaimer",
+            title = string.settings_pref_disclaimer_title,
+            subtitle = string.settings_pref_disclaimer_description
         )
     }
     val PrivacyPolicy = Setting.Category(

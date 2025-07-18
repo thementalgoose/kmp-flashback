@@ -40,7 +40,6 @@ import tmg.flashback.notifications.di.coreNotificationsModule
 import tmg.flashback.notifications.firebase.FirebaseMessagingService
 import tmg.flashback.persistence.flashback.di.dataPersistenceFlashbackModule
 import tmg.flashback.preferences.di.corePreferencesModule
-import tmg.flashback.presentation.AppContainerViewModel
 import tmg.flashback.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.presentation.settings.AllSettingsViewModel
 import tmg.flashback.presentation.settings.about.SettingsAboutViewModel
@@ -54,15 +53,14 @@ import tmg.flashback.presentation.settings.theme.SettingsThemeViewModel
 import tmg.flashback.presentation.settings.weather.SettingsWeatherViewModel
 import tmg.flashback.presentation.settings.widgets.SettingsWidgetsViewModel
 import tmg.flashback.presentation.sync.SyncViewModel
-import tmg.flashback.repositories.ContentSyncRepository
-import tmg.flashback.repositories.ContentSyncRepositoryImpl
+import tmg.flashback.repositories.OnboardingRepository
+import tmg.flashback.repositories.OnboardingRepositoryImpl
 import tmg.flashback.style.di.presentationStyleModule
 import tmg.flashback.ui.di.presentationUiModule
 import tmg.flashback.usecases.RequiresSyncUseCase
 import tmg.flashback.usecases.RequiresSyncUseCaseImpl
 import tmg.flashback.webbrowser.di.coreWebBrowserModule
 import tmg.flashback.widgets.upnext.di.featureWidgetUpNextModule
-
 
 fun doInitKoin() {
     doInitKoin { }
@@ -119,10 +117,9 @@ internal fun module() = module {
 
     single { AppStartup(get(), get(), get(),get(), get(), get(), get()) }
 
-    viewModel { AppContainerViewModel() }
-    viewModel { AppNavigationViewModel(get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { AppNavigationViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
 
-    single<ContentSyncRepository> { ContentSyncRepositoryImpl(get()) }
+    single<OnboardingRepository> { OnboardingRepositoryImpl(get()) }
 
     single<RequiresSyncUseCase> { RequiresSyncUseCaseImpl(get(), get()) }
 

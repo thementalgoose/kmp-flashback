@@ -323,6 +323,8 @@
     <string name="settings_pref_crash_reporting_description">允许在发生问题时将崩溃报告发送给开发人员</string>
     <string name="settings_pref_analytics_title">匿名分析</string>
     <string name="settings_pref_analytics_description">发送有关您的应用体验的匿名分析数据。这也有助于崩溃报告</string>
+    <string name="settings_pref_disclaimer_title">免责声明</string>
+    <string name="settings_pref_disclaimer_description">为分析和崩溃报告发送的任何及所有数据都是匿名的，并且不会以任何方式与您关联</string>
     <string name="settings_section_about_title">关于</string>
     <string name="settings_section_about_description">关于此应用</string>
     <string name="settings_header_about">关于</string>

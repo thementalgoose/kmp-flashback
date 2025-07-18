@@ -108,6 +108,7 @@ kotlin {
             implementation(projects.core.metrics.crashlytics)
             implementation(projects.core.notifications)
             implementation(projects.core.preferences)
+//            implementation(projects.core.tracking)
             implementation(projects.core.webbrowser)
 
             implementation(projects.data.flashback)

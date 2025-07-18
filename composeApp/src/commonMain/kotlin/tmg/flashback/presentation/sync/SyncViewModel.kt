@@ -21,7 +21,7 @@ import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotification
 import tmg.flashback.presentation.sync.SyncState.DONE
 import tmg.flashback.presentation.sync.SyncState.FAILED
 import tmg.flashback.presentation.sync.SyncState.LOADING
-import tmg.flashback.repositories.ContentSyncRepository
+import tmg.flashback.repositories.OnboardingRepository
 
 class SyncViewModel(
     private val circuitRepository: CircuitRepository,
@@ -32,7 +32,7 @@ class SyncViewModel(
     private val resetConfigUseCase: ResetConfigUseCase,
     private val scheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase,
     private val fetchConfigRepository: FetchConfigUseCase,
-    private val contentSyncRepository: ContentSyncRepository
+    private val onboardingRepository: OnboardingRepository
 ): ViewModel() {
 
     private val _circuitsState: MutableStateFlow<SyncState> = MutableStateFlow(LOADING)
@@ -59,7 +59,7 @@ class SyncViewModel(
     ) { circuits, constructors, drivers, races, config ->
         val all = listOf(circuits, constructors, drivers, races, config)
         if (all.all { it == DONE }) {
-            contentSyncRepository.initialSyncCompleted = true
+            onboardingRepository.initialSyncCompleted = true
             return@combine DONE
         }
         if (all.all { it != LOADING }) {

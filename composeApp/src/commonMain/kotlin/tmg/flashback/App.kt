@@ -5,28 +5,26 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.material.SnackbarDefaults
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.ModalBottomSheetProperties
-import androidx.compose.material3.SheetValue
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarResult
+import androidx.compose.material3.SnackbarVisuals
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowWidthSizeClass
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.koin.compose.getKoin
 import org.koin.compose.viewmodel.koinViewModel
-import tmg.flashback.infrastructure.device.Device
-import tmg.flashback.infrastructure.device.Platform
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.navigation.Screen
@@ -36,7 +34,6 @@ import tmg.flashback.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.presentation.sync.SyncBottomSheet
 import tmg.flashback.presentation.toNavigationItem
 import tmg.flashback.presentation.toScreen
-import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationTheme
 import tmg.flashback.ui.components.AppScaffold
 import tmg.flashback.ui.navigation.NavigationBar
@@ -72,6 +69,7 @@ fun App() {
         label = "navigationBarPosition"
     )
 
+    val snackbarHostState = remember { SnackbarHostState() }
     ApplicationTheme {
         AppScaffold(
             content = { paddingValues ->
@@ -106,54 +104,18 @@ fun App() {
                         }
                     )
                 }
-            }
+            },
+            snackbarHostState = snackbarHostState,
         )
 
-
-
         // Initial sync
-        val requiresContentSync = remember(appNavigationUiState.value.requiresContentSync) {
-            mutableStateOf(appNavigationUiState.value.requiresContentSync)
+        val promptContentSync = remember(appNavigationUiState.value.promptContentSync) {
+            mutableStateOf(appNavigationUiState.value.promptContentSync)
         }
-
-        // Disable bottom sheet back / dismiss actions when active, re-enable when done
-        val lockBottomSheetOnScreen = remember { mutableStateOf(true) }
-        if (requiresContentSync.value) {
-            ModalBottomSheet(
-                onDismissRequest = {
-                    requiresContentSync.value = false
-                },
-                sheetState = androidx.compose.material3.rememberModalBottomSheetState(
-                    skipPartiallyExpanded = true,
-                    confirmValueChange = {
-                        if (it == SheetValue.Hidden) {
-                            !lockBottomSheetOnScreen.value
-                        } else {
-                            true
-                        }
-                    }
-                ),
-                properties = ModalBottomSheetProperties(
-                    shouldDismissOnBackPress = !lockBottomSheetOnScreen.value
-                )
-            ) {
-                ApplicationTheme {
-                    SyncBottomSheet(
-                        windowSizeClass = windowSizeClass,
-                        unlock = {
-                            lockBottomSheetOnScreen.value = false
-                        },
-                    )
-                }
-            }
-        }
-
-        // Dismiss sync bottom sheet
-        LaunchedEffect(lockBottomSheetOnScreen.value) {
-            if (!lockBottomSheetOnScreen.value) {
-                delay(1000)
-                requiresContentSync.value = false
-            }
-        }
+        SyncBottomSheet(
+            show = promptContentSync.value,
+            unlock = { promptContentSync.value = false },
+            windowSizeClass = windowSizeClass
+        )
     }
 }

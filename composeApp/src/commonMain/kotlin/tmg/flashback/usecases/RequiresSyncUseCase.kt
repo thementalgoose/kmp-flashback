@@ -1,7 +1,7 @@
 package tmg.flashback.usecases
 
 import tmg.flashback.configuration.usecases.DoesConfigRequireSyncUseCase
-import tmg.flashback.repositories.ContentSyncRepository
+import tmg.flashback.repositories.OnboardingRepository
 
 interface RequiresSyncUseCase {
     operator fun invoke(): Boolean
@@ -9,7 +9,7 @@ interface RequiresSyncUseCase {
 
 internal class RequiresSyncUseCaseImpl(
     private val doesConfigRequireSyncUseCase: DoesConfigRequireSyncUseCase,
-    private val contentSyncRepository: ContentSyncRepository
+    private val onboardingRepository: OnboardingRepository
 ): RequiresSyncUseCase {
-    override fun invoke() = doesConfigRequireSyncUseCase() || !contentSyncRepository.initialSyncCompleted
+    override fun invoke() = doesConfigRequireSyncUseCase() || !onboardingRepository.initialSyncCompleted
 }

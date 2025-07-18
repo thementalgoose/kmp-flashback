@@ -16,6 +16,7 @@ import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.presentation.settings.PrefHeader
 import tmg.flashback.presentation.settings.PrefLink
 import tmg.flashback.presentation.settings.PrefSwitch
+import tmg.flashback.presentation.settings.Setting.Pref
 import tmg.flashback.presentation.settings.Settings
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
@@ -61,6 +62,10 @@ private fun SettingsPrivacyScreen(
             )
         }
         PrefHeader(string.settings_header_device_info)
+        PrefLink(
+            item = Settings.Privacy.Disclaimer,
+            itemClicked = { }
+        )
         PrefSwitch(
             item = Settings.Privacy.CrashReporting,
             isChecked = uiState.crashReportingEnabled,

@@ -326,6 +326,8 @@
     <string name="settings_pref_crash_reporting_description">Consenti l\'invio di rapporti sugli arresti anomali allo sviluppatore quando si verifica un problema</string>
     <string name="settings_pref_analytics_title">Analisi anonime</string>
     <string name="settings_pref_analytics_description">Invia dati analitici anonimi sulla tua esperienza con l\'app. Ciò può anche aiutare la segnalazione degli arresti anomali</string>
+    <string name="settings_pref_disclaimer_title">Disclaimer</string>
+    <string name="settings_pref_disclaimer_description">Tutti i dati inviati per l\'analisi e la segnalazione di arresti anomali sono anonimi e non collegati in alcun modo all\'utente</string>
     <string name="settings_section_about_title">Informazioni</string>
     <string name="settings_section_about_description">Informazioni su questa app</string>
     <string name="settings_header_about">Informazioni</string>

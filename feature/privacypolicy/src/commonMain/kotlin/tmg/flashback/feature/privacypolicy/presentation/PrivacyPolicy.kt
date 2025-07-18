@@ -2,36 +2,82 @@ package tmg.flashback.feature.privacypolicy.presentation
 
 fun getPolicy(email: String = "thementalgoose@gmail.com") = policy {
     h1("Flashback")
-    text("Jordan Fisher built the Flashback app. This SERVICE is provided by Jordan Fisher at no cost and is intended for use as is.")
-    text("This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service.")
-    text("If you choose to use my Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that I collect is used for providing and improving the Service. I will not use or share your information with anyone except as described in this Privacy Policy.")
+    text("""
+        This privacy policy applies to the Flashback app (hereby referred to as "Application") for mobile devices
+        that was created by Jordan Fisher (hereby referred to as "Service Provider") as a Free service. This
+        service is intended for use "AS IS".
+    """.trimIndent().replace("\n", ""))
     h2("Information Collection and Use")
-    text("For a better experience, while using our Service, I may require you to provide us with certain personally identifiable information. The information that I request will be retained on your device and is not collected by me in any way.")
-    text("The app does use third party services that may collect information used to identify you.")
-    text("Link to privacy policy of third party service providers used by the app")
+    text("""
+        The Application collects information when you download and use it. This information may include
+        information such as
+    """.trimIndent().replace("\n", ""))
     listItem("Google Play Services", "https://www.google.com/policies/privacy/")
-    listItem("Firebase Analytics", "https://firebase.google.com/policies/analytics/")
-    listItem("Firebase Crashlytics", "https://firebase.google.com/support/privacy")
-    h2("Log Data")
-    text("I want to inform you that whenever you use my Service, in a case of an error in the app I collect data and information (through third party products) on your phone called a crash report. This crash report may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing my Service, the time and date of your use of the Service, and other statistics. You can opt out of this crash reporting in the settings")
-    h2("Service Providers")
-    text("I may employ third-party companies and individuals due to the following reasons:")
-    listItem("To facilitate our Service;")
-    listItem("To provide the Service on our behalf;")
-    listItem("To perform Service-related services; or")
-    listItem("To assist us in analyzing how our Service is used.")
-    text("I want to inform users of this Service that these third parties have access to your Personal Information. The reason is to perform the tasks assigned to them on our behalf. However, they are obligated not to disclose or use the information for any other purpose.")
+    listItem("Firebase Analytics", "https://firebase.google.com/support/privacy/")
+    listItem("Firebase Crashlytics", "https://firebase.google.com/support/privacy/")
+    text("""
+        The Service Provider may disclose User Provided and Automatically Collected Information:
+    """.trimIndent())
+    listItem("as required by law, such as to comply with a subpoena, or similar legal process;")
+    listItem("""
+        when they believe in good faith that disclosure is necessary to protect their rights, protect your
+        safety or the safety of others, investigate fraud, or respond to a government request;
+    """.trimIndent())
+    listItem("""
+        with their trusted services providers who work on their behalf, do not have an independent use of
+        the information we disclose to them, and have agreed to adhere to the rules set forth in this
+        privacy statement.
+    """.trimIndent().replace("\n", ""))
+    h2("Opt-Out Rights")
+    text("""
+        You can stop all collection of information by the Application easily by uninstalling it or disabling 
+        "analytics" or "crash reporting" options in the settings. You may use the
+        standard uninstall processes as may be available as part of your mobile device or via the mobile
+        application marketplace or network.
+    """.trimIndent().replace("\n", ""))
+    h2("Data Retention Policy")
+    text("""
+        The Service Provider will retain User Provided data for as long as you use the Application and for a
+        reasonable time thereafter. If you'd like them to delete User Provided Data that you have provided via
+        the Application, please contact them at $email and they will respond in a reasonable
+        time.
+    """.trimIndent().replace("\n", ""))
+    h2("Children")
+    text("""
+        The Service Provider does not use the Application to knowingly solicit data from or market to children
+        under the age of 13.
+    """.trimIndent().replace("\n", ""))
+    text("""
+        The Application does not address anyone under the age of 13. The Service Provider does not knowingly
+        collect personally identifiable information from children under 13 years of age. In the case the
+        Service Provider discover that a child under 13 has provided personal information, the Service
+        Provider will immediately delete this from their servers. If you are a parent or guardian and you
+        are aware that your child has provided us with personal information, please contact the Service
+        Provider ($email) so that they will be able to take the necessary actions.
+    """.trimIndent().replace("\n", ""))
     h2("Security")
-    text("I value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and I cannot guarantee its absolute security. I have taken steps to aid in this security, please feel free to email me at $email if you wish me to provide more information")
-    h2("Links to Other Sites")
-    text("This Service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by me. Therefore, I strongly advise you to review the Privacy Policy of these websites. I have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.")
-    h2("Children's Privacy")
-    text("These Services do not address anyone under the age of 13. I do not knowingly collect personally identifiable information from children under 13. In the case I discover that a child under 13 has provided me with personal information, I immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact me so that I will be able to do necessary actions.")
-    h2("Changes to This Privacy Policy")
-    text("I may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. I will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately after they are posted on this page.")
+    text("""
+        The Service Provider is concerned about safeguarding the confidentiality of your information. The Service
+        Provider provides physical, electronic, and procedural safeguards to protect information the Service
+        Provider processes and maintains.
+    """.trimIndent().replace("\n", ""))
+    h2("Changes")
+    text("""
+        This Privacy Policy may be updated from time to time for any reason. The Service Provider will notify you
+        of any changes to the Privacy Policy by updating this page with the new Privacy Policy. You are advised
+        to consult this Privacy Policy regularly for any changes, as continued use is deemed approval of all
+        changes.
+    """.trimIndent().replace("\n", ""))
+    h2("Your consent")
+    text("""
+        By using the Application, you are consenting to the processing of your information as set forth in this
+        Privacy Policy now and as amended by us.
+    """.trimIndent().replace("\n", ""))
     h2("Contact Us")
-    text("If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at $email about your issues.")
-
+    text("""
+        If you have any questions regarding privacy while using the Application, or have questions about the
+        practices, please contact the Service Provider via email at $email
+    """.trimIndent().replace("\n", ""))
 }
 
 fun policy(block: PolicyDSL.() -> Unit): Policy {

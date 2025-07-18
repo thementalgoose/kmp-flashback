@@ -11,18 +11,18 @@ import kotlin.test.assertEquals
 
 internal class ContentSyncRepositoryTest {
 
-    private lateinit var underTest: ContentSyncRepositoryImpl
+    private lateinit var underTest: OnboardingRepositoryImpl
 
     private val mockPreferenceManager: PreferenceManager = mock(autoUnit)
 
     private fun initUnderTest() {
-        underTest = ContentSyncRepositoryImpl(
+        underTest = OnboardingRepositoryImpl(
             preferenceManager = mockPreferenceManager
         )
     }
 
     @Test
-    fun `saving value saves to repo`() {
+    fun `saving initial sync saves to repo`() {
         initUnderTest()
         underTest.initialSyncCompleted = true
         verify {
@@ -31,7 +31,7 @@ internal class ContentSyncRepositoryTest {
     }
 
     @Test
-    fun `getting value gets from repo`() {
+    fun `getting initial sync gets from repo`() {
         every { mockPreferenceManager.getBoolean(expectedKeyInitialSync, false) } returns true
         initUnderTest()
         assertEquals(true, underTest.initialSyncCompleted)
