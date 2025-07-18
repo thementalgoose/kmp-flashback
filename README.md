@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="https://play.google.com/store/apps/details?id=tmg.flashback"><img src="https://img.shields.io/static/v1?label=Google%20Play&message=%20&logo=google-play&color=success&style=flat"/></a>
-  <a href="https://apple.com"><img src="https://img.shields.io/static/v1?label=App%20Store&message=%20&logo=app-store&color=success&style=flat"/></a>
+  <a href="https://apps.apple.com/us/app/flashback-formula-results/id6748612648"><img src="https://img.shields.io/static/v1?label=App%20Store&message=%20&logo=app-store&color=success&style=flat"/></a>
   <a href="https://github.com/thementalgoose/kmp-flashback/actions"><img src="https://github.com/thementalgoose/kmp-flashback/workflows/Release/badge.svg"/></a>
 </p>
 
