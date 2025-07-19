@@ -23,6 +23,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    permissions:
+      contents: write
     steps:
       # Checkout
       - uses: actions/checkout@v4
@@ -129,11 +131,14 @@ jobs:
       # Rename signed APK
       - name: Rename signed apk
         run: |
-          mv composeApp/build/outputs/apk/production/release/composeApp-production-release-unsigned-signed.apk composeApp/build/outputs/apk/production/release/android-production-signed.apk 
+          mv composeApp/build/outputs/apk/production/release/composeApp-production-release-unsigned-signed.apk composeApp/build/outputs/apk/production/release/android.apk
+          mv composeApp/build/outputs/bundle/productionRelease/composeApp-production-release.aab composeApp/build/outputs/bundle/productionRelease/android.aab
 
       # Add artifact to tag
       - name: Upload file to github tag
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: composeApp/build/outputs/apk/production/release/android-production-signed.apk
+          files: |
+            composeApp/build/outputs/apk/production/release/android.apk
+            composeApp/build/outputs/bundle/productionRelease/android.aab
