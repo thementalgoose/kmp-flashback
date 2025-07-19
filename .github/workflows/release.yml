@@ -1,6 +1,6 @@
 name: Release
 env:
-  ANDROID_RUN_OFFSET: 445
+  ANDROID_RUN_OFFSET: 415
 'on':
   release:
     types: [published]
