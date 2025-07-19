@@ -281,7 +281,7 @@
     <string name="settings_pref_notification_manage_description">自定义您的通知设置</string>
     <string name="settings_pref_notification_system_settings">在应用设置中管理您的通知</string>
     <string name="settings_pref_schedule_exact_alarm_title">准确时间</string>
-    <string name="settings_pref_schedule_exact_alarm_description">授予 Flashback 在特定时间向您发送提醒的权限。否则，通知将在活动开始前大约 1 小时发送</string>
+    <string name="settings_pref_schedule_exact_alarm_description">允许 Flashback 在特定时间向您发送提醒。否则，通知应在活动开始前的通知期限的 10 分钟内发出。</string>
     <string name="settings_pref_notification_notice_period_title">通知</string>
     <string name="settings_pref_notification_notice_period_description">选择在上述活动之一开始前 15、30 或 60 分钟收到通知</string>
     <string name="settings_switch_notification_upcoming_fp_title">自由练习赛</string>

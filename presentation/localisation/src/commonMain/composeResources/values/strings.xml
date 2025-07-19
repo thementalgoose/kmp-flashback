@@ -320,7 +320,7 @@
     <string name="settings_pref_notification_manage_description">Customise your notification settings</string>
     <string name="settings_pref_notification_system_settings">Manage your notifications in app settings</string>
     <string name="settings_pref_schedule_exact_alarm_title">Exact timings</string>
-    <string name="settings_pref_schedule_exact_alarm_description">Grant permission for Flashback to send you reminders at specific times. Otherwise, notifications will be roughly 1h before the start of the event</string>
+    <string name="settings_pref_schedule_exact_alarm_description">Grant permission for Flashback to send you reminders at specific times. Otherwise, notifications should be within 10 minutes of the notice period before the start of the event</string>
     <string name="settings_pref_notification_notice_period_title">Notice</string>
     <string name="settings_pref_notification_notice_period_description">Get notified 15, 30 or 60 minutes before an weekend event starts</string>
     <string name="settings_switch_notification_upcoming_fp_title">Free Practice</string>

@@ -11,6 +11,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.notification_onboarding_title_howlong
 import flashback.presentation.localisation.generated.resources.settings_header_permissions
+import flashback.presentation.localisation.generated.resources.settings_pref_schedule_exact_alarm_title
 import flashback.presentation.localisation.generated.resources.settings_section_notifications_upcoming_description
 import flashback.presentation.localisation.generated.resources.settings_section_notifications_upcoming_title
 import org.jetbrains.compose.resources.stringResource
@@ -63,7 +64,8 @@ fun SettingsNotificationUpcomingScreen(
         notificationUpcomingClicked = viewModel::setNotificationUpcoming,
         permissionState = permissionState.value,
         requestPermission = viewModel::requestPermissions,
-        goToSettings = viewModel::goToSettings
+        goToSettings = viewModel::goToSettings,
+        goToAlarmSettings = viewModel::goToAlarmSettings
     )
 }
 
@@ -78,6 +80,7 @@ private fun SettingsNotificationUpcomingScreen(
     permissionState: PermissionState,
     requestPermission: () -> Unit,
     goToSettings: () -> Unit,
+    goToAlarmSettings: () -> Unit
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -170,5 +173,12 @@ private fun SettingsNotificationUpcomingScreen(
             itemClicked = { notificationReminderClicked(MINUTES_60) },
             isChecked = uiState.reminder == MINUTES_60
         )
+        if (Device.platform == Platform.Android) {
+            PrefHeader(string.settings_pref_schedule_exact_alarm_title)
+            PrefLink(
+                item = Settings.NotificationsNotice.ExactAlarm,
+                itemClicked = { goToAlarmSettings() }
+            )
+        }
     }
 }

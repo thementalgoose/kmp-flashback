@@ -284,7 +284,7 @@
     <string name="settings_pref_notification_manage_description">Personalizza le tue impostazioni di notifica</string>
     <string name="settings_pref_notification_system_settings">Gestisci le tue notifiche nelle impostazioni dell\'app</string>
     <string name="settings_pref_schedule_exact_alarm_title">Tempi esatti</string>
-    <string name="settings_pref_schedule_exact_alarm_description">Concedi il permesso a Flashback di inviarti promemoria in orari specifici. Altrimenti, le notifiche arriveranno circa 1 ora prima dell\'inizio dell\'evento</string>
+    <string name="settings_pref_schedule_exact_alarm_description">Autorizza Flashback a inviarti promemoria a orari specifici. In caso contrario, le notifiche devono essere inviate entro 10 minuti dal periodo di preavviso prima dell'inizio dell'evento.</string>
     <string name="settings_pref_notification_notice_period_title">Avviso</string>
     <string name="settings_pref_notification_notice_period_description">Scegli tra 15, 30 o 60 minuti prima dell\'inizio di uno degli eventi sopra elencati</string>
     <string name="settings_switch_notification_upcoming_fp_title">Prove libere</string>

@@ -23,4 +23,13 @@ actual class OpenSettingsUseCaseImpl actual constructor(): OpenSettingsUseCase {
             })
         }
     }
+
+    actual override fun openAlarmSettings() {
+        val url = NSURL(string = UIApplicationOpenNotificationSettingsURLString)
+        if (UIApplication.sharedApplication.canOpenURL(url)) {
+            UIApplication.sharedApplication().openURL(url, options = emptyMap<Any?, Any>(), completionHandler = {
+
+            })
+        }
+    }
 }

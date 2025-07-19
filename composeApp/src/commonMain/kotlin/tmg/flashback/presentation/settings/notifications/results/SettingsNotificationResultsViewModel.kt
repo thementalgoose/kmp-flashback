@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import tmg.flashback.device.usecases.OpenSettingsUseCase
 import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
 import tmg.flashback.feature.notifications.usecases.SubscribeResultNotificationsUseCase
@@ -17,7 +18,8 @@ import tmg.flashback.ui.permissions.PermissionState
 class SettingsNotificationResultsViewModel(
     private val notificationSettingsRepository: NotificationSettingsRepository,
     private val subscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase,
-    private val permissionManager: PermissionManager
+    private val permissionManager: PermissionManager,
+    private val openSettingsUseCase: OpenSettingsUseCase
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<SettingsNotificationResultsUiState> = MutableStateFlow(SettingsNotificationResultsUiState(
@@ -45,7 +47,7 @@ class SettingsNotificationResultsViewModel(
     }
 
     fun goToSettings() {
-        permissionManager.openNotificationSettings()
+        openSettingsUseCase.openNotificationSettings()
     }
 
     fun refresh() {

@@ -284,7 +284,7 @@
     <string name="settings_pref_notification_manage_description">Personaliza tu configuración de notificaciones</string>
     <string name="settings_pref_notification_system_settings">Administra tus notificaciones en la configuración de la aplicación</string>
     <string name="settings_pref_schedule_exact_alarm_title">Tiempos exactos</string>
-    <string name="settings_pref_schedule_exact_alarm_description">Conceder permiso a Flashback para enviarte recordatorios a horas específicas. De lo contrario, las notificaciones serán aproximadamente 1 hora antes del inicio del evento</string>
+    <string name="settings_pref_schedule_exact_alarm_description">Permite que Flashback te envíe recordatorios en horarios específicos. De lo contrario, las notificaciones deben enviarse dentro de los 10 minutos posteriores al aviso previo al inicio del evento.</string>
     <string name="settings_pref_notification_notice_period_title">Aviso</string>
     <string name="settings_pref_notification_notice_period_description">Elegir entre ser notificado 15, 30 o 60 minutos antes de que comience uno de los eventos anteriores</string>
     <string name="settings_switch_notification_upcoming_fp_title">Prácticas libres</string>

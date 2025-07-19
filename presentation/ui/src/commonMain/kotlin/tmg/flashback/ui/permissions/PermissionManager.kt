@@ -14,9 +14,6 @@ interface PermissionManager {
 
     suspend fun getPermissionState(permission: Permission): PermissionState
 
-    fun openAppSettings()
-
-    fun openNotificationSettings()
 }
 
 internal expect class PermissionManagerImpl(): PermissionManager {
@@ -24,8 +21,4 @@ internal expect class PermissionManagerImpl(): PermissionManager {
     override suspend fun requestPermission(permission: Permission): CompletableDeferred<PermissionState>
 
     override suspend fun getPermissionState(permission: Permission): PermissionState
-
-    override fun openAppSettings()
-
-    override fun openNotificationSettings()
 }

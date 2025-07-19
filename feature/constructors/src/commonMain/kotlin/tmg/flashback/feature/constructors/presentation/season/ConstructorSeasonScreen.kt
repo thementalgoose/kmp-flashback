@@ -50,13 +50,9 @@ import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.feature.constructors.presentation.shared.ConstructorHeader
 import tmg.flashback.feature.drivers.presentation.shared.ConstructorNotFound
-import tmg.flashback.formula1.enums.RaceStatus
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.ConstructorHistorySeasonDriver
-import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.model.DriverEntry
-import tmg.flashback.formula1.model.DriverHistorySeasonRace
-import tmg.flashback.formula1.model.RaceInfo
 import tmg.flashback.formula1.preview.preview
 import tmg.flashback.infrastructure.extensions.ordinalAbbreviation
 import tmg.flashback.infrastructure.extensions.roundToHalf
@@ -68,7 +64,6 @@ import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.driver.DriverIcon
-import tmg.flashback.ui.components.driver.DriverImage
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 
 
