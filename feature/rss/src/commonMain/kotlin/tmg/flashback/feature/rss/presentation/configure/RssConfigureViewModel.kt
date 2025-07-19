@@ -27,8 +27,6 @@ class RssConfigureViewModel(
     private fun getSources(): List<ConfiguredSupportedSource> {
         val rssUrls = rssRepository.rssUrls
         val list = getSourcesUseCase()
-        logInfo("RSS Configure", "URLs $rssUrls (${rssRepository.rssUrls.size})")
-        logInfo("RSS Configure", "List of sources $list")
         return list.map {
             ConfiguredSupportedSource(it, rssUrls.contains(it.rssLink))
         }
