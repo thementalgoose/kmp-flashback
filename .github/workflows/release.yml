@@ -32,6 +32,8 @@ jobs:
       version_name: ${{ needs.versions.outputs.version_name }}
       version_code: ${{ needs.versions.outputs.version_code }}
 
+  # This is in working in theory but the kotlin compilation step takes fucking ages
+  #  so disabled to save build minutes
 #  ios-assemble-deploy:
 #    needs: [unit-tests, versions]
 #    uses: ./.github/workflows/job-ios-assemble-deploy-prod.yml
