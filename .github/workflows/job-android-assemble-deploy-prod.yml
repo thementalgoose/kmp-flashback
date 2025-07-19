@@ -64,12 +64,20 @@ jobs:
           echo Version code: ${{ inputs.version_code }}
 
       # Assemble AAB
+      - name: Assemble APK
+        env:
+          VERSION_NAME: ${{ inputs.version_name }}
+          VERSION_CODE: ${{ inputs.version_code }}
+        run: |
+          ./gradlew :composeApp:assembleProductionRelease
+
+      # Assemble AAB
       - name: Assemble bundle
         env:
           VERSION_NAME: ${{ inputs.version_name }}
           VERSION_CODE: ${{ inputs.version_code }}
         run: |
-          ./gradlew :composeApp:bundleProductionRelease :composeApp:assembleProductionRelease
+          ./gradlew :composeApp:bundleProductionRelease
 
       # Sign AAB
       - name: Sign app
@@ -116,7 +124,7 @@ jobs:
           releaseFiles: composeApp/build/outputs/bundle/**/*.aab
           track: internal
           status: "completed"
-          mappingFile: composeApp/build/outputs/mapping/**/mapping.txt
+          mappingFile: composeApp/build/outputs/mapping/productionRelease/mapping.txt
 
       # Rename signed APK
       - name: Rename signed apk
