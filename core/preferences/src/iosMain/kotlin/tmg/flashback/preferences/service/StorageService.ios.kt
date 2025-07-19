@@ -1,6 +1,8 @@
 package tmg.flashback.preferences.service
 
 import platform.Foundation.NSUserDefaults
+import tmg.flashback.infrastructure.log.logDebug
+import tmg.flashback.infrastructure.log.logInfo
 
 actual class StorageService {
     actual fun save(key: String, value: Int) {
@@ -54,6 +56,10 @@ actual class StorageService {
     }
     actual fun getSet(key: String, value: Set<String>): MutableSet<String> {
         val string = NSUserDefaults.standardUserDefaults.objectForKey(key) as? String
-        return string?.split("|")?.toMutableSet() ?: value.toMutableSet()
+        val set = string?.split("|")?.toMutableSet() ?: value.toMutableSet()
+        logDebug("getSet $key -> $string -> $set")
+        return set
+            .filter { it.isNotBlank() }
+            .toMutableSet()
     }
 }

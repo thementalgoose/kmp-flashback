@@ -8,6 +8,7 @@ import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.feature.rss.models.SupportedSource
 import tmg.flashback.feature.rss.repositories.RssRepository
 import tmg.flashback.feature.rss.usecases.GetSourcesUseCase
+import tmg.flashback.infrastructure.log.logInfo
 
 class RssConfigureViewModel(
     private val rssRepository: RssRepository,
@@ -26,16 +27,23 @@ class RssConfigureViewModel(
     private fun getSources(): List<ConfiguredSupportedSource> {
         val rssUrls = rssRepository.rssUrls
         val list = getSourcesUseCase()
+        logInfo("RSS Configure", "URLs $rssUrls (${rssRepository.rssUrls.size})")
+        logInfo("RSS Configure", "List of sources $list")
         return list.map {
             ConfiguredSupportedSource(it, rssUrls.contains(it.rssLink))
         }
     }
 
     fun updateSource(source: String, include: Boolean) {
-        if (source.isBlank()) return
+        if (source.trim().isBlank() || source.trim().isEmpty()) {
+            return
+        }
+        if (source.contains("|")) {
+            return
+        }
         when (include) {
-            true -> rssRepository.rssUrls += source
-            false -> rssRepository.rssUrls -= source
+            true -> rssRepository.rssUrls += source.trim()
+            false -> rssRepository.rssUrls -= source.trim()
         }
         _uiState.update { it.copy(sources = getSources()) }
     }

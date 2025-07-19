@@ -96,13 +96,14 @@ fun RssConfigureScreen(
         content = {
             item("header") {
                 Header(
+                    modifier = Modifier.animateItem(),
                     actionUpClicked = actionUpClicked,
                     action = HeaderAction.BACK.takeIf { showBack },
                     text = stringResource(string.settings_rss_configure_sources_title)
                 )
             }
             item("show_description") {
-                Column {
+                Column(modifier = Modifier.animateItem()) {
                     SettingHeader(
                         title = string.settings_rss_show_description_title
                     )
@@ -122,7 +123,7 @@ fun RssConfigureScreen(
 
             if (uiState.showAddCustom) {
                 item("add-custom") {
-                    Column {
+                    Column(modifier = Modifier.animateItem()) {
                         SettingHeader(
                             title = string.settings_rss_add_title
                         )
@@ -141,12 +142,15 @@ fun RssConfigureScreen(
             }
 
             item("source_header") {
-                SettingHeader(
-                    title = string.settings_rss_configure
-                )
+                Column(modifier = Modifier.animateItem()) {
+                    SettingHeader(
+                        title = string.settings_rss_configure
+                    )
+                }
             }
             items(uiState.sources, key = { it.article.rssLink }) {
                 Source(
+                    modifier = Modifier.animateItem(),
                     model = it,
                     sourceAdded = { updateSource(it.rssLink, true) },
                     sourceRemoved = { updateSource(it.rssLink, false) },

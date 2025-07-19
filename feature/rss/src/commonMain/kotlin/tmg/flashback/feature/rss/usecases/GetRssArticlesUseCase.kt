@@ -40,10 +40,11 @@ class GetRssArticlesUseCaseImpl(
 
 
     private suspend fun getAll(): List<Response> = coroutineScope {
-        if (rssRepository.rssUrls.isEmpty()) {
+        if (rssRepository.rssUrls.none { it.isNotBlank() }) {
             return@coroutineScope emptyList()
         }
         return@coroutineScope rssRepository.rssUrls
+            .filter { it.isNotBlank() }
             .map { async { get(it) } }
             .awaitAll()
 
