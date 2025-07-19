@@ -21,7 +21,7 @@ crashlytics = "3.0.4"
 firebase-bom = "33.16.0"
 
 # Shared
-ktor = "3.2.1"
+ktor = "3.2.2"
 okHttpLoggingInterceptor = "5.1.0"
 compose = "1.8.2"
 composeAdaptive = "1.1.2"
