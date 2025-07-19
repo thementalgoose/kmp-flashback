@@ -11,12 +11,4 @@ actual class PermissionManagerImpl actual constructor(): PermissionManager {
     actual override suspend fun getPermissionState(permission: Permission): PermissionState {
         return PermissionState.NotDetermined
     }
-
-    actual override fun openAppSettings() {
-
-    }
-
-    actual override fun openNotificationSettings() {
-
-    }
 }

@@ -1,14 +1,11 @@
 package tmg.flashback.ui.permissions
 
-import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager.PERMISSION_DENIED
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.provider.Settings
 import android.util.Log
-import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.contract.ActivityResultContracts
 import kotlinx.coroutines.CompletableDeferred
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -44,21 +41,5 @@ actual class PermissionManagerImpl actual constructor(): PermissionManager, Koin
         }
         Log.d("Notifications", "getPermissionState $result")
         return result
-    }
-
-    actual override fun openAppSettings() {
-        val settingsIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-        settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        settingsIntent.putExtra("app_package", Device.applicationId)
-        settingsIntent.putExtra(Settings.EXTRA_APP_PACKAGE, Device.applicationId)
-        activityProvider.activity?.startActivity(settingsIntent)
-    }
-
-    actual override fun openNotificationSettings() {
-        val settingsIntent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
-        settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        settingsIntent.putExtra("app_package", Device.applicationId)
-        settingsIntent.putExtra(Settings.EXTRA_APP_PACKAGE, Device.applicationId)
-        activityProvider.activity?.startActivity(settingsIntent)
     }
 }

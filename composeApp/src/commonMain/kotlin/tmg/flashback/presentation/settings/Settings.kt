@@ -39,6 +39,8 @@ import flashback.presentation.localisation.generated.resources.settings_pref_rem
 import flashback.presentation.localisation.generated.resources.settings_pref_remember_season_change_title
 import flashback.presentation.localisation.generated.resources.settings_pref_reset_description
 import flashback.presentation.localisation.generated.resources.settings_pref_reset_title
+import flashback.presentation.localisation.generated.resources.settings_pref_schedule_exact_alarm_description
+import flashback.presentation.localisation.generated.resources.settings_pref_schedule_exact_alarm_title
 import flashback.presentation.localisation.generated.resources.settings_pref_shake_to_report_description
 import flashback.presentation.localisation.generated.resources.settings_pref_shake_to_report_title
 import flashback.presentation.localisation.generated.resources.settings_pref_temperature_unit_description
@@ -310,6 +312,11 @@ object Settings {
         val Minutes60 = Setting.Pref(
             _id = "notification_notice_60",
             title = string.notification_reminder_mins_60
+        )
+        val ExactAlarm = Setting.Pref(
+            _id = "notification_exact_alarm",
+            title = string.settings_pref_schedule_exact_alarm_title,
+            subtitle = string.settings_pref_schedule_exact_alarm_description
         )
     }
 

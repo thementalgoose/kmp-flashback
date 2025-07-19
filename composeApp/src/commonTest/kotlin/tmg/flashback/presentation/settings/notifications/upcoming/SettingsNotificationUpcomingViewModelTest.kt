@@ -1,7 +1,7 @@
-package tmg.flashback.presentation.settings.notifications
+package tmg.flashback.presentation.settings.notifications.upcoming
 
 import app.cash.turbine.test
-import dev.mokkery.MockMode.autoUnit
+import dev.mokkery.MockMode
 import dev.mokkery.answering.returns
 import dev.mokkery.every
 import dev.mokkery.everySuspend
@@ -10,11 +10,11 @@ import dev.mokkery.mock
 import dev.mokkery.verify
 import dev.mokkery.verifySuspend
 import kotlinx.coroutines.test.runTest
+import tmg.flashback.device.usecases.OpenSettingsUseCase
 import tmg.flashback.feature.notifications.model.NotificationReminder
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
 import tmg.flashback.feature.notifications.usecases.ScheduleResult
 import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
-import tmg.flashback.presentation.settings.notifications.upcoming.SettingsNotificationUpcomingViewModel
 import tmg.flashback.ui.permissions.PermissionManager
 import tmg.flashback.ui.permissions.PermissionState
 import kotlin.test.Test
@@ -24,29 +24,34 @@ internal class SettingsNotificationUpcomingViewModelTest {
 
     private lateinit var underTest: SettingsNotificationUpcomingViewModel
 
-    private val mockScheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase = mock(autoUnit)
-    private val mockNotificationSettingsRepository: NotificationSettingsRepository = mock(autoUnit)
-    private val mockPermissionManager: PermissionManager = mock(autoUnit)
+    private val mockScheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase =
+        mock(MockMode.autoUnit)
+    private val mockNotificationSettingsRepository: NotificationSettingsRepository =
+        mock(MockMode.autoUnit)
+    private val mockPermissionManager: PermissionManager = mock(MockMode.autoUnit)
+    private val mockOpenSettingsUseCase: OpenSettingsUseCase = mock(MockMode.autoUnit)
 
     private fun initUnderTest() {
         everySuspend { mockScheduleUpcomingNotificationsUseCase.invoke(any()) } returns ScheduleResult.Scheduled
         everySuspend { mockPermissionManager.getPermissionState(any()) } returns PermissionState.Granted
+        every { mockNotificationSettingsRepository.notificationUpcomingEnabled } returns emptySet()
+        every { mockNotificationSettingsRepository.notificationReminderPeriod } returns NotificationReminder.MINUTES_15
         underTest = SettingsNotificationUpcomingViewModel(
             notificationSettingsRepository = mockNotificationSettingsRepository,
             scheduleUpcomingNotificationsUseCase = mockScheduleUpcomingNotificationsUseCase,
-            permissionManager = mockPermissionManager
+            permissionManager = mockPermissionManager,
+            openSettingsUseCase = mockOpenSettingsUseCase
         )
     }
 
     @Test
     fun `settings reminder period reschedules notifications`() {
-        every { mockNotificationSettingsRepository.notificationUpcomingEnabled } returns emptySet()
-        every { mockNotificationSettingsRepository.notificationReminderPeriod } returns NotificationReminder.MINUTES_30
         initUnderTest()
         underTest.notificationReminderClicked(NotificationReminder.MINUTES_60)
 
         verify {
-            mockNotificationSettingsRepository.notificationReminderPeriod = NotificationReminder.MINUTES_60
+            mockNotificationSettingsRepository.notificationReminderPeriod =
+                NotificationReminder.MINUTES_60
         }
         verifySuspend {
             mockScheduleUpcomingNotificationsUseCase(true)
@@ -55,11 +60,29 @@ internal class SettingsNotificationUpcomingViewModelTest {
 
     @Test
     fun `settings reminder period read from repo`() = runTest {
-        every { mockNotificationSettingsRepository.notificationUpcomingEnabled } returns emptySet()
-        every { mockNotificationSettingsRepository.notificationReminderPeriod } returns NotificationReminder.MINUTES_15
         initUnderTest()
         underTest.uiState.test {
             assertEquals(NotificationReminder.MINUTES_15, awaitItem().reminder)
+        }
+    }
+
+    @Test
+    fun `go to settings open settings`() = runTest {
+        every { mockOpenSettingsUseCase.openNotificationSettings() } returns Unit
+        initUnderTest()
+        underTest.goToSettings()
+        verify {
+            mockOpenSettingsUseCase.openNotificationSettings()
+        }
+    }
+
+    @Test
+    fun `go to alarm settings open alarm settings`() = runTest {
+        every { mockOpenSettingsUseCase.openAlarmSettings() } returns Unit
+        initUnderTest()
+        underTest.goToAlarmSettings()
+        verify {
+            mockOpenSettingsUseCase.openAlarmSettings()
         }
     }
 }
