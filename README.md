@@ -5,46 +5,63 @@
 <h1 align="center">Flashback</h1>
 
 <p align="center">
-  <a href="https://play.google.com/store/apps/details?id=tmg.flashback"><img src="https://img.shields.io/static/v1?label=Google%20Play&message=%20&logo=google-play&color=success&style=flat"/></a>
-  <a href="https://apps.apple.com/us/app/flashback-formula-results/id6748612648"><img src="https://img.shields.io/static/v1?label=App%20Store&message=%20&logo=app-store&color=success&style=flat"/></a>
-  <a href="https://flashback.pages.dev"><img src="https://img.shields.io/static/v1?label=App%20Store&message=%20&logo=cloudflare&color=success&style=flat"/></a>
+  <a href="https://play.google.com/store/apps/details?id=tmg.flashback"><img src="https://img.shields.io/static/v1?label=Google%20Play&message=%20&logoColor=white&logo=google-play&color=success&style=flat"/></a>
+  <a href="https://apps.apple.com/us/app/flashback-formula-results/id6748612648"><img src="https://img.shields.io/static/v1?label=App%20Store&message=%20&logo=app-store&logoColor=white&color=blue&style=flat"/></a>
+  <a href="https://flashback.pages.dev"><img src="https://img.shields.io/static/v1?label=API&message=%20&logo=cloudflare&logoColor=white&color=orange&style=flat"/></a>
+  <a href="https://flashback.pages.dev/privacy-policy.html"><img src="https://img.shields.io/static/v1?label=Privacy%20Policy&message=%20&logo=cloudflare&logoColor=white&color=orange&style=flat"/></a>
   <a href="https://github.com/thementalgoose/kmp-flashback/actions"><img src="https://github.com/thementalgoose/kmp-flashback/workflows/Release/badge.svg"/></a>
 </p>
 
 Flashback provides race results and statistics from every race in the history of Formula 1 and the latest Formula 1 news from around the web!
 
-### Screenshots
+|                                                                               |                                                                               |                                                                               |                                                                               |                                                                               |                                                                               |                                                                               |
+|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| <img src="resources/android/screenshots/phone/screenshot1.png" width="110" /> | <img src="resources/android/screenshots/phone/screenshot2.png" width="110" /> | <img src="resources/android/screenshots/phone/screenshot4.png" width="110" /> | <img src="resources/android/screenshots/phone/screenshot5.png" width="110" /> | <img src="resources/android/screenshots/phone/screenshot6.png" width="110" /> | <img src="resources/android/screenshots/phone/screenshot7.png" width="110" /> | <img src="resources/android/screenshots/phone/screenshot8.png" width="110" /> |
 
-<details>
-<summary><h5>Android</h5></summary>
+## Screenshots
 
-| |                                                                               |                                                                               |                                                                               |                                                                               |                                                                               |                                                                               |                                                                               |
-|---|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| <img src="resources/android/screenshots/phone/screenshot1.png" width="100" /> | <img src="resources/android/screenshots/phone/screenshot2.png" width="100" /> | <img src="resources/android/screenshots/phone/screenshot2.png" width="100" /> | <img src="resources/android/screenshots/phone/screenshot4.png" width="100" /> | <img src="resources/android/screenshots/phone/screenshot5.png" width="100" /> | <img src="resources/android/screenshots/phone/screenshot6.png" width="100" /> | <img src="resources/android/screenshots/phone/screenshot7.png" width="100" /> | <img src="resources/android/screenshots/phone/screenshot8.png" width="100" /> |
+#### Android
+
+<details><summary>Phone</summary>
+
+|                                                                               |                                                                               |                                                                               |                                                                               |                                                                               |                                                                               |                                                                               |
+|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| <img src="resources/android/screenshots/phone/screenshot1.png" width="110" /> | <img src="resources/android/screenshots/phone/screenshot2.png" width="110" /> | <img src="resources/android/screenshots/phone/screenshot4.png" width="110" /> | <img src="resources/android/screenshots/phone/screenshot5.png" width="110" /> | <img src="resources/android/screenshots/phone/screenshot6.png" width="110" /> | <img src="resources/android/screenshots/phone/screenshot7.png" width="110" /> | <img src="resources/android/screenshots/phone/screenshot8.png" width="110" /> |
+
+</details>
+<details><summary>Foldable</summary>
 
 | |                                                                                  |                                                                                  |                                                                                  |                                                                                  |                                                                                  |
 |---|----------------------------------------------------------------------------------|----------------------------------------------------------------------------------|----------------------------------------------------------------------------------|----------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
 | <img src="resources/android/screenshots/tablet_7/screenshot1.png" width="120" /> | <img src="resources/android/screenshots/tablet_7/screenshot2.png" width="120" /> | <img src="resources/android/screenshots/tablet_7/screenshot3.png" width="120" /> | <img src="resources/android/screenshots/tablet_7/screenshot4.png" width="120" /> | <img src="resources/android/screenshots/tablet_7/screenshot5.png" width="120" /> | <img src="resources/android/screenshots/tablet_7/screenshot6.png" width="120" /> |
+
+</details>
+<details><summary>Tablet</summary>
 
 |                                                                                   |                                                                                   |                                                                                   |                                                                                   |
 |-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
 | <img src="resources/android/screenshots/tablet_10/screenshot1.png" width="180" /> | <img src="resources/android/screenshots/tablet_10/screenshot2.png" width="180" /> | <img src="resources/android/screenshots/tablet_10/screenshot3.png" width="180" /> | <img src="resources/android/screenshots/tablet_10/screenshot4.png" width="180" /> |
 
 </details>
-<details>
-<summary><h5>iOS</h5></summary>
+
+#### iOS
+
+<details><summary>iPhone</summary>
 
 | |                                                                            |                                                                            |                                                                            |                                                                            |                                                                            |                                                                            |                                                                            |
 |---|----------------------------------------------------------------------------|----------------------------------------------------------------------------|----------------------------------------------------------------------------|----------------------------------------------------------------------------|----------------------------------------------------------------------------|----------------------------------------------------------------------------|----------------------------------------------------------------------------|
 | <img src="resources/ios/screenshots/iphone/screenshot1.png" width="100" /> | <img src="resources/ios/screenshots/iphone/screenshot2.png" width="100" /> | <img src="resources/ios/screenshots/iphone/screenshot3.png" width="100" /> | <img src="resources/ios/screenshots/iphone/screenshot4.png" width="100" /> | <img src="resources/ios/screenshots/iphone/screenshot5.png" width="100" /> | <img src="resources/ios/screenshots/iphone/screenshot6.png" width="100" /> | <img src="resources/ios/screenshots/iphone/screenshot7.png" width="100" /> | <img src="resources/ios/screenshots/iphone/screenshot8.png" width="100" /> |
 
-| |                                                                          |                                                                          |                                                                          |                                                                          |
-|---|--------------------------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------------------------------|
-| <img src="resources/ios/screenshots/ipad/screenshot1.png" width="130" /> | <img src="resources/ios/screenshots/ipad/screenshot2.png" width="130" /> | <img src="resources/ios/screenshots/ipad/screenshot3.png" width="130" /> | <img src="resources/ios/screenshots/ipad/screenshot4.png" width="130" /> | <img src="resources/ios/screenshots/ipad/screenshot5.png" width="130" /> |
+</details>
+<details><summary>iPad</summary>
+
+|                                                                          |                                                                          |                                                                          |                                                                          |                                                                          |
+|--------------------------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| <img src="resources/ios/screenshots/ipad/screenshot1.png" width="140" /> | <img src="resources/ios/screenshots/ipad/screenshot2.png" width="140" /> | <img src="resources/ios/screenshots/ipad/screenshot3.png" width="140" /> | <img src="resources/ios/screenshots/ipad/screenshot4.png" width="140" /> | <img src="resources/ios/screenshots/ipad/screenshot5.png" width="140" /> |
 
 </details>
 
-### Play Store
+## Play Store
 
 Flashback provides race results and statistics from every race in the history of Formula 1 and the latest Formula 1 news from around the web!
 
