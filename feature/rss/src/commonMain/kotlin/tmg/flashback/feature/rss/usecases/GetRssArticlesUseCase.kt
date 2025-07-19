@@ -1,5 +1,6 @@
 package tmg.flashback.feature.rss.usecases
 
+import coil3.Uri
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
@@ -7,6 +8,7 @@ import tmg.flashback.feature.rss.mapper.RssXMLMapper
 import tmg.flashback.feature.rss.models.Article
 import tmg.flashback.feature.rss.repositories.RssRepository
 import tmg.flashback.infrastructure.log.logDebug
+import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.network.rss.api.RssApi
 
 interface GetRssArticleUseCase {
@@ -49,8 +51,12 @@ class GetRssArticlesUseCaseImpl(
 
     private suspend fun get(url: String): Response {
         return try {
-            val response = rssApi.getRssXML(url)
-            val model = rssXmlMapper.convert(response, url, showDescription = rssRepository.rssShowDescription)
+            val normalisedUrl = url.replace("http://", "https://").trim()
+            if (normalisedUrl.isBlank() || !normalisedUrl.startsWith("https://")) {
+                return Response.Error(400)
+            }
+            val response = rssApi.getRssXML(normalisedUrl)
+            val model = rssXmlMapper.convert(response, normalisedUrl, showDescription = rssRepository.rssShowDescription)
             Response.Success(model)
         } catch (e: Throwable) {
             logDebug("RSS", "EXCEPTION ${e.message}")

@@ -78,24 +78,11 @@ fun App() {
     val snackbarHostState = remember { SnackbarHostState() }
 
     // Soft upgrade
-    val message = stringResource(string.feature_banner_soft_upgrade)
-    val prompt = stringResource(string.feature_banner_soft_upgrade_prompt)
-    LaunchedEffect(Unit) {
-        if (appNavigationUiState.value.promptSoftUpgrade) {
-            coroutineScope.launch {
-                val result = snackbarHostState.showSnackbar(
-                    message = message,
-                    actionLabel = prompt,
-                    withDismissAction = true,
-                    duration = Indefinite
-                )
-                appNavigationViewModel.dismissSoftUpgrade()
-                if (result == SnackbarResult.ActionPerformed) {
-                    appNavigationViewModel.openStore()
-                }
-            }
-        }
-    }
+    snackbarHostState.SoftUpgrade(
+        show = appNavigationUiState.value.promptSoftUpgrade,
+        dismiss = { appNavigationViewModel.dismissSoftUpgrade() },
+        actionPerformed = { appNavigationViewModel.openStore() }
+    )
 
     // Screen
     ApplicationTheme {
@@ -145,5 +132,32 @@ fun App() {
             unlock = { promptContentSync.value = false },
             windowSizeClass = windowSizeClass
         )
+    }
+}
+
+@Composable
+fun SnackbarHostState.SoftUpgrade(
+    show: Boolean,
+    dismiss: () -> Unit,
+    actionPerformed: () -> Unit,
+) {
+    val coroutineScope = rememberCoroutineScope()
+    val message = stringResource(string.feature_banner_soft_upgrade)
+    val prompt = stringResource(string.feature_banner_soft_upgrade_prompt)
+    LaunchedEffect(Unit) {
+        if (show) {
+            coroutineScope.launch {
+                val result = this@SoftUpgrade.showSnackbar(
+                    message = message,
+                    actionLabel = prompt,
+                    withDismissAction = true,
+                    duration = Indefinite
+                )
+                dismiss()
+                if (result == SnackbarResult.ActionPerformed) {
+                    actionPerformed()
+                }
+            }
+        }
     }
 }

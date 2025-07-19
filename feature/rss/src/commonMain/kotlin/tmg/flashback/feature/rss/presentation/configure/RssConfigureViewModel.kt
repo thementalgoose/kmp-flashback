@@ -32,6 +32,7 @@ class RssConfigureViewModel(
     }
 
     fun updateSource(source: String, include: Boolean) {
+        if (source.isBlank()) return
         when (include) {
             true -> rssRepository.rssUrls += source
             false -> rssRepository.rssUrls -= source

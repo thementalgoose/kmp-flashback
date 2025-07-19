@@ -9,9 +9,9 @@
     <!-- Splash -->
     <string name="splash_title">Hey</string>
     <string name="splash_continue">Continue</string>
-    <string name="splash_sync_info">As this is the first time you\'re opening the app, we\'re grabbing some data related to the world of formula 1 to get you up to speed…</string>
+    <string name="splash_sync_info">As this is the first time you're opening the app, we're grabbing some data related to the world of formula 1 to get you up to speed…</string>
     <string name="splash_sync_try_again">Try again</string>
-    <string name="splash_sync_required_failed">We need to sync some information to continue. Please make sure you have an active internet connection and try again (you\'ll only need to do this once)</string>
+    <string name="splash_sync_required_failed">We need to sync some information to continue. Please make sure you have an active internet connection and try again (you'll only need to do this once)</string>
     <string name="splash_sync_config">Configuration…</string>
     <string name="splash_sync_races">Races…</string>
     <string name="splash_sync_constructors">Teams…</string>
@@ -412,7 +412,7 @@
     <string name="settings_dashboard_default_to_schedule_title">Schedule tab on startup</string>
     <string name="settings_dashboard_default_to_schedule_description">When opening the app, go to the schedule tab by default. If disabled, the calendar tab will load first</string>
     <string name="settings_dashboard_autoscroll_title">Autoscroll</string>
-    <string name="settings_dashboard_autoscroll_description">Autoscroll to the next race when you load the app when you\'re viewing the current season</string>
+    <string name="settings_dashboard_autoscroll_description">Autoscroll to the next race when you load the app when You're viewing the current season</string>
 
     <string name="settings_notifications_runtime_enabled">Permissions</string>
     <string name="settings_notifications_runtime_title">Enable Notifications</string>
@@ -556,7 +556,7 @@
     <string name="about_desc">Contact Information</string>
     <string name="about_this_app_dependency_rss">RSS source: %1$s</string>
     <string name="dependency_thank_you">The Formula 1 statistics in this app are sourced by the Flashback team. Special thanks to Ergast API for content up to 2023. We cannot guarantee the accuracy of the data provided (let us know however if you spot an issue by sending us an email with the link above)\n\nA big thank you to everyone listed below for making this app possible! Click any one of the items in the list below to find more information about the libraries and services used within the app.</string>
-    <string name="about_additional">Special thanks to everyone above! If we\'ve missed anyone or anything please let us know!</string>
+    <string name="about_additional">Special thanks to everyone above! If we've missed anyone or anything please let us know!</string>
     <string name="app_version_placeholder">App Version: %1$s</string>
     <string name="app_version">App Version</string>
     <string name="device_uuid">ID: </string>

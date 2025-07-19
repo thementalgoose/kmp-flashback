@@ -19,7 +19,6 @@ import androidx.compose.material.IconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,15 +26,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.window.core.layout.WindowSizeClass
-import com.mohamedrejeb.ksoup.html.parser.KsoupHtmlHandler
-import com.mohamedrejeb.ksoup.html.parser.KsoupHtmlParser
 import flashback.feature.rss.generated.resources.Res
 import flashback.feature.rss.generated.resources.ic_rss_icon_no_sources
 import flashback.feature.rss.generated.resources.ic_rss_settings
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.ab_rss_settings
 import flashback.presentation.localisation.generated.resources.home_last_updated
+import flashback.presentation.localisation.generated.resources.rss_network_error
 import flashback.presentation.localisation.generated.resources.rss_no_articles
 import flashback.presentation.localisation.generated.resources.title_rss
 import kotlinx.datetime.LocalDateTime
@@ -98,7 +95,9 @@ fun RSSScreen(
                     }
                     when (uiState) {
                         is RssFeedUiState.NoNetwork -> {
-
+                            item(key = "sources-disabled") {
+                                SourcesUnavailable()
+                            }
                         }
                         is RssFeedUiState.Data -> {
                             if (!uiState.hasSources || uiState.rssItems.isEmpty()) {
@@ -222,6 +221,29 @@ private fun SourcesDisabled(
         Spacer(Modifier.width(16.dp))
         TextBody1(
             text = stringResource(resource = string.rss_no_articles)
+        )
+    }
+}
+
+@Composable
+private fun SourcesUnavailable(
+    modifier: Modifier = Modifier
+) {
+    Row(modifier = modifier
+        .padding(
+            vertical = AppTheme.dimens.medium,
+            horizontal = AppTheme.dimens.medium
+        )
+    ) {
+        Icon(
+            painter = painterResource(resource = Res.drawable.ic_rss_icon_no_sources),
+            contentDescription = null,
+            tint = AppTheme.colors.onSurface,
+            modifier = Modifier.size(36.dp)
+        )
+        Spacer(Modifier.width(16.dp))
+        TextBody1(
+            text = stringResource(resource = string.rss_network_error)
         )
     }
 }
