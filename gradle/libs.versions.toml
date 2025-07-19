@@ -30,12 +30,9 @@ koin = "4.1.0"
 room = "2.7.2"
 sqlite = "2.5.2"
 coil = "3.2.0"
-alarmee = "2.0.2"
-moko = "0.19.1"
 ksoup = "0.6.0"
 
 # Testing
-kotest = "5.9.1"
 uiTooling = "1.8.3"
 mokkery = "2.9.0"
 turbine = "1.2.1"
@@ -48,7 +45,6 @@ kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 
 # Dependency Injection
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
@@ -57,7 +53,6 @@ koin-compose-viewmodel-navigation = { module = "io.insert-koin:koin-compose-view
 # Android
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
-androidx-lifecycle-viewmodel-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 androidx_glance_core = { module = "androidx.glance:glance", version.ref = "androidx-glance" }
 androidx_glance_preview = { module = "androidx.glance:glance-preview", version.ref = "androidx-glance" }
@@ -68,8 +63,6 @@ android_flagkit = "com.github.murgupluoglu:flagkit-android:1.0.5"
 androidx_core = "androidx.core:core-ktx:1.16.0"
 androidx_appcompat = "androidx.appcompat:appcompat:1.7.1"
 androidx_browser = "androidx.browser:browser:1.8.0"
-
-core_library_desugaring = "com.android.tools:desugar_jdk_libs:2.1.5"
 
 # Firebase
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
@@ -104,9 +97,6 @@ coil_compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" 
 coil_network_ktor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
 
 # Networking
-ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
-ktor-client-ios = { module = "io.ktor:ktor-client-ios", version.ref = "ktor" }
-ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 ktor-client-okHttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
@@ -174,6 +164,5 @@ kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = 
 # Custom Gradle Plugins
 flashback-kotlinMultiplatform = { id = "tmg.flashback.kotlin.multiplatform" }
 flashback-androidLibrary = { id = "tmg.flashback.android.library" }
-flashback-domainModule = { id = "tmg.flashback.domain.module" }
 flashback-dataModule = { id = "tmg.flashback.data.module" }
 flashback-featureModule = { id = "tmg.flashback.feature.module" }

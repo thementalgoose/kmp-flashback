@@ -26,11 +26,6 @@ gradlePlugin {
             implementationClass = "AndroidLibraryConventionPlugin"
         }
 
-        register("domainModule") {
-            id = libs.plugins.flashback.domainModule.get().pluginId
-            implementationClass = "DomainModuleConventionPlugin"
-        }
-
         register("dataModule") {
             id = libs.plugins.flashback.dataModule.get().pluginId
             implementationClass = "DataModuleConventionPlugin"
