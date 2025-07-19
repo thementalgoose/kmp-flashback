@@ -10,7 +10,7 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
 import org.koin.compose.koinInject
-import tmg.flashback.infrastructure.log.logInfo
+import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.theme.LocalDarkMode
 import tmg.flashback.style.theme.NightMode
@@ -42,8 +42,8 @@ fun ApplicationTheme(
     val themeManager = koinInject<ThemeManager>()
     val theme = themeManager.currentTheme
 
-    logInfo("Theme", "Theme: $theme")
-    logInfo("Theme", "DarkMode: ${isSystemInDarkTheme()}")
+    logDebug("Theme", "Theme: $theme")
+    logDebug("Theme", "DarkMode: ${isSystemInDarkTheme()}")
 
     customLightMode = when (themeManager.currentNightMode) {
         NightMode.DEFAULT -> null

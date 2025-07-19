@@ -164,7 +164,8 @@
     <string name="feature_banner_runtime_notifications">授予 Flashback 发送通知的权限</string>
     <string name="feature_banner_notifications">获取即将到来的比赛周末的练习赛、排位赛和比赛活动的通知！</string>
     <string name="feature_banner_notifications_finished">您随时可以在设置中更改此设置</string>
-    <string name="feature_banner_soft_upgrade">Play 商店中有可用更新</string>
+    <string name="feature_banner_soft_upgrade">商店中有可用更新</string>
+    <string name="feature_banner_soft_upgrade_prompt">升级</string>
 
     <!-- Errors -->
     <string name="network_error_network">发生网络错误。请确保您已连接到互联网，然后重试</string>

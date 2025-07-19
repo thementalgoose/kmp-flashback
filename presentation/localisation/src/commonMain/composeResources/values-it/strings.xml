@@ -166,7 +166,8 @@
     <string name="feature_banner_runtime_notifications">Concedi a Flashback il permesso di inviarti notifiche</string>
     <string name="feature_banner_notifications">Ricevi notifiche per le prove, le qualifiche e le gare dei prossimi weekend di gara!</string>
     <string name="feature_banner_notifications_finished">Puoi modificare questa impostazione in qualsiasi momento</string>
-    <string name="feature_banner_soft_upgrade">Un aggiornamento è disponibile sul Play Store</string>
+    <string name="feature_banner_soft_upgrade">Un aggiornamento è disponibile</string>
+    <string name="feature_banner_soft_upgrade_prompt">Aggiornamento</string>
 
     <!-- Errors -->
     <string name="network_error_network">Si è verificato un errore di rete. Assicurati di essere connesso a internet e riprova</string>

@@ -188,7 +188,8 @@
     <string name="feature_banner_runtime_notifications">Grant permission for Flashback to send you notifications</string>
     <string name="feature_banner_notifications">Get notifications for practice, qualifying and race events for upcoming race weekends!</string>
     <string name="feature_banner_notifications_finished">You can change this in the settings at any time</string>
-    <string name="feature_banner_soft_upgrade">An update is available on the play store</string>
+    <string name="feature_banner_soft_upgrade">An update is available</string>
+    <string name="feature_banner_soft_upgrade_prompt">Update</string>
 
 
     <!-- Errors -->

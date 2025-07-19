@@ -9,11 +9,13 @@ import androidx.compose.material.SnackbarDefaults
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarDuration.Indefinite
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.SnackbarVisuals
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -23,7 +25,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowWidthSizeClass
+import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.feature_banner_soft_upgrade
+import flashback.presentation.localisation.generated.resources.feature_banner_soft_upgrade_prompt
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.infrastructure.log.logInfo
@@ -70,6 +76,28 @@ fun App() {
     )
 
     val snackbarHostState = remember { SnackbarHostState() }
+
+    // Soft upgrade
+    val message = stringResource(string.feature_banner_soft_upgrade)
+    val prompt = stringResource(string.feature_banner_soft_upgrade_prompt)
+    LaunchedEffect(Unit) {
+        if (appNavigationUiState.value.promptSoftUpgrade) {
+            coroutineScope.launch {
+                val result = snackbarHostState.showSnackbar(
+                    message = message,
+                    actionLabel = prompt,
+                    withDismissAction = true,
+                    duration = Indefinite
+                )
+                appNavigationViewModel.dismissSoftUpgrade()
+                if (result == SnackbarResult.ActionPerformed) {
+                    appNavigationViewModel.openStore()
+                }
+            }
+        }
+    }
+
+    // Screen
     ApplicationTheme {
         AppScaffold(
             content = { paddingValues ->

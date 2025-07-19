@@ -1,7 +1,6 @@
 package tmg.flashback.presentation.navigation
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
@@ -10,16 +9,16 @@ import androidx.savedstate.read
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
+import tmg.flashback.device.usecases.OpenStorePageUseCase
 import tmg.flashback.eastereggs.usecases.IsMenuIconEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSnowEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSummerEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsUkraineEnabledUseCase
+import tmg.flashback.feature.maintenance.repository.MaintenanceRepository
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
 import tmg.flashback.feature.search.usecases.IsSearchEnabledUseCase
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.navigation.Screen
-import tmg.flashback.repositories.OnboardingRepository
 import tmg.flashback.usecases.RequiresSyncUseCase
 
 class AppNavigationViewModel(
@@ -30,7 +29,8 @@ class AppNavigationViewModel(
     isSummerEnabledUseCase: IsSummerEnabledUseCase,
     isUkraineEnabledUseCase: IsUkraineEnabledUseCase,
     requiresSyncUseCase: RequiresSyncUseCase,
-    private val onboardingRepository: OnboardingRepository,
+    maintenanceRepository: MaintenanceRepository,
+    private val openStorePageUseCase: OpenStorePageUseCase
 ): ViewModel(), NavController.OnDestinationChangedListener {
 
     val easterEggs = AppNavigationEasterEggs(
@@ -47,6 +47,7 @@ class AppNavigationViewModel(
         screen = null,
         intoSubNavigation = false,
         promptContentSync = requiresSyncUseCase(),
+        promptSoftUpgrade = maintenanceRepository.softUpgrade
     ))
     val uiState: StateFlow<AppNavigationUIState> = _uiState
 
@@ -92,6 +93,19 @@ class AppNavigationViewModel(
     fun hideBar(hide: Boolean) {
         _uiState.update {
             it.copy(intoSubNavigation = hide)
+        }
+    }
+
+    fun openStore() {
+        _uiState.update {
+            it.copy(promptSoftUpgrade = false)
+        }
+        openStorePageUseCase()
+    }
+
+    fun dismissSoftUpgrade() {
+        _uiState.update {
+            it.copy(promptSoftUpgrade = false)
         }
     }
 }
