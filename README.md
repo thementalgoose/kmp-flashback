@@ -1,21 +1,40 @@
-<h1 align="center">Flashback</h1>
+<p align="center">
+  <img width="180" src="resources/app_icon.png" />
+</p>
 
----
+<h1 align="center">Flashback</h1>
 
 <p align="center">
   <a href="https://play.google.com/store/apps/details?id=tmg.flashback"><img src="https://img.shields.io/static/v1?label=Google%20Play&message=%20&logo=google-play&color=success&style=flat"/></a>
   <a href="https://apps.apple.com/us/app/flashback-formula-results/id6748612648"><img src="https://img.shields.io/static/v1?label=App%20Store&message=%20&logo=app-store&color=success&style=flat"/></a>
+  <a href="https://flashback.pages.dev"><img src="https://img.shields.io/static/v1?label=App%20Store&message=%20&logo=cloudflare&color=success&style=flat"/></a>
   <a href="https://github.com/thementalgoose/kmp-flashback/actions"><img src="https://github.com/thementalgoose/kmp-flashback/workflows/Release/badge.svg"/></a>
 </p>
 
 Flashback provides race results and statistics from every race in the history of Formula 1 and the latest Formula 1 news from around the web!
 
-### Project setup
+### Screenshots
 
-- iOS
-  - Build the project
-  - `cd iosApp/ && pod install`
-  - `cd iosApp/ && fastlane build_upload_testflight`
+<details>
+<summary><h5>Android</h5></summary>
+
+| | | | | 
+|---|---|---|---|
+| | | | |
+| | | | |
+
+| | | | | 
+|---|---|---|---|
+| | | | |
+| | | | |
+
+</details>
+<details>
+<summary><h5>iOS</h5></summary>
+
+Info
+
+</details>
 
 ### Play Store
 
@@ -46,3 +65,13 @@ Flashback includes quick links for Formula 1 RSS feeds from autosport.com, crash
 Flashback is also not affiliated in any way with any of the Formula One group of companies: FORMULA 1, FIA FORMULA ONE and related trademarks of Formula One Licensing BV
 
 Contact Email: thementalgoose@gmail.com
+
+### Project setup notes
+
+```bash
+# iOS
+cd iosApp/
+pod install
+# To Release
+fastlane build_upload_testflight
+```

@@ -130,7 +130,7 @@ private fun DriverComparisonScreen(
             item("header") {
                 Header(
                     text = season.toString() + "\n" + stringResource(string.driver_comparison_title),
-                    action = when (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
+                    action = when (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.EXPANDED) {
                         true -> HeaderAction.BACK
                         false -> null
                     },

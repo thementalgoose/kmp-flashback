@@ -9,6 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass.Companion.COMPACT
+import androidx.window.core.layout.WindowWidthSizeClass.Companion.EXPANDED
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.feature.weekend.presentation.WeekendScreen
 import tmg.flashback.feature.weekend.presentation.WeekendScreenData
@@ -71,7 +72,7 @@ fun CalendarGraph(
             WeekendScreen(
                 screenData = screenData,
                 paddingValues = paddingValues,
-                showBack = windowSizeClass.windowWidthSizeClass == COMPACT,
+                showBack = windowSizeClass.windowWidthSizeClass != EXPANDED,
                 actionUpClicked = actionUpClicked,
                 windowSizeClass = windowSizeClass
             )

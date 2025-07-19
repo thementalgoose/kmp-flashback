@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowWidthSizeClass
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.feature.constructors.presentation.season.ConstructorSeasonInfo
 import tmg.flashback.feature.constructors.presentation.season.ConstructorSeasonScreen
@@ -74,7 +75,7 @@ fun TeamStandingsGraph(
                ),
                paddingValues = paddingValues,
                actionUpClicked = actionUpClicked,
-               showBack = true,
+               showBack = windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.EXPANDED,
                windowSizeClass = windowSizeClass
            )
         }
