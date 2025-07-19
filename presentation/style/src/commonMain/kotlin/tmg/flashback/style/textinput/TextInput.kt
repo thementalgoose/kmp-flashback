@@ -70,7 +70,7 @@ fun TextInput(
             Row(
                 modifier = Modifier
                     .padding(
-                        horizontal = AppTheme.dimens.medlarge,
+                        horizontal = AppTheme.dimens.medium,
                         vertical = AppTheme.dimens.medium
                     ),
                 verticalAlignment = Alignment.CenterVertically,
@@ -96,7 +96,7 @@ fun TextInput(
         BasicTextField(
             modifier = Modifier
                 .padding(
-                    horizontal = AppTheme.dimens.medlarge,
+                    horizontal = AppTheme.dimens.medium,
                     vertical = AppTheme.dimens.medium
                 )
                 .fillMaxWidth(),
