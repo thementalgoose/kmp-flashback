@@ -11,7 +11,10 @@ class CircuitViewModel(
     private val circuitRepository: CircuitRepository
 ): ViewModel() {
 
-    private val _uiState: MutableStateFlow<CircuitUiState> = MutableStateFlow(CircuitUiState())
+    private val _uiState: MutableStateFlow<CircuitUiState> = MutableStateFlow(CircuitUiState(
+        isLoading = false,
+        circuit = null,
+    ))
     val uiState: StateFlow<CircuitUiState> = _uiState
 
     fun refresh() {
