@@ -10,16 +10,19 @@ import tmg.flashback.device.usecases.OpenSettingsUseCase
 import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
 import tmg.flashback.feature.notifications.usecases.SubscribeResultNotificationsUseCase
-import tmg.flashback.infrastructure.log.logInfo
-import tmg.flashback.ui.permissions.Permission
+import tmg.flashback.ui.permissions.Permission.Notifications
 import tmg.flashback.ui.permissions.PermissionManager
 import tmg.flashback.ui.permissions.PermissionState
+import tmg.flashback.ui.permissions.PermissionState.NotDetermined
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 class SettingsNotificationResultsViewModel(
     private val notificationSettingsRepository: NotificationSettingsRepository,
     private val subscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase,
     private val permissionManager: PermissionManager,
-    private val openSettingsUseCase: OpenSettingsUseCase
+    private val openSettingsUseCase: OpenSettingsUseCase,
+    private val coroutineContext: CoroutineContext = EmptyCoroutineContext
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<SettingsNotificationResultsUiState> = MutableStateFlow(SettingsNotificationResultsUiState(
@@ -27,18 +30,18 @@ class SettingsNotificationResultsViewModel(
     ))
     val uiState: StateFlow<SettingsNotificationResultsUiState> = _uiState
 
-    private val _permissionState: MutableStateFlow<PermissionState> = MutableStateFlow(PermissionState.NotDetermined)
+    private val _permissionState: MutableStateFlow<PermissionState> = MutableStateFlow(NotDetermined)
     val permissionState: StateFlow<PermissionState> = _permissionState
 
     init {
-        viewModelScope.launch {
-            _permissionState.value = permissionManager.getPermissionState(Permission.Notifications)
+        viewModelScope.launch(coroutineContext) {
+            _permissionState.value = permissionManager.getPermissionState(Notifications)
         }
     }
 
     fun requestPermissions() {
-        viewModelScope.launch {
-            val result = permissionManager.requestPermission(Permission.Notifications).await()
+        viewModelScope.launch(coroutineContext) {
+            val result = permissionManager.requestPermission(Notifications).await()
             if (result == PermissionState.NotGranted) {
                 goToSettings()
             }
@@ -51,9 +54,9 @@ class SettingsNotificationResultsViewModel(
     }
 
     fun refresh() {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineContext) {
             subscribeResultNotificationsUseCase()
-            _permissionState.value = permissionManager.getPermissionState(Permission.Notifications)
+            _permissionState.value = permissionManager.getPermissionState(Notifications)
         }
         _uiState.update {
             SettingsNotificationResultsUiState(

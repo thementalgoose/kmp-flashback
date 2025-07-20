@@ -14,12 +14,15 @@ import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotification
 import tmg.flashback.ui.permissions.Permission
 import tmg.flashback.ui.permissions.PermissionManager
 import tmg.flashback.ui.permissions.PermissionState
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 class SettingsNotificationUpcomingViewModel(
     private val notificationSettingsRepository: NotificationSettingsRepository,
     private val scheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase,
     private val permissionManager: PermissionManager,
-    private val openSettingsUseCase: OpenSettingsUseCase
+    private val openSettingsUseCase: OpenSettingsUseCase,
+    private val coroutineContext: CoroutineContext = EmptyCoroutineContext
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<SettingsNotificationUpcomingUiState> = MutableStateFlow(SettingsNotificationUpcomingUiState(
@@ -33,13 +36,13 @@ class SettingsNotificationUpcomingViewModel(
     val permissionState: StateFlow<PermissionState> = _permissionState
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineContext) {
             _permissionState.value = permissionManager.getPermissionState(Permission.Notifications)
         }
     }
 
     fun requestPermissions() {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineContext) {
             val result = permissionManager.requestPermission(Permission.Notifications).await()
             if (result == PermissionState.NotGranted) {
                 goToSettings()
@@ -57,7 +60,7 @@ class SettingsNotificationUpcomingViewModel(
     }
 
     fun refresh() {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineContext) {
             scheduleUpcomingNotificationsUseCase(true)
             _permissionState.value = permissionManager.getPermissionState(Permission.Notifications)
         }
