@@ -10,6 +10,7 @@ import dev.mokkery.mock
 import dev.mokkery.verify
 import dev.mokkery.verifySuspend
 import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.runTest
 import tmg.flashback.device.usecases.OpenSettingsUseCase
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
@@ -19,6 +20,7 @@ import tmg.flashback.ui.permissions.PermissionManager
 import tmg.flashback.ui.permissions.PermissionState.Granted
 import tmg.flashback.ui.permissions.PermissionState.NotDetermined
 import tmg.flashback.ui.permissions.PermissionState.NotGranted
+import kotlin.coroutines.coroutineContext
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -41,7 +43,8 @@ internal class SettingsNotificationResultsViewModelTest {
             notificationSettingsRepository = mockNotificationSettingsRepository,
             subscribeResultNotificationsUseCase = mockSubscribeResultNotificationsUseCase,
             permissionManager = mockPermissionManager,
-            openSettingsUseCase = mockOpenSettingsUseCase
+            openSettingsUseCase = mockOpenSettingsUseCase,
+            coroutineContext = Dispatchers.Unconfined
         )
     }
 
