@@ -16,14 +16,12 @@ import tmg.flashback.eastereggs.usecases.IsSummerEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsUkraineEnabledUseCase
 import tmg.flashback.feature.maintenance.repository.MaintenanceRepository
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
-import tmg.flashback.feature.search.usecases.IsSearchEnabledUseCase
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.navigation.Screen
 import tmg.flashback.usecases.RequiresSyncUseCase
 
 class AppNavigationViewModel(
     isRssEnabledUseCase: IsRssEnabledUseCase,
-    isSearchEnabledUseCase: IsSearchEnabledUseCase,
     isMenuIconEnabledUseCase: IsMenuIconEnabledUseCase,
     isSnowEnabledUseCase: IsSnowEnabledUseCase,
     isSummerEnabledUseCase: IsSummerEnabledUseCase,
@@ -42,7 +40,6 @@ class AppNavigationViewModel(
 
     private val _uiState: MutableStateFlow<AppNavigationUIState> = MutableStateFlow(AppNavigationUIState(
         showRss = isRssEnabledUseCase(),
-        showSearch = isSearchEnabledUseCase(),
         easterEggs = easterEggs,
         screen = null,
         intoSubNavigation = false,
@@ -60,7 +57,7 @@ class AppNavigationViewModel(
             destination.hasRoute<Screen.Calendar>() -> Screen.Calendar
             destination.hasRoute<Screen.DriverStandings>() -> Screen.DriverStandings
             destination.hasRoute<Screen.TeamStandings>() -> Screen.TeamStandings
-            destination.hasRoute<Screen.Search>() -> Screen.Search
+            destination.hasRoute<Screen.Circuits>() -> Screen.Circuits
             destination.hasRoute<Screen.Rss>() -> Screen.Rss
             destination.hasRoute<Screen.ReactionGame>() -> Screen.ReactionGame
             destination.hasRoute<Screen.Settings>() -> Screen.Settings

@@ -6,11 +6,11 @@ import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.navigation.Screen
 import tmg.flashback.presentation.MenuItem
 import tmg.flashback.presentation.MenuItem.Calendar
+import tmg.flashback.presentation.MenuItem.Circuits
 import tmg.flashback.presentation.MenuItem.Contact
 import tmg.flashback.presentation.MenuItem.DriversStandings
 import tmg.flashback.presentation.MenuItem.ReactionGame
 import tmg.flashback.presentation.MenuItem.Rss
-import tmg.flashback.presentation.MenuItem.Search
 import tmg.flashback.presentation.MenuItem.Settings
 import tmg.flashback.presentation.MenuItem.TeamsStandings
 import tmg.flashback.presentation.toNavigationItem
@@ -30,7 +30,7 @@ internal fun AppNavigationRail(
         TeamsStandings.toNavigationItem(appNavigationUiState.screen == Screen.TeamStandings)
     )
     val secondaryItems = listOfNotNull(
-        Search.toNavigationItem(appNavigationUiState.screen == Screen.Search).takeIf { appNavigationUiState.showSearch },
+        Circuits.toNavigationItem(appNavigationUiState.screen == Screen.Circuits),
         Rss.toNavigationItem(appNavigationUiState.screen == Screen.Rss).takeIf { appNavigationUiState.showRss },
         ReactionGame.toNavigationItem(appNavigationUiState.screen == Screen.ReactionGame),
         Settings.toNavigationItem(appNavigationUiState.screen == Screen.Settings),

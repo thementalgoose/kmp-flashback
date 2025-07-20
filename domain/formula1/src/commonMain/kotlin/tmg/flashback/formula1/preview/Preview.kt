@@ -16,6 +16,18 @@ import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.SprintRaceResult
 import tmg.flashback.infrastructure.datetime.now
 
+fun Circuit.Companion.preview(
+    id: String = "circuitId"
+) = Circuit(
+    id = id,
+    name = "Silverstone",
+    wikiUrl = "https://www.google.com",
+    city = "Towcester",
+    country = "United Kingdom",
+    countryISO = "GBR",
+    location = Location(-51.1, 1.1)
+)
+
 fun Driver.Companion.preview(
     id: String = "driverId"
 ) = Driver(
