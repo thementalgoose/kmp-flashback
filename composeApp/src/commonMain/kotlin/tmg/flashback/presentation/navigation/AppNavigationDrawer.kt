@@ -74,6 +74,9 @@ internal fun AppNavigationDrawer(
                         }
                     )
                 }
+                item("mid_div") {
+                    MenuDivider()
+                }
                 if (appNavigationUiState.showSearch) {
                     item("nav_search") {
                         NavigationItem(
