@@ -9,5 +9,5 @@ val featureCircuitsModule = listOf(module())
 
 internal fun module() = module {
     viewModel { AllCircuitsViewModel(get()) }
-    viewModel { CircuitViewModel(get())  }
+    viewModel { CircuitViewModel(get(), get(), get())  }
 }

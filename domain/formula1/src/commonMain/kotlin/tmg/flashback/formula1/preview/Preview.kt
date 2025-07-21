@@ -4,6 +4,8 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 import tmg.flashback.formula1.enums.RaceStatus
 import tmg.flashback.formula1.model.Circuit
+import tmg.flashback.formula1.model.CircuitHistoryRace
+import tmg.flashback.formula1.model.CircuitHistoryRaceResult
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.model.DriverEntry
@@ -68,6 +70,28 @@ fun Circuit.Companion.preview() = Circuit(
     country = "United Kingdom",
     countryISO = "GBR",
     location = Location(52.073618, -1.022214)
+)
+
+fun CircuitHistoryRace.Companion.preview() = CircuitHistoryRace(
+    name = "British Grand Prix",
+    season = 2020,
+    round = 1,
+    wikiUrl = null,
+    date = LocalDate(2020, 1, 1),
+    time = LocalTime(12, 0),
+    preview = listOf(
+        CircuitHistoryRaceResult.preview(1),
+        CircuitHistoryRaceResult.preview(2),
+        CircuitHistoryRaceResult.preview(3)
+    )
+)
+
+fun CircuitHistoryRaceResult.Companion.preview(
+    position: Int = 1,
+) = CircuitHistoryRaceResult(
+    position = position,
+    driver = Driver.preview(),
+    constructor = Constructor.preview()
 )
 
 fun RaceInfo.Companion.preview() = RaceInfo(
