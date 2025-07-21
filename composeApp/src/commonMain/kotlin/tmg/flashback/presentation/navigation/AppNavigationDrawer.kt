@@ -74,6 +74,9 @@ internal fun AppNavigationDrawer(
                         }
                     )
                 }
+                item("mid_div") {
+                    MenuDivider()
+                }
                 item("nav_circuits") {
                     NavigationItem(
                         menuItem = MenuItem.Circuits,
