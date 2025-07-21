@@ -15,7 +15,7 @@ sealed interface Screen {
     data object TeamStandings: Screen
 
     @Serializable
-    data object Search: Screen
+    data object Circuits: Screen
 
     @Serializable
     data class Circuit(

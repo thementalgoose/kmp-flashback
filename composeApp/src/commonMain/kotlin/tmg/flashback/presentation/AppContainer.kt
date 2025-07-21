@@ -20,6 +20,7 @@ import androidx.window.core.layout.WindowWidthSizeClass
 import kotlinx.coroutines.launch
 import tmg.flashback.eastereggs.presentation.snow
 import tmg.flashback.eastereggs.presentation.summer
+import tmg.flashback.feature.circuits.presentation.all.CircuitNavigation
 import tmg.flashback.feature.rss.presentation.feed.RssNavigation
 import tmg.flashback.feature.season.presentation.calendar.WeekendNavigation
 import tmg.flashback.feature.season.presentation.driver_standings.DriverStandingsNavigation
@@ -63,18 +64,21 @@ fun AppContainer(
     val teamStandingsNavigator = rememberMasterDetailPaneState<TeamStandingsNavigation>()
     val rssNavigator = rememberMasterDetailPaneState<RssNavigation>()
     val settingsNavigator = rememberMasterDetailPaneState<SettingNavigation>()
+    val circuitsNavigator = rememberMasterDetailPaneState<CircuitNavigation>()
     LaunchedEffect(
         calendarNavigator.destination,
         driverStandingsNavigator.destination,
         teamStandingsNavigator.destination,
         rssNavigator.destination,
-        settingsNavigator.destination
+        settingsNavigator.destination,
+        circuitsNavigator.destination
     ) {
         val forceHide = calendarNavigator.destination != null ||
                 driverStandingsNavigator.destination != null ||
                 teamStandingsNavigator.destination != null ||
                 rssNavigator.destination != null ||
-                settingsNavigator.destination != null
+                settingsNavigator.destination != null ||
+                circuitsNavigator.destination != null
         appNavigationViewModel.hideBar(forceHide)
     }
     val clearSubnavs: () -> Unit = {
@@ -83,6 +87,7 @@ fun AppContainer(
         teamStandingsNavigator.clear()
         rssNavigator.clear()
         settingsNavigator.clear()
+        circuitsNavigator.clear()
     }
     //endregion
 
@@ -145,6 +150,7 @@ fun AppContainer(
                         teamStandingsNavigator = teamStandingsNavigator,
                         rssNavigator = rssNavigator,
                         settingsNavigator = settingsNavigator,
+                        circuitsNavigator = circuitsNavigator
                     )
                 }
             }

@@ -9,6 +9,7 @@ import flashback.composeapp.generated.resources.dashboard_rss
 import flashback.composeapp.generated.resources.dashboard_search
 import flashback.composeapp.generated.resources.dashboard_settings
 import flashback.composeapp.generated.resources.dashboard_contact
+import flashback.composeapp.generated.resources.dashboard_nav_circuits
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.dashboard_tab_results
 import flashback.presentation.localisation.generated.resources.nav_calendar
@@ -19,6 +20,7 @@ import flashback.presentation.localisation.generated.resources.nav_reaction_game
 import flashback.presentation.localisation.generated.resources.nav_rss
 import flashback.presentation.localisation.generated.resources.nav_search
 import flashback.presentation.localisation.generated.resources.nav_settings
+import flashback.presentation.localisation.generated.resources.search_category_circuits
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import tmg.flashback.navigation.Screen
@@ -31,7 +33,7 @@ enum class MenuItem(
     Calendar(key = "Calendar"),
     DriversStandings(key = "DriversStandings"),
     TeamsStandings(key = "TeamsStandings"),
-    Search(key = "Search"),
+    Circuits(key = "Circuits"),
     Rss(key = "Rss"),
     ReactionGame(key = "ReactionGame"),
     Settings(key = "Settings"),
@@ -44,7 +46,7 @@ val MenuItem.label: StringResource
         MenuItem.Calendar -> string.nav_calendar
         MenuItem.DriversStandings -> string.nav_drivers
         MenuItem.TeamsStandings -> string.nav_constructors
-        MenuItem.Search -> string.nav_search
+        MenuItem.Circuits -> string.search_category_circuits
         MenuItem.Rss -> string.nav_rss
         MenuItem.ReactionGame -> string.nav_reaction_game
         MenuItem.Settings -> string.nav_settings
@@ -57,7 +59,7 @@ val MenuItem.icon: DrawableResource
         MenuItem.Calendar -> Res.drawable.dashboard_nav_calendar
         MenuItem.DriversStandings -> Res.drawable.dashboard_nav_drivers
         MenuItem.TeamsStandings -> Res.drawable.dashboard_nav_constructor
-        MenuItem.Search -> Res.drawable.dashboard_search
+        MenuItem.Circuits -> Res.drawable.dashboard_nav_circuits
         MenuItem.Rss -> Res.drawable.dashboard_rss
         MenuItem.ReactionGame -> Res.drawable.dashboard_reaction
         MenuItem.Settings -> Res.drawable.dashboard_settings
@@ -79,7 +81,7 @@ fun MenuItem.toScreen(): Screen {
         MenuItem.Calendar -> Screen.Calendar
         MenuItem.DriversStandings -> Screen.DriverStandings
         MenuItem.TeamsStandings -> Screen.TeamStandings
-        MenuItem.Search -> Screen.Search
+        MenuItem.Circuits -> Screen.Circuits
         MenuItem.Rss -> Screen.Rss
         MenuItem.ReactionGame -> Screen.ReactionGame
         MenuItem.Settings -> Screen.Settings
