@@ -13,9 +13,12 @@ import kotlinx.coroutines.launch
 import tmg.flashback.data.repo.repository.CircuitRepository
 import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.infrastructure.log.logInfo
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 class AllCircuitsViewModel(
-    private val circuitRepository: CircuitRepository
+    private val circuitRepository: CircuitRepository,
+    private val coroutineContext: CoroutineContext = EmptyCoroutineContext
 ): ViewModel() {
 
     private val searchTerm: MutableStateFlow<String?> = MutableStateFlow(null)
@@ -55,7 +58,7 @@ class AllCircuitsViewModel(
     }
 
     fun refresh() {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineContext) {
             isLoading.update { true }
             circuitRepository.populateCircuits()
             isLoading.update { false }

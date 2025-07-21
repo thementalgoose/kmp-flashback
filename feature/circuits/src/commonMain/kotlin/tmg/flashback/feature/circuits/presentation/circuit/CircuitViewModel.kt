@@ -7,16 +7,21 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.datetime.LocalDate
 import tmg.flashback.data.repo.repository.CircuitRepository
 import tmg.flashback.device.usecases.OpenLocationUseCase
 import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Location
+import tmg.flashback.infrastructure.datetime.now
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 class CircuitViewModel(
     private val circuitRepository: CircuitRepository,
     private val openWebpageUseCase: OpenWebpageUseCase,
-    private val openLocationUseCase: OpenLocationUseCase
+    private val openLocationUseCase: OpenLocationUseCase,
+    private val coroutineContext: CoroutineContext = EmptyCoroutineContext
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<CircuitUiState> = MutableStateFlow(CircuitUiState(
@@ -36,7 +41,7 @@ class CircuitViewModel(
                 races = emptyList()
             )
         }
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineContext) {
             if (!populate(circuitId)) {
                 _uiState.update { it.copy(isLoading = true) }
                 circuitRepository.populateCircuit(circuitId)
@@ -47,7 +52,7 @@ class CircuitViewModel(
     }
 
     fun refresh() {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineContext) {
             _uiState.update { it.copy(isLoading = true) }
             circuitRepository.populateCircuits()
             _uiState.update { it.copy(isLoading = false) }
@@ -72,7 +77,7 @@ class CircuitViewModel(
                     .sortedByDescending { it.race.season }
             )
         }
-        return history?.results?.isEmpty() != true
+        return false
     }
 
     fun openLink(link: String) {
