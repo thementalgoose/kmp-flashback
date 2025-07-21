@@ -23,7 +23,6 @@ kotlin {
             implementation(project.dependencies.platform(libs.firebase.bom))
             implementation(libs.firebase.remoteconfig)
             implementation(libs.firebase.messaging)
-            implementation(libs.firebase.messagingktx)
         }
         commonMain.dependencies {
             implementation(libs.bundles.compose)

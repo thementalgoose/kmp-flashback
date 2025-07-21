@@ -98,7 +98,6 @@ kotlin {
             implementation(libs.firebase.analytics)
             implementation(libs.androidx.splashscreen)
             implementation(libs.firebase.messaging)
-            implementation(libs.firebase.messagingktx)
         }
         commonMain.dependencies {
 
