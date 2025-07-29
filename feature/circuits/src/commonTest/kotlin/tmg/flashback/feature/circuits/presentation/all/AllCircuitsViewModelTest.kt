@@ -51,6 +51,7 @@ internal class AllCircuitsViewModelTest {
             assertEquals(AllCircuitsUiState(), awaitItem())
 
             val item = awaitItem()
+            testScheduler.advanceUntilIdle()
             assertEquals(null, item.searchQuery)
             assertEquals(true, item.isLoading)
             assertEquals(listOf(fakeCircuitOverview1, fakeCircuitOverview2), item.circuits)
@@ -65,20 +66,25 @@ internal class AllCircuitsViewModelTest {
             assertEquals(AllCircuitsUiState(), awaitItem())
 
             val item = awaitItem()
+            testScheduler.advanceUntilIdle()
             assertEquals(null, item.searchQuery)
             assertEquals(true, item.isLoading)
             assertEquals(listOf(fakeCircuitOverview1, fakeCircuitOverview2), item.circuits)
 
             underTest.enterSearchTerm("a")
+            testScheduler.advanceUntilIdle()
             assertEquals(listOf(fakeCircuitOverview1), awaitItem().circuits)
 
             underTest.enterSearchTerm("b")
+            testScheduler.advanceUntilIdle()
             assertEquals(listOf(fakeCircuitOverview1, fakeCircuitOverview2), awaitItem().circuits)
 
             underTest.enterSearchTerm("bcd")
+            testScheduler.advanceUntilIdle()
             assertEquals(listOf(fakeCircuitOverview2), awaitItem().circuits)
 
             underTest.clearSearch()
+            testScheduler.advanceUntilIdle()
             assertEquals(listOf(fakeCircuitOverview1, fakeCircuitOverview2), awaitItem().circuits)
         }
     }
