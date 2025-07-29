@@ -1,7 +1,5 @@
 package tmg.flashback.widgets.upnext.utils
 
-import android.content.Context
-import android.content.res.Resources
 import androidx.annotation.DrawableRes
 import tmg.flashback.feature.widget_upnext.R
 import tmg.flashback.formula1.enums.TrackLayout
@@ -53,6 +51,7 @@ val TrackLayout.icon: Int
         TrackLayout.LEMANS -> R.drawable.circuit_lemans
         TrackLayout.LONG_BEACH -> R.drawable.circuit_long_beach
         TrackLayout.LOSAIL -> R.drawable.circuit_losail
+        TrackLayout.MADRING -> R.drawable.circuit_madring
         TrackLayout.MAGNY_COURS -> R.drawable.circuit_magny_cours
         TrackLayout.MARINA_BAY -> R.drawable.circuit_marina_bay
         TrackLayout.MIAMI -> R.drawable.circuit_miami

@@ -64,6 +64,7 @@ enum class TrackLayout(
     LEMANS("lemans", Res.drawable.circuit_lemans),
     LONG_BEACH("long_beach", Res.drawable.circuit_long_beach),
     LOSAIL("losail", Res.drawable.circuit_losail),
+    MADRING("madring", Res.drawable.circuit_madring),
     MAGNY_COURS("magny_cours", Res.drawable.circuit_magny_cours),
     MARINA_BAY("marina_bay", Res.drawable.circuit_marina_bay,
         Configuration.Range(min = 2008, max = 2022, _icon = Res.drawable.circuit_marina_bay_2008_2022)
