@@ -70,7 +70,7 @@ internal class ScheduleUpcomingNotificationsUseCaseImpl(
 
         upNextItemsToSchedule.forEach { item ->
             if (enabledUpcomingNotifications.contains(item.channel)) {
-                val time = item.timestamp.deviceLocalDateTime.plus(-reminderPeriod.seconds, DateTimeUnit.SECOND, timeZone = TimeZone.UTC)
+                val time = item.timestamp.utcLocalDateTime.plus(-reminderPeriod.seconds, DateTimeUnit.SECOND, timeZone = TimeZone.UTC)
                 val (title, text) = NotificationUtils.getInexactNotificationTitleText(
                     item.title,
                     item.label,
