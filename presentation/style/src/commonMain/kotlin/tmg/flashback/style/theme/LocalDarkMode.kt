@@ -9,7 +9,6 @@ import androidx.compose.runtime.setValue
 /**
  * https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-resource-environment.html#theme
  */
-
 var customLightMode by mutableStateOf<Boolean?>(null)
 
 expect object LocalDarkMode {

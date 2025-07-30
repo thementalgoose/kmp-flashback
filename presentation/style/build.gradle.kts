@@ -39,6 +39,7 @@ kotlin {
             api(compose.uiTest)
 
             implementation(projects.infrastructure)
+            implementation(projects.presentation.localisation)
             implementation(projects.core.preferences)
 
             implementation(libs.bundles.koin.compose)

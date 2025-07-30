@@ -11,6 +11,8 @@ import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
 import org.koin.compose.koinInject
 import tmg.flashback.infrastructure.log.logDebug
+import tmg.flashback.localisation.LocalAppLocale
+import tmg.flashback.localisation.customAppLocale
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.theme.LocalDarkMode
 import tmg.flashback.style.theme.NightMode
@@ -55,8 +57,9 @@ fun ApplicationTheme(
 
     CompositionLocalProvider(
         LocalDarkMode provides customLightMode,
+        LocalAppLocale provides customAppLocale
     ) {
-        key(customLightMode) {
+        key(customLightMode, customAppLocale) {
             setSystemBarsIconColours(!isSystemInDarkTheme())
             ApplicationTheme(
                 isLight = !isSystemInDarkTheme(),
