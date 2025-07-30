@@ -17,6 +17,7 @@ import flashback.presentation.localisation.generated.resources.notification_remi
 import flashback.presentation.localisation.generated.resources.notification_reminder_mins_30
 import flashback.presentation.localisation.generated.resources.notification_reminder_mins_60
 import flashback.presentation.localisation.generated.resources.settings_build_version
+import flashback.presentation.localisation.generated.resources.settings_header_device_info
 import flashback.presentation.localisation.generated.resources.settings_pref_analytics_description
 import flashback.presentation.localisation.generated.resources.settings_pref_analytics_title
 import flashback.presentation.localisation.generated.resources.settings_pref_collapsed_list_description
@@ -397,15 +398,15 @@ object Settings {
             title = string.settings_switch_review_title,
             subtitle = string.settings_switch_review_description
         )
-        val ShakeToReport = Setting.Pref(
-            _id = "about_shake",
-            title = string.settings_pref_shake_to_report_title,
-            subtitle = string.settings_pref_shake_to_report_description
-        )
         val BuildVersion = Setting.Pref(
             _id = "about_build",
             title = string.settings_build_version,
             subtitleString = Device.versionName
+        )
+        val DeviceInfo = Setting.Pref(
+            _id = "about_device_info",
+            title = string.settings_header_device_info,
+            subtitleString = Device.string()
         )
         val FirstTimeSync = Setting.Pref(
             _id = "about_reset",

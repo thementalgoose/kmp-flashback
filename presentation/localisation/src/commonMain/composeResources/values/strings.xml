@@ -378,7 +378,7 @@
     <string name="settings_pref_shake_to_report_description">Shake the screen to provide feedback or bug reports to the developer</string>
     <string name="settings_header_reset">Reset</string>
     <string name="settings_pref_reset_title">First time sync</string>
-    <string name="settings_pref_reset_description">Re-run the first time sync again. This will refresh all drivers, constructors, races and circuits</string>
+    <string name="settings_pref_reset_description">Re-run the first time sync again. This will refresh all drivers, constructors, races and circuits when the app is next restarted</string>
 
     <string name="settings_theme_title">Customisation</string>
     <string name="settings_theme_nightmode_title">Dark mode</string>
