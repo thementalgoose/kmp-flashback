@@ -1,10 +1,15 @@
 package tmg.flashback
 
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SnackbarDuration.Indefinite
 import androidx.compose.material3.SnackbarHostState
@@ -16,7 +21,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
@@ -36,6 +44,7 @@ import tmg.flashback.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.presentation.sync.SyncBottomSheet
 import tmg.flashback.presentation.toNavigationItem
 import tmg.flashback.presentation.toScreen
+import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationTheme
 import tmg.flashback.ui.components.AppScaffold
 import tmg.flashback.ui.navigation.NavigationBar
@@ -94,6 +103,17 @@ fun App() {
                     paddingValues = paddingValues,
                     appNavigationViewModel = appNavigationViewModel,
                     navController = navController
+                )
+
+                // Fake translucent status bar
+                Box(
+                    modifier = Modifier
+                        .height(WindowInsets.statusBars.asPaddingValues().calculateTopPadding())
+                        .fillMaxWidth()
+                        .align(Alignment.TopCenter)
+                        .background(Brush.verticalGradient(
+                            colors = listOf(AppTheme.colors.surface, Color.Transparent)
+                        ))
                 )
             },
             bottomBar = {

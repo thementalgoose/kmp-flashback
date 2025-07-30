@@ -31,7 +31,7 @@ fun AppScaffold(
     contentInsets: WindowInsets = WindowInsets.safeDrawingHorizontalOnly,
     bottomBar: @Composable () -> Unit = { },
     snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
-    content: @Composable (PaddingValues) -> Unit,
+    content: @Composable BoxScope.(PaddingValues) -> Unit,
 ) {
     Scaffold(
         contentWindowInsets = contentInsets,
