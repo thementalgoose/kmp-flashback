@@ -76,7 +76,7 @@ private fun TyreScreen(
     ) {
         Header(
             text = stringResource(resource = string.tyres_label),
-            action = HeaderAction.CLOSE,
+            action = null,
             actionUpClicked = dismissed
         )
         TextBody1(
