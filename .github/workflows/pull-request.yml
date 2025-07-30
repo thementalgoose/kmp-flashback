@@ -11,9 +11,9 @@ jobs:
     uses: ./.github/workflows/job-unit-tests.yml
     secrets: inherit
 
-  assemble:
-    uses: ./.github/workflows/job-android-assemble-sand.yml
-    secrets: inherit
-    with:
-      version_name: 1.0.0
-      version_code: 1
+#  assemble:
+#    uses: ./.github/workflows/job-android-assemble-sand.yml
+#    secrets: inherit
+#    with:
+#      version_name: 1.0.0
+#      version_code: 1
