@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -49,6 +50,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
+import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.ScheduleWeather
 import tmg.flashback.infrastructure.datetime.dateFormatDMMM
@@ -76,7 +78,13 @@ internal fun RaceDetails(
     model: InfoModel,
     modifier: Modifier = Modifier
 ) {
-    Row(modifier = modifier) {
+    val trackLayout = remember(model.circuit.id) {
+        TrackLayout.getTrack(model.circuit.id)?.getIcon(model.season, model.raceName)
+    }
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         Column(modifier = Modifier.weight(1f)) {
             TextBody1(
                 modifier = Modifier
@@ -99,6 +107,15 @@ internal fun RaceDetails(
                     .fillMaxWidth()
                     .padding(bottom = AppTheme.dimens.xsmall),
                 text = model.date.format(dateFormatDMMMYYYY)
+            )
+        }
+        if (trackLayout != null) {
+            Icon(
+                painter = painterResource(trackLayout),
+                contentDescription = null,
+                modifier = Modifier.size(56.dp)
+                    .padding(end = AppTheme.dimens.small),
+                tint = AppTheme.colors.onSurfaceVariant
             )
         }
         Column(

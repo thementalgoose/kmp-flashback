@@ -49,9 +49,9 @@ internal class AllCircuitsViewModelTest {
 
         underTest.uiState.test {
             assertEquals(AllCircuitsUiState(), awaitItem())
+            testScheduler.advanceUntilIdle()
 
             val item = awaitItem()
-            testScheduler.advanceUntilIdle()
             assertEquals(null, item.searchQuery)
             assertEquals(true, item.isLoading)
             assertEquals(listOf(fakeCircuitOverview1, fakeCircuitOverview2), item.circuits)
