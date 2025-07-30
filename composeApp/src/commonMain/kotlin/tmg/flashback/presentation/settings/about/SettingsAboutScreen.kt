@@ -8,9 +8,12 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.settings_header_about
+import flashback.presentation.localisation.generated.resources.settings_header_device_info
+import flashback.presentation.localisation.generated.resources.settings_pref_reset_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
+import tmg.flashback.presentation.settings.PrefHeader
 import tmg.flashback.presentation.settings.PrefLink
 import tmg.flashback.presentation.settings.Settings
 import tmg.flashback.ui.components.header.Header
@@ -33,6 +36,7 @@ fun SettingsAboutScreen(
         insetPadding = insetPadding,
         showBack = showBack,
         openReview = viewModel::openReview,
+        firstTimeSync = viewModel::firstTimeSync,
         uiState = uiState.value,
     )
 }
@@ -45,6 +49,7 @@ private fun SettingsAboutScreen(
     insetPadding: PaddingValues,
     openReview: () -> Unit,
     actionUpClicked: () -> Unit,
+    firstTimeSync: () -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -57,6 +62,7 @@ private fun SettingsAboutScreen(
                 action = HeaderAction.BACK.takeIf { showBack }
             )
         }
+        PrefHeader(string.settings_header_about)
         PrefLink(
             item = Settings.About.AboutThisApp,
             itemClicked = {
@@ -70,6 +76,16 @@ private fun SettingsAboutScreen(
         )
         PrefLink(
             item = Settings.About.BuildVersion,
+            itemClicked = { }
+        )
+        PrefHeader(string.settings_pref_reset_title)
+        PrefLink(
+            item = Settings.About.FirstTimeSync,
+            itemClicked = { firstTimeSync() }
+        )
+        PrefHeader(string.settings_header_device_info)
+        PrefLink(
+            item = Settings.About.DeviceInfo,
             itemClicked = { }
         )
     }

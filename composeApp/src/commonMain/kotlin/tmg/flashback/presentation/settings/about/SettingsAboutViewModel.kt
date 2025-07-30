@@ -3,10 +3,12 @@ package tmg.flashback.presentation.settings.about
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import tmg.flashback.configuration.repositories.ConfigRepository
 import tmg.flashback.device.usecases.OpenStorePageUseCase
 
 class SettingsAboutViewModel(
-    private val openStorePageUseCase: OpenStorePageUseCase
+    private val openStorePageUseCase: OpenStorePageUseCase,
+    private val configRepository: ConfigRepository
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<SettingsAboutUiState> = MutableStateFlow(
@@ -16,5 +18,9 @@ class SettingsAboutViewModel(
 
     fun openReview() {
         openStorePageUseCase.invoke()
+    }
+
+    fun firstTimeSync() {
+        configRepository.remoteConfigSync = 0
     }
 }

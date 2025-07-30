@@ -20,6 +20,8 @@ expect object Device {
     val manufacturer: String
     val product: String
     val device: String
+
+    fun string(): String
 }
 
 enum class Platform {

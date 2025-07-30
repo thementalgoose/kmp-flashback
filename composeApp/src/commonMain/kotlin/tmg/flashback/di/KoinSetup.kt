@@ -129,7 +129,7 @@ internal fun module() = module {
     viewModel { SettingsLayoutViewModel(get()) }
     viewModel { SettingsWeatherViewModel(get()) }
     viewModel { SettingsBrowserViewModel(get()) }
-    viewModel { SettingsAboutViewModel(get()) }
+    viewModel { SettingsAboutViewModel(get(), get()) }
     viewModel { SettingsPrivacyViewModel(get(), get()) }
     viewModel { SettingsWidgetsViewModel(get()) }
     viewModel { SettingsNotificationUpcomingViewModel(get(), get(), get(), get()) }

@@ -35,4 +35,16 @@ actual object Device {
         get() = "Unknown"
     actual val device: String
         get() = "Unknown"
+
+    actual fun string(): String = """
+        Platform: Other
+        OS Version: $osVersion
+        Brand: $brand
+        Hardware: $hardware
+        Board: $board
+        Model: $model
+        Manufacturer: $manufacturer
+        Product: $product
+        Device: $device
+    """.trimIndent()
 }

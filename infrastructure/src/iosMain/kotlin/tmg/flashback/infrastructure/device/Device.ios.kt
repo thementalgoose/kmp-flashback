@@ -49,4 +49,15 @@ actual object Device {
         get() = UIDevice.currentDevice.model()
     actual val device: String
         get() = UIDevice.currentDevice.model()
+
+    actual fun string(): String = """
+        Platform: iOS
+        OS Version: $osVersion
+        Brand: $brand
+        Manufacturer: $manufacturer
+        Hardware: $hardware
+        Model: $model
+        Product: $product
+        Device: $device
+    """.trimIndent()
 }

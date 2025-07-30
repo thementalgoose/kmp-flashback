@@ -76,4 +76,16 @@ actual object Device: KoinComponent {
 
     actual val device: String
         get() = Build.DEVICE
+
+    actual fun string(): String = """
+        Platform: Android
+        OS Version: $osVersion
+        Brand: $brand
+        Manufacturer: $manufacturer
+        Hardware: $hardware
+        Board: $board
+        Model: $model
+        Product: $product
+        Device: $device
+    """.trimIndent()
 }
