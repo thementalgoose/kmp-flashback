@@ -6,6 +6,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass.Companion.COMPACT
+import androidx.window.core.layout.WindowWidthSizeClass.Companion.EXPANDED
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.feature.rss.models.Article
 import tmg.flashback.feature.rss.presentation.configure.RssConfigureScreen
@@ -64,7 +65,7 @@ fun RssFeedGraph(
                 RssNavigation.Configure -> RssConfigureScreen(
                     actionUpClicked = actionUpClicked,
                     insetPadding = paddingValues,
-                    showBack = windowSizeClass.windowWidthSizeClass == COMPACT
+                    showBack = windowSizeClass.windowWidthSizeClass != EXPANDED
                 )
                 is RssNavigation.WebPage -> WebScreen(
                     url = model.article.link,
