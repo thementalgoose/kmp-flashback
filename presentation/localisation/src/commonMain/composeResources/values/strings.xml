@@ -416,7 +416,7 @@
 
     <string name="settings_notifications_runtime_enabled">Permissions</string>
     <string name="settings_notifications_runtime_title">Enable Notifications</string>
-    <string name="settings_notifications_runtime_description">Grant permission for Flashback to send you notifications</string>
+    <string name="settings_notifications_runtime_description">Get notifications for upcoming races and when results are available</string>
 
     <string name="settings_notifications_title">Notifications</string>
     <string name="settings_notifications_channel_qualifying_title">Qualifying</string>
