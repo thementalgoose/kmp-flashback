@@ -56,10 +56,9 @@ fun ApplicationTheme(
     AppTheme.appTheme = theme
 
     CompositionLocalProvider(
-        LocalDarkMode provides customLightMode,
-        LocalAppLocale provides customAppLocale
+        LocalDarkMode provides customLightMode
     ) {
-        key(customLightMode, customAppLocale) {
+        key(customLightMode) {
             setSystemBarsIconColours(!isSystemInDarkTheme())
             ApplicationTheme(
                 isLight = !isSystemInDarkTheme(),

@@ -1,6 +1,8 @@
 package tmg.flashback.feature.notifications.di
 
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
+import tmg.flashback.feature.notifications.presentation.NotificationPromptViewModel
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepositoryImpl
 import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
@@ -15,4 +17,6 @@ internal fun module() = module {
 
     single<SubscribeResultNotificationsUseCase> { SubscribeResultNotificationsUseCaseImpl(get(), get(), get()) }
     single<ScheduleUpcomingNotificationsUseCase> { ScheduleUpcomingNotificationsUseCaseImpl(get(), get(), get(), get(), get()) }
+
+    viewModel { NotificationPromptViewModel(get(), get(), get()) }
 }

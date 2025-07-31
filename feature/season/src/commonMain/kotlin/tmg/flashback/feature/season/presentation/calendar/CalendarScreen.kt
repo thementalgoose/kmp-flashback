@@ -44,6 +44,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
 import tmg.flashback.analytics.presentation.ScreenView
+import tmg.flashback.feature.notifications.presentation.NotificationPrompt
 import tmg.flashback.feature.season.presentation.calendar.components.RaceWeekCard
 import tmg.flashback.feature.season.presentation.calendar.components.Round
 import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedBy
@@ -115,6 +116,14 @@ fun CalendarScreen(
                             SkeletonViewList(modifier = Modifier.animateItem())
                         }
                     }
+                }
+
+                item(key = "notification_prompt") {
+                    NotificationPrompt(
+                        modifier = Modifier.padding(
+                            horizontal = AppTheme.dimens.small
+                        )
+                    )
                 }
 
                 items(uiState.items ?: emptyList(), key = { it.key }) { item ->

@@ -96,8 +96,26 @@ internal class NotificationSettingsRepositoryTest {
         }
     }
 
+    @Test
+    fun `notification prompt returns false`() {
+        every { mockPreferenceManager.getBoolean(expectedKeyPromptNotifications, false) } returns true
+
+        initUnderTest()
+        assertEquals(true, underTest.notificationPromptSeen)
+    }
+
+    @Test
+    fun `notification prompt saves value`() {
+        initUnderTest()
+        underTest.notificationPromptSeen = true
+        verify {
+            mockPreferenceManager.save(expectedKeyPromptNotifications, true)
+        }
+    }
+
     companion object {
 
+        private const val expectedKeyPromptNotifications: String = "RUNTIME_NOTIFICATION_PROMPT"
         private const val expectedKeyNotificationUpcoming: String = "NOTIFICATION_UPCOMING_CATEGORIES"
         private const val expectedKeyNotificationResult: String = "NOTIFICATION_RESULT_AVAILABLE_CATEGORIES"
 

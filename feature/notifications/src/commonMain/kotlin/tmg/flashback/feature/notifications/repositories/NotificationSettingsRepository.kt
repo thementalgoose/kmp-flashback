@@ -9,9 +9,9 @@ import tmg.flashback.preferences.manager.PreferenceManager
 
 interface NotificationSettingsRepository {
     var notificationReminderPeriod: NotificationReminder
-
     var notificationUpcomingEnabled: Set<NotificationUpcoming>
     var notificationResultsEnabled: Set<NotificationResultsAvailable>
+    var notificationPromptSeen: Boolean
 }
 
 internal class NotificationSettingsRepositoryImpl(
@@ -31,6 +31,10 @@ internal class NotificationSettingsRepositoryImpl(
             .distinct()
             .toSet()
         set(value) = preferenceManager.save(keyNotificationResult, value.map { it.saveKey }.toSet())
+
+    override var notificationPromptSeen: Boolean
+        get() = preferenceManager.getBoolean(keyPromptNotifications, false)
+        set(value) = preferenceManager.save(keyPromptNotifications, value)
 
     override var notificationUpcomingEnabled: Set<NotificationUpcoming>
         get() = preferenceManager
@@ -60,6 +64,8 @@ internal class NotificationSettingsRepositoryImpl(
                 NotificationResultsAvailable.QUALIFYING -> "qualifying"
             }
 
+
+        private const val keyPromptNotifications: String = "RUNTIME_NOTIFICATION_PROMPT"
         private const val keyNotificationUpcoming: String = "NOTIFICATION_UPCOMING_CATEGORIES"
         private const val keyNotificationResult: String = "NOTIFICATION_RESULT_AVAILABLE_CATEGORIES"
 

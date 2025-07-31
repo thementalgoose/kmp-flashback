@@ -28,6 +28,7 @@ kotlin {
             implementation(compose.components.resources)
 
             implementation(projects.core.configuration)
+            implementation(projects.core.device)
             implementation(projects.core.metrics.analytics)
             implementation(projects.core.metrics.crashlytics)
             implementation(projects.core.notifications)
@@ -41,6 +42,8 @@ kotlin {
 
             implementation(projects.presentation.navigation)
             implementation(projects.presentation.localisation)
+            implementation(projects.presentation.style)
+            implementation(projects.presentation.ui)
         }
         commonTest.dependencies {
             implementation(projects.test.formula1)
