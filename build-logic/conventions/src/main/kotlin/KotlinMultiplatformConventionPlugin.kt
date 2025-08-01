@@ -29,6 +29,9 @@ class KotlinMultiplatformConventionPlugin : Plugin<Project> {
                         implementation(libs.findLibrary("koin.core").get().get())
                     }
                 }
+                languageSettings {
+                    optIn("kotlin.time.ExperimentalTime")
+                }
             }
         }
     }
