@@ -18,6 +18,7 @@ import tmg.flashback.feature.notifications.model.NotificationReminder
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
 import tmg.flashback.feature.notifications.usecases.ScheduleResult
 import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
+import tmg.flashback.notifications.manager.NotificationManager
 import tmg.flashback.ui.permissions.Permission.Notifications
 import tmg.flashback.ui.permissions.PermissionManager
 import tmg.flashback.ui.permissions.PermissionState.Granted
@@ -34,15 +35,18 @@ internal class SettingsNotificationUpcomingViewModelTest {
     private val mockNotificationSettingsRepository: NotificationSettingsRepository =
         mock(autoUnit)
     private val mockPermissionManager: PermissionManager = mock(autofill)
+    private val mockNotificationManager: NotificationManager = mock(autofill)
     private val mockOpenSettingsUseCase: OpenSettingsUseCase = mock(autoUnit)
 
     private fun initUnderTest() {
         everySuspend { mockScheduleUpcomingNotificationsUseCase.invoke(any()) } returns ScheduleResult.Scheduled
         every { mockNotificationSettingsRepository.notificationUpcomingEnabled } returns emptySet()
         every { mockNotificationSettingsRepository.notificationReminderPeriod } returns NotificationReminder.MINUTES_15
+        every { mockNotificationManager.canScheduleExact } returns false
         underTest = SettingsNotificationUpcomingViewModel(
             notificationSettingsRepository = mockNotificationSettingsRepository,
             scheduleUpcomingNotificationsUseCase = mockScheduleUpcomingNotificationsUseCase,
+            notificationManager = mockNotificationManager,
             permissionManager = mockPermissionManager,
             openSettingsUseCase = mockOpenSettingsUseCase,
             coroutineContext = Dispatchers.Unconfined

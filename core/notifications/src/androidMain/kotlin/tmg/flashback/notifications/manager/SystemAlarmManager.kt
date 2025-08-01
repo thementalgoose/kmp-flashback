@@ -31,14 +31,14 @@ class SystemAlarmManager {
         requestText: String,
         requestDescription: String,
         requestTimestamp: LocalDateTime,
-        exact: Boolean
     ) {
         val alarmManager: AlarmManager = alarmManager ?: return
         val pendingIntent = pendingIntent(applicationContext, channelId, requestCode, requestText, requestDescription)
+        val canScheduleExact = AlarmManagerCompat.canScheduleExactAlarms(alarmManager)
 
         val instant = requestTimestamp.toInstant(TimeZone.UTC)
-        Log.d("Notification", "Scheduling (exact=$exact) alarm wakeup for ${instant.toEpochMilliseconds()} (current system is ${System.currentTimeMillis()}, with millis diff being ${(instant.toEpochMilliseconds() - System.currentTimeMillis()) / 1000} seconds) - $requestText")
-        when (exact) {
+        Log.d("Notification", "Scheduling (exact=$canScheduleExact) alarm wakeup for ${instant.toEpochMilliseconds()} (current system is ${System.currentTimeMillis()}, with millis diff being ${(instant.toEpochMilliseconds() - System.currentTimeMillis()) / 1000} seconds) - $requestText")
+        when (canScheduleExact) {
             true -> AlarmManagerCompat.setExactAndAllowWhileIdle(
                 alarmManager,
                 AlarmManager.RTC_WAKEUP,

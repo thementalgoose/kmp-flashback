@@ -9,7 +9,7 @@ interface LocalNotificationsScheduleUseCase {
         channelId: String,
         title: String,
         text: String,
-        timestamp: LocalDateTime
+        timestamp: LocalDateTime,
     )
 }
 

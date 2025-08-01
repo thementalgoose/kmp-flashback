@@ -7,6 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.settings_header_permissions
@@ -43,7 +45,7 @@ fun SettingsNotificationResultsScreen(
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     val permissionState = viewModel.permissionState.collectAsState()
 
-    LaunchedEffect(Unit) {
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
         viewModel.refresh()
     }
 
@@ -102,7 +104,6 @@ private fun SettingsNotificationResultsScreen(
                     notificationResultsClicked(SPRINT_QUALIFYING, !uiState.enabled.contains(SPRINT_QUALIFYING))
                 },
                 isChecked = uiState.enabled.contains(SPRINT_QUALIFYING),
-                isEnabled = Device.platform == Platform.IOS
             )
             PrefSwitch(
                 item = Settings.NotificationsResults.SprintRace,
@@ -110,7 +111,6 @@ private fun SettingsNotificationResultsScreen(
                     notificationResultsClicked(SPRINT, !uiState.enabled.contains(SPRINT))
                 },
                 isChecked = uiState.enabled.contains(SPRINT),
-                isEnabled = Device.platform == Platform.IOS
             )
             PrefSwitch(
                 item = Settings.NotificationsResults.Qualifying,
@@ -118,7 +118,6 @@ private fun SettingsNotificationResultsScreen(
                     notificationResultsClicked(QUALIFYING, !uiState.enabled.contains(QUALIFYING))
                 },
                 isChecked = uiState.enabled.contains(QUALIFYING),
-                isEnabled = Device.platform == Platform.IOS
             )
             PrefSwitch(
                 item = Settings.NotificationsUpcoming.Race,
@@ -126,7 +125,6 @@ private fun SettingsNotificationResultsScreen(
                     notificationResultsClicked(RACE, !uiState.enabled.contains(RACE))
                 },
                 isChecked = uiState.enabled.contains(RACE),
-                isEnabled = Device.platform == Platform.IOS
             )
         }
     }
