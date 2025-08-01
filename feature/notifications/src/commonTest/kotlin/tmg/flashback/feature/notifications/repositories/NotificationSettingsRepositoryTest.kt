@@ -31,7 +31,7 @@ internal class NotificationSettingsRepositoryTest {
 
     @Test
     fun `notification reminder period defaults to 30 mins`() {
-        every { mockPreferenceManager.getInt(expectedKeyNotificationReminder, 1800) } returns -1
+        every { mockPreferenceManager.getInt(expectedKeyNotificationReminder, 3600) } returns -1
 
         initUnderTest()
 
@@ -40,7 +40,7 @@ internal class NotificationSettingsRepositoryTest {
 
     @Test
     fun `notification reminder reads from prefs`() {
-        every { mockPreferenceManager.getInt(expectedKeyNotificationReminder, 1800) } returns 3600
+        every { mockPreferenceManager.getInt(expectedKeyNotificationReminder, 3600) } returns 3600
 
         initUnderTest()
 
