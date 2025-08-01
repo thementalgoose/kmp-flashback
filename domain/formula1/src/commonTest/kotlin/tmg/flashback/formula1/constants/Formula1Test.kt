@@ -1,6 +1,6 @@
 package tmg.flashback.formula1.constants
 
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlin.test.Test
