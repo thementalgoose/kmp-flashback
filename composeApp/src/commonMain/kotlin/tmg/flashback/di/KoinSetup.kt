@@ -115,7 +115,7 @@ expect fun platformModule(): Module
 
 internal fun module() = module {
 
-    single { AppStartup(get(), get(), get(),get(), get(), get(), get()) }
+    single { AppStartup(get(), get(),get(), get(), get(), get()) }
 
     viewModel { AppNavigationViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
 

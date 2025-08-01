@@ -25,7 +25,6 @@ class AppStartup(
     private val initialiseConfigUseCase: InitialiseConfigUseCase,
     private val fetchConfigUseCase: FetchConfigUseCase,
     private val subscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase,
-    private val scheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase,
     private val deviceRepository: DeviceRepository,
     private val initialiseCrashlyticsUseCase: InitialiseCrashlyticsUseCase,
     private val initialiseAnalyticsUseCase: InitialiseAnalyticsUseCase,
@@ -44,11 +43,8 @@ class AppStartup(
         }
 
         // Subscribe to remote topics
-        if (Device.platform == Platform.Android) {
-            GlobalScope.launch {
-                scheduleUpcomingNotificationsUseCase.invoke(false)
-                subscribeResultNotificationsUseCase.invoke()
-            }
+        GlobalScope.launch {
+            subscribeResultNotificationsUseCase.invoke()
         }
 
         Device.log()
