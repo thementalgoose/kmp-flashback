@@ -16,4 +16,7 @@ actual class NotificationManagerImpl actual constructor(): NotificationManager {
     actual override fun cancel(uuid: Int) {
         /* TBC */
     }
+
+    actual override val canScheduleExact: Boolean
+        get() = false
 }

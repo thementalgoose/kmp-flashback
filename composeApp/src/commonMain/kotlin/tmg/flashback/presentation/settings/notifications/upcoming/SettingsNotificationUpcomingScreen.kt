@@ -7,6 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.notification_onboarding_title_howlong
@@ -51,7 +53,7 @@ fun SettingsNotificationUpcomingScreen(
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     val permissionState = viewModel.permissionState.collectAsState()
 
-    LaunchedEffect(Unit) {
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
         viewModel.refresh()
     }
 
@@ -157,22 +159,6 @@ private fun SettingsNotificationUpcomingScreen(
             )
         }
 
-        PrefHeader(string.notification_onboarding_title_howlong)
-        PrefRadio(
-            item = Settings.NotificationsNotice.Minutes15,
-            itemClicked = { notificationReminderClicked(MINUTES_15) },
-            isChecked = uiState.reminder == MINUTES_15
-        )
-        PrefRadio(
-            item = Settings.NotificationsNotice.Minutes30,
-            itemClicked = { notificationReminderClicked(MINUTES_30) },
-            isChecked = uiState.reminder == MINUTES_30
-        )
-        PrefRadio(
-            item = Settings.NotificationsNotice.Minutes60,
-            itemClicked = { notificationReminderClicked(MINUTES_60) },
-            isChecked = uiState.reminder == MINUTES_60
-        )
         if (Device.platform == Platform.Android) {
             PrefHeader(string.settings_pref_schedule_exact_alarm_title)
             PrefLink(
@@ -180,5 +166,24 @@ private fun SettingsNotificationUpcomingScreen(
                 itemClicked = { goToAlarmSettings() }
             )
         }
+        PrefHeader(string.notification_onboarding_title_howlong)
+        PrefRadio(
+            item = Settings.NotificationsNotice.Minutes15,
+            itemClicked = { notificationReminderClicked(MINUTES_15) },
+            isChecked = uiState.reminder == MINUTES_15,
+            isEnabled = uiState.reminderEnabled
+        )
+        PrefRadio(
+            item = Settings.NotificationsNotice.Minutes30,
+            itemClicked = { notificationReminderClicked(MINUTES_30) },
+            isChecked = uiState.reminder == MINUTES_30,
+            isEnabled = uiState.reminderEnabled
+        )
+        PrefRadio(
+            item = Settings.NotificationsNotice.Minutes60,
+            itemClicked = { notificationReminderClicked(MINUTES_60) },
+            isChecked = uiState.reminder == MINUTES_60,
+            isEnabled = uiState.reminderEnabled
+        )
     }
 }

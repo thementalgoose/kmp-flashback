@@ -2,6 +2,7 @@ package tmg.flashback.feature.notifications.repositories
 
 import tmg.flashback.feature.notifications.model.NotificationReminder
 import tmg.flashback.feature.notifications.model.NotificationReminder.MINUTES_30
+import tmg.flashback.feature.notifications.model.NotificationReminder.MINUTES_60
 import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
 import tmg.flashback.feature.notifications.model.NotificationUpcoming
 import tmg.flashback.infrastructure.extensions.toEnum
@@ -20,8 +21,8 @@ internal class NotificationSettingsRepositoryImpl(
 
     override var notificationReminderPeriod: NotificationReminder
         get() = preferenceManager
-            .getInt(keyNotificationReminder, MINUTES_30.seconds)
-            .toEnum<NotificationReminder> { it.seconds } ?: MINUTES_30
+            .getInt(keyNotificationReminder, MINUTES_60.seconds)
+            .toEnum<NotificationReminder> { it.seconds } ?: MINUTES_60
         set(value) = preferenceManager.save(keyNotificationReminder, value.seconds)
 
     override var notificationResultsEnabled: Set<NotificationResultsAvailable>

@@ -11,6 +11,7 @@ import tmg.flashback.feature.notifications.model.NotificationReminder
 import tmg.flashback.feature.notifications.model.NotificationUpcoming
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
 import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
+import tmg.flashback.notifications.manager.NotificationManager
 import tmg.flashback.ui.permissions.Permission
 import tmg.flashback.ui.permissions.PermissionManager
 import tmg.flashback.ui.permissions.PermissionState
@@ -21,13 +22,15 @@ class SettingsNotificationUpcomingViewModel(
     private val notificationSettingsRepository: NotificationSettingsRepository,
     private val scheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase,
     private val permissionManager: PermissionManager,
+    private val notificationManager: NotificationManager,
     private val openSettingsUseCase: OpenSettingsUseCase,
     private val coroutineContext: CoroutineContext = EmptyCoroutineContext
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<SettingsNotificationUpcomingUiState> = MutableStateFlow(SettingsNotificationUpcomingUiState(
         reminder = notificationSettingsRepository.notificationReminderPeriod,
-        enabled = notificationSettingsRepository.notificationUpcomingEnabled
+        reminderEnabled = notificationManager.canScheduleExact,
+        enabled = notificationSettingsRepository.notificationUpcomingEnabled,
     ))
     val uiState: StateFlow<SettingsNotificationUpcomingUiState> = _uiState
 
@@ -67,7 +70,8 @@ class SettingsNotificationUpcomingViewModel(
         _uiState.update {
             SettingsNotificationUpcomingUiState(
                 reminder = notificationSettingsRepository.notificationReminderPeriod,
-                enabled = notificationSettingsRepository.notificationUpcomingEnabled
+                enabled = notificationSettingsRepository.notificationUpcomingEnabled,
+                reminderEnabled = notificationManager.canScheduleExact,
             )
         }
     }

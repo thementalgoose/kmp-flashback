@@ -5,6 +5,7 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import tmg.flashback.data.repo.repository.OverviewRepository
+import tmg.flashback.feature.notifications.model.NotificationReminder
 import tmg.flashback.feature.notifications.model.NotificationUpcoming
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
 import tmg.flashback.feature.notifications.utils.NotificationUtils
@@ -12,9 +13,12 @@ import tmg.flashback.formula1.enums.RaceWeekend
 import tmg.flashback.formula1.model.Timestamp
 import tmg.flashback.infrastructure.datetime.plus
 import tmg.flashback.infrastructure.log.logInfo
+import tmg.flashback.notifications.manager.NotificationManager
 import tmg.flashback.notifications.repositories.NotificationRepository
 import tmg.flashback.notifications.usecases.LocalNotificationsCancelUseCase
 import tmg.flashback.notifications.usecases.LocalNotificationsScheduleUseCase
+import tmg.flashback.ui.permissions.Permission
+import tmg.flashback.ui.permissions.PermissionManager
 
 interface ScheduleUpcomingNotificationsUseCase {
     suspend operator fun invoke(force: Boolean = false): ScheduleResult
@@ -26,10 +30,15 @@ internal class ScheduleUpcomingNotificationsUseCaseImpl(
     private val localNotificationsCancelUseCase: LocalNotificationsCancelUseCase,
     private val localNotificationsScheduleUseCase: LocalNotificationsScheduleUseCase,
     private val notificationSettingsRepository: NotificationSettingsRepository,
+    private val notificationManager: NotificationManager,
 ): ScheduleUpcomingNotificationsUseCase {
     override suspend fun invoke(force: Boolean): ScheduleResult {
 
         val enabledUpcomingNotifications = notificationSettingsRepository.notificationUpcomingEnabled
+        val notificationReminder = when (notificationManager.canScheduleExact) {
+            true -> notificationSettingsRepository.notificationReminderPeriod
+            false -> NotificationReminder.MINUTES_60
+        }
 
         if (enabledUpcomingNotifications.isEmpty()) {
             logInfo("Notifications", "All notifications disabled, skipping")
@@ -53,7 +62,7 @@ internal class ScheduleUpcomingNotificationsUseCaseImpl(
                 }
             }
             .flatten()
-            .filter { !it.timestamp.isInPastRelativeToo(notificationSettingsRepository.notificationReminderPeriod.seconds.toLong()) }
+            .filter { !it.timestamp.isInPastRelativeToo(notificationReminder.seconds.toLong()) }
 
         if (upNextItemsToSchedule.isEmpty()) {
             logInfo("Notifications", "Skipping rescheduling of notifications as there are no items to schedule for")
@@ -66,7 +75,7 @@ internal class ScheduleUpcomingNotificationsUseCaseImpl(
         }
 
         localNotificationsCancelUseCase.cancelAll()
-        val reminderPeriod = notificationSettingsRepository.notificationReminderPeriod
+        val reminderPeriod = notificationReminder
 
         upNextItemsToSchedule.forEach { item ->
             if (enabledUpcomingNotifications.contains(item.channel)) {

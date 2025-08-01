@@ -5,11 +5,15 @@ import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
+import android.os.Build
+import androidx.core.app.AlarmManagerCompat
 import kotlinx.datetime.LocalDateTime
+import org.koin.core.component.KoinComponent
 import org.koin.java.KoinJavaComponent
+import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.notifications.receivers.LocalNotificationBroadcastReceiver
 
-actual class NotificationManagerImpl actual constructor(): NotificationManager {
+actual class NotificationManagerImpl actual constructor(): NotificationManager, KoinComponent {
 
     private val applicationContext: Context
         get() = KoinJavaComponent.getKoin().get<Context>()
@@ -33,8 +37,7 @@ actual class NotificationManagerImpl actual constructor(): NotificationManager {
             channelId = channelId,
             requestText = title,
             requestDescription = text,
-            requestTimestamp = timestamp,
-            exact = false
+            requestTimestamp = timestamp
         )
     }
 
@@ -43,6 +46,14 @@ actual class NotificationManagerImpl actual constructor(): NotificationManager {
         val pendingIntent = pendingIntent(applicationContext, "", uuid, "", "")
         alarmManager.cancel(pendingIntent)
     }
+
+    actual override val canScheduleExact: Boolean
+        get() {
+            val alarmManager: AlarmManager = alarmManager ?: return false
+            val result = AlarmManagerCompat.canScheduleExactAlarms(alarmManager)
+            logDebug("Notifications", "canScheduleExactAlarms() $result")
+            return result
+        }
 
     private fun pendingIntent(context: Context, channelId: String, requestCode: Int, title: String, description: String): PendingIntent {
         val localNotificationReceiverIntent = LocalNotificationBroadcastReceiver.intent(context,

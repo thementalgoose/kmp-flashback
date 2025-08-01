@@ -14,6 +14,8 @@ interface NotificationManager {
     fun cancel(
         uuid: Int
     )
+
+    val canScheduleExact: Boolean
 }
 
 expect class NotificationManagerImpl(): NotificationManager {
@@ -25,4 +27,5 @@ expect class NotificationManagerImpl(): NotificationManager {
         timestamp: LocalDateTime
     )
     override fun cancel(uuid: Int)
+    override val canScheduleExact: Boolean
 }

@@ -1,15 +1,13 @@
 package tmg.flashback.ui.permissions
 
-import android.content.Intent
 import android.content.pm.PackageManager.PERMISSION_DENIED
 import android.content.pm.PackageManager.PERMISSION_GRANTED
-import android.provider.Settings
 import android.util.Log
 import androidx.activity.result.ActivityResultCallback
+import androidx.core.app.AlarmManagerCompat
 import kotlinx.coroutines.CompletableDeferred
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.ui.activity.ActivityProvider
 import tmg.flashback.ui.activity.BaseActivity
 
