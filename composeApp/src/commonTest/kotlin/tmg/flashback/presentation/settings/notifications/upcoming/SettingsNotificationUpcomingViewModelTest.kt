@@ -72,6 +72,8 @@ internal class SettingsNotificationUpcomingViewModelTest {
         underTest.permissionState.test {
             assertEquals(NotDetermined, awaitItem())
 
+            everySuspend { mockPermissionManager.getPermissionState(Notifications) } returns Granted
+
             underTest.requestPermissions()
 
             assertEquals(Granted, awaitItem())

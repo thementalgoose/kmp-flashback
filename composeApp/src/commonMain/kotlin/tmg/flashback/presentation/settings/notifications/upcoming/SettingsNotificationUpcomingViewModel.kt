@@ -50,7 +50,14 @@ class SettingsNotificationUpcomingViewModel(
             if (result != PermissionState.Granted) {
                 goToSettings()
             } else {
-                refresh()
+                reschedule()
+                _uiState.update {
+                    SettingsNotificationUpcomingUiState(
+                        reminder = notificationSettingsRepository.notificationReminderPeriod,
+                        enabled = notificationSettingsRepository.notificationUpcomingEnabled,
+                        reminderEnabled = notificationManager.canScheduleExact,
+                    )
+                }
             }
         }
     }
@@ -63,10 +70,14 @@ class SettingsNotificationUpcomingViewModel(
         openSettingsUseCase.openAlarmSettings()
     }
 
+    private suspend fun reschedule() {
+        scheduleUpcomingNotificationsUseCase(true)
+        _permissionState.value = permissionManager.getPermissionState(Permission.Notifications)
+    }
+
     fun refresh() {
         viewModelScope.launch(coroutineContext) {
-            scheduleUpcomingNotificationsUseCase(true)
-            _permissionState.value = permissionManager.getPermissionState(Permission.Notifications)
+            reschedule()
         }
         _uiState.update {
             SettingsNotificationUpcomingUiState(
