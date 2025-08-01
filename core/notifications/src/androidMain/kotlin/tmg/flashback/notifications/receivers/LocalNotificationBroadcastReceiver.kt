@@ -19,6 +19,8 @@ class LocalNotificationBroadcastReceiver(): BroadcastReceiver(), KoinComponent {
 
     override fun onReceive(context: Context, intent: Intent) {
 
+        Log.d("Notification", "onReceive for Local Broadcast Receiver")
+
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val title = intent.extras?.getString(keyTitle) ?: run {

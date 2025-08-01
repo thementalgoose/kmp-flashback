@@ -6,6 +6,7 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.TimeZone.Companion.UTC
 import kotlinx.datetime.atTime
 import kotlinx.datetime.format
 import kotlinx.datetime.format.Padding
@@ -19,7 +20,7 @@ data class Timestamp(
     private val originalDate: LocalDate,
     private val originalTime: LocalTime,
     private val currentTimeZone: TimeZone = TimeZone.currentSystemDefault(),
-    private val utcInstant: Instant = originalDate.atTime(originalTime).toInstant(TimeZone.UTC)
+    private val utcInstant: Instant = originalDate.atTime(originalTime).toInstant(UTC)
 ) {
     val utcLocalDateTime: LocalDateTime
         get() = originalDate.atTime(originalTime)
@@ -41,8 +42,9 @@ data class Timestamp(
      * Is the timestamp considered in the past based on UTC?
      */
     fun isInPastRelativeToo(deltaSeconds: Long): Boolean {
-        val timestampInFuture = Clock.System.now()
-        timestampInFuture.plus(deltaSeconds.seconds)
+        val timestampInFuture = Clock.System
+            .now()
+            .plus(deltaSeconds.seconds)
         return deviceLocalDateTime < timestampInFuture.toLocalDateTime(currentTimeZone)
     }
 
