@@ -14,6 +14,9 @@ import tmg.flashback.feature.notifications.usecases.SubscribeResultNotifications
 import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.infrastructure.device.Platform
 import tmg.flashback.infrastructure.device.log
+import tmg.flashback.ui.permissions.Permission
+import tmg.flashback.ui.permissions.PermissionManager
+import tmg.flashback.ui.permissions.PermissionState
 
 /**
  * App startup class
@@ -24,7 +27,7 @@ import tmg.flashback.infrastructure.device.log
 class AppStartup(
     private val initialiseConfigUseCase: InitialiseConfigUseCase,
     private val fetchConfigUseCase: FetchConfigUseCase,
-    private val subscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase,
+    private val scheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase,
     private val deviceRepository: DeviceRepository,
     private val initialiseCrashlyticsUseCase: InitialiseCrashlyticsUseCase,
     private val initialiseAnalyticsUseCase: InitialiseAnalyticsUseCase,
@@ -44,7 +47,7 @@ class AppStartup(
 
         // Subscribe to remote topics
         GlobalScope.launch {
-            subscribeResultNotificationsUseCase.invoke()
+            scheduleUpcomingNotificationsUseCase.invoke(false)
         }
 
         Device.log()

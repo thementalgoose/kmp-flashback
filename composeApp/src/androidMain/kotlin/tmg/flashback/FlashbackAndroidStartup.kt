@@ -22,17 +22,14 @@ import kotlinx.coroutines.runBlocking
 import org.jetbrains.compose.resources.getString
 import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
 import tmg.flashback.feature.notifications.model.NotificationUpcoming
-import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
-import tmg.flashback.infrastructure.device.Device
-import tmg.flashback.infrastructure.device.Platform
-import tmg.flashback.notifications.repositories.NotificationRepository
+import tmg.flashback.feature.notifications.usecases.SubscribeResultNotificationsUseCase
 
 class FlashbackAndroidStartup(
-    private val scheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase
+    private val subscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase
 ) {
     fun startup(application: FlashbackApplication) {
         application.setupNotificationChannels()
-        application.setupUpcomingNotifications()
+        application.setupResultNotifications()
     }
 
     private fun Application.setupNotificationChannels() {
@@ -67,9 +64,9 @@ class FlashbackAndroidStartup(
             }
     }
 
-    private fun Application.setupUpcomingNotifications() {
+    private fun Application.setupResultNotifications() {
         GlobalScope.launch {
-            scheduleUpcomingNotificationsUseCase.invoke(false)
+            subscribeResultNotificationsUseCase.invoke()
         }
     }
 
