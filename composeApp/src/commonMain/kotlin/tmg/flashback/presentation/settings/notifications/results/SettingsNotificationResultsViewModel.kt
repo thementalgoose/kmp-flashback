@@ -45,7 +45,12 @@ class SettingsNotificationResultsViewModel(
             if (result != PermissionState.Granted) {
                 goToSettings()
             } else {
-                refresh()
+                reschedule()
+                _uiState.update {
+                    SettingsNotificationResultsUiState(
+                        enabled = notificationSettingsRepository.notificationResultsEnabled
+                    )
+                }
             }
         }
     }
@@ -56,14 +61,18 @@ class SettingsNotificationResultsViewModel(
 
     fun refresh() {
         viewModelScope.launch(coroutineContext) {
-            subscribeResultNotificationsUseCase()
-            _permissionState.value = permissionManager.getPermissionState(Notifications)
+            reschedule()
         }
         _uiState.update {
             SettingsNotificationResultsUiState(
                 enabled = notificationSettingsRepository.notificationResultsEnabled
             )
         }
+    }
+    private suspend fun reschedule() {
+            subscribeResultNotificationsUseCase()
+            _permissionState.value = permissionManager.getPermissionState(Notifications)
+
     }
 
     fun setNotificationResult(upcoming: NotificationResultsAvailable, enabled: Boolean) {
