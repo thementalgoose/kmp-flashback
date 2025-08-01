@@ -94,17 +94,15 @@ private fun AllSettingsScreen(
                 )
             }
         }
-        if (Device.platform == Platform.Android) {
-            PrefHeader(string.settings_header_notifications)
-            PrefCategory(
-                item = Settings.NotificationsResultCategory,
-                itemClicked = { navigateTo(SettingNavigation.NotificationResults) },
-            )
-            PrefCategory(
-                item = Settings.NotificationsUpcomingCategory,
-                itemClicked = { navigateTo(SettingNavigation.NotificationUpcoming) },
-            )
-        }
+        PrefHeader(string.settings_header_notifications)
+        PrefCategory(
+            item = Settings.NotificationsResultCategory,
+            itemClicked = { navigateTo(SettingNavigation.NotificationResults) },
+        )
+        PrefCategory(
+            item = Settings.NotificationsUpcomingCategory,
+            itemClicked = { navigateTo(SettingNavigation.NotificationUpcoming) },
+        )
         if (uiState.isWidgetsSupported) {
             PrefHeader(string.settings_header_widgets)
             PrefCategory(
