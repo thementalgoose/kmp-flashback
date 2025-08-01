@@ -17,8 +17,6 @@ import tmg.flashback.notifications.manager.NotificationManager
 import tmg.flashback.notifications.repositories.NotificationRepository
 import tmg.flashback.notifications.usecases.LocalNotificationsCancelUseCase
 import tmg.flashback.notifications.usecases.LocalNotificationsScheduleUseCase
-import tmg.flashback.ui.permissions.Permission
-import tmg.flashback.ui.permissions.PermissionManager
 
 interface ScheduleUpcomingNotificationsUseCase {
     suspend operator fun invoke(force: Boolean = false): ScheduleResult

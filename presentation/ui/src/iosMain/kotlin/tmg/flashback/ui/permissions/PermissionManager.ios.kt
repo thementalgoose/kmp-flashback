@@ -1,7 +1,8 @@
 package tmg.flashback.ui.permissions
 
 import kotlinx.coroutines.CompletableDeferred
-import platform.UserNotifications.UNAuthorizationOptionTimeSensitive
+import platform.UserNotifications.UNAuthorizationOptionAlert
+import platform.UserNotifications.UNAuthorizationOptionBadge
 import platform.UserNotifications.UNAuthorizationStatusAuthorized
 import platform.UserNotifications.UNAuthorizationStatusDenied
 import platform.UserNotifications.UNAuthorizationStatusNotDetermined
@@ -14,15 +15,18 @@ actual class PermissionManagerImpl actual constructor(): PermissionManager {
         return when (permission) {
             Permission.Notifications -> suspendCoroutine { continuation ->
                 UNUserNotificationCenter.currentNotificationCenter()
-                    .requestAuthorizationWithOptions(UNAuthorizationOptionTimeSensitive) { success, error ->
-                        if (success) {
-                            continuation.resumeWith(Result.success(CompletableDeferred(PermissionState.Granted)))
-                        } else if (error != null) {
-                            continuation.resumeWith(Result.success(CompletableDeferred(PermissionState.NotGranted)))
-                        } else {
-                            continuation.resumeWith(Result.success(CompletableDeferred(PermissionState.NotDetermined)))
+                    .requestAuthorizationWithOptions(
+                        options = UNAuthorizationOptionBadge + UNAuthorizationOptionAlert,
+                        completionHandler = { success, error ->
+                            if (success) {
+                                continuation.resumeWith(Result.success(CompletableDeferred(PermissionState.Granted)))
+                            } else if (error != null) {
+                                continuation.resumeWith(Result.success(CompletableDeferred(PermissionState.NotGranted)))
+                            } else {
+                                continuation.resumeWith(Result.success(CompletableDeferred(PermissionState.NotDetermined)))
+                            }
                         }
-                    }
+                    )
             }
         }
     }

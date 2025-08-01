@@ -42,10 +42,11 @@ class SettingsNotificationResultsViewModel(
     fun requestPermissions() {
         viewModelScope.launch(coroutineContext) {
             val result = permissionManager.requestPermission(Notifications).await()
-            if (result == PermissionState.NotGranted) {
+            if (result != PermissionState.Granted) {
                 goToSettings()
+            } else {
+                refresh()
             }
-            _permissionState.value = result
         }
     }
 

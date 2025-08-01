@@ -120,7 +120,7 @@ private fun SettingsNotificationUpcomingScreen(
                     )
                 },
                 isChecked = uiState.enabled.contains(FREE_PRACTICE),
-                isEnabled = Device.platform == Platform.IOS
+                isEnabled = permissionState == PermissionState.Granted
             )
             PrefSwitch(
                 item = Settings.NotificationsUpcoming.SprintQualifying,
@@ -131,7 +131,7 @@ private fun SettingsNotificationUpcomingScreen(
                     )
                 },
                 isChecked = uiState.enabled.contains(SPRINT_QUALIFYING),
-                isEnabled = Device.platform == Platform.IOS
+                isEnabled = permissionState == PermissionState.Granted
             )
             PrefSwitch(
                 item = Settings.NotificationsUpcoming.SprintRace,
@@ -139,7 +139,7 @@ private fun SettingsNotificationUpcomingScreen(
                     notificationUpcomingClicked(SPRINT, !uiState.enabled.contains(SPRINT))
                 },
                 isChecked = uiState.enabled.contains(SPRINT),
-                isEnabled = Device.platform == Platform.IOS
+                isEnabled = permissionState == PermissionState.Granted
             )
             PrefSwitch(
                 item = Settings.NotificationsUpcoming.Qualifying,
@@ -147,7 +147,7 @@ private fun SettingsNotificationUpcomingScreen(
                     notificationUpcomingClicked(QUALIFYING, !uiState.enabled.contains(QUALIFYING))
                 },
                 isChecked = uiState.enabled.contains(QUALIFYING),
-                isEnabled = Device.platform == Platform.IOS
+                isEnabled = permissionState == PermissionState.Granted
             )
             PrefSwitch(
                 item = Settings.NotificationsUpcoming.Race,
@@ -155,7 +155,7 @@ private fun SettingsNotificationUpcomingScreen(
                     notificationUpcomingClicked(RACE, !uiState.enabled.contains(RACE))
                 },
                 isChecked = uiState.enabled.contains(RACE),
-                isEnabled = Device.platform == Platform.IOS
+                isEnabled = permissionState == PermissionState.Granted
             )
         }
 
