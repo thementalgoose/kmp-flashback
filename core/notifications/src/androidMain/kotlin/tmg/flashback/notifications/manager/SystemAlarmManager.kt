@@ -37,7 +37,7 @@ class SystemAlarmManager {
         val pendingIntent = pendingIntent(applicationContext, channelId, requestCode, requestText, requestDescription)
 
         val instant = requestTimestamp.toInstant(TimeZone.UTC)
-        Log.d("Notification", "Scheduling (exact=$exact) alarm wakeup for ${instant.toEpochMilliseconds()} (current system is ${System.currentTimeMillis()}, with millis diff being ${(instant.toEpochMilliseconds() - System.currentTimeMillis()) / 1000} seconds)")
+        Log.d("Notification", "Scheduling (exact=$exact) alarm wakeup for ${instant.toEpochMilliseconds()} (current system is ${System.currentTimeMillis()}, with millis diff being ${(instant.toEpochMilliseconds() - System.currentTimeMillis()) / 1000} seconds) - $requestText")
         when (exact) {
             true -> AlarmManagerCompat.setExactAndAllowWhileIdle(
                 alarmManager,
