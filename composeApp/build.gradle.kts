@@ -238,6 +238,7 @@ compose.desktop {
             licenseFile.set(project.file("../LICENSE.txt"))
 
             macOS {
+                bundleID = "tmg.flashback"
                 dockName = "Flashback"
                 entitlementsFile.set(project.file("default.entitlements"))
             }

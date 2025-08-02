@@ -7,15 +7,9 @@ on:
 #        type: string
 #        description: "Version name (1.0.0)"
 #        default: "1.0.0"
-#      version_code:
-#        type: string
-#        description: "Version code (1)"
-#        default: "1"
-
   workflow_call:
     inputs:
       version_name: { required: true, type: string }
-      version_code: { required: true, type: string }
     outputs:
       artifact-name:
         value: ${{ jobs.build.outputs.artifact-name }}
@@ -99,7 +93,6 @@ jobs:
       - name: Build and Deploy to TestFlight
         env:
           VERSION_NAME: ${{ inputs.version_name }}
-          VERSION_CODE: ${{ inputs.version_code }}
         run: |
           cd ./iosApp
           bundle exec fastlane build_upload_testflight

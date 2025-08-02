@@ -26,6 +26,8 @@ kotlin {
             implementation(libs.bundles.compose)
             implementation(compose.components.resources)
 
+            implementation(libs.androidx.lifecycle.runtime.compose)
+
             implementation(projects.core.configuration)
             implementation(projects.core.metrics.analytics)
             implementation(projects.core.metrics.crashlytics)
