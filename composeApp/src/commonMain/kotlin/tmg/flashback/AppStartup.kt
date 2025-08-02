@@ -11,6 +11,7 @@ import tmg.flashback.crashlytics.usecases.InitialiseCrashlyticsUseCase
 import tmg.flashback.device.repositories.DeviceRepository
 import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
 import tmg.flashback.feature.notifications.usecases.SubscribeResultNotificationsUseCase
+import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
 import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.infrastructure.device.Platform
 import tmg.flashback.infrastructure.device.log
@@ -31,6 +32,7 @@ class AppStartup(
     private val deviceRepository: DeviceRepository,
     private val initialiseCrashlyticsUseCase: InitialiseCrashlyticsUseCase,
     private val initialiseAnalyticsUseCase: InitialiseAnalyticsUseCase,
+    private val currentSeasonHolder: CurrentSeasonHolder
 ) {
     fun start() {
         // Crashlytics
@@ -43,6 +45,7 @@ class AppStartup(
         initialiseConfigUseCase(RemoteConfigDefaults.defaults)
         GlobalScope.launch {
             fetchConfigUseCase.fetchAndApply()
+            currentSeasonHolder.refresh()
         }
 
         // Subscribe to remote topics
