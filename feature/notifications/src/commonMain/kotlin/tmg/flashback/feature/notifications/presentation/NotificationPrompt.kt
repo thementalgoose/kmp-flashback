@@ -24,7 +24,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.infrastructure.device.Device
-import tmg.flashback.infrastructure.device.Platform
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
@@ -41,7 +40,7 @@ fun NotificationPrompt(
         targetState = promptNotifications.value,
         modifier = Modifier
     ) { promptNotifications ->
-        if (!promptNotifications && Device.isRuntimeNotificationsSupported && Device.platform == Platform.Android) {
+        if (!promptNotifications && Device.isRuntimeNotificationsSupported) {
             NotificationPrompt(
                 modifier = modifier,
                 promptNotifications = viewModel::promptRuntimeNotifications,

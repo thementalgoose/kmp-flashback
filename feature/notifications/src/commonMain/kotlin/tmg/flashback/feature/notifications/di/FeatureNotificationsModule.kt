@@ -18,5 +18,5 @@ internal fun module() = module {
     single<SubscribeResultNotificationsUseCase> { SubscribeResultNotificationsUseCaseImpl(get(), get(), get()) }
     single<ScheduleUpcomingNotificationsUseCase> { ScheduleUpcomingNotificationsUseCaseImpl(get(), get(), get(), get(), get(), get()) }
 
-    viewModel { NotificationPromptViewModel(get(), get(), get()) }
+    viewModel { NotificationPromptViewModel(get(), get(), get(), get()) }
 }

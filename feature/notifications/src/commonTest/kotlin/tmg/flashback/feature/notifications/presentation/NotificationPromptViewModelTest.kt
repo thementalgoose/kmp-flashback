@@ -14,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.runTest
 import tmg.flashback.device.usecases.OpenSettingsUseCase
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
+import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
 import tmg.flashback.ui.permissions.PermissionManager
 import tmg.flashback.ui.permissions.PermissionState.Granted
 import tmg.flashback.ui.permissions.PermissionState.NotGranted
@@ -25,6 +26,7 @@ internal class NotificationPromptViewModelTest {
     private val mockNotificationSettingsRepository: NotificationSettingsRepository = mock(autofill)
     private val mockPermissionManager: PermissionManager = mock(autofill)
     private val mockOpenSettingsUseCase: OpenSettingsUseCase = mock(autofill)
+    private val mockScheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase = mock(autofill)
 
     private lateinit var underTest: NotificationPromptViewModel
 
@@ -33,6 +35,7 @@ internal class NotificationPromptViewModelTest {
             notificationSettingsRepository = mockNotificationSettingsRepository,
             permissionManager = mockPermissionManager,
             openSettingsUseCase = mockOpenSettingsUseCase,
+            scheduleUpcomingNotificationsUseCase = mockScheduleUpcomingNotificationsUseCase,
             coroutineContext = Dispatchers.Unconfined
         )
     }
@@ -72,6 +75,7 @@ internal class NotificationPromptViewModelTest {
         }
 
         verifySuspend {
+            mockScheduleUpcomingNotificationsUseCase.invoke()
             mockPermissionManager.requestPermission(any())
             mockNotificationSettingsRepository.notificationPromptSeen = true
             mockOpenSettingsUseCase.openNotificationSettings()
@@ -95,6 +99,7 @@ internal class NotificationPromptViewModelTest {
         }
 
         verifySuspend {
+            mockScheduleUpcomingNotificationsUseCase.invoke()
             mockPermissionManager.requestPermission(any())
             mockNotificationSettingsRepository.notificationPromptSeen = true
         }

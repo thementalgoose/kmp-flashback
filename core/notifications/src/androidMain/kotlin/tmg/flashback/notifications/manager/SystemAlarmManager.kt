@@ -37,7 +37,7 @@ class SystemAlarmManager {
         val canScheduleExact = AlarmManagerCompat.canScheduleExactAlarms(alarmManager)
 
         val instant = requestTimestamp.toInstant(TimeZone.UTC)
-        Log.d("Notification", "Scheduling (exact=$canScheduleExact) alarm wakeup for ${instant.toEpochMilliseconds()} (current system is ${System.currentTimeMillis()}, with millis diff being ${(instant.toEpochMilliseconds() - System.currentTimeMillis()) / 1000} seconds) - $requestText")
+        Log.d("Notification", "Scheduling (exact=$canScheduleExact) alarm wakeup for ${instant.toEpochMilliseconds()} (current system is ${System.currentTimeMillis()}, with second diff being ${(instant.toEpochMilliseconds() - System.currentTimeMillis()) / 1000} seconds) - $requestText")
         when (canScheduleExact) {
             true -> AlarmManagerCompat.setExactAndAllowWhileIdle(
                 alarmManager,

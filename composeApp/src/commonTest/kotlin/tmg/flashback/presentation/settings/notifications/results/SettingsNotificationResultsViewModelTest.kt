@@ -68,9 +68,6 @@ internal class SettingsNotificationResultsViewModelTest {
             assertEquals(NotDetermined, awaitItem())
 
             underTest.requestPermissions()
-
-            assertEquals(Granted, awaitItem())
-
         }
         verifySuspend {
             mockPermissionManager.requestPermission(Notifications)
@@ -88,9 +85,8 @@ internal class SettingsNotificationResultsViewModelTest {
             assertEquals(NotDetermined, awaitItem())
 
             underTest.requestPermissions()
-
-            assertEquals(NotGranted, awaitItem())
         }
+
         verifySuspend {
             mockOpenSettingsUseCase.openNotificationSettings()
         }

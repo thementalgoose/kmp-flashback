@@ -47,10 +47,18 @@ class SettingsNotificationUpcomingViewModel(
     fun requestPermissions() {
         viewModelScope.launch(coroutineContext) {
             val result = permissionManager.requestPermission(Permission.Notifications).await()
-            if (result == PermissionState.NotGranted) {
+            if (result != PermissionState.Granted) {
                 goToSettings()
+            } else {
+                reschedule()
+                _uiState.update {
+                    SettingsNotificationUpcomingUiState(
+                        reminder = notificationSettingsRepository.notificationReminderPeriod,
+                        enabled = notificationSettingsRepository.notificationUpcomingEnabled,
+                        reminderEnabled = notificationManager.canScheduleExact,
+                    )
+                }
             }
-            _permissionState.value = result
         }
     }
 
@@ -62,10 +70,14 @@ class SettingsNotificationUpcomingViewModel(
         openSettingsUseCase.openAlarmSettings()
     }
 
+    private suspend fun reschedule() {
+        scheduleUpcomingNotificationsUseCase(true)
+        _permissionState.value = permissionManager.getPermissionState(Permission.Notifications)
+    }
+
     fun refresh() {
         viewModelScope.launch(coroutineContext) {
-            scheduleUpcomingNotificationsUseCase(true)
-            _permissionState.value = permissionManager.getPermissionState(Permission.Notifications)
+            reschedule()
         }
         _uiState.update {
             SettingsNotificationUpcomingUiState(

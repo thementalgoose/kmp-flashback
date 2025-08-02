@@ -16,16 +16,20 @@ import flashback.presentation.localisation.generated.resources.notification_chan
 import flashback.presentation.localisation.generated.resources.notification_channel_sprint_notify
 import flashback.presentation.localisation.generated.resources.notification_channel_sprint_qualifying
 import flashback.presentation.localisation.generated.resources.notification_channel_sprint_qualifying_notify
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.compose.resources.getString
 import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
 import tmg.flashback.feature.notifications.model.NotificationUpcoming
-import tmg.flashback.notifications.repositories.NotificationRepository
+import tmg.flashback.feature.notifications.usecases.SubscribeResultNotificationsUseCase
 
-class FlashbackAndroidStartup() {
-
+class FlashbackAndroidStartup(
+    private val subscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase
+) {
     fun startup(application: FlashbackApplication) {
         application.setupNotificationChannels()
+        application.setupResultNotifications()
     }
 
     private fun Application.setupNotificationChannels() {
@@ -58,6 +62,12 @@ class FlashbackAndroidStartup() {
                 it.group = resultsGroupId
                 notificationManager.createNotificationChannel(it)
             }
+    }
+
+    private fun Application.setupResultNotifications() {
+        GlobalScope.launch {
+            subscribeResultNotificationsUseCase.invoke()
+        }
     }
 
     private fun NotificationUpcoming.labelId(): String {
