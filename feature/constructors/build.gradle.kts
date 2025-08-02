@@ -35,6 +35,8 @@ kotlin {
             implementation(projects.presentation.style)
             implementation(projects.presentation.navigation)
             implementation(projects.presentation.localisation)
+
+            implementation(libs.androidx.lifecycle.runtime.compose)
         }
         commonTest.dependencies {
             implementation(projects.test.formula1)

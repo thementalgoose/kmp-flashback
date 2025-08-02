@@ -22,6 +22,9 @@ kotlin {
         commonTest.dependencies {
             implementation(kotlin("test"))
         }
+        desktopMain.dependencies {
+
+        }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
         }
