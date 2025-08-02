@@ -143,7 +143,6 @@ private fun AboutListScreen(
                 .animateItem()
             ) {
                 AboutButtons.entries
-                    .filter { it != AboutButtons.Github }
                     .forEach {
                         Button(
                             button = it,
@@ -243,7 +242,6 @@ private fun AboutPaneScreen(
                     .animateItem()
                 ) {
                     AboutButtons.entries
-                        .filter { it != AboutButtons.Github }
                         .forEach {
                             Button(
                                 button = it,
