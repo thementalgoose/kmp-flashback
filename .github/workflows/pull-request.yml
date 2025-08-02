@@ -6,6 +6,7 @@ name: Pull Request
     paths-ignore:
       - '**.md'
       - '**.png'
+      - '**.txt'
 jobs:
   unit-tests:
     uses: ./.github/workflows/job-unit-tests.yml
