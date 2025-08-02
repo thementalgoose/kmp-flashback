@@ -1,0 +1,23 @@
+<svg viewBox="0 0 960 960" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:bx="https://boxy-svg.com">
+    <defs>
+      <linearGradient id="col1" gradientUnits="userSpaceOnUse" bx:pinned="true">
+        <stop style="stop-color: rgb(62, 139, 207);"></stop>
+      </linearGradient>
+      <linearGradient id="col2" gradientUnits="userSpaceOnUse" bx:pinned="true">
+        <stop style="stop-color: rgb(90, 197, 221);"></stop>
+      </linearGradient>
+      <linearGradient id="gradient-6" bx:pinned="true">
+        <stop offset="0" style="stop-color: rgb(90, 197, 221);"></stop>
+        <stop offset="1" style="stop-color: rgb(62, 140, 207);"></stop>
+      </linearGradient>
+      <linearGradient id="gradient-6-0" gradientUnits="userSpaceOnUse" x1="480" y1="0" x2="480" y2="960" xlink:href="#gradient-6"></linearGradient>
+    </defs>
+    <rect style="fill-rule: nonzero; fill: url(#gradient-6-0); stroke: rgba(0, 0, 0, 0);" x="0" y="0" width="960" height="960" rx="150" ry="150"></rect>
+    <g clip-path="" transform="matrix(1, 0, 0, 1, -1.223714, 0.195066)">
+      <path d="m620.1096 354.20953l-99.75012 0l-69.352234 125.77954l69.352234 125.77954l99.75012 0l-69.352234 -125.77954z" fill-rule="evenodd" style="paint-order: fill; fill: rgb(255, 255, 255);"></path>
+      <path d="m194.90628 480.0635l0 0c0 -158.11438 128.17703 -286.29144 286.29144 -286.29144l0 0c75.92917 0 148.74857 30.16275 202.43863 83.85283c53.690002 53.690033 83.85278 126.5094 83.85278 202.4386l0 0c0 158.11441 -128.177 286.2914 -286.2914 286.2914l0 0c-158.11441 0 -286.29144 -128.177 -286.29144 -286.2914zm82.096924 0l0 0c0 112.77353 91.42099 204.19449 204.19452 204.19449c112.77353 0 204.19449 -91.42096 204.19449 -204.19449l0 0c0 -112.7735 -91.42096 -204.19449 -204.19449 -204.19449l0 0c-112.77353 0 -204.19452 91.42099 -204.19452 204.19449z" fill-rule="evenodd" style="paint-order: fill; fill: rgb(255, 255, 255);"></path>
+      <path d="m0.008041523 685.53284l481.89243 0l0 80.69647l-481.89243 0z" fill-rule="evenodd" style="paint-order: fill; fill: rgb(255, 255, 255);"></path>
+      <path d="m478.10257 193.64568l481.89243 0l0 80.69649l-481.89243 0z" fill-rule="evenodd" style="paint-order: fill; fill: rgb(255, 255, 255);"></path>
+      <path d="m478.09305 354.1496l-99.75009 0l-69.352264 125.77951l69.352264 125.77951l99.75009 0l-69.352264 -125.77951z" fill-rule="evenodd" style="paint-order: fill; fill: rgb(255, 255, 255);"></path>
+    </g>
+  </svg>

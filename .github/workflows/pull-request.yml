@@ -3,10 +3,6 @@ name: Pull Request
   pull_request:
     branches:
       - main
-    paths-ignore:
-      - '**.md'
-      - '**.png'
-      - '**.txt'
 jobs:
   unit-tests:
     uses: ./.github/workflows/job-unit-tests.yml
