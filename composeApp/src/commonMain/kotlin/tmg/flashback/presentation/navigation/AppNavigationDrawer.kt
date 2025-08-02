@@ -54,7 +54,11 @@ internal fun AppNavigationDrawer(
             content = {
                 item("header") {
                     DashboardHero(
-                        modifier = Modifier.padding(horizontal = AppTheme.dimens.medium),
+                        modifier = Modifier.padding(
+                            start = AppTheme.dimens.medium,
+                            end = AppTheme.dimens.medium,
+                            top = AppTheme.dimens.nsmall
+                        ),
                         menuIcons = appNavigationUiState.easterEggs.menuIcon,
                         showUkraine = appNavigationUiState.easterEggs.ukraine
                     )
