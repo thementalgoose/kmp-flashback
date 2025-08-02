@@ -5,6 +5,7 @@ enum class UserProperty(
 ) {
     APP_VERSION("app_version"),
     OS_VERSION("os_version"),
+    PLATFORM("platform"),
     DEVICE_MODEL("device_model"),
     DEVICE_BOARD("device_board"),
     DEVICE_BRAND("device_brand"),
