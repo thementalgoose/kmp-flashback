@@ -14,6 +14,13 @@ import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.ModalBottomSheetProperties
@@ -22,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
@@ -70,33 +78,43 @@ private fun TyreScreen(
     val tyres = SeasonTyres.getBySeason(season)
     val dry = tyres?.tyres?.filter { it.tyre.isDry } ?: emptyList()
     val wet = tyres?.tyres?.filter { !it.tyre.isDry } ?: emptyList()
-    Column(
+    LazyVerticalGrid(
         modifier = Modifier
-            .background(AppTheme.colors.surfaceContainer2)
-    ) {
-        Header(
-            text = stringResource(resource = string.tyres_label),
-            action = null,
-            actionUpClicked = dismissed
-        )
-        TextBody1(
-            modifier = Modifier.padding(horizontal = AppTheme.dimens.medium),
-            text = stringResource(resource = string.tyres_dry_compounds)
-        )
-        for (x in dry) {
-            TyreRow(tyreLabel = x)
+            .background(AppTheme.colors.surfaceContainer2),
+        columns = GridCells.Adaptive(minSize = 250.dp),
+        content = {
+            item("header", span = { GridItemSpan(maxLineSpan) }) {
+                Header(
+                    text = stringResource(resource = string.tyres_label),
+                    action = null,
+                    actionUpClicked = dismissed
+                )
+            }
+            item("dry", span = { GridItemSpan(maxLineSpan) }) {
+                TextBody1(
+                    modifier = Modifier.padding(horizontal = AppTheme.dimens.medium),
+                    text = stringResource(resource = string.tyres_dry_compounds)
+                )
+            }
+            items(dry) {
+                TyreRow(tyreLabel = it)
+            }
+            item("wet", span = { GridItemSpan(maxLineSpan) }) {
+                TextBody1(
+                    modifier = Modifier.padding(horizontal = AppTheme.dimens.medium),
+                    text = stringResource(resource = string.tyres_wet_compounds)
+                )
+            }
+            items(wet) {
+                TyreRow(tyreLabel = it)
+            }
+            item("spacer", span = { GridItemSpan(maxLineSpan) }) {
+                Spacer(modifier = Modifier
+                    .height(WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding())
+                )
+            }
         }
-        TextBody1(
-            modifier = Modifier.padding(horizontal = AppTheme.dimens.medium),
-            text = stringResource(resource = string.tyres_wet_compounds)
-        )
-        for (x in wet) {
-            TyreRow(tyreLabel = x)
-        }
-        Spacer(modifier = Modifier
-            .height(WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding())
-        )
-    }
+    )
 }
 
 @Composable

@@ -21,3 +21,5 @@ composeApp/src/production/google-services.json
 composeApp/src/sandbox/google-services.json
 iosApp/iosApp/Firebase/GoogleService-production.plist
 iosApp/iosApp/Firebase/GoogleService-sandbox.plist
+
+composeApp/flashback-database**
