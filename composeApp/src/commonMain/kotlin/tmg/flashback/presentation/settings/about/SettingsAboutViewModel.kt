@@ -3,7 +3,6 @@ package tmg.flashback.presentation.settings.about
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import tmg.flashback.configuration.repositories.ConfigRepository
 import tmg.flashback.device.usecases.OpenStorePageUseCase
 import tmg.flashback.repositories.OnboardingRepository
 

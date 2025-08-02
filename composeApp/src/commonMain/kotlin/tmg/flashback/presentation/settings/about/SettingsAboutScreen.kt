@@ -10,6 +10,7 @@ import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.settings_header_about
 import flashback.presentation.localisation.generated.resources.settings_header_device_info
 import flashback.presentation.localisation.generated.resources.settings_pref_reset_title
+import flashback.presentation.localisation.generated.resources.settings_restart_app_required
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
@@ -18,6 +19,8 @@ import tmg.flashback.presentation.settings.PrefLink
 import tmg.flashback.presentation.settings.Settings
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
+import tmg.flashback.ui.toast.Duration
+import tmg.flashback.ui.toast.rememberToastManager
 
 @Composable
 fun SettingsAboutScreen(
@@ -51,6 +54,9 @@ private fun SettingsAboutScreen(
     actionUpClicked: () -> Unit,
     firstTimeSync: () -> Unit,
 ) {
+    val toastManager = rememberToastManager()
+    val message = stringResource(string.settings_restart_app_required)
+
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = insetPadding
@@ -81,7 +87,10 @@ private fun SettingsAboutScreen(
         PrefHeader(string.settings_pref_reset_title)
         PrefLink(
             item = Settings.About.FirstTimeSync,
-            itemClicked = { firstTimeSync() }
+            itemClicked = {
+                toastManager.showMessage(message, Duration.Long)
+                firstTimeSync()
+            }
         )
         PrefHeader(string.settings_header_device_info)
         PrefLink(

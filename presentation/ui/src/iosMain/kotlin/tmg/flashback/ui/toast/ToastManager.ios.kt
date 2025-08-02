@@ -25,7 +25,7 @@ actual class ToastManagerImpl actual constructor(): ToastManager {
             frame = CGRectMake(
                 0.0,
                 0.0,
-                UIScreen.mainScreen.bounds.useContents { size.width } - 40,
+                UIScreen.mainScreen.bounds.useContents { size.width } - 100,
                 35.0
             )
         )
@@ -44,8 +44,8 @@ actual class ToastManagerImpl actual constructor(): ToastManager {
         rootViewController?.view?.addSubview(toastLabel)
 
         UIView.animateWithDuration(
-            duration = toastDuration,
-            delay = 0.1,
+            duration = 0.5,
+            delay = toastDuration - 0.5,
             options = UIViewAnimationOptionCurveEaseOut,
             animations = {
                 toastLabel.alpha = 0.0

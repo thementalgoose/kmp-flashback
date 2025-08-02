@@ -17,7 +17,7 @@ internal class SettingsAboutViewModelTest {
     private fun initUnderTest() {
         underTest = SettingsAboutViewModel(
             openStorePageUseCase = mockOpenStorePageUseCase,
-            onboardingRepository = mockOnboardingRepository
+            onboardingRepository = mockOnboardingRepository,
         )
     }
 
