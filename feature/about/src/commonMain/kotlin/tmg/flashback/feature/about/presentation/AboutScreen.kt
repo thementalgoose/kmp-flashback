@@ -135,7 +135,10 @@ private fun AboutListScreen(
         }
         item("buttons") {
             Row(modifier = Modifier
-                .padding(horizontal = AppTheme.dimens.medium)
+                .padding(
+                    horizontal = AppTheme.dimens.medium,
+                    vertical = AppTheme.dimens.xsmall
+                )
                 .fillMaxWidth()
                 .animateItem()
             ) {
@@ -157,8 +160,9 @@ private fun AboutListScreen(
                 modifier = Modifier
                     .animateItem()
                     .padding(
-                        horizontal = AppTheme.dimens.medium,
-                        vertical = AppTheme.dimens.medium
+                        start = AppTheme.dimens.medium,
+                        end = AppTheme.dimens.medium,
+                        bottom = AppTheme.dimens.small
                     )
             )
         }
@@ -231,6 +235,10 @@ private fun AboutPaneScreen(
             }
             item("buttons") {
                 Row(modifier = Modifier
+                    .padding(
+                        horizontal = AppTheme.dimens.medium,
+                        vertical = AppTheme.dimens.small
+                    )
                     .fillMaxWidth()
                     .animateItem()
                 ) {
@@ -240,7 +248,9 @@ private fun AboutPaneScreen(
                             Button(
                                 button = it,
                                 buttonClicked = buttonClicked,
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
+                                    .weight(1f)
                             )
                         }
                 }
