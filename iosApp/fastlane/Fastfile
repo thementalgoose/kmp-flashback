@@ -98,6 +98,7 @@ platform :ios do
   lane :build_release do |options|
     match(type: "appstore", readonly: true)
     build_app(
+      silent: options[:silent],
       workspace: "iosApp.xcworkspace",
       scheme: "Production Release",
       export_options: {
@@ -116,6 +117,8 @@ platform :ios do
       UI.user_error!("You must provide a version_number, e.g., fastlane build_upload_testflight version_number:\"1.2.3\"")
     end
 
+    # #{options.fetch(:silent, false)
+
     update_app_version version_number:options[:version_number]
     update_marketing_version version_number:options[:version_number]
 
@@ -123,8 +126,8 @@ platform :ios do
     setup_ci(force: true)
     certificates
     fetch_and_increment_build_number
-    build_release
+    build_release silent:options.fetch(:silent, false)
 
-    upload_to_testflight
+    upload_to_testflight(skip_submission: true)
   end
 end

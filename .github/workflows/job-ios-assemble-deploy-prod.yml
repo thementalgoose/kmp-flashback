@@ -95,7 +95,7 @@ jobs:
           VERSION_NAME: ${{ inputs.version_name }}
         run: |
           cd ./iosApp
-          bundle exec fastlane build_upload_testflight
+          bundle exec fastlane build_upload_testflight version_name:"${{ inputs.version_name }}" silent:true
 
       - name: Upload file to github tag
         uses: softprops/action-gh-release@v2
