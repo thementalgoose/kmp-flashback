@@ -31,6 +31,22 @@ Get certificates
 
 Load ASC API Key information to use in subsequent lanes
 
+### ios update_app_version
+
+```sh
+[bundle exec] fastlane ios update_app_version
+```
+
+Updates the CFBundleShortVersionString in Info.plist
+
+### ios update_marketing_version
+
+```sh
+[bundle exec] fastlane ios update_marketing_version
+```
+
+Updates the MARKETTING_VERSION in the project.pbxproj file
+
 ### ios fetch_and_increment_build_number
 
 ```sh

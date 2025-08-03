@@ -100,5 +100,5 @@ Contact Email: thementalgoose@gmail.com
 cd iosApp/
 pod install
 # To Release
-fastlane build_upload_testflight
+fastlane build_upload_testflight version_number:"1.0.0"
 ```
