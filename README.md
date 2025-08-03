@@ -5,6 +5,11 @@
 <h1 align="center">Flashback</h1>
 
 <p align="center">
+  <a href="https://play.google.com/store/apps/details?id=tmg.flashback"><img width="150" src="resources/google-play.png" alt="Get it on Google Play"/></a>
+  <a href="https://apps.apple.com/us/app/flashback-formula-results/id6748612648"><img width="150" src="resources/app-store.png" alt="Get it on the App Store"/></a>
+</p>
+
+<p align="center">
   <a href="https://play.google.com/store/apps/details?id=tmg.flashback"><img src="https://img.shields.io/static/v1?label=Google%20Play&message=%20&logoColor=white&logo=google-play&color=success&style=flat"/></a>
   <a href="https://apps.apple.com/us/app/flashback-formula-results/id6748612648"><img src="https://img.shields.io/static/v1?label=App%20Store&message=%20&logo=app-store&logoColor=white&color=blue&style=flat"/></a>
   <a href="https://flashback.pages.dev"><img src="https://img.shields.io/static/v1?label=API&message=%20&logo=cloudflare&logoColor=white&color=orange&style=flat"/></a>
