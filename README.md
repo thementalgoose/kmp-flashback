@@ -12,6 +12,11 @@
   <a href="https://github.com/thementalgoose/kmp-flashback/actions"><img src="https://github.com/thementalgoose/kmp-flashback/workflows/Release/badge.svg"/></a>
 </p>
 
+<p align="center">
+  <a href="https://play.google.com/store/apps/details?id=tmg.flashback"><img width="150" src="resources/google-play.png" alt="Get it on Google Play"/></a>
+  <a href="https://apps.apple.com/us/app/flashback-formula-results/id6748612648"><img width="150" src="resources/app-store.png" alt="Get it on the App Store"/></a>
+</p>
+
 Flashback provides race results and statistics from every race in the history of Formula 1 and the latest Formula 1 news from around the web!
 
 This used to be an android only application. See the old repository [here](https://github.com/thementalgoose/android-flashback)
