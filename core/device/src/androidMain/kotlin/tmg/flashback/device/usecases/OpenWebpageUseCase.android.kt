@@ -32,7 +32,7 @@ actual class OpenWebpageUseCaseImpl actual constructor(): OpenWebpageUseCase {
         val clipboardManager = (context.getSystemService(CLIPBOARD_SERVICE) as? ClipboardManager) ?: return false
         clipboardManager.setPrimaryClip(ClipData.newPlainText("", url))
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
-            Toast.makeText(context, "Copied", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_LONG).show()
         }
         return true
     }
