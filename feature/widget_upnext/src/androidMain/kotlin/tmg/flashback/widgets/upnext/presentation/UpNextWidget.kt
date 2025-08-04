@@ -13,6 +13,7 @@ import androidx.glance.LocalContext
 import androidx.glance.LocalGlanceId
 import androidx.glance.LocalSize
 import androidx.glance.action.actionParametersOf
+import androidx.glance.action.actionStartActivity
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.SizeMode
@@ -24,6 +25,7 @@ import androidx.glance.state.GlanceStateDefinition
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import tmg.flashback.data.repo.repository.OverviewRepository
+import tmg.flashback.widgets.upnext.navigation.WidgetNavigator
 import tmg.flashback.widgets.upnext.presentation.style.WidgetTheme
 import tmg.flashback.widgets.upnext.presentation.style.utils.appWidgetId
 import tmg.flashback.widgets.upnext.presentation.layout.NoRace
@@ -70,6 +72,7 @@ class UpNextWidget : GlanceAppWidget(), KoinComponent {
 
     private val upNextWidgetRepository by inject<UpNextWidgetRepository>()
     private val overviewRepository by inject<OverviewRepository>()
+    private val widgetNavigator by inject<WidgetNavigator>()
 
     override val stateDefinition: GlanceStateDefinition<UpNextConfiguration>
         get() = object : GlanceStateDefinition<UpNextConfiguration> {
@@ -111,16 +114,11 @@ class UpNextWidget : GlanceAppWidget(), KoinComponent {
             val modifier = when (upNextConfiguration.deeplinkToEvent) {
                 true -> GlanceModifier
                     .surface(if (upNextConfiguration.showBackground) GlanceTheme.colors.background.getColor(context) else androidx.compose.ui.graphics.Color.Transparent)
-                    .clickable(
-                        actionRunCallback<UpNextWidgetOpenEvent>(
-                            actionParametersOf(
-                                UpNextWidgetOpenEvent.PARAM_DATA to upNextConfiguration.scheduleData,
-                            )
-                        )
-                    )
+                    .clickable(actionStartActivity(widgetNavigator.getHomeActivity()))
+                    // TODO: Wire this up when setting is enabled
                 false -> GlanceModifier
                     .surface(if (upNextConfiguration.showBackground) GlanceTheme.colors.background.getColor(context) else androidx.compose.ui.graphics.Color.Transparent)
-                    .clickable(actionRunCallback<UpNextWidgetOpenAll>())
+                    .clickable(actionStartActivity(widgetNavigator.getHomeActivity()))
             }
 
             Log.d("UpNextWidget", "Rendering widget ${LocalGlanceId.current.appWidgetId} with $upNextConfiguration")
