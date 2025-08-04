@@ -5,7 +5,7 @@ import tmg.flashback.MainActivity
 import tmg.flashback.widgets.upnext.navigation.WidgetNavigator
 
 class WidgetNavigatorImpl(): WidgetNavigator {
-    override fun <T : Activity> getHomeActivity(): Class<*> {
+    override fun getHomeActivity(): Class<out Activity> {
         return MainActivity::class.java
     }
 }
