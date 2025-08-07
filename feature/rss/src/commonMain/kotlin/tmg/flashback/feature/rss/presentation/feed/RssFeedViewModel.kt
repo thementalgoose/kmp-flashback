@@ -9,25 +9,25 @@ import kotlinx.coroutines.launch
 import kotlinx.datetime.format
 import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.feature.rss.models.Article
-import tmg.flashback.feature.rss.presentation.feed.RssFeedUiState
 import tmg.flashback.feature.rss.repositories.RssRepository
-import tmg.flashback.feature.rss.usecases.GetRssArticleUseCase
+import tmg.flashback.feature.rss.usecases.GetRssArticlesUseCase
 import tmg.flashback.feature.rss.usecases.Response
 import tmg.flashback.infrastructure.datetime.TimeManager
 import tmg.flashback.infrastructure.datetime.timeFormatHHmmss
-import tmg.flashback.network.rss.api.RssApi
 import tmg.flashback.webbrowser.repository.WebRepository
 import tmg.flashback.webbrowser.usecases.IsInAppBrowserEnabledUseCase
 import kotlin.Boolean
-import kotlin.String
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 class RSSFeedViewModel(
     private val rssRepository: RssRepository,
     private val openWebpageUseCase: OpenWebpageUseCase,
-    private val getRssArticlesUseCase: GetRssArticleUseCase,
+    private val getRssArticlesUseCase: GetRssArticlesUseCase,
     private val isInAppBrowserEnabledUseCase: IsInAppBrowserEnabledUseCase,
     private val webRepository: WebRepository,
-    private val timeManager: TimeManager
+    private val timeManager: TimeManager,
+    private val coroutineContext: CoroutineContext = EmptyCoroutineContext
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<RssFeedUiState> = MutableStateFlow(RssFeedUiState.Data(
@@ -48,7 +48,7 @@ class RSSFeedViewModel(
         get() = isInAppBrowserEnabledUseCase() && webRepository.enabled
 
     fun refresh() {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineContext) {
             _uiState.updateData { it.copy(isLoading = true) }
             val response = getRssArticlesUseCase()
             when (val resp = response) {
