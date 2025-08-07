@@ -14,7 +14,7 @@ import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.feature.rss.models.Article
 import tmg.flashback.feature.rss.models.ArticleSource
 import tmg.flashback.feature.rss.repositories.RssRepository
-import tmg.flashback.feature.rss.usecases.GetRssArticleUseCase
+import tmg.flashback.feature.rss.usecases.GetRssArticlesUseCase
 import tmg.flashback.feature.rss.usecases.Response
 import tmg.flashback.infrastructure.datetime.TimeManager
 import tmg.flashback.infrastructure.datetime.now
@@ -29,7 +29,7 @@ internal class RssFeedViewModelTest {
 
     private val mockRssRepository: RssRepository = mock(autofill)
     private val mockOpenWebpageUseCase: OpenWebpageUseCase = mock(autofill)
-    private val mockGetRssArticlesUseCase: GetRssArticleUseCase = mock(autofill)
+    private val mockGetRssArticlesUseCase: GetRssArticlesUseCase = mock(autofill)
     private val mockIsInAppBrowserEnabledUseCase: IsInAppBrowserEnabledUseCase = mock(autofill)
     private val mockWebRepository: WebRepository = mock(autofill)
     private val mockTimeManager: TimeManager = mock(autofill)

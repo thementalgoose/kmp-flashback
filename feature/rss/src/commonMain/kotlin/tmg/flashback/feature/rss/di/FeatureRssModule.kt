@@ -10,7 +10,7 @@ import tmg.flashback.feature.rss.presentation.configure.RssConfigureViewModel
 import tmg.flashback.feature.rss.presentation.feed.RSSFeedViewModel
 import tmg.flashback.feature.rss.repositories.RssRepository
 import tmg.flashback.feature.rss.repositories.RssRepositoryImpl
-import tmg.flashback.feature.rss.usecases.GetRssArticleUseCase
+import tmg.flashback.feature.rss.usecases.GetRssArticlesUseCase
 import tmg.flashback.feature.rss.usecases.GetRssArticlesUseCaseImpl
 import tmg.flashback.feature.rss.usecases.GetSourcesUseCase
 import tmg.flashback.feature.rss.usecases.GetSourcesUseCaseImpl
@@ -30,6 +30,6 @@ internal fun module() = module {
     single<RssXMLMapper> { RssXMLMapperImpl(get()) }
 
     single<GetSourcesUseCase> { GetSourcesUseCaseImpl(get()) }
-    single<GetRssArticleUseCase> { GetRssArticlesUseCaseImpl(get(), get(), get()) }
+    single<GetRssArticlesUseCase> { GetRssArticlesUseCaseImpl(get(), get(), get()) }
     single<IsRssEnabledUseCase> { IsRssEnabledUseCaseImpl(get()) }
 }

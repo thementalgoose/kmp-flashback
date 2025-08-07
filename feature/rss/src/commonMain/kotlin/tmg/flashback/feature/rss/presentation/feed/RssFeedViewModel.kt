@@ -9,24 +9,21 @@ import kotlinx.coroutines.launch
 import kotlinx.datetime.format
 import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.feature.rss.models.Article
-import tmg.flashback.feature.rss.presentation.feed.RssFeedUiState
 import tmg.flashback.feature.rss.repositories.RssRepository
-import tmg.flashback.feature.rss.usecases.GetRssArticleUseCase
+import tmg.flashback.feature.rss.usecases.GetRssArticlesUseCase
 import tmg.flashback.feature.rss.usecases.Response
 import tmg.flashback.infrastructure.datetime.TimeManager
 import tmg.flashback.infrastructure.datetime.timeFormatHHmmss
-import tmg.flashback.network.rss.api.RssApi
 import tmg.flashback.webbrowser.repository.WebRepository
 import tmg.flashback.webbrowser.usecases.IsInAppBrowserEnabledUseCase
 import kotlin.Boolean
-import kotlin.String
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
 class RSSFeedViewModel(
     private val rssRepository: RssRepository,
     private val openWebpageUseCase: OpenWebpageUseCase,
-    private val getRssArticlesUseCase: GetRssArticleUseCase,
+    private val getRssArticlesUseCase: GetRssArticlesUseCase,
     private val isInAppBrowserEnabledUseCase: IsInAppBrowserEnabledUseCase,
     private val webRepository: WebRepository,
     private val timeManager: TimeManager,
