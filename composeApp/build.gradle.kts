@@ -107,12 +107,11 @@ kotlin {
             implementation(projects.core.metrics.crashlytics)
             implementation(projects.core.notifications)
             implementation(projects.core.preferences)
-//            implementation(projects.core.tracking)
             implementation(projects.core.webbrowser)
 
             implementation(projects.data.flashback)
             implementation(projects.data.network.flashback)
-//            implementation(projects.data.network.flashbackNews)
+            implementation(projects.data.network.flashbackNews)
             implementation(projects.data.network.rss)
             implementation(projects.data.persistence.flashback)
 
@@ -124,6 +123,7 @@ kotlin {
             implementation(projects.feature.circuits)
             implementation(projects.feature.constructors)
             implementation(projects.feature.drivers)
+            implementation(projects.feature.highlights)
             implementation(projects.feature.maintenance)
             implementation(projects.feature.notifications)
             implementation(projects.feature.privacypolicy)
