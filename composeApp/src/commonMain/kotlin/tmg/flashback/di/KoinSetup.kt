@@ -33,9 +33,11 @@ import tmg.flashback.firebase.FirebaseCrashlyticsServiceImpl
 import tmg.flashback.firebase.FirebaseMessagingServiceImpl
 import tmg.flashback.firebase.FirebaseRemoteConfigServiceImpl
 import tmg.flashback.flashbackapi.api.di.dataNetworkFlashbackModule
+import tmg.flashback.feature.highlights.di.featureHighlightsModule
 import tmg.flashback.infrastructure.di.infrastructureModule
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.network.rss.di.dataNetworkRssModule
+import tmg.flashback.news.di.dataNetworkFlashbackNewsModule
 import tmg.flashback.notifications.di.coreNotificationsModule
 import tmg.flashback.notifications.firebase.FirebaseMessagingService
 import tmg.flashback.persistence.flashback.di.dataPersistenceFlashbackModule
@@ -77,10 +79,11 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
         modules(corePreferencesModule)
         modules(coreWebBrowserModule)
 
-        modules(dataNetworkFlashbackModule)
-        modules(dataPersistenceFlashbackModule)
         modules(dataFlashbackModule)
+        modules(dataNetworkFlashbackModule)
+        modules(dataNetworkFlashbackNewsModule)
         modules(dataNetworkRssModule)
+        modules(dataPersistenceFlashbackModule)
 
         modules(easterEggsModule)
 
@@ -90,6 +93,7 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
         modules(featureCircuitsModule)
         modules(featureConstructorsModule)
         modules(featureDriversModule)
+        modules(featureHighlightsModule)
         modules(featureMaintenanceModule)
         modules(featureNotificationsModule)
         modules(featurePrivacyPolicyModule)
@@ -126,7 +130,7 @@ internal fun module() = module {
     viewModel { AllSettingsViewModel(get(), get(), get()) }
     viewModel { SettingsDarkModeViewModel(get()) }
     viewModel { SettingsThemeViewModel(get()) }
-    viewModel { SettingsLayoutViewModel(get()) }
+    viewModel { SettingsLayoutViewModel(get(), get()) }
     viewModel { SettingsWeatherViewModel(get()) }
     viewModel { SettingsBrowserViewModel(get()) }
     viewModel { SettingsAboutViewModel(get(), get()) }
