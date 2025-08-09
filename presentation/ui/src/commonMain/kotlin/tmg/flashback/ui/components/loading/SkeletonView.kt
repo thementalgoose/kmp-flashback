@@ -33,10 +33,11 @@ fun SkeletonViewList(
 
 @Composable
 fun SkeletonView(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Row(modifier = modifier
         .fillMaxWidth()
+        .shimmerLoading()
         .padding(
             vertical = AppTheme.dimens.small,
             horizontal = AppTheme.dimens.medium

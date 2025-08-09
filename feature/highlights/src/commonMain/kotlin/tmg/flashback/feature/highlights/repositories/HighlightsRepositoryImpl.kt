@@ -1,4 +1,4 @@
-package tmg.flashback.highlights.repositories
+package tmg.flashback.feature.highlights.repositories
 
 import tmg.flashback.preferences.manager.PreferenceManager
 

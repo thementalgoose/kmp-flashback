@@ -32,6 +32,7 @@ fun SettingsLayoutScreen(
         insetPadding = insetPadding,
         showBack = showBack,
         uiState = uiState.value,
+        updateHighlights = viewModel::updateHighlight,
         updateCollapseRaces = viewModel::updateCollapseRacesEnabled,
         updateShowEmptyWeeks = viewModel::updateShowEmptyWeeks,
         updateKeepLastSeason = viewModel::updateKeepLastSeason
@@ -44,6 +45,7 @@ private fun SettingsLayoutScreen(
     showBack: Boolean,
     insetPadding: PaddingValues,
     actionUpClicked: () -> Unit,
+    updateHighlights: (Boolean) -> Unit,
     updateCollapseRaces: (Boolean) -> Unit,
     updateShowEmptyWeeks: (Boolean) -> Unit,
     updateKeepLastSeason: (Boolean) -> Unit,
@@ -62,7 +64,7 @@ private fun SettingsLayoutScreen(
         PrefSwitch(
             item = Settings.Layout.RecentHighlights,
             isChecked = uiState.recentHighlights,
-            itemClicked = { },
+            itemClicked = { updateHighlights(!uiState.recentHighlights) },
         )
         PrefSwitch(
             item = Settings.Layout.CollapsibleRaces,

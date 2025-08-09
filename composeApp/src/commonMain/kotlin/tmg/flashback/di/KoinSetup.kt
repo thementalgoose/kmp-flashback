@@ -20,7 +20,6 @@ import tmg.flashback.feature.about.di.featureAboutModule
 import tmg.flashback.feature.circuits.di.featureCircuitsModule
 import tmg.flashback.feature.constructors.di.featureConstructorsModule
 import tmg.flashback.feature.drivers.di.featureDriversModule
-import tmg.flashback.feature.highlights.di.featureHighlightsModule
 import tmg.flashback.feature.maintenance.di.featureMaintenanceModule
 import tmg.flashback.feature.notifications.di.featureNotificationsModule
 import tmg.flashback.feature.privacypolicy.di.featurePrivacyPolicyModule
@@ -34,6 +33,7 @@ import tmg.flashback.firebase.FirebaseCrashlyticsServiceImpl
 import tmg.flashback.firebase.FirebaseMessagingServiceImpl
 import tmg.flashback.firebase.FirebaseRemoteConfigServiceImpl
 import tmg.flashback.flashbackapi.api.di.dataNetworkFlashbackModule
+import tmg.flashback.feature.highlights.di.featureHighlightsModule
 import tmg.flashback.infrastructure.di.infrastructureModule
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.network.rss.di.dataNetworkRssModule
@@ -130,7 +130,7 @@ internal fun module() = module {
     viewModel { AllSettingsViewModel(get(), get(), get()) }
     viewModel { SettingsDarkModeViewModel(get()) }
     viewModel { SettingsThemeViewModel(get()) }
-    viewModel { SettingsLayoutViewModel(get()) }
+    viewModel { SettingsLayoutViewModel(get(), get()) }
     viewModel { SettingsWeatherViewModel(get()) }
     viewModel { SettingsBrowserViewModel(get()) }
     viewModel { SettingsAboutViewModel(get(), get()) }

@@ -12,6 +12,6 @@ val dataNetworkFlashbackNewsModule = listOf(module())
 
 internal fun module() = module {
     singleOf(::KtorClient)
-    single<FlashbackNewsApi> { FlashbackNewsApiImpl() }
+    single<FlashbackNewsApi> { FlashbackNewsApiImpl(get(), get()) }
     single<NewsRepository> { NewsRepositoryImpl(get()) }
 }

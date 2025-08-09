@@ -161,7 +161,6 @@ object Settings {
             _id = "layout_recents",
             title = string.settings_pref_recent_highlights_title,
             subtitle = string.settings_pref_recent_highlights_description,
-            isEnabled = false
         )
         val CollapsibleRaces = Setting.Pref(
             _id = "layout_collapsible_races",

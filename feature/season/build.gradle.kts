@@ -40,6 +40,7 @@ kotlin {
             implementation(projects.infrastructure)
 
             implementation(projects.feature.weekend)
+            implementation(projects.feature.highlights)
             implementation(projects.feature.drivers)
             implementation(projects.feature.constructors)
             implementation(projects.feature.notifications)

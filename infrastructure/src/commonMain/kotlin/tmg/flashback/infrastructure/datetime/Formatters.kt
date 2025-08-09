@@ -13,15 +13,15 @@ import kotlinx.datetime.format.char
 val dateFormatMMDD = LocalDate.Format {
     monthNumber(Padding.ZERO)
     char('-')
-    dayOfMonth(Padding.ZERO)
+    day(Padding.ZERO)
 }
 val dateFormatDMMM = LocalDate.Format {
-    dayOfMonth(Padding.NONE)
+    day(Padding.NONE)
     char(' ')
     monthName(ENGLISH_ABBREVIATED)
 }
 val dateFormatDMMMYYYY = LocalDate.Format {
-    dayOfMonth(Padding.NONE)
+    day(Padding.NONE)
     char(' ')
     monthName(ENGLISH_ABBREVIATED)
     char(' ')
@@ -30,7 +30,14 @@ val dateFormatDMMMYYYY = LocalDate.Format {
 val dateFormatEEEEDMMM = LocalDate.Format {
     dayOfWeek(DayOfWeekNames.ENGLISH_FULL)
     char(' ')
-    dayOfMonth(Padding.NONE)
+    day(Padding.NONE)
+    char(' ')
+    monthName(ENGLISH_ABBREVIATED)
+}
+val dateFormatEEEDMMM = LocalDate.Format {
+    dayOfWeek(DayOfWeekNames.ENGLISH_ABBREVIATED)
+    char(' ')
+    day(Padding.NONE)
     char(' ')
     monthName(ENGLISH_ABBREVIATED)
 }
@@ -39,49 +46,49 @@ val dateFormatYYYYMD = LocalDate.Format {
     char('-')
     monthNumber(Padding.NONE)
     char('-')
-    dayOfMonth(Padding.NONE)
+    day(Padding.NONE)
 }
 val dateFormatYYYYMMD = LocalDate.Format {
     year()
     char('-')
     monthNumber(Padding.ZERO)
     char('-')
-    dayOfMonth(Padding.NONE)
+    day(Padding.NONE)
 }
 val dateFormatYYYYMMDD = LocalDate.Format {
     year()
     char('-')
     monthNumber(Padding.ZERO)
     char('-')
-    dayOfMonth(Padding.ZERO)
+    day(Padding.ZERO)
 }
 val dateFormatYYYYMMMD = LocalDate.Format {
     year()
     char('-')
     monthName(ENGLISH_ABBREVIATED)
     char('-')
-    dayOfMonth(Padding.NONE)
+    day(Padding.NONE)
 }
 val dateFormatYYYYMMMDD = LocalDate.Format {
     year()
     char('-')
     monthName(ENGLISH_ABBREVIATED)
     char('-')
-    dayOfMonth(Padding.ZERO)
+    day(Padding.ZERO)
 }
 val dateFormatYYYYMMMMD = LocalDate.Format {
     year()
     char('-')
     monthName(ENGLISH_FULL)
     char('-')
-    dayOfMonth(Padding.ZERO)
+    day(Padding.ZERO)
 }
 val dateFormatYYYYMMMMDD = LocalDate.Format {
     year()
     char('-')
     monthName(ENGLISH_FULL)
     char('-')
-    dayOfMonth(Padding.ZERO)
+    day(Padding.ZERO)
 }
 
 val dateFormatEEEE = LocalDate.Format {
@@ -138,7 +145,7 @@ val dateTimeFormatHHmmAtDMMM = LocalDateTime.Format {
     char(' ')
     char('@')
     char(' ')
-    dayOfMonth(Padding.ZERO)
+    day(Padding.ZERO)
     char(' ')
     monthName(ENGLISH_ABBREVIATED)
 }
