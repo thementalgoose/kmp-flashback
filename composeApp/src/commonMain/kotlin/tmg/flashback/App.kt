@@ -34,6 +34,7 @@ import flashback.presentation.localisation.generated.resources.feature_banner_so
 import flashback.presentation.localisation.generated.resources.feature_banner_soft_upgrade_prompt
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.infrastructure.log.logInfo
@@ -51,6 +52,7 @@ import tmg.flashback.ui.navigation.NavigationBar
 import tmg.flashback.ui.navigation.OverlappingPanelsValue
 import tmg.flashback.ui.navigation.appBarHeightWhenVertical
 import tmg.flashback.ui.navigation.rememberOverlappingPanelsState
+import tmg.flashback.ui.toasts.ToastManager
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,6 +63,14 @@ fun App() {
     val windowAdaptiveInfo = currentWindowAdaptiveInfo()
     val windowSizeClass = windowAdaptiveInfo.windowSizeClass
     val isCompact = windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT
+
+    val toastManager: ToastManager = koinInject()
+    val toastBackground: Color = AppTheme.colors.primaryContainer
+    val toastForeground: Color = AppTheme.colors.onPrimaryContainer
+    LaunchedEffect(toastBackground, toastForeground) {
+        toastManager.backgroundColor = toastBackground
+        toastManager.foregroundColor = toastForeground
+    }
 
     val navController = rememberNavController()
     DisposableEffect(key1 = navController, effect = {

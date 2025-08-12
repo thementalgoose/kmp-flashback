@@ -15,6 +15,7 @@ import tmg.flashback.crashlytics.di.coreMetricsCrashlyticsModule
 import tmg.flashback.crashlytics.firebase.FirebaseCrashlyticsService
 import tmg.flashback.data.repo.di.dataFlashbackModule
 import tmg.flashback.device.di.coreDeviceModules
+import tmg.flashback.device.manager.UiManager
 import tmg.flashback.eastereggs.di.easterEggsModule
 import tmg.flashback.feature.about.di.featureAboutModule
 import tmg.flashback.feature.circuits.di.featureCircuitsModule
@@ -36,6 +37,7 @@ import tmg.flashback.flashbackapi.api.di.dataNetworkFlashbackModule
 import tmg.flashback.feature.highlights.di.featureHighlightsModule
 import tmg.flashback.infrastructure.di.infrastructureModule
 import tmg.flashback.infrastructure.log.logInfo
+import tmg.flashback.manager.UiManagerImpl
 import tmg.flashback.network.rss.di.dataNetworkRssModule
 import tmg.flashback.news.di.dataNetworkFlashbackNewsModule
 import tmg.flashback.notifications.di.coreNotificationsModule
@@ -110,6 +112,7 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
         modules(module())
         modules(platformModule())
         modules(firebaseModule())
+        modules(inverseModule())
 
         this.koin.get<AppStartup>().start()
     }
@@ -129,17 +132,21 @@ internal fun module() = module {
 
     viewModel { AllSettingsViewModel(get(), get(), get()) }
     viewModel { SettingsDarkModeViewModel(get()) }
-    viewModel { SettingsThemeViewModel(get()) }
+    viewModel { SettingsThemeViewModel(get(), get()) }
     viewModel { SettingsLayoutViewModel(get(), get()) }
     viewModel { SettingsWeatherViewModel(get()) }
     viewModel { SettingsBrowserViewModel(get()) }
-    viewModel { SettingsAboutViewModel(get(), get()) }
-    viewModel { SettingsPrivacyViewModel(get(), get()) }
+    viewModel { SettingsAboutViewModel(get(), get(), get()) }
+    viewModel { SettingsPrivacyViewModel(get(), get(), get()) }
     viewModel { SettingsWidgetsViewModel(get()) }
     viewModel { SettingsNotificationUpcomingViewModel(get(), get(), get(), get(), get()) }
     viewModel { SettingsNotificationResultsViewModel(get(), get(), get(), get()) }
 
     viewModel { SyncViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
+}
+
+internal fun inverseModule() = module {
+    single<UiManager> { UiManagerImpl(get()) }
 }
 
 internal fun firebaseModule() = module {

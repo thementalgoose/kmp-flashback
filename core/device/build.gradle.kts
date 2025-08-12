@@ -4,6 +4,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.flashback.kotlinMultiplatform)
     alias(libs.plugins.flashback.androidLibrary)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
     alias(libs.plugins.mokkery)
 }
 
@@ -25,6 +27,9 @@ kotlin {
             implementation(projects.infrastructure)
             implementation(projects.core.preferences)
             implementation(projects.core.configuration)
+            implementation(libs.bundles.koin.compose)
+            implementation(libs.bundles.compose)
+            implementation(compose.components.resources)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))

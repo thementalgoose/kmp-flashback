@@ -338,6 +338,7 @@
     <string name="settings_header_reset">重置</string>
     <string name="settings_pref_reset_title">首次同步</string>
     <string name="settings_pref_reset_description">重新运行首次同步。这将刷新所有车手、车队、比赛和赛道。</string>
+    <string name="settings_pref_reset_toast">重新启动应用后将显示首次使用体验</string>
     <string name="settings_theme_title">自定义</string>
     <string name="settings_theme_nightmode_title">深色模式</string>
     <string name="settings_theme_nightmode_description">选择您的应用主题深色模式偏好</string>

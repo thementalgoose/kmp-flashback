@@ -8,9 +8,12 @@ import dev.mokkery.answering.returns
 import dev.mokkery.every
 import dev.mokkery.mock
 import dev.mokkery.verify
+import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.settings_restart_app_required
 import kotlinx.coroutines.test.runTest
 import tmg.flashback.analytics.repositories.AnalyticsRepository
 import tmg.flashback.crashlytics.repositories.CrashlyticsRepository
+import tmg.flashback.ui.toasts.ToastManager
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -20,11 +23,13 @@ internal class SettingsPrivacyViewModelTest {
 
     private val mockCrashlyticsRepository: CrashlyticsRepository = mock(autoUnit)
     private val mockAnalyticsRepository: AnalyticsRepository = mock(autoUnit)
+    private val mockToastManager: ToastManager = mock(autoUnit)
 
     private fun initUnderTest() {
         underTest = SettingsPrivacyViewModel(
             crashlyticsRepository = mockCrashlyticsRepository,
             analyticsRepository = mockAnalyticsRepository,
+            toastManager = mockToastManager
         )
     }
 
@@ -58,11 +63,13 @@ internal class SettingsPrivacyViewModelTest {
         underTest.updateCrashlyticsEnabled(true)
         verify {
             mockCrashlyticsRepository.crashlyticsEnabled = true
+            mockToastManager.showMessage(string.settings_restart_app_required)
         }
 
         underTest.updateAnalyticsEnabled(true)
         verify {
             mockAnalyticsRepository.analyticsEnabled = true
+            mockToastManager.showMessage(string.settings_restart_app_required)
         }
     }
 }

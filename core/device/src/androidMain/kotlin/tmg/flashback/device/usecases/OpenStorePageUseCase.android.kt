@@ -10,10 +10,15 @@ import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
 import android.os.Build
 import android.widget.Toast
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.koin.java.KoinJavaComponent
 import tmg.flashback.device.PLAY_STORE_LINK
+import tmg.flashback.device.manager.UiManager
 
-actual class OpenStorePageUseCaseImpl actual constructor(): OpenStorePageUseCase {
+actual class OpenStorePageUseCaseImpl actual constructor(): OpenStorePageUseCase, KoinComponent {
+
+    private val uiManager: UiManager by inject()
 
     private fun getApplicationContext(): Context {
         return KoinJavaComponent.get(Context::class.java)
@@ -36,7 +41,7 @@ actual class OpenStorePageUseCaseImpl actual constructor(): OpenStorePageUseCase
         val clipboardManager = (context.getSystemService(CLIPBOARD_SERVICE) as? ClipboardManager) ?: return false
         clipboardManager.setPrimaryClip(ClipData.newPlainText("", url))
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
-            Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_LONG).show()
+            uiManager.showToUser("Copied")
         }
         return true
     }

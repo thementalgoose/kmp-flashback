@@ -340,6 +340,7 @@
     <string name="settings_header_reset">Restablecer</string>
     <string name="settings_pref_reset_title">Sincronización inicial</string>
     <string name="settings_pref_reset_description">Volver a ejecutar la sincronización inicial. Esto actualizará todos los pilotos, constructores, carreras y circuitos.</string>
+    <string name="settings_pref_reset_toast">La experiencia de primera vez se mostrará cuando se reinicie la aplicación</string>
     <string name="settings_pref_shake_to_report_title">Agitar para informar</string>
     <string name="settings_pref_shake_to_report_description">Agita la pantalla para proporcionar comentarios o informes de errores al desarrollador</string>
     <string name="settings_theme_title">Personalización</string>
