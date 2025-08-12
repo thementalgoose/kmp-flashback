@@ -10,11 +10,17 @@ import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
 import android.os.Build
 import android.widget.Toast
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.koin.java.KoinJavaComponent
+import tmg.flashback.device.manager.UiManager
+import tmg.flashback.infrastructure.device.Device.string
 
 
-actual class OpenEmailUseCaseImpl actual constructor(): OpenEmailUseCase {
-    
+actual class OpenEmailUseCaseImpl actual constructor(): OpenEmailUseCase, KoinComponent {
+
+    private val uiManager: UiManager by inject()
+
     private fun getApplicationContext(): Context {
         return KoinJavaComponent.get(Context::class.java)
     }
@@ -36,7 +42,7 @@ actual class OpenEmailUseCaseImpl actual constructor(): OpenEmailUseCase {
         val clipboardManager = (context.getSystemService(CLIPBOARD_SERVICE) as? ClipboardManager) ?: return false
         clipboardManager.setPrimaryClip(ClipData.newPlainText("", url))
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
-            Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_LONG).show()
+            uiManager.showToUser("Copied")
         }
         return true
     }
