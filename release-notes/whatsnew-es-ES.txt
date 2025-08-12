@@ -1,0 +1,3 @@
+- Las actualizaciones habituales de dependencias y mejoras de rendimiento.
+- Correcciones menores en las imágenes de los diseños de pista de carreras.
+- Ajustes menores de relleno en toda la aplicación para una mejor compatibilidad de edge-to-edge.
