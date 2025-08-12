@@ -7,17 +7,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.settings_restart_app_required
 import flashback.presentation.localisation.generated.resources.settings_theme_theme_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.presentation.settings.PrefRadio
 import tmg.flashback.presentation.settings.Settings
+import tmg.flashback.style.AppTheme
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.style.theme.Theme
 import tmg.flashback.style.theme.Theme.Default
 import tmg.flashback.style.theme.Theme.MaterialYou
+import tmg.flashback.ui.toasts.ToastManager.showMessage
 
 @Composable
 fun SettingsThemeScreen(
@@ -46,6 +49,9 @@ private fun SettingsThemeScreen(
     insetPadding: PaddingValues,
     actionUpClicked: () -> Unit,
 ) {
+    val restartMessage = stringResource(string.settings_restart_app_required)
+    val snackBarBackground = AppTheme.colors.primaryContainer
+    val snackBarForeground = AppTheme.colors.onPrimaryContainer
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = insetPadding
@@ -61,6 +67,11 @@ private fun SettingsThemeScreen(
             item = Settings.Theme.ThemeDefault,
             itemClicked = {
                 clickTheme(Default)
+                showMessage(
+                    message = restartMessage,
+                    backgroundColor = snackBarBackground,
+                    textColor = snackBarForeground
+                )
             },
             isChecked = uiState.theme == Default
         )
@@ -68,6 +79,11 @@ private fun SettingsThemeScreen(
             item = Settings.Theme.ThemeMaterialYou,
             itemClicked = {
                 clickTheme(MaterialYou)
+                showMessage(
+                    message = restartMessage,
+                    backgroundColor = snackBarBackground,
+                    textColor = snackBarForeground
+                )
             },
             isChecked = uiState.theme == MaterialYou
         )
