@@ -9,6 +9,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.settings_header_device_info
 import flashback.presentation.localisation.generated.resources.settings_header_legal
+import flashback.presentation.localisation.generated.resources.settings_restart_app_required
 import flashback.presentation.localisation.generated.resources.settings_section_privacy_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -18,8 +19,10 @@ import tmg.flashback.presentation.settings.PrefLink
 import tmg.flashback.presentation.settings.PrefSwitch
 import tmg.flashback.presentation.settings.Setting.Pref
 import tmg.flashback.presentation.settings.Settings
+import tmg.flashback.style.AppTheme
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
+import tmg.flashback.ui.toasts.ToastManager.showMessage
 
 @Composable
 fun SettingsPrivacyScreen(
@@ -50,6 +53,10 @@ private fun SettingsPrivacyScreen(
     crashReportingEnabled: (Boolean) -> Unit,
     analyticsEnabled: (Boolean) -> Unit,
 ) {
+    val restartMessage = stringResource(string.settings_restart_app_required)
+    val snackBarBackground = AppTheme.colors.primaryContainer
+    val snackBarForeground = AppTheme.colors.onPrimaryContainer
+
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = insetPadding
@@ -71,6 +78,11 @@ private fun SettingsPrivacyScreen(
             isChecked = uiState.crashReportingEnabled,
             itemClicked = {
                 crashReportingEnabled(!uiState.crashReportingEnabled)
+                showMessage(
+                    message = restartMessage,
+                    backgroundColor = snackBarBackground,
+                    textColor = snackBarForeground
+                )
             }
         )
         PrefSwitch(
@@ -78,6 +90,11 @@ private fun SettingsPrivacyScreen(
             isChecked = uiState.analyticsEnabled,
             itemClicked = {
                 analyticsEnabled(!uiState.analyticsEnabled)
+                showMessage(
+                    message = restartMessage,
+                    backgroundColor = snackBarBackground,
+                    textColor = snackBarForeground
+                )
             }
         )
     }

@@ -113,6 +113,12 @@ enum class AboutDependency(
         url = "https://github.com/murgupluoglu/flagkit-android",
         imageUrl = "https://avatars.githubusercontent.com/u/11410147?v=4"
     ),
+    CMPToast(
+        dependencyName = "CMPToast",
+        author = "Chaintech Network",
+        url = "https://github.com/Chaintech-Network/CMPToast",
+        imageUrl = "https://avatars.githubusercontent.com/u/143459573?s=200&v=4"
+    ),
     Ksoup(
         dependencyName = "Ksoup",
         author = "Fleek Soft",

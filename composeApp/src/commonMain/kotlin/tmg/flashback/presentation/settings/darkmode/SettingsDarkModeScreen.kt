@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.settings_restart_app_required
 import flashback.presentation.localisation.generated.resources.settings_theme_nightmode_dark
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -19,6 +20,7 @@ import tmg.flashback.style.theme.NightMode
 import tmg.flashback.style.theme.NightMode.DAY
 import tmg.flashback.style.theme.NightMode.DEFAULT
 import tmg.flashback.style.theme.NightMode.NIGHT
+import tmg.flashback.ui.toasts.ToastManager.showMessage
 
 @Composable
 fun SettingsDarkModeScreen(

@@ -21,6 +21,8 @@ class FlashbackApplication: Application(), KoinComponent {
             androidLogger()
         }
 
+        multiplatform.network.cmptoast.AppContext.apply { set(this@FlashbackApplication) }
+
         flashbackAndroidStartup.startup(application = this)
     }
 }
