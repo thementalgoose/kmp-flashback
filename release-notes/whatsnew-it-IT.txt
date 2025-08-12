@@ -1,0 +1,3 @@
+- La consueta gamma di aggiornamenti delle dipendenze e miglioramenti delle prestazioni
+- Correzioni minori alle immagini dei layout di pista da corsa
+- Piccole modifiche al padding nell'app e per un migliore supporto edge-to-edge

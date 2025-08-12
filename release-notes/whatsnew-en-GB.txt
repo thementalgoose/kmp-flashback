@@ -1,0 +1,3 @@
+- The usual assortment of dependency updates and performance improvements
+- Minor fixes to track layouts images
+- Minor padding tweaks across the app and to better support edge to edge
