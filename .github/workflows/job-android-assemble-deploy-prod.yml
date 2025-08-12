@@ -125,6 +125,7 @@ jobs:
           packageName: tmg.flashback
           releaseFiles: composeApp/build/outputs/bundle/**/*.aab
           track: internal
+          whatsNewDirectory: release-notes
           status: "completed"
           mappingFile: composeApp/build/outputs/mapping/productionRelease/mapping.txt
 
