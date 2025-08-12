@@ -69,10 +69,10 @@ private fun SettingsWidgetScreen(
             itemClicked = { updateDeeplinkToEvent(!uiState.linkToEvent) },
             isChecked = uiState.linkToEvent
         )
-        PrefSwitch(
-            item = Settings.Widgets.ShowWeather,
-            itemClicked = { updateShowWeather(!uiState.showWeather) },
-            isChecked = uiState.showWeather
-        )
+//        PrefSwitch(
+//            item = Settings.Widgets.ShowWeather,
+//            itemClicked = { updateShowWeather(!uiState.showWeather) },
+//            isChecked = uiState.showWeather
+//        )
     }
 }
