@@ -31,6 +31,7 @@ room = "2.7.2"
 sqlite = "2.5.2"
 coil = "3.3.0"
 ksoup = "0.6.0"
+cmptoast = "1.0.7"
 
 # Testing
 uiTooling = "1.8.3"
@@ -90,6 +91,9 @@ flagkit = "dev.carlsen.flagkit:flagkit:1.1.0"
 
 # HTML
 ksoup = { module = "com.mohamedrejeb.ksoup:ksoup-html", version.ref = "ksoup" }
+
+# CMP Toast
+cmptoast = { module = "network.chaintech:cmptoast", version.ref = "cmptoast" }
 
 # Coil
 coil_compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }

@@ -43,6 +43,8 @@ kotlin {
             implementation(projects.presentation.localisation)
 
             implementation(projects.infrastructure)
+
+            implementation(libs.cmptoast)
         }
 
         commonTest.dependencies {

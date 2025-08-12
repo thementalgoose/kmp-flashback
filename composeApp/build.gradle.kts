@@ -145,6 +145,7 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.material3AdaptiveNavigationSuite)
             implementation(libs.navigation.compose)
+            implementation(libs.cmptoast)
             implementation(libs.bundles.compose)
             implementation(libs.bundles.kotlin)
             implementation(libs.androidx.lifecycle.viewmodel)
