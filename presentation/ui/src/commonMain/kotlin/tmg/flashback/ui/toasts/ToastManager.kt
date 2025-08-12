@@ -1,25 +1,19 @@
 package tmg.flashback.ui.toasts
 
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import multiplatform.network.cmptoast.ToastDuration
-import multiplatform.network.cmptoast.ToastGravity
-import multiplatform.network.cmptoast.showToast
-import tmg.flashback.style.AppColors
-import tmg.flashback.style.AppTheme
+import org.jetbrains.compose.resources.StringResource
 
-object ToastManager {
+interface ToastManager {
+
+    var backgroundColor: Color
+    var foregroundColor: Color
+
     fun showMessage(
         message: String,
-        backgroundColor: Color = Color.Black,
-        textColor: Color = Color.White
-    ) {
-        showToast(
-            message = message,
-            gravity = ToastGravity.Bottom,
-            backgroundColor = backgroundColor,
-            textColor = textColor,
-            duration = ToastDuration.Long
-        )
-    }
+        duration: Duration = Duration.Long
+    )
+    fun showMessage(
+        resourceId: StringResource,
+        duration: Duration = Duration.Long
+    )
 }
