@@ -10,4 +10,8 @@ class UiManagerImpl(
     override fun showToUser(resource: StringResource) {
         toastManager.showMessage(resource)
     }
+
+    override fun showToUser(message: String) {
+        toastManager.showMessage(message)
+    }
 }

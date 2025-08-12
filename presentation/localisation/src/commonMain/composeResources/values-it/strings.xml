@@ -339,6 +339,7 @@
     <string name="settings_header_reset">Ripristina</string>
     <string name="settings_pref_reset_title">Sincronizzazione iniziale</string>
     <string name="settings_pref_reset_description">Esegui nuovamente la sincronizzazione iniziale. Questo aggiornerà tutti i piloti, i costruttori, le gare e i circuiti.</string>
+    <string name="settings_pref_reset_toast">L'esperienza di primo utilizzo verrà mostrata al riavvio dell'app</string>
     <string name="settings_pref_shake_to_report_title">Scuoti per segnalare</string>
     <string name="settings_pref_shake_to_report_description">Scuoti lo schermo per fornire feedback o segnalazioni di bug allo sviluppatore</string>
     <string name="settings_theme_title">Personalizzazione</string>

@@ -3,8 +3,11 @@ package tmg.flashback.presentation.settings.about
 import dev.mokkery.MockMode.autoUnit
 import dev.mokkery.mock
 import dev.mokkery.verify
+import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.settings_pref_reset_toast
 import tmg.flashback.device.usecases.OpenStorePageUseCase
 import tmg.flashback.repositories.OnboardingRepository
+import tmg.flashback.ui.toasts.ToastManager
 import kotlin.test.Test
 
 internal class SettingsAboutViewModelTest {
@@ -13,11 +16,13 @@ internal class SettingsAboutViewModelTest {
 
     private val mockOpenStorePageUseCase: OpenStorePageUseCase = mock(autoUnit)
     private val mockOnboardingRepository: OnboardingRepository = mock(autoUnit)
+    private val mockToastManager: ToastManager = mock(autoUnit)
 
     private fun initUnderTest() {
         underTest = SettingsAboutViewModel(
             openStorePageUseCase = mockOpenStorePageUseCase,
-            onboardingRepository = mockOnboardingRepository
+            onboardingRepository = mockOnboardingRepository,
+            toastManager = mockToastManager
         )
     }
 
@@ -40,6 +45,7 @@ internal class SettingsAboutViewModelTest {
 
         verify {
             mockOnboardingRepository.initialSyncCompleted = false
+            mockToastManager.showMessage(string.settings_pref_reset_toast)
         }
     }
 }

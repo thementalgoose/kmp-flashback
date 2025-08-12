@@ -1,15 +1,18 @@
 package tmg.flashback.presentation.settings.about
 
 import androidx.lifecycle.ViewModel
+import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.settings_pref_reset_toast
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import tmg.flashback.configuration.repositories.ConfigRepository
 import tmg.flashback.device.usecases.OpenStorePageUseCase
 import tmg.flashback.repositories.OnboardingRepository
+import tmg.flashback.ui.toasts.ToastManager
 
 class SettingsAboutViewModel(
     private val openStorePageUseCase: OpenStorePageUseCase,
-    private val onboardingRepository: OnboardingRepository
+    private val onboardingRepository: OnboardingRepository,
+    private val toastManager: ToastManager
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<SettingsAboutUiState> = MutableStateFlow(
@@ -23,5 +26,6 @@ class SettingsAboutViewModel(
 
     fun firstTimeSync() {
         onboardingRepository.initialSyncCompleted = false
+        toastManager.showMessage(string.settings_pref_reset_toast)
     }
 }
