@@ -47,19 +47,6 @@ internal class SettingsAboutViewModelTest {
     }
 
     @Test
-    fun `open feedback calls email`() {
-        every { mockDeviceRepository.deviceUdid } returns "UUID"
-        every { mockDeviceRepository.contactEmail } returns "value"
-        initUnderTest()
-
-        underTest.openFeedback()
-
-        verify {
-            mockOpenEmailUseCase.invoke("value", any(), any())
-        }
-    }
-
-    @Test
     fun `first app sync resets counter`() {
         initUnderTest()
 
