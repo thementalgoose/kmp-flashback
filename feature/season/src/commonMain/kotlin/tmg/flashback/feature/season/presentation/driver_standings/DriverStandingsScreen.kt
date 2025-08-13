@@ -41,6 +41,7 @@ import tmg.flashback.formula1.model.SeasonDriverStandingSeason
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
+import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.driver.DriverIcon
 import tmg.flashback.ui.components.edgeBar
 import tmg.flashback.ui.components.flag.Flag
@@ -82,6 +83,7 @@ internal fun DriverStandingsScreen(
                         },
                         actionUpClicked = actionUpClicked,
                         overrideIcons = {
+                            Refresh(onClick = refresh)
                             IconButton(
                                 onClick = comparisonClicked,
                                 content = {

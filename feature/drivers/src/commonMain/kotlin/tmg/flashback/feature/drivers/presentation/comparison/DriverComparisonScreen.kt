@@ -62,6 +62,7 @@ import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextTitle
+import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.driver.DriverIcon
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
@@ -99,6 +100,7 @@ fun DriverComparisonScreen(
             actionUpClicked = actionUpClicked,
             windowSizeClass = windowSizeClass,
             season = season,
+            refresh = viewModel::refresh,
             driverList = state.value.driverList,
             driverLeft = state.value.driverLeft,
             driverRight = state.value.driverRight,
@@ -114,6 +116,7 @@ fun DriverComparisonScreen(
 private fun DriverComparisonScreen(
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
+    refresh: () -> Unit,
     windowSizeClass: WindowSizeClass,
     season: Int,
     driverList: List<Driver>,
@@ -134,7 +137,10 @@ private fun DriverComparisonScreen(
                         true -> HeaderAction.BACK
                         false -> null
                     },
-                    actionUpClicked = actionUpClicked
+                    actionUpClicked = actionUpClicked,
+                    overrideIcons = {
+                        Refresh(onClick = refresh)
+                    }
                 )
             }
             item("driver-select") {
@@ -390,6 +396,7 @@ private fun PreviewChristmas(
             actionUpClicked = {},
             windowSizeClass = WindowSizeClass.compute(400f, 700f),
             season = 2024,
+            refresh = { },
             driverList = emptyList(),
             driverLeft = Driver.preview(),
             driverRight = Driver.preview(id = "2"),

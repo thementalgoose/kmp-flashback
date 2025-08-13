@@ -33,6 +33,7 @@ import tmg.flashback.formula1.model.SeasonConstructorStandingSeason
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
+import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.driver.DriverPoints
 import tmg.flashback.ui.components.edgeBar
 import tmg.flashback.ui.components.header.Header
@@ -69,7 +70,10 @@ fun TeamStandingsScreen(
                             true -> HeaderAction.MENU
                             false -> null
                         },
-                        actionUpClicked = actionUpClicked
+                        actionUpClicked = actionUpClicked,
+                        overrideIcons = {
+                            Refresh(onClick = refresh)
+                        }
                     )
                 }
                 uiState.inProgress?.let { (raceName, round) ->

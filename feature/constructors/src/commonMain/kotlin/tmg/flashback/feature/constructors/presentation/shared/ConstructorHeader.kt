@@ -5,6 +5,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,11 +39,12 @@ import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextHeadline1
 import tmg.flashback.style.text.TextHeadline2
+import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.constructor.ConstructorImage
 
-private val backgroundHeight: Dp = 100.dp
+private val backgroundHeight: Dp = 120.dp
 private val iconSize: Dp = 120.dp
-private val iconOffset: Dp = 24.dp
+private val iconOffset: Dp = 48.dp
 
 @Composable
 fun ConstructorHeader(
@@ -49,9 +52,10 @@ fun ConstructorHeader(
     constructorImage: String?,
     backClicked: () -> Unit,
     showBack: Boolean,
+    colour: Color,
     insetPadding: PaddingValues = PaddingValues(0.dp),
     modifier: Modifier = Modifier,
-    colour: Color,
+    overrideIcons: @Composable (RowScope.() -> Unit)? = null,
 ) {
     val direction = LocalLayoutDirection.current
     val insetTop = insetPadding.calculateTopPadding()
@@ -84,6 +88,14 @@ fun ConstructorHeader(
                     contentDescription = stringResource(resource = string.ab_back),
                     tint = AppTheme.colors.onSurface
                 )
+            }
+        }
+        if (overrideIcons != null) {
+            Row(modifier = Modifier
+                .padding(top = insetTop, start = insetStart)
+                .align(Alignment.TopEnd)
+            ) {
+                overrideIcons()
             }
         }
 
@@ -155,6 +167,28 @@ private fun PreviewAlt(
                 backClicked = { },
                 showBack = false,
                 colour = AppTheme.colors.primary
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun PreviewOverrideIcons(
+    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
+) {
+    ApplicationThemePreview(previewConfig) {
+        Column {
+            val constructor = Constructor.preview()
+            ConstructorHeader(
+                label = "${constructor.name}\n2020",
+                constructorImage = null,
+                backClicked = { },
+                showBack = false,
+                colour = AppTheme.colors.primary,
+                overrideIcons = {
+                    Refresh(onClick = { })
+                }
             )
         }
     }

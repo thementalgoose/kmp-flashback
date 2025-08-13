@@ -30,6 +30,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.domain.formula1.generated.resources.ic_championship_order
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.constructor_overview_stat_championship_standing
@@ -63,6 +64,7 @@ import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
+import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.driver.DriverIcon
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 
@@ -96,6 +98,7 @@ fun ConstructorSeasonScreen(
 
     ConstructorSeasonScreen(
         constructorSeasonInfo = constructorSeasonInfo,
+        windowSizeClass = windowSizeClass,
         paddingValues = paddingValues,
         actionUpClicked = actionUpClicked,
         showBack = showBack,
@@ -109,6 +112,7 @@ fun ConstructorSeasonScreen(
 @Composable
 fun ConstructorSeasonScreen(
     constructorSeasonInfo: ConstructorSeasonInfo,
+    windowSizeClass: WindowSizeClass,
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     showBack: Boolean,
@@ -142,7 +146,10 @@ fun ConstructorSeasonScreen(
                     insetPadding = paddingValues,
                     showBack = showBack,
                     colour = constructor?.colour ?: AppTheme.colors.primary,
-                    backClicked = actionUpClicked
+                    backClicked = actionUpClicked,
+                    overrideIcons = {
+                        Refresh(onClick = refresh)
+                    }
                 )
             }
             if (uiState is ConstructorSeasonUiState.Data) {
@@ -297,6 +304,7 @@ private fun Preview(
 ) {
     ApplicationThemePreview(previewConfig) {
         ConstructorSeasonScreen(
+            windowSizeClass = WindowSizeClass.compute(400f, 700f),
             constructorSeasonInfo = ConstructorSeasonInfo(2020, "id", "name"),
             paddingValues = PaddingValues(0.dp),
             actionUpClicked = { },
