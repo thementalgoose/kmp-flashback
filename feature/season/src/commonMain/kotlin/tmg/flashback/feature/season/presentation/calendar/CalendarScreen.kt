@@ -63,6 +63,7 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.buttons.ButtonSecondary
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
+import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.fade.Fade
 import tmg.flashback.ui.components.flag.Flag
 import tmg.flashback.ui.components.header.Header
@@ -106,6 +107,9 @@ fun CalendarScreen(
                         },
                         actionUpClicked = actionUpClicked,
                         overrideIcons = {
+                            if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT) {
+                                Refresh(onClick = refresh)
+                            }
                             Tyres(uiState.season)
                         }
                     )
