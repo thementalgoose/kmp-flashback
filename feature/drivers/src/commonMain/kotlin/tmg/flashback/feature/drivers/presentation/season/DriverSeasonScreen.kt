@@ -24,6 +24,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.domain.formula1.generated.resources.ic_championship_order
 import flashback.presentation.localisation.generated.resources.Res
 import flashback.presentation.localisation.generated.resources.Res.string
@@ -54,6 +55,7 @@ import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
+import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 
 data class DriverSeasonInfo(
@@ -84,6 +86,7 @@ fun DriverSeasonScreen(
 
     DriverSeasonScreen(
         driverSeasonInfo = driverSeasonInfo,
+        windowSizeClass = windowSizeClass,
         paddingValues = paddingValues,
         actionUpClicked = actionUpClicked,
         showBack = showBack,
@@ -96,6 +99,7 @@ fun DriverSeasonScreen(
 @Composable
 fun DriverSeasonScreen(
     driverSeasonInfo: DriverSeasonInfo,
+    windowSizeClass: WindowSizeClass,
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     showBack: Boolean,
@@ -129,7 +133,12 @@ fun DriverSeasonScreen(
                     insetPadding = paddingValues,
                     showBack = showBack,
                     colour = (uiState as? DriverSeasonUiState.Data)?.latestConstructor?.colour ?: AppTheme.colors.primary,
-                    backClicked = actionUpClicked
+                    backClicked = actionUpClicked,
+                    overrideIcons = {
+                        if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT) {
+                            Refresh(onClick = refresh)
+                        }
+                    }
                 )
             }
 
@@ -222,6 +231,7 @@ private fun Preview(
 ) {
     ApplicationThemePreview(previewConfig) {
         DriverSeasonScreen(
+            windowSizeClass = WindowSizeClass.compute(400f, 700f),
             driverSeasonInfo = DriverSeasonInfo(2020, "driver", "name"),
             paddingValues = PaddingValues(0.dp),
             actionUpClicked = { },
