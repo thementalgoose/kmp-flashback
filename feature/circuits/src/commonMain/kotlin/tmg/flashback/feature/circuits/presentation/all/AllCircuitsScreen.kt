@@ -50,6 +50,7 @@ import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.textinput.TextInput
+import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.flag.Flag
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
@@ -122,7 +123,12 @@ fun AllCircuitsScreen(
                 Header(
                     actionUpClicked = actionUpClicked,
                     action = HeaderAction.MENU.takeIf { windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT },
-                    text = stringResource(string.search_category_circuits)
+                    text = stringResource(string.search_category_circuits),
+                    overrideIcons = {
+                        if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT) {
+                            Refresh(onClick = refresh)
+                        }
+                    }
                 )
             }
             item("search", span = { GridItemSpan(maxLineSpan) }) {
