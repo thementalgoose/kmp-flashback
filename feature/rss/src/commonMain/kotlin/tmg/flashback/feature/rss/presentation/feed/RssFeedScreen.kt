@@ -26,6 +26,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.feature.rss.generated.resources.Res
 import flashback.feature.rss.generated.resources.ic_rss_icon_no_sources
 import flashback.feature.rss.generated.resources.ic_rss_settings
@@ -53,6 +55,7 @@ import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextCaption
+import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
@@ -67,6 +70,7 @@ fun RSSScreen(
     uiState: RssFeedUiState,
     showMenu: Boolean,
     itemClicked: (Article) -> Unit,
+    windowSizeClass: WindowSizeClass,
     configureSources: () -> Unit,
 ) {
     SwipeRefresh(
@@ -82,6 +86,9 @@ fun RSSScreen(
                             text = stringResource(resource = string.title_rss),
                             action = HeaderAction.MENU.takeIf { showMenu },
                             overrideIcons = {
+                                if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT) {
+                                    Refresh(onClick = refresh)
+                                }
                                 IconButton(onClick = configureSources) {
                                     Icon(
                                         painter = painterResource(resource = Res.drawable.ic_rss_settings),
@@ -264,7 +271,8 @@ private fun Preview(
             configureSources = {},
             actionUpClicked = {},
             showMenu = true,
-            refresh = { }
+            refresh = { },
+            windowSizeClass = WindowSizeClass.compute(400f, 700f)
         )
     }
 }
