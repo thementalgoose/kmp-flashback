@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.feature.weekend.generated.resources.Res
 import flashback.feature.weekend.generated.resources.ic_maps
 import flashback.feature.weekend.generated.resources.ic_wikipedia
@@ -46,6 +47,7 @@ import tmg.flashback.feature.weekend.presentation.data.sprint_race.addSprintRace
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.style.AppTheme
+import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
@@ -136,6 +138,9 @@ fun WeekendScreenTab(
                             action = HeaderAction.BACK.takeIf { showBack },
                             text = (uiState as? Data)?.info?.raceName ?: screenData.raceName,
                             overrideIcons = {
+                                if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT) {
+                                    Refresh(onClick = refresh)
+                                }
                                 Icons(
                                     uiState = uiState,
                                     youtubeClicked = openLink,
