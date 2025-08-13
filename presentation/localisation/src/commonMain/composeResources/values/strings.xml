@@ -199,7 +199,7 @@
     <string name="error_data_not_available_try_again">An error occurred while getting these results. Please check your internet connection and try again</string>
     <string name="error_weekend_not_available_yet">We don't have these results just yet, please check back after the race. Results usually appear 2–12 hours after every weekend event</string>
     <string name="error_search_not_found">No results found</string>
-    <string name="rss_internal_error">A network error occurred and we weren\'t able to find any articles. Please check your internet connection or try again later</string>
+    <string name="rss_internal_error">A network error occurred and we weren't able to find any articles. Please check your internet connection or try again later</string>
     <string name="rss_network_error">A network error occurred! Please check you have added a valid set of RSS sources and you are connected to the internet and try again. </string>
     <string name="rss_no_articles">Welcome to the RSS feed!\nYou don't have any RSS sources enabled - Click here to configure them now. Pull to refresh when setup</string>
 
@@ -373,6 +373,8 @@
     <string name="settings_switch_about_this_app_description">About the app, the devs and the dependencies</string>
     <string name="settings_switch_review_title">Review</string>
     <string name="settings_switch_review_description">Review the app on the app store</string>
+    <string name="settings_switch_feedback_title">Feedback</string>
+    <string name="settings_switch_feedback_description">Email the developer with some feedback or suggestions to make this app better</string>
     <string name="settings_build_version">Build version</string>
     <string name="settings_pref_shake_to_report_title">Shake to report</string>
     <string name="settings_pref_shake_to_report_description">Shake the screen to provide feedback or bug reports to the developer</string>
@@ -574,7 +576,7 @@
     <string name="widget_up_next_description">Get the schedule for the next race</string>
     <string name="widget_up_next_nothing_title">Nothing coming up</string>
     <string name="widget_up_next_nothing_title_compact">N/A</string>
-    <string name="widget_up_next_nothing_subtitle">We will get this information as soon as it\'s available. Click here to check for updates</string>
+    <string name="widget_up_next_nothing_subtitle">We will get this information as soon as it's available. Click here to check for updates</string>
     <string name="dashboard_up_next_title">Up next</string>
     <string name="dashboard_new_season_available">New season\navailable</string>
     <plurals name="dashboard_up_next_suffix_days">
@@ -604,7 +606,8 @@
     <!-- Web Browser -->
     <string name="choose_browser">Open in browser</string>
     <string name="choose_share">Share with</string>
-    <string name="copy_to_clipboard">URL Copied to clipboard</string>
+    <string name="url_copy_to_clipboard">URL copied to clipboard</string>
+    <string name="email_copy_to_clipboard">Email copied to clipboard</string>
     <string name="unable_to_open_url">Unable to open url</string>
     <string name="home_last_updated">Last updated %1$s</string>
 

@@ -9,12 +9,13 @@ import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
 import android.os.Build
-import android.widget.Toast
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.java.KoinJavaComponent
 import tmg.flashback.device.manager.UiManager
 import tmg.flashback.infrastructure.device.Device.string
+import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.email_copy_to_clipboard
 
 
 actual class OpenEmailUseCaseImpl actual constructor(): OpenEmailUseCase, KoinComponent {
@@ -25,11 +26,16 @@ actual class OpenEmailUseCaseImpl actual constructor(): OpenEmailUseCase, KoinCo
         return KoinJavaComponent.get(Context::class.java)
     }
 
-    actual override fun invoke(email: String) {
+    actual override fun invoke(
+        email: String,
+        title: String,
+        contents: String
+    ) {
         val emailIntent = Intent(Intent.ACTION_SENDTO)
         emailIntent.data = Uri.parse("mailto:$email")
         emailIntent.flags = FLAG_ACTIVITY_NEW_TASK
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Flashback")
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, title.ifEmpty { "Flashback" })
+        emailIntent.putExtra(Intent.EXTRA_TEXT, contents)
         try {
             getApplicationContext().startActivity(emailIntent)
         } catch (e: ActivityNotFoundException) {
@@ -42,7 +48,7 @@ actual class OpenEmailUseCaseImpl actual constructor(): OpenEmailUseCase, KoinCo
         val clipboardManager = (context.getSystemService(CLIPBOARD_SERVICE) as? ClipboardManager) ?: return false
         clipboardManager.setPrimaryClip(ClipData.newPlainText("", url))
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
-            uiManager.showToUser("Copied")
+            uiManager.showToUser(string.email_copy_to_clipboard)
         }
         return true
     }
