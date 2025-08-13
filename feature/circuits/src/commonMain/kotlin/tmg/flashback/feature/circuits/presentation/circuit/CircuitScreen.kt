@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.details_link_map
 import flashback.presentation.localisation.generated.resources.details_link_wikipedia
@@ -54,6 +55,7 @@ import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
+import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.flag.Flag
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
@@ -113,6 +115,9 @@ private fun CircuitScreen(
                     action = HeaderAction.BACK.takeIf { showBack },
                     text = uiState.circuit?.name ?: circuitNavigation.circuitName,
                     overrideIcons = {
+                        if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT) {
+                            Refresh(onClick = refresh)
+                        }
                         if (uiState.circuit != null) {
                             Icons(
                                 model = uiState.circuit,
