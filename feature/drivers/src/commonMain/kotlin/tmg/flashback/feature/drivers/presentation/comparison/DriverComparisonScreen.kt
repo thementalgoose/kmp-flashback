@@ -139,9 +139,7 @@ private fun DriverComparisonScreen(
                     },
                     actionUpClicked = actionUpClicked,
                     overrideIcons = {
-                        if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT) {
-                            Refresh(onClick = refresh)
-                        }
+                        Refresh(onClick = refresh)
                     }
                 )
             }

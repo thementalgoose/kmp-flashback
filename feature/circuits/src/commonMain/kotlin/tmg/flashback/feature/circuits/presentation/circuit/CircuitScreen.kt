@@ -115,9 +115,7 @@ private fun CircuitScreen(
                     action = HeaderAction.BACK.takeIf { showBack },
                     text = uiState.circuit?.name ?: circuitNavigation.circuitName,
                     overrideIcons = {
-                        if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT) {
-                            Refresh(onClick = refresh)
-                        }
+                        Refresh(onClick = refresh)
                         if (uiState.circuit != null) {
                             Icons(
                                 model = uiState.circuit,

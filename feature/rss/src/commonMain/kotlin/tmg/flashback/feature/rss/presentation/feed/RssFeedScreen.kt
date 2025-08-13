@@ -15,7 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.IconButton
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,7 +27,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
-import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.feature.rss.generated.resources.Res
 import flashback.feature.rss.generated.resources.ic_rss_icon_no_sources
 import flashback.feature.rss.generated.resources.ic_rss_settings
@@ -86,9 +85,7 @@ fun RSSScreen(
                             text = stringResource(resource = string.title_rss),
                             action = HeaderAction.MENU.takeIf { showMenu },
                             overrideIcons = {
-                                if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT) {
-                                    Refresh(onClick = refresh)
-                                }
+                                Refresh(onClick = refresh)
                                 IconButton(onClick = configureSources) {
                                     Icon(
                                         painter = painterResource(resource = Res.drawable.ic_rss_settings),

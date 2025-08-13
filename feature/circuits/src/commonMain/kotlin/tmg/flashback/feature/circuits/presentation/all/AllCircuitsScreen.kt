@@ -125,9 +125,7 @@ fun AllCircuitsScreen(
                     action = HeaderAction.MENU.takeIf { windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT },
                     text = stringResource(string.search_category_circuits),
                     overrideIcons = {
-                        if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT) {
-                            Refresh(onClick = refresh)
-                        }
+                        Refresh(onClick = refresh)
                     }
                 )
             }

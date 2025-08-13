@@ -138,9 +138,7 @@ fun WeekendScreenTab(
                             action = HeaderAction.BACK.takeIf { showBack },
                             text = (uiState as? Data)?.info?.raceName ?: screenData.raceName,
                             overrideIcons = {
-                                if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT) {
-                                    Refresh(onClick = refresh)
-                                }
+                                Refresh(onClick = refresh)
                                 Icons(
                                     uiState = uiState,
                                     youtubeClicked = openLink,

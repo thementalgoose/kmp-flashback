@@ -135,9 +135,7 @@ fun DriverSeasonScreen(
                     colour = (uiState as? DriverSeasonUiState.Data)?.latestConstructor?.colour ?: AppTheme.colors.primary,
                     backClicked = actionUpClicked,
                     overrideIcons = {
-                        if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT) {
-                            Refresh(onClick = refresh)
-                        }
+                        Refresh(onClick = refresh)
                     }
                 )
             }

@@ -148,9 +148,7 @@ fun ConstructorSeasonScreen(
                     colour = constructor?.colour ?: AppTheme.colors.primary,
                     backClicked = actionUpClicked,
                     overrideIcons = {
-                        if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT) {
-                            Refresh(onClick = refresh)
-                        }
+                        Refresh(onClick = refresh)
                     }
                 )
             }
