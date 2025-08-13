@@ -27,6 +27,7 @@ kotlin {
             implementation(projects.infrastructure)
             implementation(projects.core.preferences)
             implementation(projects.core.configuration)
+            implementation(projects.presentation.localisation)
             implementation(libs.bundles.koin.compose)
             implementation(libs.bundles.compose)
             implementation(compose.components.resources)

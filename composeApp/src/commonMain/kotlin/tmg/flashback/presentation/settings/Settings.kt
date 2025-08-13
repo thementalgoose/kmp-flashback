@@ -82,6 +82,8 @@ import flashback.presentation.localisation.generated.resources.settings_switch_e
 import flashback.presentation.localisation.generated.resources.settings_switch_enable_javascript_title
 import flashback.presentation.localisation.generated.resources.settings_switch_enable_web_browser_description
 import flashback.presentation.localisation.generated.resources.settings_switch_enable_web_browser_title
+import flashback.presentation.localisation.generated.resources.settings_switch_feedback_description
+import flashback.presentation.localisation.generated.resources.settings_switch_feedback_title
 import flashback.presentation.localisation.generated.resources.settings_switch_notification_results_qualifying_title
 import flashback.presentation.localisation.generated.resources.settings_switch_notification_results_race_title
 import flashback.presentation.localisation.generated.resources.settings_switch_notification_results_sprint_qualifying_title
@@ -396,6 +398,11 @@ object Settings {
             _id = "about_review",
             title = string.settings_switch_review_title,
             subtitle = string.settings_switch_review_description
+        )
+        val Feedback = Setting.Pref(
+            _id = "about_feedback",
+            title = string.settings_switch_feedback_title,
+            subtitle = string.settings_switch_feedback_description
         )
         val BuildVersion = Setting.Pref(
             _id = "about_build",

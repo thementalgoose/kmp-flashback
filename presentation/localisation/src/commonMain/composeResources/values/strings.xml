@@ -606,7 +606,8 @@
     <!-- Web Browser -->
     <string name="choose_browser">Open in browser</string>
     <string name="choose_share">Share with</string>
-    <string name="copy_to_clipboard">URL Copied to clipboard</string>
+    <string name="url_copy_to_clipboard">URL copied to clipboard</string>
+    <string name="email_copy_to_clipboard">Email copied to clipboard</string>
     <string name="unable_to_open_url">Unable to open url</string>
     <string name="home_last_updated">Last updated %1$s</string>
 
