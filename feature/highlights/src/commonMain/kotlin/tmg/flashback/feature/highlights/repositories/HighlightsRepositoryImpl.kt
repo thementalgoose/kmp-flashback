@@ -7,7 +7,7 @@ class HighlightsRepositoryImpl(
 ): HighlightsRepository {
 
     override var show: Boolean
-        get() = preferenceManager.getBoolean(keyRecentHighlights, false)
+        get() = preferenceManager.getBoolean(keyRecentHighlights, true)
         set(value) = preferenceManager.save(keyRecentHighlights, value)
 
     companion object {
