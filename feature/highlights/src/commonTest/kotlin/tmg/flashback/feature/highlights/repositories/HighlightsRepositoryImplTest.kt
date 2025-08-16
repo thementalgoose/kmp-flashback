@@ -34,7 +34,7 @@ internal class HighlightsRepositoryImplTest {
 
     @Test
     fun `read value from prefs`() {
-        every { mockPreferenceManager.getBoolean(expectedKeyRecentHighlights, false) } returns true
+        every { mockPreferenceManager.getBoolean(expectedKeyRecentHighlights, true) } returns true
 
         initUnderTest()
 
