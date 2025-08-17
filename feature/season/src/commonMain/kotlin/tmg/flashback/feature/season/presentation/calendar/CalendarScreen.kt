@@ -128,7 +128,7 @@ fun CalendarScreen(
                 item(key = "notification_prompt") {
                     NotificationPrompt(
                         modifier = Modifier.padding(
-                            horizontal = AppTheme.dimens.small
+                            horizontal = AppTheme.dimens.medium
                         )
                     )
                 }
