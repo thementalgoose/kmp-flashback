@@ -48,7 +48,7 @@ class AppStartup(
             currentSeasonHolder.refresh()
         }
 
-        // Subscribe to remote topics
+        // Subscribe to upcoming topics
         GlobalScope.launch {
             scheduleUpcomingNotificationsUseCase.invoke(false)
         }

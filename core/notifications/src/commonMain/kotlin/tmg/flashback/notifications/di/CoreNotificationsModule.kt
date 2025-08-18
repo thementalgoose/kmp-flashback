@@ -24,6 +24,6 @@ internal fun module() = module {
 
     single<LocalNotificationsScheduleUseCase> { LocalNotificationsScheduleUseCaseImpl(get()) }
     single<LocalNotificationsCancelUseCase> { LocalNotificationsCancelUseCaseImpl(get(), get()) }
-    single<RemoteNotificationsUnsubscribeUseCase> { RemoteNotificationsUnsubscribeUseCaseImpl(get()) }
-    single<RemoteNotificationsSubscribeUseCase> { RemoteNotificationsSubscribeUseCaseImpl(get()) }
+    single<RemoteNotificationsUnsubscribeUseCase> { RemoteNotificationsUnsubscribeUseCaseImpl(get(), get()) }
+    single<RemoteNotificationsSubscribeUseCase> { RemoteNotificationsSubscribeUseCaseImpl(get(), get()) }
 }

@@ -96,12 +96,10 @@ private fun AllSettingsScreen(
         }
         if (Device.platform == Platform.Android || Device.platform == Platform.IOS) {
             PrefHeader(string.settings_header_notifications)
-            if (Device.platform == Platform.Android) {
-                PrefCategory(
-                    item = Settings.NotificationsResultCategory,
-                    itemClicked = { navigateTo(SettingNavigation.NotificationResults) },
-                )
-            }
+            PrefCategory(
+                item = Settings.NotificationsResultCategory,
+                itemClicked = { navigateTo(SettingNavigation.NotificationResults) },
+            )
             PrefCategory(
                 item = Settings.NotificationsUpcomingCategory,
                 itemClicked = { navigateTo(SettingNavigation.NotificationUpcoming) },
