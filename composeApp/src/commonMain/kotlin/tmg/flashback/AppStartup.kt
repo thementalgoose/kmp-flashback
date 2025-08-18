@@ -29,6 +29,7 @@ class AppStartup(
     private val initialiseConfigUseCase: InitialiseConfigUseCase,
     private val fetchConfigUseCase: FetchConfigUseCase,
     private val scheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase,
+    private val subscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase,
     private val deviceRepository: DeviceRepository,
     private val initialiseCrashlyticsUseCase: InitialiseCrashlyticsUseCase,
     private val initialiseAnalyticsUseCase: InitialiseAnalyticsUseCase,
@@ -48,9 +49,10 @@ class AppStartup(
             currentSeasonHolder.refresh()
         }
 
-        // Subscribe to remote topics
+        // Subscribe to upcoming topics
         GlobalScope.launch {
             scheduleUpcomingNotificationsUseCase.invoke(false)
+            subscribeResultNotificationsUseCase.invoke()
         }
 
         Device.log()

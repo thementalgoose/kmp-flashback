@@ -24,12 +24,9 @@ import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
 import tmg.flashback.feature.notifications.model.NotificationUpcoming
 import tmg.flashback.feature.notifications.usecases.SubscribeResultNotificationsUseCase
 
-class FlashbackAndroidStartup(
-    private val subscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase
-) {
+class FlashbackAndroidStartup() {
     fun startup(application: FlashbackApplication) {
         application.setupNotificationChannels()
-        application.setupResultNotifications()
     }
 
     private fun Application.setupNotificationChannels() {
@@ -62,12 +59,6 @@ class FlashbackAndroidStartup(
                 it.group = resultsGroupId
                 notificationManager.createNotificationChannel(it)
             }
-    }
-
-    private fun Application.setupResultNotifications() {
-        GlobalScope.launch {
-            subscribeResultNotificationsUseCase.invoke()
-        }
     }
 
     private fun NotificationUpcoming.labelId(): String {

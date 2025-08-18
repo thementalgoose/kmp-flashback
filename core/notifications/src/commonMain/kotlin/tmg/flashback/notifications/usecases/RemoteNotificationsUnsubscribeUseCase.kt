@@ -1,5 +1,6 @@
 package tmg.flashback.notifications.usecases
 
+import tmg.flashback.notifications.firebase.FirebaseMessagingService
 import tmg.flashback.notifications.repositories.NotificationRepository
 
 interface RemoteNotificationsUnsubscribeUseCase {
@@ -7,10 +8,11 @@ interface RemoteNotificationsUnsubscribeUseCase {
 }
 
 internal class RemoteNotificationsUnsubscribeUseCaseImpl(
-    private val notificationRepository: NotificationRepository
+    private val notificationRepository: NotificationRepository,
+    private val firebaseMessagingService: FirebaseMessagingService
 ): RemoteNotificationsUnsubscribeUseCase {
     override suspend operator fun invoke(topic: String): Boolean {
-//        NotifierManager.getPushNotifier().unSubscribeFromTopic(topic)
+        firebaseMessagingService.unsubscribeFromTopic(topic)
         notificationRepository.remoteNotificationTopics -= topic
         return true
     }

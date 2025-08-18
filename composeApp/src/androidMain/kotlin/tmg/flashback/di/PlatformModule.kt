@@ -6,6 +6,6 @@ import tmg.flashback.navigation.WidgetNavigatorImpl
 import tmg.flashback.widgets.upnext.navigation.WidgetNavigator
 
 actual fun platformModule() = module {
-    single { FlashbackAndroidStartup(get()) }
+    single { FlashbackAndroidStartup() }
     single<WidgetNavigator> { WidgetNavigatorImpl() }
 }
