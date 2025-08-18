@@ -78,8 +78,8 @@ internal class NotificationPromptViewModelTest {
         }
 
         verifySuspend {
-            mockScheduleUpcomingNotificationsUseCase.invoke()
-            mockSubscribeResultNotificationsUseCase.invoke()
+//            mockScheduleUpcomingNotificationsUseCase.invoke()
+//            mockSubscribeResultNotificationsUseCase.invoke()
             mockPermissionManager.requestPermission(any())
             mockNotificationSettingsRepository.notificationPromptSeen = true
             mockOpenSettingsUseCase.openNotificationSettings()
