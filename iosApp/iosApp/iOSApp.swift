@@ -25,14 +25,15 @@ struct iOSApp: App {
     }
 }
 
-class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate {
+class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
 
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
+        application.registerForRemoteNotifications()
+        UNUserNotificationCenter.current().delegate = self
         Messaging.messaging().delegate = self
-        
         return true
     }
     
@@ -40,6 +41,11 @@ class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate {
         _ application: UIApplication,
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
-        Messaging.messaging().apnsToken = deviceToken
+        Messaging.messaging().setAPNSToken(deviceToken, type: .unknown)
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("Notifications - Firebase registration token: \(String(describing: fcmToken))")
+        SubscribeNotificationsKt.doSubscribe()
     }
 }

@@ -3,6 +3,7 @@ package tmg.flashback.infrastructure.log
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.ptr
 import platform.darwin.OS_LOG_DEFAULT
+import platform.darwin.OS_LOG_TYPE_DEBUG
 import platform.darwin.OS_LOG_TYPE_DEFAULT
 import platform.darwin.OS_LOG_TYPE_INFO
 import platform.darwin.__dso_handle
@@ -15,7 +16,7 @@ actual fun logDebug(tag: String, msg: String) {
         _os_log_internal(
             __dso_handle.ptr,
             OS_LOG_DEFAULT,
-            OS_LOG_TYPE_INFO,
+            OS_LOG_TYPE_DEBUG,
             "%s",
             message("D", tag, msg)
         )
