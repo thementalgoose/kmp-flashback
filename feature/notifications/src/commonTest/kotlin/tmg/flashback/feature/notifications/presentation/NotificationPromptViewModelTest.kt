@@ -15,6 +15,7 @@ import kotlinx.coroutines.test.runTest
 import tmg.flashback.device.usecases.OpenSettingsUseCase
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
 import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
+import tmg.flashback.feature.notifications.usecases.SubscribeResultNotificationsUseCase
 import tmg.flashback.ui.permissions.PermissionManager
 import tmg.flashback.ui.permissions.PermissionState.Granted
 import tmg.flashback.ui.permissions.PermissionState.NotGranted
@@ -27,6 +28,7 @@ internal class NotificationPromptViewModelTest {
     private val mockPermissionManager: PermissionManager = mock(autofill)
     private val mockOpenSettingsUseCase: OpenSettingsUseCase = mock(autofill)
     private val mockScheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase = mock(autofill)
+    private val mockSubscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase = mock(autofill)
 
     private lateinit var underTest: NotificationPromptViewModel
 
@@ -36,6 +38,7 @@ internal class NotificationPromptViewModelTest {
             permissionManager = mockPermissionManager,
             openSettingsUseCase = mockOpenSettingsUseCase,
             scheduleUpcomingNotificationsUseCase = mockScheduleUpcomingNotificationsUseCase,
+            subscribeResultNotificationsUseCase = mockSubscribeResultNotificationsUseCase,
             coroutineContext = Dispatchers.Unconfined
         )
     }
@@ -76,6 +79,7 @@ internal class NotificationPromptViewModelTest {
 
         verifySuspend {
             mockScheduleUpcomingNotificationsUseCase.invoke()
+            mockSubscribeResultNotificationsUseCase.invoke()
             mockPermissionManager.requestPermission(any())
             mockNotificationSettingsRepository.notificationPromptSeen = true
             mockOpenSettingsUseCase.openNotificationSettings()
@@ -100,6 +104,7 @@ internal class NotificationPromptViewModelTest {
 
         verifySuspend {
             mockScheduleUpcomingNotificationsUseCase.invoke()
+            mockSubscribeResultNotificationsUseCase.invoke()
             mockPermissionManager.requestPermission(any())
             mockNotificationSettingsRepository.notificationPromptSeen = true
         }
