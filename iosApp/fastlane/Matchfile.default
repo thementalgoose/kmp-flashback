@@ -1,4 +1,4 @@
-git_url("git@github.com:thementalgoose/kmp-flashback-fastlane.git")
+git_url("https://github.com/thementalgoose/kmp-flashback-fastlane")
 
 storage_mode("git")
 
