@@ -160,7 +160,7 @@ private fun PreviewAlt(
         Column {
             val driver = Driver.preview()
             DriverHeader(
-                label = "${driver.name}\n2020",
+                label = driver.name,
                 driverImage = driver.photoUrl,
                 backClicked = { },
                 showBack = false,
@@ -179,7 +179,7 @@ private fun PreviewOverrideIcon(
         Column {
             val driver = Driver.preview()
             DriverHeader(
-                label = "${driver.name}\n2020",
+                label = driver.name,
                 driverImage = driver.photoUrl,
                 backClicked = { },
                 showBack = false,
@@ -207,7 +207,7 @@ private fun PreviewInset(
         Column {
             val driver = Driver.preview()
             DriverHeader(
-                label = "${driver.name}\n2020",
+                label = driver.name,
                 driverImage = driver.photoUrl,
                 backClicked = { },
                 showBack = true,
