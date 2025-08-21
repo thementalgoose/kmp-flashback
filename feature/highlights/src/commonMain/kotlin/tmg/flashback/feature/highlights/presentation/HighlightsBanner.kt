@@ -87,7 +87,7 @@ private fun HighlightBanner(
                 SkeletonView(
                     modifier = Modifier.padding(
                         horizontal = AppTheme.dimens.medium,
-                        vertical = AppTheme.dimens.xsmall
+                        vertical = AppTheme.dimens.small
                     )
                 )
             }
@@ -98,7 +98,7 @@ private fun HighlightBanner(
                         clickItem = clickItem,
                         modifier = Modifier.padding(
                             horizontal = AppTheme.dimens.medium,
-                            vertical = AppTheme.dimens.xsmall
+                            vertical = AppTheme.dimens.small
                         )
                     )
                 }
@@ -107,7 +107,7 @@ private fun HighlightBanner(
                 LazyRow(
                     contentPadding = PaddingValues(
                         horizontal = AppTheme.dimens.medium,
-                        vertical = AppTheme.dimens.xsmall
+                        vertical = AppTheme.dimens.small
                     ),
                     horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
                 ) {
