@@ -23,15 +23,13 @@ import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.season_standings_constructor
 import org.jetbrains.compose.resources.stringResource
-import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsConstructorId
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.feature.season.presentation.shared.ongoing_banner.ResultAsOf
 import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedBy
-import tmg.flashback.feature.season.presentation.shared.seasonpicker.SeasonPicker
+import tmg.flashback.feature.season.presentation.shared.seasonpicker.ResultsSeasonPicker
 import tmg.flashback.formula1.model.SeasonConstructorStandingSeason
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.driver.DriverPoints
@@ -64,7 +62,7 @@ fun TeamStandingsScreen(
                 item(key = "header") {
                     Header(
                         content = {
-                            SeasonPicker(subtitle = stringResource(resource = string.season_standings_constructor))
+                            ResultsSeasonPicker(subtitle = stringResource(resource = string.season_standings_constructor))
                         },
                         action = when (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
                             true -> HeaderAction.MENU

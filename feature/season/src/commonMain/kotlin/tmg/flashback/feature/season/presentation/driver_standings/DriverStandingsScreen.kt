@@ -28,7 +28,6 @@ import flashback.feature.season.generated.resources.Res
 import flashback.feature.season.generated.resources.ic_driver_comparison
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.driver_comparison_title
-import flashback.presentation.localisation.generated.resources.results_accurate_for
 import flashback.presentation.localisation.generated.resources.season_standings_driver
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -36,7 +35,7 @@ import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.feature.season.presentation.shared.ongoing_banner.ResultAsOf
 import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedBy
-import tmg.flashback.feature.season.presentation.shared.seasonpicker.SeasonPicker
+import tmg.flashback.feature.season.presentation.shared.seasonpicker.ResultsSeasonPicker
 import tmg.flashback.formula1.model.SeasonDriverStandingSeason
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextBody2
@@ -75,7 +74,7 @@ internal fun DriverStandingsScreen(
                 item(key = "header") {
                     Header(
                         content = {
-                            SeasonPicker(subtitle = stringResource(resource = string.season_standings_driver))
+                            ResultsSeasonPicker(subtitle = stringResource(resource = string.season_standings_driver))
                         },
                         action = when (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
                             true -> HeaderAction.MENU

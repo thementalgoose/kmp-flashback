@@ -36,16 +36,18 @@ import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextHeadline1
 import tmg.flashback.style.text.TextHeadline1Inline
 import tmg.flashback.style.text.TextTitle
+import tmg.flashback.ui.components.season.PickerItem
+import tmg.flashback.ui.components.season.SeasonPicker
 
 @Composable
-fun SeasonPicker(
+fun ResultsSeasonPicker(
     subtitle: String?,
     viewModel: SeasonPickerViewModel = koinViewModel()
 ) {
     val seasons = viewModel.supportedSeasons.collectAsState()
     val currentSeason = viewModel.currentSeason.collectAsState()
     val newSeasonAvailable = viewModel.newSeasonAvailable.collectAsState()
-    SeasonPicker(
+    ResultsSeasonPicker(
         subtitle = subtitle,
         currentSeason = currentSeason.value,
         supportedSeasons = seasons.value,
@@ -55,61 +57,36 @@ fun SeasonPicker(
 }
 
 @Composable
-fun SeasonPicker(
+fun ResultsSeasonPicker(
     subtitle: String?,
     currentSeason: Int,
     supportedSeasons: List<Int>,
     newSeasonAvailable: Boolean,
     currentSeasonUpdated: (season: Int) -> Unit
 ) {
-    val expanded = remember { mutableStateOf(false)  }
+    val seasons = remember(supportedSeasons) { supportedSeasons.map { PickerItem.Season(it) } }
     Column(
         modifier = Modifier
             .padding(vertical = AppTheme.dimens.medium)
             .fillMaxWidth()
     ) {
-        Row(
+        SeasonPicker(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { expanded.value = true }
                 .padding(horizontal = AppTheme.dimens.medium),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            TextHeadline1Inline(text = currentSeason.toString())
-            Spacer(Modifier.width(AppTheme.dimens.nsmall))
-            Icon(
-                imageVector = Icons.Default.Edit,
-                contentDescription = null,
-                tint = AppTheme.colors.tertiary
-            )
-            if (newSeasonAvailable) {
-                Spacer(Modifier.width(AppTheme.dimens.small))
-                BadgeView(model = Badge(label = stringResource(resource = string.dashboard_new_season_available)))
-            }
-            DropdownMenu(
-                offset = DpOffset(AppTheme.dimens.medium, 0.dp),
-                modifier = Modifier.background(AppTheme.colors.tertiaryContainer),
-                expanded = expanded.value,
-                onDismissRequest = { expanded.value = false },
-                content = {
-                    supportedSeasons.forEach { season ->
-                        DropdownMenuItem(
-                            text = {
-                                TextTitle(
-                                    textColor = AppTheme.colors.onTertiaryContainer,
-                                    text = season.toString(),
-                                    bold = true
-                                )
-                            },
-                            onClick = {
-                                currentSeasonUpdated(season)
-                                expanded.value = false
-                            }
-                        )
-                    }
+            season = currentSeason,
+            seasonsToShow = seasons,
+            seasonUpdated = {
+                if (it is PickerItem.Season) {
+                    currentSeasonUpdated(it.season)
                 }
-            )
-        }
+            },
+            labelContent = {
+                if (newSeasonAvailable) {
+                    BadgeView(model = Badge(label = stringResource(resource = string.dashboard_new_season_available)))
+                }
+            }
+        )
         if (subtitle != null) {
             TextHeadline1(
                 text = subtitle,
@@ -125,7 +102,7 @@ private fun PreviewWithNewSeason(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
     ApplicationThemePreview(previewConfig) {
-        SeasonPicker(
+        ResultsSeasonPicker(
             subtitle = "Subtitle",
             currentSeason = 2023,
             supportedSeasons = listOf(2023, 2024),
@@ -141,7 +118,7 @@ private fun Preview(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
     ApplicationThemePreview(previewConfig) {
-        SeasonPicker(
+        ResultsSeasonPicker(
             subtitle = "Subtitle",
             currentSeason = 2023,
             supportedSeasons = listOf(2023, 2024),
