@@ -17,9 +17,12 @@ import tmg.flashback.feature.drivers.presentation.stats.DriverStatBuilder.getSea
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.DriverHistory
 import tmg.flashback.formula1.model.DriverHistorySeason
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 class DriverStatsViewModel(
-    private val driverRepository: DriverRepository
+    private val driverRepository: DriverRepository,
+    private val coroutineContext: CoroutineContext = EmptyCoroutineContext
 ) : ViewModel() {
 
     private val _loading: MutableStateFlow<Boolean> = MutableStateFlow(false)

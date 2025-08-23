@@ -9,12 +9,16 @@ import tmg.flashback.formula1.model.CircuitHistoryRaceResult
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.model.DriverEntry
+import tmg.flashback.formula1.model.DriverHistory
+import tmg.flashback.formula1.model.DriverHistorySeason
+import tmg.flashback.formula1.model.DriverHistorySeasonRace
 import tmg.flashback.formula1.model.FastestLap
 import tmg.flashback.formula1.model.LapTime
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.model.RaceInfo
 import tmg.flashback.formula1.model.RaceResult
 import tmg.flashback.formula1.model.Schedule
+import tmg.flashback.formula1.model.SeasonDriverStandings
 import tmg.flashback.formula1.model.SprintRaceResult
 import tmg.flashback.infrastructure.datetime.now
 
@@ -137,4 +141,37 @@ fun Schedule.Companion.preview(label: String) = Schedule(
     date = LocalDate.now(),
     time = LocalTime.now(),
     weather = null
+)
+
+fun DriverHistory.Companion.preview(
+    driverId: String = "driverId"
+) = DriverHistory(
+    driver = Driver.preview(driverId),
+    standings = listOf()
+)
+
+fun DriverHistorySeason.Companion.preview(
+    constructors: List<Constructor> = listOf(Constructor.preview()),
+    raceOverviews: List<DriverHistorySeasonRace> = listOf(DriverHistorySeasonRace.preview())
+) = DriverHistorySeason(
+    championshipStanding = 1,
+    isInProgress = false,
+    points = 25.0,
+    season = 2020,
+    constructors = constructors,
+    raceOverview = raceOverviews
+)
+
+fun DriverHistorySeasonRace.Companion.preview(
+    constructor: Constructor = Constructor.preview(),
+    raceInfo: RaceInfo = RaceInfo.preview()
+) = DriverHistorySeasonRace(
+    isSprint = false,
+    status = RaceStatus.FINISHED,
+    finished = 1,
+    points = 25.0,
+    qualified = 1,
+    gridPos = 1,
+    constructor = constructor,
+    raceInfo = raceInfo
 )
