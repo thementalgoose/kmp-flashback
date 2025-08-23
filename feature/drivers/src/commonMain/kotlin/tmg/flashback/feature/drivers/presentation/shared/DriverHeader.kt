@@ -2,6 +2,7 @@ package tmg.flashback.feature.drivers.presentation.shared
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -37,9 +38,11 @@ import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextHeadline1
-import tmg.flashback.style.text.TextHeadline2
 import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.driver.DriverIcon
+import tmg.flashback.ui.components.season.PickerItem
+import tmg.flashback.ui.components.season.Picker
+import tmg.flashback.ui.components.season.string
 
 private val backgroundHeight: Dp = 120.dp
 private val iconSize: Dp = 120.dp
@@ -47,7 +50,10 @@ private val iconOffset: Dp = 48.dp
 
 @Composable
 fun DriverHeader(
-    label: String,
+    driverName: String,
+    option: PickerItem,
+    optionsToShow: List<PickerItem>,
+    optionClicked: (PickerItem) -> Unit,
     driverImage: String?,
     backClicked: () -> Unit,
     showBack: Boolean,
@@ -111,22 +117,34 @@ fun DriverHeader(
             photoUrl = driverImage,
             constructorColor = colour.value
         )
-        
-        Column(modifier = Modifier
-            .padding(
-                top = backgroundHeight + insetTop,
-                end = iconSize + insetEnd,
-                start = insetStart
-            )
-            .defaultMinSize(minHeight = iconOffset)
-            .fillMaxWidth()
+
+        Column(
+            modifier = Modifier
+                .padding(
+                    top = backgroundHeight + insetTop + AppTheme.dimens.medium,
+                )
+                .defaultMinSize(minHeight = iconOffset)
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
         ) {
+            Picker(
+                option = option,
+                optionsToShow = optionsToShow,
+                optionUpdated = optionClicked,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = insetStart + AppTheme.dimens.medium,
+                        end = insetEnd + iconSize + AppTheme.dimens.medium
+                    )
+            )
             TextHeadline1(
-                modifier = Modifier.padding(
-                    top = AppTheme.dimens.medium,
-                    start = AppTheme.dimens.medium,
-                ),
-                text = label
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        horizontal = AppTheme.dimens.medium,
+                    ),
+                text = driverName
             )
         }
     }
@@ -141,7 +159,10 @@ private fun Preview(
         Column {
             val driver = Driver.preview()
             DriverHeader(
-                label = driver.name,
+                option = PickerItem.Text("2020"),
+                optionsToShow = listOf(),
+                optionClicked = { },
+                driverName = driver.name,
                 driverImage = driver.photoUrl,
                 backClicked = { },
                 showBack = true,
@@ -160,7 +181,10 @@ private fun PreviewAlt(
         Column {
             val driver = Driver.preview()
             DriverHeader(
-                label = "${driver.name}\n2020",
+                option = PickerItem.Text("2020"),
+                optionsToShow = listOf(),
+                optionClicked = { },
+                driverName = driver.name,
                 driverImage = driver.photoUrl,
                 backClicked = { },
                 showBack = false,
@@ -179,7 +203,10 @@ private fun PreviewOverrideIcon(
         Column {
             val driver = Driver.preview()
             DriverHeader(
-                label = "${driver.name}\n2020",
+                option = PickerItem.Text("2020"),
+                optionsToShow = listOf(),
+                optionClicked = { },
+                driverName = driver.name,
                 driverImage = driver.photoUrl,
                 backClicked = { },
                 showBack = false,
@@ -207,7 +234,10 @@ private fun PreviewInset(
         Column {
             val driver = Driver.preview()
             DriverHeader(
-                label = "${driver.name}\n2020",
+                option = PickerItem.Text("2020"),
+                optionsToShow = listOf(),
+                optionClicked = { },
+                driverName = driver.name,
                 driverImage = driver.photoUrl,
                 backClicked = { },
                 showBack = true,

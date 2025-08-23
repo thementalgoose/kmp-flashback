@@ -24,6 +24,7 @@ firebase-bom = "34.1.0"
 ktor = "3.2.3"
 okHttpLoggingInterceptor = "5.1.0"
 compose = "1.8.2"
+composeUiTooling = "1.9.0"
 composeAdaptive = "1.1.2"
 composeNavigation = "2.9.0-beta03"
 koin = "4.1.0"
@@ -116,7 +117,7 @@ turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 # Gradle Plugins
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
-androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "compose" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "composeUiTooling" }
 
 [bundles]
 androidx_glance = [

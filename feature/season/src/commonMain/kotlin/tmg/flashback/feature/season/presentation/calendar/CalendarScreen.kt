@@ -49,10 +49,9 @@ import tmg.flashback.feature.notifications.presentation.NotificationPrompt
 import tmg.flashback.feature.season.presentation.calendar.components.RaceWeekCard
 import tmg.flashback.feature.season.presentation.calendar.components.Round
 import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedBy
-import tmg.flashback.feature.season.presentation.shared.seasonpicker.SeasonPicker
+import tmg.flashback.feature.season.presentation.shared.seasonpicker.ResultsSeasonPicker
 import tmg.flashback.feature.season.presentation.tyres.TyreBottomSheet
 import tmg.flashback.formula1.enums.SeasonTyres
-import tmg.flashback.formula1.enums.getBySeason
 import tmg.flashback.formula1.enums.hasEntryForSeason
 import tmg.flashback.formula1.extensions.icon
 import tmg.flashback.formula1.extensions.label
@@ -60,11 +59,9 @@ import tmg.flashback.infrastructure.datetime.dateFormatDMMM
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.startOfWeek
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.buttons.ButtonSecondary
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.ui.components.Refresh
-import tmg.flashback.ui.components.fade.Fade
 import tmg.flashback.ui.components.flag.Flag
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
@@ -99,7 +96,7 @@ fun CalendarScreen(
                 item(key = "header") {
                     Header(
                         content = {
-                            SeasonPicker(subtitle = null)
+                            ResultsSeasonPicker(subtitle = null)
                         },
                         action = when (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
                             true -> HeaderAction.MENU
