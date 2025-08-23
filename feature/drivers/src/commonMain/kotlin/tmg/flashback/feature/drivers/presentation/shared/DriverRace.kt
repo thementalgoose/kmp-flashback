@@ -35,7 +35,6 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
-import tmg.flashback.feature.drivers.presentation.season.DriverSeasonRace
 import tmg.flashback.formula1.enums.RaceStatus
 import tmg.flashback.formula1.enums.isStatusFinished
 import tmg.flashback.formula1.model.Constructor
