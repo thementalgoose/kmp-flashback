@@ -10,8 +10,6 @@ import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.feature.drivers.presentation.comparison.DriverComparisonScreen
-import tmg.flashback.feature.drivers.presentation.season.DriverSeasonInfo
-import tmg.flashback.feature.drivers.presentation.season.DriverSeasonScreen
 import tmg.flashback.feature.drivers.presentation.stats.DriverStatsInfo
 import tmg.flashback.feature.drivers.presentation.stats.DriverStatsScreen
 import tmg.flashback.ui.navigation.MasterDetailPaneState
