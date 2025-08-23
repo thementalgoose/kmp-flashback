@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 import tmg.flashback.data.repo.repository.DriverRepository
 import tmg.flashback.feature.drivers.presentation.stats.DriverStatBuilder.getOverallStats
 import tmg.flashback.feature.drivers.presentation.stats.DriverStatBuilder.getSeasonStats
+import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.DriverHistory
 import tmg.flashback.formula1.model.DriverHistorySeason
 
@@ -41,8 +42,9 @@ class DriverStatsViewModel(
             DriverFilter.Overview -> {
                 return@combine DriverStatsUiState(
                     driver = driver?.driver,
+                    constructors = driver.getConstructors(),
                     availableSeasons = driver.availableSeasons,
-                    isLoading = false,
+                    selection = DriverFilter.Overview,
                     stats = driver.getOverallStats(),
                     data = driver.getOverallTeams()
                 )
@@ -54,8 +56,9 @@ class DriverStatsViewModel(
 
                 return@combine DriverStatsUiState(
                     driver = driver?.driver,
+                    constructors = (driverHistorySeason?.constructors ?: emptyList()).reversed(),
                     availableSeasons = driver.availableSeasons,
-                    isLoading = false,
+                    selection = DriverFilter.Season(selection.season),
                     stats = driverHistorySeason.getSeasonStats(),
                     data = driverHistorySeason.getSeasonRaces()
                 )
@@ -70,6 +73,7 @@ class DriverStatsViewModel(
             null -> selection.update { DriverFilter.Overview }
             else -> selection.update { DriverFilter.Season(season) }
         }
+        refresh()
     }
 
     fun changeSelection(season: DriverFilter) {
@@ -87,7 +91,9 @@ class DriverStatsViewModel(
 
     private fun DriverHistory?.getOverallTeams(): DriverStatsData.Overview {
         return DriverStatsData.Overview(
-            teams = emptyMap()
+            teams = (this?.standings ?: emptyList())
+                .sortedByDescending { it.season }
+                .associate { it.season to it.constructors }
         )
     }
 
@@ -95,6 +101,13 @@ class DriverStatsViewModel(
         return DriverStatsData.Season(
             races = this?.raceOverview ?: emptyList()
         )
+    }
+
+    private fun DriverHistory?.getConstructors(): List<Constructor> {
+        return this?.standings
+            ?.sortedByDescending { it.season }
+            ?.flatMap { it.constructors }
+            ?.distinct() ?: emptyList()
     }
 
     private val DriverHistory?.availableSeasons: List<Int>

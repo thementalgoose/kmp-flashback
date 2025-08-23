@@ -108,14 +108,14 @@ internal fun ResultHeader(
 @Composable
 internal fun ResultRace(
     multipleConstructors: Boolean,
-    model: DriverSeasonRace,
-    clickResult: (DriverSeasonRace) -> Unit,
+    model: DriverHistorySeasonRace,
+    clickResult: (DriverHistorySeasonRace) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier
             .alpha(
-                when (model.result.status.isStatusFinished()) {
+                when (model.status.isStatusFinished()) {
                     true -> 1.0f
                     false -> 0.5f
                 }
@@ -132,25 +132,25 @@ internal fun ResultRace(
         Column(
             Modifier.weight(1f)
         ) {
-            if (model.result.isSprint) {
+            if (model.isSprint) {
                 SprintInfo(
-                    raceName = model.result.raceInfo.name,
-                    raceCountryISO = model.result.raceInfo.circuit.countryISO,
-                    constructorColor = model.result.constructor.colour,
-                    circuitName = model.result.raceInfo.circuit.name,
-                    country = model.result.raceInfo.circuit.country,
-                    constructor = model.result.constructor,
-                    round = model.result.raceInfo.round,
+                    raceName = model.raceInfo.name,
+                    raceCountryISO = model.raceInfo.circuit.countryISO,
+                    constructorColor = model.constructor.colour,
+                    circuitName = model.raceInfo.circuit.name,
+                    country = model.raceInfo.circuit.country,
+                    constructor = model.constructor,
+                    round = model.raceInfo.round,
                     showConstructorLabel = multipleConstructors
                 )
             } else {
                 RaceInfo(
-                    raceName = model.result.raceInfo.name,
-                    raceCountryISO = model.result.raceInfo.circuit.countryISO,
-                    constructorColor = model.result.constructor.colour,
-                    circuitName = model.result.raceInfo.circuit.name,
-                    constructor = model.result.constructor,
-                    round = model.result.raceInfo.round,
+                    raceName = model.raceInfo.name,
+                    raceCountryISO = model.raceInfo.circuit.countryISO,
+                    constructorColor = model.constructor.colour,
+                    circuitName = model.raceInfo.circuit.name,
+                    constructor = model.constructor,
+                    round = model.raceInfo.round,
                     showConstructorLabel = multipleConstructors
                 )
             }
@@ -170,9 +170,9 @@ internal fun ResultRace(
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth(),
                     bold = false,
-                    text = model.result.qualified?.ordinalAbbreviation ?: "-"
+                    text = model.qualified?.ordinalAbbreviation ?: "-"
                 )
-                if (!model.result.status.isStatusFinished()) {
+                if (!model.status.isStatusFinished()) {
                     TextCaption(
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
@@ -192,30 +192,30 @@ internal fun ResultRace(
                     .fillMaxWidth()
                     .padding(top = AppTheme.dimens.xsmall)
             ) {
-                if (model.result.isSprint) {
+                if (model.isSprint) {
                     TextBody2(
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
                         bold = true,
-                        text = model.result.finished.ordinalAbbreviation
+                        text = model.finished.ordinalAbbreviation
                     )
                 } else {
                     TextBody1(
-                        textColor = when (model.result.finished == 1) {
+                        textColor = when (model.finished == 1) {
                             true -> AppTheme.colors.f1Championship
                             false -> null
                         },
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
                         bold = true,
-                        text = model.result.finished.ordinalAbbreviation
+                        text = model.finished.ordinalAbbreviation
                     )
                 }
-                if (!model.result.status.isStatusFinished()) {
+                if (!model.status.isStatusFinished()) {
                     TextCaption(
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
-                        text = model.result.status.label
+                        text = model.status.label
                     )
                 }
             }
@@ -226,7 +226,7 @@ internal fun ResultRace(
                 .padding(vertical = AppTheme.dimens.small)
         ) {
             TextBody1(
-                text = model.result.points.roundToHalf(),
+                text = model.points.roundToHalf(),
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -368,7 +368,7 @@ private fun Preview(
             )
             ResultRace(
                 multipleConstructors = true,
-                model = fakeModel.copy(result = fakeModel.result.copy(isSprint = true)),
+                model = fakeModel.copy(isSprint = true),
                 clickResult = { }
             )
             ResultRace(
@@ -380,15 +380,13 @@ private fun Preview(
     }
 }
 
-private val fakeModel = DriverSeasonRace(
-    result = DriverHistorySeasonRace(
-        isSprint = false,
-        status = RaceStatus.FINISHED,
-        finished = 1,
-        points = 25.0,
-        qualified = 2,
-        gridPos = 3,
-        constructor = Constructor.preview(),
-        raceInfo = RaceInfo.preview()
-    )
+private val fakeModel = DriverHistorySeasonRace(
+    isSprint = false,
+    status = RaceStatus.FINISHED,
+    finished = 1,
+    points = 25.0,
+    qualified = 2,
+    gridPos = 3,
+    constructor = Constructor.preview(),
+    raceInfo = RaceInfo.preview()
 )

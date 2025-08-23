@@ -28,10 +28,10 @@ import tmg.flashback.style.text.TextHeadline1Inline
 import tmg.flashback.style.text.TextTitle
 
 @Composable
-fun SeasonPicker(
-    season: Int,
-    seasonsToShow: List<PickerItem>,
-    seasonUpdated: (PickerItem) -> Unit,
+fun Picker(
+    option: PickerItem,
+    optionsToShow: List<PickerItem>,
+    optionUpdated: (PickerItem) -> Unit,
     modifier: Modifier = Modifier,
     labelContent: @Composable () -> Unit = { },
     defaultExpanded: Boolean = false
@@ -42,7 +42,7 @@ fun SeasonPicker(
             .clickable { expanded.value = true },
         verticalAlignment = Alignment.CenterVertically
     ) {
-        TextHeadline1Inline(text = season.toString())
+        TextHeadline1Inline(text = option.string())
         Spacer(Modifier.width(AppTheme.dimens.nsmall))
         Icon(
             imageVector = Icons.Default.Edit,
@@ -57,12 +57,12 @@ fun SeasonPicker(
             expanded = expanded.value,
             onDismissRequest = { expanded.value = false },
             content = {
-                seasonsToShow.forEach { season ->
+                optionsToShow.forEach { season ->
                     DropdownMenuItem(
                         text = {
                             val string = when (val item = season) {
                                 is PickerItem.Label -> stringResource(item.stringRes)
-                                is PickerItem.Season -> item.season.toString()
+                                is PickerItem.Text -> item.text
                             }
                             TextTitle(
                                 textColor = AppTheme.colors.onTertiaryContainer,
@@ -71,7 +71,7 @@ fun SeasonPicker(
                             )
                         },
                         onClick = {
-                            seasonUpdated(season)
+                            optionUpdated(season)
                             expanded.value = false
                         }
                     )
@@ -87,10 +87,10 @@ private fun Preview(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
     ApplicationThemePreview(previewConfig) {
-        SeasonPicker(
-            season = 2020,
-            seasonsToShow = listOf(PickerItem.Season(2020), PickerItem.Season(2021)),
-            seasonUpdated = { },
+        Picker(
+            option = PickerItem.Text("2020"),
+            optionsToShow = listOf(PickerItem.Text("2020"), PickerItem.Text("2021")),
+            optionUpdated = { },
         )
     }
 }
@@ -102,10 +102,10 @@ private fun PreviewExpanded(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
     ApplicationThemePreview(previewConfig) {
-        SeasonPicker(
-            season = 2020,
-            seasonsToShow = listOf(PickerItem.Season(2020), PickerItem.Season(2021)),
-            seasonUpdated = { },
+        Picker(
+            option = PickerItem.Text("2020"),
+            optionsToShow = listOf(PickerItem.Text("2020"), PickerItem.Text("2021")),
+            optionUpdated = { },
             defaultExpanded = true
         )
     }

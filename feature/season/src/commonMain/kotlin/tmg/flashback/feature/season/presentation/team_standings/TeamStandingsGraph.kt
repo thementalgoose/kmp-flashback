@@ -11,10 +11,6 @@ import androidx.window.core.layout.WindowWidthSizeClass
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.feature.constructors.presentation.season.ConstructorSeasonInfo
 import tmg.flashback.feature.constructors.presentation.season.ConstructorSeasonScreen
-import tmg.flashback.feature.drivers.presentation.season.DriverSeasonInfo
-import tmg.flashback.feature.drivers.presentation.season.DriverSeasonScreen
-import tmg.flashback.feature.season.presentation.driver_standings.DriverStandingsNavigation
-import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.navigation.MasterDetailPaneState
 import tmg.flashback.ui.navigation.MasterDetailsPane
 import tmg.flashback.ui.navigation.appBarMaximumHeight

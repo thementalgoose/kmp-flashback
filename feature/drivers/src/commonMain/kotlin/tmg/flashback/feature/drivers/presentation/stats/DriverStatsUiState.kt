@@ -2,14 +2,15 @@ package tmg.flashback.feature.drivers.presentation.stats
 
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
+import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.model.DriverHistorySeasonRace
-import tmg.flashback.navigation.Screen
 
 data class DriverStatsUiState(
     val driver: Driver? = null,
+    val constructors: List<Constructor> = emptyList(),
+    val selection: DriverFilter? = null,
     val availableSeasons: List<Int> = emptyList(),
-    val isLoading: Boolean = false,
     val stats: List<DriverStat> = emptyList(),
     val data: DriverStatsData? = null,
 )
@@ -17,7 +18,7 @@ data class DriverStatsUiState(
 sealed interface DriverStatsData {
 
     data class Overview(
-        val teams: Map<Int, List<Screen.Constructor>>,
+        val teams: Map<Int, List<Constructor>>,
     ): DriverStatsData
 
     data class Season(

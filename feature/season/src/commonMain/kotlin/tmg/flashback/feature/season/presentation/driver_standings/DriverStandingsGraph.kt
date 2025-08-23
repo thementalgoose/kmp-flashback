@@ -12,6 +12,8 @@ import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.feature.drivers.presentation.comparison.DriverComparisonScreen
 import tmg.flashback.feature.drivers.presentation.season.DriverSeasonInfo
 import tmg.flashback.feature.drivers.presentation.season.DriverSeasonScreen
+import tmg.flashback.feature.drivers.presentation.stats.DriverStatsInfo
+import tmg.flashback.feature.drivers.presentation.stats.DriverStatsScreen
 import tmg.flashback.ui.navigation.MasterDetailPaneState
 import tmg.flashback.ui.navigation.MasterDetailsPane
 import tmg.flashback.ui.navigation.appBarMaximumHeight
@@ -75,11 +77,11 @@ fun DriverStandingsGraph(
         },
         details = { model, actionUpClicked ->
             when (model) {
-                is DriverStandingsNavigation.Driver -> DriverSeasonScreen(
-                    driverSeasonInfo = DriverSeasonInfo(
+                is DriverStandingsNavigation.Driver -> DriverStatsScreen(
+                    driverStats = DriverStatsInfo(
+                        driverId = model.id,
+                        driverName = model.name,
                         season = model.season,
-                        id = model.id,
-                        name = model.name,
                     ),
                     paddingValues = paddingValues,
                     actionUpClicked = actionUpClicked,

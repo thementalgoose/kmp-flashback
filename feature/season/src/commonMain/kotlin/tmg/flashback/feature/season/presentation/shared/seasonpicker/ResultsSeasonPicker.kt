@@ -1,26 +1,12 @@
 package tmg.flashback.feature.season.presentation.shared.seasonpicker
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.DpOffset
-import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.dashboard_new_season_available
 import org.jetbrains.compose.resources.stringResource
@@ -34,10 +20,8 @@ import tmg.flashback.style.badge.BadgeView
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextHeadline1
-import tmg.flashback.style.text.TextHeadline1Inline
-import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.season.PickerItem
-import tmg.flashback.ui.components.season.SeasonPicker
+import tmg.flashback.ui.components.season.Picker
 
 @Composable
 fun ResultsSeasonPicker(
@@ -64,21 +48,21 @@ fun ResultsSeasonPicker(
     newSeasonAvailable: Boolean,
     currentSeasonUpdated: (season: Int) -> Unit
 ) {
-    val seasons = remember(supportedSeasons) { supportedSeasons.map { PickerItem.Season(it) } }
+    val seasons = remember(supportedSeasons) { supportedSeasons.map { PickerItem.Text(it.toString()) } }
     Column(
         modifier = Modifier
             .padding(vertical = AppTheme.dimens.medium)
             .fillMaxWidth()
     ) {
-        SeasonPicker(
+        Picker(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = AppTheme.dimens.medium),
-            season = currentSeason,
-            seasonsToShow = seasons,
-            seasonUpdated = {
-                if (it is PickerItem.Season) {
-                    currentSeasonUpdated(it.season)
+            option = PickerItem.Text(currentSeason.toString()),
+            optionsToShow = seasons,
+            optionUpdated = {
+                if (it is PickerItem.Text) {
+                    currentSeasonUpdated(it.text.toInt())
                 }
             },
             labelContent = {
