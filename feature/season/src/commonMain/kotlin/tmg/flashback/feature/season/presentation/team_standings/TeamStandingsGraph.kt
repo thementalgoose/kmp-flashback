@@ -9,8 +9,8 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
 import org.koin.compose.viewmodel.koinViewModel
-import tmg.flashback.feature.constructors.presentation.season.ConstructorSeasonInfo
-import tmg.flashback.feature.constructors.presentation.season.ConstructorSeasonScreen
+import tmg.flashback.feature.constructors.presentation.stats.ConstructorStatsInfo
+import tmg.flashback.feature.constructors.presentation.stats.ConstructorStatsScreen
 import tmg.flashback.ui.navigation.MasterDetailPaneState
 import tmg.flashback.ui.navigation.MasterDetailsPane
 import tmg.flashback.ui.navigation.appBarMaximumHeight
@@ -63,11 +63,11 @@ fun TeamStandingsGraph(
             navigator.clear()
         },
         details = { model, actionUpClicked ->
-            ConstructorSeasonScreen(
-               constructorSeasonInfo = ConstructorSeasonInfo(
+            ConstructorStatsScreen(
+               constructorStatsInfo = ConstructorStatsInfo(
                    season = model.season,
-                   id = model.id,
-                   name = model.name,
+                   constructorId = model.id,
+                   constructorName = model.name,
                ),
                paddingValues = paddingValues,
                actionUpClicked = actionUpClicked,
