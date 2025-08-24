@@ -2,6 +2,7 @@ package tmg.flashback.feature.highlights.domain
 
 import tmg.flashback.feature.highlights.domain.models.NewsItem
 import tmg.flashback.infrastructure.datetime.requireFromDate
+import tmg.flashback.infrastructure.log.logException
 import tmg.flashback.news.api.FlashbackNewsApi
 import tmg.flashback.news.models.news.News
 
@@ -10,9 +11,14 @@ class GetNewsItemsUseCaseImpl(
 ): GetNewsItemsUseCase {
 
     override suspend fun getNews(): List<NewsItem>? {
-        return flashbackNewsApi.getOverview()
-            ?.data
-            ?.mapNotNull { it.toDomain() }
+        try {
+            return flashbackNewsApi.getOverview()
+                ?.data
+                ?.mapNotNull { it.toDomain() }
+        } catch (e: Throwable) {
+            logException(e)
+            return emptyList()
+        }
     }
 
     private fun News.toDomain(): NewsItem? = try {
