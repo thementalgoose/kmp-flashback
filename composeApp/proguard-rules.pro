@@ -40,6 +40,8 @@
 
 -dontwarn java.lang.invoke.StringConcatFactory
 
+-keep class androidx.glance.appwidget.action.** { *; }
+
 -dontwarn androidx.appcompat.view.ContextThemeWrapper
 -dontwarn javax.xml.stream.XMLStreamException
 
