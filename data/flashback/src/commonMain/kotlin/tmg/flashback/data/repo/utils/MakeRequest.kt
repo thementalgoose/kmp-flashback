@@ -29,6 +29,9 @@ suspend fun <T> FlashbackApi.makeRequest(
         } catch (e: Exception) {
             logException(e)
             Response.Unknown
+        } catch (e: Throwable) {
+            logException(e)
+            Response.Unknown
         }
     }
 }
