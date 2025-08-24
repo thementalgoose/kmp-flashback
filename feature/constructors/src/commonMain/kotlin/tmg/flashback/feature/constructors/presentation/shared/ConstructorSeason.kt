@@ -1,4 +1,4 @@
-package tmg.flashback.feature.drivers.presentation.shared
+package tmg.flashback.feature.constructors.presentation.shared
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,6 +17,7 @@ import flashback.presentation.ui.generated.resources.ic_circle
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.formula1.model.Constructor
+import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.preview.preview
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
@@ -24,12 +25,13 @@ import tmg.flashback.style.badge.Badge
 import tmg.flashback.style.badge.BadgeView
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextTitle
 
 @Composable
-fun DriverTeam(
+fun ConstructorSeason(
     year: Int,
-    constructors: List<Constructor>,
+    drivers: List<Driver>,
     yearClicked: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -55,14 +57,10 @@ fun DriverTeam(
             horizontalAlignment = Alignment.End,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            constructors.forEach { constructor ->
-                BadgeView(
+            drivers.forEach { driver ->
+                TextBody1(
                     modifier = modifier,
-                    model = Badge(
-                        label = constructor.name,
-                        icon = Res.drawable.ic_circle
-                    ),
-                    tintIcon = constructor.colour
+                    text = driver.name
                 )
             }
         }
@@ -76,9 +74,9 @@ private fun Preview(
     @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
 ) {
     ApplicationThemePreview(previewConfig) {
-        DriverTeam(
+        ConstructorSeason(
             year = 2020,
-            constructors = listOf(Constructor.preview()),
+            drivers = listOf(Driver.preview()),
             yearClicked = { }
         )
     }

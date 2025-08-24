@@ -2,6 +2,7 @@ package tmg.flashback.feature.constructors.presentation.shared
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -41,6 +42,8 @@ import tmg.flashback.style.text.TextHeadline1
 import tmg.flashback.style.text.TextHeadline2
 import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.constructor.ConstructorImage
+import tmg.flashback.ui.components.season.Picker
+import tmg.flashback.ui.components.season.PickerItem
 
 private val backgroundHeight: Dp = 120.dp
 private val iconSize: Dp = 120.dp
@@ -48,7 +51,10 @@ private val iconOffset: Dp = 48.dp
 
 @Composable
 fun ConstructorHeader(
-    label: String,
+    constructorName: String,
+    option: PickerItem,
+    optionsToShow: List<PickerItem>,
+    optionClicked: (PickerItem) -> Unit,
     constructorImage: String?,
     backClicked: () -> Unit,
     showBack: Boolean,
@@ -113,22 +119,34 @@ fun ConstructorHeader(
             constructorColor = colour.value
         )
 
-        Column(modifier = Modifier
-            .padding(
-                top = backgroundHeight + insetTop,
-                end = iconSize + (AppTheme.dimens.medium * 2) + insetEnd,
-                start = insetStart,
-            )
-            .defaultMinSize(minHeight = iconOffset)
-            .fillMaxWidth()
+
+        Column(
+            modifier = Modifier
+                .padding(
+                    top = backgroundHeight + insetTop + AppTheme.dimens.medium,
+                )
+                .defaultMinSize(minHeight = iconOffset)
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
         ) {
+            Picker(
+                option = option,
+                optionsToShow = optionsToShow,
+                optionUpdated = optionClicked,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = insetStart + AppTheme.dimens.medium,
+                        end = insetEnd + iconSize + AppTheme.dimens.medium
+                    )
+            )
             TextHeadline1(
-                modifier = Modifier.padding(
-                    top = AppTheme.dimens.medium,
-                    start = AppTheme.dimens.medium,
-                    end = AppTheme.dimens.medium,
-                ),
-                text = label
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        horizontal = AppTheme.dimens.medium,
+                    ),
+                text = constructorName
             )
         }
     }
@@ -143,7 +161,10 @@ private fun Preview(
         Column {
             val constructor = Constructor.preview()
             ConstructorHeader(
-                label = constructor.name,
+                constructorName = constructor.name,
+                option = PickerItem.Text("..."),
+                optionsToShow = listOf(),
+                optionClicked = { },
                 constructorImage = constructor.photoUrl,
                 backClicked = { },
                 showBack = true,
@@ -162,7 +183,10 @@ private fun PreviewAlt(
         Column {
             val constructor = Constructor.preview()
             ConstructorHeader(
-                label = "${constructor.name}\n2020",
+                constructorName = constructor.name,
+                option = PickerItem.Text("..."),
+                optionsToShow = listOf(),
+                optionClicked = { },
                 constructorImage = null,
                 backClicked = { },
                 showBack = false,
@@ -181,7 +205,10 @@ private fun PreviewOverrideIcons(
         Column {
             val constructor = Constructor.preview()
             ConstructorHeader(
-                label = "${constructor.name}\n2020",
+                constructorName = constructor.name,
+                option = PickerItem.Text("..."),
+                optionsToShow = listOf(),
+                optionClicked = { },
                 constructorImage = null,
                 backClicked = { },
                 showBack = false,
@@ -209,7 +236,10 @@ private fun PreviewInset(
         Column {
             val constructor = Constructor.preview()
             ConstructorHeader(
-                label = "${constructor.name}\n2020",
+                constructorName = constructor.name,
+                option = PickerItem.Text("..."),
+                optionsToShow = listOf(),
+                optionClicked = { },
                 constructorImage = constructor.photoUrl,
                 backClicked = { },
                 showBack = true,

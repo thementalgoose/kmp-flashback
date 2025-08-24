@@ -85,7 +85,7 @@ class DriverStatsViewModel(
 
     fun refresh() {
         val driver = driver.value ?: return
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineContext) {
             _loading.update { true }
             driverRepository.populateDriver(driver)
             _loading.update { false }
