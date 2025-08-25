@@ -28,7 +28,6 @@ class HighlightsViewModel(
     fun refresh() {
         if (highlightsRepository.show) {
             viewModelScope.launch(coroutineContext) {
-                delay(5000)
                 val news = getNewsItemsUseCase.getNews() ?: emptyList()
                 _uiState.update {
                     it.copy(news = news.sortedByDescending { it.date })
