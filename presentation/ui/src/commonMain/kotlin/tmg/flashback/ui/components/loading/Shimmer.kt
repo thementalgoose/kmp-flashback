@@ -34,7 +34,7 @@ fun Modifier.shimmerLoading(
         label = "",
     )
 
-    val color = AppTheme.colors.surfaceContainer5
+    val color = AppTheme.colors.tertiary
 
     return drawBehind {
         drawRect(
