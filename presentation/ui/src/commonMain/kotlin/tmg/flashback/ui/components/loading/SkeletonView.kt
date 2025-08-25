@@ -37,7 +37,6 @@ fun SkeletonView(
 ) {
     Row(modifier = modifier
         .fillMaxWidth()
-        .shimmerLoading()
         .padding(
             vertical = AppTheme.dimens.small,
             horizontal = AppTheme.dimens.medium
@@ -45,11 +44,13 @@ fun SkeletonView(
     ) {
         Box(modifier = Modifier
             .size(48.dp)
+            .shimmerLoading()
             .background(AppTheme.colors.tertiaryContainer))
         Spacer(Modifier.width(AppTheme.dimens.medium))
         Box(modifier = Modifier
             .height(48.dp)
             .weight(1f)
+            .shimmerLoading()
             .background(AppTheme.colors.tertiaryContainer)
         )
     }

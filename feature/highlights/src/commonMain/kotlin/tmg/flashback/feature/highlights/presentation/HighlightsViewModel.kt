@@ -2,6 +2,7 @@ package tmg.flashback.feature.highlights.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -27,6 +28,7 @@ class HighlightsViewModel(
     fun refresh() {
         if (highlightsRepository.show) {
             viewModelScope.launch(coroutineContext) {
+                delay(5000)
                 val news = getNewsItemsUseCase.getNews() ?: emptyList()
                 _uiState.update {
                     it.copy(news = news.sortedByDescending { it.date })
