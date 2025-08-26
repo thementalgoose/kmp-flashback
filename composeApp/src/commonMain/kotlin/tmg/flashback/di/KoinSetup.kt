@@ -35,6 +35,8 @@ import tmg.flashback.firebase.FirebaseMessagingServiceImpl
 import tmg.flashback.firebase.FirebaseRemoteConfigServiceImpl
 import tmg.flashback.flashbackapi.api.di.dataNetworkFlashbackModule
 import tmg.flashback.feature.highlights.di.featureHighlightsModule
+import tmg.flashback.firebase.FirebaseInstallationService
+import tmg.flashback.firebase.FirebaseInstallationServiceImpl
 import tmg.flashback.infrastructure.di.infrastructureModule
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.manager.UiManagerImpl
@@ -154,4 +156,5 @@ internal fun firebaseModule() = module {
     singleOf<FirebaseCrashlyticsService>(::FirebaseCrashlyticsServiceImpl)
     singleOf<FirebaseAnalyticsService>(::FirebaseAnalyticsServiceImpl)
     singleOf<FirebaseMessagingService>(::FirebaseMessagingServiceImpl)
+    singleOf<FirebaseInstallationService>(::FirebaseInstallationServiceImpl)
 }
