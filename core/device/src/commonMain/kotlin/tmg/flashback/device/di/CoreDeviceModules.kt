@@ -4,6 +4,8 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import tmg.flashback.device.repositories.DeviceRepository
 import tmg.flashback.device.repositories.DeviceRepositoryImpl
+import tmg.flashback.device.usecases.CopyToClipboardUseCase
+import tmg.flashback.device.usecases.CopyToClipboardUseCaseImpl
 import tmg.flashback.device.usecases.OpenEmailUseCase
 import tmg.flashback.device.usecases.OpenEmailUseCaseImpl
 import tmg.flashback.device.usecases.OpenLocationUseCase
@@ -25,4 +27,5 @@ internal fun module() = module {
     singleOf<OpenEmailUseCase>(::OpenEmailUseCaseImpl)
     singleOf<OpenLocationUseCase>(::OpenLocationUseCaseImpl)
     singleOf<OpenStorePageUseCase>(::OpenStorePageUseCaseImpl)
+    singleOf<CopyToClipboardUseCase>(::CopyToClipboardUseCaseImpl)
 }
