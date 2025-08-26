@@ -36,7 +36,13 @@ class SettingsAboutViewModel(
         openEmailUseCase.invoke(
             email = deviceRepository.contactEmail,
             title = "Flashback - Feedback",
-            contents = "\n\n${Device.string()}\nID:${deviceRepository.deviceUdid}"
+            contents = """
+                
+                
+                ${Device.string()}
+                ID: ${deviceRepository.deviceUdid}
+                IID: ${deviceRepository.installationId}
+            """.trimIndent()
         )
     }
 
