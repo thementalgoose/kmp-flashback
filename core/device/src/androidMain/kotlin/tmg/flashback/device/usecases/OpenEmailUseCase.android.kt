@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
 import android.os.Build
+import androidx.core.app.ShareCompat
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.java.KoinJavaComponent
@@ -28,14 +29,13 @@ actual class OpenEmailUseCaseImpl actual constructor(): OpenEmailUseCase, KoinCo
         title: String,
         contents: String
     ) {
-        val emailIntent = Intent(Intent.ACTION_SENDTO)
-        emailIntent.flags = FLAG_ACTIVITY_NEW_TASK
-        emailIntent.type = "message/rfc822"
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, title.ifEmpty { "Flashback" })
-        emailIntent.putExtra(Intent.EXTRA_TEXT, contents)
         try {
-            applicationContext.startActivity(emailIntent)
+            ShareCompat.IntentBuilder(applicationContext)
+                .setEmailTo(arrayOf(email))
+                .setSubject(title.ifEmpty { "Flashback" })
+                .setText(contents)
+                .setChooserTitle("Email")
+                .startChooser()
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
             copyToClipboardUseCase(email)
