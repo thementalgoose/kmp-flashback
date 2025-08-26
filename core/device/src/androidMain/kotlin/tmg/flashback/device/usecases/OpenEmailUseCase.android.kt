@@ -1,22 +1,16 @@
 package tmg.flashback.device.usecases
 
 import android.content.ActivityNotFoundException
-import android.content.ClipData
-import android.content.ClipboardManager
 import android.content.Context
-import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
-import android.os.Build
+import android.text.Html
 import androidx.core.app.ShareCompat
+import androidx.core.text.HtmlCompat
+import androidx.core.text.HtmlCompat.FROM_HTML_MODE_LEGACY
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import org.koin.java.KoinJavaComponent
-import tmg.flashback.device.manager.UiManager
-import tmg.flashback.infrastructure.device.Device.string
-import flashback.presentation.localisation.generated.resources.Res.string
-import flashback.presentation.localisation.generated.resources.email_copy_to_clipboard
 
 
 actual class OpenEmailUseCaseImpl actual constructor(): OpenEmailUseCase, KoinComponent {
@@ -30,14 +24,13 @@ actual class OpenEmailUseCaseImpl actual constructor(): OpenEmailUseCase, KoinCo
         contents: String
     ) {
         try {
-            val intent = ShareCompat.IntentBuilder(applicationContext)
-                .setEmailTo(arrayOf(email))
-                .setSubject(title.ifEmpty { "Flashback" })
-                .setText(contents)
-                .setChooserTitle("Email")
-                .createChooserIntent()
-            intent.flags = FLAG_ACTIVITY_NEW_TASK
-            applicationContext.startActivity(intent)
+            val emailIntent = Intent(Intent.ACTION_SENDTO)
+            emailIntent.setDataAndType(Uri.parse("mailto:"), "text/html")
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(email)) // Multiple recipients
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, title.ifEmpty { "Flashback" })
+            emailIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(contents, FROM_HTML_MODE_LEGACY))
+            emailIntent.flags = FLAG_ACTIVITY_NEW_TASK
+            applicationContext.startActivity(emailIntent)
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
             copyToClipboardUseCase(email)
