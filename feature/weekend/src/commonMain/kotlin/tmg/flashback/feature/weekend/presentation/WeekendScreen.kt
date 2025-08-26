@@ -12,8 +12,8 @@ import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -21,7 +21,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.window.core.layout.WindowSizeClass
-import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.feature.weekend.generated.resources.Res
 import flashback.feature.weekend.generated.resources.ic_maps
 import flashback.feature.weekend.generated.resources.ic_wikipedia
@@ -64,14 +63,12 @@ fun WeekendScreen(
     windowSizeClass: WindowSizeClass,
     viewModel: WeekendViewModel = koinViewModel()
 ) {
-
     ScreenView(
         screenName = "Weekend", args = mapOf(
             AnalyticsConstants.analyticsSeason to screenData.season.toString(),
             AnalyticsConstants.analyticsRound to screenData.round.toString()
         )
     )
-
 
     val uiState = viewModel.uiState.collectAsState()
     val isLoading = viewModel.isLoading.collectAsState()

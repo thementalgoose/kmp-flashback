@@ -16,7 +16,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -131,10 +131,12 @@ fun AllCircuitsScreen(
             }
             item("search", span = { GridItemSpan(maxLineSpan) }) {
                 TextInput(
-                    modifier = Modifier.padding(
-                        horizontal = AppTheme.dimens.medium,
-                        vertical = AppTheme.dimens.xsmall
-                    ),
+                    modifier = Modifier
+                        .animateItem()
+                        .padding(
+                            horizontal = AppTheme.dimens.medium,
+                            vertical = AppTheme.dimens.xsmall
+                        ),
                     text = searchTerm,
                     onValueChange = {
                         searchTerm.value = it
@@ -146,6 +148,7 @@ fun AllCircuitsScreen(
             }
             items(uiState.circuits, key = { it.circuit.id }) {
                 Circuit(
+                    modifier = Modifier.animateItem(),
                     model = it,
                     onClick = circuitClicked
                 )
