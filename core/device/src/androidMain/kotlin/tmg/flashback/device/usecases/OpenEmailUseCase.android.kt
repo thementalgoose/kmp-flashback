@@ -20,11 +20,8 @@ import flashback.presentation.localisation.generated.resources.email_copy_to_cli
 
 actual class OpenEmailUseCaseImpl actual constructor(): OpenEmailUseCase, KoinComponent {
 
-    private val uiManager: UiManager by inject()
-
-    private fun getApplicationContext(): Context {
-        return KoinJavaComponent.get(Context::class.java)
-    }
+    private val copyToClipboardUseCase: CopyToClipboardUseCase by inject()
+    private val applicationContext: Context by inject()
 
     actual override fun invoke(
         email: String,
@@ -38,20 +35,10 @@ actual class OpenEmailUseCaseImpl actual constructor(): OpenEmailUseCase, KoinCo
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, title.ifEmpty { "Flashback" })
         emailIntent.putExtra(Intent.EXTRA_TEXT, contents)
         try {
-            getApplicationContext().startActivity(emailIntent)
+            applicationContext.startActivity(emailIntent)
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
-            copyToClipboard(getApplicationContext(), email)
+            copyToClipboardUseCase(email)
         }
-    }
-
-
-    private fun copyToClipboard(context: Context, url: String): Boolean {
-        val clipboardManager = (context.getSystemService(CLIPBOARD_SERVICE) as? ClipboardManager) ?: return false
-        clipboardManager.setPrimaryClip(ClipData.newPlainText("", url))
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
-            uiManager.showToUser(string.email_copy_to_clipboard)
-        }
-        return true
     }
 }
