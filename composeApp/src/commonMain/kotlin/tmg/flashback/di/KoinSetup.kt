@@ -65,6 +65,8 @@ import tmg.flashback.style.di.presentationStyleModule
 import tmg.flashback.ui.di.presentationUiModule
 import tmg.flashback.usecases.RequiresSyncUseCase
 import tmg.flashback.usecases.RequiresSyncUseCaseImpl
+import tmg.flashback.usecases.StoreFirebaseInstallationIdUseCase
+import tmg.flashback.usecases.StoreFirebaseInstallationIdUseCaseImpl
 import tmg.flashback.webbrowser.di.coreWebBrowserModule
 import tmg.flashback.widgets.upnext.di.featureWidgetUpNextModule
 
@@ -124,12 +126,13 @@ expect fun platformModule(): Module
 
 internal fun module() = module {
 
-    single { AppStartup(get(), get(), get(),get(), get(), get(), get()) }
+    single { AppStartup(get(), get(), get(), get(),get(), get(), get(), get()) }
 
     viewModel { AppNavigationViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
 
     single<OnboardingRepository> { OnboardingRepositoryImpl(get()) }
 
+    single<StoreFirebaseInstallationIdUseCase> { StoreFirebaseInstallationIdUseCaseImpl(get(), get()) }
     single<RequiresSyncUseCase> { RequiresSyncUseCaseImpl(get(), get()) }
 
     viewModel { AllSettingsViewModel(get(), get(), get()) }

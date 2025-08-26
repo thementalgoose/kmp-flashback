@@ -18,6 +18,7 @@ import tmg.flashback.infrastructure.device.log
 import tmg.flashback.ui.permissions.Permission
 import tmg.flashback.ui.permissions.PermissionManager
 import tmg.flashback.ui.permissions.PermissionState
+import tmg.flashback.usecases.StoreFirebaseInstallationIdUseCase
 
 /**
  * App startup class
@@ -30,6 +31,7 @@ class AppStartup(
     private val fetchConfigUseCase: FetchConfigUseCase,
     private val scheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase,
     private val deviceRepository: DeviceRepository,
+    private val storeFirebaseInstallationIdUseCase: StoreFirebaseInstallationIdUseCase,
     private val initialiseCrashlyticsUseCase: InitialiseCrashlyticsUseCase,
     private val initialiseAnalyticsUseCase: InitialiseAnalyticsUseCase,
     private val currentSeasonHolder: CurrentSeasonHolder
@@ -46,6 +48,11 @@ class AppStartup(
         GlobalScope.launch {
             fetchConfigUseCase.fetchAndApply()
             currentSeasonHolder.refresh()
+        }
+
+        // Installations
+        GlobalScope.launch {
+            storeFirebaseInstallationIdUseCase()
         }
 
         // Subscribe to upcoming topics
