@@ -197,12 +197,9 @@ private fun AboutListScreen(
 
         item("footer") {
             Footer(
+                idsClicked = idsClicked,
                 modifier = Modifier
                     .animateItem()
-                    .combinedClickable(
-                        onClick = { },
-                        onLongClick = idsClicked
-                    )
                     .padding(horizontal = AppTheme.dimens.medium),
                 version = Device.versionName,
                 debugIds = listOfNotNull(deviceId, installationId, remoteNotificationId)
@@ -275,12 +272,9 @@ private fun AboutPaneScreen(
 
             item("footer") {
                 Footer(
+                    idsClicked = idsClicked,
                     modifier = Modifier
                         .animateItem()
-                        .combinedClickable(
-                            onClick = { },
-                            onLongClick = idsClicked
-                        )
                         .padding(horizontal = AppTheme.dimens.medium),
                     version = Device.versionName,
                     debugIds = listOfNotNull(deviceId, installationId, remoteNotificationId)
@@ -394,7 +388,7 @@ private fun Section(
         )
         Icon(
             modifier = Modifier.rotate(degrees.value),
-            painter = painterResource(resource = flashback.presentation.ui.generated.resources.Res.drawable.arrow_down),
+            painter = painterResource(resource = Res.drawable.arrow_down),
             contentDescription = null,
             tint = AppTheme.colors.onSurface
         )
@@ -405,6 +399,7 @@ private fun Section(
 private fun Footer(
     version: String,
     debugIds: String,
+    idsClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -422,6 +417,12 @@ private fun Footer(
         Spacer(Modifier.height(4.dp))
 
         TextBody2(
+            modifier = Modifier
+                .combinedClickable(
+                    onClick = { },
+                    onLongClick = idsClicked
+                )
+                .fillMaxWidth(),
             text = debugIds,
             textColor = AppTheme.colors.onSurfaceVariant
         )
