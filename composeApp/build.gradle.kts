@@ -80,6 +80,11 @@ kotlin {
             extraOpts += listOf("-compiler-option", "-fmodules")
         }
 
+        pod("FirebaseInstallations") {
+            version = "~> 11.13"
+            extraOpts += listOf("-compiler-option", "-fmodules")
+        }
+
         podfile = project.file("../iosApp/Podfile")
 
         xcodeConfigurationToNativeBuildType["Sandbox Debug"]=NativeBuildType.DEBUG
@@ -98,6 +103,7 @@ kotlin {
             implementation(libs.firebase.analytics)
             implementation(libs.androidx.splashscreen)
             implementation(libs.firebase.messaging)
+            implementation(libs.firebase.installations)
         }
         commonMain.dependencies {
 
