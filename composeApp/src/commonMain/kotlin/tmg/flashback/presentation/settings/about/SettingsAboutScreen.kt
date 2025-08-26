@@ -86,16 +86,16 @@ private fun SettingsAboutScreen(
             item = Settings.About.Changelog,
             itemClicked = { openChangelog() }
         )
-        PrefLink(
-            item = Settings.About.BuildVersion,
-            itemClicked = { }
-        )
         PrefHeader(string.settings_pref_reset_title)
         PrefLink(
             item = Settings.About.FirstTimeSync,
             itemClicked = { firstTimeSync() }
         )
         PrefHeader(string.settings_header_device_info)
+        PrefLink(
+            item = Settings.About.BuildVersion,
+            itemClicked = { }
+        )
         PrefLink(
             item = Settings.About.DeviceInfo,
             itemClicked = { }
