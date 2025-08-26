@@ -35,6 +35,8 @@ import tmg.flashback.firebase.FirebaseMessagingServiceImpl
 import tmg.flashback.firebase.FirebaseRemoteConfigServiceImpl
 import tmg.flashback.flashbackapi.api.di.dataNetworkFlashbackModule
 import tmg.flashback.feature.highlights.di.featureHighlightsModule
+import tmg.flashback.firebase.FirebaseInstallationService
+import tmg.flashback.firebase.FirebaseInstallationServiceImpl
 import tmg.flashback.infrastructure.di.infrastructureModule
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.manager.UiManagerImpl
@@ -63,6 +65,8 @@ import tmg.flashback.style.di.presentationStyleModule
 import tmg.flashback.ui.di.presentationUiModule
 import tmg.flashback.usecases.RequiresSyncUseCase
 import tmg.flashback.usecases.RequiresSyncUseCaseImpl
+import tmg.flashback.usecases.StoreFirebaseInstallationIdUseCase
+import tmg.flashback.usecases.StoreFirebaseInstallationIdUseCaseImpl
 import tmg.flashback.webbrowser.di.coreWebBrowserModule
 import tmg.flashback.widgets.upnext.di.featureWidgetUpNextModule
 
@@ -122,12 +126,13 @@ expect fun platformModule(): Module
 
 internal fun module() = module {
 
-    single { AppStartup(get(), get(), get(),get(), get(), get(), get()) }
+    single { AppStartup(get(), get(), get(), get(),get(), get(), get(), get()) }
 
     viewModel { AppNavigationViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
 
     single<OnboardingRepository> { OnboardingRepositoryImpl(get()) }
 
+    single<StoreFirebaseInstallationIdUseCase> { StoreFirebaseInstallationIdUseCaseImpl(get(), get()) }
     single<RequiresSyncUseCase> { RequiresSyncUseCaseImpl(get(), get()) }
 
     viewModel { AllSettingsViewModel(get(), get(), get()) }
@@ -154,4 +159,5 @@ internal fun firebaseModule() = module {
     singleOf<FirebaseCrashlyticsService>(::FirebaseCrashlyticsServiceImpl)
     singleOf<FirebaseAnalyticsService>(::FirebaseAnalyticsServiceImpl)
     singleOf<FirebaseMessagingService>(::FirebaseMessagingServiceImpl)
+    singleOf<FirebaseInstallationService>(::FirebaseInstallationServiceImpl)
 }

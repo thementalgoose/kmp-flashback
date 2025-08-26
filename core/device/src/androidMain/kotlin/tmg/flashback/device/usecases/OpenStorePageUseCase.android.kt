@@ -18,31 +18,18 @@ import tmg.flashback.device.manager.UiManager
 
 actual class OpenStorePageUseCaseImpl actual constructor(): OpenStorePageUseCase, KoinComponent {
 
-    private val uiManager: UiManager by inject()
-
-    private fun getApplicationContext(): Context {
-        return KoinJavaComponent.get(Context::class.java)
-    }
+    private val copyToClipboardUseCase: CopyToClipboardUseCase by inject()
+    private val applicationContext: Context by inject()
 
     actual override fun invoke() {
         try {
-            getApplicationContext().startActivity(
+            applicationContext.startActivity(
                 Intent(Intent.ACTION_VIEW, Uri.parse(PLAY_STORE_LINK)).apply {
                     flags = FLAG_ACTIVITY_NEW_TASK
                 }
             )
         } catch (e: ActivityNotFoundException) {
-            copyToClipboard(getApplicationContext(), PLAY_STORE_LINK)
+            copyToClipboardUseCase(PLAY_STORE_LINK)
         }
-    }
-
-
-    private fun copyToClipboard(context: Context, url: String): Boolean {
-        val clipboardManager = (context.getSystemService(CLIPBOARD_SERVICE) as? ClipboardManager) ?: return false
-        clipboardManager.setPrimaryClip(ClipData.newPlainText("", url))
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
-            uiManager.showToUser("Copied")
-        }
-        return true
     }
 }

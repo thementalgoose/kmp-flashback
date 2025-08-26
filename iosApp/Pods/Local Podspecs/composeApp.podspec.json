@@ -23,6 +23,9 @@
     "FirebaseCrashlytics": [
       "~> 11.13"
     ],
+    "FirebaseInstallations": [
+      "~> 11.13"
+    ],
     "FirebaseMessaging": [
       "~> 11.13"
     ],

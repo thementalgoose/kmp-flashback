@@ -4,6 +4,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -88,7 +89,9 @@ fun AboutScreen(
             deviceId = uiState.value.deviceUuid,
             dependencyClicked = viewModel::openDependency,
             buttonClicked = viewModel::openButton,
-            installationId = uiState.value.installationId
+            remoteNotificationId = uiState.value.remoteTokenId,
+            installationId = uiState.value.installationId,
+            idsClicked = viewModel::idsClicked
         )
     } else {
         AboutPaneScreen(
@@ -99,7 +102,9 @@ fun AboutScreen(
             deviceId = uiState.value.deviceUuid,
             dependencyClicked = viewModel::openDependency,
             buttonClicked = viewModel::openButton,
-            installationId = uiState.value.installationId
+            installationId = uiState.value.installationId,
+            remoteNotificationId = uiState.value.remoteTokenId,
+            idsClicked = viewModel::idsClicked
         )
     }
 }
@@ -110,10 +115,12 @@ private fun AboutListScreen(
     email: String,
     deviceId: String,
     installationId: String,
+    remoteNotificationId: String?,
     paddingValues: PaddingValues,
     buttonClicked: (AboutButtons) -> Unit,
     dependencyClicked: (AboutDependency) -> Unit,
     actionUpClicked: () -> Unit,
+    idsClicked: () -> Unit,
 ) {
     val showDependencies = remember { mutableStateOf(true) }
     LazyColumn(
@@ -190,11 +197,13 @@ private fun AboutListScreen(
 
         item("footer") {
             Footer(
+                idsClicked = idsClicked,
                 modifier = Modifier
                     .animateItem()
                     .padding(horizontal = AppTheme.dimens.medium),
                 version = Device.versionName,
-                debugIds = "$deviceId\n$installationId"
+                debugIds = listOfNotNull(deviceId, installationId, remoteNotificationId)
+                    .joinToString(separator = "\n")
             )
         }
     }
@@ -207,9 +216,11 @@ private fun AboutPaneScreen(
     email: String,
     deviceId: String,
     installationId: String,
+    remoteNotificationId: String?,
     buttonClicked: (AboutButtons) -> Unit,
     dependencyClicked: (AboutDependency) -> Unit,
     actionUpClicked: () -> Unit,
+    idsClicked: () -> Unit,
 ) {
     Row(modifier = Modifier.fillMaxWidth()) {
         LazyColumn(
@@ -261,11 +272,13 @@ private fun AboutPaneScreen(
 
             item("footer") {
                 Footer(
+                    idsClicked = idsClicked,
                     modifier = Modifier
                         .animateItem()
                         .padding(horizontal = AppTheme.dimens.medium),
                     version = Device.versionName,
-                    debugIds = "$deviceId\n$installationId"
+                    debugIds = listOfNotNull(deviceId, installationId, remoteNotificationId)
+                        .joinToString(separator = "\n")
                 )
             }
         }
@@ -375,7 +388,7 @@ private fun Section(
         )
         Icon(
             modifier = Modifier.rotate(degrees.value),
-            painter = painterResource(resource = flashback.presentation.ui.generated.resources.Res.drawable.arrow_down),
+            painter = painterResource(resource = Res.drawable.arrow_down),
             contentDescription = null,
             tint = AppTheme.colors.onSurface
         )
@@ -386,6 +399,7 @@ private fun Section(
 private fun Footer(
     version: String,
     debugIds: String,
+    idsClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -403,6 +417,12 @@ private fun Footer(
         Spacer(Modifier.height(4.dp))
 
         TextBody2(
+            modifier = Modifier
+                .combinedClickable(
+                    onClick = { },
+                    onLongClick = idsClicked
+                )
+                .fillMaxWidth(),
             text = debugIds,
             textColor = AppTheme.colors.onSurfaceVariant
         )
@@ -514,10 +534,12 @@ private fun PreviewList(
             email = "thementalgoose@gmail.com",
             deviceId = "uuid",
             installationId = "installation-uuid",
+            remoteNotificationId = "notification-id",
             actionUpClicked = { },
             dependencyClicked = { },
             buttonClicked = { },
             icon = Res.drawable.unknown_avatar,
+            idsClicked = { }
         )
     }
 }
@@ -534,10 +556,12 @@ private fun PreviewPane(
             email = "thementalgoose@gmail.com",
             deviceId = "uuid",
             installationId = "installation-uuid",
+            remoteNotificationId = "notification-id",
             icon = Res.drawable.unknown_avatar,
             dependencyClicked = { },
             buttonClicked = { },
-            actionUpClicked = { }
+            actionUpClicked = { },
+            idsClicked = { }
         )
     }
 }

@@ -18,28 +18,17 @@ import java.net.MalformedURLException
 
 actual class OpenWebpageUseCaseImpl actual constructor(): OpenWebpageUseCase, KoinComponent {
 
-    private val uiManager: UiManager by inject()
+    private val copyToClipboardUseCase: CopyToClipboardUseCase by inject()
 
-    private fun getApplicationContext(): Context {
-        return KoinJavaComponent.get(Context::class.java)
-    }
+    private val applicationContext: Context by inject()
 
     actual override fun invoke(url: String, title: String) {
         try {
             val intent = webpageIntent(url)
-            getApplicationContext().startActivity(intent)
+            applicationContext.startActivity(intent)
         } catch (e: ActivityNotFoundException) {
-            copyToClipboard(getApplicationContext(), url)
+            copyToClipboardUseCase(url)
         }
-    }
-
-    private fun copyToClipboard(context: Context, url: String): Boolean {
-        val clipboardManager = (context.getSystemService(CLIPBOARD_SERVICE) as? ClipboardManager) ?: return false
-        clipboardManager.setPrimaryClip(ClipData.newPlainText("", url))
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
-            uiManager.showToUser("Copied")
-        }
-        return true
     }
 
     private fun webpageIntent(url: String): Intent? {
