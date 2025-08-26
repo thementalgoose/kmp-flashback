@@ -30,12 +30,14 @@ actual class OpenEmailUseCaseImpl actual constructor(): OpenEmailUseCase, KoinCo
         contents: String
     ) {
         try {
-            ShareCompat.IntentBuilder(applicationContext)
+            val intent = ShareCompat.IntentBuilder(applicationContext)
                 .setEmailTo(arrayOf(email))
                 .setSubject(title.ifEmpty { "Flashback" })
                 .setText(contents)
                 .setChooserTitle("Email")
-                .startChooser()
+                .createChooserIntent()
+            intent.flags = FLAG_ACTIVITY_NEW_TASK
+            applicationContext.startActivity(intent)
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
             copyToClipboardUseCase(email)
