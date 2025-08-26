@@ -17,6 +17,7 @@ import org.jetbrains.compose.resources.StringResource
 data class AboutUiState(
     val deviceUuid: String,
     val installationId: String,
+    val remoteTokenId: String?,
     val contactEmail: String,
 )
 

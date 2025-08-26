@@ -10,9 +10,11 @@ import tmg.flashback.device.repositories.DeviceRepository
 import tmg.flashback.device.usecases.OpenEmailUseCase
 import tmg.flashback.device.usecases.OpenStorePageUseCase
 import tmg.flashback.device.usecases.OpenWebpageUseCase
+import tmg.flashback.notifications.repositories.NotificationRepository
 
 class AboutViewModel(
     private val deviceRepository: DeviceRepository,
+    private val notificationRepository: NotificationRepository,
     private val openWebpageUseCase: OpenWebpageUseCase,
     private val openEmailUseCase: OpenEmailUseCase,
 ): ViewModel() {
@@ -20,12 +22,17 @@ class AboutViewModel(
     private val _uiState: MutableStateFlow<AboutUiState> = MutableStateFlow(AboutUiState(
         deviceUuid = deviceRepository.deviceUdid,
         installationId = deviceRepository.installationId,
+        remoteTokenId = notificationRepository.remoteNotificationToken,
         contactEmail = deviceRepository.contactEmail,
     ))
     val uiState: StateFlow<AboutUiState> = _uiState
 
     fun openDependency(dependency: AboutDependency) {
         openWebpageUseCase.invoke(dependency.url, dependency.name)
+    }
+
+    fun idsClicked() {
+
     }
 
     fun openButton(aboutButtons: AboutButtons) {
