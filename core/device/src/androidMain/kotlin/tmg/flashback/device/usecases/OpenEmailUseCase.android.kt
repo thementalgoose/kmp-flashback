@@ -30,7 +30,7 @@ actual class OpenEmailUseCaseImpl actual constructor(): OpenEmailUseCase, KoinCo
     ) {
         val emailIntent = Intent(Intent.ACTION_SENDTO)
         emailIntent.flags = FLAG_ACTIVITY_NEW_TASK
-        emailIntent.data = Uri.parse("mailto:")
+        emailIntent.type = "message/rfc822"
         emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, title.ifEmpty { "Flashback" })
         emailIntent.putExtra(Intent.EXTRA_TEXT, contents)
