@@ -95,6 +95,8 @@ import flashback.presentation.localisation.generated.resources.settings_switch_n
 import flashback.presentation.localisation.generated.resources.settings_switch_notification_upcoming_sprint_title
 import flashback.presentation.localisation.generated.resources.settings_switch_review_description
 import flashback.presentation.localisation.generated.resources.settings_switch_review_title
+import flashback.presentation.localisation.generated.resources.settings_switch_changelog_description
+import flashback.presentation.localisation.generated.resources.settings_switch_changelog_title
 import flashback.presentation.localisation.generated.resources.settings_theme_nightmode_dark
 import flashback.presentation.localisation.generated.resources.settings_theme_nightmode_follow_system
 import flashback.presentation.localisation.generated.resources.settings_theme_nightmode_light
@@ -398,6 +400,11 @@ object Settings {
             _id = "about_review",
             title = string.settings_switch_review_title,
             subtitle = string.settings_switch_review_description
+        )
+        val Changelog = Setting.Pref(
+            _id = "about_changelog",
+            title = string.settings_switch_changelog_title,
+            subtitle = string.settings_switch_changelog_description
         )
         val Feedback = Setting.Pref(
             _id = "about_feedback",

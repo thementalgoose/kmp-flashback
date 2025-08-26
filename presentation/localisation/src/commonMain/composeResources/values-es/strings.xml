@@ -337,6 +337,8 @@
     <string name="settings_switch_about_this_app_description">Acerca de la aplicación, los desarrolladores y las dependencias</string>
     <string name="settings_switch_review_title">Reseña</string>
     <string name="settings_switch_review_description">Reseña la aplicación en la app store</string>
+    <string name="settings_switch_changelog_title">Registro de cambios</string>
+    <string name="settings_switch_changelog_description">Ver los registros de cambios de la versión</string>
     <string name="settings_switch_feedback_title">Comentarios</string>
     <string name="settings_switch_feedback_description">Enviar un correo electrónico al desarrollador con comentarios o sugerencias para mejorar esta aplicación</string>
     <string name="settings_header_reset">Restablecer</string>

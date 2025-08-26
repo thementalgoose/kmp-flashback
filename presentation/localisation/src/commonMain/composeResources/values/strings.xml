@@ -373,6 +373,8 @@
     <string name="settings_switch_about_this_app_description">About the app, the devs and the dependencies</string>
     <string name="settings_switch_review_title">Review</string>
     <string name="settings_switch_review_description">Review the app on the app store</string>
+    <string name="settings_switch_changelog_title">Changelog</string>
+    <string name="settings_switch_changelog_description">View the release changelogs</string>
     <string name="settings_switch_feedback_title">Feedback</string>
     <string name="settings_switch_feedback_description">Email the developer with some feedback or suggestions to make this app better</string>
     <string name="settings_build_version">Build version</string>

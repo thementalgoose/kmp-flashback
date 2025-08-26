@@ -37,6 +37,7 @@ fun SettingsAboutScreen(
         showBack = showBack,
         openReview = viewModel::openReview,
         openFeedback = viewModel::openFeedback,
+        openChangelog = viewModel::openChangelog,
         firstTimeSync = viewModel::firstTimeSync,
         uiState = uiState.value,
     )
@@ -50,6 +51,7 @@ private fun SettingsAboutScreen(
     insetPadding: PaddingValues,
     openReview: () -> Unit,
     openFeedback: () -> Unit,
+    openChangelog: () -> Unit,
     actionUpClicked: () -> Unit,
     firstTimeSync: () -> Unit,
 ) {
@@ -81,8 +83,8 @@ private fun SettingsAboutScreen(
             itemClicked = { openFeedback() }
         )
         PrefLink(
-            item = Settings.About.BuildVersion,
-            itemClicked = { }
+            item = Settings.About.Changelog,
+            itemClicked = { openChangelog() }
         )
         PrefHeader(string.settings_pref_reset_title)
         PrefLink(
@@ -90,6 +92,10 @@ private fun SettingsAboutScreen(
             itemClicked = { firstTimeSync() }
         )
         PrefHeader(string.settings_header_device_info)
+        PrefLink(
+            item = Settings.About.BuildVersion,
+            itemClicked = { }
+        )
         PrefLink(
             item = Settings.About.DeviceInfo,
             itemClicked = { }
