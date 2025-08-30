@@ -23,13 +23,16 @@ import org.jetbrains.compose.resources.getString
 import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
 import tmg.flashback.feature.notifications.model.NotificationUpcoming
 import tmg.flashback.feature.notifications.usecases.SubscribeResultNotificationsUseCase
+import tmg.flashback.widgets.upnext.usecases.RefreshWidgetsUseCase
 
 class FlashbackAndroidStartup(
-    private val subscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase
+    private val subscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase,
+    private val refreshWidgetsUseCase: RefreshWidgetsUseCase
 ) {
     fun startup(application: FlashbackApplication) {
         application.setupNotificationChannels()
         application.setupResultNotifications()
+        application.refreshWidgets()
     }
 
     private fun Application.setupNotificationChannels() {
@@ -62,6 +65,10 @@ class FlashbackAndroidStartup(
                 it.group = resultsGroupId
                 notificationManager.createNotificationChannel(it)
             }
+    }
+
+    private fun Application.refreshWidgets() {
+        refreshWidgetsUseCase()
     }
 
     private fun Application.setupResultNotifications() {
