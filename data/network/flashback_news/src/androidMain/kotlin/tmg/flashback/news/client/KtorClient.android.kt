@@ -14,6 +14,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.serializer
 import okhttp3.logging.HttpLoggingInterceptor
 import tmg.flashback.infrastructure.device.Device
+import tmg.flashback.infrastructure.network.DnsUtils
 
 actual val KtorClient: HttpClient by lazy {
     Log.d("SDK","KtorClient Android")
@@ -23,6 +24,9 @@ actual val KtorClient: HttpClient by lazy {
         expectSuccess = true
 
         engine {
+            config {
+                dns(DnsUtils.dns)
+            }
             // add logging interceptor
             if (Device.isDebug) {
                 addInterceptor(

@@ -12,8 +12,13 @@ import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.KotlinxSerializationConverter
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.serializer
+import okhttp3.HttpUrl.Companion.toHttpUrl
+import okhttp3.OkHttpClient
+import okhttp3.dnsoverhttps.DnsOverHttps
 import okhttp3.logging.HttpLoggingInterceptor
 import tmg.flashback.infrastructure.device.Device
+import tmg.flashback.infrastructure.network.DnsUtils
+import java.net.InetAddress
 
 actual val KtorClient: HttpClient by lazy {
     Log.d("SDK","KtorClient Android")
@@ -23,6 +28,9 @@ actual val KtorClient: HttpClient by lazy {
         expectSuccess = true
 
         engine {
+            config {
+                dns(DnsUtils.dns)
+            }
             // add logging interceptor
             if (Device.isDebug) {
                 addInterceptor(
