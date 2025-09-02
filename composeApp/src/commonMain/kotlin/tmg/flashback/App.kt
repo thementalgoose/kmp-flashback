@@ -150,14 +150,13 @@ fun App() {
         )
 
         // Initial sync
-        val promptContentSync = remember(appNavigationUiState.value.promptContentSync) {
-            mutableStateOf(appNavigationUiState.value.promptContentSync)
+        val isOpen = remember { mutableStateOf(appNavigationUiState.value.promptContentSync) }
+        if (isOpen.value) {
+            SyncBottomSheet(
+                hide = { isOpen.value = false },
+                windowSizeClass = windowSizeClass
+            )
         }
-        SyncBottomSheet(
-            show = promptContentSync.value,
-            unlock = { promptContentSync.value = false },
-            windowSizeClass = windowSizeClass
-        )
     }
 }
 

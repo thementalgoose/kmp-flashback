@@ -104,7 +104,7 @@ class SyncViewModel(
         if (_driversState.value != DONE) {
             _driversState.value = LOADING
             viewModelScope.launch {
-                delay(DELAY_SYNC_MS)
+                delay(DELAY_SYNC_DRIVERS)
                 _driversState.value = when (driverRepository.populateDrivers()) {
                     Response.Successful -> DONE
                     else -> FAILED
@@ -117,7 +117,7 @@ class SyncViewModel(
         if (_constructorsState.value != DONE) {
             _constructorsState.value = LOADING
             viewModelScope.launch {
-                delay(DELAY_SYNC_MS)
+                delay(DELAY_SYNC_TEAMS)
                 _constructorsState.value = when (constructorRepository.populateConstructors()) {
                     Response.Successful -> DONE
                     else -> FAILED
@@ -130,7 +130,7 @@ class SyncViewModel(
         if (_circuitsState.value != DONE) {
             _circuitsState.value = LOADING
             viewModelScope.launch {
-                delay(DELAY_SYNC_MS)
+                delay(DELAY_SYNC_CIRCUITS)
                 _circuitsState.value = when (circuitRepository.populateCircuits()) {
                     Response.Successful -> DONE
                     else -> FAILED
@@ -143,7 +143,7 @@ class SyncViewModel(
         if (_racesState.value != DONE) {
             _racesState.value = LOADING
             viewModelScope.launch {
-                delay(DELAY_SYNC_MS)
+                delay(DELAY_SYNC_RACES)
                 _racesState.value = when (overviewRepository.populateOverview()) {
                     Response.Successful -> DONE
                     else -> FAILED
@@ -154,7 +154,10 @@ class SyncViewModel(
     }
 
     companion object {
-        private val DELAY_SYNC_MS = 300L
+        private val DELAY_SYNC_DRIVERS = 200L
+        private val DELAY_SYNC_TEAMS = 400L
+        private val DELAY_SYNC_CIRCUITS = 600L
+        private val DELAY_SYNC_RACES = 800L
         private val DELAY_CONFIG_SYNC_MS = 1000L
     }
 }
