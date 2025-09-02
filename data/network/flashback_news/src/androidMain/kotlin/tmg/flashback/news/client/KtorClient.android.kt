@@ -1,28 +1,29 @@
 package tmg.flashback.news.client
 
-import android.util.Log
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
-import io.ktor.client.plugins.HttpRequestRetry
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.defaultRequest
-import io.ktor.client.plugins.logging.LogLevel
-import io.ktor.client.plugins.logging.Logging
 import io.ktor.http.ContentType
-import io.ktor.serialization.kotlinx.KotlinxSerializationConverter
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.serialization.serializer
+import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import tmg.flashback.infrastructure.device.Device
+import tmg.flashback.infrastructure.network.DnsUtils
 
 actual val KtorClient: HttpClient by lazy {
-    Log.d("SDK","KtorClient Android")
+
+    val okhttpClient = OkHttpClient.Builder().build()
+    val dns = DnsUtils.getDns(okhttpClient)
 
     HttpClient(OkHttp) {
         // default validation to throw exceptions for non-2xx responses
         expectSuccess = true
-
         engine {
+            preconfigured = okhttpClient
+                .newBuilder()
+                .dns(dns)
+                .build()
+
             // add logging interceptor
             if (Device.isDebug) {
                 addInterceptor(

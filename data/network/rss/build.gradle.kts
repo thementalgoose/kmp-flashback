@@ -11,6 +11,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.ktor.client.okHttp)
             implementation(libs.okhttp.loggingInterceptor)
+            implementation(libs.okhttp.dnsoverhttps)
         }
         commonMain.dependencies {
             implementation(projects.infrastructure)

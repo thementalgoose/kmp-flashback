@@ -22,7 +22,7 @@ firebase-bom = "34.2.0"
 
 # Shared
 ktor = "3.2.3"
-okHttpLoggingInterceptor = "5.1.0"
+okhttp = "5.1.0"
 compose = "1.8.2"
 composeUiTooling = "1.9.0"
 composeAdaptive = "1.1.2"
@@ -110,7 +110,8 @@ ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 ktor-client-apache = { module = "io.ktor:ktor-client-apache", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-serialization-kotlinx-xml = { module = "io.ktor:ktor-serialization-kotlinx-xml", version.ref = "ktor" }
-okhttp-loggingInterceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okHttpLoggingInterceptor" }
+okhttp-loggingInterceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
+okhttp-dnsoverhttps = { module = "com.squareup.okhttp3:okhttp-dnsoverhttps", version.ref = "okhttp"}
 
 # Test
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
