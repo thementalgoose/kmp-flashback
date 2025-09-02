@@ -1,5 +1,6 @@
 package tmg.flashback.presentation.sync
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -28,6 +29,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -40,6 +42,7 @@ import androidx.window.core.layout.WindowSizeClass
 import flashback.composeapp.generated.resources.Res
 import flashback.composeapp.generated.resources.wave
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.splash_continue
 import flashback.presentation.localisation.generated.resources.splash_sync_circuits
 import flashback.presentation.localisation.generated.resources.splash_sync_config
 import flashback.presentation.localisation.generated.resources.splash_sync_constructors
@@ -49,6 +52,7 @@ import flashback.presentation.localisation.generated.resources.splash_sync_races
 import flashback.presentation.localisation.generated.resources.splash_sync_try_again
 import flashback.presentation.localisation.generated.resources.splash_title
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -60,6 +64,7 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.buttons.ButtonPrimary
+import tmg.flashback.style.buttons.ButtonSecondary
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody1
@@ -68,46 +73,42 @@ import tmg.flashback.style.text.TextHeadline1
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SyncBottomSheet(
-    show: Boolean,
-    unlock: () -> Unit,
+    hide: () -> Unit,
     windowSizeClass: WindowSizeClass,
 ) {
 
     // Disable bottom sheet back / dismiss actions when active, re-enable when done
     val lockBottomSheetOnScreen = remember { mutableStateOf(true) }
-    if (show) {
-        ModalBottomSheet(
-            onDismissRequest = unlock,
-            sheetState = androidx.compose.material3.rememberModalBottomSheetState(
-                skipPartiallyExpanded = true,
-                confirmValueChange = {
-                    if (it == SheetValue.Hidden) {
-                        !lockBottomSheetOnScreen.value
-                    } else {
-                        true
-                    }
-                }
-            ),
-            properties = ModalBottomSheetProperties(
-                shouldDismissOnBackPress = !lockBottomSheetOnScreen.value
-            )
-        ) {
-            ApplicationTheme {
-                SyncScreen(
-                    windowSizeClass = windowSizeClass,
-                    unlock = {
-                        lockBottomSheetOnScreen.value = false
-                    },
-                )
+    val sheetState = androidx.compose.material3.rememberModalBottomSheetState(
+        skipPartiallyExpanded = true,
+        confirmValueChange = {
+            if (it == SheetValue.Hidden) {
+                !lockBottomSheetOnScreen.value
+            } else {
+                true
             }
-        }
-    }
-
-    // Dismiss sync bottom sheet
-    LaunchedEffect(lockBottomSheetOnScreen.value) {
-        if (!lockBottomSheetOnScreen.value) {
-            delay(1000)
-            unlock()
+        },
+    )
+    val coroutineScope = rememberCoroutineScope()
+    ModalBottomSheet(
+        onDismissRequest = hide,
+        sheetState = sheetState,
+        properties = ModalBottomSheetProperties(
+            shouldDismissOnBackPress = !lockBottomSheetOnScreen.value
+        )
+    ) {
+        ApplicationTheme {
+            SyncScreen(
+                windowSizeClass = windowSizeClass,
+                dismiss = {
+                    coroutineScope.launch {
+                        sheetState.hide()
+                    }
+                },
+                unlock = {
+                    lockBottomSheetOnScreen.value = false
+                },
+            )
         }
     }
 }
@@ -115,6 +116,7 @@ fun SyncBottomSheet(
 @Composable
 fun SyncScreen(
     unlock: () -> Unit,
+    dismiss: () -> Unit,
     windowSizeClass: WindowSizeClass,
     viewModel: SyncViewModel = koinViewModel()
 ) {
@@ -135,7 +137,8 @@ fun SyncScreen(
         constructors = stateConstructors.value,
         races = stateRaces.value,
         config = stateConfig.value,
-        showTryAgain = overall.value == SyncState.FAILED,
+        overall = overall.value,
+        continueClicked = dismiss,
         tryAgainClicked = viewModel::startInitialSync
     )
 
@@ -158,8 +161,9 @@ fun SyncScreen(
     config: SyncState,
     constructors: SyncState,
     races: SyncState,
-    showTryAgain: Boolean,
-    tryAgainClicked: () -> Unit
+    overall: SyncState,
+    tryAgainClicked: () -> Unit,
+    continueClicked: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -216,11 +220,22 @@ fun SyncScreen(
                 .defaultMinSize(minHeight = 100.dp),
             horizontalAlignment = Alignment.End
         ) {
-            if (showTryAgain) {
-                ButtonPrimary(
-                    text = stringResource(string.splash_sync_try_again),
-                    onClick = tryAgainClicked
-                )
+            AnimatedContent(overall) {
+                when (it) {
+                    SyncState.LOADING -> { }
+                    SyncState.DONE -> {
+                        ButtonPrimary(
+                            text = stringResource(string.splash_continue),
+                            onClick = continueClicked
+                        )
+                    }
+                    SyncState.FAILED -> {
+                        ButtonSecondary(
+                            text = stringResource(string.splash_sync_try_again),
+                            onClick = tryAgainClicked
+                        )
+                    }
+                }
             }
         }
 
@@ -324,7 +339,8 @@ private fun PreviewLoading(
             config = SyncState.DONE,
             constructors = SyncState.DONE,
             races = SyncState.LOADING,
-            showTryAgain = false,
+            overall = SyncState.LOADING,
+            continueClicked = { },
             tryAgainClicked = { },
             windowSizeClass = WindowSizeClass.compute(400f, 700f)
         )
@@ -343,7 +359,8 @@ private fun PreviewFailed(
             config = SyncState.FAILED,
             constructors = SyncState.LOADING,
             races = SyncState.LOADING,
-            showTryAgain = true,
+            overall = SyncState.FAILED,
+            continueClicked = { },
             tryAgainClicked = { },
             windowSizeClass = WindowSizeClass.compute(400f, 700f)
         )
