@@ -1,6 +1,8 @@
 package tmg.flashback.presentation.sync
 
 import app.cash.turbine.test
+import app.cash.turbine.testIn
+import app.cash.turbine.turbineScope
 import dev.mokkery.MockMode
 import dev.mokkery.MockMode.autoUnit
 import dev.mokkery.answering.returns
@@ -8,6 +10,9 @@ import dev.mokkery.every
 import dev.mokkery.everySuspend
 import dev.mokkery.matcher.any
 import dev.mokkery.mock
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.job
+import kotlinx.coroutines.test.TestCoroutineScheduler
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import tmg.flashback.configuration.usecases.DoesConfigRequireSyncUseCase
@@ -21,6 +26,7 @@ import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.feature.notifications.usecases.ScheduleResult
 import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
 import tmg.flashback.repositories.OnboardingRepository
+import kotlin.coroutines.coroutineContext
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.time.Duration.Companion.hours
@@ -39,6 +45,8 @@ internal class SyncViewModelTest {
     private val mockFetchConfigRepository: FetchConfigUseCase = mock(autoUnit)
     private val mockOnboardingRepository: OnboardingRepository = mock(autoUnit)
 
+    private val testScheduler = TestCoroutineScheduler()
+
     private fun initUnderTest() {
         everySuspend { mockScheduleUpcomingNotificationsUseCase.invoke(any()) } returns ScheduleResult.Disabled
         underTest = SyncViewModel(
@@ -51,42 +59,45 @@ internal class SyncViewModelTest {
             scheduleUpcomingNotificationsUseCase = mockScheduleUpcomingNotificationsUseCase,
             fetchConfigRepository = mockFetchConfigRepository,
             onboardingRepository = mockOnboardingRepository,
+            coroutineContext = testScheduler
         )
     }
 
     @Test
-    fun `start sync returns done when everything is successful`() = runTest {
-        initUnderTest()
-        everySuspend { mockCircuitRepository.populateCircuits() } returns Response.Successful
-        everySuspend { mockConstructorRepository.populateConstructors() } returns Response.Successful
-        everySuspend { mockDriverRepository.populateDrivers() } returns Response.Successful
-        everySuspend { mockOverviewRepository.populateOverview() } returns Response.Successful
-        every { mockDoesConfigRequireSyncUseCase.invoke() } returns false
-        everySuspend { mockFetchConfigRepository.fetch() } returns true
+    fun `start sync returns done when everything is successful`() = runTest(testScheduler) {
+        turbineScope {
+            initUnderTest()
 
-        underTest.startInitialSync()
+            everySuspend { mockCircuitRepository.populateCircuits() } returns Response.Successful
+            everySuspend { mockConstructorRepository.populateConstructors() } returns Response.Successful
+            everySuspend { mockDriverRepository.populateDrivers() } returns Response.Successful
+            everySuspend { mockOverviewRepository.populateOverview() } returns Response.Successful
+            every { mockDoesConfigRequireSyncUseCase.invoke() } returns false
+            everySuspend { mockFetchConfigRepository.fetch() } returns true
 
-        this.testScheduler.advanceTimeBy(1.seconds)
+            val circuitReceiver = underTest.circuits.testIn(backgroundScope)
+            val constructorReceiver = underTest.constructors.testIn(backgroundScope)
+            val driverReceiver = underTest.drivers.testIn(backgroundScope)
+            val racesReceiver = underTest.races.testIn(backgroundScope)
+            val configReceiver = underTest.config.testIn(backgroundScope)
+            val overallReceiver = underTest.overall.testIn(backgroundScope)
 
-        underTest.circuits.test {
-            assertEquals(SyncState.LOADING, awaitItem())
-            assertEquals(SyncState.DONE, awaitItem())
-        }
-        underTest.constructors.test {
-            assertEquals(SyncState.DONE, awaitItem())
-        }
-        underTest.drivers.test {
-            assertEquals(SyncState.DONE, awaitItem())
-        }
-        underTest.races.test {
-            assertEquals(SyncState.DONE, awaitItem())
-        }
-        underTest.config.test {
-            assertEquals(SyncState.DONE, awaitItem())
-        }
-        underTest.overall.test {
-            assertEquals(SyncState.LOADING, awaitItem())
-            assertEquals(SyncState.DONE, awaitItem())
+            assertEquals(SyncState.LOADING, circuitReceiver.awaitItem())
+            assertEquals(SyncState.LOADING, constructorReceiver.awaitItem())
+            assertEquals(SyncState.LOADING, driverReceiver.awaitItem())
+            assertEquals(SyncState.LOADING, racesReceiver.awaitItem())
+            assertEquals(SyncState.LOADING, configReceiver.awaitItem())
+            assertEquals(SyncState.LOADING, overallReceiver.awaitItem())
+
+            underTest.startInitialSync()
+
+            assertEquals(SyncState.DONE, circuitReceiver.awaitItem())
+            assertEquals(SyncState.DONE, constructorReceiver.awaitItem())
+            assertEquals(SyncState.DONE, driverReceiver.awaitItem())
+            assertEquals(SyncState.DONE, racesReceiver.awaitItem())
+            assertEquals(SyncState.DONE, configReceiver.awaitItem())
+            assertEquals(SyncState.DONE, overallReceiver.awaitItem())
+
         }
     }
 }
