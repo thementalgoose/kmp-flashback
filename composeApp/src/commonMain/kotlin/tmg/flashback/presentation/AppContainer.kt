@@ -140,7 +140,10 @@ fun AppContainer(
                     .weight(1f)
                 ) {
                     AppGraph(
-                        openPanel = openPanel,
+                        openPanel = {
+                            clearSubnavs()
+                            openPanel()
+                        },
                         appNavigationViewModel = appNavigationViewModel,
                         navController = navController,
                         insetPadding = paddingValues,
