@@ -332,6 +332,7 @@ private fun DateCard(
             }
         }
         TextBody1(
+            textColor = AppTheme.colors.onTertiaryContainer,
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
             text = time,
