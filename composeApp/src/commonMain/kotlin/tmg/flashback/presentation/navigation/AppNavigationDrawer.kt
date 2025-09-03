@@ -139,7 +139,7 @@ internal fun AppNavigationDrawer(
                 item("app_version") {
                     TextBody2(
                         modifier = Modifier.padding(horizontal = AppTheme.dimens.medium),
-                        text = stringResource(Res.string.app_version_placeholder, Device.versionName)
+                        text = stringResource(Res.string.app_version_placeholder, "${Device.versionName}.${Device.versionCode}")
                     )
                 }
             }
