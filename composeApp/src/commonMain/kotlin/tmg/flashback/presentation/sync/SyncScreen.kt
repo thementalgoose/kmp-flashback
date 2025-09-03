@@ -103,6 +103,8 @@ fun SyncBottomSheet(
                 dismiss = {
                     coroutineScope.launch {
                         sheetState.hide()
+                        delay(300L)
+                        hide()
                     }
                 },
                 unlock = {
