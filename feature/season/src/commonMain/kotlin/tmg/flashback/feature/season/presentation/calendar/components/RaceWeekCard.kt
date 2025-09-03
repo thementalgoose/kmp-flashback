@@ -8,10 +8,12 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.CollectionInfo
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -60,6 +62,7 @@ import tmg.flashback.style.text.TextSection
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.flag.Flag
 import tmg.flashback.ui.components.now.Now
+import tmg.flashback.ui.extensions.manipulate
 
 private val countryBadgeSize = 32.dp
 private const val listAlpha = 0.6f
@@ -300,7 +303,7 @@ private fun DateCard(
         .clearAndSetSemantics { this.contentDescription = contentDescription }
         .width(IntrinsicSize.Max)
         .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
-        .background(AppTheme.colors.tertiaryContainer)
+        .background(AppTheme.colors.surfaceContainer5)
         .alpha(alpha)
         .padding(
             bottom = AppTheme.dimens.nsmall,
@@ -319,19 +322,20 @@ private fun DateCard(
             TextBody1(
                 textAlign = TextAlign.Center,
                 text = schedule.label,
-                textColor = AppTheme.colors.onTertiaryContainer
+                textColor = AppTheme.colors.onSurfaceVariant
             )
             if (showNotificationBadge) {
                 Spacer(Modifier.width(4.dp))
                 Icon(
                     modifier = Modifier.size(16.dp),
-                    tint = AppTheme.colors.onTertiaryContainer,
+                    tint = AppTheme.colors.onSurface,
                     painter = painterResource(resource = Res.drawable.ic_notification_indicator_bell),
                     contentDescription = stringResource(resource = string.ab_notifications_enabled)
                 )
             }
         }
         TextBody1(
+            textColor = AppTheme.colors.onSurface,
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Start,
             text = time,

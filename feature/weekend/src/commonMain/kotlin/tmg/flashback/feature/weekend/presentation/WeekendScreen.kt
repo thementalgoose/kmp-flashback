@@ -241,7 +241,7 @@ private fun RowScope.Icons(
                     Icon(
                         painter = painterResource(Res.drawable.ic_youtube),
                         contentDescription = stringResource(string.details_link_youtube),
-                        tint = AppTheme.colors.onSurfaceVariant
+                        tint = AppTheme.colors.onSurface
                     )
                 }
             )
@@ -253,7 +253,7 @@ private fun RowScope.Icons(
                     Icon(
                         painter = painterResource(Res.drawable.ic_wikipedia),
                         contentDescription = stringResource(string.details_link_wikipedia),
-                        tint = AppTheme.colors.onSurfaceVariant
+                        tint = AppTheme.colors.onSurface
                     )
                 }
             )
@@ -267,7 +267,7 @@ private fun RowScope.Icons(
                     Icon(
                         painter = painterResource(Res.drawable.ic_maps),
                         contentDescription = stringResource(string.details_link_map),
-                        tint = AppTheme.colors.onSurfaceVariant
+                        tint = AppTheme.colors.onSurface
                     )
                 }
             )

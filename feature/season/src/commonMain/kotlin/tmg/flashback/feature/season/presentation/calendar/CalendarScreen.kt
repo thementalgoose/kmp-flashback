@@ -347,7 +347,7 @@ private fun Tyres(
                 Icon(
                     painter = painterResource(resource = drawable.ic_tyre),
                     contentDescription = stringResource(resource = string.tyres_label),
-                    tint = AppTheme.colors.onSurfaceVariant
+                    tint = AppTheme.colors.onSurface
                 )
             }
         )
