@@ -2,7 +2,6 @@ package tmg.flashback.feature.notifications.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -25,13 +24,20 @@ class NotificationPromptViewModel(
     private val coroutineContext: CoroutineContext = EmptyCoroutineContext
 ): ViewModel() {
 
-    private val _uiState: MutableStateFlow<Boolean> = MutableStateFlow(notificationSettingsRepository.notificationPromptSeen)
-    val uiState: StateFlow<Boolean> = _uiState
+    private val _promptNotification: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val promptNotification: StateFlow<Boolean> = _promptNotification
+
+    init {
+        viewModelScope.launch(coroutineContext) {
+            val existingPermission = permissionManager.getPermissionState(Permission.Notifications)
+            _promptNotification.value = !notificationSettingsRepository.notificationPromptSeen && existingPermission != PermissionState.Granted
+        }
+    }
 
     fun promptRuntimeNotifications() {
         viewModelScope.launch(coroutineContext) {
             val result = permissionManager.requestPermission(Permission.Notifications).await()
-            _uiState.value = true
+            _promptNotification.value = false
             notificationSettingsRepository.notificationPromptSeen = true
             if (result == PermissionState.NotGranted) {
                 openSettingsUseCase.openNotificationSettings()
@@ -44,6 +50,6 @@ class NotificationPromptViewModel(
 
     fun close() {
         notificationSettingsRepository.notificationPromptSeen = true
-        _uiState.value = true
+        _promptNotification.value = false
     }
 }

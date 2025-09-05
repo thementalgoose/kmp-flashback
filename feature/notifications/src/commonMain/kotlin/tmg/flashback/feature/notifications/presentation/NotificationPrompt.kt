@@ -35,12 +35,12 @@ fun NotificationPrompt(
     modifier: Modifier = Modifier,
     viewModel: NotificationPromptViewModel = koinViewModel()
 ) {
-    val promptNotifications = viewModel.uiState.collectAsState()
+    val promptNotifications = viewModel.promptNotification.collectAsState()
     AnimatedContent(
         targetState = promptNotifications.value,
         modifier = Modifier
     ) { promptNotifications ->
-        if (!promptNotifications && Device.isRuntimeNotificationsSupported) {
+        if (promptNotifications && Device.isRuntimeNotificationsSupported) {
             NotificationPrompt(
                 modifier = modifier,
                 promptNotifications = viewModel::promptRuntimeNotifications,
