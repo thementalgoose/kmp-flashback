@@ -10,8 +10,10 @@ import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepo
 import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
 import tmg.flashback.feature.notifications.usecases.SubscribeResultNotificationsUseCase
 import tmg.flashback.ui.permissions.Permission
+import tmg.flashback.ui.permissions.Permission.Notifications
 import tmg.flashback.ui.permissions.PermissionManager
 import tmg.flashback.ui.permissions.PermissionState
+import tmg.flashback.ui.permissions.PermissionState.NotDetermined
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
@@ -29,14 +31,14 @@ class NotificationPromptViewModel(
 
     init {
         viewModelScope.launch(coroutineContext) {
-            val existingPermission = permissionManager.getPermissionState(Permission.Notifications)
-            _promptNotification.value = !notificationSettingsRepository.notificationPromptSeen && existingPermission != PermissionState.Granted
+            val existingPermission = permissionManager.getPermissionState(Notifications)
+            _promptNotification.value = !notificationSettingsRepository.notificationPromptSeen && existingPermission == NotDetermined
         }
     }
 
     fun promptRuntimeNotifications() {
         viewModelScope.launch(coroutineContext) {
-            val result = permissionManager.requestPermission(Permission.Notifications).await()
+            val result = permissionManager.requestPermission(Notifications).await()
             _promptNotification.value = false
             notificationSettingsRepository.notificationPromptSeen = true
             if (result == PermissionState.NotGranted) {
