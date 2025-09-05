@@ -104,6 +104,7 @@ private fun SettingsNotificationResultsScreen(
                     notificationResultsClicked(SPRINT_QUALIFYING, !uiState.enabled.contains(SPRINT_QUALIFYING))
                 },
                 isChecked = uiState.enabled.contains(SPRINT_QUALIFYING),
+                isEnabled = permissionState == PermissionState.Granted
             )
             PrefSwitch(
                 item = Settings.NotificationsResults.SprintRace,
@@ -111,6 +112,7 @@ private fun SettingsNotificationResultsScreen(
                     notificationResultsClicked(SPRINT, !uiState.enabled.contains(SPRINT))
                 },
                 isChecked = uiState.enabled.contains(SPRINT),
+                isEnabled = permissionState == PermissionState.Granted
             )
             PrefSwitch(
                 item = Settings.NotificationsResults.Qualifying,
@@ -118,6 +120,7 @@ private fun SettingsNotificationResultsScreen(
                     notificationResultsClicked(QUALIFYING, !uiState.enabled.contains(QUALIFYING))
                 },
                 isChecked = uiState.enabled.contains(QUALIFYING),
+                isEnabled = permissionState == PermissionState.Granted
             )
             PrefSwitch(
                 item = Settings.NotificationsUpcoming.Race,
@@ -125,6 +128,7 @@ private fun SettingsNotificationResultsScreen(
                     notificationResultsClicked(RACE, !uiState.enabled.contains(RACE))
                 },
                 isChecked = uiState.enabled.contains(RACE),
+                isEnabled = permissionState == PermissionState.Granted
             )
         }
     }
