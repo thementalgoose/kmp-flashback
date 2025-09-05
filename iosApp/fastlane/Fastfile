@@ -129,5 +129,9 @@ platform :ios do
     build_release silent:options.fetch(:silent, false)
 
     upload_to_testflight(skip_submission: true)
+    upload_symbols_to_crashlytics(
+      gsp_path: "./iosApp/Firebase/GoogleService-production.plist", 
+      dsym_path: "./Flashback.app.dSYM.zip"
+    )
   end
 end
