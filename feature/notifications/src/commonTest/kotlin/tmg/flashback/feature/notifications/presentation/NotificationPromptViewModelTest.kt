@@ -16,7 +16,9 @@ import tmg.flashback.device.usecases.OpenSettingsUseCase
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
 import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
 import tmg.flashback.feature.notifications.usecases.SubscribeResultNotificationsUseCase
+import tmg.flashback.ui.permissions.Permission
 import tmg.flashback.ui.permissions.PermissionManager
+import tmg.flashback.ui.permissions.PermissionState
 import tmg.flashback.ui.permissions.PermissionState.Granted
 import tmg.flashback.ui.permissions.PermissionState.NotGranted
 import kotlin.test.Test
@@ -46,15 +48,16 @@ internal class NotificationPromptViewModelTest {
     @Test
     fun `close updates state to true`() = runTest {
         every { mockNotificationSettingsRepository.notificationPromptSeen } returns false
+        everySuspend { mockPermissionManager.getPermissionState(Permission.Notifications) } returns PermissionState.NotDetermined
 
         initUnderTest()
 
-        underTest.uiState.test {
-            assertEquals(false, awaitItem())
+        underTest.promptNotification.test {
+            assertEquals(true, awaitItem())
 
             underTest.close()
 
-            assertEquals(true, awaitItem())
+            assertEquals(false, awaitItem())
         }
 
         verify {
@@ -65,16 +68,17 @@ internal class NotificationPromptViewModelTest {
     @Test
     fun `prompt notifications requests permissions and opens settings if not granted`() = runTest {
         every { mockNotificationSettingsRepository.notificationPromptSeen } returns false
+        everySuspend { mockPermissionManager.getPermissionState(Permission.Notifications) } returns PermissionState.NotDetermined
         everySuspend { mockPermissionManager.requestPermission(any()) } returns CompletableDeferred(NotGranted)
 
         initUnderTest()
 
-        underTest.uiState.test {
-            assertEquals(false, awaitItem())
+        underTest.promptNotification.test {
+            assertEquals(true, awaitItem())
 
             underTest.promptRuntimeNotifications()
 
-            assertEquals(true, awaitItem())
+            assertEquals(false, awaitItem())
         }
 
         verifySuspend {
@@ -89,17 +93,18 @@ internal class NotificationPromptViewModelTest {
     @Test
     fun `prompt notifications requests permissions`() = runTest {
         every { mockNotificationSettingsRepository.notificationPromptSeen } returns false
+        everySuspend { mockPermissionManager.getPermissionState(Permission.Notifications) } returns PermissionState.NotDetermined
         everySuspend { mockPermissionManager.requestPermission(any()) } returns CompletableDeferred(Granted)
 
         initUnderTest()
 
 
-        underTest.uiState.test {
-            assertEquals(false, awaitItem())
+        underTest.promptNotification.test {
+            assertEquals(true, awaitItem())
 
             underTest.promptRuntimeNotifications()
 
-            assertEquals(true, awaitItem())
+            assertEquals(false, awaitItem())
         }
 
         verifySuspend {
