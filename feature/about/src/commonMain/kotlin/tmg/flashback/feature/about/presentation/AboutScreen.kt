@@ -47,6 +47,7 @@ import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.ab_back
 import flashback.presentation.localisation.generated.resources.about_additional
 import flashback.presentation.localisation.generated.resources.about_dependencies
+import flashback.presentation.localisation.generated.resources.about_desc
 import flashback.presentation.localisation.generated.resources.app_name
 import flashback.presentation.localisation.generated.resources.app_version
 import flashback.presentation.localisation.generated.resources.dependency_thank_you
@@ -346,7 +347,7 @@ private fun Hero(
                 text = stringResource(string.app_name)
             )
             TextBody1(
-                text = "Contact Email"
+                text = stringResource(string.about_desc)
             )
             TextBody2(
                 text = email
