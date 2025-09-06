@@ -12,14 +12,13 @@ import androidx.glance.GlanceTheme
 import androidx.glance.LocalContext
 import androidx.glance.LocalGlanceId
 import androidx.glance.LocalSize
-import androidx.glance.action.actionParametersOf
 import androidx.glance.action.actionStartActivity
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.SizeMode
 import androidx.glance.appwidget.action.actionRunCallback
+import androidx.glance.appwidget.action.actionStartActivity
 import androidx.glance.appwidget.provideContent
-import androidx.glance.background
 import androidx.glance.currentState
 import androidx.glance.state.GlanceStateDefinition
 import org.koin.core.component.KoinComponent
@@ -114,11 +113,11 @@ class UpNextWidget : GlanceAppWidget(), KoinComponent {
             val modifier = when (upNextConfiguration.deeplinkToEvent) {
                 true -> GlanceModifier
                     .surface(if (upNextConfiguration.showBackground) GlanceTheme.colors.background.getColor(context) else androidx.compose.ui.graphics.Color.Transparent)
-                    .clickable(actionStartActivity(widgetNavigator.getHomeActivity()))
+                    .clickable(actionStartActivity(widgetNavigator.getHomeIntent(context)))
                     // TODO: Wire this up when setting is enabled
                 false -> GlanceModifier
                     .surface(if (upNextConfiguration.showBackground) GlanceTheme.colors.background.getColor(context) else androidx.compose.ui.graphics.Color.Transparent)
-                    .clickable(actionStartActivity(widgetNavigator.getHomeActivity()))
+                    .clickable(actionStartActivity(widgetNavigator.getHomeIntent(context)))
             }
 
             Log.d("UpNextWidget", "Rendering widget ${LocalGlanceId.current.appWidgetId} with $upNextConfiguration")
