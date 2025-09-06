@@ -222,7 +222,12 @@ private fun EventItem(
 ) {
     val timestamp = item.timestamp.deviceLocalDateTime.time.format(timeFormatHHmm)
     Column(modifier = modifier
-        .padding(vertical = AppTheme.dimens.xsmall)
+        .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
+        .background(AppTheme.colors.surfaceContainer3)
+        .padding(
+            vertical = AppTheme.dimens.xsmall,
+            horizontal = AppTheme.dimens.nsmall
+        )
     ) {
         val contentDescription = when (showNotificationBell) {
             true -> stringResource(resource = string.ab_schedule_date_card_notifications_enabled, item.label, timestamp)
@@ -234,11 +239,8 @@ private fun EventItem(
                 .clearAndSetSemantics {
                     this.contentDescription = contentDescription
                 }
-                .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
-                .background(AppTheme.colors.surfaceContainer3)
                 .padding(
                     vertical = AppTheme.dimens.small,
-                    horizontal = AppTheme.dimens.nsmall
                 )
         ) {
             Row {
@@ -264,12 +266,9 @@ private fun EventItem(
             )
         }
 
-        Spacer(Modifier.height(AppTheme.dimens.xsmall))
         item.weather?.let { weather ->
             Column(
                 modifier = Modifier.padding(
-                    start = AppTheme.dimens.xsmall,
-                    end = AppTheme.dimens.xsmall,
                     bottom = AppTheme.dimens.xsmall
                 ),
                 horizontalAlignment = Alignment.Start

@@ -25,7 +25,6 @@ import tmg.flashback.style.text.TextHeadline2
 internal fun TypeHeader(
     resource: StringResource,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = { },
 ) {
     Row(
         modifier = modifier
@@ -33,10 +32,6 @@ internal fun TypeHeader(
             .padding(
                 horizontal = AppTheme.dimens.medium,
                 vertical = AppTheme.dimens.small
-            )
-            .clickable(
-                enabled = true,
-                onClick = onClick
             ),
         verticalAlignment = Alignment.CenterVertically,
     ) {
