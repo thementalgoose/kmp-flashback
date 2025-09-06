@@ -41,6 +41,7 @@ import flashback.presentation.localisation.generated.resources.weather_temp_degr
 import flashback.presentation.localisation.generated.resources.weather_temp_degrees_f
 import flashback.presentation.localisation.generated.resources.weather_wind_kph
 import flashback.presentation.localisation.generated.resources.weather_wind_mph
+import flashback.presentation.localisation.generated.resources.weekend_info_laps
 import flashback.presentation.localisation.generated.resources.weekend_race_round
 import flashback.presentation.ui.generated.resources.Res
 import flashback.presentation.ui.generated.resources.ic_notification_indicator_bell
@@ -60,6 +61,7 @@ import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.timeFormatHHmm
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
+import tmg.flashback.style.badge.BadgeView
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody1
@@ -108,6 +110,13 @@ internal fun RaceDetails(
                     .padding(bottom = AppTheme.dimens.xsmall),
                 text = model.date.format(dateFormatDMMMYYYY)
             )
+            Row {
+                if (model.laps != null) {
+                    BadgeView(
+                        label = stringResource(string.weekend_info_laps, model.laps),
+                    )
+                }
+            }
         }
         if (trackLayout != null) {
             Icon(
