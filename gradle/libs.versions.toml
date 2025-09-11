@@ -1,7 +1,7 @@
 [versions]
 # Kotlin
-kotlin = "2.2.10"
-ksp = "2.2.10-2.0.2"
+kotlin = "2.2.20"
+ksp = "2.2.20-2.0.2"
 kotlinx-serialization = "1.9.0"
 kotlinx-datetime = "0.7.1"
 kotlinx-coroutines = "1.10.2"
@@ -35,7 +35,7 @@ ksoup = "0.6.0"
 cmptoast = "1.0.7"
 
 # Testing
-mokkery = "2.9.0"
+mokkery = "2.10.0"
 turbine = "1.2.1"
 
 [libraries]
