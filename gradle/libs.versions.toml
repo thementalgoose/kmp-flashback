@@ -21,7 +21,7 @@ crashlytics = "3.0.4"
 firebase-bom = "34.2.0"
 
 # Shared
-ktor = "3.2.3"
+ktor = "3.3.0"
 okhttp = "5.1.0"
 compose = "1.8.2"
 composeUiTooling = "1.9.1"
