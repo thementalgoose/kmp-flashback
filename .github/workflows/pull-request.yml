@@ -8,6 +8,10 @@ jobs:
     uses: ./.github/workflows/job-unit-tests.yml
     secrets: inherit
 
+  dependency-diff:
+    uses: ./.github/workflows/job-dependency-diff.yml
+    secrets: inherit
+
 #  assemble:
 #    uses: ./.github/workflows/job-android-assemble-sand.yml
 #    secrets: inherit
