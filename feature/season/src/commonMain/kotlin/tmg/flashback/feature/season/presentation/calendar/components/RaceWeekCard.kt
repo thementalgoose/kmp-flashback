@@ -222,12 +222,12 @@ private fun Dates(
     modifier: Modifier = Modifier
 ) {
     val schedule = scheduleList.groupBy { it.timestamp.deviceLocalDateTime.date }
-    var targetIndex = schedule
-        .map { it.value.any { !it.timestamp.isInPast } }
-        .indexOfFirst { it }
-    if (targetIndex == -1) targetIndex = schedule.size - 1
+    val now = LocalDate.now()
+    val targetIndex = schedule
+        .map { it.key }
+        .indexOfFirst { it == now }
     val scrollState = rememberLazyListState(
-        initialFirstVisibleItemIndex = targetIndex.coerceIn(0, schedule.size - 1)
+        initialFirstVisibleItemIndex = (targetIndex.takeIf { it != -1 } ?: (schedule.size - 1)).coerceIn(0, schedule.size - 1)
     )
 
     val showWeather = schedule.values.map { it }.flatten().all { it.weather != null }
