@@ -10,6 +10,7 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/thementalgoose/kmp-flashback/releases"><img src="https://img.shields.io/github/v/release/thementalgoose/kmp-flashback"/></a>
   <a href="https://play.google.com/store/apps/details?id=tmg.flashback"><img src="https://img.shields.io/static/v1?label=Google%20Play&message=%20&logoColor=white&logo=google-play&color=success&style=flat"/></a>
   <a href="https://apps.apple.com/us/app/flashback-formula-results/id6748612648"><img src="https://img.shields.io/static/v1?label=App%20Store&message=%20&logo=app-store&logoColor=white&color=blue&style=flat"/></a>
   <a href="https://flashback.pages.dev"><img src="https://img.shields.io/static/v1?label=API&message=%20&logo=cloudflare&logoColor=white&color=orange&style=flat"/></a>
