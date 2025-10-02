@@ -190,6 +190,7 @@
     <string name="feature_banner_notifications_finished">You can change this in the settings at any time</string>
     <string name="feature_banner_soft_upgrade">An update is available</string>
     <string name="feature_banner_soft_upgrade_prompt">Update</string>
+    <string name="feature_banner_device_time">All times will be displayed in your current timezone (%1$s)</string>
 
 
     <!-- Errors -->

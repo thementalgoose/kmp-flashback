@@ -8,6 +8,7 @@ interface CalendarRepository {
     var collapseList: Boolean
     var keepUserSelectedSeason: Boolean
     var userSelectedSeason: Int?
+    var seenDatePrompt: Boolean
 }
 
 internal class CalendarRepositoryImpl(
@@ -22,6 +23,7 @@ internal class CalendarRepositoryImpl(
         private const val keyDashboardCollapseList: String = "DASHBOARD_COLLAPSE_LIST"
         private const val keyRememberSeasonChange: String = "REMEMBER_SEASON_CHANGE"
         private const val keyUserSeasonChange: String = "USER_SEASON_CHANGE"
+        private const val keyDatePrompt: String = "DATE_PROMPT"
     }
 
     override var viewedSeasons: Set<Int>
@@ -41,6 +43,10 @@ internal class CalendarRepositoryImpl(
     override var keepUserSelectedSeason: Boolean
         get() = preferenceManager.getBoolean(keyRememberSeasonChange, false)
         set(value) = preferenceManager.save(keyRememberSeasonChange, value)
+
+    override var seenDatePrompt: Boolean
+        get() = preferenceManager.getBoolean(keyDatePrompt, false)
+        set(value) = preferenceManager.save(keyDatePrompt, value)
 
     override var userSelectedSeason: Int?
         get() = preferenceManager.getInt(keyUserSeasonChange, -1).takeIf { it != -1 }

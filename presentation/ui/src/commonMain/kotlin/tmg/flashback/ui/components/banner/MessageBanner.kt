@@ -34,6 +34,21 @@ fun MessageBanner(
     clicked: (() -> Unit)? = null,
     close: (() -> Unit)? = null
 ) {
+    MessageBanner(
+        text = stringResource(label),
+        modifier = modifier,
+        clicked = clicked,
+        close = close
+    )
+}
+
+@Composable
+fun MessageBanner(
+    text: String,
+    modifier: Modifier = Modifier,
+    clicked: (() -> Unit)? = null,
+    close: (() -> Unit)? = null
+) {
     Row(
         modifier = modifier
             .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
@@ -52,7 +67,7 @@ fun MessageBanner(
                     horizontal = AppTheme.dimens.nsmall,
                     vertical = AppTheme.dimens.small
                 ),
-            text = stringResource(label),
+            text = text,
             textColor = AppTheme.colors.onTertiaryContainer
         )
         if (close != null) {
