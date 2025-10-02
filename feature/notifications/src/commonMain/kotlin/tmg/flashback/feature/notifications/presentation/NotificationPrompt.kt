@@ -23,12 +23,14 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.data.repo.model.Banner
 import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody1
+import tmg.flashback.ui.components.banner.MessageBanner
 
 @Composable
 fun NotificationPrompt(
@@ -41,61 +43,12 @@ fun NotificationPrompt(
         modifier = Modifier
     ) { promptNotifications ->
         if (promptNotifications && Device.isRuntimeNotificationsSupported) {
-            NotificationPrompt(
+            MessageBanner(
                 modifier = modifier,
-                promptNotifications = viewModel::promptRuntimeNotifications,
+                label = string.settings_notifications_runtime_description,
+                clicked = viewModel::promptRuntimeNotifications,
                 close = viewModel::close
             )
         }
-    }
-}
-
-@Composable
-private fun NotificationPrompt(
-    modifier: Modifier,
-    promptNotifications: () -> Unit,
-    close: () -> Unit
-) {
-    Row(
-        modifier = modifier
-            .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
-            .background(AppTheme.colors.tertiaryContainer)
-            .clickable(onClick = promptNotifications),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        TextBody1(
-            modifier = Modifier
-                .weight(1f)
-                .padding(
-                    horizontal = AppTheme.dimens.nsmall,
-                    vertical = AppTheme.dimens.small
-                ),
-            text = stringResource(string.settings_notifications_runtime_description),
-            textColor = AppTheme.colors.onTertiaryContainer
-        )
-        IconButton(
-            onClick = close,
-            content = {
-                Icon(
-                    painter = painterResource(Res.drawable.ic_close),
-                    contentDescription = stringResource(string.ab_close),
-                    tint = AppTheme.colors.onTertiaryContainer,
-                )
-            }
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun Preview(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
-        NotificationPrompt(
-            modifier = Modifier,
-            promptNotifications = { },
-            close = { }
-        )
     }
 }
