@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import flashback.presentation.localisation.generated.resources.Res.string
-import flashback.presentation.localisation.generated.resources.settings_notifications_runtime_description
+import flashback.presentation.localisation.generated.resources.feature_banner_device_time
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.ui.components.banner.MessageBanner
 import tmg.flashback.ui.components.fade.Fade
@@ -18,7 +18,7 @@ internal fun DeviceTimePrompt(
     Fade(visible = showBanner.value) {
         MessageBanner(
             modifier = modifier,
-            label = string.settings_notifications_runtime_description,
+            label = string.feature_banner_device_time,
             clicked = viewModel::acknowledge,
             close = viewModel::acknowledge
         )
