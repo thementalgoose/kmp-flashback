@@ -168,7 +168,7 @@
     <string name="feature_banner_notifications_finished">Puoi modificare questa impostazione in qualsiasi momento</string>
     <string name="feature_banner_soft_upgrade">Un aggiornamento è disponibile</string>
     <string name="feature_banner_soft_upgrade_prompt">Aggiornamento</string>
-    <string name="feature_banner_device_time">Tutti gli orari verranno visualizzati nel tuo fuso orario corrente (%s)</string>
+    <string name="feature_banner_device_time">Tutti gli orari verranno visualizzati nel tuo fuso orario corrente (%1$s)</string>
 
     <!-- Errors -->
     <string name="network_error_network">Si è verificato un errore di rete. Assicurati di essere connesso a internet e riprova</string>
