@@ -1,36 +1,14 @@
 package tmg.flashback.feature.notifications.presentation
 
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import flashback.presentation.localisation.generated.resources.Res.string
-import flashback.presentation.localisation.generated.resources.ab_close
 import flashback.presentation.localisation.generated.resources.settings_notifications_runtime_description
-import flashback.presentation.ui.generated.resources.Res
-import flashback.presentation.ui.generated.resources.ic_close
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import org.koin.compose.viewmodel.koinViewModel
-import tmg.flashback.data.repo.model.Banner
 import tmg.flashback.infrastructure.device.Device
-import tmg.flashback.style.AppTheme
-import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
-import tmg.flashback.style.text.TextBody1
 import tmg.flashback.ui.components.banner.MessageBanner
+import tmg.flashback.ui.components.fade.Fade
 
 @Composable
 fun NotificationPrompt(
@@ -38,17 +16,12 @@ fun NotificationPrompt(
     viewModel: NotificationPromptViewModel = koinViewModel()
 ) {
     val promptNotifications = viewModel.promptNotification.collectAsState()
-    AnimatedContent(
-        targetState = promptNotifications.value,
-        modifier = Modifier
-    ) { promptNotifications ->
-        if (promptNotifications && Device.isRuntimeNotificationsSupported) {
-            MessageBanner(
-                modifier = modifier,
-                label = string.settings_notifications_runtime_description,
-                clicked = viewModel::promptRuntimeNotifications,
-                close = viewModel::close
-            )
-        }
+    Fade(visible = promptNotifications.value && Device.isRuntimeNotificationsSupported) {
+        MessageBanner(
+            modifier = modifier,
+            label = string.settings_notifications_runtime_description,
+            clicked = viewModel::promptRuntimeNotifications,
+            close = viewModel::close
+        )
     }
 }
