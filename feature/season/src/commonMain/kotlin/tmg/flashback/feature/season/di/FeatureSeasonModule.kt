@@ -4,6 +4,8 @@ import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import tmg.flashback.feature.season.presentation.calendar.CalendarScreenViewModel
 import tmg.flashback.feature.season.presentation.driver_standings.DriverStandingsViewModel
+import tmg.flashback.feature.season.presentation.shared.device_time.DeviceTimePrompt
+import tmg.flashback.feature.season.presentation.shared.device_time.DeviceTimeViewModel
 import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedByViewModel
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolderImpl
@@ -22,6 +24,7 @@ internal fun module() = module {
     viewModel { TeamStandingsViewModel(get(), get(), get(), get()) }
     viewModel { CalendarScreenViewModel(get(), get(), get(), get(), get()) }
     viewModel { SeasonPickerViewModel(get()) }
+    viewModel { DeviceTimeViewModel(get()) }
     single<CurrentSeasonHolder> { CurrentSeasonHolderImpl(get(), get(), get()) }
 
     single<CalendarRepository> { CalendarRepositoryImpl(get()) }
