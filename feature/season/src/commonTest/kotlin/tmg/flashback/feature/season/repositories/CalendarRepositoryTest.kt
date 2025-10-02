@@ -97,6 +97,24 @@ internal class CalendarRepositoryTest {
     }
 
     @Test
+    fun `date prompt reads from prefs`() {
+        every { mockPreferenceManager.getBoolean(expectedKeyDatePrompt, false) } returns true
+
+        initUnderTest()
+        assertTrue(underTest.seenDatePrompt)
+    }
+
+    @Test
+    fun `date prompt writes to prefs`() {
+        initUnderTest()
+        underTest.seenDatePrompt = true
+
+        verify {
+            mockPreferenceManager.save(expectedKeyDatePrompt, true)
+        }
+    }
+
+    @Test
     fun `user selected season reads from prefs`() {
         every { mockPreferenceManager.getInt(expectedKeyUserSeasonChange, -1) } returns 2
 
@@ -121,5 +139,6 @@ internal class CalendarRepositoryTest {
         private const val expectedKeyDashboardCollapseList: String = "DASHBOARD_COLLAPSE_LIST"
         private const val expectedKeyRememberSeasonChange: String = "REMEMBER_SEASON_CHANGE"
         private const val expectedKeyUserSeasonChange: String = "USER_SEASON_CHANGE"
+        private const val expectedKeyDatePrompt: String = "DATE_PROMPT"
     }
 }
