@@ -91,6 +91,7 @@ private fun HighlightBanner(
                     )
                 )
             }
+            uiState.news.isEmpty() -> { }
             uiState.news.size == 1 -> {
                 Column {
                     NewsCard(

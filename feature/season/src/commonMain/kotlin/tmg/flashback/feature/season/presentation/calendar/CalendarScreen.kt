@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
@@ -48,6 +49,7 @@ import tmg.flashback.feature.highlights.presentation.HighlightBanner
 import tmg.flashback.feature.notifications.presentation.NotificationPrompt
 import tmg.flashback.feature.season.presentation.calendar.components.RaceWeekCard
 import tmg.flashback.feature.season.presentation.calendar.components.Round
+import tmg.flashback.feature.season.presentation.shared.device_time.DeviceTimePrompt
 import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedBy
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.ResultsSeasonPicker
 import tmg.flashback.feature.season.presentation.tyres.TyreBottomSheet
@@ -119,12 +121,24 @@ fun CalendarScreen(
                 }
 
                 item(key = "news") {
-                    HighlightBanner()
+                    HighlightBanner(
+                        modifier = Modifier
+                    )
                 }
 
                 item(key = "notification_prompt") {
                     NotificationPrompt(
                         modifier = Modifier.padding(
+                            vertical = AppTheme.dimens.xsmall,
+                            horizontal = AppTheme.dimens.medium
+                        )
+                    )
+                }
+
+                item(key = "device_time") {
+                    DeviceTimePrompt(
+                        modifier = Modifier.padding(
+                            vertical = AppTheme.dimens.xsmall,
                             horizontal = AppTheme.dimens.medium
                         )
                     )
@@ -148,7 +162,6 @@ fun CalendarScreen(
                         }
 
                         is CalendarItem.GroupedCompletedRaces -> {
-                            Spacer(Modifier.height(AppTheme.dimens.xsmall))
                             CollapsableList(
                                 model = item,
                                 itemClicked = {
