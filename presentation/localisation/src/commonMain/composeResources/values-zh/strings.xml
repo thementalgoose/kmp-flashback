@@ -166,6 +166,7 @@
     <string name="feature_banner_notifications_finished">您随时可以在设置中更改此设置</string>
     <string name="feature_banner_soft_upgrade">商店中有可用更新</string>
     <string name="feature_banner_soft_upgrade_prompt">升级</string>
+    <string name="feature_banner_device_time">所有时间都将以您当前的时区 (%s) 显示</string>
 
     <!-- Errors -->
     <string name="network_error_network">发生网络错误。请确保您已连接到互联网，然后重试</string>

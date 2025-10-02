@@ -168,6 +168,7 @@
     <string name="feature_banner_notifications_finished">Puedes cambiar esto en los ajustes en cualquier momento</string>
     <string name="feature_banner_soft_upgrade">Hay una actualización disponible</string>
     <string name="feature_banner_soft_upgrade_prompt">Mejora</string>
+    <string name="feature_banner_device_time">Todas las horas se mostrarán en tu zona horaria actual (%s)</string>
 
     <!-- Errors -->
     <string name="network_error_network">Se produjo un error de red. Asegúrate de estar conectado a Internet y vuelve a intentarlo</string>
