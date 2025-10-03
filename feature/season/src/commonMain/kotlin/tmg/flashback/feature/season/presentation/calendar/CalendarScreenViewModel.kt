@@ -39,7 +39,7 @@ class CalendarScreenViewModel(
         viewModelScope.launch(mainDispatcher) {
             currentSeasonHolder.currentSeasonFlow.collectLatest {
                 _uiState.value = _uiState.value.copy(season = it)
-                if (!populate(it) || it == currentSeasonHolder.defaultSeason) {
+                if (!populate(it) || it == currentSeasonHolder.defaultSeason || !raceRepository.hasAnyRaces(it)) {
                     refresh()
                 }
             }
