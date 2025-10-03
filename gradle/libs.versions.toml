@@ -32,7 +32,7 @@ room = "2.8.1"
 sqlite = "2.6.1"
 coil = "3.3.0"
 ksoup = "0.6.0"
-cmptoast = "1.0.8"
+cmptoast = "1.0.71"
 
 # Testing
 mokkery = "2.10.0"
