@@ -78,9 +78,6 @@ internal fun AppNavigationDrawer(
                         }
                     )
                 }
-                item("mid_div") {
-                    MenuDivider()
-                }
                 item("nav_circuits") {
                     NavigationItem(
                         menuItem = MenuItem.Circuits,
@@ -90,6 +87,9 @@ internal fun AppNavigationDrawer(
                             closeMenu()
                         }
                     )
+                }
+                item("mid_div") {
+                    MenuDivider()
                 }
                 if (appNavigationUiState.showRss) {
                     item("nav_rss") {
