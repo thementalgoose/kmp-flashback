@@ -27,10 +27,10 @@ internal fun AppNavigationRail(
     val primaryItems = listOfNotNull(
         Calendar.toNavigationItem(appNavigationUiState.screen == Screen.Calendar),
         DriversStandings.toNavigationItem(appNavigationUiState.screen == Screen.DriverStandings),
-        TeamsStandings.toNavigationItem(appNavigationUiState.screen == Screen.TeamStandings)
+        TeamsStandings.toNavigationItem(appNavigationUiState.screen == Screen.TeamStandings),
+        Circuits.toNavigationItem(appNavigationUiState.screen == Screen.Circuits),
     )
     val secondaryItems = listOfNotNull(
-        Circuits.toNavigationItem(appNavigationUiState.screen == Screen.Circuits),
         Rss.toNavigationItem(appNavigationUiState.screen == Screen.Rss).takeIf { appNavigationUiState.showRss },
         ReactionGame.toNavigationItem(appNavigationUiState.screen == Screen.ReactionGame),
         Settings.toNavigationItem(appNavigationUiState.screen == Screen.Settings),
