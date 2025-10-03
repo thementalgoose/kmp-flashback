@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.privacy_policy_title
@@ -120,12 +121,12 @@ private fun PrivacyPolicyScreen(
                             ) {
                                 openWebpage(it.link!!)
                             }
+                            .fillMaxWidth()
                             .padding(
                                 vertical = AppTheme.dimens.xsmall,
-                                horizontal = AppTheme.dimens.medium
+                                horizontal = AppTheme.dimens.small
                             ),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(2.dp)
+                        horizontalArrangement = Arrangement.spacedBy(3.dp)
                     ) {
                         Icon(
                             modifier = Modifier.size(16.dp),
@@ -138,7 +139,9 @@ private fun PrivacyPolicyScreen(
                         )
                         if (it.link != null) {
                             Icon(
-                                modifier = Modifier.size(16.dp),
+                                modifier = Modifier
+                                    .size(16.dp)
+                                    .rotate(45f),
                                 imageVector = Icons.Default.Link,
                                 contentDescription = null,
                                 tint = AppTheme.colors.onSurfaceVariant
