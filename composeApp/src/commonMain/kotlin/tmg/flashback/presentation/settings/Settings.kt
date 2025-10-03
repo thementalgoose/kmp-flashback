@@ -1,5 +1,6 @@
 package tmg.flashback.presentation.settings
 
+import androidx.compose.runtime.Composable
 import flashback.composeapp.generated.resources.Res
 import flashback.composeapp.generated.resources.ic_settings_about
 import flashback.composeapp.generated.resources.ic_settings_dark_mode
@@ -22,6 +23,8 @@ import flashback.presentation.localisation.generated.resources.settings_pref_ana
 import flashback.presentation.localisation.generated.resources.settings_pref_analytics_title
 import flashback.presentation.localisation.generated.resources.settings_pref_collapsed_list_description
 import flashback.presentation.localisation.generated.resources.settings_pref_collapsed_list_title
+import flashback.presentation.localisation.generated.resources.settings_pref_timezone_description
+import flashback.presentation.localisation.generated.resources.settings_pref_timezone_title
 import flashback.presentation.localisation.generated.resources.settings_pref_crash_reporting_description
 import flashback.presentation.localisation.generated.resources.settings_pref_crash_reporting_title
 import flashback.presentation.localisation.generated.resources.settings_pref_disclaimer_description
@@ -108,6 +111,7 @@ import flashback.presentation.localisation.generated.resources.settings_theme_th
 import flashback.presentation.localisation.generated.resources.settings_theme_theme_title
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.infrastructure.device.Device
 
 object Settings {
@@ -161,6 +165,13 @@ object Settings {
         icon = Res.drawable.ic_settings_home
     )
     object Layout {
+        fun Timezone(timezone: String) = Setting.Pref(
+            _id = "timezone",
+            title = string.settings_pref_timezone_title,
+            subtitleResolver = @Composable {
+                stringResource(string.settings_pref_timezone_description, timezone)
+            }
+        )
         val RecentHighlights = Setting.Pref(
             _id = "layout_recents",
             title = string.settings_pref_recent_highlights_title,
@@ -446,6 +457,7 @@ sealed class Setting(
         val title: StringResource,
         val subtitle: StringResource? = null,
         val subtitleString: String? = null,
+        val subtitleResolver: (@Composable () -> String)? = null,
         val isBeta: Boolean = false,
         val isEnabled: Boolean = true
     ): Setting(_id)
