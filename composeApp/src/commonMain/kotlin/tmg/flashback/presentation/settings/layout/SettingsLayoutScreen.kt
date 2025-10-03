@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.settings_home
+import flashback.presentation.localisation.generated.resources.settings_section_home_title
 import kotlinx.datetime.TimeZone
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -58,7 +59,7 @@ private fun SettingsLayoutScreen(
     ) {
         item("header") {
             Header(
-                text = stringResource(string.settings_home),
+                text = stringResource(string.settings_section_home_title),
                 actionUpClicked = actionUpClicked,
                 action = HeaderAction.BACK.takeIf { showBack }
             )
