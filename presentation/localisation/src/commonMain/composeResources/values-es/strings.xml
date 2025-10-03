@@ -253,6 +253,8 @@
     <string name="settings_section_home_title">Diseño</string>
     <string name="settings_section_home_description">Personalizar los diseños del menú y del panel</string>
     <string name="settings_header_home">Inicio</string>
+    <string name="settings_pref_timezone_title">Zonas horarias</string>
+    <string name="settings_pref_timezone_description">Todas las horas de los eventos se muestran en la zona horaria de tu dispositivo (%1$s)</string>
     <string name="settings_pref_collapsed_list_title">Contraer carreras</string>
     <string name="settings_pref_collapsed_list_description">Ocultar todas las carreras completadas de la temporada actual excepto una, mostrando los próximos eventos más arriba en el feed</string>
     <string name="settings_pref_empty_week_title">Mostrar semanas vacías</string>

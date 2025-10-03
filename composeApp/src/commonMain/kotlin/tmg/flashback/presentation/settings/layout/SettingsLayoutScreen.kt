@@ -8,9 +8,12 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.settings_home
+import flashback.presentation.localisation.generated.resources.settings_section_home_title
+import kotlinx.datetime.TimeZone
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
+import tmg.flashback.presentation.settings.PrefLink
 import tmg.flashback.presentation.settings.PrefSwitch
 import tmg.flashback.presentation.settings.Settings
 import tmg.flashback.ui.components.header.Header
@@ -56,11 +59,15 @@ private fun SettingsLayoutScreen(
     ) {
         item("header") {
             Header(
-                text = stringResource(string.settings_home),
+                text = stringResource(string.settings_section_home_title),
                 actionUpClicked = actionUpClicked,
                 action = HeaderAction.BACK.takeIf { showBack }
             )
         }
+        PrefLink(
+            item = Settings.Layout.Timezone(TimeZone.currentSystemDefault().id),
+            itemClicked = { },
+        )
         PrefSwitch(
             item = Settings.Layout.RecentHighlights,
             isChecked = uiState.recentHighlights,

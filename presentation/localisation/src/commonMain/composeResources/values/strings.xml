@@ -282,9 +282,11 @@
     <string name="settings_pref_wind_speed_unit_title">Wind speed</string>
     <string name="settings_pref_wind_speed_unit_description">Show the wind speed in metric units (kph)</string>
 
-    <string name="settings_section_home_title">Layout</string>
-    <string name="settings_section_home_description">Customise the menu and dashboard layouts</string>
+    <string name="settings_section_home_title">Calendar</string>
+    <string name="settings_section_home_description">Customise the calendar screen</string>
     <string name="settings_header_home">Home</string>
+    <string name="settings_pref_timezone_title">Timezone</string>
+    <string name="settings_pref_timezone_description">All event times are shown in your device timezone (%1$s)</string>
     <string name="settings_pref_collapsed_list_title">Collapse races</string>
     <string name="settings_pref_collapsed_list_description">Hide all but one of the completed races for the current season, showing the upcoming events higher in the feed</string>
     <string name="settings_pref_empty_week_title">Show empty weeks</string>

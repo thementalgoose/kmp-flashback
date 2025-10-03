@@ -250,6 +250,8 @@
     <string name="settings_section_home_description">自定义菜单和仪表板布局</string>
     <string name="settings_header_home">主页</string>
     <string name="settings_build_version">构建版本</string>
+    <string name="settings_pref_timezone_title">时区</string>
+    <string name="settings_pref_timezone_description">所有活动时间均以您设备的时区 (%1$s) 显示</string>
     <string name="settings_pref_collapsed_list_title">折叠比赛</string>
     <string name="settings_pref_collapsed_list_description">隐藏当前赛季中除一场之外的所有已完成比赛，在信息流中显示即将举行的比赛</string>
     <string name="settings_pref_empty_week_title">显示空周</string>

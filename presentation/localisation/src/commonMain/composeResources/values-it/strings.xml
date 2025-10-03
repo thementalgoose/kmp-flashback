@@ -253,6 +253,8 @@
     <string name="settings_section_home_title">Layout</string>
     <string name="settings_section_home_description">Personalizza i layout del menu e della dashboard</string>
     <string name="settings_header_home">Home</string>
+    <string name="settings_pref_timezone_title">Fusi orari</string>
+    <string name="settings_pref_timezone_description">Tutti gli orari degli eventi vengono visualizzati nel fuso orario del tuo dispositivo (%1$s)</string>
     <string name="settings_pref_collapsed_list_title">Riduci le gare</string>
     <string name="settings_pref_collapsed_list_description">Nascondi tutte le gare completate per la stagione corrente, tranne una, mostrando gli eventi imminenti più in alto nel feed</string>
     <string name="settings_pref_empty_week_title">Mostra le settimane vuote</string>
