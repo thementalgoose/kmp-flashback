@@ -1,6 +1,7 @@
 package tmg.flashback.data.repo.repository
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import tmg.flashback.data.repo.extensions.valueList
 import tmg.flashback.data.repo.mappers.app.RaceMapper
@@ -25,6 +26,7 @@ interface RaceRepository {
     suspend fun populateRaces(season: Int): Response
     suspend fun populateRace(season: Int, round: Int): Response
     fun getRace(season: Int, round: Int): Flow<Race?>
+    suspend fun hasAnyRaces(season: Int): Boolean
 }
 
 internal class RaceRepositoryImpl(
@@ -108,6 +110,10 @@ internal class RaceRepositoryImpl(
             return@makeRequest true
         }
     )
+
+    override suspend fun hasAnyRaces(season: Int): Boolean {
+        return persistence.seasonDao().getRaceCount(season) != 0
+    }
 
     override fun getRace(season: Int, round: Int): Flow<Race?> {
         return persistence.seasonDao().getRace(season, round)
