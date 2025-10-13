@@ -61,3 +61,4 @@ jobs:
           before: before.txt
           after: after.txt
           post_pr_comment: true
+          show_removals: false
