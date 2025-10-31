@@ -22,7 +22,7 @@ firebase-bom = "34.4.0"
 
 # Shared
 ktor = "3.3.1"
-okhttp = "5.2.1"
+okhttp = "5.3.0"
 compose = "1.9.1"
 composeUiTooling = "1.9.4"
 composeAdaptive = "1.2.0"
