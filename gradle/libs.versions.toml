@@ -59,7 +59,7 @@ androidx_glance_core = { module = "androidx.glance:glance", version.ref = "andro
 androidx_glance_preview = { module = "androidx.glance:glance-preview", version.ref = "androidx-glance" }
 androidx_glance_appwidget = { module = "androidx.glance:glance-appwidget", version.ref = "androidx-glance" }
 androidx_glance_appwidgetpreview = { module = "androidx.glance:glance-appwidget-preview", version.ref = "androidx-glance" }
-androidx_splashscreen = "androidx.core:core-splashscreen:1.0.1"
+androidx_splashscreen = "androidx.core:core-splashscreen:1.2.0"
 android_flagkit = "com.github.murgupluoglu:flagkit-android:1.0.5"
 androidx_core = "androidx.core:core-ktx:1.17.0"
 androidx_appcompat = "androidx.appcompat:appcompat:1.7.1"
