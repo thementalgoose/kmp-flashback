@@ -97,6 +97,7 @@ fun CalendarScreen(
             content = {
                 item(key = "header") {
                     Header(
+                        modifier = Modifier.animateItem(),
                         content = {
                             ResultsSeasonPicker(subtitle = null)
                         },
@@ -122,25 +123,29 @@ fun CalendarScreen(
 
                 item(key = "news") {
                     HighlightBanner(
-                        modifier = Modifier
+                        modifier = Modifier.animateItem()
                     )
                 }
 
                 item(key = "notification_prompt") {
                     NotificationPrompt(
-                        modifier = Modifier.padding(
-                            vertical = AppTheme.dimens.xsmall,
-                            horizontal = AppTheme.dimens.medium
-                        )
+                        modifier = Modifier
+                            .animateItem()
+                            .padding(
+                                vertical = AppTheme.dimens.xsmall,
+                                horizontal = AppTheme.dimens.medium
+                            )
                     )
                 }
 
                 item(key = "device_time") {
                     DeviceTimePrompt(
-                        modifier = Modifier.padding(
-                            vertical = AppTheme.dimens.xsmall,
-                            horizontal = AppTheme.dimens.medium
-                        )
+                        modifier = Modifier
+                            .animateItem()
+                            .padding(
+                                vertical = AppTheme.dimens.xsmall,
+                                horizontal = AppTheme.dimens.medium
+                            )
                     )
                 }
 
@@ -182,7 +187,9 @@ fun CalendarScreen(
                 }
 
                 item(key = "footer") {
-                    ProvidedBy()
+                    ProvidedBy(
+                        modifier = Modifier.animateItem()
+                    )
                 }
             }
         )

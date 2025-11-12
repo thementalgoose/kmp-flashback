@@ -73,6 +73,7 @@ internal fun DriverStandingsScreen(
             content = {
                 item(key = "header") {
                     Header(
+                        modifier = Modifier.animateItem(),
                         content = {
                             ResultsSeasonPicker(subtitle = stringResource(resource = string.season_standings_driver))
                         },
@@ -98,25 +99,37 @@ internal fun DriverStandingsScreen(
                 }
                 uiState.inProgress?.let { (raceName, round) ->
                     item(key = "banner") {
-                        ResultAsOf(raceName, round)
+                        ResultAsOf(
+                            modifier = Modifier
+                                .animateItem()
+                                .padding(
+                                    horizontal = AppTheme.dimens.medium,
+                                    vertical = AppTheme.dimens.xsmall
+                                ),
+                            grandPrixName = raceName,
+                            round = round
+                        )
                     }
                 }
                 if (uiState.standings.isEmpty()) {
                     if (uiState.isLoading) {
                         item(key = "loading") {
-                            SkeletonViewList()
+                            SkeletonViewList(modifier = Modifier.animateItem())
                         }
                     }
                 }
                 items(uiState.standings, key = { "driver=${it.driver.id}" }) {
                     DriverStandings(
+                        modifier = Modifier.animateItem(),
                         model = it,
                         itemClicked = driverClicked,
                         maxPoints = uiState.maxPoints
                     )
                 }
                 item(key = "footer") {
-                    ProvidedBy()
+                    ProvidedBy(
+                        modifier = Modifier.animateItem()
+                    )
                 }
             }
         )
