@@ -1,18 +1,18 @@
 [versions]
 # Kotlin
 kotlin = "2.2.21"
-ksp = "2.3.1"
+ksp = "2.3.2"
 kotlinx-serialization = "1.9.0"
 kotlinx-datetime = "0.7.1"
 kotlinx-coroutines = "1.10.2"
 
 # Android
-agp = "8.13.0"
+agp = "8.13.1"
 android-compileSdk = "36"
 android-minSdk = "26"
 android-targetSdk = "36"
 androidx-activityCompose = "1.11.0"
-androidx-lifecycle = "2.9.5"
+androidx-lifecycle = "2.9.6"
 androidx-glance = "1.1.1"
 
 # Firebase
@@ -21,9 +21,9 @@ crashlytics = "3.0.4"
 firebase-bom = "34.5.0"
 
 # Shared
-ktor = "3.3.1"
+ktor = "3.3.2"
 okhttp = "5.3.0"
-compose = "1.9.2"
+compose = "1.9.3"
 composeUiTooling = "1.9.4"
 composeAdaptive = "1.2.0"
 composeNavigation = "2.9.1"
@@ -59,7 +59,7 @@ androidx_glance_core = { module = "androidx.glance:glance", version.ref = "andro
 androidx_glance_preview = { module = "androidx.glance:glance-preview", version.ref = "androidx-glance" }
 androidx_glance_appwidget = { module = "androidx.glance:glance-appwidget", version.ref = "androidx-glance" }
 androidx_glance_appwidgetpreview = { module = "androidx.glance:glance-appwidget-preview", version.ref = "androidx-glance" }
-androidx_splashscreen = "androidx.core:core-splashscreen:1.0.1"
+androidx_splashscreen = "androidx.core:core-splashscreen:1.2.0"
 android_flagkit = "com.github.murgupluoglu:flagkit-android:1.0.5"
 androidx_core = "androidx.core:core-ktx:1.17.0"
 androidx_appcompat = "androidx.appcompat:appcompat:1.7.1"
