@@ -61,6 +61,7 @@ fun TeamStandingsScreen(
             content = {
                 item(key = "header") {
                     Header(
+                        modifier = Modifier.animateItem(),
                         content = {
                             ResultsSeasonPicker(subtitle = stringResource(resource = string.season_standings_constructor))
                         },
@@ -76,25 +77,37 @@ fun TeamStandingsScreen(
                 }
                 uiState.inProgress?.let { (raceName, round) ->
                     item(key = "banner") {
-                        ResultAsOf(raceName, round)
+                        ResultAsOf(
+                            modifier = Modifier
+                                .animateItem()
+                                .padding(
+                                    horizontal = AppTheme.dimens.medium,
+                                    vertical = AppTheme.dimens.xsmall
+                                ),
+                            grandPrixName = raceName,
+                            round = round
+                        )
                     }
                 }
                 if (uiState.standings.isEmpty()) {
                      if (uiState.isLoading) {
                         item(key = "loading") {
-                            SkeletonViewList()
+                            SkeletonViewList(modifier = Modifier.animateItem())
                         }
                     }
                 }
                 items(uiState.standings, key = { "constructor=${it.constructor.id}" }) {
                     ConstructorStandings(
+                        modifier = Modifier.animateItem(),
                         model = it,
                         itemClicked = constructorClicked,
                         maxPoints = uiState.maxPoints
                     )
                 }
                 item(key = "footer") {
-                    ProvidedBy()
+                    ProvidedBy(
+                        modifier = Modifier.animateItem()
+                    )
                 }
             }
         )

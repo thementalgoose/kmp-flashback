@@ -18,10 +18,7 @@ import tmg.flashback.style.text.TextBody2
 fun ResultAsOf(
     grandPrixName: String,
     round: Int,
-    modifier: Modifier = Modifier.padding(
-        horizontal = AppTheme.dimens.medium,
-        vertical = AppTheme.dimens.xsmall
-    )
+    modifier: Modifier = Modifier
 ) {
     TextBody2(
         text = stringResource(string.results_accurate_for, grandPrixName, round),
