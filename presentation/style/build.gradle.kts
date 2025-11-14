@@ -41,6 +41,7 @@ kotlin {
             implementation(projects.infrastructure)
             implementation(projects.presentation.localisation)
             implementation(projects.core.preferences)
+            implementation(projects.presentation.xr)
 
             implementation(libs.bundles.koin.compose)
         }
