@@ -80,6 +80,7 @@ include(":presentation:navigation")
 include(":presentation:localisation")
 include(":presentation:style")
 include(":presentation:ui")
+include(":presentation:xr")
 
 include(":test:formula1")
 include(":test:data:network:flashback")
