@@ -7,11 +7,11 @@ object DesktopXR: XR {
     override val isSpatialUiEnabled: Boolean
         @Composable get() = false
 
-    override fun goToHomeSpaceMode() {
+    override fun requestPassthroughMode() {
         /* no op */
     }
 
-    override fun goToFullSpaceMode() {
+    override fun requestImmersiveMode() {
         /* no op */
     }
 }

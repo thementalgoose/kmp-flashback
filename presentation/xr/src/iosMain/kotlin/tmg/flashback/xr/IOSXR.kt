@@ -6,7 +6,7 @@ object IOSXR: XR {
     override val isSpatialUiEnabled: Boolean
         @Composable get() = false
 
-    override fun goToHomeSpaceMode() { /* no op */ }
+    override fun requestPassthroughMode() { /* no op */ }
 
-    override fun goToFullSpaceMode() { /* no op */ }
+    override fun requestImmersiveMode() { /* no op */ }
 }
