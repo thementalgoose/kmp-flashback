@@ -1,5 +1,6 @@
 package tmg.flashback.xr
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.xr.compose.platform.LocalSpatialCapabilities
 import androidx.xr.runtime.Session
@@ -9,7 +10,11 @@ class AndroidXR(
     val localSession: Session?
 ): XR {
     override val isSpatialUiEnabled: Boolean
-        @Composable get() = LocalSpatialCapabilities.current.isSpatialUiEnabled
+        @Composable get() {
+            return LocalSpatialCapabilities.current.isSpatialUiEnabled.also {
+                Log.d("AppXR", "isSpatialUiEnabled $it")
+            }
+        }
 
     override fun requestPassthroughMode() {
         localSession?.scene?.requestHomeSpaceMode()

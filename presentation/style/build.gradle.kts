@@ -25,6 +25,7 @@ kotlin {
         androidMain.dependencies {
             api(compose.preview)
             api(libs.androidx.activity.compose)
+            implementation(libs.bundles.androidx.xr)
         }
         commonMain.dependencies {
             api(compose.runtime)

@@ -68,8 +68,6 @@ fun ApplicationTheme(
             )
         }
     }
-
-
 }
 
 @Composable
@@ -87,7 +85,8 @@ fun ApplicationTheme(
     LocalColors.provides(colors)
 
     CompositionLocalProvider(
-        LocalColors provides colors
+        LocalColors provides colors,
+        LocalXR provides xr()
     ) {
         MaterialTheme(
             colorScheme = colors.appColors

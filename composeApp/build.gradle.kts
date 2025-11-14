@@ -104,6 +104,9 @@ kotlin {
             implementation(libs.androidx.splashscreen)
             implementation(libs.firebase.messaging)
             implementation(libs.firebase.installations)
+
+            implementation(libs.bundles.androidx.xr)
+            compileOnly(libs.androidx.xr.extensions)
         }
         commonMain.dependencies {
 

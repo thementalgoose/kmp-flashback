@@ -14,7 +14,7 @@ android-targetSdk = "36"
 androidx-activityCompose = "1.11.0"
 androidx-lifecycle = "2.9.6"
 androidx-glance = "1.1.1"
-androidx-xr = "1.0.0-alpha07"
+androidx-xr = "1.0.0-alpha05"
 
 # Firebase
 google-services = "4.4.2"
@@ -141,7 +141,7 @@ androidx_xr = [
     "androidx_xr_runtime",
     "androidx_xr_scenecore",
     "androidx_xr_compose",
-    "androidx_xr_material3",
+#    "androidx_xr_material3",
     "androidx_xr_arcore"
 ]
 kotlin = [
