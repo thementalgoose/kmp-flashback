@@ -6,5 +6,5 @@ import androidx.compose.runtime.Composable
 actual fun XRSurface(
     content: @Composable (() -> Unit)
 ) {
-    content.invoke()
+    /* no-op */
 }
