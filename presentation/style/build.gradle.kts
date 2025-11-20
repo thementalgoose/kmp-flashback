@@ -25,6 +25,7 @@ kotlin {
         androidMain.dependencies {
             api(compose.preview)
             api(libs.androidx.activity.compose)
+            implementation(libs.bundles.androidx.xr)
         }
         commonMain.dependencies {
             api(compose.runtime)
@@ -41,6 +42,7 @@ kotlin {
             implementation(projects.infrastructure)
             implementation(projects.presentation.localisation)
             implementation(projects.core.preferences)
+            implementation(projects.presentation.xr)
 
             implementation(libs.bundles.koin.compose)
         }

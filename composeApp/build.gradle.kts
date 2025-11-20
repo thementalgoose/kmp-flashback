@@ -104,6 +104,9 @@ kotlin {
             implementation(libs.androidx.splashscreen)
             implementation(libs.firebase.messaging)
             implementation(libs.firebase.installations)
+
+            implementation(libs.bundles.androidx.xr)
+            compileOnly(libs.androidx.xr.extensions)
         }
         commonMain.dependencies {
 
@@ -147,6 +150,7 @@ kotlin {
             implementation(projects.presentation.navigation)
             implementation(projects.presentation.style)
             implementation(projects.presentation.ui)
+            implementation(projects.presentation.xr)
 
             implementation(compose.components.resources)
             implementation(compose.material3AdaptiveNavigationSuite)

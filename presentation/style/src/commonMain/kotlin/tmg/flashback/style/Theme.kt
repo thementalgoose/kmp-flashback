@@ -11,14 +11,14 @@ import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
 import org.koin.compose.koinInject
 import tmg.flashback.infrastructure.log.logDebug
-import tmg.flashback.localisation.LocalAppLocale
-import tmg.flashback.localisation.customAppLocale
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.theme.LocalDarkMode
 import tmg.flashback.style.theme.NightMode
 import tmg.flashback.style.theme.Theme
 import tmg.flashback.style.theme.ThemeManager
 import tmg.flashback.style.theme.customLightMode
+import tmg.flashback.xr.LocalXR
+import tmg.flashback.xr.xr
 
 object AppTheme {
     var appTheme: Theme = Theme.Default
@@ -56,7 +56,8 @@ fun ApplicationTheme(
     AppTheme.appTheme = theme
 
     CompositionLocalProvider(
-        LocalDarkMode provides customLightMode
+        LocalDarkMode provides customLightMode,
+        LocalXR provides xr()
     ) {
         key(customLightMode) {
             setSystemBarsIconColours(!isSystemInDarkTheme())
@@ -67,8 +68,6 @@ fun ApplicationTheme(
             )
         }
     }
-
-
 }
 
 @Composable
@@ -86,7 +85,8 @@ fun ApplicationTheme(
     LocalColors.provides(colors)
 
     CompositionLocalProvider(
-        LocalColors provides colors
+        LocalColors provides colors,
+        LocalXR provides xr()
     ) {
         MaterialTheme(
             colorScheme = colors.appColors
