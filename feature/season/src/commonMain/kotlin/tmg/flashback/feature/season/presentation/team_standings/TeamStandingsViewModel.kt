@@ -49,7 +49,6 @@ class TeamStandingsViewModel(
             }
             _uiState.value = _uiState.value.copy(isLoading = true)
             seasonRepository.populateSeason(season)
-            standingsRepository.populateStandings(season)
             populate()
         }
     }
