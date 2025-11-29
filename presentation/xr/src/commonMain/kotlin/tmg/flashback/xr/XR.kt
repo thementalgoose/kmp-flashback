@@ -6,6 +6,9 @@ interface XR {
     val isSpatialUiEnabled: Boolean
         @Composable get
 
+    val isXrDevice: Boolean
+        @Composable get
+
     fun requestPassthroughMode()
 
     fun requestImmersiveMode()
@@ -13,6 +16,8 @@ interface XR {
 
 class NoopXR: XR {
     override val isSpatialUiEnabled: Boolean
+        @Composable get() = false
+    override val isXrDevice: Boolean
         @Composable get() = false
     override fun requestPassthroughMode() { }
     override fun requestImmersiveMode() { }

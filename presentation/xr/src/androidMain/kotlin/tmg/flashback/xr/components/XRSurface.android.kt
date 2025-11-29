@@ -1,6 +1,7 @@
 package tmg.flashback.xr.components
 
 import androidx.compose.runtime.Composable
+import androidx.xr.compose.spatial.Subspace
 import androidx.xr.compose.subspace.SpatialPanel
 import androidx.xr.compose.subspace.layout.SubspaceModifier
 
@@ -8,8 +9,10 @@ import androidx.xr.compose.subspace.layout.SubspaceModifier
 actual fun XRSurface(
     content: @Composable () -> Unit
 ) {
-    SpatialPanel(
-        modifier = SubspaceModifier,
-        content = content,
-    )
+    Subspace {
+        SpatialPanel(
+            modifier = SubspaceModifier,
+            content = content,
+        )
+    }
 }
