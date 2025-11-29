@@ -3,6 +3,7 @@ package tmg.flashback.ui.navigation
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -54,13 +55,15 @@ fun NavigationOrbiter(
     itemClicked: (NavigationItem) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier
-        .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-        .background(AppTheme.colors.surfaceNav)
-        .width(navigationOrbiterColumnWidth)
-        .padding(
-            vertical = AppTheme.dimens.small
-        )
+    Column(
+        modifier = modifier
+            .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
+            .background(AppTheme.colors.surfaceNav)
+            .width(navigationOrbiterColumnWidth)
+            .padding(
+                vertical = AppTheme.dimens.small
+            ),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
     ) {
         primary.forEach { item ->
             NavigationItem(
