@@ -48,8 +48,8 @@ internal class RaceRepositoryImpl(
             saveConstructors(data.constructors)
             saveDrivers(data.drivers)
 
-            saveConstructorStandings(season, data.constructorStandings)
-            saveDriverStandings(season, data.driverStandings)
+//            saveConstructorStandings(season, data.constructorStandings)
+//            saveDriverStandings(season, data.driverStandings)
 
             val raceData = data.races.valueList().map { networkRaceDataMapper.mapRaceData(it.data) }
             val qualifyingResults = data.races.valueList()
