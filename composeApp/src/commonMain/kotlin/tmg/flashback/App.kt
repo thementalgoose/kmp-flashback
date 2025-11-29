@@ -141,7 +141,8 @@ fun App() {
                         list = items,
                         itemClicked = { item ->
                             val menuItem = item.id.toEnum<MenuItem> { it.key } ?: return@NavigationBar
-                            navController.navigate(menuItem.toScreen())
+                            val screen = menuItem.toScreen() ?: return@NavigationBar
+                            navController.navigate(screen)
                         }
                     )
                 }

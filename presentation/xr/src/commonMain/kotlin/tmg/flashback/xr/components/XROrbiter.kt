@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 expect fun XROrbiter(
     position: Position = Position.Start,
-    offset: Dp = 8.dp,
+    offset: Dp = 0.dp,
     elevation: Dp = 16.dp,
     content: @Composable () -> Unit,
 )

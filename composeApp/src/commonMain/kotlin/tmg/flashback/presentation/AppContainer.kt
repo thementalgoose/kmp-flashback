@@ -28,6 +28,7 @@ import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsNav
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.navigation.Screen
 import tmg.flashback.presentation.navigation.AppNavigationDrawer
+import tmg.flashback.presentation.navigation.AppNavigationOrbiter
 import tmg.flashback.presentation.navigation.AppNavigationRail
 import tmg.flashback.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.presentation.settings.SettingNavigation
@@ -36,6 +37,7 @@ import tmg.flashback.ui.navigation.OverlappingPanels
 import tmg.flashback.ui.navigation.OverlappingPanelsState
 import tmg.flashback.ui.navigation.OverlappingPanelsValue
 import tmg.flashback.ui.navigation.rememberMasterDetailPaneState
+import tmg.flashback.xr.LocalXR
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -91,14 +93,28 @@ fun AppContainer(
     }
     //endregion
 
+    val isSpacialUiEnabled: Boolean = LocalXR.current.isSpatialUiEnabled
+    if (isSpacialUiEnabled) {
+        AppNavigationOrbiter(
+            appNavigationUiState = appNavigationUiState.value,
+            navigationItemClicked = {
+                clearSubnavs()
+                navController.navigate(it) {
+                    this.launchSingleTop = true
+                    this.popUpTo(Screen.Calendar)
+                }
+            }
+        )
+    }
+
     OverlappingPanels(
         modifier = Modifier
             .background(AppTheme.colors.surface),
-        panelsState = when (isCompact && menuAccessible) {
+        panelsState = when (isCompact && menuAccessible && !isSpacialUiEnabled) {
             true -> panelsState
             false -> OverlappingPanelsState(OverlappingPanelsValue.Closed)
         },
-        gesturesEnabled = isCompact && menuAccessible,
+        gesturesEnabled = isCompact && menuAccessible && !isSpacialUiEnabled,
         centerPanelElevation = if (isCompact) 8.dp else 0.dp,
         panelStart = {
             AppNavigationDrawer(
@@ -123,7 +139,7 @@ fun AppContainer(
                 .background(AppTheme.colors.surface)
                 .then(if (!isCompact) easterEggModifier else Modifier)
             ) {
-                if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT) {
+                if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT && !isSpacialUiEnabled) {
                     AppNavigationRail(
                         appNavigationUiState = appNavigationUiState.value,
                         navigationItemClicked = {

@@ -1,13 +1,10 @@
 package tmg.flashback.ui.navigation
 
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -28,9 +25,8 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.text.TextBody1
 
-val columnWidth: Dp = 64.dp
+val navigationOrbiterColumnWidth: Dp = 64.dp
 private val itemSize: Dp = 48.dp
 private val iconSize: Dp = 24.dp
 
@@ -61,7 +57,7 @@ fun NavigationOrbiter(
     Column(modifier = modifier
         .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
         .background(AppTheme.colors.surfaceNav)
-        .width(columnWidth)
+        .width(navigationOrbiterColumnWidth)
         .padding(
             vertical = AppTheme.dimens.small
         )

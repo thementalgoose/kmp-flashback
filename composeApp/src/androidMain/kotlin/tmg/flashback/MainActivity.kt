@@ -2,6 +2,7 @@ package tmg.flashback
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -9,6 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.xr.runtime.Session
+import androidx.xr.runtime.SessionCreateApkRequired
 import org.koin.android.ext.android.inject
 import tmg.flashback.style.theme.Theme
 import tmg.flashback.style.theme.ThemeManager
@@ -34,6 +37,9 @@ class MainActivity : BaseActivity(), SplashScreen.KeepOnScreenCondition {
         val splashScreen = installSplashScreen()
         setTheme(theme)
         splashScreen.setKeepOnScreenCondition(this)
+
+        val session = Session.create(this)
+        Log.i("INFO", "Session creation $session")
 
         setContent {
             App()
