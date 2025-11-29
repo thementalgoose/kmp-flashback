@@ -37,6 +37,7 @@ import tmg.flashback.presentation.navigation.hero.DashboardHero
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
+import tmg.flashback.xr.LocalXR
 
 @Composable
 internal fun AppNavigationDrawer(
@@ -44,8 +45,10 @@ internal fun AppNavigationDrawer(
     navigationItemClicked: (Screen) -> Unit,
     closeMenu: () -> Unit,
     modifier: Modifier = Modifier,
-    insetPadding: PaddingValues = WindowInsets.safeContent.asPaddingValues()
+    insetPadding: PaddingValues = WindowInsets.safeContent.asPaddingValues(),
+    showXr: Boolean = false
 ) {
+    val xr = LocalXR.current
     Box(modifier) {
         LazyColumn(
             contentPadding = insetPadding,
@@ -135,6 +138,17 @@ internal fun AppNavigationDrawer(
                 }
                 item("footer_div") {
                     MenuDivider()
+                }
+                if (showXr) {
+                    item("nav_xr") {
+                        NavigationItem(
+                            menuItem = MenuItem.XR_Spacial,
+                            isSelected = false,
+                            onClick = {
+                                xr.requestImmersiveMode()
+                            }
+                        )
+                    }
                 }
                 item("app_version") {
                     TextBody2(

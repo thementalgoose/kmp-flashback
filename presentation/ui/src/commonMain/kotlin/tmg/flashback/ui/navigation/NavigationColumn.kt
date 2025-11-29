@@ -56,6 +56,7 @@ fun NavigationColumn(
         primary = list,
         divider = { },
         secondary = emptyList(),
+        tertiary = emptyList(),
         itemClicked = itemClicked,
         modifier = modifier,
         padding = padding,
@@ -68,6 +69,7 @@ fun NavigationColumn(
     primary: List<NavigationItem>,
     divider: @Composable () -> Unit,
     secondary: List<NavigationItem>,
+    tertiary: List<NavigationItem> = emptyList(),
     itemClicked: (NavigationItem) -> Unit,
     modifier: Modifier = Modifier,
     padding: PaddingValues = PaddingValues(0.dp),
@@ -124,6 +126,17 @@ fun NavigationColumn(
                     divider()
                 }
                 items(secondary) {
+                    NavigationItem(
+                        item = it,
+                        isExpanded = expanded.value,
+                        onClick = itemClicked,
+                    )
+                    Spacer(Modifier.height(AppTheme.dimens.small))
+                }
+                item {
+                    divider()
+                }
+                items(tertiary) {
                     NavigationItem(
                         item = it,
                         isExpanded = expanded.value,
