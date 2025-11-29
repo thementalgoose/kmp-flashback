@@ -93,6 +93,7 @@ fun AppContainer(
     }
     //endregion
 
+    val isXrDevice = LocalXR.current.isXrDevice
     val isSpacialUiEnabled: Boolean = LocalXR.current.isSpatialUiEnabled
     if (isSpacialUiEnabled) {
         AppNavigationOrbiter(
@@ -106,6 +107,7 @@ fun AppContainer(
             }
         )
     }
+
 
     OverlappingPanels(
         modifier = Modifier
@@ -130,6 +132,7 @@ fun AppContainer(
                 closeMenu = {
                     coroutineScope.launch { panelsState.closePanels() }
                 },
+                showXr = isXrDevice,
                 modifier = if (isCompact) easterEggModifier else Modifier
             )
         },
@@ -149,6 +152,7 @@ fun AppContainer(
                                 this.popUpTo(Screen.Calendar)
                             }
                         },
+                        showXr = isXrDevice,
                         insetPadding = paddingValues
                     )
                 }
