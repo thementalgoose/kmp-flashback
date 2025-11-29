@@ -13,14 +13,10 @@ import tmg.flashback.persistence.flashback.FlashbackDatabase
 
 interface SeasonRepository {
     fun getSeason(season: Int): Flow<Season?>
-    fun getDriverStandings(season: Int): Flow<SeasonDriverStandings?>
-    fun getConstructorStandings(season: Int): Flow<SeasonConstructorStandings?>
 }
 
 internal class SeasonRepositoryImpl(
     private val flashbackDatabase: FlashbackDatabase,
-    private val driverStandingMapper: DriverStandingMapper,
-    private val constructorStandingMapper: ConstructorStandingMapper,
     private val seasonMapper: SeasonMapper
 ): SeasonRepository {
 
@@ -32,21 +28,5 @@ internal class SeasonRepositoryImpl(
         ).map { (list, winterTesting) ->
             seasonMapper.mapSeason(season, list, winterTesting)
         }
-    }
-
-    override fun getDriverStandings(season: Int): Flow<SeasonDriverStandings?> {
-        return flashbackDatabase.seasonStandingDao()
-            .getDriverStandings(season)
-            .map { standings ->
-                driverStandingMapper.mapDriverStanding(standings)
-            }
-    }
-
-    override fun getConstructorStandings(season: Int): Flow<SeasonConstructorStandings?> {
-        return flashbackDatabase.seasonStandingDao()
-            .getConstructorStandings(season)
-            .map { standings ->
-                constructorStandingMapper.mapConstructorStanding(standings)
-            }
     }
 }

@@ -12,6 +12,7 @@ import tmg.flashback.flashbackapi.api.models.overview.Event
 import tmg.flashback.flashbackapi.api.models.overview.Overview
 import tmg.flashback.flashbackapi.api.models.races.Round
 import tmg.flashback.flashbackapi.api.models.races.Season
+import tmg.flashback.flashbackapi.api.models.races.Standings
 
 interface FlashbackApi {
 
@@ -46,7 +47,7 @@ interface FlashbackApi {
     suspend fun getSeason(season: Int): MetadataWrapper<Season>?
 
     @Throws(RuntimeException::class, IOException::class)
-    suspend fun getStandings(season: Int): MetadataWrapper<Season>?
+    suspend fun getStandings(season: Int): MetadataWrapper<Standings>?
 
     @Throws(RuntimeException::class, IOException::class)
     suspend fun getSeason(season: Int, round: Int): MetadataWrapper<Round>?
