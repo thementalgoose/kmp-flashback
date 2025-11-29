@@ -78,6 +78,7 @@ class DriverComparisonViewModel(
                 isLoading = true,
             )
             racesRepository.populateRaces(seasonValue)
+            standingsRepository.populateStandings(seasonValue)
 
             season = seasonRepository.getSeason(seasonValue).firstOrNull()
             driverStandings = standingsRepository.getDriverStandings(seasonValue).firstOrNull()
