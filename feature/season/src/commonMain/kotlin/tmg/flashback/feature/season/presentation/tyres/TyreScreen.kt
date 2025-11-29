@@ -60,6 +60,7 @@ fun TyreBottomSheet(
 ) {
     ModalBottomSheet(
         onDismissRequest = dismissed,
+        containerColor = AppTheme.colors.surface,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         content = {
             TyreScreen(
@@ -80,11 +81,13 @@ private fun TyreScreen(
     val wet = tyres?.tyres?.filter { !it.tyre.isDry } ?: emptyList()
     LazyVerticalGrid(
         modifier = Modifier
-            .background(AppTheme.colors.surfaceContainer2),
+            .background(AppTheme.colors.surface),
         columns = GridCells.Adaptive(minSize = 250.dp),
         content = {
             item("header", span = { GridItemSpan(maxLineSpan) }) {
                 Header(
+                    // Needed for the dialog to show the background colour in XR.
+                    modifier = Modifier.background(AppTheme.colors.surface),
                     text = stringResource(resource = string.tyres_label),
                     action = null,
                     actionUpClicked = dismissed

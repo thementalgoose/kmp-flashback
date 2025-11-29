@@ -5,6 +5,7 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -90,14 +91,15 @@ fun SyncBottomSheet(
         },
     )
     val coroutineScope = rememberCoroutineScope()
-    ModalBottomSheet(
-        onDismissRequest = hide,
-        sheetState = sheetState,
-        properties = ModalBottomSheetProperties(
-            shouldDismissOnBackPress = !lockBottomSheetOnScreen.value
-        )
-    ) {
-        ApplicationTheme {
+    ApplicationTheme {
+        ModalBottomSheet(
+            onDismissRequest = hide,
+            sheetState = sheetState,
+            containerColor = AppTheme.colors.surface,
+            properties = ModalBottomSheetProperties(
+                shouldDismissOnBackPress = !lockBottomSheetOnScreen.value
+            )
+        ) {
             SyncScreen(
                 windowSizeClass = windowSizeClass,
                 dismiss = {
@@ -169,11 +171,14 @@ fun SyncScreen(
 ) {
     Column(
         modifier = Modifier
+            .background(AppTheme.colors.surface)
             .fillMaxWidth()
             .padding(AppTheme.dimens.medium),
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
     ) {
         Row(
+            // Needed for the dialog to show the background colour in XR.
+            modifier = Modifier.background(AppTheme.colors.surface),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {

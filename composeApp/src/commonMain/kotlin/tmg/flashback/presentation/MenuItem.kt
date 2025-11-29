@@ -7,6 +7,7 @@ import flashback.composeapp.generated.resources.dashboard_nav_drivers
 import flashback.composeapp.generated.resources.dashboard_reaction
 import flashback.composeapp.generated.resources.dashboard_rss
 import flashback.composeapp.generated.resources.dashboard_search
+import flashback.composeapp.generated.resources.dashboard_xr
 import flashback.composeapp.generated.resources.dashboard_settings
 import flashback.composeapp.generated.resources.dashboard_contact
 import flashback.composeapp.generated.resources.dashboard_nav_circuits
@@ -19,6 +20,7 @@ import flashback.presentation.localisation.generated.resources.nav_drivers
 import flashback.presentation.localisation.generated.resources.nav_reaction_game
 import flashback.presentation.localisation.generated.resources.nav_rss
 import flashback.presentation.localisation.generated.resources.nav_search
+import flashback.presentation.localisation.generated.resources.nav_xr
 import flashback.presentation.localisation.generated.resources.nav_settings
 import flashback.presentation.localisation.generated.resources.search_category_circuits
 import org.jetbrains.compose.resources.DrawableResource
@@ -38,6 +40,7 @@ enum class MenuItem(
     ReactionGame(key = "ReactionGame"),
     Settings(key = "Settings"),
     Contact(key = "Contact"),
+    XR_Spacial(key = "XR_Spacial")
 }
 
 val MenuItem.label: StringResource
@@ -51,6 +54,7 @@ val MenuItem.label: StringResource
         MenuItem.ReactionGame -> string.nav_reaction_game
         MenuItem.Settings -> string.nav_settings
         MenuItem.Contact -> string.nav_contact
+        MenuItem.XR_Spacial -> string.nav_xr
     }
 
 val MenuItem.icon: DrawableResource
@@ -64,6 +68,7 @@ val MenuItem.icon: DrawableResource
         MenuItem.ReactionGame -> Res.drawable.dashboard_reaction
         MenuItem.Settings -> Res.drawable.dashboard_settings
         MenuItem.Contact -> Res.drawable.dashboard_contact
+        MenuItem.XR_Spacial -> Res.drawable.dashboard_xr
     }
 
 fun MenuItem.toNavigationItem(
@@ -75,7 +80,7 @@ fun MenuItem.toNavigationItem(
     isSelected = isSelected
 )
 
-fun MenuItem.toScreen(): Screen {
+fun MenuItem.toScreen(): Screen? {
     return when (this) {
         MenuItem.Results -> Screen.Calendar
         MenuItem.Calendar -> Screen.Calendar
@@ -86,5 +91,6 @@ fun MenuItem.toScreen(): Screen {
         MenuItem.ReactionGame -> Screen.ReactionGame
         MenuItem.Settings -> Screen.Settings
         MenuItem.Contact -> Screen.About
+        MenuItem.XR_Spacial -> null
     }
 }
