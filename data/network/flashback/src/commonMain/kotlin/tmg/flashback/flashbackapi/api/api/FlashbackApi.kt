@@ -46,6 +46,9 @@ interface FlashbackApi {
     suspend fun getSeason(season: Int): MetadataWrapper<Season>?
 
     @Throws(RuntimeException::class, IOException::class)
+    suspend fun getStandings(season: Int): MetadataWrapper<Season>?
+
+    @Throws(RuntimeException::class, IOException::class)
     suspend fun getSeason(season: Int, round: Int): MetadataWrapper<Round>?
 
     @Throws(RuntimeException::class, IOException::class)

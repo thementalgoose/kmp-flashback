@@ -63,6 +63,10 @@ class FlashbackApiImpl(
         makeRequest("constructors/$id.json")
 
     @Throws(RuntimeException::class, IOException::class)
+    override suspend fun getStandings(season: Int): MetadataWrapper<Season>? =
+        makeRequest("standings/$season.json")
+
+    @Throws(RuntimeException::class, IOException::class)
     override suspend fun getSeason(season: Int): MetadataWrapper<Season>? =
         makeRequest("races/$season.json")
 
