@@ -9,5 +9,5 @@ val featureDriversModule = listOf(module())
 
 internal fun module() = module {
     viewModel { DriverStatsViewModel(get()) }
-    viewModel { DriverComparisonViewModel(get(), get()) }
+    viewModel { DriverComparisonViewModel(get(), get(), get()) }
 }
