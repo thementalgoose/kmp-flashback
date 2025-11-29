@@ -57,6 +57,7 @@ internal class DriverStandingsViewModelTest {
         every { mockCurrentSeasonHolder.currentSeasonFlow } returns _fakeCurrentSeasonFlow
         everySuspend { mockOverviewRepository.populateOverview(any()) } returns Response.Successful
         everySuspend { mockRaceRepository.populateRaces(any()) } returns Response.Successful
+        everySuspend { mockStandingsRepository.populateStandings(any()) } returns Response.Successful
         underTest = DriverStandingsViewModel(
             standingsRepository = mockStandingsRepository,
             currentSeasonHolder = mockCurrentSeasonHolder,
