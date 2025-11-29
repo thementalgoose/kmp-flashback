@@ -36,9 +36,7 @@ internal class DriverStandingsViewModelTest {
 
     private val mockStandingsRepository: StandingsRepository = mock(autoUnit)
     private val mockCurrentSeasonHolder: CurrentSeasonHolder = mock(autoUnit)
-    private val mockOverviewRepository: OverviewRepository = mock(autoUnit)
-    private val mockRaceRepository: RaceRepository = mock(autoUnit)
-
+    private val mockSeasonRepository: SeasonRepository = mock(autoUnit)
     private val standing1 = SeasonDriverStandingSeason.model()
     private val standing2 = SeasonDriverStandingSeason.model(driver = Driver.model(id = "2"))
 
@@ -55,14 +53,11 @@ internal class DriverStandingsViewModelTest {
         )) }
         every { mockCurrentSeasonHolder.currentSeason } returns 2019
         every { mockCurrentSeasonHolder.currentSeasonFlow } returns _fakeCurrentSeasonFlow
-        everySuspend { mockOverviewRepository.populateOverview(any()) } returns Response.Successful
-        everySuspend { mockRaceRepository.populateRaces(any()) } returns Response.Successful
-        everySuspend { mockStandingsRepository.populateStandings(any()) } returns Response.Successful
+        everySuspend { mockSeasonRepository.populateSeason(any()) } returns Response.Successful
         underTest = DriverStandingsViewModel(
             standingsRepository = mockStandingsRepository,
             currentSeasonHolder = mockCurrentSeasonHolder,
-            overviewRepository = mockOverviewRepository,
-            racesRepository = mockRaceRepository,
+            seasonRepository = mockSeasonRepository,
             mainDispatcher = testDispatcher
         )
     }
@@ -154,8 +149,7 @@ internal class DriverStandingsViewModelTest {
             assertEquals(listOf(standing2), afterRefreshPopulate.standings)
 
             verifySuspend {
-                mockOverviewRepository.populateOverview(2020)
-                mockRaceRepository.populateRaces(2020)
+                mockSeasonRepository.populateSeason(2020)
             }
         }
     }

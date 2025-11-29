@@ -9,15 +9,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
-import tmg.flashback.data.repo.repository.OverviewRepository
-import tmg.flashback.data.repo.repository.RaceRepository
+import tmg.flashback.data.repo.repository.SeasonRepository
 import tmg.flashback.data.repo.repository.StandingsRepository
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
 
 class DriverStandingsViewModel(
+    private val seasonRepository: SeasonRepository,
     private val standingsRepository: StandingsRepository,
-    private val overviewRepository: OverviewRepository,
-    private val racesRepository: RaceRepository,
     private val currentSeasonHolder: CurrentSeasonHolder,
     private val mainDispatcher: CoroutineDispatcher = Dispatchers.Main
 ): ViewModel() {
@@ -47,9 +45,7 @@ class DriverStandingsViewModel(
                 populate()
             }
             _uiState.value = _uiState.value.copy(isLoading = true)
-            overviewRepository.populateOverview(season)
-            racesRepository.populateRaces(season)
-            standingsRepository.populateStandings(season)
+            seasonRepository.populateSeason(season)
             populate()
         }
     }
