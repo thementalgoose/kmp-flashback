@@ -18,6 +18,7 @@ import tmg.flashback.flashbackapi.api.models.overview.Event
 import tmg.flashback.flashbackapi.api.models.overview.Overview
 import tmg.flashback.flashbackapi.api.models.races.Round
 import tmg.flashback.flashbackapi.api.models.races.Season
+import tmg.flashback.flashbackapi.api.models.races.Standings
 import tmg.flashback.flashbackapi.api.repositories.NetworkConfigRepository
 import tmg.flashback.infrastructure.log.logInfo
 
@@ -61,6 +62,10 @@ class FlashbackApiImpl(
     @Throws(RuntimeException::class, IOException::class)
     override suspend fun getConstructor(id: String): MetadataWrapper<ConstructorHistory>? =
         makeRequest("constructors/$id.json")
+
+    @Throws(RuntimeException::class, IOException::class)
+    override suspend fun getStandings(season: Int): MetadataWrapper<Standings>? =
+        makeRequest("standings/$season.json")
 
     @Throws(RuntimeException::class, IOException::class)
     override suspend fun getSeason(season: Int): MetadataWrapper<Season>? =

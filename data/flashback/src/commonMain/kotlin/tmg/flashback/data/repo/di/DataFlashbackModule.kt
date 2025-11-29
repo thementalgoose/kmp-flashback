@@ -42,6 +42,8 @@ import tmg.flashback.data.repo.repository.RaceRepository
 import tmg.flashback.data.repo.repository.RaceRepositoryImpl
 import tmg.flashback.data.repo.repository.SeasonRepository
 import tmg.flashback.data.repo.repository.SeasonRepositoryImpl
+import tmg.flashback.data.repo.repository.StandingsRepository
+import tmg.flashback.data.repo.repository.StandingsRepositoryImpl
 
 val dataFlashbackModule = listOf(module())
 
@@ -75,11 +77,12 @@ internal fun module() = module {
 
     single<RaceRepository> { RaceRepositoryImpl(get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
     single<OverviewRepository> { OverviewRepositoryImpl(get(), get(), get(), get(), get(), get()) }
-    single<SeasonRepository> { SeasonRepositoryImpl(get(), get(), get(), get()) }
+    single<SeasonRepository> { SeasonRepositoryImpl(get(), get()) }
     single<EventRepository> { EventRepositoryImpl(get(), get(), get(), get()) }
     single<DriverRepository> { DriverRepositoryImpl(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
     single<ConstructorRepository> { ConstructorRepositoryImpl(get(), get(), get(), get(), get(), get(), get()) }
     single<CircuitRepository> { CircuitRepositoryImpl(get(), get(), get(), get(), get(), get(), get()) }
+    single<StandingsRepository> { StandingsRepositoryImpl(get(), get(), get(), get(), get(), get(), get(), get()) }
 
     single<InfoRepository> { InfoRepositoryImpl(get()) }
 }

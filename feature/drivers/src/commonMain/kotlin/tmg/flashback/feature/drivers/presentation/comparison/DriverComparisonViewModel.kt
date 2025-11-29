@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import tmg.flashback.data.repo.repository.RaceRepository
 import tmg.flashback.data.repo.repository.SeasonRepository
+import tmg.flashback.data.repo.repository.StandingsRepository
 import tmg.flashback.formula1.enums.isStatusFinished
 import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.model.RaceResult
@@ -14,6 +15,7 @@ import tmg.flashback.formula1.model.Season
 import tmg.flashback.formula1.model.SeasonDriverStandings
 
 class DriverComparisonViewModel(
+    private val standingsRepository: StandingsRepository,
     private val seasonRepository: SeasonRepository,
     private val racesRepository: RaceRepository,
 ): ViewModel() {
@@ -69,16 +71,17 @@ class DriverComparisonViewModel(
         viewModelScope.launch {
             val seasonValue = seasonValue ?: return@launch
             season = seasonRepository.getSeason(seasonValue).firstOrNull()
-            driverStandings = seasonRepository.getDriverStandings(seasonValue).firstOrNull()
+            driverStandings = standingsRepository.getDriverStandings(seasonValue).firstOrNull()
             populate()
 
             uiState.value = uiState.value.copy(
                 isLoading = true,
             )
             racesRepository.populateRaces(seasonValue)
+            standingsRepository.populateStandings(seasonValue)
 
             season = seasonRepository.getSeason(seasonValue).firstOrNull()
-            driverStandings = seasonRepository.getDriverStandings(seasonValue).firstOrNull()
+            driverStandings = standingsRepository.getDriverStandings(seasonValue).firstOrNull()
             populate()
         }
     }

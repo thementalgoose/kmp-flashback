@@ -17,6 +17,7 @@ import tmg.flashback.data.repo.model.Response
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
 import tmg.flashback.data.repo.repository.SeasonRepository
+import tmg.flashback.data.repo.repository.StandingsRepository
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.SeasonConstructorStandingSeason
@@ -29,7 +30,7 @@ internal class TeamStandingsViewModelTest {
 
     private val testDispatcher = StandardTestDispatcher()
 
-    private val mockSeasonRepository: SeasonRepository = mock(autoUnit)
+    private val mockStandingsRepository: StandingsRepository = mock(autoUnit)
     private val mockCurrentSeasonHolder: CurrentSeasonHolder = mock(autoUnit)
     private val mockOverviewRepository: OverviewRepository = mock(autoUnit)
     private val mockRaceRepository: RaceRepository = mock(autoUnit)
@@ -42,11 +43,11 @@ internal class TeamStandingsViewModelTest {
     private lateinit var underTest: TeamStandingsViewModel
 
     private fun initUnderTest() = runBlocking {
-        every { mockSeasonRepository.getConstructorStandings(2020) } returns flow { emit(
+        every { mockStandingsRepository.getConstructorStandings(2020) } returns flow { emit(
             SeasonConstructorStandings.model(
             standings = listOf(standing1)
         )) }
-        every { mockSeasonRepository.getConstructorStandings(2021) } returns flow { emit(
+        every { mockStandingsRepository.getConstructorStandings(2021) } returns flow { emit(
             SeasonConstructorStandings.model(
             standings = listOf(standing2)
         )) }
@@ -54,8 +55,9 @@ internal class TeamStandingsViewModelTest {
         every { mockCurrentSeasonHolder.currentSeasonFlow } returns _fakeCurrentSeasonFlow
         everySuspend { mockOverviewRepository.populateOverview(any()) } returns Response.Successful
         everySuspend { mockRaceRepository.populateRaces(any()) } returns Response.Successful
+        everySuspend { mockStandingsRepository.populateStandings(any()) } returns Response.Successful
         underTest = TeamStandingsViewModel(
-            seasonRepository = mockSeasonRepository,
+            standingsRepository = mockStandingsRepository,
             currentSeasonHolder = mockCurrentSeasonHolder,
             overviewRepository = mockOverviewRepository,
             raceRepository = mockRaceRepository,
@@ -135,7 +137,7 @@ internal class TeamStandingsViewModelTest {
             val afterPopulate = awaitItem()
             assertEquals(listOf(standing1), afterPopulate.standings)
 
-            every { mockSeasonRepository.getConstructorStandings(2020) } returns flow { emit(
+            every { mockStandingsRepository.getConstructorStandings(2020) } returns flow { emit(
                 SeasonConstructorStandings.model(
                 standings = listOf(standing2)
             )) }

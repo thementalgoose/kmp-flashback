@@ -11,11 +11,11 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
-import tmg.flashback.data.repo.repository.SeasonRepository
+import tmg.flashback.data.repo.repository.StandingsRepository
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
 
 class DriverStandingsViewModel(
-    private val seasonRepository: SeasonRepository,
+    private val standingsRepository: StandingsRepository,
     private val overviewRepository: OverviewRepository,
     private val racesRepository: RaceRepository,
     private val currentSeasonHolder: CurrentSeasonHolder,
@@ -49,12 +49,13 @@ class DriverStandingsViewModel(
             _uiState.value = _uiState.value.copy(isLoading = true)
             overviewRepository.populateOverview(season)
             racesRepository.populateRaces(season)
+            standingsRepository.populateStandings(season)
             populate()
         }
     }
 
     private suspend fun populate(): Boolean {
-        val currentStandings = seasonRepository.getDriverStandings(season).firstOrNull()?.standings ?: emptyList()
+        val currentStandings = standingsRepository.getDriverStandings(season).firstOrNull()?.standings ?: emptyList()
         val maxPoints = currentStandings.maxOfOrNull { it.points } ?: 850.0
 
         _uiState.value = _uiState.value.copy(

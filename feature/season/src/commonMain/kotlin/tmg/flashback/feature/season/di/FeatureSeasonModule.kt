@@ -22,7 +22,7 @@ internal fun module() = module {
     viewModel { ProvidedByViewModel(get()) }
     viewModel { DriverStandingsViewModel(get(), get(), get(), get()) }
     viewModel { TeamStandingsViewModel(get(), get(), get(), get()) }
-    viewModel { CalendarScreenViewModel(get(), get(), get(), get(), get()) }
+    viewModel { CalendarScreenViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { SeasonPickerViewModel(get()) }
     viewModel { DeviceTimeViewModel(get()) }
     single<CurrentSeasonHolder> { CurrentSeasonHolderImpl(get(), get(), get()) }

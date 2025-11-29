@@ -22,6 +22,7 @@ import tmg.flashback.data.repo.model.Response
 import tmg.flashback.data.repo.repository.EventRepository
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
+import tmg.flashback.data.repo.repository.StandingsRepository
 import tmg.flashback.feature.season.models.NotificationSchedule
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
 import tmg.flashback.feature.season.repositories.CalendarRepository
@@ -39,6 +40,7 @@ internal class CalendarScreenViewModelTest {
 
     private val mockOverviewRepository: OverviewRepository = mock(autoUnit)
     private val mockRaceRepository: RaceRepository = mock(autoUnit)
+    private val mockStandingsRepository: StandingsRepository = mock(autoUnit)
     private val mockCurrentSeasonHolder: CurrentSeasonHolder = mock(autoUnit)
     private val mockEventsRepository: EventRepository = mock(autoUnit)
     private val mockCalendarRepository: CalendarRepository = mock(autoUnit)
@@ -67,6 +69,7 @@ internal class CalendarScreenViewModelTest {
         everySuspend { mockOverviewRepository.populateOverview(any())} returns Response.Successful
         everySuspend { mockRaceRepository.populateRaces(any())} returns Response.Successful
         everySuspend { mockRaceRepository.hasAnyRaces(any()) } returns true
+        everySuspend { mockStandingsRepository.populateStandings(any()) } returns Response.Successful
         every { mockCalendarRepository.emptyWeeksInCalendar } returns false
         every { mockEventsRepository.getEvents(any<Int>()) } returns flow { emit(emptyList()) }
         every { mockCurrentSeasonHolder.currentSeason } returns 2019
@@ -74,6 +77,7 @@ internal class CalendarScreenViewModelTest {
 
         underTest = CalendarScreenViewModel(
             overviewRepository = mockOverviewRepository,
+            standingsRepository = mockStandingsRepository,
             raceRepository = mockRaceRepository,
             currentSeasonHolder = mockCurrentSeasonHolder,
             eventsRepository = mockEventsRepository,
@@ -172,6 +176,7 @@ internal class CalendarScreenViewModelTest {
             verifySuspend {
                 mockOverviewRepository.populateOverview(2020)
                 mockRaceRepository.populateRaces(2020)
+                mockStandingsRepository.populateStandings(2020)
             }
         }
     }
@@ -199,6 +204,7 @@ internal class CalendarScreenViewModelTest {
             verifySuspend {
                 mockOverviewRepository.populateOverview(2020)
                 mockRaceRepository.populateRaces(2020)
+                mockStandingsRepository.populateStandings(2020)
             }
 
             cancelAndIgnoreRemainingEvents()
@@ -232,6 +238,7 @@ internal class CalendarScreenViewModelTest {
             verifySuspend {
                 mockOverviewRepository.populateOverview(2020)
                 mockRaceRepository.populateRaces(2020)
+                mockStandingsRepository.populateStandings(2020)
             }
 
             cancelAndIgnoreRemainingEvents()
