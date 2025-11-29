@@ -60,6 +60,7 @@ fun TyreBottomSheet(
 ) {
     ModalBottomSheet(
         onDismissRequest = dismissed,
+        containerColor = AppTheme.colors.surface,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         content = {
             TyreScreen(

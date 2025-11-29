@@ -90,14 +90,15 @@ fun SyncBottomSheet(
         },
     )
     val coroutineScope = rememberCoroutineScope()
-    ModalBottomSheet(
-        onDismissRequest = hide,
-        sheetState = sheetState,
-        properties = ModalBottomSheetProperties(
-            shouldDismissOnBackPress = !lockBottomSheetOnScreen.value
-        )
-    ) {
-        ApplicationTheme {
+    ApplicationTheme {
+        ModalBottomSheet(
+            onDismissRequest = hide,
+            sheetState = sheetState,
+            containerColor = AppTheme.colors.surface,
+            properties = ModalBottomSheetProperties(
+                shouldDismissOnBackPress = !lockBottomSheetOnScreen.value
+            )
+        ) {
             SyncScreen(
                 windowSizeClass = windowSizeClass,
                 dismiss = {
