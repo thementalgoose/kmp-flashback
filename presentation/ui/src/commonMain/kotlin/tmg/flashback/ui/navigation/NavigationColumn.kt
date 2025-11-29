@@ -227,7 +227,6 @@ private fun PreviewCompactDark() {
     }
 }
 
-@Preview
 @Composable
 private fun PreviewCompact() {
     NavigationColumn(
@@ -253,7 +252,6 @@ private fun PreviewExpandedDark() {
     }
 }
 
-@Preview
 @Composable
 private fun PreviewExpanded() {
     NavigationColumn(
