@@ -81,11 +81,12 @@ private fun TyreScreen(
     val wet = tyres?.tyres?.filter { !it.tyre.isDry } ?: emptyList()
     LazyVerticalGrid(
         modifier = Modifier
-            .background(AppTheme.colors.surfaceContainer2),
+            .background(AppTheme.colors.surface),
         columns = GridCells.Adaptive(minSize = 250.dp),
         content = {
             item("header", span = { GridItemSpan(maxLineSpan) }) {
                 Header(
+                    modifier = Modifier.background(AppTheme.colors.surface),
                     text = stringResource(resource = string.tyres_label),
                     action = null,
                     actionUpClicked = dismissed

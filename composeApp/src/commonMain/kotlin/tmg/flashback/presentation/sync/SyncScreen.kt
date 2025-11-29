@@ -5,6 +5,7 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -170,11 +171,13 @@ fun SyncScreen(
 ) {
     Column(
         modifier = Modifier
+            .background(AppTheme.colors.surface)
             .fillMaxWidth()
             .padding(AppTheme.dimens.medium),
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
     ) {
         Row(
+            modifier = Modifier.background(AppTheme.colors.surface),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
