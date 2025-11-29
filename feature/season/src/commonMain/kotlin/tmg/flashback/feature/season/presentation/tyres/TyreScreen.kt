@@ -86,6 +86,7 @@ private fun TyreScreen(
         content = {
             item("header", span = { GridItemSpan(maxLineSpan) }) {
                 Header(
+                    // Needed for the dialog to show the background colour in XR.
                     modifier = Modifier.background(AppTheme.colors.surface),
                     text = stringResource(resource = string.tyres_label),
                     action = null,

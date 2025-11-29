@@ -177,6 +177,7 @@ fun SyncScreen(
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
     ) {
         Row(
+            // Needed for the dialog to show the background colour in XR.
             modifier = Modifier.background(AppTheme.colors.surface),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
