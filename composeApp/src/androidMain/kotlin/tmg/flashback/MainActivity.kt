@@ -38,8 +38,12 @@ class MainActivity : BaseActivity(), SplashScreen.KeepOnScreenCondition {
         setTheme(theme)
         splashScreen.setKeepOnScreenCondition(this)
 
-        val session = Session.create(this)
-        Log.i("INFO", "Session creation $session")
+        try {
+            val session = Session.create(this)
+            Log.i("INFO", "Session creation $session")
+        } catch (e: Throwable) {
+            /* Safely ignore */
+        }
 
         setContent {
             App()
