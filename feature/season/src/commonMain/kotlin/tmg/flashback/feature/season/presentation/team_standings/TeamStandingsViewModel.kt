@@ -17,7 +17,8 @@ import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeas
 
 class TeamStandingsViewModel(
     private val standingsRepository: StandingsRepository,
-    private val seasonRepository: SeasonRepository,
+    private val overviewRepository: OverviewRepository,
+    private val raceRepository: RaceRepository,
     private val currentSeasonHolder: CurrentSeasonHolder,
     private val mainDispatcher: CoroutineDispatcher = Dispatchers.Main
 ): ViewModel() {
@@ -48,7 +49,9 @@ class TeamStandingsViewModel(
                 populate()
             }
             _uiState.value = _uiState.value.copy(isLoading = true)
-            seasonRepository.populateSeason(season)
+            overviewRepository.populateOverview(season)
+            raceRepository.populateRaces(season)
+            standingsRepository.populateStandings(season)
             populate()
         }
     }

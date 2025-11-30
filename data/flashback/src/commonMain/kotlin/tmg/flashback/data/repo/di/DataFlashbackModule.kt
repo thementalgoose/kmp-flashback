@@ -77,7 +77,7 @@ internal fun module() = module {
 
     single<RaceRepository> { RaceRepositoryImpl(get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
     single<OverviewRepository> { OverviewRepositoryImpl(get(), get(), get(), get(), get(), get()) }
-    single<SeasonRepository> { SeasonRepositoryImpl(get(), get(), get(), get(), get()) }
+    single<SeasonRepository> { SeasonRepositoryImpl(get(), get()) }
     single<EventRepository> { EventRepositoryImpl(get(), get(), get(), get()) }
     single<DriverRepository> { DriverRepositoryImpl(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
     single<ConstructorRepository> { ConstructorRepositoryImpl(get(), get(), get(), get(), get(), get(), get()) }
