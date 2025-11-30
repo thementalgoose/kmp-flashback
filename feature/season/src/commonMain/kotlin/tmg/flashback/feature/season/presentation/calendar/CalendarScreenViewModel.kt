@@ -12,7 +12,6 @@ import kotlinx.coroutines.launch
 import tmg.flashback.data.repo.repository.EventRepository
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
-import tmg.flashback.data.repo.repository.SeasonRepository
 import tmg.flashback.data.repo.repository.StandingsRepository
 import tmg.flashback.feature.season.models.NotificationSchedule
 import tmg.flashback.feature.season.presentation.calendar.ScheduleBuilder.generateScheduleModel
@@ -23,7 +22,7 @@ import tmg.flashback.infrastructure.log.logInfo
 class CalendarScreenViewModel(
     private val overviewRepository: OverviewRepository,
     private val raceRepository: RaceRepository,
-    private val seasonRepository: SeasonRepository,
+    private val standingsRepository: StandingsRepository,
     private val currentSeasonHolder: CurrentSeasonHolder,
     calendarRepository: CalendarRepository,
     private val eventsRepository: EventRepository,
@@ -56,7 +55,9 @@ class CalendarScreenViewModel(
                 populate(season)
             }
             _uiState.value = _uiState.value.copy(isLoading = true, showEvents = false)
-            seasonRepository.populateSeason(season)
+            overviewRepository.populateOverview(season)
+            raceRepository.populateRaces(season)
+            standingsRepository.populateStandings(season)
             populate(season)
         }
     }
