@@ -69,7 +69,7 @@ androidx_browser = "androidx.browser:browser:1.9.0"
 androidx_xr_runtime = { module = "androidx.xr.runtime:runtime", version.ref = "androidx-xr" }
 androidx_xr_scenecore = { module = "androidx.xr.scenecore:scenecore", version.ref = "androidx-xr" }
 androidx_xr_compose = { module = "androidx.xr.compose:compose", version.ref = "androidx-xr" }
-androidx_xr_material3 = "androidx.xr.compose.material3:material3:1.0.0-alpha12"
+androidx_xr_material3 = "androidx.xr.compose.material3:material3:1.0.0-alpha13"
 androidx_xr_arcore = { module = "androidx.xr.arcore:arcore", version.ref = "androidx-xr" }
 
 androidx_xr_extensions = "com.android.extensions.xr:extensions-xr:1.1.0"
