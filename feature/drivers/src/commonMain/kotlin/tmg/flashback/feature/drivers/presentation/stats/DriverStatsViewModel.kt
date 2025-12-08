@@ -96,7 +96,13 @@ class DriverStatsViewModel(
         return DriverStatsData.Overview(
             teams = (this?.standings ?: emptyList())
                 .sortedByDescending { it.season }
-                .associate { it.season to it.constructors }
+                .map { model ->
+                    DriverStatTeamOverview(
+                        season = model.season,
+                        teams = model.constructors,
+                        standing = model.championshipStanding.takeIf { !model.isInProgress }
+                    )
+                }
         )
     }
 
