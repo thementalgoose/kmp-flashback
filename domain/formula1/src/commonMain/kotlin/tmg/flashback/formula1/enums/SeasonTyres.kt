@@ -31,6 +31,16 @@ enum class SeasonTyres(
     val season: Int,
     val tyres: List<TyreLabel>
 ) {
+    S2026(
+        season = 2026,
+        tyres = listOf(
+            TyreLabel(tyre = RED_DRY_18, label = string.tyre_soft),
+            TyreLabel(tyre = YELLOW_DRY_18, label = string.tyre_medium),
+            TyreLabel(tyre = WHITE_DRY_18, label = string.tyre_hard),
+            TyreLabel(tyre = GREEN_WET_18, label = string.tyre_intermediate),
+            TyreLabel(tyre = BLUE_WET_18, label = string.tyre_wet)
+        )
+    ),
     S2025(
         season = 2025,
         tyres = listOf(
