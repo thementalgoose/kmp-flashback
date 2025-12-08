@@ -67,8 +67,11 @@ data class AppColors(
 
     // F1
     val f1Podium1: Color,
+    val f1Podium1Highlight: Color = f1Podium1.copy(alpha = 0.1f),
     val f1Podium2: Color,
+    val f1Podium2Highlight: Color = f1Podium2.copy(alpha = 0.1f),
     val f1Podium3: Color,
+    val f1Podium3Highlight: Color = f1Podium3.copy(alpha = 0.1f),
     val f1DeltaPositive: Color,
     val f1DeltaNeutral: Color = onSurface,
     val f1DeltaNegative: Color,
@@ -79,6 +82,7 @@ data class AppColors(
     val f1FastestSector: Color,
     val f1FavouriteSeason: Color,
     val f1Championship: Color,
+    val f1ChampionshipHighlight: Color = f1Championship.copy(alpha = 0.1f),
     val f1PipeColor: Color = onSurfaceVariant,
     val f1StartLightGreen: Color,
     val f1StartLightAmber: Color,
