@@ -17,13 +17,19 @@ data class ConstructorStatsUiState(
 sealed interface ConstructorStatsData {
 
     data class Overview(
-        val items: Map<Int, List<Driver>>,
+        val items: List<ConstructorStatSeasonOverview>,
     ): ConstructorStatsData
 
     data class Season(
         val drivers: List<ConstructorHistorySeasonDriver>,
     ): ConstructorStatsData
 }
+
+data class ConstructorStatSeasonOverview(
+    val season: Int,
+    val drivers: Map<Int?, Driver>,
+    val standing: Int?
+)
 
 data class ConstructorStat(
     val string: StringResource,

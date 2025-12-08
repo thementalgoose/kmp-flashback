@@ -175,11 +175,12 @@ private fun DriverStatsScreen(
             }
             when (uiState.data) {
                 is DriverStatsData.Overview -> {
-                    items(uiState.data.teams.toList()) { (year, constructors) ->
+                    items(uiState.data.teams.toList()) { it ->
                         DriverTeam(
                             modifier = Modifier.animateItem(),
-                            year = year,
-                            constructors = constructors,
+                            year = it.season,
+                            constructors = it.teams,
+                            standing = it.standing,
                             yearClicked = {
                                 changeSelection(DriverFilter.Season(it))
                             }
@@ -267,7 +268,10 @@ private fun PreviewAll(
                 availableSeasons = listOf(2020, 2019),
                 stats = listOf(DriverStat(string.dashboard_all_title, flashback.presentation.ui.generated.resources.Res.drawable.ic_menu_drivers, "value")),
                 data = DriverStatsData.Overview(
-                    teams = mapOf(2020 to listOf(Constructor.preview()))
+                    teams = listOf(
+                        DriverStatTeamOverview(season = 2020, teams = listOf(Constructor.preview()), standing = 2),
+                        DriverStatTeamOverview(season = 2021, teams = listOf(Constructor.preview()), standing = 1)
+                    )
                 )
             ),
             changeSelection = { }

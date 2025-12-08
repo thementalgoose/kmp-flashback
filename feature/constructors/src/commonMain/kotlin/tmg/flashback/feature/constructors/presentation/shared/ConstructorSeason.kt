@@ -5,15 +5,20 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import flashback.domain.formula1.generated.resources.ic_driver
 import flashback.presentation.ui.generated.resources.Res
 import flashback.presentation.ui.generated.resources.ic_circle
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.formula1.model.Constructor
@@ -31,7 +36,8 @@ import tmg.flashback.style.text.TextTitle
 @Composable
 fun ConstructorSeason(
     year: Int,
-    drivers: List<Driver>,
+    drivers: Map<Int?, Driver>,
+    standing: Int?,
     yearClicked: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -48,20 +54,41 @@ fun ConstructorSeason(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         TextTitle(
-            modifier = Modifier.weight(1f),
             text = year.toString(),
             bold = true,
         )
+        if (standing == 1) {
+            Icon(
+                modifier = Modifier
+                    .padding(horizontal = AppTheme.dimens.xsmall)
+                    .size(12.dp),
+                painter = painterResource(flashback.domain.formula1.generated.resources.Res.drawable.ic_driver),
+                contentDescription = null,
+                tint = AppTheme.colors.f1Championship
+            )
+        }
+        Spacer(Modifier.weight(1f))
         Column(
             modifier = Modifier.weight(2f),
             horizontalAlignment = Alignment.End,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            drivers.forEach { driver ->
-                TextBody1(
-                    modifier = modifier,
-                    text = driver.name
-                )
+            drivers.forEach { (standing, driver) ->
+                Row {
+                    if (standing == 1) {
+                        Icon(
+                            modifier = Modifier
+                                .padding(horizontal = AppTheme.dimens.xsmall)
+                                .size(12.dp),
+                            painter = painterResource(flashback.domain.formula1.generated.resources.Res.drawable.ic_driver),
+                            contentDescription = null,
+                            tint = AppTheme.colors.f1Championship
+                        )
+                    }
+                    TextBody1(
+                        text = driver.name
+                    )
+                }
             }
         }
     }
@@ -76,7 +103,8 @@ private fun Preview(
     ApplicationThemePreview(previewConfig) {
         ConstructorSeason(
             year = 2020,
-            drivers = listOf(Driver.preview()),
+            drivers = mapOf(1 to Driver.preview()),
+            standing = 1,
             yearClicked = { }
         )
     }

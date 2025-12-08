@@ -157,14 +157,15 @@ fun ConstructorStatsScreen(
             }
             when (uiState.data) {
                 is ConstructorStatsData.Overview -> {
-                    items(uiState.data.items.toList()) { (year, drivers) ->
+                    items(uiState.data.items.toList()) { model ->
                         ConstructorSeason(
                             modifier = Modifier.animateItem(),
-                            year = year,
+                            year = model.season,
                             yearClicked = {
-                                changeSelection(ConstructorFilter.Season(year))
+                                changeSelection(ConstructorFilter.Season(model.season))
                             },
-                            drivers = drivers
+                            drivers = model.drivers,
+                            standing = model.standing
                         )
                     }
                 }
@@ -238,7 +239,13 @@ private fun PreviewAll(
                 availableSeasons = listOf(2020, 2019),
                 stats = listOf(ConstructorStat(string.dashboard_all_title, flashback.presentation.ui.generated.resources.Res.drawable.ic_menu_drivers, "value")),
                 data = ConstructorStatsData.Overview(
-                    items = mapOf(2020 to listOf(Driver.preview()))
+                    items = listOf(
+                        ConstructorStatSeasonOverview(
+                            season = 2020,
+                            drivers = mapOf(1 to Driver.preview()),
+                            standing = 1
+                        )
+                    )
                 )
             ),
             changeSelection = { }

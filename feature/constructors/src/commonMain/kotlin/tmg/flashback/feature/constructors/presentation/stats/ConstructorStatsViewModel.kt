@@ -94,7 +94,15 @@ class ConstructorStatsViewModel(
         return ConstructorStatsData.Overview(
             items = (this?.standings ?: emptyList())
                 .sortedByDescending { it.season }
-                .associate { it.season to it.drivers.values.map { it.driver.driver } }
+                .map { model ->
+                    ConstructorStatSeasonOverview(
+                        season = model.season,
+                        drivers = model.drivers.values
+                            .sortedByDescending { it.points }
+                            .associate { it.championshipStanding.takeIf { !model.isInProgress } to it.driver.driver },
+                        standing = model.championshipStanding.takeIf { !model.isInProgress }
+                    )
+                }
         )
     }
 

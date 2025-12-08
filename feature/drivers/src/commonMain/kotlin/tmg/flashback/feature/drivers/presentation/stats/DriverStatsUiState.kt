@@ -18,13 +18,19 @@ data class DriverStatsUiState(
 sealed interface DriverStatsData {
 
     data class Overview(
-        val teams: Map<Int, List<Constructor>>,
+        val teams: List<DriverStatTeamOverview>,
     ): DriverStatsData
 
     data class Season(
         val races: List<DriverHistorySeasonRace>,
     ): DriverStatsData
 }
+
+data class DriverStatTeamOverview(
+    val season: Int,
+    val teams: List<Constructor>,
+    val standing: Int?,
+)
 
 data class DriverStat(
     val string: StringResource,
