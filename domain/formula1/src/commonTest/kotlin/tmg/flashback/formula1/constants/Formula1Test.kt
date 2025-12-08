@@ -14,6 +14,7 @@ internal class Formula1Test {
     )
 
     private val testCasesMaxPoints = listOf(
+        TestCase(2025,25),
         TestCase(2024,26),
         TestCase(2023,26),
         TestCase(2021,26),
