@@ -62,7 +62,7 @@ internal class DriverStatsViewModelTest {
             assertEquals(12, state.stats.size)
             assertEquals(listOf(Constructor.model()), state.constructors)
             assertEquals(listOf(2020), state.availableSeasons)
-            assertEquals(listOf(DriverStatTeamOverview(2020, listOf(Constructor.model()), 1)), (state.data as DriverStatsData.Overview).teams)
+            assertEquals(listOf(DriverStatTeamOverview(2020, listOf(Constructor.model()), null)), (state.data as DriverStatsData.Overview).teams)
         }
     }
 
