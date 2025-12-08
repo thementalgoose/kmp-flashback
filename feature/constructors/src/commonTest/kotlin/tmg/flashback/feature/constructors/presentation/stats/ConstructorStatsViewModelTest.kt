@@ -61,7 +61,7 @@ internal class ConstructorStatsViewModelTest {
             assertEquals(8, state.stats.size)
             assertEquals(listOf(2020), state.availableSeasons)
 
-            val data = listOf(ConstructorStatSeasonOverview(2020, mapOf(1 to Driver.model()), 1))
+            val data = listOf(ConstructorStatSeasonOverview(2020, mapOf(null to Driver.model()), null))
             assertEquals(data, (state.data as ConstructorStatsData.Overview).items)
         }
     }
