@@ -67,11 +67,11 @@ data class AppColors(
 
     // F1
     val f1Podium1: Color,
-    val f1Podium1Highlight: Color = f1Podium1.copy(alpha = 0.1f),
+    val f1Podium1Highlight: Color = f1Podium1.copy(alpha = 0.2f),
     val f1Podium2: Color,
-    val f1Podium2Highlight: Color = f1Podium2.copy(alpha = 0.1f),
+    val f1Podium2Highlight: Color = f1Podium2.copy(alpha = 0.35f),
     val f1Podium3: Color,
-    val f1Podium3Highlight: Color = f1Podium3.copy(alpha = 0.1f),
+    val f1Podium3Highlight: Color = f1Podium3.copy(alpha = 0.2f),
     val f1DeltaPositive: Color,
     val f1DeltaNeutral: Color = onSurface,
     val f1DeltaNegative: Color,
@@ -224,7 +224,7 @@ val lightColours = AppColors(
     systemStatusBarColor = Color(0xFF0274D1),
     systemNavigationBarColor = Color(0xFFFCFCFC),
 
-    f1Podium1 = Color(0xFFD3BC4D),
+    f1Podium1 = Color(0xFFA38B21),
     f1Podium2 = Color(0xFFC2C2C2),
     f1Podium3 = Color(0xFFD29342),
     f1DeltaPositive = Color(0xFFF44336),
