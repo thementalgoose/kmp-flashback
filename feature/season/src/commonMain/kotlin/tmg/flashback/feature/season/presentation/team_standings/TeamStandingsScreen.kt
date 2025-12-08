@@ -124,7 +124,7 @@ private fun ConstructorStandings(
     modifier: Modifier = Modifier,
 ) {
     val backgroundColor = when {
-        model.inProgressContent == null && model.championshipPosition == 1 -> AppTheme.colors.f1Podium1.copy(alpha = 0.2f)
+        model.inProgressContent == null && model.championshipPosition == 1 -> AppTheme.colors.f1ChampionshipHighlight
         else -> Transparent
     }
     Row(

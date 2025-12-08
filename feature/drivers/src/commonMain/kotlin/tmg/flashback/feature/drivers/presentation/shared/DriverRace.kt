@@ -111,6 +111,13 @@ internal fun ResultRace(
     clickResult: (DriverHistorySeasonRace) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val backgroundColor = when {
+        model.isSprint -> AppTheme.colors.surfaceContainer3
+        model.finished == 1 -> AppTheme.colors.f1Podium1Highlight
+        model.finished == 2 -> AppTheme.colors.f1Podium2Highlight
+        model.finished == 3 -> AppTheme.colors.f1Podium3Highlight
+        else -> AppTheme.colors.surfaceContainer3
+    }
     Row(
         modifier = modifier
             .alpha(
@@ -125,7 +132,7 @@ internal fun ResultRace(
             )
             .clickable(onClick = { clickResult(model) })
             .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
-            .background(AppTheme.colors.surfaceContainer3)
+            .background(backgroundColor)
             .padding(AppTheme.dimens.small)
     ) {
         Column(
@@ -200,9 +207,9 @@ internal fun ResultRace(
                     )
                 } else {
                     TextBody1(
-                        textColor = when (model.finished == 1) {
-                            true -> AppTheme.colors.f1Championship
-                            false -> null
+                        textColor = when (model.finished) {
+                            1 -> AppTheme.colors.f1Podium1
+                            else -> null
                         },
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
