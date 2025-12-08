@@ -1,6 +1,7 @@
 package tmg.flashback.feature.season.presentation.driver_standings
 
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -20,6 +21,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
@@ -144,6 +146,10 @@ private fun DriverStandings(
     maxPoints: Double,
     modifier: Modifier = Modifier,
 ) {
+    val backgroundColor = when {
+        model.inProgressContent == null && model.championshipPosition == 1 -> AppTheme.colors.f1Podium1.copy(alpha = 0.2f)
+        else -> Transparent
+    }
     val constructorColor =
         model.constructors.lastOrNull()?.constructor?.colour ?: AppTheme.colors.tertiaryContainer
     Row(
@@ -151,7 +157,8 @@ private fun DriverStandings(
             .edgeBar(constructorColor)
             .clickable(onClick = {
                 itemClicked(model)
-            }),
+            })
+            .background(backgroundColor),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         TextTitle(
@@ -210,7 +217,8 @@ private fun DriverStandings(
                 points = model.points,
                 maxPoints = maxPoints,
                 barColor = model.constructors.lastOrNull()?.constructor?.colour
-                    ?: AppTheme.colors.primary
+                    ?: AppTheme.colors.primary,
+                backgroundColor = Transparent
             )
         }
     }

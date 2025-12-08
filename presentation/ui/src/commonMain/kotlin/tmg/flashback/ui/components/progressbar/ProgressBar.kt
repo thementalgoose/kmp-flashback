@@ -49,6 +49,7 @@ fun ProgressBar(
     modifier: Modifier = Modifier
         .fillMaxWidth()
         .height(48.dp),
+    backgroundColor: Color = AppTheme.colors.surface
 ) {
     val progress = (points / maxPoints).toFloat().coerceIn(0f, 1f)
     ProgressBar(
@@ -62,7 +63,8 @@ fun ProgressBar(
                 else -> (it * maxPoints).takeIf { !it.isNaN() }?.roundToInt()?.toString()
                     ?: points.roundToHalf()
             }
-        }
+        },
+        backgroundColor = backgroundColor
     )
 }
 
