@@ -40,6 +40,8 @@ internal actual class FirebaseAnalyticsServiceImpl actual constructor(): Firebas
             putString(FirebaseAnalytics.Param.SCREEN_NAME, screenName)
             if (clazz != null) {
                 putString(FirebaseAnalytics.Param.SCREEN_CLASS, clazz.simpleName)
+            } else {
+                putString(FirebaseAnalytics.Param.SCREEN_CLASS, screenName)
             }
             for (x in params) {
                 putString(x.key, x.value)
