@@ -1,6 +1,8 @@
 package tmg.flashback.firebase
 
 import cocoapods.FirebaseAnalytics.FIRAnalytics
+import cocoapods.FirebaseAnalytics.kFIRParameterScreenClass
+import cocoapods.FirebaseAnalytics.kFIRParameterScreenName
 import kotlinx.cinterop.ExperimentalForeignApi
 import tmg.flashback.analytics.firebase.FirebaseAnalyticsService
 import kotlin.reflect.KClass
@@ -21,6 +23,17 @@ internal actual class FirebaseAnalyticsServiceImpl actual constructor(): Firebas
         FIRAnalytics.setUserPropertyString(value, forName = key)
     }
     actual override fun logViewScreen(screenName: String, params: Map<String, String>, clazz: KClass<*>?) {
-        FIRAnalytics.logEventWithName("screen_view", parameters = params.toMap())
+        val params = params
+            .toMutableMap()
+            .apply {
+                if (kFIRParameterScreenName != null) {
+                    put(kFIRParameterScreenName!!, screenName)
+                }
+                if (clazz != null && clazz.simpleName != null && kFIRParameterScreenClass != null) {
+                    put(kFIRParameterScreenClass!!, clazz.simpleName!!)
+                }
+            }
+            .toMap()
+        FIRAnalytics.logEventWithName(kFIRParameterScreenName ?: "screen_view", parameters = params.toMap())
     }
 }
