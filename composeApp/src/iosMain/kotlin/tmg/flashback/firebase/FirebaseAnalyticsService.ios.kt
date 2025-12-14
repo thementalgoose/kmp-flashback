@@ -26,11 +26,11 @@ internal actual class FirebaseAnalyticsServiceImpl actual constructor(): Firebas
         val params = params
             .toMutableMap()
             .apply {
-                if (kFIRParameterScreenName != null) {
-                    put(kFIRParameterScreenName!!, screenName)
-                }
-                if (clazz != null && clazz.simpleName != null && kFIRParameterScreenClass != null) {
-                    put(kFIRParameterScreenClass!!, clazz.simpleName!!)
+                put(kFIRParameterScreenName ?: "screen_name", screenName)
+                if (clazz != null && clazz.simpleName != null) {
+                    put(kFIRParameterScreenClass ?: "screen_class", screenName)
+                } else {
+                    put(kFIRParameterScreenClass ?: "screen_class", clazz!!.simpleName!!)
                 }
             }
             .toMap()
