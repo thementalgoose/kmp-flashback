@@ -28,9 +28,9 @@ internal actual class FirebaseAnalyticsServiceImpl actual constructor(): Firebas
             .apply {
                 put(kFIRParameterScreenName ?: "screen_name", screenName)
                 if (clazz != null && clazz.simpleName != null) {
-                    put(kFIRParameterScreenClass ?: "screen_class", screenName)
+                    put(kFIRParameterScreenClass ?: "screen_class", clazz.simpleName!!)
                 } else {
-                    put(kFIRParameterScreenClass ?: "screen_class", clazz!!.simpleName!!)
+                    put(kFIRParameterScreenClass ?: "screen_class", screenName)
                 }
             }
             .toMap()
