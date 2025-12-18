@@ -1,5 +1,7 @@
 package tmg.flashback.feature.drivers.presentation.comparison
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,6 +41,7 @@ import flashback.presentation.localisation.generated.resources.driver_comparison
 import flashback.presentation.localisation.generated.resources.driver_comparison_stat_podiums
 import flashback.presentation.localisation.generated.resources.driver_comparison_stat_points
 import flashback.presentation.localisation.generated.resources.driver_comparison_stat_points_finishes
+import flashback.presentation.localisation.generated.resources.driver_comparison_stat_pole
 import flashback.presentation.localisation.generated.resources.driver_comparison_stat_qualifying
 import flashback.presentation.localisation.generated.resources.driver_comparison_stat_races
 import flashback.presentation.localisation.generated.resources.driver_comparison_stat_wins
@@ -151,29 +154,35 @@ private fun DriverComparisonScreen(
                     .padding(horizontal = AppTheme.dimens.medium)
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
-                        ButtonSecondary(
-                            modifier = Modifier.fillMaxWidth(),
-                            text = driverLeft?.name ?: "...",
-                            onClick = {
-                                driverLeftExpanded.value = true
-                            }
-                        )
+                        AnimatedContent(driverLeft) {
+                            ButtonSecondary(
+                                modifier = Modifier.fillMaxWidth(),
+                                text = driverLeft?.name ?: "...",
+                                onClick = {
+                                    driverLeftExpanded.value = true
+                                }
+                            )
+                        }
                         DriverList(
                             driverList = driverList,
                             expanded = driverLeftExpanded,
                             driverClicked = { selectDriverLeft(it.id) }
                         )
                         if (driverLeft != null && driverRight != null) {
-                            DriverIcon(
-                                modifier = Modifier.align(Alignment.Start),
-                                photoUrl = driverLeft.photoUrl,
-                                size = headerImageSize
-                            )
-                            DriverBadges(
-                                modifier = Modifier.padding(vertical = AppTheme.dimens.small),
-                                driver = driverLeft,
-                                constructors = comparison?.leftConstructors ?: emptyList()
-                            )
+                            AnimatedContent(driverLeft) {
+                                Column {
+                                    DriverIcon(
+                                        modifier = Modifier.align(Alignment.Start),
+                                        photoUrl = driverLeft.photoUrl,
+                                        size = headerImageSize
+                                    )
+                                    DriverBadges(
+                                        modifier = Modifier.padding(vertical = AppTheme.dimens.small),
+                                        driver = driverLeft,
+                                        constructors = comparison?.leftConstructors ?: emptyList()
+                                    )
+                                }
+                            }
                         }
                     }
                     IconButton(
@@ -187,30 +196,36 @@ private fun DriverComparisonScreen(
                         )
                     }
                     Column(modifier = Modifier.weight(1f)) {
-                        ButtonSecondary(
-                            modifier = Modifier.fillMaxWidth(),
-                            text = driverRight?.name ?: "...",
-                            onClick = {
-                                driverRightExpanded.value = true
-                            }
-                        )
+                        AnimatedContent(driverRight) {
+                            ButtonSecondary(
+                                modifier = Modifier.fillMaxWidth(),
+                                text = driverRight?.name ?: "...",
+                                onClick = {
+                                    driverRightExpanded.value = true
+                                }
+                            )
+                        }
                         DriverList(
                             driverList = driverList,
                             expanded = driverRightExpanded,
                             driverClicked = { selectDriverRight(it.id) }
                         )
                         if (driverLeft != null && driverRight != null) {
-                            DriverIcon(
-                                modifier = Modifier.align(Alignment.End),
-                                photoUrl = driverRight.photoUrl,
-                                size = headerImageSize
-                            )
-                            DriverBadges(
-                                modifier = Modifier.padding(vertical = AppTheme.dimens.small),
-                                driver = driverRight,
-                                alignment = Alignment.End,
-                                constructors = comparison?.rightConstructors ?: emptyList()
-                            )
+                            AnimatedContent(driverRight) {
+                                Column {
+                                    DriverIcon(
+                                        modifier = Modifier.align(Alignment.End),
+                                        photoUrl = driverRight.photoUrl,
+                                        size = headerImageSize
+                                    )
+                                    DriverBadges(
+                                        modifier = Modifier.padding(vertical = AppTheme.dimens.small),
+                                        driver = driverRight,
+                                        alignment = Alignment.End,
+                                        constructors = comparison?.rightConstructors ?: emptyList()
+                                    )
+                                }
+                            }
                         }
                     }
                 }
@@ -232,6 +247,14 @@ private fun DriverComparisonScreen(
                         valueResolver = { it.qualifyingHeadToHead.toString() },
                     )
                 }
+                item("comparison-pole-position") {
+                    ItemComparison(
+                        label = stringResource(string.driver_comparison_stat_pole),
+                        comparison = comparison,
+                        percentageResolver = { it.pole.toFloat() },
+                        valueResolver = { it.pole.toString() },
+                    )
+                }
                 item("comparison-points") {
                     ItemComparison(
                         label = stringResource(string.driver_comparison_stat_points),
@@ -240,12 +263,12 @@ private fun DriverComparisonScreen(
                         valueResolver = { it.points?.roundToHalf() ?: "" },
                     )
                 }
-                item("comparison-points-finishes") {
+                item("comparison-wins") {
                     ItemComparison(
-                        label = stringResource(string.driver_comparison_stat_points_finishes),
+                        label = stringResource(string.driver_comparison_stat_wins),
                         comparison = comparison,
-                        percentageResolver = { it.pointsFinishes.toFloat() },
-                        valueResolver = { it.pointsFinishes.toString() },
+                        percentageResolver = { it.wins.toFloat() },
+                        valueResolver = { it.wins.toString() },
                     )
                 }
                 item("comparison-podiums") {
@@ -256,12 +279,12 @@ private fun DriverComparisonScreen(
                         valueResolver = { it.podiums.toString() },
                     )
                 }
-                item("comparison-wins") {
+                item("comparison-points-finishes") {
                     ItemComparison(
-                        label = stringResource(string.driver_comparison_stat_wins),
+                        label = stringResource(string.driver_comparison_stat_points_finishes),
                         comparison = comparison,
-                        percentageResolver = { it.wins.toFloat() },
-                        valueResolver = { it.wins.toString() },
+                        percentageResolver = { it.pointsFinishes.toFloat() },
+                        valueResolver = { it.pointsFinishes.toString() },
                     )
                 }
                 item("comparison-dnfs") {
@@ -417,6 +440,7 @@ private val fakeComparison = Comparison(
         pointsFinishes = 4,
         podiums = 0,
         wins = 1,
+        pole = 2,
         dnfs = 1,
     ),
     leftConstructors = listOf(),
@@ -427,6 +451,7 @@ private val fakeComparison = Comparison(
         pointsFinishes = 5,
         podiums = 0,
         wins = 1,
+        pole = 3,
         dnfs = 3
     ),
     rightConstructors = listOf()

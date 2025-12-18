@@ -113,6 +113,7 @@
     <string name="driver_comparison_swap_drivers">互换选择</string>
     <string name="driver_comparison_stat_races">比赛</string>
     <string name="driver_comparison_stat_qualifying">排位赛</string>
+    <string name="driver_comparison_stat_pole">获得第一名</string>
     <string name="driver_comparison_stat_points">分数</string>
     <string name="driver_comparison_stat_points_finishes">分数完赛</string>
     <string name="driver_comparison_stat_podiums">颁奖台</string>

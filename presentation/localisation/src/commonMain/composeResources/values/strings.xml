@@ -131,6 +131,7 @@
     <string name="driver_comparison_swap_drivers">Swap drivers</string>
     <string name="driver_comparison_stat_races">Races head to head</string>
     <string name="driver_comparison_stat_qualifying">Qualifying head to head</string>
+    <string name="driver_comparison_stat_pole">Pole positions</string>
     <string name="driver_comparison_stat_points">Points (season total)</string>
     <string name="driver_comparison_stat_points_finishes">Points finishes</string>
     <string name="driver_comparison_stat_podiums">Podiums</string>

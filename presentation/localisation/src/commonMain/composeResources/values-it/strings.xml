@@ -115,6 +115,7 @@
     <string name="driver_comparison_swap_drivers">Selezione di scambio</string>
     <string name="driver_comparison_stat_races">Gare testa a testa</string>
     <string name="driver_comparison_stat_qualifying">Qualifiche testa a testa</string>
+    <string name="driver_comparison_stat_pole">Qualificato per primo</string>
     <string name="driver_comparison_stat_points">Punti</string>
     <string name="driver_comparison_stat_points_finishes">Finiti con punti</string>
     <string name="driver_comparison_stat_podiums">Podi</string>
