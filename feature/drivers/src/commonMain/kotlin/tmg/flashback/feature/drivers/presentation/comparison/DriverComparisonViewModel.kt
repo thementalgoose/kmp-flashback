@@ -10,6 +10,7 @@ import tmg.flashback.data.repo.repository.SeasonRepository
 import tmg.flashback.data.repo.repository.StandingsRepository
 import tmg.flashback.formula1.enums.isStatusFinished
 import tmg.flashback.formula1.model.Driver
+import tmg.flashback.formula1.model.QualifyingResult
 import tmg.flashback.formula1.model.RaceResult
 import tmg.flashback.formula1.model.Season
 import tmg.flashback.formula1.model.SeasonDriverStandings
@@ -148,6 +149,14 @@ class DriverComparisonViewModel(
             }
             .collapseInts()
 
+        // Qualifying on pole
+        val (driverLeftQualifyingPole, driverRightQualifyingPole) = season
+            .racesForDriver(driverLeft, driverRight)
+            .map { (left, right) ->
+                Pair(if (left.grid == 1) 1 else 0, if (right.grid == 1) 1 else 0)
+            }
+            .collapseInts()
+
         // Points
         val driverLeftPoints = driverStandings
             ?.standings
@@ -211,6 +220,7 @@ class DriverComparisonViewModel(
                 pointsFinishes = driverLeftPointsFinishes,
                 podiums = driverLeftPodiums,
                 wins = driverLeftWins,
+                pole = driverLeftQualifyingPole,
                 dnfs = driverLeftDNFs
             ),
             leftConstructors = leftConstructors,
@@ -221,6 +231,7 @@ class DriverComparisonViewModel(
                 pointsFinishes = driverRightPointsFinishes,
                 podiums = driverRightPodiums,
                 wins = driverRightWins,
+                pole = driverRightQualifyingPole,
                 dnfs = driverRightDNFs
             ),
             rightConstructors = rightConstructors

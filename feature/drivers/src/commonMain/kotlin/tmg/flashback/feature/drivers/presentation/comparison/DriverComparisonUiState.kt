@@ -52,5 +52,6 @@ data class ComparisonValue(
     val pointsFinishes: Int,
     val podiums: Int,
     val wins: Int,
+    val pole: Int,
     val dnfs: Int,
 )
