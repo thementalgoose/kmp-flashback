@@ -2,6 +2,7 @@ package tmg.flashback.device.usecases
 
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.content.pm.PackageManager
 import android.net.Uri
 import org.koin.core.component.KoinComponent
@@ -21,14 +22,20 @@ actual class OpenLocationUseCaseImpl actual constructor(): OpenLocationUseCase, 
             isPackageInstalled(PACKAGE_GOOGLE_MAPS) -> {
                 logInfo("Opening location with google maps intent $geoIntent")
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(geoIntent))
-                    .apply { setPackage(PACKAGE_GOOGLE_MAPS) }
+                    .apply {
+                        setPackage(PACKAGE_GOOGLE_MAPS)
+                        flags = FLAG_ACTIVITY_NEW_TASK
+                    }
                 val chooser = Intent.createChooser(intent, "Maps")
                 applicationContext.startActivity(chooser)
             }
             isPackageInstalled(PACKAGE_WAZE) -> {
                 logInfo("Opening location with waze maps intent $geoIntent")
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(geoIntent))
-                    .apply { setPackage(PACKAGE_WAZE) }
+                    .apply {
+                        setPackage(PACKAGE_WAZE)
+                        flags = FLAG_ACTIVITY_NEW_TASK
+                    }
                 val chooser = Intent.createChooser(intent, "Maps")
                 applicationContext.startActivity(chooser)
             }
