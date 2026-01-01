@@ -255,6 +255,8 @@ compose.desktop {
             }
         }
 
+        version = versionNameProperty
+
         buildTypes.release {
             proguard {
                 obfuscate.set(true)
