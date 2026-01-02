@@ -8,6 +8,11 @@ plugins {
 }
 
 kotlin {
+    androidLibrary {
+        androidResources {
+            enable = true
+        }
+    }
     sourceSets {
         val desktopMain by getting
 

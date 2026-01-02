@@ -5,37 +5,38 @@ import android.content.pm.PackageManager
 import android.os.Build
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import org.koin.java.KoinJavaComponent.inject
-import tmg.flashback.infrastructure.device.Device.applicationContext
-import tmg.flashback.infrastructure.device.Device.applicationId
 
-actual object Device {
+actual object Device: KoinComponent {
 
     private val applicationContext
-        get() = inject<Context>(Context::class.java)
+        get() = inject<Context>()
 
     actual val applicationId: String
         get() = applicationContext.value.packageName
 
     actual val versionCode: Int
-        get() = try {
-            val context = applicationContext.value
-            val info = context.packageManager.getPackageInfo(context.packageName, 0)
-            info.versionCode
-        } catch (e: PackageManager.NameNotFoundException) {
-            e.printStackTrace()
-            1
+        get() {
+            try {
+                val context = applicationContext.value
+                val info = context.packageManager.getPackageInfo(context.packageName, 0)
+                return info.versionCode
+            } catch (e: PackageManager.NameNotFoundException) {
+                e.printStackTrace()
+                return 1
+            }
         }
-    }
 
     actual val versionName: String
-        get() = try {
-            val context = applicationContext.value
-            val info = context.packageManager.getPackageInfo(context.packageName, 0)
-            info.versionName ?: "1.0.0"
-        } catch (e: PackageManager.NameNotFoundException) {
-            e.printStackTrace()
-            "1.0.0"
+        get() {
+            val name = try {
+                val context = applicationContext.value
+                val info = context.packageManager.getPackageInfo(context.packageName, 0)
+                info.versionName
+            } catch (e: PackageManager.NameNotFoundException) {
+                e.printStackTrace()
+                null
+            }
+            return name ?: "1.0.0"
         }
 
     actual val isMonetThemeSupported: Boolean

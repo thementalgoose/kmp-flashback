@@ -15,7 +15,7 @@ import tmg.flashback.composeApp.presentation.MenuItem.Settings
 import tmg.flashback.composeApp.presentation.MenuItem.TeamsStandings
 import tmg.flashback.composeApp.presentation.MenuItem.XR_Spacial
 import tmg.flashback.composeApp.presentation.toNavigationItem
-import tmg.flashback.presentation.toScreen
+import tmg.flashback.composeApp.presentation.toScreen
 import tmg.flashback.style.AppTheme
 import tmg.flashback.ui.navigation.NavigationOrbiter
 import tmg.flashback.ui.navigation.navigationOrbiterColumnWidth

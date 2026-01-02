@@ -18,7 +18,7 @@ import tmg.flashback.infrastructure.device.log
 import tmg.flashback.ui.permissions.Permission
 import tmg.flashback.ui.permissions.PermissionManager
 import tmg.flashback.ui.permissions.PermissionState
-import tmg.flashback.usecases.StoreFirebaseInstallationIdUseCase
+import tmg.flashback.composeApp.usecases.StoreFirebaseInstallationIdUseCase
 
 /**
  * App startup class

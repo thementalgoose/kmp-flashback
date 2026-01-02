@@ -50,9 +50,13 @@ actual class NotificationManagerImpl actual constructor(): NotificationManager, 
     actual override val canScheduleExact: Boolean
         get() {
             val alarmManager: AlarmManager = alarmManager ?: return false
-            val result = AlarmManagerCompat.canScheduleExactAlarms(alarmManager)
-            logDebug("Notifications", "canScheduleExactAlarms() $result")
-            return result
+            val canScheduleExactAlarm = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                alarmManager.canScheduleExactAlarms()
+            } else {
+                true
+            }
+            logDebug("Notifications", "canScheduleExactAlarms() $canScheduleExactAlarm")
+            return canScheduleExactAlarm
         }
 
     private fun pendingIntent(context: Context, channelId: String, requestCode: Int, title: String, description: String): PendingIntent {

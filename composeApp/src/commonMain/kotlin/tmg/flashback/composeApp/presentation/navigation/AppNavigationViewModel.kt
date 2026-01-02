@@ -18,7 +18,7 @@ import tmg.flashback.feature.maintenance.repository.MaintenanceRepository
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.navigation.Screen
-import tmg.flashback.usecases.RequiresSyncUseCase
+import tmg.flashback.composeApp.usecases.RequiresSyncUseCase
 
 class AppNavigationViewModel(
     isRssEnabledUseCase: IsRssEnabledUseCase,

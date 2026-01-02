@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
+import android.os.Build
 import android.util.Log
 import androidx.core.app.AlarmManagerCompat
 import kotlinx.datetime.LocalDateTime
@@ -34,8 +35,11 @@ class SystemAlarmManager {
     ) {
         val alarmManager: AlarmManager = alarmManager ?: return
         val pendingIntent = pendingIntent(applicationContext, channelId, requestCode, requestText, requestDescription)
-        val canScheduleExact = AlarmManagerCompat.canScheduleExactAlarms(alarmManager)
-
+        val canScheduleExact = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            alarmManager.canScheduleExactAlarms()
+        } else {
+            true
+        }
         val instant = requestTimestamp.toInstant(TimeZone.UTC)
         Log.d("Notification", "Scheduling (exact=$canScheduleExact) alarm wakeup for ${instant.toEpochMilliseconds()} (current system is ${System.currentTimeMillis()}, with second diff being ${(instant.toEpochMilliseconds() - System.currentTimeMillis()) / 1000} seconds) - $requestText")
         when (canScheduleExact) {

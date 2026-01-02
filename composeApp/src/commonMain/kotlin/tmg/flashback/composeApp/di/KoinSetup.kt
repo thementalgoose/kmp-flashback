@@ -6,7 +6,7 @@ import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
-import tmg.flashback.AppStartup
+import tmg.flashback.composeApp.AppStartup
 import tmg.flashback.analytics.di.coreMetricsAnalyticsModule
 import tmg.flashback.analytics.firebase.FirebaseAnalyticsService
 import tmg.flashback.configuration.di.coreConfigurationModule
@@ -39,7 +39,7 @@ import tmg.flashback.composeApp.firebase.FirebaseInstallationService
 import tmg.flashback.composeApp.firebase.FirebaseInstallationServiceImpl
 import tmg.flashback.infrastructure.di.infrastructureModule
 import tmg.flashback.infrastructure.log.logInfo
-import tmg.flashback.manager.UiManagerImpl
+import tmg.flashback.composeApp.manager.UiManagerImpl
 import tmg.flashback.network.rss.di.dataNetworkRssModule
 import tmg.flashback.news.di.dataNetworkFlashbackNewsModule
 import tmg.flashback.notifications.di.coreNotificationsModule
@@ -63,10 +63,10 @@ import tmg.flashback.composeApp.repositories.OnboardingRepository
 import tmg.flashback.composeApp.repositories.OnboardingRepositoryImpl
 import tmg.flashback.style.di.presentationStyleModule
 import tmg.flashback.ui.di.presentationUiModule
-import tmg.flashback.usecases.RequiresSyncUseCase
-import tmg.flashback.usecases.RequiresSyncUseCaseImpl
-import tmg.flashback.usecases.StoreFirebaseInstallationIdUseCase
-import tmg.flashback.usecases.StoreFirebaseInstallationIdUseCaseImpl
+import tmg.flashback.composeApp.usecases.RequiresSyncUseCase
+import tmg.flashback.composeApp.usecases.RequiresSyncUseCaseImpl
+import tmg.flashback.composeApp.usecases.StoreFirebaseInstallationIdUseCase
+import tmg.flashback.composeApp.usecases.StoreFirebaseInstallationIdUseCaseImpl
 import tmg.flashback.webbrowser.di.coreWebBrowserModule
 import tmg.flashback.widgets.upnext.di.featureWidgetUpNextModule
 
