@@ -8,7 +8,6 @@ class KotlinMultiplatformConventionPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         val libs = getLibs()
         plugins.apply(libs.findPlugin("kotlinMultiplatform").get().get().pluginId)
-        plugins.apply(libs.findPlugin("composeCompiler").get().get().pluginId)
         plugins.apply(libs.findPlugin("androidKotlinMultiplatformLibrary").get().get().pluginId)
 
         extensions.configure<KotlinMultiplatformExtension> {
