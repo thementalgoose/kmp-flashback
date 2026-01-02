@@ -7,7 +7,7 @@ kotlinx-datetime = "0.7.1"
 kotlinx-coroutines = "1.10.2"
 
 # Android
-agp = "8.13.2"
+agp = "9.0.0-rc02"
 android-compileSdk = "36"
 android-minSdk = "26"
 android-targetSdk = "36"
@@ -175,6 +175,7 @@ coil = [
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+androidKotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
@@ -188,7 +189,5 @@ kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = 
 
 # Custom Gradle Plugins
 flashback-kotlinMultiplatform = { id = "tmg.flashback.kotlin.multiplatform" }
-flashback-androidLibrary = { id = "tmg.flashback.android.library" }
 flashback-dataModule = { id = "tmg.flashback.data.module" }
 flashback-featureModule = { id = "tmg.flashback.feature.module" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

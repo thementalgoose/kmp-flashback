@@ -1,19 +1,14 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     alias(libs.plugins.flashback.kotlinMultiplatform)
-    alias(libs.plugins.flashback.androidLibrary)
 }
 
 kotlin {
-    sourceSets {
-        androidTarget {
-            @OptIn(ExperimentalKotlinGradlePluginApi::class)
-            compilerOptions {
-                jvmTarget.set(JvmTarget.JVM_21)
-            }
+    android {
+        compileSdk {
+            version = release(libs.versions.android.compileSdk.get().toInt())
         }
+    }
+    sourceSets {
         androidMain.dependencies {
             implementation(libs.ktor.client.okHttp)
             implementation(libs.okhttp.loggingInterceptor)
@@ -29,11 +24,5 @@ kotlin {
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
         }
-    }
-}
-
-android {
-    buildFeatures {
-        buildConfig = true
     }
 }

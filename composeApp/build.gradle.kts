@@ -1,11 +1,8 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 
 plugins {
     alias(libs.plugins.flashback.kotlinMultiplatform)
-    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinSerialization)
@@ -25,10 +22,11 @@ val versionNameProperty: String = try {
 }
 
 kotlin {
-    androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    android {
+        compileSdk {
+            version = release(libs.versions.android.compileSdk.get().toInt())
+        }
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_21)
             freeCompilerArgs.add("-Xstring-concat=inline")
         }
     }
@@ -174,28 +172,8 @@ kotlin {
     }
 }
 
-android {
-    namespace = "tmg.flashback"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
-
-    defaultConfig {
-        minSdk = libs.versions.android.minSdk.get().toInt()
-    }
-
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
-}
-
 dependencies {
-    debugImplementation(compose.uiTooling)
+    "androidRuntimeClasspath"(compose.uiTooling)
 }
 
 compose.resources {

@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.flashback.dataModule)
+    alias(libs.plugins.flashback.kotlinMultiplatform)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.mokkery)
 }

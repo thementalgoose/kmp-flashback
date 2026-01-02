@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.flashback.kotlinMultiplatform)
-    alias(libs.plugins.flashback.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.mokkery)
@@ -14,11 +13,9 @@ compose.resources {
 }
 
 kotlin {
-    androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_21)
-            freeCompilerArgs.add("-Xstring-concat=inline")
+    android {
+        compileSdk {
+            version = release(libs.versions.android.compileSdk.get().toInt())
         }
     }
 
@@ -58,5 +55,5 @@ kotlin {
     }
 }
 dependencies {
-    debugImplementation(libs.androidx.ui.tooling)
+    "androidRuntimeClasspath"(libs.androidx.ui.tooling)
 }

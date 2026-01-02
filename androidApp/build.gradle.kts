@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.googleServices)
     alias(libs.plugins.crashlytics)
-    alias(libs.plugins.kotlin.android)
 }
 
 val versionCodeProperty: Int = try {
@@ -34,6 +33,10 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+
+    buildFeatures {
+        resValues = true
     }
 
     signingConfigs {

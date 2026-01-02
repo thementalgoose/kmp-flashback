@@ -1,15 +1,23 @@
+import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.dependencies
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class KotlinMultiplatformConventionPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         val libs = getLibs()
         plugins.apply(libs.findPlugin("kotlinMultiplatform").get().get().pluginId)
+        plugins.apply(libs.findPlugin("androidKotlinMultiplatformLibrary").get().get().pluginId)
 
         extensions.configure<KotlinMultiplatformExtension> {
+
+            this.extensions.configure<KotlinMultiplatformAndroidLibraryTarget> {
+                compileSdk {
+                    version = release(libs.findVersion("android.compileSdk").get().toString().toInt())
+                }
+            }
+
             listOf(
                 iosX64(),
                 iosArm64(),

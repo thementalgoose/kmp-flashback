@@ -7,13 +7,6 @@ plugins {
 }
 
 kotlin {
-    androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_21)
-            freeCompilerArgs.add("-Xstring-concat=inline")
-        }
-    }
     sourceSets {
         val desktopMain by getting
 
