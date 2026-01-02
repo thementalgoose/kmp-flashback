@@ -1,6 +1,5 @@
 plugins {
-    alias(libs.plugins.flashback.dataModule)
-    alias(libs.plugins.flashback.androidLibrary)
+    alias(libs.plugins.flashback.kotlinMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeMultiplatform)
 }

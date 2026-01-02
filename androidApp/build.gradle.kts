@@ -36,6 +36,10 @@ android {
         }
     }
 
+    buildFeatures {
+        resValues = true
+    }
+
     signingConfigs {
         create("release") {
             storeFile = file(System.getenv("KEYSTORE") ?: "flashback.keystore")

@@ -1,6 +1,3 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     alias(libs.plugins.flashback.featureModule)
     alias(libs.plugins.kotlinSerialization)
@@ -12,11 +9,9 @@ compose.resources {
 }
 
 kotlin {
-    androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_21)
-            freeCompilerArgs.add("-Xstring-concat=inline")
+    android {
+        compileSdk {
+            version = release(libs.versions.android.compileSdk.get().toInt())
         }
     }
     sourceSets {

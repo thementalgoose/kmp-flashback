@@ -3,17 +3,14 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.flashback.kotlinMultiplatform)
-    alias(libs.plugins.flashback.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.mokkery)
 }
 
 kotlin {
-    androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_21)
-            freeCompilerArgs.add("-Xstring-concat=inline")
+    androidLibrary {
+        androidResources {
+            enable = true
         }
     }
     sourceSets {

@@ -10,7 +10,6 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import org.koin.java.KoinJavaComponent
 import tmg.flashback.core.notifications.R
-import tmg.flashback.infrastructure.BuildConfig
 import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.notifications.repositories.NotificationRepository
 
@@ -32,7 +31,7 @@ class RemoteNotificationService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        if (BuildConfig.DEBUG) {
+        if (Device.isDebug) {
             Log.i("Notifications", "New token for remote push notifications '$token'")
         }
         val notificationRepository = KoinJavaComponent.getKoin().get<NotificationRepository>()

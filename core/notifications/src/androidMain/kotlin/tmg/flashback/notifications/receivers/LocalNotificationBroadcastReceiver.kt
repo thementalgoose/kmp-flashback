@@ -9,7 +9,7 @@ import androidx.annotation.Keep
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import tmg.flashback.crashlytics.manager.CrashlyticsManager
-import tmg.flashback.infrastructure.BuildConfig
+import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.notifications.utils.NotificationBuilder
 
 @Keep
@@ -35,7 +35,7 @@ class LocalNotificationBroadcastReceiver(): BroadcastReceiver(), KoinComponent {
             crashController.logException(NullPointerException("Channel id null when trying to show notification"), "Channel id null when trying to show notification")
             return
         }
-        if (BuildConfig.DEBUG) {
+        if (Device.isDebug) {
             Log.d("Notification", "Scheduling notification for Title '$title' Description '$description'")
         }
 

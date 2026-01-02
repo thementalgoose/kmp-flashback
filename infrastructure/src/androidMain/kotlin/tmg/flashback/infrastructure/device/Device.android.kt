@@ -1,10 +1,10 @@
 package tmg.flashback.infrastructure.device
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Build
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import tmg.flashback.infrastructure.BuildConfig
 
 actual object Device: KoinComponent {
 
@@ -15,10 +15,29 @@ actual object Device: KoinComponent {
         get() = applicationContext.value.packageName
 
     actual val versionCode: Int
-        get() = BuildConfig.VERSION_CODE.toIntOrNull() ?: 1
+        get() {
+            try {
+                val context = applicationContext.value
+                val info = context.packageManager.getPackageInfo(context.packageName, 0)
+                return info.versionCode
+            } catch (e: PackageManager.NameNotFoundException) {
+                e.printStackTrace()
+                return 1
+            }
+        }
 
     actual val versionName: String
-        get() = BuildConfig.VERSION_NAME
+        get() {
+            val name = try {
+                val context = applicationContext.value
+                val info = context.packageManager.getPackageInfo(context.packageName, 0)
+                info.versionName
+            } catch (e: PackageManager.NameNotFoundException) {
+                e.printStackTrace()
+                null
+            }
+            return name ?: "1.0.0"
+        }
 
     actual val isMonetThemeSupported: Boolean
         get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
@@ -45,7 +64,7 @@ actual object Device: KoinComponent {
                 || Build.PRODUCT.contains("simulator")
 
     actual val isDebug: Boolean
-        get() = BuildConfig.DEBUG
+        get() = applicationId.contains(".debug")
 
     actual val platform: Platform
         get() = Platform.Android

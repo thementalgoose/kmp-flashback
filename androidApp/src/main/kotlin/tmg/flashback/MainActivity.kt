@@ -13,6 +13,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.xr.runtime.Session
 import androidx.xr.runtime.SessionCreateApkRequired
 import org.koin.android.ext.android.inject
+import tmg.flashback.composeApp.App
 import tmg.flashback.style.theme.Theme
 import tmg.flashback.style.theme.ThemeManager
 import tmg.flashback.ui.activity.ActivityProvider
