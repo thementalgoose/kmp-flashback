@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.Keep
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen
@@ -19,6 +20,7 @@ import tmg.flashback.style.theme.ThemeManager
 import tmg.flashback.ui.activity.ActivityProvider
 import tmg.flashback.ui.activity.BaseActivity
 
+@Keep
 class MainActivity : BaseActivity(), SplashScreen.KeepOnScreenCondition {
 
     private val themeManager: ThemeManager by inject()
