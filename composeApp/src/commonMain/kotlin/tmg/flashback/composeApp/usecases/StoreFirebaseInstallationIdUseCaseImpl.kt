@@ -1,7 +1,7 @@
 package tmg.flashback.composeApp.usecases
 
 import tmg.flashback.device.repositories.DeviceRepository
-import tmg.flashback.firebase.FirebaseInstallationService
+import tmg.flashback.composeApp.firebase.FirebaseInstallationService
 import tmg.flashback.infrastructure.log.logDebug
 
 class StoreFirebaseInstallationIdUseCaseImpl(

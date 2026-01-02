@@ -5,7 +5,7 @@ import dev.mokkery.answering.returns
 import dev.mokkery.every
 import dev.mokkery.mock
 import tmg.flashback.configuration.usecases.DoesConfigRequireSyncUseCase
-import tmg.flashback.repositories.OnboardingRepository
+import tmg.flashback.composeApp.repositories.OnboardingRepository
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue

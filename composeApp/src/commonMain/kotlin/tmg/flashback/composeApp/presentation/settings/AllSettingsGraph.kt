@@ -7,16 +7,16 @@ import androidx.window.core.layout.WindowWidthSizeClass.Companion.COMPACT
 import androidx.window.core.layout.WindowWidthSizeClass.Companion.EXPANDED
 import tmg.flashback.feature.privacypolicy.presentation.PrivacyPolicyScreen
 import tmg.flashback.feature.rss.presentation.configure.RssConfigureScreen
-import tmg.flashback.presentation.settings.about.SettingsAboutScreen
-import tmg.flashback.presentation.settings.browser.SettingsBrowserScreen
-import tmg.flashback.presentation.settings.darkmode.SettingsDarkModeScreen
-import tmg.flashback.presentation.settings.layout.SettingsLayoutScreen
-import tmg.flashback.presentation.settings.notifications.results.SettingsNotificationResultsScreen
-import tmg.flashback.presentation.settings.notifications.upcoming.SettingsNotificationUpcomingScreen
-import tmg.flashback.presentation.settings.privacy.SettingsPrivacyScreen
-import tmg.flashback.presentation.settings.theme.SettingsThemeScreen
-import tmg.flashback.presentation.settings.weather.SettingsWeatherScreen
-import tmg.flashback.presentation.settings.widgets.SettingsWidgetScreen
+import tmg.flashback.composeApp.presentation.settings.about.SettingsAboutScreen
+import tmg.flashback.composeApp.presentation.settings.browser.SettingsBrowserScreen
+import tmg.flashback.composeApp.presentation.settings.darkmode.SettingsDarkModeScreen
+import tmg.flashback.composeApp.presentation.settings.layout.SettingsLayoutScreen
+import tmg.flashback.composeApp.presentation.settings.notifications.results.SettingsNotificationResultsScreen
+import tmg.flashback.composeApp.presentation.settings.notifications.upcoming.SettingsNotificationUpcomingScreen
+import tmg.flashback.composeApp.presentation.settings.privacy.SettingsPrivacyScreen
+import tmg.flashback.composeApp.presentation.settings.theme.SettingsThemeScreen
+import tmg.flashback.composeApp.presentation.settings.weather.SettingsWeatherScreen
+import tmg.flashback.composeApp.presentation.settings.widgets.SettingsWidgetScreen
 import tmg.flashback.ui.navigation.MasterDetailPaneState
 import tmg.flashback.ui.navigation.MasterDetailsPane
 

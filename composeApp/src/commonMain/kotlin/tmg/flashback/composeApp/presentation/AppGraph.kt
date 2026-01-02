@@ -29,9 +29,9 @@ import tmg.flashback.feature.season.presentation.driver_standings.DriverStanding
 import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsGraph
 import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsNavigation
 import tmg.flashback.navigation.Screen
-import tmg.flashback.presentation.navigation.AppNavigationViewModel
-import tmg.flashback.presentation.settings.AllSettingsGraph
-import tmg.flashback.presentation.settings.SettingNavigation
+import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
+import tmg.flashback.composeApp.presentation.settings.AllSettingsGraph
+import tmg.flashback.composeApp.presentation.settings.SettingNavigation
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.navigation.MasterDetailPaneState
 

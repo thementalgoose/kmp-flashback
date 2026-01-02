@@ -18,10 +18,10 @@ import tmg.flashback.data.repo.repository.ConstructorRepository
 import tmg.flashback.data.repo.repository.DriverRepository
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
-import tmg.flashback.presentation.sync.SyncState.DONE
-import tmg.flashback.presentation.sync.SyncState.FAILED
-import tmg.flashback.presentation.sync.SyncState.LOADING
-import tmg.flashback.repositories.OnboardingRepository
+import tmg.flashback.composeApp.presentation.sync.SyncState.DONE
+import tmg.flashback.composeApp.presentation.sync.SyncState.FAILED
+import tmg.flashback.composeApp.presentation.sync.SyncState.LOADING
+import tmg.flashback.composeApp.repositories.OnboardingRepository
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 

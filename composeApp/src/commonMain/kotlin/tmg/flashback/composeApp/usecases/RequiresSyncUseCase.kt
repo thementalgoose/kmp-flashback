@@ -1,7 +1,7 @@
 package tmg.flashback.composeApp.usecases
 
 import tmg.flashback.configuration.usecases.DoesConfigRequireSyncUseCase
-import tmg.flashback.repositories.OnboardingRepository
+import tmg.flashback.composeApp.repositories.OnboardingRepository
 
 interface RequiresSyncUseCase {
     operator fun invoke(): Boolean

@@ -30,10 +30,10 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.navigation.Screen
-import tmg.flashback.presentation.MenuItem
-import tmg.flashback.presentation.icon
-import tmg.flashback.presentation.label
-import tmg.flashback.presentation.navigation.hero.DashboardHero
+import tmg.flashback.composeApp.presentation.MenuItem
+import tmg.flashback.composeApp.presentation.icon
+import tmg.flashback.composeApp.presentation.label
+import tmg.flashback.composeApp.presentation.navigation.hero.DashboardHero
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2

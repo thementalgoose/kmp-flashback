@@ -3,7 +3,7 @@ package tmg.flashback.composeApp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import org.koin.compose.getKoin
-import tmg.flashback.di.doInitKoin
+import tmg.flashback.composeApp.di.doInitKoin
 
 fun main() = application {
 

@@ -24,11 +24,11 @@ import tmg.flashback.feature.notifications.model.NotificationResultsAvailable.SP
 import tmg.flashback.feature.notifications.model.NotificationResultsAvailable.SPRINT_QUALIFYING
 import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.infrastructure.device.Platform
-import tmg.flashback.presentation.settings.PrefHeader
-import tmg.flashback.presentation.settings.PrefLink
-import tmg.flashback.presentation.settings.PrefSwitch
-import tmg.flashback.presentation.settings.Settings
-import tmg.flashback.presentation.settings.notifications.ManageInSettings
+import tmg.flashback.composeApp.presentation.settings.PrefHeader
+import tmg.flashback.composeApp.presentation.settings.PrefLink
+import tmg.flashback.composeApp.presentation.settings.PrefSwitch
+import tmg.flashback.composeApp.presentation.settings.Settings
+import tmg.flashback.composeApp.presentation.settings.notifications.ManageInSettings
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.permissions.PermissionState

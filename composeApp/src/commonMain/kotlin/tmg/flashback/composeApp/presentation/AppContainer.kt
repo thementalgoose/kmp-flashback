@@ -27,11 +27,11 @@ import tmg.flashback.feature.season.presentation.driver_standings.DriverStanding
 import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsNavigation
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.navigation.Screen
-import tmg.flashback.presentation.navigation.AppNavigationDrawer
-import tmg.flashback.presentation.navigation.AppNavigationOrbiter
-import tmg.flashback.presentation.navigation.AppNavigationRail
-import tmg.flashback.presentation.navigation.AppNavigationViewModel
-import tmg.flashback.presentation.settings.SettingNavigation
+import tmg.flashback.composeApp.presentation.navigation.AppNavigationDrawer
+import tmg.flashback.composeApp.presentation.navigation.AppNavigationOrbiter
+import tmg.flashback.composeApp.presentation.navigation.AppNavigationRail
+import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
+import tmg.flashback.composeApp.presentation.settings.SettingNavigation
 import tmg.flashback.style.AppTheme
 import tmg.flashback.ui.navigation.OverlappingPanels
 import tmg.flashback.ui.navigation.OverlappingPanelsState

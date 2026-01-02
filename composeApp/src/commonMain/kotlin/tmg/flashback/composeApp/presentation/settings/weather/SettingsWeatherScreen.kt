@@ -11,8 +11,8 @@ import flashback.presentation.localisation.generated.resources.settings_header_w
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
-import tmg.flashback.presentation.settings.PrefSwitch
-import tmg.flashback.presentation.settings.Settings
+import tmg.flashback.composeApp.presentation.settings.PrefSwitch
+import tmg.flashback.composeApp.presentation.settings.Settings
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 

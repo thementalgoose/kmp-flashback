@@ -25,7 +25,7 @@ import tmg.flashback.data.repo.repository.DriverRepository
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.feature.notifications.usecases.ScheduleResult
 import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
-import tmg.flashback.repositories.OnboardingRepository
+import tmg.flashback.composeApp.repositories.OnboardingRepository
 import kotlin.coroutines.coroutineContext
 import kotlin.test.Test
 import kotlin.test.assertEquals

@@ -182,7 +182,7 @@ compose.resources {
 
 compose.desktop {
     application {
-        mainClass = "tmg.flashback.MainKt"
+        mainClass = "tmg.flashback.composeApp.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)

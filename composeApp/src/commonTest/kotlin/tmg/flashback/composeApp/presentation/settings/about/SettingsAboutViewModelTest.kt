@@ -9,7 +9,7 @@ import tmg.flashback.device.repositories.DeviceRepository
 import tmg.flashback.device.usecases.OpenEmailUseCase
 import tmg.flashback.device.usecases.OpenStorePageUseCase
 import tmg.flashback.device.usecases.OpenWebpageUseCase
-import tmg.flashback.repositories.OnboardingRepository
+import tmg.flashback.composeApp.repositories.OnboardingRepository
 import tmg.flashback.ui.toasts.ToastManager
 import kotlin.test.Test
 
