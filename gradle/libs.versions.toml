@@ -47,7 +47,6 @@ kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 
 # Dependency Injection
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
@@ -70,7 +69,6 @@ androidx_browser = "androidx.browser:browser:1.9.0"
 androidx_xr_runtime = { module = "androidx.xr.runtime:runtime", version.ref = "androidx-xr" }
 androidx_xr_scenecore = { module = "androidx.xr.scenecore:scenecore", version.ref = "androidx-xr" }
 androidx_xr_compose = { module = "androidx.xr.compose:compose", version.ref = "androidx-xr" }
-androidx_xr_material3 = "androidx.xr.compose.material3:material3:1.0.0-alpha13"
 androidx_xr_arcore = { module = "androidx.xr.arcore:arcore", version.ref = "androidx-xr" }
 
 androidx_xr_extensions = "com.android.extensions.xr:extensions-xr:1.1.0"
@@ -117,7 +115,6 @@ ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "k
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
-ktor-client-apache = { module = "io.ktor:ktor-client-apache", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-serialization-kotlinx-xml = { module = "io.ktor:ktor-serialization-kotlinx-xml", version.ref = "ktor" }
 okhttp-loggingInterceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
@@ -142,7 +139,6 @@ androidx_xr = [
     "androidx_xr_runtime",
     "androidx_xr_scenecore",
     "androidx_xr_compose",
-#    "androidx_xr_material3",
     "androidx_xr_arcore"
 ]
 kotlin = [
@@ -174,7 +170,6 @@ coil = [
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
-androidLibrary = { id = "com.android.library", version.ref = "agp" }
 androidKotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
@@ -189,6 +184,5 @@ kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = 
 
 # Custom Gradle Plugins
 flashback-kotlinMultiplatform = { id = "tmg.flashback.kotlin.multiplatform" }
-flashback-dataModule = { id = "tmg.flashback.data.module" }
 flashback-featureModule = { id = "tmg.flashback.feature.module" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
