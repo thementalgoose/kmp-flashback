@@ -18,8 +18,8 @@ captures
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 
-composeApp/src/production/google-services.json
-composeApp/src/sandbox/google-services.json
+androidApp/src/production/google-services.json
+androidApp/src/sandbox/google-services.json
 iosApp/iosApp/Firebase/GoogleService-production.plist
 iosApp/iosApp/Firebase/GoogleService-sandbox.plist
 
