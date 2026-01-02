@@ -34,7 +34,7 @@ jobs:
       - uses: actions/setup-java@v5
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: '21'
 
       # Caching gradle
       - uses: actions/cache@v5
@@ -52,10 +52,10 @@ jobs:
           GOOGLE_SERVICES_JSON_SANDBOX: ${{ secrets.GOOGLE_SERVICES_JSON_SANDBOX }}
           GOOGLE_SERVICES_PLIST_SANDBOX: ${{ secrets.GOOGLE_SERVICES_PLIST_SANDBOX }}
         run: |
-          mkdir -p composeApp/src/sandbox
-          mkdir -p composeApp/src/production
+          mkdir -p androidApp/src/sandbox
+          mkdir -p androidApp/src/production
           mkdir -p iosApp/iosApp/Firebase
-          echo $GOOGLE_SERVICES_JSON_SANDBOX | base64 --decode >> composeApp/src/sandbox/google-services.json
+          echo $GOOGLE_SERVICES_JSON_SANDBOX | base64 --decode >> androidApp/src/sandbox/google-services.json
           echo $GOOGLE_SERVICES_PLIST_SANDBOX | base64 --decode >> iosApp/iosApp/Firebase/GoogleService-sandbox.plist
 
       # Building version
@@ -70,14 +70,14 @@ jobs:
           VERSION_NAME: ${{ inputs.version_name }}
           VERSION_CODE: ${{ inputs.version_code }}
         run: |
-          ./gradlew :composeApp:assembleSandboxRelease
+          ./gradlew :androidApp:assembleSandboxRelease
 
       # Sign AAB
       - name: Sign app
         uses: r0adkll/sign-android-release@v1
         id: sign_app
         with:
-          releaseDirectory: composeApp/build/outputs/apk/sandbox/release
+          releaseDirectory: androidApp/build/outputs/apk/sandbox/release
           signingKeyBase64: ${{ secrets.ANDROID_KEYSTORE }}
           alias: ${{ secrets.ANDROID_KEYSTORE_ALIAS }}
           keyStorePassword: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
@@ -92,5 +92,5 @@ jobs:
         with:
           name: APK
           path: |
-            composeApp/build/outputs/apk/**/*.apk
+            androidApp/build/outputs/apk/**/*.apk
           retention-days: 2

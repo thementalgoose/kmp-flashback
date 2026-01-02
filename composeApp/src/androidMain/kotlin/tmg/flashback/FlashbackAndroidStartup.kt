@@ -4,6 +4,7 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationChannelGroup
 import android.app.NotificationManager
+import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.notification_channel_free_practice
@@ -29,14 +30,14 @@ class FlashbackAndroidStartup(
     private val subscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase,
     private val refreshWidgetsUseCase: RefreshWidgetsUseCase
 ) {
-    fun startup(application: FlashbackApplication) {
+    fun startup(application: Application) {
         application.setupNotificationChannels()
         application.setupResultNotifications()
         application.refreshWidgets()
     }
 
     private fun Application.setupNotificationChannels() {
-        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         //region Legacy: Remove these existing channels which were previously used for remote notifications
         notificationManager.deleteNotificationChannel("race")
@@ -49,7 +50,13 @@ class FlashbackAndroidStartup(
         notificationManager.createNotificationChannelGroup(upcomingGroup)
         NotificationUpcoming.entries
             .filter { it != NotificationUpcoming.OTHER }
-            .map { NotificationChannel(it.channelId, it.labelId(), NotificationManager.IMPORTANCE_HIGH) }
+            .map {
+                NotificationChannel(
+                    it.channelId,
+                    it.labelId(),
+                    NotificationManager.IMPORTANCE_HIGH
+                )
+            }
             .forEach {
                 it.group = upcomingGroupId
                 notificationManager.createNotificationChannel(it)
@@ -60,7 +67,13 @@ class FlashbackAndroidStartup(
         val resultsGroup = NotificationChannelGroup(resultsGroupId, "Results Available")
         notificationManager.createNotificationChannelGroup(resultsGroup)
         NotificationResultsAvailable.entries
-            .map { NotificationChannel(it.channelId, it.labelId(), NotificationManager.IMPORTANCE_HIGH) }
+            .map {
+                NotificationChannel(
+                    it.channelId,
+                    it.labelId(),
+                    NotificationManager.IMPORTANCE_HIGH
+                )
+            }
             .forEach {
                 it.group = resultsGroupId
                 notificationManager.createNotificationChannel(it)

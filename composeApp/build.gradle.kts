@@ -5,12 +5,10 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 
 plugins {
     alias(libs.plugins.flashback.kotlinMultiplatform)
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinSerialization)
-    alias(libs.plugins.googleServices)
-    alias(libs.plugins.crashlytics)
     alias(libs.plugins.mokkery)
     alias(libs.plugins.kotlinCocoapods)
 }
@@ -30,7 +28,7 @@ kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_17)
+            jvmTarget.set(JvmTarget.JVM_21)
             freeCompilerArgs.add("-Xstring-concat=inline")
         }
     }
@@ -38,6 +36,8 @@ kotlin {
     iosX64()
     iosArm64()
     iosSimulatorArm64()
+
+    jvmToolchain(21)
 
     cocoapods {
         summary = "Flashback"
@@ -179,52 +179,18 @@ android {
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "tmg.flashback"
         minSdk = libs.versions.android.minSdk.get().toInt()
-        targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = versionCodeProperty
-        versionName = "${versionNameProperty}.${versionCodeProperty}"
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "./proguard-rules.pro")
-        }
-    }
-
-    signingConfigs {
-        create("release") {
-            storeFile = file(System.getenv("KEYSTORE") ?: "flashback.keystore")
-            storePassword = System.getenv("KEYSTORE_PASSWORD")
-            keyAlias = System.getenv("KEYSTORE_ALIAS")
-            keyPassword = System.getenv("KEYSTORE_PASSWORD")
-        }
-    }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    flavorDimensions.add("variant")
-
-    productFlavors {
-        create("sandbox") {
-            dimension = "variant"
-            isDefault = true
-            applicationIdSuffix = ".sandbox"
-            resValue("string", "app_name", "Flashback Sandbox")
-        }
-
-        create("production") {
-            dimension = "variant"
-            resValue("string", "app_name", "Flashback")
-        }
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 }
 

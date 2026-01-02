@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-java@v5
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: '21'
 
       # Caching gradle
       - uses: actions/cache@v5
@@ -35,23 +35,23 @@ jobs:
           GOOGLE_SERVICES_JSON_SANDBOX: ${{ secrets.GOOGLE_SERVICES_JSON_SANDBOX }}
           GOOGLE_SERVICES_PLIST_SANDBOX: ${{ secrets.GOOGLE_SERVICES_PLIST_SANDBOX }}
         run: |
-          mkdir -p composeApp/src/sandbox
-          mkdir -p composeApp/src/production
+          mkdir -p androidApp/src/sandbox
+          mkdir -p androidApp/src/production
           mkdir -p iosApp/iosApp/Firebase
-          echo $GOOGLE_SERVICES_JSON_SANDBOX | base64 --decode >> composeApp/src/sandbox/google-services.json
+          echo $GOOGLE_SERVICES_JSON_SANDBOX | base64 --decode >> androidApp/src/sandbox/google-services.json
           echo $GOOGLE_SERVICES_PLIST_SANDBOX | base64 --decode >> iosApp/iosApp/Firebase/GoogleService-sandbox.plist
 
       # Generating before app dependency output
       - name: Checkout base branch + generate report
         run: |
           git checkout ${{ github.base_ref }}
-          ./gradlew :composeApp:dependencies --configuration productionReleaseRuntimeClasspath >> before.txt
+          ./gradlew :androidApp:dependencies --configuration productionReleaseRuntimeClasspath >> before.txt
 
       # Generating after app dependency output
       - name: Checkout head branch + generate report
         run: |
           git checkout ${{ github.head_ref }}
-          ./gradlew :composeApp:dependencies --configuration productionReleaseRuntimeClasspath >> after.txt
+          ./gradlew :androidApp:dependencies --configuration productionReleaseRuntimeClasspath >> after.txt
 
       # Generating diff
       - name: Generate dependency diff

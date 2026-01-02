@@ -1,13 +1,15 @@
 package tmg.flashback
 
 import android.app.Application
+import multiplatform.network.cmptoast.AppContext
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.dsl.module
 import tmg.flashback.di.doInitKoin
-import tmg.flashback.notifications.repositories.NotificationRepository
+import tmg.flashback.navigation.WidgetNavigatorImpl
+import tmg.flashback.widgets.upnext.navigation.WidgetNavigator
 
 class FlashbackApplication: Application(), KoinComponent {
 
@@ -19,9 +21,12 @@ class FlashbackApplication: Application(), KoinComponent {
         doInitKoin {
             androidContext(this@FlashbackApplication)
             androidLogger()
+            module {
+                single<WidgetNavigator> { WidgetNavigatorImpl() }
+            }
         }
 
-        multiplatform.network.cmptoast.AppContext.apply { set(this@FlashbackApplication) }
+        AppContext.apply { set(this@FlashbackApplication) }
 
         flashbackAndroidStartup.startup(application = this)
     }
