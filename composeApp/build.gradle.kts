@@ -5,12 +5,10 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 
 plugins {
     alias(libs.plugins.flashback.kotlinMultiplatform)
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinSerialization)
-    alias(libs.plugins.googleServices)
-    alias(libs.plugins.crashlytics)
     alias(libs.plugins.mokkery)
     alias(libs.plugins.kotlinCocoapods)
 }
@@ -175,56 +173,22 @@ kotlin {
 }
 
 android {
-    namespace = "tmg.flashback"
+    namespace = "tmg.flashback.compose"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "tmg.flashback"
         minSdk = libs.versions.android.minSdk.get().toInt()
-        targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = versionCodeProperty
-        versionName = "${versionNameProperty}.${versionCodeProperty}"
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "./proguard-rules.pro")
-        }
-    }
-
-    signingConfigs {
-        create("release") {
-            storeFile = file(System.getenv("KEYSTORE") ?: "flashback.keystore")
-            storePassword = System.getenv("KEYSTORE_PASSWORD")
-            keyAlias = System.getenv("KEYSTORE_ALIAS")
-            keyPassword = System.getenv("KEYSTORE_PASSWORD")
         }
     }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    flavorDimensions.add("variant")
-
-    productFlavors {
-        create("sandbox") {
-            dimension = "variant"
-            isDefault = true
-            applicationIdSuffix = ".sandbox"
-            resValue("string", "app_name", "Flashback Sandbox")
-        }
-
-        create("production") {
-            dimension = "variant"
-            resValue("string", "app_name", "Flashback")
-        }
     }
 }
 

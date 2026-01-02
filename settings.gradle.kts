@@ -38,6 +38,7 @@ plugins {
 includeBuild("build-logic")
 
 include(":composeApp")
+include(":androidApp")
 
 include(":core:configuration")
 include(":core:device")
