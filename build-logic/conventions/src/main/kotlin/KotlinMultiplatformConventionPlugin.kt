@@ -16,6 +16,7 @@ class KotlinMultiplatformConventionPlugin : Plugin<Project> {
                 compileSdk {
                     version = release(libs.findVersion("android.compileSdk").get().toString().toInt())
                 }
+                namespace = "tmg.flashback.$moduleName"
             }
 
             listOf(

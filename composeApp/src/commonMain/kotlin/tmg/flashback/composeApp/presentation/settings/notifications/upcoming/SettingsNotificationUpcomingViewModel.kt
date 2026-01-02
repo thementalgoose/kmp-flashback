@@ -1,0 +1,103 @@
+package tmg.flashback.composeApp.presentation.settings.notifications.upcoming
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import tmg.flashback.device.usecases.OpenSettingsUseCase
+import tmg.flashback.feature.notifications.model.NotificationReminder
+import tmg.flashback.feature.notifications.model.NotificationUpcoming
+import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
+import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
+import tmg.flashback.notifications.manager.NotificationManager
+import tmg.flashback.ui.permissions.Permission
+import tmg.flashback.ui.permissions.PermissionManager
+import tmg.flashback.ui.permissions.PermissionState
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
+
+class SettingsNotificationUpcomingViewModel(
+    private val notificationSettingsRepository: NotificationSettingsRepository,
+    private val scheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase,
+    private val permissionManager: PermissionManager,
+    private val notificationManager: NotificationManager,
+    private val openSettingsUseCase: OpenSettingsUseCase,
+    private val coroutineContext: CoroutineContext = EmptyCoroutineContext
+): ViewModel() {
+
+    private val _uiState: MutableStateFlow<SettingsNotificationUpcomingUiState> = MutableStateFlow(SettingsNotificationUpcomingUiState(
+        reminder = notificationSettingsRepository.notificationReminderPeriod,
+        reminderEnabled = notificationManager.canScheduleExact,
+        enabled = notificationSettingsRepository.notificationUpcomingEnabled,
+    ))
+    val uiState: StateFlow<SettingsNotificationUpcomingUiState> = _uiState
+
+
+    private val _permissionState: MutableStateFlow<PermissionState> = MutableStateFlow(PermissionState.NotDetermined)
+    val permissionState: StateFlow<PermissionState> = _permissionState
+
+    init {
+        viewModelScope.launch(coroutineContext) {
+            _permissionState.value = permissionManager.getPermissionState(Permission.Notifications)
+        }
+    }
+
+    fun requestPermissions() {
+        viewModelScope.launch(coroutineContext) {
+            val result = permissionManager.requestPermission(Permission.Notifications).await()
+            if (result != PermissionState.Granted) {
+                goToSettings()
+            } else {
+                reschedule()
+                _uiState.update {
+                    SettingsNotificationUpcomingUiState(
+                        reminder = notificationSettingsRepository.notificationReminderPeriod,
+                        enabled = notificationSettingsRepository.notificationUpcomingEnabled,
+                        reminderEnabled = notificationManager.canScheduleExact,
+                    )
+                }
+            }
+        }
+    }
+
+    fun goToSettings() {
+        openSettingsUseCase.openNotificationSettings()
+    }
+
+    fun goToAlarmSettings() {
+        openSettingsUseCase.openAlarmSettings()
+    }
+
+    private suspend fun reschedule() {
+        scheduleUpcomingNotificationsUseCase(true)
+        _permissionState.value = permissionManager.getPermissionState(Permission.Notifications)
+    }
+
+    fun refresh() {
+        viewModelScope.launch(coroutineContext) {
+            reschedule()
+        }
+        _uiState.update {
+            SettingsNotificationUpcomingUiState(
+                reminder = notificationSettingsRepository.notificationReminderPeriod,
+                enabled = notificationSettingsRepository.notificationUpcomingEnabled,
+                reminderEnabled = notificationManager.canScheduleExact,
+            )
+        }
+    }
+
+    fun notificationReminderClicked(reminder: NotificationReminder) {
+        notificationSettingsRepository.notificationReminderPeriod = reminder
+        refresh()
+    }
+
+    fun setNotificationUpcoming(upcoming: NotificationUpcoming, enabled: Boolean) {
+        when (enabled) {
+            true -> notificationSettingsRepository.notificationUpcomingEnabled += upcoming
+            false -> notificationSettingsRepository.notificationUpcomingEnabled -= upcoming
+        }
+        refresh()
+    }
+}

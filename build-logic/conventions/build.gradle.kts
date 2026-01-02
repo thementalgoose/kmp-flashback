@@ -21,16 +21,6 @@ gradlePlugin {
             implementationClass = "KotlinMultiplatformConventionPlugin"
         }
 
-        register("androidLibrary") {
-            id = libs.plugins.flashback.androidLibrary.get().pluginId
-            implementationClass = "AndroidLibraryConventionPlugin"
-        }
-
-        register("dataModule") {
-            id = libs.plugins.flashback.dataModule.get().pluginId
-            implementationClass = "DataModuleConventionPlugin"
-        }
-
         register("featureModule") {
             id = libs.plugins.flashback.featureModule.get().pluginId
             implementationClass = "FeatureModuleConventionPlugin"
