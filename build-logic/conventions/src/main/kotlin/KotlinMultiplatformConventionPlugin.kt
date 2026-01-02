@@ -8,6 +8,7 @@ class KotlinMultiplatformConventionPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         val libs = getLibs()
         plugins.apply(libs.findPlugin("kotlinMultiplatform").get().get().pluginId)
+        plugins.apply(libs.findPlugin("composeCompiler").get().get().pluginId)
         plugins.apply(libs.findPlugin("androidKotlinMultiplatformLibrary").get().get().pluginId)
 
         extensions.configure<KotlinMultiplatformExtension> {
@@ -18,6 +19,9 @@ class KotlinMultiplatformConventionPlugin : Plugin<Project> {
                 }
                 minSdk {
                     version = release(libs.findVersion("android.minSdk").get().toString().toInt())
+                }
+                androidResources {
+                    enable = true
                 }
                 namespace = "tmg.flashback.$modulePackageName"
             }
