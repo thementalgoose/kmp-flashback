@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.googleServices)
     alias(libs.plugins.crashlytics)
+    alias(libs.plugins.kotlin.android)
 }
 
 val versionCodeProperty: Int = try {
@@ -53,8 +54,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     flavorDimensions.add("variant")
@@ -141,6 +142,7 @@ dependencies {
 
     // XR Support
     implementation(libs.bundles.androidx.xr)
+    implementation(libs.androidx.core)
     compileOnly(libs.androidx.xr.extensions)
 
     // CMPToast

@@ -28,7 +28,7 @@ kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_17)
+            jvmTarget.set(JvmTarget.JVM_21)
             freeCompilerArgs.add("-Xstring-concat=inline")
         }
     }
@@ -36,6 +36,8 @@ kotlin {
     iosX64()
     iosArm64()
     iosSimulatorArm64()
+
+    jvmToolchain(21)
 
     cocoapods {
         summary = "Flashback"
@@ -173,7 +175,7 @@ kotlin {
 }
 
 android {
-    namespace = "tmg.flashback.compose"
+    namespace = "tmg.flashback"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
@@ -187,8 +189,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 }
 
