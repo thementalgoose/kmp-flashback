@@ -145,12 +145,17 @@ dependencies {
     implementation(libs.androidx.core)
     compileOnly(libs.androidx.xr.extensions)
 
-    // CMPToast
+    implementation(compose.components.resources)
+    implementation(compose.material3AdaptiveNavigationSuite)
+    implementation(libs.navigation.compose)
     implementation(libs.cmptoast)
-
-    // Koin
+    implementation(libs.bundles.compose)
+    implementation(libs.bundles.kotlin)
+    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.koin.core)
+    implementation(libs.bundles.koin.compose)
+    implementation(libs.ksoup)
 
-    // Debug tools
     debugImplementation(compose.uiTooling)
 }
