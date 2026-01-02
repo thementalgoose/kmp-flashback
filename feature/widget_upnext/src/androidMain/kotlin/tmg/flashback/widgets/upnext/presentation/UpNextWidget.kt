@@ -1,6 +1,7 @@
 package tmg.flashback.widgets.upnext.presentation
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.DpSize
@@ -12,7 +13,6 @@ import androidx.glance.GlanceTheme
 import androidx.glance.LocalContext
 import androidx.glance.LocalGlanceId
 import androidx.glance.LocalSize
-import androidx.glance.action.actionStartActivity
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.SizeMode
@@ -24,17 +24,16 @@ import androidx.glance.state.GlanceStateDefinition
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import tmg.flashback.data.repo.repository.OverviewRepository
-import tmg.flashback.widgets.upnext.navigation.WidgetNavigator
-import tmg.flashback.widgets.upnext.presentation.style.WidgetTheme
-import tmg.flashback.widgets.upnext.presentation.style.utils.appWidgetId
 import tmg.flashback.widgets.upnext.presentation.layout.NoRace
-import tmg.flashback.widgets.upnext.presentation.layout.RaceLarge
 import tmg.flashback.widgets.upnext.presentation.layout.RaceIcon
+import tmg.flashback.widgets.upnext.presentation.layout.RaceLarge
 import tmg.flashback.widgets.upnext.presentation.layout.RaceName
 import tmg.flashback.widgets.upnext.presentation.layout.RaceSmall
 import tmg.flashback.widgets.upnext.presentation.layout.ScheduleList
 import tmg.flashback.widgets.upnext.presentation.layout.ScheduleListRace
+import tmg.flashback.widgets.upnext.presentation.style.WidgetTheme
 import tmg.flashback.widgets.upnext.presentation.style.modifiers.surface
+import tmg.flashback.widgets.upnext.presentation.style.utils.appWidgetId
 import tmg.flashback.widgets.upnext.repositories.UpNextWidgetRepository
 import java.io.File
 
@@ -71,7 +70,6 @@ class UpNextWidget : GlanceAppWidget(), KoinComponent {
 
     private val upNextWidgetRepository by inject<UpNextWidgetRepository>()
     private val overviewRepository by inject<OverviewRepository>()
-    private val widgetNavigator by inject<WidgetNavigator>()
 
     override val stateDefinition: GlanceStateDefinition<UpNextConfiguration>
         get() = object : GlanceStateDefinition<UpNextConfiguration> {
@@ -91,6 +89,11 @@ class UpNextWidget : GlanceAppWidget(), KoinComponent {
             }
         }
 
+    private fun Context.getHomeIntent(): Intent {
+        return Intent(this, Class.forName("tmg.flashback.MainActivity")).apply {
+            addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        }
+    }
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         Log.d("UpNextWidget", "provideGlance $id")
@@ -113,11 +116,11 @@ class UpNextWidget : GlanceAppWidget(), KoinComponent {
             val modifier = when (upNextConfiguration.deeplinkToEvent) {
                 true -> GlanceModifier
                     .surface(if (upNextConfiguration.showBackground) GlanceTheme.colors.background.getColor(context) else androidx.compose.ui.graphics.Color.Transparent)
-                    .clickable(actionStartActivity(widgetNavigator.getHomeIntent(context)))
+                    .clickable(actionStartActivity(context.getHomeIntent()))
                     // TODO: Wire this up when setting is enabled
                 false -> GlanceModifier
                     .surface(if (upNextConfiguration.showBackground) GlanceTheme.colors.background.getColor(context) else androidx.compose.ui.graphics.Color.Transparent)
-                    .clickable(actionStartActivity(widgetNavigator.getHomeIntent(context)))
+                    .clickable(actionStartActivity(context.getHomeIntent()))
             }
 
             Log.d("UpNextWidget", "Rendering widget ${LocalGlanceId.current.appWidgetId} with $upNextConfiguration")
