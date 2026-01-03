@@ -1,4 +1,4 @@
-package tmg.flashback.firebase
+package tmg.flashback.composeApp.firebase
 
 import cocoapods.FirebaseMessaging.FIRMessaging
 import kotlinx.cinterop.ExperimentalForeignApi
