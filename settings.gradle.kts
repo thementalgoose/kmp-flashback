@@ -1,6 +1,6 @@
 import java.net.URI
 
-rootProject.name = "Flashback"
+rootProject.name = "kmp-flashback"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
