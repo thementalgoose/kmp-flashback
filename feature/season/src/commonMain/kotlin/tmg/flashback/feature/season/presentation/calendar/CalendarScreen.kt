@@ -88,6 +88,9 @@ fun CalendarScreen(
         analyticsSeason to uiState.season.toString()
     ))
 
+    val now = LocalDate.now()
+    val eventsRef = remember(now.toEpochDays()) { LocalDate.now() }
+
     SwipeRefresh(
         isLoading = uiState.isLoading,
         onRefresh = refresh
@@ -162,6 +165,7 @@ fun CalendarScreen(
                         is CalendarItem.Event -> {
                             Event(
                                 event = item,
+                                now = eventsRef,
                                 modifier = Modifier.animateItem()
                             )
                         }
@@ -326,10 +330,11 @@ private fun Expand(
 @Composable
 private fun Event(
     event: CalendarItem.Event,
+    now: LocalDate,
     modifier: Modifier = Modifier
 ) {
     Row(modifier = modifier
-        .alpha(if (event.date <= LocalDate.now()) 1f else listAlpha)
+        .alpha(if (event.date >= now) 1f else listAlpha)
         .padding(
             vertical = AppTheme.dimens.xsmall,
             horizontal = AppTheme.dimens.medium
