@@ -58,6 +58,7 @@ class CalendarScreenViewModel(
             overviewRepository.populateOverview(season)
             raceRepository.populateRaces(season)
             standingsRepository.populateStandings(season)
+            eventsRepository.fetchEvents(season)
             populate(season)
         }
     }

@@ -177,6 +177,7 @@ internal class CalendarScreenViewModelTest {
                 mockOverviewRepository.populateOverview(2020)
                 mockRaceRepository.populateRaces(2020)
                 mockStandingsRepository.populateStandings(2020)
+                mockEventsRepository.fetchEvents(2020)
             }
         }
     }
