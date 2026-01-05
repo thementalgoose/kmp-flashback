@@ -58,19 +58,19 @@ enum class AboutDependency(
         dependencyName = "Ergast API",
         author = "Ergast",
         url = "https://ergast.com/mrd/",
-        imageUrl = "https://i.imgur.com/mWzkikf.png"
+        imageUrl = "https://flashback.pages.dev/images/dependencies/ergast.png"
     ),
     KotlinMultiplatform(
         dependencyName = "Kotlin Multiplatform",
         author = "Kotlin",
         url = "http://kotlinlang.org/docs/multiplatform.html",
-        imageUrl = "https://i.imgur.com/p93EtbY.png"
+        imageUrl = "https://flashback.pages.dev/images/dependencies/kmp.png"
     ),
     ComposeMultiplatform(
         dependencyName = "Compose Multiplatform",
         author = "Jetbrains",
         url = "https://www.jetbrains.com/compose-multiplatform/",
-        imageUrl = "https://i.imgur.com/X2CEYWQ.png"
+        imageUrl = "https://flashback.pages.dev/images/dependencies/cmp.png"
     ),
     Firebase(
         dependencyName = "Firebase",
