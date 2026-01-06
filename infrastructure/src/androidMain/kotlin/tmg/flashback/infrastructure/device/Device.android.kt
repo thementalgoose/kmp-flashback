@@ -31,7 +31,7 @@ actual object Device: KoinComponent {
             val name = try {
                 val context = applicationContext.value
                 val info = context.packageManager.getPackageInfo(context.packageName, 0)
-                info.versionName
+                info.versionName?.replace(".${versionCode}", "")
             } catch (e: PackageManager.NameNotFoundException) {
                 e.printStackTrace()
                 null
