@@ -32,7 +32,7 @@ internal class ConfigManagerImpl(
 
     override fun <T> getJson(key: String, serializer: KSerializer<T>): T? {
         val string = getString(key) ?: return null
-        if (string.isEmpty() == true) return null
+        if (string.isEmpty()) return null
         if (string == "false") return null
         if (string == "true") return null
         return try {
