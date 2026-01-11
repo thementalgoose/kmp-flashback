@@ -17,7 +17,8 @@ import tmg.flashback.webbrowser.presentation.WebScreen
 sealed interface RssNavigation {
     data object Configure: RssNavigation
     data class WebPage(
-        val article: Article
+        val article: Article,
+        val toolbarAtTop: Boolean
     ): RssNavigation
 }
 
@@ -47,7 +48,7 @@ fun RssFeedGraph(
                 windowSizeClass = windowSizeClass,
                 itemClicked = {
                     if (viewModel.inAppBrowserEnabled) {
-                        navigator.navigateTo(RssNavigation.WebPage(it))
+                        navigator.navigateTo(RssNavigation.WebPage(it, viewModel.inAppBrowserToolbarAtTop))
                     } else {
                         viewModel.openArticle(it)
                     }
@@ -70,6 +71,7 @@ fun RssFeedGraph(
                 )
                 is RssNavigation.WebPage -> WebScreen(
                     url = model.article.link,
+                    toolbarAtTop = model.toolbarAtTop,
                     actionUpClicked = actionUpClicked,
                     shareClicked = { },
                     paddingValues = paddingValues,

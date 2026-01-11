@@ -47,6 +47,9 @@ class RSSFeedViewModel(
     val inAppBrowserEnabled: Boolean
         get() = isInAppBrowserEnabledUseCase() && webRepository.enabled
 
+    val inAppBrowserToolbarAtTop: Boolean
+        get() = webRepository.toolbarAtTop
+
     fun refresh() {
         viewModelScope.launch(coroutineContext) {
             _uiState.updateData { it.copy(isLoading = true) }
