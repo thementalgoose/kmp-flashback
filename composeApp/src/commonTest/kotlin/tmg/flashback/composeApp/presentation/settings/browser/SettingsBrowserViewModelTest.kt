@@ -27,6 +27,7 @@ internal class SettingsBrowserViewModelTest {
     fun `enable state is populated from repo`() = runTest {
         every { mockWebRepository.enabled } returns false
         every { mockWebRepository.enableJavascript } returns true
+        every { mockWebRepository.toolbarAtTop } returns false
         initUnderTest()
         underTest.uiState.test {
             assertEquals(true, awaitItem().enableJavascript)
@@ -37,6 +38,7 @@ internal class SettingsBrowserViewModelTest {
     fun `enable javascript state is populated from repo`() = runTest {
         every { mockWebRepository.enableJavascript } returns false
         every { mockWebRepository.enabled } returns true
+        every { mockWebRepository.toolbarAtTop } returns false
         initUnderTest()
         underTest.uiState.test {
             assertEquals(true, awaitItem().enabled)
