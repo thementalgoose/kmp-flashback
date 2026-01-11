@@ -41,6 +41,8 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
+import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
+import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.formula1.enums.SeasonTyres
 import tmg.flashback.formula1.enums.TyreLabel
 import tmg.flashback.formula1.enums.getBySeason
@@ -76,6 +78,9 @@ private fun TyreScreen(
     season: Int,
     dismissed: () -> Unit
 ) {
+    ScreenView("Tyres", args = mapOf(
+        analyticsSeason to season.toString()
+    ))
     val tyres = SeasonTyres.getBySeason(season)
     val dry = tyres?.tyres?.filter { it.tyre.isDry } ?: emptyList()
     val wet = tyres?.tyres?.filter { !it.tyre.isDry } ?: emptyList()
