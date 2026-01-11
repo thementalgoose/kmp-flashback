@@ -24,7 +24,7 @@ internal class SettingsBrowserViewModelTest {
     }
 
     @Test
-    fun `crashlytics state is populated from repo`() = runTest {
+    fun `enable state is populated from repo`() = runTest {
         every { mockWebRepository.enabled } returns false
         every { mockWebRepository.enableJavascript } returns true
         initUnderTest()
@@ -34,7 +34,7 @@ internal class SettingsBrowserViewModelTest {
     }
 
     @Test
-    fun `analytics state is populated from repo`() = runTest {
+    fun `enable javascript state is populated from repo`() = runTest {
         every { mockWebRepository.enableJavascript } returns false
         every { mockWebRepository.enabled } returns true
         initUnderTest()
@@ -44,9 +44,21 @@ internal class SettingsBrowserViewModelTest {
     }
 
     @Test
+    fun `toolbar top state is populated from repo`() = runTest {
+        every { mockWebRepository.enableJavascript } returns false
+        every { mockWebRepository.enabled } returns false
+        every { mockWebRepository.toolbarAtTop } returns true
+        initUnderTest()
+        underTest.uiState.test {
+            assertEquals(true, awaitItem().toolbarAtTop)
+        }
+    }
+
+    @Test
     fun `updating values saves values to repo`() = runTest {
         every { mockWebRepository.enableJavascript } returns false
         every { mockWebRepository.enabled } returns false
+        every { mockWebRepository.toolbarAtTop } returns false
 
         initUnderTest()
 
@@ -58,6 +70,11 @@ internal class SettingsBrowserViewModelTest {
         underTest.updateEnabled(true)
         verify {
             mockWebRepository.enabled = true
+        }
+
+        underTest.updateToolbarTop(true)
+        verify {
+            mockWebRepository.toolbarAtTop = true
         }
     }
 }

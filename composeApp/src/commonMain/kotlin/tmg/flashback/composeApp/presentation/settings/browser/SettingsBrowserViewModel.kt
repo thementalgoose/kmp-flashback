@@ -13,7 +13,8 @@ class SettingsBrowserViewModel(
     private val _uiState: MutableStateFlow<SettingsBrowserUiState> = MutableStateFlow(
         SettingsBrowserUiState(
             enabled = webRepository.enabled,
-            enableJavascript = webRepository.enableJavascript
+            enableJavascript = webRepository.enableJavascript,
+            toolbarAtTop = webRepository.toolbarAtTop
         )
     )
     val uiState: StateFlow<SettingsBrowserUiState> = _uiState
@@ -22,7 +23,8 @@ class SettingsBrowserViewModel(
         _uiState.update {
             SettingsBrowserUiState(
                 enabled = webRepository.enabled,
-                enableJavascript = webRepository.enableJavascript
+                enableJavascript = webRepository.enableJavascript,
+                toolbarAtTop = webRepository.toolbarAtTop
             )
         }
     }
@@ -34,6 +36,11 @@ class SettingsBrowserViewModel(
 
     fun updateEnableJavascript(enabled: Boolean) {
         webRepository.enableJavascript = enabled
+        refresh()
+    }
+
+    fun updateToolbarTop(enabled: Boolean) {
+        webRepository.toolbarAtTop = enabled
         refresh()
     }
 

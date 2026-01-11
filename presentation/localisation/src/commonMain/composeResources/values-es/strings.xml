@@ -274,6 +274,8 @@
     <string name="settings_switch_enable_web_browser_description">Activar el navegador web en la aplicación</string>
     <string name="settings_switch_enable_javascript_title">Habilitar Javascript</string>
     <string name="settings_switch_enable_javascript_description">Renderizar Javascript en el navegador de la aplicación. Es posible que las páginas web no funcionen correctamente con esto deshabilitado</string>
+    <string name="settings_switch_toolbar_location_title">Ubicación de los controles</string>
+    <string name="settings_switch_toolbar_location_description">Cuando esté habilitado, el panel de control estará en la parte superior. De lo contrario, estará en la parte inferior.</string>
     <string name="settings_help_adverts_title">Anuncios</string>
     <string name="settings_help_adverts_description">¿Quieres que se muestren anuncios? Todos los desarrolladores aprecian tu apoyo dejando los anuncios habilitados</string>
     <string name="settings_help_adverts_long_description">Personaliza cómo se muestran los anuncios en la aplicación</string>
