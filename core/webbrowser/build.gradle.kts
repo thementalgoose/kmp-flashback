@@ -17,6 +17,7 @@ kotlin {
             implementation(libs.androidx.appcompat)
             implementation(libs.androidx.core)
             implementation(libs.androidx.browser)
+            implementation(libs.androidx.webkit)
         }
         commonMain.dependencies {
             implementation(libs.bundles.kotlin)

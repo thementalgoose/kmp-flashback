@@ -8,7 +8,7 @@ actual fun WebView(
     domainChanged: (String) -> Unit,
     titleChanged: (String) -> Unit,
     urlChanged: (String) -> Unit,
-    progressUpdated: (Float) -> Unit
+    progressUpdated: (Float) -> Unit,
 ) {
 
 }

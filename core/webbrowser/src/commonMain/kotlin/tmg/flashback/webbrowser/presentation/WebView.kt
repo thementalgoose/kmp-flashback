@@ -40,7 +40,7 @@ expect fun WebView(
     domainChanged: (String) -> Unit,
     titleChanged: (String) -> Unit,
     urlChanged: (String) -> Unit,
-    progressUpdated: (Float) -> Unit
+    progressUpdated: (Float) -> Unit,
 )
 
 @Composable
@@ -63,7 +63,7 @@ fun WebScreen(
             domainChanged = domainChanged,
             titleChanged = titleChanged,
             urlChanged = urlChanged,
-            progressUpdated = progressUpdated
+            progressUpdated = progressUpdated,
         )
     }
 ) {

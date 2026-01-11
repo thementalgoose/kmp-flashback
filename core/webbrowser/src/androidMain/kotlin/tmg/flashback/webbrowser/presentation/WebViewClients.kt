@@ -19,7 +19,8 @@ internal class FlashbackWebChromeClient(
 internal class FlashbackWebViewClient(
     val domainChanged: (domain: String) -> Unit,
     val titleChanged: (title: String) -> Unit,
-    val urlChanged: (url: String) -> Unit
+    val urlChanged: (url: String) -> Unit,
+    val updateProgressToo: (progress: Int) -> Unit
 ): WebViewClient() {
 
     override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
@@ -34,5 +35,6 @@ internal class FlashbackWebViewClient(
     override fun onPageFinished(view: WebView?, url: String?) {
         super.onPageFinished(view, url)
         titleChanged(view?.title ?: "...")
+        updateProgressToo(100)
     }
 }
