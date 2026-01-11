@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.format
 import tmg.flashback.device.usecases.OpenWebpageUseCase
+import tmg.flashback.device.usecases.ShareWebpageUseCase
 import tmg.flashback.feature.rss.models.Article
 import tmg.flashback.feature.rss.repositories.RssRepository
 import tmg.flashback.feature.rss.usecases.GetRssArticlesUseCase
@@ -23,6 +24,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 class RSSFeedViewModel(
     private val rssRepository: RssRepository,
     private val openWebpageUseCase: OpenWebpageUseCase,
+    private val shareWebpageUseCase: ShareWebpageUseCase,
     private val getRssArticlesUseCase: GetRssArticlesUseCase,
     private val isInAppBrowserEnabledUseCase: IsInAppBrowserEnabledUseCase,
     private val webRepository: WebRepository,
@@ -72,6 +74,14 @@ class RSSFeedViewModel(
                 }
             }
         }
+    }
+
+    fun shareArticle(article: Article): Boolean {
+        shareWebpageUseCase(
+            url = article.link,
+            title = article.title
+        )
+        return true
     }
 
     fun openArticle(article: Article): Boolean {

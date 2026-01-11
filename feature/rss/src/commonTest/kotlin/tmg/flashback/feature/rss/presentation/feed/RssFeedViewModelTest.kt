@@ -11,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.LocalDateTime
 import tmg.flashback.device.usecases.OpenWebpageUseCase
+import tmg.flashback.device.usecases.ShareWebpageUseCase
 import tmg.flashback.feature.rss.models.Article
 import tmg.flashback.feature.rss.models.ArticleSource
 import tmg.flashback.feature.rss.repositories.RssRepository
@@ -28,7 +29,9 @@ import kotlin.test.assertTrue
 internal class RssFeedViewModelTest {
 
     private val mockRssRepository: RssRepository = mock(autofill)
+
     private val mockOpenWebpageUseCase: OpenWebpageUseCase = mock(autofill)
+    private val mockShareWebpageUseCase: ShareWebpageUseCase = mock(autofill)
     private val mockGetRssArticlesUseCase: GetRssArticlesUseCase = mock(autofill)
     private val mockIsInAppBrowserEnabledUseCase: IsInAppBrowserEnabledUseCase = mock(autofill)
     private val mockWebRepository: WebRepository = mock(autofill)
@@ -41,6 +44,7 @@ internal class RssFeedViewModelTest {
         underTest = RSSFeedViewModel(
             rssRepository = mockRssRepository,
             openWebpageUseCase = mockOpenWebpageUseCase,
+            shareWebpageUseCase = mockShareWebpageUseCase,
             getRssArticlesUseCase = mockGetRssArticlesUseCase,
             isInAppBrowserEnabledUseCase = mockIsInAppBrowserEnabledUseCase,
             webRepository = mockWebRepository,
@@ -100,6 +104,18 @@ internal class RssFeedViewModelTest {
 
         verify {
             mockOpenWebpageUseCase.invoke("link", "title")
+        }
+    }
+
+    @Test
+    fun `share article calls open article use case`() {
+        every { mockRssRepository.rssUrls } returns emptySet()
+        initUnderTest()
+
+        underTest.shareArticle(fakeArticle())
+
+        verify {
+            mockShareWebpageUseCase.invoke("link", "title")
         }
     }
 

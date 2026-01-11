@@ -73,7 +73,7 @@ fun RssFeedGraph(
                     url = model.article.link,
                     toolbarAtTop = model.toolbarAtTop,
                     actionUpClicked = actionUpClicked,
-                    shareClicked = { },
+                    shareClicked = { viewModel.shareArticle(model.article) },
                     paddingValues = paddingValues,
                     openInBrowser = { viewModel.openArticle(model.article) }
                 )
