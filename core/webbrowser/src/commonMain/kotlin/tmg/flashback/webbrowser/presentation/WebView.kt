@@ -1,5 +1,6 @@
 package tmg.flashback.webbrowser.presentation
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.Backspace
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.OpenInBrowser
 import androidx.compose.material.icons.filled.Share
@@ -22,9 +24,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.dropShadow
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.shadow.Shadow
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.ab_close
 import flashback.presentation.localisation.generated.resources.ab_rss_back
 import flashback.presentation.localisation.generated.resources.ab_rss_open_in_browser
 import flashback.presentation.localisation.generated.resources.ab_rss_share
@@ -37,10 +44,7 @@ import tmg.flashback.style.text.TextBody1
 @Composable
 expect fun WebView(
     url: String,
-    domainChanged: (String) -> Unit,
-    titleChanged: (String) -> Unit,
-    urlChanged: (String) -> Unit,
-    progressUpdated: (Float) -> Unit,
+    webViewState: WebViewState,
 )
 
 @Composable
@@ -50,45 +54,30 @@ fun WebScreen(
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     shareClicked: () -> Unit,
-    openInBrowser: () -> Unit,
-    webViewImpl: @Composable (
-        url: String,
-        domainChanged: (String) -> Unit,
-        titleChanged: (String) -> Unit,
-        urlChanged: (String) -> Unit,
-        progressUpdated: (Float) -> Unit
-    ) -> Unit = { url, domainChanged, titleChanged, urlChanged, progressUpdated ->
-        WebView(
-            url = url,
-            domainChanged = domainChanged,
-            titleChanged = titleChanged,
-            urlChanged = urlChanged,
-            progressUpdated = progressUpdated,
-        )
-    }
+    openInBrowser: () -> Unit
 ) {
-    val titleValue = remember { mutableStateOf("title") }
-    val domainValue = remember { mutableStateOf("url") }
-    val urlValue = remember { mutableStateOf(url) }
-    val progress = remember { mutableStateOf(0.0f )}
-
-
-
     Box(modifier = Modifier.padding(paddingValues)) {
-        webViewImpl(
-            url,
-            { domainValue.value = it },
-            { titleValue.value = it },
-            { urlValue.value = it },
-            { progress.value = it }
-        )
+        val webviewState = rememberWebViewState()
+
+        if (LocalInspectionMode.current) {
+            PreviewWebView()
+        } else {
+            WebView(
+                url = url,
+                webViewState = webviewState,
+            )
+        }
         ControlPanel(
             modifier = Modifier
                 .padding(AppTheme.dimens.medium)
                 .align(if (toolbarAtTop) Alignment.TopCenter else Alignment.BottomCenter),
-            backClicked = actionUpClicked,
+            showBack = webviewState.canGoBack,
+            actionUpClicked = actionUpClicked,
             shareClicked = shareClicked,
-            openInBrowser = openInBrowser
+            openInBrowser = openInBrowser,
+            backClicked = {
+                webviewState.clickBack()
+            }
         )
     }
 }
@@ -97,6 +86,8 @@ fun WebScreen(
 @Composable
 private fun ControlPanel(
     modifier: Modifier = Modifier,
+    showBack: Boolean,
+    actionUpClicked: () -> Unit,
     backClicked: () -> Unit,
     shareClicked: () -> Unit,
     openInBrowser: () -> Unit,
@@ -111,13 +102,30 @@ private fun ControlPanel(
                 .padding(AppTheme.dimens.xsmall)
         ) {
             IconButton(
-                onClick = backClicked,
+                onClick = actionUpClicked,
                 content = {
                     Icon(
                         imageVector = Icons.Default.Close,
                         tint = AppTheme.colors.onSurface,
-                        contentDescription = stringResource(string.ab_rss_back)
+                        contentDescription = stringResource(string.ab_close)
                     )
+                }
+            )
+            AnimatedContent(
+                targetState = showBack,
+                content = {
+                    if (it) {
+                        IconButton(
+                            onClick = backClicked,
+                            content = {
+                                Icon(
+                                    imageVector = Icons.AutoMirrored.Default.ArrowBack,
+                                    tint = AppTheme.colors.onSurface,
+                                    contentDescription = stringResource(string.ab_rss_back)
+                                )
+                            }
+                        )
+                    }
                 }
             )
         }
@@ -153,6 +161,19 @@ private fun ControlPanel(
 }
 
 @Composable
+private fun PreviewWebView() {
+    Box(Modifier.fillMaxSize()
+        .padding(8.dp)
+        .border(width = 1.dp, Color.Magenta)
+        .padding(8.dp)) {
+        TextBody1(
+            text = "WebView",
+            modifier = Modifier.align(Alignment.Center)
+        )
+    }
+}
+
+@Composable
 @Preview
 private fun PreviewTop() {
     ApplicationThemePreview {
@@ -162,18 +183,7 @@ private fun PreviewTop() {
             paddingValues = PaddingValues(0.dp),
             actionUpClicked = {},
             shareClicked = {},
-            openInBrowser = {},
-            webViewImpl = { url, domainChanged, titleChanged, urlChanged, progressUpdated ->
-                Box(Modifier.fillMaxSize()
-                    .padding(8.dp)
-                    .border(width = 1.dp, Color.Magenta)
-                    .padding(8.dp)) {
-                    TextBody1(
-                        text = "WebView",
-                        modifier = Modifier.align(Alignment.Center)
-                    )
-                }
-            }
+            openInBrowser = {}
         )
     }
 }
@@ -188,18 +198,7 @@ private fun PreviewBottom() {
             paddingValues = PaddingValues(0.dp),
             actionUpClicked = {},
             shareClicked = {},
-            openInBrowser = {},
-            webViewImpl = { url, domainChanged, titleChanged, urlChanged, progressUpdated ->
-                Box(Modifier.fillMaxSize()
-                    .padding(8.dp)
-                    .border(width = 1.dp, Color.Magenta)
-                    .padding(8.dp)) {
-                    TextBody1(
-                        text = "WebView",
-                        modifier = Modifier.align(Alignment.Center)
-                    )
-                }
-            }
+            openInBrowser = {}
         )
     }
 }
