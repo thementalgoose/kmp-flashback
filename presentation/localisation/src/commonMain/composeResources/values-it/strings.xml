@@ -274,6 +274,8 @@
     <string name="settings_switch_enable_web_browser_description">Attiva il browser web in-app</string>
     <string name="settings_switch_enable_javascript_title">Abilita Javascript</string>
     <string name="settings_switch_enable_javascript_description">Esegui Javascript nel browser in-app. Le pagine web potrebbero non funzionare correttamente se disabilitato</string>
+    <string name="settings_switch_toolbar_location_title">Posizione di controllo</string>
+    <string name="settings_switch_toolbar_location_description">Quando abilitato, il pannello di controllo sarà in alto. Altrimenti, sarà in basso</string>
     <string name="settings_help_adverts_title">Annunci</string>
     <string name="settings_help_adverts_description">Vuoi che gli annunci vengano visualizzati? Ogni sviluppatore apprezza il tuo supporto lasciando gli annunci abilitati</string>
     <string name="settings_help_adverts_long_description">Personalizza il modo in cui gli annunci vengono visualizzati nell\'app</string>

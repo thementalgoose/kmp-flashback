@@ -32,7 +32,8 @@ fun SettingsBrowserScreen(
         showBack = showBack,
         uiState = uiState.value,
         updateEnabled = viewModel::updateEnabled,
-        updateEnableJavascript = viewModel::updateEnableJavascript
+        updateEnableJavascript = viewModel::updateEnableJavascript,
+        updateToolbarTop = viewModel::updateToolbarTop
     )
 }
 
@@ -44,6 +45,7 @@ private fun SettingsBrowserScreen(
     actionUpClicked: () -> Unit,
     updateEnabled: (Boolean) -> Unit,
     updateEnableJavascript: (Boolean) -> Unit,
+    updateToolbarTop: (Boolean) -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -66,6 +68,12 @@ private fun SettingsBrowserScreen(
             itemClicked = { updateEnableJavascript(!uiState.enableJavascript) },
             isChecked = uiState.enableJavascript,
             isEnabled = uiState.enabled
+        )
+        PrefSwitch(
+            item = Settings.WebBrowser.ToolbarTop,
+            itemClicked = { updateToolbarTop(!uiState.toolbarAtTop) },
+            isChecked = uiState.toolbarAtTop,
+            isEnabled = false
         )
     }
 }
