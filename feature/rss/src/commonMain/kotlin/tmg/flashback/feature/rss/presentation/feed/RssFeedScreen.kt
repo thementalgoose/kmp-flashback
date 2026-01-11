@@ -42,6 +42,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
+import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.feature.rss.models.Article
 import tmg.flashback.feature.rss.models.ArticleSource
 import tmg.flashback.infrastructure.datetime.dateTimeFormatHHmmAtDMMM
@@ -72,6 +73,8 @@ fun RSSScreen(
     windowSizeClass: WindowSizeClass,
     configureSources: () -> Unit,
 ) {
+    ScreenView("RSS")
+
     SwipeRefresh(
         isLoading = (uiState as? RssFeedUiState.Data)?.isLoading == true,
         onRefresh = refresh,

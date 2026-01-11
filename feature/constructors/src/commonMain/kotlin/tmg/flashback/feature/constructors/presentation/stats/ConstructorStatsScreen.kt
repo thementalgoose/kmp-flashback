@@ -64,17 +64,22 @@ fun ConstructorStatsScreen(
     windowSizeClass: WindowSizeClass,
     viewModel: ConstructorStatsViewModel = koinViewModel()
 ) {
-    ScreenView(screenName = "Constructor Season", args = mapOf(
-        analyticsConstructorId to constructorStatsInfo.constructorId,
-        analyticsSeason to constructorStatsInfo.season.toString()
-    ))
-
     LaunchedEffect(constructorStatsInfo) {
         viewModel.loadConstructor(constructorStatsInfo.constructorId, constructorStatsInfo.season)
     }
 
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     val loading = viewModel.loading.collectAsStateWithLifecycle()
+
+    val currentSeason = when (val selection = uiState.value.selection) {
+        ConstructorFilter.Overview -> "All"
+        is ConstructorFilter.Season -> selection.season.toString()
+        null -> constructorStatsInfo.season?.toString() ?: "All"
+    }
+    ScreenView(screenName = "Constructor Season", updateKey = currentSeason, args = mapOf(
+        analyticsConstructorId to constructorStatsInfo.constructorId,
+        analyticsSeason to currentSeason
+    ))
 
     ConstructorStatsScreen(
         constructorStatsInfo = constructorStatsInfo,
