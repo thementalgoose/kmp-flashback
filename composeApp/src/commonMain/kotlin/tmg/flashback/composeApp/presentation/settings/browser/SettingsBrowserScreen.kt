@@ -73,7 +73,7 @@ private fun SettingsBrowserScreen(
             item = Settings.WebBrowser.ToolbarTop,
             itemClicked = { updateToolbarTop(!uiState.toolbarAtTop) },
             isChecked = uiState.toolbarAtTop,
-            isEnabled = false
+            isEnabled = uiState.enabled
         )
     }
 }
