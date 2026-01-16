@@ -30,6 +30,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.buttons.ButtonTertiary
@@ -49,6 +50,8 @@ fun PrivacyPolicyScreen(
     showBack: Boolean = true,
     viewModel: PrivacyPolicyViewModel = koinViewModel()
 ) {
+    ScreenView("Privacy Policy")
+
     PrivacyPolicyScreen(
         paddingValues = paddingValues,
         actionUpClicked = actionUpClicked,

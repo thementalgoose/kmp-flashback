@@ -70,6 +70,7 @@ internal class CalendarScreenViewModelTest {
         everySuspend { mockRaceRepository.populateRaces(any())} returns Response.Successful
         everySuspend { mockRaceRepository.hasAnyRaces(any()) } returns true
         everySuspend { mockStandingsRepository.populateStandings(any()) } returns Response.Successful
+        everySuspend { mockEventsRepository.fetchEvents(any()) } returns Response.Successful
         every { mockCalendarRepository.emptyWeeksInCalendar } returns false
         every { mockEventsRepository.getEvents(any<Int>()) } returns flow { emit(emptyList()) }
         every { mockCurrentSeasonHolder.currentSeason } returns 2019
@@ -177,6 +178,7 @@ internal class CalendarScreenViewModelTest {
                 mockOverviewRepository.populateOverview(2020)
                 mockRaceRepository.populateRaces(2020)
                 mockStandingsRepository.populateStandings(2020)
+                mockEventsRepository.fetchEvents(2020)
             }
         }
     }

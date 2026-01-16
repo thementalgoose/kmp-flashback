@@ -38,6 +38,8 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsCircuitId
+import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.feature.circuits.presentation.all.CircuitNavigation
 import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Circuit
@@ -68,6 +70,10 @@ fun CircuitScreen(
     viewModel: CircuitViewModel = koinViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsState()
+
+    ScreenView("Circuit", args = mapOf(
+        analyticsCircuitId to circuitNavigation.circuitId
+    ))
 
     LaunchedEffect(circuitNavigation) {
         viewModel.load(circuitNavigation.circuitId)

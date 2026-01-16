@@ -308,6 +308,8 @@
     <string name="settings_switch_enable_web_browser_description">Turn on the in-app web browser instead of loading webpages in a custom tab</string>
     <string name="settings_switch_enable_javascript_title">Enable Javascript</string>
     <string name="settings_switch_enable_javascript_description">Render Javascript in the in-app browser. Web pages should load quicker but may not function correctly with this setting disabled</string>
+    <string name="settings_switch_toolbar_location_title">Toolbar Location</string>
+    <string name="settings_switch_toolbar_location_description">When enabled, the toolbar will be at the top. Otherwise, it will be at the bottom</string>
 
     <string name="settings_help_adverts_title">Adverts</string>
     <string name="settings_help_adverts_description">Do you want ads to be displayed! Every developer appreciates your support leaving adverts enabled</string>

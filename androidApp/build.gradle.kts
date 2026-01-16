@@ -146,6 +146,9 @@ dependencies {
     implementation(libs.bundles.androidx.xr)
     implementation(libs.androidx.core)
     compileOnly(libs.androidx.xr.extensions)
+    
+    implementation(libs.androidx.browser)
+    implementation(libs.androidx.webkit)
 
     implementation(compose.components.resources)
     implementation(compose.material3AdaptiveNavigationSuite)

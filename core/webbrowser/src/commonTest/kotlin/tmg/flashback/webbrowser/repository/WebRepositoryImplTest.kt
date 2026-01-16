@@ -9,7 +9,7 @@ import tmg.flashback.preferences.manager.PreferenceManager
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
-internal class WebBrowserRepositoryTest {
+internal class WebRepositoryImplTest {
 
     private val mockPreferenceManager: PreferenceManager = mock(autoUnit)
 
@@ -59,8 +59,28 @@ internal class WebBrowserRepositoryTest {
         }
     }
 
-    companion object {
+    @Test
+    fun `toolbar at top reads from preferences`() {
+        every { mockPreferenceManager.getBoolean(expectedKeyToolbarTop, true) } returns true
+        initUnderTest()
+        assertTrue(underTest.toolbarAtTop)
+        verify {
+            mockPreferenceManager.getBoolean(expectedKeyToolbarTop, true)
+        }
+    }
+
+    @Test
+    fun `toolbar at top writes to preferences`() {
+        initUnderTest()
+        underTest.toolbarAtTop = true
+        verify {
+            mockPreferenceManager.save(expectedKeyToolbarTop, true)
+        }
+    }
+
+    companion object Companion {
         private const val expectedKeyEnabled = "WEB_BROWSER_ENABLED"
         private const val expectedKeyEnableJavascript = "WEB_BROWSER_ENABLE_JAVASCRIPT"
+        private const val expectedKeyToolbarTop = "WEB_BROWSER_TOOLBAR_TOP"
     }
 }

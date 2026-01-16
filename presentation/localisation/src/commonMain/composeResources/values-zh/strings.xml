@@ -271,6 +271,8 @@
     <string name="settings_switch_enable_web_browser_description">启用应用内网络浏览器</string>
     <string name="settings_switch_enable_javascript_title">启用 Javascript</string>
     <string name="settings_switch_enable_javascript_description">在应用内浏览器中呈现 Javascript。如果禁用此功能，网页可能无法正常运行</string>
+    <string name="settings_switch_toolbar_location_title">控制位置</string>
+    <string name="settings_switch_toolbar_location_description">启用后，控制面板将显示在顶部；否则，它将显示在底部。</string>
     <string name="settings_help_adverts_title">广告</string>
     <string name="settings_help_adverts_description">您是否希望显示广告！每个开发人员都感谢您支持启用广告</string>
     <string name="settings_help_adverts_long_description">自定义广告在整个应用中的显示方式</string>

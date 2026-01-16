@@ -15,5 +15,7 @@
 		<string>remote-notification</string>
 		<string>fetch</string>
 	</array>
+    <key>FirebaseAutomaticScreenReportingEnabled</key>
+    <false/>
 </dict>
 </plist>

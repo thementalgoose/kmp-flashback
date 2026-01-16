@@ -16,6 +16,8 @@ import tmg.flashback.device.usecases.OpenStorePageUseCase
 import tmg.flashback.device.usecases.OpenStorePageUseCaseImpl
 import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.device.usecases.OpenWebpageUseCaseImpl
+import tmg.flashback.device.usecases.ShareWebpageUseCase
+import tmg.flashback.device.usecases.ShareWebpageUseCaseImpl
 
 val coreDeviceModules = listOf(module())
 
@@ -28,4 +30,5 @@ internal fun module() = module {
     singleOf<OpenLocationUseCase>(::OpenLocationUseCaseImpl)
     singleOf<OpenStorePageUseCase>(::OpenStorePageUseCaseImpl)
     singleOf<CopyToClipboardUseCase>(::CopyToClipboardUseCaseImpl)
+    singleOf<ShareWebpageUseCase>(::ShareWebpageUseCaseImpl)
 }

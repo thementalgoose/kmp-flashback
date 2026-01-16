@@ -19,6 +19,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.currentCompositionErrors
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -69,17 +70,22 @@ fun DriverStatsScreen(
     driverStats: DriverStatsInfo,
     viewModel: DriverStatsViewModel = koinViewModel(),
 ) {
-    ScreenView(screenName = "Driver Season", args = mapOf(
-        analyticsDriverId to driverStats.driverId,
-        analyticsSeason to (driverStats.season?.toString() ?: "All")
-    ))
-
     LaunchedEffect(driverStats) {
         viewModel.loadDriver(driverStats.driverId, driverStats.season)
     }
 
     val isLoading = viewModel.loading.collectAsState()
     val uiState = viewModel.uiState.collectAsState()
+
+    val currentSeason = when (val selection = uiState.value.selection) {
+        DriverFilter.Overview -> "All"
+        is DriverFilter.Season -> selection.season.toString()
+        null -> driverStats.season?.toString() ?: "All"
+    }
+    ScreenView(screenName = "Driver Season", updateKey = currentSeason, args = mapOf(
+        analyticsDriverId to driverStats.driverId,
+        analyticsSeason to currentSeason
+    ))
 
     DriverStatsScreen(
         driverStats = driverStats,

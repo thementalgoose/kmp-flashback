@@ -83,6 +83,8 @@ import flashback.presentation.localisation.generated.resources.settings_switch_a
 import flashback.presentation.localisation.generated.resources.settings_switch_about_this_app_title
 import flashback.presentation.localisation.generated.resources.settings_switch_enable_javascript_description
 import flashback.presentation.localisation.generated.resources.settings_switch_enable_javascript_title
+import flashback.presentation.localisation.generated.resources.settings_switch_toolbar_location_title
+import flashback.presentation.localisation.generated.resources.settings_switch_toolbar_location_description
 import flashback.presentation.localisation.generated.resources.settings_switch_enable_web_browser_description
 import flashback.presentation.localisation.generated.resources.settings_switch_enable_web_browser_title
 import flashback.presentation.localisation.generated.resources.settings_switch_feedback_description
@@ -239,6 +241,12 @@ object Settings {
             _id = "webbrowser_javascript",
             title = string.settings_switch_enable_javascript_title,
             subtitle = string.settings_switch_enable_javascript_description
+        )
+        val ToolbarTop = Setting.Pref(
+            _id = "webbrowser_toolbar_location",
+            title = string.settings_switch_toolbar_location_title,
+            subtitle = string.settings_switch_toolbar_location_description,
+            isBeta = true
         )
     }
 
