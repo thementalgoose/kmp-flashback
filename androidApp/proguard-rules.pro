@@ -46,3 +46,9 @@
 -dontwarn javax.xml.stream.XMLStreamException
 
 -keepattributes Exceptions, Signature, InnerClasses, LineNumberTable
+
+# WorkManager
+-keep class androidx.work.** { *; }
+-keep class * extends androidx.work.InputMerger {
+    public <init>();
+}
