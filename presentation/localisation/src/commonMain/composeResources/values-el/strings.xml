@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Splash -->
+    <string name="splash_title">Γεια</string>
+    <string name="splash_continue">Συνέχεια</string>
+    <string name="splash_sync_info">Καθώς αυτή είναι η πρώτη φορά που ανοίγετε την εφαρμογή, συλλέγουμε ορισμένα δεδομένα σχετικά με τον κόσμο της Formula 1 για να σας ενημερώσουμε…</string>
+    <string name="splash_sync_try_again">Δοκιμάστε ξανά</string>
+    <string name="splash_sync_required_failed">Πρέπει να συγχρονίσουμε ορισμένες πληροφορίες για να συνεχίσουμε. Βεβαιωθείτε ότι έχετε ενεργή σύνδεση στο διαδίκτυο και δοκιμάστε ξανά (θα χρειαστεί να το κάνετε αυτό μόνο μία φορά)</string>
+    <string name="splash_sync_config">Διαμόρφωση…</string>
+    <string name="splash_sync_races">Αγώνες…</string>
+    <string name="splash_sync_constructors">Ομάδες…</string>
+    <string name="splash_sync_drivers">Οδηγοί…</string>
+    <string name="splash_sync_circuits">Πίστες…</string>
+
+
+    <!-- Search -->
+    <string name="search_title">Αναζήτηση</string>
+    <string name="search_category_option_title">Κατηγορία</string>
+    <string name="search_category_option_description">Επιλέξτε μια κατηγορία για αναζήτηση</string>
+    <string name="search_category_driver">Οδηγοί</string>
+    <string name="search_category_constructors">Ομάδες</string>
+    <string name="search_category_races">Αγώνες</string>
+    <string name="search_category_circuits">Πίστες</string>
+    <string name="search_placeholder">Βρείτε οποιονδήποτε οδηγό, κατασκευαστή, πίστα ή αγώνα από την ιστορία της Formula 1</string>
+
+
+    <!-- Navigation -->
+    <string name="nav_drivers">Οδηγοί</string>
+    <string name="nav_constructors">Ομάδες</string>
+    <string name="nav_calendar">Ημερολόγιο</string>
+    <string name="nav_schedule">Πρόγραμμα</string>
+    <string name="nav_seasons">Σεζόν</string>
+    <string name="nav_settings">Ρυθμίσεις</string>
+    <string name="nav_search">Αναζήτηση</string>
+    <string name="nav_rss">RSS</string>
+    <string name="nav_reaction_game">Παιχνίδι Αντίδρασης</string>
+    <string name="nav_contact">Επικοινωνία</string>
+    <string name="nav_xr">XR</string>
+    <string name="nav_details">Λεπτομέρειες</string>
+    <string name="nav_qualifying">Κατατακτήριες</string>
+    <string name="nav_race">Αγώνας</string>
+    <string name="nav_sprint_qualifying">Κατατακτήριες Sprint</string>
+    <string name="nav_sprint">Sprint</string>
+
+
+    <!-- Race -->
+    <plurals name="race_points">
+        <item quantity="one">%1$s βαθμός</item>
+        <item quantity="other">%1$s βαθμοί</item>
+    </plurals>
+    <string name="race_status_retired">DNF</string>
+
+
+    <!-- Qualifying -->
+    <string name="qualifying_header_q1">Q1</string>
+    <string name="qualifying_header_q2">Q2</string>
+    <string name="qualifying_header_q3">Q3</string>
+    <string name="sprint_qualifying_header_q1">SQ1</string>
+    <string name="sprint_qualifying_header_q2">SQ2</string>
+    <string name="sprint_qualifying_header_q3">SQ3</string>
+    <string name="qualifying_penalty_starts">Ποινή, εκκινεί %1$s</string>
+    <string name="qualifying_penalty">Ποινή, εκκίνηση από pit-lane</string>
+    <string name="qualifying_penalty_starts_sprint">Ποινή, εκκινεί sprint %1$s</string>
+    <string name="qualifying_visualisation_subtitle">Οπτικοποιήστε τις διαφορές στις κατατακτήριες δοκιμές</string>
+    <string name="qualifying_visualisation_title">Διαφορές κατατακτήριων</string>
+    <string name="qualifying_visualisation_not_found">Δεν υπάρχουν διαθέσιμα δεδομένα κατατακτήριων για οπτικοποίηση</string>
+
+
+    <!-- Results -->
+    <string name="weekend_race_round">Γύρος %1$d</string>
+    <string name="weekend_race_round_season" formatted="false">Γύρος %1$d, %1$d</string>
+    <string name="world_champion">Παγκόσμιος Πρωταθλητής</string>
+
+
+    <!-- Details -->
+    <string name="weekend_info_laps">%1$s γύροι</string>
+
+
+    <!-- Dashboard -->
+    <string name="dashboard_now">Πρόσφατα highlights…</string>
+    <string name="dashboard_search">Αναζήτηση</string>
+    <string name="dashboard_links_title">Σύνδεσμοι</string>
+    <string name="dashboard_links_rss">RSS feed</string>
+    <string name="dashboard_links_reaction">Παιχνίδι αντίδρασης</string>
+    <string name="dashboard_links_search">Αναζήτηση</string>
+    <string name="dashboard_links_settings">Ρυθμίσεις</string>
+    <string name="dashboard_links_contact">Επικοινωνία</string>
+    <string name="dashboard_links_dark_mode">Σκοτεινή λειτουργία</string>
+    <string name="dashboard_all_title">Όλα</string>
+    <string name="dashboard_tab_results">Αποτελέσματα</string>
+    <string name="dashboard_tab_calendar">Ημερολόγιο</string>
+    <string name="dashboard_tab_drivers">Οδηγοί</string>
+    <string name="dashboard_tab_constructors">Ομάδες</string>
+    <string name="season_standings_driver">Βαθμολογία Οδηγών</string>
+    <string name="season_standings_constructor">Βαθμολογία Ομάδων</string>
+
+
+    <!-- Driver overview -->
+    <string name="driver_overview_stat_career_drivers_title">Πρωταθλήματα οδηγών</string>
+    <string name="driver_overview_stat_career_best_championship_position">Καλύτερη θέση στο πρωτάθλημα</string>
+    <string name="driver_overview_stat_career_championship_standing">Θέση στο πρωτάθλημα</string>
+    <string name="driver_overview_stat_career_championship_standing_so_far">Τρέχουσα θέση στο πρωτάθλημα</string>
+    <string name="driver_overview_stat_career_wins">Νίκες</string>
+    <string name="driver_overview_stat_career_podiums">Βάθρα</string>
+    <string name="driver_overview_stat_race_starts">Εκκινήσεις αγώνων</string>
+    <string name="driver_overview_stat_race_finishes">Τερματισμοί αγώνων</string>
+    <string name="driver_overview_stat_race_retirements">Εγκαταλείψεις αγώνων</string>
+    <string name="driver_overview_stat_career_points">Βαθμοί</string>
+    <string name="driver_overview_stat_career_best_finish">Καλύτερος τερματισμός</string>
+    <string name="driver_overview_stat_career_points_finishes">Τερματισμοί με βαθμούς</string>
+    <string name="driver_overview_stat_career_qualifying_pole">Pole positions</string>
+    <string name="driver_overview_stat_career_qualifying_top_3">Κατατακτήριες στο top 3</string>
+    <string name="driver_overview_stat_career_qualifying_top_10">Κατατακτήριες στο top 10</string>
+    <string name="driver_overview_stat_career_team_history">Ιστορικό</string>
+    <string name="driver_overview_stat_career_team">Ομάδα</string>
+    <string name="driver_overview_constructor">Κατασκευαστής: %1$s</string>
+    <string name="driver_overview_stat_birthday">Γεννήθηκε %1$s</string>
+    <string name="driver_overview_no_races">Δεν μπορούμε να βρούμε αγώνες στους οποίους συμμετείχε αυτός ο οδηγός αυτή τη σεζόν</string>
+    <string name="driver_overview_not_found">Δεν υπάρχουν διαθέσιμες πληροφορίες για αυτόν τον οδηγό. Δοκιμάστε ξανά αργότερα</string>
+
+
+    <!-- Driver Comparison -->
+    <string name="driver_comparison_no_races_in_common">Δεν υπάρχουν αγώνες κατά τη διάρκεια της σεζόν όπου αυτοί οι δύο οδηγοί συμμετείχαν στον ίδιο αγώνα.</string>
+    <string name="driver_comparison_title">Σύγκριση οδηγών</string>
+    <string name="driver_comparison_swap_drivers">Εναλλαγή οδηγών</string>
+    <string name="driver_comparison_stat_races">Αγώνες head to head</string>
+    <string name="driver_comparison_stat_qualifying">Κατατακτήριες head to head</string>
+    <string name="driver_comparison_stat_pole">Pole positions</string>
+    <string name="driver_comparison_stat_points">Βαθμοί (σύνολο σεζόν)</string>
+    <string name="driver_comparison_stat_points_finishes">Τερματισμοί με βαθμούς</string>
+    <string name="driver_comparison_stat_podiums">Βάθρα</string>
+    <string name="driver_comparison_stat_wins">Νίκες</string>
+    <string name="driver_comparison_stat_highest_finish">Καλύτερος τερματισμός</string>
+    <string name="driver_comparison_stat_dnfs">DNFs</string>
+
+
+    <!-- Constructor Overview -->
+    <string name="constructor_overview_stat_titles">Πρωταθλήματα κατασκευαστών</string>
+    <string name="constructor_overview_stat_drivers_titles">Πρωταθλήματα οδηγών</string>
+    <string name="constructor_overview_stat_championship_standing">Θέση στο πρωτάθλημα</string>
+    <string name="constructor_overview_stat_championship_standing_so_far">Τρέχουσα θέση στο πρωτάθλημα</string>
+    <string name="constructor_overview_stat_races">Αγώνες</string>
+    <string name="constructor_overview_stat_race_wins">Νίκες</string>
+    <string name="constructor_overview_stat_race_podiums">Βάθρα</string>
+    <string name="constructor_overview_stat_qualifying_poles">Pole positions</string>
+    <string name="constructor_overview_stat_qualifying_top_3">Κατατακτήριες στο top 3</string>
+    <string name="constructor_overview_stat_points">Βαθμοί</string>
+    <string name="constructor_overview_stat_points_finishes">Τερματισμοί με βαθμούς</string>
+    <string name="constructor_overview_stat_best_finish">Καλύτερος τερματισμός</string>
+    <string name="constructor_overview_stat_best_championship_position">Καλύτερη θέση στο πρωτάθλημα</string>
+    <string name="constructor_overview_stat_position">Θέση</string>
+    <string name="constructor_overview_in_progress">Σεζόν σε εξέλιξη</string>
+
+
+    <!-- Stats -->
+    <string name="stat_history_championships">Πρωταθλήματα</string>
+    <string name="stat_history_wins">Νίκες</string>
+    <string name="stat_history_poles">Pole Positions</string>
+    <string name="stat_history_podiums">Βάθρα</string>
+    <string name="stat_history_empty">Δεν βρέθηκαν αποτελέσματα!</string>
+
+
+    <!-- Circuits -->
+    <string name="circuit_race_round" formatted="false">%1$s, γύρος %1$d</string>
+    <string name="circuit_hosted_grand_prix_from" formatted="false">Φιλοξένησε %1$d grand prix μεταξύ %1$d και %1$d</string>
+    <string name="circuit_hosted_grand_prix" formatted="false">Φιλοξένησε %1$d grand prix</string>
+
+
+    <!-- Results disclaimer -->
+    <string name="results_accurate_for" formatted="false">Αποτελέσματα μέχρι %1$s (γύρος %2$d)</string>
+    <string name="results_accurate_for_round" formatted="false">Αποτελέσματα μέχρι %1$d, γύρος %2$s</string>
+    <string name="results_accurate_for_year" formatted="false">Αποτελέσματα μέχρι %1$d %2$s (γύρος %3$d)</string>
+
+
+    <!-- Links -->
+    <string name="details_link_youtube">Youtube</string>
+    <string name="details_link_circuit">Ιστορικό Πίστας</string>
+    <string name="details_link_map">Τοποθεσία</string>
+    <string name="details_link_laps">%1$s γύροι</string>
+    <string name="details_link_wikipedia">Wikipedia</string>
+
+
+    <!-- Feature banners -->
+    <string name="feature_banner_runtime_notifications">Δώστε άδεια στο Flashback να σας στέλνει ειδοποιήσεις</string>
+    <string name="feature_banner_notifications">Κάντε κλικ εδώ για να ενεργοποιήσετε ειδοποιήσεις για ελεύθερες δοκιμές, κατατακτήριες και αγώνες για τα επερχόμενα αγωνιστικά Σαββατοκύριακα!</string>
+    <string name="feature_banner_notifications_finished">Μπορείτε να το αλλάξετε αυτό στις ρυθμίσεις ανά πάσα στιγμή</string>
+    <string name="feature_banner_soft_upgrade">Υπάρχει διαθέσιμη ενημέρωση</string>
+    <string name="feature_banner_soft_upgrade_prompt">Ενημέρωση</string>
+    <string name="feature_banner_device_time">Όλες οι ώρες θα εμφανίζονται στην τρέχουσα ζώνη ώρας σας (%1$s)</string>
+
+
+    <!-- Errors -->
+    <string name="network_error_network">Παρουσιάστηκε σφάλμα δικτύου. Βεβαιωθείτε ότι είστε συνδεδεμένοι στο διαδίκτυο και δοκιμάστε ξανά</string>
+    <string name="network_error_internal">Παρουσιάστηκε άγνωστο σφάλμα</string>
+    <string name="error_weekend_not_available">Δυστυχώς δεν έχουμε αυτά τα αποτελέσματα.</string>
+    <string name="error_data_not_available_try_again">Παρουσιάστηκε σφάλμα κατά τη λήψη αυτών των αποτελεσμάτων. Ελέγξτε τη σύνδεσή σας στο διαδίκτυο και δοκιμάστε ξανά</string>
+    <string name="error_weekend_not_available_yet">Δεν έχουμε ακόμα αυτά τα αποτελέσματα, ελέγξτε ξανά μετά τον αγώνα. Τα αποτελέσματα εμφανίζονται συνήθως 2–12 ώρες μετά από κάθε αγωνιστικό Σαββατοκύριακο</string>
+    <string name="error_search_not_found">Δεν βρέθηκαν αποτελέσματα</string>
+    <string name="rss_internal_error">Παρουσιάστηκε σφάλμα δικτύου και δεν μπορέσαμε να βρούμε άρθρα. Ελέγξτε τη σύνδεσή σας στο διαδίκτυο ή δοκιμάστε ξανά αργότερα</string>
+    <string name="rss_network_error">Παρουσιάστηκε σφάλμα δικτύου! Ελέγξτε ότι έχετε προσθέσει έγκυρες πηγές RSS και ότι είστε συνδεδεμένοι στο διαδίκτυο και δοκιμάστε ξανά.</string>
+    <string name="rss_no_articles">Καλώς ήρθατε στο RSS feed!\nΔεν έχετε ενεργοποιημένες πηγές RSS - Κάντε κλικ εδώ για να τις διαμορφώσετε τώρα. Σύρετε για ανανέωση μετά τη ρύθμιση</string>
+
+
+    <!-- Events -->
+    <string name="event_type_testing">Δοκιμές</string>
+    <string name="event_type_car_launch">Παρουσίαση Μονοθεσίου</string>
+    <string name="event_type_netflix">Netflix</string>
+    <string name="event_type_other">Άλλο</string>
+    <string name="events_title">Εκδηλώσεις προ-σεζόν</string>
+    <string name="events_list_title">%1$s εκδηλώσεις</string>
+    <string name="events_list_subtitle">Εκδηλώσεις προ-σεζόν για αυτή τη σεζόν</string>
+
+
+    <!-- Tyres -->
+    <string name="tyres_label">Γόμες ελαστικών</string>
+    <string name="tyres_list_title">%1$s ελαστικά</string>
+    <string name="tyres_list_subtitle">Αυτές είναι οι γόμες ελαστικών Pirelli που χρησιμοποιούνται σε αυτή τη σεζόν</string>
+    <string name="tyres_dry_compounds">Στεγνά</string>
+    <string name="tyres_wet_compounds">Βροχής</string>
+    <string name="tyres_size">Ζάντες %1$d ιντσών</string>
+
+    <string name="tyre_hyper_soft">Hyper Soft</string>
+    <string name="tyre_ultra_soft">Ultra Soft</string>
+    <string name="tyre_super_soft">Super Soft</string>
+    <string name="tyre_soft">Soft</string>
+    <string name="tyre_medium">Medium</string>
+    <string name="tyre_hard">Hard</string>
+    <string name="tyre_super_hard">Super Hard</string>
+    <string name="tyre_intermediate">Intermediate</string>
+    <string name="tyre_wet">Wet</string>
+
+
+    <!-- Permissions -->
+        <string name="permissions_rationale_title">Χρειαζόμαστε την άδειά σας</string>
+    <string name="permissions_rationale_confirm">Επιβεβαίωση</string>
+    <string name="permissions_rationale_cancel">Όχι τώρα</string>
+    <plurals name="permissions_rationale_permissions_denied">
+        <item quantity="one">Άδεια απορρίφθηκε, ελέγξτε τις ρυθμίσεις της εφαρμογής</item>
+        <item quantity="other">%1$d άδειες απορρίφθηκαν, ελέγξτε τις ρυθμίσεις της εφαρμογής</item>
+    </plurals>
+    <string name="permissions_rationale_permission_denied">Άδεια απορρίφθηκε, ελέγξτε τις ρυθμίσεις της εφαρμογής</string>
+    <string name="permissions_rationale_runtime_notifications_description">Για να λαμβάνετε ειδοποιήσεις από την ομάδα του Flashback για διαθέσιμα αποτελέσματα αγώνων ή επερχόμενα αγωνιστικά Σαββατοκύριακα της F1, χρειαζόμαστε άδεια για να σας στέλνουμε ειδοποιήσεις</string>
+    <string name="permissions_rationale_exact_alarms_description">Για να σας ειδοποιούμε με ακρίβεια πριν από έναν αγώνα, χρειαζόμαστε άδεια για να προγραμματίζουμε αυτές τις υπενθυμίσεις σε συγκεκριμένη ώρα</string>
+
+
+    <!-- Adverts -->
+    <string name="admob_advertisement">Διαφήμιση</string>
+
+
+    <!-- RSS -->
+    <string name="title_rss">RSS</string>
+
+
+    <!-- Settings -->
+    <string name="settings_title">Ρυθμίσεις</string>
+    <string name="settings_search">Αναζήτηση ρυθμίσεων</string>
+
+    <string name="settings_header_appearance">Εμφάνιση</string>
+    <string name="settings_header_data">Δεδομένα</string>
+    <string name="settings_header_rss_feed">RSS Feed</string>
+    <string name="settings_header_web_browser">Πρόγραμμα περιήγησης</string>
+    <string name="settings_header_notifications">Ειδοποιήσεις</string>
+    <string name="settings_header_notifications_upcoming">Ειδοποιήσεις (Επερχόμενα)</string>
+    <string name="settings_header_notifications_results_available">Ειδοποιήσεις (Διαθέσιμα αποτελέσματα)</string>
+    <string name="settings_header_other">Άλλα</string>
+
+    <string name="settings_section_dark_mode_title">Σκοτεινή λειτουργία</string>
+    <string name="settings_section_dark_mode_description">Επιβολή σκοτεινής ή φωτεινής λειτουργίας</string>
+    <string name="settings_section_theme_title">Θέμα</string>
+    <string name="settings_section_theme_description">Ακολουθήστε τα χρωματικά σχήματα Material You</string>
+
+    <string name="settings_section_weather_title">Καιρός</string>
+    <string name="settings_section_weather_description">Αλλάξτε τον τρόπο εμφάνισης του καιρού</string>
+    <string name="settings_header_weather">Καιρός</string>
+    <string name="settings_header_weather_metrics">Μετρήσεις</string>
+    <string name="settings_pref_temperature_unit_title">Θερμοκρασία</string>
+    <string name="settings_pref_temperature_unit_description">Εμφάνιση θερμοκρασίας σε μετρικές μονάδες (°C)</string>
+    <string name="settings_pref_wind_speed_unit_title">Ταχύτητα ανέμου</string>
+    <string name="settings_pref_wind_speed_unit_description">Εμφάνιση ταχύτητας ανέμου σε μετρικές μονάδες (km/h)</string>
+
+    <string name="settings_section_home_title">Ημερολόγιο</string>
+    <string name="settings_section_home_description">Προσαρμογή της οθόνης ημερολογίου</string>
+    <string name="settings_header_home">Αρχική</string>
+    <string name="settings_pref_timezone_title">Ζώνη ώρας</string>
+    <string name="settings_pref_timezone_description">Όλες οι ώρες εκδηλώσεων εμφανίζονται στη ζώνη ώρας της συσκευής σας (%1$s)</string>
+    <string name="settings_pref_collapsed_list_title">Σύμπτυξη αγώνων</string>
+    <string name="settings_pref_collapsed_list_description">Απόκρυψη όλων εκτός από έναν από τους ολοκληρωμένους αγώνες της τρέχουσας σεζόν, εμφανίζοντας τα επερχόμενα γεγονότα υψηλότερα στη ροή</string>
+    <string name="settings_pref_empty_week_title">Εμφάνιση κενών εβδομάδων</string>
+    <string name="settings_pref_empty_week_description">Εμφάνιση ένδειξης διαστήματος μεταξύ αγώνων για να τονιστούν τα διπλά και τριπλά header στην επερχόμενη σεζόν</string>
+    <string name="settings_pref_recent_highlights_title">Πρόσφατα highlights</string>
+    <string name="settings_pref_recent_highlights_description">Εμφάνιση του banner πρόσφατων highlights στην αρχική σελίδα αν είστε συνδεδεμένοι στο διαδίκτυο. Αυτό συνήθως περιέχει συνδέσμους σε σημαντικές ιστορίες της τελευταίας εβδομάδας περίπου</string>
+    <string name="settings_pref_remember_season_change_title">Διατήρηση τελευταίας σεζόν</string>
+    <string name="settings_pref_remember_season_change_description">Συνέχιση από τη σεζόν που προβλήθηκε τελευταία</string>
+
+    <string name="settings_section_rss_configure_title">Διαμόρφωση</string>
+    <string name="settings_section_rss_configure_description">Ρύθμιση πηγών RSS ή προσαρμογή εμφάνισης</string>
+
+    <string name="settings_section_web_browser_title">Πρόγραμμα περιήγησης εντός εφαρμογής</string>
+    <string name="settings_section_web_browser_description">Προσαρμογή ή απενεργοποίηση του προγράμματος περιήγησης εντός εφαρμογής</string>
+    <string name="settings_header_in_app_browser">Πρόγραμμα περιήγησης εντός εφαρμογής</string>
+    <string name="settings_switch_enable_web_browser_title">Ενεργοποίηση</string>
+    <string name="settings_switch_enable_web_browser_description">Ενεργοποίηση του προγράμματος περιήγησης εντός εφαρμογής αντί για φόρτωση ιστοσελίδων σε προσαρμοσμένη καρτέλα</string>
+    <string name="settings_switch_enable_javascript_title">Ενεργοποίηση Javascript</string>
+    <string name="settings_switch_enable_javascript_description">Απόδοση Javascript στο πρόγραμμα περιήγησης της εφαρμογής. Οι ιστοσελίδες θα φορτώνουν πιο γρήγορα αλλά ενδέχεται να μην λειτουργούν σωστά με αυτή τη ρύθμιση απενεργοποιημένη</string>
+    <string name="settings_switch_toolbar_location_title">Θέση γραμμής εργαλείων</string>
+    <string name="settings_switch_toolbar_location_description">Όταν είναι ενεργοποιημένο, η γραμμή εργαλείων θα είναι στην κορυφή. Διαφορετικά, θα είναι στο κάτω μέρος</string>
+
+    <string name="settings_help_adverts_title">Διαφημίσεις</string>
+    <string name="settings_help_adverts_description">Θέλετε να εμφανίζονται διαφημίσεις; Κάθε προγραμματιστής εκτιμά την υποστήριξή σας αφήνοντας τις διαφημίσεις ενεργοποιημένες</string>
+    <string name="settings_help_adverts_long_description">Προσαρμόστε τον τρόπο εμφάνισης διαφημίσεων σε όλη την εφαρμογή</string>
+
+    <string name="settings_section_notifications_upcoming_title">Επερχόμενοι αγώνες</string>
+    <string name="settings_section_notifications_upcoming_description">Λάβετε ειδοποιήσεις για επερχόμενους αγώνες</string>
+    <string name="settings_section_notifications_results_title">Αποτελέσματα αγώνων</string>
+    <string name="settings_section_notifications_results_description">Λάβετε ειδοποιήσεις όταν τα αποτελέσματα αγώνων είναι διαθέσιμα</string>
+    <string name="settings_header_notice">Ειδοποίηση</string>
+    <string name="settings_header_permissions">Άδεια</string>
+    <string name="settings_pref_notification_permission_title">Ενεργοποίηση ειδοποιήσεων</string>
+    <string name="settings_pref_notification_permission_description">Δώστε άδεια στο Flashback να σας στέλνει ειδοποιήσεις</string>
+    <string name="settings_pref_notification_manage_title">Ρυθμίσεις ειδοποιήσεων</string>
+    <string name="settings_pref_notification_manage_description">Προσαρμόστε τις ρυθμίσεις ειδοποιήσεών σας</string>
+    <string name="settings_pref_notification_system_settings">Διαχειριστείτε τις ειδοποιήσεις σας στις ρυθμίσεις της εφαρμογής</string>
+    <string name="settings_pref_schedule_exact_alarm_title">Ακριβείς χρόνοι</string>
+    <string name="settings_pref_schedule_exact_alarm_description">Δώστε άδεια στο Flashback να σας στέλνει υπενθυμίσεις σε συγκεκριμένες ώρες. Διαφορετικά, οι ειδοποιήσεις θα παραδοθούν εντός της ώρας πριν από ένα γεγονός</string>
+    <string name="settings_pref_notification_notice_period_title">Προειδοποίηση</string>
+    <string name="settings_pref_notification_notice_period_description">Λάβετε ειδοποίηση 15, 30 ή 60 λεπτά πριν ξεκινήσει ένα αγωνιστικό Σαββατοκύριακο</string>
+    <string name="settings_switch_notification_upcoming_fp_title">Ελεύθερες Δοκιμές</string>
+    <string name="settings_switch_notification_upcoming_qualifying_title">Κατατακτήριες</string>
+    <string name="settings_switch_notification_upcoming_sprint_title">Sprint</string>
+    <string name="settings_switch_notification_upcoming_sprint_qualifying_title">Κατατακτήριες Sprint</string>
+    <string name="settings_switch_notification_upcoming_race_title">Αγώνας</string>
+    <string name="settings_switch_notification_upcoming_other_title">Άλλα</string>
+    <string name="settings_switch_notification_results_qualifying_title">Κατατακτήριες</string>
+    <string name="settings_switch_notification_results_sprint_qualifying_title">Κατατακτήριες Sprint</string>
+    <string name="settings_switch_notification_results_sprint_title">Sprint</string>
+    <string name="settings_switch_notification_results_race_title">Αγώνας</string>
+
+    <string name="settings_header_widgets">Widgets</string>
+    <string name="settings_section_widgets_title">Widgets</string>
+    <string name="settings_section_widgets_description">Προσαρμογές widgets</string>
+    <string name="settings_section_widgets_show_background_title">Εμφάνιση φόντου;</string>
+    <string name="settings_section_widgets_show_background_description">Εμφάνιση συμπαγούς φόντου αντί για διαφανές</string>
+    <string name="settings_section_widgets_deeplink_event_title">Σύνδεσμος σε γεγονός;</string>
+    <string name="settings_section_widgets_deeplink_event_description">Πατώντας το widget θα μεταβείτε στον συγκεκριμένο αγώνα, αντί για την αρχική σελίδα</string>
+    <string name="settings_section_widgets_show_weather_title">Εμφάνιση καιρού;</string>
+    <string name="settings_section_widgets_show_weather_description">Εμφάνιση του καιρού για το γεγονός. Αυτό είναι ορατό μόνο σε μεγαλύτερες διατάξεις widget</string>
+    <string name="settings_section_refresh_title">Ανανέωση</string>
+    <string name="settings_section_refresh_widget_title">Ανανέωση Widgets</string>
+    <string name="settings_section_refresh_widget_description">Επιβολή ανανέωσης των ενεργών widgets</string>
+    <string name="settings_section_refresh_widget_message">Τα widgets ανανεώθηκαν</string>
+
+    <string name="settings_section_ads_title">Διαφημίσεις</string>
+    <string name="settings_section_ads_description">Ρυθμίσεις διαφημίσεων</string>
+    <string name="settings_header_ads">Διαφημίσεις</string>
+    <string name="settings_switch_ads_enable_title">Εμφάνιση διαφημίσεων;</string>
+    <string name="settings_switch_ads_enable_description">Θέλετε να εμφανίζονται διαφημίσεις; Κάθε προγραμματιστής εκτιμά την υποστήριξή σας αφήνοντας τις διαφημίσεις ενεργοποιημένες</string>
+
+    <string name="settings_section_privacy_title">Απόρρητο</string>
+    <string name="settings_section_privacy_description">Crashlytics, Analytics</string>
+    <string name="settings_header_legal">Νομικά</string>
+    <string name="settings_pref_privacy_policy_title">Πολιτική Απορρήτου</string>
+    <string name="settings_pref_privacy_policy_description">Η πολιτική απορρήτου της εφαρμογής</string>
+    <string name="settings_header_device_info">Πληροφορίες Συσκευής</string>
+    <string name="settings_pref_crash_reporting_title">Αναφορά Σφαλμάτων</string>
+    <string name="settings_pref_crash_reporting_description">Επιτρέψτε την αποστολή αναφορών σφαλμάτων στον προγραμματιστή όταν προκύπτει πρόβλημα.</string>
+    <string name="settings_pref_analytics_title">Ανώνυμα Analytics</string>
+    <string name="settings_pref_analytics_description">Αποστολή ανώνυμων δεδομένων analytics σχετικά με την εμπειρία σας στην εφαρμογή. Αυτό μπορεί επίσης να βοηθήσει στην αναφορά σφαλμάτων</string>
+    <string name="settings_pref_disclaimer_title">Αποποίηση ευθυνών</string>
+    <string name="settings_pref_disclaimer_description">Όλα τα δεδομένα που αποστέλλονται για analytics και αναφορά σφαλμάτων είναι ανώνυμα και δεν περιέχουν προσωπικά αναγνωρίσιμες πληροφορίες</string>
+    <string name="settings_section_about_title">Σχετικά</string>
+    <string name="settings_section_about_description">Σχετικά με αυτήν την εφαρμογή</string>
+    <string name="settings_header_about">Σχετικά</string>
+    <string name="settings_switch_about_this_app_title">Σχετικά με αυτήν την εφαρμογή</string>
+    <string name="settings_switch_about_this_app_description">Σχετικά με την εφαρμογή, τους προγραμματιστές και τις εξαρτήσεις</string>
+    <string name="settings_switch_review_title">Αξιολόγηση</string>
+    <string name="settings_switch_review_description">Αξιολογήστε την εφαρμογή στο app store</string>
+    <string name="settings_switch_changelog_title">Αρχείο αλλαγών</string>
+    <string name="settings_switch_changelog_description">Δείτε τα αρχεία αλλαγών εκδόσεων</string>
+    <string name="settings_switch_feedback_title">Σχόλια</string>
+    <string name="settings_switch_feedback_description">Στείλτε email στον προγραμματιστή με σχόλια ή προτάσεις για να κάνετε αυτήν την εφαρμογή καλύτερη</string>
+    <string name="settings_build_version">Έκδοση build</string>
+    <string name="settings_pref_shake_to_report_title">Κούνημα για αναφορά</string>
+    <string name="settings_pref_shake_to_report_description">Κουνήστε την οθόνη για να παρέχετε σχόλια ή αναφορές σφαλμάτων στον προγραμματιστή</string>
+    <string name="settings_header_reset">Επαναφορά</string>
+    <string name="settings_pref_reset_title">Αρχικός συγχρονισμός</string>
+    <string name="settings_pref_reset_description">Εκτελέστε ξανά τον αρχικό συγχρονισμό. Αυτό θα ανανεώσει όλους τους οδηγούς, κατασκευαστές, αγώνες και πίστες όταν επανεκκινηθεί η εφαρμογή</string>
+    <string name="settings_pref_reset_toast">Η εμπειρία πρώτης χρήσης θα εμφανιστεί όταν επανεκκινηθεί η εφαρμογή</string>
+
+    <string name="settings_theme_title">Προσαρμογή</string>
+    <string name="settings_theme_nightmode_title">Σκοτεινή λειτουργία</string>
+    <string name="settings_theme_nightmode_description">Επιλέξτε την προτίμησή σας για σκοτεινή λειτουργία</string>
+    <string name="settings_theme_nightmode_follow_system">Ακολουθήστε τις προτιμήσεις συστήματος</string>
+    <string name="settings_theme_nightmode_light">Φωτεινή λειτουργία</string>
+    <string name="settings_theme_nightmode_dark">Σκοτεινή λειτουργία</string>
+    <string name="settings_theme_theme_title">Θέμα εφαρμογής</string>
+    <string name="settings_theme_theme_description">Επιλέξτε τα χρωματικά σχήματα της εφαρμογής σας</string>
+    <string name="settings_theme_theme_default">Προεπιλογή</string>
+    <string name="settings_theme_theme_default_desc">Προεπιλογή (απαιτεί επανεκκίνηση εφαρμογής)</string>
+    <string name="settings_theme_theme_material_you">Material You</string>
+    <string name="settings_theme_theme_material_you_desc">Material You (απαιτεί επανεκκίνηση εφαρμογής)</string>
+    <string name="settings_theme_theme_applied_later">Το θέμα σας θα εφαρμοστεί μετά την επανεκκίνηση της εφαρμογής</string>
+    <string name="settings_theme_animation_speed_title">Ταχύτητα animation</string>
+    <string name="settings_theme_animation_speed_description">Επιλέξτε την ταχύτητα των animated προβολών σε όλη την εφαρμογή.</string>
+
+    <string name="settings_home">Αρχική</string>
+    <string name="settings_statistics">Στατιστικά</string>
+    <string name="settings_default_season_title">Επαναφορά προεπιλεγμένης σεζόν</string>
+    <string name="settings_default_season_description">Επαναφέρετε την επιλογή προεπιλεγμένης σεζόν για να αφήσετε το flashback να διαχειρίζεται την τρέχουσα ενεργή σεζόν</string>
+    <string name="settings_default_season_updated">Το Flashback διαχειρίζεται πλέον την τρέχουσα ενεργή σεζόν</string>
+    <string name="settings_customisation_season_all_expanded_title">Ενότητα Όλα</string>
+    <string name="settings_customisation_season_all_expanded_description">Ανάπτυξη της ενότητας Όλα στο μενού από προεπιλογή</string>
+    <string name="settings_customisation_season_favourited_expanded_title">Ενότητα Αγαπημένα</string>
+    <string name="settings_customisation_season_favourited_expanded_description">Ανάπτυξη της ενότητας αγαπημένων στο μενού από προεπιλογή</string>
+    <string name="settings_information_title">Πληροφορίες</string>
+    <string name="settings_information_at_top_title">Εμφάνιση "Παρέχεται από" στην κορυφή</string>
+    <string name="settings_information_at_top_description">Εμφάνιση της επιλογής "Δεδομένα παρέχονται από" στην κορυφή κάθε οθόνης. Διαφορετικά θα εμφανίζεται στο κάτω μέρος</string>
+    <string name="settings_dashboard_title">Πίνακας ελέγχου</string>
+    <string name="settings_dashboard_default_to_schedule_title">Καρτέλα προγράμματος κατά την εκκίνηση</string>
+    <string name="settings_dashboard_default_to_schedule_description">Όταν ανοίγετε την εφαρμογή, μεταβείτε στην καρτέλα προγράμματος από προεπιλογή. Αν είναι απενεργοποιημένο, η καρτέλα ημερολογίου θα φορτωθεί πρώτη</string>
+    <string name="settings_dashboard_autoscroll_title">Αυτόματη κύλιση</string>
+    <string name="settings_dashboard_autoscroll_description">Αυτόματη κύλιση στον επόμενο αγώνα όταν φορτώνετε την εφαρμογή όταν βλέπετε την τρέχουσα σεζόν</string>
+
+    <string name="settings_notifications_runtime_enabled">Άδειες</string>
+    <string name="settings_notifications_runtime_title">Ενεργοποίηση Ειδοποιήσεων</string>
+    <string name="settings_notifications_runtime_description">Κάντε κλικ εδώ για να λαμβάνετε ειδοποιήσεις για επερχόμενους αγώνες και όταν τα αποτελέσματα είναι διαθέσιμα</string>
+
+    <string name="settings_notifications_title">Ειδοποιήσεις</string>
+    <string name="settings_notifications_channel_qualifying_title">Κατατακτήριες</string>
+    <string name="settings_notifications_channel_qualifying_description">Λάβετε ειδοποιήσεις 30 λεπτά πριν ξεκινήσουν οι κατατακτήριες. Διαμορφώστε τις εδώ</string>
+    <string name="settings_notifications_channel_race_title">Αγώνας</string>
+    <string name="settings_notifications_channel_race_description">Λάβετε ειδοποιήσεις 30 λεπτά πριν ξεκινήσει ένας αγώνας. Διαμορφώστε τις εδώ</string>
+    <string name="settings_notifications_nonchannel_title">Ειδοποιήσεις</string>
+    <string name="settings_notifications_nonchannel_description">Απενεργοποιήστε τις ειδοποιήσεις της εφαρμογής απενεργοποιώντας τις στις ρυθμίσεις σας</string>
+
+    <string name="settings_up_next_category_title">Κατηγορίες</string>
+    <string name="settings_up_next_category_race_title">Αγώνας</string>
+    <string name="settings_up_next_category_race_descrition">Λάβετε ειδοποίηση πριν ξεκινήσει ο αγώνας ή τα sprints</string>
+    <string name="settings_up_next_category_qualifying_title">Κατατακτήριες</string>
+    <string name="settings_up_next_category_qualifying_descrition">Λάβετε ειδοποίηση πριν ξεκινήσουν οι κατατακτήριες</string>
+    <string name="settings_up_next_category_free_practice_title">Ελεύθερες Δοκιμές</string>
+    <string name="settings_up_next_category_free_practice_descrition">Λάβετε ειδοποίηση πριν ξεκινήσουν οι ελεύθερες δοκιμές</string>
+    <string name="settings_up_next_category_other_title">Άλλα</string>
+    <string name="settings_up_next_category_other_descrition">Λάβετε ειδοποίηση πριν ξεκινήσουν άλλες εκδηλώσεις F1 (π.χ. Χειμερινές δοκιμές)</string>
+
+    <string name="settings_up_next_results_available_title">Διαθέσιμα αποτελέσματα</string>
+    <string name="settings_up_next_results_qualifying_title">Κατατακτήριες</string>
+    <string name="settings_up_next_results_qualifying_descrition">Λάβετε ειδοποίηση όταν τα αποτελέσματα κατατακτήριων είναι διαθέσιμα</string>
+    <string name="settings_up_next_results_sprint_title">Sprint</string>
+    <string name="settings_up_next_results_sprint_descrition">Λάβετε ειδοποίηση όταν τα αποτελέσματα sprint είναι διαθέσιμα</string>
+    <string name="settings_up_next_results_race_title">Αγώνας</string>
+    <string name="settings_up_next_results_race_descrition">Λάβετε ειδοποίηση όταν τα αποτελέσματα αγώνα είναι διαθέσιμα</string>
+
+    <string name="settings_up_next_title">Περίοδος προειδοποίησης</string>
+    <string name="settings_up_next_time_before_title">Προειδοποίηση</string>
+    <string name="settings_up_next_time_before_description">Πόση ώρα πριν από ένα γεγονός θέλετε ειδοποίηση;</string>
+    <string name="settings_up_next_reminder_title">Υπενθύμιση</string>
+    <string name="settings_up_next_reminder_description">Πόση ώρα πριν από ένα γεγονός θέλετε το Flashback να σας ειδοποιήσει;</string>
+
+    <string name="settings_web_browser_title">Πρόγραμμα περιήγησης</string>
+    <string name="settings_web_browser_in_app_title">Άνοιγμα σε εξωτερικό πρόγραμμα περιήγησης</string>
+    <string name="settings_web_browser_in_app_description">Άνοιγμα συνδέσμων ή ιστοσελίδων στο πρόγραμμα περιήγησης της συσκευής σας αντί για το ενσωματωμένο</string>
+    <string name="settings_web_browser_javascript_title">Ενεργοποίηση Javascript;</string>
+    <string name="settings_web_browser_javascript_description">Ενεργοποίηση javascript στο πρόγραμμα περιήγησης της εφαρμογής. Αυτό μπορεί να βοηθήσει τις ιστοσελίδες να φορτώνουν πιο γρήγορα, αλλά μπορεί να επηρεάσει τη λειτουργικότητα της σελίδας</string>
+
+    <string name="settings_restart_app_required">Η αλλαγή σας θα τεθεί σε ισχύ όταν επανεκκινηθεί η εφαρμογή</string>
+    <string name="settings_experimental">BETA</string>
+    <string name="settings_experimental_description">Αυτή η λειτουργία είναι σε beta, και ως εκ τούτου μπορεί να μην λειτουργεί σωστά.</string>
+
+    <string name="settings_rss_title">RSS</string>
+    <string name="settings_rss_appearance_title">Διάταξη</string>
+    <string name="settings_rss_show_description_title">Εμφάνιση περιγραφής</string>
+    <string name="settings_rss_show_description_description">Εμφάνιση της περιγραφής του άρθρου δίπλα στην πηγή RSS αν υπάρχει</string>
+    <string name="settings_rss_configure">Η λίστα σας</string>
+    <string name="settings_rss_configure_sources_title">Διαμόρφωση πηγών</string>
+    <string name="settings_rss_configure_sources_description">Ρυθμίστε σε ποια RSS feeds θέλετε να εγγραφείτε</string>
+    <string name="settings_rss_add_custom">Προσαρμοσμένο RSS feed</string>
+    <string name="settings_rss_contact_link">Σύνδεσμος επικοινωνίας</string>
+    <string name="settings_rss_add_title">Προσθήκη προσαρμοσμένου RSS feed</string>
+    <string name="settings_rss_add_description">Προσθέστε ένα προσαρμοσμένο RSS feed URL στη ροή σας. Επικοινωνήστε με τον προγραμματιστή για να το προσθέσει ως γρήγορο σύνδεσμο παρακάτω!</string>
+    <string name="settings_rss_add_confirm">Προσθήκη</string>
+    <string name="settings_rss_add_cancel">Ακύρωση</string>
+
+
+    <!-- Weather -->
+    <string name="weather_type_clear_sky">Ηλιοφάνεια</string>
+    <string name="weather_type_clouds_light">Αραιή συννεφιά</string>
+    <string name="weather_type_clouds_scattered">Διάσπαρτη συννεφιά</string>
+    <string name="weather_type_clouds_broken">Διάσπαρτη συννεφιά</string>
+    <string name="weather_type_clouds_overcast">Συννεφιασμένος</string>
+    <string name="weather_type_rain_light">Ελαφριά βροχή</string>
+    <string name="weather_type_rain_moderate">Μέτρια βροχή</string>
+    <string name="weather_type_rain_heavy">Έντονη βροχή</string>
+    <string name="weather_type_thunderstorm">Καταιγίδα</string>
+    <string name="weather_type_snow">Χιόνι</string>
+    <string name="weather_type_sand">Άμμος</string>
+    <string name="weather_type_fog">Ομίχλη</string>
+    <string name="weather_type_mist">Καταχνιά</string>
+
+    <string name="weather_rain_percent">%1$d %</string>
+    <string name="weather_temp_degrees_c">%1$d °C</string>
+    <string name="weather_temp_degrees_f">%1$d °F</string>
+    <string name="weather_wind_metre_per_second">%1$d m/s</string>
+    <string name="weather_wind_mph">%1$d mph</string>
+    <string name="weather_wind_kph">%1$d kph</string>
+
+
+    <!-- RSS Configure -->
+    <string name="rss_configure_title">Διαμόρφωση RSS</string>
+    <string name="rss_configure_header_items">Η λίστα RSS σας</string>
+    <string name="rss_configure_header_items_subtitle">Διαμορφώστε το εξατομικευμένο RSS feed σας εδώ!</string>
+    <string name="rss_configure_header_items_no_items">0 στοιχεία</string>
+    <string name="rss_configure_header_add">Προσθήκη προσαρμοσμένου</string>
+    <string name="rss_configure_header_add_subtitle">Προσθέστε το δικό σας RSS link ή feed για να δημιουργήσετε τα δικά σας νέα Formula 1.</string>
+    <string name="rss_configure_header_quick_add">Γρήγοροι σύνδεσμοι</string>
+    <string name="rss_configure_header_quick_add_subtitle">Γρήγοροι σύνδεσμοι για ορισμένες δημοφιλείς ειδησεογραφικές πηγές Formula 1. Το Flashback δεν συνδέεται με κανέναν τρόπο με τις πηγές που αναφέρονται, μπορείτε να επισκεφθείτε τις ιστοσελίδες και τις πληροφορίες επικοινωνίας αυτών των πηγών κάνοντας κλικ στον σύνδεσμο της ιστοσελίδας δίπλα σε κάθε στοιχείο παρακάτω. Αν θέλετε να συμπεριλάβετε ένα άλλο RSS feed σε αυτή τη λίστα, στείλτε μας email!</string>
+    <string name="rss_configure_malformed_url">Σφάλμα στο URL</string>
+    <string name="rss_configure_hint">www.formula1.com/link/to/rss</string>
+    <string name="rss_configure_valid_url">Απαιτείται έγκυρο URL</string>
+    <string name="rss_configure_visit_website">Ιστοσελίδα</string>
+    <string name="rss_configure_cannot_open_page">Δεν είναι δυνατό το άνοιγμα της ιστοσελίδας</string>
+    <string name="rss_configure_cannot_open_page_action">Αντιγραφή URL στο πρόχειρο</string>
+
+
+    <!-- Notifications -->
+    <string name="notification_content_title" formatted="false">%1$s ξεκινά σε %2$s</string>
+    <string name="notification_content_title_inexact" formatted="false">%1$s ξεκινά στις %2$s</string>
+    <string name="notification_content_text" formatted="false">%1$s %2$s ξεκινά σε %3$s στις %4$s</string>
+    <string name="notification_content_text_inexact" formatted="false">%1$s %2$s ξεκινά στις %3$s</string>
+    <string name="notification_content_text_device_time" formatted="false">%1$s %2$s (ώρα συσκευής)</string>
+    <string name="notification_reminder_mins_60">60 λεπτά</string>
+    <string name="notification_reminder_mins_30">30 λεπτά</string>
+    <string name="notification_reminder_mins_15">15 λεπτά</string>
+    <string name="notification_onboarding_title">Ειδοποιήσεις</string>
+    <string name="notification_onboarding_title_howlong">Πόση ώρα πριν να ειδοποιηθείτε</string>
+    <string name="notification_onboarding_description">Λάβετε ειδοποιήσεις λίγο πριν ξεκινήσουν αγώνες, κατατακτήριες, ελεύθερες δοκιμές ή δοκιμές στη Formula 1. Μπορείτε να τις αλλάξετε ανά πάσα στιγμή στις ρυθμίσεις, καθώς και πόση ώρα πριν θέλετε να ειδοποιηθείτε</string>
+
+    <string name="notification_channel_title_upcoming">Επερχόμενες υπενθυμίσεις</string>
+    <string name="notification_channel_title_results">Διαθέσιμα αποτελέσματα</string>
+    <string name="notification_channel_race">Αγώνας</string>
+    <string name="notification_channel_sprint">Sprint</string>
+    <string name="notification_channel_sprint_qualifying">Κατατακτήριες Sprint</string>
+    <string name="notification_channel_qualifying">Κατατακτήριες</string>
+    <string name="notification_channel_free_practice">Ελεύθερες Δοκιμές</string>
+    <string name="notification_channel_race_notify">Αγώνας</string>
+    <string name="notification_channel_sprint_notify">Sprint</string>
+    <string name="notification_channel_sprint_qualifying_notify">Κατατακτήριες Sprint</string>
+    <string name="notification_channel_qualifying_notify">Κατατακτήριες</string>
+    <string name="notification_channel_info">Πληροφορίες σεζόν</string>
+
+
+    <!-- App Shortcuts -->
+    <string name="app_shortcut_search_shorttitle">Αναζήτηση</string>
+    <string name="app_shortcut_search_longtitle">Αναζήτηση Οδηγών, Ομάδων και Πιστών Formula 1</string>
+    <string name="app_shortcut_search_disabled">Αναζήτηση (Μη διαθέσιμη)</string>
+    <string name="app_shortcut_rss_shorttitle">RSS</string>
+    <string name="app_shortcut_rss_longtitle">RSS feed Formula 1</string>
+    <string name="app_shortcut_rss_disabled">RSS (Μη διαθέσιμο)</string>
+
+
+    <!-- About -->
+    <string name="about_name">Flashback</string>
+    <string name="about_desc">Πληροφορίες Επικοινωνίας</string>
+    <string name="about_this_app_dependency_rss">Πηγή RSS: %1$s</string>
+    <string name="dependency_thank_you">Τα στατιστικά Formula 1 σε αυτήν την εφαρμογή προέρχονται από την ομάδα Flashback. Ιδιαίτερες ευχαριστίες στο Ergast API για περιεχόμενο μέχρι το 2023. Δεν μπορούμε να εγγυηθούμε την ακρίβεια των δεδομένων που παρέχονται (ωστόσο, ενημερώστε μας αν εντοπίσετε κάποιο πρόβλημα στέλνοντάς μας email με τον παραπάνω σύνδεσμο)\n\nΈνα μεγάλο ευχαριστώ σε όλους όσους αναφέρονται παρακάτω για να γίνει δυνατή αυτή η εφαρμογή! Κάντε κλικ σε οποιοδήποτε από τα στοιχεία της παρακάτω λίστας για να βρείτε περισσότερες πληροφορίες σχετικά με τις βιβλιοθήκες και τις υπηρεσίες που χρησιμοποιούνται στην εφαρμογή.</string>
+    <string name="about_additional">Ιδιαίτερες ευχαριστίες σε όλους τους παραπάνω! Αν ξεχάσαμε κάποιον ή κάτι, ενημερώστε μας!</string>
+    <string name="app_version_placeholder">Έκδοση εφαρμογής: %1$s</string>
+    <string name="app_version">Έκδοση εφαρμογής</string>
+    <string name="device_uuid">ID: </string>
+    <string name="installation_id">ID Εγκατάστασης: </string>
+    <string name="about_dependencies">Εξαρτήσεις</string>
+    <string name="button_play">Play</string>
+    <string name="button_apple_app">App Store</string>
+    <string name="button_email">Email</string>
+    <string name="button_github">Github</string>
+
+
+    <!-- Widgets -->
+    <string name="widget_up_next_title">Επόμενο</string>
+    <string name="widget_up_next_description">Δείτε το πρόγραμμα του επόμενου αγώνα</string>
+    <string name="widget_up_next_nothing_title">Τίποτα επερχόμενο</string>
+    <string name="widget_up_next_nothing_title_compact">Δ/Υ</string>
+    <string name="widget_up_next_nothing_subtitle">Θα λάβουμε αυτές τις πληροφορίες μόλις γίνουν διαθέσιμες. Κάντε κλικ εδώ για να ελέγξετε για ενημερώσεις</string>
+    <string name="dashboard_up_next_title">Επόμενο</string>
+    <string name="dashboard_new_season_available">Νέα σεζόν\nδιαθέσιμη</string>
+    <plurals name="dashboard_up_next_suffix_days">
+        <item quantity="one">Αύριο</item>
+        <item quantity="other">%1$d ημέρες ακόμα</item>
+    </plurals>
+
+    <string name="dashboard_up_next_your_time">Ώρα συσκευής</string>
+    <string name="dashboard_up_next_shown_in_device_time">Όλες οι ώρες εμφανίζονται στη ζώνη ώρας σας</string>
+    <plurals name="dashboard_up_next_starts_in">
+        <item quantity="zero">Η πρώτη εκδήλωση ξεκινά σήμερα</item>
+        <item quantity="one">Η πρώτη εκδήλωση ξεκινά σε %1$d ημέρα</item>
+        <item quantity="other">Η πρώτη εκδήλωση ξεκινά σε %1$d ημέρες</item>
+    </plurals>
+    <string name="dashboard_up_next_starts_in">Όλες οι ώρες εμφανίζονται στη ζώνη ώρας σας</string>
+    <string name="dashboard_up_next_all_day">Όλη μέρα</string>
+    <string name="dashboard_up_next_date_today">Σήμερα</string>
+    <string name="dashboard_up_next_date_next">%1$s ημέρες</string>
+    <string name="dashboard_up_next_date_previous">%1$s ημέρες πριν</string>
+
+
+    <string name="intent_chooser_open_maps">Άνοιγμα τοποθεσίας</string>
+    <string name="intent_chooser_open_website">Άνοιγμα ιστοσελίδας</string>
+    <string name="intent_chooser_share">Κοινοποίηση</string>
+
+
+    <!-- Web Browser -->
+    <string name="choose_browser">Άνοιγμα στο πρόγραμμα περιήγησης</string>
+    <string name="choose_share">Κοινοποίηση με</string>
+    <string name="url_copy_to_clipboard">Το URL αντιγράφηκε στο πρόχειρο</string>
+    <string name="email_copy_to_clipboard">Το email αντιγράφηκε στο πρόχειρο</string>
+    <string name="unable_to_open_url">Δεν είναι δυνατό το άνοιγμα του url</string>
+    <string name="home_last_updated">Τελευταία ενημέρωση %1$s</string>
+
+
+
+    <!-- Privacy Policy -->
+    <string name="privacy_policy_title">Πολιτική Απορρήτου</string>
+
+    <!-- Easter Eggs -->
+    <string name="easter_egg_menu_new_years">Καλή Χρονιά!</string>
+    <string name="easter_egg_menu_chinese_new_year">Καλή Κινέζικη Πρωτοχρονιά!</string>
+    <string name="easter_egg_menu_valentines">Καλή Ημέρα του Αγίου Βαλεντίνου!</string>
+    <string name="easter_egg_menu_easter">Καλό Πάσχα!</string>
+    <string name="easter_egg_menu_halloween">Καλό Halloween!</string>
+    <string name="easter_egg_menu_diwali">Καλό Diwali!</string>
+    <string name="easter_egg_menu_christmas">Καλά Χριστούγεννα!</string>
+
+    <!-- Reaction screen -->
+    <string name="reaction_screen_title">Παιχνίδι αντίδρασης</string>
+    <string name="reaction_screen_heading">Δοκιμάστε τις αντιδράσεις σας</string>
+    <string name="reaction_screen_subtitle">Νομίζετε ότι θα μπορούσατε να φτάσετε τους χρόνους αντίδρασης ενός οδηγού F1 όταν σβήνουν τα φώτα;\n\nΞεκινήστε το παιχνίδι παρακάτω και μετά πατήστε οπουδήποτε στην οθόνη όταν δείτε τα φώτα να σβήνουν για να πάρετε βαθμολογία</string>
+    <string name="reaction_screen_action_start">Ξεκινήστε το παιχνίδι</string>
+    <string name="reaction_screen_action_reset">Επαναφορά</string>
+    <string name="reaction_screen_action_again">Παίξτε ξανά;</string>
+    <string name="reaction_screen_action_react">Αντιδράστε</string>
+    <string name="reaction_screen_instructions">Πατήστε οπουδήποτε όταν σβήσουν τα φώτα…</string>
+
+    <string name="reaction_screen_miss_title">Χάσατε!</string>
+    <string name="reaction_screen_miss_subtitle">Θυμηθείτε να πατήσετε οπουδήποτε στην οθόνη όταν δείτε τα φώτα να σβήνουν</string>
+    <string name="reaction_screen_jump_title">Άκυρη εκκίνηση!</string>
+    <string name="reaction_screen_jump_subtitle">Αντιδράσατε πριν σβήσουν τα φώτα και θα είχατε λάβει χρονική ποινή για άκυρη εκκίνηση. Δοκιμάστε ξανά και βεβαιωθείτε ότι δεν αντιδράτε πολύ νωρίς</string>
+
+    <string name="reaction_tier_superhuman">Υπεράνθρωπος</string>
+    <string name="reaction_tier_superhuman_desc">Ο χρόνος αντίδρασής σας ήταν υπεράνθρωπος!</string>
+    <string name="reaction_tier_great">Εξαιρετικός</string>
+    <string name="reaction_tier_great_desc">Ο χρόνος αντίδρασής σας ήταν πιο γρήγορος από τον μέσο χρόνο αντίδρασης ενός οδηγού F1, συγχαρητήρια!</string>
+    <string name="reaction_tier_good">Καλός</string>
+    <string name="reaction_tier_good_desc">Ο χρόνος αντίδρασής σας ήταν παρόμοιος με τον μέσο χρόνο αντίδρασης ενός οδηγού F1, συγχαρητήρια!</string>
+    <string name="reaction_tier_average">Μέσος</string>
+    <string name="reaction_tier_average_desc">Ο χρόνος αντίδρασής σας ήταν παρόμοιος με τον μέσο χρόνο αντίδρασης ενός οδηγού F1, συγχαρητήρια!</string>
+    <string name="reaction_tier_not_good">Πάνω από τον μέσο όρο</string>
+    <string name="reaction_tier_not_good_desc">Ο χρόνος αντίδρασής σας είναι ελαφρώς πιο αργός από τον μέσο χρόνο αντίδρασης ενός οδηγού F1. Ο μέσος χρόνος αντίδρασης είναι περίπου 250ms, φροντίστε να εξασκηθείτε λίγο περισσότερο</string>
+    <string name="reaction_tier_poor">Αργός</string>
+    <string name="reaction_tier_poor_desc">Ο χρόνος αντίδρασής σας είναι πιο αργός από τον μέσο όρο. Ο μέσος χρόνος αντίδρασης είναι περίπου 250ms, φροντίστε να εξασκηθείτε περισσότερο πριν ξεκινήσετε την καριέρα σας ως οδηγός F1</string>
+
+</resources>

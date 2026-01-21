@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_up_next_title">Επόμενο</string>
+    <string name="widget_up_next_description">Δείτε το πρόγραμμα του επόμενου αγώνα</string>
+    <string name="widget_up_next_nothing_title">Τίποτα επερχόμενο</string>
+    <string name="widget_up_next_nothing_title_compact">Δ/Υ</string>
+    <string name="widget_up_next_nothing_subtitle">Θα λάβουμε αυτές τις πληροφορίες μόλις γίνουν διαθέσιμες. Κάντε κλικ εδώ για να ελέγξετε για ενημερώσεις</string>
+</resources>
