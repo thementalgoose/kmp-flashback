@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="ab_rss_back">Πίσω</string>
+    <string name="ab_rss_refresh">Ανανέωση</string>
+    <string name="ab_rss_settings">Ρυθμίσεις</string>
+
+    <string name="ab_rss_configure_supported_remove">Αφαίρεση από τη ροή</string>
+    <string name="ab_rss_configure_supported_add">Προσθήκη στη ροή</string>
+    <string name="ab_rss_configure_add">Προσθήκη ροής</string>
+
+    <string name="ab_refresh">Ανανέωση</string>
+    <string name="ab_menu">Μενού</string>
+    <string name="ab_close">Κλείσιμο</string>
+    <string name="ab_back">Πίσω</string>
+    <string name="ab_hide">Απόκρυψη</string>
+
+    <string name="ab_points">Βαθμοί</string>
+    <string name="ab_status">Κατάσταση</string>
+
+    <string name="ab_result_race_overview">%1$s, %2$s, οδηγεί για %3$s</string>
+    <string name="ab_result_qualifying_overview">%1$s, οδηγεί για %2$s, τερμάτισε P %3$s</string>
+    <string name="ab_result_qualifying_overview_dnq">%1$s, οδηγεί για %2$s, δεν προκρίθηκε</string>
+    <string name="ab_result_overview_fastest_lap">%1$s, %2$s, οδηγεί για %3$s. Είχε τον ταχύτερο γύρο</string>
+    <string name="ab_did_not_qualify">Δεν προκρίθηκε</string>
+    <string name="ab_result_fastest_lap">Είχε τον ταχύτερο γύρο</string>
+
+    <string name="ab_result_finish_time">Τερμάτισε %1$s πίσω από τον νικητή</string>
+    <string name="ab_result_finish_p1">Τερμάτισε σε %1$s</string>
+    <string name="ab_result_finish_dnf">Δεν τερμάτισε. %1$s</string>
+
+    <string name="ab_race_overview">%1$s, γύρος %2$s στο %3$s. Οδήγησε για %4$s</string>
+
+    <string name="ab_scored">%1$s σημείωσε %2$s βαθμούς</string>
+    <string name="ab_notifications_enabled">Ειδοποίηση ενεργοποιημένη</string>
+
+    <string name="ab_has_qualifying_results">Διαθέσιμα αποτελέσματα κατατακτήριων</string>
+    <string name="ab_no_qualifying_results">Κατατακτήριες δεν είναι ακόμα διαθέσιμες</string>
+    <string name="ab_has_sprint_results">Διαθέσιμα αποτελέσματα sprint</string>
+    <string name="ab_no_sprint_results">Sprint δεν είναι ακόμα διαθέσιμο</string>
+    <string name="ab_has_race_results">Διαθέσιμα αποτελέσματα αγώνα</string>
+    <string name="ab_no_race_results">Αποτελέσματα αγώνα δεν είναι ακόμα διαθέσιμα</string>
+
+    <string name="ab_positions_gained">Εκκίνησε %1$s, τερμάτισε %2$s, κέρδισε %3$d θέσεις</string>
+    <string name="ab_positions_neutral">Εκκίνησε %1$s, τερμάτισε %2$s</string>
+    <string name="ab_positions_lost">Εκκίνησε %1$s, κέρδισε %2$d, έχασε %3$d θέσεις</string>
+
+    <string name="ab_fastest_lap">Ταχύτερος Γύρος</string>
+
+    <string name="ab_constructor_logo">Λογότυπο %1$s</string>
+
+    <string name="ab_preseason_events">Εκδηλώσεις προ-σεζόν</string>
+
+    <string name="ab_rss_open_in_browser">Άνοιγμα στο πρόγραμμα περιήγησης</string>
+    <string name="ab_rss_share">Κοινοποίηση</string>
+
+    <string name="ab_collapsed_section">%1$s, γύρος %2$d έως %3$s, γύρος %4$d.</string>
+    <string name="ab_schedule_date_card">%1$s, στις %2$s ώρα συσκευής</string>
+    <string name="ab_schedule_date_card_notifications_enabled">%1$s, στις %2$s ώρα συσκευής. Ειδοποιήσεις ενεργοποιημένες</string>
+
+    <string name="ab_change_of_rain">Πιθανότητα βροχής</string>
+</resources>
