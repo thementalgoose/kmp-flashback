@@ -10,12 +10,6 @@ plugins {
 }
 
 kotlin {
-    android {
-        compileSdk {
-            version = release(libs.versions.android.compileSdk.get().toInt())
-        }
-    }
-
     sourceSets {
         val desktopMain by getting
 
@@ -35,6 +29,7 @@ kotlin {
             api(compose.materialIconsExtended)
             @OptIn(ExperimentalComposeLibrary::class)
             api(compose.uiTest)
+            implementation(libs.androidx.ui.toolingpreview)
 
             implementation(projects.infrastructure)
             implementation(projects.presentation.localisation)
@@ -54,5 +49,5 @@ kotlin {
     }
 }
 dependencies {
-    "androidRuntimeClasspath"(libs.androidx.ui.tooling)
+    "androidRuntimeClasspath"(libs.androidx.ui.toolingpreview)
 }

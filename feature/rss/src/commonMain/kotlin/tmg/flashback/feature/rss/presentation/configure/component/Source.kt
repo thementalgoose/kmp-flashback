@@ -21,8 +21,8 @@ import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.settings_rss_contact_link
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.feature.rss.models.SupportedSource
 import tmg.flashback.feature.rss.presentation.configure.ConfiguredSupportedSource
 import tmg.flashback.infrastructure.extensions.toColourInt

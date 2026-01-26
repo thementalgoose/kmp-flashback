@@ -37,8 +37,8 @@ import flashback.presentation.localisation.generated.resources.settings_rss_show
 import flashback.presentation.localisation.generated.resources.settings_rss_show_description_title
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.feature.rss.models.SupportedSource
 import tmg.flashback.feature.rss.presentation.configure.component.Source

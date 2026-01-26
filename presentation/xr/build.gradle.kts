@@ -8,11 +8,6 @@ plugins {
 }
 
 kotlin {
-    android {
-        compileSdk {
-            version = release(libs.versions.android.compileSdk.get().toInt())
-        }
-    }
     sourceSets {
         androidMain.dependencies {
             implementation(libs.bundles.androidx.xr)

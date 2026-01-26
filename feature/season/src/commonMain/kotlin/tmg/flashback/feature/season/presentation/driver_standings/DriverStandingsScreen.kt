@@ -31,6 +31,7 @@ import flashback.feature.season.generated.resources.ic_driver_comparison
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.driver_comparison_title
 import flashback.presentation.localisation.generated.resources.season_standings_driver
+import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
@@ -39,6 +40,7 @@ import tmg.flashback.feature.season.presentation.shared.ongoing_banner.ResultAsO
 import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedBy
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.ResultsSeasonPicker
 import tmg.flashback.formula1.model.SeasonDriverStandingSeason
+import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
@@ -183,11 +185,13 @@ private fun DriverStandings(
                 .wrapContentHeight()
         ) {
             Column(modifier = Modifier.weight(2f)) {
-                TextTitle(
-                    text = model.driver.name,
-                    bold = true,
-                    modifier = Modifier.fillMaxWidth()
-                )
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    TextTitle(
+                        text = model.driver.name,
+                        bold = true,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
                 Spacer(modifier = Modifier.height(2.dp))
                 Row(
                     modifier = Modifier

@@ -25,8 +25,8 @@ import flashback.presentation.localisation.generated.resources.ab_scored
 import flashback.presentation.localisation.generated.resources.nav_race
 import flashback.presentation.localisation.generated.resources.nav_sprint
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.feature.weekend.presentation.WeekendUiState
 import tmg.flashback.feature.weekend.presentation.components.DataMissing
 import tmg.flashback.feature.weekend.presentation.components.DataUnavailable

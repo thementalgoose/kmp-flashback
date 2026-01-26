@@ -20,8 +20,8 @@ import flashback.domain.formula1.generated.resources.ic_driver
 import flashback.presentation.ui.generated.resources.Res
 import flashback.presentation.ui.generated.resources.ic_circle
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.preview.preview
 import tmg.flashback.style.AppTheme

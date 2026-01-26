@@ -13,7 +13,7 @@ import flashback.presentation.localisation.generated.resources.ab_result_finish_
 import flashback.presentation.localisation.generated.resources.ab_result_finish_time
 import flashback.presentation.localisation.generated.resources.race_status_retired
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import tmg.flashback.formula1.enums.RaceStatus
 import tmg.flashback.formula1.enums.isStatusFinished
 import tmg.flashback.formula1.model.LapTime

@@ -25,5 +25,10 @@ gradlePlugin {
             id = libs.plugins.flashback.featureModule.get().pluginId
             implementationClass = "FeatureModuleConventionPlugin"
         }
+
+        register("composeMultiplatform") {
+            id = libs.plugins.flashback.composeMultiplatform.get().pluginId
+            implementationClass = "ComposeMultiplatformConventionPlugin"
+        }
     }
 }

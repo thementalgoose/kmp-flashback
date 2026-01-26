@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.flashback.featureModule)
+    alias(libs.plugins.flashback.composeMultiplatform)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.mokkery)
 }
@@ -9,11 +10,6 @@ compose.resources {
 }
 
 kotlin {
-    android {
-        compileSdk {
-            version = release(libs.versions.android.compileSdk.get().toInt())
-        }
-    }
     sourceSets {
         val desktopMain by getting
 
