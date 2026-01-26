@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.flashback.featureModule)
+    alias(libs.plugins.flashback.composeMultiplatform)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.mokkery)
 }
@@ -21,7 +22,7 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.xml)
             implementation(libs.ksoup)
 
-            implementation(compose.components.resources)
+            implementation(libs.compose.resources)
 
             implementation(projects.core.configuration)
             implementation(projects.core.device)

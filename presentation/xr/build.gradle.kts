@@ -8,11 +8,6 @@ plugins {
 }
 
 kotlin {
-    android {
-        compileSdk {
-            version = release(libs.versions.android.compileSdk.get().toInt())
-        }
-    }
     sourceSets {
         androidMain.dependencies {
             implementation(libs.bundles.androidx.xr)
@@ -20,7 +15,7 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(libs.bundles.kotlin)
-            implementation(compose.components.resources)
+            implementation(libs.compose.resources)
             implementation(compose.foundation)
             implementation(compose.material3AdaptiveNavigationSuite)
         }

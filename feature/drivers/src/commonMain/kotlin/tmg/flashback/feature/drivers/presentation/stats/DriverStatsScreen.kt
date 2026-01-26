@@ -31,8 +31,8 @@ import flashback.presentation.localisation.generated.resources.dashboard_all_tit
 import flashback.presentation.ui.generated.resources.ic_menu_drivers
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsDriverId
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason

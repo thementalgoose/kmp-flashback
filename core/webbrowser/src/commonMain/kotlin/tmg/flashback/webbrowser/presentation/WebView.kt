@@ -36,7 +36,7 @@ import flashback.presentation.localisation.generated.resources.ab_rss_back
 import flashback.presentation.localisation.generated.resources.ab_rss_open_in_browser
 import flashback.presentation.localisation.generated.resources.ab_rss_share
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.text.TextBody1

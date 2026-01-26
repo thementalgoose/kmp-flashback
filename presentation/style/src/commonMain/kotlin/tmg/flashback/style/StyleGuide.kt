@@ -29,7 +29,7 @@ import flashback.presentation.style.generated.resources.Res
 import flashback.presentation.style.generated.resources.ic_preview_icon
 import flashback.presentation.style.generated.resources.preview
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import tmg.flashback.style.buttons.ButtonItem
 import tmg.flashback.style.buttons.ButtonPrimary
 import tmg.flashback.style.buttons.ButtonSecondary

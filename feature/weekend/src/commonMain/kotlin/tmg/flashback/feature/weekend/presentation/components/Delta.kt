@@ -16,7 +16,7 @@ import flashback.feature.weekend.generated.resources.ic_pos_neutral
 import flashback.feature.weekend.generated.resources.ic_pos_up
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.text.TextBody2

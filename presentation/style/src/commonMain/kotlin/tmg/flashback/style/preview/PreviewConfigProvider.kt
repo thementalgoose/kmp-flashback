@@ -1,6 +1,6 @@
 package tmg.flashback.style.preview
 
-import org.jetbrains.compose.ui.tooling.preview.PreviewParameterProvider
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import tmg.flashback.style.theme.Theme
 
 class PreviewConfigProvider: PreviewParameterProvider<PreviewConfig> {

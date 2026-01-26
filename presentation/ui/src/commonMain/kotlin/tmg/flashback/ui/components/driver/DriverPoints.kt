@@ -11,8 +11,8 @@ import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.plurals
 import flashback.presentation.localisation.generated.resources.race_points
 import org.jetbrains.compose.resources.pluralStringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.infrastructure.extensions.roundToHalf
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview

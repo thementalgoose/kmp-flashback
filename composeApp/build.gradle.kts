@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 
 plugins {
     alias(libs.plugins.flashback.kotlinMultiplatform)
+    alias(libs.plugins.flashback.composeMultiplatform)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinSerialization)
@@ -23,9 +24,6 @@ val versionNameProperty: String = try {
 
 kotlin {
     android {
-        compileSdk {
-            version = release(libs.versions.android.compileSdk.get().toInt())
-        }
         compilerOptions {
             freeCompilerArgs.add("-Xstring-concat=inline")
         }
@@ -150,7 +148,7 @@ kotlin {
             implementation(projects.presentation.ui)
             implementation(projects.presentation.xr)
 
-            implementation(compose.components.resources)
+            implementation(libs.compose.resources)
             implementation(compose.material3AdaptiveNavigationSuite)
             implementation(libs.navigation.compose)
             implementation(libs.cmptoast)

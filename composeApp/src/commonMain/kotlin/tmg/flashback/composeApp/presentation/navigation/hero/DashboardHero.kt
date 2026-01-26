@@ -22,8 +22,8 @@ import flashback.presentation.localisation.generated.resources.easter_egg_slava_
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.eastereggs.model.MenuIcons
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
