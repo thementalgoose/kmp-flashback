@@ -1,16 +1,6 @@
-name: Job - Android - Assemble Prod AAB + APK
+name: Android Deploy
 
 on:
-  #  workflow_dispatch:
-  #    inputs:
-  #      version_name:
-  #        type: string
-  #        description: "Version name (1.0.0)"
-  #        default: "1.0.0"
-  #      version_code:
-  #        type: string
-  #        description: "Version code (1)"
-  #        default: "1"
   workflow_call:
     inputs:
       version_name: { required: true, type: string }
@@ -31,7 +21,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Setup Java 17
+      # Setup Java 21
       - uses: actions/setup-java@v5
         with:
           distribution: 'zulu'

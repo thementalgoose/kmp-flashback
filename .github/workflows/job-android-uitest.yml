@@ -1,0 +1,69 @@
+name: Android UI Tests
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  uiTest:
+    name: Run
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+
+    steps:
+      # Checkout
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      # Enable KVM
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      # Setup Java 21
+      - uses: actions/setup-java@v5
+        with:
+          distribution: 'zulu'
+          java-version: '21'
+
+      # Environment
+      - name: Environment variables
+        env:
+          GOOGLE_SERVICES_JSON_SANDBOX: ${{ secrets.GOOGLE_SERVICES_JSON_SANDBOX }}
+          GOOGLE_SERVICES_PLIST_SANDBOX: ${{ secrets.GOOGLE_SERVICES_PLIST_SANDBOX }}
+        run: |
+          mkdir -p androidApp/src/sandbox
+          mkdir -p androidApp/src/production
+          mkdir -p iosApp/iosApp/Firebase
+          echo $GOOGLE_SERVICES_JSON_SANDBOX | base64 --decode >> androidApp/src/sandbox/google-services.json
+          echo $GOOGLE_SERVICES_PLIST_SANDBOX | base64 --decode >> iosApp/iosApp/Firebase/GoogleService-sandbox.plist
+
+      # Caching gradle
+      - uses: actions/cache@v5
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/*.toml*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+            
+      # Run UI tests
+      - name: Run connected tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 30
+          target: google_apis
+          arch: x86_64
+          script: ./gradlew :androidApp:connectedSandboxDebugAndroidTest
+
+      # Publishes a summary table of the test results
+      - name: Publish UI Test Report
+        uses: mikepenz/action-junit-report@v6
+        if: always()
+        with:
+          report_paths: '**/build/outputs/androidTest-results/connected/**/*.xml'
+          check_name: UI Test Results

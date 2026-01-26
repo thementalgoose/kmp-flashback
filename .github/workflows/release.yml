@@ -11,6 +11,10 @@ jobs:
     uses: ./.github/workflows/job-unit-tests.yml
     secrets: inherit
 
+  ui-tests:
+    uses: ./.gradle/workflows/job-android-uitest.yml
+    secrets: inherit
+
   versions:
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -25,8 +29,8 @@ jobs:
           echo "version_code=$((${{ github.run_number }} + $ANDROID_RUN_OFFSET))" >> $GITHUB_OUTPUT
 
   android-assemble-deploy:
-    needs: [unit-tests, versions]
-    uses: ./.github/workflows/job-android-assemble-deploy-prod.yml
+    needs: [unit-tests, versions, ui-tests]
+    uses: ./.github/workflows/job-android-deploy.yml
     secrets: inherit
     with:
       version_name: ${{ needs.versions.outputs.version_name }}
@@ -36,7 +40,7 @@ jobs:
   #  so disabled to save build minutes
 #  ios-assemble-deploy:
 #    needs: [unit-tests, versions]
-#    uses: ./.github/workflows/job-ios-assemble-deploy-prod.yml
+#    uses: ./.github/workflows/job-ios-deploy.yml
 #    secrets: inherit
 #    with:
 #      version_name: ${{ needs.versions.outputs.version_name }}
