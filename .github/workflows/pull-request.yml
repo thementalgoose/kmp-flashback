@@ -12,9 +12,6 @@ jobs:
     uses: ./.github/workflows/job-dependency-diff.yml
     secrets: inherit
 
-#  assemble:
-#    uses: ./.github/workflows/job-android-apk.yml
-#    secrets: inherit
-#    with:
-#      version_name: 1.0.0
-#      version_code: 1
+  ui-tests:
+    uses: ./.github/workflows/job-android-uitest.yml
+    secrets: inherit
