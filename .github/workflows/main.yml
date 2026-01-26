@@ -11,3 +11,6 @@ jobs:
   unit-tests:
     uses: ./.github/workflows/job-unit-tests.yml
     secrets: inherit
+  ui-test:
+    uses: ./.github/workflows/job-android-uitest.yml
+    secrets: inherit

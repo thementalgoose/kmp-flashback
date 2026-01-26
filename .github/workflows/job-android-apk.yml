@@ -1,4 +1,4 @@
-name: Job - Android - Assemble Sandbox APK
+name: Android APK
 
 on:
   workflow_dispatch:

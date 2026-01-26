@@ -1,4 +1,4 @@
-name: Job - Dependency Diff
+name: Dependency Diff Report
 
 on:
   workflow_call:
