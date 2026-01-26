@@ -37,6 +37,8 @@ cmptoast = "1.0.8"
 # Testing
 mokkery = "3.1.1"
 turbine = "1.2.1"
+androidx-test-junit = "1.2.1"
+androidx-test-espresso = "3.5.0"
 
 [libraries]
 # Kotlin
@@ -131,6 +133,10 @@ okhttp-dnsoverhttps = { module = "com.squareup.okhttp3:okhttp-dnsoverhttps", ver
 
 # Test
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+androidx-test-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-test-junit" }
+androidx-test-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-test-espresso" }
+compose-ui-test-junit4 = { module = "org.jetbrains.compose.ui:ui-test-junit4", version.ref = "compose" }
+compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version = "1.8.2" }
 
 # Gradle Plugins
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }

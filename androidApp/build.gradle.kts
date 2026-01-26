@@ -27,6 +27,8 @@ android {
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = versionCodeProperty
         versionName = "${versionNameProperty}.${versionCodeProperty}"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     packaging {
@@ -163,4 +165,10 @@ dependencies {
     implementation(libs.ksoup)
 
     debugImplementation(compose.uiTooling)
+
+    // Android UI Testing
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.test.espresso)
+    androidTestImplementation(libs.compose.ui.test.junit4)
+    debugImplementation(libs.compose.ui.test.manifest)
 }
