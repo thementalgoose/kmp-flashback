@@ -58,7 +58,7 @@ jobs:
           api-level: 30
           target: google_apis
           arch: x86_64
-          script: ./gradlew connectedCheck
+          script: ./gradlew :androidApp:connectedSandboxDebugAndroidTest
 
       # Publishes a summary table of the test results
       - name: Publish UI Test Report
