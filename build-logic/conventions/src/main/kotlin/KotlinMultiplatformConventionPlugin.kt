@@ -23,6 +23,10 @@ class KotlinMultiplatformConventionPlugin : Plugin<Project> {
                     enable = true
                 }
                 namespace = "tmg.flashback.$modulePackageName"
+                compilerOptions {
+                    freeCompilerArgs.add("-Xstring-concat=inline")
+                    freeCompilerArgs.add("-Xexpect-actual-classes")
+                }
             }
 
             listOf(

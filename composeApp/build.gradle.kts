@@ -23,12 +23,6 @@ val versionNameProperty: String = try {
 }
 
 kotlin {
-    android {
-        compilerOptions {
-            freeCompilerArgs.add("-Xstring-concat=inline")
-        }
-    }
-
     iosX64()
     iosArm64()
     iosSimulatorArm64()
