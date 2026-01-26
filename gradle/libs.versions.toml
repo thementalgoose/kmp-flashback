@@ -87,6 +87,15 @@ compose-adaptivelayout = { module = "org.jetbrains.compose.material3.adaptive:ad
 compose-adaptivenavigation = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation", version.ref = "composeAdaptive" }
 compose-backhandler = { module = "org.jetbrains.compose.ui:ui-backhandler", version.ref = "compose"}
 
+compose-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "compose" }
+compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "compose" }
+compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "compose" }
+compose-material = { module = "org.jetbrains.compose.material:material", version.ref = "compose" }
+compose-material3 = "org.jetbrains.compose.material3:material3:1.9.0"
+compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose" }
+compose-materialIconsExtended = "org.jetbrains.compose.material:material-icons-extended:1.7.3"
+compose-uiTest = { module = "org.jetbrains.compose.ui:ui-test", version.ref = "compose" }
+
 # Navigation
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "composeNavigation"}
 

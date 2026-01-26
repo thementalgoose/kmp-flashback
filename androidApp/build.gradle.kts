@@ -150,7 +150,7 @@ dependencies {
     implementation(libs.androidx.browser)
     implementation(libs.androidx.webkit)
 
-    implementation(compose.components.resources)
+    implementation(libs.compose.resources)
     implementation(compose.material3AdaptiveNavigationSuite)
     implementation(libs.navigation.compose)
     implementation(libs.cmptoast)

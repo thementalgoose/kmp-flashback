@@ -23,7 +23,7 @@ kotlin {
             implementation(projects.presentation.localisation)
             implementation(libs.bundles.koin.compose)
             implementation(libs.bundles.compose)
-            implementation(compose.components.resources)
+            implementation(libs.compose.resources)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))

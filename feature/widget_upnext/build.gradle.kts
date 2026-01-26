@@ -25,7 +25,7 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(libs.bundles.compose)
-            implementation(compose.components.resources)
+            implementation(libs.compose.resources)
             implementation(libs.bundles.kotlin)
             implementation(projects.data.flashback)
             implementation(projects.infrastructure)

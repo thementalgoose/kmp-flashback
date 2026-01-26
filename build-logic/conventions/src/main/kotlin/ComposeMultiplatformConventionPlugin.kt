@@ -12,6 +12,14 @@ class ComposeMultiplatformConventionPlugin: Plugin<Project> {
             sourceSets.configureEach {
                 when (name) {
                     "commonMain" -> dependencies {
+                        implementation(libs.findLibrary("compose.runtime").get().get())
+                        implementation(libs.findLibrary("compose.foundation").get().get())
+                        implementation(libs.findLibrary("compose.material").get().get())
+                        implementation(libs.findLibrary("compose.material3").get().get())
+                        implementation(libs.findLibrary("compose.ui").get().get())
+                        implementation(libs.findLibrary("compose.resources").get().get())
+                        implementation(libs.findLibrary("compose.materialIconsExtended").get().get())
+                        implementation(libs.findLibrary("compose.uiTest").get().get())
                         implementation(libs.findLibrary("androidx.ui.toolingpreview").get().get())
                     }
                 }

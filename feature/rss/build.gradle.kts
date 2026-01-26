@@ -22,7 +22,7 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.xml)
             implementation(libs.ksoup)
 
-            implementation(compose.components.resources)
+            implementation(libs.compose.resources)
 
             implementation(projects.core.configuration)
             implementation(projects.core.device)

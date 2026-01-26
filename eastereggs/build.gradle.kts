@@ -20,7 +20,7 @@ kotlin {
             implementation(libs.bundles.kotlin)
             implementation(libs.bundles.compose)
 
-            implementation(compose.components.resources)
+            implementation(libs.compose.resources)
 
             implementation(projects.core.configuration)
             implementation(projects.infrastructure)

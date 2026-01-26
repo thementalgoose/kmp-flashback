@@ -148,7 +148,7 @@ kotlin {
             implementation(projects.presentation.ui)
             implementation(projects.presentation.xr)
 
-            implementation(compose.components.resources)
+            implementation(libs.compose.resources)
             implementation(compose.material3AdaptiveNavigationSuite)
             implementation(libs.navigation.compose)
             implementation(libs.cmptoast)

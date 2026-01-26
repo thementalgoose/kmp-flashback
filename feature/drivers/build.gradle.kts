@@ -18,7 +18,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.bundles.kotlin)
             implementation(libs.bundles.compose)
-            implementation(compose.components.resources)
+            implementation(libs.compose.resources)
 
             implementation(libs.androidx.lifecycle.runtime.compose)
 

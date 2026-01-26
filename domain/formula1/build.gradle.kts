@@ -16,7 +16,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.bundles.kotlin)
-            implementation(compose.components.resources)
+            implementation(libs.compose.resources)
             implementation(compose.foundation)
 
             implementation(projects.infrastructure)

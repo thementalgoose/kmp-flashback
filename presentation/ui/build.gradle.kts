@@ -15,13 +15,12 @@ kotlin {
         val desktopMain by getting
 
         androidMain.dependencies {
-            api(compose.preview)
             api(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
             implementation(libs.flagkit)
 
-            implementation(compose.components.resources)
+            implementation(libs.compose.resources)
             implementation(libs.bundles.compose)
             implementation(libs.bundles.koin.compose)
             implementation(libs.bundles.coil)
