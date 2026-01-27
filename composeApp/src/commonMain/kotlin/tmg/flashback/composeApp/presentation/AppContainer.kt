@@ -140,10 +140,10 @@ fun AppContainer(
             Row(modifier = Modifier
                 .fillMaxSize()
                 .background(AppTheme.colors.surface)
-                .then(if (!isCompact) easterEggModifier else Modifier)
             ) {
                 if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT && !isSpacialUiEnabled) {
                     AppNavigationRail(
+                        modifier = if (!isCompact) easterEggModifier else Modifier,
                         appNavigationUiState = appNavigationUiState.value,
                         navigationItemClicked = {
                             clearSubnavs()
