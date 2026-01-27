@@ -1,18 +1,18 @@
 name: Release
 env:
   ANDROID_RUN_OFFSET: 415
+
 'on':
   release:
     types: [published]
-  workflow_dispatch:
-jobs:
 
+jobs:
   unit-tests:
     uses: ./.github/workflows/job-unit-tests.yml
     secrets: inherit
 
   ui-tests:
-    uses: ./.gradle/workflows/job-android-uitest.yml
+    uses: ./.github/workflows/job-android-uitest.yml
     secrets: inherit
 
   versions:
