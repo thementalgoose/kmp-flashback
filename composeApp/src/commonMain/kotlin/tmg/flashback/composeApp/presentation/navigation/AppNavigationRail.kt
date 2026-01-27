@@ -2,6 +2,7 @@ package tmg.flashback.composeApp.presentation.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import kotlinx.coroutines.coroutineScope
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.navigation.Screen
@@ -26,6 +27,7 @@ internal fun AppNavigationRail(
     appNavigationUiState: AppNavigationUIState,
     navigationItemClicked: (Screen) -> Unit,
     insetPadding: PaddingValues,
+    modifier: Modifier = Modifier,
     showXr: Boolean = false,
 ) {
     val primaryItems = listOfNotNull(
@@ -46,6 +48,7 @@ internal fun AppNavigationRail(
 
     val xr = LocalXR.current
     NavigationColumn(
+        modifier = modifier,
         primary = primaryItems,
         divider = { MenuDivider() },
         secondary = secondaryItems,
