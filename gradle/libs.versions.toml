@@ -73,7 +73,7 @@ androidx_xr_scenecore = { module = "androidx.xr.scenecore:scenecore", version.re
 androidx_xr_compose = { module = "androidx.xr.compose:compose", version.ref = "androidx-xr" }
 androidx_xr_arcore = { module = "androidx.xr.arcore:arcore", version.ref = "androidx-xr" }
 
-androidx_xr_extensions = "com.android.extensions.xr:extensions-xr:1.1.0"
+androidx_xr_extensions = "com.android.extensions.xr:extensions-xr:1.2.0"
 
 # Firebase
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
