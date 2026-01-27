@@ -37,7 +37,7 @@ cmptoast = "1.0.8"
 # Testing
 mokkery = "3.1.1"
 turbine = "1.2.1"
-androidx-test-junit = "1.2.1"
+androidx-test-junit = "1.3.0"
 androidx-test-espresso = "3.5.0"
 
 [libraries]
