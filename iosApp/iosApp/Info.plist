@@ -5,9 +5,11 @@
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleShortVersionString</key>
-	<string>1.20.0</string>
+	<string>1.30.0</string>
 	<key>CFBundleVersion</key>
 	<string>2</string>
+	<key>FirebaseAutomaticScreenReportingEnabled</key>
+	<false/>
 	<key>NSAllowsLocalNetworking</key>
 	<true/>
 	<key>UIBackgroundModes</key>
@@ -15,7 +17,5 @@
 		<string>remote-notification</string>
 		<string>fetch</string>
 	</array>
-    <key>FirebaseAutomaticScreenReportingEnabled</key>
-    <false/>
 </dict>
 </plist>
