@@ -8,7 +8,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.Keep
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.xr.runtime.Session
@@ -54,10 +53,4 @@ class MainActivity : BaseActivity(), SplashScreen.KeepOnScreenCondition {
     }
 
     override fun shouldKeepOnScreen(): Boolean = false
-}
-
-@Preview
-@Composable
-fun AppAndroidPreview() {
-    App()
 }
