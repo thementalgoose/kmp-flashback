@@ -14,11 +14,14 @@ import tmg.flashback.formula1.model.QualifyingResult
 import tmg.flashback.formula1.model.RaceResult
 import tmg.flashback.formula1.model.Season
 import tmg.flashback.formula1.model.SeasonDriverStandings
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 class DriverComparisonViewModel(
     private val standingsRepository: StandingsRepository,
     private val seasonRepository: SeasonRepository,
     private val racesRepository: RaceRepository,
+    private val coroutineContext: CoroutineContext = EmptyCoroutineContext
 ): ViewModel() {
 
     private var season: Season? = null
@@ -69,7 +72,7 @@ class DriverComparisonViewModel(
     }
 
     fun refresh() {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineContext) {
             val seasonValue = seasonValue ?: return@launch
             season = seasonRepository.getSeason(seasonValue).firstOrNull()
             driverStandings = standingsRepository.getDriverStandings(seasonValue).firstOrNull()
