@@ -42,9 +42,6 @@ fun String.toColourInt(): Int {
 
     // Combine into ARGB integer: (A shl 24) or (R shl 16) or (G shl 8) or B
     return (alpha shl 24) or (red shl 16) or (green shl 8) or blue
-
-    val colourLong = cleanHexString.toLongOrNull(16) ?: 0x888888
-    return colourLong.toInt()
 }
 
 inline fun <reified T : Enum<T>> String.toEnum(by: (enum: T) -> String = { it.name }): T? {
