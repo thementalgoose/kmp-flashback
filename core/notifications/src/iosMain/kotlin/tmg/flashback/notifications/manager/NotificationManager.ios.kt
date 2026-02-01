@@ -49,6 +49,12 @@ actual class NotificationManagerImpl actual constructor(): NotificationManager {
             .removePendingNotificationRequestsWithIdentifiers(listOf(uuid.toString()))
     }
 
+    override fun cancelAll(uuids: List<Int>) {
+        for (uuid in uuids) {
+            cancel(uuid)
+        }
+    }
+
     actual override val canScheduleExact: Boolean
         get() = true
 }

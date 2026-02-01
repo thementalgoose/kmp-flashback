@@ -17,7 +17,6 @@ internal class LocalNotificationsCancelUseCaseImpl(
     }
 
     override fun cancelAll() {
-        notificationRepository.notificationIds
-            .forEach { cancel(it) }
+        notificationManager.cancelAll(notificationRepository.notificationIds.toList())
     }
 }
