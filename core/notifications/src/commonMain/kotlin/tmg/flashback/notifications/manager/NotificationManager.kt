@@ -14,6 +14,9 @@ interface NotificationManager {
     fun cancel(
         uuid: Int
     )
+    fun cancelAll(
+        uuids: List<Int>
+    )
 
     val canScheduleExact: Boolean
 }

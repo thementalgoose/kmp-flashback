@@ -17,6 +17,10 @@ actual class NotificationManagerImpl actual constructor(): NotificationManager {
         /* TODO */
     }
 
+    override fun cancelAll(uuids: List<Int>) {
+        /* TODO */
+    }
+
     actual override val canScheduleExact: Boolean
         get() = false
 }
