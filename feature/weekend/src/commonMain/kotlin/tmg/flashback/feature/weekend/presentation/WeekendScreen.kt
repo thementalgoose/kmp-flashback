@@ -45,6 +45,7 @@ import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.addSpri
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.addSprintRaceData
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.infrastructure.extensions.toEnum
+import tmg.flashback.navigation.Screen
 import tmg.flashback.style.AppTheme
 import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.header.Header
@@ -56,7 +57,7 @@ import tmg.flashback.ui.navigation.appBarMaximumHeight
 
 @Composable
 fun WeekendScreen(
-    screenData: WeekendScreenData,
+    data: Screen.Weekend,
     paddingValues: PaddingValues,
     showBack: Boolean,
     actionUpClicked: () -> Unit,
@@ -65,22 +66,22 @@ fun WeekendScreen(
 ) {
     ScreenView(
         screenName = "Weekend", args = mapOf(
-            AnalyticsConstants.analyticsSeason to screenData.season.toString(),
-            AnalyticsConstants.analyticsRound to screenData.round.toString()
+            AnalyticsConstants.analyticsSeason to data.season.toString(),
+            AnalyticsConstants.analyticsRound to data.round.toString()
         )
     )
 
     val uiState = viewModel.uiState.collectAsState()
     val isLoading = viewModel.isLoading.collectAsState()
-    LaunchedEffect(screenData) {
+    LaunchedEffect(data) {
         viewModel.load(
-            season = screenData.season,
-            round = screenData.round
+            season = data.season,
+            round = data.round
         )
     }
     WeekendScreenTab(
         isLoading = isLoading.value,
-        screenData = screenData,
+        screenData = data,
         paddingValues = paddingValues,
         showBack = showBack,
         actionUpClicked = actionUpClicked,
@@ -96,7 +97,7 @@ fun WeekendScreen(
 
 @Composable
 fun WeekendScreenTab(
-    screenData: WeekendScreenData,
+    screenData: Screen.Weekend,
     isLoading: Boolean,
     paddingValues: PaddingValues,
     showBack: Boolean,

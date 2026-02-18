@@ -14,30 +14,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.backhandler.BackHandler
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavHostController
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import androidx.window.core.layout.WindowWidthSizeClass
 import kotlinx.coroutines.launch
-import tmg.flashback.eastereggs.presentation.snow
-import tmg.flashback.eastereggs.presentation.summer
-import tmg.flashback.feature.circuits.presentation.all.CircuitNavigation
-import tmg.flashback.feature.rss.presentation.feed.RssNavigation
-import tmg.flashback.feature.season.presentation.calendar.WeekendNavigation
-import tmg.flashback.feature.season.presentation.driver_standings.DriverStandingsNavigation
-import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsNavigation
-import tmg.flashback.infrastructure.log.logDebug
-import tmg.flashback.navigation.Screen
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationDrawer
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationOrbiter
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationRail
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
-import tmg.flashback.composeApp.presentation.settings.SettingNavigation
+import tmg.flashback.eastereggs.presentation.snow
+import tmg.flashback.eastereggs.presentation.summer
+import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.style.AppTheme
 import tmg.flashback.ui.navigation.OverlappingPanels
 import tmg.flashback.ui.navigation.OverlappingPanelsState
 import tmg.flashback.ui.navigation.OverlappingPanelsValue
-import tmg.flashback.ui.navigation.rememberMasterDetailPaneState
 import tmg.flashback.xr.LocalXR
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -46,6 +39,7 @@ fun AppContainer(
     openPanel: () -> Unit,
     windowAdaptiveInfo: WindowAdaptiveInfo,
     windowSizeClass: WindowSizeClass,
+    backStack: NavBackStack<NavKey>,
     panelsState: OverlappingPanelsState,
     paddingValues: PaddingValues,
     appNavigationViewModel: AppNavigationViewModel
@@ -66,10 +60,8 @@ fun AppContainer(
         AppNavigationOrbiter(
             appNavigationUiState = appNavigationUiState.value,
             navigationItemClicked = {
-                navController.navigate(it) {
-                    this.launchSingleTop = true
-                    this.popUpTo(Screen.Calendar)
-                }
+                backStack.clear()
+                backStack.add(it)
             }
         )
     }
@@ -88,10 +80,8 @@ fun AppContainer(
             AppNavigationDrawer(
                 appNavigationUiState = appNavigationUiState.value,
                 navigationItemClicked = {
-                    navController.navigate(it) {
-                        this.launchSingleTop = true
-                        this.popUpTo(Screen.Calendar)
-                    }
+                    backStack.clear()
+                    backStack.add(it)
                 },
                 insetPadding = paddingValues,
                 closeMenu = {
@@ -111,11 +101,8 @@ fun AppContainer(
                         modifier = if (!isCompact) easterEggModifier else Modifier,
                         appNavigationUiState = appNavigationUiState.value,
                         navigationItemClicked = {
-                            clearSubnavs()
-                            navController.navigate(it) {
-                                this.launchSingleTop = true
-                                this.popUpTo(Screen.Calendar)
-                            }
+                            backStack.clear()
+                            backStack.add(it)
                         },
                         showXr = isXrDevice,
                         insetPadding = paddingValues
@@ -126,19 +113,12 @@ fun AppContainer(
                 ) {
                     AppGraph(
                         openPanel = {
-                            clearSubnavs()
                             openPanel()
                         },
+                        backStack = backStack,
                         appNavigationViewModel = appNavigationViewModel,
-                        navController = navController,
                         insetPadding = paddingValues,
                         windowAdaptiveInfo = windowAdaptiveInfo,
-                        calendarNavigator = calendarNavigator,
-                        driverStandingsNavigator = driverStandingsNavigator,
-                        teamStandingsNavigator = teamStandingsNavigator,
-                        rssNavigator = rssNavigator,
-                        settingsNavigator = settingsNavigator,
-                        circuitsNavigator = circuitsNavigator
                     )
                 }
             }

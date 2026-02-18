@@ -39,6 +39,7 @@ import tmg.flashback.feature.constructors.presentation.shared.ConstructorSeason
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.preview.preview
+import tmg.flashback.navigation.Screen
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
@@ -49,23 +50,17 @@ import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.season.PickerItem
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 
-data class ConstructorStatsInfo(
-    val constructorId: String,
-    val constructorName: String,
-    val season: Int? = null
-)
-
 @Composable
 fun ConstructorStatsScreen(
-    constructorStatsInfo: ConstructorStatsInfo,
+    data: Screen.Team,
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     showBack: Boolean,
     windowSizeClass: WindowSizeClass,
     viewModel: ConstructorStatsViewModel = koinViewModel()
 ) {
-    LaunchedEffect(constructorStatsInfo) {
-        viewModel.loadConstructor(constructorStatsInfo.constructorId, constructorStatsInfo.season)
+    LaunchedEffect(data) {
+        viewModel.loadConstructor(data.id, data.season)
     }
 
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
@@ -74,15 +69,15 @@ fun ConstructorStatsScreen(
     val currentSeason = when (val selection = uiState.value.selection) {
         ConstructorFilter.Overview -> "All"
         is ConstructorFilter.Season -> selection.season.toString()
-        null -> constructorStatsInfo.season?.toString() ?: "All"
+        null -> data.season.toString()
     }
     ScreenView(screenName = "Constructor Season", updateKey = currentSeason, args = mapOf(
-        analyticsConstructorId to constructorStatsInfo.constructorId,
+        analyticsConstructorId to data.id,
         analyticsSeason to currentSeason
     ))
 
     ConstructorStatsScreen(
-        constructorStatsInfo = constructorStatsInfo,
+        data = data,
         windowSizeClass = windowSizeClass,
         paddingValues = paddingValues,
         actionUpClicked = actionUpClicked,
@@ -96,8 +91,8 @@ fun ConstructorStatsScreen(
 
 
 @Composable
-fun ConstructorStatsScreen(
-    constructorStatsInfo: ConstructorStatsInfo,
+internal fun ConstructorStatsScreen(
+    data: Screen.Team,
     windowSizeClass: WindowSizeClass,
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
@@ -135,7 +130,7 @@ fun ConstructorStatsScreen(
             item("header") {
                 ConstructorHeader(
                     modifier = Modifier.animateItem(),
-                    constructorName = constructorStatsInfo.constructorName,
+                    constructorName = data.name,
                     option = option ?: PickerItem.Text("..."),
                     optionsToShow = optionsToShow,
                     optionClicked = {
@@ -231,12 +226,12 @@ private fun PreviewAll(
 ) {
     ApplicationThemePreview(previewConfig) {
         ConstructorStatsScreen(
+            data = Screen.Team(2020, "driver", "name"),
             windowSizeClass = WindowSizeClass.compute(400f, 700f),
             paddingValues = PaddingValues(0.dp),
             actionUpClicked = { },
             showBack = true,
             isLoading = false,
-            constructorStatsInfo = ConstructorStatsInfo("driver", "name", 2020),
             refresh = { },
             uiState = ConstructorStatsUiState(
                 constructor = Constructor.preview(),
@@ -264,12 +259,12 @@ private fun PreviewSeason(
 ) {
     ApplicationThemePreview(previewConfig) {
         ConstructorStatsScreen(
+            data = Screen.Team(2020, "driver", "name"),
             windowSizeClass = WindowSizeClass.compute(400f, 700f),
             paddingValues = PaddingValues(0.dp),
             actionUpClicked = { },
             showBack = true,
             isLoading = false,
-            constructorStatsInfo = ConstructorStatsInfo("driver", "name", 2020),
             refresh = { },
             uiState = ConstructorStatsUiState(
                 constructor = Constructor.preview(),

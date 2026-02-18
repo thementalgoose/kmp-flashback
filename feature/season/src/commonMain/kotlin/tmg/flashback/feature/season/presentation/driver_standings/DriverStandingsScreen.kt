@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -19,9 +21,11 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Transparent
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
@@ -34,6 +38,7 @@ import flashback.presentation.localisation.generated.resources.season_standings_
 import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.feature.season.presentation.shared.ongoing_banner.ResultAsOf
@@ -41,6 +46,7 @@ import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedBy
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.ResultsSeasonPicker
 import tmg.flashback.formula1.model.SeasonDriverStandingSeason
 import tmg.flashback.infrastructure.datetime.now
+import tmg.flashback.navigation.Screen
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
@@ -53,6 +59,48 @@ import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.loading.SkeletonViewList
 import tmg.flashback.ui.components.progressbar.ProgressBar
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
+import tmg.flashback.ui.navigation.MasterDetailPaneState
+import tmg.flashback.ui.navigation.appBarMaximumHeight
+
+@Composable
+fun DriverStandingsScreen(
+    paddingValues: PaddingValues,
+    actionUpClicked: () -> Unit,
+    windowSizeClass: WindowSizeClass,
+    navigateTo: (Screen) -> Unit,
+    viewModel: DriverStandingsViewModel = koinViewModel()
+) {
+    val state = viewModel.uiState.collectAsState()
+
+    // Add custom padding for nav bar
+    val direction = LocalLayoutDirection.current
+    val masterPadding = PaddingValues(
+        top = paddingValues.calculateTopPadding(),
+        bottom = paddingValues.calculateBottomPadding() + appBarMaximumHeight,
+        start = paddingValues.calculateStartPadding(direction),
+        end = paddingValues.calculateEndPadding(direction)
+    )
+
+    DriverStandingsScreen(
+        paddingValues = masterPadding,
+        actionUpClicked = actionUpClicked,
+        uiState = state.value,
+        windowSizeClass = windowSizeClass,
+        driverClicked = {
+            navigateTo(Screen.Driver(
+                season = it.season,
+                id = it.driver.id,
+                name = it.driver.name
+            ))
+        },
+        refresh = viewModel::refresh,
+        comparisonClicked = {
+            navigateTo(Screen.DriverComparison(
+                season = state.value.season
+            ))
+        }
+    )
+}
 
 @Composable
 internal fun DriverStandingsScreen(

@@ -19,6 +19,7 @@ import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.infrastructure.device.Platform
+import tmg.flashback.navigation.Screen
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 
@@ -26,9 +27,10 @@ import tmg.flashback.ui.components.header.HeaderAction
 internal fun AllSettingsScreen(
     actionUpClicked: () -> Unit,
     showMenu: Boolean,
-    navigateTo: (SettingNavigation) -> Unit,
-    viewModel: AllSettingsViewModel = koinViewModel(),
+    navigateToSubScreen: (Screen) -> Unit,
+    navigateTo: (Screen) -> Unit,
     insetPadding: PaddingValues,
+    viewModel: AllSettingsViewModel = koinViewModel(),
 ) {
     ScreenView(screenName = "Settings")
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
@@ -36,6 +38,7 @@ internal fun AllSettingsScreen(
     AllSettingsScreen(
         actionUpClicked = actionUpClicked,
         navigateTo = navigateTo,
+        navigateToSubScreen = navigateToSubScreen,
         showMenu = showMenu,
         uiState = uiState.value,
         paddingValues = insetPadding
@@ -46,7 +49,8 @@ internal fun AllSettingsScreen(
 private fun AllSettingsScreen(
     actionUpClicked: () -> Unit,
     showMenu: Boolean,
-    navigateTo: (SettingNavigation) -> Unit,
+    navigateToSubScreen: (Screen) -> Unit,
+    navigateTo: (Screen) -> Unit,
     uiState: AllSettingsUiState,
     paddingValues: PaddingValues,
 ) {
@@ -64,33 +68,33 @@ private fun AllSettingsScreen(
         PrefHeader(string.settings_header_appearance)
         PrefCategory(
             item = Settings.DarkModeCategory,
-            itemClicked = { navigateTo(SettingNavigation.DarkMode) }
+            itemClicked = { navigateToSubScreen(Screen.SettingsDarkMode) }
         )
         if (uiState.isThemeChangeSupported) {
             PrefCategory(
                 item = Settings.ThemeCategory,
-                itemClicked = { navigateTo(SettingNavigation.Theme) }
+                itemClicked = { navigateToSubScreen(Screen.SettingsTheme) }
             )
         }
         PrefHeader(string.settings_header_data)
         PrefCategory(
             item = Settings.LayoutCategory,
-            itemClicked = { navigateTo(SettingNavigation.Layout)  }
+            itemClicked = { navigateToSubScreen(Screen.SettingsLayout)  }
         )
         PrefCategory(
             item = Settings.WeatherCategory,
-            itemClicked = { navigateTo(SettingNavigation.Weather)  }
+            itemClicked = { navigateToSubScreen(Screen.SettingsWeather)  }
         )
         if (uiState.isRssEnabled) {
             PrefHeader(string.settings_header_rss_feed)
             PrefCategory(
                 item = Settings.RssCategory,
-                itemClicked = { navigateTo(SettingNavigation.RssConfigure) }
+                itemClicked = { navigateToSubScreen(Screen.SettingsRssConfigure) }
             )
             if (uiState.isInAppBrowserSupported) {
                 PrefCategory(
                     item = Settings.WebBrowserCategory,
-                    itemClicked = { navigateTo(SettingNavigation.InAppBrowser)  }
+                    itemClicked = { navigateToSubScreen(Screen.SettingsInAppBrowser)  }
                 )
             }
         }
@@ -98,32 +102,32 @@ private fun AllSettingsScreen(
             PrefHeader(string.settings_header_notifications)
             PrefCategory(
                 item = Settings.NotificationsResultCategory,
-                itemClicked = { navigateTo(SettingNavigation.NotificationResults) },
+                itemClicked = { navigateToSubScreen(Screen.SettingsNotificationResults) },
             )
             PrefCategory(
                 item = Settings.NotificationsUpcomingCategory,
-                itemClicked = { navigateTo(SettingNavigation.NotificationUpcoming) },
+                itemClicked = { navigateToSubScreen(Screen.SettingsNotificationUpcoming) },
             )
         }
         if (uiState.isWidgetsSupported) {
             PrefHeader(string.settings_header_widgets)
             PrefCategory(
                 item = Settings.WidgetCategory,
-                itemClicked = { navigateTo(SettingNavigation.Widgets) }
+                itemClicked = { navigateToSubScreen(Screen.SettingsWidgets) }
             )
         }
         PrefHeader(string.settings_header_other)
         PrefCategory(
             item = Settings.PrivacyCategory,
-            itemClicked = { navigateTo(SettingNavigation.Privacy) }
+            itemClicked = { navigateToSubScreen(Screen.PrivacyPolicy) }
         )
         PrefCategory(
             item = Settings.PrivacyPolicy,
-            itemClicked = { navigateTo(SettingNavigation.PrivacyPolicy) }
+            itemClicked = { navigateToSubScreen(Screen.PrivacyPolicy) }
         )
         PrefCategory(
             item = Settings.AboutCategory,
-            itemClicked = { navigateTo(SettingNavigation.About) }
+            itemClicked = { navigateTo(Screen.About) }
         )
     }
 }

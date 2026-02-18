@@ -1,6 +1,5 @@
 package tmg.flashback.feature.drivers.presentation.stats
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -19,7 +18,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.currentCompositionErrors
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,6 +43,7 @@ import tmg.flashback.feature.drivers.presentation.shared.ResultRace
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.preview.preview
+import tmg.flashback.navigation.Screen
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
@@ -55,23 +54,17 @@ import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.season.PickerItem
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 
-data class DriverStatsInfo(
-    val driverId: String,
-    val driverName: String,
-    val season: Int? = null
-)
-
 @Composable
 fun DriverStatsScreen(
+    data: Screen.Driver,
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     showBack: Boolean,
     windowSizeClass: WindowSizeClass,
-    driverStats: DriverStatsInfo,
     viewModel: DriverStatsViewModel = koinViewModel(),
 ) {
-    LaunchedEffect(driverStats) {
-        viewModel.loadDriver(driverStats.driverId, driverStats.season)
+    LaunchedEffect(data) {
+        viewModel.loadDriver(data.id, data.season)
     }
 
     val isLoading = viewModel.loading.collectAsState()
@@ -80,15 +73,15 @@ fun DriverStatsScreen(
     val currentSeason = when (val selection = uiState.value.selection) {
         DriverFilter.Overview -> "All"
         is DriverFilter.Season -> selection.season.toString()
-        null -> driverStats.season?.toString() ?: "All"
+        null -> data.season?.toString() ?: "All"
     }
     ScreenView(screenName = "Driver Season", updateKey = currentSeason, args = mapOf(
-        analyticsDriverId to driverStats.driverId,
+        analyticsDriverId to data.id,
         analyticsSeason to currentSeason
     ))
 
     DriverStatsScreen(
-        driverStats = driverStats,
+        data = data,
         paddingValues = paddingValues,
         actionUpClicked = actionUpClicked,
         showBack = showBack,
@@ -102,7 +95,7 @@ fun DriverStatsScreen(
 
 @Composable
 private fun DriverStatsScreen(
-    driverStats: DriverStatsInfo,
+    data: Screen.Driver,
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     showBack: Boolean,
@@ -140,7 +133,7 @@ private fun DriverStatsScreen(
             item("header") {
                 DriverHeader(
                     modifier = Modifier.animateItem(),
-                    driverName = uiState.driver?.name ?: driverStats.driverName,
+                    driverName = uiState.driver?.name ?: data.name,
                     driverImage = uiState.driver?.photoUrl,
                     option = option ?: PickerItem.Text("..."),
                     optionsToShow = optionsToShow,
@@ -261,12 +254,12 @@ private fun PreviewAll(
 ) {
     ApplicationThemePreview(previewConfig) {
         DriverStatsScreen(
+            data = Screen.Driver(20202, "driver", "name"),
             windowSizeClass = WindowSizeClass.compute(400f, 700f),
             paddingValues = PaddingValues(0.dp),
             actionUpClicked = { },
             showBack = true,
             isLoading = false,
-            driverStats = DriverStatsInfo("driver", "name", 2020),
             refresh = { },
             uiState = DriverStatsUiState(
                 driver = Driver.preview(),
@@ -291,12 +284,12 @@ private fun PreviewSeason(
 ) {
     ApplicationThemePreview(previewConfig) {
         DriverStatsScreen(
+            data = Screen.Driver(20202, "driver", "name"),
             windowSizeClass = WindowSizeClass.compute(400f, 700f),
             paddingValues = PaddingValues(0.dp),
             actionUpClicked = { },
             showBack = true,
             isLoading = false,
-            driverStats = DriverStatsInfo("driver", "name", 2020),
             refresh = { },
             uiState = DriverStatsUiState(
                 driver = Driver.preview(),

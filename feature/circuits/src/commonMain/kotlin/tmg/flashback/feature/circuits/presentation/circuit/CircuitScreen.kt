@@ -47,6 +47,7 @@ import tmg.flashback.formula1.model.CircuitHistoryRace
 import tmg.flashback.formula1.model.CircuitHistoryRaceResult
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.preview.preview
+import tmg.flashback.navigation.Screen
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
@@ -62,7 +63,7 @@ import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 
 @Composable
 fun CircuitScreen(
-    circuitNavigation: CircuitNavigation,
+    data: Screen.Circuit,
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     showBack: Boolean,
@@ -72,15 +73,15 @@ fun CircuitScreen(
     val uiState = viewModel.uiState.collectAsState()
 
     ScreenView("Circuit", args = mapOf(
-        analyticsCircuitId to circuitNavigation.circuitId
+        analyticsCircuitId to data.id
     ))
 
-    LaunchedEffect(circuitNavigation) {
-        viewModel.load(circuitNavigation.circuitId)
+    LaunchedEffect(data) {
+        viewModel.load(data.id)
     }
 
     CircuitScreen(
-        circuitNavigation = circuitNavigation,
+        data = data,
         paddingValues = paddingValues,
         actionUpClicked = actionUpClicked,
         windowSizeClass = windowSizeClass,
@@ -94,7 +95,7 @@ fun CircuitScreen(
 
 @Composable
 private fun CircuitScreen(
-    circuitNavigation: CircuitNavigation,
+    data: Screen.Circuit,
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
@@ -116,7 +117,7 @@ private fun CircuitScreen(
                 Header(
                     actionUpClicked = actionUpClicked,
                     action = HeaderAction.BACK.takeIf { showBack },
-                    text = uiState.circuit?.name ?: circuitNavigation.circuitName,
+                    text = uiState.circuit?.name ?: data.name,
                     overrideIcons = {
                         Refresh(onClick = refresh)
                         if (uiState.circuit != null) {
@@ -290,7 +291,7 @@ private fun Preview(
 ) {
     ApplicationThemePreview(previewConfig) {
         CircuitScreen(
-            circuitNavigation = CircuitNavigation("id", "Silverstone"),
+            data = Screen.Circuit("id", "Silverstone"),
             paddingValues = PaddingValues(0.dp),
             actionUpClicked = { },
             showBack = true,
