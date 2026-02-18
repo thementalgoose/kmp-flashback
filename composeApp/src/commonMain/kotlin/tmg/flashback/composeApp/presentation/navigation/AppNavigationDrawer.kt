@@ -24,16 +24,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation3.runtime.NavKey
 import flashback.presentation.localisation.generated.resources.Res
 import flashback.presentation.localisation.generated.resources.app_version_placeholder
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.infrastructure.device.Device
-import tmg.flashback.navigation.Screen
 import tmg.flashback.composeApp.presentation.MenuItem
 import tmg.flashback.composeApp.presentation.icon
 import tmg.flashback.composeApp.presentation.label
 import tmg.flashback.composeApp.presentation.navigation.hero.DashboardHero
+import tmg.flashback.navigation.NavAbout
+import tmg.flashback.navigation.NavCalendar
+import tmg.flashback.navigation.NavCircuits
+import tmg.flashback.navigation.NavDriverStandings
+import tmg.flashback.navigation.NavReactionGame
+import tmg.flashback.navigation.NavRss
+import tmg.flashback.navigation.NavSettings
+import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
@@ -42,7 +50,7 @@ import tmg.flashback.xr.LocalXR
 @Composable
 internal fun AppNavigationDrawer(
     appNavigationUiState: AppNavigationUIState,
-    navigationItemClicked: (Screen) -> Unit,
+    navigationItemClicked: (NavKey) -> Unit,
     closeMenu: () -> Unit,
     modifier: Modifier = Modifier,
     insetPadding: PaddingValues = WindowInsets.safeContent.asPaddingValues(),
@@ -72,11 +80,11 @@ internal fun AppNavigationDrawer(
                 item("nav_results") {
                     NavigationItem(
                         menuItem = MenuItem.Results,
-                        isSelected = appNavigationUiState.screen == Screen.Calendar ||
-                                appNavigationUiState.screen == Screen.DriverStandings ||
-                                appNavigationUiState.screen == Screen.TeamStandings,
+                        isSelected = appNavigationUiState.screen == NavCalendar ||
+                                appNavigationUiState.screen == NavDriverStandings ||
+                                appNavigationUiState.screen == NavTeamStandings,
                         onClick = {
-                            navigationItemClicked(Screen.Calendar)
+                            navigationItemClicked(NavCalendar)
                             closeMenu()
                         }
                     )
@@ -84,9 +92,9 @@ internal fun AppNavigationDrawer(
                 item("nav_circuits") {
                     NavigationItem(
                         menuItem = MenuItem.Circuits,
-                        isSelected = appNavigationUiState.screen == Screen.Circuits,
+                        isSelected = appNavigationUiState.screen == NavCircuits,
                         onClick = {
-                            navigationItemClicked(Screen.Circuits)
+                            navigationItemClicked(NavCircuits)
                             closeMenu()
                         }
                     )
@@ -98,9 +106,9 @@ internal fun AppNavigationDrawer(
                     item("nav_rss") {
                         NavigationItem(
                             menuItem = MenuItem.Rss,
-                            isSelected = appNavigationUiState.screen == Screen.Rss,
+                            isSelected = appNavigationUiState.screen == NavRss,
                             onClick = {
-                                navigationItemClicked(Screen.Rss)
+                                navigationItemClicked(NavRss)
                                 closeMenu()
                             }
                         )
@@ -109,9 +117,9 @@ internal fun AppNavigationDrawer(
                 item("nav_reaction_game") {
                     NavigationItem(
                         menuItem = MenuItem.ReactionGame,
-                        isSelected = appNavigationUiState.screen == Screen.ReactionGame,
+                        isSelected = appNavigationUiState.screen == NavReactionGame,
                         onClick = {
-                            navigationItemClicked(Screen.ReactionGame)
+                            navigationItemClicked(NavReactionGame)
                             closeMenu()
                         }
                     )
@@ -119,9 +127,9 @@ internal fun AppNavigationDrawer(
                 item("nav_settings") {
                     NavigationItem(
                         menuItem = MenuItem.Settings,
-                        isSelected = appNavigationUiState.screen == Screen.Settings,
+                        isSelected = appNavigationUiState.screen == NavSettings,
                         onClick = {
-                            navigationItemClicked(Screen.Settings)
+                            navigationItemClicked(NavSettings)
                             closeMenu()
                         }
                     )
@@ -129,9 +137,9 @@ internal fun AppNavigationDrawer(
                 item("nav_contact") {
                     NavigationItem(
                         menuItem = MenuItem.Contact,
-                        isSelected = appNavigationUiState.screen == Screen.About,
+                        isSelected = appNavigationUiState.screen == NavAbout,
                         onClick = {
-                            navigationItemClicked(Screen.About)
+                            navigationItemClicked(NavAbout)
                             closeMenu()
                         }
                     )

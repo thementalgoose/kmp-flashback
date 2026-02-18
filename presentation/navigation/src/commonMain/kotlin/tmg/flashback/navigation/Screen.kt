@@ -4,101 +4,97 @@ import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed interface Screen: NavKey {
+data object NavCalendar: NavKey
 
-    @Serializable
-    data object Calendar: Screen
+@Serializable
+data object NavDriverStandings: NavKey
 
-    @Serializable
-    data object DriverStandings: Screen
+@Serializable
+data object NavTeamStandings: NavKey
 
-    @Serializable
-    data object TeamStandings: Screen
+@Serializable
+data object NavCircuits: NavKey
 
-    @Serializable
-    data object Circuits: Screen
+@Serializable
+data class NavWeekend(
+    val season: Int,
+    val round: Int,
+    val raceName: String,
+): NavKey
 
-    @Serializable
-    data class Weekend(
-        val season: Int,
-        val round: Int,
-        val raceName: String,
-    ): Screen
-
-    @Serializable
-    data class Circuit(
-        val id: String,
-        val name: String,
-    ): Screen {
-        companion object
-    }
-
-    @Serializable
-    data class Driver(
-        val season: Int,
-        val id: String,
-        val name: String
-    ): Screen
-
-    @Serializable
-    data class Team(
-        val season: Int,
-        val id: String,
-        val name: String
-    ): Screen
-
-    @Serializable
-    data class DriverComparison(
-        val season: Int
-    ): Screen
-
-    @Serializable
-    data object Rss: Screen
-
-    @Serializable
-    data class Webpage(
-        val url: String
-    ): Screen
-
-    @Serializable
-    data object ReactionGame: Screen
-
-    @Serializable
-    data object Settings: Screen
-
-    @Serializable
-    data object SettingsDarkMode: Screen
-
-    @Serializable
-    data object SettingsTheme: Screen
-
-    @Serializable
-    data object SettingsLayout: Screen
-
-    @Serializable
-    data object SettingsWeather: Screen
-
-    @Serializable
-    data object SettingsRssConfigure: Screen
-
-    @Serializable
-    data object SettingsInAppBrowser: Screen
-
-    @Serializable
-    data object SettingsNotificationResults: Screen
-
-    @Serializable
-    data object SettingsNotificationUpcoming: Screen
-
-    @Serializable
-    data object SettingsWidgets: Screen
-
-    @Serializable
-    data object SettingsPrivacy: Screen
-
-    @Serializable
-    data object PrivacyPolicy: Screen
-
-    @Serializable
-    data object About: Screen
+@Serializable
+data class NavCircuit(
+    val id: String,
+    val name: String,
+): NavKey {
+    companion object
 }
+
+@Serializable
+data class NavDriver(
+    val season: Int,
+    val id: String,
+    val name: String
+): NavKey
+
+@Serializable
+data class NavTeam(
+    val season: Int,
+    val id: String,
+    val name: String
+): NavKey
+
+@Serializable
+data class NavDriverComparison(
+    val season: Int
+): NavKey
+
+@Serializable
+data object NavRss: NavKey
+
+@Serializable
+data class NavWebpage(
+    val url: String
+): NavKey
+
+@Serializable
+data object NavReactionGame: NavKey
+
+@Serializable
+data object NavSettings: NavKey
+
+@Serializable
+data object NavSettingsDarkMode: NavKey
+
+@Serializable
+data object NavSettingsTheme: NavKey
+
+@Serializable
+data object NavSettingsLayout: NavKey
+
+@Serializable
+data object NavSettingsWeather: NavKey
+
+@Serializable
+data object NavSettingsRssConfigure: NavKey
+
+@Serializable
+data object NavSettingsInAppBrowser: NavKey
+
+@Serializable
+data object NavSettingsNotificationResults: NavKey
+
+@Serializable
+data object NavSettingsNotificationUpcoming: NavKey
+
+@Serializable
+data object NavSettingsWidgets: NavKey
+
+@Serializable
+data object NavSettingsPrivacy: NavKey
+
+@Serializable
+data object NavPrivacyPolicy: NavKey
+
+@Serializable
+data object NavAbout: NavKey

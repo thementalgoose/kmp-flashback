@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.presentation.localisation.generated.resources.Res.string
@@ -36,7 +37,7 @@ import tmg.flashback.feature.season.presentation.shared.ongoing_banner.ResultAsO
 import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedBy
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.ResultsSeasonPicker
 import tmg.flashback.formula1.model.SeasonConstructorStandingSeason
-import tmg.flashback.navigation.Screen
+import tmg.flashback.navigation.NavTeam
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.Refresh
@@ -54,7 +55,7 @@ fun TeamStandingsScreen(
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
-    navigateTo: (Screen) -> Unit,
+    navigateTo: (NavKey) -> Unit,
     viewModel: TeamStandingsViewModel = koinViewModel()
 ) {
 
@@ -75,11 +76,13 @@ fun TeamStandingsScreen(
         windowSizeClass = windowSizeClass,
         uiState = state.value,
         constructorClicked = {
-            navigateTo(Screen.Team(
-                id = it.constructor.id,
-                name = it.constructor.name,
-                season = it.season
-            ))
+            navigateTo(
+                NavTeam(
+                    id = it.constructor.id,
+                    name = it.constructor.name,
+                    season = it.season
+                )
+            )
         },
         refresh = viewModel::refresh
     )

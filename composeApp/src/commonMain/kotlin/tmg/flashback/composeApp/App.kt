@@ -44,13 +44,15 @@ import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.infrastructure.log.logInfo
-import tmg.flashback.navigation.Screen
 import tmg.flashback.composeApp.presentation.AppContainer
 import tmg.flashback.composeApp.presentation.MenuItem
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.composeApp.presentation.sync.SyncBottomSheet
 import tmg.flashback.composeApp.presentation.toNavigationItem
 import tmg.flashback.composeApp.presentation.toScreen
+import tmg.flashback.navigation.NavCalendar
+import tmg.flashback.navigation.NavDriverStandings
+import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.navigation.rememberListDetailSceneStrategy
 import tmg.flashback.navigation.saveStateConfiguration
 import tmg.flashback.style.AppTheme
@@ -80,12 +82,12 @@ fun App() {
         toastManager.foregroundColor = toastForeground
     }
 
-    val backStack = rememberNavBackStack(saveStateConfiguration, Screen.Calendar)
+    val backStack = rememberNavBackStack(saveStateConfiguration, NavCalendar)
 
     val panelsState = rememberOverlappingPanelsState(OverlappingPanelsValue.Closed)
     val coroutineScope = rememberCoroutineScope()
 
-    val showBottomBar = isCompact && appNavigationUiState.value.screen in listOf(Screen.Calendar, Screen.DriverStandings, Screen.TeamStandings) && !appNavigationUiState.value.intoSubNavigation
+    val showBottomBar = isCompact && appNavigationUiState.value.screen in listOf(NavCalendar, NavDriverStandings, NavTeamStandings) && !appNavigationUiState.value.intoSubNavigation
     val systemNavigationBarHeight = WindowInsets.safeDrawing.asPaddingValues().calculateBottomPadding()
     val navigationBarHeight = appBarHeightWhenVertical + systemNavigationBarHeight
     val navigationBarPosition = animateDpAsState(
@@ -115,6 +117,7 @@ fun App() {
                     windowSizeClass = windowSizeClass,
                     paddingValues = paddingValues,
                     appNavigationViewModel = appNavigationViewModel,
+                    backStack = backStack
                 )
 
                 // Fake translucent status bar
@@ -132,9 +135,9 @@ fun App() {
                 if (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
                     val screen = appNavigationUiState.value.screen
                     val items = listOf(
-                        MenuItem.Calendar.toNavigationItem(screen == Screen.Calendar),
-                        MenuItem.DriversStandings.toNavigationItem(screen == Screen.DriverStandings),
-                        MenuItem.TeamsStandings.toNavigationItem(screen == Screen.TeamStandings)
+                        MenuItem.Calendar.toNavigationItem(screen == NavCalendar),
+                        MenuItem.DriversStandings.toNavigationItem(screen == NavDriverStandings),
+                        MenuItem.TeamsStandings.toNavigationItem(screen == NavTeamStandings)
                     )
                     NavigationBar(
                         bottomPadding = systemNavigationBarHeight,

@@ -33,6 +33,7 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
+import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.domain.formula1.generated.resources.Res.drawable
@@ -65,7 +66,7 @@ import tmg.flashback.formula1.extensions.label
 import tmg.flashback.infrastructure.datetime.dateFormatDMMM
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.startOfWeek
-import tmg.flashback.navigation.Screen
+import tmg.flashback.navigation.NavWeekend
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
@@ -87,7 +88,7 @@ fun CalendarScreen(
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
-    navigateTo: (Screen) -> Unit,
+    navigateTo: (NavKey) -> Unit,
     viewModel: CalendarScreenViewModel = koinViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsState()
@@ -108,11 +109,13 @@ fun CalendarScreen(
         uiState = uiState.value,
         refresh = viewModel::refresh,
         goToWeekend = {
-            navigateTo(Screen.Weekend(
-                season = it.model.season,
-                round = it.model.round,
-                raceName = it.model.raceName
-            ))
+            navigateTo(
+                NavWeekend(
+                    season = it.model.season,
+                    round = it.model.round,
+                    raceName = it.model.raceName
+                )
+            )
         },
         expandGroupedRaces = viewModel::clickGroupedRaces
     )

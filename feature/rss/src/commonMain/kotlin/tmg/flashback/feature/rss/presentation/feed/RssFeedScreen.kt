@@ -44,6 +44,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowWidthSizeClass.Companion.COMPACT
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
@@ -52,7 +53,8 @@ import tmg.flashback.feature.rss.models.ArticleSource
 import tmg.flashback.infrastructure.datetime.dateTimeFormatHHmmAtDMMM
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.extensions.toColourInt
-import tmg.flashback.navigation.Screen
+import tmg.flashback.navigation.NavSettingsRssConfigure
+import tmg.flashback.navigation.NavWebpage
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
@@ -64,7 +66,6 @@ import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
-import tmg.flashback.ui.navigation.MasterDetailPaneState
 
 private val badgeSize: Dp = 40.dp
 
@@ -73,7 +74,7 @@ fun RSSScreen(
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
-    navigateTo: (Screen) -> Unit,
+    navigateTo: (NavKey) -> Unit,
     viewModel: RSSFeedViewModel = koinViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsState()
@@ -89,13 +90,13 @@ fun RSSScreen(
         windowSizeClass = windowSizeClass,
         itemClicked = {
             if (viewModel.inAppBrowserEnabled) {
-                navigateTo(Screen.Webpage(it.link))
+                navigateTo(NavWebpage(it.link))
             } else {
                 viewModel.openArticle(it)
             }
         },
         configureSources = {
-            navigateTo(Screen.SettingsRssConfigure)
+            navigateTo(NavSettingsRssConfigure)
         },
         showMenu = windowSizeClass.windowWidthSizeClass == COMPACT
     )

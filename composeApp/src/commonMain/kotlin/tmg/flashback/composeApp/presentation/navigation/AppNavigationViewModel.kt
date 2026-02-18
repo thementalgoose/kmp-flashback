@@ -16,8 +16,6 @@ import tmg.flashback.eastereggs.usecases.IsSummerEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsUkraineEnabledUseCase
 import tmg.flashback.feature.maintenance.repository.MaintenanceRepository
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
-import tmg.flashback.infrastructure.log.logDebug
-import tmg.flashback.navigation.Screen
 import tmg.flashback.composeApp.usecases.RequiresSyncUseCase
 
 class AppNavigationViewModel(

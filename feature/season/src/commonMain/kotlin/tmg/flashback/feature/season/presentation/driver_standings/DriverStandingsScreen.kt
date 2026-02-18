@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.feature.season.generated.resources.Res
@@ -35,7 +36,6 @@ import flashback.feature.season.generated.resources.ic_driver_comparison
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.driver_comparison_title
 import flashback.presentation.localisation.generated.resources.season_standings_driver
-import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -45,8 +45,8 @@ import tmg.flashback.feature.season.presentation.shared.ongoing_banner.ResultAsO
 import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedBy
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.ResultsSeasonPicker
 import tmg.flashback.formula1.model.SeasonDriverStandingSeason
-import tmg.flashback.infrastructure.datetime.now
-import tmg.flashback.navigation.Screen
+import tmg.flashback.navigation.NavDriver
+import tmg.flashback.navigation.NavDriverComparison
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
@@ -59,7 +59,6 @@ import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.loading.SkeletonViewList
 import tmg.flashback.ui.components.progressbar.ProgressBar
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
-import tmg.flashback.ui.navigation.MasterDetailPaneState
 import tmg.flashback.ui.navigation.appBarMaximumHeight
 
 @Composable
@@ -67,7 +66,7 @@ fun DriverStandingsScreen(
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
-    navigateTo: (Screen) -> Unit,
+    navigateTo: (NavKey) -> Unit,
     viewModel: DriverStandingsViewModel = koinViewModel()
 ) {
     val state = viewModel.uiState.collectAsState()
@@ -87,7 +86,7 @@ fun DriverStandingsScreen(
         uiState = state.value,
         windowSizeClass = windowSizeClass,
         driverClicked = {
-            navigateTo(Screen.Driver(
+            navigateTo(NavDriver(
                 season = it.season,
                 id = it.driver.id,
                 name = it.driver.name
@@ -95,9 +94,7 @@ fun DriverStandingsScreen(
         },
         refresh = viewModel::refresh,
         comparisonClicked = {
-            navigateTo(Screen.DriverComparison(
-                season = state.value.season
-            ))
+            navigateTo(NavDriverComparison(season = state.value.season))
         }
     )
 }

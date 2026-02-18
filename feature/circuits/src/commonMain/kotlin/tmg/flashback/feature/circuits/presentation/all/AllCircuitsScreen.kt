@@ -36,12 +36,13 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.navigation3.runtime.NavKey
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.preview.preview
-import tmg.flashback.navigation.Screen
+import tmg.flashback.navigation.NavCircuit
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
@@ -63,7 +64,7 @@ fun AllCircuitsScreen(
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
-    navigateTo: (Screen) -> Unit,
+    navigateTo: (NavKey) -> Unit,
     viewModel: AllCircuitsViewModel = koinViewModel()
 ) {
     ScreenView(screenName = "All Circuits")
@@ -84,7 +85,7 @@ fun AllCircuitsScreen(
         refresh = viewModel::refresh,
         circuitClicked = {
             focusManager.clearFocus()
-            navigateTo(Screen.Circuit(it.circuit.id, it.circuit.name))
+            navigateTo(NavCircuit(it.circuit.id, it.circuit.name))
         },
         modifier = Modifier
             .pointerInput(Unit) {

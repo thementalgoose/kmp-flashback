@@ -43,7 +43,7 @@ import tmg.flashback.feature.drivers.presentation.shared.ResultRace
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.preview.preview
-import tmg.flashback.navigation.Screen
+import tmg.flashback.navigation.NavDriver
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
@@ -56,7 +56,7 @@ import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 
 @Composable
 fun DriverStatsScreen(
-    data: Screen.Driver,
+    data: NavDriver,
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     showBack: Boolean,
@@ -95,7 +95,7 @@ fun DriverStatsScreen(
 
 @Composable
 private fun DriverStatsScreen(
-    data: Screen.Driver,
+    data: NavDriver,
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     showBack: Boolean,
@@ -254,7 +254,7 @@ private fun PreviewAll(
 ) {
     ApplicationThemePreview(previewConfig) {
         DriverStatsScreen(
-            data = Screen.Driver(20202, "driver", "name"),
+            data = NavDriver(20202, "driver", "name"),
             windowSizeClass = WindowSizeClass.compute(400f, 700f),
             paddingValues = PaddingValues(0.dp),
             actionUpClicked = { },
@@ -284,7 +284,7 @@ private fun PreviewSeason(
 ) {
     ApplicationThemePreview(previewConfig) {
         DriverStatsScreen(
-            data = Screen.Driver(20202, "driver", "name"),
+            data = NavDriver(20202, "driver", "name"),
             windowSizeClass = WindowSizeClass.compute(400f, 700f),
             paddingValues = PaddingValues(0.dp),
             actionUpClicked = { },

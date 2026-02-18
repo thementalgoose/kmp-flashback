@@ -45,7 +45,7 @@ import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.addSpri
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.addSprintRaceData
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.infrastructure.extensions.toEnum
-import tmg.flashback.navigation.Screen
+import tmg.flashback.navigation.NavWeekend
 import tmg.flashback.style.AppTheme
 import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.header.Header
@@ -57,7 +57,7 @@ import tmg.flashback.ui.navigation.appBarMaximumHeight
 
 @Composable
 fun WeekendScreen(
-    data: Screen.Weekend,
+    data: NavWeekend,
     paddingValues: PaddingValues,
     showBack: Boolean,
     actionUpClicked: () -> Unit,
@@ -97,7 +97,7 @@ fun WeekendScreen(
 
 @Composable
 fun WeekendScreenTab(
-    screenData: Screen.Weekend,
+    screenData: NavWeekend,
     isLoading: Boolean,
     paddingValues: PaddingValues,
     showBack: Boolean,

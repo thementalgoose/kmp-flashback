@@ -40,14 +40,13 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsCircuitId
 import tmg.flashback.analytics.presentation.ScreenView
-import tmg.flashback.feature.circuits.presentation.all.CircuitNavigation
 import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.CircuitHistoryRace
 import tmg.flashback.formula1.model.CircuitHistoryRaceResult
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.preview.preview
-import tmg.flashback.navigation.Screen
+import tmg.flashback.navigation.NavCircuit
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
@@ -63,7 +62,7 @@ import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 
 @Composable
 fun CircuitScreen(
-    data: Screen.Circuit,
+    data: NavCircuit,
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     showBack: Boolean,
@@ -95,7 +94,7 @@ fun CircuitScreen(
 
 @Composable
 private fun CircuitScreen(
-    data: Screen.Circuit,
+    data: NavCircuit,
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
@@ -291,7 +290,7 @@ private fun Preview(
 ) {
     ApplicationThemePreview(previewConfig) {
         CircuitScreen(
-            data = Screen.Circuit("id", "Silverstone"),
+            data = NavCircuit("id", "Silverstone"),
             paddingValues = PaddingValues(0.dp),
             actionUpClicked = { },
             showBack = true,

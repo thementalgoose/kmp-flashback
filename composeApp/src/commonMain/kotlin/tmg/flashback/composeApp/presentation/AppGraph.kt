@@ -19,7 +19,6 @@ import tmg.flashback.feature.about.presentation.AboutScreen
 import tmg.flashback.feature.privacypolicy.presentation.PrivacyPolicyScreen
 import tmg.flashback.feature.reactiongame.presentation.ReactionGameScreen
 import tmg.flashback.feature.rss.presentation.feed.RssFeedGraph
-import tmg.flashback.navigation.Screen
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.composeApp.presentation.settings.AllSettingsScreen
 import tmg.flashback.composeApp.presentation.settings.browser.SettingsBrowserScreen
@@ -43,6 +42,31 @@ import tmg.flashback.feature.season.presentation.driver_standings.DriverStanding
 import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsScreen
 import tmg.flashback.feature.weekend.presentation.WeekendScreen
 import tmg.flashback.navigation.ListDetailScene
+import tmg.flashback.navigation.NavAbout
+import tmg.flashback.navigation.NavCalendar
+import tmg.flashback.navigation.NavCircuit
+import tmg.flashback.navigation.NavCircuits
+import tmg.flashback.navigation.NavDriver
+import tmg.flashback.navigation.NavDriverComparison
+import tmg.flashback.navigation.NavDriverStandings
+import tmg.flashback.navigation.NavPrivacyPolicy
+import tmg.flashback.navigation.NavReactionGame
+import tmg.flashback.navigation.NavRss
+import tmg.flashback.navigation.NavSettings
+import tmg.flashback.navigation.NavSettingsDarkMode
+import tmg.flashback.navigation.NavSettingsInAppBrowser
+import tmg.flashback.navigation.NavSettingsLayout
+import tmg.flashback.navigation.NavSettingsNotificationResults
+import tmg.flashback.navigation.NavSettingsNotificationUpcoming
+import tmg.flashback.navigation.NavSettingsPrivacy
+import tmg.flashback.navigation.NavSettingsRssConfigure
+import tmg.flashback.navigation.NavSettingsTheme
+import tmg.flashback.navigation.NavSettingsWeather
+import tmg.flashback.navigation.NavSettingsWidgets
+import tmg.flashback.navigation.NavTeam
+import tmg.flashback.navigation.NavTeamStandings
+import tmg.flashback.navigation.NavWebpage
+import tmg.flashback.navigation.NavWeekend
 import tmg.flashback.navigation.rememberListDetailSceneStrategy
 import tmg.flashback.webbrowser.presentation.WebScreen
 
@@ -63,7 +87,7 @@ fun AppGraph(
         sceneStrategy = listDetailStrategy,
         modifier = modifier,
         entryProvider = entryProvider {
-            entry<Screen.Calendar>(metadata = ListDetailScene.listPane()) {
+            entry<NavCalendar>(metadata = ListDetailScene.listPane()) {
                 CalendarScreen(
                     paddingValues = insetPadding,
                     actionUpClicked = openPanel,
@@ -73,7 +97,7 @@ fun AppGraph(
                     }
                 )
             }
-            entry<Screen.DriverStandings>(metadata = ListDetailScene.listPane()) {
+            entry<NavDriverStandings>(metadata = ListDetailScene.listPane()) {
                 DriverStandingsScreen(
                     paddingValues = insetPadding,
                     actionUpClicked = openPanel,
@@ -83,7 +107,7 @@ fun AppGraph(
                     }
                 )
             }
-            entry<Screen.TeamStandings>(metadata = ListDetailScene.listPane()) {
+            entry<NavTeamStandings>(metadata = ListDetailScene.listPane()) {
                 TeamStandingsScreen(
                     paddingValues = insetPadding,
                     actionUpClicked = { backStack.removeLastOrNull() },
@@ -93,7 +117,7 @@ fun AppGraph(
                     }
                 )
             }
-            entry<Screen.Circuit>(metadata = ListDetailScene.listPane()) {
+            entry<NavCircuits>(metadata = ListDetailScene.listPane()) {
                 AllCircuitsScreen(
                     paddingValues = insetPadding,
                     actionUpClicked = { backStack.removeLastOrNull() },
@@ -104,8 +128,7 @@ fun AppGraph(
                 )
             }
 
-
-            entry<Screen.Weekend>(metadata = ListDetailScene.detailPane()) {
+            entry<NavWeekend>(metadata = ListDetailScene.detailPane()) {
                 WeekendScreen(
                     data = it,
                     paddingValues = insetPadding,
@@ -114,7 +137,7 @@ fun AppGraph(
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
             }
-            entry<Screen.Circuit>(metadata = ListDetailScene.detailPane()) {
+            entry<NavCircuit>(metadata = ListDetailScene.detailPane()) {
                 CircuitScreen(
                     data = it,
                     paddingValues = insetPadding,
@@ -123,7 +146,7 @@ fun AppGraph(
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
             }
-            entry<Screen.Driver>(metadata = ListDetailScene.detailPane()) {
+            entry<NavDriver>(metadata = ListDetailScene.detailPane()) {
                 DriverStatsScreen(
                     data = it,
                     paddingValues = insetPadding,
@@ -132,7 +155,7 @@ fun AppGraph(
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                 )
             }
-            entry<Screen.Team>(metadata = ListDetailScene.detailPane()) {
+            entry<NavTeam>(metadata = ListDetailScene.detailPane()) {
                 ConstructorStatsScreen(
                     data = it,
                     paddingValues = insetPadding,
@@ -141,7 +164,7 @@ fun AppGraph(
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
             }
-            entry<Screen.DriverComparison>(metadata = ListDetailScene.detailPane()) {
+            entry<NavDriverComparison>(metadata = ListDetailScene.detailPane()) {
                 DriverComparisonScreen(
                     season = it.season,
                     paddingValues = insetPadding,
@@ -150,7 +173,7 @@ fun AppGraph(
                 )
             }
 
-            entry<Screen.Rss>(metadata = ListDetailScene.listPane()) {
+            entry<NavRss>(metadata = ListDetailScene.listPane()) {
                 RSSScreen(
                     paddingValues = insetPadding,
                     actionUpClicked = { backStack.removeLastOrNull() },
@@ -160,7 +183,7 @@ fun AppGraph(
                     }
                 )
             }
-            entry<Screen.Webpage>(metadata = ListDetailScene.detailPane()) {
+            entry<NavWebpage>(metadata = ListDetailScene.detailPane()) {
                 WebScreen(
                     url = it.url,
                     paddingValues = insetPadding,
@@ -171,7 +194,7 @@ fun AppGraph(
                 )
             }
 
-            entry<Screen.ReactionGame>(metadata = ListDetailScene.listPane()) {
+            entry<NavReactionGame>(metadata = ListDetailScene.listPane()) {
                 ReactionGameScreen(
                     paddingValues = insetPadding,
                     actionUpClicked = openPanel,
@@ -179,7 +202,7 @@ fun AppGraph(
                 )
             }
 
-            entry<Screen.Settings>(metadata = ListDetailScene.listPane()) {
+            entry<NavSettings>(metadata = ListDetailScene.listPane()) {
                 AllSettingsScreen(
                     actionUpClicked = { backStack.removeLastOrNull() },
                     showMenu = true,
@@ -191,84 +214,84 @@ fun AppGraph(
                     insetPadding = insetPadding
                 )
             }
-            entry<Screen.SettingsDarkMode>(metadata = ListDetailScene.detailPane()) {
+            entry<NavSettingsDarkMode>(metadata = ListDetailScene.detailPane()) {
                 SettingsDarkModeScreen(
                     actionUpClicked = { backStack.removeLastOrNull() },
                     insetPadding = insetPadding,
                     showBack = true
                 )
             }
-            entry<Screen.SettingsTheme>(metadata = ListDetailScene.detailPane()) {
+            entry<NavSettingsTheme>(metadata = ListDetailScene.detailPane()) {
                 SettingsThemeScreen(
                     actionUpClicked = { backStack.removeLastOrNull() },
                     insetPadding = insetPadding,
                     showBack = true
                 )
             }
-            entry<Screen.SettingsLayout>(metadata = ListDetailScene.detailPane()) {
+            entry<NavSettingsLayout>(metadata = ListDetailScene.detailPane()) {
                 SettingsLayoutScreen(
                     actionUpClicked = { backStack.removeLastOrNull() },
                     insetPadding = insetPadding,
                     showBack = true
                 )
             }
-            entry<Screen.SettingsWeather>(metadata = ListDetailScene.detailPane()) {
+            entry<NavSettingsWeather>(metadata = ListDetailScene.detailPane()) {
                 SettingsWeatherScreen(
                     actionUpClicked = { backStack.removeLastOrNull() },
                     insetPadding = insetPadding,
                     showBack = true
                 )
             }
-            entry<Screen.SettingsRssConfigure>(metadata = ListDetailScene.detailPane()) {
+            entry<NavSettingsRssConfigure>(metadata = ListDetailScene.detailPane()) {
                 RssConfigureScreen(
                     actionUpClicked = { backStack.removeLastOrNull() },
                     insetPadding = insetPadding,
                     showBack = true
                 )
             }
-            entry<Screen.SettingsInAppBrowser>(metadata = ListDetailScene.detailPane()) {
+            entry<NavSettingsInAppBrowser>(metadata = ListDetailScene.detailPane()) {
                 SettingsBrowserScreen(
                     actionUpClicked = { backStack.removeLastOrNull() },
                     insetPadding = insetPadding,
                     showBack = true
                 )
             }
-            entry<Screen.SettingsNotificationResults>(metadata = ListDetailScene.detailPane()) {
+            entry<NavSettingsNotificationResults>(metadata = ListDetailScene.detailPane()) {
                 SettingsNotificationResultsScreen(
                     actionUpClicked = { backStack.removeLastOrNull() },
                     insetPadding = insetPadding,
                     showBack = true
                 )
             }
-            entry<Screen.SettingsNotificationUpcoming>(metadata = ListDetailScene.detailPane()) {
+            entry<NavSettingsNotificationUpcoming>(metadata = ListDetailScene.detailPane()) {
                 SettingsNotificationUpcomingScreen(
                     actionUpClicked = { backStack.removeLastOrNull() },
                     insetPadding = insetPadding,
                     showBack = true
                 )
             }
-            entry<Screen.SettingsWidgets>(metadata = ListDetailScene.detailPane()) {
+            entry<NavSettingsWidgets>(metadata = ListDetailScene.detailPane()) {
                 SettingsWidgetScreen(
                     actionUpClicked = { backStack.removeLastOrNull() },
                     insetPadding = insetPadding,
                     showBack = true
                 )
             }
-            entry<Screen.SettingsPrivacy>(metadata = ListDetailScene.detailPane()) {
+            entry<NavSettingsPrivacy>(metadata = ListDetailScene.detailPane()) {
                 SettingsPrivacyScreen(
                     actionUpClicked = { backStack.removeLastOrNull() },
                     insetPadding = insetPadding,
                     showBack = true
                 )
             }
-            entry<Screen.PrivacyPolicy>(metadata = ListDetailScene.detailPane()) {
+            entry<NavPrivacyPolicy>(metadata = ListDetailScene.detailPane()) {
                 PrivacyPolicyScreen(
                     paddingValues = insetPadding,
                     actionUpClicked = openPanel
                 )
             }
 
-            entry<Screen.About>(metadata = ListDetailScene.listPane()) {
+            entry<NavAbout>(metadata = ListDetailScene.listPane()) {
                 AboutScreen(
                     appIcon = Res.drawable.logo,
                     paddingValues = insetPadding,
@@ -278,21 +301,4 @@ fun AppGraph(
             }
         }
     )
-
-    NavHost(
-        navController = navController,
-        startDestination = Screen.Calendar,
-        enterTransition = { fadeIn() },
-        exitTransition = { fadeOut() },
-        modifier = modifier,
-    ) {
-        composable<Screen.Rss> {
-            RssFeedGraph(
-                paddingValues = insetPadding,
-                actionUpClicked = openPanel,
-                navigator = rssNavigator,
-                windowSizeClass = windowAdaptiveInfo.windowSizeClass
-            )
-        }
-    }
 }

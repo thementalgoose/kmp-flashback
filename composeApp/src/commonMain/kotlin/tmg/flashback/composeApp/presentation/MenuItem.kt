@@ -1,12 +1,12 @@
 package tmg.flashback.composeApp.presentation
 
+import androidx.navigation3.runtime.NavKey
 import flashback.composeapp.generated.resources.Res
 import flashback.composeapp.generated.resources.dashboard_nav_calendar
 import flashback.composeapp.generated.resources.dashboard_nav_constructor
 import flashback.composeapp.generated.resources.dashboard_nav_drivers
 import flashback.composeapp.generated.resources.dashboard_reaction
 import flashback.composeapp.generated.resources.dashboard_rss
-import flashback.composeapp.generated.resources.dashboard_search
 import flashback.composeapp.generated.resources.dashboard_xr
 import flashback.composeapp.generated.resources.dashboard_settings
 import flashback.composeapp.generated.resources.dashboard_contact
@@ -25,7 +25,14 @@ import flashback.presentation.localisation.generated.resources.nav_settings
 import flashback.presentation.localisation.generated.resources.search_category_circuits
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
-import tmg.flashback.navigation.Screen
+import tmg.flashback.navigation.NavAbout
+import tmg.flashback.navigation.NavCalendar
+import tmg.flashback.navigation.NavCircuits
+import tmg.flashback.navigation.NavDriverStandings
+import tmg.flashback.navigation.NavReactionGame
+import tmg.flashback.navigation.NavRss
+import tmg.flashback.navigation.NavSettings
+import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.ui.navigation.NavigationItem
 
 enum class MenuItem(
@@ -80,17 +87,17 @@ fun MenuItem.toNavigationItem(
     isSelected = isSelected
 )
 
-fun MenuItem.toScreen(): Screen? {
+fun MenuItem.toScreen(): NavKey? {
     return when (this) {
-        MenuItem.Results -> Screen.Calendar
-        MenuItem.Calendar -> Screen.Calendar
-        MenuItem.DriversStandings -> Screen.DriverStandings
-        MenuItem.TeamsStandings -> Screen.TeamStandings
-        MenuItem.Circuits -> Screen.Circuits
-        MenuItem.Rss -> Screen.Rss
-        MenuItem.ReactionGame -> Screen.ReactionGame
-        MenuItem.Settings -> Screen.Settings
-        MenuItem.Contact -> Screen.About
+        MenuItem.Results -> NavCalendar
+        MenuItem.Calendar -> NavCalendar
+        MenuItem.DriversStandings -> NavDriverStandings
+        MenuItem.TeamsStandings -> NavTeamStandings
+        MenuItem.Circuits -> NavCircuits
+        MenuItem.Rss -> NavRss
+        MenuItem.ReactionGame -> NavReactionGame
+        MenuItem.Settings -> NavSettings
+        MenuItem.Contact -> NavAbout
         MenuItem.XR_Spacial -> null
     }
 }
