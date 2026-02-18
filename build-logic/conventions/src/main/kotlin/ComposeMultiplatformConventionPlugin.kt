@@ -21,6 +21,10 @@ class ComposeMultiplatformConventionPlugin: Plugin<Project> {
                         implementation(libs.findLibrary("compose.materialIconsExtended").get().get())
                         implementation(libs.findLibrary("compose.uiTest").get().get())
                         implementation(libs.findLibrary("androidx.ui.toolingpreview").get().get())
+
+                        implementation(libs.findLibrary("compose.nav3").get().get())
+                        implementation(libs.findLibrary("compose.nav3Adaptive").get().get())
+                        implementation(libs.findLibrary("compose.nav3ViewModel").get().get())
                     }
                 }
             }
