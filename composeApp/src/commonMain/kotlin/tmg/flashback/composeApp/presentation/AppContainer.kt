@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import androidx.window.core.layout.WindowWidthSizeClass
 import kotlinx.coroutines.launch
 import tmg.flashback.eastereggs.presentation.snow
@@ -45,7 +46,6 @@ fun AppContainer(
     openPanel: () -> Unit,
     windowAdaptiveInfo: WindowAdaptiveInfo,
     windowSizeClass: WindowSizeClass,
-    navController: NavHostController,
     panelsState: OverlappingPanelsState,
     paddingValues: PaddingValues,
     appNavigationViewModel: AppNavigationViewModel
@@ -58,40 +58,7 @@ fun AppContainer(
         .summer(appNavigationUiState.value.easterEggs.summer)
 
     val menuAccessible = !appNavigationUiState.value.intoSubNavigation // Derive from VM
-    val isCompact = windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT
-
-    //region Navigators for master / detail pane. To be replaced by nav3 approac
-    val calendarNavigator = rememberMasterDetailPaneState<WeekendNavigation>()
-    val driverStandingsNavigator = rememberMasterDetailPaneState<DriverStandingsNavigation>()
-    val teamStandingsNavigator = rememberMasterDetailPaneState<TeamStandingsNavigation>()
-    val rssNavigator = rememberMasterDetailPaneState<RssNavigation>()
-    val settingsNavigator = rememberMasterDetailPaneState<SettingNavigation>()
-    val circuitsNavigator = rememberMasterDetailPaneState<CircuitNavigation>()
-    LaunchedEffect(
-        calendarNavigator.destination,
-        driverStandingsNavigator.destination,
-        teamStandingsNavigator.destination,
-        rssNavigator.destination,
-        settingsNavigator.destination,
-        circuitsNavigator.destination
-    ) {
-        val forceHide = calendarNavigator.destination != null ||
-                driverStandingsNavigator.destination != null ||
-                teamStandingsNavigator.destination != null ||
-                rssNavigator.destination != null ||
-                settingsNavigator.destination != null ||
-                circuitsNavigator.destination != null
-        appNavigationViewModel.hideBar(forceHide)
-    }
-    val clearSubnavs: () -> Unit = {
-        calendarNavigator.clear()
-        driverStandingsNavigator.clear()
-        teamStandingsNavigator.clear()
-        rssNavigator.clear()
-        settingsNavigator.clear()
-        circuitsNavigator.clear()
-    }
-    //endregion
+    val isCompact = !windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)
 
     val isXrDevice = LocalXR.current.isXrDevice
     val isSpacialUiEnabled: Boolean = LocalXR.current.isSpatialUiEnabled
@@ -99,7 +66,6 @@ fun AppContainer(
         AppNavigationOrbiter(
             appNavigationUiState = appNavigationUiState.value,
             navigationItemClicked = {
-                clearSubnavs()
                 navController.navigate(it) {
                     this.launchSingleTop = true
                     this.popUpTo(Screen.Calendar)
@@ -122,7 +88,6 @@ fun AppContainer(
             AppNavigationDrawer(
                 appNavigationUiState = appNavigationUiState.value,
                 navigationItemClicked = {
-                    clearSubnavs()
                     navController.navigate(it) {
                         this.launchSingleTop = true
                         this.popUpTo(Screen.Calendar)

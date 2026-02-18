@@ -12,6 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.navigation3.ui.NavDisplay
 import flashback.composeapp.generated.resources.Res
 import flashback.composeapp.generated.resources.logo
 import tmg.flashback.feature.about.presentation.AboutScreen
@@ -32,6 +37,8 @@ import tmg.flashback.navigation.Screen
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.composeApp.presentation.settings.AllSettingsGraph
 import tmg.flashback.composeApp.presentation.settings.SettingNavigation
+import tmg.flashback.navigation.ListDetailScene
+import tmg.flashback.navigation.rememberListDetailSceneStrategy
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.navigation.MasterDetailPaneState
 
@@ -42,14 +49,113 @@ fun AppGraph(
     navController: NavHostController,
     insetPadding: PaddingValues,
     windowAdaptiveInfo: WindowAdaptiveInfo,
-    calendarNavigator: MasterDetailPaneState<WeekendNavigation>,
-    driverStandingsNavigator: MasterDetailPaneState<DriverStandingsNavigation>,
-    teamStandingsNavigator: MasterDetailPaneState<TeamStandingsNavigation>,
-    rssNavigator: MasterDetailPaneState<RssNavigation>,
-    settingsNavigator: MasterDetailPaneState<SettingNavigation>,
-    circuitsNavigator: MasterDetailPaneState<CircuitNavigation>,
+    backStack: NavBackStack<NavKey>,
     modifier: Modifier = Modifier,
 ) {
+    val listDetailStrategy = rememberListDetailSceneStrategy<NavKey>()
+
+    NavDisplay(
+        backStack = backStack,
+        onBack = { backStack.removeLastOrNull() },
+        sceneStrategy = listDetailStrategy,
+        modifier = modifier,
+        entryProvider = entryProvider {
+            entry<Screen.Calendar>(metadata = ListDetailScene.listPane()) {
+
+            }
+            entry<Screen.DriverStandings>(metadata = ListDetailScene.listPane()) {
+
+            }
+            entry<Screen.TeamStandings>(metadata = ListDetailScene.listPane()) {
+
+            }
+            entry<Screen.Circuit>(metadata = ListDetailScene.listPane()) {
+
+            }
+
+
+            entry<Screen.Weekend>(metadata = ListDetailScene.detailPane()) {
+
+            }
+            entry<Screen.Circuit>(metadata = ListDetailScene.detailPane()) {
+
+            }
+            entry<Screen.Driver>(metadata = ListDetailScene.detailPane()) {
+
+            }
+            entry<Screen.Team>(metadata = ListDetailScene.detailPane()) {
+
+            }
+            entry<Screen.DriverComparison>(metadata = ListDetailScene.detailPane()) {
+
+            }
+
+            entry<Screen.Rss>(metadata = ListDetailScene.listPane()) {
+
+            }
+            entry<Screen.Webpage>(metadata = ListDetailScene.detailPane()) {
+
+            }
+
+            entry<Screen.ReactionGame>(metadata = ListDetailScene.listPane()) {
+                ReactionGameScreen(
+                    paddingValues = insetPadding,
+                    actionUpClicked = openPanel,
+                    windowSizeClass = windowAdaptiveInfo.windowSizeClass
+                )
+            }
+
+            entry<Screen.Settings>(metadata = ListDetailScene.listPane()) {
+
+            }
+            entry<Screen.SettingsDarkMode>(metadata = ListDetailScene.detailPane()) {
+
+            }
+            entry<Screen.SettingsTheme>(metadata = ListDetailScene.detailPane()) {
+
+            }
+            entry<Screen.SettingsLayout>(metadata = ListDetailScene.detailPane()) {
+
+            }
+            entry<Screen.SettingsWeather>(metadata = ListDetailScene.detailPane()) {
+
+            }
+            entry<Screen.SettingsRssConfigure>(metadata = ListDetailScene.detailPane()) {
+
+            }
+            entry<Screen.SettingsInAppBrowser>(metadata = ListDetailScene.detailPane()) {
+
+            }
+            entry<Screen.SettingsNotificationResults>(metadata = ListDetailScene.detailPane()) {
+
+            }
+            entry<Screen.SettingsNotificationUpcoming>(metadata = ListDetailScene.detailPane()) {
+
+            }
+            entry<Screen.SettingsWidgets>(metadata = ListDetailScene.detailPane()) {
+
+            }
+            entry<Screen.SettingsPrivacy>(metadata = ListDetailScene.detailPane()) {
+
+            }
+            entry<Screen.PrivacyPolicy>(metadata = ListDetailScene.detailPane()) {
+                PrivacyPolicyScreen(
+                    paddingValues = insetPadding,
+                    actionUpClicked = openPanel
+                )
+            }
+
+            entry<Screen.About>(metadata = ListDetailScene.listPane()) {
+                AboutScreen(
+                    appIcon = Res.drawable.logo,
+                    paddingValues = insetPadding,
+                    actionUpClicked = openPanel,
+                    windowSizeClass = windowAdaptiveInfo.windowSizeClass
+                )
+            }
+        }
+    )
+
     NavHost(
         navController = navController,
         startDestination = Screen.Calendar,
@@ -110,42 +216,6 @@ fun AppGraph(
                     navController.navigate(Screen.PrivacyPolicy)
                 }
             )
-        }
-        composable<Screen.ReactionGame> {
-            ReactionGameScreen(
-                paddingValues = insetPadding,
-                actionUpClicked = openPanel,
-                windowSizeClass = windowAdaptiveInfo.windowSizeClass
-            )
-        }
-        composable<Screen.PrivacyPolicy> {
-            PrivacyPolicyScreen(
-                paddingValues = insetPadding,
-                actionUpClicked = openPanel
-            )
-        }
-        composable<Screen.About> {
-            AboutScreen(
-                appIcon = Res.drawable.logo,
-                paddingValues = insetPadding,
-                actionUpClicked = openPanel,
-                windowSizeClass = windowAdaptiveInfo.windowSizeClass
-            )
-        }
-        composable<Screen.Driver> {
-            Box(Modifier.fillMaxSize()) {
-                TextTitle("Driver", Modifier.align(Alignment.Center))
-            }
-        }
-        composable<Screen.Constructor> {
-            Box(Modifier.fillMaxSize()) {
-                TextTitle("Constructor", Modifier.align(Alignment.Center))
-            }
-        }
-        composable<Screen.Circuit> {
-            Box(Modifier.fillMaxSize()) {
-                TextTitle("Circuit", Modifier.align(Alignment.Center))
-            }
         }
     }
 }
