@@ -50,6 +50,7 @@ import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.composeApp.presentation.sync.SyncBottomSheet
 import tmg.flashback.composeApp.presentation.toNavigationItem
 import tmg.flashback.composeApp.presentation.toScreen
+import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavDriverStandings
 import tmg.flashback.navigation.NavTeamStandings
@@ -83,6 +84,10 @@ fun App() {
     }
 
     val backStack = rememberNavBackStack(saveStateConfiguration, NavCalendar)
+    DisposableEffect(backStack.lastOrNull()) {
+        appNavigationViewModel.destinationUpdated(backStack.lastOrNull())
+        return@DisposableEffect onDispose {  }
+    }
 
     val panelsState = rememberOverlappingPanelsState(OverlappingPanelsValue.Closed)
     val coroutineScope = rememberCoroutineScope()
@@ -147,9 +152,8 @@ fun App() {
                         itemClicked = { item ->
                             val menuItem = item.id.toEnum<MenuItem> { it.key } ?: return@NavigationBar
                             val screen = menuItem.toScreen() ?: return@NavigationBar
-
-                            // TODO SCREEN: Navigate to screen
-
+                            backStack.clear()
+                            backStack.add(screen)
                         }
                     )
                 }

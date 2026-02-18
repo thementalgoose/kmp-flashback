@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation3.runtime.NavKey
 import androidx.savedstate.SavedState
 import androidx.savedstate.read
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -46,44 +47,11 @@ class AppNavigationViewModel(
     ))
     val uiState: StateFlow<AppNavigationUIState> = _uiState
 
-//    override fun onDestinationChanged(
-//        controller: NavController,
-//        destination: NavDestination,
-//        arguments: SavedState?
-//    ) {
-//        val screen: Screen? = when {
-//            destination.hasRoute<Screen.Calendar>() -> Screen.Calendar
-//            destination.hasRoute<Screen.DriverStandings>() -> Screen.DriverStandings
-//            destination.hasRoute<Screen.TeamStandings>() -> Screen.TeamStandings
-//            destination.hasRoute<Screen.Circuits>() -> Screen.Circuits
-//            destination.hasRoute<Screen.Rss>() -> Screen.Rss
-//            destination.hasRoute<Screen.ReactionGame>() -> Screen.ReactionGame
-//            destination.hasRoute<Screen.Settings>() -> Screen.Settings
-//            destination.hasRoute<Screen.PrivacyPolicy>() -> Screen.PrivacyPolicy
-//            destination.hasRoute<Screen.About>() -> Screen.About
-//            destination.hasRoute<Screen.Circuit>() -> arguments?.read {
-//                val id = getString("id")
-//                val name = getString("name")
-//                return@read Screen.Circuit(id, name)
-//            }
-//            destination.hasRoute<Screen.Driver>() -> arguments?.read {
-//                val id = getString("id")
-//                val name = getString("name")
-//                return@read Screen.Driver(id, name)
-//            }
-//            destination.hasRoute<Screen.Constructor>() -> arguments?.read {
-//                val id = getString("id")
-//                val name = getString("name")
-//                return@read Screen.Constructor(id, name)
-//            }
-//            else -> null
-//        }
-//
-//        logDebug("AppNavigation", "onDestination updated to $screen")
-//        _uiState.update {
-//            it.copy(screen = screen)
-//        }
-//    }
+    fun destinationUpdated(screen: NavKey?) {
+        _uiState.update {
+            it.copy(screen = screen)
+        }
+    }
 
     fun hideBar(hide: Boolean) {
         _uiState.update {
