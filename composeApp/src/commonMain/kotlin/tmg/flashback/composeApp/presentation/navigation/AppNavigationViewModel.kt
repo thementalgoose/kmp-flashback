@@ -18,6 +18,7 @@ import tmg.flashback.eastereggs.usecases.IsUkraineEnabledUseCase
 import tmg.flashback.feature.maintenance.repository.MaintenanceRepository
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
 import tmg.flashback.composeApp.usecases.RequiresSyncUseCase
+import tmg.flashback.navigation.isList
 
 class AppNavigationViewModel(
     isRssEnabledUseCase: IsRssEnabledUseCase,
@@ -49,13 +50,10 @@ class AppNavigationViewModel(
 
     fun destinationUpdated(screen: NavKey?) {
         _uiState.update {
-            it.copy(screen = screen)
-        }
-    }
-
-    fun hideBar(hide: Boolean) {
-        _uiState.update {
-            it.copy(intoSubNavigation = hide)
+            it.copy(
+                screen = screen,
+                intoSubNavigation = screen?.isList() != true
+            )
         }
     }
 

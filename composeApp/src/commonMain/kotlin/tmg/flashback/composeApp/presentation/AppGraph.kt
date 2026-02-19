@@ -1,7 +1,12 @@
 package tmg.flashback.composeApp.presentation
 
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandIn
+import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.adaptive.WindowAdaptiveInfo
 import androidx.compose.runtime.Composable
@@ -10,7 +15,7 @@ import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
-import androidx.navigation3.ui.defaultPredictivePopTransitionSpec
+import androidx.navigation3.ui.defaultTransitionSpec
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import flashback.composeapp.generated.resources.Res
 import flashback.composeapp.generated.resources.logo
@@ -68,6 +73,7 @@ import tmg.flashback.navigation.NavWebpage
 import tmg.flashback.navigation.NavWeekend
 import tmg.flashback.navigation.removeDetail
 import tmg.flashback.navigation.replaceDetail
+import tmg.flashback.navigation.replaceList
 import tmg.flashback.webbrowser.presentation.WebScreen
 
 @Composable
@@ -86,6 +92,16 @@ fun AppGraph(
         backStack = backStack,
         onBack = { backStack.removeDetail() },
         sceneStrategy = listDetailStrategy,
+        transitionSpec = {
+            fadeIn() togetherWith fadeOut()
+        },
+        popTransitionSpec = {
+            fadeIn() togetherWith fadeOut()
+        },
+        predictivePopTransitionSpec = {
+            slideInHorizontally(initialOffsetX = { -it }) togetherWith
+                    slideOutHorizontally(targetOffsetX = { it })
+        },
         modifier = modifier,
         entryProvider = entryProvider {
             entry<NavCalendar>(metadata = SplitPaneScene.listPane()) {
@@ -209,7 +225,7 @@ fun AppGraph(
                     showMenu = isCompact,
                     navigateToSubScreen = { backStack.add(it) },
                     navigateTo = {
-                        backStack.replaceDetail(it)
+                        backStack.replaceList(it)
                     },
                     insetPadding = insetPadding
                 )
@@ -287,7 +303,9 @@ fun AppGraph(
             entry<NavPrivacyPolicy>(metadata = SplitPaneScene.detailPane()) {
                 PrivacyPolicyScreen(
                     paddingValues = insetPadding,
-                    actionUpClicked = openPanel
+                    actionUpClicked = {
+                        backStack.replaceList(NavSettings)
+                    }
                 )
             }
 
