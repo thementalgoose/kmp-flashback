@@ -99,8 +99,7 @@ fun AppGraph(
             fadeIn() togetherWith fadeOut()
         },
         predictivePopTransitionSpec = {
-            slideInHorizontally(initialOffsetX = { -it }) togetherWith
-                    slideOutHorizontally(targetOffsetX = { it })
+            fadeIn() togetherWith fadeOut()
         },
         modifier = modifier,
         entryProvider = entryProvider {
