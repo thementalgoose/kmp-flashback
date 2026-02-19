@@ -30,8 +30,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import androidx.window.core.layout.WindowWidthSizeClass
@@ -42,19 +40,17 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
-import tmg.flashback.infrastructure.extensions.toEnum
-import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.composeApp.presentation.AppContainer
 import tmg.flashback.composeApp.presentation.MenuItem
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.composeApp.presentation.sync.SyncBottomSheet
 import tmg.flashback.composeApp.presentation.toNavigationItem
 import tmg.flashback.composeApp.presentation.toScreen
+import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavDriverStandings
 import tmg.flashback.navigation.NavTeamStandings
-import tmg.flashback.navigation.rememberListDetailSceneStrategy
 import tmg.flashback.navigation.saveStateConfiguration
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationTheme
@@ -85,6 +81,7 @@ fun App() {
 
     val backStack = rememberNavBackStack(saveStateConfiguration, NavCalendar)
     DisposableEffect(backStack.lastOrNull()) {
+        logDebug("Stack", "Back Stack contents: \n${backStack.joinToString(separator = "\n") { "- $it" }}")
         appNavigationViewModel.destinationUpdated(backStack.lastOrNull())
         return@DisposableEffect onDispose {  }
     }

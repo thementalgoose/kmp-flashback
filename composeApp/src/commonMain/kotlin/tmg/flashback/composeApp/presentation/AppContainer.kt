@@ -96,7 +96,7 @@ fun AppContainer(
                 .fillMaxSize()
                 .background(AppTheme.colors.surface)
             ) {
-                if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT && !isSpacialUiEnabled) {
+                if (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND) && !isSpacialUiEnabled) {
                     AppNavigationRail(
                         modifier = if (!isCompact) easterEggModifier else Modifier,
                         appNavigationUiState = appNavigationUiState.value,
