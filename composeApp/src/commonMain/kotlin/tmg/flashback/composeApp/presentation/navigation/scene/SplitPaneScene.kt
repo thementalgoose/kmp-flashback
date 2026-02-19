@@ -4,8 +4,11 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.scene.Scene
@@ -41,9 +45,15 @@ class SplitPaneScene<T : Any>(
     override val entries: List<NavEntry<T>> = listOfNotNull(listEntry, detailEntry)
     override val content: @Composable (() -> Unit) = {
         val safeDrawingInsets = WindowInsets.safeDrawing.asPaddingValues()
+        val paddingInsets = PaddingValues(
+            start = 0.dp,
+            end = 0.dp,
+            top = safeDrawingInsets.calculateTopPadding(),
+            bottom = safeDrawingInsets.calculateBottomPadding()
+        )
         BoxWithConstraints(modifier = Modifier
             .fillMaxSize()
-            .padding(safeDrawingInsets)
+            .padding(paddingInsets)
             .padding(end = AppTheme.dimens.medium)
             .consumeWindowInsets(WindowInsets.safeDrawing),
         ) {
