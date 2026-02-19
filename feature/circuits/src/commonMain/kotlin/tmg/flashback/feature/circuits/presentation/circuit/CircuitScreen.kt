@@ -1,13 +1,14 @@
 package tmg.flashback.feature.circuits.presentation.circuit
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,9 +18,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -40,21 +41,23 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsCircuitId
 import tmg.flashback.analytics.presentation.ScreenView
-import tmg.flashback.feature.circuits.presentation.all.CircuitNavigation
 import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.CircuitHistoryRace
 import tmg.flashback.formula1.model.CircuitHistoryRaceResult
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.preview.preview
+import tmg.flashback.navigation.NavCircuit
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
+import tmg.flashback.style.badge.BadgeView
 import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.preview.PreviewConfigProvider
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.Refresh
+import tmg.flashback.ui.components.edgeFade
 import tmg.flashback.ui.components.flag.Flag
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
@@ -62,7 +65,7 @@ import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 
 @Composable
 fun CircuitScreen(
-    circuitNavigation: CircuitNavigation,
+    data: NavCircuit,
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     showBack: Boolean,
@@ -72,15 +75,15 @@ fun CircuitScreen(
     val uiState = viewModel.uiState.collectAsState()
 
     ScreenView("Circuit", args = mapOf(
-        analyticsCircuitId to circuitNavigation.circuitId
+        analyticsCircuitId to data.id
     ))
 
-    LaunchedEffect(circuitNavigation) {
-        viewModel.load(circuitNavigation.circuitId)
+    LaunchedEffect(data) {
+        viewModel.load(data.id)
     }
 
     CircuitScreen(
-        circuitNavigation = circuitNavigation,
+        data = data,
         paddingValues = paddingValues,
         actionUpClicked = actionUpClicked,
         windowSizeClass = windowSizeClass,
@@ -94,7 +97,7 @@ fun CircuitScreen(
 
 @Composable
 private fun CircuitScreen(
-    circuitNavigation: CircuitNavigation,
+    data: NavCircuit,
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
@@ -116,16 +119,9 @@ private fun CircuitScreen(
                 Header(
                     actionUpClicked = actionUpClicked,
                     action = HeaderAction.BACK.takeIf { showBack },
-                    text = uiState.circuit?.name ?: circuitNavigation.circuitName,
+                    text = uiState.circuit?.name ?: data.name,
                     overrideIcons = {
                         Refresh(onClick = refresh)
-                        if (uiState.circuit != null) {
-                            Icons(
-                                model = uiState.circuit,
-                                wikipediaClicked = clickLink,
-                                mapsClicked = clickMap,
-                            )
-                        }
                     }
                 )
             }
@@ -144,7 +140,7 @@ private fun CircuitScreen(
                             TextTitle(text = uiState.circuit.city)
                             TextTitle(text = uiState.circuit.country)
                             Flag(
-                                modifier = Modifier.size(32.dp),
+                                modifier = Modifier.size(42.dp),
                                 iso = uiState.circuit.countryISO,
                                 nationality = uiState.circuit.country
                             )
@@ -152,10 +148,20 @@ private fun CircuitScreen(
                         Icon(
                             painter = painterResource(uiState.trackLayout.getDefaultIcon()),
                             contentDescription = null,
-                            modifier = Modifier.size(100.dp),
+                            modifier = Modifier.size(90.dp),
                             tint = AppTheme.colors.onSurface
                         )
                     }
+                }
+            }
+            item("links") {
+                if (uiState.circuit != null) {
+                    CircuitLinks(
+                        modifier = Modifier.padding(bottom = AppTheme.dimens.small),
+                        model = uiState.circuit,
+                        wikipediaClicked = clickLink,
+                        mapsClicked = clickMap,
+                    )
                 }
             }
             items(uiState.races) {
@@ -166,41 +172,42 @@ private fun CircuitScreen(
 }
 
 
-
 @Composable
-private fun RowScope.Icons(
+internal fun CircuitLinks(
     model: Circuit,
     wikipediaClicked: (String) -> Unit,
-    mapsClicked: (Location, String) -> Unit
+    mapsClicked: (Location, String) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-    if (model.wikiUrl != null) {
-        IconButton(
-            onClick = { wikipediaClicked(model.wikiUrl!!) },
-            content = {
-                Icon(
-                    painter = painterResource(Res.drawable.ic_details_wikipedia),
-                    contentDescription = stringResource(string.details_link_wikipedia),
-                    tint = AppTheme.colors.onSurfaceVariant
+    if (model.location != null || model.wikiUrl != null) {
+        Row(
+            modifier
+                .edgeFade()
+                .horizontalScroll(rememberScrollState())
+                .padding(horizontal = AppTheme.dimens.medium),
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
+        ) {
+            if (model.location != null) {
+                BadgeView(
+                    modifier = Modifier.clickable {
+                        mapsClicked(model.location!!, model.name)
+                    },
+                    label = stringResource(string.details_link_map),
+                    icon = Res.drawable.ic_details_maps
                 )
             }
-        )
-    }
-    if (model.location != null) {
-        IconButton(
-            onClick = {
-                mapsClicked(model.location!!, model.name)
-            },
-            content = {
-                Icon(
-                    painter = painterResource(Res.drawable.ic_details_maps),
-                    contentDescription = stringResource(string.details_link_map),
-                    tint = AppTheme.colors.onSurfaceVariant
+            if (model.wikiUrl != null) {
+                BadgeView(
+                    modifier = Modifier.clickable {
+                        wikipediaClicked(model.wikiUrl!!)
+                    },
+                    label = stringResource(string.details_link_wikipedia),
+                    icon = Res.drawable.ic_details_wikipedia
                 )
             }
-        )
+        }
     }
 }
-
 
 @Composable
 private fun Event(
@@ -290,7 +297,7 @@ private fun Preview(
 ) {
     ApplicationThemePreview(previewConfig) {
         CircuitScreen(
-            circuitNavigation = CircuitNavigation("id", "Silverstone"),
+            data = NavCircuit("id", "Silverstone"),
             paddingValues = PaddingValues(0.dp),
             actionUpClicked = { },
             showBack = true,

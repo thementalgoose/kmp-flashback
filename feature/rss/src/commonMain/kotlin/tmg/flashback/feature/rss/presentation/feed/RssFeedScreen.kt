@@ -19,6 +19,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -42,12 +44,17 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.navigation3.runtime.NavKey
+import androidx.window.core.layout.WindowWidthSizeClass.Companion.COMPACT
+import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.feature.rss.models.Article
 import tmg.flashback.feature.rss.models.ArticleSource
 import tmg.flashback.infrastructure.datetime.dateTimeFormatHHmmAtDMMM
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.extensions.toColourInt
+import tmg.flashback.navigation.NavSettingsRssConfigure
+import tmg.flashback.navigation.NavWebpage
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewConfig
@@ -64,6 +71,39 @@ private val badgeSize: Dp = 40.dp
 
 @Composable
 fun RSSScreen(
+    paddingValues: PaddingValues,
+    actionUpClicked: () -> Unit,
+    windowSizeClass: WindowSizeClass,
+    navigateTo: (NavKey) -> Unit,
+    viewModel: RSSFeedViewModel = koinViewModel()
+) {
+    val uiState = viewModel.uiState.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.refresh()
+    }
+    RSSScreen(
+        paddingValues = paddingValues,
+        actionUpClicked = actionUpClicked,
+        uiState = uiState.value,
+        refresh = viewModel::refresh,
+        windowSizeClass = windowSizeClass,
+        itemClicked = {
+            if (viewModel.inAppBrowserEnabled) {
+                navigateTo(NavWebpage(it.link))
+            } else {
+                viewModel.openArticle(it)
+            }
+        },
+        configureSources = {
+            navigateTo(NavSettingsRssConfigure)
+        },
+        showMenu = windowSizeClass.windowWidthSizeClass == COMPACT
+    )
+}
+
+@Composable
+internal fun RSSScreen(
     actionUpClicked: () -> Unit,
     refresh: () -> Unit,
     paddingValues: PaddingValues,

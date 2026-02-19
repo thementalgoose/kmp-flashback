@@ -14,29 +14,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.backhandler.BackHandler
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavHostController
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
-import androidx.window.core.layout.WindowWidthSizeClass
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import kotlinx.coroutines.launch
-import tmg.flashback.eastereggs.presentation.snow
-import tmg.flashback.eastereggs.presentation.summer
-import tmg.flashback.feature.circuits.presentation.all.CircuitNavigation
-import tmg.flashback.feature.rss.presentation.feed.RssNavigation
-import tmg.flashback.feature.season.presentation.calendar.WeekendNavigation
-import tmg.flashback.feature.season.presentation.driver_standings.DriverStandingsNavigation
-import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsNavigation
-import tmg.flashback.infrastructure.log.logDebug
-import tmg.flashback.navigation.Screen
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationDrawer
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationOrbiter
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationRail
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
-import tmg.flashback.composeApp.presentation.settings.SettingNavigation
+import tmg.flashback.eastereggs.presentation.snow
+import tmg.flashback.eastereggs.presentation.summer
+import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.style.AppTheme
 import tmg.flashback.ui.navigation.OverlappingPanels
 import tmg.flashback.ui.navigation.OverlappingPanelsState
 import tmg.flashback.ui.navigation.OverlappingPanelsValue
-import tmg.flashback.ui.navigation.rememberMasterDetailPaneState
 import tmg.flashback.xr.LocalXR
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -45,7 +38,7 @@ fun AppContainer(
     openPanel: () -> Unit,
     windowAdaptiveInfo: WindowAdaptiveInfo,
     windowSizeClass: WindowSizeClass,
-    navController: NavHostController,
+    backStack: NavBackStack<NavKey>,
     panelsState: OverlappingPanelsState,
     paddingValues: PaddingValues,
     appNavigationViewModel: AppNavigationViewModel
@@ -53,45 +46,17 @@ fun AppContainer(
     val coroutineScope = rememberCoroutineScope()
 
     val appNavigationUiState = appNavigationViewModel.uiState.collectAsStateWithLifecycle()
-    val easterEggModifier = Modifier
+    val menuAccessible = !appNavigationUiState.value.intoSubNavigation // Derive from VM
+    val isCompact = !windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)
+
+    val compactEasterEggModifier = Modifier
         .snow(appNavigationUiState.value.easterEggs.snow)
         .summer(appNavigationUiState.value.easterEggs.summer)
-
-    val menuAccessible = !appNavigationUiState.value.intoSubNavigation // Derive from VM
-    val isCompact = windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT
-
-    //region Navigators for master / detail pane. To be replaced by nav3 approac
-    val calendarNavigator = rememberMasterDetailPaneState<WeekendNavigation>()
-    val driverStandingsNavigator = rememberMasterDetailPaneState<DriverStandingsNavigation>()
-    val teamStandingsNavigator = rememberMasterDetailPaneState<TeamStandingsNavigation>()
-    val rssNavigator = rememberMasterDetailPaneState<RssNavigation>()
-    val settingsNavigator = rememberMasterDetailPaneState<SettingNavigation>()
-    val circuitsNavigator = rememberMasterDetailPaneState<CircuitNavigation>()
-    LaunchedEffect(
-        calendarNavigator.destination,
-        driverStandingsNavigator.destination,
-        teamStandingsNavigator.destination,
-        rssNavigator.destination,
-        settingsNavigator.destination,
-        circuitsNavigator.destination
-    ) {
-        val forceHide = calendarNavigator.destination != null ||
-                driverStandingsNavigator.destination != null ||
-                teamStandingsNavigator.destination != null ||
-                rssNavigator.destination != null ||
-                settingsNavigator.destination != null ||
-                circuitsNavigator.destination != null
-        appNavigationViewModel.hideBar(forceHide)
-    }
-    val clearSubnavs: () -> Unit = {
-        calendarNavigator.clear()
-        driverStandingsNavigator.clear()
-        teamStandingsNavigator.clear()
-        rssNavigator.clear()
-        settingsNavigator.clear()
-        circuitsNavigator.clear()
-    }
-    //endregion
+        .takeIf { isCompact } ?: Modifier
+    val expandedEasterEggModifier = Modifier
+        .snow(appNavigationUiState.value.easterEggs.snow, drawOver = false)
+        .summer(appNavigationUiState.value.easterEggs.summer, drawOver = false)
+        .takeIf { !isCompact } ?: Modifier
 
     val isXrDevice = LocalXR.current.isXrDevice
     val isSpacialUiEnabled: Boolean = LocalXR.current.isSpatialUiEnabled
@@ -99,11 +64,8 @@ fun AppContainer(
         AppNavigationOrbiter(
             appNavigationUiState = appNavigationUiState.value,
             navigationItemClicked = {
-                clearSubnavs()
-                navController.navigate(it) {
-                    this.launchSingleTop = true
-                    this.popUpTo(Screen.Calendar)
-                }
+                backStack.clear()
+                backStack.add(it)
             }
         )
     }
@@ -122,35 +84,29 @@ fun AppContainer(
             AppNavigationDrawer(
                 appNavigationUiState = appNavigationUiState.value,
                 navigationItemClicked = {
-                    clearSubnavs()
-                    navController.navigate(it) {
-                        this.launchSingleTop = true
-                        this.popUpTo(Screen.Calendar)
-                    }
+                    backStack.clear()
+                    backStack.add(it)
                 },
                 insetPadding = paddingValues,
                 closeMenu = {
                     coroutineScope.launch { panelsState.closePanels() }
                 },
                 showXr = isXrDevice,
-                modifier = if (isCompact) easterEggModifier else Modifier
+                modifier = compactEasterEggModifier
             )
         },
         panelCenter = {
             Row(modifier = Modifier
                 .fillMaxSize()
                 .background(AppTheme.colors.surface)
+                .then(expandedEasterEggModifier)
             ) {
-                if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT && !isSpacialUiEnabled) {
+                if (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND) && !isSpacialUiEnabled) {
                     AppNavigationRail(
-                        modifier = if (!isCompact) easterEggModifier else Modifier,
                         appNavigationUiState = appNavigationUiState.value,
                         navigationItemClicked = {
-                            clearSubnavs()
-                            navController.navigate(it) {
-                                this.launchSingleTop = true
-                                this.popUpTo(Screen.Calendar)
-                            }
+                            backStack.clear()
+                            backStack.add(it)
                         },
                         showXr = isXrDevice,
                         insetPadding = paddingValues
@@ -161,19 +117,12 @@ fun AppContainer(
                 ) {
                     AppGraph(
                         openPanel = {
-                            clearSubnavs()
                             openPanel()
                         },
+                        backStack = backStack,
                         appNavigationViewModel = appNavigationViewModel,
-                        navController = navController,
                         insetPadding = paddingValues,
                         windowAdaptiveInfo = windowAdaptiveInfo,
-                        calendarNavigator = calendarNavigator,
-                        driverStandingsNavigator = driverStandingsNavigator,
-                        teamStandingsNavigator = teamStandingsNavigator,
-                        rssNavigator = rssNavigator,
-                        settingsNavigator = settingsNavigator,
-                        circuitsNavigator = circuitsNavigator
                     )
                 }
             }

@@ -2,6 +2,8 @@ package tmg.flashback.feature.weekend.presentation.data.info
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,7 +16,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -51,7 +55,15 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import flashback.presentation.localisation.generated.resources.details_link_laps
+import flashback.presentation.localisation.generated.resources.details_link_map
+import flashback.presentation.localisation.generated.resources.details_link_wikipedia
+import flashback.presentation.localisation.generated.resources.details_link_youtube
+import flashback.presentation.ui.generated.resources.ic_details_maps
+import flashback.presentation.ui.generated.resources.ic_details_wikipedia
+import flashback.presentation.ui.generated.resources.ic_details_youtube
 import tmg.flashback.formula1.enums.TrackLayout
+import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.ScheduleWeather
 import tmg.flashback.infrastructure.datetime.dateFormatDMMM
@@ -110,13 +122,6 @@ internal fun RaceDetails(
                     .padding(bottom = AppTheme.dimens.xsmall),
                 text = model.date.format(dateFormatDMMMYYYY)
             )
-            Row {
-                if (model.laps != null) {
-                    BadgeView(
-                        label = stringResource(string.weekend_info_laps, model.laps),
-                    )
-                }
-            }
         }
         if (trackLayout != null) {
             Icon(
@@ -140,6 +145,58 @@ internal fun RaceDetails(
                 bold = true,
                 modifier = Modifier.padding(vertical = 2.dp)
             )
+        }
+    }
+}
+
+@Composable
+internal fun RaceLinks(
+    model: InfoModel,
+    youtubeClicked: (String) -> Unit,
+    wikipediaClicked: (String) -> Unit,
+    mapsClicked: (Location, String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    if (model.laps != null || model.youtubeUrl != null || model.circuit.location != null || model.wikipediaUrl != null) {
+        Row(
+            modifier
+                .edgeFade()
+                .horizontalScroll(rememberScrollState())
+                .padding(horizontal = AppTheme.dimens.medium),
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
+        ) {
+            if (model.laps != null) {
+                BadgeView(
+                    label = stringResource(string.details_link_laps, model.laps),
+                )
+            }
+            if (model.youtubeUrl != null) {
+                BadgeView(
+                    modifier = Modifier.clickable {
+                        youtubeClicked(model.youtubeUrl)
+                    },
+                    label = stringResource(string.details_link_youtube),
+                    icon = Res.drawable.ic_details_youtube
+                )
+            }
+            if (model.circuit.location != null) {
+                BadgeView(
+                    modifier = Modifier.clickable {
+                        mapsClicked(model.circuit.location!!, model.circuit.name)
+                    },
+                    label = stringResource(string.details_link_map),
+                    icon = Res.drawable.ic_details_maps
+                )
+            }
+            if (model.wikipediaUrl != null) {
+                BadgeView(
+                    modifier = Modifier.clickable {
+                        wikipediaClicked(model.wikipediaUrl)
+                    },
+                    label = stringResource(string.details_link_wikipedia),
+                    icon = Res.drawable.ic_details_wikipedia
+                )
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ jobs:
   uiTest:
     name: Run
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
 
     steps:
       # Checkout

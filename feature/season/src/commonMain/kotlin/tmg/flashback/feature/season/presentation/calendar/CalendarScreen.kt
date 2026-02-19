@@ -7,10 +7,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -18,6 +23,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -25,11 +31,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
+import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.domain.formula1.generated.resources.Res.drawable
 import flashback.domain.formula1.generated.resources.ic_tyre
@@ -43,6 +52,7 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.format
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.feature.highlights.presentation.HighlightBanner
@@ -60,6 +70,7 @@ import tmg.flashback.formula1.extensions.label
 import tmg.flashback.infrastructure.datetime.dateFormatDMMM
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.startOfWeek
+import tmg.flashback.navigation.NavWeekend
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
@@ -70,9 +81,55 @@ import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.loading.SkeletonViewList
 import tmg.flashback.ui.components.now.Now
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
+import tmg.flashback.ui.insets.compactOnly
+import tmg.flashback.ui.navigation.MasterDetailPaneState
+import tmg.flashback.ui.navigation.appBarMaximumHeight
 
 private const val listAlpha = 0.6f
 private val expandIcon = 20.dp
+
+@Composable
+fun CalendarScreen(
+    paddingValues: PaddingValues,
+    actionUpClicked: () -> Unit,
+    windowSizeClass: WindowSizeClass,
+    navigateTo: (NavKey) -> Unit,
+    viewModel: CalendarScreenViewModel = koinViewModel()
+) {
+    val uiState = viewModel.uiState.collectAsState()
+
+    // Add custom padding for nav bar
+    val insets = when (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
+        true -> paddingValues
+        false -> {
+            val direction = LocalLayoutDirection.current
+            PaddingValues(
+                top = paddingValues.calculateTopPadding(),
+                bottom = paddingValues.calculateBottomPadding() + appBarMaximumHeight,
+                start = paddingValues.calculateStartPadding(direction),
+                end = paddingValues.calculateEndPadding(direction)
+            )
+        }
+    }
+
+    CalendarScreen(
+        paddingValues = insets,
+        actionUpClicked = actionUpClicked,
+        windowSizeClass = windowSizeClass,
+        uiState = uiState.value,
+        refresh = viewModel::refresh,
+        goToWeekend = {
+            navigateTo(
+                NavWeekend(
+                    season = it.model.season,
+                    round = it.model.round,
+                    raceName = it.model.raceName
+                )
+            )
+        },
+        expandGroupedRaces = viewModel::clickGroupedRaces
+    )
+}
 
 @Composable
 fun CalendarScreen(

@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation3.runtime.NavKey
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.nav_settings
 import flashback.presentation.localisation.generated.resources.settings_header_appearance
@@ -19,6 +20,18 @@ import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.infrastructure.device.Platform
+import tmg.flashback.navigation.NavAbout
+import tmg.flashback.navigation.NavPrivacyPolicy
+import tmg.flashback.navigation.NavSettingsDarkMode
+import tmg.flashback.navigation.NavSettingsInAppBrowser
+import tmg.flashback.navigation.NavSettingsLayout
+import tmg.flashback.navigation.NavSettingsNotificationResults
+import tmg.flashback.navigation.NavSettingsNotificationUpcoming
+import tmg.flashback.navigation.NavSettingsPrivacy
+import tmg.flashback.navigation.NavSettingsRssConfigure
+import tmg.flashback.navigation.NavSettingsTheme
+import tmg.flashback.navigation.NavSettingsWeather
+import tmg.flashback.navigation.NavSettingsWidgets
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 
@@ -26,9 +39,10 @@ import tmg.flashback.ui.components.header.HeaderAction
 internal fun AllSettingsScreen(
     actionUpClicked: () -> Unit,
     showMenu: Boolean,
-    navigateTo: (SettingNavigation) -> Unit,
-    viewModel: AllSettingsViewModel = koinViewModel(),
+    navigateToSubScreen: (NavKey) -> Unit,
+    navigateTo: (NavKey) -> Unit,
     insetPadding: PaddingValues,
+    viewModel: AllSettingsViewModel = koinViewModel(),
 ) {
     ScreenView(screenName = "Settings")
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
@@ -36,6 +50,7 @@ internal fun AllSettingsScreen(
     AllSettingsScreen(
         actionUpClicked = actionUpClicked,
         navigateTo = navigateTo,
+        navigateToSubScreen = navigateToSubScreen,
         showMenu = showMenu,
         uiState = uiState.value,
         paddingValues = insetPadding
@@ -46,7 +61,8 @@ internal fun AllSettingsScreen(
 private fun AllSettingsScreen(
     actionUpClicked: () -> Unit,
     showMenu: Boolean,
-    navigateTo: (SettingNavigation) -> Unit,
+    navigateToSubScreen: (NavKey) -> Unit,
+    navigateTo: (NavKey) -> Unit,
     uiState: AllSettingsUiState,
     paddingValues: PaddingValues,
 ) {
@@ -64,33 +80,33 @@ private fun AllSettingsScreen(
         PrefHeader(string.settings_header_appearance)
         PrefCategory(
             item = Settings.DarkModeCategory,
-            itemClicked = { navigateTo(SettingNavigation.DarkMode) }
+            itemClicked = { navigateToSubScreen(NavSettingsDarkMode) }
         )
         if (uiState.isThemeChangeSupported) {
             PrefCategory(
                 item = Settings.ThemeCategory,
-                itemClicked = { navigateTo(SettingNavigation.Theme) }
+                itemClicked = { navigateToSubScreen(NavSettingsTheme) }
             )
         }
         PrefHeader(string.settings_header_data)
         PrefCategory(
             item = Settings.LayoutCategory,
-            itemClicked = { navigateTo(SettingNavigation.Layout)  }
+            itemClicked = { navigateToSubScreen(NavSettingsLayout)  }
         )
         PrefCategory(
             item = Settings.WeatherCategory,
-            itemClicked = { navigateTo(SettingNavigation.Weather)  }
+            itemClicked = { navigateToSubScreen(NavSettingsWeather)  }
         )
         if (uiState.isRssEnabled) {
             PrefHeader(string.settings_header_rss_feed)
             PrefCategory(
                 item = Settings.RssCategory,
-                itemClicked = { navigateTo(SettingNavigation.RssConfigure) }
+                itemClicked = { navigateToSubScreen(NavSettingsRssConfigure) }
             )
             if (uiState.isInAppBrowserSupported) {
                 PrefCategory(
                     item = Settings.WebBrowserCategory,
-                    itemClicked = { navigateTo(SettingNavigation.InAppBrowser)  }
+                    itemClicked = { navigateToSubScreen(NavSettingsInAppBrowser)  }
                 )
             }
         }
@@ -98,32 +114,32 @@ private fun AllSettingsScreen(
             PrefHeader(string.settings_header_notifications)
             PrefCategory(
                 item = Settings.NotificationsResultCategory,
-                itemClicked = { navigateTo(SettingNavigation.NotificationResults) },
+                itemClicked = { navigateToSubScreen(NavSettingsNotificationResults) },
             )
             PrefCategory(
                 item = Settings.NotificationsUpcomingCategory,
-                itemClicked = { navigateTo(SettingNavigation.NotificationUpcoming) },
+                itemClicked = { navigateToSubScreen(NavSettingsNotificationUpcoming) },
             )
         }
         if (uiState.isWidgetsSupported) {
             PrefHeader(string.settings_header_widgets)
             PrefCategory(
                 item = Settings.WidgetCategory,
-                itemClicked = { navigateTo(SettingNavigation.Widgets) }
+                itemClicked = { navigateToSubScreen(NavSettingsWidgets) }
             )
         }
         PrefHeader(string.settings_header_other)
         PrefCategory(
             item = Settings.PrivacyCategory,
-            itemClicked = { navigateTo(SettingNavigation.Privacy) }
+            itemClicked = { navigateToSubScreen(NavSettingsPrivacy) }
         )
         PrefCategory(
             item = Settings.PrivacyPolicy,
-            itemClicked = { navigateTo(SettingNavigation.PrivacyPolicy) }
+            itemClicked = { navigateToSubScreen(NavPrivacyPolicy) }
         )
         PrefCategory(
             item = Settings.AboutCategory,
-            itemClicked = { navigateTo(SettingNavigation.About) }
+            itemClicked = { navigateTo(NavAbout) }
         )
     }
 }

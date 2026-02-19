@@ -38,6 +38,7 @@ import tmg.flashback.feature.weekend.presentation.WeekendUiState.Data
 import tmg.flashback.feature.weekend.presentation.data.ResultType
 import tmg.flashback.feature.weekend.presentation.data.info.InfoModel
 import tmg.flashback.feature.weekend.presentation.data.info.RaceDetails
+import tmg.flashback.feature.weekend.presentation.data.info.RaceLinks
 import tmg.flashback.feature.weekend.presentation.data.info.Schedule
 import tmg.flashback.feature.weekend.presentation.data.qualifying.addQualifyingData
 import tmg.flashback.feature.weekend.presentation.data.race.addRaceData
@@ -45,6 +46,7 @@ import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.addSpri
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.addSprintRaceData
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.infrastructure.extensions.toEnum
+import tmg.flashback.navigation.NavWeekend
 import tmg.flashback.style.AppTheme
 import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.header.Header
@@ -56,7 +58,7 @@ import tmg.flashback.ui.navigation.appBarMaximumHeight
 
 @Composable
 fun WeekendScreen(
-    screenData: WeekendScreenData,
+    data: NavWeekend,
     paddingValues: PaddingValues,
     showBack: Boolean,
     actionUpClicked: () -> Unit,
@@ -65,22 +67,22 @@ fun WeekendScreen(
 ) {
     ScreenView(
         screenName = "Weekend", args = mapOf(
-            AnalyticsConstants.analyticsSeason to screenData.season.toString(),
-            AnalyticsConstants.analyticsRound to screenData.round.toString()
+            AnalyticsConstants.analyticsSeason to data.season.toString(),
+            AnalyticsConstants.analyticsRound to data.round.toString()
         )
     )
 
     val uiState = viewModel.uiState.collectAsState()
     val isLoading = viewModel.isLoading.collectAsState()
-    LaunchedEffect(screenData) {
+    LaunchedEffect(data) {
         viewModel.load(
-            season = screenData.season,
-            round = screenData.round
+            season = data.season,
+            round = data.round
         )
     }
     WeekendScreenTab(
         isLoading = isLoading.value,
-        screenData = screenData,
+        screenData = data,
         paddingValues = paddingValues,
         showBack = showBack,
         actionUpClicked = actionUpClicked,
@@ -96,7 +98,7 @@ fun WeekendScreen(
 
 @Composable
 fun WeekendScreenTab(
-    screenData: WeekendScreenData,
+    screenData: NavWeekend,
     isLoading: Boolean,
     paddingValues: PaddingValues,
     showBack: Boolean,
@@ -136,12 +138,6 @@ fun WeekendScreenTab(
                             text = (uiState as? Data)?.info?.raceName ?: screenData.raceName,
                             overrideIcons = {
                                 Refresh(onClick = refresh)
-                                Icons(
-                                    uiState = uiState,
-                                    youtubeClicked = openLink,
-                                    wikipediaClicked = openLink,
-                                    mapsClicked = openMap
-                                )
                             }
                         )
                     }
@@ -149,6 +145,7 @@ fun WeekendScreenTab(
                     if (uiState is Data) {
 
                         addDetails(uiState.info)
+                        addLinks(uiState.info, openLink, openLink, openMap)
                         addSchedule(uiState.info)
 
                         if (uiState.tab == WeekendTabs.Qualifying) {
@@ -189,7 +186,7 @@ fun WeekendScreenTab(
                         clickWeekendTab(tab)
                     }
                 },
-                bottomPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+                bottomPadding = paddingValues.calculateBottomPadding()
             )
         }
     }
@@ -218,59 +215,26 @@ fun LazyListScope.addDetails(info: InfoModel) {
     }
 }
 
+fun LazyListScope.addLinks(
+    info: InfoModel,
+    youtubeClicked: (String) -> Unit,
+    wikipediaClicked: (String) -> Unit,
+    mapsClicked: (Location, String) -> Unit
+) {
+    item("links") {
+        RaceLinks(
+            model = info,
+            youtubeClicked = youtubeClicked,
+            wikipediaClicked = wikipediaClicked,
+            mapsClicked = mapsClicked
+        )
+    }
+}
+
 fun LazyListScope.addSchedule(info: InfoModel) {
     item("schedule") {
         Schedule(
             model = info
         )
-    }
-}
-
-@Composable
-private fun RowScope.Icons(
-    uiState: WeekendUiState?,
-    youtubeClicked: (String) -> Unit,
-    wikipediaClicked: (String) -> Unit,
-    mapsClicked: (Location, String) -> Unit
-) {
-    if (uiState is Data) {
-        if (uiState.info.youtubeUrl?.isNotEmpty() == true) {
-            IconButton(
-                onClick = { youtubeClicked(uiState.info.youtubeUrl) },
-                content = {
-                    Icon(
-                        painter = painterResource(Res.drawable.ic_youtube),
-                        contentDescription = stringResource(string.details_link_youtube),
-                        tint = AppTheme.colors.onSurface
-                    )
-                }
-            )
-        }
-        if (uiState.info.wikipediaUrl?.isNotEmpty() == true) {
-            IconButton(
-                onClick = { wikipediaClicked(uiState.info.wikipediaUrl) },
-                content = {
-                    Icon(
-                        painter = painterResource(Res.drawable.ic_wikipedia),
-                        contentDescription = stringResource(string.details_link_wikipedia),
-                        tint = AppTheme.colors.onSurface
-                    )
-                }
-            )
-        }
-        if (uiState.info.circuit.location != null) {
-            IconButton(
-                onClick = {
-                    mapsClicked(uiState.info.circuit.location!!, uiState.info.circuit.name)
-                },
-                content = {
-                    Icon(
-                        painter = painterResource(Res.drawable.ic_maps),
-                        contentDescription = stringResource(string.details_link_map),
-                        tint = AppTheme.colors.onSurface
-                    )
-                }
-            )
-        }
     }
 }

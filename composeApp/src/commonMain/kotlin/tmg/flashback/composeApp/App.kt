@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3AdaptiveApi::class)
+
 package tmg.flashback.composeApp
 
 import androidx.compose.animation.core.animateDpAsState
@@ -14,6 +16,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SnackbarDuration.Indefinite
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
+import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -27,7 +30,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.feature_banner_soft_upgrade
@@ -36,15 +40,18 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
-import tmg.flashback.infrastructure.extensions.toEnum
-import tmg.flashback.infrastructure.log.logInfo
-import tmg.flashback.navigation.Screen
 import tmg.flashback.composeApp.presentation.AppContainer
 import tmg.flashback.composeApp.presentation.MenuItem
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.composeApp.presentation.sync.SyncBottomSheet
 import tmg.flashback.composeApp.presentation.toNavigationItem
 import tmg.flashback.composeApp.presentation.toScreen
+import tmg.flashback.infrastructure.extensions.toEnum
+import tmg.flashback.infrastructure.log.logDebug
+import tmg.flashback.navigation.NavCalendar
+import tmg.flashback.navigation.NavDriverStandings
+import tmg.flashback.navigation.NavTeamStandings
+import tmg.flashback.navigation.saveStateConfiguration
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationTheme
 import tmg.flashback.ui.components.AppScaffold
@@ -62,7 +69,7 @@ fun App() {
 
     val windowAdaptiveInfo = currentWindowAdaptiveInfo()
     val windowSizeClass = windowAdaptiveInfo.windowSizeClass
-    val isCompact = windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT
+    val isCompact = !windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)
 
     val toastManager: ToastManager = koinInject()
     val toastBackground: Color = AppTheme.colors.primaryContainer
@@ -72,17 +79,17 @@ fun App() {
         toastManager.foregroundColor = toastForeground
     }
 
-    val navController = rememberNavController()
-    DisposableEffect(key1 = navController, effect = {
-        logInfo("AppContainer", "Configuring navController to viewmodel")
-        navController.addOnDestinationChangedListener(appNavigationViewModel)
+    val backStack = rememberNavBackStack(saveStateConfiguration, NavCalendar)
+    DisposableEffect(backStack.lastOrNull()) {
+        logDebug("Stack", "Back Stack contents: \n${backStack.joinToString(separator = "\n") { "- $it" }}")
+        appNavigationViewModel.destinationUpdated(backStack.lastOrNull())
         return@DisposableEffect onDispose {  }
-    })
+    }
 
     val panelsState = rememberOverlappingPanelsState(OverlappingPanelsValue.Closed)
     val coroutineScope = rememberCoroutineScope()
 
-    val showBottomBar = isCompact && appNavigationUiState.value.screen in listOf(Screen.Calendar, Screen.DriverStandings, Screen.TeamStandings) && !appNavigationUiState.value.intoSubNavigation
+    val showBottomBar = isCompact && appNavigationUiState.value.screen in listOf(NavCalendar, NavDriverStandings, NavTeamStandings) && !appNavigationUiState.value.intoSubNavigation
     val systemNavigationBarHeight = WindowInsets.safeDrawing.asPaddingValues().calculateBottomPadding()
     val navigationBarHeight = appBarHeightWhenVertical + systemNavigationBarHeight
     val navigationBarPosition = animateDpAsState(
@@ -112,7 +119,7 @@ fun App() {
                     windowSizeClass = windowSizeClass,
                     paddingValues = paddingValues,
                     appNavigationViewModel = appNavigationViewModel,
-                    navController = navController
+                    backStack = backStack
                 )
 
                 // Fake translucent status bar
@@ -130,9 +137,9 @@ fun App() {
                 if (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
                     val screen = appNavigationUiState.value.screen
                     val items = listOf(
-                        MenuItem.Calendar.toNavigationItem(screen == Screen.Calendar),
-                        MenuItem.DriversStandings.toNavigationItem(screen == Screen.DriverStandings),
-                        MenuItem.TeamsStandings.toNavigationItem(screen == Screen.TeamStandings)
+                        MenuItem.Calendar.toNavigationItem(screen == NavCalendar),
+                        MenuItem.DriversStandings.toNavigationItem(screen == NavDriverStandings),
+                        MenuItem.TeamsStandings.toNavigationItem(screen == NavTeamStandings)
                     )
                     NavigationBar(
                         bottomPadding = systemNavigationBarHeight,
@@ -142,7 +149,8 @@ fun App() {
                         itemClicked = { item ->
                             val menuItem = item.id.toEnum<MenuItem> { it.key } ?: return@NavigationBar
                             val screen = menuItem.toScreen() ?: return@NavigationBar
-                            navController.navigate(screen)
+                            backStack.clear()
+                            backStack.add(screen)
                         }
                     )
                 }
