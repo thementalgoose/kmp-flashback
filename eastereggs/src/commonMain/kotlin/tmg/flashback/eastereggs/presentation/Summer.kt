@@ -28,14 +28,14 @@ import kotlin.time.Duration.Companion.nanoseconds
 
 private const val baseDegreesRotationIn1s = 1.8f
 
-fun Modifier.summer(isEnabled: Boolean): Modifier {
+fun Modifier.summer(isEnabled: Boolean, drawOver: Boolean = true): Modifier {
     if (isEnabled) {
-        return this.summer()
+        return this.summer(drawOver = drawOver)
     }
     return this
 }
 
-internal fun Modifier.summer() = composed {
+internal fun Modifier.summer(drawOver: Boolean = true) = composed {
     var sunrayState by remember {
         mutableStateOf(SunrayState(-1, IntSize(0, 0)))
     }
@@ -59,8 +59,13 @@ internal fun Modifier.summer() = composed {
     onSizeChanged { newSize -> sunrayState = sunrayState.resize(newSize) }
         .clipToBounds()
         .drawWithContent {
-            drawContent()
-            sunrayState.draw(drawContext.canvas, darkTheme)
+            if (drawOver) {
+                drawContent()
+                sunrayState.draw(drawContext.canvas, darkTheme)
+            } else {
+                sunrayState.draw(drawContext.canvas, darkTheme)
+                drawContent()
+            }
         }
 }
 

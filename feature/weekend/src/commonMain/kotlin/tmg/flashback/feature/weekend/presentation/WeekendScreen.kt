@@ -190,7 +190,7 @@ fun WeekendScreenTab(
                         clickWeekendTab(tab)
                     }
                 },
-                bottomPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+                bottomPadding = paddingValues.calculateBottomPadding()
             )
         }
     }

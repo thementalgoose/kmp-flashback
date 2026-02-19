@@ -18,7 +18,6 @@ import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
-import androidx.window.core.layout.WindowWidthSizeClass
 import kotlinx.coroutines.launch
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationDrawer
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationOrbiter
@@ -47,12 +46,17 @@ fun AppContainer(
     val coroutineScope = rememberCoroutineScope()
 
     val appNavigationUiState = appNavigationViewModel.uiState.collectAsStateWithLifecycle()
-    val easterEggModifier = Modifier
-        .snow(appNavigationUiState.value.easterEggs.snow)
-        .summer(appNavigationUiState.value.easterEggs.summer)
-
     val menuAccessible = !appNavigationUiState.value.intoSubNavigation // Derive from VM
     val isCompact = !windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)
+
+    val compactEasterEggModifier = Modifier
+        .snow(appNavigationUiState.value.easterEggs.snow)
+        .summer(appNavigationUiState.value.easterEggs.summer)
+        .takeIf { isCompact } ?: Modifier
+    val expandedEasterEggModifier = Modifier
+        .snow(appNavigationUiState.value.easterEggs.snow, drawOver = false)
+        .summer(appNavigationUiState.value.easterEggs.summer, drawOver = false)
+        .takeIf { !isCompact } ?: Modifier
 
     val isXrDevice = LocalXR.current.isXrDevice
     val isSpacialUiEnabled: Boolean = LocalXR.current.isSpatialUiEnabled
@@ -88,17 +92,17 @@ fun AppContainer(
                     coroutineScope.launch { panelsState.closePanels() }
                 },
                 showXr = isXrDevice,
-                modifier = if (isCompact) easterEggModifier else Modifier
+                modifier = compactEasterEggModifier
             )
         },
         panelCenter = {
             Row(modifier = Modifier
                 .fillMaxSize()
                 .background(AppTheme.colors.surface)
+                .then(expandedEasterEggModifier)
             ) {
                 if (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND) && !isSpacialUiEnabled) {
                     AppNavigationRail(
-                        modifier = if (!isCompact) easterEggModifier else Modifier,
                         appNavigationUiState = appNavigationUiState.value,
                         navigationItemClicked = {
                             backStack.clear()

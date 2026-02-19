@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.adaptive.WindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
@@ -74,6 +75,7 @@ import tmg.flashback.navigation.NavWeekend
 import tmg.flashback.navigation.removeDetail
 import tmg.flashback.navigation.replaceDetail
 import tmg.flashback.navigation.replaceList
+import tmg.flashback.ui.insets.compactOnly
 import tmg.flashback.webbrowser.presentation.WebScreen
 
 @Composable
@@ -86,7 +88,12 @@ fun AppGraph(
     modifier: Modifier = Modifier,
 ) {
     val listDetailStrategy = rememberSplitPaneSceneStrategy<NavKey>()
+
     val isCompact = !windowAdaptiveInfo.windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)
+    val insetPadding = when (isCompact) {
+        true -> insetPadding
+        false -> PaddingValues(0.dp)
+    }
 
     NavDisplay(
         backStack = backStack,

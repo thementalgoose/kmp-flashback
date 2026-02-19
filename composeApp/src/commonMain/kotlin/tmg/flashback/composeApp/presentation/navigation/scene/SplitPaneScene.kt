@@ -2,18 +2,27 @@ package tmg.flashback.composeApp.presentation.navigation.scene
 
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.scene.Scene
@@ -24,6 +33,7 @@ import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOW
 import tmg.flashback.composeApp.presentation.navigation.scene.SplitPaneScene.Companion.DETAIL_KEY
 import tmg.flashback.composeApp.presentation.navigation.scene.SplitPaneScene.Companion.LIST_KEY
 import tmg.flashback.style.AppTheme
+import tmg.flashback.ui.components.fade.Fade
 
 class SplitPaneScene<T : Any>(
     override val key: Any,
@@ -33,19 +43,30 @@ class SplitPaneScene<T : Any>(
 ) : Scene<T> {
     override val entries: List<NavEntry<T>> = listOfNotNull(listEntry, detailEntry)
     override val content: @Composable (() -> Unit) = {
-        Row(Modifier.fillMaxSize()) {
+        val safeDrawingInsets = WindowInsets.safeDrawing.asPaddingValues()
+
+        Row(modifier = Modifier
+            .fillMaxSize()
+            .padding(safeDrawingInsets)
+            .padding(end = AppTheme.dimens.medium)
+            .consumeWindowInsets(WindowInsets.safeDrawing),
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.medium)
+        ) {
             Box(Modifier.weight(1f)) {
                 Box(Modifier
                     .fillMaxSize()
-                    .background(AppTheme.colors.surface)
+                    .clip(RoundedCornerShape(AppTheme.dimens.radiusLarge))
+                    .background(AppTheme.colors.surfaceContainer1)
                 ) {
                     listEntry.Content()
                 }
             }
             if (detailEntry != null) {
                 Box(Modifier.weight(1f)) {
-                    Box(Modifier.fillMaxSize()
-                        .background(AppTheme.colors.surface)
+                    Box(Modifier
+                        .fillMaxSize()
+                        .clip(RoundedCornerShape(AppTheme.dimens.radiusLarge))
+                        .background(AppTheme.colors.surfaceContainer1)
                     ) {
                         detailEntry.Content()
                     }

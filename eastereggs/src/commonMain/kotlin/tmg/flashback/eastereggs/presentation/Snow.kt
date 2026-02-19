@@ -35,14 +35,14 @@ private const val angleRange = 0.1f
 private const val angleDivisor = 10000.0f
 private const val baseSpeedPxAt60Fps = 2
 
-fun Modifier.snow(isEnabled: Boolean): Modifier {
+fun Modifier.snow(isEnabled: Boolean, drawOver: Boolean = true): Modifier {
     if (isEnabled) {
-        return this.snowfall()
+        return this.snowfall(drawOver = drawOver)
     }
     return this
 }
 
-internal fun Modifier.snowfall() = composed {
+internal fun Modifier.snowfall(drawOver: Boolean = true) = composed {
     var snowflakesState by remember {
         mutableStateOf(SnowflakesState(-1, IntSize(0, 0)))
     }
@@ -68,8 +68,13 @@ internal fun Modifier.snowfall() = composed {
     onSizeChanged { newSize -> snowflakesState = snowflakesState.resize(newSize) }
         .clipToBounds()
         .drawWithContent {
-            drawContent()
-            snowflakesState.draw(drawContext.canvas, darkTheme)
+            if (drawOver) {
+                drawContent()
+                snowflakesState.draw(drawContext.canvas, darkTheme)
+            } else {
+                snowflakesState.draw(drawContext.canvas, darkTheme)
+                drawContent()
+            }
         }
 }
 
@@ -120,7 +125,7 @@ internal data class SnowflakesState(
 
 private val snowflakePaintDark = Paint().apply {
     isAntiAlias = true
-    color = Color.White.copy(alpha = 0.4f)
+    color = Color.White.copy(alpha = 0.2f)
     style = PaintingStyle.Fill
 }
 private val snowflakePaintLight = Paint().apply {

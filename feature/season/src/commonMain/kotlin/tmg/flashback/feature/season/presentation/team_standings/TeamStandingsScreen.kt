@@ -59,7 +59,6 @@ fun TeamStandingsScreen(
     navigateTo: (NavKey) -> Unit,
     viewModel: TeamStandingsViewModel = koinViewModel()
 ) {
-
     val state = viewModel.uiState.collectAsState()
 
     val insets = when (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {

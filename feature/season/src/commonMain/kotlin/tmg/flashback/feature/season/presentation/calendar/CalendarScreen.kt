@@ -7,12 +7,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -78,6 +81,7 @@ import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.loading.SkeletonViewList
 import tmg.flashback.ui.components.now.Now
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
+import tmg.flashback.ui.insets.compactOnly
 import tmg.flashback.ui.navigation.MasterDetailPaneState
 import tmg.flashback.ui.navigation.appBarMaximumHeight
 
