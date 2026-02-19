@@ -26,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.season_standings_constructor
@@ -61,17 +62,21 @@ fun TeamStandingsScreen(
 
     val state = viewModel.uiState.collectAsState()
 
-    // Add custom padding for nav bar
-    val direction = LocalLayoutDirection.current
-    val masterPadding = PaddingValues(
-        top = paddingValues.calculateTopPadding(),
-        bottom = paddingValues.calculateBottomPadding() + appBarMaximumHeight,
-        start = paddingValues.calculateStartPadding(direction),
-        end = paddingValues.calculateEndPadding(direction)
-    )
+    val insets = when (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
+        true -> paddingValues
+        false -> {
+            val direction = LocalLayoutDirection.current
+            PaddingValues(
+                top = paddingValues.calculateTopPadding(),
+                bottom = paddingValues.calculateBottomPadding() + appBarMaximumHeight,
+                start = paddingValues.calculateStartPadding(direction),
+                end = paddingValues.calculateEndPadding(direction)
+            )
+        }
+    }
 
     TeamStandingsScreen(
-        paddingValues = masterPadding,
+        paddingValues = insets,
         actionUpClicked = actionUpClicked,
         windowSizeClass = windowSizeClass,
         uiState = state.value,

@@ -30,6 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.feature.season.generated.resources.Res
 import flashback.feature.season.generated.resources.ic_driver_comparison
@@ -72,16 +73,22 @@ fun DriverStandingsScreen(
     val state = viewModel.uiState.collectAsState()
 
     // Add custom padding for nav bar
-    val direction = LocalLayoutDirection.current
-    val masterPadding = PaddingValues(
-        top = paddingValues.calculateTopPadding(),
-        bottom = paddingValues.calculateBottomPadding() + appBarMaximumHeight,
-        start = paddingValues.calculateStartPadding(direction),
-        end = paddingValues.calculateEndPadding(direction)
-    )
+
+    val insets = when (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
+        true -> paddingValues
+        false -> {
+            val direction = LocalLayoutDirection.current
+            PaddingValues(
+                top = paddingValues.calculateTopPadding(),
+                bottom = paddingValues.calculateBottomPadding() + appBarMaximumHeight,
+                start = paddingValues.calculateStartPadding(direction),
+                end = paddingValues.calculateEndPadding(direction)
+            )
+        }
+    }
 
     DriverStandingsScreen(
-        paddingValues = masterPadding,
+        paddingValues = insets,
         actionUpClicked = actionUpClicked,
         uiState = state.value,
         windowSizeClass = windowSizeClass,

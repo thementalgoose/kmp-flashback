@@ -41,7 +41,7 @@ fun NavKey.isList() = when (this) {
     is NavSettingsNotificationUpcoming -> false
     is NavSettingsWidgets -> false
     is NavSettingsPrivacy -> false
-    is NavPrivacyPolicy -> true
+    is NavPrivacyPolicy -> false
     is NavAbout -> true
     else -> true
 }
