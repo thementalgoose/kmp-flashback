@@ -44,7 +44,9 @@ class SplitPaneScene<T : Any>(
             }
             if (detailEntry != null) {
                 Box(Modifier.weight(1f)) {
-                    Box(Modifier.fillMaxSize()) {
+                    Box(Modifier.fillMaxSize()
+                        .background(AppTheme.colors.surface)
+                    ) {
                         detailEntry.Content()
                     }
                 }
