@@ -7,16 +7,22 @@ import androidx.compose.animation.shrinkOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.adaptive.WindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import androidx.navigation3.ui.defaultTransitionSpec
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_EXPANDED_LOWER_BOUND
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import flashback.composeapp.generated.resources.Res
 import flashback.composeapp.generated.resources.logo
@@ -75,6 +81,7 @@ import tmg.flashback.navigation.NavWeekend
 import tmg.flashback.navigation.removeDetail
 import tmg.flashback.navigation.replaceDetail
 import tmg.flashback.navigation.replaceList
+import tmg.flashback.style.AppTheme
 import tmg.flashback.ui.insets.compactOnly
 import tmg.flashback.webbrowser.presentation.WebScreen
 
@@ -85,11 +92,21 @@ fun AppGraph(
     insetPadding: PaddingValues,
     windowAdaptiveInfo: WindowAdaptiveInfo,
     backStack: NavBackStack<NavKey>,
-    modifier: Modifier = Modifier,
 ) {
     val listDetailStrategy = rememberSplitPaneSceneStrategy<NavKey>()
 
     val isCompact = !windowAdaptiveInfo.windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)
+    val isExpanded = windowAdaptiveInfo.windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_EXPANDED_LOWER_BOUND)
+    val navDisplayModifier = when (!isCompact && !isExpanded) {
+        true -> Modifier
+            .fillMaxSize()
+            .padding(insetPadding)
+            .padding(end = AppTheme.dimens.medium)
+            .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
+            .background(AppTheme.colors.surfaceContainer1)
+        false -> Modifier
+            .fillMaxSize()
+    }
     val insetPadding = when (isCompact) {
         true -> insetPadding
         false -> PaddingValues(0.dp)
@@ -108,7 +125,7 @@ fun AppGraph(
         predictivePopTransitionSpec = {
             fadeIn() togetherWith fadeOut()
         },
-        modifier = modifier,
+        modifier = navDisplayModifier,
         entryProvider = entryProvider {
             entry<NavCalendar>(metadata = SplitPaneScene.listPane()) {
                 CalendarScreen(
@@ -155,7 +172,7 @@ fun AppGraph(
                 WeekendScreen(
                     data = it,
                     paddingValues = insetPadding,
-                    showBack = isCompact,
+                    showBack = !isExpanded,
                     actionUpClicked = { backStack.removeDetail() },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
@@ -165,7 +182,7 @@ fun AppGraph(
                     data = it,
                     paddingValues = insetPadding,
                     actionUpClicked = { backStack.removeDetail() },
-                    showBack = isCompact,
+                    showBack = !isExpanded,
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
             }
@@ -174,7 +191,7 @@ fun AppGraph(
                     data = it,
                     paddingValues = insetPadding,
                     actionUpClicked = { backStack.removeDetail() },
-                    showBack = isCompact,
+                    showBack = !isExpanded,
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                 )
             }
@@ -183,7 +200,7 @@ fun AppGraph(
                     data = it,
                     paddingValues = insetPadding,
                     actionUpClicked = { backStack.removeDetail() },
-                    showBack = isCompact,
+                    showBack = !isExpanded,
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
             }
@@ -237,70 +254,70 @@ fun AppGraph(
                 SettingsDarkModeScreen(
                     actionUpClicked = { backStack.removeDetail() },
                     insetPadding = insetPadding,
-                    showBack = isCompact
+                    showBack = !isExpanded
                 )
             }
             entry<NavSettingsTheme>(metadata = SplitPaneScene.detailPane()) {
                 SettingsThemeScreen(
                     actionUpClicked = { backStack.removeDetail() },
                     insetPadding = insetPadding,
-                    showBack = isCompact
+                    showBack = !isExpanded
                 )
             }
             entry<NavSettingsLayout>(metadata = SplitPaneScene.detailPane()) {
                 SettingsLayoutScreen(
                     actionUpClicked = { backStack.removeDetail() },
                     insetPadding = insetPadding,
-                    showBack = isCompact
+                    showBack = !isExpanded
                 )
             }
             entry<NavSettingsWeather>(metadata = SplitPaneScene.detailPane()) {
                 SettingsWeatherScreen(
                     actionUpClicked = { backStack.removeDetail() },
                     insetPadding = insetPadding,
-                    showBack = isCompact
+                    showBack = !isExpanded
                 )
             }
             entry<NavSettingsRssConfigure>(metadata = SplitPaneScene.detailPane()) {
                 RssConfigureScreen(
                     actionUpClicked = { backStack.removeDetail() },
                     insetPadding = insetPadding,
-                    showBack = isCompact
+                    showBack = !isExpanded
                 )
             }
             entry<NavSettingsInAppBrowser>(metadata = SplitPaneScene.detailPane()) {
                 SettingsBrowserScreen(
                     actionUpClicked = { backStack.removeDetail() },
                     insetPadding = insetPadding,
-                    showBack = isCompact
+                    showBack = !isExpanded
                 )
             }
             entry<NavSettingsNotificationResults>(metadata = SplitPaneScene.detailPane()) {
                 SettingsNotificationResultsScreen(
                     actionUpClicked = { backStack.removeDetail() },
                     insetPadding = insetPadding,
-                    showBack = isCompact
+                    showBack = !isExpanded
                 )
             }
             entry<NavSettingsNotificationUpcoming>(metadata = SplitPaneScene.detailPane()) {
                 SettingsNotificationUpcomingScreen(
                     actionUpClicked = { backStack.removeDetail() },
                     insetPadding = insetPadding,
-                    showBack = isCompact
+                    showBack = !isExpanded
                 )
             }
             entry<NavSettingsWidgets>(metadata = SplitPaneScene.detailPane()) {
                 SettingsWidgetScreen(
                     actionUpClicked = { backStack.removeDetail() },
                     insetPadding = insetPadding,
-                    showBack = isCompact
+                    showBack = !isExpanded
                 )
             }
             entry<NavSettingsPrivacy>(metadata = SplitPaneScene.detailPane()) {
                 SettingsPrivacyScreen(
                     actionUpClicked = { backStack.removeDetail() },
                     insetPadding = insetPadding,
-                    showBack = isCompact
+                    showBack = !isExpanded
                 )
             }
             entry<NavPrivacyPolicy>(metadata = SplitPaneScene.detailPane()) {
