@@ -12,6 +12,6 @@ val coreWebBrowserModule = listOf(modules(), platformModule())
 
 internal fun modules() = module {
     single<WebRepository> { WebRepositoryImpl(get()) }
-    viewModel { WebViewViewModel(get()) }
+    viewModel { WebViewViewModel(get(), get(), get()) }
     single<IsInAppBrowserEnabledUseCase> { IsInAppBrowserEnabledUseCaseImpl() }
 }
