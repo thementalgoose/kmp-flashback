@@ -19,6 +19,7 @@ import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -37,6 +38,7 @@ import flashback.presentation.localisation.generated.resources.ab_rss_open_in_br
 import flashback.presentation.localisation.generated.resources.ab_rss_share
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.text.TextBody1
@@ -49,6 +51,27 @@ expect fun WebView(
 
 @Composable
 fun WebScreen(
+    url: String,
+    paddingValues: PaddingValues,
+    actionUpClicked: () -> Unit,
+    shareClicked: () -> Unit,
+    openInBrowser: () -> Unit,
+    viewModel: WebViewViewModel = koinViewModel()
+) {
+    val uiState = viewModel.uiState.collectAsState()
+
+    WebScreen(
+        url = url,
+        toolbarAtTop = uiState.value.toolbarAtTop,
+        paddingValues = paddingValues,
+        actionUpClicked = actionUpClicked,
+        shareClicked = shareClicked,
+        openInBrowser = openInBrowser,
+    )
+}
+
+@Composable
+internal fun WebScreen(
     url: String,
     toolbarAtTop: Boolean,
     paddingValues: PaddingValues,
@@ -179,7 +202,6 @@ private fun PreviewTop() {
     ApplicationThemePreview {
         WebScreen(
             url = "url",
-            toolbarAtTop = true,
             paddingValues = PaddingValues(0.dp),
             actionUpClicked = {},
             shareClicked = {},
@@ -194,7 +216,6 @@ private fun PreviewBottom() {
     ApplicationThemePreview {
         WebScreen(
             url = "url",
-            toolbarAtTop = false,
             paddingValues = PaddingValues(0.dp),
             actionUpClicked = {},
             shareClicked = {},
