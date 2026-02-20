@@ -100,6 +100,7 @@ compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", v
 compose-material = { module = "org.jetbrains.compose.material:material", version.ref = "compose" }
 compose-material3 = "org.jetbrains.compose.material3:material3:1.9.0"
 compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose" }
+compose-uiTooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "compose" }
 compose-materialIconsExtended = "org.jetbrains.compose.material:material-icons-extended:1.7.3"
 compose-uiTest = { module = "org.jetbrains.compose.ui:ui-test", version.ref = "compose" }
 
@@ -141,7 +142,7 @@ turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 androidx-test-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-test-junit" }
 androidx-test-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-test-espresso" }
 compose-ui-test-junit4 = { module = "org.jetbrains.compose.ui:ui-test-junit4", version.ref = "compose" }
-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version = "1.8.2" }
+compose-ui-test-manifest = "androidx.compose.ui:ui-test-manifest:1.8.2"
 
 # Gradle Plugins
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
