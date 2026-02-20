@@ -4,6 +4,7 @@ import app.cash.turbine.test
 import dev.mokkery.MockMode.autoUnit
 import dev.mokkery.answering.returns
 import dev.mokkery.every
+import dev.mokkery.matcher.any
 import dev.mokkery.mock
 import dev.mokkery.verify
 import kotlinx.coroutines.test.runTest
@@ -40,6 +41,8 @@ internal class WebViewViewModelTest {
 
     @Test
     fun `share calls share use case`() {
+        every { mockWebRepository.toolbarAtTop } returns false
+        every { mockShareWebpageUseCase.invoke(any()) } returns Unit
         initUnderTest()
         underTest.share("url")
         verify {
@@ -49,6 +52,8 @@ internal class WebViewViewModelTest {
 
     @Test
     fun `open calls open use case`() {
+        every { mockWebRepository.toolbarAtTop } returns false
+        every { mockOpenWebpageUseCase.invoke(any()) } returns Unit
         initUnderTest()
         underTest.open("url")
         verify {
