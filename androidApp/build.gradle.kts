@@ -153,7 +153,6 @@ dependencies {
     implementation(libs.androidx.webkit)
 
     implementation(libs.compose.resources)
-    implementation(compose.material3AdaptiveNavigationSuite)
     implementation(libs.navigation.compose)
     implementation(libs.cmptoast)
     implementation(libs.bundles.compose)
@@ -164,7 +163,7 @@ dependencies {
     implementation(libs.bundles.koin.compose)
     implementation(libs.ksoup)
 
-    debugImplementation(compose.uiTooling)
+    debugImplementation(libs.compose.uiTooling)
 
     // Android UI Testing
     androidTestImplementation(libs.androidx.test.junit)
