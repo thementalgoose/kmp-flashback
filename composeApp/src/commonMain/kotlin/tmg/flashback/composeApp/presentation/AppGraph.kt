@@ -212,8 +212,7 @@ fun AppGraph(
                     paddingValues = insetPadding,
                     actionUpClicked = { backStack.removeDetail() },
                     shareClicked = { },
-                    openInBrowser = { },
-                    toolbarAtTop = true
+                    openInBrowser = { }
                 )
             }
 
