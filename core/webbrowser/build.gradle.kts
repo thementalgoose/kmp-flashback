@@ -28,6 +28,7 @@ kotlin {
             implementation(libs.compose.resources)
 
             implementation(projects.core.preferences)
+            implementation(projects.core.device)
             implementation(projects.infrastructure)
             implementation(projects.presentation.style)
             implementation(projects.presentation.localisation)

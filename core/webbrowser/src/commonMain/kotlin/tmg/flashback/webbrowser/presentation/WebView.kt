@@ -54,8 +54,6 @@ fun WebScreen(
     url: String,
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
-    shareClicked: () -> Unit,
-    openInBrowser: () -> Unit,
     viewModel: WebViewViewModel = koinViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsState()
@@ -65,8 +63,12 @@ fun WebScreen(
         toolbarAtTop = uiState.value.toolbarAtTop,
         paddingValues = paddingValues,
         actionUpClicked = actionUpClicked,
-        shareClicked = shareClicked,
-        openInBrowser = openInBrowser,
+        shareClicked = {
+            viewModel.share(url)
+        },
+        openInBrowser = {
+            viewModel.open(url)
+        },
     )
 }
 
@@ -202,6 +204,7 @@ private fun PreviewTop() {
     ApplicationThemePreview {
         WebScreen(
             url = "url",
+            toolbarAtTop = true,
             paddingValues = PaddingValues(0.dp),
             actionUpClicked = {},
             shareClicked = {},
@@ -216,6 +219,7 @@ private fun PreviewBottom() {
     ApplicationThemePreview {
         WebScreen(
             url = "url",
+            toolbarAtTop = false,
             paddingValues = PaddingValues(0.dp),
             actionUpClicked = {},
             shareClicked = {},

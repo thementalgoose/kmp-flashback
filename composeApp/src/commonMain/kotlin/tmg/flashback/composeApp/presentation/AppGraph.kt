@@ -210,9 +210,7 @@ fun AppGraph(
                 WebScreen(
                     url = it.url,
                     paddingValues = insetPadding,
-                    actionUpClicked = { backStack.removeDetail() },
-                    shareClicked = { },
-                    openInBrowser = { }
+                    actionUpClicked = { backStack.removeDetail() }
                 )
             }
 
