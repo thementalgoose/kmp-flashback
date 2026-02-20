@@ -13,6 +13,12 @@
         "/^androidx\\.xr\\./"
       ],
       "enabled": false
+    },
+    {
+      "matchPackagePatterns": [
+        "/^io\\.insert-koin:/"
+      ],
+      "excludeVersions": ["4.1.1"]
     }
   ]
 }
