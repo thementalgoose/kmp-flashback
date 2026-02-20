@@ -1,6 +1,7 @@
 package tmg.flashback.ui.components.driver
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -31,27 +32,29 @@ fun DriverPoints(
     points: Double,
     modifier: Modifier = Modifier
 ) {
-    Row(
+    FlowRow(
         modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically
+        itemVerticalAlignment = Alignment.CenterVertically
     ) {
-        Column(modifier = Modifier
-            .padding(
-                vertical = AppTheme.dimens.xxsmall
-            )
-        ) {
-            Flag(
-                iso = nationalityISO,
-                nationality = nationality,
-                modifier = Modifier.size(16.dp)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(modifier = Modifier
+                .padding(
+                    vertical = AppTheme.dimens.xxsmall
+                )
+            ) {
+                Flag(
+                    iso = nationalityISO,
+                    nationality = nationality,
+                    modifier = Modifier.size(16.dp)
+                )
+            }
+            TextBody2(
+                text = name,
+                modifier = Modifier.padding(horizontal = AppTheme.dimens.xsmall)
             )
         }
-        TextBody2(
-            text = name,
-            modifier = Modifier.padding(horizontal = AppTheme.dimens.xsmall)
-        )
         val points = pluralStringResource(plurals.race_points, points.takeIf { !it.isNaN() }?.roundToInt() ?: 0, points.roundToHalf())
-        TextCaption(text = "- $points")
+        TextCaption(text = points)
     }
 }
 
