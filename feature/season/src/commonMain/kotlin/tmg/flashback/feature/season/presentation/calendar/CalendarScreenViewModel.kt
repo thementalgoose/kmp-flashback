@@ -77,7 +77,7 @@ class CalendarScreenViewModel(
 
         val raceList = generateScheduleModel(
             overview = overview,
-            events = emptyList(),
+            events = events ?: emptyList(),
             notificationSchedule = NotificationSchedule(false, false, false, false, false, false),
             showCollapsePreviousRaces = collapseRaces,
             showEmptyWeeks = showEmptyWeeks,
