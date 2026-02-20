@@ -132,10 +132,14 @@ fun WeekendScreenTab(
                     modifier = Modifier.fillMaxSize()
                 ) {
                     item("header") {
+                        val text = when {
+                            uiState is Data -> "${uiState.info.season} ${uiState.info.raceName}"
+                            else -> "${screenData.season} ${screenData.raceName}"
+                        }
                         Header(
                             actionUpClicked = actionUpClicked,
                             action = HeaderAction.BACK.takeIf { showBack },
-                            text = (uiState as? Data)?.info?.raceName ?: screenData.raceName,
+                            text = text,
                             overrideIcons = {
                                 Refresh(onClick = refresh)
                             }
