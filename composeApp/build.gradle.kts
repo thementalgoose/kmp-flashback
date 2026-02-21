@@ -164,10 +164,6 @@ kotlin {
     }
 }
 
-dependencies {
-    "androidRuntimeClasspath"(compose.uiTooling)
-}
-
 compose.resources {
     publicResClass = true
 }
