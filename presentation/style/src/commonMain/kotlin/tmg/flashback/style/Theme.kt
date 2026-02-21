@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalInspectionMode
 import org.koin.compose.koinInject
 import tmg.flashback.infrastructure.log.logDebug
-import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.theme.LocalDarkMode
 import tmg.flashback.style.theme.NightMode
 import tmg.flashback.style.theme.Theme
@@ -102,18 +101,6 @@ fun ApplicationTheme(
 
 @Composable
 fun ApplicationThemePreview(
-    previewConfig: PreviewConfig?,
-    content: @Composable () -> Unit,
-) {
-    ApplicationThemePreview(
-        isLight = previewConfig?.isLightMode == true,
-        theme = previewConfig?.theme ?: Theme.Default,
-        content = content
-    )
-}
-
-@Composable
-fun ApplicationThemePreview(
     isLight: Boolean = !isSystemInDarkTheme(),
     theme: Theme = Theme.Default,
     content: @Composable () -> Unit,
@@ -122,13 +109,7 @@ fun ApplicationThemePreview(
         isLight = isLight,
         theme = theme,
         xr = noopXr(),
-        content = {
-            Box(modifier = Modifier
-                .background(AppTheme.colors.surface)
-            ) {
-                content()
-            }
-        }
+        content = content
     )
 }
 

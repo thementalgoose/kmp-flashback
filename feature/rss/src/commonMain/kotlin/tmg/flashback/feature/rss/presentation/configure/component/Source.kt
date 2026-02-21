@@ -31,8 +31,7 @@ import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.buttons.ButtonSecondary
 import tmg.flashback.style.buttons.ButtonTertiary
 import tmg.flashback.style.input.InputSwitch
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
 
@@ -113,12 +112,10 @@ private fun SourceBadge(
 }
 
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewSelected(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewSelected() {
+    ApplicationThemePreview {
         Source(
             model = ConfiguredSupportedSource(fakeSource, true),
             sourceAdded = { },
@@ -129,12 +126,10 @@ private fun PreviewSelected(
 }
 
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewNotSelected(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewNotSelected() {
+    ApplicationThemePreview {
         Source(
             model = ConfiguredSupportedSource(fakeSource, false),
             sourceAdded = { },

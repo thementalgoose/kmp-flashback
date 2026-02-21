@@ -21,8 +21,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.AppTheme.disabledAlpha
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 
@@ -67,12 +66,10 @@ fun ButtonSecondary(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview() {
+    ApplicationThemePreview {
         Box(Modifier.padding(16.dp)) {
             ButtonSecondary(
                 text = "Secondary Button",
@@ -82,12 +79,10 @@ private fun Preview(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewSelected(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewSelected() {
+    ApplicationThemePreview {
         Box(Modifier.padding(16.dp)) {
             ButtonSecondary(
                 text = "Secondary Button",
@@ -98,12 +93,10 @@ private fun PreviewSelected(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewDisabled(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewDisabled() {
+    ApplicationThemePreview {
         Box(Modifier.padding(16.dp)) {
             ButtonSecondary(
                 enabled = false,

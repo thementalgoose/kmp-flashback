@@ -57,8 +57,7 @@ import tmg.flashback.navigation.NavSettingsRssConfigure
 import tmg.flashback.navigation.NavWebpage
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextCaption
@@ -295,12 +294,10 @@ private fun SourcesUnavailable(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview() {
+    ApplicationThemePreview {
         RSSScreen(
             paddingValues = PaddingValues.Absolute(),
             uiState = RssFeedUiState.Data(

@@ -42,8 +42,7 @@ import tmg.flashback.formula1.preview.preview
 import tmg.flashback.navigation.NavTeam
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.ui.components.Refresh
@@ -219,12 +218,10 @@ private fun Stat(
 
 
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewAll(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewAll() {
+    ApplicationThemePreview {
         ConstructorStatsScreen(
             data = NavTeam(2020, "driver", "name"),
             windowSizeClass = WindowSizeClass.compute(400f, 700f),
@@ -252,12 +249,11 @@ private fun PreviewAll(
         )
     }
 }
-@Preview
+
+@PreviewTheme
 @Composable
-private fun PreviewSeason(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewSeason() {
+    ApplicationThemePreview {
         ConstructorStatsScreen(
             data = NavTeam(2020, "driver", "name"),
             windowSizeClass = WindowSizeClass.compute(400f, 700f),

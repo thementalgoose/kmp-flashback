@@ -36,8 +36,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextTitle
 
 @Composable
@@ -133,12 +132,10 @@ fun TextInput(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview() {
+    ApplicationThemePreview {
         Box(modifier = Modifier.padding(16.dp)) {
             val textState = remember { mutableStateOf(TextFieldValue("Input Field")) }
             TextInput(
@@ -149,12 +146,10 @@ private fun Preview(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewClear(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewClear() {
+    ApplicationThemePreview {
         Box(modifier = Modifier.padding(16.dp)) {
             val textState = remember { mutableStateOf(TextFieldValue("Input Field")) }
             TextInput(
@@ -166,12 +161,10 @@ private fun PreviewClear(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewError(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewError() {
+    ApplicationThemePreview {
         Box(modifier = Modifier.padding(16.dp)) {
             val textState = remember { mutableStateOf(TextFieldValue("Input Field")) }
             TextInput(
@@ -184,12 +177,10 @@ private fun PreviewError(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewEmpty(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewEmpty() {
+    ApplicationThemePreview {
         Box(modifier = Modifier.padding(16.dp)) {
             val textState = remember { mutableStateOf(TextFieldValue("")) }
             TextInput(

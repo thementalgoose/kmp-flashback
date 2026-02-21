@@ -67,8 +67,7 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.LOGO_GRADIENT_1
 import tmg.flashback.style.LOGO_GRADIENT_2
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextHeadline2
@@ -525,12 +524,10 @@ private fun Dependency(
 }
 
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewList(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewList() {
+    ApplicationThemePreview {
         AboutListScreen(
             paddingValues = PaddingValues(0.dp),
             email = "thementalgoose@gmail.com",
@@ -547,12 +544,10 @@ private fun PreviewList(
 }
 
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewPane(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewPane() {
+    ApplicationThemePreview {
         AboutPaneScreen(
             paddingValues = PaddingValues(0.dp),
             email = "thementalgoose@gmail.com",

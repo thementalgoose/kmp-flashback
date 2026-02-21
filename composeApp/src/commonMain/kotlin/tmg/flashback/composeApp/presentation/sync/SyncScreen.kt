@@ -66,8 +66,7 @@ import tmg.flashback.style.ApplicationTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.buttons.ButtonPrimary
 import tmg.flashback.style.buttons.ButtonSecondary
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextHeadline1
 
@@ -334,12 +333,10 @@ private fun BreakdownLabel(
     )
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewLoading(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewLoading() {
+    ApplicationThemePreview {
         SyncScreen(
             drivers = SyncState.LOADING,
             circuits = SyncState.LOADING,
@@ -354,12 +351,10 @@ private fun PreviewLoading(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewFailed(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewFailed() {
+    ApplicationThemePreview {
         SyncScreen(
             drivers = SyncState.DONE,
             circuits = SyncState.LOADING,

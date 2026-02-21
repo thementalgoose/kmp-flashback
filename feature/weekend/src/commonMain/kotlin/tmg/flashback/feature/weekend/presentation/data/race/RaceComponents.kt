@@ -49,8 +49,7 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.buttons.Segments
 import tmg.flashback.style.input.InputSelection
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.driver.DriverPoints
 import tmg.flashback.ui.components.driver.driverIconSize
@@ -202,12 +201,10 @@ internal fun RaceConstructorResult(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview() {
+    ApplicationThemePreview {
         Column {
             RaceDriverResult(
                 model = RaceResult.preview(),

@@ -15,8 +15,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.AppTheme.disabledAlpha
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 
 
@@ -52,12 +51,10 @@ fun ButtonPrimary(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview() {
+    ApplicationThemePreview {
         Box(Modifier.padding(16.dp)) {
             ButtonPrimary(
                 text = "Primary Button",
@@ -67,12 +64,10 @@ private fun Preview(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewDisabled(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewDisabled() {
+    ApplicationThemePreview {
         Box(Modifier.padding(16.dp)) {
             ButtonPrimary(
                 enabled = false,

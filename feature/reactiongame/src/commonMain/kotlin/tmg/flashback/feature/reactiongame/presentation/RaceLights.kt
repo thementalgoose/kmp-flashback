@@ -28,8 +28,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 
 
 private val columnColor: Color = Color(0xFF383838)
@@ -284,72 +283,58 @@ private fun ColumnScope.Light(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewAborted(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewAborted() {
+    ApplicationThemePreview {
         PreviewLights(StartLightState.AbortedStart)
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewReady(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewReady() {
+    ApplicationThemePreview {
         PreviewLights(StartLightState.Ready)
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview10(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview10() {
+    ApplicationThemePreview {
         PreviewLights(StartLightState.StartSequence(1))
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview20(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview20() {
+    ApplicationThemePreview {
         PreviewLights(StartLightState.StartSequence(2))
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview30(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview30() {
+    ApplicationThemePreview {
         PreviewLights(StartLightState.StartSequence(3))
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview40(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview40() {
+    ApplicationThemePreview {
         PreviewLights(StartLightState.StartSequence(4))
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview50(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview50() {
+    ApplicationThemePreview {
         PreviewLights(StartLightState.StartSequence(5))
     }
 }

@@ -27,8 +27,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.eastereggs.model.MenuIcons
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.ColourType
 import tmg.flashback.style.text.TextCaption
 import tmg.flashback.style.text.TextHeadline2
@@ -79,12 +78,10 @@ internal fun DashboardHero(
     }
 }
 
+@PreviewTheme
 @Composable
-@Preview
-private fun PreviewValentinesDay(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewValentinesDay() {
+    ApplicationThemePreview {
         DashboardHero(
             menuIcons = MenuIcons.VALENTINES_DAY,
             showUkraine = false
@@ -92,12 +89,10 @@ private fun PreviewValentinesDay(
     }
 }
 
+@PreviewTheme
 @Composable
-@Preview
-private fun PreviewChristmas(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewChristmas() {
+    ApplicationThemePreview {
         DashboardHero(
             menuIcons = MenuIcons.CHRISTMAS,
             showUkraine = false
@@ -105,12 +100,10 @@ private fun PreviewChristmas(
     }
 }
 
+@PreviewTheme
 @Composable
-@Preview
-private fun PreviewUkraine(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewUkraine() {
+    ApplicationThemePreview {
         DashboardHero(
             menuIcons = null,
             showUkraine = true
@@ -118,12 +111,10 @@ private fun PreviewUkraine(
     }
 }
 
+@PreviewTheme
 @Composable
-@Preview
-private fun PreviewPride(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewPride() {
+    ApplicationThemePreview {
         DashboardHero(
             menuIcons = null,
             showUkraine = false,

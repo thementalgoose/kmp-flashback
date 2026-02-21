@@ -22,8 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextHeadline1Inline
 import tmg.flashback.style.text.TextTitle
 
@@ -81,12 +80,10 @@ fun Picker(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview() {
+    ApplicationThemePreview {
         Picker(
             option = PickerItem.Text("2020"),
             optionsToShow = listOf(PickerItem.Text("2020"), PickerItem.Text("2021")),
@@ -96,12 +93,10 @@ private fun Preview(
 }
 
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewExpanded(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewExpanded() {
+    ApplicationThemePreview {
         Picker(
             option = PickerItem.Text("2020"),
             optionsToShow = listOf(PickerItem.Text("2020"), PickerItem.Text("2021")),

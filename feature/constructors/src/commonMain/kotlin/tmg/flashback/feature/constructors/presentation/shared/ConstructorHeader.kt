@@ -36,8 +36,7 @@ import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.preview.preview
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextHeadline1
 import tmg.flashback.style.text.TextHeadline2
 import tmg.flashback.ui.components.Refresh
@@ -152,12 +151,10 @@ fun ConstructorHeader(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview() {
+    ApplicationThemePreview {
         Column {
             val constructor = Constructor.preview()
             ConstructorHeader(
@@ -174,12 +171,10 @@ private fun Preview(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewAlt(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewAlt() {
+    ApplicationThemePreview {
         Column {
             val constructor = Constructor.preview()
             ConstructorHeader(
@@ -196,12 +191,10 @@ private fun PreviewAlt(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewOverrideIcons(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewOverrideIcons() {
+    ApplicationThemePreview {
         Column {
             val constructor = Constructor.preview()
             ConstructorHeader(
@@ -221,12 +214,10 @@ private fun PreviewOverrideIcons(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewInset(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewInset() {
+    ApplicationThemePreview {
         val insetPadding = PaddingValues(
             top = 48.dp,
             start = 12.dp,
