@@ -41,7 +41,6 @@ import androidx.compose.ui.graphics.Brush.Companion.linearGradient
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
-import androidx.window.core.layout.WindowWidthSizeClass
 import coil3.compose.AsyncImage
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.ab_back
@@ -60,6 +59,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.infrastructure.device.Device
@@ -84,7 +84,7 @@ fun AboutScreen(
     ScreenView("About")
 
     val uiState = viewModel.uiState.collectAsState()
-    if (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
+    if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
         AboutListScreen(
             icon = appIcon,
             paddingValues = paddingValues,
@@ -101,7 +101,6 @@ fun AboutScreen(
         AboutPaneScreen(
             icon = appIcon,
             paddingValues = paddingValues,
-            actionUpClicked = actionUpClicked,
             email = uiState.value.contactEmail,
             deviceId = uiState.value.deviceUuid,
             dependencyClicked = viewModel::openDependency,
@@ -223,7 +222,6 @@ private fun AboutPaneScreen(
     remoteNotificationId: String?,
     buttonClicked: (AboutButtons) -> Unit,
     dependencyClicked: (AboutDependency) -> Unit,
-    actionUpClicked: () -> Unit,
     idsClicked: () -> Unit,
 ) {
     Row(modifier = Modifier.fillMaxWidth()) {
@@ -564,7 +562,6 @@ private fun PreviewPane(
             icon = Res.drawable.unknown_avatar,
             dependencyClicked = { },
             buttonClicked = { },
-            actionUpClicked = { },
             idsClicked = { }
         )
     }

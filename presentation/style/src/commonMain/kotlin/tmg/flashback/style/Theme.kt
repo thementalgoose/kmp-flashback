@@ -9,6 +9,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalInspectionMode
 import org.koin.compose.koinInject
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.style.preview.PreviewConfig
@@ -18,6 +19,8 @@ import tmg.flashback.style.theme.Theme
 import tmg.flashback.style.theme.ThemeManager
 import tmg.flashback.style.theme.customLightMode
 import tmg.flashback.xr.LocalXR
+import tmg.flashback.xr.XR
+import tmg.flashback.xr.noopXr
 import tmg.flashback.xr.xr
 
 object AppTheme {
@@ -74,6 +77,7 @@ fun ApplicationTheme(
 fun ApplicationTheme(
     isLight: Boolean,
     theme: Theme,
+    xr: XR = xr(),
     content: @Composable () -> Unit
 ) {
     val appColours = getColours(theme)
@@ -86,7 +90,7 @@ fun ApplicationTheme(
 
     CompositionLocalProvider(
         LocalColors provides colors,
-        LocalXR provides xr()
+        LocalXR provides xr
     ) {
         MaterialTheme(
             colorScheme = colors.appColors
@@ -117,6 +121,7 @@ fun ApplicationThemePreview(
     return ApplicationTheme(
         isLight = isLight,
         theme = theme,
+        xr = noopXr(),
         content = {
             Box(modifier = Modifier
                 .background(AppTheme.colors.surface)

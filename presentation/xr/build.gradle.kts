@@ -13,6 +13,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.bundles.kotlin)
             implementation(libs.compose.resources)
+            implementation(libs.compose.foundation)
         }
     }
 }
