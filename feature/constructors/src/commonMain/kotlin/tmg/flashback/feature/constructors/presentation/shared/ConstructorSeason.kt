@@ -28,8 +28,7 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.badge.Badge
 import tmg.flashback.style.badge.BadgeView
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextTitle
 
@@ -95,12 +94,10 @@ fun ConstructorSeason(
 }
 
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview() {
+    ApplicationThemePreview {
         ConstructorSeason(
             year = 2020,
             drivers = mapOf(1 to Driver.preview()),

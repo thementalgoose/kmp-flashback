@@ -47,8 +47,7 @@ import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.buttons.ButtonPrimary
 import tmg.flashback.style.buttons.ButtonSecondary
 import tmg.flashback.style.input.InputSwitch
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextSection
 import tmg.flashback.style.text.TextTitle
@@ -295,12 +294,10 @@ private fun CustomSourceDialog(
 
 
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewDialog(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewDialog() {
+    ApplicationThemePreview {
         CustomSourceDialog(
             addCustomSource = { },
             onDismissClicked = { }
@@ -310,12 +307,10 @@ private fun PreviewDialog(
 
 
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewList(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewList() {
+    ApplicationThemePreview {
         RssConfigureScreen(
             actionUpClicked = { },
             insetPadding = PaddingValues(0.dp),

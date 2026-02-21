@@ -30,8 +30,7 @@ import tmg.flashback.style.AppTheme
 
 import tmg.flashback.style.AppTheme.disabledAlpha
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody2
 
 @Composable
@@ -82,12 +81,10 @@ fun ButtonTertiary(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview() {
+    ApplicationThemePreview {
         Box(Modifier.padding(16.dp)) {
             ButtonTertiary(
                 text = "Tertiary Button",
@@ -97,12 +94,10 @@ private fun Preview(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewWithIcon(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewWithIcon() {
+    ApplicationThemePreview {
         Box(Modifier.padding(16.dp)) {
             ButtonTertiary(
                 text = "Tertiary Button",
@@ -113,12 +108,10 @@ private fun PreviewWithIcon(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewDisabled(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewDisabled() {
+    ApplicationThemePreview {
         Box(Modifier.padding(16.dp)) {
             ButtonTertiary(
                 text = "Tertiary Button",

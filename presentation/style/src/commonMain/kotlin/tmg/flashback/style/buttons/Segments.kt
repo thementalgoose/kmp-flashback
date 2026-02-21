@@ -33,8 +33,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.AppTheme.disabledAlpha
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody2
 
 @Composable
@@ -168,12 +167,10 @@ private val fakeItems = listOf(
     ButtonItem(key = "3", string = Res.string.preview)
 )
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview(
-    @PreviewParameter(PreviewConfigProvider ::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview() {
+    ApplicationThemePreview {
         Box(Modifier.padding(16.dp)) {
             Segments(
                 items = fakeItems,
@@ -184,12 +181,10 @@ private fun Preview(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewShowTick(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewShowTick() {
+    ApplicationThemePreview {
         Box(Modifier.padding(16.dp)) {
             Segments(
                 items = fakeItems,
@@ -201,12 +196,10 @@ private fun PreviewShowTick(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewDisabled(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewDisabled() {
+    ApplicationThemePreview {
         Box(Modifier.padding(16.dp)) {
             Segments(
                 items = fakeItems,

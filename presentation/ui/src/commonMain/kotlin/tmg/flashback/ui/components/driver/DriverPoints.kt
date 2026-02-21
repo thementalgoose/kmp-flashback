@@ -17,8 +17,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.infrastructure.extensions.roundToHalf
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextCaption
 import tmg.flashback.ui.components.flag.Flag
@@ -58,12 +57,10 @@ fun DriverPoints(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview() {
+    ApplicationThemePreview {
         DriverPoints(
             name = "firstName lastName",
             nationality = "",

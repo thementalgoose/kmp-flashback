@@ -27,8 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 
 
 val driverIconImageSize: Dp = 48.dp
@@ -93,12 +92,10 @@ fun DriverImage(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview() {
+    ApplicationThemePreview {
         DriverIcon(
             photoUrl = "",
             constructorColor = Color.Red

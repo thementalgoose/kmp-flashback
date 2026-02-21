@@ -48,8 +48,7 @@ import tmg.flashback.formula1.enums.TyreLabel
 import tmg.flashback.formula1.enums.getBySeason
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextHeadline2
 import tmg.flashback.ui.components.header.Header
@@ -152,12 +151,10 @@ private fun TyreRow(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview() {
+    ApplicationThemePreview {
         TyreScreen(
             season = 2022,
             dismissed = { }

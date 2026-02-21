@@ -44,8 +44,7 @@ import tmg.flashback.infrastructure.datetime.dateFormatEEEEDMMM
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextCaption
@@ -189,12 +188,10 @@ private fun NewsCard(
     }
 }
 
+@PreviewTheme
 @Composable
-@Preview
-private fun Preview(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview() {
+    ApplicationThemePreview {
         HighlightBanner(
             uiState = HighlightsUiState(
                 news = listOf(fakeNewsItem()),
@@ -206,12 +203,10 @@ private fun Preview(
     }
 }
 
+@PreviewTheme
 @Composable
-@Preview
-private fun PreviewSkeleton(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewSkeleton() {
+    ApplicationThemePreview {
         HighlightBanner(
             uiState = HighlightsUiState(
                 news = null,
@@ -223,12 +218,10 @@ private fun PreviewSkeleton(
     }
 }
 
+@PreviewTheme
 @Composable
-@Preview
-private fun PreviewMultiple(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewMultiple() {
+    ApplicationThemePreview {
         HighlightBanner(
             uiState = HighlightsUiState(
                 news = listOf(fakeNewsItem(), fakeNewsItem()),
@@ -240,12 +233,10 @@ private fun PreviewMultiple(
     }
 }
 
+@PreviewTheme
 @Composable
-@Preview
-private fun PreviewHidden(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewHidden() {
+    ApplicationThemePreview {
         HighlightBanner(
             uiState = HighlightsUiState(
                 news = listOf(fakeNewsItem()),

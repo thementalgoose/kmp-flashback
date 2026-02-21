@@ -1,5 +1,6 @@
 package tmg.flashback.style.text
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -11,8 +12,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewDevices
+import tmg.flashback.style.preview.PreviewTheme
 
 @Composable
 fun TextBody1(
@@ -39,27 +40,12 @@ fun TextBody1(
     )
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview() {
+    ApplicationThemePreview {
         TextBody1(
             text = "Body 1"
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewBold(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
-        TextBody1(
-            text = "Body 1 Bold",
-            bold = true
         )
     }
 }

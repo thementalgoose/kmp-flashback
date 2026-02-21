@@ -28,7 +28,7 @@ compose = "1.10.1"
 composeAdaptive = "1.2.0"
 composeNavigation = "2.9.2"
 composeNav3 = "1.0.0-alpha06"
-koin = "4.1.1"
+koin = "4.1.0"
 room = "2.8.4"
 sqlite = "2.6.2"
 coil = "3.3.0"
@@ -99,9 +99,10 @@ compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", v
 compose-material = { module = "org.jetbrains.compose.material:material", version.ref = "compose" }
 compose-material3 = "org.jetbrains.compose.material3:material3:1.9.0"
 compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose" }
-compose-uiTooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "compose" }
 compose-materialIconsExtended = "org.jetbrains.compose.material:material-icons-extended:1.7.3"
 compose-uiTest = { module = "org.jetbrains.compose.ui:ui-test", version.ref = "compose" }
+compose-uiTooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "compose" }
+compose-uiToolingPreview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose" }
 
 # Navigation
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "composeNavigation"}
@@ -145,7 +146,6 @@ compose-ui-test-manifest = "androidx.compose.ui:ui-test-manifest:1.8.2"
 # Gradle Plugins
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
-androidx-ui-toolingpreview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose" }
 
 [bundles]
 androidx_glance = [

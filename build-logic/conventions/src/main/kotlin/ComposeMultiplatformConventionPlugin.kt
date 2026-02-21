@@ -2,11 +2,16 @@ import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.dependencies
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class ComposeMultiplatformConventionPlugin: Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         val libs = getLibs()
+
+        dependencies {
+            add("androidRuntimeClasspath", libs.findLibrary("compose.uiTooling").get().get())
+        }
 
         extensions.configure<KotlinMultiplatformExtension> {
             sourceSets.configureEach {
@@ -20,11 +25,12 @@ class ComposeMultiplatformConventionPlugin: Plugin<Project> {
                         implementation(libs.findLibrary("compose.resources").get().get())
                         implementation(libs.findLibrary("compose.materialIconsExtended").get().get())
                         implementation(libs.findLibrary("compose.uiTest").get().get())
-                        implementation(libs.findLibrary("androidx.ui.toolingpreview").get().get())
 
                         implementation(libs.findLibrary("compose.nav3").get().get())
                         implementation(libs.findLibrary("compose.nav3Adaptive").get().get())
                         implementation(libs.findLibrary("compose.nav3ViewModel").get().get())
+
+                        implementation(libs.findLibrary("compose.uiToolingPreview").get().get())
                     }
                 }
             }

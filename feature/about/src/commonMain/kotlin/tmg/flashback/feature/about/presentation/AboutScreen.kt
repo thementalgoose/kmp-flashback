@@ -41,7 +41,6 @@ import androidx.compose.ui.graphics.Brush.Companion.linearGradient
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
-import androidx.window.core.layout.WindowWidthSizeClass
 import coil3.compose.AsyncImage
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.ab_back
@@ -60,6 +59,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.infrastructure.device.Device
@@ -67,8 +67,7 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.LOGO_GRADIENT_1
 import tmg.flashback.style.LOGO_GRADIENT_2
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextHeadline2
@@ -84,7 +83,7 @@ fun AboutScreen(
     ScreenView("About")
 
     val uiState = viewModel.uiState.collectAsState()
-    if (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
+    if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
         AboutListScreen(
             icon = appIcon,
             paddingValues = paddingValues,
@@ -101,7 +100,6 @@ fun AboutScreen(
         AboutPaneScreen(
             icon = appIcon,
             paddingValues = paddingValues,
-            actionUpClicked = actionUpClicked,
             email = uiState.value.contactEmail,
             deviceId = uiState.value.deviceUuid,
             dependencyClicked = viewModel::openDependency,
@@ -223,7 +221,6 @@ private fun AboutPaneScreen(
     remoteNotificationId: String?,
     buttonClicked: (AboutButtons) -> Unit,
     dependencyClicked: (AboutDependency) -> Unit,
-    actionUpClicked: () -> Unit,
     idsClicked: () -> Unit,
 ) {
     Row(modifier = Modifier.fillMaxWidth()) {
@@ -527,12 +524,10 @@ private fun Dependency(
 }
 
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewList(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewList() {
+    ApplicationThemePreview {
         AboutListScreen(
             paddingValues = PaddingValues(0.dp),
             email = "thementalgoose@gmail.com",
@@ -549,12 +544,10 @@ private fun PreviewList(
 }
 
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewPane(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewPane() {
+    ApplicationThemePreview {
         AboutPaneScreen(
             paddingValues = PaddingValues(0.dp),
             email = "thementalgoose@gmail.com",
@@ -564,7 +557,6 @@ private fun PreviewPane(
             icon = Res.drawable.unknown_avatar,
             dependencyClicked = { },
             buttonClicked = { },
-            actionUpClicked = { },
             idsClicked = { }
         )
     }

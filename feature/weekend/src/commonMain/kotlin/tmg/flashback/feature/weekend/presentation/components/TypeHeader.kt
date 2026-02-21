@@ -17,8 +17,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.feature.weekend.presentation.data.ResultType
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextHeadline2
 
 @Composable
@@ -80,24 +79,20 @@ internal fun TypeHeader(
 }
 
 
+@PreviewTheme
 @Composable
-@Preview
-private fun PreviewTypeHeaderRegular(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewTypeHeaderRegular() {
+    ApplicationThemePreview {
         TypeHeader(
             resource = string.nav_race
         )
     }
 }
 
+@PreviewTheme
 @Composable
-@Preview
-private fun PreviewTypeHeaderResult(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewTypeHeaderResult() {
+    ApplicationThemePreview {
         TypeHeader(
             resource = string.nav_race,
             resultType = ResultType.DRIVERS,

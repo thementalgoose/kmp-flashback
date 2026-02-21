@@ -9,15 +9,17 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalInspectionMode
 import org.koin.compose.koinInject
 import tmg.flashback.infrastructure.log.logDebug
-import tmg.flashback.style.preview.PreviewConfig
 import tmg.flashback.style.theme.LocalDarkMode
 import tmg.flashback.style.theme.NightMode
 import tmg.flashback.style.theme.Theme
 import tmg.flashback.style.theme.ThemeManager
 import tmg.flashback.style.theme.customLightMode
 import tmg.flashback.xr.LocalXR
+import tmg.flashback.xr.XR
+import tmg.flashback.xr.noopXr
 import tmg.flashback.xr.xr
 
 object AppTheme {
@@ -74,6 +76,7 @@ fun ApplicationTheme(
 fun ApplicationTheme(
     isLight: Boolean,
     theme: Theme,
+    xr: XR = xr(),
     content: @Composable () -> Unit
 ) {
     val appColours = getColours(theme)
@@ -86,7 +89,7 @@ fun ApplicationTheme(
 
     CompositionLocalProvider(
         LocalColors provides colors,
-        LocalXR provides xr()
+        LocalXR provides xr
     ) {
         MaterialTheme(
             colorScheme = colors.appColors
@@ -98,18 +101,6 @@ fun ApplicationTheme(
 
 @Composable
 fun ApplicationThemePreview(
-    previewConfig: PreviewConfig?,
-    content: @Composable () -> Unit,
-) {
-    ApplicationThemePreview(
-        isLight = previewConfig?.isLightMode == true,
-        theme = previewConfig?.theme ?: Theme.Default,
-        content = content
-    )
-}
-
-@Composable
-fun ApplicationThemePreview(
     isLight: Boolean = !isSystemInDarkTheme(),
     theme: Theme = Theme.Default,
     content: @Composable () -> Unit,
@@ -117,13 +108,8 @@ fun ApplicationThemePreview(
     return ApplicationTheme(
         isLight = isLight,
         theme = theme,
-        content = {
-            Box(modifier = Modifier
-                .background(AppTheme.colors.surface)
-            ) {
-                content()
-            }
-        }
+        xr = noopXr(),
+        content = content
     )
 }
 

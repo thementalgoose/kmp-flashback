@@ -22,8 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.preview.PreviewConfig
-import tmg.flashback.style.preview.PreviewConfigProvider
+import tmg.flashback.style.preview.PreviewTheme
 
 private val RainbowColors = listOf(
     Color(0xff9c4f96),
@@ -102,24 +101,20 @@ fun TextHeadline2(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun Preview(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun Preview() {
+    ApplicationThemePreview {
         TextHeadline2(
             text = "Headline 2"
         )
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewIcon(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewIcon() {
+    ApplicationThemePreview {
         TextHeadline2(
             text = "Headline 2",
             icon = rememberVectorPainter(Icons.Default.Home),
@@ -129,12 +124,10 @@ private fun PreviewIcon(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewIconRainbow(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewIconRainbow() {
+    ApplicationThemePreview {
         TextHeadline2(
             text = "Headline 2",
             icon = rememberVectorPainter(Icons.Default.Home),
@@ -144,12 +137,10 @@ private fun PreviewIconRainbow(
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewBrand(
-    @PreviewParameter(PreviewConfigProvider::class) previewConfig: PreviewConfig
-) {
-    ApplicationThemePreview(previewConfig) {
+private fun PreviewBrand() {
+    ApplicationThemePreview {
         TextHeadline2(
             text = "Headline 2 Brand",
             brand = true
