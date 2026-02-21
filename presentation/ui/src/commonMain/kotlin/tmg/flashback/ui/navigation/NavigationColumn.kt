@@ -204,6 +204,7 @@ private fun NavigationItem(
                     .padding(start = AppTheme.dimens.small)
                     .align(Alignment.CenterVertically)
                     .fillMaxWidth(),
+                maxLines = 1,
                 textColor = contentColor.value,
                 text = stringResource(resource = item.label)
             )
