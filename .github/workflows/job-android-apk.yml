@@ -88,7 +88,7 @@ jobs:
       # Upload signed artifact info
       - name: Upload artifact info
         id: upload
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: APK
           path: |
