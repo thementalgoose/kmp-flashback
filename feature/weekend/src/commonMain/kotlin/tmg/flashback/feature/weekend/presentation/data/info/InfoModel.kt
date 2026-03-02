@@ -14,6 +14,7 @@ data class InfoModel(
     val time: LocalTime?,
     val circuit: Circuit,
     val laps: String?,
+    val cancelled: Boolean,
     val youtubeUrl: String?,
     val wikipediaUrl: String?,
     val days: List<Pair<LocalDate, List<Pair<Schedule, Boolean>>>>,
@@ -31,6 +32,7 @@ fun InfoModel.Companion.preview() = InfoModel(
     time = LocalTime(12, 0),
     circuit = Circuit.preview(),
     laps = "100",
+    cancelled = false,
     youtubeUrl = "youtube",
     wikipediaUrl = "wiki",
     days = listOf(

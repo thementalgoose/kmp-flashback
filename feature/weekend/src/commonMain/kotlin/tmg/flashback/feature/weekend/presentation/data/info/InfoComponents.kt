@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -225,6 +226,7 @@ internal fun Schedule(
                     Column(
                         modifier = modifier
                             .fillMaxWidth()
+                            .alpha(if (model.cancelled) 0.6f else 1f)
                             .padding(
                                 top = AppTheme.dimens.xsmall,
                                 start = AppTheme.dimens.medium,

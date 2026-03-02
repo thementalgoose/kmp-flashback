@@ -71,11 +71,11 @@ fun LazyListScope.addRaceData(
     if (uiState.raceResults.isEmpty()) {
         item("race_not_found") {
             when {
-                Formula1.currentSeasonYear == uiState.season -> {
-                    DataMissing()
-                }
                 uiState.cancelled -> {
                     EventCancelled()
+                }
+                Formula1.currentSeasonYear == uiState.season -> {
+                    DataMissing()
                 }
                 else -> {
                     DataUnavailable()
