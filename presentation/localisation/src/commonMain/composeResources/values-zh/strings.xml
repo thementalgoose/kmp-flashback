@@ -174,6 +174,7 @@
     <string name="network_error_network">发生网络错误。请确保您已连接到互联网，然后重试</string>
     <string name="network_error_internal">发生未知错误</string>
     <string name="error_weekend_not_available">很遗憾，我们没有这些结果。</string>
+    <string name="error_weekend_cancelled">此活动已取消，将不再举行</string>
     <string name="error_data_not_available_try_again">获取这些结果时发生错误。请检查您的互联网连接，然后重试</string>
     <string name="error_weekend_not_available_yet">我们目前还没有这些结果，请在比赛结束后查看。结果通常在每个周末活动后的 2–12 小时内出现</string>
     <string name="error_search_not_found">未找到结果</string>

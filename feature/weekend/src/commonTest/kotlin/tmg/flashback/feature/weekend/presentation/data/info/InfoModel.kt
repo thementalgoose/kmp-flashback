@@ -16,6 +16,7 @@ fun InfoModel.Companion.model(
     time: LocalTime? = LocalTime(12, 34),
     youtubeUrl: String? = "youtube",
     wikipediaUrl: String? = "wikiUrl",
+    cancelled: Boolean = false,
     temperatureMetric: Boolean = true,
     windspeedMetric: Boolean = true
 ): InfoModel = InfoModel(
@@ -33,6 +34,7 @@ fun InfoModel.Companion.model(
     ),
     date = date,
     time = time,
+    cancelled = cancelled,
     temperatureMetric = temperatureMetric,
     windspeedMetric = windspeedMetric
 )

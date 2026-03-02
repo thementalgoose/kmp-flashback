@@ -23,6 +23,7 @@ internal class InfoDataMapperImpl(
             youtubeUrl = race.raceInfo.youtube,
             wikipediaUrl = race.raceInfo.wikipediaUrl,
             days = race.getScheduleGrouping(),
+            cancelled = race.raceInfo.cancelled,
             temperatureMetric = weatherRepository.weatherTemperatureMetric,
             windspeedMetric = weatherRepository.weatherWindspeedMetric
         )

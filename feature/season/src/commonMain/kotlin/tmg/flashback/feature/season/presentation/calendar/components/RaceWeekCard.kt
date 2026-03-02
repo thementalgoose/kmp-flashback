@@ -8,12 +8,10 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.CollectionInfo
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -41,6 +39,7 @@ import flashback.presentation.localisation.generated.resources.ab_schedule_date_
 import flashback.presentation.localisation.generated.resources.empty
 import flashback.presentation.localisation.generated.resources.weekend_race_round
 import flashback.feature.season.generated.resources.Res
+import flashback.feature.season.generated.resources.ic_cancelled
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.format
 import org.jetbrains.compose.resources.painterResource
@@ -49,20 +48,23 @@ import tmg.flashback.feature.season.models.NotificationSchedule
 import tmg.flashback.feature.season.presentation.calendar.CalendarItem
 import tmg.flashback.formula1.constants.Formula1.qualifyingDataAvailableFrom
 import tmg.flashback.formula1.constants.Formula1.sprintsIntroducedIn
+import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.Schedule
+import tmg.flashback.formula1.preview.preview
 import tmg.flashback.infrastructure.datetime.dateFormatDMMM
 import tmg.flashback.infrastructure.datetime.dateFormatEEEEDMMM
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.startOfWeek
 import tmg.flashback.infrastructure.datetime.timeFormatHHmm
 import tmg.flashback.style.AppTheme
+import tmg.flashback.style.ApplicationThemePreview
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextSection
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.flag.Flag
 import tmg.flashback.ui.components.now.Now
-import tmg.flashback.ui.extensions.manipulate
 
 private val countryBadgeSize = 32.dp
 private const val listAlpha = 0.6f
@@ -84,6 +86,7 @@ internal fun RaceWeekCard(
             true -> AppTheme.colors.surfaceContainer3
             false -> Color.Transparent
         })
+        .alpha(if (model.model.cancelled) 0.6f else 1f)
         .clickable { itemClicked(model) }
     ) {
         Row {
@@ -96,13 +99,24 @@ internal fun RaceWeekCard(
                 if (model.model.date.startOfWeek() == LocalDate.now().startOfWeek()) {
                     Now(Modifier.align(Alignment.CenterStart))
                 }
-                Flag(
-                    iso = model.model.countryISO,
-                    nationality = null,
-                    modifier = Modifier
-                        .padding(start = AppTheme.dimens.medium)
-                        .size(countryBadgeSize),
-                )
+                if (model.model.cancelled) {
+                    Icon(
+                        modifier = Modifier
+                            .padding(start = AppTheme.dimens.medium)
+                            .size(countryBadgeSize),
+                        contentDescription = null,
+                        painter = painterResource(resource = Res.drawable.ic_cancelled),
+                        tint = AppTheme.colors.onSurfaceVariant
+                    )
+                } else {
+                    Flag(
+                        iso = model.model.countryISO,
+                        nationality = null,
+                        modifier = Modifier
+                            .padding(start = AppTheme.dimens.medium)
+                            .size(countryBadgeSize),
+                    )
+                }
             }
             Column(modifier = Modifier
                 .weight(1f)
@@ -131,12 +145,14 @@ internal fun RaceWeekCard(
                             .padding(top = 2.dp)
                     )
                     Spacer(Modifier.width(AppTheme.dimens.small))
-                    IconRow(
-                        hasQualifying = model.model.hasQualifying && model.model.season >= qualifyingDataAvailableFrom,
-                        showSprint = (model.containsSprintEvent || model.model.hasSprint) && model.model.season > sprintsIntroducedIn,
-                        hasSprint = model.model.hasSprint && model.model.season > sprintsIntroducedIn,
-                        hasRace = model.model.hasResults
-                    )
+                    if (!model.model.cancelled) {
+                        IconRow(
+                            hasQualifying = model.model.hasQualifying && model.model.season >= qualifyingDataAvailableFrom,
+                            showSprint = (model.containsSprintEvent || model.model.hasSprint) && model.model.season > sprintsIntroducedIn,
+                            hasSprint = model.model.hasSprint && model.model.season > sprintsIntroducedIn,
+                            hasRace = model.model.hasResults
+                        )
+                    }
                 }
 
                 if (!model.shouldShowScheduleList) {
@@ -353,5 +369,71 @@ private fun DateCard(
         } else {
             Spacer(Modifier.height(AppTheme.dimens.nsmall))
         }
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewUpcoming() {
+    ApplicationThemePreview {
+        RaceWeekCard(
+            model = CalendarItem.RaceWeek(
+                model = OverviewRace.preview(),
+                showScheduleList = true,
+                notificationSchedule = NotificationSchedule(false, false, false, false, false, false),
+            ),
+            itemClicked = { }
+        )
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewUpcomingFuture() {
+    ApplicationThemePreview {
+        RaceWeekCard(
+            model = CalendarItem.RaceWeek(
+                model = OverviewRace.preview(),
+                showScheduleList = false,
+                notificationSchedule = NotificationSchedule(false, false, false, false, false, false),
+            ),
+            itemClicked = { }
+        )
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewPast() {
+    ApplicationThemePreview {
+        RaceWeekCard(
+            model = CalendarItem.RaceWeek(
+                model = OverviewRace.preview(
+                    hasQualifying = true,
+                    hasSprint = true,
+                    hasResults = true
+                ),
+                showScheduleList = false,
+                notificationSchedule = NotificationSchedule(false, false, false, false, false, false),
+            ),
+            itemClicked = { }
+        )
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewCancelled() {
+    ApplicationThemePreview {
+        RaceWeekCard(
+            model = CalendarItem.RaceWeek(
+                model = OverviewRace.preview(
+                    cancelled = true
+                ),
+                showScheduleList = false,
+                notificationSchedule = NotificationSchedule(false, false, false, false, false, false),
+            ),
+            itemClicked = { }
+        )
     }
 }

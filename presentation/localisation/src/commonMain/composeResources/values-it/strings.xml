@@ -176,6 +176,7 @@
     <string name="network_error_network">Si è verificato un errore di rete. Assicurati di essere connesso a internet e riprova</string>
     <string name="network_error_internal">Si è verificato un errore sconosciuto</string>
     <string name="error_weekend_not_available">Purtroppo non abbiamo questi risultati.</string>
+    <string name="error_weekend_cancelled">Questo evento è stato annullato e non avrà luogo</string>
     <string name="error_data_not_available_try_again">Si è verificato un errore durante il recupero di questi risultati. Controlla la tua connessione internet e riprova</string>
     <string name="error_weekend_not_available_yet">Non abbiamo ancora questi risultati, riprova dopo la gara. I risultati di solito compaiono 2–12 ore dopo ogni evento del weekend</string>
     <string name="error_search_not_found">Nessun risultato trovato</string>

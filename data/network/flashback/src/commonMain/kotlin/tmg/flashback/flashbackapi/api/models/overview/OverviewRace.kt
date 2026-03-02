@@ -22,6 +22,8 @@ data class OverviewRace(
     val laps: String? = null,
     @SerialName("time")
     val time: String? = null,
+    @SerialName("cancelled")
+    val cancelled: Boolean = false,
     @SerialName("hasQualifying")
     val hasQualifying: Boolean,
     @SerialName("hasSprint")

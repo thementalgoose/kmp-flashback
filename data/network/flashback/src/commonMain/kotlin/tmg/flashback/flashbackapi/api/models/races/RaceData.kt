@@ -23,7 +23,9 @@ data class RaceData(
     @SerialName("wikiUrl")
     val wikiUrl: String? = null,
     @SerialName("youtubeUrl")
-    val youtubeUrl: String? = null
+    val youtubeUrl: String? = null,
+    @SerialName("cancelled")
+    val cancelled: Boolean = false
 ) {
     companion object
 }

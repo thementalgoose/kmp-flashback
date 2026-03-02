@@ -32,6 +32,7 @@ import tmg.flashback.feature.weekend.presentation.components.DataMissing
 import tmg.flashback.feature.weekend.presentation.components.DataUnavailable
 import tmg.flashback.feature.weekend.presentation.components.DriverInfoWithIcon
 import tmg.flashback.feature.weekend.presentation.components.DriverTeamSwitcher
+import tmg.flashback.feature.weekend.presentation.components.EventCancelled
 import tmg.flashback.feature.weekend.presentation.components.PointsBox
 import tmg.flashback.feature.weekend.presentation.components.RaceHeader
 import tmg.flashback.feature.weekend.presentation.components.Time
@@ -68,10 +69,16 @@ fun LazyListScope.addSprintRaceData(
     }
     if (uiState.sprintRaceResults.isEmpty()) {
         item("sprint_race_not_found") {
-            if (Formula1.currentSeasonYear == uiState.season) {
-                DataMissing()
-            } else {
-                DataUnavailable()
+            when {
+                uiState.cancelled -> {
+                    EventCancelled()
+                }
+                Formula1.currentSeasonYear == uiState.season -> {
+                    DataMissing()
+                }
+                else -> {
+                    DataUnavailable()
+                }
             }
         }
     } else {

@@ -72,6 +72,7 @@ class WeekendViewModel(
                     season = race.raceInfo.season
                 ),
                 resultType = resultType,
+                cancelled = race.raceInfo.cancelled,
                 qualifyingResults = qualifyingDataMapper(race),
                 qualifyingColumns = race.qualifying.maxOfOrNull { it.label },
                 raceResults = raceDataMapper(race, resultType),

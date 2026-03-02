@@ -29,6 +29,7 @@ sealed class WeekendUiState {
         val tabs: List<WeekendTabs>,
         val info: InfoModel,
         val resultType: ResultType,
+        val cancelled: Boolean,
         val qualifyingColumns: QualifyingType?,
         val qualifyingResults: List<QualifyingModel>,
         val raceResults: List<RaceModel>,
