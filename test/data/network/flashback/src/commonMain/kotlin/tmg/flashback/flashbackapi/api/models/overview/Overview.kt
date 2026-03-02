@@ -14,6 +14,7 @@ fun OverviewRace.Companion.model(
     hasQualifying: Boolean = true,
     hasSprint: Boolean = false,
     hasRace: Boolean = false,
+    cancelled: Boolean = false,
     schedule: List<Schedule>? = listOf(
         Schedule.model()
     )
@@ -28,5 +29,6 @@ fun OverviewRace.Companion.model(
     hasQualifying = hasQualifying,
     hasRace = hasRace,
     hasSprint = hasSprint,
-    schedule = schedule
+    schedule = schedule,
+    cancelled = cancelled
 )

@@ -17,7 +17,8 @@ class NetworkOverviewMapper {
             time = overview.time,
             hasRace = overview.hasRace,
             hasSprint = overview.hasSprint,
-            hasQualifying = overview.hasQualifying
+            hasQualifying = overview.hasQualifying,
+            cancelled = overview.cancelled,
         )
     }
 }

@@ -19,6 +19,7 @@ val fakeOverviewRace = OverviewRace(
     hasQualifying = false,
     hasSprint = false,
     hasResults = false,
+    cancelled = false,
     schedule = listOf(
         Schedule("FP1", LocalDate(2020, 1, 1), LocalTime(12, 0), null),
         Schedule("FP2", LocalDate(2020, 1, 1), LocalTime(15, 0), null),

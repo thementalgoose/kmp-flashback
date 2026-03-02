@@ -22,6 +22,7 @@ class OverviewMapper(
             country = overview.circuit.country,
             laps = overview.overview.laps,
             countryISO = overview.circuit.countryISO,
+            cancelled = overview.overview.cancelled,
             hasQualifying = overview.overview.hasQualifying,
             hasSprint = overview.overview.hasSprint,
             hasResults = overview.overview.hasRace,

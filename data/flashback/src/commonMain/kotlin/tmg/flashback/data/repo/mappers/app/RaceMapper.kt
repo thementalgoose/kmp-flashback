@@ -44,6 +44,7 @@ class RaceMapper(
             wikipediaUrl = data.raceInfo.wikiUrl,
             youtube = data.raceInfo.youtube,
             circuit = circuitMapper.mapCircuit(data.circuit)!!,
+            cancelled = data.raceInfo.cancelled,
         )
     }
 
@@ -58,6 +59,7 @@ class RaceMapper(
             wikipediaUrl = data.raceInfo.wikiUrl,
             youtube = data.raceInfo.youtube,
             circuit = circuitMapper.mapCircuit(data.circuit)!!,
+            cancelled = data.raceInfo.cancelled,
         )
     }
 

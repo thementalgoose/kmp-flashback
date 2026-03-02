@@ -8,6 +8,7 @@ fun Overview.Companion.model(
     laps: String? = "12",
     date: String = "2020-10-12",
     time: String? = "12:34",
+    cancelled: Boolean = false,
     hasRace: Boolean = false,
     hasSprint: Boolean = false,
     hasQualifying: Boolean = true,
@@ -23,5 +24,6 @@ fun Overview.Companion.model(
     hasRace = hasRace,
     hasSprint = hasSprint,
     hasQualifying = hasQualifying,
+    cancelled = cancelled,
     id = id
 )
