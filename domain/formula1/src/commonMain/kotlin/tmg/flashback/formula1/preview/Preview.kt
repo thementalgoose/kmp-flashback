@@ -15,12 +15,45 @@ import tmg.flashback.formula1.model.DriverHistorySeasonRace
 import tmg.flashback.formula1.model.FastestLap
 import tmg.flashback.formula1.model.LapTime
 import tmg.flashback.formula1.model.Location
+import tmg.flashback.formula1.model.Overview
+import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.RaceInfo
 import tmg.flashback.formula1.model.RaceResult
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.SeasonDriverStandings
 import tmg.flashback.formula1.model.SprintRaceResult
 import tmg.flashback.infrastructure.datetime.now
+
+fun OverviewRace.Companion.preview(
+    season: Int = 2025,
+    round: Int = 1,
+    hasQualifying: Boolean = false,
+    hasSprint: Boolean = false,
+    hasResults: Boolean = false,
+    cancelled: Boolean = false,
+) = OverviewRace(
+    season = season,
+    round = round,
+    raceName = "British Grand Prix",
+    circuitId = "silverstone",
+    circuitName = "Silverstone",
+    countryISO = "GBR",
+    date = LocalDate.now(),
+    time = LocalTime.now(),
+    hasQualifying = hasQualifying,
+    hasSprint = hasSprint,
+    hasResults = hasResults,
+    laps = "12",
+    country = "United Kingdom",
+    cancelled = cancelled,
+    schedule = listOf(
+        Schedule.preview("FP1"),
+        Schedule.preview("FP2"),
+        Schedule.preview("FP3"),
+        Schedule.preview("Qualifying"),
+        Schedule.preview("Race")
+    )
+)
 
 fun Circuit.Companion.preview(
     id: String = "circuitId"
