@@ -26,6 +26,8 @@ data class Overview(
     val hasSprint: Boolean,
     @ColumnInfo(name = "has_qualifying_data")
     val hasQualifying: Boolean,
+    @ColumnInfo(name = "cancelled")
+    val cancelled: Boolean,
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: String = "${season}_${round}"

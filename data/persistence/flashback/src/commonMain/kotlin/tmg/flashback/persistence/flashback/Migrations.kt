@@ -153,4 +153,10 @@ enum class Migrations(
             database.execSQL("ALTER TABLE DriverSeasonRace_Temp RENAME TO DriverSeasonRace")
         }
     }),
+    MIGRATION_11_12(object : Migration(11, 12) {
+        override fun migrate(database: SQLiteConnection) {
+            database.execSQL("ALTER TABLE Overview ADD COLUMN cancelled INTEGER NOT NULL DEFAULT 0")
+            database.execSQL("ALTER TABLE RaceInfo ADD COLUMN cancelled INTEGER NOT NULL DEFAULT 0")
+        }
+    })
 }

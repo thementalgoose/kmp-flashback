@@ -24,6 +24,8 @@ data class RaceInfo(
     val wikiUrl: String?,
     @ColumnInfo(name = "youtube")
     val youtube: String?,
+    @ColumnInfo(name = "cancelled")
+    val cancelled: Boolean,
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: String = "${season}_${round}"
