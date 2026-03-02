@@ -145,12 +145,14 @@ internal fun RaceWeekCard(
                             .padding(top = 2.dp)
                     )
                     Spacer(Modifier.width(AppTheme.dimens.small))
-                    IconRow(
-                        hasQualifying = model.model.hasQualifying && model.model.season >= qualifyingDataAvailableFrom,
-                        showSprint = (model.containsSprintEvent || model.model.hasSprint) && model.model.season > sprintsIntroducedIn,
-                        hasSprint = model.model.hasSprint && model.model.season > sprintsIntroducedIn,
-                        hasRace = model.model.hasResults
-                    )
+                    if (!model.model.cancelled) {
+                        IconRow(
+                            hasQualifying = model.model.hasQualifying && model.model.season >= qualifyingDataAvailableFrom,
+                            showSprint = (model.containsSprintEvent || model.model.hasSprint) && model.model.season > sprintsIntroducedIn,
+                            hasSprint = model.model.hasSprint && model.model.season > sprintsIntroducedIn,
+                            hasRace = model.model.hasResults
+                        )
+                    }
                 }
 
                 if (!model.shouldShowScheduleList) {
