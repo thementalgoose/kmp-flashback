@@ -39,6 +39,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.feature.weekend.presentation.WeekendUiState.Data
 import tmg.flashback.feature.weekend.presentation.components.DataMissing
 import tmg.flashback.feature.weekend.presentation.components.DataUnavailable
+import tmg.flashback.feature.weekend.presentation.components.EventCancelled
 import tmg.flashback.feature.weekend.presentation.components.Position
 import tmg.flashback.feature.weekend.presentation.components.TypeHeader
 import tmg.flashback.formula1.constants.Formula1
@@ -72,10 +73,16 @@ fun LazyListScope.addQualifyingData(
     }
     if (uiState.qualifyingResults.isEmpty()) {
         item("qualifying_not_found") {
-            if (Formula1.currentSeasonYear == uiState.season) {
-                DataMissing()
-            } else {
-                DataUnavailable()
+            when {
+                Formula1.currentSeasonYear == uiState.season -> {
+                    DataMissing()
+                }
+                uiState.cancelled -> {
+                    EventCancelled()
+                }
+                else -> {
+                    DataUnavailable()
+                }
             }
         }
     } else {

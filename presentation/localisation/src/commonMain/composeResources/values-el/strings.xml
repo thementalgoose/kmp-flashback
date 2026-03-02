@@ -194,6 +194,7 @@
     <string name="network_error_network">Παρουσιάστηκε σφάλμα δικτύου. Βεβαιωθείτε ότι είστε συνδεδεμένοι στο διαδίκτυο και δοκιμάστε ξανά</string>
     <string name="network_error_internal">Παρουσιάστηκε άγνωστο σφάλμα</string>
     <string name="error_weekend_not_available">Δυστυχώς δεν έχουμε αυτά τα αποτελέσματα.</string>
+    <string name="error_weekend_cancelled">Αυτή η εκδήλωση ακυρώθηκε και δεν θα πραγματοποιηθεί</string>
     <string name="error_data_not_available_try_again">Παρουσιάστηκε σφάλμα κατά τη λήψη αυτών των αποτελεσμάτων. Ελέγξτε τη σύνδεσή σας στο διαδίκτυο και δοκιμάστε ξανά</string>
     <string name="error_weekend_not_available_yet">Δεν έχουμε ακόμα αυτά τα αποτελέσματα, ελέγξτε ξανά μετά τον αγώνα. Τα αποτελέσματα εμφανίζονται συνήθως 2–12 ώρες μετά από κάθε αγωνιστικό Σαββατοκύριακο</string>
     <string name="error_search_not_found">Δεν βρέθηκαν αποτελέσματα</string>

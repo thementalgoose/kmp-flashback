@@ -199,6 +199,7 @@
     <string name="network_error_network">A network error occurred. Please make sure you are connected to the internet and try again</string>
     <string name="network_error_internal">A unknown error occurred</string>
     <string name="error_weekend_not_available">Unfortunately we don't have these results.</string>
+    <string name="error_weekend_cancelled">This event has been cancelled and will not take place</string>
     <string name="error_data_not_available_try_again">An error occurred while getting these results. Please check your internet connection and try again</string>
     <string name="error_weekend_not_available_yet">We don't have these results just yet, please check back after the race. Results usually appear 2–12 hours after every weekend event</string>
     <string name="error_search_not_found">No results found</string>

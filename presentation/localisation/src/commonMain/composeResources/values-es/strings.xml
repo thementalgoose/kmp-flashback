@@ -176,6 +176,7 @@
     <string name="network_error_network">Se produjo un error de red. Asegúrate de estar conectado a Internet y vuelve a intentarlo</string>
     <string name="network_error_internal">Se produjo un error desconocido</string>
     <string name="error_weekend_not_available">Lamentablemente, no tenemos estos resultados.</string>
+    <string name="error_weekend_cancelled">Este evento ha sido cancelado y no se llevará a cabo</string>
     <string name="error_data_not_available_try_again">Se produjo un error al obtener estos resultados. Comprueba tu conexión a Internet y vuelve a intentarlo</string>
     <string name="error_weekend_not_available_yet">Todavía no tenemos estos resultados, vuelve a consultar después de la carrera. Los resultados suelen aparecer entre 2 y 12 horas después de cada evento de fin de semana</string>
     <string name="error_search_not_found">No se encontraron resultados</string>
