@@ -107,7 +107,8 @@ fun RaceInfo.Companion.preview() = RaceInfo(
     laps = "100",
     youtube = "youtubeUrl",
     wikipediaUrl = "wikipediaUrl",
-    circuit = Circuit.preview()
+    circuit = Circuit.preview(),
+    cancelled = false
 )
 
 fun LapTime.Companion.preview() = LapTime(0, 1, 2, 123)

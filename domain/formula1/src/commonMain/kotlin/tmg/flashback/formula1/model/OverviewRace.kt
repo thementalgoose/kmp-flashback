@@ -14,6 +14,7 @@ data class OverviewRace(
     val laps: String?,
     val country: String,
     val countryISO: String,
+    val cancelled: Boolean,
     val hasQualifying: Boolean,
     val hasSprint: Boolean,
     val hasResults: Boolean,
@@ -31,6 +32,7 @@ data class OverviewRace(
             laps = laps,
             youtube = null,
             wikipediaUrl = null,
+            cancelled = cancelled,
             circuit = Circuit(
                 id = circuitId,
                 name = circuitName,

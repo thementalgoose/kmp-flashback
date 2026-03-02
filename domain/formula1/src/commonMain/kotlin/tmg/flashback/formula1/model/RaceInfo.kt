@@ -13,6 +13,7 @@ data class RaceInfo(
     val youtube: String?,
     val wikipediaUrl: String?,
     val circuit: Circuit,
+    val cancelled: Boolean,
 ) {
     companion object
 }
