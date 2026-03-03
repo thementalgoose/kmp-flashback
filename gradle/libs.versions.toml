@@ -7,7 +7,7 @@ kotlinx-datetime = "0.7.1"
 kotlinx-coroutines = "1.10.2"
 
 # Android
-agp = "9.0.1"
+agp = "9.1.0"
 android-compileSdk = "36"
 android-minSdk = "26"
 android-targetSdk = "36"
