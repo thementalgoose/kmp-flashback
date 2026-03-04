@@ -107,6 +107,10 @@ internal object ScheduleBuilder {
         val daysBetween = this.date.daysUntil(targetRace.date)
         val weeksToExclude = listOf(this.date.startOfWeek(), targetRace.date.startOfWeek())
 
+        if (daysBetween <= 0) {
+            return emptyList()
+        }
+
         return List(daysBetween) { this.date.plus(it, DateTimeUnit.DAY) }
             .map { it.startOfWeek() }
             .distinct()
