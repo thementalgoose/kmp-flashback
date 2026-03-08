@@ -276,11 +276,11 @@ private fun Dates(
                                     showWeather = showWeather,
                                     showNotificationBadge = false
                                 )
-                                Spacer(Modifier.width(AppTheme.dimens.small))
+                                Spacer(Modifier.width(AppTheme.dimens.xsmall))
                             }
                         }
                     }
-                    Spacer(Modifier.width(AppTheme.dimens.medium))
+                    Spacer(Modifier.width(AppTheme.dimens.medium - AppTheme.dimens.xsmall))
                 }
             }
         }

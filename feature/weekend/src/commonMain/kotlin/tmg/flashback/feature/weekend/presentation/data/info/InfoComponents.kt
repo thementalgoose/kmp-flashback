@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -220,6 +221,9 @@ internal fun Schedule(
             modifier = modifier
                 .padding(bottom = AppTheme.dimens.small)
                 .edgeFade(),
+            contentPadding = PaddingValues(
+                end = AppTheme.dimens.medium
+            ),
             state = scrollState,
             content = {
                 items(model.days) { (date, list) ->
@@ -229,13 +233,12 @@ internal fun Schedule(
                             .alpha(if (model.cancelled) 0.6f else 1f)
                             .padding(
                                 top = AppTheme.dimens.xsmall,
-                                start = AppTheme.dimens.medium,
-                                end = AppTheme.dimens.medium
+                                start = AppTheme.dimens.medium
                             )
                     ) {
                         Title(date)
                         Row(
-                            horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.medium)
+                            horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
                         ) {
                             list.forEach { (schedule, isNotificationSet) ->
                                 EventItem(
