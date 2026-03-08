@@ -37,7 +37,9 @@ import tmg.flashback.feature.constructors.presentation.shared.ConstructorDriver
 import tmg.flashback.feature.constructors.presentation.shared.ConstructorHeader
 import tmg.flashback.feature.constructors.presentation.shared.ConstructorSeason
 import tmg.flashback.formula1.model.Constructor
+import tmg.flashback.formula1.model.ConstructorHistorySeasonDriver
 import tmg.flashback.formula1.model.Driver
+import tmg.flashback.formula1.model.DriverEntry
 import tmg.flashback.formula1.preview.preview
 import tmg.flashback.navigation.NavTeam
 import tmg.flashback.style.AppTheme
@@ -124,7 +126,8 @@ internal fun ConstructorStatsScreen(
         }
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            contentPadding = bottomOnlyPadding
+            contentPadding = bottomOnlyPadding,
+            verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
         ) {
             item("header") {
                 ConstructorHeader(
@@ -193,7 +196,7 @@ private fun Stat(
     Row(modifier = modifier
         .padding(
             horizontal = AppTheme.dimens.medium,
-            vertical = AppTheme.dimens.xsmall
+            vertical = AppTheme.dimens.xxsmall
         ),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
     ) {
@@ -268,7 +271,53 @@ private fun PreviewSeason() {
                 availableSeasons = listOf(2020, 2019),
                 stats = listOf(ConstructorStat(string.dashboard_all_title, flashback.presentation.ui.generated.resources.Res.drawable.ic_menu_drivers, "value")),
                 data = ConstructorStatsData.Season(
-                    drivers = listOf()
+                    drivers = List(3) {
+                        ConstructorHistorySeasonDriver(
+                            driver = DriverEntry.preview("driverId$it"),
+                            points = 1.0,
+                            wins = 1,
+                            races = 2,
+                            podiums = 3,
+                            polePosition = 4,
+                            championshipStanding = 1,
+                            finishesInPoints = 3
+                        )
+                    }
+                )
+            ),
+            changeSelection = { }
+        )
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewOverview() {
+    ApplicationThemePreview {
+        ConstructorStatsScreen(
+            data = NavTeam(2020, "driver", "name"),
+            windowSizeClass = WindowSizeClass.compute(400f, 700f),
+            paddingValues = PaddingValues(0.dp),
+            actionUpClicked = { },
+            showBack = true,
+            isLoading = false,
+            refresh = { },
+            uiState = ConstructorStatsUiState(
+                constructor = Constructor.preview(),
+                selection = ConstructorFilter.Season(2020),
+                availableSeasons = listOf(2020, 2019),
+                stats = listOf(ConstructorStat(string.dashboard_all_title, flashback.presentation.ui.generated.resources.Res.drawable.ic_menu_drivers, "value")),
+                data = ConstructorStatsData.Overview(
+                    items = listOf(
+                        ConstructorStatSeasonOverview(
+                            season = 2020,
+                            drivers = mapOf(
+                                1 to Driver.preview(id = "driverId1"),
+                                2 to Driver.preview(id = "driverId2"),
+                            ),
+                            standing = 1
+                        )
+                    )
                 )
             ),
             changeSelection = { }

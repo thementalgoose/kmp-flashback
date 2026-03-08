@@ -35,7 +35,7 @@ import tmg.flashback.composeApp.presentation.navigation.scene.SplitPaneScene.Com
 import tmg.flashback.composeApp.presentation.navigation.scene.SplitPaneScene.Companion.LIST_KEY
 import tmg.flashback.style.AppTheme
 
-private val spacingPadding = 12.dp
+private val spacingPadding = AppTheme.dimens.xsmall
 
 class SplitPaneScene<T : Any>(
     override val key: Any,
@@ -55,7 +55,7 @@ class SplitPaneScene<T : Any>(
         BoxWithConstraints(modifier = Modifier
             .fillMaxSize()
             .padding(paddingInsets)
-            .padding(end = AppTheme.dimens.medium)
+            .padding(end = AppTheme.dimens.small)
             .consumeWindowInsets(WindowInsets.safeDrawing),
         ) {
             val listWidth = animateDpAsState(

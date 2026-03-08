@@ -43,8 +43,7 @@ fun ConstructorSeason(
     Row(
         modifier = modifier
             .padding(
-                horizontal = AppTheme.dimens.small,
-                vertical = AppTheme.dimens.xsmall
+                horizontal = AppTheme.dimens.small
             )
             .clickable(onClick = { yearClicked(year) })
             .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))

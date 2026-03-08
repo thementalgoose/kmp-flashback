@@ -43,10 +43,7 @@ internal fun ConstructorDriver(
 ) {
     Box(modifier = modifier
         .height(IntrinsicSize.Min)
-        .padding(
-            horizontal = AppTheme.dimens.medium,
-            vertical = AppTheme.dimens.small
-        )
+        .padding(horizontal = AppTheme.dimens.medium)
     ) {
         Column(
             modifier = Modifier
