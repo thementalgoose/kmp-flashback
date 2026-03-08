@@ -72,7 +72,7 @@ fun DriverStatsScreen(
     val currentSeason = when (val selection = uiState.value.selection) {
         DriverFilter.Overview -> "All"
         is DriverFilter.Season -> selection.season.toString()
-        null -> data.season?.toString() ?: "All"
+        null -> data.season.toString()
     }
     ScreenView(screenName = "Driver Season", updateKey = currentSeason, args = mapOf(
         analyticsDriverId to data.id,

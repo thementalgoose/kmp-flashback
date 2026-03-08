@@ -47,8 +47,8 @@ fun DriverBadges(
 ) {
     FlowRow(
         modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small),
-        horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.small, alignment = alignment)
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall),
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall, alignment = alignment)
     ) {
 
         val flagVector = getFlagVector(driver.nationalityISO)
