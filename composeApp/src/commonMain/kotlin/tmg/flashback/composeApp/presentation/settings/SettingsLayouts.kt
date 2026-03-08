@@ -41,7 +41,7 @@ private val categoryIconSize: Dp = 36.dp
 
 private val defaultSettingModifier = Modifier
     .padding(
-        vertical = AppTheme.dimens.nsmall,
+        vertical = 10.dp,
         horizontal = AppTheme.dimens.medium
     )
 
