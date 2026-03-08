@@ -37,8 +37,9 @@ fun Picker(
 ) {
     val expanded = remember { mutableStateOf(defaultExpanded)  }
     Row(
-        modifier = modifier
-            .clickable { expanded.value = true },
+        modifier = Modifier
+            .clickable { expanded.value = true }
+            .then(modifier),
         verticalAlignment = Alignment.CenterVertically
     ) {
         TextHeadline1Inline(text = option.string())
