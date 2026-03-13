@@ -42,12 +42,16 @@ import flashback.feature.season.generated.resources.Res
 import flashback.feature.season.generated.resources.ic_cancelled
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.format
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.feature.season.models.NotificationSchedule
 import tmg.flashback.feature.season.presentation.calendar.CalendarItem
 import tmg.flashback.formula1.constants.Formula1.qualifyingDataAvailableFrom
 import tmg.flashback.formula1.constants.Formula1.sprintsIntroducedIn
+import tmg.flashback.formula1.enums.SprintFormat
+import tmg.flashback.formula1.enums.SprintFormat.Companion.getSeasonFormat
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.preview.preview
@@ -147,6 +151,7 @@ internal fun RaceWeekCard(
                     Spacer(Modifier.width(AppTheme.dimens.small))
                     if (!model.model.cancelled) {
                         IconRow(
+                            season = model.model.season,
                             hasQualifying = model.model.hasQualifying && model.model.season >= qualifyingDataAvailableFrom,
                             showSprint = (model.containsSprintEvent || model.model.hasSprint) && model.model.season > sprintsIntroducedIn,
                             hasSprint = model.model.hasSprint && model.model.season > sprintsIntroducedIn,
@@ -177,54 +182,64 @@ internal fun RaceWeekCard(
 
 @Composable
 private fun RowScope.IconRow(
+    season: Int,
     hasQualifying: Boolean,
     showSprint: Boolean,
     hasSprint: Boolean,
     hasRace: Boolean,
+) {
+    val format = getSeasonFormat(season)
+    if (showSprint && format == SprintFormat.FORMAT_CURRENT) {
+        IconResult(
+            icon = flashback.domain.formula1.generated.resources.Res.drawable.ic_status_results_sprint,
+            contentDescriptionAvailable = string.ab_has_sprint_results,
+            contentDescriptionNotAvailable = string.ab_no_sprint_results,
+            hasResult = hasSprint
+        )
+        Spacer(Modifier.width(2.dp))
+    }
+    IconResult(
+        icon = flashback.domain.formula1.generated.resources.Res.drawable.ic_status_results_qualifying,
+        contentDescriptionAvailable = string.ab_has_qualifying_results,
+        contentDescriptionNotAvailable = string.ab_no_qualifying_results,
+        hasResult = hasQualifying
+    )
+    Spacer(Modifier.width(2.dp))
+    if (showSprint && format == SprintFormat.FORMAT_2021_2022 || format == SprintFormat.FORMAT_2023) {
+        IconResult(
+            icon = flashback.domain.formula1.generated.resources.Res.drawable.ic_status_results_sprint,
+            contentDescriptionAvailable = string.ab_has_sprint_results,
+            contentDescriptionNotAvailable = string.ab_no_sprint_results,
+            hasResult = hasSprint
+        )
+        Spacer(Modifier.width(2.dp))
+    }
+    IconResult(
+        icon = flashback.domain.formula1.generated.resources.Res.drawable.ic_status_results_race,
+        contentDescriptionAvailable = string.ab_has_race_results,
+        contentDescriptionNotAvailable = string.ab_no_race_results,
+        hasResult = hasRace
+    )
+}
+
+@Composable
+private fun RowScope.IconResult(
+    icon: DrawableResource,
+    contentDescriptionAvailable: StringResource,
+    contentDescriptionNotAvailable: StringResource,
+    hasResult: Boolean,
     iconSize: Dp = 16.dp
 ) {
     Icon(
         modifier = Modifier
             .size(iconSize)
             .align(Alignment.CenterVertically),
-        painter = painterResource(resource = flashback.domain.formula1.generated.resources.Res.drawable.ic_status_results_qualifying),
-        contentDescription = when (hasQualifying) {
-            true -> stringResource(resource = string.ab_has_qualifying_results)
-            false -> stringResource(resource = string.ab_no_qualifying_results)
+        painter = painterResource(resource = icon),
+        contentDescription = when (hasResult) {
+            true -> stringResource(resource = contentDescriptionAvailable)
+            false -> stringResource(resource = contentDescriptionNotAvailable)
         },
-        tint = when (hasQualifying) {
-            true -> AppTheme.colors.f1ResultsFull
-            false -> AppTheme.colors.f1ResultsNeutral.copy(alpha = 0.3f)
-        }
-    )
-    Spacer(Modifier.width(2.dp))
-    if (showSprint) {
-        Icon(
-            modifier = Modifier
-                .size(iconSize)
-                .align(Alignment.CenterVertically),
-            painter = painterResource(resource = flashback.domain.formula1.generated.resources.Res.drawable.ic_status_results_sprint),
-            contentDescription = when (hasSprint) {
-                true -> stringResource(resource = string.ab_has_sprint_results)
-                false -> stringResource(resource = string.ab_no_sprint_results)
-            },
-            tint = when (hasSprint) {
-                true -> AppTheme.colors.f1ResultsFull
-                false -> AppTheme.colors.f1ResultsNeutral.copy(alpha = 0.3f)
-            }
-        )
-        Spacer(Modifier.width(2.dp))
-    }
-    Icon(
-        modifier = Modifier
-            .size(iconSize)
-            .align(Alignment.CenterVertically),
-        painter = painterResource(resource = flashback.domain.formula1.generated.resources.Res.drawable.ic_status_results_race),
-        contentDescription = when (hasRace) {
-            true -> stringResource(resource = string.ab_has_race_results)
-            false -> stringResource(resource = string.ab_no_race_results)
-        },
-        tint = when (hasRace) {
+        tint = when (hasResult) {
             true -> AppTheme.colors.f1ResultsFull
             false -> AppTheme.colors.f1ResultsNeutral.copy(alpha = 0.3f)
         }
