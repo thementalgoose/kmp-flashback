@@ -13,6 +13,7 @@ import kotlinx.datetime.format.char
 
 fun LocalDate.displayDate(
     weekdays: DayOfWeekNames? = null,
+    month: MonthNames = ENGLISH_ABBREVIATED,
     includeYear: Boolean = true
 ): String {
     val day = this.day.ordinalAbbreviation
@@ -23,7 +24,7 @@ fun LocalDate.displayDate(
         }
         chars(day)
         char(' ')
-        monthName(ENGLISH_ABBREVIATED)
+        monthName(month)
         if (includeYear) {
             char(' ')
             year()

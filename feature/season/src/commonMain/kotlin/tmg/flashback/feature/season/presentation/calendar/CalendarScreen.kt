@@ -50,6 +50,7 @@ import flashback.presentation.localisation.generated.resources.ab_collapsed_sect
 import flashback.presentation.localisation.generated.resources.tyres_label
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.format
+import kotlinx.datetime.format.MonthNames
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -410,7 +411,10 @@ private fun Event(
                 .weight(1f)
         )
         TextBody2(
-            text = event.event.date.displayDate(includeYear = false),
+            text = event.event.date.displayDate(
+                month = MonthNames.ENGLISH_FULL,
+                includeYear = false
+            ),
         )
     }
 }
