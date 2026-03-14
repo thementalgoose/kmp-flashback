@@ -9,11 +9,15 @@ import tmg.flashback.analytics.manager.AnalyticsManager
 fun ScreenView(
     screenName: String,
     args: Map<String, String> = mapOf(),
-    updateKey: Any? = Unit
+    updateKey: Any? = Unit,
+    updateKey2: Any? = Unit,
+    shouldReport: () -> Boolean = { true }
 ) {
     val analyticsManager: AnalyticsManager = koinInject()
-    DisposableEffect(key1 = updateKey, effect = {
-        analyticsManager.viewScreen(screenName, args)
+    DisposableEffect(key1 = updateKey, key2 = updateKey2, effect = {
+        if (shouldReport()) {
+            analyticsManager.viewScreen(screenName, args)
+        }
         this.onDispose { }
     })
 }

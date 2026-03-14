@@ -11,7 +11,7 @@ import tmg.flashback.feature.reactiongame.presentation.ReactionGameViewModel
 val featureReactionGameModule = listOf(module())
 
 internal fun module() = module {
-    viewModel { ReactionGameViewModel(get(), get(), Dispatchers.IO) }
+    viewModel { ReactionGameViewModel(get(), get(), get(), Dispatchers.IO) }
 
     single<LightsOutDelayProvider> { LightsOutDelayProviderImpl() }
 }

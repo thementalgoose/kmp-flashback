@@ -12,12 +12,15 @@ import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import tmg.flashback.analytics.usecases.LogEventUseCase
 import tmg.flashback.feature.reactiongame.manager.LightsOutDelayProvider
 import tmg.flashback.infrastructure.datetime.TimeManager
+import kotlin.math.log
 
 class ReactionGameViewModel(
     private val lightsOutDelayProvider: LightsOutDelayProvider,
     private val timeManager: TimeManager,
+    private val logEventUseCase: LogEventUseCase,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ): ViewModel() {
 
@@ -39,7 +42,7 @@ class ReactionGameViewModel(
     }
 
     fun start() {
-
+        logEventUseCase.logEvent("reaction_game", mapOf("started" to "true"))
         lightsOutTime = 0L
         val lightsOutDelay = lightsOutDelayProvider.getDelay()
         job = viewModelScope.launch(ioDispatcher) {
@@ -78,6 +81,7 @@ class ReactionGameViewModel(
 
         // Clicked before lights out. Jump start
         if (this.lightsOutTime == 0L || reactionTime < 0L) {
+            logEventUseCase.logEvent("reaction_game", mapOf("result" to "n/a"))
             _uiState.value = ReactionUiState.JumpStart
             return
         }
@@ -87,6 +91,7 @@ class ReactionGameViewModel(
             tier = ReactionResultTier.toTier(reactionTime),
             percentage = (reactionTime / 500f).coerceIn(0f, 1f)
         )
+        logEventUseCase.logEvent("reaction_game", mapOf("result" to "$reactionTime"))
         this.lightsOutTime = 0L
     }
 }

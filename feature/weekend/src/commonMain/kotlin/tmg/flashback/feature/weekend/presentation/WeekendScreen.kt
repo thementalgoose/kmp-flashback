@@ -65,13 +65,6 @@ fun WeekendScreen(
     windowSizeClass: WindowSizeClass,
     viewModel: WeekendViewModel = koinViewModel()
 ) {
-    ScreenView(
-        screenName = "Weekend", args = mapOf(
-            AnalyticsConstants.analyticsSeason to data.season.toString(),
-            AnalyticsConstants.analyticsRound to data.round.toString()
-        )
-    )
-
     val uiState = viewModel.uiState.collectAsState()
     val isLoading = viewModel.isLoading.collectAsState()
     LaunchedEffect(data) {
@@ -80,6 +73,18 @@ fun WeekendScreen(
             round = data.round
         )
     }
+
+    ScreenView(
+        updateKey = data,
+        updateKey2 = (uiState.value as? Data)?.tab,
+        shouldReport = { (uiState.value as? Data)?.tab != null },
+        screenName = "Weekend", args = mapOf(
+            AnalyticsConstants.analyticsSeason to data.season.toString(),
+            AnalyticsConstants.analyticsRound to data.round.toString(),
+            AnalyticsConstants.analyticsTab to ((uiState.value as? Data)?.tab?.id ?: "")
+        )
+    )
+
     WeekendScreenTab(
         isLoading = isLoading.value,
         screenData = data,
