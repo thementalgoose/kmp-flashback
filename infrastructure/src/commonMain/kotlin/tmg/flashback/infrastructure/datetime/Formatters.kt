@@ -3,6 +3,7 @@ package tmg.flashback.infrastructure.datetime
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
+import kotlinx.datetime.format
 import kotlinx.datetime.format.DayOfWeekNames
 import kotlinx.datetime.format.MonthNames
 import kotlinx.datetime.format.MonthNames.Companion.ENGLISH_ABBREVIATED
@@ -10,36 +11,42 @@ import kotlinx.datetime.format.MonthNames.Companion.ENGLISH_FULL
 import kotlinx.datetime.format.Padding
 import kotlinx.datetime.format.char
 
+fun LocalDate.displayDate(
+    weekdays: DayOfWeekNames? = null,
+    month: MonthNames = ENGLISH_ABBREVIATED,
+    includeYear: Boolean = true
+): String {
+    val day = this.day.ordinalAbbreviation
+    return this.format(LocalDate.Format {
+        if (weekdays != null) {
+            dayOfWeek(weekdays)
+            char(' ')
+        }
+        chars(day)
+        char(' ')
+        monthName(month)
+        if (includeYear) {
+            char(' ')
+            year()
+        }
+    })
+}
+
+private val Int.ordinalAbbreviation: String
+    get() {
+        val label = when (this) {
+            1, 21, 31 -> "st"
+            2, 22 -> "nd"
+            3, 23 -> "rd"
+            else -> "th"
+        }
+        return "$this$label"
+    }
+
 val dateFormatMMDD = LocalDate.Format {
     monthNumber(Padding.ZERO)
     char('-')
     day(Padding.ZERO)
-}
-val dateFormatDMMM = LocalDate.Format {
-    day(Padding.NONE)
-    char(' ')
-    monthName(ENGLISH_ABBREVIATED)
-}
-val dateFormatDMMMYYYY = LocalDate.Format {
-    day(Padding.NONE)
-    char(' ')
-    monthName(ENGLISH_ABBREVIATED)
-    char(' ')
-    year(Padding.NONE)
-}
-val dateFormatEEEEDMMM = LocalDate.Format {
-    dayOfWeek(DayOfWeekNames.ENGLISH_FULL)
-    char(' ')
-    day(Padding.NONE)
-    char(' ')
-    monthName(ENGLISH_ABBREVIATED)
-}
-val dateFormatEEEDMMM = LocalDate.Format {
-    dayOfWeek(DayOfWeekNames.ENGLISH_ABBREVIATED)
-    char(' ')
-    day(Padding.NONE)
-    char(' ')
-    monthName(ENGLISH_ABBREVIATED)
 }
 val dateFormatYYYYMD = LocalDate.Format {
     year()

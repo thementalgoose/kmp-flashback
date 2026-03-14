@@ -50,6 +50,7 @@ import flashback.presentation.localisation.generated.resources.ab_collapsed_sect
 import flashback.presentation.localisation.generated.resources.tyres_label
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.format
+import kotlinx.datetime.format.MonthNames
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -67,7 +68,7 @@ import tmg.flashback.formula1.enums.SeasonTyres
 import tmg.flashback.formula1.enums.hasEntryForSeason
 import tmg.flashback.formula1.extensions.icon
 import tmg.flashback.formula1.extensions.label
-import tmg.flashback.infrastructure.datetime.dateFormatDMMM
+import tmg.flashback.infrastructure.datetime.displayDate
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.startOfWeek
 import tmg.flashback.navigation.NavWeekend
@@ -410,7 +411,10 @@ private fun Event(
                 .weight(1f)
         )
         TextBody2(
-            text = event.event.date.format(dateFormatDMMM),
+            text = event.event.date.displayDate(
+                month = MonthNames.ENGLISH_FULL,
+                includeYear = false
+            ),
         )
     }
 }

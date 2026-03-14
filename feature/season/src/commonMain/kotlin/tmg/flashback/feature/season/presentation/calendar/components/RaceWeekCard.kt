@@ -42,6 +42,7 @@ import flashback.feature.season.generated.resources.Res
 import flashback.feature.season.generated.resources.ic_cancelled
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.format
+import kotlinx.datetime.format.DayOfWeekNames
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
@@ -55,8 +56,7 @@ import tmg.flashback.formula1.enums.SprintFormat.Companion.getSeasonFormat
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.preview.preview
-import tmg.flashback.infrastructure.datetime.dateFormatDMMM
-import tmg.flashback.infrastructure.datetime.dateFormatEEEEDMMM
+import tmg.flashback.infrastructure.datetime.displayDate
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.startOfWeek
 import tmg.flashback.infrastructure.datetime.timeFormatHHmm
@@ -162,7 +162,7 @@ internal fun RaceWeekCard(
 
                 if (!model.shouldShowScheduleList) {
                     TextBody2(
-                        text = model.model.date.format(dateFormatDMMM),
+                        text = model.model.date.displayDate(includeYear = false),
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 2.dp)
@@ -277,7 +277,7 @@ private fun Dates(
                         this.collectionInfo = CollectionInfo(list.size, 1)
                     }) {
                         TextBody2(
-                            text = date.format(dateFormatEEEEDMMM),
+                            text = date.displayDate(weekdays = DayOfWeekNames.ENGLISH_FULL, includeYear = false),
                             modifier = Modifier
                                 .alpha(alpha)
                                 .padding(

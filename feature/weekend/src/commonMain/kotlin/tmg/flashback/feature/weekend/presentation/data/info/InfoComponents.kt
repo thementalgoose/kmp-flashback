@@ -55,8 +55,6 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.format
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import flashback.presentation.localisation.generated.resources.details_link_laps
 import flashback.presentation.localisation.generated.resources.details_link_map
 import flashback.presentation.localisation.generated.resources.details_link_wikipedia
@@ -64,13 +62,13 @@ import flashback.presentation.localisation.generated.resources.details_link_yout
 import flashback.presentation.ui.generated.resources.ic_details_maps
 import flashback.presentation.ui.generated.resources.ic_details_wikipedia
 import flashback.presentation.ui.generated.resources.ic_details_youtube
+import kotlinx.datetime.format.DayOfWeekNames
+import kotlinx.datetime.format.MonthNames
 import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.ScheduleWeather
-import tmg.flashback.infrastructure.datetime.dateFormatDMMM
-import tmg.flashback.infrastructure.datetime.dateFormatDMMMYYYY
-import tmg.flashback.infrastructure.datetime.dateFormatEEEEDMMM
+import tmg.flashback.infrastructure.datetime.displayDate
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.timeFormatHHmm
 import tmg.flashback.style.AppTheme
@@ -121,7 +119,7 @@ internal fun RaceDetails(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = AppTheme.dimens.xsmall),
-                text = model.date.format(dateFormatDMMMYYYY)
+                text = model.date.displayDate(month = MonthNames.ENGLISH_FULL)
             )
         }
         if (trackLayout != null) {
@@ -262,7 +260,11 @@ private fun Title(
     modifier: Modifier = Modifier
 ) {
     TextBody1(
-        text = date.format(dateFormatEEEEDMMM),
+        text = date.displayDate(
+            weekdays = DayOfWeekNames.ENGLISH_FULL,
+            month = MonthNames.ENGLISH_FULL,
+            includeYear = false
+        ),
         bold = true,
         modifier = modifier
             .fillMaxWidth()
