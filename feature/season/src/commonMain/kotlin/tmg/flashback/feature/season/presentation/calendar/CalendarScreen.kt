@@ -67,7 +67,7 @@ import tmg.flashback.formula1.enums.SeasonTyres
 import tmg.flashback.formula1.enums.hasEntryForSeason
 import tmg.flashback.formula1.extensions.icon
 import tmg.flashback.formula1.extensions.label
-import tmg.flashback.infrastructure.datetime.dateFormatDMMM
+import tmg.flashback.infrastructure.datetime.displayDate
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.startOfWeek
 import tmg.flashback.navigation.NavWeekend
@@ -410,7 +410,7 @@ private fun Event(
                 .weight(1f)
         )
         TextBody2(
-            text = event.event.date.format(dateFormatDMMM),
+            text = event.event.date.displayDate(includeYear = false),
         )
     }
 }

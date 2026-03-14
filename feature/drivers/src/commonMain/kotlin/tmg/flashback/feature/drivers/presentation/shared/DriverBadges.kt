@@ -23,13 +23,10 @@ import flashback.domain.formula1.generated.resources.ic_driver_birthday
 import flashback.domain.formula1.generated.resources.ic_driver_code
 import flashback.presentation.ui.generated.resources.Res
 import flashback.presentation.ui.generated.resources.ic_circle
-import kotlinx.datetime.format
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.preview.preview
-import tmg.flashback.infrastructure.datetime.dateFormatDMMMYYYY
+import tmg.flashback.infrastructure.datetime.displayDate
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.badge.Badge
@@ -57,7 +54,7 @@ fun DriverBadges(
             imageVector = flagVector,
         )
 
-        val birthday = driver.dateOfBirth.format(dateFormatDMMMYYYY)
+        val birthday = driver.dateOfBirth.displayDate()
         BadgeView(model = Badge(label = birthday, icon = flashback.domain.formula1.generated.resources.Res.drawable.ic_driver_birthday))
 
         if (driver.code != null && driver.number != null) {

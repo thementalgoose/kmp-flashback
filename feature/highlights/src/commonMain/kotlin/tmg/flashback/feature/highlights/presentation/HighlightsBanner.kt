@@ -17,7 +17,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -26,27 +25,19 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
-import flashback.presentation.localisation.generated.resources.Res.string
-import flashback.presentation.localisation.generated.resources.ab_close
-import flashback.presentation.localisation.generated.resources.settings_notifications_runtime_description
-import flashback.presentation.localisation.generated.resources.settings_pref_recent_highlights_title
 import flashback.presentation.ui.generated.resources.Res
 import flashback.presentation.ui.generated.resources.ic_link
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.format.DayOfWeekNames
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.feature.highlights.domain.models.NewsItem
-import tmg.flashback.infrastructure.datetime.dateFormatEEEDMMM
-import tmg.flashback.infrastructure.datetime.dateFormatEEEEDMMM
+import tmg.flashback.infrastructure.datetime.displayDate
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
-import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextCaption
 import tmg.flashback.ui.components.loading.shimmerLoading
 
@@ -173,7 +164,10 @@ private fun NewsCard(
             )
             TextCaption(
                 modifier = Modifier.padding(top = 3.dp),
-                text = dateFormatEEEDMMM.format(newsItem.date).uppercase(),
+                text = newsItem.date.displayDate(
+                    weekdays = DayOfWeekNames.ENGLISH_ABBREVIATED,
+                    includeYear = false
+                ).uppercase(),
                 textColor = AppTheme.colors.onTertiaryContainer
             )
         }
