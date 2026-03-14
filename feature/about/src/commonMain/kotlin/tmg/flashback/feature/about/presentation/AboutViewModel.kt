@@ -3,6 +3,7 @@ package tmg.flashback.feature.about.presentation
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import tmg.flashback.analytics.usecases.LogEventUseCase
 import tmg.flashback.device.APPLE_STORE_LINK
 import tmg.flashback.device.GITHUB_LINK
 import tmg.flashback.device.PLAY_STORE_LINK
@@ -13,6 +14,7 @@ import tmg.flashback.device.usecases.OpenStorePageUseCase
 import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.notifications.repositories.NotificationRepository
+import kotlin.math.log
 
 class AboutViewModel(
     private val deviceRepository: DeviceRepository,
@@ -20,6 +22,7 @@ class AboutViewModel(
     private val copyToClipboardUseCase: CopyToClipboardUseCase,
     private val openWebpageUseCase: OpenWebpageUseCase,
     private val openEmailUseCase: OpenEmailUseCase,
+    private val logEventUseCase: LogEventUseCase
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<AboutUiState> = MutableStateFlow(AboutUiState(
@@ -31,6 +34,7 @@ class AboutViewModel(
     val uiState: StateFlow<AboutUiState> = _uiState
 
     fun openDependency(dependency: AboutDependency) {
+        logEventUseCase.logEvent("view_dependency", mapOf("dependency_name" to dependency.name))
         openWebpageUseCase.invoke(dependency.url, dependency.name)
     }
 
@@ -43,10 +47,22 @@ class AboutViewModel(
 
     fun openButton(aboutButtons: AboutButtons) {
         when (aboutButtons) {
-            AboutButtons.Play -> openWebpageUseCase(PLAY_STORE_LINK)
-            AboutButtons.Apple -> openWebpageUseCase(APPLE_STORE_LINK)
-            AboutButtons.Email -> openEmailUseCase(deviceRepository.contactEmail)
-            AboutButtons.Github -> openWebpageUseCase(GITHUB_LINK)
+            AboutButtons.Play -> {
+                logEventUseCase.logEvent("view_google_store")
+                openWebpageUseCase(PLAY_STORE_LINK)
+            }
+            AboutButtons.Apple -> {
+                logEventUseCase.logEvent("view_apple_store")
+                openWebpageUseCase(APPLE_STORE_LINK)
+            }
+            AboutButtons.Email -> {
+                logEventUseCase.logEvent("view_email")
+                openEmailUseCase(deviceRepository.contactEmail)
+            }
+            AboutButtons.Github -> {
+                logEventUseCase.logEvent("view_github")
+                openWebpageUseCase(GITHUB_LINK)
+            }
         }
     }
 }

@@ -10,6 +10,7 @@ import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runTest
+import tmg.flashback.analytics.usecases.LogEventUseCase
 import tmg.flashback.feature.reactiongame.manager.LightsOutDelayProvider
 import tmg.flashback.infrastructure.datetime.TimeManager
 import kotlin.test.Test
@@ -26,6 +27,7 @@ internal class ReactionViewModelTest {
 
     private val mockLightsOutDelayProvider: LightsOutDelayProvider = mock(autoUnit)
     private val mockTimeManager: TimeManager = mock(autoUnit)
+    private val mockLogEventUseCase: LogEventUseCase = mock(autoUnit)
     private val testDispatcher: TestDispatcher = StandardTestDispatcher()
 
     private lateinit var underTest: ReactionGameViewModel
@@ -35,6 +37,7 @@ internal class ReactionViewModelTest {
         underTest = ReactionGameViewModel(
             lightsOutDelayProvider = mockLightsOutDelayProvider,
             timeManager = mockTimeManager,
+            logEventUseCase = mockLogEventUseCase,
             ioDispatcher = testDispatcher
         )
     }

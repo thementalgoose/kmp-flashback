@@ -6,6 +6,7 @@ import flashback.presentation.localisation.generated.resources.settings_restart_
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import tmg.flashback.analytics.usecases.LogEventUseCase
 import tmg.flashback.style.theme.Theme
 import tmg.flashback.style.theme.ThemeManager
 import tmg.flashback.ui.toasts.ToastManager
@@ -13,6 +14,7 @@ import tmg.flashback.ui.toasts.ToastManager
 class SettingsThemeViewModel(
     private val themeManager: ThemeManager,
     private val toastManager: ToastManager,
+    private val logEventUseCase: LogEventUseCase
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<SettingsThemeUIState> = MutableStateFlow(
@@ -27,8 +29,15 @@ class SettingsThemeViewModel(
     }
 
     fun updateSelection(theme: Theme) {
+        logEventUseCase.logEvent("change_appearance", mapOf("theme" to theme.label))
         themeManager.currentTheme = theme
         refresh()
         toastManager.showMessage(string.settings_restart_app_required)
     }
+
+    private val Theme.label: String
+        get() = when (this) {
+            Theme.Default -> "default"
+            Theme.MaterialYou -> "material_you"
+        }
 }

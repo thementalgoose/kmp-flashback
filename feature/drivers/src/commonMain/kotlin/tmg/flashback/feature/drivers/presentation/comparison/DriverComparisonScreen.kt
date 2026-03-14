@@ -81,17 +81,20 @@ fun DriverComparisonScreen(
     season: Int,
     viewModel: DriverComparisonViewModel = koinViewModel()
 ) {
-    ScreenView(
-        screenName = "Driver Comparison", args = mapOf(
-            analyticsSeason to season.toString()
-        )
-    )
-
     LaunchedEffect(season) {
         viewModel.setup(season)
     }
-
     val state = viewModel.uiState.collectAsState()
+
+    ScreenView(
+        updateKey = season,
+        updateKey2 = state.value.comparison,
+        screenName = "Driver Comparison", args = mapOf(
+            analyticsSeason to season.toString(),
+            "driver_1" to (state.value.driverLeft?.id ?: ""),
+            "driver_2" to (state.value.driverRight?.id ?: "")
+        )
+    )
 
     SwipeRefresh(
         isLoading = state.value.isLoading,

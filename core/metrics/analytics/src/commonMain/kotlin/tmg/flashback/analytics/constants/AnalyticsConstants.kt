@@ -6,4 +6,5 @@ object AnalyticsConstants {
     const val analyticsCircuitId: String = "circuit_id"
     const val analyticsConstructorId: String = "constructor_id"
     const val analyticsRound: String = "round"
+    const val analyticsTab: String = "tab"
 }
