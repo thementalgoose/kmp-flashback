@@ -4,11 +4,13 @@ import app.cash.turbine.test
 import dev.mokkery.MockMode.autoUnit
 import dev.mokkery.answering.returns
 import dev.mokkery.every
+import dev.mokkery.matcher.any
 import dev.mokkery.mock
 import dev.mokkery.verify
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.settings_restart_app_required
 import kotlinx.coroutines.test.runTest
+import tmg.flashback.analytics.usecases.LogEventUseCase
 import tmg.flashback.style.theme.Theme.Default
 import tmg.flashback.style.theme.Theme.MaterialYou
 import tmg.flashback.style.theme.ThemeManager
@@ -22,11 +24,13 @@ internal class SettingsThemeViewModelTest {
 
     private val mockThemeManager: ThemeManager = mock(autoUnit)
     private val mockToastManager: ToastManager = mock(autoUnit)
+    private val mockLogEventUseCase: LogEventUseCase = mock(autoUnit)
 
     private fun initUnderTest() {
         underTest = SettingsThemeViewModel(
             themeManager = mockThemeManager,
-            toastManager = mockToastManager
+            toastManager = mockToastManager,
+            logEventUseCase = mockLogEventUseCase
         )
     }
 
@@ -51,6 +55,7 @@ internal class SettingsThemeViewModelTest {
             verify {
                 mockThemeManager.currentTheme = MaterialYou
                 mockToastManager.showMessage(string.settings_restart_app_required)
+                mockLogEventUseCase.logEvent(any(), any())
             }
         }
     }

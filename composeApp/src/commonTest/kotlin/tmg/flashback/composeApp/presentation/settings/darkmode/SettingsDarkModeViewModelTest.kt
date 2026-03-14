@@ -4,9 +4,11 @@ import app.cash.turbine.test
 import dev.mokkery.MockMode.autoUnit
 import dev.mokkery.answering.returns
 import dev.mokkery.every
+import dev.mokkery.matcher.any
 import dev.mokkery.mock
 import dev.mokkery.verify
 import kotlinx.coroutines.test.runTest
+import tmg.flashback.analytics.usecases.LogEventUseCase
 import tmg.flashback.style.theme.NightMode.DAY
 import tmg.flashback.style.theme.NightMode.NIGHT
 import tmg.flashback.style.theme.ThemeManager
@@ -18,10 +20,12 @@ internal class SettingsDarkModeViewModelTest {
     private lateinit var underTest: SettingsDarkModeViewModel
 
     private val mockThemeManager: ThemeManager = mock(autoUnit)
+    private val mockLogEventUseCase: LogEventUseCase = mock(autoUnit)
 
     private fun initUnderTest() {
         underTest = SettingsDarkModeViewModel(
-            themeManager = mockThemeManager
+            themeManager = mockThemeManager,
+            logEventUseCase = mockLogEventUseCase
         )
     }
 
@@ -45,6 +49,7 @@ internal class SettingsDarkModeViewModelTest {
 
             verify {
                 mockThemeManager.currentNightMode = DAY
+                mockLogEventUseCase.logEvent(any(), any())
             }
         }
     }
