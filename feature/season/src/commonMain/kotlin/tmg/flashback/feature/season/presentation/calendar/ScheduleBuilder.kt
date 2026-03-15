@@ -101,6 +101,7 @@ internal object ScheduleBuilder {
                     is CalendarItem.RaceWeek -> it.model.date.format(dateFormatYYYYMMDD)
                 }
             }
+            .distinct()
     }
 
     private fun OverviewRace.getWeeksBetween(targetRace: OverviewRace): List<LocalDate> {
