@@ -35,7 +35,7 @@ sealed class CalendarItem(
         val notificationSchedule: NotificationSchedule,
         val id: String = model.raceName
     ): CalendarItem(
-        key = "${model.season}-${model.round}-${model.raceName}"
+        key = "race-${model.raceName}"
     ) {
         val date: LocalDate
             get() = model.date
