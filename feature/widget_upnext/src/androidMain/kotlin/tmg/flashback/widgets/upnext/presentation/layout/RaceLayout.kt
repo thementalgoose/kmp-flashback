@@ -19,6 +19,7 @@ import androidx.glance.layout.fillMaxWidth
 import androidx.glance.layout.padding
 import androidx.glance.preview.ExperimentalGlancePreviewApi
 import androidx.glance.preview.Preview
+import androidx.glance.text.TextDecoration
 import tmg.flashback.feature.widget_upnext.R
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.widgets.upnext.presentation.style.WidgetThemePreview
@@ -123,6 +124,7 @@ private fun Race(
                             bottom = 2.dp
                         ),
                     text = overviewRace.raceName,
+                    textDecoration = if (overviewRace.cancelled) TextDecoration.LineThrough else TextDecoration.None,
                     color = GlanceTheme.colors.onBackground.getColor(context)
                 )
                 if (showRefresh) {

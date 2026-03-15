@@ -8,6 +8,7 @@ import androidx.glance.GlanceModifier
 import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextAlign
+import androidx.glance.text.TextDecoration
 import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
 
@@ -18,6 +19,7 @@ fun TextBody(
     size: TextUnit = 14.sp,
     weight: FontWeight = FontWeight.Normal,
     textAlign: TextAlign = TextAlign.Start,
+    textDecoration: TextDecoration = TextDecoration.None,
     modifier: GlanceModifier = GlanceModifier
 ) {
     Text(
@@ -27,7 +29,8 @@ fun TextBody(
             color = ColorProvider(color),
             fontSize = size,
             fontWeight = weight,
-            textAlign = textAlign
+            textAlign = textAlign,
+            textDecoration = textDecoration
         )
     )
 }

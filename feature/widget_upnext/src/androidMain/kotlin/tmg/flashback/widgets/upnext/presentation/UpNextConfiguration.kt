@@ -33,7 +33,9 @@ class UpNextConfigurationDataStore(
 ): DataStore<UpNextConfiguration> {
 
     private suspend fun getConfig(): UpNextConfiguration {
-        val nextRace = overviewRepository.getUpcomingOverviews()?.minByOrNull { it.date }
+        val nextRace = overviewRepository.getUpcomingOverviews()
+            ?.filter { !it.cancelled }
+            ?.minByOrNull { it.date }
         return UpNextConfiguration(
             scheduleData = nextRace,
             showBackground = upNextWidgetRepository.showBackground,

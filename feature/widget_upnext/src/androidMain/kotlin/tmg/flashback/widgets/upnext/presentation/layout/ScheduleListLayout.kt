@@ -104,6 +104,7 @@ internal fun ScheduleList(
                     val schedule = overviewRace.schedule
                     items(items = schedule) {
                         Schedule(
+                            cancelled = overviewRace.cancelled,
                             model = it,
                             context = context,
                             compressed = true

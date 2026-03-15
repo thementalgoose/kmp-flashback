@@ -82,6 +82,7 @@ internal fun ScheduleListRace(
                     .forEach {
                         Schedule(
                             model = it,
+                            cancelled = overviewRace.cancelled,
                             compressed = false,
                             context = context
                         )
