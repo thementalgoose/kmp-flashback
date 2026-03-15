@@ -44,6 +44,7 @@ internal class ScheduleUpcomingNotificationsUseCaseImpl(
         }
 
         val upNextItemsToSchedule = (overviewRepository.getUpcomingOverviews() ?: emptyList())
+            .filter { !it.cancelled }
             .map { event ->
                 event.schedule.mapIndexed { index, item ->
                     NotificationModel(
