@@ -13,6 +13,7 @@ import androidx.glance.layout.width
 import androidx.glance.preview.ExperimentalGlancePreviewApi
 import androidx.glance.preview.Preview
 import androidx.glance.text.FontWeight
+import androidx.glance.text.TextDecoration
 import kotlinx.datetime.LocalDateTime
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.infrastructure.datetime.now
@@ -25,16 +26,22 @@ import tmg.flashback.widgets.upnext.utils.raceSchedule
 @Composable
 internal fun Schedule(
     model: Schedule,
+    cancelled: Boolean,
     context: Context,
     compressed: Boolean,
     modifier: GlanceModifier = GlanceModifier
 ) {
     val deviceLocaleTime = model.timestamp.deviceLocalDateTime
-    val alpha = if (deviceLocaleTime < LocalDateTime.now()) 0.5f else 1f
+    val alpha = when {
+        deviceLocaleTime < LocalDateTime.now() -> 0.5f
+        cancelled -> 0.5f
+        else -> 1f
+    }
     val (day, time) = model.labels()
     Row(modifier = modifier.padding(top = 3.dp)) {
         TextBody(
             modifier = GlanceModifier,
+            textDecoration = if (cancelled) TextDecoration.LineThrough else TextDecoration.None,
             color = GlanceTheme.colors.onBackground.getColor(context).copy(alpha = alpha),
             text = if (compressed) model.label.shortenLabel() else model.label,
             weight = FontWeight.Bold
@@ -61,6 +68,7 @@ private fun String.shortenLabel() = when (this.lowercase()) {
 private fun PreviewCompressed() {
     WidgetThemePreview {
         Schedule(
+            cancelled = false,
             context = LocalContext.current,
             model = fakeOverviewRace.raceSchedule()!!,
             compressed = true
@@ -74,6 +82,21 @@ private fun PreviewCompressed() {
 private fun PreviewExpanded() {
     WidgetThemePreview {
         Schedule(
+            cancelled = false,
+            context = LocalContext.current,
+            model = fakeOverviewRace.raceSchedule()!!,
+            compressed = false
+        )
+    }
+}
+
+@OptIn(ExperimentalGlancePreviewApi::class)
+@Preview
+@Composable
+private fun PreviewCancelled() {
+    WidgetThemePreview {
+        Schedule(
+            cancelled = true,
             context = LocalContext.current,
             model = fakeOverviewRace.raceSchedule()!!,
             compressed = false

@@ -22,8 +22,8 @@ fun WidgetThemePreview(
     content: @Composable () -> Unit,
 ) {
     val backgroundColor = when (isLight) {
-        true -> Color.Black
-        false -> Color.White
+        true -> Color.White
+        false -> Color.Black
     }
     Column(modifier = GlanceModifier.background(backgroundColor)) {
         WidgetTheme(content)
