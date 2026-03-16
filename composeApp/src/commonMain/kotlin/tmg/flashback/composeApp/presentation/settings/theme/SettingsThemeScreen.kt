@@ -28,7 +28,7 @@ fun SettingsThemeScreen(
     showBack: Boolean,
     viewModel: SettingsThemeViewModel = koinViewModel()
 ) {
-    ScreenView(screenName = "Settings - Widgets")
+    ScreenView(screenName = "Settings - Theme")
 
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     SettingsThemeScreen(
