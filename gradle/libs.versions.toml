@@ -141,7 +141,7 @@ okhttp-dnsoverhttps = { module = "com.squareup.okhttp3:okhttp-dnsoverhttps", ver
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 androidx-test-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-test-junit" }
 compose-ui-test-junit4 = { module = "org.jetbrains.compose.ui:ui-test-junit4", version.ref = "compose" }
-compose-ui-test-manifest = "androidx.compose.ui:ui-test-manifest:1.8.2"
+compose-ui-test-manifest = "androidx.compose.ui:ui-test-manifest:1.10.5"
 
 # Gradle Plugins
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
