@@ -65,7 +65,7 @@ androidx_splashscreen = "androidx.core:core-splashscreen:1.2.0"
 android_flagkit = "com.github.murgupluoglu:flagkit-android:1.0.5"
 androidx_core = "androidx.core:core-ktx:1.18.0"
 androidx_appcompat = "androidx.appcompat:appcompat:1.7.1"
-androidx_browser = "androidx.browser:browser:1.9.0"
+androidx_browser = "androidx.browser:browser:1.10.0"
 androidx_webkit = "androidx.webkit:webkit:1.15.0"
 
 androidx_xr_runtime = { module = "androidx.xr.runtime:runtime", version.ref = "androidx-xr" }
