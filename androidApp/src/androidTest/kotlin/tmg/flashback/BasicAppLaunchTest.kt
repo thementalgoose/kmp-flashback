@@ -1,10 +1,15 @@
 package tmg.flashback
 
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.isDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.printToLog
+import androidx.compose.ui.test.printToString
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Rule
 import org.junit.Test
@@ -17,7 +22,7 @@ class BasicAppLaunchTest {
     val composeTestRule = createAndroidComposeRule<MainActivity>()
 
     @Test
-    fun appLaunch_dismissOnboarding_homepageVisible() {
+    fun appLaunch_dismissOnboarding_homepageVisible()  {
         composeTestRule.waitUntil(timeoutMillis = 30_000) {
             composeTestRule
                 .onAllNodesWithText("Continue")
@@ -29,11 +34,30 @@ class BasicAppLaunchTest {
             .onNodeWithText("Continue")
             .performClick()
 
-        composeTestRule.waitUntil(timeoutMillis = 15_000) {
+        composeTestRule.waitForIdle()
+
+        println(composeTestRule
+            .onNodeWithTag("App")
+            .printToString())
+
+        composeTestRule.waitUntil(timeoutMillis = 5_000) {
             composeTestRule
-                .onAllNodesWithText("Australian Grand Prix")
+                .onAllNodesWithText(
+                    text = "Continue",
+                    substring = true,
+                    ignoreCase = false,
+                    useUnmergedTree = true
+                )
                 .fetchSemanticsNodes()
                 .isNotEmpty()
         }
+        composeTestRule
+            .onNodeWithText(
+                text = "Australian Grand Prix",
+                substring = true,
+                ignoreCase = false,
+                useUnmergedTree = true
+            )
+            .assertExists()
     }
 }
