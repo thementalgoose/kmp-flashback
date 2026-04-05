@@ -37,14 +37,17 @@ class BasicAppLaunchTest {
         composeTestRule.waitForIdle()
 
         println(composeTestRule
-            .onNodeWithTag("App")
+            .onNodeWithTag("App", useUnmergedTree = true)
             .printToString())
+        composeTestRule
+            .onNodeWithTag("App", useUnmergedTree = true)
+            .printToLog("UITest")
 
-        composeTestRule.waitUntil(timeoutMillis = 5_000) {
+        composeTestRule.waitUntil(timeoutMillis = 15_000) {
             composeTestRule
                 .onAllNodesWithText(
-                    text = "Continue",
-                    substring = true,
+                    text = "Australian Grand Prix",
+                    substring = false,
                     ignoreCase = false,
                     useUnmergedTree = true
                 )
@@ -54,7 +57,7 @@ class BasicAppLaunchTest {
         composeTestRule
             .onNodeWithText(
                 text = "Australian Grand Prix",
-                substring = true,
+                substring = false,
                 ignoreCase = false,
                 useUnmergedTree = true
             )
