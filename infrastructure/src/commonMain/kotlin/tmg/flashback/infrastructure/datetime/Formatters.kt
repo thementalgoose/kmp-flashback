@@ -98,8 +98,12 @@ val dateFormatYYYYMMMMDD = LocalDate.Format {
     day(Padding.ZERO)
 }
 
-val dateFormatEEEE = LocalDate.Format {
+val dateFormatEEE = LocalDate.Format {
     dayOfWeek(DayOfWeekNames.ENGLISH_ABBREVIATED)
+}
+
+val dateFormatEEEE = LocalDate.Format {
+    dayOfWeek(DayOfWeekNames.ENGLISH_FULL)
 }
 
 val dateFormatMMM = LocalDate.Format {

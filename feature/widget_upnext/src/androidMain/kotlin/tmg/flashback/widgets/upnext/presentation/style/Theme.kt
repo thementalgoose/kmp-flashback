@@ -7,6 +7,8 @@ import androidx.glance.GlanceModifier
 import androidx.glance.GlanceTheme
 import androidx.glance.appwidget.cornerRadius
 import androidx.glance.background
+import androidx.glance.layout.Alignment
+import androidx.glance.layout.Box
 import androidx.glance.layout.Column
 import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.fillMaxWidth
@@ -26,10 +28,10 @@ fun WidgetThemePreview(
     content: @Composable () -> Unit,
 ) {
     WidgetTheme {
-        Column(modifier = GlanceModifier
+        Box(modifier = GlanceModifier
             .fillMaxSize()
             .cornerRadius(8.dp)
-            .background(GlanceTheme.colors.widgetBackground)
+            .background(GlanceTheme.colors.widgetBackground),
         ) {
             content()
         }

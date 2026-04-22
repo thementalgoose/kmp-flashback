@@ -18,15 +18,17 @@ fun TextBody1(
     color: ColorProvider = GlanceTheme.colors.onBackground,
     weight: FontWeight = FontWeight.Normal,
     textAlign: TextAlign = TextAlign.Start,
+    maxLines: Int = Int.MAX_VALUE,
     textDecoration: TextDecoration = TextDecoration.None,
     modifier: GlanceModifier = GlanceModifier
 ) {
     Text(
         modifier = modifier,
         text = text,
+        maxLines = maxLines,
         style = TextStyle(
             color = color,
-            fontSize = 14.sp,
+            fontSize = 16.sp,
             fontWeight = weight,
             textAlign = textAlign,
             textDecoration = textDecoration

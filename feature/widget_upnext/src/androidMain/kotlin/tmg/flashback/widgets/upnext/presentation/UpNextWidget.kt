@@ -12,8 +12,9 @@ import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
 import androidx.glance.GlanceTheme
 import androidx.glance.LocalContext
-import androidx.glance.LocalGlanceId
 import androidx.glance.LocalSize
+import androidx.glance.action.Action
+import androidx.glance.action.action
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.SizeMode
@@ -23,51 +24,40 @@ import androidx.glance.appwidget.provideContent
 import androidx.glance.currentState
 import androidx.glance.state.GlanceStateDefinition
 import androidx.glance.unit.ColorProvider
-import androidx.glance.unit.FixedColorProvider
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import tmg.flashback.data.repo.repository.OverviewRepository
-import tmg.flashback.widgets.upnext.presentation.layout.NoRace
-import tmg.flashback.widgets.upnext.presentation.layout.RaceIcon
-import tmg.flashback.widgets.upnext.presentation.layout.RaceLarge
-import tmg.flashback.widgets.upnext.presentation.layout.RaceName
-import tmg.flashback.widgets.upnext.presentation.layout.RaceSmall
-import tmg.flashback.widgets.upnext.presentation.layout.ScheduleList
-import tmg.flashback.widgets.upnext.presentation.layout.ScheduleListRace
+import tmg.flashback.formula1.model.OverviewRace
+import tmg.flashback.widgets.upnext.presentation.layouts.RaceIcon
+import tmg.flashback.widgets.upnext.presentation.layouts.RaceOverview
+import tmg.flashback.widgets.upnext.presentation.layouts.RaceSchedule
+import tmg.flashback.widgets.upnext.presentation.layouts.raceIconConfiguration
+import tmg.flashback.widgets.upnext.presentation.layouts.raceOverviewConfiguration
+import tmg.flashback.widgets.upnext.presentation.layouts.raceOverviewWidth
+import tmg.flashback.widgets.upnext.presentation.layouts.raceScheduleConfiguration
+import tmg.flashback.widgets.upnext.presentation.preview.fakeOverviewRace
+import tmg.flashback.widgets.upnext.presentation.preview.fakeSprintWeekend
 import tmg.flashback.widgets.upnext.presentation.style.WidgetTheme
+import tmg.flashback.widgets.upnext.presentation.style.WidgetThemePreview
 import tmg.flashback.widgets.upnext.presentation.style.modifiers.surface
-import tmg.flashback.widgets.upnext.presentation.style.utils.appWidgetId
+import tmg.flashback.widgets.upnext.presentation.style.preview.PreviewAllSizes
+import tmg.flashback.widgets.upnext.presentation.style.preview.Widget1Min
+import tmg.flashback.widgets.upnext.presentation.style.preview.Widget2Min
+import tmg.flashback.widgets.upnext.presentation.style.preview.Widget3Min
+import tmg.flashback.widgets.upnext.presentation.style.preview.Widget4Min
+import tmg.flashback.widgets.upnext.presentation.style.text.TextBody1
 import tmg.flashback.widgets.upnext.repositories.UpNextWidgetRepository
 import java.io.File
 
-class UpNextWidget : GlanceAppWidget(), KoinComponent {
 
-    companion object {
-        private val configurationIcon = DpSize(36.dp, 36.dp)
-        private val configurationIconRaceName = DpSize(109.dp, 36.dp)
-        private val configurationIconDetails = DpSize(56.dp, 56.dp)
-        private val configurationRaceName = DpSize(140.dp, 56.dp)
-        private val configurationRaceSmall = DpSize(160.dp, 56.dp)
-        private val configurationRaceSmall2 = DpSize(140.dp, 80.dp)
-        private val configurationRaceLarge = DpSize(200.dp, 80.dp)
-        private val configurationScheduleList = DpSize(160.dp, 140.dp)
-        private val configurationScheduleListWithTrack = DpSize(300.dp, 140.dp)
-        private val configurationScheduleListRace = DpSize(200.dp, 180.dp)
-        private val configurationScheduleListRaceWithTrack = DpSize(300.dp, 180.dp)
-    }
+
+class UpNextWidget : GlanceAppWidget(), KoinComponent {
 
     override val sizeMode = SizeMode.Responsive(
         setOf(
-            configurationIcon,
-            configurationIconRaceName,
-            configurationIconDetails,
-            configurationRaceName,
-            configurationRaceSmall,
-            configurationRaceLarge,
-            configurationScheduleList,
-            configurationScheduleListWithTrack,
-            configurationScheduleListRace,
-            configurationScheduleListRaceWithTrack,
+            raceScheduleConfiguration,
+            raceOverviewConfiguration,
+            raceIconConfiguration
         )
     )
 
@@ -92,12 +82,6 @@ class UpNextWidget : GlanceAppWidget(), KoinComponent {
             }
         }
 
-    private fun Context.getHomeIntent(): Intent {
-        return Intent(this, Class.forName("tmg.flashback.MainActivity")).apply {
-            addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        }
-    }
-
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         Log.d("UpNextWidget", "provideGlance $id")
         provideContent {
@@ -115,95 +99,89 @@ class UpNextWidget : GlanceAppWidget(), KoinComponent {
     ) {
         val context = LocalContext.current
         if (upNextConfiguration.scheduleData != null) {
-            val config = LocalSize.current
-            val modifier = when (upNextConfiguration.deeplinkToEvent) {
-                true -> GlanceModifier
-                    .surface(if (upNextConfiguration.showBackground) GlanceTheme.colors.widgetBackground else ColorProvider(Color.Transparent))
-                    .clickable(actionStartActivity(context.getHomeIntent()))
-                    // TODO: Wire this up when setting is enabled
-                false -> GlanceModifier
-                    .surface(if (upNextConfiguration.showBackground) GlanceTheme.colors.widgetBackground else ColorProvider(Color.Transparent))
-                    .clickable(actionStartActivity(context.getHomeIntent()))
-            }
-
-            Log.d("UpNextWidget", "Rendering widget ${LocalGlanceId.current.appWidgetId} with $upNextConfiguration")
-
-            when (config) {
-                configurationIcon -> RaceIcon(
-                    context = context,
-                    overviewRace = upNextConfiguration.scheduleData,
-                    showText = false,
-                    modifier = modifier,
-                )
-                configurationRaceName,
-                configurationIconRaceName-> RaceName(
-                    context = context,
-                    overviewRace = upNextConfiguration.scheduleData,
-                    modifier = modifier,
-                )
-                configurationIconDetails -> RaceIcon(
-                    context = context,
-                    overviewRace = upNextConfiguration.scheduleData,
-                    showText = true,
-                    modifier = modifier,
-                )
-                configurationRaceSmall,
-                configurationRaceSmall2 -> RaceSmall(
-                    context = context,
-                    overviewRace = upNextConfiguration.scheduleData,
-                    showRefresh = false,
-                    modifier = modifier,
-                )
-                configurationRaceLarge -> RaceLarge(
-                    context = context,
-                    overviewRace = upNextConfiguration.scheduleData,
-                    showRefresh = true,
-                    modifier = modifier,
-                )
-                configurationScheduleList -> ScheduleList(
-                    context = context,
-                    overviewRace = upNextConfiguration.scheduleData,
-                    modifier = modifier,
-                    showTrackIcon = false
-                )
-                configurationScheduleListWithTrack -> ScheduleList(
-                    context = context,
-                    overviewRace = upNextConfiguration.scheduleData,
-                    modifier = modifier,
-                    showTrackIcon = true
-                )
-                configurationScheduleListRace -> ScheduleListRace(
-                    context = context,
-                    overviewRace = upNextConfiguration.scheduleData,
-                    modifier = modifier,
-                    showTrackIcon = false
-                )
-                configurationScheduleListRaceWithTrack -> ScheduleListRace(
-                    context = context,
-                    overviewRace = upNextConfiguration.scheduleData,
-                    modifier = modifier,
-                    showTrackIcon = true
-                )
-
-                else -> {
-                    Log.e("UpNextWidget", "Invalid size, throwing IAW")
-                    throw IllegalArgumentException("Invalid size not matching the provided ones")
-                }
-            }
-//            if (BuildConfig.DEBUG) {
-//                TextBody(
-//                    text = "$config",
-//                    color = GlanceTheme.colors.onBackground.getColor(context)
-//                )
-//            }
+            WidgetContent(
+                overviewRace = upNextConfiguration.scheduleData,
+                shouldDeeplink = upNextConfiguration.deeplinkToEvent,
+                showBackground = upNextConfiguration.showBackground,
+                clickAction = actionStartActivity(context.getHomeIntent())
+            )
         } else {
             Log.i("UpNextWidget", "No race found, showing fallback")
-            NoRace(
-                context = context,
-                modifier = GlanceModifier.clickable(actionRunCallback<UpNextWidgetRefreshWidget>()),
-            )
+//            NoRace(
+//                context = context,
+//                modifier = GlanceModifier.clickable(actionRunCallback<UpNextWidgetRefreshWidget>()),
+//            )
         }
 
         Log.i("UpNextWidget", "provideFlance finished")
+    }
+}
+
+private fun Context.getHomeIntent(): Intent {
+    return Intent(this, Class.forName("tmg.flashback.MainActivity")).apply {
+        addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+    }
+}
+
+@Composable
+private fun WidgetContent(
+    overviewRace: OverviewRace,
+    shouldDeeplink: Boolean,
+    showBackground: Boolean,
+    clickAction: Action
+) {
+    val config = LocalSize.current
+    val modifier = when (shouldDeeplink) {
+        true -> GlanceModifier
+            .surface(if (showBackground) GlanceTheme.colors.widgetBackground else ColorProvider(Color.Transparent))
+            .clickable(clickAction)
+        // TODO: Wire this up when setting is enabled
+        false -> GlanceModifier
+            .surface(if (showBackground) GlanceTheme.colors.widgetBackground else ColorProvider(Color.Transparent))
+            .clickable(clickAction)
+    }
+
+    when (config) {
+        raceScheduleConfiguration -> RaceSchedule(
+            overviewRace = overviewRace,
+            modifier = modifier,
+        )
+        raceOverviewConfiguration -> RaceOverview(
+            overviewRace = overviewRace,
+            modifier = modifier,
+        )
+        raceIconConfiguration -> RaceIcon(
+            overviewRace = overviewRace,
+            modifier = modifier,
+        )
+        else -> {
+            TextBody1("Invalid size - $config")
+        }
+    }
+}
+
+@PreviewAllSizes
+@Composable
+private fun PreviewOverview() {
+    WidgetThemePreview {
+        WidgetContent(
+            overviewRace = fakeOverviewRace,
+            shouldDeeplink = false,
+            showBackground = true,
+            clickAction = action { }
+        )
+    }
+}
+
+@PreviewAllSizes
+@Composable
+private fun PreviewSprint() {
+    WidgetThemePreview {
+        WidgetContent(
+            overviewRace = fakeSprintWeekend,
+            shouldDeeplink = false,
+            showBackground = true,
+            clickAction = action { }
+        )
     }
 }

@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.glance.GlanceModifier
+import androidx.glance.GlanceTheme
 import androidx.glance.background
 import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.padding
@@ -14,3 +15,7 @@ fun GlanceModifier.surface(color: ColorProvider): GlanceModifier = this
     .fillMaxSize()
     .background(color)
     .padding(0.dp)
+
+@Composable
+fun GlanceModifier.widgetBackground(): GlanceModifier = this
+    .surface(GlanceTheme.colors.widgetBackground)

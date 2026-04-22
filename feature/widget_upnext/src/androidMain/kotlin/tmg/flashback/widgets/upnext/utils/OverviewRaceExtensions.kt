@@ -6,7 +6,7 @@ import kotlinx.datetime.format
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.Timestamp
-import tmg.flashback.infrastructure.datetime.dateFormatEEEE
+import tmg.flashback.infrastructure.datetime.dateFormatEEE
 import tmg.flashback.infrastructure.datetime.dateFormatMMM
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.startOfWeek
@@ -22,7 +22,7 @@ internal fun OverviewRace.labels(): Pair<String, String> {
     val sameWeek = LocalDate.now().startOfWeek() == deviceTime.date.startOfWeek()
     val timeString = this.time?.let { deviceTime.time.format(timeFormatHHmm) } ?: ""
     return if (sameWeek) {
-        deviceTime.date.format(dateFormatEEEE) to timeString
+        deviceTime.date.format(dateFormatEEE) to timeString
     } else {
         "${deviceTime.dayOfMonth} ${deviceTime.date.format(dateFormatMMM)}" to timeString
     }
