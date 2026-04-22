@@ -46,7 +46,6 @@ fun FeatureDate(
             TextFeature(
                 fontSize = featureTextSize,
                 text = "$day ($time)",
-                color = GlanceTheme.colors.onBackground.getColor(context),
             )
         }
     }
