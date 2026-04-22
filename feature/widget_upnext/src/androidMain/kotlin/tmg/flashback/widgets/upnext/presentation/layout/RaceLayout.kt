@@ -125,7 +125,6 @@ private fun Race(
                         ),
                     text = overviewRace.raceName,
                     textDecoration = if (overviewRace.cancelled) TextDecoration.LineThrough else TextDecoration.None,
-                    color = GlanceTheme.colors.onBackground.getColor(context)
                 )
                 if (showRefresh) {
                     Image(

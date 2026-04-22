@@ -57,7 +57,6 @@ internal fun ScheduleListRace(
                         end = 8.dp
                     ),
                 text = overviewRace.raceName,
-                color = GlanceTheme.colors.onBackground.getColor(context)
             )
             Image(
                 modifier = GlanceModifier.clickable(actionRunCallback<UpNextWidgetRefreshWidget>()),

@@ -54,7 +54,6 @@ internal fun RaceIcon(
                 textAlign = TextAlign.Center,
                 text = day,
                 weight = FontWeight.Bold,
-                color = GlanceTheme.colors.onBackground.getColor(context)
             )
             TextBody(
                 modifier = GlanceModifier.padding(
@@ -64,7 +63,6 @@ internal fun RaceIcon(
                 ),
                 textAlign = TextAlign.Center,
                 text = time,
-                color = GlanceTheme.colors.onBackground.getColor(context)
             )
         }
     }
