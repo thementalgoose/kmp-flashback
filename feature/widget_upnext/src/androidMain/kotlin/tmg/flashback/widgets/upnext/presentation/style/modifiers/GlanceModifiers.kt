@@ -7,9 +7,10 @@ import androidx.glance.GlanceModifier
 import androidx.glance.background
 import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.padding
+import androidx.glance.unit.ColorProvider
 
 @Composable
-fun GlanceModifier.surface(color: Color): GlanceModifier = this
+fun GlanceModifier.surface(color: ColorProvider): GlanceModifier = this
     .fillMaxSize()
     .background(color)
     .padding(0.dp)

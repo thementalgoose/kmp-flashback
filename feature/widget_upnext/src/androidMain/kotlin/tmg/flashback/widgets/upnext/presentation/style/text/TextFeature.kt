@@ -5,6 +5,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import androidx.glance.GlanceModifier
+import androidx.glance.GlanceTheme
 import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextAlign
@@ -14,7 +15,7 @@ import androidx.glance.unit.ColorProvider
 @Composable
 fun TextFeature(
     text: String,
-    color: Color = Color.White,
+    color: ColorProvider = GlanceTheme.colors.onBackground,
     weight: FontWeight = FontWeight.Bold,
     textAlign: TextAlign = TextAlign.Start,
     fontSize: TextUnit = 32.sp,
@@ -24,7 +25,7 @@ fun TextFeature(
         modifier = modifier,
         text = text,
         style = TextStyle(
-            color = ColorProvider(color),
+            color = color,
             fontSize = fontSize,
             fontWeight = weight,
             textAlign = textAlign

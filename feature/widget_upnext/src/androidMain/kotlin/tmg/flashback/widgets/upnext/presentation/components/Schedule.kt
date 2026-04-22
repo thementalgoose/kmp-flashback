@@ -6,6 +6,8 @@ import androidx.compose.ui.unit.dp
 import androidx.glance.GlanceModifier
 import androidx.glance.GlanceTheme
 import androidx.glance.LocalContext
+import androidx.glance.appwidget.appWidgetBackground
+import androidx.glance.color.ColorProvider
 import androidx.glance.layout.Row
 import androidx.glance.layout.Spacer
 import androidx.glance.layout.padding
@@ -40,15 +42,12 @@ internal fun Schedule(
     val (day, time) = model.labels()
     Row(modifier = modifier.padding(top = 3.dp)) {
         TextBody(
-            modifier = GlanceModifier,
             textDecoration = if (cancelled) TextDecoration.LineThrough else TextDecoration.None,
-            color = GlanceTheme.colors.onBackground.getColor(context).copy(alpha = alpha),
             text = if (compressed) model.label.shortenLabel() else model.label,
             weight = FontWeight.Bold
         )
         Spacer(GlanceModifier.width(12.dp))
         TextBody(
-            color = GlanceTheme.colors.onBackground.getColor(context).copy(alpha = alpha),
             text = "$day (${time})"
         )
     }

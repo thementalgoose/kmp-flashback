@@ -32,7 +32,7 @@ internal fun NoRace(
 ) {
     if (compact) {
         Box(
-            modifier = modifier.surface(GlanceTheme.colors.background.getColor(context)),
+            modifier = modifier.surface(GlanceTheme.colors.background),
             contentAlignment = Alignment.Center
         ) {
             TextTitle(
@@ -42,12 +42,11 @@ internal fun NoRace(
                 ),
                 textAlign = TextAlign.Center,
                 text = context.getString(R.string.widget_up_next_nothing_title_compact),
-                color = GlanceTheme.colors.onBackground.getColor(context)
             )
         }
     } else {
         Column(
-            modifier = modifier.surface(GlanceTheme.colors.background.getColor(context)),
+            modifier = modifier.surface(GlanceTheme.colors.background),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column(
@@ -60,7 +59,6 @@ internal fun NoRace(
                             bottom = 4.dp
                         ),
                         text = context.getString(R.string.widget_up_next_nothing_title),
-                        color = GlanceTheme.colors.onBackground.getColor(context)
                     )
                 }
 

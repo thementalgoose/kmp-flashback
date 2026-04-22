@@ -62,7 +62,6 @@ internal fun ScheduleList(
                         end = 8.dp
                     ),
                 text = overviewRace.raceName,
-                color = GlanceTheme.colors.onBackground.getColor(context)
             )
             Image(
                 modifier = GlanceModifier.clickable(actionRunCallback<UpNextWidgetRefreshWidget>()),
@@ -81,13 +80,11 @@ internal fun ScheduleList(
                     Row(modifier = modifier.padding(top = 12.dp)) {
                         TextBody(
                             modifier = GlanceModifier,
-                            color = GlanceTheme.colors.onBackground.getColor(context),
                             text = "Race",
                             weight = FontWeight.Bold
                         )
                         Spacer(GlanceModifier.width(12.dp))
                         TextBody(
-                            color = GlanceTheme.colors.onBackground.getColor(context),
                             text = "$day (${time})"
                         )
                     }

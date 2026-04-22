@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.datastore.core.DataStore
@@ -21,6 +22,8 @@ import androidx.glance.appwidget.action.actionStartActivity
 import androidx.glance.appwidget.provideContent
 import androidx.glance.currentState
 import androidx.glance.state.GlanceStateDefinition
+import androidx.glance.unit.ColorProvider
+import androidx.glance.unit.FixedColorProvider
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import tmg.flashback.data.repo.repository.OverviewRepository
@@ -115,11 +118,11 @@ class UpNextWidget : GlanceAppWidget(), KoinComponent {
             val config = LocalSize.current
             val modifier = when (upNextConfiguration.deeplinkToEvent) {
                 true -> GlanceModifier
-                    .surface(if (upNextConfiguration.showBackground) GlanceTheme.colors.background.getColor(context) else androidx.compose.ui.graphics.Color.Transparent)
+                    .surface(if (upNextConfiguration.showBackground) GlanceTheme.colors.widgetBackground else ColorProvider(Color.Transparent))
                     .clickable(actionStartActivity(context.getHomeIntent()))
                     // TODO: Wire this up when setting is enabled
                 false -> GlanceModifier
-                    .surface(if (upNextConfiguration.showBackground) GlanceTheme.colors.background.getColor(context) else androidx.compose.ui.graphics.Color.Transparent)
+                    .surface(if (upNextConfiguration.showBackground) GlanceTheme.colors.widgetBackground else ColorProvider(Color.Transparent))
                     .clickable(actionStartActivity(context.getHomeIntent()))
             }
 
