@@ -25,13 +25,12 @@ import androidx.glance.text.FontWeight
 import tmg.flashback.feature.widget_upnext.R
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.widgets.upnext.presentation.style.WidgetThemePreview
-import tmg.flashback.widgets.upnext.presentation.style.modifiers.surface
-import tmg.flashback.widgets.upnext.presentation.style.text.TextBody
 import tmg.flashback.widgets.upnext.presentation.UpNextWidgetRefreshWidget
 import tmg.flashback.widgets.upnext.presentation.components.CountryIcon
 import tmg.flashback.widgets.upnext.presentation.components.Schedule
 import tmg.flashback.widgets.upnext.presentation.components.TrackIcon
 import tmg.flashback.widgets.upnext.presentation.preview.fakeOverviewRace
+import tmg.flashback.widgets.upnext.presentation.style.text.TextBody1
 import tmg.flashback.widgets.upnext.utils.labels
 
 private const val scheduleWidth = 280
@@ -54,7 +53,7 @@ internal fun ScheduleList(
                 country = overviewRace.country,
                 countryISO = overviewRace.countryISO
             )
-            TextBody(
+            TextBody1(
                 modifier = GlanceModifier
                     .defaultWeight()
                     .padding(
@@ -78,13 +77,13 @@ internal fun ScheduleList(
                 Column(modifier = GlanceModifier.defaultWeight()) {
                     val (day, time) = overviewRace.labels()
                     Row(modifier = modifier.padding(top = 12.dp)) {
-                        TextBody(
+                        TextBody1(
                             modifier = GlanceModifier,
                             text = "Race",
                             weight = FontWeight.Bold
                         )
                         Spacer(GlanceModifier.width(12.dp))
-                        TextBody(
+                        TextBody1(
                             text = "$day (${time})"
                         )
                     }

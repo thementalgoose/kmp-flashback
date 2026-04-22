@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.glance.GlanceModifier
-import androidx.glance.GlanceTheme
 import androidx.glance.LocalContext
 import androidx.glance.layout.Alignment
 import androidx.glance.layout.Column
@@ -15,8 +14,7 @@ import androidx.glance.text.FontWeight
 import androidx.glance.text.TextAlign
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.widgets.upnext.presentation.style.WidgetThemePreview
-import tmg.flashback.widgets.upnext.presentation.style.modifiers.surface
-import tmg.flashback.widgets.upnext.presentation.style.text.TextBody
+import tmg.flashback.widgets.upnext.presentation.style.text.TextBody1
 import tmg.flashback.widgets.upnext.presentation.components.CountryIcon
 import tmg.flashback.widgets.upnext.presentation.preview.fakeOverviewRace
 import tmg.flashback.widgets.upnext.utils.labels
@@ -45,7 +43,7 @@ internal fun RaceIcon(
         )
         if (schedule != null && showText) {
             val (day, time) = schedule.labels()
-            TextBody(
+            TextBody1(
                 modifier = GlanceModifier.padding(
                     top = 2.dp,
                     start = 8.dp,
@@ -55,7 +53,7 @@ internal fun RaceIcon(
                 text = day,
                 weight = FontWeight.Bold,
             )
-            TextBody(
+            TextBody1(
                 modifier = GlanceModifier.padding(
                     top = 2.dp,
                     start = 8.dp,

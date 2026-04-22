@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.glance.GlanceModifier
-import androidx.glance.GlanceTheme
 import androidx.glance.LocalContext
 import androidx.glance.appwidget.appWidgetBackground
 import androidx.glance.color.ColorProvider
@@ -20,7 +19,7 @@ import kotlinx.datetime.LocalDateTime
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.widgets.upnext.presentation.style.WidgetThemePreview
-import tmg.flashback.widgets.upnext.presentation.style.text.TextBody
+import tmg.flashback.widgets.upnext.presentation.style.text.TextBody1
 import tmg.flashback.widgets.upnext.presentation.preview.fakeOverviewRace
 import tmg.flashback.widgets.upnext.utils.labels
 import tmg.flashback.widgets.upnext.utils.raceSchedule
@@ -41,13 +40,13 @@ internal fun Schedule(
     }
     val (day, time) = model.labels()
     Row(modifier = modifier.padding(top = 3.dp)) {
-        TextBody(
+        TextBody1(
             textDecoration = if (cancelled) TextDecoration.LineThrough else TextDecoration.None,
             text = if (compressed) model.label.shortenLabel() else model.label,
             weight = FontWeight.Bold
         )
         Spacer(GlanceModifier.width(12.dp))
-        TextBody(
+        TextBody1(
             text = "$day (${time})"
         )
     }

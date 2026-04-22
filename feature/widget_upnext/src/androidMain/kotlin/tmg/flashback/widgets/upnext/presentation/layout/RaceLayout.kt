@@ -6,7 +6,6 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.glance.GlanceModifier
-import androidx.glance.GlanceTheme
 import androidx.glance.Image
 import androidx.glance.ImageProvider
 import androidx.glance.LocalContext
@@ -23,8 +22,7 @@ import androidx.glance.text.TextDecoration
 import tmg.flashback.feature.widget_upnext.R
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.widgets.upnext.presentation.style.WidgetThemePreview
-import tmg.flashback.widgets.upnext.presentation.style.modifiers.surface
-import tmg.flashback.widgets.upnext.presentation.style.text.TextBody
+import tmg.flashback.widgets.upnext.presentation.style.text.TextBody1
 import tmg.flashback.widgets.upnext.presentation.UpNextWidgetRefreshWidget
 import tmg.flashback.widgets.upnext.presentation.components.CountryIcon
 import tmg.flashback.widgets.upnext.presentation.components.FeatureDate
@@ -114,7 +112,7 @@ private fun Race(
                     country = overviewRace.country,
                     countryISO = overviewRace.countryISO
                 )
-                TextBody(
+                TextBody1(
                     modifier = GlanceModifier
                         .defaultWeight()
                         .padding(

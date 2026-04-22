@@ -21,7 +21,7 @@ import tmg.flashback.widgets.upnext.presentation.style.preview.Preview1x1
 import tmg.flashback.widgets.upnext.presentation.style.preview.Preview2x1
 import tmg.flashback.widgets.upnext.presentation.style.preview.Preview4x1
 import tmg.flashback.widgets.upnext.presentation.style.preview.Preview4x2
-import tmg.flashback.widgets.upnext.presentation.style.text.TextBody
+import tmg.flashback.widgets.upnext.presentation.style.text.TextBody1
 import tmg.flashback.widgets.upnext.presentation.style.text.TextTitle
 
 @Composable
@@ -62,7 +62,7 @@ internal fun NoRace(
                     )
                 }
 
-                TextBody(
+                TextBody1(
                     text = context.getString(R.string.widget_up_next_nothing_subtitle)
                 )
             }

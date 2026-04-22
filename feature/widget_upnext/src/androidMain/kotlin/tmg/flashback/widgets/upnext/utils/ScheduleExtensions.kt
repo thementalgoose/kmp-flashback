@@ -8,6 +8,7 @@ import tmg.flashback.infrastructure.datetime.dateFormatMMM
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.startOfWeek
 import tmg.flashback.infrastructure.datetime.timeFormatHHmm
+import tmg.flashback.infrastructure.extensions.ordinalAbbreviation
 
 internal fun Schedule.labels(): Pair<String, String> {
     val deviceTime = this.timestamp.deviceLocalDateTime
@@ -16,6 +17,6 @@ internal fun Schedule.labels(): Pair<String, String> {
     return if (sameWeek) {
         deviceTime.date.format(dateFormatEEEE) to deviceTime.time.format(timeFormatHHmm)
     } else {
-        "${deviceTime.dayOfMonth} ${deviceTime.date.format(dateFormatMMM)}" to deviceTime.time.format(timeFormatHHmm)
+        "${deviceTime.dayOfMonth.ordinalAbbreviation} ${deviceTime.date.format(dateFormatMMM)}" to deviceTime.time.format(timeFormatHHmm)
     }
 }

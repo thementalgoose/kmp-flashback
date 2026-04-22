@@ -14,4 +14,3 @@ fun GlanceModifier.surface(color: ColorProvider): GlanceModifier = this
     .fillMaxSize()
     .background(color)
     .padding(0.dp)
-

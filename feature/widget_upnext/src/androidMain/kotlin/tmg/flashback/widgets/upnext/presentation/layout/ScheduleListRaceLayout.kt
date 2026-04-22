@@ -20,7 +20,7 @@ import androidx.glance.preview.Preview
 import tmg.flashback.feature.widget_upnext.R
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.widgets.upnext.presentation.style.WidgetThemePreview
-import tmg.flashback.widgets.upnext.presentation.style.text.TextBody
+import tmg.flashback.widgets.upnext.presentation.style.text.TextBody1
 import tmg.flashback.widgets.upnext.presentation.UpNextWidgetRefreshWidget
 import tmg.flashback.widgets.upnext.presentation.components.CountryIcon
 import tmg.flashback.widgets.upnext.presentation.components.FeatureDate
@@ -49,7 +49,7 @@ internal fun ScheduleListRace(
                 country = overviewRace.country,
                 countryISO = overviewRace.countryISO
             )
-            TextBody(
+            TextBody1(
                 modifier = GlanceModifier
                     .defaultWeight()
                     .padding(
