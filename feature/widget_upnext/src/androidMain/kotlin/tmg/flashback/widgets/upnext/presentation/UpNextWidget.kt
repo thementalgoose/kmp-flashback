@@ -27,6 +27,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.formula1.model.OverviewRace
+import tmg.flashback.widgets.upnext.presentation.layouts.NoRace
 import tmg.flashback.widgets.upnext.presentation.layouts.RaceIcon
 import tmg.flashback.widgets.upnext.presentation.layouts.RaceName
 import tmg.flashback.widgets.upnext.presentation.layouts.RaceOverview
@@ -44,7 +45,6 @@ import tmg.flashback.widgets.upnext.presentation.style.WidgetThemePreview
 import tmg.flashback.widgets.upnext.presentation.style.modifiers.surface
 import tmg.flashback.widgets.upnext.presentation.style.preview.PreviewAllSizes
 import tmg.flashback.widgets.upnext.presentation.style.preview.PreviewPixel
-import tmg.flashback.widgets.upnext.presentation.style.text.TextBody1
 import tmg.flashback.widgets.upnext.repositories.UpNextWidgetRepository
 import java.io.File
 
@@ -185,6 +185,18 @@ private fun PreviewPixelSprint() {
 }
 
 @Composable
+@PreviewPixel
+private fun PreviewPixelNoRace() {
+    WidgetThemePreview {
+        NoRace(
+            titleCompact = "N/A",
+            title = "Nothing coming up",
+            subtitle = "We will get this information as soon as it\\'s available. Click here to check for updates"
+        )
+    }
+}
+
+@Composable
 @PreviewAllSizes
 private fun PreviewMinMaxOverview() {
     WidgetThemePreview {
@@ -206,6 +218,18 @@ private fun PreviewMinMaxSprint() {
             shouldDeeplink = false,
             showBackground = true,
             clickAction = action { }
+        )
+    }
+}
+
+@Composable
+@PreviewAllSizes
+private fun PreviewMinMaxNoRace() {
+    WidgetThemePreview {
+        NoRace(
+            titleCompact = "N/A",
+            title = "Nothing coming up",
+            subtitle = "We will get this information as soon as it\\'s available. Click here to check for updates"
         )
     }
 }
