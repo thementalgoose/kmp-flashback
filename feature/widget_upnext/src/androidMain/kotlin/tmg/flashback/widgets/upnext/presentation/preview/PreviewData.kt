@@ -46,7 +46,7 @@ val fakeSprintWeekend = OverviewRace(
     cancelled = false,
     schedule = listOf(
         Schedule("FP1", LocalDate(2020, 1, 1), LocalTime(12, 0), null),
-        Schedule("Sprint Shootout", LocalDate(2020, 1, 1), LocalTime(15, 0), null),
+        Schedule("Sprint Qualifying", LocalDate(2020, 1, 1), LocalTime(15, 0), null),
         Schedule("Sprint", LocalDate(2020, 1, 2), LocalTime(11, 0), null),
         Schedule("Qualifying", LocalDate(2020, 1, 2), LocalTime(14, 0), null),
         Schedule("Race", LocalDate(2020, 1, 3), LocalTime(15, 0), null)

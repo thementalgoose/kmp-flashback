@@ -13,6 +13,7 @@ import androidx.glance.text.FontWeight
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.widgets.upnext.presentation.preview.fakeOverviewRace
 import tmg.flashback.widgets.upnext.presentation.style.WidgetThemePreview
+import tmg.flashback.widgets.upnext.presentation.style.marginMedium
 import tmg.flashback.widgets.upnext.presentation.style.marginSmall
 import tmg.flashback.widgets.upnext.presentation.style.text.TextBody1
 import tmg.flashback.widgets.upnext.presentation.style.text.TextBody2
@@ -21,6 +22,8 @@ import tmg.flashback.widgets.upnext.presentation.style.text.TextTitle
 @Composable
 internal fun WidgetTitle(
     overviewRace: OverviewRace,
+    showCircuit: Boolean = true,
+    titleMaxLines: Int = 2,
     modifier: GlanceModifier = GlanceModifier
 ) {
     val context = LocalContext.current
@@ -38,15 +41,20 @@ internal fun WidgetTitle(
         ) {
             TextTitle(
                 weight = FontWeight.Bold,
-                modifier = GlanceModifier.padding(start = marginSmall),
+                maxLines = titleMaxLines,
+                modifier = GlanceModifier.padding(start = marginMedium),
                 text = overviewRace.raceName
             )
-            TextBody2(
-                modifier = GlanceModifier.padding(start = marginSmall),
-                text = overviewRace.circuitName
-            )
+            if (showCircuit) {
+                TextBody2(
+                    modifier = GlanceModifier.padding(start = marginMedium),
+                    text = overviewRace.circuitName,
+                    maxLines = 1
+                )
+            }
         }
         TextBody1(
+            modifier = GlanceModifier.padding(start = marginSmall),
             text = "#${overviewRace.round}",
             weight = FontWeight.Bold
         )

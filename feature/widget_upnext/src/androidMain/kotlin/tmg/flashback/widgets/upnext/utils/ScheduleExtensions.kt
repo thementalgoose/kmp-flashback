@@ -26,6 +26,6 @@ internal fun LocalDate.weekRelativeLabel(): String {
     return if (sameWeek) {
         this.format(dateFormatEEE)
     } else {
-        "${this.day} ${this.format(dateFormatMMM)}"
+        "${this.day.ordinalAbbreviation} ${this.format(dateFormatMMM)}"
     }
 }

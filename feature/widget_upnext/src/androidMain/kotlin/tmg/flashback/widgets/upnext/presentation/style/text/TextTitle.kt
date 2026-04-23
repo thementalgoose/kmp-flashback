@@ -17,11 +17,13 @@ fun TextTitle(
     color: ColorProvider = GlanceTheme.colors.onBackground,
     weight: FontWeight = FontWeight.Normal,
     textAlign: TextAlign = TextAlign.Start,
+    maxLines: Int = Int.MAX_VALUE,
     modifier: GlanceModifier = GlanceModifier
 ) {
     Text(
         modifier = modifier,
         text = text,
+        maxLines = maxLines,
         style = TextStyle(
             color = color,
             fontSize = 18.sp,

@@ -6,13 +6,14 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.glance.GlanceModifier
 import androidx.glance.GlanceTheme
+import androidx.glance.LocalSize
 import androidx.glance.appwidget.cornerRadius
-import androidx.glance.appwidget.lazy.LazyColumn
 import androidx.glance.background
 import androidx.glance.layout.Box
 import androidx.glance.layout.Column
 import androidx.glance.layout.Row
 import androidx.glance.layout.Spacer
+import androidx.glance.layout.fillMaxHeight
 import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.fillMaxWidth
 import androidx.glance.layout.padding
@@ -21,61 +22,52 @@ import androidx.glance.preview.ExperimentalGlancePreviewApi
 import androidx.glance.preview.Preview
 import androidx.glance.text.FontWeight
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.format
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.widgets.upnext.presentation.components.WidgetTitle
 import tmg.flashback.widgets.upnext.presentation.preview.fakeOverviewRace
 import tmg.flashback.widgets.upnext.presentation.preview.fakeSprintWeekend
 import tmg.flashback.widgets.upnext.presentation.style.WidgetThemePreview
-import tmg.flashback.widgets.upnext.presentation.style.marginSSmall
 import tmg.flashback.widgets.upnext.presentation.style.marginSmall
 import tmg.flashback.widgets.upnext.presentation.style.marginXSmall
 import tmg.flashback.widgets.upnext.presentation.style.radius
-import tmg.flashback.widgets.upnext.presentation.style.text.TextBody1
 import tmg.flashback.widgets.upnext.presentation.style.text.TextBody2
 import tmg.flashback.widgets.upnext.utils.labels
 import tmg.flashback.widgets.upnext.utils.weekRelativeLabel
 
-internal const val raceOverviewWidth = 180
-internal const val raceOverviewHeight = 130
-internal val raceOverviewConfiguration = DpSize(raceOverviewWidth.dp, raceOverviewHeight.dp)
+internal const val raceOverviewWidth = 250
+internal const val raceOverviewHeight = 190
+private const val raceOverviewHeightBreakpoint = 210
 
 @Composable
 internal fun RaceOverview(
     overviewRace: OverviewRace,
+    localSize: DpSize,
     modifier: GlanceModifier = GlanceModifier,
 ) {
     Column(
         modifier = modifier.fillMaxSize()
     ) {
-        LazyColumn(
+        WidgetTitle(
+            overviewRace = overviewRace,
+            showCircuit = localSize.height >= raceOverviewHeightBreakpoint.dp,
             modifier = GlanceModifier
-        ) {
-            item {
-                WidgetTitle(
-                    overviewRace = overviewRace,
-                    modifier = GlanceModifier
-                        .fillMaxWidth()
-                        .padding(
-                            vertical = marginSmall,
-                            horizontal = marginSmall,
-                        )
+                .fillMaxWidth()
+                .padding(
+                    vertical = marginSmall,
+                    horizontal = marginSmall,
                 )
-            }
-            item {
-                DayEvents(
-                    overviewRace = overviewRace,
-                    modifier = GlanceModifier
-                        .fillMaxWidth()
-                        .padding(
-                            bottom = marginSmall,
-                            end = marginSmall,
-                            start = marginSmall
-                        )
+        )
+        DayEvents(
+            overviewRace = overviewRace,
+            modifier = GlanceModifier
+                .fillMaxWidth()
+                .padding(
+                    bottom = marginSmall,
+                    end = marginSmall,
+                    start = marginSmall
                 )
-            }
-        }
+        )
     }
 }
 
@@ -117,34 +109,41 @@ private fun Day(
 ) {
     Column(
         modifier = modifier
+            .fillMaxHeight()
     ) {
-        TextBody1(
+        TextBody2(
             text = date.weekRelativeLabel()
         )
         schedules.forEach { schedule ->
             Box(
                 modifier = GlanceModifier
                     .fillMaxWidth()
+                    .defaultWeight()
                     .padding(vertical = marginXSmall)
             ) {
-                Column(modifier = GlanceModifier
-                    .fillMaxWidth()
-                    .background(GlanceTheme.colors.background)
-                    .padding(
-                        horizontal = marginSmall,
-                        vertical = marginSmall
-                    )
-                    .cornerRadius(radius)
+                Box(
+                    modifier = GlanceModifier
+                        .fillMaxSize()
+                        .background(GlanceTheme.colors.background)
+                        .cornerRadius(radius),
                 ) {
-                    val (_, time) = schedule.labels()
-                    TextBody2(
-                        maxLines = 2,
-                        text = schedule.label,
-                        weight = FontWeight.Bold
-                    )
-                    TextBody2(
-                        text = time
-                    )
+                    Column(
+                        modifier = GlanceModifier.padding(
+                            top = marginXSmall,
+                            start = marginSmall,
+                            end = marginSmall
+                        ),
+                    ) {
+                        val (_, time) = schedule.labels()
+                        TextBody2(
+                            maxLines = 1,
+                            text = schedule.label,
+                            weight = FontWeight.Bold
+                        )
+                        TextBody2(
+                            text = time
+                        )
+                    }
                 }
             }
         }
@@ -154,10 +153,11 @@ private fun Day(
 @OptIn(ExperimentalGlancePreviewApi::class)
 @Preview(widthDp = raceOverviewWidth, heightDp = raceOverviewHeight)
 @Composable
-private fun PreviewOverview() {
+private fun PreviewOverview1() {
     WidgetThemePreview {
         RaceOverview(
             overviewRace = fakeOverviewRace,
+            localSize = LocalSize.current
         )
     }
 }
@@ -165,10 +165,11 @@ private fun PreviewOverview() {
 @OptIn(ExperimentalGlancePreviewApi::class)
 @Preview(widthDp = raceOverviewWidth, heightDp = raceOverviewHeight)
 @Composable
-private fun PreviewSprint() {
+private fun PreviewSprint1() {
     WidgetThemePreview {
         RaceOverview(
             overviewRace = fakeSprintWeekend,
+            localSize = LocalSize.current
         )
     }
 }

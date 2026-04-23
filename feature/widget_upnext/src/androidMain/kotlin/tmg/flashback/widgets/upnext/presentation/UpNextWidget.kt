@@ -5,7 +5,6 @@ import android.content.Intent
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.datastore.core.DataStore
 import androidx.glance.GlanceId
@@ -18,10 +17,10 @@ import androidx.glance.action.action
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.SizeMode
-import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.action.actionStartActivity
 import androidx.glance.appwidget.provideContent
 import androidx.glance.currentState
+import androidx.glance.layout.Column
 import androidx.glance.state.GlanceStateDefinition
 import androidx.glance.unit.ColorProvider
 import org.koin.core.component.KoinComponent
@@ -29,37 +28,29 @@ import org.koin.core.component.inject
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.widgets.upnext.presentation.layouts.RaceIcon
+import tmg.flashback.widgets.upnext.presentation.layouts.RaceName
 import tmg.flashback.widgets.upnext.presentation.layouts.RaceOverview
 import tmg.flashback.widgets.upnext.presentation.layouts.RaceSchedule
-import tmg.flashback.widgets.upnext.presentation.layouts.raceIconConfiguration
-import tmg.flashback.widgets.upnext.presentation.layouts.raceOverviewConfiguration
+import tmg.flashback.widgets.upnext.presentation.layouts.raceNameHeight
+import tmg.flashback.widgets.upnext.presentation.layouts.raceNameWidth
+import tmg.flashback.widgets.upnext.presentation.layouts.raceOverviewHeight
 import tmg.flashback.widgets.upnext.presentation.layouts.raceOverviewWidth
-import tmg.flashback.widgets.upnext.presentation.layouts.raceScheduleConfiguration
+import tmg.flashback.widgets.upnext.presentation.layouts.raceScheduleHeight
+import tmg.flashback.widgets.upnext.presentation.layouts.raceScheduleWidth
 import tmg.flashback.widgets.upnext.presentation.preview.fakeOverviewRace
 import tmg.flashback.widgets.upnext.presentation.preview.fakeSprintWeekend
 import tmg.flashback.widgets.upnext.presentation.style.WidgetTheme
 import tmg.flashback.widgets.upnext.presentation.style.WidgetThemePreview
 import tmg.flashback.widgets.upnext.presentation.style.modifiers.surface
 import tmg.flashback.widgets.upnext.presentation.style.preview.PreviewAllSizes
-import tmg.flashback.widgets.upnext.presentation.style.preview.Widget1Min
-import tmg.flashback.widgets.upnext.presentation.style.preview.Widget2Min
-import tmg.flashback.widgets.upnext.presentation.style.preview.Widget3Min
-import tmg.flashback.widgets.upnext.presentation.style.preview.Widget4Min
+import tmg.flashback.widgets.upnext.presentation.style.preview.PreviewPixel
 import tmg.flashback.widgets.upnext.presentation.style.text.TextBody1
 import tmg.flashback.widgets.upnext.repositories.UpNextWidgetRepository
 import java.io.File
 
-
-
 class UpNextWidget : GlanceAppWidget(), KoinComponent {
 
-    override val sizeMode = SizeMode.Responsive(
-        setOf(
-            raceScheduleConfiguration,
-            raceOverviewConfiguration,
-            raceIconConfiguration
-        )
-    )
+    override val sizeMode = SizeMode.Exact
 
     private val upNextWidgetRepository by inject<UpNextWidgetRepository>()
     private val overviewRepository by inject<OverviewRepository>()
@@ -130,39 +121,46 @@ private fun WidgetContent(
     showBackground: Boolean,
     clickAction: Action
 ) {
-    val config = LocalSize.current
     val modifier = when (shouldDeeplink) {
         true -> GlanceModifier
             .surface(if (showBackground) GlanceTheme.colors.widgetBackground else ColorProvider(Color.Transparent))
             .clickable(clickAction)
-        // TODO: Wire this up when setting is enabled
         false -> GlanceModifier
             .surface(if (showBackground) GlanceTheme.colors.widgetBackground else ColorProvider(Color.Transparent))
             .clickable(clickAction)
     }
-
-    when (config) {
-        raceScheduleConfiguration -> RaceSchedule(
-            overviewRace = overviewRace,
-            modifier = modifier,
-        )
-        raceOverviewConfiguration -> RaceOverview(
-            overviewRace = overviewRace,
-            modifier = modifier,
-        )
-        raceIconConfiguration -> RaceIcon(
-            overviewRace = overviewRace,
-            modifier = modifier,
-        )
-        else -> {
-            TextBody1("Invalid size - $config")
+    val size = LocalSize.current
+    Column(modifier = modifier) {
+        when {
+            size.width >= raceOverviewWidth.dp && size.height >= raceOverviewHeight.dp ->
+                RaceOverview(
+                    overviewRace = overviewRace,
+                    localSize = size,
+                )
+            size.width >= raceScheduleWidth.dp && size.height >= raceScheduleHeight.dp ->
+                RaceSchedule(
+                    overviewRace = overviewRace,
+                )
+            size.width >= raceNameWidth.dp && size.height >= raceNameHeight.dp ->
+                RaceName(
+                    overviewRace = overviewRace,
+                    localSize = size,
+                )
+            else -> {
+                RaceIcon(
+                    overviewRace = overviewRace,
+                    localSize = size,
+                )
+            }
         }
     }
 }
 
-@PreviewAllSizes
+
+
 @Composable
-private fun PreviewOverview() {
+@PreviewPixel
+private fun PreviewPixelOverview() {
     WidgetThemePreview {
         WidgetContent(
             overviewRace = fakeOverviewRace,
@@ -173,9 +171,35 @@ private fun PreviewOverview() {
     }
 }
 
-@PreviewAllSizes
 @Composable
-private fun PreviewSprint() {
+@PreviewPixel
+private fun PreviewPixelSprint() {
+    WidgetThemePreview {
+        WidgetContent(
+            overviewRace = fakeSprintWeekend,
+            shouldDeeplink = false,
+            showBackground = true,
+            clickAction = action { }
+        )
+    }
+}
+
+@Composable
+@PreviewAllSizes
+private fun PreviewMinMaxOverview() {
+    WidgetThemePreview {
+        WidgetContent(
+            overviewRace = fakeOverviewRace,
+            shouldDeeplink = false,
+            showBackground = true,
+            clickAction = action { }
+        )
+    }
+}
+
+@Composable
+@PreviewAllSizes
+private fun PreviewMinMaxSprint() {
     WidgetThemePreview {
         WidgetContent(
             overviewRace = fakeSprintWeekend,

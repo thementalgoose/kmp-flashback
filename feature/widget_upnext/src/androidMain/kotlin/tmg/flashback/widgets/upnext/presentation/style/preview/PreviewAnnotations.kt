@@ -84,3 +84,67 @@ annotation class Preview4x3
 @Preview4x2
 @Preview4x3
 annotation class PreviewAllSizes
+
+
+
+@OptIn(ExperimentalGlancePreviewApi::class)
+@Preview(widthDp = 64, heightDp = 106)
+annotation class PreviewPixel1x1
+
+@OptIn(ExperimentalGlancePreviewApi::class)
+@Preview(widthDp = 140, heightDp = 106)
+annotation class PreviewPixel2x1
+
+@OptIn(ExperimentalGlancePreviewApi::class)
+@Preview(widthDp = 140, heightDp = 229)
+annotation class PreviewPixel2x2
+
+@OptIn(ExperimentalGlancePreviewApi::class)
+@Preview(widthDp = 216, heightDp = 106)
+annotation class PreviewPixel3x1
+
+@OptIn(ExperimentalGlancePreviewApi::class)
+@Preview(widthDp = 216, heightDp = 229)
+annotation class PreviewPixel3x2
+
+@OptIn(ExperimentalGlancePreviewApi::class)
+@Preview(widthDp = 216, heightDp = 356)
+annotation class PreviewPixel3x3
+
+@OptIn(ExperimentalGlancePreviewApi::class)
+@Preview(widthDp = 292, heightDp = 106)
+annotation class PreviewPixel4x1
+
+@OptIn(ExperimentalGlancePreviewApi::class)
+@Preview(widthDp = 292, heightDp = 229)
+annotation class PreviewPixel4x2
+
+@OptIn(ExperimentalGlancePreviewApi::class)
+@Preview(widthDp = 292, heightDp = 352)
+annotation class PreviewPixel4x3
+
+@OptIn(ExperimentalGlancePreviewApi::class)
+@Preview(widthDp = 368, heightDp = 106)
+annotation class PreviewPixel5x1
+
+@OptIn(ExperimentalGlancePreviewApi::class)
+@Preview(widthDp = 368, heightDp = 229)
+annotation class PreviewPixel5x2
+
+@OptIn(ExperimentalGlancePreviewApi::class)
+@Preview(widthDp = 368, heightDp = 352)
+annotation class PreviewPixel5x3
+
+@PreviewPixel1x1
+@PreviewPixel2x1
+@PreviewPixel2x2
+@PreviewPixel3x1
+@PreviewPixel3x2
+@PreviewPixel3x3
+@PreviewPixel4x1
+@PreviewPixel4x2
+@PreviewPixel4x3
+@PreviewPixel5x1
+@PreviewPixel5x2
+@PreviewPixel5x3
+annotation class PreviewPixel

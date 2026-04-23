@@ -2,8 +2,6 @@ package tmg.flashback.widgets.upnext.presentation.layouts
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.unit.DpSize
-import androidx.compose.ui.unit.dp
 import androidx.glance.GlanceModifier
 import androidx.glance.GlanceTheme
 import androidx.glance.appwidget.cornerRadius
@@ -14,8 +12,10 @@ import androidx.glance.layout.Alignment
 import androidx.glance.layout.Box
 import androidx.glance.layout.Column
 import androidx.glance.layout.Row
+import androidx.glance.layout.Spacer
 import androidx.glance.layout.fillMaxSize
 import androidx.glance.layout.fillMaxWidth
+import androidx.glance.layout.height
 import androidx.glance.layout.padding
 import androidx.glance.preview.ExperimentalGlancePreviewApi
 import androidx.glance.preview.Preview
@@ -36,9 +36,8 @@ import tmg.flashback.widgets.upnext.presentation.style.text.TextBody2
 import tmg.flashback.widgets.upnext.utils.labels
 
 
-internal const val raceScheduleWidth = 130
-internal const val raceScheduleHeight = 100
-internal val raceScheduleConfiguration = DpSize(raceScheduleWidth.dp, raceScheduleHeight.dp)
+internal const val raceScheduleWidth = 140
+internal const val raceScheduleHeight = 180
 
 @Composable
 internal fun RaceSchedule(
@@ -60,6 +59,7 @@ internal fun RaceSchedule(
             item {
                 WidgetTitle(
                     overviewRace = overviewRace,
+                    showCircuit = false,
                     modifier = GlanceModifier
                         .fillMaxWidth()
                         .padding(
@@ -79,6 +79,9 @@ internal fun RaceSchedule(
                         schedule = schedule,
                     )
                 }
+            }
+            item {
+                Spacer(GlanceModifier.height(marginSmall))
             }
         }
     }
