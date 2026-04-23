@@ -17,6 +17,7 @@ import androidx.glance.action.action
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.SizeMode
+import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.action.actionStartActivity
 import androidx.glance.appwidget.provideContent
 import androidx.glance.currentState
@@ -98,10 +99,9 @@ class UpNextWidget : GlanceAppWidget(), KoinComponent {
             )
         } else {
             Log.i("UpNextWidget", "No race found, showing fallback")
-//            NoRace(
-//                context = context,
-//                modifier = GlanceModifier.clickable(actionRunCallback<UpNextWidgetRefreshWidget>()),
-//            )
+            NoRace(
+                modifier = GlanceModifier.clickable(actionRunCallback<UpNextWidgetRefreshWidget>()),
+            )
         }
 
         Log.i("UpNextWidget", "provideFlance finished")
