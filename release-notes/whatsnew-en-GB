@@ -1,4 +1,4 @@
 - The usual assortment of dependency updates and performance improvements
-- Adds a few more driver comparison stats
-- Minor preparation updates for 2026 season
-- Minor edge to edge updates
+- Fixes widget day/night responsive theming
+- Redesigns widget
+- Refines animations in home screen
