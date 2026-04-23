@@ -1,4 +1,4 @@
 - La variedad habitual de actualizaciones de dependencias y mejoras de rendimiento
-- Añade algunas estadísticas adicionales de comparación de pilotos
-- Actualizaciones menores de preparación para la temporada 2026
-- Actualizaciones menores de borde a borde
+- Corrige el theming responsivo día/noche del widget
+- Rediseña el widget
+- Refina las animaciones en la pantalla de inicio
