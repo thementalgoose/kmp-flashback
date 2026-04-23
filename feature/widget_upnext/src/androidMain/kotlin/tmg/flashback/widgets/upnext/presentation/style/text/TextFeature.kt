@@ -19,11 +19,13 @@ fun TextFeature(
     weight: FontWeight = FontWeight.Bold,
     textAlign: TextAlign = TextAlign.Start,
     fontSize: TextUnit = 24.sp,
+    maxLines: Int = Int.MAX_VALUE,
     modifier: GlanceModifier = GlanceModifier
 ) {
     Text(
         modifier = modifier,
         text = text,
+        maxLines = maxLines,
         style = TextStyle(
             color = color,
             fontSize = fontSize,

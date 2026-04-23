@@ -6,7 +6,7 @@ import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.Schedule
 
 val fakeOverviewRace = OverviewRace(
-    date = LocalDate(2020, 1, 3),
+    date = LocalDate(2020, 1, 22),
     time = LocalTime(15, 0, 0),
     season = 2020,
     round = 1,
@@ -30,7 +30,7 @@ val fakeOverviewRace = OverviewRace(
 )
 
 val fakeSprintWeekend = OverviewRace(
-    date = LocalDate(2020, 1, 3),
+    date = LocalDate(2020, 1, 22),
     time = LocalTime(15, 0, 0),
     season = 2020,
     round = 1,

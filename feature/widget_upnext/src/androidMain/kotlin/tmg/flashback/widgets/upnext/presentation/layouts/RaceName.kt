@@ -56,6 +56,7 @@ internal fun RaceName(
         ) {
             TextFeature(
                 text = "$date ($time)",
+                maxLines = 1,
                 modifier = GlanceModifier
                     .padding(horizontal = marginMedium)
             )
