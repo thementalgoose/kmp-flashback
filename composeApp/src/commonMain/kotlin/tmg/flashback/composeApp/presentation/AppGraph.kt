@@ -115,7 +115,7 @@ fun AppGraph(
     NavDisplay(
         backStack = backStack,
         onBack = { backStack.removeDetail() },
-        sceneStrategy = listDetailStrategy,
+        sceneStrategies = listOf(listDetailStrategy),
         transitionSpec = {
             fadeIn() togetherWith fadeOut()
         },
