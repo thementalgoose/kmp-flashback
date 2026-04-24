@@ -9,3 +9,4 @@ internal val marginSmall = 8.dp
 internal val marginMedium = 16.dp
 
 internal val radius = 16.dp
+internal val innerRadius = 6.dp

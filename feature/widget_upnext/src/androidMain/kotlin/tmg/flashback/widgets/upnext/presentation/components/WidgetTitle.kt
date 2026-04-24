@@ -41,12 +41,12 @@ internal fun WidgetTitle(
             TextTitle(
                 weight = FontWeight.Bold,
                 maxLines = titleMaxLines,
-                modifier = GlanceModifier.padding(start = marginMedium),
+                modifier = GlanceModifier.padding(start = marginSmall),
                 text = overviewRace.raceName
             )
             if (showCircuit) {
                 TextBody2(
-                    modifier = GlanceModifier.padding(start = marginMedium),
+                    modifier = GlanceModifier.padding(start = marginSmall),
                     text = overviewRace.circuitName,
                     maxLines = 1
                 )

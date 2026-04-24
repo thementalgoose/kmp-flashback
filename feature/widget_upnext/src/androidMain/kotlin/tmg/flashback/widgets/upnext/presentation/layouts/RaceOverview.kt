@@ -37,7 +37,7 @@ import tmg.flashback.widgets.upnext.utils.weekRelativeLabel
 
 internal const val raceOverviewWidth = 250
 internal const val raceOverviewHeight = 190
-private const val raceOverviewHeightBreakpoint = 205
+private const val raceOverviewHeightBreakpoint = 210
 
 @get:Composable
 private val ScheduleBackground
