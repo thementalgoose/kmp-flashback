@@ -103,7 +103,7 @@ internal fun RaceSchedule(
                             modifier = GlanceModifier.padding(horizontal = marginSmall)
                         ) {
                             if (i != 0) {
-                                Spacer(modifier = GlanceModifier.height(1.dp))
+                                Spacer(modifier = GlanceModifier.height(marginXSmall))
                             }
                             Schedule(
                                 schedule = schedule,
