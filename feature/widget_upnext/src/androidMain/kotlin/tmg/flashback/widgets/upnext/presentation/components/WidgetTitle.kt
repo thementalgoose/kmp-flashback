@@ -28,8 +28,7 @@ internal fun WidgetTitle(
 ) {
     val context = LocalContext.current
     Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically
+        modifier = modifier
     ) {
         CountryIcon(
             context = context,

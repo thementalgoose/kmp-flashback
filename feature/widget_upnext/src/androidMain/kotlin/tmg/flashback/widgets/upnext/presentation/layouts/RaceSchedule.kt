@@ -39,6 +39,14 @@ import tmg.flashback.widgets.upnext.utils.labels
 internal const val raceScheduleWidth = 140
 internal const val raceScheduleHeight = 180
 
+@get:Composable
+private val ScheduleBackground
+    get() = GlanceTheme.colors.primaryContainer
+
+@get:Composable
+private val ScheduleText
+    get() = GlanceTheme.colors.onPrimaryContainer
+
 @Composable
 internal fun RaceSchedule(
     overviewRace: OverviewRace,
@@ -54,7 +62,7 @@ internal fun RaceSchedule(
         modifier = modifier.fillMaxSize()
     ) {
         LazyColumn(
-            modifier = GlanceModifier
+            modifier = GlanceModifier,
         ) {
             item {
                 WidgetTitle(
@@ -72,7 +80,7 @@ internal fun RaceSchedule(
                 Box(modifier = GlanceModifier
                     .padding(
                         horizontal = marginSmall,
-                        vertical = marginXXSmall
+                        vertical = marginXSmall
                     )
                 ) {
                     Schedule(
@@ -95,7 +103,7 @@ private fun Schedule(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(GlanceTheme.colors.surface)
+            .background(ScheduleBackground)
             .cornerRadius(radius)
             .padding(
                 horizontal = marginSmall,
@@ -106,6 +114,7 @@ private fun Schedule(
         val (label, time) = schedule.labels()
         if (label.lowercase() == "race") {
             TextBody1(
+                color = ScheduleText,
                 text = schedule.label,
                 weight = FontWeight.Bold,
                 maxLines = 2,
@@ -114,6 +123,7 @@ private fun Schedule(
             )
         } else {
             TextBody2(
+                color = ScheduleText,
                 text = schedule.label,
                 weight = FontWeight.Bold,
                 maxLines = 2,
@@ -122,6 +132,7 @@ private fun Schedule(
             )
         }
         TextBody2(
+            color = ScheduleText,
             text = "$label\n$time",
             textAlign = TextAlign.End,
         )

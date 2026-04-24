@@ -37,7 +37,15 @@ import tmg.flashback.widgets.upnext.utils.weekRelativeLabel
 
 internal const val raceOverviewWidth = 250
 internal const val raceOverviewHeight = 190
-private const val raceOverviewHeightBreakpoint = 210
+private const val raceOverviewHeightBreakpoint = 205
+
+@get:Composable
+private val ScheduleBackground
+    get() = GlanceTheme.colors.primaryContainer
+
+@get:Composable
+private val ScheduleText
+    get() = GlanceTheme.colors.onPrimaryContainer
 
 @Composable
 internal fun RaceOverview(
@@ -63,7 +71,7 @@ internal fun RaceOverview(
             modifier = GlanceModifier
                 .fillMaxWidth()
                 .padding(
-                    bottom = marginSmall,
+                    bottom = marginXSmall,
                     end = marginSmall,
                     start = marginSmall
                 )
@@ -124,7 +132,7 @@ private fun Day(
                 Box(
                     modifier = GlanceModifier
                         .fillMaxSize()
-                        .background(GlanceTheme.colors.background)
+                        .background(ScheduleBackground)
                         .cornerRadius(radius),
                 ) {
                     Column(
@@ -136,11 +144,13 @@ private fun Day(
                     ) {
                         val (_, time) = schedule.labels()
                         TextBody2(
+                            color = ScheduleText,
                             maxLines = 1,
                             text = schedule.label,
                             weight = FontWeight.Bold
                         )
                         TextBody2(
+                            color = ScheduleText,
                             text = time
                         )
                     }

@@ -17,7 +17,7 @@ internal fun Schedule.labels(): Pair<String, String> {
     return if (sameWeek) {
         deviceTime.date.format(dateFormatEEE) to deviceTime.time.format(timeFormatHHmm)
     } else {
-        "${deviceTime.dayOfMonth} ${deviceTime.date.format(dateFormatMMM)}" to deviceTime.time.format(timeFormatHHmm)
+        "${deviceTime.day.ordinalAbbreviation} ${deviceTime.date.format(dateFormatMMM)}" to deviceTime.time.format(timeFormatHHmm)
     }
 }
 
