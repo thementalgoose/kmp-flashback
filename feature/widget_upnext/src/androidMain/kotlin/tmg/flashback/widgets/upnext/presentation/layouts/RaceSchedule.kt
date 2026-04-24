@@ -2,6 +2,7 @@ package tmg.flashback.widgets.upnext.presentation.layouts
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.unit.dp
 import androidx.glance.GlanceModifier
 import androidx.glance.GlanceTheme
 import androidx.glance.appwidget.cornerRadius
@@ -21,6 +22,7 @@ import androidx.glance.preview.ExperimentalGlancePreviewApi
 import androidx.glance.preview.Preview
 import androidx.glance.text.FontWeight
 import androidx.glance.text.TextAlign
+import kotlinx.datetime.format
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.widgets.upnext.presentation.components.WidgetTitle
@@ -34,10 +36,19 @@ import tmg.flashback.widgets.upnext.presentation.style.radius
 import tmg.flashback.widgets.upnext.presentation.style.text.TextBody1
 import tmg.flashback.widgets.upnext.presentation.style.text.TextBody2
 import tmg.flashback.widgets.upnext.utils.labels
+import tmg.flashback.widgets.upnext.utils.weekRelativeLabel
 
 
 internal const val raceScheduleWidth = 140
 internal const val raceScheduleHeight = 180
+
+@get:Composable
+private val ScheduleBackground
+    get() = GlanceTheme.colors.primaryContainer
+
+@get:Composable
+private val ScheduleText
+    get() = GlanceTheme.colors.onPrimaryContainer
 
 @Composable
 internal fun RaceSchedule(
@@ -49,39 +60,57 @@ internal fun RaceSchedule(
             .schedule
             .sortedBy { it.time }
             .sortedBy { it.date }
+            .groupBy { it.timestamp.deviceLocalDateTime.date }
+            .toList()
     }
     Column(
         modifier = modifier.fillMaxSize()
     ) {
         LazyColumn(
-            modifier = GlanceModifier
+            modifier = GlanceModifier,
         ) {
             item {
                 WidgetTitle(
                     overviewRace = overviewRace,
                     showCircuit = false,
+                    titleMaxLines = 1,
                     modifier = GlanceModifier
                         .fillMaxWidth()
                         .padding(
-                            vertical = marginSmall,
-                            horizontal = marginSmall,
+                            top = marginSmall,
+                            start = marginSmall,
+                            end = marginSmall
                         )
                 )
             }
-            items(schedules) { schedule ->
-                Box(modifier = GlanceModifier
-                    .padding(
-                        horizontal = marginSmall,
-                        vertical = marginXXSmall
-                    )
-                ) {
-                    Schedule(
-                        schedule = schedule,
+            for ((date, scheduleList) in schedules) {
+                item {
+                    TextBody2(
+                        text = date.weekRelativeLabel(),
+                        modifier = GlanceModifier
+                            .padding(
+                                start = marginSmall,
+                                end = marginSmall,
+                                bottom = marginSmall,
+                                top = marginSmall
+                            )
                     )
                 }
-            }
-            item {
-                Spacer(GlanceModifier.height(marginSmall))
+                for (i in 0 until scheduleList.size) {
+                    val schedule = scheduleList[i]
+                    item {
+                        Column(
+                            modifier = GlanceModifier.padding(horizontal = marginSmall)
+                        ) {
+                            if (i != 0) {
+                                Spacer(modifier = GlanceModifier.height(marginXSmall))
+                            }
+                            Schedule(
+                                schedule = schedule,
+                            )
+                        }
+                    }
+                }
             }
         }
     }
@@ -95,7 +124,7 @@ private fun Schedule(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(GlanceTheme.colors.surface)
+            .background(ScheduleBackground)
             .cornerRadius(radius)
             .padding(
                 horizontal = marginSmall,
@@ -106,6 +135,7 @@ private fun Schedule(
         val (label, time) = schedule.labels()
         if (label.lowercase() == "race") {
             TextBody1(
+                color = ScheduleText,
                 text = schedule.label,
                 weight = FontWeight.Bold,
                 maxLines = 2,
@@ -114,6 +144,7 @@ private fun Schedule(
             )
         } else {
             TextBody2(
+                color = ScheduleText,
                 text = schedule.label,
                 weight = FontWeight.Bold,
                 maxLines = 2,
@@ -122,7 +153,8 @@ private fun Schedule(
             )
         }
         TextBody2(
-            text = "$label\n$time",
+            color = ScheduleText,
+            text = time,
             textAlign = TextAlign.End,
         )
     }

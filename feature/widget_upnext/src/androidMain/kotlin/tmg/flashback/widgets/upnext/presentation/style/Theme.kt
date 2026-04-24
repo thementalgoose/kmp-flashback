@@ -28,12 +28,14 @@ fun WidgetThemePreview(
     content: @Composable () -> Unit,
 ) {
     WidgetTheme {
-        Box(modifier = GlanceModifier
-            .fillMaxSize()
-            .cornerRadius(8.dp)
-            .background(GlanceTheme.colors.widgetBackground),
-        ) {
-            content()
+        Box(GlanceModifier.background(Color.Black)) {
+            Box(modifier = GlanceModifier
+                .fillMaxSize()
+                .cornerRadius(radius)
+                .background(GlanceTheme.colors.widgetBackground),
+            ) {
+                content()
+            }
         }
     }
 }
