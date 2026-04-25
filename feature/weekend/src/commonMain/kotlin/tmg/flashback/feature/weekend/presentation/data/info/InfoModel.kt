@@ -16,6 +16,7 @@ data class InfoModel(
     val laps: String?,
     val cancelled: Boolean,
     val youtubeUrl: String?,
+    val aerialUrl: String?,
     val wikipediaUrl: String?,
     val days: List<Pair<LocalDate, List<Pair<Schedule, Boolean>>>>,
     val temperatureMetric: Boolean,
@@ -48,6 +49,7 @@ fun InfoModel.Companion.preview() = InfoModel(
             Schedule.preview("Race") to false,
         )
     ),
+    aerialUrl = null,
     temperatureMetric = true,
     windspeedMetric = true
 )
