@@ -84,7 +84,7 @@ firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
 firebase-installations = { module = "com.google.firebase:firebase-installations" }
 
 # Compose
-compose-nav3 = "org.jetbrains.androidx.navigation3:navigation3-ui:1.1.0"
+compose-nav3 = "org.jetbrains.androidx.navigation3:navigation3-ui:1.0.0-alpha06"
 compose-nav3Adaptive = "org.jetbrains.compose.material3.adaptive:adaptive-navigation3:1.3.0-alpha02"
 compose-nav3ViewModel = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3:2.10.0"
 
