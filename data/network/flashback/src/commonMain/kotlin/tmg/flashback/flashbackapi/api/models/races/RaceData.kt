@@ -22,6 +22,8 @@ data class RaceData(
     val circuit: Circuit,
     @SerialName("wikiUrl")
     val wikiUrl: String? = null,
+    @SerialName("aerialUrl")
+    val aerialUrl: String? = null,
     @SerialName("youtubeUrl")
     val youtubeUrl: String? = null,
     @SerialName("cancelled")

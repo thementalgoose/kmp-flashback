@@ -11,6 +11,7 @@ fun RaceData.Companion.model(
     time: String? = "12:34",
     laps: String? = "12",
     cancelled: Boolean = false,
+    aerialUrl: String? = "aerialUrl",
     circuit: Circuit = Circuit.model(),
     wikiUrl: String? = "wikiUrl",
     youtubeUrl: String? = "youtube"
@@ -23,6 +24,7 @@ fun RaceData.Companion.model(
     laps = laps,
     circuit = circuit,
     wikiUrl = wikiUrl,
+    aerialUrl = aerialUrl,
     youtubeUrl = youtubeUrl,
     cancelled = cancelled
 )

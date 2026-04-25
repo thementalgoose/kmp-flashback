@@ -12,6 +12,7 @@ fun RaceInfo.Companion.model(
     laps: String? = "12",
     wikipediaUrl: String? = "wikiUrl",
     youtube: String? = "youtube",
+    aerialUrl: String? = "aerialUrl",
     circuit: Circuit = Circuit.model(),
     cancelled: Boolean = false,
 ): RaceInfo = RaceInfo(
@@ -23,6 +24,7 @@ fun RaceInfo.Companion.model(
     name = name,
     wikipediaUrl = wikipediaUrl,
     youtube = youtube,
+    aerialUrl = aerialUrl,
     circuit = circuit,
     cancelled = cancelled
 )

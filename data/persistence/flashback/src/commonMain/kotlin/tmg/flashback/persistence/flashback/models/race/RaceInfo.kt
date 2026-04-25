@@ -22,6 +22,8 @@ data class RaceInfo(
     val time: String?,
     @ColumnInfo(name = "wikiUrl")
     val wikiUrl: String?,
+    @ColumnInfo(name = "aerialUrl")
+    val aerialUrl: String?,
     @ColumnInfo(name = "youtube")
     val youtube: String?,
     @ColumnInfo(name = "cancelled")

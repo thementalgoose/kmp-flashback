@@ -11,6 +11,7 @@ data class RaceInfo(
     val name: String,
     val laps: String?,
     val youtube: String?,
+    val aerialUrl: String?,
     val wikipediaUrl: String?,
     val circuit: Circuit,
     val cancelled: Boolean,
