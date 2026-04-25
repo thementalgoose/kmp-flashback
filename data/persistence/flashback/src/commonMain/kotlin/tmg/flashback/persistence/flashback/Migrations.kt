@@ -158,5 +158,10 @@ enum class Migrations(
             database.execSQL("ALTER TABLE Overview ADD COLUMN cancelled INTEGER NOT NULL DEFAULT 0")
             database.execSQL("ALTER TABLE RaceInfo ADD COLUMN cancelled INTEGER NOT NULL DEFAULT 0")
         }
+    }),
+    MIGRATION_12_13(object : Migration(12, 13) {
+        override fun migrate(database: SQLiteConnection) {
+            database.execSQL("ALTER TABLE RaceInfo ADD COLUMN aerialUrl TEXT")
+        }
     })
 }

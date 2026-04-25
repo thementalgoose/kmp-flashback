@@ -10,6 +10,7 @@ fun RaceInfo.Companion.model(
     time: String? = "12:34",
     cancelled: Boolean = false,
     wikiUrl: String? = "wikiUrl",
+    aerialUrl: String? = "aerialUrl",
     youtube: String? = "youtube"
 ): RaceInfo = RaceInfo(
     season = season,
@@ -21,5 +22,6 @@ fun RaceInfo.Companion.model(
     time = time,
     wikiUrl = wikiUrl,
     youtube = youtube,
+    aerialUrl = aerialUrl,
     cancelled = cancelled,
 )
