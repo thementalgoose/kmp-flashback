@@ -17,7 +17,8 @@ class NetworkRaceDataMapper {
             time = raceData.time,
             wikiUrl = raceData.wikiUrl,
             youtube = raceData.youtubeUrl,
-            cancelled = raceData.cancelled
+            cancelled = raceData.cancelled,
+            aerialUrl = raceData.aerialUrl
         )
     }
 }

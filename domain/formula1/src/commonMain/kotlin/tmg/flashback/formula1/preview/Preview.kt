@@ -141,6 +141,7 @@ fun RaceInfo.Companion.preview() = RaceInfo(
     youtube = "youtubeUrl",
     wikipediaUrl = "wikipediaUrl",
     circuit = Circuit.preview(),
+    aerialUrl = "aerialUrl",
     cancelled = false
 )
 

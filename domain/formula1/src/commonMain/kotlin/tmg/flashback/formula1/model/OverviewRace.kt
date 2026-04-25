@@ -33,6 +33,7 @@ data class OverviewRace(
             youtube = null,
             wikipediaUrl = null,
             cancelled = cancelled,
+            aerialUrl = null,
             circuit = Circuit(
                 id = circuitId,
                 name = circuitName,
