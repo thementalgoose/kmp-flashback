@@ -63,6 +63,7 @@ fun LazyListScope.addRaceData(
 ) {
     item("race_label") {
         TypeHeader(
+            modifier = Modifier.animateItem(),
             resource = string.nav_race,
             resultType = uiState.resultType,
             selectResultType = { selectResultType(it) }
@@ -72,31 +73,36 @@ fun LazyListScope.addRaceData(
         item("race_not_found") {
             when {
                 uiState.cancelled -> {
-                    EventCancelled()
+                    EventCancelled(Modifier.animateItem())
                 }
                 Formula1.currentSeasonYear == uiState.season -> {
-                    DataMissing()
+                    DataMissing(Modifier.animateItem())
                 }
                 else -> {
-                    DataUnavailable()
+                    DataUnavailable(Modifier.animateItem())
                 }
             }
         }
     } else {
         item("race_header") {
-            RaceHeader()
+            RaceHeader(Modifier.animateItem())
         }
     }
     items(uiState.raceResults, key = { "${keyPrefix}-${it.id}" }) {
         when (it) {
             is RaceModel.ConstructorResult -> {
                 RaceConstructorResult(
+                    modifier = Modifier.animateItem(),
                     model = it,
                     itemClicked = { },
                 )
             }
             is RaceModel.DriverResult -> {
-                RaceDriverResult(model = it.result, driverClicked = { })
+                RaceDriverResult(
+                    modifier = Modifier.animateItem(),
+                    model = it.result,
+                    driverClicked = { }
+                )
             }
         }
     }

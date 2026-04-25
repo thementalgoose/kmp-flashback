@@ -63,6 +63,7 @@ fun LazyListScope.addSprintQualifyingData(
 ) {
     item("sprint_qualifying_label") {
         TypeHeader(
+            modifier = Modifier.animateItem(),
             resource = string.nav_sprint_qualifying
         )
     }
@@ -70,24 +71,25 @@ fun LazyListScope.addSprintQualifyingData(
         item("sprint_qualifying_not_found") {
             when {
                 uiState.cancelled -> {
-                    EventCancelled()
+                    EventCancelled(Modifier.animateItem())
                 }
                 Formula1.currentSeasonYear == uiState.season -> {
-                    DataMissing()
+                    DataMissing(Modifier.animateItem())
                 }
                 else -> {
-                    DataUnavailable()
+                    DataUnavailable(Modifier.animateItem())
                 }
             }
         }
     } else {
         item("sprint_qualifying_header") {
-            SprintQualifyingHeader()
+            SprintQualifyingHeader(Modifier.animateItem())
         }
     }
     items(uiState.sprintQualifyingResults, key = { "${keyPrefix}-${it.id}" }) {
         when (it) {
             is SprintQualifyingModel.Result -> SprintQualifying(
+                modifier = Modifier.animateItem(),
                 model = it,
                 driverClicked = { }
             )

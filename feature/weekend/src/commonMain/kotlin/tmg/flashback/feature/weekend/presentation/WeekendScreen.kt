@@ -172,7 +172,10 @@ fun WeekendScreenTab(
                         val buttonModifier = Modifier
                             .clip(CircleShape)
                             .background(backgroundAlpha.value)
-                        Box(modifier = Modifier.height(IntrinsicSize.Min)) {
+                        Box(modifier = Modifier
+                            .animateItem()
+                            .height(IntrinsicSize.Min)
+                        ) {
                             Image(
                                 painter = painter,
                                 modifier = Modifier.matchParentSize(),
@@ -266,10 +269,12 @@ fun LazyListScope.addDetails(info: InfoModel) {
     item("details") {
         RaceDetails(
             model = info,
-            modifier = Modifier.padding(
-                horizontal = AppTheme.dimens.medium,
-                vertical = AppTheme.dimens.xsmall
-            )
+            modifier = Modifier
+                .animateItem()
+                .padding(
+                    horizontal = AppTheme.dimens.medium,
+                    vertical = AppTheme.dimens.xsmall
+                )
         )
     }
 }
@@ -282,6 +287,7 @@ fun LazyListScope.addLinks(
 ) {
     item("links") {
         RaceLinks(
+            modifier = Modifier.animateItem(),
             model = info,
             youtubeClicked = youtubeClicked,
             wikipediaClicked = wikipediaClicked,
@@ -293,6 +299,7 @@ fun LazyListScope.addLinks(
 fun LazyListScope.addSchedule(info: InfoModel) {
     item("schedule") {
         Schedule(
+            modifier = Modifier.animateItem(),
             model = info
         )
     }

@@ -68,6 +68,7 @@ fun LazyListScope.addQualifyingData(
 ) {
     item("qualifying_label") {
         TypeHeader(
+            modifier = Modifier.animateItem(),
             resource = string.nav_qualifying,
         )
     }
@@ -75,19 +76,20 @@ fun LazyListScope.addQualifyingData(
         item("qualifying_not_found") {
             when {
                 uiState.cancelled -> {
-                    EventCancelled()
+                    EventCancelled(Modifier.animateItem())
                 }
                 Formula1.currentSeasonYear == uiState.season -> {
-                    DataMissing()
+                    DataMissing(Modifier.animateItem())
                 }
                 else -> {
-                    DataUnavailable()
+                    DataUnavailable(Modifier.animateItem())
                 }
             }
         }
     } else {
         item("qualifying_header") {
             QualifyingHeader(
+                modifier = Modifier.animateItem(),
                 showQ1 = uiState.qualifyingColumns in listOf(Q1, Q2, Q3),
                 showQ2 = uiState.qualifyingColumns in listOf(Q2, Q3),
                 showQ3 = uiState.qualifyingColumns in listOf(Q3)
@@ -97,14 +99,17 @@ fun LazyListScope.addQualifyingData(
     items(uiState.qualifyingResults, key = { "${keyPrefix}-${it.id}" }) {
         when (it) {
             is QualifyingModel.Q1 -> QualifyingResult(
+                modifier = Modifier.animateItem(),
                 model = it,
                 driverClicked = { },
             )
             is QualifyingModel.Q1Q2 -> QualifyingResult(
+                modifier = Modifier.animateItem(),
                 model = it,
                 driverClicked = { },
             )
             is QualifyingModel.Q1Q2Q3 -> QualifyingResult(
+                modifier = Modifier.animateItem(),
                 model = it,
                 driverClicked = { },
             )
