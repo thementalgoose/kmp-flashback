@@ -21,6 +21,7 @@ internal class InfoDataMapperImpl(
             time = race.raceInfo.time,
             laps = race.raceInfo.laps,
             youtubeUrl = race.raceInfo.youtube,
+            aerialUrl = race.raceInfo.aerialUrl,
             wikipediaUrl = race.raceInfo.wikipediaUrl,
             days = race.getScheduleGrouping(),
             cancelled = race.raceInfo.cancelled,

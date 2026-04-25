@@ -1,9 +1,14 @@
 package tmg.flashback.ui.components.header
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -12,6 +17,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalInspectionMode
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.*
 import flashback.presentation.ui.generated.resources.Res
@@ -21,16 +30,25 @@ import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextHeadline1
 
 @Composable
 fun Header(
     actionUpClicked: () -> Unit,
     modifier: Modifier = Modifier,
+    topInset: Dp = 0.dp,
+    scrim: Boolean = false,
+    scrimColour: Color = AppTheme.colors.surface,
     action: HeaderAction? = null,
-    overrideIcons: @Composable RowScope.() -> Unit = { },
+    actionModifier: Modifier = Modifier,
+    overrideIcons: @Composable RowScope.(Modifier) -> Unit = { },
+    contentSpacing: Dp = 0.dp,
     content: @Composable RowScope.() -> Unit
 ) {
     Column(
@@ -38,9 +56,13 @@ fun Header(
             .fillMaxWidth()
             .padding(top = AppTheme.dimens.xsmall)
     ) {
+        Spacer(Modifier.height(topInset))
         if (action != null) {
             Row {
-                IconButton(onClick = actionUpClicked) {
+                IconButton(
+                    modifier = actionModifier,
+                    onClick = actionUpClicked,
+                ) {
                     Icon(
                         painter = painterResource(resource = action.icon),
                         contentDescription = stringResource(resource = action.contentDescription),
@@ -48,21 +70,31 @@ fun Header(
                     )
                 }
                 Spacer(Modifier.weight(1f))
-                overrideIcons()
+                overrideIcons(Modifier)
             }
-//            Spacer(Modifier.height(AppTheme.dimens.large))
         }
-        Row(
-            verticalAlignment = Alignment.Top
-        ) {
-            Row(Modifier.weight(1f)) {
-                content()
+        Spacer(Modifier.height(contentSpacing))
+        Box {
+            val scrimModifier = when (scrim) {
+                true -> Modifier.background(
+                    brush = Brush.verticalGradient(listOf(Color.Transparent, scrimColour))
+                )
+                false -> Modifier
             }
-            if (action == null) {
-                Row(
-                    modifier = Modifier.align(Alignment.CenterVertically)
-                ) {
-                    overrideIcons()
+
+            Row(
+                verticalAlignment = Alignment.Top,
+                modifier = scrimModifier
+            ) {
+                Row(Modifier.weight(1f)) {
+                    content()
+                }
+                if (action == null) {
+                    Row(
+                        modifier = Modifier.align(Alignment.CenterVertically)
+                    ) {
+                        overrideIcons(Modifier)
+                    }
                 }
             }
         }
@@ -73,14 +105,24 @@ fun Header(
 fun Header(
     text: String,
     actionUpClicked: () -> Unit,
+    topInset: Dp = 0.dp,
+    scrim: Boolean = false,
+    scrimColour: Color = AppTheme.colors.surface,
     modifier: Modifier = Modifier,
     action: HeaderAction? = null,
-    overrideIcons: @Composable RowScope.() -> Unit = { },
+    actionModifier: Modifier = Modifier,
+    contentSpacing: Dp = 0.dp,
+    overrideIcons: @Composable RowScope.(Modifier) -> Unit = { },
 ) {
     Header(
         actionUpClicked = actionUpClicked,
         modifier = modifier,
         action = action,
+        actionModifier = actionModifier,
+        topInset = topInset,
+        scrim = scrim,
+        scrimColour = scrimColour,
+        contentSpacing = contentSpacing,
         overrideIcons = overrideIcons,
         content = {
             TextHeadline1(
@@ -116,7 +158,7 @@ enum class HeaderAction(
     )
 }
 
-@Preview
+@PreviewTheme
 @Composable
 private fun Preview() {
     ApplicationThemePreview {
@@ -128,13 +170,7 @@ private fun Preview() {
     }
 }
 
-@Preview
-@Composable
-private fun PreviewWithOverrideLight() {
-    ApplicationThemePreview(isLight = true) {  }
-}
-
-@Preview
+@PreviewTheme
 @Composable
 private fun PreviewWithOverride() {
     ApplicationThemePreview {
@@ -155,62 +191,74 @@ private fun PreviewWithOverride() {
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
-private fun PreviewNoIconLight() {
-    ApplicationThemePreview(isLight = true) {
-        PreviewNoIcon()
+private fun PreviewWithOverrideWithInsetAndScrim() {
+    ApplicationThemePreview {
+        Header(
+            text = "2022",
+            action = HeaderAction.MENU,
+            topInset = 16.dp,
+            scrim = true,
+            scrimColour = Color.Magenta,
+            actionUpClicked = { },
+            overrideIcons = {
+                IconButton(onClick = { }) {
+                    Icon(
+                        painter = painterResource(resource = Res.drawable.ic_close),
+                        contentDescription = stringResource(resource = string.tyres_label),
+                        tint = AppTheme.colors.onSurfaceVariant
+                    )
+                }
+            }
+        )
     }
 }
 
-@Preview
-@Composable
-private fun PreviewNoIconDark() {
-    ApplicationThemePreview(isLight = false) {
-        PreviewNoIcon()
-    }
-}
-
+@PreviewTheme
 @Composable
 private fun PreviewNoIcon() {
-    Header(
-        text = "2022",
-        action = null,
-        actionUpClicked = { }
-    )
-}
-
-
-@Preview
-@Composable
-private fun PreviewNoIconWithOverrideLight() {
-    ApplicationThemePreview(isLight = true) {
-        PreviewNoIconWithOverride()
+    ApplicationThemePreview {
+        Header(
+            text = "2022",
+            action = null,
+            actionUpClicked = { }
+        )
     }
 }
 
-@Preview
+
+@PreviewTheme
 @Composable
-private fun PreviewNoIconWithOverrideDark() {
-    ApplicationThemePreview(isLight = false) {
-        PreviewNoIconWithOverride()
+private fun PreviewNoIconAndScrim() {
+    ApplicationThemePreview {
+        Header(
+            text = "2022",
+            action = null,
+            scrim = true,
+            scrimColour = Color.Magenta,
+            actionUpClicked = { }
+        )
     }
 }
 
+@PreviewTheme
 @Composable
 private fun PreviewNoIconWithOverride() {
-    Header(
-        text = "2022",
-        action = null,
-        actionUpClicked = { },
-        overrideIcons = {
-            IconButton(onClick = { }) {
-                Icon(
-                    painter = painterResource(resource = Res.drawable.ic_close),
-                    contentDescription = stringResource(resource = string.tyres_label),
-                    tint = AppTheme.colors.onSurfaceVariant
-                )
+    ApplicationThemePreview {
+        Header(
+            text = "2022",
+            action = null,
+            actionUpClicked = { },
+            overrideIcons = {
+                IconButton(onClick = { }) {
+                    Icon(
+                        painter = painterResource(resource = Res.drawable.ic_close),
+                        contentDescription = stringResource(resource = string.tyres_label),
+                        tint = AppTheme.colors.onSurfaceVariant
+                    )
+                }
             }
-        }
-    )
+        )
+    }
 }

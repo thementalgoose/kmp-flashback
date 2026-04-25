@@ -62,6 +62,7 @@ fun LazyListScope.addSprintRaceData(
 ) {
     item("sprint_race_label") {
         TypeHeader(
+            modifier = Modifier.animateItem(),
             resource = string.nav_sprint,
             resultType = uiState.resultType,
             selectResultType = { selectResultType(it) }
@@ -71,31 +72,33 @@ fun LazyListScope.addSprintRaceData(
         item("sprint_race_not_found") {
             when {
                 uiState.cancelled -> {
-                    EventCancelled()
+                    EventCancelled(Modifier.animateItem())
                 }
                 Formula1.currentSeasonYear == uiState.season -> {
-                    DataMissing()
+                    DataMissing(Modifier.animateItem())
                 }
                 else -> {
-                    DataUnavailable()
+                    DataUnavailable(Modifier.animateItem())
                 }
             }
         }
     } else {
         item("sprint_race_header") {
-            RaceHeader()
+            RaceHeader(Modifier.animateItem())
         }
     }
     items(uiState.sprintRaceResults, key = { "${keyPrefix}-${it.id}" }) {
         when (it) {
             is SprintRaceModel.ConstructorResult -> {
                 SprintRaceConstructorResult(
+                    modifier = Modifier.animateItem(),
                     model = it,
                     constructorClicked = { }
                 )
             }
             is SprintRaceModel.DriverResult -> {
                 SprintRaceDriverResult(
+                    modifier = Modifier.animateItem(),
                     model = it.result,
                     driverClicked = { }
                 )

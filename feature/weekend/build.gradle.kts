@@ -18,6 +18,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.bundles.kotlin)
             implementation(libs.bundles.compose)
+            implementation(libs.bundles.coil)
 
             implementation(libs.compose.resources)
 
