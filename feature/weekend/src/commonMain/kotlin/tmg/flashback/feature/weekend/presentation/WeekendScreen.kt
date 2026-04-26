@@ -1,7 +1,13 @@
 package tmg.flashback.feature.weekend.presentation
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
+import androidx.compose.animation.with
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -38,7 +44,11 @@ import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowSizeClass.Companion.HEIGHT_DP_MEDIUM_LOWER_BOUND
 import coil3.compose.AsyncImage
+import coil3.compose.AsyncImagePainter
+import coil3.compose.LocalPlatformContext
 import coil3.compose.rememberAsyncImagePainter
+import coil3.request.ImageRequest
+import coil3.request.crossfade
 import flashback.feature.weekend.generated.resources.Res
 import flashback.feature.weekend.generated.resources.ic_maps
 import flashback.feature.weekend.generated.resources.ic_wikipedia
@@ -69,6 +79,7 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
+import tmg.flashback.ui.components.loading.SkeletonBox
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 import tmg.flashback.ui.navigation.NavigationBar
 import tmg.flashback.ui.navigation.NavigationItem
@@ -157,12 +168,13 @@ fun WeekendScreenTab(
                     if (imageUrl != null) AppTheme.colors.surface.copy(alpha = 0.6f) else Color.Transparent
                 )
                 val height = animateDpAsState(
-                    if (imageUrl != null && windowSizeClass.isHeightAtLeastBreakpoint(HEIGHT_DP_MEDIUM_LOWER_BOUND)) AppTheme.dimens.xlarge else 0.dp
+                    if (imageUrl != null && windowSizeClass.isHeightAtLeastBreakpoint(HEIGHT_DP_MEDIUM_LOWER_BOUND)) 80.dp else 0.dp
                 )
                 val painter = rememberAsyncImagePainter(
                     model = imageUrl,
                     contentScale = ContentScale.Crop
                 )
+                val painterState = painter.state.collectAsState()
 
                 LazyColumn(
                     contentPadding = masterPadding,
@@ -176,12 +188,30 @@ fun WeekendScreenTab(
                             .animateItem()
                             .height(IntrinsicSize.Min)
                         ) {
-                            Image(
-                                painter = painter,
+                            Crossfade(
+                                targetState = painterState.value,
                                 modifier = Modifier.matchParentSize(),
-                                contentScale = ContentScale.Crop,
-                                contentDescription = null
-                            )
+                            ) {
+                                when (it) {
+                                    AsyncImagePainter.State.Empty -> {
+                                        Box(Modifier.fillMaxSize())
+                                    }
+                                    is AsyncImagePainter.State.Error -> {
+                                        Box(Modifier.fillMaxSize())
+                                    }
+                                    is AsyncImagePainter.State.Loading -> {
+                                        SkeletonBox(Modifier.fillMaxSize())
+                                    }
+                                    is AsyncImagePainter.State.Success -> {
+                                        Image(
+                                            painter = it.painter,
+                                            modifier = Modifier.fillMaxSize(),
+                                            contentScale = ContentScale.FillBounds,
+                                            contentDescription = null
+                                        )
+                                    }
+                                }
+                            }
                             val text = when {
                                 uiState is Data -> "${uiState.info.season} ${uiState.info.raceName}"
                                 else -> "${screenData.season} ${screenData.raceName}"

@@ -3,6 +3,9 @@ package tmg.flashback.style.text
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.drawscope.DrawStyle
+import androidx.compose.ui.graphics.drawscope.Fill
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
@@ -23,7 +26,7 @@ fun TextHeadline1(
                 true -> AppTheme.colors.primary
                 false -> AppTheme.colors.onSurface
             }
-        )
+        ),
     )
 }
 @Composable

@@ -32,6 +32,13 @@ fun SkeletonViewList(
 }
 
 @Composable
+fun SkeletonBox(
+    modifier: Modifier = Modifier
+) {
+    Box(modifier.shimmerLoading())
+}
+
+@Composable
 fun SkeletonView(
     modifier: Modifier = Modifier,
 ) {
