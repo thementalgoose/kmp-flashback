@@ -29,6 +29,7 @@ import tmg.flashback.widgets.upnext.presentation.components.WidgetTitle
 import tmg.flashback.widgets.upnext.presentation.preview.fakeOverviewRace
 import tmg.flashback.widgets.upnext.presentation.preview.fakeSprintWeekend
 import tmg.flashback.widgets.upnext.presentation.style.WidgetThemePreview
+import tmg.flashback.widgets.upnext.presentation.style.marginNSmall
 import tmg.flashback.widgets.upnext.presentation.style.marginSmall
 import tmg.flashback.widgets.upnext.presentation.style.marginXSmall
 import tmg.flashback.widgets.upnext.presentation.style.marginXXSmall
@@ -37,6 +38,7 @@ import tmg.flashback.widgets.upnext.presentation.style.text.TextBody1
 import tmg.flashback.widgets.upnext.presentation.style.text.TextBody2
 import tmg.flashback.widgets.upnext.utils.labels
 import tmg.flashback.widgets.upnext.utils.weekRelativeLabel
+import java.lang.reflect.Modifier
 
 
 internal const val raceScheduleWidth = 140
@@ -77,9 +79,9 @@ internal fun RaceSchedule(
                     modifier = GlanceModifier
                         .fillMaxWidth()
                         .padding(
-                            top = marginSmall,
-                            start = marginSmall,
-                            end = marginSmall
+                            top = marginNSmall,
+                            start = marginNSmall,
+                            end = marginNSmall,
                         )
                 )
             }
@@ -110,6 +112,9 @@ internal fun RaceSchedule(
                             )
                         }
                     }
+                }
+                item {
+                    Spacer(GlanceModifier.height(marginSmall))
                 }
             }
         }

@@ -11,6 +11,7 @@ import tmg.flashback.infrastructure.datetime.dateFormatMMM
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.startOfWeek
 import tmg.flashback.infrastructure.datetime.timeFormatHHmm
+import tmg.flashback.infrastructure.extensions.ordinalAbbreviation
 
 internal fun OverviewRace.raceSchedule(): Schedule? {
     return this.schedule.firstOrNull { it.label.lowercase() == "race" }
@@ -24,6 +25,6 @@ internal fun OverviewRace.labels(): Pair<String, String> {
     return if (sameWeek) {
         deviceTime.date.format(dateFormatEEE) to timeString
     } else {
-        "${deviceTime.dayOfMonth} ${deviceTime.date.format(dateFormatMMM)}" to timeString
+        "${deviceTime.day.ordinalAbbreviation} ${deviceTime.date.format(dateFormatMMM)}" to timeString
     }
 }

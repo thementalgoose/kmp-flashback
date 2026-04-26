@@ -28,6 +28,7 @@ import tmg.flashback.widgets.upnext.presentation.components.WidgetTitle
 import tmg.flashback.widgets.upnext.presentation.preview.fakeOverviewRace
 import tmg.flashback.widgets.upnext.presentation.preview.fakeSprintWeekend
 import tmg.flashback.widgets.upnext.presentation.style.WidgetThemePreview
+import tmg.flashback.widgets.upnext.presentation.style.marginNSmall
 import tmg.flashback.widgets.upnext.presentation.style.marginSmall
 import tmg.flashback.widgets.upnext.presentation.style.marginXSmall
 import tmg.flashback.widgets.upnext.presentation.style.radius
@@ -62,8 +63,10 @@ internal fun RaceOverview(
             modifier = GlanceModifier
                 .fillMaxWidth()
                 .padding(
-                    vertical = marginSmall,
-                    horizontal = marginSmall,
+                    top = marginNSmall,
+                    start = marginNSmall,
+                    end = marginNSmall,
+                    bottom = marginSmall,
                 )
         )
         DayEvents(
