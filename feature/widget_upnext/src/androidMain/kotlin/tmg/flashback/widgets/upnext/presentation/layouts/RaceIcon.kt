@@ -45,10 +45,12 @@ internal fun RaceIcon(
             val (date, time) = overviewRace.labels()
             TextBody1(
                 text = date,
+                maxLines = 1,
                 weight = FontWeight.Bold
             )
             TextBody2(
-                text = time
+                text = time,
+                maxLines = 1
             )
         }
     }

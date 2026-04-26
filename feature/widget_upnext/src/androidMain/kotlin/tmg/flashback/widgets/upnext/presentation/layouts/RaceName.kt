@@ -20,6 +20,7 @@ import tmg.flashback.widgets.upnext.presentation.preview.fakeOverviewRace
 import tmg.flashback.widgets.upnext.presentation.preview.fakeSprintWeekend
 import tmg.flashback.widgets.upnext.presentation.style.WidgetThemePreview
 import tmg.flashback.widgets.upnext.presentation.style.marginMedium
+import tmg.flashback.widgets.upnext.presentation.style.marginNSmall
 import tmg.flashback.widgets.upnext.presentation.style.marginSmall
 import tmg.flashback.widgets.upnext.presentation.style.marginXSmall
 import tmg.flashback.widgets.upnext.presentation.style.text.TextFeature
@@ -43,9 +44,9 @@ internal fun RaceName(
             modifier = GlanceModifier
                 .fillMaxWidth()
                 .padding(
-                    top = marginSmall,
-                    end = marginSmall,
-                    start = marginSmall
+                    top = marginNSmall,
+                    start = marginNSmall,
+                    end = marginNSmall
                 )
         )
         val (date, time) = overviewRace.labels()
