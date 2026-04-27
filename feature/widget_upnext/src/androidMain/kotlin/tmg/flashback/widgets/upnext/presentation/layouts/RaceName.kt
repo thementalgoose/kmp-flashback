@@ -29,6 +29,7 @@ import tmg.flashback.widgets.upnext.utils.labels
 internal const val raceNameWidth = 200
 internal const val raceNameHeight = 80
 private const val raceNameHeightBreakpoint = 105
+private const val raceNameWidthBreakpoint = 280
 
 @Composable
 internal fun RaceName(
@@ -49,7 +50,7 @@ internal fun RaceName(
                     end = marginNSmall
                 )
         )
-        val (date, time) = overviewRace.labels()
+        val (date, time) = overviewRace.labels(shortWeek = localSize.width < raceNameWidthBreakpoint.dp)
         Row(
             modifier = GlanceModifier
                 .fillMaxHeight(),

@@ -42,7 +42,7 @@ internal fun RaceIcon(
             countryISO = overviewRace.countryISO,
         )
         if (localSize.height >= raceIconHeightBreakpoint.dp) {
-            val (date, time) = overviewRace.labels()
+            val (date, time) = overviewRace.labels(shortWeek = true)
             TextBody1(
                 text = date,
                 maxLines = 1,

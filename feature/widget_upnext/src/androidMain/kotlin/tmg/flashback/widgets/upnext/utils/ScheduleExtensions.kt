@@ -4,6 +4,7 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.format
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.infrastructure.datetime.dateFormatEEE
+import tmg.flashback.infrastructure.datetime.dateFormatEEEE
 import tmg.flashback.infrastructure.datetime.dateFormatMMM
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.startOfWeek
@@ -15,7 +16,7 @@ internal fun Schedule.labels(): Pair<String, String> {
 
     val sameWeek = LocalDate.now().startOfWeek() == deviceTime.date.startOfWeek()
     return if (sameWeek) {
-        deviceTime.date.format(dateFormatEEE) to deviceTime.time.format(timeFormatHHmm)
+        deviceTime.date.format(dateFormatEEEE) to deviceTime.time.format(timeFormatHHmm)
     } else {
         "${deviceTime.day.ordinalAbbreviation} ${deviceTime.date.format(dateFormatMMM)}" to deviceTime.time.format(timeFormatHHmm)
     }
@@ -24,7 +25,7 @@ internal fun Schedule.labels(): Pair<String, String> {
 internal fun LocalDate.weekRelativeLabel(): String {
     val sameWeek = LocalDate.now().startOfWeek() == this.startOfWeek()
     return if (sameWeek) {
-        this.format(dateFormatEEE)
+        this.format(dateFormatEEEE)
     } else {
         "${this.day.ordinalAbbreviation} ${this.format(dateFormatMMM)}"
     }
