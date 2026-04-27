@@ -206,7 +206,7 @@ fun WeekendScreenTab(
                                         Image(
                                             painter = it.painter,
                                             modifier = Modifier.fillMaxSize(),
-                                            contentScale = ContentScale.FillBounds,
+                                            contentScale = ContentScale.Crop,
                                             contentDescription = null
                                         )
                                     }
