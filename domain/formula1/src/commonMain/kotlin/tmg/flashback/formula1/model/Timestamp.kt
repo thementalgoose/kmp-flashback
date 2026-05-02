@@ -46,8 +46,9 @@ data class Timestamp(
     val isLive: Boolean
         get() {
             val now = LocalDateTime.now()
-            val plusHour = now.plus(1, DateTimeUnit.HOUR)
-            return deviceLocalDateTime in now..plusHour
+            val lowerBound = deviceLocalDateTime.plus(-5, DateTimeUnit.MINUTE)
+            val upperBound = deviceLocalDateTime.plus(1, DateTimeUnit.HOUR)
+            return now in lowerBound..upperBound
         }
 
     /**
