@@ -1,6 +1,7 @@
 package tmg.flashback.feature.season.presentation.calendar.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -68,6 +69,7 @@ import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextSection
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.flag.Flag
+import tmg.flashback.ui.components.indicators.Live
 import tmg.flashback.ui.components.now.Now
 
 private val countryBadgeSize = 32.dp
@@ -322,7 +324,8 @@ private fun DateCard(
     showWeather: Boolean,
     modifier: Modifier = Modifier
 ) {
-    val alpha = if (schedule.timestamp.isInPast) pastScheduleAlpha else 1f
+    val isLive = schedule.timestamp.isLive
+    val alpha = if (schedule.timestamp.isInPast && !isLive) pastScheduleAlpha else 1f
 
     val time = schedule.timestamp.deviceLocalDateTime.time.format(timeFormatHHmm)
     val contentDescription = when (showNotificationBadge) {
@@ -335,6 +338,7 @@ private fun DateCard(
         .width(IntrinsicSize.Max)
         .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
         .background(AppTheme.colors.surfaceContainer5)
+        .border(2.dp, if (isLive) AppTheme.colors.f1EventLive else Color.Transparent, RoundedCornerShape(AppTheme.dimens.radiusSmall))
         .alpha(alpha)
         .padding(
             bottom = AppTheme.dimens.nsmall,
@@ -350,6 +354,10 @@ private fun DateCard(
             ),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            if (isLive) {
+                Live(size = 16.dp)
+                Spacer(Modifier.width(AppTheme.dimens.xsmall))
+            }
             TextBody1(
                 textAlign = TextAlign.Center,
                 text = schedule.label,
