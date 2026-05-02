@@ -52,6 +52,14 @@ private val ScheduleBackground
 private val ScheduleText
     get() = GlanceTheme.colors.onPrimaryContainer
 
+@get:Composable
+private val SchedulePastBackground
+    get() = GlanceTheme.colors.widgetBackground
+
+@get:Composable
+private val SchedulePastText
+    get() = GlanceTheme.colors.inversePrimary
+
 @Composable
 internal fun RaceSchedule(
     overviewRace: OverviewRace,
@@ -88,6 +96,10 @@ internal fun RaceSchedule(
             for ((date, scheduleList) in schedules) {
                 item {
                     TextBody2(
+                        color = when (scheduleList.all { it.timestamp.isInPast }) {
+                            false -> ScheduleText
+                            true -> SchedulePastText
+                        },
                         text = date.weekRelativeLabel(),
                         modifier = GlanceModifier
                             .padding(
@@ -140,7 +152,10 @@ private fun Schedule(
         val (label, time) = schedule.labels()
         if (label.lowercase() == "race") {
             TextBody1(
-                color = ScheduleText,
+                color = when (schedule.timestamp.isInPast) {
+                    false -> ScheduleText
+                    true -> SchedulePastText
+                },
                 text = schedule.label,
                 weight = FontWeight.Bold,
                 maxLines = 2,
@@ -149,7 +164,10 @@ private fun Schedule(
             )
         } else {
             TextBody2(
-                color = ScheduleText,
+                color = when (schedule.timestamp.isInPast) {
+                    false -> ScheduleText
+                    true -> SchedulePastText
+                },
                 text = schedule.label,
                 weight = FontWeight.Bold,
                 maxLines = 2,
@@ -158,7 +176,10 @@ private fun Schedule(
             )
         }
         TextBody2(
-            color = ScheduleText,
+            color = when (schedule.timestamp.isInPast) {
+                false -> ScheduleText
+                true -> SchedulePastText
+            },
             text = time,
             textAlign = TextAlign.End,
         )
@@ -167,6 +188,7 @@ private fun Schedule(
 
 @OptIn(ExperimentalGlancePreviewApi::class)
 @Preview(widthDp = raceScheduleWidth, heightDp = raceScheduleHeight)
+@Preview(widthDp = raceScheduleWidth, heightDp = raceScheduleHeight * 2)
 @Composable
 private fun PreviewOverview() {
     WidgetThemePreview {
@@ -178,6 +200,7 @@ private fun PreviewOverview() {
 
 @OptIn(ExperimentalGlancePreviewApi::class)
 @Preview(widthDp = raceScheduleWidth, heightDp = raceScheduleHeight)
+@Preview(widthDp = raceScheduleWidth, heightDp = raceScheduleHeight * 2)
 @Composable
 private fun PreviewSprint() {
     WidgetThemePreview {

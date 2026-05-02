@@ -48,6 +48,14 @@ private val ScheduleBackground
 private val ScheduleText
     get() = GlanceTheme.colors.onPrimaryContainer
 
+@get:Composable
+private val SchedulePastBackground
+    get() = GlanceTheme.colors.widgetBackground
+
+@get:Composable
+private val SchedulePastText
+    get() = GlanceTheme.colors.inversePrimary
+
 @Composable
 internal fun RaceOverview(
     overviewRace: OverviewRace,
@@ -123,7 +131,11 @@ private fun Day(
             .fillMaxHeight()
     ) {
         TextBody2(
-            text = date.weekRelativeLabel()
+            text = date.weekRelativeLabel(),
+            color = when (schedules.all { it.timestamp.isInPast }) {
+                false -> ScheduleText
+                true -> SchedulePastText
+            }
         )
         schedules.forEach { schedule ->
             Box(
@@ -135,7 +147,10 @@ private fun Day(
                 Box(
                     modifier = GlanceModifier
                         .fillMaxSize()
-                        .background(ScheduleBackground)
+                        .background(when (schedule.timestamp.isInPast) {
+                            false -> ScheduleBackground
+                            true -> SchedulePastBackground
+                        })
                         .cornerRadius(radius),
                 ) {
                     Column(
@@ -147,13 +162,19 @@ private fun Day(
                     ) {
                         val (_, time) = schedule.labels()
                         TextBody2(
-                            color = ScheduleText,
+                            color = when (schedule.timestamp.isInPast) {
+                                false -> ScheduleText
+                                true -> SchedulePastText
+                            },
                             maxLines = 1,
                             text = schedule.label,
                             weight = FontWeight.Bold
                         )
                         TextBody2(
-                            color = ScheduleText,
+                            color = when (schedule.timestamp.isInPast) {
+                                false -> ScheduleText
+                                true -> SchedulePastText
+                            },
                             text = time
                         )
                     }
