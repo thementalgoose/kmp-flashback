@@ -1,10 +1,15 @@
 package tmg.flashback.feature.weekend.presentation.data.info
 
+import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
+import kotlinx.datetime.minus
+import kotlinx.datetime.plus
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.preview.preview
+import tmg.flashback.infrastructure.datetime.now
+import tmg.flashback.infrastructure.datetime.plusMinutes
 
 data class InfoModel(
     val season: Int,
@@ -38,15 +43,15 @@ fun InfoModel.Companion.preview() = InfoModel(
     wikipediaUrl = "wiki",
     days = listOf(
         LocalDate(2020, 1, 1) to listOf(
-            Schedule.preview("FP1") to false,
-            Schedule.preview("FP2") to false
+            Schedule.preview("FP1", date = LocalDate.now().minus(1, DateTimeUnit.DAY), time = LocalTime.now().plusMinutes(-120)) to false,
+            Schedule.preview("FP2", date = LocalDate.now().minus(1, DateTimeUnit.DAY)) to false
         ),
         LocalDate(2020, 1, 2) to listOf(
-            Schedule.preview("FP3") to false,
+            Schedule.preview("FP3", time = LocalTime.now().plusMinutes(-120)) to false,
             Schedule.preview("Qualifying") to false
         ),
         LocalDate(2020, 1, 3) to listOf(
-            Schedule.preview("Race") to false,
+            Schedule.preview("Race", date = LocalDate.now().plus(1, DateTimeUnit.DAY)) to false,
         )
     ),
     aerialUrl = null,

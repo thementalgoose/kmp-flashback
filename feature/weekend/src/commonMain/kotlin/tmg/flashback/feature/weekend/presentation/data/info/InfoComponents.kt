@@ -2,6 +2,7 @@ package tmg.flashback.feature.weekend.presentation.data.info
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -27,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -80,6 +82,7 @@ import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.edgeFade
 import tmg.flashback.ui.components.flag.Flag
+import tmg.flashback.ui.components.indicators.Live
 import kotlin.math.roundToInt
 
 private val trackSize: Dp = 200.dp
@@ -284,9 +287,11 @@ private fun EventItem(
     modifier: Modifier = Modifier
 ) {
     val timestamp = item.timestamp.deviceLocalDateTime.time.format(timeFormatHHmm)
+    val isLive = item.timestamp.isLive
     Column(modifier = modifier
         .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
         .background(AppTheme.colors.surfaceContainer3)
+        .border(2.dp, if (isLive) AppTheme.colors.f1EventLive else Color.Transparent, RoundedCornerShape(AppTheme.dimens.radiusSmall))
         .padding(
             vertical = AppTheme.dimens.xsmall,
             horizontal = AppTheme.dimens.nsmall
@@ -306,7 +311,13 @@ private fun EventItem(
                     vertical = AppTheme.dimens.small,
                 )
         ) {
-            Row {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                if (isLive) {
+                    Live(size = 16.dp)
+                    Spacer(Modifier.width(AppTheme.dimens.xsmall))
+                }
                 TextBody1(
                     text = item.label
                 )

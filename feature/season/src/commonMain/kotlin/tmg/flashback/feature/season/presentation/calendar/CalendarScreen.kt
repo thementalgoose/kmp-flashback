@@ -58,6 +58,7 @@ import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.feature.highlights.presentation.HighlightBanner
 import tmg.flashback.feature.notifications.presentation.NotificationPrompt
+import tmg.flashback.feature.season.presentation.calendar.components.CollapsableList
 import tmg.flashback.feature.season.presentation.calendar.components.RaceWeekCard
 import tmg.flashback.feature.season.presentation.calendar.components.Round
 import tmg.flashback.feature.season.presentation.shared.device_time.DeviceTimePrompt
@@ -87,7 +88,6 @@ import tmg.flashback.ui.navigation.MasterDetailPaneState
 import tmg.flashback.ui.navigation.appBarMaximumHeight
 
 private const val listAlpha = 0.6f
-private val expandIcon = 20.dp
 
 @Composable
 fun CalendarScreen(
@@ -259,84 +259,6 @@ fun CalendarScreen(
 }
 
 @Composable
-private fun CollapsableList(
-    model: CalendarItem.GroupedCompletedRaces,
-    itemClicked: (CalendarItem.GroupedCompletedRaces) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val contentDescription = stringResource(resource = string.ab_collapsed_section,
-        model.first.raceName,
-        model.first.round,
-        model.last?.raceName ?: model.first.raceName,
-        model.last?.round ?: model.first.round
-    )
-    Row(modifier = modifier
-        .clickable { itemClicked(model) }
-        .semantics(mergeDescendants = true) { }
-        .clearAndSetSemantics { this.stateDescription = contentDescription }
-        .padding(
-            start = AppTheme.dimens.xsmall,
-            end = AppTheme.dimens.small,
-            top = AppTheme.dimens.xsmall,
-            bottom = AppTheme.dimens.xsmall
-        ),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Expand()
-
-        Row(
-            modifier = modifier
-                .weight(1f)
-                .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
-                .padding(
-                    horizontal = AppTheme.dimens.small,
-                    vertical = AppTheme.dimens.small
-                ),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-
-            Column(Modifier.weight(1f)) {
-                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                    Flag(
-                        iso = model.first.countryISO,
-                        nationality = null,
-                        modifier = Modifier.size(20.dp)
-                    )
-                    TextBody1(
-                        modifier = Modifier
-                            .padding(horizontal = AppTheme.dimens.small)
-                            .weight(1f),
-                        bold = true,
-                        text = model.first.raceName
-                    )
-                    Round(model.first.round)
-                }
-                if (model.last != null) {
-                    Spacer(Modifier.height(8.dp))
-                    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                        Flag(
-                            iso = model.last.countryISO,
-                            nationality = null,
-                            modifier = Modifier.size(20.dp)
-                        )
-                        TextBody1(
-                            modifier = Modifier
-                                .padding(horizontal = AppTheme.dimens.small)
-                                .weight(1f),
-                            bold = true,
-                            text = model.last.raceName
-                        )
-                        Round(model.last.round)
-                    }
-                }
-            }
-        }
-
-        Expand()
-    }
-}
-
-@Composable
 private fun EmptyWeek(
     model: CalendarItem.EmptyWeek,
     modifier: Modifier = Modifier
@@ -360,27 +282,6 @@ private fun EmptyWeek(
                 .padding(horizontal = AppTheme.dimens.medium)
                 .background(AppTheme.colors.surfaceContainer5)
                 .alpha(0.3f)
-        )
-    }
-}
-
-@Composable
-private fun Expand(
-    modifier: Modifier = Modifier
-) {
-    Column(modifier = modifier.fillMaxHeight()) {
-        Icon(
-            painter = painterResource(resource = Res.drawable.ic_collapsible_icon_top),
-            contentDescription = null,
-            modifier = Modifier.size(expandIcon),
-            tint = AppTheme.colors.onSurfaceVariant
-        )
-        Spacer(Modifier.height(8.dp))
-        Icon(
-            painter = painterResource(resource = Res.drawable.ic_collapsible_icon_bottom),
-            contentDescription = null,
-            modifier = Modifier.size(expandIcon),
-            tint = AppTheme.colors.onSurfaceVariant
         )
     }
 }
