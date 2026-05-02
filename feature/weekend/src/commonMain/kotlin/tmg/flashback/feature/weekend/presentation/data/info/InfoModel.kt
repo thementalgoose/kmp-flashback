@@ -34,10 +34,10 @@ data class InfoModel(
     companion object
 }
 
-fun InfoModel.Companion.preview() {
+fun InfoModel.Companion.preview(): InfoModel {
     val nowDate = LocalDate.now()
     val nowTime = LocalTime.now()
-    InfoModel(
+    return InfoModel(
         season = 2020,
         round = 1,
         raceName = "British Grand Prix",
