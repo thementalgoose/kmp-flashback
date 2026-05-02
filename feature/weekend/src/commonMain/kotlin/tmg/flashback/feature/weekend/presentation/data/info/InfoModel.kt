@@ -27,34 +27,42 @@ data class InfoModel(
     val temperatureMetric: Boolean,
     val windspeedMetric: Boolean
 ) {
+    val isUpcoming by lazy {
+        LocalDate.now() <= date
+    }
+
     companion object
 }
 
-fun InfoModel.Companion.preview() = InfoModel(
-    season = 2020,
-    round = 1,
-    raceName = "British Grand Prix",
-    date = LocalDate(2020, 1, 1),
-    time = LocalTime(12, 0),
-    circuit = Circuit.preview(),
-    laps = "100",
-    cancelled = false,
-    youtubeUrl = "youtube",
-    wikipediaUrl = "wiki",
-    days = listOf(
-        LocalDate(2020, 1, 1) to listOf(
-            Schedule.preview("FP1", date = LocalDate.now().minus(1, DateTimeUnit.DAY), time = LocalTime.now().plusMinutes(-120)) to false,
-            Schedule.preview("FP2", date = LocalDate.now().minus(1, DateTimeUnit.DAY)) to false
+fun InfoModel.Companion.preview(): InfoModel {
+    val nowDate = LocalDate.now()
+    val nowTime = LocalTime.now()
+    return InfoModel(
+        season = 2020,
+        round = 1,
+        raceName = "British Grand Prix",
+        date = LocalDate(2020, 1, 1),
+        time = LocalTime(12, 0),
+        circuit = Circuit.preview(),
+        laps = "100",
+        cancelled = false,
+        youtubeUrl = "youtube",
+        wikipediaUrl = "wiki",
+        days = listOf(
+            nowDate.minus(1, DateTimeUnit.DAY) to listOf(
+                Schedule.preview("FP1", date = nowDate.minus(1, DateTimeUnit.DAY), time = nowTime.plusMinutes(-120)) to false,
+                Schedule.preview("FP2", date = nowDate.minus(1, DateTimeUnit.DAY)) to false
+            ),
+            nowDate to listOf(
+                Schedule.preview("FP3", time = nowTime.plusMinutes(-120)) to false,
+                Schedule.preview("Qualifying") to false
+            ),
+            nowDate.plus(1, DateTimeUnit.DAY) to listOf(
+                Schedule.preview("Race", date = nowDate.plus(1, DateTimeUnit.DAY)) to false,
+            )
         ),
-        LocalDate(2020, 1, 2) to listOf(
-            Schedule.preview("FP3", time = LocalTime.now().plusMinutes(-120)) to false,
-            Schedule.preview("Qualifying") to false
-        ),
-        LocalDate(2020, 1, 3) to listOf(
-            Schedule.preview("Race", date = LocalDate.now().plus(1, DateTimeUnit.DAY)) to false,
-        )
-    ),
-    aerialUrl = null,
-    temperatureMetric = true,
-    windspeedMetric = true
-)
+        aerialUrl = null,
+        temperatureMetric = true,
+        windspeedMetric = true
+    )
+}
