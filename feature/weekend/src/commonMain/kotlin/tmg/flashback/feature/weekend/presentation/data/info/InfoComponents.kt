@@ -228,6 +228,8 @@ internal fun Schedule(
             state = scrollState,
             content = {
                 items(model.days) { (date, list) ->
+                    val isRoundUpcoming = model.isUpcoming
+                    val allExpired = list.all { it.first.timestamp.isInPast && !it.first.timestamp.isLive }
                     Column(
                         modifier = modifier
                             .fillMaxWidth()
@@ -237,13 +239,17 @@ internal fun Schedule(
                                 start = AppTheme.dimens.medium
                             )
                     ) {
-                        Title(date)
+                        Title(
+                            date = date,
+                            modifier = Modifier.alpha(if (allExpired && isRoundUpcoming) 0.6f else 1f)
+                        )
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
                         ) {
                             list.forEach { (schedule, isNotificationSet) ->
                                 EventItem(
                                     item = schedule,
+                                    isRoundUpcoming = isRoundUpcoming,
                                     temperatureMetric = model.temperatureMetric,
                                     windspeedMetric = model.windspeedMetric,
                                     showNotificationBell = isNotificationSet
@@ -281,16 +287,19 @@ private fun Title(
 @Composable
 private fun EventItem(
     item: Schedule,
+    isRoundUpcoming: Boolean,
     temperatureMetric: Boolean,
     windspeedMetric: Boolean,
     showNotificationBell: Boolean,
     modifier: Modifier = Modifier
 ) {
     val timestamp = item.timestamp.deviceLocalDateTime.time.format(timeFormatHHmm)
+    val isInPast = item.timestamp.isInPast
     val isLive = item.timestamp.isLive
     Column(modifier = modifier
         .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
         .background(AppTheme.colors.surfaceContainer3)
+        .alpha(if (isInPast && !isLive && isRoundUpcoming) 0.6f else 1f)
         .border(2.dp, if (isLive) AppTheme.colors.f1EventLive else Color.Transparent, RoundedCornerShape(AppTheme.dimens.radiusSmall))
         .padding(
             vertical = AppTheme.dimens.xsmall,

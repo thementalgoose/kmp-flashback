@@ -27,6 +27,10 @@ data class InfoModel(
     val temperatureMetric: Boolean,
     val windspeedMetric: Boolean
 ) {
+    val isUpcoming by lazy {
+        LocalDate.now() <= date
+    }
+
     companion object
 }
 
