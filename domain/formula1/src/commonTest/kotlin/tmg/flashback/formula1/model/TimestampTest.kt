@@ -209,9 +209,9 @@ internal class TimestampTest {
     //region isLive
 
     @Test
-    fun `is live returns false when date before now`() {
+    fun `is live returns false when event is in the future`() {
         val date = LocalDate.now()
-        val time = LocalTime.now().minus(60)
+        val time = LocalTime.now().plus(600)
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
@@ -220,7 +220,7 @@ internal class TimestampTest {
     }
 
     @Test
-    fun `is live returns true when date is now`() {
+    fun `is live returns true when event is now`() {
         val date = LocalDate.now()
         val time = LocalTime.now().plus(1)
         val zone = TimeZone.UTC
@@ -231,9 +231,9 @@ internal class TimestampTest {
     }
 
     @Test
-    fun `is live returns true when date is within 1 hour of now`() {
+    fun `is live returns true when event is less than 1 hour ago`() {
         val date = LocalDate.now()
-        val time = LocalTime.now().plus(1800) // 30 minutes
+        val time = LocalTime.now().minus(3000) // 50 minutes
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
@@ -242,9 +242,9 @@ internal class TimestampTest {
     }
 
     @Test
-    fun `is live returns false when date is more than 1 hour in future`() {
+    fun `is live returns false when event is more than 1 hour ago`() {
         val date = LocalDate.now()
-        val time = LocalTime.now().plus(7200) // 2 hours
+        val time = LocalTime.now().minus(7200) // 2 hours
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
