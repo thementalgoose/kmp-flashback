@@ -1,7 +1,10 @@
 package tmg.flashback.formula1.preview
 
+import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
+import kotlinx.datetime.minus
+import kotlinx.datetime.plus
 import tmg.flashback.formula1.enums.RaceStatus
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.CircuitHistoryRace
@@ -23,6 +26,7 @@ import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.SeasonDriverStandings
 import tmg.flashback.formula1.model.SprintRaceResult
 import tmg.flashback.infrastructure.datetime.now
+import tmg.flashback.infrastructure.datetime.plusMinutes
 
 fun OverviewRace.Companion.preview(
     season: Int = 2025,
@@ -47,11 +51,11 @@ fun OverviewRace.Companion.preview(
     country = "United Kingdom",
     cancelled = cancelled,
     schedule = listOf(
-        Schedule.preview("FP1"),
-        Schedule.preview("FP2"),
-        Schedule.preview("FP3"),
+        Schedule.preview("FP1", date = LocalDate.now().minus(1, DateTimeUnit.DAY), time = LocalTime.now().plusMinutes(-120)),
+        Schedule.preview("FP2", date = LocalDate.now().minus(1, DateTimeUnit.DAY)),
+        Schedule.preview("FP3", time = LocalTime.now().plusMinutes(-120)),
         Schedule.preview("Qualifying"),
-        Schedule.preview("Race")
+        Schedule.preview("Race", date = LocalDate.now().plus(1, DateTimeUnit.DAY))
     )
 )
 
@@ -171,10 +175,14 @@ fun SprintRaceResult.Companion.preview() = SprintRaceResult(
     status = RaceStatus.FINISHED,
 )
 
-fun Schedule.Companion.preview(label: String) = Schedule(
+fun Schedule.Companion.preview(
+    label: String,
+    date: LocalDate = LocalDate.now(),
+    time: LocalTime = LocalTime.now()
+) = Schedule(
     label = label,
-    date = LocalDate.now(),
-    time = LocalTime.now(),
+    date = date,
+    time = time,
     weather = null
 )
 
