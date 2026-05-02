@@ -206,6 +206,53 @@ internal class TimestampTest {
 
     //endregion
 
+    //region isLive
+
+    @Test
+    fun `is live returns false when date before now`() {
+        val date = LocalDate.now()
+        val time = LocalTime.now().minus(60)
+        val zone = TimeZone.UTC
+
+        val sut = Timestamp(date, time, zone)
+
+        assertFalse(sut.isLive)
+    }
+
+    @Test
+    fun `is live returns true when date is now`() {
+        val date = LocalDate.now()
+        val time = LocalTime.now().plus(1)
+        val zone = TimeZone.UTC
+
+        val sut = Timestamp(date, time, zone)
+
+        assertTrue(sut.isLive)
+    }
+
+    @Test
+    fun `is live returns true when date is within 1 hour of now`() {
+        val date = LocalDate.now()
+        val time = LocalTime.now().plus(1800) // 30 minutes
+        val zone = TimeZone.UTC
+
+        val sut = Timestamp(date, time, zone)
+
+        assertTrue(sut.isLive)
+    }
+
+    @Test
+    fun `is live returns false when date is more than 1 hour in future`() {
+        val date = LocalDate.now()
+        val time = LocalTime.now().plus(7200) // 2 hours
+        val zone = TimeZone.UTC
+
+        val sut = Timestamp(date, time, zone)
+
+        assertFalse(sut.isLive)
+    }
+
+    //endregion
 
     private fun LocalDateTime.Companion.now(): LocalDateTime {
         return Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())

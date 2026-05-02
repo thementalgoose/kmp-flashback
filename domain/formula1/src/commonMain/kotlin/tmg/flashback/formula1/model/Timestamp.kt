@@ -1,5 +1,6 @@
 package tmg.flashback.formula1.model
 
+import kotlinx.datetime.DateTimeUnit
 import kotlin.time.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
@@ -14,6 +15,7 @@ import kotlinx.datetime.format.char
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 import tmg.flashback.infrastructure.datetime.now
+import tmg.flashback.infrastructure.datetime.plus
 import kotlin.time.Duration.Companion.seconds
 
 data class Timestamp(
@@ -36,6 +38,16 @@ data class Timestamp(
     val isInPast: Boolean
         get() {
             return deviceLocalDateTime < LocalDateTime.now()
+        }
+
+    /**
+     * Is the timestamp considered live
+     */
+    val isLive: Boolean
+        get() {
+            val now = LocalDateTime.now()
+            val plusHour = now.plus(1, DateTimeUnit.HOUR)
+            return deviceLocalDateTime in now..plusHour
         }
 
     /**
