@@ -132,7 +132,7 @@ private fun Day(
     ) {
         TextBody2(
             text = date.weekRelativeLabel(),
-            color = when (schedules.all { it.timestamp.isInPast }) {
+            color = when (schedules.all { it.timestamp.isInPast && !it.timestamp.isLive }) {
                 false -> ScheduleText
                 true -> SchedulePastText
             }
@@ -147,7 +147,7 @@ private fun Day(
                 Box(
                     modifier = GlanceModifier
                         .fillMaxSize()
-                        .background(when (schedule.timestamp.isInPast) {
+                        .background(when (schedule.timestamp.isInPast && !schedule.timestamp.isLive) {
                             false -> ScheduleBackground
                             true -> SchedulePastBackground
                         })
@@ -162,7 +162,7 @@ private fun Day(
                     ) {
                         val (_, time) = schedule.labels()
                         TextBody2(
-                            color = when (schedule.timestamp.isInPast) {
+                            color = when (schedule.timestamp.isInPast && !schedule.timestamp.isLive) {
                                 false -> ScheduleText
                                 true -> SchedulePastText
                             },
@@ -171,7 +171,7 @@ private fun Day(
                             weight = FontWeight.Bold
                         )
                         TextBody2(
-                            color = when (schedule.timestamp.isInPast) {
+                            color = when (schedule.timestamp.isInPast && !schedule.timestamp.isLive) {
                                 false -> ScheduleText
                                 true -> SchedulePastText
                             },

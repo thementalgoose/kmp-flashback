@@ -96,7 +96,7 @@ internal fun RaceSchedule(
             for ((date, scheduleList) in schedules) {
                 item {
                     TextBody2(
-                        color = when (scheduleList.all { it.timestamp.isInPast }) {
+                        color = when (scheduleList.all { it.timestamp.isInPast && !it.timestamp.isLive }) {
                             false -> ScheduleText
                             true -> SchedulePastText
                         },
@@ -152,7 +152,7 @@ private fun Schedule(
         val (label, time) = schedule.labels()
         if (label.lowercase() == "race") {
             TextBody1(
-                color = when (schedule.timestamp.isInPast) {
+                color = when (schedule.timestamp.isInPast && !schedule.timestamp.isLive) {
                     false -> ScheduleText
                     true -> SchedulePastText
                 },
@@ -164,7 +164,7 @@ private fun Schedule(
             )
         } else {
             TextBody2(
-                color = when (schedule.timestamp.isInPast) {
+                color = when (schedule.timestamp.isInPast && !schedule.timestamp.isLive) {
                     false -> ScheduleText
                     true -> SchedulePastText
                 },
@@ -176,7 +176,7 @@ private fun Schedule(
             )
         }
         TextBody2(
-            color = when (schedule.timestamp.isInPast) {
+            color = when (schedule.timestamp.isInPast && !schedule.timestamp.isLive) {
                 false -> ScheduleText
                 true -> SchedulePastText
             },
