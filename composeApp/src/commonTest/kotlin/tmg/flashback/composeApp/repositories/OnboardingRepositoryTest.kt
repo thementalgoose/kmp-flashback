@@ -9,7 +9,7 @@ import tmg.flashback.preferences.manager.PreferenceManager
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-internal class ContentSyncRepositoryTest {
+internal class OnboardingRepositoryTest {
 
     private lateinit var underTest: OnboardingRepositoryImpl
 
