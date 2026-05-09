@@ -255,9 +255,9 @@ private fun NavigationItem(
             contentDescription = null
         )
         Spacer(Modifier.width(AppTheme.dimens.medium))
-        TextTitle(
+        TextBody1(
             text = label,
-            bold = true,
+            bold = isSelected,
             modifier = Modifier
                 .weight(1f)
                 .align(Alignment.CenterVertically)
