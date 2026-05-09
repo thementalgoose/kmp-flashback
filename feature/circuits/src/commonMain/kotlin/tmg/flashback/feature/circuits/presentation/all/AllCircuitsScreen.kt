@@ -114,7 +114,7 @@ fun AllCircuitsScreen(
         onRefresh = refresh
     ) {
         LazyVerticalGrid(
-            columns = GridCells.Adaptive(minSize = 400.dp),
+            columns = GridCells.Adaptive(300.dp),
             contentPadding = paddingValues,
             modifier = Modifier.fillMaxSize()
         ) {
