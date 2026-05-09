@@ -108,7 +108,10 @@ class ConstructorStatsViewModel(
 
     private fun ConstructorHistorySeason?.getSeasonRaces(): ConstructorStatsData.Season {
         return ConstructorStatsData.Season(
-            drivers = this?.drivers?.values?.toList() ?: emptyList()
+            drivers = this?.drivers?.values
+                ?.toList()
+                ?.sortedBy { it.championshipStanding }
+                ?: emptyList()
         )
     }
 
