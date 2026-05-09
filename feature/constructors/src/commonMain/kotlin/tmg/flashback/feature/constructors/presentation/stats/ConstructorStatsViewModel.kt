@@ -98,8 +98,8 @@ class ConstructorStatsViewModel(
                     ConstructorStatSeasonOverview(
                         season = model.season,
                         drivers = model.drivers.values
-                            .sortedByDescending { it.points }
-                            .associate { it.championshipStanding.takeIf { !model.isInProgress } to it.driver.driver },
+                            .sortedBy { it.championshipStanding }
+                            .associate { it.championshipStanding to it.driver.driver },
                         standing = model.championshipStanding.takeIf { !model.isInProgress }
                     )
                 }
@@ -108,7 +108,10 @@ class ConstructorStatsViewModel(
 
     private fun ConstructorHistorySeason?.getSeasonRaces(): ConstructorStatsData.Season {
         return ConstructorStatsData.Season(
-            drivers = this?.drivers?.values?.toList() ?: emptyList()
+            drivers = this?.drivers?.values
+                ?.toList()
+                ?.sortedBy { it.championshipStanding }
+                ?: emptyList()
         )
     }
 
