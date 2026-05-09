@@ -59,6 +59,8 @@ import tmg.flashback.composeApp.presentation.settings.theme.SettingsThemeViewMod
 import tmg.flashback.composeApp.presentation.settings.weather.SettingsWeatherViewModel
 import tmg.flashback.composeApp.presentation.settings.widgets.SettingsWidgetsViewModel
 import tmg.flashback.composeApp.presentation.sync.SyncViewModel
+import tmg.flashback.composeApp.repositories.NavRepository
+import tmg.flashback.composeApp.repositories.NavRepositoryImpl
 import tmg.flashback.composeApp.repositories.OnboardingRepository
 import tmg.flashback.composeApp.repositories.OnboardingRepositoryImpl
 import tmg.flashback.style.di.presentationStyleModule
@@ -128,9 +130,10 @@ internal fun module() = module {
 
     single { AppStartup(get(), get(), get(), get(),get(), get(), get(), get()) }
 
-    viewModel { AppNavigationViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { AppNavigationViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
 
     single<OnboardingRepository> { OnboardingRepositoryImpl(get()) }
+    single<NavRepository> { NavRepositoryImpl(get()) }
 
     single<StoreFirebaseInstallationIdUseCase> { StoreFirebaseInstallationIdUseCaseImpl(get(), get()) }
     single<RequiresSyncUseCase> { RequiresSyncUseCaseImpl(get(), get()) }

@@ -15,6 +15,7 @@ object RemoteConfigDefaults {
         "easteregg_summer" to false,
         "easteregg_ukraine" to false,
         "email" to "thementalgoose@gmail.com",
+        "nav" to emptyNav(),
         "privacy_policy_url" to "https://flashback.pages.dev/privacy-policy.html",
         "reaction_game" to false,
         "rss" to false,
@@ -23,6 +24,12 @@ object RemoteConfigDefaults {
         "soft_upgrade" to false,
         "supported_seasons" to generateSeasonArray(),
     )
+
+    private fun emptyNav(): String = """
+        {
+           "extraLinks": []
+        }
+    """.trimIndent()
 
     private fun rssSupportedSources(): String = """{
         "sources": [
