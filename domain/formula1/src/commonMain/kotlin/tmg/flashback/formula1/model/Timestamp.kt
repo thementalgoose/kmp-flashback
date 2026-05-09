@@ -53,24 +53,21 @@ data class Timestamp(
             val buildUpBound = deviceLocalDateTime.plus(-30, DateTimeUnit.MINUTE)
             val liveBound = deviceLocalDateTime.plus(-2, DateTimeUnit.MINUTE)
             val expiredBound = deviceLocalDateTime.plus(1, DateTimeUnit.HOUR)
-            return when {
-                now < buildUpBound -> TimestampState.UPCOMING
+            val state = when {
                 now in buildUpBound..liveBound -> TimestampState.BUILD_UP
                 now in liveBound..expiredBound -> TimestampState.LIVE
-                else -> TimestampState.EXPIRED
+                now > expiredBound -> TimestampState.EXPIRED
+                else -> TimestampState.UPCOMING
             }
+            println("> $now\n> $buildUpBound\n> $liveBound\n> $expiredBound\n <<<< $state")
+            return state
         }
 
     /**
      * Is the timestamp considered live
      */
     val isLive: Boolean
-        get() {
-            val now = LocalDateTime.now()
-            val lowerBound = deviceLocalDateTime.plus(-2, DateTimeUnit.MINUTE)
-            val upperBound = deviceLocalDateTime.plus(1, DateTimeUnit.HOUR)
-            return now in lowerBound..upperBound
-        }
+        get() = state == TimestampState.LIVE
 
     /**
      * Is the timestamp considered in the past based on UTC?

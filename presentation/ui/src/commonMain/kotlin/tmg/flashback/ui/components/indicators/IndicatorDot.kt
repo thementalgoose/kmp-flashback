@@ -15,6 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import tmg.flashback.style.AppTheme
@@ -25,10 +26,11 @@ private val Dp.minSize
     get() = this / 2
 
 @Composable
-fun Live(
+fun IndicatorDot(
+    color: Color,
+    modifier: Modifier = Modifier,
     size: Dp = 24.dp,
     circleBorderWidth: Dp = 2.dp,
-    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier.size(size),
@@ -38,7 +40,7 @@ fun Live(
             modifier = Modifier
                 .size(size.minSize)
                 .clip(CircleShape)
-                .background(AppTheme.colors.f1EventLive)
+                .background(color)
         )
 
         val transition = rememberInfiniteTransition(label = "indicator")
@@ -55,7 +57,7 @@ fun Live(
         Box(
             modifier = Modifier
                 .size(pulse.dp)
-                .border(circleBorderWidth, color = AppTheme.colors.f1EventLive, CircleShape)
+                .border(circleBorderWidth, color = color, CircleShape)
         )
     }
 }
@@ -64,6 +66,8 @@ fun Live(
 @Composable
 private fun Preview() {
     ApplicationThemePreview {
-        Live()
+        IndicatorDot(
+            color = Color.Magenta
+        )
     }
 }

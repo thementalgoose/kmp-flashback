@@ -18,15 +18,17 @@ import tmg.flashback.formula1.model.DriverHistorySeasonRace
 import tmg.flashback.formula1.model.FastestLap
 import tmg.flashback.formula1.model.LapTime
 import tmg.flashback.formula1.model.Location
-import tmg.flashback.formula1.model.Overview
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.RaceInfo
 import tmg.flashback.formula1.model.RaceResult
 import tmg.flashback.formula1.model.Schedule
-import tmg.flashback.formula1.model.SeasonDriverStandings
 import tmg.flashback.formula1.model.SprintRaceResult
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.plusMinutes
+
+private fun LocalTime.adjustToUTC(): LocalTime {
+    return this.plusMinutes(-60)
+}
 
 fun OverviewRace.Companion.preview(
     season: Int = 2025,
@@ -51,11 +53,29 @@ fun OverviewRace.Companion.preview(
     country = "United Kingdom",
     cancelled = cancelled,
     schedule = listOf(
-        Schedule.preview("FP1", date = LocalDate.now().minus(1, DateTimeUnit.DAY), time = LocalTime.now().plusMinutes(-120)),
-        Schedule.preview("FP2", date = LocalDate.now().minus(1, DateTimeUnit.DAY)),
-        Schedule.preview("FP3", time = LocalTime.now().plusMinutes(-120)),
-        Schedule.preview("Qualifying"),
-        Schedule.preview("Race", date = LocalDate.now().plus(1, DateTimeUnit.DAY))
+        Schedule.preview(
+            label = "FP1",
+            date = LocalDate.now().minus(1, DateTimeUnit.DAY),
+            time = LocalTime.now().plusMinutes(-120).adjustToUTC()
+        ),
+        Schedule.preview(
+            label = "FP2",
+            date = LocalDate.now().minus(1, DateTimeUnit.DAY),
+            time = LocalTime.now().adjustToUTC()
+        ),
+        Schedule.preview(
+            label = "FP3",
+            time = LocalTime.now().plusMinutes(-30).adjustToUTC()
+        ),
+        Schedule.preview(
+            label = "Qualifying",
+            time = LocalTime.now().plusMinutes(20).adjustToUTC()
+        ),
+        Schedule.preview(
+            label = "Race",
+            date = LocalDate.now().plus(1, DateTimeUnit.DAY),
+            time = LocalTime.now().adjustToUTC()
+        )
     )
 )
 

@@ -70,6 +70,10 @@ import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.ScheduleWeather
+import tmg.flashback.formula1.model.Timestamp
+import tmg.flashback.formula1.model.Timestamp.TimestampState.BUILD_UP
+import tmg.flashback.formula1.model.Timestamp.TimestampState.EXPIRED
+import tmg.flashback.formula1.model.Timestamp.TimestampState.LIVE
 import tmg.flashback.infrastructure.datetime.displayDate
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.timeFormatHHmm
@@ -82,7 +86,8 @@ import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.edgeFade
 import tmg.flashback.ui.components.flag.Flag
-import tmg.flashback.ui.components.indicators.Live
+import tmg.flashback.ui.components.indicators.IndicatorDot
+import tmg.flashback.ui.components.indicators.stateBorder
 import kotlin.math.roundToInt
 
 private val trackSize: Dp = 200.dp
@@ -229,7 +234,7 @@ internal fun Schedule(
             content = {
                 items(model.days) { (date, list) ->
                     val isRoundUpcoming = model.isUpcoming
-                    val allExpired = list.all { it.first.timestamp.isInPast && !it.first.timestamp.isLive }
+                    val allExpired = remember { list.all { it.first.timestamp.state == EXPIRED } }
                     Column(
                         modifier = modifier
                             .fillMaxWidth()
@@ -293,14 +298,19 @@ private fun EventItem(
     showNotificationBell: Boolean,
     modifier: Modifier = Modifier
 ) {
+    val state = remember { item.timestamp.state }
+    val color = when (state) {
+        BUILD_UP -> AppTheme.colors.f1EventBuildup
+        LIVE -> AppTheme.colors.f1EventLive
+        else -> Color.Transparent
+    }
+
     val timestamp = item.timestamp.deviceLocalDateTime.time.format(timeFormatHHmm)
-    val isInPast = item.timestamp.isInPast
-    val isLive = item.timestamp.isLive
     Column(modifier = modifier
         .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
         .background(AppTheme.colors.surfaceContainer3)
-        .alpha(if (isInPast && !isLive && isRoundUpcoming) 0.6f else 1f)
-        .border(2.dp, if (isLive) AppTheme.colors.f1EventLive else Color.Transparent, RoundedCornerShape(AppTheme.dimens.radiusSmall))
+        .alpha(if (state == EXPIRED && isRoundUpcoming) 0.6f else 1f)
+        .stateBorder(color)
         .padding(
             vertical = AppTheme.dimens.xsmall,
             horizontal = AppTheme.dimens.nsmall
@@ -323,8 +333,11 @@ private fun EventItem(
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                if (isLive) {
-                    Live(size = 16.dp)
+                if (state == BUILD_UP || state == LIVE) {
+                    IndicatorDot(
+                        color = color,
+                        size = 16.dp
+                    )
                     Spacer(Modifier.width(AppTheme.dimens.xsmall))
                 }
                 TextBody1(

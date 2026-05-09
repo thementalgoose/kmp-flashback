@@ -34,6 +34,10 @@ data class InfoModel(
     companion object
 }
 
+private fun LocalTime.adjustToUTC(): LocalTime {
+    return this.plusMinutes(-60)
+}
+
 fun InfoModel.Companion.preview(): InfoModel {
     val nowDate = LocalDate.now()
     val nowTime = LocalTime.now()
@@ -41,8 +45,8 @@ fun InfoModel.Companion.preview(): InfoModel {
         season = 2020,
         round = 1,
         raceName = "British Grand Prix",
-        date = LocalDate(2020, 1, 1),
-        time = LocalTime(12, 0),
+        date = nowDate.plus(1, DateTimeUnit.DAY),
+        time = nowTime.adjustToUTC(),
         circuit = Circuit.preview(),
         laps = "100",
         cancelled = false,
@@ -50,15 +54,33 @@ fun InfoModel.Companion.preview(): InfoModel {
         wikipediaUrl = "wiki",
         days = listOf(
             nowDate.minus(1, DateTimeUnit.DAY) to listOf(
-                Schedule.preview("FP1", date = nowDate.minus(1, DateTimeUnit.DAY), time = nowTime.plusMinutes(-120)) to false,
-                Schedule.preview("FP2", date = nowDate.minus(1, DateTimeUnit.DAY)) to false
+                Schedule.preview(
+                    label = "FP1",
+                    date = nowDate.minus(1, DateTimeUnit.DAY),
+                    time = nowTime.plusMinutes(-120).adjustToUTC()
+                ) to false,
+                Schedule.preview(
+                    label = "FP2",
+                    date = nowDate.minus(1, DateTimeUnit.DAY),
+                    time = nowTime.adjustToUTC()
+                ) to false
             ),
             nowDate to listOf(
-                Schedule.preview("FP3", time = nowTime.plusMinutes(-120)) to false,
-                Schedule.preview("Qualifying") to false
+                Schedule.preview(
+                    label = "FP3",
+                    time = nowTime.plusMinutes(-30).adjustToUTC()
+                ) to false,
+                Schedule.preview(
+                    label = "Qua",
+                    time = nowTime.plusMinutes(20).adjustToUTC()
+                ) to false
             ),
             nowDate.plus(1, DateTimeUnit.DAY) to listOf(
-                Schedule.preview("Race", date = nowDate.plus(1, DateTimeUnit.DAY)) to false,
+                Schedule.preview(
+                    label = "Rac",
+                    date = nowDate.plus(1, DateTimeUnit.DAY),
+                    time = nowTime.adjustToUTC()
+                ) to false,
             )
         ),
         aerialUrl = null,
