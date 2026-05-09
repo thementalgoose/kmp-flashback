@@ -272,7 +272,7 @@ private fun Footer(
 ) {
     Row(
         modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(4.dp)
+        horizontalArrangement = Arrangement.spacedBy(2.dp)
     ) {
         TextBody1(
             text = stringResource(Res.string.app_version_placeholder, "")
