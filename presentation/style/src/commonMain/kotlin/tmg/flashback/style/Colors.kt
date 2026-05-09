@@ -88,6 +88,7 @@ data class AppColors(
     val f1StartLightAmber: Color,
     val f1StartLightRed: Color,
     val f1EventLive: Color,
+    val f1EventBuildup: Color,
 
     // RSS
     val rssAdd: Color,
@@ -243,6 +244,7 @@ val lightColours = AppColors(
     f1StartLightAmber = Color(0xFFFFA000),
     f1StartLightRed = Color(0xFFF44336),
     f1EventLive = Color(0xFFF44336),
+    f1EventBuildup = Color(0xFFFFA000),
 
 //    f1PipeColor = ,
     rssAdd = Color(0xFF4CAF50),
@@ -307,6 +309,7 @@ val darkColours = AppColors(
     f1StartLightAmber = Color(0xFFFFA000),
     f1StartLightRed = Color(0xFFF44336),
     f1EventLive = Color(0xFFF44336),
+    f1EventBuildup = Color(0xFFFFA000),
 
 //    f1PipeColor = ,
     rssAdd = Color(0xFF4CAF50),

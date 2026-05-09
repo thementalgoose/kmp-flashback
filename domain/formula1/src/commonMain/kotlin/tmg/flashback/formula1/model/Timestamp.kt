@@ -41,14 +41,26 @@ data class Timestamp(
         }
 
     /**
-     * Is the timestamp considered live
+     * The state of the event
+     * - < -30 -> UPCOMING
+     * - -30m -> -2m = BUILD_UP
+     * - -2m -> 1h = LIVE
+     * - > 1h = EXPIRED
      */
-    val isLive: Boolean
+    val state: TimestampState
         get() {
             val now = LocalDateTime.now()
-            val lowerBound = deviceLocalDateTime.plus(-5, DateTimeUnit.MINUTE)
-            val upperBound = deviceLocalDateTime.plus(1, DateTimeUnit.HOUR)
-            return now in lowerBound..upperBound
+            val buildUpBound = deviceLocalDateTime.plus(-30, DateTimeUnit.MINUTE)
+            val liveBound = deviceLocalDateTime.plus(-2, DateTimeUnit.MINUTE)
+            val expiredBound = deviceLocalDateTime.plus(1, DateTimeUnit.HOUR)
+            val state = when {
+                now in buildUpBound..liveBound -> TimestampState.BUILD_UP
+                now in liveBound..expiredBound -> TimestampState.LIVE
+                now > expiredBound -> TimestampState.EXPIRED
+                else -> TimestampState.UPCOMING
+            }
+            println("> $now\n> $buildUpBound\n> $liveBound\n> $expiredBound\n <<<< $state")
+            return state
         }
 
     /**
@@ -89,5 +101,12 @@ data class Timestamp(
         minute(Padding.ZERO)
         char(':')
         second(Padding.ZERO)
+    }
+
+    enum class TimestampState {
+        UPCOMING,
+        BUILD_UP,
+        LIVE,
+        EXPIRED
     }
 }

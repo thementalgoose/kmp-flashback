@@ -1,14 +1,15 @@
 package tmg.flashback.feature.season.presentation.calendar.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Text
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -56,6 +57,9 @@ import tmg.flashback.formula1.enums.SprintFormat
 import tmg.flashback.formula1.enums.SprintFormat.Companion.getSeasonFormat
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.Schedule
+import tmg.flashback.formula1.model.Timestamp
+import tmg.flashback.formula1.model.Timestamp.TimestampState.BUILD_UP
+import tmg.flashback.formula1.model.Timestamp.TimestampState.LIVE
 import tmg.flashback.formula1.preview.preview
 import tmg.flashback.infrastructure.datetime.displayDate
 import tmg.flashback.infrastructure.datetime.now
@@ -69,11 +73,11 @@ import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextSection
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.flag.Flag
-import tmg.flashback.ui.components.indicators.Live
+import tmg.flashback.ui.components.indicators.IndicatorDot
+import tmg.flashback.ui.components.indicators.stateBorder
 import tmg.flashback.ui.components.now.Now
 
 private val countryBadgeSize = 32.dp
-private const val listAlpha = 0.6f
 private const val pastScheduleAlpha = 0.2f
 private val weatherIconSize = 42.dp
 
@@ -324,8 +328,12 @@ private fun DateCard(
     showWeather: Boolean,
     modifier: Modifier = Modifier
 ) {
-    val isLive = schedule.timestamp.isLive
-    val alpha = if (schedule.timestamp.isInPast && !isLive) pastScheduleAlpha else 1f
+    val state = remember { schedule.timestamp.state }
+    val color = when (state) {
+        BUILD_UP -> AppTheme.colors.f1EventBuildup
+        LIVE -> AppTheme.colors.f1EventLive
+        else -> Color.Transparent
+    }
 
     val time = schedule.timestamp.deviceLocalDateTime.time.format(timeFormatHHmm)
     val contentDescription = when (showNotificationBadge) {
@@ -338,8 +346,8 @@ private fun DateCard(
         .width(IntrinsicSize.Max)
         .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
         .background(AppTheme.colors.surfaceContainer5)
-        .border(2.dp, if (isLive) AppTheme.colors.f1EventLive else Color.Transparent, RoundedCornerShape(AppTheme.dimens.radiusSmall))
-        .alpha(alpha)
+        .stateBorder(color)
+        .alpha(if (state == Timestamp.TimestampState.EXPIRED) pastScheduleAlpha else 1f)
         .padding(
             bottom = AppTheme.dimens.nsmall,
             start = AppTheme.dimens.nsmall,
@@ -354,8 +362,11 @@ private fun DateCard(
             ),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (isLive) {
-                Live(size = 16.dp)
+            if (state == BUILD_UP || state == LIVE) {
+                IndicatorDot(
+                    color = color,
+                    size = 16.dp
+                )
                 Spacer(Modifier.width(AppTheme.dimens.xsmall))
             }
             TextBody1(

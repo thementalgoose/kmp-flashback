@@ -9,7 +9,6 @@ data class Schedule(
     val time: LocalTime,
     val weather: ScheduleWeather?
 ) {
-
     val timestamp: Timestamp by lazy {
         Timestamp(date, time)
     }

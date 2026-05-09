@@ -206,50 +206,72 @@ internal class TimestampTest {
 
     //endregion
 
-    //region isLive
+    //region state
 
     @Test
-    fun `is live returns false when event is in the future`() {
+    fun `state is UPCOMING when more than 30 minutes in future`() {
         val date = LocalDate.now()
-        val time = LocalTime.now().plus(600)
+        val time = LocalTime.now().plus(31 * 60)
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
 
-        assertFalse(sut.isLive)
+        assertEquals(Timestamp.TimestampState.UPCOMING, sut.state)
     }
 
     @Test
-    fun `is live returns true when event is now`() {
+    fun `state is BUILD_UP at lower bound (30 minutes in future)`() {
         val date = LocalDate.now()
-        val time = LocalTime.now().plus(1)
+        val time = LocalTime.now().plus(29 * 60)
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
 
-        assertTrue(sut.isLive)
+        assertEquals(Timestamp.TimestampState.BUILD_UP, sut.state)
     }
 
     @Test
-    fun `is live returns true when event is less than 1 hour ago`() {
+    fun `state is BUILD_UP at upper bound (2 minutes in future)`() {
         val date = LocalDate.now()
-        val time = LocalTime.now().minus(3000) // 50 minutes
+        val time = LocalTime.now().plus(3 * 60)
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
 
-        assertTrue(sut.isLive)
+        assertEquals(Timestamp.TimestampState.BUILD_UP, sut.state)
     }
 
     @Test
-    fun `is live returns false when event is more than 1 hour ago`() {
+    fun `state is LIVE at lower bound (just after 2 minutes ago)`() {
         val date = LocalDate.now()
-        val time = LocalTime.now().minus(7200) // 2 hours
+        val time = LocalTime.now().minus(1 * 60)
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
 
-        assertFalse(sut.isLive)
+        assertEquals(Timestamp.TimestampState.LIVE, sut.state)
+    }
+
+    @Test
+    fun `state is LIVE at upper bound (1 hour ago)`() {
+        val date = LocalDate.now()
+        val time = LocalTime.now().minus(60 * 59)
+        val zone = TimeZone.UTC
+
+        val sut = Timestamp(date, time, zone)
+
+        assertEquals(Timestamp.TimestampState.LIVE, sut.state)
+    }
+
+    @Test
+    fun `state is EXPIRED when more than 1 hour in past`() {
+        val date = LocalDate.now()
+        val time = LocalTime.now().minus(2 * 60 * 60)
+        val zone = TimeZone.UTC
+
+        val sut = Timestamp(date, time, zone)
+
+        assertEquals(Timestamp.TimestampState.EXPIRED, sut.state)
     }
 
     //endregion

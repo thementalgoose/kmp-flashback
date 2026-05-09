@@ -37,9 +37,6 @@ sealed class CalendarItem(
     ): CalendarItem(
         key = "race-${model.raceName}"
     ) {
-        val date: LocalDate
-            get() = model.date
-
         val containsSprintEvent: Boolean by lazy {
             model.schedule.any { it.label.contains("sprint", ignoreCase = true) }
         }
