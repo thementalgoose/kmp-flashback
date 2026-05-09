@@ -56,7 +56,7 @@ internal fun CollapsableList(
         .semantics(mergeDescendants = true) { }
         .clearAndSetSemantics { this.stateDescription = contentDescription }
         .padding(
-            start = AppTheme.dimens.xsmall,
+            start = AppTheme.dimens.small,
             end = AppTheme.dimens.small,
             top = AppTheme.dimens.xsmall,
             bottom = AppTheme.dimens.xsmall
@@ -70,8 +70,10 @@ internal fun CollapsableList(
                 .weight(1f)
                 .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
                 .padding(
-                    horizontal = AppTheme.dimens.small,
-                    vertical = AppTheme.dimens.small
+                    start = AppTheme.dimens.xsmall,
+                    end = AppTheme.dimens.small,
+                    top = AppTheme.dimens.small,
+                    bottom = AppTheme.dimens.small,
                 ),
             verticalAlignment = Alignment.CenterVertically
         ) {

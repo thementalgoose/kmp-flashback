@@ -22,8 +22,6 @@ import flashback.presentation.localisation.generated.resources.easter_egg_slava_
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.eastereggs.model.MenuIcons
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
@@ -31,6 +29,8 @@ import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.ColourType
 import tmg.flashback.style.text.TextCaption
 import tmg.flashback.style.text.TextHeadline2
+import tmg.flashback.ui.components.text.ShimmerText
+import tmg.flashback.ui.components.text.TextWithIcon
 
 private val MenuIcons.drawable: DrawableResource get() = when (this) {
     MenuIcons.VALENTINES_DAY -> Res.drawable.ic_easteregg_valentines
@@ -56,15 +56,22 @@ internal fun DashboardHero(
         bottom = AppTheme.dimens.xsmall,
         end = AppTheme.dimens.nsmall
     )) {
-        TextHeadline2(
-            text = stringResource(resource = string.app_name),
+        TextWithIcon(
             icon = menuIcons?.let { painterResource(resource = it.drawable) },
             iconModifier = Modifier
                 .rotate(20f)
                 .size(18.dp),
-            colourType = when (rainbow) {
-                true -> ColourType.RAINBOW
-                false -> ColourType.DEFAULT
+            content = {
+                if (rainbow) {
+                    TextHeadline2(
+                        text = stringResource(resource = string.app_name),
+                        colourType = ColourType.RAINBOW
+                    )
+                } else {
+                    ShimmerText(
+                        text = stringResource(resource = string.app_name),
+                    )
+                }
             }
         )
         if (showUkraine) {

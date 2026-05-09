@@ -34,7 +34,12 @@ fun AppTypography() = AppTypography(
     h2 = TextStyle(
         fontFamily = montserrat,
         fontWeight = FontWeight.SemiBold,
-        fontSize = 18.sp
+        fontSize = 24.sp
+    ),
+    h3 = TextStyle(
+        fontFamily = montserrat,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 20.sp
     ),
     title = TextStyle(
         fontSize = 16.sp
@@ -65,6 +70,7 @@ fun AppTypography() = AppTypography(
 data class AppTypography(
     val h1: TextStyle,
     val h2: TextStyle,
+    val h3: TextStyle,
     val title: TextStyle,
     val section: TextStyle,
     val body1: TextStyle,

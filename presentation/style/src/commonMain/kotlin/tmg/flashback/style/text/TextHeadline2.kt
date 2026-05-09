@@ -1,104 +1,37 @@
 package tmg.flashback.style.text
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
 
-private val RainbowColors = listOf(
-    Color(0xff9c4f96),
-    Color(0xffff6355),
-    Color(0xfffba949),
-    Color(0xffdac422),
-    Color(0xff8bd448),
-    Color(0xff2aa8f2)
-)
-
 @Composable
 fun TextHeadline2(
     text: String,
-    modifier: Modifier = Modifier
-        .fillMaxWidth(),
+    modifier: Modifier = Modifier,
     maxLines: Int = Int.MAX_VALUE,
-    brand: Boolean = false
+    colourType: ColourType = ColourType.DEFAULT
 ) {
+    val style = when (colourType) {
+        ColourType.DEFAULT -> AppTheme.typography.h2.copy(
+            color = AppTheme.colors.onSurface
+        )
+        ColourType.BRAND -> AppTheme.typography.h2.copy(
+            color = AppTheme.colors.primary
+        )
+        ColourType.RAINBOW -> AppTheme.typography.h2.copy(
+            brush = Brush.horizontalGradient(RainbowColors)
+        )
+    }
     Text(
         text,
         modifier = modifier,
         maxLines = maxLines,
-        style = AppTheme.typography.h2.copy(
-            color = when (brand) {
-                true -> AppTheme.colors.primary
-                false -> AppTheme.colors.onSurface
-            }
-        )
+        style = style
     )
-}
-
-enum class ColourType {
-    DEFAULT,
-    BRAND,
-    RAINBOW
-}
-
-@Composable
-fun TextHeadline2(
-    text: String,
-    icon: Painter?,
-    modifier: Modifier = Modifier,
-    iconModifier: Modifier = Modifier,
-    maxLines: Int = 1,
-    colourType: ColourType = ColourType.DEFAULT
-) {
-    Box {
-        Row {
-            val style = when (colourType) {
-                ColourType.DEFAULT -> AppTheme.typography.h2.copy(
-                    color = AppTheme.colors.onSurface
-                )
-                ColourType.BRAND -> AppTheme.typography.h2.copy(
-                    color = AppTheme.colors.onSurface
-                )
-                ColourType.RAINBOW -> AppTheme.typography.h2.copy(
-                    brush = Brush.horizontalGradient(RainbowColors)
-                )
-            }
-            Text(
-                text,
-                modifier = modifier,
-                maxLines = maxLines,
-                style = style
-            )
-            Spacer(Modifier.width(10.dp))
-        }
-        icon?.let {
-            Image(
-                painter = it,
-                contentDescription = null,
-                modifier = iconModifier
-                    .align(Alignment.TopEnd),
-            )
-        }
-    }
 }
 
 @PreviewTheme
@@ -113,25 +46,10 @@ private fun Preview() {
 
 @PreviewTheme
 @Composable
-private fun PreviewIcon() {
+private fun PreviewRainbow() {
     ApplicationThemePreview {
         TextHeadline2(
             text = "Headline 2",
-            icon = rememberVectorPainter(Icons.Default.Home),
-            iconModifier = Modifier.rotate(40f),
-            colourType = ColourType.DEFAULT
-        )
-    }
-}
-
-@PreviewTheme
-@Composable
-private fun PreviewIconRainbow() {
-    ApplicationThemePreview {
-        TextHeadline2(
-            text = "Headline 2",
-            icon = rememberVectorPainter(Icons.Default.Home),
-            iconModifier = Modifier.rotate(40f),
             colourType = ColourType.RAINBOW
         )
     }
@@ -142,8 +60,8 @@ private fun PreviewIconRainbow() {
 private fun PreviewBrand() {
     ApplicationThemePreview {
         TextHeadline2(
-            text = "Headline 2 Brand",
-            brand = true
+            text = "Headline 2",
+            colourType = ColourType.BRAND
         )
     }
 }
