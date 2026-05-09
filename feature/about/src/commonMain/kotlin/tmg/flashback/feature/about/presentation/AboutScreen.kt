@@ -182,8 +182,7 @@ private fun AboutListScreen(
             Footer(
                 idsClicked = idsClicked,
                 modifier = Modifier
-                    .animateItem()
-                    .padding(horizontal = AppTheme.dimens.medium),
+                    .animateItem(),
                 version = "${Device.versionName}.${Device.versionCode}",
                 debugIds = listOfNotNull(deviceId, installationId, remoteNotificationId)
                     .joinToString(separator = "\n")
@@ -236,8 +235,7 @@ private fun AboutPaneScreen(
                 Footer(
                     idsClicked = idsClicked,
                     modifier = Modifier
-                        .animateItem()
-                        .padding(horizontal = AppTheme.dimens.medium),
+                        .animateItem(),
                     version = "${Device.versionName}.${Device.versionCode}",
                     debugIds = listOfNotNull(deviceId, installationId, remoteNotificationId)
                         .joinToString(separator = "\n")
@@ -385,11 +383,10 @@ private fun Footer(
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
     ) {
         TextBody1(
-            modifier = Modifier,
+            modifier = Modifier
+                .padding(horizontal = AppTheme.dimens.medium),
             text = stringResource(string.about_additional)
         )
-
-        Spacer(Modifier.height(4.dp))
 
         TextBody2(
             modifier = Modifier
@@ -397,17 +394,23 @@ private fun Footer(
                     onClick = { },
                     onLongClick = idsClicked
                 )
+                .padding(
+                    horizontal = AppTheme.dimens.medium,
+                    vertical = AppTheme.dimens.small
+                )
                 .fillMaxWidth(),
             text = debugIds,
             textColor = AppTheme.colors.onSurfaceVariant
         )
 
-        Spacer(Modifier.height(4.dp))
-
         TextBody1(
+            modifier = Modifier
+                .padding(horizontal = AppTheme.dimens.medium),
             text = stringResource(string.app_version)
         )
         TextBody2(
+            modifier = Modifier
+                .padding(horizontal = AppTheme.dimens.medium),
             text = version,
             bold = true
         )
