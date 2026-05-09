@@ -67,6 +67,7 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.LOGO_GRADIENT_1
 import tmg.flashback.style.LOGO_GRADIENT_2
+import tmg.flashback.style.preview.PreviewDevices
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
@@ -140,28 +141,8 @@ private fun AboutListScreen(
                     .padding(horizontal = AppTheme.dimens.medium),
                 email = email,
                 icon = icon,
+                buttonClicked = buttonClicked
             )
-        }
-        item("buttons") {
-            Row(modifier = Modifier
-                .padding(
-                    horizontal = AppTheme.dimens.medium,
-                    vertical = AppTheme.dimens.xsmall
-                )
-                .fillMaxWidth()
-                .animateItem()
-            ) {
-                AboutButtons.entries
-                    .forEach {
-                        Button(
-                            button = it,
-                            buttonClicked = buttonClicked,
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-                                .weight(1f)
-                        )
-                    }
-            }
         }
         item("header") {
             Header(
@@ -241,29 +222,9 @@ private fun AboutPaneScreen(
                             bottom = AppTheme.dimens.small
                         ),
                     icon = icon,
-                    email = email
+                    email = email,
+                    buttonClicked = buttonClicked
                 )
-            }
-            item("buttons") {
-                Row(modifier = Modifier
-                    .padding(
-                        horizontal = AppTheme.dimens.medium,
-                        vertical = AppTheme.dimens.small
-                    )
-                    .fillMaxWidth()
-                    .animateItem()
-                ) {
-                    AboutButtons.entries
-                        .forEach {
-                            Button(
-                                button = it,
-                                buttonClicked = buttonClicked,
-                                modifier = Modifier
-                                    .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-                                    .weight(1f)
-                            )
-                        }
-                }
             }
             item("header") {
                 Header(modifier = Modifier
@@ -325,6 +286,7 @@ private fun Hero(
     icon: DrawableResource,
     email: String,
     modifier: Modifier = Modifier,
+    buttonClicked: (AboutButtons) -> Unit,
 ) {
     Row(
         modifier = modifier,
@@ -346,12 +308,24 @@ private fun Hero(
             TextHeadline2(
                 text = stringResource(string.app_name)
             )
-            TextBody1(
-                text = stringResource(string.about_desc)
-            )
-            TextBody2(
-                text = email
-            )
+            Row(modifier = Modifier
+                .padding(
+                    vertical = AppTheme.dimens.small
+                )
+                .fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                AboutButtons.entries
+                    .forEach {
+                        Button(
+                            button = it,
+                            buttonClicked = buttonClicked,
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
+                                .weight(1f)
+                        )
+                    }
+            }
         }
     }
 }
@@ -451,6 +425,7 @@ private fun Button(
             .clickable {
                 buttonClicked(button)
             }
+            .background(AppTheme.colors.surfaceContainer3)
             .padding(
                 vertical = AppTheme.dimens.small,
                 horizontal = AppTheme.dimens.xsmall
@@ -544,7 +519,7 @@ private fun PreviewList() {
 }
 
 
-@PreviewTheme
+@PreviewDevices
 @Composable
 private fun PreviewPane() {
     ApplicationThemePreview {

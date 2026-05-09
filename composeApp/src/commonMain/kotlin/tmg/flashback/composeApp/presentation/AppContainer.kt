@@ -50,6 +50,7 @@ fun AppContainer(
     val isCompact = !windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)
 
     val compactEasterEggModifier = Modifier
+        .background(AppTheme.colors.surfaceNav)
         .snow(appNavigationUiState.value.easterEggs.snow)
         .summer(appNavigationUiState.value.easterEggs.summer)
         .takeIf { isCompact } ?: Modifier

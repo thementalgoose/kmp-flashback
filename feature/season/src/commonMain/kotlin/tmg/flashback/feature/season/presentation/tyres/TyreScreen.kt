@@ -51,6 +51,8 @@ import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextHeadline2
+import tmg.flashback.style.text.TextHeadline3
+import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 
@@ -98,7 +100,7 @@ private fun TyreScreen(
                 )
             }
             item("dry", span = { GridItemSpan(maxLineSpan) }) {
-                TextBody1(
+                TextHeadline3(
                     modifier = Modifier.padding(horizontal = AppTheme.dimens.medium),
                     text = stringResource(resource = string.tyres_dry_compounds)
                 )
@@ -107,7 +109,7 @@ private fun TyreScreen(
                 TyreRow(tyreLabel = it)
             }
             item("wet", span = { GridItemSpan(maxLineSpan) }) {
-                TextBody1(
+                TextHeadline3(
                     modifier = Modifier.padding(horizontal = AppTheme.dimens.medium),
                     text = stringResource(resource = string.tyres_wet_compounds)
                 )
@@ -145,7 +147,7 @@ private fun TyreRow(
                 vertical = AppTheme.dimens.xsmall
             )
         ) {
-            TextHeadline2(text = stringResource(resource = tyreLabel.label))
+            TextTitle(text = stringResource(resource = tyreLabel.label), bold = true)
             TextBody1(text = stringResource(resource = string.tyres_size, tyreLabel.tyre.size))
         }
     }
