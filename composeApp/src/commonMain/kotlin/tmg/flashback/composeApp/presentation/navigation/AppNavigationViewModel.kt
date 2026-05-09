@@ -10,6 +10,7 @@ import androidx.savedstate.read
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import tmg.flashback.composeApp.repositories.NavRepository
 import tmg.flashback.device.usecases.OpenStorePageUseCase
 import tmg.flashback.eastereggs.usecases.IsMenuIconEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSnowEnabledUseCase
@@ -18,6 +19,7 @@ import tmg.flashback.eastereggs.usecases.IsUkraineEnabledUseCase
 import tmg.flashback.feature.maintenance.repository.MaintenanceRepository
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
 import tmg.flashback.composeApp.usecases.RequiresSyncUseCase
+import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.navigation.isList
 
 class AppNavigationViewModel(
@@ -28,7 +30,9 @@ class AppNavigationViewModel(
     isUkraineEnabledUseCase: IsUkraineEnabledUseCase,
     requiresSyncUseCase: RequiresSyncUseCase,
     maintenanceRepository: MaintenanceRepository,
-    private val openStorePageUseCase: OpenStorePageUseCase
+    navRepository: NavRepository,
+    private val openWebpageUseCase: OpenWebpageUseCase,
+    private val openStorePageUseCase: OpenStorePageUseCase,
 ): ViewModel() {
 
     val easterEggs = AppNavigationEasterEggs(
@@ -44,7 +48,8 @@ class AppNavigationViewModel(
         screen = null,
         intoSubNavigation = false,
         promptContentSync = requiresSyncUseCase(),
-        promptSoftUpgrade = maintenanceRepository.softUpgrade
+        promptSoftUpgrade = maintenanceRepository.softUpgrade,
+        extraLinks = navRepository.navLinks
     ))
     val uiState: StateFlow<AppNavigationUIState> = _uiState
 
@@ -68,5 +73,9 @@ class AppNavigationViewModel(
         _uiState.update {
             it.copy(promptSoftUpgrade = false)
         }
+    }
+
+    fun openWebpage(url: String) {
+        openWebpageUseCase(url)
     }
 }

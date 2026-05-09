@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.safeContent
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -25,8 +26,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
+import flashback.composeapp.generated.resources.ic_settings_web
 import flashback.presentation.localisation.generated.resources.Res
 import flashback.presentation.localisation.generated.resources.app_version_placeholder
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.infrastructure.device.Device
@@ -34,6 +38,7 @@ import tmg.flashback.composeApp.presentation.MenuItem
 import tmg.flashback.composeApp.presentation.icon
 import tmg.flashback.composeApp.presentation.label
 import tmg.flashback.composeApp.presentation.navigation.hero.DashboardHero
+import tmg.flashback.composeApp.repositories.model.NavLink
 import tmg.flashback.navigation.NavAbout
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavCircuits
@@ -53,6 +58,7 @@ internal fun AppNavigationDrawer(
     appNavigationUiState: AppNavigationUIState,
     navigationItemClicked: (NavKey) -> Unit,
     closeMenu: () -> Unit,
+    openUrl: (String) -> Unit,
     modifier: Modifier = Modifier,
     insetPadding: PaddingValues = WindowInsets.safeContent.asPaddingValues(),
     showXr: Boolean = false
@@ -145,10 +151,10 @@ internal fun AppNavigationDrawer(
                         }
                     )
                 }
-                item("footer_div") {
-                    MenuDivider()
-                }
                 if (showXr) {
+                    item("xr_div") {
+                        MenuDivider()
+                    }
                     item("nav_xr") {
                         NavigationItem(
                             menuItem = MenuItem.XR_Spacial,
@@ -158,6 +164,28 @@ internal fun AppNavigationDrawer(
                             }
                         )
                     }
+                }
+                if (appNavigationUiState.extraLinks.isNotEmpty()) {
+                    item("extra_div") {
+                        MenuDivider()
+                    }
+                }
+                items(appNavigationUiState.extraLinks, key = { it.id }) {
+                    when (it) {
+                        is NavLink.Url -> {
+                            NavigationItem(
+                                label = it.name,
+                                icon = flashback.composeapp.generated.resources.Res.drawable.ic_settings_web,
+                                isSelected = false,
+                                onClick = {
+                                    openUrl(it.url)
+                                }
+                            )
+                        }
+                    }
+                }
+                item("footer_div") {
+                    MenuDivider()
                 }
                 item("app_version") {
                     TextBody2(
@@ -170,9 +198,27 @@ internal fun AppNavigationDrawer(
     }
 }
 
+
 @Composable
 private fun NavigationItem(
     menuItem: MenuItem,
+    isSelected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    NavigationItem(
+        icon = menuItem.icon,
+        label = stringResource(menuItem.label),
+        isSelected = isSelected,
+        onClick = onClick,
+        modifier = modifier,
+    )
+}
+
+@Composable
+private fun NavigationItem(
+    icon: DrawableResource,
+    label: String,
     isSelected: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -200,14 +246,14 @@ private fun NavigationItem(
         )
     ) {
         Icon(
-            painter = painterResource(resource = menuItem.icon),
+            painter = painterResource(resource = icon),
             modifier = Modifier.size(24.dp),
             tint = AppTheme.colors.onSurface,
             contentDescription = null
         )
         Spacer(Modifier.width(AppTheme.dimens.medium))
         TextTitle(
-            text = stringResource(resource = menuItem.label),
+            text = label,
             bold = true,
             modifier = Modifier
                 .weight(1f)

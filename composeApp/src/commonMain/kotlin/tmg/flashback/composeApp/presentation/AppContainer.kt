@@ -92,6 +92,7 @@ fun AppContainer(
                 closeMenu = {
                     coroutineScope.launch { panelsState.closePanels() }
                 },
+                openUrl = appNavigationViewModel::openWebpage,
                 showXr = isXrDevice,
                 modifier = compactEasterEggModifier
             )

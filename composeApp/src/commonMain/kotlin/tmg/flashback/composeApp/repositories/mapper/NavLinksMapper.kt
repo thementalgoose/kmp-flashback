@@ -12,11 +12,11 @@ internal fun NavLinkJson.convert(): NavLink? {
     if (this.url == null || this.type == null || this.name == null) {
         return null
     }
-    when (type) {
+    return when (type) {
         "url" -> NavLink.Url(
             name = this.name,
             url = this.url
         )
+        else -> null
     }
-    return null
 }
