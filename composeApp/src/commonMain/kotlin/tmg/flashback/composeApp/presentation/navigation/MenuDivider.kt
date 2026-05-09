@@ -13,6 +13,6 @@ fun MenuDivider() {
             horizontal = AppTheme.dimens.medium,
             vertical = AppTheme.dimens.xsmall
         ),
-        color = AppTheme.colors.surfaceContainer5
+        color = AppTheme.colors.onSurfaceVariant.copy(alpha = 0.3f)
     )
 }
