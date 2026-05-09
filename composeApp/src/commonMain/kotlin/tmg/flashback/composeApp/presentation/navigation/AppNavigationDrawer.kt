@@ -45,6 +45,7 @@ import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
+import tmg.flashback.style.text.TextTitle
 import tmg.flashback.xr.LocalXR
 
 @Composable
@@ -200,12 +201,12 @@ private fun NavigationItem(
     ) {
         Icon(
             painter = painterResource(resource = menuItem.icon),
-            modifier = Modifier.size(20.dp),
+            modifier = Modifier.size(24.dp),
             tint = AppTheme.colors.onSurface,
             contentDescription = null
         )
         Spacer(Modifier.width(AppTheme.dimens.medium))
-        TextBody1(
+        TextTitle(
             text = stringResource(resource = menuItem.label),
             bold = true,
             modifier = Modifier
