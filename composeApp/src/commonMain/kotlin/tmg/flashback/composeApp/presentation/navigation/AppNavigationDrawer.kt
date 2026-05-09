@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import flashback.composeapp.generated.resources.ic_settings_web
 import flashback.presentation.localisation.generated.resources.Res
+import flashback.presentation.localisation.generated.resources.app_version
 import flashback.presentation.localisation.generated.resources.app_version_placeholder
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
@@ -188,9 +189,11 @@ internal fun AppNavigationDrawer(
                     MenuDivider()
                 }
                 item("app_version") {
-                    TextBody2(
-                        modifier = Modifier.padding(horizontal = AppTheme.dimens.medium),
-                        text = stringResource(Res.string.app_version_placeholder, "${Device.versionName}.${Device.versionCode}")
+                    Footer(
+                        modifier = Modifier.padding(
+                            vertical = AppTheme.dimens.small,
+                            horizontal = AppTheme.dimens.medium
+                        )
                     )
                 }
             }
@@ -258,6 +261,25 @@ private fun NavigationItem(
             modifier = Modifier
                 .weight(1f)
                 .align(Alignment.CenterVertically)
+        )
+    }
+}
+
+@Composable
+private fun Footer(
+    modifier: Modifier = Modifier,
+    version: String = "${Device.versionName}.${Device.versionCode}",
+) {
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        TextBody1(
+            text = stringResource(Res.string.app_version_placeholder, "")
+        )
+        TextBody1(
+            text = version,
+            bold = true
         )
     }
 }
