@@ -1,4 +1,4 @@
 - The usual assortment of dependency updates and performance improvements
 - Fixes widget day/night responsive theming
+- Fixes missing driver info on constructor stats page
 - Redesigns widget
-- Refines animations in home screen
