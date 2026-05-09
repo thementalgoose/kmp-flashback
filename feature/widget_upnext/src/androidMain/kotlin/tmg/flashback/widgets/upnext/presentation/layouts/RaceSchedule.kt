@@ -25,6 +25,8 @@ import androidx.glance.text.TextAlign
 import kotlinx.datetime.format
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.Schedule
+import tmg.flashback.formula1.model.Timestamp
+import tmg.flashback.formula1.model.Timestamp.TimestampState.EXPIRED
 import tmg.flashback.widgets.upnext.presentation.components.WidgetTitle
 import tmg.flashback.widgets.upnext.presentation.preview.fakeOverviewRace
 import tmg.flashback.widgets.upnext.presentation.preview.fakeSprintWeekend
@@ -95,8 +97,9 @@ internal fun RaceSchedule(
             }
             for ((date, scheduleList) in schedules) {
                 item {
+                    val allExpired = remember { scheduleList.all { it.timestamp.state == EXPIRED } }
                     TextBody2(
-                        color = when (scheduleList.all { it.timestamp.isInPast && !it.timestamp.isLive }) {
+                        color = when (allExpired) {
                             false -> ScheduleText
                             true -> SchedulePastText
                         },
@@ -138,6 +141,7 @@ private fun Schedule(
     schedule: Schedule,
     modifier: GlanceModifier = GlanceModifier
 ) {
+    val scheduleExpired = remember { schedule.timestamp.state == EXPIRED }
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -152,7 +156,7 @@ private fun Schedule(
         val (label, time) = schedule.labels()
         if (label.lowercase() == "race") {
             TextBody1(
-                color = when (schedule.timestamp.isInPast && !schedule.timestamp.isLive) {
+                color = when (scheduleExpired) {
                     false -> ScheduleText
                     true -> SchedulePastText
                 },
@@ -164,7 +168,7 @@ private fun Schedule(
             )
         } else {
             TextBody2(
-                color = when (schedule.timestamp.isInPast && !schedule.timestamp.isLive) {
+                color = when (scheduleExpired) {
                     false -> ScheduleText
                     true -> SchedulePastText
                 },
@@ -176,7 +180,7 @@ private fun Schedule(
             )
         }
         TextBody2(
-            color = when (schedule.timestamp.isInPast && !schedule.timestamp.isLive) {
+            color = when (scheduleExpired) {
                 false -> ScheduleText
                 true -> SchedulePastText
             },

@@ -64,12 +64,6 @@ data class Timestamp(
         }
 
     /**
-     * Is the timestamp considered live
-     */
-    val isLive: Boolean
-        get() = state == TimestampState.LIVE
-
-    /**
      * Is the timestamp considered in the past based on UTC?
      */
     fun isInPastRelativeToo(deltaSeconds: Long): Boolean {

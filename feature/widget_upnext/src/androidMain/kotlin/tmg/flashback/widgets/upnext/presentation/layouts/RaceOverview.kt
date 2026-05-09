@@ -24,6 +24,7 @@ import androidx.glance.text.FontWeight
 import kotlinx.datetime.LocalDate
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.Schedule
+import tmg.flashback.formula1.model.Timestamp
 import tmg.flashback.widgets.upnext.presentation.components.WidgetTitle
 import tmg.flashback.widgets.upnext.presentation.preview.fakeOverviewRace
 import tmg.flashback.widgets.upnext.presentation.preview.fakeSprintWeekend
@@ -130,11 +131,12 @@ private fun Day(
         modifier = modifier
             .fillMaxHeight()
     ) {
+        val allExpired = remember { schedules.all { it.timestamp.state == Timestamp.TimestampState.EXPIRED } }
         TextBody2(
             text = date.weekRelativeLabel(),
-            color = when (schedules.all { it.timestamp.isInPast && !it.timestamp.isLive }) {
-                false -> ScheduleText
+            color = when (allExpired) {
                 true -> SchedulePastText
+                false -> ScheduleText
             }
         )
         schedules.forEach { schedule ->
@@ -144,10 +146,11 @@ private fun Day(
                     .defaultWeight()
                     .padding(vertical = marginXSmall)
             ) {
+                val scheduleExpired = remember { schedule.timestamp.state == Timestamp.TimestampState.EXPIRED }
                 Box(
                     modifier = GlanceModifier
                         .fillMaxSize()
-                        .background(when (schedule.timestamp.isInPast && !schedule.timestamp.isLive) {
+                        .background(when (scheduleExpired) {
                             false -> ScheduleBackground
                             true -> SchedulePastBackground
                         })
@@ -162,7 +165,7 @@ private fun Day(
                     ) {
                         val (_, time) = schedule.labels()
                         TextBody2(
-                            color = when (schedule.timestamp.isInPast && !schedule.timestamp.isLive) {
+                            color = when (scheduleExpired) {
                                 false -> ScheduleText
                                 true -> SchedulePastText
                             },
@@ -171,7 +174,7 @@ private fun Day(
                             weight = FontWeight.Bold
                         )
                         TextBody2(
-                            color = when (schedule.timestamp.isInPast && !schedule.timestamp.isLive) {
+                            color = when (scheduleExpired) {
                                 false -> ScheduleText
                                 true -> SchedulePastText
                             },
