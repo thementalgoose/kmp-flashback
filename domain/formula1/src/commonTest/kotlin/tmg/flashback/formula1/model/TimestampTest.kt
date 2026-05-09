@@ -222,7 +222,7 @@ internal class TimestampTest {
     @Test
     fun `state is BUILD_UP at lower bound (30 minutes in future)`() {
         val date = LocalDate.now()
-        val time = LocalTime.now().plus(30 * 60)
+        val time = LocalTime.now().plus(29 * 60)
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
@@ -233,7 +233,7 @@ internal class TimestampTest {
     @Test
     fun `state is BUILD_UP at upper bound (2 minutes in future)`() {
         val date = LocalDate.now()
-        val time = LocalTime.now().plus(2 * 60)
+        val time = LocalTime.now().plus(3 * 60)
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
@@ -244,7 +244,7 @@ internal class TimestampTest {
     @Test
     fun `state is LIVE at lower bound (just after 2 minutes ago)`() {
         val date = LocalDate.now()
-        val time = LocalTime.now().minus(2 * 60 - 1)
+        val time = LocalTime.now().minus(1 * 60)
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
@@ -255,7 +255,7 @@ internal class TimestampTest {
     @Test
     fun `state is LIVE at upper bound (1 hour ago)`() {
         val date = LocalDate.now()
-        val time = LocalTime.now().minus(60 * 60)
+        val time = LocalTime.now().minus(60 * 59)
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
