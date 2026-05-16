@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-15
+    runs-on: macos-26
     timeout-minutes: 40
     env:
       BUNDLE_GEMFILE: ${{ github.workspace }}/iosApp/Gemfile
