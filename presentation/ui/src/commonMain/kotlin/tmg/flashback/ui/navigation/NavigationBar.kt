@@ -61,7 +61,9 @@ fun NavigationBar(
         modifier = modifier
             .fillMaxWidth()
             .shadow(shadow)
-            .background(AppTheme.colors.surfaceNav)
+            .background(
+                brush = Brush.verticalGradient(listOf(AppTheme.colors.surfaceNav.copy(alpha = 0.7f), AppTheme.colors.surfaceNav))
+            )
             .clickable(enabled = false, onClick = {})
             .padding(bottom = bottomPadding)
     ) {
@@ -71,8 +73,7 @@ fun NavigationBar(
         )
         Row(
             modifier = Modifier
-                .height(appBarHeight.value)
-                .background(AppTheme.colors.surfaceNav),
+                .height(appBarHeight.value),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically,
         ) {
