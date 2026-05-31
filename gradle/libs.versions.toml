@@ -19,7 +19,7 @@ androidx-xr = "1.0.0-alpha05"
 # Firebase
 google-services = "4.4.2"
 crashlytics = "3.0.4"
-firebase-bom = "34.13.0"
+firebase-bom = "34.14.0"
 
 # Shared
 ktor = "3.5.0"
