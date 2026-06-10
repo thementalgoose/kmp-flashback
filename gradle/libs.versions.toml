@@ -19,11 +19,11 @@ androidx-xr = "1.0.0-alpha05"
 # Firebase
 google-services = "4.4.2"
 crashlytics = "3.0.4"
-firebase-bom = "34.14.0"
+firebase-bom = "34.14.1"
 
 # Shared
 ktor = "3.5.0"
-okhttp = "5.3.2"
+okhttp = "5.4.0"
 compose = "1.11.1"
 composeAdaptive = "1.2.0"
 composeNavigation = "2.9.2"
@@ -63,7 +63,7 @@ androidx_glance_appwidget = { module = "androidx.glance:glance-appwidget", versi
 androidx_glance_appwidgetpreview = { module = "androidx.glance:glance-appwidget-preview", version.ref = "androidx-glance" }
 androidx_splashscreen = "androidx.core:core-splashscreen:1.2.0"
 android_flagkit = "com.github.murgupluoglu:flagkit-android:1.0.5"
-androidx_core = "androidx.core:core-ktx:1.18.0"
+androidx_core = "androidx.core:core-ktx:1.19.0"
 androidx_appcompat = "androidx.appcompat:appcompat:1.7.1"
 androidx_browser = "androidx.browser:browser:1.10.0"
 androidx_webkit = "androidx.webkit:webkit:1.16.0"
