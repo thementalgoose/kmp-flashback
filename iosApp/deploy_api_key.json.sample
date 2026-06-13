@@ -1,0 +1,7 @@
+{
+  "key_id": "ABC123DEFG",
+  "issuer_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "key_filepath": "./AuthKey_ABC123DEFG.p8",
+  "duration": 1200,
+  "in_house": false
+}
