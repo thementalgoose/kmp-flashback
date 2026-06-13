@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'Flashback'
     spec.vendored_frameworks      = 'build/cocoapods/framework/ComposeApp.framework'
     spec.libraries                = 'c++'
-    spec.ios.deployment_target    = '18.2'
+    spec.ios.deployment_target    = '26.0'
     spec.dependency 'FirebaseAnalytics', '~> 11.13'
     spec.dependency 'FirebaseCore', '~> 11.13'
     spec.dependency 'FirebaseCrashlytics', '~> 11.13'
