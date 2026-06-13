@@ -3,3 +3,6 @@ fastlane/report.xml
 
 Flashback.app.dSYM.zip
 Flashback.ipa
+
+deploy_api_key.json
+AuthKey_*.p8

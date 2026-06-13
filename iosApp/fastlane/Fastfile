@@ -128,7 +128,11 @@ platform :ios do
     fetch_and_increment_build_number
     build_release silent:options.fetch(:silent, false)
 
-    upload_to_testflight(skip_submission: true)
+    upload_to_testflight(
+      skip_submission: true,
+      ipa: "./Flashback.ipa",
+      api_key_path: "./deploy_api_key.json"
+    )
     upload_symbols_to_crashlytics(
       gsp_path: "./iosApp/Firebase/GoogleService-production.plist", 
       dsym_path: "./Flashback.app.dSYM.zip"
