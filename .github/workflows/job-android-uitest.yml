@@ -41,7 +41,7 @@ jobs:
           echo $GOOGLE_SERVICES_PLIST_SANDBOX | base64 --decode >> iosApp/iosApp/Firebase/GoogleService-sandbox.plist
 
       # Caching gradle
-      - uses: actions/cache@v5
+      - uses: actions/cache@v6
         with:
           path: |
             ~/.gradle/caches
