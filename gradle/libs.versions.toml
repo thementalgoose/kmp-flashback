@@ -24,7 +24,7 @@ firebase-bom = "34.15.0"
 # Shared
 ktor = "3.5.1"
 okhttp = "5.4.0"
-compose = "1.11.1"
+compose = "1.11.4"
 composeAdaptive = "1.2.0"
 composeNavigation = "2.9.2"
 composeNav3 = "1.0.0-alpha06"
