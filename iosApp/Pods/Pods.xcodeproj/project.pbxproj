@@ -7106,6 +7106,25 @@
 			};
 			name = "Sandbox Debug";
 		};
+		17872EDF05D9C38A97B3AC25ADF3AE18 /* Sandbox Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B905D8844E0C91AB0FA6C0006D1269E5 /* composeApp.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Sandbox Release";
+		};
 		1A33C18BD21E1E1A4AA24065BF348A12 /* Sandbox Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 85D47B3FDFECF2204F2FCE23765B45DD /* Pods-iosApp.sandbox debug.xcconfig */;
@@ -7145,24 +7164,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = "Sandbox Debug";
-		};
-		1AD6A27F114680A5DBDB0AFF2A7BFA06 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
 		};
 		1B8221A10C8677D8E095599CD616B6A5 /* Production Debug */ = {
 			isa = XCBuildConfiguration;
@@ -7569,6 +7570,25 @@
 			};
 			name = "Sandbox Debug";
 		};
+		2E031EB024049C49DDF6BFD91D099184 /* Sandbox Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B905D8844E0C91AB0FA6C0006D1269E5 /* composeApp.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Sandbox Debug";
+		};
 		2FB158315D34793F4B8F833D826E1D67 /* Sandbox Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5DF3285F5E23BE561DA402E406AC98C9 /* FirebaseCore.release.xcconfig */;
@@ -7728,25 +7748,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = "Production Debug";
-		};
-		3281B17FE87A6BF06BFFA987C9590C7C /* Sandbox Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B905D8844E0C91AB0FA6C0006D1269E5 /* composeApp.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = "Sandbox Debug";
 		};
 		337256A313BB8B0155EA2A9812764849 /* Sandbox Release */ = {
 			isa = XCBuildConfiguration;
@@ -7920,6 +7921,24 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
+		};
+		3838B8625869721CF30B3A5044F23C86 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
 		};
 		38CE102F006F5431C1835EAF9C5B4DC8 /* Production Release */ = {
 			isa = XCBuildConfiguration;
@@ -8538,6 +8557,23 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = "Sandbox Release";
+		};
+		5ABD665D253F0B3427377B9A1092DAFF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
 		};
 		5AEE1B4A79EB9D1E3BA02B1121F58150 /* Sandbox Debug */ = {
 			isa = XCBuildConfiguration;
@@ -9191,6 +9227,25 @@
 			};
 			name = Debug;
 		};
+		6EA5216A737DC070ECD32E9A1AD60360 /* Production Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B905D8844E0C91AB0FA6C0006D1269E5 /* composeApp.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Production Debug";
+		};
 		6FD5ED23FABF5A100B8E77172276435F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -9379,25 +9434,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
-		};
-		76A7A67A0B7F919B2826B87AD15DC7F8 /* Sandbox Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B905D8844E0C91AB0FA6C0006D1269E5 /* composeApp.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = "Sandbox Release";
 		};
 		789CF1FA796337E70C4F5BEBF25DCCCC /* Sandbox Release */ = {
 			isa = XCBuildConfiguration;
@@ -10311,23 +10347,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = "Production Release";
-		};
-		992B33C0E1240A93F88D14E2615508BA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
 		};
 		994D4AE92984A97159879A5258A261F0 /* Sandbox Release */ = {
 			isa = XCBuildConfiguration;
@@ -11600,25 +11619,6 @@
 			};
 			name = Release;
 		};
-		D6439A0264B7D5766BD612C217A96F8F /* Production Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B905D8844E0C91AB0FA6C0006D1269E5 /* composeApp.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = "Production Debug";
-		};
 		D6E9020A73224AE07F9F449296D94455 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -12333,25 +12333,6 @@
 			};
 			name = Debug;
 		};
-		ED33BF615A126F7336B7A9FFAB17CA0E /* Production Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B905D8844E0C91AB0FA6C0006D1269E5 /* composeApp.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = "Production Release";
-		};
 		EDF6A7BADB250544A1E9AB5D7BF44499 /* Sandbox Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5DF3285F5E23BE561DA402E406AC98C9 /* FirebaseCore.release.xcconfig */;
@@ -12785,6 +12766,25 @@
 			};
 			name = "Sandbox Release";
 		};
+		F9FF3CDA54DE64B51949C41ED8DEB733 /* Production Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B905D8844E0C91AB0FA6C0006D1269E5 /* composeApp.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Production Release";
+		};
 		FC2B7A0D762AB5ECED6814D3642CEAA7 /* Sandbox Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 685B20AB553979B6759496F0E281D783 /* FirebaseMessaging.release.xcconfig */;
@@ -13038,12 +13038,12 @@
 		7AD7C631054E52477E0B508AEEB8584B /* Build configuration list for PBXAggregateTarget "composeApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				992B33C0E1240A93F88D14E2615508BA /* Debug */,
-				D6439A0264B7D5766BD612C217A96F8F /* Production Debug */,
-				ED33BF615A126F7336B7A9FFAB17CA0E /* Production Release */,
-				1AD6A27F114680A5DBDB0AFF2A7BFA06 /* Release */,
-				3281B17FE87A6BF06BFFA987C9590C7C /* Sandbox Debug */,
-				76A7A67A0B7F919B2826B87AD15DC7F8 /* Sandbox Release */,
+				5ABD665D253F0B3427377B9A1092DAFF /* Debug */,
+				6EA5216A737DC070ECD32E9A1AD60360 /* Production Debug */,
+				F9FF3CDA54DE64B51949C41ED8DEB733 /* Production Release */,
+				3838B8625869721CF30B3A5044F23C86 /* Release */,
+				2E031EB024049C49DDF6BFD91D099184 /* Sandbox Debug */,
+				17872EDF05D9C38A97B3AC25ADF3AE18 /* Sandbox Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
