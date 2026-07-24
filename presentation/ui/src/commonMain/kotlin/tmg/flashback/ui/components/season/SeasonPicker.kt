@@ -1,7 +1,7 @@
 package tmg.flashback.ui.components.season
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
@@ -18,8 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
@@ -31,6 +29,7 @@ fun Picker(
     option: PickerItem,
     optionsToShow: List<PickerItem>,
     optionUpdated: (PickerItem) -> Unit,
+    longClicked: () -> Unit = { },
     modifier: Modifier = Modifier,
     labelContent: @Composable () -> Unit = { },
     defaultExpanded: Boolean = false
@@ -38,7 +37,10 @@ fun Picker(
     val expanded = remember { mutableStateOf(defaultExpanded)  }
     Row(
         modifier = Modifier
-            .clickable { expanded.value = true }
+            .combinedClickable(
+                onClick = { expanded.value = true },
+                onLongClick = longClicked
+            )
             .then(modifier),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -89,6 +91,7 @@ private fun Preview() {
             option = PickerItem.Text("2020"),
             optionsToShow = listOf(PickerItem.Text("2020"), PickerItem.Text("2021")),
             optionUpdated = { },
+            longClicked = { }
         )
     }
 }
@@ -102,6 +105,7 @@ private fun PreviewExpanded() {
             option = PickerItem.Text("2020"),
             optionsToShow = listOf(PickerItem.Text("2020"), PickerItem.Text("2021")),
             optionUpdated = { },
+            longClicked = { },
             defaultExpanded = true
         )
     }
