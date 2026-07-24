@@ -32,48 +32,44 @@ internal class GetPreviousRaceUseCaseImplTest {
 
     @Test
     fun `returns previous race when the same race name exists in an earlier season`() = runTest {
+        val currentRace = OverviewRace.model(season = 2024, round = 1, raceName = "British Grand Prix", circuitId = "silverstone")
         val previousRace = OverviewRace.model(season = 2023, round = 10, raceName = "British Grand Prix", circuitId = "silverstone")
 
-        every { mockOverviewRepository.getOverview(any<Int>()) } returns flowOf(Overview(0, overviewRaces = emptyList()))
-        every { mockOverviewRepository.getOverview(2023) } returns flowOf(Overview(2023, overviewRaces = listOf(previousRace)))
-        every { mockOverviewRepository.getOverview(2022) } returns flowOf(Overview(2022, overviewRaces = emptyList()))
-        everySuspend { mockOverviewRepository.getOverview(any<String>()) } returns listOf(previousRace)
+        every { mockOverviewRepository.getOverview(any<Int>(), any<Int>()) } returns flowOf(currentRace)
+        everySuspend { mockOverviewRepository.getOverview("silverstone") } returns listOf(previousRace)
 
         initUnderTest()
 
-        val result = underTest(2024, 1, "silverstone")
+        val result = underTest(2024, 1)
 
         assertEquals(previousRace, result)
     }
 
     @Test
     fun `returns previous race from the same circuit when no same-name race exists`() = runTest {
+        val currentRace = OverviewRace.model(season = 2024, round = 1, raceName = "Spanish Grand Prix", circuitId = "barcelona")
         val previousRace = OverviewRace.model(season = 2023, round = 5, raceName = "Monaco Grand Prix", circuitId = "barcelona")
 
-        every { mockOverviewRepository.getOverview(any<Int>()) } returns flowOf(Overview(0, overviewRaces = emptyList()))
-        every { mockOverviewRepository.getOverview(2023) } returns flowOf(Overview(2023, overviewRaces = emptyList()))
-        every { mockOverviewRepository.getOverview(2022) } returns flowOf(Overview(2022, overviewRaces = emptyList()))
-        everySuspend { mockOverviewRepository.getOverview(any<String>()) } returns listOf(previousRace)
+        every { mockOverviewRepository.getOverview(any<Int>(), any<Int>()) } returns flowOf(currentRace)
+        everySuspend { mockOverviewRepository.getOverview("barcelona") } returns listOf(previousRace)
 
         initUnderTest()
 
-        val result = underTest(2024, 1, "barcelona")
+        val result = underTest(2024, 1)
 
         assertEquals(previousRace, result)
     }
 
     @Test
     fun `returns null when no previous matching race exists`() = runTest {
-        every { mockOverviewRepository.getOverview(any<Int>()) } returns flowOf(Overview(0, overviewRaces = emptyList()))
-        every { mockOverviewRepository.getOverview(2023) } returns flowOf(Overview(2023, overviewRaces = emptyList()))
-        every { mockOverviewRepository.getOverview(2022) } returns flowOf(Overview(2022, overviewRaces = emptyList()))
-        every { mockOverviewRepository.getOverview(2021) } returns flowOf(Overview(2021, overviewRaces = emptyList()))
-        every { mockOverviewRepository.getOverview(2020) } returns flowOf(Overview(2020, overviewRaces = emptyList()))
-        everySuspend { mockOverviewRepository.getOverview(any<String>()) } returns emptyList()
+        val currentRace = OverviewRace.model(season = 2024, round = 1, raceName = "Spanish Grand Prix", circuitId = "barcelona")
+
+        every { mockOverviewRepository.getOverview(any<Int>(), any<Int>()) } returns flowOf(currentRace)
+        everySuspend { mockOverviewRepository.getOverview("barcelona") } returns emptyList()
 
         initUnderTest()
 
-        val result = underTest(2024, 1, "barcelona")
+        val result = underTest(2024, 1)
 
         assertNull(result)
     }
