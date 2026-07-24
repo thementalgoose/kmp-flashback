@@ -5,20 +5,20 @@ import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.formula1.model.OverviewRace
 
 interface GetPreviousRaceUseCase {
-    suspend operator fun invoke(currentRace: OverviewRace): OverviewRace?
+    suspend operator fun invoke(season: Int, round: Int): OverviewRace?
 }
 
 internal class GetPreviousRaceUseCaseImpl(
     private val overviewRepository: OverviewRepository
 ): GetPreviousRaceUseCase {
 
-    override suspend operator fun invoke(currentRace: OverviewRace): OverviewRace? {
-        return overviewRepository.getOverview(currentRace.circuitId)
+    override suspend operator fun invoke(season: Int, round: Int): OverviewRace? {
+        val race = overviewRepository.getOverview(season, round).firstOrNull() ?: return null
+        return overviewRepository.getOverview(race.circuitId)
             .filter { race ->
-                race.season < currentRace.season || (race.season == currentRace.season && race.round < currentRace.round)
+                race.season < season || (race.season == season && race.round < round)
             }
-            .sortedBy { race -> race.round }
-            .sortedBy { race -> race.season }
-            .firstOrNull()
+            .sortedByDescending { race -> race.round }
+            .maxByOrNull { race -> race.season }
     }
 }

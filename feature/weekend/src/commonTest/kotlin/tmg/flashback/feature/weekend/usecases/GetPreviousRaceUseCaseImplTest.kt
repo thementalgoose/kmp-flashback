@@ -13,6 +13,7 @@ import kotlinx.datetime.LocalTime
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.formula1.model.Overview
 import tmg.flashback.formula1.model.OverviewRace
+import tmg.flashback.formula1.model.model
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -31,8 +32,7 @@ internal class GetPreviousRaceUseCaseImplTest {
 
     @Test
     fun `returns previous race when the same race name exists in an earlier season`() = runTest {
-        val currentRace = race(season = 2024, round = 1, raceName = "British Grand Prix", circuitId = "silverstone")
-        val previousRace = race(season = 2023, round = 10, raceName = "British Grand Prix", circuitId = "silverstone")
+        val previousRace = OverviewRace.model(season = 2023, round = 10, raceName = "British Grand Prix", circuitId = "silverstone")
 
         every { mockOverviewRepository.getOverview(any<Int>()) } returns flowOf(Overview(0, overviewRaces = emptyList()))
         every { mockOverviewRepository.getOverview(2023) } returns flowOf(Overview(2023, overviewRaces = listOf(previousRace)))
@@ -41,15 +41,14 @@ internal class GetPreviousRaceUseCaseImplTest {
 
         initUnderTest()
 
-        val result = underTest(currentRace)
+        val result = underTest(2024, 1, "silverstone")
 
         assertEquals(previousRace, result)
     }
 
     @Test
     fun `returns previous race from the same circuit when no same-name race exists`() = runTest {
-        val currentRace = race(season = 2024, round = 1, raceName = "Spanish Grand Prix", circuitId = "barcelona")
-        val previousRace = race(season = 2023, round = 5, raceName = "Monaco Grand Prix", circuitId = "barcelona")
+        val previousRace = OverviewRace.model(season = 2023, round = 5, raceName = "Monaco Grand Prix", circuitId = "barcelona")
 
         every { mockOverviewRepository.getOverview(any<Int>()) } returns flowOf(Overview(0, overviewRaces = emptyList()))
         every { mockOverviewRepository.getOverview(2023) } returns flowOf(Overview(2023, overviewRaces = emptyList()))
@@ -58,15 +57,13 @@ internal class GetPreviousRaceUseCaseImplTest {
 
         initUnderTest()
 
-        val result = underTest(currentRace)
+        val result = underTest(2024, 1, "barcelona")
 
         assertEquals(previousRace, result)
     }
 
     @Test
     fun `returns null when no previous matching race exists`() = runTest {
-        val currentRace = race(season = 2024, round = 1, raceName = "Spanish Grand Prix", circuitId = "barcelona")
-
         every { mockOverviewRepository.getOverview(any<Int>()) } returns flowOf(Overview(0, overviewRaces = emptyList()))
         every { mockOverviewRepository.getOverview(2023) } returns flowOf(Overview(2023, overviewRaces = emptyList()))
         every { mockOverviewRepository.getOverview(2022) } returns flowOf(Overview(2022, overviewRaces = emptyList()))
@@ -76,31 +73,8 @@ internal class GetPreviousRaceUseCaseImplTest {
 
         initUnderTest()
 
-        val result = underTest(currentRace)
+        val result = underTest(2024, 1, "barcelona")
 
         assertNull(result)
     }
-
-    private fun race(
-        season: Int,
-        round: Int,
-        raceName: String,
-        circuitId: String
-    ) = OverviewRace(
-        date = LocalDate(2020, 1, 1),
-        time = LocalTime(12, 0),
-        season = season,
-        round = round,
-        raceName = raceName,
-        circuitId = circuitId,
-        circuitName = circuitId,
-        laps = null,
-        country = "Country",
-        countryISO = "GB",
-        cancelled = false,
-        hasQualifying = false,
-        hasSprint = false,
-        hasResults = false,
-        schedule = emptyList()
-    )
 }

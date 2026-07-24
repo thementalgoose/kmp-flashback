@@ -62,12 +62,14 @@ import flashback.presentation.localisation.generated.resources.details_link_map
 import flashback.presentation.localisation.generated.resources.details_link_wikipedia
 import flashback.presentation.localisation.generated.resources.details_link_youtube
 import flashback.presentation.ui.generated.resources.ic_details_maps
+import flashback.presentation.ui.generated.resources.ic_details_track
 import flashback.presentation.ui.generated.resources.ic_details_wikipedia
 import flashback.presentation.ui.generated.resources.ic_details_youtube
 import kotlinx.datetime.format.DayOfWeekNames
 import kotlinx.datetime.format.MonthNames
 import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Location
+import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.ScheduleWeather
 import tmg.flashback.formula1.model.Timestamp
@@ -159,6 +161,8 @@ internal fun RaceDetails(
 @Composable
 internal fun RaceLinks(
     model: InfoModel,
+    previousRace: OverviewRace?,
+    previousRaceClicked: (OverviewRace) -> Unit,
     youtubeClicked: (String) -> Unit,
     wikipediaClicked: (String) -> Unit,
     mapsClicked: (Location, String) -> Unit,
@@ -175,6 +179,15 @@ internal fun RaceLinks(
             if (model.laps != null) {
                 BadgeView(
                     label = stringResource(string.details_link_laps, model.laps),
+                )
+            }
+            if (previousRace != null) {
+                BadgeView(
+                    modifier = Modifier.clickable {
+                        previousRaceClicked(previousRace)
+                    },
+                    icon = Res.drawable.ic_details_track,
+                    label = previousRace.season.toString(),
                 )
             }
             if (model.youtubeUrl != null) {

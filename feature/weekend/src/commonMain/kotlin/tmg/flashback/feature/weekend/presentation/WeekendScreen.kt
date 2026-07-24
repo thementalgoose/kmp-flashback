@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowSizeClass.Companion.HEIGHT_DP_MEDIUM_LOWER_BOUND
 import coil3.compose.AsyncImagePainter
@@ -44,6 +45,7 @@ import tmg.flashback.feature.weekend.presentation.data.race.addRaceData
 import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.addSprintQualifyingData
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.addSprintRaceData
 import tmg.flashback.formula1.model.Location
+import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.navigation.NavWeekend
 import tmg.flashback.style.AppTheme
@@ -62,6 +64,7 @@ fun WeekendScreen(
     paddingValues: PaddingValues,
     showBack: Boolean,
     actionUpClicked: () -> Unit,
+    navigateTo: (NavKey) -> Unit,
     windowSizeClass: WindowSizeClass,
     viewModel: WeekendViewModel = koinViewModel()
 ) {
@@ -90,6 +93,7 @@ fun WeekendScreen(
         screenData = data,
         paddingValues = paddingValues,
         showBack = showBack,
+        navigateTo = navigateTo,
         actionUpClicked = actionUpClicked,
         openLink = viewModel::openLink,
         openMap = viewModel::openMap,
@@ -107,6 +111,7 @@ fun WeekendScreenTab(
     isLoading: Boolean,
     paddingValues: PaddingValues,
     showBack: Boolean,
+    navigateTo: (NavKey) -> Unit,
     actionUpClicked: () -> Unit,
     clickWeekendTab: (WeekendTabs) -> Unit,
     openLink: (String) -> Unit,
@@ -208,7 +213,22 @@ fun WeekendScreenTab(
                     if (uiState is Data) {
 
                         addDetails(uiState.info)
-                        addLinks(uiState.info, openLink, openLink, openMap)
+                        addLinks(
+                            info = uiState.info,
+                            previousRace = uiState.previousRace,
+                            previousRaceClicked = {
+                                navigateTo(
+                                    NavWeekend(
+                                        season = it.season,
+                                        round = it.round,
+                                        raceName = it.raceName
+                                    )
+                                )
+                            },
+                            youtubeClicked = openLink,
+                            wikipediaClicked = openLink,
+                            mapsClicked = openMap
+                        )
                         addSchedule(uiState.info)
 
                         if (uiState.tab == WeekendTabs.Qualifying) {
@@ -282,6 +302,8 @@ fun LazyListScope.addDetails(info: InfoModel) {
 
 fun LazyListScope.addLinks(
     info: InfoModel,
+    previousRace: OverviewRace?,
+    previousRaceClicked: (OverviewRace) -> Unit,
     youtubeClicked: (String) -> Unit,
     wikipediaClicked: (String) -> Unit,
     mapsClicked: (Location, String) -> Unit
@@ -290,6 +312,8 @@ fun LazyListScope.addLinks(
         RaceLinks(
             modifier = Modifier.animateItem(),
             model = info,
+            previousRace = previousRace,
+            previousRaceClicked = previousRaceClicked,
             youtubeClicked = youtubeClicked,
             wikipediaClicked = wikipediaClicked,
             mapsClicked = mapsClicked
