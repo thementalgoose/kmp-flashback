@@ -20,6 +20,10 @@ interface OverviewDao {
     @Query("SELECT * FROM overview")
     fun getOverview(): Flow<List<OverviewWithCircuit>>
 
+    @Transaction
+    @Query("SELECT * FROM overview WHERE circuit_id = :circuitId ORDER BY season ASC, round ASC")
+    suspend fun getOverview(circuitId: String): List<OverviewWithCircuit>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(overviews: List<Overview>)
 

@@ -20,6 +20,7 @@ interface OverviewRepository {
     suspend fun populateOverview(season: Int): Response
     fun getOverview(season: Int, round: Int): Flow<OverviewRace?>
     fun getOverview(season: Int): Flow<Overview?>
+    suspend fun getOverview(circuitId: String): List<OverviewRace>
     suspend fun getUpcomingOverviews(): List<OverviewRace>?
 }
 
@@ -109,6 +110,17 @@ internal class OverviewRepositoryImpl(
                         .map { overviewMapper.mapOverview(it) }
                         .sortedBy { it.round }
                 )
+            }
+    }
+
+    override suspend fun getOverview(circuitId: String): List<OverviewRace> {
+        return persistence.overviewDao().getOverview(circuitId)
+            .mapNotNull { overview ->
+                try {
+                    overviewMapper.mapOverview(overview)
+                } catch (e: RuntimeException) {
+                    null
+                }
             }
     }
 
