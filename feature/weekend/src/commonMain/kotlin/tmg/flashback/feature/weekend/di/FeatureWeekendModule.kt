@@ -15,13 +15,16 @@ import tmg.flashback.feature.weekend.presentation.data.sprint_race.SprintRaceDat
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.SprintRaceDataMapperImpl
 import tmg.flashback.feature.weekend.repositories.WeatherRepository
 import tmg.flashback.feature.weekend.repositories.WeatherRepositoryImpl
+import tmg.flashback.feature.weekend.usecases.GetPreviousRaceUseCase
+import tmg.flashback.feature.weekend.usecases.GetPreviousRaceUseCaseImpl
 
 val featureWeekendModule = listOf(module())
 
 internal fun module() = module {
-    viewModel { WeekendViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { WeekendViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
 
     single<WeatherRepository> { WeatherRepositoryImpl(get()) }
+    single<GetPreviousRaceUseCase> { GetPreviousRaceUseCaseImpl(get()) }
 
     single<InfoDataMapper> { InfoDataMapperImpl(get()) }
     single<QualifyingDataMapper> { QualifyingDataMapperImpl() }

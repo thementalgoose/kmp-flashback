@@ -18,6 +18,7 @@ import tmg.flashback.feature.weekend.presentation.data.qualifying.QualifyingMode
 import tmg.flashback.feature.weekend.presentation.data.race.RaceModel
 import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.SprintQualifyingModel
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.SprintRaceModel
+import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.QualifyingType
 
 sealed class WeekendUiState {
@@ -30,6 +31,7 @@ sealed class WeekendUiState {
         val info: InfoModel,
         val resultType: ResultType,
         val cancelled: Boolean,
+        val previousRace: OverviewRace?,
         val qualifyingColumns: QualifyingType?,
         val qualifyingResults: List<QualifyingModel>,
         val raceResults: List<RaceModel>,

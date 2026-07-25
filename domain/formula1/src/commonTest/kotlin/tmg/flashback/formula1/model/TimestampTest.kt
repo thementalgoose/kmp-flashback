@@ -11,6 +11,7 @@ import kotlinx.datetime.UtcOffset
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
+import tmg.flashback.infrastructure.datetime.plus
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -103,8 +104,9 @@ internal class TimestampTest {
 
     @Test
     fun `is in past returns true when date is today and original time is in past`() {
-        val date = LocalDate.now()
-        val time = LocalTime.now().minus(1)
+        val dateTime = LocalDateTime.now().plus(-1, DateTimeUnit.SECOND)
+        val date = dateTime.date
+        val time = dateTime.time
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
@@ -114,8 +116,9 @@ internal class TimestampTest {
 
     @Test
     fun `is in past returns false when date is today and original time is now`() {
-        val date = LocalDate.now()
-        val time = LocalTime.now().plus(1)
+        val dateTime = LocalDateTime.now().plus(1, DateTimeUnit.SECOND)
+        val date = dateTime.date
+        val time = dateTime.time
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
@@ -162,8 +165,9 @@ internal class TimestampTest {
 
     @Test
     fun `is today returns true when date is today and original time is today`() {
-        val date = LocalDate.now()
-        val time = LocalTime.now().minus(1)
+        val dateTime = LocalDateTime.now().plus(-1, DateTimeUnit.SECOND)
+        val date = dateTime.date
+        val time = dateTime.time
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
@@ -173,8 +177,9 @@ internal class TimestampTest {
 
     @Test
     fun `is today returns true when date is today and original time is now`() {
-        val date = LocalDate.now()
-        val time = LocalTime.now().plus(1)
+        val dateTime = LocalDateTime.now().plus(1, DateTimeUnit.SECOND)
+        val date = dateTime.date
+        val time = dateTime.time
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
@@ -184,8 +189,9 @@ internal class TimestampTest {
 
     @Test
     fun `is today returns true when date is today and original time is in future`() {
-        val date = LocalDate.now()
-        val time = LocalTime.now().plus(1)
+        val dateTime = LocalDateTime.now().plus(1, DateTimeUnit.SECOND)
+        val date = dateTime.date
+        val time = dateTime.time
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
@@ -210,8 +216,9 @@ internal class TimestampTest {
 
     @Test
     fun `state is UPCOMING when more than 30 minutes in future`() {
-        val date = LocalDate.now()
-        val time = LocalTime.now().plus(31 * 60)
+        val dateTime = LocalDateTime.now().plus(31 * 60, DateTimeUnit.SECOND)
+        val date = dateTime.date
+        val time = dateTime.time
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
@@ -221,8 +228,9 @@ internal class TimestampTest {
 
     @Test
     fun `state is BUILD_UP at lower bound (30 minutes in future)`() {
-        val date = LocalDate.now()
-        val time = LocalTime.now().plus(29 * 60)
+        val dateTime = LocalDateTime.now().plus(29 * 60, DateTimeUnit.SECOND)
+        val date = dateTime.date
+        val time = dateTime.time
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
@@ -232,8 +240,9 @@ internal class TimestampTest {
 
     @Test
     fun `state is BUILD_UP at upper bound (2 minutes in future)`() {
-        val date = LocalDate.now()
-        val time = LocalTime.now().plus(3 * 60)
+        val dateTime = LocalDateTime.now().plus(3 * 60, DateTimeUnit.SECOND)
+        val date = dateTime.date
+        val time = dateTime.time
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
@@ -243,8 +252,9 @@ internal class TimestampTest {
 
     @Test
     fun `state is LIVE at lower bound (just after 2 minutes ago)`() {
-        val date = LocalDate.now()
-        val time = LocalTime.now().minus(1 * 60)
+        val dateTime = LocalDateTime.now().plus(-1 * 60, DateTimeUnit.SECOND)
+        val date = dateTime.date
+        val time = dateTime.time
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
@@ -254,8 +264,9 @@ internal class TimestampTest {
 
     @Test
     fun `state is LIVE at upper bound (1 hour ago)`() {
-        val date = LocalDate.now()
-        val time = LocalTime.now().minus(60 * 59)
+        val dateTime = LocalDateTime.now().plus(-60 * 59, DateTimeUnit.SECOND)
+        val date = dateTime.date
+        val time = dateTime.time
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
@@ -265,8 +276,9 @@ internal class TimestampTest {
 
     @Test
     fun `state is EXPIRED when more than 1 hour in past`() {
-        val date = LocalDate.now()
-        val time = LocalTime.now().minus(2 * 60 * 60)
+        val dateTime = LocalDateTime.now().plus(-2 * 60 * 60, DateTimeUnit.SECOND)
+        val date = dateTime.date
+        val time = dateTime.time
         val zone = TimeZone.UTC
 
         val sut = Timestamp(date, time, zone)
@@ -290,8 +302,8 @@ internal class TimestampTest {
 
     private fun LocalTime.minus(seconds: Int): LocalTime = this.plus(-seconds)
     private fun LocalTime.plus(seconds: Int): LocalTime {
-        var millis = this.toMillisecondOfDay()
-        millis += (seconds * 1000)
-        return LocalTime.fromMillisecondOfDay(millis)
+        val millisPerDay = 24L * 60 * 60 * 1000
+        val millis = ((this.toMillisecondOfDay().toLong() + seconds * 1000L) % millisPerDay + millisPerDay) % millisPerDay
+        return LocalTime.fromMillisecondOfDay(millis.toInt())
     }
 }

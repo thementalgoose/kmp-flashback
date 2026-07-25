@@ -23,8 +23,10 @@ import tmg.flashback.feature.weekend.presentation.data.qualifying.QualifyingData
 import tmg.flashback.feature.weekend.presentation.data.race.RaceDataMapper
 import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.SprintQualifyingDataMapper
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.SprintRaceDataMapper
+import tmg.flashback.feature.weekend.usecases.GetPreviousRaceUseCase
 import tmg.flashback.feature.weekend.utils.getWeekendEventOrder
 import tmg.flashback.formula1.model.Location
+import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.infrastructure.log.logInfo
 
@@ -37,7 +39,8 @@ class WeekendViewModel(
     private val sprintQualifyingDataMapper: SprintQualifyingDataMapper,
     private val sprintRaceDataMapper: SprintRaceDataMapper,
     private val openWebpageUseCase: OpenWebpageUseCase,
-    private val openLocationUseCase: OpenLocationUseCase
+    private val openLocationUseCase: OpenLocationUseCase,
+    private val getPreviousRaceUseCase: GetPreviousRaceUseCase
 ): ViewModel() {
 
     private val seasonRound: MutableStateFlow<Pair<Int, Int>?> = MutableStateFlow(null)
@@ -48,6 +51,7 @@ class WeekendViewModel(
     private val resultType: MutableStateFlow<ResultType> = MutableStateFlow(ResultType.DRIVERS)
 
     private val tab: MutableStateFlow<WeekendTabs> = MutableStateFlow(WeekendTabs.Qualifying)
+    private val previousRace: MutableStateFlow<OverviewRace?> = MutableStateFlow(null)
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val uiState: StateFlow<WeekendUiState> =
@@ -56,8 +60,9 @@ class WeekendViewModel(
                 .filterNotNull()
                 .flatMapLatest { (season, round) -> racesRepository.getRace(season, round) },
             resultType,
-            tab
-        ) { race, resultType, tab ->
+            tab,
+            previousRace
+        ) { race, resultType, tab, previousRace ->
             logDebug("WeekendVM", "Calculating WeekendUiState ${race?.raceInfo} - $resultType - $tab")
             if (race == null) {
                 return@combine WeekendUiState.NotFound
@@ -73,6 +78,7 @@ class WeekendViewModel(
                 ),
                 resultType = resultType,
                 cancelled = race.raceInfo.cancelled,
+                previousRace = previousRace,
                 qualifyingResults = qualifyingDataMapper(race),
                 qualifyingColumns = race.qualifying.maxOfOrNull { it.label },
                 raceResults = raceDataMapper(race, resultType),
@@ -89,9 +95,15 @@ class WeekendViewModel(
         this.tab.update { WeekendTabs.Qualifying }
         viewModelScope.launch {
             val data = racesRepository.getRace(season, round).firstOrNull()
-            if (data?.race?.isEmpty() == true && data.qualifying.isEmpty() == true) {
+            if (data?.race?.isEmpty() == true && data.qualifying.isEmpty() || data == null) {
                 refresh(season)
             }
+
+            val previousRaceOverview = getPreviousRaceUseCase(
+                season = season,
+                round = round,
+            )
+            previousRace.update { previousRaceOverview }
         }
     }
 
