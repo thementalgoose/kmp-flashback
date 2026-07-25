@@ -71,7 +71,8 @@ fun ResultsSeasonPicker(
                 if (newSeasonAvailable) {
                     BadgeView(model = Badge(label = stringResource(resource = string.dashboard_new_season_available)))
                 }
-            }
+            },
+            counter = true
         )
         if (subtitle != null) {
             TextHeadline1(
