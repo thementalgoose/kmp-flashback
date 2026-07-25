@@ -23,6 +23,7 @@ import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextHeadline1Inline
 import tmg.flashback.style.text.TextTitle
+import tmg.flashback.ui.components.text.CounterText
 
 @Composable
 fun Picker(
@@ -32,7 +33,8 @@ fun Picker(
     longClicked: () -> Unit = { },
     modifier: Modifier = Modifier,
     labelContent: @Composable () -> Unit = { },
-    defaultExpanded: Boolean = false
+    defaultExpanded: Boolean = false,
+    counter: Boolean = false
 ) {
     val expanded = remember { mutableStateOf(defaultExpanded)  }
     Row(
@@ -44,7 +46,11 @@ fun Picker(
             .then(modifier),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        TextHeadline1Inline(text = option.string())
+        if (counter) {
+            CounterText(option.string())
+        } else {
+            TextHeadline1Inline(text = option.string())
+        }
         Spacer(Modifier.width(AppTheme.dimens.nsmall))
         Icon(
             imageVector = Icons.Default.Edit,

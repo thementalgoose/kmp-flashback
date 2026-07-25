@@ -14,27 +14,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.ApplicationTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextHeadline1Inline
 
 @Composable
 fun CounterText(
-    integer: Int,
+    label: String,
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .animateContentSize(),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        integer
-            .toString()
-            .mapIndexed { index, c -> Digit(c, integer, index) }
+        label
+            .mapIndexed { index, c -> Digit(c, index) }
             .forEach { digit ->
                 AnimatedContent(
                     targetState = digit,
@@ -54,7 +51,7 @@ fun CounterText(
     }
 }
 
-private data class Digit(val digitChar: Char, val fullNumber: Int, val place: Int) {
+private data class Digit(val digitChar: Char, val place: Int) {
     override fun equals(other: Any?): Boolean {
         return when (other) {
             is Digit -> digitChar == other.digitChar
@@ -64,7 +61,7 @@ private data class Digit(val digitChar: Char, val fullNumber: Int, val place: In
 }
 
 private operator fun Digit.compareTo(other: Digit): Int {
-    return fullNumber.compareTo(other.fullNumber)
+    return digitChar.compareTo(other.digitChar)
 }
 
 @Composable
@@ -72,7 +69,7 @@ private operator fun Digit.compareTo(other: Digit): Int {
 private fun Preview() {
     ApplicationThemePreview {
         CounterText(
-            integer = 2022,
+            label = "2022",
             modifier = Modifier.padding(horizontal = AppTheme.dimens.medium)
         )
     }
