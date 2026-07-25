@@ -66,9 +66,7 @@ fun ResultsSeasonPicker(
                     currentSeasonUpdated(it.text.toInt())
                 }
             },
-            longClicked = {
-
-            },
+            longClicked = goToLatestSeason,
             labelContent = {
                 if (newSeasonAvailable) {
                     BadgeView(model = Badge(label = stringResource(resource = string.dashboard_new_season_available)))
