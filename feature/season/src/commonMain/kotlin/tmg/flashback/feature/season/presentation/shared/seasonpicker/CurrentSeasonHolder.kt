@@ -18,6 +18,7 @@ interface CurrentSeasonHolder {
     val defaultSeason: Int
 
     fun updateTo(season: Int)
+    fun updateToLatest()
     fun refresh()
 }
 
@@ -51,6 +52,10 @@ class CurrentSeasonHolderImpl(
             currentSeasonFlow.value = season
         }
         refresh()
+    }
+
+    override fun updateToLatest() {
+        updateTo(defaultSeason)
     }
 
     override fun refresh() {

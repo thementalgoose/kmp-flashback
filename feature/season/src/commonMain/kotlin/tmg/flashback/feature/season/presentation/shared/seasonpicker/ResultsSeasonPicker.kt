@@ -35,7 +35,8 @@ fun ResultsSeasonPicker(
         currentSeason = currentSeason.value,
         supportedSeasons = seasons.value,
         newSeasonAvailable = newSeasonAvailable.value,
-        currentSeasonUpdated = viewModel::currentSeasonUpdate
+        currentSeasonUpdated = viewModel::currentSeasonUpdate,
+        goToLatestSeason = viewModel::goToLatestSeason
     )
 }
 
@@ -45,7 +46,8 @@ fun ResultsSeasonPicker(
     currentSeason: Int,
     supportedSeasons: List<Int>,
     newSeasonAvailable: Boolean,
-    currentSeasonUpdated: (season: Int) -> Unit
+    currentSeasonUpdated: (season: Int) -> Unit,
+    goToLatestSeason: () -> Unit,
 ) {
     val seasons = remember(supportedSeasons) { supportedSeasons.map { PickerItem.Text(it.toString()) } }
     Column(
@@ -64,6 +66,7 @@ fun ResultsSeasonPicker(
                     currentSeasonUpdated(it.text.toInt())
                 }
             },
+            longClicked = goToLatestSeason,
             labelContent = {
                 if (newSeasonAvailable) {
                     BadgeView(model = Badge(label = stringResource(resource = string.dashboard_new_season_available)))
@@ -88,7 +91,8 @@ private fun PreviewWithNewSeason() {
             currentSeason = 2023,
             supportedSeasons = listOf(2023, 2024),
             newSeasonAvailable = true,
-            currentSeasonUpdated = { }
+            currentSeasonUpdated = { },
+            goToLatestSeason = { }
         )
     }
 }
@@ -102,7 +106,8 @@ private fun Preview() {
             currentSeason = 2023,
             supportedSeasons = listOf(2023, 2024),
             newSeasonAvailable = false,
-            currentSeasonUpdated = { }
+            currentSeasonUpdated = { },
+            goToLatestSeason = { }
         )
     }
 }

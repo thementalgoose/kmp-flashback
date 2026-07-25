@@ -16,4 +16,8 @@ class SeasonPickerViewModel (
     fun currentSeasonUpdate(season: Int) {
         currentSeasonHolder.updateTo(season)
     }
+
+    fun goToLatestSeason() {
+        currentSeasonHolder.updateToLatest()
+    }
 }
