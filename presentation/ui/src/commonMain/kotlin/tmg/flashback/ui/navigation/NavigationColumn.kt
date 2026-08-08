@@ -29,6 +29,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
@@ -198,8 +202,12 @@ private fun NavigationItem(
             horizontal = iconPadding.value,
         )
     ) {
+        val contentDescription = stringResource(item.label)
         Box(modifier = Modifier
             .size(iconSize)
+            .clearAndSetSemantics {
+                this.contentDescription = contentDescription
+            }
             .align(Alignment.CenterVertically)
         ) {
             Icon(

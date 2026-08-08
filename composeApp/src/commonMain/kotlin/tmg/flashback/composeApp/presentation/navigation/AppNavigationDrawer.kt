@@ -28,6 +28,8 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import flashback.composeapp.generated.resources.ic_settings_web
@@ -267,7 +269,12 @@ private fun NavigationItem(
             end = AppTheme.dimens.medium / 2
         )
     ) {
-        Box(modifier = Modifier.size(24.dp)) {
+        Box(modifier = Modifier
+            .clearAndSetSemantics {
+                this.contentDescription = label
+            }
+            .size(24.dp)
+        ) {
             Icon(
                 modifier = Modifier
                     .alpha(1f - iconTransition.value)

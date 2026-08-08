@@ -26,6 +26,10 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
@@ -140,9 +144,13 @@ private fun VerticalItem(
                 ),
             verticalArrangement = Arrangement.spacedBy(2.dp)
         ) {
+            val contentDescription = stringResource(item.label)
             Box(
                 modifier = Modifier
                     .size(iconSize)
+                    .clearAndSetSemantics {
+                        this.contentDescription = contentDescription
+                    }
                     .align(Alignment.CenterHorizontally)
             ) {
                 Icon(
@@ -158,7 +166,7 @@ private fun VerticalItem(
                         .size(iconSize)
                         .alpha(iconTransition.value),
                     painter = painterResource(resource = item.selectedIcon),
-                    tint = AppTheme.colors.onSurface,
+                    tint = AppTheme.colors.onPrimaryContainer,
                     contentDescription = null,
                 )
             }
@@ -216,8 +224,7 @@ private fun HorizontalItem(
         )
         Row(
             modifier = modifier
-                .padding(vertical = iconVerticalPadding)
-                .clickable(onClick = { itemClicked(item) }),
+                .padding(vertical = iconVerticalPadding),
             horizontalArrangement = Arrangement.spacedBy(
                 space = 8.dp,
                 alignment = Alignment.CenterHorizontally
