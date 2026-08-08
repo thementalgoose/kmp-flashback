@@ -30,6 +30,13 @@ enum class Platform {
     Other
 }
 
+val Platform.string: String
+    get() = when (this) {
+        Platform.Android -> "Android"
+        Platform.IOS -> "iOS"
+        Platform.Other -> "Other"
+    }
+
 fun Device.log() {
     logInfo("Device", "applicationId: $applicationId")
     logInfo("Device", "versionCode: $versionCode")

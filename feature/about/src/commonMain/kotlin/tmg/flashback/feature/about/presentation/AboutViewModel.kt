@@ -14,6 +14,7 @@ import tmg.flashback.device.usecases.OpenEmailUseCase
 import tmg.flashback.device.usecases.OpenStorePageUseCase
 import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.infrastructure.device.Device
+import tmg.flashback.infrastructure.device.string
 import tmg.flashback.notifications.repositories.NotificationRepository
 import kotlin.math.log
 
@@ -58,7 +59,28 @@ class AboutViewModel(
             }
             AboutButtons.Email -> {
                 logEventUseCase.logEvent("view_email")
-                openEmailUseCase(deviceRepository.contactEmail)
+                openEmailUseCase(
+                    email = deviceRepository.contactEmail,
+                    title = "Flashback",
+                    contents = """
+                        Hi 👋
+                        
+                        
+                        
+                        ------------------------------------------------------
+                        Platform: ${Device.platform.string}
+                        OS Version: ${Device.osVersion}
+                        Brand: ${Device.brand}
+                        Manufacturer: ${Device.manufacturer}
+                        Hardware: ${Device.hardware}
+                        Model: ${Device.model}
+                        Product: ${Device.product}
+                        Device: ${Device.device}
+                        UDID: ${deviceRepository.deviceUdid}
+                        IID: ${deviceRepository.installationId}
+                        ------------------------------------------------------
+                    """.trimIndent()
+                )
             }
             AboutButtons.Github -> {
                 logEventUseCase.logEvent("view_github")
