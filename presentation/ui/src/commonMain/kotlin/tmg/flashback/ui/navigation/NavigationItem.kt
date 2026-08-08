@@ -11,6 +11,7 @@ data class NavigationItem(
     val id: String,
     val label: StringResource,
     val icon: DrawableResource,
+    val selectedIcon: DrawableResource = icon,
     val isSelected: Boolean? = false,
 )
 
