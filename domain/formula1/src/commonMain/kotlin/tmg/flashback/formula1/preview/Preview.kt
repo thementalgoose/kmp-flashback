@@ -22,7 +22,9 @@ import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.RaceInfo
 import tmg.flashback.formula1.model.RaceResult
 import tmg.flashback.formula1.model.Schedule
+import tmg.flashback.formula1.model.ScheduleWeather
 import tmg.flashback.formula1.model.SprintRaceResult
+import tmg.flashback.formula1.model.WeatherType
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.plusMinutes
 
@@ -198,12 +200,29 @@ fun SprintRaceResult.Companion.preview() = SprintRaceResult(
 fun Schedule.Companion.preview(
     label: String,
     date: LocalDate = LocalDate.now(),
-    time: LocalTime = LocalTime.now()
+    time: LocalTime = LocalTime.now(),
+    weather: ScheduleWeather? = null
 ) = Schedule(
     label = label,
     date = date,
     time = time,
-    weather = null
+    weather = weather
+)
+
+fun ScheduleWeather.Companion.preview(
+    rainPercent: Double = 10.0,
+    windMs: Double = 23.0,
+    windBearing: Int = 123,
+    tempMaxC: Double = 27.0,
+    tempMinC: Double = 21.0,
+    summary: List<WeatherType> = listOf(WeatherType.CLOUDS_LIGHT)
+) = ScheduleWeather(
+    rainPercent = rainPercent,
+    windMs = windMs,
+    windBearing = windBearing,
+    tempMaxC = tempMaxC,
+    tempMinC = tempMinC,
+    summary = summary,
 )
 
 fun DriverHistory.Companion.preview(
