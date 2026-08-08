@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import tmg.flashback.analytics.usecases.LogEventUseCase
+import tmg.flashback.device.API_LINK
 import tmg.flashback.device.APPLE_STORE_LINK
 import tmg.flashback.device.GITHUB_LINK
 import tmg.flashback.device.PLAY_STORE_LINK
@@ -22,7 +23,7 @@ class AboutViewModel(
     private val copyToClipboardUseCase: CopyToClipboardUseCase,
     private val openWebpageUseCase: OpenWebpageUseCase,
     private val openEmailUseCase: OpenEmailUseCase,
-    private val logEventUseCase: LogEventUseCase
+    private val logEventUseCase: LogEventUseCase,
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<AboutUiState> = MutableStateFlow(AboutUiState(
@@ -62,6 +63,10 @@ class AboutViewModel(
             AboutButtons.Github -> {
                 logEventUseCase.logEvent("view_github")
                 openWebpageUseCase(GITHUB_LINK)
+            }
+            AboutButtons.Api -> {
+                logEventUseCase.logEvent("view_api")
+                openWebpageUseCase(API_LINK)
             }
         }
     }
