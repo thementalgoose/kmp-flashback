@@ -25,16 +25,22 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.times
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody2
+import kotlin.plus
 
 private val edgePadding: Dp = 6.dp
+private val iconVerticalPadding: Dp = 8.dp
 private val iconSize: Dp = 24.dp
 private val horizontalWidthThreshold: Dp = 180.dp
+val appBarHeight: Dp by lazy {
+    iconSize + (2 * edgePadding) + (2 * iconVerticalPadding)
+}
 
 @Composable
 fun FloatingNavigationBar(
@@ -42,11 +48,14 @@ fun FloatingNavigationBar(
     itemClicked: (NavigationItem) -> Unit,
     modifier: Modifier = Modifier,
     shadow: Dp = 8.dp,
+    bottomPadding: Dp = 0.dp,
     showLabels: Boolean = false,
 ) {
     BoxWithConstraints(
         modifier = modifier
+            .padding(bottom = bottomPadding)
             .fillMaxWidth()
+            .height(appBarHeight)
             .shadow(shadow, shape = RoundedCornerShape(100.dp))
             .clip(RoundedCornerShape(100.dp))
             .background(AppTheme.colors.surfaceNav)
@@ -119,7 +128,7 @@ private fun VerticalItem(
             modifier = Modifier
                 .align(Alignment.Center)
                 .padding(
-                    vertical = if (showLabel) AppTheme.dimens.xsmall else AppTheme.dimens.small,
+                    vertical = iconVerticalPadding,
                     horizontal = AppTheme.dimens.xsmall
                 ),
             verticalArrangement = Arrangement.spacedBy(2.dp)
@@ -182,7 +191,7 @@ private fun HorizontalItem(
         )
         Row(
             modifier = modifier
-                .padding(all = AppTheme.dimens.xsmall)
+                .padding(vertical = iconVerticalPadding)
                 .clickable(onClick = { itemClicked(item) }),
             horizontalArrangement = Arrangement.spacedBy(
                 space = 8.dp,
