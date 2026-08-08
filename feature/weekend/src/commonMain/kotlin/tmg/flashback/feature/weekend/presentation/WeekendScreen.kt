@@ -145,9 +145,7 @@ fun WeekendScreenTab(
                 val backgroundAlpha = animateColorAsState(
                     if (imageUrl != null) AppTheme.colors.surface.copy(alpha = 0.6f) else Color.Transparent
                 )
-                val height = animateDpAsState(
-                    if (imageUrl != null && windowSizeClass.isHeightAtLeastBreakpoint(HEIGHT_DP_MEDIUM_LOWER_BOUND)) 80.dp else 0.dp
-                )
+                val height = 0.dp
                 val painter = rememberAsyncImagePainter(
                     model = imageUrl,
                     contentScale = ContentScale.Crop
@@ -198,7 +196,7 @@ fun WeekendScreenTab(
                                 actionUpClicked = actionUpClicked,
                                 action = HeaderAction.BACK.takeIf { showBack },
                                 actionModifier = buttonModifier,
-                                contentSpacing = height.value,
+                                contentSpacing = height,
                                 text = text,
                                 scrim = true,
                                 topInset = topInset,
