@@ -51,9 +51,18 @@ fun Header(
     contentSpacing: Dp = 0.dp,
     content: @Composable RowScope.() -> Unit
 ) {
+
+    val scrimModifier = when (scrim) {
+        true -> Modifier.background(
+            brush = Brush.verticalGradient(listOf(Color.Transparent, scrimColour))
+        )
+        false -> Modifier
+    }
+
     Column(
         modifier = modifier
             .fillMaxWidth()
+            .then(scrimModifier)
             .padding(top = AppTheme.dimens.xsmall)
     ) {
         Spacer(Modifier.height(topInset))
@@ -75,16 +84,9 @@ fun Header(
         }
         Spacer(Modifier.height(contentSpacing))
         Box {
-            val scrimModifier = when (scrim) {
-                true -> Modifier.background(
-                    brush = Brush.verticalGradient(listOf(Color.Transparent, scrimColour))
-                )
-                false -> Modifier
-            }
 
             Row(
-                verticalAlignment = Alignment.Top,
-                modifier = scrimModifier
+                verticalAlignment = Alignment.Top
             ) {
                 Row(Modifier.weight(1f)) {
                     content()
