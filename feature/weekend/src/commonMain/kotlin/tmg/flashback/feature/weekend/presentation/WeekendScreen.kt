@@ -22,6 +22,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -54,6 +55,7 @@ import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.loading.SkeletonBox
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
+import tmg.flashback.ui.navigation.FloatingNavigationBar
 import tmg.flashback.ui.navigation.NavigationBar
 import tmg.flashback.ui.navigation.NavigationItem
 import tmg.flashback.ui.navigation.appBarMaximumHeight
@@ -259,8 +261,10 @@ fun WeekendScreenTab(
         )
         if (uiState is Data) {
             val navigationItems = uiState.tabs.toNavigationItem(uiState.tab)
-            NavigationBar(
+            FloatingNavigationBar(
                 modifier = Modifier
+                    .background(Brush.verticalGradient(listOf(Color.Transparent, AppTheme.colors.surface)))
+                    .padding(horizontal = AppTheme.dimens.medium)
                     .align(Alignment.BottomCenter),
                 list = navigationItems,
                 itemClicked = {
@@ -269,7 +273,7 @@ fun WeekendScreenTab(
                         clickWeekendTab(tab)
                     }
                 },
-                bottomPadding = paddingValues.calculateBottomPadding()
+                bottomPadding = paddingValues.calculateBottomPadding() + 16.dp
             )
         }
     }
@@ -281,6 +285,7 @@ private fun List<WeekendTabs>.toNavigationItem(selected: WeekendTabs): List<Navi
             id = it.id,
             label = it.label,
             icon = it.icon,
+            selectedIcon = it.selectedIcon,
             isSelected = selected == it
         )
     }
