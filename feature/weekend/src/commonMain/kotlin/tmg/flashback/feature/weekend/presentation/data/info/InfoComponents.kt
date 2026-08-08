@@ -428,7 +428,7 @@ private fun EventItem(
                 Row(Modifier.fillMaxWidth()) {
                     Image(
                         modifier = Modifier
-                            .rotate(90 + weather.windBearing.toFloat())
+                            .rotate(-90 + weather.windBearing.toFloat())
                             .size(weatherMetadataIconSize),
                         painter = painterResource(resource = flashback.domain.formula1.generated.resources.Res.drawable.weather_indicator_wind),
                         contentDescription = null
