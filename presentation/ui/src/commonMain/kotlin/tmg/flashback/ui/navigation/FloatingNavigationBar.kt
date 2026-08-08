@@ -241,7 +241,7 @@ private fun HorizontalItem(
                         .size(iconSize)
                         .alpha(iconTransition.value),
                     painter = painterResource(resource = item.selectedIcon),
-                    tint = AppTheme.colors.onSurface,
+                    tint = AppTheme.colors.onPrimaryContainer,
                     contentDescription = null,
                 )
             }

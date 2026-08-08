@@ -26,6 +26,7 @@ import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
+import tmg.flashback.style.preview.PreviewTheme
 
 val navigationOrbiterColumnWidth: Dp = 64.dp
 private val itemSize: Dp = 48.dp
@@ -95,7 +96,7 @@ private fun NavigationItem(
     modifier: Modifier = Modifier,
 ) {
     val backgroundColor = animateColorAsState(targetValue = when (item.isSelected) {
-        true -> AppTheme.colors.primaryContainer
+        true -> AppTheme.colors.primary.copy(alpha = 0.3f)
         else -> Color.Transparent
     }, label = "backgroundColor")
     val contentColor = animateColorAsState(targetValue = when (item.isSelected) {
@@ -109,7 +110,7 @@ private fun NavigationItem(
         )
         .fillMaxWidth()
         .height(itemSize)
-        .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
+        .clip(RoundedCornerShape(100.dp))
         .background(backgroundColor.value)
         .clickable(
             enabled = onClick != null,
@@ -133,59 +134,34 @@ private fun NavigationItem(
 }
 
 
-@Preview
-@Composable
-private fun PreviewLight() {
-    ApplicationThemePreview(isLight = true) {
-        PreviewList()
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewDark() {
-    ApplicationThemePreview(isLight = false) {
-        PreviewList()
-    }
-}
-
+@PreviewTheme
 @Composable
 private fun PreviewList() {
-    NavigationOrbiter(
-        itemClicked = { },
-        list = fakeNavigationItems
-    )
-}
-@Preview
-@Composable
-private fun PreviewWithDividerLight() {
-    ApplicationThemePreview(isLight = true) {
-        PreviewWithDivider()
+    ApplicationThemePreview {
+        NavigationOrbiter(
+            itemClicked = { },
+            list = fakeNavigationItems
+        )
     }
 }
 
 @Preview
-@Composable
-private fun PreviewWithDividerDark() {
-    ApplicationThemePreview(isLight = false) {
-        PreviewWithDivider()
-    }
-}
-
 @Composable
 private fun PreviewWithDivider() {
-    NavigationOrbiter(
-        divider = {
-            HorizontalDivider(
-                modifier = Modifier.padding(
-                    vertical = AppTheme.dimens.small,
-                    horizontal = AppTheme.dimens.medium
+    ApplicationThemePreview {
+        NavigationOrbiter(
+            divider = {
+                HorizontalDivider(
+                    modifier = Modifier.padding(
+                        vertical = AppTheme.dimens.small,
+                        horizontal = AppTheme.dimens.medium
+                    )
                 )
-            )
-        },
-        itemClicked = { },
-        primary = fakeNavigationItems.take(3),
-        secondary = fakeNavigationItems.take(1),
-        tertiary = fakeNavigationItems.takeLast(1)
-    )
+            },
+            itemClicked = { },
+            primary = fakeNavigationItems.take(3),
+            secondary = fakeNavigationItems.take(1),
+            tertiary = fakeNavigationItems.takeLast(1)
+        )
+    }
 }
