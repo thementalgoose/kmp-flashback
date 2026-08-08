@@ -2,6 +2,7 @@ package tmg.flashback.ui.navigation
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
@@ -25,10 +26,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -109,6 +113,10 @@ private fun RowScope.HorizontalItem(
         true -> AppTheme.colors.primary.copy(alpha = 0.3f)
         false -> Color.Transparent
     }, label = "backgroundColor")
+    val iconTransition = animateFloatAsState(targetValue = when (item.isSelected ?: false) {
+        true -> 1f
+        false -> 0f
+    }, label = "iconTransition")
     Box(modifier = Modifier
         .weight(1f)
         .fillMaxHeight()
@@ -137,13 +145,26 @@ private fun RowScope.HorizontalItem(
                     ),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(
-                    modifier = Modifier
-                        .size(iconSize),
-                    painter = painterResource(resource = item.icon),
-                    tint = AppTheme.colors.onSurface,
-                    contentDescription = null,
-                )
+                Box(modifier = Modifier
+                    .size(iconSize)
+                ) {
+                    Icon(
+                        modifier = Modifier
+                            .alpha(1f - iconTransition.value)
+                            .size(iconSize),
+                        painter = painterResource(resource = item.icon),
+                        tint = AppTheme.colors.onSurface,
+                        contentDescription = null,
+                    )
+                    Icon(
+                        modifier = Modifier
+                            .alpha(iconTransition.value)
+                            .size(iconSize),
+                        painter = painterResource(resource = item.selectedIcon),
+                        tint = AppTheme.colors.onSurface,
+                        contentDescription = null,
+                    )
+                }
                 TextBody1(
                     textAlign = TextAlign.Center,
                     maxLines = 1,
@@ -178,6 +199,10 @@ private fun VerticalItem(
         true -> AppTheme.colors.primary.copy(alpha = 0.3f)
         false -> Color.Transparent
     }, label = "backgroundColor")
+    val iconTransition = animateFloatAsState(targetValue = when (item.isSelected ?: false) {
+        true -> 1f
+        false -> 0f
+    }, label = "iconTransition")
 
     Column(
         modifier = modifier
@@ -190,7 +215,11 @@ private fun VerticalItem(
             ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        val contentDescription = stringResource(item.label)
         Box(modifier = modifier
+            .clearAndSetSemantics {
+                this.contentDescription = contentDescription
+            }
             .width(verticalSelectedPillWidth)
             .height(verticalPillHeight)
         ) {
@@ -203,10 +232,20 @@ private fun VerticalItem(
                 .background(backgroundColor.value))
             Icon(
                 modifier = Modifier
+                    .alpha(1f - iconTransition.value)
                     .size(iconSize)
                     .align(Alignment.Center),
                 painter = painterResource(resource = item.icon),
                 tint = AppTheme.colors.onSurface,
+                contentDescription = null,
+            )
+            Icon(
+                modifier = Modifier
+                    .alpha(iconTransition.value)
+                    .size(iconSize)
+                    .align(Alignment.Center),
+                painter = painterResource(resource = item.selectedIcon),
+                tint = AppTheme.colors.onPrimaryContainer,
                 contentDescription = null,
             )
         }

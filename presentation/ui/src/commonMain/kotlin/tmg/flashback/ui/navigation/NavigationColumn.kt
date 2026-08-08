@@ -2,8 +2,10 @@ package tmg.flashback.ui.navigation
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
@@ -24,8 +26,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
@@ -37,6 +44,7 @@ import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 
 val columnWidthCollapsed: Dp = 64.dp
@@ -160,7 +168,7 @@ private fun NavigationItem(
     modifier: Modifier = Modifier,
 ) {
     val backgroundColor = animateColorAsState(targetValue = when (item.isSelected) {
-        true -> AppTheme.colors.primaryContainer
+        true -> AppTheme.colors.primary.copy(alpha = 0.3f)
         else -> Color.Transparent
     }, label = "backgroundColor")
     val contentColor = animateColorAsState(targetValue = when (item.isSelected) {
@@ -171,6 +179,10 @@ private fun NavigationItem(
         true -> AppTheme.dimens.medium
         false -> (itemSize - iconSize) / 2
     }, label = "iconPadding")
+    val iconTransition = animateFloatAsState(targetValue = when (item.isSelected ?: false) {
+        true -> 1f
+        false -> 0f
+    }, label = "iconTransition")
 
     Row(modifier = modifier
         .padding(
@@ -178,7 +190,7 @@ private fun NavigationItem(
         )
         .fillMaxWidth()
         .height(itemSize)
-        .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
+        .clip(RoundedCornerShape(100.dp))
         .background(backgroundColor.value)
         .clickable(
             enabled = onClick != null,
@@ -190,14 +202,31 @@ private fun NavigationItem(
             horizontal = iconPadding.value,
         )
     ) {
-        Icon(
-            modifier = Modifier
-                .size(iconSize)
-                .align(Alignment.CenterVertically),
-            painter = painterResource(resource = item.icon),
-            tint = contentColor.value,
-            contentDescription = stringResource(resource = item.label)
-        )
+        val contentDescription = stringResource(item.label)
+        Box(modifier = Modifier
+            .size(iconSize)
+            .clearAndSetSemantics {
+                this.contentDescription = contentDescription
+            }
+            .align(Alignment.CenterVertically)
+        ) {
+            Icon(
+                modifier = Modifier
+                    .alpha(1f - iconTransition.value)
+                    .size(iconSize),
+                painter = painterResource(resource = item.icon),
+                tint = contentColor.value,
+                contentDescription = stringResource(resource = item.label)
+            )
+            Icon(
+                modifier = Modifier
+                    .alpha(iconTransition.value)
+                    .size(iconSize),
+                painter = painterResource(resource = item.selectedIcon),
+                tint = contentColor.value,
+                contentDescription = stringResource(resource = item.label)
+            )
+        }
         if (isExpanded) {
             TextBody1(
                 modifier = Modifier
@@ -212,52 +241,26 @@ private fun NavigationItem(
     }
 }
 
-@Preview
-@Composable
-private fun PreviewCompactLight() {
-    ApplicationThemePreview(isLight = true) {
-        PreviewCompact()
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewCompactDark() {
-    ApplicationThemePreview(isLight = false) {
-        PreviewCompact()
-    }
-}
-
+@PreviewTheme
 @Composable
 private fun PreviewCompact() {
-    NavigationColumn(
-        lockExpanded = false,
-        itemClicked = { },
-        list = fakeNavigationItems
-    )
-}
-
-@Preview
-@Composable
-private fun PreviewExpandedLight() {
-    ApplicationThemePreview(isLight = true) {
-        PreviewExpanded()
+    ApplicationThemePreview() {
+        NavigationColumn(
+            lockExpanded = false,
+            itemClicked = { },
+            list = fakeNavigationItems
+        )
     }
 }
 
-@Preview
-@Composable
-private fun PreviewExpandedDark() {
-    ApplicationThemePreview(isLight = false) {
-        PreviewExpanded()
-    }
-}
-
+@PreviewTheme
 @Composable
 private fun PreviewExpanded() {
-    NavigationColumn(
-        lockExpanded = true,
-        itemClicked = { },
-        list = fakeNavigationItems
-    )
+    ApplicationThemePreview() {
+        NavigationColumn(
+            lockExpanded = true,
+            itemClicked = { },
+            list = fakeNavigationItems
+        )
+    }
 }

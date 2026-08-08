@@ -10,7 +10,16 @@ import flashback.composeapp.generated.resources.dashboard_rss
 import flashback.composeapp.generated.resources.dashboard_xr
 import flashback.composeapp.generated.resources.dashboard_settings
 import flashback.composeapp.generated.resources.dashboard_contact
+import flashback.composeapp.generated.resources.dashboard_contact_selected
+import flashback.composeapp.generated.resources.dashboard_nav_calendar_selected
 import flashback.composeapp.generated.resources.dashboard_nav_circuits
+import flashback.composeapp.generated.resources.dashboard_nav_circuits_selected
+import flashback.composeapp.generated.resources.dashboard_nav_constructor_selected
+import flashback.composeapp.generated.resources.dashboard_nav_drivers_selected
+import flashback.composeapp.generated.resources.dashboard_reaction_selected
+import flashback.composeapp.generated.resources.dashboard_rss_selected
+import flashback.composeapp.generated.resources.dashboard_settings_selected
+import flashback.composeapp.generated.resources.dashboard_xr_selected
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.dashboard_tab_results
 import flashback.presentation.localisation.generated.resources.nav_calendar
@@ -78,12 +87,27 @@ val MenuItem.icon: DrawableResource
         MenuItem.XR_Spacial -> Res.drawable.dashboard_xr
     }
 
+val MenuItem.selectedIcon: DrawableResource
+    get() = when (this) {
+        MenuItem.Results -> Res.drawable.dashboard_nav_calendar_selected
+        MenuItem.Calendar -> Res.drawable.dashboard_nav_calendar_selected
+        MenuItem.DriversStandings -> Res.drawable.dashboard_nav_drivers_selected
+        MenuItem.TeamsStandings -> Res.drawable.dashboard_nav_constructor_selected
+        MenuItem.Circuits -> Res.drawable.dashboard_nav_circuits_selected
+        MenuItem.Rss -> Res.drawable.dashboard_rss_selected
+        MenuItem.ReactionGame -> Res.drawable.dashboard_reaction_selected
+        MenuItem.Settings -> Res.drawable.dashboard_settings_selected
+        MenuItem.Contact -> Res.drawable.dashboard_contact_selected
+        MenuItem.XR_Spacial -> Res.drawable.dashboard_xr_selected
+    }
+
 fun MenuItem.toNavigationItem(
     isSelected: Boolean? = null
 ) = NavigationItem(
     id = this.key,
     label = this.label,
     icon = this.icon,
+    selectedIcon = this.selectedIcon,
     isSelected = isSelected
 )
 

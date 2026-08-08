@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -26,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
@@ -56,8 +58,10 @@ import tmg.flashback.navigation.saveStateConfiguration
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationTheme
 import tmg.flashback.ui.components.AppScaffold
+import tmg.flashback.ui.navigation.FloatingNavigationBar
 import tmg.flashback.ui.navigation.NavigationBar
 import tmg.flashback.ui.navigation.OverlappingPanelsValue
+import tmg.flashback.ui.navigation.appBarHeight
 import tmg.flashback.ui.navigation.appBarHeightWhenVertical
 import tmg.flashback.ui.navigation.rememberOverlappingPanelsState
 import tmg.flashback.ui.toasts.ToastManager
@@ -91,8 +95,8 @@ fun App() {
     val coroutineScope = rememberCoroutineScope()
 
     val showBottomBar = isCompact && appNavigationUiState.value.screen in listOf(NavCalendar, NavDriverStandings, NavTeamStandings) && !appNavigationUiState.value.intoSubNavigation
-    val systemNavigationBarHeight = WindowInsets.safeDrawing.asPaddingValues().calculateBottomPadding()
-    val navigationBarHeight = appBarHeightWhenVertical + systemNavigationBarHeight
+    val systemNavigationBarHeight = WindowInsets.safeDrawing.asPaddingValues().calculateBottomPadding() + 16.dp
+    val navigationBarHeight = appBarHeight + systemNavigationBarHeight
     val navigationBarPosition = animateDpAsState(
         targetValue = if (panelsState.isStartPanelOpen || !showBottomBar) navigationBarHeight else 0.dp,
         label = "navigationBarPosition"
@@ -143,14 +147,16 @@ fun App() {
                         MenuItem.DriversStandings.toNavigationItem(screen == NavDriverStandings),
                         MenuItem.TeamsStandings.toNavigationItem(screen == NavTeamStandings)
                     )
-                    NavigationBar(
+                    FloatingNavigationBar(
                         bottomPadding = systemNavigationBarHeight,
                         modifier = Modifier
-                            .offset(y = navigationBarPosition.value),
+                            .offset(y = navigationBarPosition.value)
+                            .background(Brush.verticalGradient(listOf(Color.Transparent, AppTheme.colors.surface)))
+                            .padding(horizontal = AppTheme.dimens.medium),
                         list = items,
                         itemClicked = { item ->
-                            val menuItem = item.id.toEnum<MenuItem> { it.key } ?: return@NavigationBar
-                            val screen = menuItem.toScreen() ?: return@NavigationBar
+                            val menuItem = item.id.toEnum<MenuItem> { it.key } ?: return@FloatingNavigationBar
+                            val screen = menuItem.toScreen() ?: return@FloatingNavigationBar
                             backStack.clear()
                             backStack.add(screen)
                         }

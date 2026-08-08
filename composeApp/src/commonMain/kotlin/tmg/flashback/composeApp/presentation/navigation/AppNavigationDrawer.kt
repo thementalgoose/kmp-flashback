@@ -1,5 +1,7 @@
 package tmg.flashback.composeApp.presentation.navigation
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -22,24 +24,28 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import flashback.composeapp.generated.resources.ic_settings_web
 import flashback.presentation.localisation.generated.resources.Res
-import flashback.presentation.localisation.generated.resources.app_version
 import flashback.presentation.localisation.generated.resources.app_version_placeholder
 import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.composeApp.presentation.MenuItem
 import tmg.flashback.composeApp.presentation.icon
 import tmg.flashback.composeApp.presentation.label
 import tmg.flashback.composeApp.presentation.navigation.hero.DashboardHero
+import tmg.flashback.composeApp.presentation.selectedIcon
 import tmg.flashback.composeApp.repositories.model.NavLink
+import tmg.flashback.eastereggs.model.MenuIcons
+import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.navigation.NavAbout
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavCircuits
@@ -49,10 +55,11 @@ import tmg.flashback.navigation.NavRss
 import tmg.flashback.navigation.NavSettings
 import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.style.AppTheme
+import tmg.flashback.style.ApplicationThemePreview
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
-import tmg.flashback.style.text.TextBody2
-import tmg.flashback.style.text.TextTitle
 import tmg.flashback.xr.LocalXR
+import tmg.flashback.xr.XR
 
 @Composable
 internal fun AppNavigationDrawer(
@@ -62,9 +69,9 @@ internal fun AppNavigationDrawer(
     openUrl: (String) -> Unit,
     modifier: Modifier = Modifier,
     insetPadding: PaddingValues = WindowInsets.safeContent.asPaddingValues(),
-    showXr: Boolean = false
+    showXr: Boolean = false,
+    xr: XR? = LocalXR.current,
 ) {
-    val xr = LocalXR.current
     Box(modifier) {
         LazyColumn(
             contentPadding = insetPadding,
@@ -161,7 +168,7 @@ internal fun AppNavigationDrawer(
                             menuItem = MenuItem.XR_Spacial,
                             isSelected = false,
                             onClick = {
-                                xr.requestImmersiveMode()
+                                xr?.requestImmersiveMode()
                             }
                         )
                     }
@@ -189,12 +196,14 @@ internal fun AppNavigationDrawer(
                     MenuDivider()
                 }
                 item("app_version") {
-                    Footer(
-                        modifier = Modifier.padding(
-                            vertical = AppTheme.dimens.small,
-                            horizontal = AppTheme.dimens.medium
+                    if (!LocalInspectionMode.current) {
+                        Footer(
+                            modifier = Modifier.padding(
+                                vertical = AppTheme.dimens.small,
+                                horizontal = AppTheme.dimens.medium
+                            )
                         )
-                    )
+                    }
                 }
             }
         )
@@ -211,6 +220,7 @@ private fun NavigationItem(
 ) {
     NavigationItem(
         icon = menuItem.icon,
+        selectedIcon = menuItem.selectedIcon,
         label = stringResource(menuItem.label),
         isSelected = isSelected,
         onClick = onClick,
@@ -225,7 +235,20 @@ private fun NavigationItem(
     isSelected: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    selectedIcon: DrawableResource = icon,
 ) {
+    val backgroundColor = animateColorAsState(targetValue = when (isSelected) {
+        true -> AppTheme.colors.primary.copy(alpha = 0.3f)
+        else -> Color.Transparent
+    }, label = "backgroundColor")
+    val contentColor = animateColorAsState(targetValue = when (isSelected) {
+        true -> AppTheme.colors.onPrimaryContainer
+        else -> AppTheme.colors.onSurface
+    })
+    val iconTransition = animateFloatAsState(targetValue = when (isSelected) {
+        true -> 1f
+        false -> 0f
+    }, label = "iconTransition")
     Row(modifier = modifier
         .fillMaxWidth()
         .padding(
@@ -237,9 +260,7 @@ private fun NavigationItem(
                 bottomEnd = AppTheme.dimens.radiusLarge
             )
         )
-        .background(
-            if (isSelected) AppTheme.colors.primaryContainer else Color.Transparent
-        )
+        .background(backgroundColor.value)
         .clickable(onClick = onClick)
         .padding(
             top = AppTheme.dimens.nsmall,
@@ -248,15 +269,33 @@ private fun NavigationItem(
             end = AppTheme.dimens.medium / 2
         )
     ) {
-        Icon(
-            painter = painterResource(resource = icon),
-            modifier = Modifier.size(24.dp),
-            tint = AppTheme.colors.onSurface,
-            contentDescription = null
-        )
+        Box(modifier = Modifier
+            .clearAndSetSemantics {
+                this.contentDescription = label
+            }
+            .size(24.dp)
+        ) {
+            Icon(
+                modifier = Modifier
+                    .alpha(1f - iconTransition.value)
+                    .size(24.dp),
+                painter = painterResource(resource = icon),
+                tint = AppTheme.colors.onSurface,
+                contentDescription = null
+            )
+            Icon(
+                modifier = Modifier
+                    .alpha(iconTransition.value)
+                    .size(24.dp),
+                painter = painterResource(resource = selectedIcon),
+                tint = AppTheme.colors.onPrimaryContainer,
+                contentDescription = null
+            )
+        }
         Spacer(Modifier.width(AppTheme.dimens.medium))
         TextBody1(
             text = label,
+            textColor = contentColor.value,
             bold = isSelected,
             modifier = Modifier
                 .weight(1f)
@@ -280,6 +319,28 @@ private fun Footer(
         TextBody1(
             text = version,
             bold = true
+        )
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun Preview() {
+    ApplicationThemePreview {
+        AppNavigationDrawer(
+            appNavigationUiState = AppNavigationUIState(
+                showRss = true,
+                easterEggs = AppNavigationEasterEggs(MenuIcons.HALLOWEEN, false, false, false),
+                screen = NavCalendar,
+                intoSubNavigation = false,
+                promptContentSync = false,
+                promptSoftUpgrade = false,
+                extraLinks = emptyList()
+            ),
+            navigationItemClicked = { },
+            closeMenu = { },
+            openUrl = { },
+            xr = null
         )
     }
 }

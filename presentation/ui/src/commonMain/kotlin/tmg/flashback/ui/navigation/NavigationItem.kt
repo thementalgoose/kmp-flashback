@@ -11,6 +11,7 @@ data class NavigationItem(
     val id: String,
     val label: StringResource,
     val icon: DrawableResource,
+    val selectedIcon: DrawableResource = icon,
     val isSelected: Boolean? = false,
 )
 
@@ -18,8 +19,7 @@ internal val fakeNavigationItems: List<NavigationItem> = listOf(
     NavigationItem(
         id = "menu",
         label = string.ab_menu,
-        icon = Res.drawable.ic_nightmode_dark,
-        isSelected = true
+        icon = Res.drawable.ic_nightmode_dark
     ),
     NavigationItem(
         id = "back",
@@ -29,7 +29,8 @@ internal val fakeNavigationItems: List<NavigationItem> = listOf(
     NavigationItem(
         id = "settings",
         label = string.settings_theme_title,
-        icon = Res.drawable.ic_nightmode_auto
+        icon = Res.drawable.ic_nightmode_auto,
+        isSelected = true
     ),
     NavigationItem(
         id = "light",

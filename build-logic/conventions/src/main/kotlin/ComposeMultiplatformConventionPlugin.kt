@@ -23,6 +23,7 @@ class ComposeMultiplatformConventionPlugin: Plugin<Project> {
                         implementation(libs.findLibrary("compose.material3").get().get())
                         implementation(libs.findLibrary("compose.ui").get().get())
                         implementation(libs.findLibrary("compose.resources").get().get())
+                        implementation(libs.findLibrary("compose.animation").get().get())
                         implementation(libs.findLibrary("compose.materialIconsExtended").get().get())
                         implementation(libs.findLibrary("compose.uiTest").get().get())
 

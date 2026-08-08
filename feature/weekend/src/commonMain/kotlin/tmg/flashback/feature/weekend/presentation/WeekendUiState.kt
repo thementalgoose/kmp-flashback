@@ -2,9 +2,13 @@ package tmg.flashback.feature.weekend.presentation
 
 import flashback.feature.weekend.generated.resources.Res
 import flashback.feature.weekend.generated.resources.nav_qualifying
+import flashback.feature.weekend.generated.resources.nav_qualifying_selected
 import flashback.feature.weekend.generated.resources.nav_race
+import flashback.feature.weekend.generated.resources.nav_race_selected
 import flashback.feature.weekend.generated.resources.nav_sprint
 import flashback.feature.weekend.generated.resources.nav_sprint_qualifying
+import flashback.feature.weekend.generated.resources.nav_sprint_qualifying_selected
+import flashback.feature.weekend.generated.resources.nav_sprint_selected
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.nav_qualifying
 import flashback.presentation.localisation.generated.resources.nav_race
@@ -63,4 +67,12 @@ val WeekendTabs.icon: DrawableResource
         WeekendTabs.Race -> Res.drawable.nav_race
         WeekendTabs.SprintQualifying -> Res.drawable.nav_sprint_qualifying
         WeekendTabs.SprintRace -> Res.drawable.nav_sprint
+    }
+
+val WeekendTabs.selectedIcon: DrawableResource
+    get() = when (this) {
+        WeekendTabs.Qualifying -> Res.drawable.nav_qualifying_selected
+        WeekendTabs.Race -> Res.drawable.nav_race_selected
+        WeekendTabs.SprintQualifying -> Res.drawable.nav_sprint_qualifying_selected
+        WeekendTabs.SprintRace -> Res.drawable.nav_sprint_selected
     }
