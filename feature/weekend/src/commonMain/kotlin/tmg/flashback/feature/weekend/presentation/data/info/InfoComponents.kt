@@ -28,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -76,6 +77,7 @@ import tmg.flashback.formula1.model.Timestamp
 import tmg.flashback.formula1.model.Timestamp.TimestampState.BUILD_UP
 import tmg.flashback.formula1.model.Timestamp.TimestampState.EXPIRED
 import tmg.flashback.formula1.model.Timestamp.TimestampState.LIVE
+import tmg.flashback.formula1.preview.preview
 import tmg.flashback.infrastructure.datetime.displayDate
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.timeFormatHHmm
@@ -423,10 +425,11 @@ private fun EventItem(
                 }
 
                 // Wind
-                val windSpeed = weather.windMph.toFloat()
                 Row(Modifier.fillMaxWidth()) {
                     Image(
-                        modifier = Modifier.size(weatherMetadataIconSize),
+                        modifier = Modifier
+                            .rotate(-90 + weather.windBearing.toFloat())
+                            .size(weatherMetadataIconSize),
                         painter = painterResource(resource = flashback.domain.formula1.generated.resources.Res.drawable.weather_indicator_wind),
                         contentDescription = null
                     )
@@ -463,6 +466,20 @@ private fun PreviewSchedule() {
         Column {
             Schedule(
                 model = InfoModel.preview()
+            )
+        }
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewScheduleWithWeather() {
+    ApplicationThemePreview {
+        Column {
+            Schedule(
+                model = InfoModel.preview(
+                    weather = ScheduleWeather.preview()
+                )
             )
         }
     }

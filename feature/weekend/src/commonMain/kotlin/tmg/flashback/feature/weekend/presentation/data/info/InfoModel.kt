@@ -7,6 +7,7 @@ import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.Schedule
+import tmg.flashback.formula1.model.ScheduleWeather
 import tmg.flashback.formula1.preview.preview
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.plusMinutes
@@ -38,7 +39,9 @@ private fun LocalTime.adjustToUTC(): LocalTime {
     return this.plusMinutes(-60)
 }
 
-fun InfoModel.Companion.preview(): InfoModel {
+fun InfoModel.Companion.preview(
+    weather: ScheduleWeather? = null
+): InfoModel {
     val nowDate = LocalDate.now()
     val nowTime = LocalTime.now()
     return InfoModel(
@@ -57,29 +60,34 @@ fun InfoModel.Companion.preview(): InfoModel {
                 Schedule.preview(
                     label = "FP1",
                     date = nowDate.minus(1, DateTimeUnit.DAY),
-                    time = nowTime.plusMinutes(-120).adjustToUTC()
+                    time = nowTime.plusMinutes(-120).adjustToUTC(),
+                    weather = weather,
                 ) to false,
                 Schedule.preview(
                     label = "FP2",
                     date = nowDate.minus(1, DateTimeUnit.DAY),
-                    time = nowTime.adjustToUTC()
+                    time = nowTime.adjustToUTC(),
+                    weather = weather,
                 ) to false
             ),
             nowDate to listOf(
                 Schedule.preview(
                     label = "FP3",
-                    time = nowTime.plusMinutes(-30).adjustToUTC()
+                    time = nowTime.plusMinutes(-30).adjustToUTC(),
+                    weather = weather,
                 ) to false,
                 Schedule.preview(
                     label = "Qua",
-                    time = nowTime.plusMinutes(20).adjustToUTC()
+                    time = nowTime.plusMinutes(20).adjustToUTC(),
+                    weather = weather,
                 ) to false
             ),
             nowDate.plus(1, DateTimeUnit.DAY) to listOf(
                 Schedule.preview(
                     label = "Rac",
                     date = nowDate.plus(1, DateTimeUnit.DAY),
-                    time = nowTime.adjustToUTC()
+                    time = nowTime.adjustToUTC(),
+                    weather = weather,
                 ) to false,
             )
         ),
