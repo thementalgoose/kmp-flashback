@@ -1,11 +1,13 @@
 package tmg.flashback.feature.about.presentation
 
 import flashback.feature.about.generated.resources.Res
+import flashback.feature.about.generated.resources.ic_util_icon_api
 import flashback.feature.about.generated.resources.ic_util_icon_apple
 import flashback.feature.about.generated.resources.ic_util_icon_email
 import flashback.feature.about.generated.resources.ic_util_icon_github
 import flashback.feature.about.generated.resources.ic_util_icon_play
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.button_api
 import flashback.presentation.localisation.generated.resources.button_apple_app
 import flashback.presentation.localisation.generated.resources.button_email
 import flashback.presentation.localisation.generated.resources.button_github
@@ -45,6 +47,11 @@ enum class AboutButtons(
         key = "github",
         icon = Res.drawable.ic_util_icon_github,
         label = string.button_github,
+    ),
+    Api(
+        key = "api",
+        icon = Res.drawable.ic_util_icon_api,
+        label = string.button_api,
     )
 }
 

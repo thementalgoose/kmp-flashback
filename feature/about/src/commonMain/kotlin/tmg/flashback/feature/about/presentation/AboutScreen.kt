@@ -8,16 +8,19 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -306,12 +309,12 @@ private fun Hero(
             TextHeadline2(
                 text = stringResource(string.app_name)
             )
-            Row(modifier = Modifier
-                .padding(
-                    vertical = AppTheme.dimens.small
-                )
-                .fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(4.dp)
+            FlowRow(
+                modifier = Modifier
+                    .padding(vertical = AppTheme.dimens.small)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 AboutButtons.entries
                     .forEach {
@@ -319,8 +322,8 @@ private fun Hero(
                             button = it,
                             buttonClicked = buttonClicked,
                             modifier = Modifier
+                                .width(80.dp)
                                 .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-                                .weight(1f)
                         )
                     }
             }
