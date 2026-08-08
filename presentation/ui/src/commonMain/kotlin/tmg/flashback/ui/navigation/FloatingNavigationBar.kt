@@ -18,8 +18,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.internal.rememberComposableLambda
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -110,6 +113,10 @@ private fun VerticalItem(
         true -> 1f
         false -> 0.8f
     }, label = "fractionWidth")
+    val iconTransition = animateFloatAsState(targetValue = when (item.isSelected ?: false) {
+        true -> 1f
+        false -> 0f
+    })
     Box(
         modifier = modifier
             .padding(vertical = edgePadding)
@@ -133,14 +140,28 @@ private fun VerticalItem(
                 ),
             verticalArrangement = Arrangement.spacedBy(2.dp)
         ) {
-            Icon(
+            Box(
                 modifier = Modifier
                     .size(iconSize)
-                    .align(Alignment.CenterHorizontally),
-                painter = painterResource(resource = item.icon),
-                tint = AppTheme.colors.onSurface,
-                contentDescription = null,
-            )
+                    .align(Alignment.CenterHorizontally)
+            ) {
+                Icon(
+                    modifier = Modifier
+                        .size(iconSize)
+                        .alpha(1f - iconTransition.value),
+                    painter = painterResource(resource = item.icon),
+                    tint = AppTheme.colors.onSurface,
+                    contentDescription = null,
+                )
+                Icon(
+                    modifier = Modifier
+                        .size(iconSize)
+                        .alpha(iconTransition.value),
+                    painter = painterResource(resource = item.selectedIcon),
+                    tint = AppTheme.colors.onSurface,
+                    contentDescription = null,
+                )
+            }
             if (showLabel) {
                 TextBody2(
                     modifier = Modifier
@@ -173,6 +194,10 @@ private fun HorizontalItem(
         true -> 1f
         false -> 0.8f
     }, label = "fractionWidth")
+    val iconTransition = animateFloatAsState(targetValue = when (item.isSelected ?: false) {
+        true -> 1f
+        false -> 0f
+    })
     Box(
         modifier = modifier
             .padding(vertical = edgePadding)
@@ -199,13 +224,27 @@ private fun HorizontalItem(
             ),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
+            Box(
                 modifier = Modifier
-                    .size(iconSize),
-                painter = painterResource(resource = item.icon),
-                tint = AppTheme.colors.onSurface,
-                contentDescription = null,
-            )
+                    .size(iconSize)
+            ) {
+                Icon(
+                    modifier = Modifier
+                        .size(iconSize)
+                        .alpha(1f - iconTransition.value),
+                    painter = painterResource(resource = item.icon),
+                    tint = AppTheme.colors.onSurface,
+                    contentDescription = null,
+                )
+                Icon(
+                    modifier = Modifier
+                        .size(iconSize)
+                        .alpha(iconTransition.value),
+                    painter = painterResource(resource = item.selectedIcon),
+                    tint = AppTheme.colors.onSurface,
+                    contentDescription = null,
+                )
+            }
             if (showLabel) {
                 TextBody2(
                     text = stringResource(item.label),
