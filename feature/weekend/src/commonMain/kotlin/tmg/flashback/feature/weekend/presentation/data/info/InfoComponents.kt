@@ -2,7 +2,6 @@ package tmg.flashback.feature.weekend.presentation.data.info
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -20,9 +18,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,6 +34,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import flashback.domain.formula1.generated.resources.weather_indicator_rain
 import flashback.domain.formula1.generated.resources.weather_indicator_temp
 import flashback.domain.formula1.generated.resources.weather_indicator_wind
@@ -50,7 +50,6 @@ import flashback.presentation.localisation.generated.resources.weather_temp_degr
 import flashback.presentation.localisation.generated.resources.weather_temp_degrees_f
 import flashback.presentation.localisation.generated.resources.weather_wind_kph
 import flashback.presentation.localisation.generated.resources.weather_wind_mph
-import flashback.presentation.localisation.generated.resources.weekend_info_laps
 import flashback.presentation.localisation.generated.resources.weekend_race_round
 import flashback.presentation.ui.generated.resources.Res
 import flashback.presentation.ui.generated.resources.ic_notification_indicator_bell
@@ -73,7 +72,6 @@ import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.ScheduleWeather
-import tmg.flashback.formula1.model.Timestamp
 import tmg.flashback.formula1.model.Timestamp.TimestampState.BUILD_UP
 import tmg.flashback.formula1.model.Timestamp.TimestampState.EXPIRED
 import tmg.flashback.formula1.model.Timestamp.TimestampState.LIVE
@@ -138,7 +136,8 @@ internal fun RaceDetails(
             Icon(
                 painter = painterResource(trackLayout),
                 contentDescription = null,
-                modifier = Modifier.size(56.dp)
+                modifier = Modifier
+                    .size(56.dp)
                     .padding(end = AppTheme.dimens.small),
                 tint = AppTheme.colors.onSurfaceVariant
             )
