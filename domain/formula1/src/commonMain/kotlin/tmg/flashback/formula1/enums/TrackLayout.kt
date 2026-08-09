@@ -309,7 +309,8 @@ enum class TrackLayout(
     ),
     SHANGHAI(
         circuitId = "shanghai",
-        icon = Res.drawable.circuit_shanghai
+        icon = Res.drawable.circuit_shanghai,
+        breakdown = TrackBreakdowns.SHANGHAI
     ),
     SILVERSTONE(
         circuitId = "silverstone",

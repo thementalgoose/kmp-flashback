@@ -143,7 +143,11 @@ fun TrackBreakdown(
                     cap = StrokeCap.Square
                 )
                 val startLineStroke = Stroke(
-                    width = trackWidthPx,
+                    width = trackWidthPx - (trackWidthPx / 2),
+                    cap = StrokeCap.Square
+                )
+                val startLineOutlineStroke = Stroke(
+                    width = outlineWidthPx - (trackWidthPx / 2),
                     cap = StrokeCap.Square
                 )
                 val lineStroke = Stroke(
@@ -165,15 +169,18 @@ fun TrackBreakdown(
                     drawPath(path = s2FullPath, color = trackColor, style = trackStroke)
                     drawPath(path = s3FullPath, color = trackColor, style = trackStroke)
 
-                    // Start line
-                    if (startLinePath != null) {
-                        drawPath(path = startLinePath, color = trackColor, style = startLineStroke)
-                    }
-
                     // Animated Track Outlines
                     drawPath(path = s1AnimatedPath, color = s1Color, style = lineStroke)
                     drawPath(path = s2AnimatedPath, color = s2Color, style = lineStroke)
                     drawPath(path = s3AnimatedPath, color = s3Color, style = lineStroke)
+
+                    // Start line
+                    if (startLinePath != null) {
+                        drawPath(path = startLinePath, color = trackOutlineColor, style = startLineOutlineStroke)
+                    }
+                    if (startLinePath != null) {
+                        drawPath(path = startLinePath, color = trackColor, style = startLineStroke)
+                    }
                 }
             }
         }
