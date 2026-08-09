@@ -149,7 +149,7 @@ private fun CircuitScreen(
                                 nationality = uiState.circuit.country
                             )
                         }
-                        val size = Modifier.size(width = 150.dp, height = 108.dp)
+                        val size = Modifier.size(width = 180.dp, height = 108.dp)
                         if (uiState.trackLayout.breakdown != null) {
                             val showDialog = remember { mutableStateOf(false) }
                             TrackBreakdown(
