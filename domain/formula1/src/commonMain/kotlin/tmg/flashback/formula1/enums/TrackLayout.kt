@@ -221,7 +221,8 @@ enum class TrackLayout(
     ),
     MIAMI(
         circuitId = "miami",
-        icon = Res.drawable.circuit_miami
+        icon = Res.drawable.circuit_miami,
+        breakdown = TrackBreakdown.MIAMI
     ),
     MONACO(
         circuitId = "monaco",
@@ -336,7 +337,8 @@ enum class TrackLayout(
     ),
     SUZUKA(
         circuitId = "suzuka",
-        icon = Res.drawable.circuit_suzuka
+        icon = Res.drawable.circuit_suzuka,
+        breakdown = TrackBreakdown.SUZUKA
     ),
     TREMBLANT(
         circuitId = "tremblant",
@@ -352,7 +354,8 @@ enum class TrackLayout(
     ),
     VILLENEUVE(
         circuitId = "villeneuve",
-        icon = Res.drawable.circuit_villeneuve
+        icon = Res.drawable.circuit_villeneuve,
+        breakdown = TrackBreakdown.VILLENEUVE
     ),
     WATKINS_GLEN(
         circuitId = "watkins_glen",
