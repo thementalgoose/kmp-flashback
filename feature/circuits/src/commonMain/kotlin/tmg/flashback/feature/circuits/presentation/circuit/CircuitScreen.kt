@@ -24,6 +24,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
@@ -38,9 +40,11 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.window.Dialog
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsCircuitId
 import tmg.flashback.analytics.presentation.ScreenView
+import tmg.flashback.formula1.enums.TrackBreakdowns
 import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.CircuitHistoryRace
@@ -61,6 +65,7 @@ import tmg.flashback.ui.components.flag.Flag
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
+import tmg.flashback.ui.components.track.TrackBreakdown
 
 @Composable
 fun CircuitScreen(
@@ -139,17 +144,44 @@ private fun CircuitScreen(
                             TextTitle(text = uiState.circuit.city)
                             TextTitle(text = uiState.circuit.country)
                             Flag(
-                                modifier = Modifier.size(42.dp),
+                                modifier = Modifier.size(48.dp),
                                 iso = uiState.circuit.countryISO,
                                 nationality = uiState.circuit.country
                             )
                         }
-                        Icon(
-                            painter = painterResource(uiState.trackLayout.getDefaultIcon()),
-                            contentDescription = null,
-                            modifier = Modifier.size(90.dp),
-                            tint = AppTheme.colors.onSurface
-                        )
+                        val size = Modifier.size(width = 150.dp, height = 108.dp)
+                        if (uiState.trackLayout.breakdown != null) {
+                            val showDialog = remember { mutableStateOf(false) }
+                            TrackBreakdown(
+                                trackBreakdowns = uiState.trackLayout.breakdown!!,
+                                modifier = size
+                                    .clickable(onClick = { showDialog.value = true })
+                            )
+                            if (showDialog.value) {
+                                Dialog(
+                                    onDismissRequest = { showDialog.value = false },
+                                    content = {
+                                        Box(modifier = Modifier
+                                            .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
+                                            .background(AppTheme.colors.surface)
+                                            .padding(AppTheme.dimens.medium)
+                                        ) {
+                                            TrackBreakdown(
+                                                trackBreakdowns = uiState.trackLayout.breakdown!!,
+                                            )
+                                        }
+                                    }
+                                )
+                            }
+                        } else {
+                            Icon(
+                                painter = painterResource(uiState.trackLayout.getDefaultIcon()),
+                                contentDescription = null,
+                                modifier = size,
+                                tint = AppTheme.colors.onSurface
+                            )
+                        }
+
                     }
                 }
             }
@@ -289,6 +321,22 @@ private fun Result(
     }
 }
 
+@Composable
+private fun TrackBreakdown(
+    trackBreakdowns: TrackBreakdowns,
+    modifier: Modifier = Modifier
+) {
+    TrackBreakdown(
+        modifier = modifier,
+        pathWidth = trackBreakdowns.pathWidth,
+        pathHeight = trackBreakdowns.pathHeight,
+        pathS1 = trackBreakdowns.s1,
+        pathS2 = trackBreakdowns.s2,
+        pathS3 = trackBreakdowns.s3,
+        pathStartLine = trackBreakdowns.startLine
+    )
+}
+
 @PreviewTheme
 @Composable
 private fun Preview() {
@@ -302,7 +350,7 @@ private fun Preview() {
             uiState = CircuitUiState(
                 isLoading = false,
                 circuit = Circuit.preview(),
-                trackLayout = TrackLayout.SILVERSTONE,
+                trackLayout = TrackLayout.ALBERT_PARK,
                 races = listOf(
                     CircuitEvent(
                         CircuitHistoryRace.preview(),

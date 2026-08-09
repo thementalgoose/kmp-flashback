@@ -67,7 +67,6 @@ import flashback.presentation.ui.generated.resources.ic_details_wikipedia
 import flashback.presentation.ui.generated.resources.ic_details_youtube
 import kotlinx.datetime.format.DayOfWeekNames
 import kotlinx.datetime.format.MonthNames
-import tmg.flashback.feature.weekend.presentation.data.info.track.TrackScreen
 import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.model.OverviewRace
@@ -134,26 +133,14 @@ internal fun RaceDetails(
             )
         }
         if (trackLayout != null) {
-            val showTracks = remember { mutableStateOf(false) }
             Icon(
                 painter = painterResource(trackLayout),
                 contentDescription = null,
                 modifier = Modifier
-                    .clickable(onClick = { showTracks.value = true })
                     .size(56.dp)
                     .padding(end = AppTheme.dimens.small),
                 tint = AppTheme.colors.onSurfaceVariant
             )
-
-            if (showTracks.value) {
-                @OptIn(ExperimentalMaterial3Api::class)
-                Dialog(
-                    onDismissRequest = { showTracks.value = false },
-                    content = {
-//                        TrackScreen()
-                    }
-                )
-            }
         }
         Column(
             horizontalAlignment = Alignment.End

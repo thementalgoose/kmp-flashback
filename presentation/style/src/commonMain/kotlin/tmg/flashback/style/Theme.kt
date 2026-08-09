@@ -1,15 +1,11 @@
 package tmg.flashback.style
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.key
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalInspectionMode
 import org.koin.compose.koinInject
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.style.theme.LocalDarkMode

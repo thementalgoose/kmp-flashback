@@ -27,9 +27,12 @@ import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.ui.extensions.px
 
+private const val duration = 1000
 
-private val trackWidth: Dp = 12.dp
-private val outlineWidth: Dp = 20.dp
+private val lineWidth: Dp = 12.dp
+private val trackWidth: Dp = 24.dp
+private val outlineWidth: Dp = 8.dp
+
 
 @Composable
 fun TrackBreakdown(
@@ -42,10 +45,11 @@ fun TrackBreakdown(
     pathAspectRatio: Float = pathWidth / pathHeight,
     pathStartLine: String? = null,
     pathOvertakeZones: List<String> = emptyList(),
-    s1Color: Color = Color.Red,
-    s2Color: Color = Color.Cyan,
-    s3Color: Color = Color.Yellow,
-    track: Color = AppTheme.colors.surfaceInverse,
+    s1Color: Color = AppTheme.colors.f1Sector1,
+    s2Color: Color = AppTheme.colors.f1Sector2,
+    s3Color: Color = AppTheme.colors.f1Sector3,
+    trackColor: Color = Color.Black,
+    trackOutlineColor: Color = Color.White
 ) {
     Box(modifier = modifier) {
         BoxWithConstraints(
@@ -80,21 +84,23 @@ fun TrackBreakdown(
             val s3PathMeasure = remember { PathMeasure() }
             val s3AnimatedPath = remember { Path() }
 
+            val lineWidthPx = lineWidth.px.toFloat()
             val trackWidthPx = trackWidth.px.toFloat()
-            val outlineWidthPx = outlineWidth.px.toFloat()
+            val outlineWidthPx = (outlineWidth + trackWidth).px.toFloat()
+
 
             LaunchedEffect(pathS1, pathS2, pathS3) {
                 s1Progress.animateTo(
                     targetValue = 1f,
-                    animationSpec = tween(durationMillis = 1500, delayMillis = 0)
+                    animationSpec = tween(durationMillis = duration, delayMillis = 0)
                 )
                 s2Progress.animateTo(
                     targetValue = 1f,
-                    animationSpec = tween(durationMillis = 1500, delayMillis = 0)
+                    animationSpec = tween(durationMillis = duration, delayMillis = 0)
                 )
                 s3Progress.animateTo(
                     targetValue = 1f,
-                    animationSpec = tween(durationMillis = 1500, delayMillis = 0)
+                    animationSpec = tween(durationMillis = duration, delayMillis = 0)
                 )
             }
 
@@ -129,6 +135,10 @@ fun TrackBreakdown(
                 )
 
                 val trackStroke = Stroke(
+                    width = trackWidthPx,
+                    cap = StrokeCap.Square
+                )
+                val trackOutlineStroke = Stroke(
                     width = outlineWidthPx,
                     cap = StrokeCap.Square
                 )
@@ -136,8 +146,8 @@ fun TrackBreakdown(
                     width = trackWidthPx,
                     cap = StrokeCap.Square
                 )
-                val animatedStroke = Stroke(
-                    width = trackWidthPx,
+                val lineStroke = Stroke(
+                    width = lineWidthPx,
                     cap = StrokeCap.Butt
                 )
 
@@ -145,20 +155,25 @@ fun TrackBreakdown(
                     scale = scaleX,
                     pivot = Offset(x = 0f, y = 0f)
                 ) {
+                    // Track Outline Background
+                    drawPath(path = s1FullPath, color = trackOutlineColor, style = trackOutlineStroke)
+                    drawPath(path = s2FullPath, color = trackOutlineColor, style = trackOutlineStroke)
+                    drawPath(path = s3FullPath, color = trackOutlineColor, style = trackOutlineStroke)
+
                     // Track Background
-                    drawPath(path = s1FullPath, color = track, style = trackStroke)
-                    drawPath(path = s2FullPath, color = track, style = trackStroke)
-                    drawPath(path = s3FullPath, color = track, style = trackStroke)
+                    drawPath(path = s1FullPath, color = trackColor, style = trackStroke)
+                    drawPath(path = s2FullPath, color = trackColor, style = trackStroke)
+                    drawPath(path = s3FullPath, color = trackColor, style = trackStroke)
 
                     // Start line
                     if (startLinePath != null) {
-                        drawPath(path = startLinePath, color = track, style = startLineStroke)
+                        drawPath(path = startLinePath, color = trackColor, style = startLineStroke)
                     }
 
                     // Animated Track Outlines
-                    drawPath(path = s1AnimatedPath, color = s1Color, style = animatedStroke)
-                    drawPath(path = s2AnimatedPath, color = s2Color, style = animatedStroke)
-                    drawPath(path = s3AnimatedPath, color = s3Color, style = animatedStroke)
+                    drawPath(path = s1AnimatedPath, color = s1Color, style = lineStroke)
+                    drawPath(path = s2AnimatedPath, color = s2Color, style = lineStroke)
+                    drawPath(path = s3AnimatedPath, color = s3Color, style = lineStroke)
                 }
             }
         }
