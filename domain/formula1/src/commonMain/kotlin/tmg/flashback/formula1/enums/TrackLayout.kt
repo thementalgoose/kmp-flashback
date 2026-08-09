@@ -10,7 +10,7 @@ import org.jetbrains.compose.resources.DrawableResource
 enum class TrackLayout(
     val circuitId: String,
     private val icon: DrawableResource,
-    val breakdown: TrackBreakdowns? = null,
+    val breakdown: TrackBreakdown? = null,
     private val overrides: List<Configuration> = emptyList(),
 ) {
     ADELAIDE(
@@ -28,7 +28,7 @@ enum class TrackLayout(
     ALBERT_PARK(
         circuitId = "albert_park",
         icon = Res.drawable.circuit_albert_park,
-        breakdown = TrackBreakdowns.ALBERT_PARK
+        breakdown = TrackBreakdown.ALBERT_PARK
     ),
     ALGARVE(
         circuitId = "algarve",
@@ -310,7 +310,7 @@ enum class TrackLayout(
     SHANGHAI(
         circuitId = "shanghai",
         icon = Res.drawable.circuit_shanghai,
-        breakdown = TrackBreakdowns.SHANGHAI
+        breakdown = TrackBreakdown.SHANGHAI
     ),
     SILVERSTONE(
         circuitId = "silverstone",
