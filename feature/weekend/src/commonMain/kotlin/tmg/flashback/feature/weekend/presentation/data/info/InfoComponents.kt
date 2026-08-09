@@ -107,27 +107,30 @@ internal fun RaceDetails(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Column(modifier = Modifier.weight(1f)) {
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(6.dp)
+        ) {
+            TextTitle(
+                text = stringResource(resource = string.weekend_race_round, model.round),
+                bold = true,
+                modifier = Modifier
+                    .fillMaxWidth(),
+            )
             TextBody1(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        top = AppTheme.dimens.xsmall,
-                        bottom = AppTheme.dimens.xsmall
-                    ),
+                    .fillMaxWidth(),
                 text = model.circuit.name
             )
             TextBody1(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = AppTheme.dimens.xsmall),
+                    .fillMaxWidth(),
                 text = model.circuit.country
             )
             TextBody2(
                 bold = true,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = AppTheme.dimens.xsmall),
+                    .fillMaxWidth(),
                 text = model.date.displayDate(month = MonthNames.ENGLISH_FULL)
             )
         }
@@ -136,23 +139,9 @@ internal fun RaceDetails(
                 painter = painterResource(trackLayout),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(56.dp)
+                    .size(width = 120.dp, height = 90.dp)
                     .padding(end = AppTheme.dimens.small),
                 tint = AppTheme.colors.onSurfaceVariant
-            )
-        }
-        Column(
-            horizontalAlignment = Alignment.End
-        ) {
-            Flag(
-                iso = model.circuit.countryISO,
-                nationality = model.circuit.country,
-                modifier = Modifier.size(48.dp),
-            )
-            TextBody2(
-                text = stringResource(resource = string.weekend_race_round, model.round),
-                bold = true,
-                modifier = Modifier.padding(vertical = 2.dp)
             )
         }
     }

@@ -347,7 +347,9 @@ fun LazyListScope.addLinks(
 ) {
     item("links") {
         RaceLinks(
-            modifier = Modifier.animateItem(),
+            modifier = Modifier
+                .padding(top = AppTheme.dimens.xsmall)
+                .animateItem(),
             model = info,
             previousRace = previousRace,
             previousRaceClicked = previousRaceClicked,
