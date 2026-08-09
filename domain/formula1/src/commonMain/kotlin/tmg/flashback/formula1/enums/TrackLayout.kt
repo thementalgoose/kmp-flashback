@@ -10,7 +10,8 @@ import org.jetbrains.compose.resources.DrawableResource
 enum class TrackLayout(
     val circuitId: String,
     private val icon: DrawableResource,
-    private vararg val overrides: Configuration,
+    private val breakdown: TrackBreakdowns? = null,
+    private val overrides: List<Configuration> = emptyList(),
 ) {
     ADELAIDE(
         circuitId = "adelaide",
@@ -54,8 +55,11 @@ enum class TrackLayout(
     BAHRAIN(
         circuitId = "bahrain",
         icon = Res.drawable.circuit_bahrain,
-        Configuration.OneOff(2010, _icon = Res.drawable.circuit_bahrain_2010),
-        Configuration.OneOff(2020, name = "Sakhir Grand Prix", _icon = Res.drawable.circuit_sakhir)
+        breakdown = null,
+        overrides = listOf(
+            Configuration.OneOff(2010, _icon = Res.drawable.circuit_bahrain_2010),
+            Configuration.OneOff(2020, name = "Sakhir Grand Prix", _icon = Res.drawable.circuit_sakhir)
+        )
     ),
     BAK(
         circuitId = "BAK",
@@ -120,7 +124,10 @@ enum class TrackLayout(
     GALVEZ(
         circuitId = "galvez",
         icon = Res.drawable.circuit_galvez,
-        Configuration.Range(min = 1974, max = 1981, _icon = Res.drawable.circuit_galvez_1974_1981)
+        breakdown = null,
+        overrides = listOf(
+            Configuration.Range(min = 1974, max = 1981, _icon = Res.drawable.circuit_galvez_1974_1981)
+        )
     ),
     GEORGE(
         circuitId = "george",
@@ -149,8 +156,11 @@ enum class TrackLayout(
     IMOLA(
         circuitId = "imola",
         icon = Res.drawable.circuit_imola,
-        Configuration.Range(min = 1995, max = 2006, _icon = Res.drawable.circuit_imola_1995_2006),
-        Configuration.Range(min = 1980, max = 1994, _icon = Res.drawable.circuit_imola_1980_1994),
+        breakdown = null,
+        overrides = listOf(
+            Configuration.Range(min = 1995, max = 2006, _icon = Res.drawable.circuit_imola_1995_2006),
+            Configuration.Range(min = 1980, max = 1994, _icon = Res.drawable.circuit_imola_1980_1994),
+        )
     ),
     ISTANBUL(
         circuitId = "istanbul",
@@ -203,7 +213,10 @@ enum class TrackLayout(
     MARINA_BAY(
         circuitId = "marina_bay",
         icon = Res.drawable.circuit_marina_bay,
-        Configuration.Range(min = 2008, max = 2022, _icon = Res.drawable.circuit_marina_bay_2008_2022)
+        breakdown = null,
+        overrides = listOf(
+            Configuration.Range(min = 2008, max = 2022, _icon = Res.drawable.circuit_marina_bay_2008_2022)
+        )
     ),
     MIAMI(
         circuitId = "miami",
@@ -300,13 +313,16 @@ enum class TrackLayout(
     SILVERSTONE(
         circuitId = "silverstone",
         icon = Res.drawable.circuit_silverstone,
-        Configuration.Range(min = 1997, max = 2009, _icon = Res.drawable.circuit_silverstone_1997_2009),
-        Configuration.OneOff(year = 1996, _icon = Res.drawable.circuit_silverstone_1996),
-        Configuration.Range(min = 1994, max = 1995, _icon = Res.drawable.circuit_silverstone_1994_1995),
-        Configuration.Range(min = 1991, max = 1993, _icon = Res.drawable.circuit_silverstone_1991_1993),
-        Configuration.Range(min = 1987, max = 1990, _icon = Res.drawable.circuit_silverstone_1987_1990),
-        Configuration.Range(min = 1975, max = 1986, _icon = Res.drawable.circuit_silverstone_1975_1986),
-        Configuration.Range(min = 1950, max = 1973, _icon = Res.drawable.circuit_silverstone_1950_1973)
+        breakdown = null,
+        overrides = listOf(
+            Configuration.Range(min = 1997, max = 2009, _icon = Res.drawable.circuit_silverstone_1997_2009),
+            Configuration.OneOff(year = 1996, _icon = Res.drawable.circuit_silverstone_1996),
+            Configuration.Range(min = 1994, max = 1995, _icon = Res.drawable.circuit_silverstone_1994_1995),
+            Configuration.Range(min = 1991, max = 1993, _icon = Res.drawable.circuit_silverstone_1991_1993),
+            Configuration.Range(min = 1987, max = 1990, _icon = Res.drawable.circuit_silverstone_1987_1990),
+            Configuration.Range(min = 1975, max = 1986, _icon = Res.drawable.circuit_silverstone_1975_1986),
+            Configuration.Range(min = 1950, max = 1973, _icon = Res.drawable.circuit_silverstone_1950_1973)
+        )
     ),
     SOCHI(
         circuitId = "sochi",
@@ -343,7 +359,10 @@ enum class TrackLayout(
     YAS_MARINA(
         circuitId = "yas_marina",
         icon = Res.drawable.circuit_yas_marina,
-        Configuration.Range(min = 2009, max = 2020, _icon = Res.drawable.circuit_yas_marina_2009_2020)
+        breakdown = null,
+        overrides = listOf(
+            Configuration.Range(min = 2009, max = 2020, _icon = Res.drawable.circuit_yas_marina_2009_2020)
+        )
     ),
     YEONGAM(
         circuitId = "yeongam",
