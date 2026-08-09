@@ -38,13 +38,11 @@ import flashback.presentation.ui.generated.resources.ic_details_maps
 import flashback.presentation.ui.generated.resources.ic_details_wikipedia
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.window.Dialog
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsCircuitId
 import tmg.flashback.analytics.presentation.ScreenView
-import tmg.flashback.formula1.enums.TrackBreakdowns
+import tmg.flashback.formula1.enums.TrackBreakdown
 import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.CircuitHistoryRace
@@ -153,7 +151,7 @@ private fun CircuitScreen(
                         if (uiState.trackLayout.breakdown != null) {
                             val showDialog = remember { mutableStateOf(false) }
                             TrackBreakdown(
-                                trackBreakdowns = uiState.trackLayout.breakdown!!,
+                                trackBreakdown = uiState.trackLayout.breakdown!!,
                                 modifier = size
                                     .clickable(onClick = { showDialog.value = true })
                             )
@@ -167,7 +165,7 @@ private fun CircuitScreen(
                                             .padding(AppTheme.dimens.medium)
                                         ) {
                                             TrackBreakdown(
-                                                trackBreakdowns = uiState.trackLayout.breakdown!!,
+                                                trackBreakdown = uiState.trackLayout.breakdown!!,
                                             )
                                         }
                                     }
@@ -323,17 +321,18 @@ private fun Result(
 
 @Composable
 private fun TrackBreakdown(
-    trackBreakdowns: TrackBreakdowns,
+    trackBreakdown: TrackBreakdown,
     modifier: Modifier = Modifier
 ) {
     TrackBreakdown(
         modifier = modifier,
-        pathWidth = trackBreakdowns.pathWidth,
-        pathHeight = trackBreakdowns.pathHeight,
-        pathS1 = trackBreakdowns.s1,
-        pathS2 = trackBreakdowns.s2,
-        pathS3 = trackBreakdowns.s3,
-        pathStartLine = trackBreakdowns.startLine
+        pathWidth = trackBreakdown.pathWidth,
+        pathHeight = trackBreakdown.pathHeight,
+        pathTrackWidth = trackBreakdown.trackWidth,
+        pathS1 = trackBreakdown.s1,
+        pathS2 = trackBreakdown.s2,
+        pathS3 = trackBreakdown.s3,
+        pathStartLine = trackBreakdown.startLine
     )
 }
 
