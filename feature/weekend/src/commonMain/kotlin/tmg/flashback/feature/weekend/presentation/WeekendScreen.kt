@@ -5,14 +5,18 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.shape.CircleShape
@@ -50,7 +54,9 @@ import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.navigation.NavWeekend
 import tmg.flashback.style.AppTheme
+import tmg.flashback.style.text.TextHeadline1
 import tmg.flashback.ui.components.Refresh
+import tmg.flashback.ui.components.flag.Flag
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.loading.SkeletonBox
@@ -197,7 +203,35 @@ fun WeekendScreenTab(
                                 action = HeaderAction.BACK.takeIf { showBack },
                                 actionModifier = buttonModifier,
                                 contentSpacing = height,
-                                text = text,
+                                content = @Composable {
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(
+                                                start = AppTheme.dimens.medium,
+                                                end = AppTheme.dimens.medium,
+                                                top = AppTheme.dimens.medium,
+                                                bottom = AppTheme.dimens.medium
+                                            ),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                                    ) {
+                                        TextHeadline1(
+                                            text = text,
+                                            modifier = Modifier
+                                                .weight(1f)
+                                        )
+                                        if (uiState is Data) {
+                                            Flag(
+                                                iso = uiState.info.circuit.countryISO,
+                                                nationality = uiState.info.circuit.country,
+                                                modifier = Modifier.size(48.dp),
+                                            )
+                                        } else {
+                                            Box(modifier = Modifier.size(48.dp))
+                                        }
+                                    }
+                                },
                                 scrim = true,
                                 topInset = topInset,
                                 overrideIcons = {

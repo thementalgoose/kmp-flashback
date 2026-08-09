@@ -92,7 +92,6 @@ import tmg.flashback.ui.components.indicators.IndicatorDot
 import tmg.flashback.ui.components.indicators.stateBorder
 import kotlin.math.roundToInt
 
-private val trackSize: Dp = 200.dp
 private val weatherIconSize: Dp = 48.dp
 private val weatherMetadataIconSize: Dp = 20.dp
 
