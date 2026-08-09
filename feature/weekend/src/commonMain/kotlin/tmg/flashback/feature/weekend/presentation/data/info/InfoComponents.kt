@@ -21,8 +21,11 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,6 +38,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import flashback.domain.formula1.generated.resources.weather_indicator_rain
 import flashback.domain.formula1.generated.resources.weather_indicator_temp
 import flashback.domain.formula1.generated.resources.weather_indicator_wind
@@ -68,6 +72,7 @@ import flashback.presentation.ui.generated.resources.ic_details_wikipedia
 import flashback.presentation.ui.generated.resources.ic_details_youtube
 import kotlinx.datetime.format.DayOfWeekNames
 import kotlinx.datetime.format.MonthNames
+import tmg.flashback.feature.weekend.presentation.track.TrackScreen
 import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.model.OverviewRace
@@ -135,13 +140,26 @@ internal fun RaceDetails(
             )
         }
         if (trackLayout != null) {
+            val showTracks = remember { mutableStateOf(false) }
             Icon(
                 painter = painterResource(trackLayout),
                 contentDescription = null,
-                modifier = Modifier.size(56.dp)
+                modifier = Modifier
+                    .clickable(onClick = { showTracks.value = true })
+                    .size(56.dp)
                     .padding(end = AppTheme.dimens.small),
                 tint = AppTheme.colors.onSurfaceVariant
             )
+
+            if (showTracks.value) {
+                @OptIn(ExperimentalMaterial3Api::class)
+                Dialog(
+                    onDismissRequest = { showTracks.value = false },
+                    content = {
+                        TrackScreen()
+                    }
+                )
+            }
         }
         Column(
             horizontalAlignment = Alignment.End
