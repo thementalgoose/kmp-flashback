@@ -226,7 +226,8 @@ enum class TrackLayout(
     ),
     MONACO(
         circuitId = "monaco",
-        icon = Res.drawable.circuit_monaco
+        icon = Res.drawable.circuit_monaco,
+        breakdown = TrackBreakdown.MONACO
     ),
     MONZA(
         circuitId = "monza",
