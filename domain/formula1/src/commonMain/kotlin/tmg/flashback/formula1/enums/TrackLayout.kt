@@ -80,7 +80,8 @@ enum class TrackLayout(
     ),
     CATALUNYA(
         circuitId = "catalunya",
-        icon = Res.drawable.circuit_catalunya
+        icon = Res.drawable.circuit_catalunya,
+        breakdown = TrackBreakdown.CATALUNYA
     ),
     CATALUNYA_1991_2022(
         circuitId = "catalunya",
@@ -283,7 +284,8 @@ enum class TrackLayout(
     ),
     RED_BULL_RING(
         circuitId = "red_bull_ring",
-        icon = Res.drawable.circuit_red_bull_ring
+        icon = Res.drawable.circuit_red_bull_ring,
+        breakdown = TrackBreakdown.RED_BULL_RING
     ),
     REIMS(
         circuitId = "reims",
@@ -317,7 +319,7 @@ enum class TrackLayout(
     SILVERSTONE(
         circuitId = "silverstone",
         icon = Res.drawable.circuit_silverstone,
-        breakdown = null,
+        breakdown = TrackBreakdown.SILVERSTONE,
         overrides = listOf(
             Configuration.Range(min = 1997, max = 2009, _icon = Res.drawable.circuit_silverstone_1997_2009),
             Configuration.OneOff(year = 1996, _icon = Res.drawable.circuit_silverstone_1996),
