@@ -212,7 +212,8 @@ enum class TrackLayout(
     ),
     MADRING(
         circuitId = "madring",
-        icon = Res.drawable.circuit_madring
+        icon = Res.drawable.circuit_madring,
+        breakdown = TrackBreakdown.MADRING
     ),
     MAGNY_COURS(
         circuitId = "magny_cours",
