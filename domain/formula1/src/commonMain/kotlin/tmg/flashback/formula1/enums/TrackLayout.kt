@@ -391,6 +391,25 @@ enum class TrackLayout(
         return icon
     }
 
+    fun getBreakdown(year: Int, name: String): TrackBreakdown? {
+        val override = overrides
+            .firstOrNull { option ->
+                return@firstOrNull when (option) {
+                    is Configuration.OneOff -> if (option.name != null) {
+                        year == option.year && name == option.name
+                    } else {
+                        year == option.year
+                    }
+                    is Configuration.Range -> year <= option.max && year >= option.min
+                }
+            }
+        if (override != null) {
+            return override.breakdown
+        } else {
+            return breakdown
+        }
+    }
+
     fun getIcon(year: Int, name: String): DrawableResource {
         if (overrides.isEmpty()) {
             return icon
@@ -423,18 +442,21 @@ enum class TrackLayout(
 }
 
 sealed class Configuration(
-    val icon: DrawableResource
+    val icon: DrawableResource,
+    val breakdown: TrackBreakdown?
 ){
 
     data class OneOff(
         val year: Int,
         val name: String? = null,
-        private val _icon: DrawableResource
-    ): Configuration(_icon)
+        private val _icon: DrawableResource,
+        private val _breakdown: TrackBreakdown? = null,
+    ): Configuration(_icon, _breakdown)
 
     data class Range(
         val min: Int,
         val max: Int,
-        private val _icon: DrawableResource
-    ): Configuration(_icon)
+        private val _icon: DrawableResource,
+        private val _breakdown: TrackBreakdown? = null,
+    ): Configuration(_icon, _breakdown)
 }
