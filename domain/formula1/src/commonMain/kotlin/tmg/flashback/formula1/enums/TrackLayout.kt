@@ -48,7 +48,8 @@ enum class TrackLayout(
     ),
     AMERICAS(
         circuitId = "americas",
-        icon = Res.drawable.circuit_americas
+        icon = Res.drawable.circuit_americas,
+        breakdown = TrackBreakdown.AMERICAS
     ),
     BUDDH(
         circuitId = "buddh",
@@ -64,7 +65,8 @@ enum class TrackLayout(
     ),
     BAK(
         circuitId = "BAK",
-        icon = Res.drawable.circuit_bak
+        icon = Res.drawable.circuit_bak,
+        breakdown = TrackBreakdown.BAKU
     ),
     BREMGARTEN(
         circuitId = "bremgarten",
@@ -145,7 +147,8 @@ enum class TrackLayout(
     ),
     HUNGARORING(
         circuitId = "hungaroring",
-        icon = Res.drawable.circuit_hungaroring
+        icon = Res.drawable.circuit_hungaroring,
+        breakdown = TrackBreakdown.HUNGARORING
     ),
     INDIANAPOLIS(
         circuitId = "indianapolis",
@@ -153,7 +156,8 @@ enum class TrackLayout(
     ),
     INTERLAGOS(
         circuitId = "interlagos",
-        icon = Res.drawable.circuit_interlagos
+        icon = Res.drawable.circuit_interlagos,
+        breakdown = TrackBreakdown.INTERLAGOS
     ),
     IMOLA(
         circuitId = "imola",
@@ -202,7 +206,8 @@ enum class TrackLayout(
     ),
     LOSAIL(
         circuitId = "losail",
-        icon = Res.drawable.circuit_losail
+        icon = Res.drawable.circuit_losail,
+        breakdown = TrackBreakdown.LOSAIL
     ),
     MADRING(
         circuitId = "madring",
@@ -215,7 +220,7 @@ enum class TrackLayout(
     MARINA_BAY(
         circuitId = "marina_bay",
         icon = Res.drawable.circuit_marina_bay,
-        breakdown = null,
+        breakdown = TrackBreakdown.MARINA_BAY,
         overrides = listOf(
             Configuration.Range(min = 2008, max = 2022, _icon = Res.drawable.circuit_marina_bay_2008_2022)
         )
@@ -232,7 +237,8 @@ enum class TrackLayout(
     ),
     MONZA(
         circuitId = "monza",
-        icon = Res.drawable.circuit_monza
+        icon = Res.drawable.circuit_monza,
+        breakdown = TrackBreakdown.MONZA
     ),
     MONSANTO(
         circuitId = "monsanto",
@@ -301,7 +307,8 @@ enum class TrackLayout(
     ),
     RODRIGUEZ(
         circuitId = "rodriguez",
-        icon = Res.drawable.circuit_rodriguez
+        icon = Res.drawable.circuit_rodriguez,
+        breakdown = TrackBreakdown.RODRIGUEZ
     ),
     SEBRING(
         circuitId = "sebring",
@@ -336,7 +343,8 @@ enum class TrackLayout(
     ),
     SPA(
         circuitId = "spa",
-        icon = Res.drawable.circuit_spa
+        icon = Res.drawable.circuit_spa,
+        breakdown = TrackBreakdown.SPA
     ),
     SUZUKA(
         circuitId = "suzuka",
@@ -353,7 +361,8 @@ enum class TrackLayout(
     ),
     VEGAS(
         circuitId = "vegas",
-        icon = Res.drawable.circuit_vegas
+        icon = Res.drawable.circuit_vegas,
+        breakdown = TrackBreakdown.VEGAS
     ),
     VILLENEUVE(
         circuitId = "villeneuve",
@@ -367,7 +376,7 @@ enum class TrackLayout(
     YAS_MARINA(
         circuitId = "yas_marina",
         icon = Res.drawable.circuit_yas_marina,
-        breakdown = null,
+        breakdown = TrackBreakdown.YAS_MARINA,
         overrides = listOf(
             Configuration.Range(min = 2009, max = 2020, _icon = Res.drawable.circuit_yas_marina_2009_2020)
         )
@@ -378,7 +387,8 @@ enum class TrackLayout(
     ),
     ZANDVOORT(
         circuitId = "zandvoort",
-        icon = Res.drawable.circuit_zandvoort
+        icon = Res.drawable.circuit_zandvoort,
+        breakdown = TrackBreakdown.ZANDVOORT
     ),
     ZELTWEG(
         circuitId = "zeltweg",
