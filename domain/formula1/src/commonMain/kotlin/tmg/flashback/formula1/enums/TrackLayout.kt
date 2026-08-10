@@ -57,7 +57,7 @@ enum class TrackLayout(
     BAHRAIN(
         circuitId = "bahrain",
         icon = Res.drawable.circuit_bahrain,
-        breakdown = null,
+        breakdown = TrackBreakdown.BAHRAIN,
         overrides = listOf(
             Configuration.OneOff(2010, _icon = Res.drawable.circuit_bahrain_2010),
             Configuration.OneOff(2020, name = "Sakhir Grand Prix", _icon = Res.drawable.circuit_sakhir)
@@ -182,7 +182,8 @@ enum class TrackLayout(
     ),
     JEDDAH(
         circuitId = "jeddah",
-        icon = Res.drawable.circuit_jeddah
+        icon = Res.drawable.circuit_jeddah,
+        breakdown = TrackBreakdown.JEDDAH
     ),
     JEREZ(
         circuitId = "jerez",
