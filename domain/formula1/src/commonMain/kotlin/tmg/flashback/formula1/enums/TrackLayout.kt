@@ -319,7 +319,7 @@ enum class TrackLayout(
     SILVERSTONE(
         circuitId = "silverstone",
         icon = Res.drawable.circuit_silverstone,
-        breakdown = null,
+        breakdown = TrackBreakdown.SILVERSTONE,
         overrides = listOf(
             Configuration.Range(min = 1997, max = 2009, _icon = Res.drawable.circuit_silverstone_1997_2009),
             Configuration.OneOff(year = 1996, _icon = Res.drawable.circuit_silverstone_1996),
