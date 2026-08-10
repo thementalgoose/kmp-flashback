@@ -40,7 +40,8 @@ private fun LocalTime.adjustToUTC(): LocalTime {
 }
 
 fun InfoModel.Companion.preview(
-    weather: ScheduleWeather? = null
+    weather: ScheduleWeather? = null,
+    circuit: Circuit = Circuit.preview(),
 ): InfoModel {
     val nowDate = LocalDate.now()
     val nowTime = LocalTime.now()
@@ -50,7 +51,7 @@ fun InfoModel.Companion.preview(
         raceName = "British Grand Prix",
         date = nowDate.plus(1, DateTimeUnit.DAY),
         time = nowTime.adjustToUTC(),
-        circuit = Circuit.preview(),
+        circuit = circuit,
         laps = "100",
         cancelled = false,
         youtubeUrl = "youtube",
