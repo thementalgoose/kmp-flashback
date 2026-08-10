@@ -317,7 +317,8 @@ enum class TrackLayout(
     ),
     SEPANG(
         circuitId = "sepang",
-        icon = Res.drawable.circuit_sepang
+        icon = Res.drawable.circuit_sepang,
+        breakdown = TrackBreakdown.SEPANG
     ),
     SHANGHAI(
         circuitId = "shanghai",
