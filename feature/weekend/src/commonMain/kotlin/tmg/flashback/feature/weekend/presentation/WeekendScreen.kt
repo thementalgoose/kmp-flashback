@@ -203,6 +203,7 @@ fun WeekendScreenTab(
                                 action = HeaderAction.BACK.takeIf { showBack },
                                 actionModifier = buttonModifier,
                                 contentSpacing = height,
+                                scrimColour = AppTheme.colors.surfaceContainer1,
                                 content = @Composable {
                                     Row(
                                         modifier = Modifier
