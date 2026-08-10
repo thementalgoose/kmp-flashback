@@ -100,7 +100,7 @@ internal fun Schedule(
             content = {
                 items(model.days) { (date, list) ->
                     val isRoundUpcoming = model.isUpcoming
-                    val allExpired = remember { list.all { it.first.timestamp.state == EXPIRED } }
+                    val allExpired = remember(list) { list.all { it.first.timestamp.state == EXPIRED } }
                     Column(
                         modifier = modifier
                             .fillMaxWidth()
@@ -165,7 +165,7 @@ private fun EventItem(
     showNotificationBell: Boolean,
     modifier: Modifier = Modifier
 ) {
-    val state = remember { item.timestamp.state }
+    val state = remember(item) { item.timestamp.state }
     val color = when (state) {
         BUILD_UP -> AppTheme.colors.f1EventBuildup
         LIVE -> AppTheme.colors.f1EventLive
