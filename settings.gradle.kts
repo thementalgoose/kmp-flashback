@@ -40,6 +40,7 @@ includeBuild("build-logic")
 include(":composeApp")
 include(":androidApp")
 
+include(":core:ai")
 include(":core:configuration")
 include(":core:device")
 include(":core:metrics:crashlytics")

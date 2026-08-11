@@ -68,6 +68,8 @@ androidx_appcompat = "androidx.appcompat:appcompat:1.7.1"
 androidx_browser = "androidx.browser:browser:1.10.0"
 androidx_webkit = "androidx.webkit:webkit:1.16.0"
 
+google_mlkit = "com.google.mlkit:genai-summarization:1.0.0-beta1"
+
 androidx_xr_runtime = { module = "androidx.xr.runtime:runtime", version.ref = "androidx-xr" }
 androidx_xr_scenecore = { module = "androidx.xr.scenecore:scenecore", version.ref = "androidx-xr" }
 androidx_xr_compose = { module = "androidx.xr.compose:compose", version.ref = "androidx-xr" }

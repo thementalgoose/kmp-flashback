@@ -47,7 +47,7 @@ actual class NotificationManagerImpl actual constructor(): NotificationManager, 
         alarmManager.cancel(pendingIntent)
     }
 
-    override fun cancelAll(uuids: List<Int>) {
+    actual override fun cancelAll(uuids: List<Int>) {
         val alarmManager: AlarmManager = alarmManager ?: return
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             alarmManager.cancelAll()
