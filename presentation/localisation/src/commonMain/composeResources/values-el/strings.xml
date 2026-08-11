@@ -290,7 +290,7 @@
     <string name="settings_pref_empty_week_title">Εμφάνιση κενών εβδομάδων</string>
     <string name="settings_pref_empty_week_description">Εμφάνιση ένδειξης διαστήματος μεταξύ αγώνων για να τονιστούν τα διπλά και τριπλά header στην επερχόμενη σεζόν</string>
     <string name="settings_pref_recent_highlights_title">Πρόσφατα highlights</string>
-    <string name="settings_pref_recent_highlights_description">Εμφάνιση του banner πρόσφατων highlights στην αρχική σελίδα αν είστε συνδεδεμένοι στο διαδίκτυο. Αυτό συνήθως περιέχει συνδέσμους σε σημαντικές ιστορίες της τελευταίας εβδομάδας περίπου</string>
+    <string name="settings_pref_recent_highlights_description">Εμφάνιση του banner με τα πρόσφατα σημαντικά θέματα στην αρχική σελίδα, εφόσον υπάρχει σύνδεση στο διαδίκτυο. Συνήθως περιλαμβάνει συνδέσμους προς σημαντικές ειδήσεις της τελευταίας εβδομάδας περίπου.</string>
     <string name="settings_pref_remember_season_change_title">Διατήρηση τελευταίας σεζόν</string>
     <string name="settings_pref_remember_season_change_description">Συνέχιση από τη σεζόν που προβλήθηκε τελευταία</string>
 

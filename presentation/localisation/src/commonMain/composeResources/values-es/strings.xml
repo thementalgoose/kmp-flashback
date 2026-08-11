@@ -263,7 +263,7 @@
     <string name="settings_pref_empty_week_title">Mostrar semanas vacías</string>
     <string name="settings_pref_empty_week_description">Mostrar un pequeño indicador de espaciado entre carreras para resaltar las dobles y triples cabeceras en la próxima temporada</string>
     <string name="settings_pref_recent_highlights_title">Destacados recientes</string>
-    <string name="settings_pref_recent_highlights_description">Mostrar el banner de destacados recientes en la página de inicio si estás conectado a Internet. Esto suele contener enlaces a historias importantes de la última semana aproximadamente</string>
+    <string name="settings_pref_recent_highlights_description">Mostrar el banner de noticias destacadas recientes en la página de inicio si hay conexión a Internet. Por lo general, contiene enlaces a historias relevantes de la última semana, aproximadamente.</string>
     <string name="settings_pref_remember_season_change_title">Recordar cambio de temporada</string>
     <string name="settings_pref_remember_season_change_description">Recordar la última temporada vista entre reinicios de la aplicación</string>
     <string name="settings_section_rss_configure_title">Configurar</string>
