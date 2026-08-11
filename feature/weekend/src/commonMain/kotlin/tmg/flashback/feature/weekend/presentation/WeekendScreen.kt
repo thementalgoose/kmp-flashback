@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowSizeClass.Companion.HEIGHT_DP_MEDIUM_LOWER_BOUND
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import coil3.compose.AsyncImagePainter
 import coil3.compose.rememberAsyncImagePainter
 import org.koin.compose.viewmodel.koinViewModel
@@ -158,6 +159,11 @@ fun WeekendScreenTab(
                 )
                 val painterState = painter.state.collectAsState()
 
+                val scrimColor = when (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
+                    true -> AppTheme.colors.surfaceContainer1
+                    false -> AppTheme.colors.surface
+                }
+
                 LazyColumn(
                     contentPadding = masterPadding,
                     modifier = Modifier.fillMaxSize()
@@ -203,7 +209,7 @@ fun WeekendScreenTab(
                                 action = HeaderAction.BACK.takeIf { showBack },
                                 actionModifier = buttonModifier,
                                 contentSpacing = height,
-                                scrimColour = AppTheme.colors.surfaceContainer1,
+                                scrimColour = scrimColor,
                                 content = @Composable {
                                     Row(
                                         modifier = Modifier
@@ -262,9 +268,13 @@ fun WeekendScreenTab(
                             },
                             youtubeClicked = openLink,
                             wikipediaClicked = openLink,
-                            mapsClicked = openMap
+                            mapsClicked = openMap,
+                            backgroundColor = scrimColor
                         )
-                        addSchedule(uiState.info)
+                        addSchedule(
+                            info = uiState.info,
+                            backgroundColor = scrimColor
+                        )
 
                         if (uiState.tab == WeekendTabs.Qualifying) {
                             addQualifyingData(
@@ -340,6 +350,7 @@ fun LazyListScope.addDetails(info: InfoModel) {
 
 fun LazyListScope.addLinks(
     info: InfoModel,
+    backgroundColor: Color,
     previousRace: OverviewRace?,
     previousRaceClicked: (OverviewRace) -> Unit,
     youtubeClicked: (String) -> Unit,
@@ -351,6 +362,7 @@ fun LazyListScope.addLinks(
             modifier = Modifier
                 .padding(top = AppTheme.dimens.xsmall)
                 .animateItem(),
+            backgroundColor = backgroundColor,
             model = info,
             previousRace = previousRace,
             previousRaceClicked = previousRaceClicked,
@@ -361,10 +373,14 @@ fun LazyListScope.addLinks(
     }
 }
 
-fun LazyListScope.addSchedule(info: InfoModel) {
+fun LazyListScope.addSchedule(
+    info: InfoModel,
+    backgroundColor: Color,
+) {
     item("schedule") {
         Schedule(
             modifier = Modifier.animateItem(),
+            backgroundColor = backgroundColor,
             model = info
         )
     }

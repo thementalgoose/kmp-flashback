@@ -78,6 +78,7 @@ private val weatherMetadataIconSize: Dp = 20.dp
 @Composable
 internal fun Schedule(
     model: InfoModel,
+    backgroundColor: Color,
     modifier: Modifier = Modifier
 ) {
     if (model.days.isNotEmpty()) {
@@ -92,7 +93,7 @@ internal fun Schedule(
         LazyRow(
             modifier = modifier
                 .padding(bottom = AppTheme.dimens.small)
-                .edgeFade(),
+                .edgeFade(backgroundColor = backgroundColor),
             contentPadding = PaddingValues(
                 end = AppTheme.dimens.medium
             ),
@@ -316,7 +317,8 @@ private fun PreviewSchedule() {
     ApplicationThemePreview {
         Column {
             Schedule(
-                model = InfoModel.preview()
+                model = InfoModel.preview(),
+                backgroundColor = Color.Red
             )
         }
     }
@@ -330,7 +332,8 @@ private fun PreviewScheduleWithWeather() {
             Schedule(
                 model = InfoModel.preview(
                     weather = ScheduleWeather.preview()
-                )
+                ),
+                backgroundColor = Color.Red
             )
         }
     }

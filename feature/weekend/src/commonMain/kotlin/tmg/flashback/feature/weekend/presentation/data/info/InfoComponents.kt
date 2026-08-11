@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Colors
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -19,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import flashback.presentation.localisation.generated.resources.Res.string
@@ -135,6 +137,7 @@ internal fun RaceDetails(
 @Composable
 internal fun RaceLinks(
     model: InfoModel,
+    backgroundColor: Color,
     previousRace: OverviewRace?,
     previousRaceClicked: (OverviewRace) -> Unit,
     youtubeClicked: (String) -> Unit,
@@ -145,7 +148,7 @@ internal fun RaceLinks(
     if (model.laps != null || model.youtubeUrl != null || model.circuit.location != null || model.wikipediaUrl != null) {
         Row(
             modifier
-                .edgeFade()
+                .edgeFade(backgroundColor = backgroundColor)
                 .horizontalScroll(rememberScrollState())
                 .padding(horizontal = AppTheme.dimens.medium),
             horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
