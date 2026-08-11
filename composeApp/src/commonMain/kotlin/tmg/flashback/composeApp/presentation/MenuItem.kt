@@ -16,6 +16,8 @@ import flashback.composeapp.generated.resources.dashboard_nav_circuits
 import flashback.composeapp.generated.resources.dashboard_nav_circuits_selected
 import flashback.composeapp.generated.resources.dashboard_nav_constructor_selected
 import flashback.composeapp.generated.resources.dashboard_nav_drivers_selected
+import flashback.composeapp.generated.resources.dashboard_nav_results
+import flashback.composeapp.generated.resources.dashboard_nav_results_selected
 import flashback.composeapp.generated.resources.dashboard_reaction_selected
 import flashback.composeapp.generated.resources.dashboard_rss_selected
 import flashback.composeapp.generated.resources.dashboard_settings_selected
@@ -75,7 +77,7 @@ val MenuItem.label: StringResource
 
 val MenuItem.icon: DrawableResource
     get() = when (this) {
-        MenuItem.Results -> Res.drawable.dashboard_nav_calendar
+        MenuItem.Results -> Res.drawable.dashboard_nav_results
         MenuItem.Calendar -> Res.drawable.dashboard_nav_calendar
         MenuItem.DriversStandings -> Res.drawable.dashboard_nav_drivers
         MenuItem.TeamsStandings -> Res.drawable.dashboard_nav_constructor
@@ -89,7 +91,7 @@ val MenuItem.icon: DrawableResource
 
 val MenuItem.selectedIcon: DrawableResource
     get() = when (this) {
-        MenuItem.Results -> Res.drawable.dashboard_nav_calendar_selected
+        MenuItem.Results -> Res.drawable.dashboard_nav_results_selected
         MenuItem.Calendar -> Res.drawable.dashboard_nav_calendar_selected
         MenuItem.DriversStandings -> Res.drawable.dashboard_nav_drivers_selected
         MenuItem.TeamsStandings -> Res.drawable.dashboard_nav_constructor_selected
