@@ -14,10 +14,11 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.text.TextBody1
 
+@Composable
 fun Modifier.edgeFade(
     edgeWidth: Dp = AppTheme.dimens.medium,
+    backgroundColor: Color = AppTheme.colors.surface
 ): Modifier = composed {
-    val backgroundColor = AppTheme.colors.surface
     this.drawWithContent {
         this.drawContent()
         this.drawRect(
