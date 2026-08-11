@@ -39,6 +39,7 @@ import flashback.presentation.ui.generated.resources.ic_details_wikipedia
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.window.Dialog
+import androidx.navigation3.runtime.NavKey
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsCircuitId
 import tmg.flashback.analytics.presentation.ScreenView
@@ -50,6 +51,7 @@ import tmg.flashback.formula1.model.CircuitHistoryRaceResult
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.preview.preview
 import tmg.flashback.navigation.NavCircuit
+import tmg.flashback.navigation.NavWeekend
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.badge.BadgeView
@@ -69,6 +71,7 @@ import tmg.flashback.ui.components.track.TrackBreakdown
 fun CircuitScreen(
     data: NavCircuit,
     paddingValues: PaddingValues,
+    navigateTo: (NavKey) -> Unit,
     actionUpClicked: () -> Unit,
     showBack: Boolean,
     windowSizeClass: WindowSizeClass,
@@ -90,6 +93,7 @@ fun CircuitScreen(
         actionUpClicked = actionUpClicked,
         windowSizeClass = windowSizeClass,
         showBack = showBack,
+        navigateTo = navigateTo,
         refresh = viewModel::refresh,
         uiState = uiState.value,
         clickLink = viewModel::openLink,
@@ -102,6 +106,7 @@ private fun CircuitScreen(
     data: NavCircuit,
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
+    navigateTo: (NavKey) -> Unit,
     windowSizeClass: WindowSizeClass,
     showBack: Boolean,
     uiState: CircuitUiState,
@@ -194,7 +199,10 @@ private fun CircuitScreen(
                 }
             }
             items(uiState.races) {
-                Event(it)
+                Event(
+                    model = it,
+                    navigateTo = navigateTo
+                )
             }
         }
     }
@@ -241,6 +249,7 @@ internal fun CircuitLinks(
 @Composable
 private fun Event(
     model: CircuitEvent,
+    navigateTo: (NavKey) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -249,6 +258,13 @@ private fun Event(
                 horizontal = AppTheme.dimens.small,
                 vertical = AppTheme.dimens.xsmall
             )
+            .clickable(onClick = {
+                navigateTo(NavWeekend(
+                    season = model.race.season,
+                    round = model.race.round,
+                    raceName = model.race.name
+                ))
+            })
             .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
             .background(AppTheme.colors.surfaceContainer3)
             .padding(
@@ -345,6 +361,7 @@ private fun Preview() {
             paddingValues = PaddingValues(0.dp),
             actionUpClicked = { },
             showBack = true,
+            navigateTo = { },
             windowSizeClass = WindowSizeClass.compute(400f, 700f),
             uiState = CircuitUiState(
                 isLoading = false,

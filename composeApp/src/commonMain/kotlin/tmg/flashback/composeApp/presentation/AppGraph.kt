@@ -184,6 +184,7 @@ fun AppGraph(
                     paddingValues = insetPadding,
                     actionUpClicked = { backStack.removeDetail() },
                     showBack = !isExpanded,
+                    navigateTo = { backStack.replaceDetail(it) },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
             }
