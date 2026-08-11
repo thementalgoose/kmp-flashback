@@ -263,7 +263,7 @@
     <string name="settings_pref_empty_week_title">Mostra le settimane vuote</string>
     <string name="settings_pref_empty_week_description">Mostra un piccolo indicatore di spaziatura tra le gare per evidenziare i doppi e i tripli header nella stagione imminente</string>
     <string name="settings_pref_recent_highlights_title">Momenti salienti recenti</string>
-    <string name="settings_pref_recent_highlights_description">Mostra il banner dei momenti salienti recenti nella home page se connesso a internet. Di solito contiene collegamenti a storie significative dell\'ultima settimana circa</string>
+    <string name="settings_pref_recent_highlights_description">Mostra il banner con i contenuti in evidenza recenti nella home page, se connessi a Internet. Di solito contiene link a notizie significative dell\'ultima settimana circa.</string>
     <string name="settings_pref_remember_season_change_title">Ricorda il cambio di stagione</string>
     <string name="settings_pref_remember_season_change_description">Ricorda l\'ultima stagione visualizzata tra un riavvio e l\'altro dell\'app</string>
     <string name="settings_section_rss_configure_title">Configura</string>

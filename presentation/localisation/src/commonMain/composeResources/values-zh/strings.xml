@@ -260,7 +260,7 @@
     <string name="settings_pref_empty_week_title">显示空周</string>
     <string name="settings_pref_empty_week_description">在比赛之间显示一个小间距指示器，以突出即将到来的赛季中的双重和三重比赛</string>
     <string name="settings_pref_recent_highlights_title">近期亮点</string>
-    <string name="settings_pref_recent_highlights_description">如果已连接到互联网，则在主页上显示近期亮点横幅。这通常包含过去一周左右的重要商店的链接</string>
+    <string name="settings_pref_recent_highlights_description">如果已连接互联网，则在首页显示“近期精选”横幅。该横幅通常包含指向过去一周左右重要报道的链接。</string>
     <string name="settings_pref_remember_season_change_title">记住季节变化</string>
     <string name="settings_pref_remember_season_change_description">记住应用重启期间观看的最后一个季节</string>
     <string name="settings_section_rss_configure_title">配置</string>
