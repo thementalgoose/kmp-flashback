@@ -162,7 +162,7 @@ enum class TrackLayout(
     IMOLA(
         circuitId = "imola",
         icon = Res.drawable.circuit_imola,
-        breakdown = null,
+        breakdown = TrackBreakdown.IMOLA,
         overrides = listOf(
             Configuration.Range(min = 1995, max = 2006, _icon = Res.drawable.circuit_imola_1995_2006),
             Configuration.Range(min = 1980, max = 1994, _icon = Res.drawable.circuit_imola_1980_1994),
