@@ -347,7 +347,8 @@ enum class TrackLayout(
     ),
     SOCHI(
         circuitId = "sochi",
-        icon = Res.drawable.circuit_sochi
+        icon = Res.drawable.circuit_sochi,
+        breakdown = TrackBreakdown.SOCHI
     ),
     SPA(
         circuitId = "spa",
