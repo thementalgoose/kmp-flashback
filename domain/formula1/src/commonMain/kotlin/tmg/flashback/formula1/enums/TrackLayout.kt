@@ -44,7 +44,8 @@ enum class TrackLayout(
     ),
     PORTIMAO(
         circuitId = "portimao",
-        icon = Res.drawable.circuit_algarve
+        icon = Res.drawable.circuit_algarve,
+        breakdown = TrackBreakdown.PORTIMAO
     ),
     AMERICAS(
         circuitId = "americas",
@@ -143,7 +144,8 @@ enum class TrackLayout(
     ),
     HOCKENHEIMRING(
         circuitId = "hockenheimring",
-        icon = Res.drawable.circuit_hockenheimring
+        icon = Res.drawable.circuit_hockenheimring,
+        breakdown = TrackBreakdown.HOCKENHEIMRING
     ),
     HUNGARORING(
         circuitId = "hungaroring",
@@ -162,7 +164,7 @@ enum class TrackLayout(
     IMOLA(
         circuitId = "imola",
         icon = Res.drawable.circuit_imola,
-        breakdown = null,
+        breakdown = TrackBreakdown.IMOLA,
         overrides = listOf(
             Configuration.Range(min = 1995, max = 2006, _icon = Res.drawable.circuit_imola_1995_2006),
             Configuration.Range(min = 1980, max = 1994, _icon = Res.drawable.circuit_imola_1980_1994),
@@ -170,7 +172,8 @@ enum class TrackLayout(
     ),
     ISTANBUL(
         circuitId = "istanbul",
-        icon = Res.drawable.circuit_istanbul
+        icon = Res.drawable.circuit_istanbul,
+        breakdown = TrackBreakdown.ISTANBUL_PARK
     ),
     JACAREPAGUA(
         circuitId = "jacarepagua",
@@ -256,7 +259,8 @@ enum class TrackLayout(
     ),
     MUGELLO(
         circuitId = "mugello",
-        icon = Res.drawable.circuit_mugello
+        icon = Res.drawable.circuit_mugello,
+        breakdown = TrackBreakdown.MUGELLO
     ),
     NIVELLES(
         circuitId = "nivelles",
@@ -264,7 +268,8 @@ enum class TrackLayout(
     ),
     NURBURGRING(
         circuitId = "nurburgring",
-        icon = Res.drawable.circuit_nurburgring
+        icon = Res.drawable.circuit_nurburgring,
+        breakdown = TrackBreakdown.NURBURGRING
     ),
     OKAYAMA(
         circuitId = "okayama",
@@ -301,7 +306,8 @@ enum class TrackLayout(
     ),
     RICARD(
         circuitId = "ricard",
-        icon = Res.drawable.circuit_ricard
+        icon = Res.drawable.circuit_ricard,
+        breakdown = TrackBreakdown.PAUL_RICARD
     ),
     RIVERSIDE(
         circuitId = "riverside",
@@ -342,7 +348,8 @@ enum class TrackLayout(
     ),
     SOCHI(
         circuitId = "sochi",
-        icon = Res.drawable.circuit_sochi
+        icon = Res.drawable.circuit_sochi,
+        breakdown = TrackBreakdown.SOCHI
     ),
     SPA(
         circuitId = "spa",
