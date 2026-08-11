@@ -144,7 +144,8 @@ enum class TrackLayout(
     ),
     HOCKENHEIMRING(
         circuitId = "hockenheimring",
-        icon = Res.drawable.circuit_hockenheimring
+        icon = Res.drawable.circuit_hockenheimring,
+        breakdown = TrackBreakdown.HOCKENHEIMRING
     ),
     HUNGARORING(
         circuitId = "hungaroring",
