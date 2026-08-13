@@ -369,7 +369,8 @@ enum class TrackLayout(
     ),
     VALENCIA(
         circuitId = "valencia",
-        icon = Res.drawable.circuit_valencia
+        icon = Res.drawable.circuit_valencia,
+        breakdown = TrackBreakdown.VALENCIA
     ),
     VEGAS(
         circuitId = "vegas",
