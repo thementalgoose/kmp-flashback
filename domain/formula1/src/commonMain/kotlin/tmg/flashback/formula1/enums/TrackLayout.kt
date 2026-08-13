@@ -54,7 +54,9 @@ enum class TrackLayout(
     ),
     BUDDH(
         circuitId = "buddh",
-        icon = Res.drawable.circuit_buddh),
+        icon = Res.drawable.circuit_buddh,
+        breakdown = TrackBreakdown.BUDDH
+    ),
     BAHRAIN(
         circuitId = "bahrain",
         icon = Res.drawable.circuit_bahrain,
@@ -393,7 +395,8 @@ enum class TrackLayout(
     ),
     YEONGAM(
         circuitId = "yeongam",
-        icon = Res.drawable.circuit_yeongam
+        icon = Res.drawable.circuit_yeongam,
+        breakdown = TrackBreakdown.YEONGAM
     ),
     ZANDVOORT(
         circuitId = "zandvoort",
