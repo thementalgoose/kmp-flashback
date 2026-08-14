@@ -67,10 +67,10 @@
 
     <!-- Details -->
     <string name="weekend_info_laps">%1$s vueltas</string>
-    <string name="weekend_track_zones">Zones</string>
-    <string name="weekend_track_zones_hidden">Hidden</string>
+    <string name="weekend_track_zones">Zonas</string>
+    <string name="weekend_track_zones_hidden">Ocultas</string>
     <string name="weekend_track_zones_drs">DRS</string>
-    <string name="weekend_track_zones_overtake">Straight Mode</string>
+    <string name="weekend_track_zones_overtake">Modo recto</string>
 
     <!-- Dashboard -->
     <string name="dashboard_now">Lo más destacado reciente…</string>
