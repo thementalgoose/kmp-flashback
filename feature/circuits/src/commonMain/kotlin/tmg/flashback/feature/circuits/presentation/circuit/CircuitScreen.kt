@@ -66,6 +66,8 @@ import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 import tmg.flashback.ui.components.track.TrackBreakdown
+import tmg.flashback.ui.components.track.TrackBreakdownDialog
+import tmg.flashback.ui.components.track.TrackBreakdownInfo
 
 @Composable
 fun CircuitScreen(
@@ -154,26 +156,17 @@ private fun CircuitScreen(
                         }
                         val size = Modifier.size(width = 180.dp, height = 108.dp)
                         if (uiState.trackLayout.breakdown != null) {
+                            val trackBreakdownInfo = remember(uiState.trackLayout.breakdown) { uiState.trackLayout.breakdown!!.toInfo() }
                             val showDialog = remember { mutableStateOf(false) }
                             TrackBreakdown(
-                                trackBreakdown = uiState.trackLayout.breakdown!!,
+                                trackBreakdownInfo = trackBreakdownInfo,
                                 modifier = size
                                     .clickable(onClick = { showDialog.value = true })
                             )
                             if (showDialog.value) {
-                                Dialog(
-                                    onDismissRequest = { showDialog.value = false },
-                                    content = {
-                                        Box(modifier = Modifier
-                                            .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-                                            .background(AppTheme.colors.surface)
-                                            .padding(AppTheme.dimens.medium)
-                                        ) {
-                                            TrackBreakdown(
-                                                trackBreakdown = uiState.trackLayout.breakdown!!,
-                                            )
-                                        }
-                                    }
+                                TrackBreakdownDialog(
+                                    showDialog = showDialog,
+                                    trackBreakdownInfo = trackBreakdownInfo
                                 )
                             }
                         } else {
@@ -335,22 +328,18 @@ private fun Result(
     }
 }
 
-@Composable
-private fun TrackBreakdown(
-    trackBreakdown: TrackBreakdown,
-    modifier: Modifier = Modifier
-) {
-    TrackBreakdown(
-        modifier = modifier,
-        pathWidth = trackBreakdown.pathWidth,
-        pathHeight = trackBreakdown.pathHeight,
-        pathTrackWidth = trackBreakdown.trackWidth,
-        pathS1 = trackBreakdown.s1,
-        pathS2 = trackBreakdown.s2,
-        pathS3 = trackBreakdown.s3,
-        pathStartLine = trackBreakdown.startLine
-    )
-}
+
+private fun TrackBreakdown.toInfo() = TrackBreakdownInfo(
+    pathWidth = this.pathWidth,
+    pathHeight = this.pathHeight,
+    pathTrackWidth = this.trackWidth,
+    pathS1 = s1,
+    pathS2 = s2,
+    pathS3 = s3,
+    pathStartLine = startLine,
+    pathOvertakeZones = straightModeZones,
+    pathDrsZones = drsZones
+)
 
 @PreviewTheme
 @Composable
