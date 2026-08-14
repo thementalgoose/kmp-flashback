@@ -37,6 +37,8 @@ import flashback.presentation.ui.generated.resources.ic_details_youtube
 import kotlinx.datetime.format.MonthNames
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsCircuitId
+import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.formula1.enums.TrackBreakdown
 import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Circuit
@@ -110,6 +112,9 @@ internal fun RaceDetails(
                     .then(sizeModifier)
             )
             if (showDialog.value) {
+                ScreenView(screenName = "Track Breakdown", args = mapOf(
+                    analyticsCircuitId to model.circuit.id
+                ))
                 TrackBreakdownDialog(
                     showDialog = showDialog,
                     circuitName = model.circuit.name,
