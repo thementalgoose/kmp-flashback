@@ -65,6 +65,10 @@
 
     <!-- Details -->
     <string name="weekend_info_laps">%1$s 圈</string>
+    <string name="weekend_track_zones">赛道分区</string>
+    <string name="weekend_track_zones_hidden">隐藏</string>
+    <string name="weekend_track_zones_drs">DRS</string>
+    <string name="weekend_track_zones_overtake">直线模式</string>
 
     <!-- Dashboard -->
     <string name="dashboard_now">最近的精彩瞬间…</string>

@@ -53,6 +53,8 @@ import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.edgeFade
 import tmg.flashback.ui.components.track.TrackBreakdown
+import tmg.flashback.ui.components.track.TrackBreakdownDialog
+import tmg.flashback.ui.components.track.TrackBreakdownInfo
 
 @Composable
 internal fun RaceDetails(
@@ -99,27 +101,21 @@ internal fun RaceDetails(
         }
         val sizeModifier = Modifier.size(width = 150.dp, height = 90.dp)
         if (trackBreakdown != null) {
+            val trackBreakdownInfo = remember(trackBreakdown) { trackBreakdown.toInfo() }
             val showDialog = remember { mutableStateOf(false) }
             TrackBreakdown(
-                trackBreakdown = trackBreakdown,
+                trackBreakdownInfo = trackBreakdownInfo,
                 modifier = Modifier
                     .clickable(onClick = { showDialog.value = true })
                     .then(sizeModifier)
             )
             if (showDialog.value) {
-                Dialog(
-                    onDismissRequest = { showDialog.value = false },
-                    content = {
-                        Box(modifier = Modifier
-                            .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-                            .background(AppTheme.colors.surface)
-                            .padding(AppTheme.dimens.medium)
-                        ) {
-                            TrackBreakdown(
-                                trackBreakdown = trackBreakdown,
-                            )
-                        }
-                    }
+                TrackBreakdownDialog(
+                    showDialog = showDialog,
+                    circuitName = model.circuit.name,
+                    countryName = model.circuit.country,
+                    countryISO = model.circuit.countryISO,
+                    trackBreakdownInfo = trackBreakdownInfo
                 )
             }
         }
@@ -198,22 +194,17 @@ internal fun RaceLinks(
     }
 }
 
-@Composable
-private fun TrackBreakdown(
-    trackBreakdown: TrackBreakdown,
-    modifier: Modifier = Modifier
-) {
-    TrackBreakdown(
-        modifier = modifier,
-        pathWidth = trackBreakdown.pathWidth,
-        pathHeight = trackBreakdown.pathHeight,
-        pathTrackWidth = trackBreakdown.trackWidth,
-        pathS1 = trackBreakdown.s1,
-        pathS2 = trackBreakdown.s2,
-        pathS3 = trackBreakdown.s3,
-        pathStartLine = trackBreakdown.startLine
-    )
-}
+private fun TrackBreakdown.toInfo() = TrackBreakdownInfo(
+    pathWidth = this.pathWidth,
+    pathHeight = this.pathHeight,
+    pathTrackWidth = this.trackWidth,
+    pathS1 = s1,
+    pathS2 = s2,
+    pathS3 = s3,
+    pathStartLine = startLine,
+    pathOvertakeZones = straightModeZones,
+    pathDrsZones = drsZones
+)
 
 @PreviewTheme
 @Composable
