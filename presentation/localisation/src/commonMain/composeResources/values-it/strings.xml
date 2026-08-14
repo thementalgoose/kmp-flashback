@@ -67,6 +67,10 @@
 
     <!-- Details -->
     <string name="weekend_info_laps">%1$s giri</string>
+    <string name="weekend_track_zones">Zones</string>
+    <string name="weekend_track_zones_hidden">Hidden</string>
+    <string name="weekend_track_zones_drs">DRS</string>
+    <string name="weekend_track_zones_overtake">Straight Mode</string>
 
     <!-- Dashboard -->
     <string name="dashboard_now">Momenti salienti recenti…</string>

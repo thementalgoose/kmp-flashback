@@ -165,6 +165,9 @@ private fun CircuitScreen(
                             )
                             if (showDialog.value) {
                                 TrackBreakdownDialog(
+                                    circuitName = uiState.circuit.name,
+                                    countryName = uiState.circuit.country,
+                                    countryISO = uiState.circuit.countryISO,
                                     showDialog = showDialog,
                                     trackBreakdownInfo = trackBreakdownInfo
                                 )

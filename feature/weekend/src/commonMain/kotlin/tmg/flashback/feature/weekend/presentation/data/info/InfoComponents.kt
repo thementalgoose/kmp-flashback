@@ -112,6 +112,9 @@ internal fun RaceDetails(
             if (showDialog.value) {
                 TrackBreakdownDialog(
                     showDialog = showDialog,
+                    circuitName = model.circuit.name,
+                    countryName = model.circuit.country,
+                    countryISO = model.circuit.countryISO,
                     trackBreakdownInfo = trackBreakdownInfo
                 )
             }
