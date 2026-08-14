@@ -368,7 +368,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.53.0;
+				MARKETING_VERSION = 1.56.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tmg.flashback.sandbox;
 				PRODUCT_NAME = "Flashback Sandbox";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -478,7 +478,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.53.0;
+				MARKETING_VERSION = 1.56.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tmg.flashback;
 				PRODUCT_NAME = Flashback;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -582,7 +582,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.53.0;
+				MARKETING_VERSION = 1.56.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tmg.flashback;
 				PRODUCT_NAME = Flashback;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -691,7 +691,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.53.0;
+				MARKETING_VERSION = 1.56.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tmg.flashback.sandbox;
 				PRODUCT_NAME = "Flashback Sandbox";
 				SWIFT_EMIT_LOC_STRINGS = YES;

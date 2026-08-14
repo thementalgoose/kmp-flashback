@@ -164,6 +164,9 @@ private fun CircuitScreen(
                                     .clickable(onClick = { showDialog.value = true })
                             )
                             if (showDialog.value) {
+                                ScreenView(screenName = "Track Breakdown", args = mapOf(
+                                    analyticsCircuitId to uiState.circuit.id
+                                ))
                                 TrackBreakdownDialog(
                                     circuitName = uiState.circuit.name,
                                     countryName = uiState.circuit.country,
