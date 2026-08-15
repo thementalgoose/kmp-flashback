@@ -23,13 +23,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
 import flashback.presentation.localisation.generated.resources.Res
-import flashback.presentation.localisation.generated.resources.ab_hide
-import flashback.presentation.localisation.generated.resources.details_link_laps
-import flashback.presentation.localisation.generated.resources.details_link_map
 import flashback.presentation.localisation.generated.resources.weekend_track_zones
 import flashback.presentation.localisation.generated.resources.weekend_track_zones_drs
 import flashback.presentation.localisation.generated.resources.weekend_track_zones_hidden
@@ -65,8 +60,8 @@ private val overtakeButton = ButtonItem(
 )
 
 @Composable
-fun TrackBreakdownDialog(
-    showDialog: MutableState<Boolean>,
+fun TrackBreakdownBottomSheet(
+    showBottomSheet: MutableState<Boolean>,
     circuitName: String?,
     countryName: String?,
     countryISO: String?,
@@ -76,7 +71,7 @@ fun TrackBreakdownDialog(
     showOvertake: Boolean = true,
 ) {
     ModalBottomSheet(
-        onDismissRequest = { showDialog.value = false },
+        onDismissRequest = { showBottomSheet.value = false },
         containerColor = AppTheme.colors.surface,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         content = {
@@ -85,7 +80,7 @@ fun TrackBreakdownDialog(
                 .background(AppTheme.colors.surface)
                 .padding(AppTheme.dimens.medium)
             ) {
-                TrackBreakdownDialog(
+                TrackBreakdownBottomSheet(
                     showDrs = showDrs,
                     showOvertake = showOvertake,
                     circuitName = circuitName,
@@ -100,7 +95,7 @@ fun TrackBreakdownDialog(
 }
 
 @Composable
-private fun TrackBreakdownDialog(
+private fun TrackBreakdownBottomSheet(
     circuitName: String?,
     countryName: String?,
     countryISO: String?,
@@ -180,7 +175,7 @@ private fun TrackBreakdownDialog(
 @Composable
 private fun Preview() {
     ApplicationThemePreview {
-        TrackBreakdownDialog(
+        TrackBreakdownBottomSheet(
             showDrs = true,
             showOvertake = true,
             circuitName = "Zandvoort Circuit",

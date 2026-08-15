@@ -38,7 +38,6 @@ import flashback.presentation.ui.generated.resources.ic_details_maps
 import flashback.presentation.ui.generated.resources.ic_details_wikipedia
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import androidx.compose.ui.window.Dialog
 import androidx.navigation3.runtime.NavKey
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsCircuitId
@@ -66,7 +65,7 @@ import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 import tmg.flashback.ui.components.track.TrackBreakdown
-import tmg.flashback.ui.components.track.TrackBreakdownDialog
+import tmg.flashback.ui.components.track.TrackBreakdownBottomSheet
 import tmg.flashback.ui.components.track.TrackBreakdownInfo
 
 @Composable
@@ -167,11 +166,11 @@ private fun CircuitScreen(
                                 ScreenView(screenName = "Track Breakdown", args = mapOf(
                                     analyticsCircuitId to uiState.circuit.id
                                 ))
-                                TrackBreakdownDialog(
+                                TrackBreakdownBottomSheet(
                                     circuitName = uiState.circuit.name,
                                     countryName = uiState.circuit.country,
                                     countryISO = uiState.circuit.countryISO,
-                                    showDialog = showDialog,
+                                    showBottomSheet = showDialog,
                                     trackBreakdownInfo = trackBreakdownInfo
                                 )
                             }
