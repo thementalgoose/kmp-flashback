@@ -47,7 +47,7 @@ enum class TrackLayout(
         icon = Res.drawable.circuit_algarve,
         breakdown = TrackBreakdown.PORTIMAO
     ),
-    AMERICAS(
+    COTA(
         circuitId = "americas",
         icon = Res.drawable.circuit_americas,
         breakdown = TrackBreakdown.COTA
