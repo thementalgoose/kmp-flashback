@@ -15,7 +15,7 @@ val TrackLayout.icon: Int
         TrackLayout.ANDERSTORP -> R.drawable.circuit_anderstorp
         TrackLayout.AVUS -> R.drawable.circuit_avus
         TrackLayout.PORTIMAO -> R.drawable.circuit_algarve
-        TrackLayout.AMERICAS -> R.drawable.circuit_americas
+        TrackLayout.COTA -> R.drawable.circuit_americas
         TrackLayout.BUDDH -> R.drawable.circuit_buddh
         TrackLayout.BAHRAIN -> R.drawable.circuit_bahrain
         TrackLayout.BAK -> R.drawable.circuit_bak
