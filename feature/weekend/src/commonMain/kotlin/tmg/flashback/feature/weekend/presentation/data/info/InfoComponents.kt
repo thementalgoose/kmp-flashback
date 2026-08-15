@@ -38,7 +38,9 @@ import kotlinx.datetime.format.MonthNames
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsCircuitId
+import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
 import tmg.flashback.analytics.presentation.ScreenView
+import tmg.flashback.formula1.constants.Formula1
 import tmg.flashback.formula1.enums.TrackBreakdown
 import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Circuit
@@ -113,10 +115,13 @@ internal fun RaceDetails(
             )
             if (showDialog.value) {
                 ScreenView(screenName = "Track Breakdown", args = mapOf(
-                    analyticsCircuitId to model.circuit.id
+                    analyticsCircuitId to model.circuit.id,
+                    analyticsSeason to model.season.toString()
                 ))
                 TrackBreakdownDialog(
                     showDialog = showDialog,
+                    showDrs = model.season in Formula1.drs,
+                    showOvertake = model.season in Formula1.straightModeZones,
                     circuitName = model.circuit.name,
                     countryName = model.circuit.country,
                     countryISO = model.circuit.countryISO,

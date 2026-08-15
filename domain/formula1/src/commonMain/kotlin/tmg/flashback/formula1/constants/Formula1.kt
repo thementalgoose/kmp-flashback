@@ -34,6 +34,12 @@ object Formula1 {
     const val sprintsIntroducedIn = 2021
 
     /**
+     * Map Zones
+     */
+    val drs = 2011..2025
+    val straightModeZones = 2026..Int.MAX_VALUE
+
+    /**
      * Maximum points awarded to a driver in a single race based on the
      * season
      */

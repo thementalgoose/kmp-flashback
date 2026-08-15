@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package tmg.flashback.ui.components.track
 
 import androidx.compose.foundation.background
@@ -11,6 +13,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -67,9 +72,13 @@ fun TrackBreakdownDialog(
     countryISO: String?,
     trackBreakdownInfo: TrackBreakdownInfo,
     modifier: Modifier = Modifier,
+    showDrs: Boolean = true,
+    showOvertake: Boolean = true,
 ) {
-    Dialog(
+    ModalBottomSheet(
         onDismissRequest = { showDialog.value = false },
+        containerColor = AppTheme.colors.surface,
+        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         content = {
             Box(modifier = modifier
                 .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
@@ -77,6 +86,8 @@ fun TrackBreakdownDialog(
                 .padding(AppTheme.dimens.medium)
             ) {
                 TrackBreakdownDialog(
+                    showDrs = showDrs,
+                    showOvertake = showOvertake,
                     circuitName = circuitName,
                     countryName = countryName,
                     countryISO = countryISO,
@@ -95,6 +106,8 @@ private fun TrackBreakdownDialog(
     countryISO: String?,
     modifier: Modifier = Modifier,
     trackBreakdownInfo: TrackBreakdownInfo,
+    showDrs: Boolean,
+    showOvertake: Boolean,
 ) {
     val hasOvertakeZones = remember(trackBreakdownInfo) { trackBreakdownInfo.pathOvertakeZones.isNotEmpty() }
     val hasDrsZones = remember(trackBreakdownInfo) { trackBreakdownInfo.pathDrsZones.isNotEmpty() }
@@ -103,14 +116,15 @@ private fun TrackBreakdownDialog(
     val selection = selected.value?.key?.toEnum<Zones> { it.key }
 
     val buttons = listOfNotNull(
-        hiddenButton.takeIf { !hasOvertakeZones || !hasDrsZones},
-        drsButton.takeIf { hasDrsZones },
-        overtakeButton.takeIf { hasOvertakeZones },
+        hiddenButton,
+        drsButton.takeIf { hasDrsZones && showDrs },
+        overtakeButton.takeIf { hasOvertakeZones && showOvertake },
     )
 
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         if (circuitName != null && countryName != null && countryISO != null) {
             Row(
@@ -144,9 +158,10 @@ private fun TrackBreakdownDialog(
             showDrs = selection == Zones.DRS,
             showOvertake = selection == Zones.OVERTAKE
         )
-        if (hasOvertakeZones || hasDrsZones) {
+        if (buttons.size > 1) {
             Spacer(Modifier.height(AppTheme.dimens.xsmall))
             TextBody1(
+                modifier = Modifier.fillMaxWidth(),
                 text = stringResource(Res.string.weekend_track_zones)
             )
             Segments(
@@ -166,6 +181,8 @@ private fun TrackBreakdownDialog(
 private fun Preview() {
     ApplicationThemePreview {
         TrackBreakdownDialog(
+            showDrs = true,
+            showOvertake = true,
             circuitName = "Zandvoort Circuit",
             countryName = "Netherlands",
             countryISO = "NLD",
