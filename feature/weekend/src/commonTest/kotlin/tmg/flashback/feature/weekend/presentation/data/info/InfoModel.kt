@@ -2,6 +2,7 @@ package tmg.flashback.feature.weekend.presentation.data.info
 
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
+import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.model
