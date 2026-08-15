@@ -153,12 +153,13 @@ private fun TrackBreakdownBottomSheet(
             showDrs = selection == Zones.DRS,
             showOvertake = selection == Zones.OVERTAKE
         )
+        Spacer(Modifier.height(AppTheme.dimens.xsmall))
         if (buttons.size > 1) {
-            Spacer(Modifier.height(AppTheme.dimens.xsmall))
             TextBody1(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(Res.string.weekend_track_zones)
             )
+            Spacer(Modifier.height(AppTheme.dimens.xsmall))
             Segments(
                 items = buttons,
                 selected = selected.value,
