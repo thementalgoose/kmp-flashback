@@ -50,7 +50,7 @@ enum class TrackLayout(
     AMERICAS(
         circuitId = "americas",
         icon = Res.drawable.circuit_americas,
-        breakdown = TrackBreakdown.AMERICAS
+        breakdown = TrackBreakdown.COTA
     ),
     BUDDH(
         circuitId = "buddh",
