@@ -2,6 +2,7 @@ package tmg.flashback.feature.weekend.presentation.data.info
 
 import kotlinx.datetime.LocalDate
 import tmg.flashback.feature.weekend.repositories.WeatherRepository
+import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Race
 import tmg.flashback.formula1.model.Schedule
 
@@ -20,6 +21,8 @@ internal class InfoDataMapperImpl(
             date = race.raceInfo.date,
             time = race.raceInfo.time,
             laps = race.raceInfo.laps,
+            trackLayout = TrackLayout.getTrack(race.raceInfo.circuit.id),
+
             youtubeUrl = race.raceInfo.youtube,
             aerialUrl = race.raceInfo.aerialUrl,
             wikipediaUrl = race.raceInfo.wikipediaUrl,

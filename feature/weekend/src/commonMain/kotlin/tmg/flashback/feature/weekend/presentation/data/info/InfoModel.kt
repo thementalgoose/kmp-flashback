@@ -5,6 +5,7 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
+import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.ScheduleWeather
@@ -20,6 +21,7 @@ data class InfoModel(
     val time: LocalTime?,
     val circuit: Circuit,
     val laps: String?,
+    val trackLayout: TrackLayout?,
     val cancelled: Boolean,
     val youtubeUrl: String?,
     val aerialUrl: String?,
@@ -41,6 +43,7 @@ private fun LocalTime.adjustToUTC(): LocalTime {
 
 fun InfoModel.Companion.preview(
     weather: ScheduleWeather? = null,
+    trackLayout: TrackLayout? = TrackLayout.SILVERSTONE,
     circuit: Circuit = Circuit.preview(),
 ): InfoModel {
     val nowDate = LocalDate.now()
@@ -92,8 +95,9 @@ fun InfoModel.Companion.preview(
                 ) to false,
             )
         ),
+        trackLayout = trackLayout,
         aerialUrl = null,
         temperatureMetric = true,
-        windspeedMetric = true
+        windspeedMetric = true,
     )
 }

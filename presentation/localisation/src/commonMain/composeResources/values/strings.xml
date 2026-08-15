@@ -84,6 +84,8 @@
     <string name="weekend_track_zones_hidden">Hidden</string>
     <string name="weekend_track_zones_drs">DRS</string>
     <string name="weekend_track_zones_overtake">Straight Mode</string>
+    <string name="drs_zones">%1$s DRS zones</string>
+    <string name="straight_mode_zones">%1$s straight mode zones</string>
 
 
     <!-- Dashboard -->

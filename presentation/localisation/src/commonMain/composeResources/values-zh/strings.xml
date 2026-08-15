@@ -69,6 +69,8 @@
     <string name="weekend_track_zones_hidden">隐藏</string>
     <string name="weekend_track_zones_drs">DRS</string>
     <string name="weekend_track_zones_overtake">直线模式</string>
+    <string name="drs_zones">%1$s DRS 赛道分区</string>
+    <string name="straight_mode_zones">%1$s 直线模式 赛道分区</string>
 
     <!-- Dashboard -->
     <string name="dashboard_now">最近的精彩瞬间…</string>

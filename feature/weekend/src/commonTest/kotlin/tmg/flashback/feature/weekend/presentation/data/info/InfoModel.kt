@@ -2,6 +2,7 @@ package tmg.flashback.feature.weekend.presentation.data.info
 
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
+import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.model
@@ -11,6 +12,7 @@ fun InfoModel.Companion.model(
     round: Int = 1,
     raceName: String = "name",
     circuit: Circuit = Circuit.model(),
+    trackLayout: TrackLayout? = null,
     laps: String? = "12",
     date: LocalDate = LocalDate(2020, 10, 12),
     time: LocalTime? = LocalTime(12, 34),
@@ -26,6 +28,7 @@ fun InfoModel.Companion.model(
     raceName = raceName,
     circuit = circuit,
     laps = laps,
+    trackLayout = trackLayout,
     youtubeUrl = youtubeUrl,
     wikipediaUrl = wikipediaUrl,
     days = listOf(

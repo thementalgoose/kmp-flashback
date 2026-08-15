@@ -79,6 +79,8 @@
     <string name="weekend_track_zones_hidden">Κρυφές</string>
     <string name="weekend_track_zones_drs">DRS</string>
     <string name="weekend_track_zones_overtake">Λειτουργία ευθείας</string>
+    <string name="drs_zones">%1$s DRS zώνες</string>
+    <string name="straight_mode_zones">%1$s Λειτουργία ευθείας zώνες</string>
 
 
     <!-- Dashboard -->
