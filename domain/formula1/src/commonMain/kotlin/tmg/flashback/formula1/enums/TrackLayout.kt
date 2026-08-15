@@ -135,7 +135,8 @@ enum class TrackLayout(
     ),
     FUJI(
         circuitId = "fuji",
-        icon = Res.drawable.circuit_fuji
+        icon = Res.drawable.circuit_fuji,
+        breakdown = TrackBreakdown.FUJI
     ),
     GALVEZ(
         circuitId = "galvez",
@@ -169,7 +170,8 @@ enum class TrackLayout(
     ),
     INDIANAPOLIS(
         circuitId = "indianapolis",
-        icon = Res.drawable.circuit_indianapolis
+        icon = Res.drawable.circuit_indianapolis,
+        breakdown = TrackBreakdown.INDIANAPOLIS
     ),
     INTERLAGOS(
         circuitId = "interlagos",
@@ -184,7 +186,8 @@ enum class TrackLayout(
             Configuration.Range(
                 min = 1995,
                 max = 2006,
-                _icon = Res.drawable.circuit_imola_1995_2006
+                _icon = Res.drawable.circuit_imola_1995_2006,
+                _breakdown = TrackBreakdown.IMOLA_1995_2006
             ),
             Configuration.Range(
                 min = 1980,
