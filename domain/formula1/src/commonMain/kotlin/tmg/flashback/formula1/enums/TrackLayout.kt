@@ -243,7 +243,8 @@ enum class TrackLayout(
     ),
     MAGNY_COURS(
         circuitId = "magny_cours",
-        icon = Res.drawable.circuit_magny_cours
+        icon = Res.drawable.circuit_magny_cours,
+        breakdown = TrackBreakdown.MAGNY_COURS
     ),
     MARINA_BAY(
         circuitId = "marina_bay",
