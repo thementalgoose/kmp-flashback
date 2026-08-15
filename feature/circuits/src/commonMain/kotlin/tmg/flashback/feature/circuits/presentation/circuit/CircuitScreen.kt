@@ -170,6 +170,7 @@ private fun CircuitScreen(
                                     circuitName = uiState.circuit.name,
                                     countryName = uiState.circuit.country,
                                     countryISO = uiState.circuit.countryISO,
+                                    laps = null,
                                     showBottomSheet = showDialog,
                                     trackBreakdownInfo = trackBreakdownInfo
                                 )
