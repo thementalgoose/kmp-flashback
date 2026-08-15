@@ -159,7 +159,6 @@ private fun TrackBreakdownBottomSheet(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(Res.string.weekend_track_zones)
             )
-            Spacer(Modifier.height(AppTheme.dimens.xsmall))
             Segments(
                 items = buttons,
                 selected = selected.value,
