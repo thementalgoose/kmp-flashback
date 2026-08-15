@@ -25,6 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res
+import flashback.presentation.localisation.generated.resources.weekend_info_lap_count
+import flashback.presentation.localisation.generated.resources.weekend_info_laps
 import flashback.presentation.localisation.generated.resources.weekend_track_zones
 import flashback.presentation.localisation.generated.resources.weekend_track_zones_drs
 import flashback.presentation.localisation.generated.resources.weekend_track_zones_hidden
@@ -37,6 +39,7 @@ import tmg.flashback.style.buttons.ButtonItem
 import tmg.flashback.style.buttons.Segments
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
+import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.flag.Flag
 
@@ -65,6 +68,7 @@ fun TrackBreakdownBottomSheet(
     circuitName: String?,
     countryName: String?,
     countryISO: String?,
+    laps: String?,
     trackBreakdownInfo: TrackBreakdownInfo,
     modifier: Modifier = Modifier,
     showDrs: Boolean = true,
@@ -86,6 +90,7 @@ fun TrackBreakdownBottomSheet(
                     circuitName = circuitName,
                     countryName = countryName,
                     countryISO = countryISO,
+                    laps = laps,
                     trackBreakdownInfo = trackBreakdownInfo,
                     modifier = Modifier,
                 )
@@ -99,6 +104,7 @@ private fun TrackBreakdownBottomSheet(
     circuitName: String?,
     countryName: String?,
     countryISO: String?,
+    laps: String?,
     modifier: Modifier = Modifier,
     trackBreakdownInfo: TrackBreakdownInfo,
     showDrs: Boolean,
@@ -154,6 +160,17 @@ private fun TrackBreakdownBottomSheet(
             showOvertake = selection == Zones.OVERTAKE
         )
         Spacer(Modifier.height(AppTheme.dimens.xsmall))
+        if (laps != null) {
+            TextBody1(
+                modifier = Modifier.fillMaxWidth(),
+                text = stringResource(Res.string.weekend_info_lap_count)
+            )
+            TextBody2(
+                modifier = Modifier.fillMaxWidth(),
+                text = stringResource(Res.string.weekend_info_laps, laps)
+            )
+            Spacer(Modifier.height(AppTheme.dimens.xsmall))
+        }
         if (buttons.size > 1) {
             TextBody1(
                 modifier = Modifier.fillMaxWidth(),
@@ -167,6 +184,7 @@ private fun TrackBreakdownBottomSheet(
                 },
                 showTick = true
             )
+            Spacer(Modifier.height(AppTheme.dimens.xsmall))
         }
     }
 }
@@ -178,6 +196,7 @@ private fun Preview() {
         TrackBreakdownBottomSheet(
             showDrs = true,
             showOvertake = true,
+            laps = "51",
             circuitName = "Zandvoort Circuit",
             countryName = "Netherlands",
             countryISO = "NLD",

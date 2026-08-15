@@ -121,6 +121,7 @@ internal fun RaceDetails(
                     showBottomSheet = showDialog,
                     showDrs = model.season in Formula1.drs,
                     showOvertake = model.season in Formula1.straightModeZones,
+                    laps = model.laps,
                     circuitName = model.circuit.name,
                     countryName = model.circuit.country,
                     countryISO = model.circuit.countryISO,

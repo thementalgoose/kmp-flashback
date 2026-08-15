@@ -80,6 +80,7 @@
 
     <!-- Details -->
     <string name="weekend_info_laps">%1$s laps</string>
+    <string name="weekend_info_lap_count">Lap count</string>
     <string name="weekend_track_zones">Zones</string>
     <string name="weekend_track_zones_hidden">Hidden</string>
     <string name="weekend_track_zones_drs">DRS</string>

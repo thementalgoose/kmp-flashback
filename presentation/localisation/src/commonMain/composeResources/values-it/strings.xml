@@ -67,6 +67,7 @@
 
     <!-- Details -->
     <string name="weekend_info_laps">%1$s giri</string>
+    <string name="weekend_info_lap_count">Giri</string>
     <string name="weekend_track_zones">Zone</string>
     <string name="weekend_track_zones_hidden">Nascoste</string>
     <string name="weekend_track_zones_drs">DRS</string>

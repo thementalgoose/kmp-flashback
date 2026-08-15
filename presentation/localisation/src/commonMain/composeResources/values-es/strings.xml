@@ -67,6 +67,7 @@
 
     <!-- Details -->
     <string name="weekend_info_laps">%1$s vueltas</string>
+    <string name="weekend_info_lap_count">Vueltas</string>
     <string name="weekend_track_zones">Zonas</string>
     <string name="weekend_track_zones_hidden">Ocultas</string>
     <string name="weekend_track_zones_drs">DRS</string>
