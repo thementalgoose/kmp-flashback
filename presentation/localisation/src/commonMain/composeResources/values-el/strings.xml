@@ -75,7 +75,7 @@
 
     <!-- Details -->
     <string name="weekend_info_laps">%1$s γύροι</string>
-    <string name="weekend_info_lap_count">Lap count</string>
+    <string name="weekend_info_lap_count">Γύροι</string>
     <string name="weekend_track_zones">Ζώνες</string>
     <string name="weekend_track_zones_hidden">Κρυφές</string>
     <string name="weekend_track_zones_drs">DRS</string>
