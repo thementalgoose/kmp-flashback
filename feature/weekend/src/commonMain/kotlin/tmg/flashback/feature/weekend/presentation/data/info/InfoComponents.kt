@@ -17,14 +17,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import flashback.domain.formula1.generated.resources.ic_drs
+import flashback.domain.formula1.generated.resources.ic_straight_mode
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.details_link_laps
 import flashback.presentation.localisation.generated.resources.details_link_map
 import flashback.presentation.localisation.generated.resources.details_link_wikipedia
 import flashback.presentation.localisation.generated.resources.details_link_youtube
+import flashback.presentation.localisation.generated.resources.drs_zones
+import flashback.presentation.localisation.generated.resources.straight_mode_zones
 import flashback.presentation.localisation.generated.resources.weekend_race_round
 import flashback.presentation.ui.generated.resources.Res
+import flashback.presentation.ui.generated.resources.ic_details_laps
 import flashback.presentation.ui.generated.resources.ic_details_maps
+import flashback.presentation.ui.generated.resources.ic_details_previous_race
 import flashback.presentation.ui.generated.resources.ic_details_track
 import flashback.presentation.ui.generated.resources.ic_details_wikipedia
 import flashback.presentation.ui.generated.resources.ic_details_youtube
@@ -59,12 +65,11 @@ internal fun RaceDetails(
     model: InfoModel,
     modifier: Modifier = Modifier
 ) {
-    val trackLayout = remember(model.circuit.id) { TrackLayout.getTrack(model.circuit.id) }
-    val trackIcon = remember(trackLayout) {
-        trackLayout?.getIcon(model.season, model.raceName)
+    val trackIcon = remember(model) {
+        model.trackLayout?.getIcon(model.season, model.raceName)
     }
     val trackBreakdown = remember(model) {
-        trackLayout?.getBreakdown(model.season, model.raceName)
+        model.trackLayout?.getBreakdown(model.season, model.raceName)
     }
     Row(
         modifier = modifier,
@@ -145,55 +150,80 @@ internal fun RaceLinks(
     mapsClicked: (Location, String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    if (model.laps != null || model.youtubeUrl != null || model.circuit.location != null || model.wikipediaUrl != null) {
-        Row(
-            modifier
-                .edgeFade(backgroundColor = backgroundColor)
-                .horizontalScroll(rememberScrollState())
-                .padding(horizontal = AppTheme.dimens.medium),
-            horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
-        ) {
-            if (model.laps != null) {
+    Row(
+        modifier
+            .edgeFade(backgroundColor = backgroundColor)
+            .horizontalScroll(rememberScrollState())
+            .padding(horizontal = AppTheme.dimens.medium),
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
+    ) {
+        if (model.laps != null) {
+            BadgeView(
+                modifier = Modifier,
+                icon = Res.drawable.ic_details_laps,
+                label = stringResource(string.details_link_laps, model.laps),
+            )
+        }
+        val breakdown = remember(model) { model.trackLayout?.getBreakdown(model.season, model.raceName) }
+        if (breakdown != null) {
+            val drsZones = breakdown.drsZones
+                .filter { it.isNotBlank() }
+                .size
+            val straightModeZones = breakdown.straightModeZones
+                .filter { it.isNotBlank() }
+                .size
+
+            if (drsZones > 0 && model.season in Formula1.drs) {
                 BadgeView(
-                    label = stringResource(string.details_link_laps, model.laps),
+                    modifier = Modifier,
+                    icon = flashback.domain.formula1.generated.resources.Res.drawable.ic_drs,
+                    label = stringResource(string.drs_zones, drsZones.toString()),
                 )
             }
-            if (previousRace != null) {
+
+            if (straightModeZones > 0 && model.season in Formula1.straightModeZones) {
                 BadgeView(
-                    modifier = Modifier.clickable {
-                        previousRaceClicked(previousRace)
-                    },
-                    icon = Res.drawable.ic_details_track,
-                    label = previousRace.season.toString(),
+                    modifier = Modifier,
+                    icon = flashback.domain.formula1.generated.resources.Res.drawable.ic_straight_mode,
+                    label = stringResource(string.straight_mode_zones, straightModeZones.toString()),
                 )
             }
-            if (model.youtubeUrl != null) {
-                BadgeView(
-                    modifier = Modifier.clickable {
-                        youtubeClicked(model.youtubeUrl)
-                    },
-                    label = stringResource(string.details_link_youtube),
-                    icon = Res.drawable.ic_details_youtube
-                )
-            }
-            if (model.circuit.location != null) {
-                BadgeView(
-                    modifier = Modifier.clickable {
-                        mapsClicked(model.circuit.location!!, model.circuit.name)
-                    },
-                    label = stringResource(string.details_link_map),
-                    icon = Res.drawable.ic_details_maps
-                )
-            }
-            if (model.wikipediaUrl != null) {
-                BadgeView(
-                    modifier = Modifier.clickable {
-                        wikipediaClicked(model.wikipediaUrl)
-                    },
-                    label = stringResource(string.details_link_wikipedia),
-                    icon = Res.drawable.ic_details_wikipedia
-                )
-            }
+        }
+        if (previousRace != null) {
+            BadgeView(
+                modifier = Modifier.clickable {
+                    previousRaceClicked(previousRace)
+                },
+                icon = Res.drawable.ic_details_previous_race,
+                label = previousRace.season.toString(),
+            )
+        }
+        if (model.youtubeUrl != null) {
+            BadgeView(
+                modifier = Modifier.clickable {
+                    youtubeClicked(model.youtubeUrl)
+                },
+                label = stringResource(string.details_link_youtube),
+                icon = Res.drawable.ic_details_youtube
+            )
+        }
+        if (model.circuit.location != null) {
+            BadgeView(
+                modifier = Modifier.clickable {
+                    mapsClicked(model.circuit.location!!, model.circuit.name)
+                },
+                label = stringResource(string.details_link_map),
+                icon = Res.drawable.ic_details_maps
+            )
+        }
+        if (model.wikipediaUrl != null) {
+            BadgeView(
+                modifier = Modifier.clickable {
+                    wikipediaClicked(model.wikipediaUrl)
+                },
+                label = stringResource(string.details_link_wikipedia),
+                icon = Res.drawable.ic_details_wikipedia
+            )
         }
     }
 }

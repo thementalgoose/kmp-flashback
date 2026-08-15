@@ -71,6 +71,8 @@
     <string name="weekend_track_zones_hidden">Nascoste</string>
     <string name="weekend_track_zones_drs">DRS</string>
     <string name="weekend_track_zones_overtake">Modalità rettilineo</string>
+    <string name="drs_zones">%1$s DRS zone</string>
+    <string name="straight_mode_zones">%1$s Modalità rettilineo zone</string>
 
     <!-- Dashboard -->
     <string name="dashboard_now">Momenti salienti recenti…</string>

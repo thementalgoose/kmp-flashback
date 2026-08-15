@@ -22,6 +22,7 @@ internal class InfoDataMapperImpl(
             time = race.raceInfo.time,
             laps = race.raceInfo.laps,
             trackLayout = TrackLayout.getTrack(race.raceInfo.circuit.id),
+
             youtubeUrl = race.raceInfo.youtube,
             aerialUrl = race.raceInfo.aerialUrl,
             wikipediaUrl = race.raceInfo.wikipediaUrl,
