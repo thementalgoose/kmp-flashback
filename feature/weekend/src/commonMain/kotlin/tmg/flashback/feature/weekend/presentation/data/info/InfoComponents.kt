@@ -1,28 +1,22 @@
 package tmg.flashback.feature.weekend.presentation.data.info
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Colors
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.details_link_laps
 import flashback.presentation.localisation.generated.resources.details_link_map
@@ -38,7 +32,9 @@ import kotlinx.datetime.format.MonthNames
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsCircuitId
+import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
 import tmg.flashback.analytics.presentation.ScreenView
+import tmg.flashback.formula1.constants.Formula1
 import tmg.flashback.formula1.enums.TrackBreakdown
 import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Circuit
@@ -55,7 +51,7 @@ import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.edgeFade
 import tmg.flashback.ui.components.track.TrackBreakdown
-import tmg.flashback.ui.components.track.TrackBreakdownDialog
+import tmg.flashback.ui.components.track.TrackBreakdownBottomSheet
 import tmg.flashback.ui.components.track.TrackBreakdownInfo
 
 @Composable
@@ -113,10 +109,13 @@ internal fun RaceDetails(
             )
             if (showDialog.value) {
                 ScreenView(screenName = "Track Breakdown", args = mapOf(
-                    analyticsCircuitId to model.circuit.id
+                    analyticsCircuitId to model.circuit.id,
+                    analyticsSeason to model.season.toString()
                 ))
-                TrackBreakdownDialog(
-                    showDialog = showDialog,
+                TrackBreakdownBottomSheet(
+                    showBottomSheet = showDialog,
+                    showDrs = model.season in Formula1.drs,
+                    showOvertake = model.season in Formula1.straightModeZones,
                     circuitName = model.circuit.name,
                     countryName = model.circuit.country,
                     countryISO = model.circuit.countryISO,
