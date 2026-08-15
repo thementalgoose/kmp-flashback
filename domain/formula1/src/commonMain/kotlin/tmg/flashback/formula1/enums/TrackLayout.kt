@@ -135,7 +135,8 @@ enum class TrackLayout(
     ),
     FUJI(
         circuitId = "fuji",
-        icon = Res.drawable.circuit_fuji
+        icon = Res.drawable.circuit_fuji,
+        breakdown = TrackBreakdown.FUJI
     ),
     GALVEZ(
         circuitId = "galvez",
