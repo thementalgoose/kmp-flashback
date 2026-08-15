@@ -65,6 +65,7 @@ fun TrackBreakdownBottomSheet(
     circuitName: String?,
     countryName: String?,
     countryISO: String?,
+    laps: String?,
     trackBreakdownInfo: TrackBreakdownInfo,
     modifier: Modifier = Modifier,
     showDrs: Boolean = true,
@@ -99,6 +100,7 @@ private fun TrackBreakdownBottomSheet(
     circuitName: String?,
     countryName: String?,
     countryISO: String?,
+    laps: String?,
     modifier: Modifier = Modifier,
     trackBreakdownInfo: TrackBreakdownInfo,
     showDrs: Boolean,
@@ -154,6 +156,12 @@ private fun TrackBreakdownBottomSheet(
             showOvertake = selection == Zones.OVERTAKE
         )
         Spacer(Modifier.height(AppTheme.dimens.xsmall))
+        if (laps != null) {
+            TextBody1(
+                modifier = Modifier.fillMaxWidth(),
+                text = stringResource(Res.string.weekend_track_zones)
+            )
+        }
         if (buttons.size > 1) {
             TextBody1(
                 modifier = Modifier.fillMaxWidth(),
