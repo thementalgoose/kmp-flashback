@@ -41,6 +41,7 @@ import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.constants.AnalyticsConstants
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.feature.weekend.presentation.WeekendUiState.Data
+import tmg.flashback.feature.weekend.presentation.data.QualifyingSortType
 import tmg.flashback.feature.weekend.presentation.data.ResultType
 import tmg.flashback.feature.weekend.presentation.data.info.InfoModel
 import tmg.flashback.feature.weekend.presentation.data.info.RaceDetails
@@ -52,6 +53,7 @@ import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.addSpri
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.addSprintRaceData
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.model.OverviewRace
+import tmg.flashback.formula1.model.QualifyingType
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.navigation.NavWeekend
 import tmg.flashback.style.AppTheme
@@ -110,6 +112,7 @@ fun WeekendScreen(
         uiState = uiState.value,
         clickWeekendTab = viewModel::updateTab,
         selectResultType = viewModel::selectResultType,
+        selectQualifyingType = viewModel::sortQualifyingBy,
         refresh = viewModel::refresh
     )
 }
@@ -128,6 +131,7 @@ fun WeekendScreenTab(
     windowSizeClass: WindowSizeClass,
     uiState: WeekendUiState,
     selectResultType: (ResultType) -> Unit,
+    selectQualifyingType: (QualifyingSortType) -> Unit,
     refresh: () -> Unit,
 ) {
     Box(
@@ -278,7 +282,8 @@ fun WeekendScreenTab(
 
                         if (uiState.tab == WeekendTabs.Qualifying) {
                             addQualifyingData(
-                                uiState = uiState
+                                uiState = uiState,
+                                selectQualifyingType = selectQualifyingType
                             )
                         }
                         if (uiState.tab == WeekendTabs.Race) {

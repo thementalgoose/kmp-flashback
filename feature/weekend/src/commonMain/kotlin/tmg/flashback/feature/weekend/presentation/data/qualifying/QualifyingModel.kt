@@ -1,5 +1,6 @@
 package tmg.flashback.feature.weekend.presentation.data.qualifying
 
+import tmg.flashback.feature.weekend.presentation.data.QualifyingSortType
 import tmg.flashback.formula1.model.DriverEntry
 import tmg.flashback.formula1.model.LapTime
 import tmg.flashback.formula1.model.QualifyingResult
@@ -20,11 +21,11 @@ sealed class QualifyingModel(
         val sprintRaceGrid: Int? // For 2021 and 2022 when qualifying set grid for sprint
     ) : QualifyingModel("driver-${driver.driver.id}") {
 
-        internal fun comparatorValue(type: QualifyingType?): Int {
+        internal fun comparatorValue(type: QualifyingSortType?): Int {
             return when (type) {
-                QualifyingType.Q1 -> q1?.lapTime?.totalMillis ?: 0
-                QualifyingType.Q2 -> q2?.lapTime?.totalMillis ?: 0
-                QualifyingType.Q3 -> q3?.lapTime?.totalMillis ?: 0
+                QualifyingSortType.Q1 -> q1?.lapTime?.totalMillis?.takeIf { it != 0 } ?: Int.MAX_VALUE
+                QualifyingSortType.Q2 -> q2?.lapTime?.totalMillis?.takeIf { it != 0 } ?: Int.MAX_VALUE
+                QualifyingSortType.Q3 -> q3?.lapTime?.totalMillis?.takeIf { it != 0 } ?: Int.MAX_VALUE
                 else -> qualified ?: 0
             }
         }
@@ -40,10 +41,10 @@ sealed class QualifyingModel(
         val qualified: Int? = finalQualifyingPosition ?: q2?.position ?: q1?.position
     ) : QualifyingModel("driver-${driver.driver.id}") {
 
-        internal fun comparatorValue(type: QualifyingType?): Int {
+        internal fun comparatorValue(type: QualifyingSortType?): Int {
             return when (type) {
-                QualifyingType.Q1 -> q1?.lapTime?.totalMillis ?: 0
-                QualifyingType.Q2 -> q2?.lapTime?.totalMillis ?: 0
+                QualifyingSortType.Q1 -> q1?.lapTime?.totalMillis?.takeIf { it != 0 } ?: Int.MAX_VALUE
+                QualifyingSortType.Q2 -> q2?.lapTime?.totalMillis?.takeIf { it != 0 } ?: Int.MAX_VALUE
                 else -> qualified ?: 0
             }
         }
@@ -58,9 +59,9 @@ sealed class QualifyingModel(
         val qualified: Int? = finalQualifyingPosition ?: q1?.position
     ) : QualifyingModel("driver-${driver.driver.id}") {
 
-        internal fun comparatorValue(type: QualifyingType?): Int {
+        internal fun comparatorValue(type: QualifyingSortType?): Int {
             return when (type) {
-                QualifyingType.Q1 -> q1?.lapTime?.totalMillis ?: 0
+                QualifyingSortType.Q1 -> q1?.lapTime?.totalMillis?.takeIf { it != 0 } ?: Int.MAX_VALUE
                 else -> qualified ?: 0
             }
         }
@@ -69,7 +70,7 @@ sealed class QualifyingModel(
     }
 }
 
-fun List<QualifyingModel>.sortedBy(type: QualifyingType?): List<QualifyingModel> {
+fun List<QualifyingModel>.sortedBy(type: QualifyingSortType?): List<QualifyingModel> {
     return this.sortedBy {
         return@sortedBy when (it) {
             is QualifyingModel.Q1 -> it.comparatorValue(type)

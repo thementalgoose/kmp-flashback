@@ -16,6 +16,7 @@ import flashback.presentation.localisation.generated.resources.nav_sprint
 import flashback.presentation.localisation.generated.resources.nav_sprint_qualifying
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
+import tmg.flashback.feature.weekend.presentation.data.QualifyingSortType
 import tmg.flashback.feature.weekend.presentation.data.ResultType
 import tmg.flashback.feature.weekend.presentation.data.info.InfoModel
 import tmg.flashback.feature.weekend.presentation.data.qualifying.QualifyingModel
@@ -37,9 +38,10 @@ sealed class WeekendUiState {
         val resultType: ResultType,
         val cancelled: Boolean,
         val previousRace: OverviewRace?,
-        val qualifyingColumns: QualifyingType?,
+        val qualifyingColumns: List<QualifyingType>,
         val qualifyingResults: List<QualifyingModel>,
-        val qualifyingSort: QualifyingType?,
+        val qualifyingSortOptions: List<QualifyingSortType>,
+        val qualifyingSort: QualifyingSortType,
         val raceResults: List<RaceModel>,
         val sprintQualifyingResults: List<SprintQualifyingModel>,
         val sprintRaceResults: List<SprintRaceModel>,

@@ -45,7 +45,7 @@ data class LapTime(
             val millisString = millis.extend(3).take(millisPrecision)
             return when {
                 noTime -> {
-                    "No time"
+                    ""
                 }
                 hours != 0 -> {
                     "${hours}:${mins.extend(2)}:${seconds.extend(2)}.${millisString}"

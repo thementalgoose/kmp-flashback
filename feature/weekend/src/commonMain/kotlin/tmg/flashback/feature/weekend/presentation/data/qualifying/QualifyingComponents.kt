@@ -34,14 +34,15 @@ import flashback.presentation.localisation.generated.resources.qualifying_penalt
 import flashback.presentation.localisation.generated.resources.qualifying_penalty_starts_sprint
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.feature.weekend.presentation.WeekendUiState.Data
 import tmg.flashback.feature.weekend.presentation.components.DataMissing
 import tmg.flashback.feature.weekend.presentation.components.DataUnavailable
 import tmg.flashback.feature.weekend.presentation.components.EventCancelled
 import tmg.flashback.feature.weekend.presentation.components.Position
 import tmg.flashback.feature.weekend.presentation.components.TypeHeader
+import tmg.flashback.feature.weekend.presentation.data.QualifyingSortType
+import tmg.flashback.feature.weekend.presentation.data.QualifyingSortType.Qualified
+import tmg.flashback.feature.weekend.presentation.data.label
 import tmg.flashback.formula1.constants.Formula1
 import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.model.DriverEntry
@@ -58,18 +59,32 @@ import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextSection
 import tmg.flashback.ui.components.driver.DriverName
 import tmg.flashback.ui.components.edgeBar
-import kotlin.collections.contains
 
 private val lapTimeWidth: Dp = 64.dp
 
 fun LazyListScope.addQualifyingData(
     uiState: Data,
+    selectQualifyingType: (QualifyingSortType) -> Unit,
     keyPrefix: String = ""
 ) {
     item("qualifying_label") {
         TypeHeader(
             modifier = Modifier.animateItem(),
             resource = string.nav_qualifying,
+            option = uiState.qualifyingSort,
+            options = listOf(
+                QualifyingSortType.Qualified,
+                QualifyingSortType.Q3,
+                QualifyingSortType.Q2,
+                QualifyingSortType.Q1
+            ),
+            optionsToShowBadge = listOf(
+                QualifyingSortType.Q3,
+                QualifyingSortType.Q2,
+                QualifyingSortType.Q1
+            ),
+            optionClicked = { selectQualifyingType(it) },
+            optionLabel = { stringResource(it.label )}
         )
     }
     if (uiState.qualifyingResults.isEmpty()) {
@@ -90,9 +105,9 @@ fun LazyListScope.addQualifyingData(
         item("qualifying_header") {
             QualifyingHeader(
                 modifier = Modifier.animateItem(),
-                showQ1 = uiState.qualifyingColumns in listOf(Q1, Q2, Q3),
-                showQ2 = uiState.qualifyingColumns in listOf(Q2, Q3),
-                showQ3 = uiState.qualifyingColumns in listOf(Q3)
+                showQ1 = uiState.qualifyingColumns.contains(Q1),
+                showQ2 = uiState.qualifyingColumns.contains(Q2),
+                showQ3 = uiState.qualifyingColumns.contains(Q3)
             )
         }
     }

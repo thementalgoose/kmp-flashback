@@ -17,6 +17,7 @@ import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
 import tmg.flashback.device.usecases.OpenLocationUseCase
 import tmg.flashback.device.usecases.OpenWebpageUseCase
+import tmg.flashback.feature.weekend.presentation.data.QualifyingSortType
 import tmg.flashback.feature.weekend.presentation.data.ResultType
 import tmg.flashback.feature.weekend.presentation.data.info.InfoDataMapper
 import tmg.flashback.feature.weekend.presentation.data.qualifying.QualifyingDataMapper
@@ -51,7 +52,7 @@ class WeekendViewModel(
     val isLoading: StateFlow<Boolean> = _isLoading
 
     private val resultType: MutableStateFlow<ResultType> = MutableStateFlow(ResultType.DRIVERS)
-    private val qualifyingSort: MutableStateFlow<QualifyingType?> = MutableStateFlow(null)
+    private val qualifyingSort: MutableStateFlow<QualifyingSortType> = MutableStateFlow(QualifyingSortType.Qualified)
     private val tab: MutableStateFlow<WeekendTabs> = MutableStateFlow(WeekendTabs.Qualifying)
     private val previousRace: MutableStateFlow<OverviewRace?> = MutableStateFlow(null)
 
@@ -71,6 +72,7 @@ class WeekendViewModel(
                 return@combine WeekendUiState.NotFound
             }
             _isLoading.update { false }
+            val maxLabel = race.qualifying.maxOfOrNull { it.label }
             return@combine WeekendUiState.Data(
                 season = race.raceInfo.season,
                 info = infoDataMapper(race),
@@ -84,7 +86,17 @@ class WeekendViewModel(
                 previousRace = previousRace,
                 qualifyingResults = qualifyingDataMapper(race)
                     .sortedBy(qualifyingSort),
-                qualifyingColumns = race.qualifying.maxOfOrNull { it.label },
+                qualifyingColumns = listOfNotNull(
+                    QualifyingType.Q1.takeIf { maxLabel == QualifyingType.Q3 || maxLabel == QualifyingType.Q2 || maxLabel == QualifyingType.Q1 },
+                    QualifyingType.Q2.takeIf { maxLabel == QualifyingType.Q3 || maxLabel == QualifyingType.Q2 },
+                    QualifyingType.Q3.takeIf { maxLabel == QualifyingType.Q3 },
+                ),
+                qualifyingSortOptions = listOfNotNull(
+                    QualifyingSortType.Qualified,
+                    QualifyingSortType.Q1.takeIf { maxLabel == QualifyingType.Q3 || maxLabel == QualifyingType.Q2 || maxLabel == QualifyingType.Q1 },
+                    QualifyingSortType.Q2.takeIf { maxLabel == QualifyingType.Q3 || maxLabel == QualifyingType.Q2 },
+                    QualifyingSortType.Q3.takeIf { maxLabel == QualifyingType.Q3 }
+                ),
                 qualifyingSort = qualifyingSort,
                 raceResults = raceDataMapper(race, resultType),
                 sprintQualifyingResults = sprintQualifyingDataMapper(race),
@@ -97,6 +109,7 @@ class WeekendViewModel(
         this.seasonRound.update {
             season to round
         }
+        this.qualifyingSort.update { QualifyingSortType.Qualified }
         this.tab.update { WeekendTabs.Qualifying }
         viewModelScope.launch {
             val data = racesRepository.getRace(season, round).firstOrNull()
@@ -112,9 +125,9 @@ class WeekendViewModel(
         }
     }
 
-    fun sortQualifyingBy(qualifyingType: QualifyingType?) {
-        logDebug("Weeekend", "Selecting qualifying type $qualifyingType")
-        this.qualifyingSort.update { qualifyingType }
+    fun sortQualifyingBy(qualifyingSortType: QualifyingSortType) {
+        logDebug("Weeekend", "Selecting qualifying type $qualifyingSortType")
+        this.qualifyingSort.update { qualifyingSortType }
     }
 
     fun updateTab(tab: WeekendTabs) {

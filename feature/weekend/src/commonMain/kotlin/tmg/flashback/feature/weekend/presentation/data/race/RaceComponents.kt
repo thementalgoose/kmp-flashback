@@ -24,13 +24,10 @@ import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.ab_scored
 import flashback.presentation.localisation.generated.resources.nav_race
 import org.jetbrains.compose.resources.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.feature.weekend.presentation.WeekendUiState.Data
 import tmg.flashback.feature.weekend.presentation.components.DataMissing
 import tmg.flashback.feature.weekend.presentation.components.DataUnavailable
 import tmg.flashback.feature.weekend.presentation.components.DriverInfoWithIcon
-import tmg.flashback.feature.weekend.presentation.components.DriverTeamSwitcher
 import tmg.flashback.feature.weekend.presentation.components.EventCancelled
 import tmg.flashback.feature.weekend.presentation.components.PointsBox
 import tmg.flashback.feature.weekend.presentation.components.RaceHeader
@@ -40,6 +37,7 @@ import tmg.flashback.feature.weekend.presentation.components.finishingPositionWi
 import tmg.flashback.feature.weekend.presentation.components.status
 import tmg.flashback.feature.weekend.presentation.components.timeWidth
 import tmg.flashback.feature.weekend.presentation.data.ResultType
+import tmg.flashback.feature.weekend.presentation.data.label
 import tmg.flashback.formula1.constants.Formula1
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.DriverEntry
@@ -48,13 +46,12 @@ import tmg.flashback.formula1.preview.preview
 import tmg.flashback.infrastructure.extensions.roundToHalf
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.buttons.Segments
-import tmg.flashback.style.input.InputSelection
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.driver.DriverPoints
 import tmg.flashback.ui.components.driver.driverIconSize
 import tmg.flashback.ui.components.edgeBar
+
 
 fun LazyListScope.addRaceData(
     uiState: Data,
@@ -65,8 +62,10 @@ fun LazyListScope.addRaceData(
         TypeHeader(
             modifier = Modifier.animateItem(),
             resource = string.nav_race,
-            resultType = uiState.resultType,
-            selectResultType = { selectResultType(it) }
+            option = uiState.resultType,
+            options = listOf(ResultType.DRIVERS, ResultType.CONSTRUCTORS),
+            optionClicked = selectResultType,
+            optionLabel = { stringResource(it.label) }
         )
     }
     if (uiState.raceResults.isEmpty()) {
