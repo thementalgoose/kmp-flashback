@@ -73,6 +73,11 @@ class WeekendViewModel(
             }
             _isLoading.update { false }
             val maxLabel = race.qualifying.maxOfOrNull { it.label }
+            val qualifyingColumns = listOfNotNull(
+                QualifyingType.Q1.takeIf { maxLabel == QualifyingType.Q3 || maxLabel == QualifyingType.Q2 || maxLabel == QualifyingType.Q1 },
+                QualifyingType.Q2.takeIf { maxLabel == QualifyingType.Q3 || maxLabel == QualifyingType.Q2 },
+                QualifyingType.Q3.takeIf { maxLabel == QualifyingType.Q3 },
+            )
             return@combine WeekendUiState.Data(
                 season = race.raceInfo.season,
                 info = infoDataMapper(race),
@@ -86,16 +91,12 @@ class WeekendViewModel(
                 previousRace = previousRace,
                 qualifyingResults = qualifyingDataMapper(race)
                     .sortedBy(qualifyingSort),
-                qualifyingColumns = listOfNotNull(
-                    QualifyingType.Q1.takeIf { maxLabel == QualifyingType.Q3 || maxLabel == QualifyingType.Q2 || maxLabel == QualifyingType.Q1 },
-                    QualifyingType.Q2.takeIf { maxLabel == QualifyingType.Q3 || maxLabel == QualifyingType.Q2 },
-                    QualifyingType.Q3.takeIf { maxLabel == QualifyingType.Q3 },
-                ),
+                qualifyingColumns = qualifyingColumns,
                 qualifyingSortOptions = listOfNotNull(
                     QualifyingSortType.Qualified,
-                    QualifyingSortType.Q1.takeIf { maxLabel == QualifyingType.Q3 || maxLabel == QualifyingType.Q2 || maxLabel == QualifyingType.Q1 },
-                    QualifyingSortType.Q2.takeIf { maxLabel == QualifyingType.Q3 || maxLabel == QualifyingType.Q2 },
-                    QualifyingSortType.Q3.takeIf { maxLabel == QualifyingType.Q3 }
+                    QualifyingSortType.Q1.takeIf { qualifyingColumns.contains(QualifyingType.Q1) },
+                    QualifyingSortType.Q2.takeIf { qualifyingColumns.contains(QualifyingType.Q2) },
+                    QualifyingSortType.Q3.takeIf { qualifyingColumns.contains(QualifyingType.Q3) }
                 ),
                 qualifyingSort = qualifyingSort,
                 raceResults = raceDataMapper(race, resultType),
