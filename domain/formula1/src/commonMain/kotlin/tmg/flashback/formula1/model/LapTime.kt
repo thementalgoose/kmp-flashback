@@ -12,14 +12,12 @@ data class LapTime(
     val millisPrecision: Int = 3,
 ) {
 
-    constructor(
-        millisPrecision: Int = 3
-    ): this(
+    constructor(): this(
         hours = -1,
         mins = -1,
         seconds = -1,
         millis = -1,
-        millisPrecision = millisPrecision
+        millisPrecision = 3
     )
 
     constructor(

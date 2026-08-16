@@ -14,7 +14,7 @@ fun LapTime.addDelta(hours: Int = 0, mins: Int = 0, seconds: Int = 0, millis: In
 }
 
 fun LapTime.add(millis: Int): LapTime {
-    return LapTime(this.totalMillis + millis)
+    return LapTime(millis = this.totalMillis + millis)
 }
 
 fun LapTime.addDelta(data: String?): LapTime {
