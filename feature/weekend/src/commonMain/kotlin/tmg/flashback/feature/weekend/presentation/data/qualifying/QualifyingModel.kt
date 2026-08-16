@@ -1,8 +1,10 @@
 package tmg.flashback.feature.weekend.presentation.data.qualifying
 
+import tmg.flashback.feature.weekend.presentation.data.QualifyingSortType
 import tmg.flashback.formula1.model.DriverEntry
 import tmg.flashback.formula1.model.LapTime
 import tmg.flashback.formula1.model.QualifyingResult
+import tmg.flashback.formula1.model.QualifyingType
 import tmg.flashback.formula1.preview.preview
 
 sealed class QualifyingModel(
@@ -18,6 +20,16 @@ sealed class QualifyingModel(
         val grid: Int?,
         val sprintRaceGrid: Int? // For 2021 and 2022 when qualifying set grid for sprint
     ) : QualifyingModel("driver-${driver.driver.id}") {
+
+        internal fun comparatorValue(type: QualifyingSortType?): Int {
+            return when (type) {
+                QualifyingSortType.Q1 -> q1?.lapTime?.totalMillis?.takeIf { it != 0 } ?: Int.MAX_VALUE
+                QualifyingSortType.Q2 -> q2?.lapTime?.totalMillis?.takeIf { it != 0 } ?: Int.MAX_VALUE
+                QualifyingSortType.Q3 -> q3?.lapTime?.totalMillis?.takeIf { it != 0 } ?: Int.MAX_VALUE
+                else -> qualified ?: 0
+            }
+        }
+
         companion object
     }
 
@@ -28,6 +40,15 @@ sealed class QualifyingModel(
         val q2: QualifyingResult?,
         val qualified: Int? = finalQualifyingPosition ?: q2?.position ?: q1?.position
     ) : QualifyingModel("driver-${driver.driver.id}") {
+
+        internal fun comparatorValue(type: QualifyingSortType?): Int {
+            return when (type) {
+                QualifyingSortType.Q1 -> q1?.lapTime?.totalMillis?.takeIf { it != 0 } ?: Int.MAX_VALUE
+                QualifyingSortType.Q2 -> q2?.lapTime?.totalMillis?.takeIf { it != 0 } ?: Int.MAX_VALUE
+                else -> qualified ?: 0
+            }
+        }
+
         companion object
     }
 
@@ -37,9 +58,28 @@ sealed class QualifyingModel(
         val q1: QualifyingResult?,
         val qualified: Int? = finalQualifyingPosition ?: q1?.position
     ) : QualifyingModel("driver-${driver.driver.id}") {
+
+        internal fun comparatorValue(type: QualifyingSortType?): Int {
+            return when (type) {
+                QualifyingSortType.Q1 -> q1?.lapTime?.totalMillis?.takeIf { it != 0 } ?: Int.MAX_VALUE
+                else -> qualified ?: 0
+            }
+        }
+
         companion object
     }
 }
+
+fun List<QualifyingModel>.sortedBy(type: QualifyingSortType?): List<QualifyingModel> {
+    return this.sortedBy {
+        return@sortedBy when (it) {
+            is QualifyingModel.Q1 -> it.comparatorValue(type)
+            is QualifyingModel.Q1Q2 -> it.comparatorValue(type)
+            is QualifyingModel.Q1Q2Q3 -> it.comparatorValue(type)
+        }
+    }
+}
+
 
 fun QualifyingModel.Q1.Companion.preview() = QualifyingModel.Q1(
     driver = DriverEntry.preview(),

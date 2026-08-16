@@ -22,16 +22,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.ab_scored
-import flashback.presentation.localisation.generated.resources.nav_race
 import flashback.presentation.localisation.generated.resources.nav_sprint
 import org.jetbrains.compose.resources.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.feature.weekend.presentation.WeekendUiState
 import tmg.flashback.feature.weekend.presentation.components.DataMissing
 import tmg.flashback.feature.weekend.presentation.components.DataUnavailable
 import tmg.flashback.feature.weekend.presentation.components.DriverInfoWithIcon
-import tmg.flashback.feature.weekend.presentation.components.DriverTeamSwitcher
 import tmg.flashback.feature.weekend.presentation.components.EventCancelled
 import tmg.flashback.feature.weekend.presentation.components.PointsBox
 import tmg.flashback.feature.weekend.presentation.components.RaceHeader
@@ -41,6 +37,7 @@ import tmg.flashback.feature.weekend.presentation.components.finishingPositionWi
 import tmg.flashback.feature.weekend.presentation.components.status
 import tmg.flashback.feature.weekend.presentation.components.timeWidth
 import tmg.flashback.feature.weekend.presentation.data.ResultType
+import tmg.flashback.feature.weekend.presentation.data.label
 import tmg.flashback.formula1.constants.Formula1
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.DriverEntry
@@ -64,8 +61,10 @@ fun LazyListScope.addSprintRaceData(
         TypeHeader(
             modifier = Modifier.animateItem(),
             resource = string.nav_sprint,
-            resultType = uiState.resultType,
-            selectResultType = { selectResultType(it) }
+            option = uiState.resultType,
+            options = listOf(ResultType.DRIVERS, ResultType.CONSTRUCTORS),
+            optionClicked = selectResultType,
+            optionLabel = { stringResource(it.label) }
         )
     }
     if (uiState.sprintRaceResults.isEmpty()) {

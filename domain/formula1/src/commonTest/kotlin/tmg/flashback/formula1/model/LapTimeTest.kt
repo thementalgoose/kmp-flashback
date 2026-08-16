@@ -30,7 +30,7 @@ internal class LapTimeTest {
     fun `time string returns no time when no time true`() {
         val model = LapTime()
         assertTrue(model.noTime)
-        assertEquals("No time", model.time)
+        assertEquals("", model.time)
     }
 
     private data class TestCaseTime(
@@ -43,7 +43,7 @@ internal class LapTimeTest {
     )
 
     private val testCasesTime = listOf(
-        TestCaseTime(-1,-1,-1,-1, 3, "No time"),
+        TestCaseTime(-1,-1,-1,-1, 3, ""),
         TestCaseTime(0,0,0,0, 3, "0.000"),
         TestCaseTime(0,0,1,1, 3, "1.001"),
         TestCaseTime(0,1,1,1, 3, "1:01.001"),

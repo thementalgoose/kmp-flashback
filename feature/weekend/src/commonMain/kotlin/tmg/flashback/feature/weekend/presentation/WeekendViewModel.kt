@@ -17,9 +17,11 @@ import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
 import tmg.flashback.device.usecases.OpenLocationUseCase
 import tmg.flashback.device.usecases.OpenWebpageUseCase
+import tmg.flashback.feature.weekend.presentation.data.QualifyingSortType
 import tmg.flashback.feature.weekend.presentation.data.ResultType
 import tmg.flashback.feature.weekend.presentation.data.info.InfoDataMapper
 import tmg.flashback.feature.weekend.presentation.data.qualifying.QualifyingDataMapper
+import tmg.flashback.feature.weekend.presentation.data.qualifying.sortedBy
 import tmg.flashback.feature.weekend.presentation.data.race.RaceDataMapper
 import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.SprintQualifyingDataMapper
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.SprintRaceDataMapper
@@ -27,6 +29,7 @@ import tmg.flashback.feature.weekend.usecases.GetPreviousRaceUseCase
 import tmg.flashback.feature.weekend.utils.getWeekendEventOrder
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.model.OverviewRace
+import tmg.flashback.formula1.model.QualifyingType
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.infrastructure.log.logInfo
 
@@ -49,7 +52,7 @@ class WeekendViewModel(
     val isLoading: StateFlow<Boolean> = _isLoading
 
     private val resultType: MutableStateFlow<ResultType> = MutableStateFlow(ResultType.DRIVERS)
-
+    private val qualifyingSort: MutableStateFlow<QualifyingSortType> = MutableStateFlow(QualifyingSortType.Qualified)
     private val tab: MutableStateFlow<WeekendTabs> = MutableStateFlow(WeekendTabs.Qualifying)
     private val previousRace: MutableStateFlow<OverviewRace?> = MutableStateFlow(null)
 
@@ -59,15 +62,17 @@ class WeekendViewModel(
             seasonRound
                 .filterNotNull()
                 .flatMapLatest { (season, round) -> racesRepository.getRace(season, round) },
+            qualifyingSort,
             resultType,
             tab,
             previousRace
-        ) { race, resultType, tab, previousRace ->
+        ) { race, qualifyingSort, resultType, tab, previousRace ->
             logDebug("WeekendVM", "Calculating WeekendUiState ${race?.raceInfo} - $resultType - $tab")
             if (race == null) {
                 return@combine WeekendUiState.NotFound
             }
             _isLoading.update { false }
+            val maxLabel = race.qualifying.maxOfOrNull { it.label }
             return@combine WeekendUiState.Data(
                 season = race.raceInfo.season,
                 info = infoDataMapper(race),
@@ -79,8 +84,20 @@ class WeekendViewModel(
                 resultType = resultType,
                 cancelled = race.raceInfo.cancelled,
                 previousRace = previousRace,
-                qualifyingResults = qualifyingDataMapper(race),
-                qualifyingColumns = race.qualifying.maxOfOrNull { it.label },
+                qualifyingResults = qualifyingDataMapper(race)
+                    .sortedBy(qualifyingSort),
+                qualifyingColumns = listOfNotNull(
+                    QualifyingType.Q1.takeIf { maxLabel == QualifyingType.Q3 || maxLabel == QualifyingType.Q2 || maxLabel == QualifyingType.Q1 },
+                    QualifyingType.Q2.takeIf { maxLabel == QualifyingType.Q3 || maxLabel == QualifyingType.Q2 },
+                    QualifyingType.Q3.takeIf { maxLabel == QualifyingType.Q3 },
+                ),
+                qualifyingSortOptions = listOfNotNull(
+                    QualifyingSortType.Qualified,
+                    QualifyingSortType.Q1.takeIf { maxLabel == QualifyingType.Q3 || maxLabel == QualifyingType.Q2 || maxLabel == QualifyingType.Q1 },
+                    QualifyingSortType.Q2.takeIf { maxLabel == QualifyingType.Q3 || maxLabel == QualifyingType.Q2 },
+                    QualifyingSortType.Q3.takeIf { maxLabel == QualifyingType.Q3 }
+                ),
+                qualifyingSort = qualifyingSort,
                 raceResults = raceDataMapper(race, resultType),
                 sprintQualifyingResults = sprintQualifyingDataMapper(race),
                 sprintRaceResults = sprintRaceDataMapper(race, resultType),
@@ -92,6 +109,7 @@ class WeekendViewModel(
         this.seasonRound.update {
             season to round
         }
+        this.qualifyingSort.update { QualifyingSortType.Qualified }
         this.tab.update { WeekendTabs.Qualifying }
         viewModelScope.launch {
             val data = racesRepository.getRace(season, round).firstOrNull()
@@ -105,6 +123,11 @@ class WeekendViewModel(
             )
             previousRace.update { previousRaceOverview }
         }
+    }
+
+    fun sortQualifyingBy(qualifyingSortType: QualifyingSortType) {
+        logDebug("Weeekend", "Selecting qualifying type $qualifyingSortType")
+        this.qualifyingSort.update { qualifyingSortType }
     }
 
     fun updateTab(tab: WeekendTabs) {
