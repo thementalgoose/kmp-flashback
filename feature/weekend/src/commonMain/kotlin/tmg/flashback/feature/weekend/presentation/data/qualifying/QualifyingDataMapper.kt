@@ -7,7 +7,7 @@ interface QualifyingDataMapper {
     operator fun invoke(race: Race): List<QualifyingModel>
 }
 
-class QualifyingDataMapperImpl(): QualifyingDataMapper {
+class QualifyingDataMapperImpl: QualifyingDataMapper {
     override fun invoke(race: Race): List<QualifyingModel> {
         return when {
             race.has(QualifyingType.Q3) -> race.getQ1Q2Q3QualifyingList(QualifyingType.Q3)
