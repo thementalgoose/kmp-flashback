@@ -25,21 +25,27 @@ fun LapTime.addDelta(data: String?): LapTime {
     if (data?.contains("-") == true) {
         time = time.replace("-", "")
     }
+    val millisString = time.split(".")[1]
+    val millis = when (millisString.length) {
+        1 -> "${millisString}00".toIntOrNull() ?: 0
+        2 -> "${millisString}0".toIntOrNull() ?: 0
+        else -> millisString.toIntOrNull() ?: 0
+    }
     return when (time.split(":").size) {
         3 -> addDelta(
             hours = time.split(":")[0].toIntOrNull() ?: 0,
             mins = time.split(":")[1].toIntOrNull() ?: 0,
             seconds = time.split(":")[2].split(".")[0].toIntOrNull() ?: 0,
-            millis = time.split(".")[1].toIntOrNull() ?: 0
+            millis = millis
         )
         2 -> addDelta(
             mins = time.split(":")[0].toIntOrNull() ?: 0,
             seconds = time.split(":")[1].split(".")[0].toIntOrNull() ?: 0,
-            millis = time.split(".")[1].toIntOrNull() ?: 0
+            millis = millis
         )
         else -> addDelta(
             seconds = time.split(".")[0].toIntOrNull() ?: 0,
-            millis = time.split(".")[1].toIntOrNull() ?: 0
+            millis = millis
         )
     }
 }
@@ -55,20 +61,35 @@ fun String.toLocalTime(): LocalTime? {
     try {
         if (time.matches(tmg.flashback.formula1.enums.LapTimeFormats.SECOND_MILLIS.regex)) {
             val seconds = time.split(".")[0].toIntOrNull() ?: 0
-            val millis = time.split(".")[1].toIntOrNull() ?: 0
+            val millisString = time.split(".")[1]
+            val millis = when (millisString.length) {
+                1 -> "${millisString}00".toIntOrNull() ?: 0
+                2 -> "${millisString}0".toIntOrNull() ?: 0
+                else -> millisString.toIntOrNull() ?: 0
+            }
             return LocalTime(0, 0, seconds, millis * 1_000_000)
         }
         if (time.matches(tmg.flashback.formula1.enums.LapTimeFormats.MIN_SECOND_MILLIS.regex)) {
             val mins = time.split(":")[0].toIntOrNull() ?: 0
             val seconds = time.split(":")[1].split(".")[0].toIntOrNull() ?: 0
-            val millis = time.split(".")[1].toIntOrNull() ?: 0
+            val millisString = time.split(".")[1]
+            val millis = when (millisString.length) {
+                1 -> "${millisString}00".toIntOrNull() ?: 0
+                2 -> "${millisString}0".toIntOrNull() ?: 0
+                else -> millisString.toIntOrNull() ?: 0
+            }
             return LocalTime(0, mins, seconds, millis * 1_000_000)
         }
         if (time.matches(tmg.flashback.formula1.enums.LapTimeFormats.HOUR_MIN_SECOND_MILLIS.regex)) {
             val hours = time.split(":")[0].toIntOrNull() ?: 0
             val mins = time.split(":")[1].toIntOrNull() ?: 0
             val seconds = time.split(":")[2].split(".")[0].toIntOrNull() ?: 0
-            val millis = time.split(".")[1].toIntOrNull() ?: 0
+            val millisString = time.split(".")[1]
+            val millis = when (millisString.length) {
+                1 -> "${millisString}00".toIntOrNull() ?: 0
+                2 -> "${millisString}0".toIntOrNull() ?: 0
+                else -> millisString.toIntOrNull() ?: 0
+            }
             return LocalTime(hours, mins, seconds, millis * 1_000_000)
         }
     }
@@ -81,11 +102,13 @@ fun String.toLocalTime(): LocalTime? {
 fun String.toLapTime(): LapTime {
     val localTime = this.toLocalTime()
     return if (localTime != null) {
+        val millisPrecision = this.split(".").lastOrNull()?.length?.coerceIn(1, 3) ?: 3
         LapTime(
             hours = localTime.hour,
             mins = localTime.minute,
             seconds = localTime.second,
-            millis = localTime.nanosecond / 1_000_000
+            millis = localTime.nanosecond / 1_000_000,
+            millisPrecision = millisPrecision,
         )
     }
     else {

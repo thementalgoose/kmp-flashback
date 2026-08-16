@@ -47,6 +47,9 @@ internal class LapTimeTest {
         TestCaseTime(0,0,1,1,"1.001"),
         TestCaseTime(0,1,1,1,"1:01.001"),
         TestCaseTime(1,1,1,1,"1:01:01.001"),
+        TestCaseTime(1,1,1,10,"1:01:01.010"),
+        TestCaseTime(1,1,1,100,"1:01:01.10"),
+        TestCaseTime(1,1,1,100,"1:01:01.1"),
     )
     @Test
     fun `time returns valid value`() {
