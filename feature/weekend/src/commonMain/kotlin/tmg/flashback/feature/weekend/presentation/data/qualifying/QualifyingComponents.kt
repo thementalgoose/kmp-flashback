@@ -72,12 +72,7 @@ fun LazyListScope.addQualifyingData(
             modifier = Modifier.animateItem(),
             resource = string.nav_qualifying,
             option = uiState.qualifyingSort,
-            options = listOf(
-                QualifyingSortType.Qualified,
-                QualifyingSortType.Q3,
-                QualifyingSortType.Q2,
-                QualifyingSortType.Q1
-            ),
+            options = uiState.qualifyingSortOptions,
             optionsToShowBadge = listOf(
                 QualifyingSortType.Q3,
                 QualifyingSortType.Q2,
