@@ -38,35 +38,39 @@ internal class LapTimeTest {
         val mins: Int,
         val seconds: Int,
         val milliseconds: Int,
+        val millisPrecision: Int,
         val expected: String
     )
 
     private val testCasesTime = listOf(
-        TestCaseTime(-1,-1,-1,-1,"No time"),
-        TestCaseTime(0,0,0,0,"0.000"),
-        TestCaseTime(0,0,1,1,"1.001"),
-        TestCaseTime(0,1,1,1,"1:01.001"),
-        TestCaseTime(1,1,1,1,"1:01:01.001"),
+        TestCaseTime(-1,-1,-1,-1, 3, "No time"),
+        TestCaseTime(0,0,0,0, 3, "0.000"),
+        TestCaseTime(0,0,1,1, 3, "1.001"),
+        TestCaseTime(0,1,1,1, 3, "1:01.001"),
+        TestCaseTime(1,1,1,1, 3, "1:01:01.001"),
+        TestCaseTime(1,1,1,10, 3, "1:01:01.010"),
+        TestCaseTime(1,1,1,100, 2, "1:01:01.10"),
+        TestCaseTime(1,1,1,100, 1, "1:01:01.1"),
     )
     @Test
     fun `time returns valid value`() {
-        testCasesTime.forEach { (hours, mins, seconds, milliseconds, expected) ->
-            val model = LapTime(hours, mins, seconds, milliseconds)
+        testCasesTime.forEach { (hours, mins, seconds, milliseconds, millisPrecision, expected) ->
+            val model = LapTime(hours, mins, seconds, milliseconds, millisPrecision)
             assertEquals(expected, model.time)
         }
     }
 
     private val testCasesContentDescription = listOf(
-        TestCaseTime(-1,-1,-1,-1,"No time"),
-        TestCaseTime(0,0,0,0,"0 seconds and 000 milliseconds"),
-        TestCaseTime(0,0,1,1,"1 seconds and 001 milliseconds"),
-        TestCaseTime(0,1,1,1,"1 minutes, 01 seconds and 001 milliseconds"),
-        TestCaseTime(1,1,1,1,"1 hours, 1 minutes, 01 seconds and 001 milliseconds"),
+        TestCaseTime(-1,-1,-1,-1, 3,"No time"),
+        TestCaseTime(0,0,0,0, 3,"0 seconds and 000 milliseconds"),
+        TestCaseTime(0,0,1,1, 3,"1 seconds and 001 milliseconds"),
+        TestCaseTime(0,1,1,1, 3,"1 minutes, 01 seconds and 001 milliseconds"),
+        TestCaseTime(1,1,1,1, 3,"1 hours, 1 minutes, 01 seconds and 001 milliseconds"),
     )
     @Test
     fun `content description returns valid value`() {
-        testCasesContentDescription.forEach { (hours, mins, seconds, milliseconds, expected) ->
-            val model = LapTime(hours, mins, seconds, milliseconds)
+        testCasesContentDescription.forEach { (hours, mins, seconds, milliseconds, millisPrecision, expected) ->
+            val model = LapTime(hours, mins, seconds, milliseconds, millisPrecision)
             assertEquals(expected, model.contentDescription)
         }
     }

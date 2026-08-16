@@ -20,16 +20,16 @@ class LapTimeFormatsTest {
         TestCase("1:012",true),
         TestCase("9:012",true),
         TestCase("0:012",true),
-        TestCase("103",false),
+        TestCase("103:0",false),
         TestCase("60:000",false),
-        TestCase("34:12",false),
+        TestCase("34:12",true),
         TestCase("1:34:120",false),
         TestCase("oo:02",false),
     )
     @Test
     fun `regex for seconds matches seconds properly`() {
         testCasesSeconds.forEach { (lapTime, expectedIsValid) ->
-            assertEquals(SECOND_MILLIS.regex.matches(lapTime), expectedIsValid)
+            assertEquals(SECOND_MILLIS.regex.matches(lapTime), expectedIsValid, "Expecting $lapTime to be valid=$expectedIsValid")
         }
     }
 

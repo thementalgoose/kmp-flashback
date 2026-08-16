@@ -8,21 +8,27 @@ data class LapTime(
     val hours: Int = 0,
     val mins: Int = 0,
     val seconds: Int = 0,
-    val millis: Int = 0
+    val millis: Int = 0,
+    val millisPrecision: Int = 3,
 ) {
 
     constructor(): this(
-        -1,
-        -1,
-        -1,
-        -1
+        hours = -1,
+        mins = -1,
+        seconds = -1,
+        millis = -1,
+        millisPrecision = 3
     )
 
-    constructor(millis: Int): this(
-        LocalTime.fromNanosecondOfDay(millis * 1_000_000L).hour,
-        LocalTime.fromNanosecondOfDay(millis * 1_000_000L).minute,
-        LocalTime.fromNanosecondOfDay(millis * 1_000_000L).second,
-        LocalTime.fromNanosecondOfDay(millis * 1_000_000L).nanosecond / 1_000_000
+    constructor(
+        millis: Int,
+        millisPrecision: Int = 3,
+    ): this(
+        hours = LocalTime.fromNanosecondOfDay(millis * 1_000_000L).hour,
+        mins = LocalTime.fromNanosecondOfDay(millis * 1_000_000L).minute,
+        seconds = LocalTime.fromNanosecondOfDay(millis * 1_000_000L).second,
+        millis = LocalTime.fromNanosecondOfDay(millis * 1_000_000L).nanosecond / 1_000_000,
+        millisPrecision = millisPrecision
     )
 
     val noTime: Boolean
@@ -35,18 +41,21 @@ data class LapTime(
                 millis
 
     val time: String
-        get() = when {
-            noTime -> {
-                "No time"
-            }
-            hours != 0 -> {
-                "${hours}:${mins.extend(2)}:${seconds.extend(2)}.${millis.extend(3)}"
-            }
-            mins != 0 -> {
-                "${mins}:${seconds.extend(2)}.${millis.extend(3)}"
-            }
-            else -> {
-                "${seconds}.${millis.extend(3)}"
+        get() {
+            val millisString = millis.extend(3).take(millisPrecision)
+            return when {
+                noTime -> {
+                    "No time"
+                }
+                hours != 0 -> {
+                    "${hours}:${mins.extend(2)}:${seconds.extend(2)}.${millisString}"
+                }
+                mins != 0 -> {
+                    "${mins}:${seconds.extend(2)}.${millisString}"
+                }
+                else -> {
+                    "${seconds}.${millisString}"
+                }
             }
         }
 
