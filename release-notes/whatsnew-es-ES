@@ -1,4 +1,6 @@
-- La variedad habitual de actualizaciones de dependencias y mejoras de rendimiento
-- Corrige el theming responsivo día/noche del widget
-- Corrige la información de piloto que falta en la página de estadísticas de constructores
-- Rediseña el widget
+- La habitual serie de actualizaciones de dependencias y mejoras de rendimiento
+- Añade opciones de ordenación a los resultados de la clasificación
+- Añade el desglose de trazado para todos los circuitos modernos, incluyendo zonas de adelantamiento y DRS
+- Corrección de errores en los datos de clasificación anteriores a 1995
+- Corrección de errores en la visibilidad de las carreras Sprint de Fórmula 1 para la temporada 2023
+- Añade animaciones en las vistas de clasificación y del fin de semana
