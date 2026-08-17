@@ -55,7 +55,6 @@ import tmg.flashback.ui.components.edgeBar
 fun LazyListScope.addSprintRaceData(
     uiState: WeekendUiState.Data,
     selectResultType: (ResultType) -> Unit,
-    keyPrefix: String = ""
 ) {
     item("sprint_race_label") {
         TypeHeader(
@@ -86,7 +85,7 @@ fun LazyListScope.addSprintRaceData(
             RaceHeader(Modifier.animateItem())
         }
     }
-    items(uiState.sprintRaceResults, key = { "${keyPrefix}-${it.id}" }) {
+    items(uiState.sprintRaceResults, key = { it.id }) {
         when (it) {
             is SprintRaceModel.ConstructorResult -> {
                 SprintRaceConstructorResult(
