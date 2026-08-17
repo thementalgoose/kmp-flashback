@@ -51,7 +51,6 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.feature.season.models.NotificationSchedule
 import tmg.flashback.feature.season.presentation.calendar.CalendarItem
-import tmg.flashback.formula1.constants.Formula1.qualifyingDataAvailableFrom
 import tmg.flashback.formula1.constants.Formula1.sprintsIntroducedIn
 import tmg.flashback.formula1.enums.SprintFormat
 import tmg.flashback.formula1.enums.SprintFormat.Companion.getSeasonFormat
@@ -158,7 +157,7 @@ internal fun RaceWeekCard(
                     if (!model.model.cancelled) {
                         IconRow(
                             season = model.model.season,
-                            hasQualifying = model.model.hasQualifying && model.model.season >= qualifyingDataAvailableFrom,
+                            hasQualifying = model.model.hasQualifying,
                             showSprint = (model.containsSprintEvent || model.model.hasSprint) && model.model.season > sprintsIntroducedIn,
                             hasSprint = model.model.hasSprint && model.model.season > sprintsIntroducedIn,
                             hasRace = model.model.hasResults

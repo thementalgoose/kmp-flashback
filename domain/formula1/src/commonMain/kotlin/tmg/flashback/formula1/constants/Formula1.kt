@@ -19,11 +19,6 @@ object Formula1 {
     const val championshipStarted = 1950
 
     /**
-     * Qualifying data available from
-     */
-    const val qualifyingDataAvailableFrom: Int = 1995
-
-    /**
      * When did championships start
      */
     const val championshipConstructorStarts = 1958
