@@ -210,7 +210,7 @@ private fun RowScope.IconRow(
         hasResult = hasQualifying
     )
     Spacer(Modifier.width(2.dp))
-    if (showSprint && format == SprintFormat.FORMAT_2021_2022 || format == SprintFormat.FORMAT_2023) {
+    if (showSprint && (format == SprintFormat.FORMAT_2021_2022 || format == SprintFormat.FORMAT_2023)) {
         IconResult(
             icon = flashback.domain.formula1.generated.resources.Res.drawable.ic_status_results_sprint,
             contentDescriptionAvailable = string.ab_has_sprint_results,
