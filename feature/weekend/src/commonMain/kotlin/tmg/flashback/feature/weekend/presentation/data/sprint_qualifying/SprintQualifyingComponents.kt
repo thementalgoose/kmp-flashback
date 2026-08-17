@@ -59,7 +59,6 @@ private val lapTimeWidth: Dp = 64.dp
 
 fun LazyListScope.addSprintQualifyingData(
     uiState: Data,
-    keyPrefix: String = ""
 ) {
     item("sprint_qualifying_label") {
         TypeHeader(
@@ -86,7 +85,7 @@ fun LazyListScope.addSprintQualifyingData(
             SprintQualifyingHeader(Modifier.animateItem())
         }
     }
-    items(uiState.sprintQualifyingResults, key = { "${keyPrefix}-${it.id}" }) {
+    items(uiState.sprintQualifyingResults, key = { it.id }) {
         when (it) {
             is SprintQualifyingModel.Result -> SprintQualifying(
                 modifier = Modifier.animateItem(),

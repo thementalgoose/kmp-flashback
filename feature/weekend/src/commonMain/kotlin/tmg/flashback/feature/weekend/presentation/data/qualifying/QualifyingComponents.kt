@@ -65,7 +65,6 @@ private val lapTimeWidth: Dp = 64.dp
 fun LazyListScope.addQualifyingData(
     uiState: Data,
     selectQualifyingType: (QualifyingSortType) -> Unit,
-    keyPrefix: String = ""
 ) {
     item("qualifying_label") {
         TypeHeader(
@@ -106,7 +105,7 @@ fun LazyListScope.addQualifyingData(
             )
         }
     }
-    items(uiState.qualifyingResults, key = { "${keyPrefix}-${it.id}" }) {
+    items(uiState.qualifyingResults, key = { it.id }) {
         when (it) {
             is QualifyingModel.Q1 -> QualifyingResult(
                 modifier = Modifier.animateItem(),
@@ -170,7 +169,7 @@ internal fun QualifyingResult(
     driverClicked: (Driver) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(Modifier.fillMaxWidth()) {
+    Column(modifier.fillMaxWidth()) {
         Row(modifier = modifier
             .height(IntrinsicSize.Min)
         ) {
