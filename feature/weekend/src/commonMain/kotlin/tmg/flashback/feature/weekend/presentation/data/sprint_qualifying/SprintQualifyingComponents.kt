@@ -129,7 +129,7 @@ internal fun SprintQualifying(
     driverClicked: (Driver) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(Modifier.fillMaxWidth()) {
+    Column(modifier.fillMaxWidth()) {
         Row(modifier = modifier
             .height(IntrinsicSize.Min)
         ) {
