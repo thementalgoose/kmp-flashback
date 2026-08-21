@@ -21,6 +21,7 @@ data class AboutUiState(
     val installationId: String,
     val remoteTokenId: String?,
     val contactEmail: String,
+    val buttons: List<AboutButtons>
 )
 
 enum class AboutButtons(
