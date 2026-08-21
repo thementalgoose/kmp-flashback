@@ -94,6 +94,7 @@ fun AboutScreen(
             actionUpClicked = actionUpClicked,
             email = uiState.value.contactEmail,
             deviceId = uiState.value.deviceUuid,
+            buttons = uiState.value.buttons,
             dependencyClicked = viewModel::openDependency,
             buttonClicked = viewModel::openButton,
             remoteNotificationId = uiState.value.remoteTokenId,
@@ -106,6 +107,7 @@ fun AboutScreen(
             paddingValues = paddingValues,
             email = uiState.value.contactEmail,
             deviceId = uiState.value.deviceUuid,
+            buttons = uiState.value.buttons,
             dependencyClicked = viewModel::openDependency,
             buttonClicked = viewModel::openButton,
             installationId = uiState.value.installationId,
@@ -120,6 +122,7 @@ private fun AboutListScreen(
     icon: DrawableResource,
     email: String,
     deviceId: String,
+    buttons: List<AboutButtons>,
     installationId: String,
     remoteNotificationId: String?,
     paddingValues: PaddingValues,
@@ -144,6 +147,7 @@ private fun AboutListScreen(
                     .padding(horizontal = AppTheme.dimens.medium),
                 email = email,
                 icon = icon,
+                buttons = buttons,
                 buttonClicked = buttonClicked
             )
         }
@@ -200,6 +204,7 @@ private fun AboutPaneScreen(
     icon: DrawableResource,
     email: String,
     deviceId: String,
+    buttons: List<AboutButtons>,
     installationId: String,
     remoteNotificationId: String?,
     buttonClicked: (AboutButtons) -> Unit,
@@ -225,6 +230,7 @@ private fun AboutPaneScreen(
                         ),
                     icon = icon,
                     email = email,
+                    buttons = buttons,
                     buttonClicked = buttonClicked
                 )
             }
@@ -286,6 +292,7 @@ private fun ActionUpButton(
 private fun Hero(
     icon: DrawableResource,
     email: String,
+    buttons: List<AboutButtons>,
     modifier: Modifier = Modifier,
     buttonClicked: (AboutButtons) -> Unit,
 ) {
@@ -316,7 +323,7 @@ private fun Hero(
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                AboutButtons.entries
+                buttons
                     .forEach {
                         Button(
                             button = it,
@@ -513,6 +520,7 @@ private fun PreviewList() {
             paddingValues = PaddingValues(0.dp),
             email = "thementalgoose@gmail.com",
             deviceId = "uuid",
+            buttons = AboutButtons.entries,
             installationId = "installation-uuid",
             remoteNotificationId = "notification-id",
             actionUpClicked = { },
@@ -533,6 +541,7 @@ private fun PreviewPane() {
             paddingValues = PaddingValues(0.dp),
             email = "thementalgoose@gmail.com",
             deviceId = "uuid",
+            buttons = AboutButtons.entries,
             installationId = "installation-uuid",
             remoteNotificationId = "notification-id",
             icon = Res.drawable.unknown_avatar,

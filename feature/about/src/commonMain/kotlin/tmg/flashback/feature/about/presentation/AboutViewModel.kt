@@ -14,6 +14,7 @@ import tmg.flashback.device.usecases.OpenEmailUseCase
 import tmg.flashback.device.usecases.OpenStorePageUseCase
 import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.infrastructure.device.Device
+import tmg.flashback.infrastructure.device.Platform
 import tmg.flashback.infrastructure.device.string
 import tmg.flashback.notifications.repositories.NotificationRepository
 import kotlin.math.log
@@ -32,6 +33,13 @@ class AboutViewModel(
         installationId = deviceRepository.installationId,
         remoteTokenId = null,
         contactEmail = deviceRepository.contactEmail,
+        buttons = listOfNotNull(
+            AboutButtons.Play.takeIf { Device.platform == Platform.Android },
+            AboutButtons.Apple.takeIf { Device.platform == Platform.IOS },
+            AboutButtons.Api,
+            AboutButtons.Github,
+            AboutButtons.Email
+        )
     ))
     val uiState: StateFlow<AboutUiState> = _uiState
 
