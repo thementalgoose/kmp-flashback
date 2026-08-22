@@ -274,7 +274,16 @@ enum class TrackLayout(
     MONZA(
         circuitId = "monza",
         icon = Res.drawable.circuit_monza,
-        breakdown = TrackBreakdown.MONZA
+        breakdown = TrackBreakdown.MONZA,
+        overrides = listOf(
+            Configuration.Range(min = 1976, max = 1999, _icon = Res.drawable.circuit_monza_1976),
+            Configuration.Range(min = 1972, max = 1975, _icon = Res.drawable.circuit_monza_1972),
+            Configuration.Range(min = 1962, max = 1971, _icon = Res.drawable.circuit_monza_1957),
+            Configuration.Range(min = 1960, max = 1962, _icon = Res.drawable.circuit_monza_1955),
+            Configuration.Range(min = 1957, max = 1959, _icon = Res.drawable.circuit_monza_1957),
+            Configuration.Range(min = 1955, max = 1956, _icon = Res.drawable.circuit_monza_1955),
+            Configuration.Range(min = 1950, max = 1954, _icon = Res.drawable.circuit_monza_1948)
+        )
     ),
     MONSANTO(
         circuitId = "monsanto",
