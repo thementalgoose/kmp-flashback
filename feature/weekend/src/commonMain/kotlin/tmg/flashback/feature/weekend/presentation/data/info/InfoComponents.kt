@@ -1,5 +1,11 @@
 package tmg.flashback.feature.weekend.presentation.data.info
 
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.keyframes
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -11,10 +17,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import flashback.domain.formula1.generated.resources.ic_drs
@@ -31,7 +39,6 @@ import flashback.presentation.ui.generated.resources.Res
 import flashback.presentation.ui.generated.resources.ic_details_laps
 import flashback.presentation.ui.generated.resources.ic_details_maps
 import flashback.presentation.ui.generated.resources.ic_details_previous_race
-import flashback.presentation.ui.generated.resources.ic_details_track
 import flashback.presentation.ui.generated.resources.ic_details_wikipedia
 import flashback.presentation.ui.generated.resources.ic_details_youtube
 import kotlinx.datetime.format.MonthNames
@@ -42,7 +49,6 @@ import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.formula1.constants.Formula1
 import tmg.flashback.formula1.enums.TrackBreakdown
-import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.model.OverviewRace
@@ -183,8 +189,26 @@ internal fun RaceLinks(
             }
 
             if (straightModeZones > 0 && model.season in Formula1.straightModeZones) {
+                val infiniteTransition = rememberInfiniteTransition(label = "StraightModeLoop")
+                val rotationAngle by infiniteTransition.animateFloat(
+                    initialValue = -45f,
+                    targetValue = 0f,
+                    animationSpec = infiniteRepeatable(
+                        animation = keyframes {
+                            durationMillis = 5000
+                            (-45f) at 0 using FastOutSlowInEasing
+                            0f at 250 using FastOutSlowInEasing
+                            0f at 2500 using FastOutSlowInEasing
+                            (-45f) at 2750 using FastOutSlowInEasing
+                            (-45f) at 5000 using FastOutSlowInEasing
+                        }
+                    ),
+                    label = "AngleAnimation"
+                )
+
                 BadgeView(
                     modifier = Modifier,
+                    iconModifier = Modifier.rotate(rotationAngle),
                     icon = flashback.domain.formula1.generated.resources.Res.drawable.ic_straight_mode,
                     label = stringResource(string.straight_mode_zones, straightModeZones.toString()),
                 )
