@@ -56,13 +56,15 @@ fun BadgeView(
     label: String,
     icon: DrawableResource? = null,
     modifier: Modifier = Modifier,
+    iconModifier: Modifier = Modifier,
     tintIcon: Color? = AppTheme.colors.onSurface
 ) {
     val badge = Badge(label = label, icon = icon)
     BadgeView(
         model = badge,
         modifier = modifier,
-        tintIcon = tintIcon
+        tintIcon = tintIcon,
+        iconModifier = iconModifier
     )
 }
 
@@ -70,6 +72,7 @@ fun BadgeView(
 fun BadgeView(
     model: Badge,
     modifier: Modifier = Modifier,
+    iconModifier: Modifier = Modifier,
     tintIcon: Color? = AppTheme.colors.onSurface,
 ) {
     Row(modifier = modifier
@@ -92,13 +95,17 @@ fun BadgeView(
                     painter = painterResource(resource = model.icon),
                     contentDescription = null,
                     tint = tintIcon,
-                    modifier = Modifier.size(16.dp)
+                    modifier = Modifier
+                        .size(16.dp)
+                        .then(iconModifier)
                 )
             } else {
                 Image(
                     painter = painterResource(resource = model.icon),
                     contentDescription = null,
-                    modifier = Modifier.size(16.dp)
+                    modifier = Modifier
+                        .size(16.dp)
+                        .then(iconModifier)
                 )
             }
             Spacer(Modifier.width(6.dp))
