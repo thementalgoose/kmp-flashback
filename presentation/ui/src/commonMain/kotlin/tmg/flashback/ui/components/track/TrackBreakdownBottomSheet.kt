@@ -210,6 +210,7 @@ private fun Laps(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
+<<<<<<< Updated upstream
         TextBody1(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(Res.string.weekend_info_lap_count)
@@ -217,6 +218,41 @@ private fun Laps(
         TextBody2(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(Res.string.weekend_info_laps, laps)
+=======
+        if (circuitName != null && countryName != null && countryISO != null) {
+            Row(
+                modifier = Modifier
+                    .background(AppTheme.colors.surface)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
+                ) {
+                    TextTitle(
+                        text = circuitName,
+                        bold = true
+                    )
+                    TextBody1(
+                        text = countryName,
+                        bold = false
+                    )
+                }
+                Flag(
+                    modifier = Modifier.size(48.dp),
+                    iso = countryISO,
+                    nationality = countryName
+                )
+            }
+            Spacer(Modifier.height(AppTheme.dimens.xsmall))
+        }
+        TrackBreakdown(
+            trackBreakdownInfo = trackBreakdownInfo,
+            showDrs = selection == Zones.DRS,
+            showOvertake = selection == Zones.OVERTAKE
+>>>>>>> Stashed changes
         )
         Spacer(Modifier.height(AppTheme.dimens.xsmall))
     }
