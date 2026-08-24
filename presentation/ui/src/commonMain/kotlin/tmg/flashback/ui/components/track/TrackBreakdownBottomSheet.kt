@@ -12,7 +12,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -23,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res
 import flashback.presentation.localisation.generated.resources.weekend_info_lap_count
@@ -75,32 +80,35 @@ fun TrackBreakdownBottomSheet(
     showOvertake: Boolean = true,
 ) {
     ModalBottomSheet(
+        modifier = modifier,
         onDismissRequest = { showBottomSheet.value = false },
         containerColor = AppTheme.colors.surface,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+        dragHandle = {
+            Box(Modifier
+                .padding(vertical = AppTheme.dimens.nsmall)
+                .clip(RoundedCornerShape(4.dp))
+                .background(AppTheme.colors.surfaceInverse)
+                .size(width = 50.dp, height = 4.dp)
+            )
+        },
         content = {
-            Box(modifier = modifier
-                .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-                .background(AppTheme.colors.surface)
-                .padding(AppTheme.dimens.medium)
-            ) {
-                TrackBreakdownBottomSheet(
-                    showDrs = showDrs,
-                    showOvertake = showOvertake,
-                    circuitName = circuitName,
-                    countryName = countryName,
-                    countryISO = countryISO,
-                    laps = laps,
-                    trackBreakdownInfo = trackBreakdownInfo,
-                    modifier = Modifier,
-                )
-            }
+            TrackBreakdownContent(
+                circuitName = circuitName,
+                countryName = countryName,
+                countryISO = countryISO,
+                laps = laps,
+                modifier = Modifier,
+                trackBreakdownInfo = trackBreakdownInfo,
+                showDrs = showDrs,
+                showOvertake = showOvertake
+            )
         }
     )
 }
 
 @Composable
-private fun TrackBreakdownBottomSheet(
+private fun TrackBreakdownContent(
     circuitName: String?,
     countryName: String?,
     countryISO: String?,
@@ -115,73 +123,125 @@ private fun TrackBreakdownBottomSheet(
 
     val selected = remember { mutableStateOf<ButtonItem?>(hiddenButton) }
     val selection = selected.value?.key?.toEnum<Zones> { it.key }
-
     val buttons = listOfNotNull(
         hiddenButton,
         drsButton.takeIf { hasDrsZones && showDrs },
         overtakeButton.takeIf { hasOvertakeZones && showOvertake },
     )
 
+    LazyColumn(modifier = modifier
+        .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
+        .background(AppTheme.colors.surface)
+        .padding(AppTheme.dimens.medium)
+    ) {
+        item("header") {
+            Header(
+                circuitName = circuitName ?: "",
+                countryName = countryName ?: "",
+                countryISO = countryISO
+            )
+        }
+        item("breakdown") {
+            TrackBreakdown(
+                modifier = Modifier.padding(bottom = AppTheme.dimens.medium),
+                trackBreakdownInfo = trackBreakdownInfo,
+                showDrs = selection == Zones.DRS,
+                showOvertake = selection == Zones.OVERTAKE
+            )
+        }
+        if (laps != null) {
+            item("laps") {
+                Laps(laps)
+            }
+        }
+        item("zones") {
+            Buttons(
+                buttons = buttons,
+                selected = selected.value,
+                buttonClicked = {
+                    selected.value = it
+                }
+            )
+        }
+    }
+}
+
+@Composable
+private fun Header(
+    circuitName: String,
+    countryName: String,
+    countryISO: String?
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
+        ) {
+            TextTitle(
+                text = circuitName,
+                bold = true
+            )
+            TextBody1(
+                text = countryName,
+                bold = false
+            )
+        }
+        if (countryISO != null) {
+            Flag(
+                modifier = Modifier.size(48.dp),
+                iso = countryISO,
+                nationality = countryName
+            )
+        }
+    }
+    Spacer(Modifier.height(AppTheme.dimens.xsmall))
+}
+
+@Composable
+private fun Laps(
+    laps: String,
+    modifier: Modifier = Modifier,
+) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small),
-        horizontalAlignment = Alignment.CenterHorizontally
+        verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        if (circuitName != null && countryName != null && countryISO != null) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column(
-                    modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
-                ) {
-                    TextTitle(
-                        text = circuitName,
-                        bold = true
-                    )
-                    TextBody1(
-                        text = countryName,
-                        bold = false
-                    )
-                }
-                Flag(
-                    modifier = Modifier.size(48.dp),
-                    iso = countryISO,
-                    nationality = countryName
-                )
-            }
-            Spacer(Modifier.height(AppTheme.dimens.xsmall))
-        }
-        TrackBreakdown(
-            trackBreakdownInfo = trackBreakdownInfo,
-            showDrs = selection == Zones.DRS,
-            showOvertake = selection == Zones.OVERTAKE
+        TextBody1(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(Res.string.weekend_info_lap_count)
+        )
+        TextBody2(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(Res.string.weekend_info_laps, laps)
         )
         Spacer(Modifier.height(AppTheme.dimens.xsmall))
-        if (laps != null) {
-            TextBody1(
-                modifier = Modifier.fillMaxWidth(),
-                text = stringResource(Res.string.weekend_info_lap_count)
-            )
-            TextBody2(
-                modifier = Modifier.fillMaxWidth(),
-                text = stringResource(Res.string.weekend_info_laps, laps)
-            )
-            Spacer(Modifier.height(AppTheme.dimens.xsmall))
-        }
-        if (buttons.size > 1) {
+    }
+}
+
+@Composable
+private fun Buttons(
+    buttons: List<ButtonItem>,
+    selected: ButtonItem?,
+    buttonClicked: (ButtonItem) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    if (buttons.size > 1) {
+        Column(
+            modifier = modifier,
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
             TextBody1(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(Res.string.weekend_track_zones)
             )
             Segments(
                 items = buttons,
-                selected = selected.value,
-                segmentClicked = {
-                    selected.value = it
-                },
+                selected = selected,
+                segmentClicked = buttonClicked,
                 showTick = true
             )
             Spacer(Modifier.height(AppTheme.dimens.xsmall))
@@ -193,7 +253,7 @@ private fun TrackBreakdownBottomSheet(
 @Composable
 private fun Preview() {
     ApplicationThemePreview {
-        TrackBreakdownBottomSheet(
+        TrackBreakdownContent(
             showDrs = true,
             showOvertake = true,
             laps = "51",
