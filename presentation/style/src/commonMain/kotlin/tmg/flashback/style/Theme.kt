@@ -43,7 +43,7 @@ fun ApplicationTheme(
     val theme = themeManager.currentTheme
 
     logDebug("Theme", "Theme: $theme")
-    logDebug("Theme", "DarkMode: ${isSystemInDarkTheme()}")
+    logDebug("Theme", "DarkMode: ${!LocalDarkMode.current}")
 
     customLightMode = when (themeManager.currentNightMode) {
         NightMode.DEFAULT -> null
@@ -58,9 +58,9 @@ fun ApplicationTheme(
         LocalXR provides xr()
     ) {
         key(customLightMode) {
-            setSystemBarsIconColours(!isSystemInDarkTheme())
+            setSystemBarsIconColours(LocalDarkMode.current)
             ApplicationTheme(
-                isLight = !isSystemInDarkTheme(),
+                isLight = LocalDarkMode.current,
                 theme = theme,
                 content = content
             )
@@ -97,7 +97,7 @@ fun ApplicationTheme(
 
 @Composable
 fun ApplicationThemePreview(
-    isLight: Boolean = !isSystemInDarkTheme(),
+    isLight: Boolean = LocalDarkMode.current,
     theme: Theme = Theme.Default,
     content: @Composable () -> Unit,
 ) {
