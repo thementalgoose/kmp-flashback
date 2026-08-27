@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_subtitle">Formula 1 统计数据</string>
 
     <!-- Splash -->
     <string name="splash_title">嗨</string>

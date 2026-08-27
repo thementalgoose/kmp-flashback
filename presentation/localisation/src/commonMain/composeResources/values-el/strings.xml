@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_subtitle">Στατιστικά στοιχεία F1</string>
 
     <!-- Splash -->
     <string name="splash_title">Γεια</string>
