@@ -1,4 +1,4 @@
-package tmg.flashback.feature.glossary.presentation
+package tmg.flashback.feature.glossary.presentation.all
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,15 +10,8 @@ class GlossaryViewModel(
     private val coroutineContext: CoroutineContext = EmptyCoroutineContext
 ): ViewModel() {
 
-    private val searchTerm: MutableStateFlow<String?> = MutableStateFlow(null)
-    private val entries: MutableStateFlow<List<Entry>> = MutableStateFlow(listOf())
-
     private val _uiState: MutableStateFlow<GlossaryUiState> = MutableStateFlow(
         GlossaryUiState()
     )
     val uiState: StateFlow<GlossaryUiState> = _uiState
-
-    fun enterSearchTerm(search: String) {
-        searchTerm.update { search }
-    }
 }

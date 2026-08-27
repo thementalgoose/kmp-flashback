@@ -50,6 +50,7 @@ import tmg.flashback.navigation.NavAbout
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavCircuits
 import tmg.flashback.navigation.NavDriverStandings
+import tmg.flashback.navigation.NavGlossary
 import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
@@ -149,6 +150,18 @@ internal fun AppNavigationDrawer(
                             closeMenu()
                         }
                     )
+                }
+                if (Device.isDebug) {
+                    item("nav_glossary") {
+                        NavigationItem(
+                            menuItem = MenuItem.Glossary,
+                            isSelected = appNavigationUiState.screen == NavGlossary,
+                            onClick = {
+                                navigationItemClicked(NavGlossary)
+                                closeMenu()
+                            }
+                        )
+                    }
                 }
                 item("nav_settings") {
                     NavigationItem(

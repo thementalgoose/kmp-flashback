@@ -1,11 +1,7 @@
 package tmg.flashback.composeApp.presentation
 
-import androidx.compose.animation.expandIn
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkOut
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
@@ -21,7 +17,6 @@ import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
-import androidx.navigation3.ui.defaultTransitionSpec
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_EXPANDED_LOWER_BOUND
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import flashback.composeapp.generated.resources.Res
@@ -45,6 +40,8 @@ import tmg.flashback.feature.circuits.presentation.circuit.CircuitScreen
 import tmg.flashback.feature.constructors.presentation.stats.ConstructorStatsScreen
 import tmg.flashback.feature.drivers.presentation.comparison.DriverComparisonScreen
 import tmg.flashback.feature.drivers.presentation.stats.DriverStatsScreen
+import tmg.flashback.feature.glossary.presentation.all.GlossaryScreen
+import tmg.flashback.feature.glossary.presentation.details.GlossaryDetailScreen
 import tmg.flashback.feature.lineup.presentation.LineupScreen
 import tmg.flashback.feature.privacypolicy.presentation.PrivacyPolicyScreen
 import tmg.flashback.feature.reactiongame.presentation.ReactionGameScreen
@@ -62,6 +59,8 @@ import tmg.flashback.navigation.NavDriver
 import tmg.flashback.navigation.NavDriverComparison
 import tmg.flashback.navigation.NavDriverStandings
 import tmg.flashback.navigation.NavLineup
+import tmg.flashback.navigation.NavGlossary
+import tmg.flashback.navigation.NavGlossaryDetail
 import tmg.flashback.navigation.NavPrivacyPolicy
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
@@ -84,7 +83,6 @@ import tmg.flashback.navigation.removeDetail
 import tmg.flashback.navigation.replaceDetail
 import tmg.flashback.navigation.replaceList
 import tmg.flashback.style.AppTheme
-import tmg.flashback.ui.insets.compactOnly
 import tmg.flashback.webbrowser.presentation.WebScreen
 
 @Composable
@@ -248,6 +246,27 @@ fun AppGraph(
                 ReactionGameScreen(
                     paddingValues = insetPadding,
                     actionUpClicked = openPanel,
+                    windowSizeClass = windowAdaptiveInfo.windowSizeClass
+                )
+            }
+
+            entry<NavGlossary>(metadata = SplitPaneScene.listPane()) {
+                GlossaryScreen(
+                    paddingValues = insetPadding,
+                    actionUpClicked = openPanel,
+                    navigateTo = {
+                        backStack.replaceDetail(it)
+                    },
+                    windowSizeClass = windowAdaptiveInfo.windowSizeClass
+                )
+            }
+
+            entry<NavGlossaryDetail>(metadata = SplitPaneScene.detailPane()) {
+                GlossaryDetailScreen(
+                    data = it,
+                    paddingValues = insetPadding,
+                    showBack = !isExpanded,
+                    actionUpClicked = { backStack.removeDetail() },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
             }
