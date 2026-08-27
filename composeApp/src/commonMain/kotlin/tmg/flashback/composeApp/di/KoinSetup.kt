@@ -20,6 +20,8 @@ import tmg.flashback.eastereggs.di.easterEggsModule
 import tmg.flashback.feature.about.di.featureAboutModule
 import tmg.flashback.feature.circuits.di.featureCircuitsModule
 import tmg.flashback.feature.constructors.di.featureConstructorsModule
+import tmg.flashback.feature.glossary.di.featureGlossaryModule
+import tmg.flashback.feature.lineup.di.featureLineupModule
 import tmg.flashback.feature.drivers.di.featureDriversModule
 import tmg.flashback.feature.maintenance.di.featureMaintenanceModule
 import tmg.flashback.feature.notifications.di.featureNotificationsModule
@@ -69,7 +71,6 @@ import tmg.flashback.composeApp.usecases.RequiresSyncUseCase
 import tmg.flashback.composeApp.usecases.RequiresSyncUseCaseImpl
 import tmg.flashback.composeApp.usecases.StoreFirebaseInstallationIdUseCase
 import tmg.flashback.composeApp.usecases.StoreFirebaseInstallationIdUseCaseImpl
-import tmg.flashback.feature.lineup.di.featureLineupModule
 import tmg.flashback.webbrowser.di.coreWebBrowserModule
 import tmg.flashback.widgets.upnext.di.featureWidgetUpNextModule
 
@@ -102,6 +103,7 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
         modules(featureCircuitsModule)
         modules(featureConstructorsModule)
         modules(featureDriversModule)
+        modules(featureGlossaryModule)
         modules(featureHighlightsModule)
         modules(featureLineupModule)
         modules(featureMaintenanceModule)
