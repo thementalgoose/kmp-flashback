@@ -18,6 +18,7 @@ import flashback.eastereggs.generated.resources.ic_easteregg_newyears
 import flashback.eastereggs.generated.resources.ic_easteregg_valentines
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.app_name
+import flashback.presentation.localisation.generated.resources.app_subtitle
 import flashback.presentation.localisation.generated.resources.easter_egg_slava_ukraine
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
@@ -74,6 +75,12 @@ internal fun DashboardHero(
                 }
             }
         )
+        TextCaption(
+            modifier = Modifier.padding(top = 4.dp),
+            fontStyle = FontStyle.Italic,
+            text = stringResource(resource = string.app_subtitle),
+            maxLines = 1
+        )
         if (showUkraine) {
             TextCaption(
                 modifier = Modifier.padding(top = 4.dp),
@@ -82,6 +89,17 @@ internal fun DashboardHero(
                 maxLines = 1
             )
         }
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun Preview() {
+    ApplicationThemePreview {
+        DashboardHero(
+            menuIcons = null,
+            showUkraine = false
+        )
     }
 }
 
