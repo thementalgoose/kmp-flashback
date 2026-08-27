@@ -23,6 +23,7 @@ import tmg.flashback.feature.constructors.di.featureConstructorsModule
 import tmg.flashback.feature.glossary.di.featureGlossaryModule
 import tmg.flashback.feature.lineup.di.featureLineupModule
 import tmg.flashback.feature.drivers.di.featureDriversModule
+import tmg.flashback.feature.glossary.di.featureGlossaryModule
 import tmg.flashback.feature.maintenance.di.featureMaintenanceModule
 import tmg.flashback.feature.notifications.di.featureNotificationsModule
 import tmg.flashback.feature.privacypolicy.di.featurePrivacyPolicyModule

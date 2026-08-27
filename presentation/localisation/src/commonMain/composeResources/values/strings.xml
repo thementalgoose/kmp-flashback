@@ -680,4 +680,42 @@
     <string name="driver_lineup_title">Driver lineup</string>
     <string name="driver_lineup_subtitle">Drivers on the grid have contracts for race seats that have an expiry date. Below is all the current confirmed seats</string>
 
+
+    <string name="glossary_active_aero">Active Aero</string>
+    <string name="glossary_atr">ATR (Aerodynamic Testing Restrictions)</string>
+    <string name="glossary_barge_boards">Barge Boards</string>
+    <string name="glossary_box">Box</string>
+    <string name="glossary_clipping">Clipping</string>
+    <string name="glossary_cost_cap">Cost Cap</string>
+    <string name="glossary_das">(DAS) Dual Axis Steering</string>
+    <string name="glossary_delta">Delta</string>
+    <string name="glossary_dirty_air">Dirty Air</string>
+    <string name="glossary_ers">(ERS) Electrical Recovery System</string>
+    <string name="glossary_es">(ES) Energy Store</string>
+    <string name="glossary_fcy">(FCY) Full Course Yellow</string>
+    <string name="glossary_graining">Graining</string>
+    <string name="glossary_ground_effect">Ground Effect</string>
+    <string name="glossary_halo">Halo</string>
+    <string name="glossary_hans_device">HANS Device</string>
+    <string name="glossary_ice">(ICE) Internal Combustion Engine</string>
+    <string name="glossary_kers">(KERS) Kinetic Energy Recovery System</string>
+    <string name="glossary_lico">(LICO) Lift And Coast</string>
+    <string name="glossary_mgu_k">(MGU-K) Motor Generator Unit - Kinetic</string>
+    <string name="glossary_mgu_h">(MGU-H) Motor Generator Unit - Heat</string>
+    <string name="glossary_monocoque">Monocoque</string>
+    <string name="glossary_overcut">Overcut</string>
+    <string name="glossary_overtake_mode">Overtake mode</string>
+    <string name="glossary_parc_ferme">Parc Fermé</string>
+    <string name="glossary_plank">Plank</string>
+    <string name="glossary_porpoising">Porpoising</string>
+    <string name="glossary_pu">(PU) Power Unit</string>
+    <string name="glossary_rake">Rake</string>
+    <string name="glossary_recharge_mode">Recharge Mode</string>
+    <string name="glossary_sprint">Sprint</string>
+    <string name="glossary_straight_corner_mode">Straight Mode / Corner Mode</string>
+    <string name="glossary_super_clipping">Super Clipping</string>
+    <string name="glossary_survival_cell">Survival Cell</string>
+    <string name="glossary_undercut">Undercut</string>
+    <string name="glossary_vsc">(VSC) Virtual Safety Car</string>
+
 </resources>
