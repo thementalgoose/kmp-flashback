@@ -1,5 +1,7 @@
 package tmg.flashback.feature.glossary.presentation.details
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,10 +9,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Icon
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
 import org.jetbrains.compose.resources.painterResource
@@ -26,6 +30,8 @@ import tmg.flashback.formula1.model.Location
 import tmg.flashback.navigation.NavCircuit
 import tmg.flashback.navigation.NavGlossaryDetail
 import tmg.flashback.style.AppTheme
+import tmg.flashback.style.ApplicationThemePreview
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.header.Header
@@ -83,16 +89,35 @@ private fun GlossaryDetailScreen(
         val glossary = uiState.glossary ?: return@LazyColumn
         item("details") {
             Column(
-                modifier = Modifier.fillMaxWidth()
-                    .padding(horizontal = AppTheme.dimens.medium)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = AppTheme.dimens.medium),
+                verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.medium)
             ) {
-//                Icon(
-//                    painter = painterResource()
-//                )
+                Image(
+                    painter = painterResource(glossary.infographic),
+                    contentDescription = null
+                )
                 TextBody1(
                     text = stringResource(glossary.desc)
                 )
             }
         }
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun Preview() {
+    ApplicationThemePreview {
+        GlossaryDetailScreen(
+            paddingValues = PaddingValues(0.dp),
+            actionUpClicked = { },
+            windowSizeClass = WindowSizeClass.compute(400f, 700f),
+            showBack = true,
+            uiState = GlossaryDetailUiState(
+                glossary = Glossary.APEX
+            )
+        )
     }
 }
