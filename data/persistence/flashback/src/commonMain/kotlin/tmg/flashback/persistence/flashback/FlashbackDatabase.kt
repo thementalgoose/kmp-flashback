@@ -8,6 +8,7 @@ import tmg.flashback.persistence.flashback.dao.CircuitDao
 import tmg.flashback.persistence.flashback.dao.ConstructorDao
 import tmg.flashback.persistence.flashback.dao.DriverDao
 import tmg.flashback.persistence.flashback.dao.EventsDao
+import tmg.flashback.persistence.flashback.dao.LineupDao
 import tmg.flashback.persistence.flashback.dao.OverviewDao
 import tmg.flashback.persistence.flashback.dao.ScheduleDao
 import tmg.flashback.persistence.flashback.dao.SeasonDao
@@ -79,6 +80,7 @@ abstract class FlashbackDatabase: RoomDatabase() {
     abstract fun seasonStandingDao(): SeasonStandingsDao
     abstract fun scheduleDao(): ScheduleDao
     abstract fun eventsDao(): EventsDao
+    abstract fun lineupDao(): LineupDao
 }
 
 // The Room compiler generates the `actual` implementations.
