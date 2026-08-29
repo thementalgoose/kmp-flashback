@@ -12,6 +12,7 @@ import tmg.flashback.flashbackapi.api.api.FlashbackApi
 import tmg.flashback.flashbackapi.api.models.constructors.Constructor
 import tmg.flashback.flashbackapi.api.models.drivers.Driver
 import tmg.flashback.formula1.model.LineupSeason
+import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.persistence.flashback.FlashbackDatabase
 
 interface LineupRepository {
@@ -53,7 +54,10 @@ internal class LineupRepositoryImpl(
 
     override fun getLineup(): Flow<List<LineupSeason>?> {
         return persistence.lineupDao().getLineup()
-            .map { lineupMapper.mapLineup(it) }
+            .map {
+                logDebug("Raw lineup $it")
+                lineupMapper.mapLineup(it)
+            }
     }
 
     private suspend fun saveConstructors(constructors: Map<String, Constructor>?) {

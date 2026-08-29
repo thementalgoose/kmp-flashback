@@ -11,16 +11,6 @@ data class LineupSeason(
         driversToConstructors.keys.distinct()
     }
 
-    val constructorOverview: Map<Constructor, Set<Driver>> by lazy {
-        driversToConstructors.values
-            .distinct()
-            .associateWith { constructor ->
-                driversToConstructors
-                    .filter { it.value == constructor }
-                    .keys
-            }
-    }
-
     companion object
 }
 
@@ -28,22 +18,19 @@ fun List<LineupSeason>.toOverview(): List<LineupOverview> {
     val list = mutableListOf<LineupOverview>()
     val constructors = this.flatMap { it.constructors }.distinct()
     for (constructor in constructors) {
-        val driverMap = this
-            .filter { lineup -> lineup.constructors.contains(constructor) }
-            .map { lineup -> lineup
-                .driversToConstructors
-                .filter { it.value == constructors }
-                .keys
-                .associateWith { lineup.season }
+        val drivers = this
+            .flatMap { season ->
+                season.driversToConstructors
+                    .filter { it.value == constructor }
+                    .map { it.key }
             }
-
-        val drivers = driverMap.flatMap { it.keys }.distinct()
         val driversToSeasons = drivers
-            .associateWith {
-                driverMap
-                    .map { list -> list[it] }
+            .associateWith { driver ->
+                this
+                    .filter { it.driversToConstructors[driver] == constructor }
+                    .map { it.season }
                     .distinct()
-                    .filterNotNull()
+                    .sorted()
             }
 
         list.add(

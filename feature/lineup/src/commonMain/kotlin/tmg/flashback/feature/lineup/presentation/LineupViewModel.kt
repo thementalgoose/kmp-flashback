@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import tmg.flashback.data.repo.repository.LineupRepository
 import tmg.flashback.formula1.model.LineupSeason
 import tmg.flashback.formula1.model.toOverview
+import tmg.flashback.infrastructure.log.logDebug
 import kotlin.collections.emptyList
 import kotlin.collections.map
 import kotlin.to
@@ -81,6 +82,7 @@ class LineupViewModel(
         if (firstNumber != null && !numbers.contains(firstNumber)) {
             result.add(0, ConstructorBar(signedup = false, seasons = (numbers.first() - firstNumber).coerceIn(0, 10)))
         }
+        logDebug("Finding sequence from $firstNumber -> $numbers = $result")
         return result
     }
 }

@@ -89,20 +89,25 @@ private fun LineupScreen(
                                 modifier = Modifier.padding(horizontal = AppTheme.dimens.medium)
                             )
                         }
-                        item("lineup") {
-                            Column(
-                                modifier = Modifier
-                                    .padding(
-                                        vertical = AppTheme.dimens.medium,
-                                        horizontal = AppTheme.dimens.medium
-                                    )
-                                    .horizontalScroll(rememberScrollState())
-                            ) {
-                                SeasonList(seasons = uiState.seasons)
-                                for (lineup in uiState.rows) {
-                                    ConstructorItem(
-                                        constructorLineup = lineup,
-                                    )
+                        if (uiState.rows.isNotEmpty()) {
+                            item("lineup") {
+                                Column(
+                                    modifier = Modifier
+                                        .animateItem()
+                                        .horizontalScroll(rememberScrollState())
+                                        .padding(
+                                            vertical = AppTheme.dimens.medium,
+                                            horizontal = AppTheme.dimens.medium
+                                        )
+                                ) {
+                                    SeasonList(seasons = uiState.seasons)
+                                    for (lineup in uiState.rows) {
+                                        ConstructorItem(
+                                            seasons = uiState.seasons,
+                                            constructorLineup = lineup,
+                                            modifier = Modifier.padding(top = AppTheme.dimens.medium),
+                                        )
+                                    }
                                 }
                             }
                         }
