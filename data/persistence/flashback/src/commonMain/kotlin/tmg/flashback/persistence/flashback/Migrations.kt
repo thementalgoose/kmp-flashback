@@ -163,5 +163,16 @@ enum class Migrations(
         override fun migrate(database: SQLiteConnection) {
             database.execSQL("ALTER TABLE RaceInfo ADD COLUMN aerialUrl TEXT")
         }
+    }),
+    MIGRATION_13_14(object : Migration(13, 14) {
+        override fun migrate(database: SQLiteConnection) {
+            database.execSQL("CREATE TABLE Lineup (" +
+                    "driver_id TEXT NOT NULL," +
+                    "constructor_id TEXT NOT NULL," +
+                    "season TEXT NOT NULL," +
+                    "id TEXT NOT NULL PRIMARY KEY" +
+                    ")"
+            )
+        }
     })
 }

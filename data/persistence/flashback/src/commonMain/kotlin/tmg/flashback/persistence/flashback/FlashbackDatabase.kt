@@ -21,6 +21,7 @@ import tmg.flashback.persistence.flashback.models.constructors.ConstructorSeason
 import tmg.flashback.persistence.flashback.models.drivers.Driver
 import tmg.flashback.persistence.flashback.models.drivers.DriverSeason
 import tmg.flashback.persistence.flashback.models.drivers.DriverSeasonRace
+import tmg.flashback.persistence.flashback.models.lineup.Lineup
 import tmg.flashback.persistence.flashback.models.overview.Event
 import tmg.flashback.persistence.flashback.models.overview.Overview
 import tmg.flashback.persistence.flashback.models.overview.Schedule
@@ -41,7 +42,7 @@ expect class FlashbackDatabaseFactory {
 }
 
 @Database(
-    version = 13,
+    version = 14,
     entities = [
         Circuit::class,
         CircuitRound::class,
@@ -53,6 +54,7 @@ expect class FlashbackDatabaseFactory {
         DriverSeason::class,
         DriverSeasonRace::class,
         Overview::class,
+        Lineup::class,
         Schedule::class,
         RaceInfo::class,
         RaceResult::class,
