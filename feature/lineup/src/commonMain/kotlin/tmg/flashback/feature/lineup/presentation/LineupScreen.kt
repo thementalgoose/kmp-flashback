@@ -1,20 +1,23 @@
 package tmg.flashback.feature.lineup.presentation
 
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -37,6 +40,7 @@ import tmg.flashback.style.text.TextBody1
 import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
+import tmg.flashback.ui.components.loading.SkeletonViewList
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 
 @Composable
@@ -75,11 +79,29 @@ private fun LineupScreen(
         modifier = Modifier.fillMaxSize()
     ) {
         val scrollState = rememberScrollState()
+        val listState = rememberLazyListState()
+        val isHeaderStuck by remember {
+            derivedStateOf {
+                val firstItem = listState.layoutInfo.visibleItemsInfo
+                    .firstOrNull { it.index == 2 }
+                firstItem != null && firstItem.offset <= 0
+            }
+        }
+        val topPadding by animateDpAsState(
+            targetValue = if (isHeaderStuck) paddingValues.calculateTopPadding() else 0.dp,
+            label = "stickyHeaderPadding"
+        )
+        val scrimColor = when (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
+            true -> AppTheme.colors.surfaceContainer1
+            false -> AppTheme.colors.surface
+        }
+
         SwipeRefresh(
             isLoading = uiState.isLoading,
             onRefresh = refresh,
             content = {
                 LazyColumn(
+                    state = listState,
                     contentPadding = paddingValues,
                     content = {
                         item("header") {
@@ -107,10 +129,10 @@ private fun LineupScreen(
                                         .animateItem()
                                         .horizontalScroll(scrollState)
                                         .background(Brush.verticalGradient(
-                                            listOf(AppTheme.colors.surface, AppTheme.colors.surface, Color.Transparent)
+                                            listOf(scrimColor, AppTheme.colors.surface, Color.Transparent)
                                         ))
                                         .padding(
-                                            top = AppTheme.dimens.medium + paddingValues.calculateTopPadding(),
+                                            top = AppTheme.dimens.medium + topPadding,
                                             start = AppTheme.dimens.medium,
                                             end = AppTheme.dimens.medium,
                                             bottom = AppTheme.dimens.medium
@@ -139,6 +161,10 @@ private fun LineupScreen(
                                         )
                                     }
                                 }
+                            }
+                        } else {
+                            item("placeholder") {
+                                SkeletonViewList()
                             }
                         }
                     }
