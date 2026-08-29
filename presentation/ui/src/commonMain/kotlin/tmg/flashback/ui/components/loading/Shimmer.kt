@@ -14,6 +14,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import tmg.flashback.style.AppTheme
+import tmg.flashback.ui.extensions.manipulate
 
 @Composable
 fun Modifier.shimmerLoading(
@@ -34,7 +35,7 @@ fun Modifier.shimmerLoading(
         label = "",
     )
 
-    val color = AppTheme.colors.tertiary
+    val color = AppTheme.colors.tertiaryContainer.manipulate(0.9f)
 
     return drawBehind {
         drawRect(

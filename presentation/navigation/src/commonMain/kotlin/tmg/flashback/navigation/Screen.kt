@@ -31,6 +31,9 @@ data class NavCircuit(
 }
 
 @Serializable
+data object NavLineup: NavKey
+
+@Serializable
 data class NavDriver(
     val season: Int,
     val id: String,

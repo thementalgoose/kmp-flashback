@@ -31,6 +31,7 @@ fun NavKey.isList() = when (this) {
     is NavWebpage -> false
     is NavReactionGame -> true
     is NavSettings -> true
+    is NavLineup -> true
     is NavSettingsDarkMode -> false
     is NavSettingsTheme -> false
     is NavSettingsLayout -> false

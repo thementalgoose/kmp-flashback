@@ -11,6 +11,7 @@ import tmg.flashback.composeApp.presentation.MenuItem.Calendar
 import tmg.flashback.composeApp.presentation.MenuItem.Circuits
 import tmg.flashback.composeApp.presentation.MenuItem.Contact
 import tmg.flashback.composeApp.presentation.MenuItem.DriversStandings
+import tmg.flashback.composeApp.presentation.MenuItem.Lineup
 import tmg.flashback.composeApp.presentation.MenuItem.ReactionGame
 import tmg.flashback.composeApp.presentation.MenuItem.Results
 import tmg.flashback.composeApp.presentation.MenuItem.Rss
@@ -23,6 +24,7 @@ import tmg.flashback.navigation.NavAbout
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavCircuits
 import tmg.flashback.navigation.NavDriverStandings
+import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
 import tmg.flashback.navigation.NavSettings
@@ -43,6 +45,7 @@ internal fun AppNavigationRail(
         DriversStandings.toNavigationItem(appNavigationUiState.screen == NavDriverStandings),
         TeamsStandings.toNavigationItem(appNavigationUiState.screen == NavTeamStandings),
         Circuits.toNavigationItem(appNavigationUiState.screen == NavCircuits),
+        Lineup.toNavigationItem(appNavigationUiState.screen == NavLineup),
     )
     val secondaryItems = listOfNotNull(
         Rss.toNavigationItem(appNavigationUiState.screen == NavRss).takeIf { appNavigationUiState.showRss },
@@ -72,6 +75,7 @@ internal fun AppNavigationRail(
                 DriversStandings,
                 TeamsStandings,
                 Circuits,
+                Lineup,
                 Rss,
                 ReactionGame,
                 Settings,

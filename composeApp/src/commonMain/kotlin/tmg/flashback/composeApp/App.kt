@@ -27,7 +27,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
@@ -59,10 +58,8 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationTheme
 import tmg.flashback.ui.components.AppScaffold
 import tmg.flashback.ui.navigation.FloatingNavigationBar
-import tmg.flashback.ui.navigation.NavigationBar
 import tmg.flashback.ui.navigation.OverlappingPanelsValue
 import tmg.flashback.ui.navigation.appBarHeight
-import tmg.flashback.ui.navigation.appBarHeightWhenVertical
 import tmg.flashback.ui.navigation.rememberOverlappingPanelsState
 import tmg.flashback.ui.toasts.ToastManager
 

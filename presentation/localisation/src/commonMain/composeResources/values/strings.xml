@@ -38,6 +38,7 @@
     <string name="nav_seasons">Seasons</string>
     <string name="nav_settings">Settings</string>
     <string name="nav_search">Search</string>
+    <string name="nav_lineup">Lineup</string>
     <string name="nav_rss">RSS</string>
     <string name="nav_reaction_game">Reaction Game</string>
     <string name="nav_contact">Contact</string>
@@ -674,5 +675,9 @@
     <string name="reaction_tier_poor_desc">Your reaction time is slower than average. The average reaction time is around 250ms, be sure to get some more practice in before you start your career as an F1 driver</string>
 
     <string name="percentage" translatable="false">%1$s%</string>
+
+    <!-- Lineup -->
+    <string name="driver_lineup_title">Driver lineup</string>
+    <string name="driver_lineup_subtitle">Drivers on the grid have contracts for race seats that have an expiry date. Below is all the current confirmed seats</string>
 
 </resources>

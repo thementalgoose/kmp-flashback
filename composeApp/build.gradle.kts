@@ -123,6 +123,7 @@ kotlin {
             implementation(projects.feature.constructors)
             implementation(projects.feature.drivers)
             implementation(projects.feature.highlights)
+            implementation(projects.feature.lineup)
             implementation(projects.feature.maintenance)
             implementation(projects.feature.notifications)
             implementation(projects.feature.privacypolicy)

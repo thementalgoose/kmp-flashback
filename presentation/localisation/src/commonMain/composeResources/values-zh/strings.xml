@@ -32,6 +32,7 @@
     <string name="nav_seasons">赛季</string>
     <string name="nav_settings">设置</string>
     <string name="nav_search">搜索</string>
+    <string name="nav_lineup">车手阵容</string>
     <string name="nav_rss">RSS</string>
     <string name="nav_reaction_game">反应游戏</string>
     <string name="nav_contact">联系</string>
@@ -602,4 +603,7 @@
     <string name="easter_egg_menu_halloween">万圣节快乐！</string>
     <string name="easter_egg_menu_diwali">排灯节快乐！</string>
     <string name="easter_egg_menu_christmas">圣诞快乐！</string>
+
+    <string name="driver_lineup_title">车手阵容</string>
+    <string name="driver_lineup_subtitle">已签下未来参赛席位合同的车手</string>
 </resources>

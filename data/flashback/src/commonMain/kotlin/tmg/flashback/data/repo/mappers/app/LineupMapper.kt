@@ -10,7 +10,7 @@ class LineupMapper(
         if (model.isEmpty()) {
             return null
         }
-        return model.groupBy { it.lineup.season }
+        val result = model.groupBy { it.lineup.season }
             .map {
                 LineupSeason(
                     season = it.key,
@@ -23,5 +23,6 @@ class LineupMapper(
                         }
                 )
             }
+        return result
     }
 }

@@ -50,6 +50,7 @@ import tmg.flashback.navigation.NavAbout
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavCircuits
 import tmg.flashback.navigation.NavDriverStandings
+import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
 import tmg.flashback.navigation.NavSettings
@@ -110,6 +111,16 @@ internal fun AppNavigationDrawer(
                         isSelected = appNavigationUiState.screen == NavCircuits,
                         onClick = {
                             navigationItemClicked(NavCircuits)
+                            closeMenu()
+                        }
+                    )
+                }
+                item("nav_lineup") {
+                    NavigationItem(
+                        menuItem = MenuItem.Lineup,
+                        isSelected = appNavigationUiState.screen == NavLineup,
+                        onClick = {
+                            navigationItemClicked(NavLineup)
                             closeMenu()
                         }
                     )

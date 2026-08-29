@@ -108,8 +108,10 @@ fun Driver.Companion.preview(
     nationalityISO = "GBR"
 )
 
-fun Constructor.Companion.preview() = Constructor(
-    id = "apex",
+fun Constructor.Companion.preview(
+    id: String = "apex"
+) = Constructor(
+    id = id,
     name = "Apex GP",
     wikiUrl = "wikiUrl",
     photoUrl = "https://i.imgur.com/ftD4H0D.png",
