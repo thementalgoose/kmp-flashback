@@ -9,6 +9,7 @@ import tmg.flashback.data.repo.mappers.app.DriverDataMapper
 import tmg.flashback.data.repo.mappers.app.DriverMapper
 import tmg.flashback.data.repo.mappers.app.DriverStandingMapper
 import tmg.flashback.data.repo.mappers.app.EventMapper
+import tmg.flashback.data.repo.mappers.app.LineupMapper
 import tmg.flashback.data.repo.mappers.app.OverviewMapper
 import tmg.flashback.data.repo.mappers.app.RaceMapper
 import tmg.flashback.data.repo.mappers.app.ScheduleMapper
@@ -22,6 +23,7 @@ import tmg.flashback.data.repo.mappers.network.NetworkDriverDataMapper
 import tmg.flashback.data.repo.mappers.network.NetworkDriverMapper
 import tmg.flashback.data.repo.mappers.network.NetworkDriverStandingMapper
 import tmg.flashback.data.repo.mappers.network.NetworkEventMapper
+import tmg.flashback.data.repo.mappers.network.NetworkLineupMapper
 import tmg.flashback.data.repo.mappers.network.NetworkOverviewMapper
 import tmg.flashback.data.repo.mappers.network.NetworkRaceDataMapper
 import tmg.flashback.data.repo.mappers.network.NetworkRaceMapper
@@ -36,6 +38,8 @@ import tmg.flashback.data.repo.repository.EventRepository
 import tmg.flashback.data.repo.repository.EventRepositoryImpl
 import tmg.flashback.data.repo.repository.InfoRepository
 import tmg.flashback.data.repo.repository.InfoRepositoryImpl
+import tmg.flashback.data.repo.repository.LineupRepository
+import tmg.flashback.data.repo.repository.LineupRepositoryImpl
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.OverviewRepositoryImpl
 import tmg.flashback.data.repo.repository.RaceRepository
@@ -55,6 +59,7 @@ internal fun module() = module {
     single { DriverDataMapper() }
     single { DriverMapper(get(), get(), get()) }
     single { DriverStandingMapper(get(), get()) }
+    single { LineupMapper(get(), get()) }
     single { EventMapper() }
     single { OverviewMapper(get()) }
     single { RaceMapper(get(), get(), get(), get()) }
@@ -69,12 +74,14 @@ internal fun module() = module {
     single { NetworkDriverDataMapper() }
     single { NetworkDriverMapper() }
     single { NetworkDriverStandingMapper() }
+    single { NetworkLineupMapper() }
     single { NetworkEventMapper() }
     single { NetworkOverviewMapper() }
     single { NetworkRaceDataMapper() }
     single { NetworkRaceMapper() }
     single { NetworkScheduleMapper() }
 
+    single<LineupRepository> { LineupRepositoryImpl(get(), get(), get(), get(), get(), get()) }
     single<RaceRepository> { RaceRepositoryImpl(get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
     single<OverviewRepository> { OverviewRepositoryImpl(get(), get(), get(), get(), get(), get()) }
     single<SeasonRepository> { SeasonRepositoryImpl(get(), get()) }

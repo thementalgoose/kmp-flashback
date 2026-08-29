@@ -14,6 +14,7 @@ import tmg.flashback.flashbackapi.api.models.constructors.AllConstructors
 import tmg.flashback.flashbackapi.api.models.constructors.ConstructorHistory
 import tmg.flashback.flashbackapi.api.models.drivers.AllDrivers
 import tmg.flashback.flashbackapi.api.models.drivers.DriverHistory
+import tmg.flashback.flashbackapi.api.models.lineup.Lineup
 import tmg.flashback.flashbackapi.api.models.overview.Event
 import tmg.flashback.flashbackapi.api.models.overview.Overview
 import tmg.flashback.flashbackapi.api.models.races.Round
@@ -30,6 +31,10 @@ class FlashbackApiImpl(
     @Throws(RuntimeException::class, IOException::class)
     override suspend fun getOverview(): MetadataWrapper<Overview>? =
         makeRequest("overview.json")
+
+    @Throws(RuntimeException::class, IOException::class)
+    override suspend fun getLineup(): MetadataWrapper<Lineup>? =
+        makeRequest("lineup.json")
 
     @Throws(RuntimeException::class, IOException::class)
     override suspend fun getOverview(season: Int): MetadataWrapper<Overview>? =

@@ -8,6 +8,7 @@ import tmg.flashback.persistence.flashback.dao.CircuitDao
 import tmg.flashback.persistence.flashback.dao.ConstructorDao
 import tmg.flashback.persistence.flashback.dao.DriverDao
 import tmg.flashback.persistence.flashback.dao.EventsDao
+import tmg.flashback.persistence.flashback.dao.LineupDao
 import tmg.flashback.persistence.flashback.dao.OverviewDao
 import tmg.flashback.persistence.flashback.dao.ScheduleDao
 import tmg.flashback.persistence.flashback.dao.SeasonDao
@@ -21,6 +22,7 @@ import tmg.flashback.persistence.flashback.models.constructors.ConstructorSeason
 import tmg.flashback.persistence.flashback.models.drivers.Driver
 import tmg.flashback.persistence.flashback.models.drivers.DriverSeason
 import tmg.flashback.persistence.flashback.models.drivers.DriverSeasonRace
+import tmg.flashback.persistence.flashback.models.lineup.Lineup
 import tmg.flashback.persistence.flashback.models.overview.Event
 import tmg.flashback.persistence.flashback.models.overview.Overview
 import tmg.flashback.persistence.flashback.models.overview.Schedule
@@ -41,7 +43,7 @@ expect class FlashbackDatabaseFactory {
 }
 
 @Database(
-    version = 13,
+    version = 14,
     entities = [
         Circuit::class,
         CircuitRound::class,
@@ -53,6 +55,7 @@ expect class FlashbackDatabaseFactory {
         DriverSeason::class,
         DriverSeasonRace::class,
         Overview::class,
+        Lineup::class,
         Schedule::class,
         RaceInfo::class,
         RaceResult::class,
@@ -77,6 +80,7 @@ abstract class FlashbackDatabase: RoomDatabase() {
     abstract fun seasonStandingDao(): SeasonStandingsDao
     abstract fun scheduleDao(): ScheduleDao
     abstract fun eventsDao(): EventsDao
+    abstract fun lineupDao(): LineupDao
 }
 
 // The Room compiler generates the `actual` implementations.
