@@ -13,4 +13,6 @@ data class Lineup(
     val constructors: Map<String, Constructor>,
     @SerialName("lineup")
     val lineup: Map<String, LineupSeason>
-)
+) {
+    companion object
+}

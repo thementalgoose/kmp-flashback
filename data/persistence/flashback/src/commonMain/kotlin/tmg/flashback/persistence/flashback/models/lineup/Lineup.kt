@@ -15,4 +15,6 @@ data class Lineup(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: String = "${season}_${driverId}",
-)
+) {
+    companion object
+}

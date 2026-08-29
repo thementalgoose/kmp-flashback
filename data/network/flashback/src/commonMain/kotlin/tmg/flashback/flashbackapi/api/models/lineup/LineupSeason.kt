@@ -9,4 +9,6 @@ data class LineupSeason(
     val season: Int,
     @SerialName("drivers")
     val drivers: Map<String, String>,
-)
+) {
+    companion object
+}
