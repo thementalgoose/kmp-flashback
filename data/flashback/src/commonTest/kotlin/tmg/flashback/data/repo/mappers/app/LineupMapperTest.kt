@@ -2,9 +2,9 @@ package tmg.flashback.data.repo.mappers.app
 
 import tmg.flashback.data.repo.fakes.fakeConstructorDataMapper
 import tmg.flashback.data.repo.fakes.fakeDriverDataMapper
-import tmg.flashback.formula1.model.model
 import tmg.flashback.persistence.flashback.models.lineup.LineupWithDrivers
 import tmg.flashback.persistence.flashback.models.lineup.model
+import tmg.flashback.formula1.model.model
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
