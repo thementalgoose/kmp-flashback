@@ -32,6 +32,7 @@
     <string name="nav_seasons">Temporadas</string>
     <string name="nav_settings">Ajustes</string>
     <string name="nav_search">Buscar</string>
+    <string name="nav_lineup">Alineación</string>
     <string name="nav_rss">RSS</string>
     <string name="nav_reaction_game">Reaction Game</string>
     <string name="nav_contact">Contacto</string>
@@ -608,5 +609,8 @@
     <string name="easter_egg_menu_halloween">¡Feliz Halloween!</string>
     <string name="easter_egg_menu_diwali">¡Feliz Diwali!</string>
     <string name="easter_egg_menu_christmas">¡Feliz Navidad!</string>
+
+    <string name="driver_lineup_title">Alineación de pilotos</string>
+    <string name="driver_lineup_subtitle">Pilotos con contrato de piloto titular para futuras alineaciones</string>
 
 </resources>
