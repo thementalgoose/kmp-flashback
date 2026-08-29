@@ -45,6 +45,7 @@ import tmg.flashback.feature.circuits.presentation.circuit.CircuitScreen
 import tmg.flashback.feature.constructors.presentation.stats.ConstructorStatsScreen
 import tmg.flashback.feature.drivers.presentation.comparison.DriverComparisonScreen
 import tmg.flashback.feature.drivers.presentation.stats.DriverStatsScreen
+import tmg.flashback.feature.lineup.presentation.LineupScreen
 import tmg.flashback.feature.privacypolicy.presentation.PrivacyPolicyScreen
 import tmg.flashback.feature.reactiongame.presentation.ReactionGameScreen
 import tmg.flashback.feature.rss.presentation.configure.RssConfigureScreen
@@ -60,6 +61,7 @@ import tmg.flashback.navigation.NavCircuits
 import tmg.flashback.navigation.NavDriver
 import tmg.flashback.navigation.NavDriverComparison
 import tmg.flashback.navigation.NavDriverStandings
+import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavPrivacyPolicy
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
@@ -177,6 +179,15 @@ fun AppGraph(
                     navigateTo = { backStack.replaceDetail(it) },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
+            }
+            entry<NavLineup>(metadata = SplitPaneScene.listPane()) {
+                LineupScreen(
+                    paddingValues = insetPadding,
+                    actionUpClicked = openPanel,
+                    windowSizeClass = windowAdaptiveInfo.windowSizeClass,
+                    navigateTo = {
+                        backStack.replaceDetail(it)
+                    })
             }
             entry<NavCircuit>(metadata = SplitPaneScene.detailPane()) {
                 CircuitScreen(
