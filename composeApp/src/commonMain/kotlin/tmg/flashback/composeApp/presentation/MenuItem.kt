@@ -16,6 +16,8 @@ import flashback.composeapp.generated.resources.dashboard_nav_circuits
 import flashback.composeapp.generated.resources.dashboard_nav_circuits_selected
 import flashback.composeapp.generated.resources.dashboard_nav_constructor_selected
 import flashback.composeapp.generated.resources.dashboard_nav_drivers_selected
+import flashback.composeapp.generated.resources.dashboard_nav_lineup
+import flashback.composeapp.generated.resources.dashboard_nav_lineup_selected
 import flashback.composeapp.generated.resources.dashboard_nav_results
 import flashback.composeapp.generated.resources.dashboard_nav_results_selected
 import flashback.composeapp.generated.resources.dashboard_reaction_selected
@@ -31,6 +33,7 @@ import flashback.presentation.localisation.generated.resources.nav_drivers
 import flashback.presentation.localisation.generated.resources.nav_reaction_game
 import flashback.presentation.localisation.generated.resources.nav_rss
 import flashback.presentation.localisation.generated.resources.nav_search
+import flashback.presentation.localisation.generated.resources.nav_lineup
 import flashback.presentation.localisation.generated.resources.nav_xr
 import flashback.presentation.localisation.generated.resources.nav_settings
 import flashback.presentation.localisation.generated.resources.search_category_circuits
@@ -40,6 +43,7 @@ import tmg.flashback.navigation.NavAbout
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavCircuits
 import tmg.flashback.navigation.NavDriverStandings
+import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
 import tmg.flashback.navigation.NavSettings
@@ -55,6 +59,7 @@ enum class MenuItem(
     TeamsStandings(key = "TeamsStandings"),
     Circuits(key = "Circuits"),
     Rss(key = "Rss"),
+    Lineup(key = "Lineup"),
     ReactionGame(key = "ReactionGame"),
     Settings(key = "Settings"),
     Contact(key = "Contact"),
@@ -68,6 +73,7 @@ val MenuItem.label: StringResource
         MenuItem.DriversStandings -> string.nav_drivers
         MenuItem.TeamsStandings -> string.nav_constructors
         MenuItem.Circuits -> string.search_category_circuits
+        MenuItem.Lineup -> string.nav_lineup
         MenuItem.Rss -> string.nav_rss
         MenuItem.ReactionGame -> string.nav_reaction_game
         MenuItem.Settings -> string.nav_settings
@@ -82,6 +88,7 @@ val MenuItem.icon: DrawableResource
         MenuItem.DriversStandings -> Res.drawable.dashboard_nav_drivers
         MenuItem.TeamsStandings -> Res.drawable.dashboard_nav_constructor
         MenuItem.Circuits -> Res.drawable.dashboard_nav_circuits
+        MenuItem.Lineup -> Res.drawable.dashboard_nav_lineup
         MenuItem.Rss -> Res.drawable.dashboard_rss
         MenuItem.ReactionGame -> Res.drawable.dashboard_reaction
         MenuItem.Settings -> Res.drawable.dashboard_settings
@@ -96,6 +103,7 @@ val MenuItem.selectedIcon: DrawableResource
         MenuItem.DriversStandings -> Res.drawable.dashboard_nav_drivers_selected
         MenuItem.TeamsStandings -> Res.drawable.dashboard_nav_constructor_selected
         MenuItem.Circuits -> Res.drawable.dashboard_nav_circuits_selected
+        MenuItem.Lineup -> Res.drawable.dashboard_nav_lineup_selected
         MenuItem.Rss -> Res.drawable.dashboard_rss_selected
         MenuItem.ReactionGame -> Res.drawable.dashboard_reaction_selected
         MenuItem.Settings -> Res.drawable.dashboard_settings_selected
@@ -120,6 +128,7 @@ fun MenuItem.toScreen(): NavKey? {
         MenuItem.DriversStandings -> NavDriverStandings
         MenuItem.TeamsStandings -> NavTeamStandings
         MenuItem.Circuits -> NavCircuits
+        MenuItem.Lineup -> NavLineup
         MenuItem.Rss -> NavRss
         MenuItem.ReactionGame -> NavReactionGame
         MenuItem.Settings -> NavSettings

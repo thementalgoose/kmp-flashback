@@ -50,6 +50,7 @@ import tmg.flashback.navigation.NavAbout
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavCircuits
 import tmg.flashback.navigation.NavDriverStandings
+import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
 import tmg.flashback.navigation.NavSettings
@@ -128,6 +129,16 @@ internal fun AppNavigationDrawer(
                             }
                         )
                     }
+                }
+                item("nav_lineup") {
+                    NavigationItem(
+                        menuItem = MenuItem.Lineup,
+                        isSelected = appNavigationUiState.screen == NavLineup,
+                        onClick = {
+                            navigationItemClicked(NavLineup)
+                            closeMenu()
+                        }
+                    )
                 }
                 item("nav_reaction_game") {
                     NavigationItem(
