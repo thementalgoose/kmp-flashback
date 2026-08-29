@@ -50,8 +50,9 @@ internal fun SeasonList(
         for (season in seasons) {
             TextTitle(
                 text = season.toString(),
-                textAlign = TextAlign.Center,
-                modifier = Modifier.width(yearWidth)
+                modifier = Modifier
+                    .width(yearWidth)
+                    .padding(horizontal = AppTheme.dimens.small)
             )
         }
     }
