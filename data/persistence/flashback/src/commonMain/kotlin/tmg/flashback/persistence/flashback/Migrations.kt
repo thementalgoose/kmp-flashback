@@ -169,7 +169,7 @@ enum class Migrations(
             database.execSQL("CREATE TABLE Lineup (" +
                     "driver_id TEXT NOT NULL," +
                     "constructor_id TEXT NOT NULL," +
-                    "season TEXT NOT NULL," +
+                    "season INTEGER NOT NULL," +
                     "id TEXT NOT NULL PRIMARY KEY" +
                     ")"
             )
