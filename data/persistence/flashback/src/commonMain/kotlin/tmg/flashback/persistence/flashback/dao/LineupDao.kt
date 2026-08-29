@@ -30,7 +30,7 @@ interface LineupDao {
     suspend fun deleteLineups()
 
     @Transaction
-    suspend fun replaceLineup(lineup: List<Lineup>) {
+    suspend fun replaceLineups(lineup: List<Lineup>) {
         deleteLineups()
         insertLineup(lineup)
     }
