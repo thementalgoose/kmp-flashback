@@ -45,10 +45,10 @@ internal fun AppNavigationRail(
         DriversStandings.toNavigationItem(appNavigationUiState.screen == NavDriverStandings),
         TeamsStandings.toNavigationItem(appNavigationUiState.screen == NavTeamStandings),
         Circuits.toNavigationItem(appNavigationUiState.screen == NavCircuits),
+        Lineup.toNavigationItem(appNavigationUiState.screen == NavLineup),
     )
     val secondaryItems = listOfNotNull(
         Rss.toNavigationItem(appNavigationUiState.screen == NavRss).takeIf { appNavigationUiState.showRss },
-        Lineup.toNavigationItem(appNavigationUiState.screen == NavLineup),
         ReactionGame.toNavigationItem(appNavigationUiState.screen == NavReactionGame),
         Settings.toNavigationItem(appNavigationUiState.screen == NavSettings),
         Contact.toNavigationItem(appNavigationUiState.screen == NavAbout)

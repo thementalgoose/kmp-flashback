@@ -115,6 +115,16 @@ internal fun AppNavigationDrawer(
                         }
                     )
                 }
+                item("nav_lineup") {
+                    NavigationItem(
+                        menuItem = MenuItem.Lineup,
+                        isSelected = appNavigationUiState.screen == NavLineup,
+                        onClick = {
+                            navigationItemClicked(NavLineup)
+                            closeMenu()
+                        }
+                    )
+                }
                 item("mid_div") {
                     MenuDivider()
                 }
@@ -129,16 +139,6 @@ internal fun AppNavigationDrawer(
                             }
                         )
                     }
-                }
-                item("nav_lineup") {
-                    NavigationItem(
-                        menuItem = MenuItem.Lineup,
-                        isSelected = appNavigationUiState.screen == NavLineup,
-                        onClick = {
-                            navigationItemClicked(NavLineup)
-                            closeMenu()
-                        }
-                    )
                 }
                 item("nav_reaction_game") {
                     NavigationItem(
