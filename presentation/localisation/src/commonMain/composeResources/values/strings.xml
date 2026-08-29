@@ -675,4 +675,8 @@
 
     <string name="percentage" translatable="false">%1$s%</string>
 
+    <!-- Lineup -->
+    <string name="driver_lineup_title">Driver lineup</string>
+    <string name="driver_lineup_subtitle">Drivers with race seat contracts for future lineups</string>
+
 </resources>
