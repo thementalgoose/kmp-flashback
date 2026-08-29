@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.driver_lineup_subtitle
 import flashback.presentation.localisation.generated.resources.driver_lineup_title
@@ -30,6 +31,7 @@ import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.header.Header
+import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 
 @Composable
@@ -77,7 +79,10 @@ private fun LineupScreen(
                         item("header") {
                             Header(
                                 text = stringResource(string.driver_lineup_title),
-                                action = null,
+                                action = when (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
+                                    true -> null
+                                    false -> HeaderAction.MENU
+                                },
                                 actionUpClicked = actionUpClicked,
                                 overrideIcons = {
                                     Refresh(onClick = refresh)
