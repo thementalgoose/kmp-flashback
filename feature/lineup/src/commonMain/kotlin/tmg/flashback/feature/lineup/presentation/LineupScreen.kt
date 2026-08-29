@@ -1,11 +1,14 @@
 package tmg.flashback.feature.lineup.presentation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
@@ -13,6 +16,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
@@ -69,6 +74,7 @@ private fun LineupScreen(
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
+        val scrollState = rememberScrollState()
         SwipeRefresh(
             isLoading = uiState.isLoading,
             onRefresh = refresh,
@@ -95,22 +101,41 @@ private fun LineupScreen(
                             )
                         }
                         if (uiState.rows.isNotEmpty()) {
+                            stickyHeader(key = "lineup-title") {
+                                Column(
+                                    modifier = Modifier
+                                        .animateItem()
+                                        .horizontalScroll(scrollState)
+                                        .background(Brush.verticalGradient(
+                                            listOf(AppTheme.colors.surface, AppTheme.colors.surface, Color.Transparent)
+                                        ))
+                                        .padding(
+                                            top = AppTheme.dimens.medium + paddingValues.calculateTopPadding(),
+                                            start = AppTheme.dimens.medium,
+                                            end = AppTheme.dimens.medium,
+                                            bottom = AppTheme.dimens.medium
+                                        )
+                                ) {
+                                    SeasonList(
+                                        modifier = Modifier,
+                                        seasons = uiState.seasons
+                                    )
+                                }
+                            }
                             item("lineup") {
                                 Column(
                                     modifier = Modifier
                                         .animateItem()
-                                        .horizontalScroll(rememberScrollState())
+                                        .horizontalScroll(scrollState)
                                         .padding(
-                                            vertical = AppTheme.dimens.medium,
                                             horizontal = AppTheme.dimens.medium
                                         )
                                 ) {
-                                    SeasonList(seasons = uiState.seasons)
                                     for (lineup in uiState.rows) {
                                         ConstructorItem(
                                             seasons = uiState.seasons,
                                             constructorLineup = lineup,
-                                            modifier = Modifier.padding(top = AppTheme.dimens.medium),
+                                            modifier = Modifier.padding(bottom = AppTheme.dimens.medium),
                                         )
                                     }
                                 }

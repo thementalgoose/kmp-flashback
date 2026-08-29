@@ -49,6 +49,7 @@ internal fun SeasonList(
     ) {
         for (season in seasons) {
             TextTitle(
+                bold = true,
                 text = season.toString(),
                 modifier = Modifier
                     .width(yearWidth)

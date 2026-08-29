@@ -678,6 +678,6 @@
 
     <!-- Lineup -->
     <string name="driver_lineup_title">Driver lineup</string>
-    <string name="driver_lineup_subtitle">Drivers with race seat contracts for future lineups</string>
+    <string name="driver_lineup_subtitle">Drivers on the grid have contracts for race seats that have an expiry date. Below is all the current confirmed seats</string>
 
 </resources>
