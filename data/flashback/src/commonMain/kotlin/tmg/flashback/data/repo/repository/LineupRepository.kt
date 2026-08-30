@@ -55,7 +55,6 @@ internal class LineupRepositoryImpl(
     override fun getLineup(): Flow<List<LineupSeason>?> {
         return persistence.lineupDao().getLineup()
             .map {
-                logDebug("Raw lineup $it")
                 lineupMapper.mapLineup(it)
             }
     }
