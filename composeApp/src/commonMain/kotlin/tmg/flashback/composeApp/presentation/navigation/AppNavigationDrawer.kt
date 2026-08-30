@@ -151,18 +151,18 @@ internal fun AppNavigationDrawer(
                         }
                     )
                 }
-                if (Device.isDebug) {
-                    item("nav_glossary") {
-                        NavigationItem(
-                            menuItem = MenuItem.Glossary,
-                            isSelected = appNavigationUiState.screen == NavGlossary,
-                            onClick = {
-                                navigationItemClicked(NavGlossary)
-                                closeMenu()
-                            }
-                        )
-                    }
-                }
+//                if (Device.isDebug) {
+//                    item("nav_glossary") {
+//                        NavigationItem(
+//                            menuItem = MenuItem.Glossary,
+//                            isSelected = appNavigationUiState.screen == NavGlossary,
+//                            onClick = {
+//                                navigationItemClicked(NavGlossary)
+//                                closeMenu()
+//                            }
+//                        )
+//                    }
+//                }
                 item("nav_settings") {
                     NavigationItem(
                         menuItem = MenuItem.Settings,

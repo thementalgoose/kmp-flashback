@@ -53,7 +53,7 @@ internal fun AppNavigationRail(
     val secondaryItems = listOfNotNull(
         Rss.toNavigationItem(appNavigationUiState.screen == NavRss).takeIf { appNavigationUiState.showRss },
         ReactionGame.toNavigationItem(appNavigationUiState.screen == NavReactionGame),
-        Glossary.toNavigationItem(appNavigationUiState.screen == NavGlossary).takeIf { Device.isDebug },
+//        Glossary.toNavigationItem(appNavigationUiState.screen == NavGlossary).takeIf { Device.isDebug },
         Settings.toNavigationItem(appNavigationUiState.screen == NavSettings),
         Contact.toNavigationItem(appNavigationUiState.screen == NavAbout)
     )
