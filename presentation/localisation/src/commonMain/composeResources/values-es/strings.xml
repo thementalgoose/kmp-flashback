@@ -612,6 +612,6 @@
     <string name="easter_egg_menu_christmas">¡Feliz Navidad!</string>
 
     <string name="driver_lineup_title">Alineación de pilotos</string>
-    <string name="driver_lineup_subtitle">Pilotos con contrato de piloto titular para futuras alineaciones</string>
+    <string name="driver_lineup_subtitle">Consulta los pilotos que tienen contratos confirmados para futuras temporadas en los equipos de Fórmula 1</string>
 
 </resources>

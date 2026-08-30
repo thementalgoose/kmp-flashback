@@ -38,3 +38,18 @@ internal val fakeUiState = LineupUiState(
         )
     )
 )
+
+internal val fakeUiUnconfirmedState = LineupUiState(
+    isLoading = false,
+    seasons = listOf(2026, 2027),
+    rows = listOf(
+        ConstructorLineup(
+            constructor = Constructor.preview(id = "1"),
+            contractBars = mapOf(
+                Driver.preview(id = "1") to listOf(2026, 2027, 2028),
+                Driver.preview(id = "2") to listOf(2026, 2027),
+                Driver.preview(id = "3") to listOf(2027, 2028),
+            )
+        )
+    )
+)

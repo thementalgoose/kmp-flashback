@@ -671,5 +671,5 @@
     <string name="reaction_tier_poor_desc">Ο χρόνος αντίδρασής σας είναι πιο αργός από τον μέσο όρο. Ο μέσος χρόνος αντίδρασης είναι περίπου 250ms, φροντίστε να εξασκηθείτε περισσότερο πριν ξεκινήσετε την καριέρα σας ως οδηγός F1</string>
 
     <string name="driver_lineup_title">Σύνθεση οδηγών</string>
-    <string name="driver_lineup_subtitle">Οδηγοί με συμβόλαια θέσης αγώνα για μελλοντικές συνθέσεις</string>
+    <string name="driver_lineup_subtitle">Δείτε τους οδηγούς που έχουν επιβεβαιωμένα συμβόλαια για τις μελλοντικές σεζόν στις ομάδες της Formula 1</string>
 </resources>

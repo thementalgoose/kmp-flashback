@@ -9,9 +9,8 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import tmg.flashback.data.repo.repository.LineupRepository
+import tmg.flashback.formula1.model.LineupOverview
 import tmg.flashback.formula1.model.LineupSeason
-import tmg.flashback.formula1.model.toOverview
-import tmg.flashback.infrastructure.log.logDebug
 import kotlin.collections.emptyList
 import kotlin.collections.map
 import kotlin.to
@@ -47,8 +46,8 @@ class LineupViewModel(
         if (list == null) {
             return emptyList()
         }
-        return list
-            .toOverview()
+        return LineupOverview
+            .from(list)
             .map {
                 ConstructorLineup(
                     constructor = it.constructor,
