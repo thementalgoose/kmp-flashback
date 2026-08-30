@@ -29,6 +29,7 @@
     <!-- Navigation -->
     <string name="nav_drivers">Οδηγοί</string>
     <string name="nav_constructors">Ομάδες</string>
+    <string name="nav_driver_comparison">Συγκρίνω</string>
     <string name="nav_calendar">Ημερολόγιο</string>
     <string name="nav_schedule">Πρόγραμμα</string>
     <string name="nav_seasons">Σεζόν</string>
