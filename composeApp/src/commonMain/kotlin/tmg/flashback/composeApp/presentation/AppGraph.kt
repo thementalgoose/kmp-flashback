@@ -83,6 +83,7 @@ import tmg.flashback.navigation.removeDetail
 import tmg.flashback.navigation.replaceDetail
 import tmg.flashback.navigation.replaceList
 import tmg.flashback.style.AppTheme
+import tmg.flashback.ui.navigation.OverlappingPanelsState
 import tmg.flashback.webbrowser.presentation.WebScreen
 
 @Composable
@@ -90,6 +91,7 @@ fun AppGraph(
     openPanel: () -> Unit,
     appNavigationViewModel: AppNavigationViewModel,
     insetPadding: PaddingValues,
+    overlappingPanelsState: OverlappingPanelsState,
     windowAdaptiveInfo: WindowAdaptiveInfo,
     backStack: NavBackStack<NavKey>,
 ) {
