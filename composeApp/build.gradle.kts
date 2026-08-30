@@ -122,6 +122,7 @@ kotlin {
             implementation(projects.feature.circuits)
             implementation(projects.feature.constructors)
             implementation(projects.feature.drivers)
+            implementation(projects.feature.glossary)
             implementation(projects.feature.highlights)
             implementation(projects.feature.lineup)
             implementation(projects.feature.maintenance)

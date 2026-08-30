@@ -64,6 +64,14 @@ data class NavWebpage(
 data object NavReactionGame: NavKey
 
 @Serializable
+data object NavGlossary: NavKey
+
+@Serializable
+data class NavGlossaryDetail(
+    val id: String
+): NavKey
+
+@Serializable
 data object NavSettings: NavKey
 
 @Serializable

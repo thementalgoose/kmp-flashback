@@ -28,6 +28,7 @@ fun NavKey.isList() = when (this) {
     is NavTeam -> false
     is NavDriverComparison -> false
     is NavRss -> true
+    is NavGlossary -> true
     is NavWebpage -> false
     is NavReactionGame -> true
     is NavSettings -> true
@@ -43,6 +44,7 @@ fun NavKey.isList() = when (this) {
     is NavSettingsWidgets -> false
     is NavSettingsPrivacy -> false
     is NavPrivacyPolicy -> false
+    is NavGlossaryDetail -> false
     is NavAbout -> true
     else -> true
 }
