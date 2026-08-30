@@ -33,6 +33,7 @@
     <!-- Navigation -->
     <string name="nav_drivers">Drivers</string>
     <string name="nav_constructors">Teams</string>
+    <string name="nav_driver_comparison">Comparison</string>
     <string name="nav_calendar">Calendar</string>
     <string name="nav_schedule">Schedule</string>
     <string name="nav_seasons">Seasons</string>
