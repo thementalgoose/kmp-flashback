@@ -94,10 +94,13 @@ private fun GlossaryDetailScreen(
                     .padding(horizontal = AppTheme.dimens.medium),
                 verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.medium)
             ) {
-                Image(
-                    painter = painterResource(glossary.infographic),
-                    contentDescription = null
-                )
+                val infographic = glossary.infographic
+                if (infographic != null) {
+                    Image(
+                        painter = painterResource(infographic),
+                        contentDescription = null
+                    )
+                }
                 TextBody1(
                     text = stringResource(glossary.desc)
                 )
