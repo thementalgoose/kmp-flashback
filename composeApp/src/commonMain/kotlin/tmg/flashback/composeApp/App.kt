@@ -34,7 +34,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
-import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.feature_banner_soft_upgrade
 import flashback.presentation.localisation.generated.resources.feature_banner_soft_upgrade_prompt
@@ -137,7 +136,7 @@ fun App() {
                 )
             },
             bottomBar = {
-                if (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
+                if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
                     val screen = appNavigationUiState.value.screen
                     val items = listOf(
                         MenuItem.Calendar.toNavigationItem(screen == NavCalendar),

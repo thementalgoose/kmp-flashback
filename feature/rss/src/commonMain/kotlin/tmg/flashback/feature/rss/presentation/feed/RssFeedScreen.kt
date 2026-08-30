@@ -45,7 +45,7 @@ import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.navigation3.runtime.NavKey
-import androidx.window.core.layout.WindowWidthSizeClass.Companion.COMPACT
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.feature.rss.models.Article
@@ -97,7 +97,7 @@ fun RSSScreen(
         configureSources = {
             navigateTo(NavSettingsRssConfigure)
         },
-        showMenu = windowSizeClass.windowWidthSizeClass == COMPACT
+        showMenu = !windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)
     )
 }
 

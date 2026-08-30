@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
-import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.season_standings_constructor
 import org.jetbrains.compose.resources.stringResource
@@ -117,9 +116,10 @@ internal fun TeamStandingsScreen(
                         content = {
                             ResultsSeasonPicker(subtitle = stringResource(resource = string.season_standings_constructor))
                         },
-                        action = when (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
-                            true -> HeaderAction.MENU
-                            false -> null
+                        action = if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
+                            HeaderAction.MENU
+                        } else {
+                            null
                         },
                         actionUpClicked = actionUpClicked,
                         overrideIcons = {

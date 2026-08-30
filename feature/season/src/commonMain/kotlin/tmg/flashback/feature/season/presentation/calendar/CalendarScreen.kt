@@ -39,7 +39,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
-import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.domain.formula1.generated.resources.Res.drawable
 import flashback.domain.formula1.generated.resources.ic_tyre
 import flashback.feature.season.generated.resources.ic_collapsible_icon_bottom
@@ -162,9 +161,10 @@ fun CalendarScreen(
                         content = {
                             ResultsSeasonPicker(subtitle = null)
                         },
-                        action = when (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
-                            true -> HeaderAction.MENU
-                            false -> null
+                        action = if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
+                            HeaderAction.MENU
+                        } else {
+                            null
                         },
                         actionUpClicked = actionUpClicked,
                         overrideIcons = {
