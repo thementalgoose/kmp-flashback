@@ -34,7 +34,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
-import androidx.window.core.layout.WindowWidthSizeClass
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.reaction_screen_action_again
 import flashback.presentation.localisation.generated.resources.reaction_screen_action_react
@@ -118,9 +118,10 @@ private fun ReactionScreen(
     ) {
         Header(
             text = stringResource(string.reaction_screen_title),
-            action = when (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT) {
-                true -> null
-                false -> HeaderAction.MENU
+            action = if (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
+                null
+            } else {
+                HeaderAction.MENU
             },
             actionUpClicked = actionUpClicked
         )
@@ -130,7 +131,7 @@ private fun ReactionScreen(
                 .background(AppTheme.colors.surface)
         ) {
 
-            if (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
+            if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
                 Column(
                     modifier = Modifier.fillMaxSize()
                 ) {

@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
-import androidx.window.core.layout.WindowWidthSizeClass
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_EXPANDED_LOWER_BOUND
 import flashback.feature.drivers.generated.resources.Res
 import flashback.feature.drivers.generated.resources.ic_driver_swap
 import flashback.presentation.localisation.generated.resources.Res.string
@@ -138,9 +138,10 @@ private fun DriverComparisonScreen(
             item("header") {
                 Header(
                     text = season.toString() + "\n" + stringResource(string.driver_comparison_title),
-                    action = when (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.EXPANDED) {
-                        true -> HeaderAction.BACK
-                        false -> null
+                    action = if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_EXPANDED_LOWER_BOUND)) {
+                        HeaderAction.BACK
+                    } else {
+                        null
                     },
                     actionUpClicked = actionUpClicked,
                     overrideIcons = {
