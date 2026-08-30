@@ -47,42 +47,13 @@ class LineupViewModel(
         if (list == null) {
             return emptyList()
         }
-        val firstSeason = list.map { it.season }.distinct().sorted().firstOrNull()
         return list
             .toOverview()
             .map {
                 ConstructorLineup(
                     constructor = it.constructor,
                     contractBars = it.drivers
-                        .map { (driver, seasons) ->
-                            driver to findSequenceAndGapLengths(firstSeason, seasons)
-                        }
-                        .toMap()
                 )
             }
-    }
-
-    internal fun findSequenceAndGapLengths(firstNumber: Int?, numbers: List<Int>): List<ConstructorBar> {
-        if (numbers.isEmpty()) return emptyList()
-        val result = mutableListOf<ConstructorBar>()
-        var currentSeqLen = 1
-        for (i in 0 until numbers.lastIndex) {
-            val current = numbers[i]
-            val next = numbers[i + 1]
-            if (next == current + 1) {
-                currentSeqLen++
-            } else {
-                result.add(ConstructorBar(signedup = true, seasons = currentSeqLen))
-                result.add(ConstructorBar(signedup = false, seasons = next - current - 1))
-                currentSeqLen = 1
-            }
-        }
-        result.add(ConstructorBar(signedup = true, seasons = currentSeqLen))
-
-        if (firstNumber != null && !numbers.contains(firstNumber)) {
-            result.add(0, ConstructorBar(signedup = false, seasons = (numbers.first() - firstNumber).coerceIn(0, 10)))
-        }
-        logDebug("Finding sequence from $firstNumber -> $numbers = $result")
-        return result
     }
 }

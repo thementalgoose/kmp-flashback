@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalComposeUiApi::class)
+
 package tmg.flashback.feature.lineup.presentation
 
 import androidx.compose.animation.core.animateDpAsState
@@ -17,10 +19,17 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
@@ -28,6 +37,7 @@ import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOW
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.driver_lineup_subtitle
 import flashback.presentation.localisation.generated.resources.driver_lineup_title
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
@@ -57,7 +67,6 @@ fun LineupScreen(
     }
 
     val uiState = viewModel.uiState.collectAsState()
-
     LineupScreen(
         paddingValues = paddingValues,
         actionUpClicked = actionUpClicked,
@@ -65,6 +74,12 @@ fun LineupScreen(
         uiState = uiState.value,
         refresh = viewModel::refresh,
     )
+}
+
+enum class HorizontalScrollDirection {
+    IDLE,
+    LEFT,
+    RIGHT
 }
 
 @Composable
@@ -127,7 +142,6 @@ private fun LineupScreen(
                                 Column(
                                     modifier = Modifier
                                         .animateItem()
-                                        .horizontalScroll(scrollState)
                                         .background(Brush.verticalGradient(
                                             listOf(scrimColor, AppTheme.colors.surface, Color.Transparent)
                                         ))
@@ -148,14 +162,13 @@ private fun LineupScreen(
                                 Column(
                                     modifier = Modifier
                                         .animateItem()
-                                        .horizontalScroll(scrollState)
                                         .padding(
                                             horizontal = AppTheme.dimens.medium
                                         )
                                 ) {
                                     for (lineup in uiState.rows) {
                                         ConstructorItem(
-                                            seasons = uiState.seasons,
+                                            seasonList = uiState.seasons,
                                             constructorLineup = lineup,
                                             modifier = Modifier.padding(bottom = AppTheme.dimens.medium),
                                         )

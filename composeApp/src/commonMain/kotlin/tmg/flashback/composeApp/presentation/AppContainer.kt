@@ -121,6 +121,7 @@ fun AppContainer(
                         openPanel = {
                             openPanel()
                         },
+                        overlappingPanelsState = panelsState,
                         backStack = backStack,
                         appNavigationViewModel = appNavigationViewModel,
                         insetPadding = paddingValues,

@@ -15,12 +15,12 @@ data class LineupUiState(
 
 data class ConstructorLineup(
     val constructor: Constructor,
-    val contractBars: Map<Driver, List<ConstructorBar>>,
+    val contractBars: Map<Driver, List<Int>>,
 )
 
 data class ConstructorBar(
     val signedup: Boolean,
-    val seasons: Int
+    val width: Int
 )
 
 
@@ -31,9 +31,9 @@ internal val fakeUiState = LineupUiState(
         ConstructorLineup(
             constructor = Constructor.preview(id = "1"),
             contractBars = mapOf(
-                Driver.preview(id = "1") to listOf(ConstructorBar(true, 3)),
-                Driver.preview(id = "2") to listOf(ConstructorBar(true, 2)),
-                Driver.preview(id = "3") to listOf(ConstructorBar(false, 1), ConstructorBar(true, 2)),
+                Driver.preview(id = "1") to listOf(2026, 2027, 2028),
+                Driver.preview(id = "2") to listOf(2026, 2027),
+                Driver.preview(id = "3") to listOf(2027, 2028),
             )
         )
     )

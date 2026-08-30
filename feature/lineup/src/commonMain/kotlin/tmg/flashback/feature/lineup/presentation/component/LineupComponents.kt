@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -17,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import tmg.flashback.feature.lineup.presentation.ConstructorBar
@@ -27,12 +27,12 @@ import tmg.flashback.formula1.model.Driver
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
+import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.driver.DriverIcon
 import tmg.flashback.ui.components.driver.DriverName
 import tmg.flashback.ui.components.driver.driverIconSize
 
-private val yearWidth: Dp = 80.dp
 private val yearHeight: Dp = 32.dp
 
 private val constructorLineHeight: Dp = 2.dp
@@ -49,11 +49,11 @@ internal fun SeasonList(
             .padding(start = startPadding)
     ) {
         for (season in seasons) {
-            TextTitle(
+            TextBody1(
                 bold = true,
                 text = season.toString(),
                 modifier = Modifier
-                    .width(yearWidth)
+                    .weight(1f)
                     .padding(horizontal = AppTheme.dimens.small)
             )
         }
@@ -62,7 +62,7 @@ internal fun SeasonList(
 
 @Composable
 internal fun ConstructorItem(
-    seasons: List<Int>,
+    seasonList: List<Int>,
     constructorLineup: ConstructorLineup,
     modifier: Modifier = Modifier
 ) {
@@ -79,19 +79,16 @@ internal fun ConstructorItem(
         ) {
             Box(Modifier
                 .background(constructorLineup.constructor.colour)
-                .width(startPadding)
-                .height(constructorLineHeight))
-            Box(Modifier
-                .background(constructorLineup.constructor.colour)
-                .width(yearWidth * seasons.size)
+                .fillMaxWidth()
                 .height(constructorLineHeight))
         }
-        for ((driver, contracts) in constructorLineup.contractBars) {
+        for ((driver, seasons) in constructorLineup.contractBars) {
             DriverItem(
+                seasonList = seasonList,
                 modifier = Modifier.padding(top = AppTheme.dimens.small),
                 constructorColor = constructorLineup.constructor.colour,
                 driver = driver,
-                contracts = contracts
+                seasons = seasons
             )
         }
     }
@@ -99,9 +96,10 @@ internal fun ConstructorItem(
 
 @Composable
 private fun DriverItem(
+    seasonList: List<Int>,
     constructorColor: Color,
     driver: Driver,
-    contracts: List<ConstructorBar>,
+    seasons: List<Int>,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -122,21 +120,23 @@ private fun DriverItem(
                 modifier = Modifier
                     .height(IntrinsicSize.Min)
             ) {
-                for (contract in contracts) {
-                    if (contract.signedup) {
+                for (season in seasonList) {
+                    if (seasons.contains(season)) {
                         Box(
                             modifier = Modifier
                                 .fillMaxHeight()
                                 .heightIn(min = yearHeight)
-                                .width(yearWidth * contract.seasons)
+                                .weight(1f)
                                 .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
                                 .background(constructorColor)
                         )
                     } else {
                         Box(
                             modifier = Modifier
-                                .width(yearWidth * contract.seasons)
+                                .weight(1f)
                                 .heightIn(min = yearHeight)
+                                .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
+                                .background(AppTheme.colors.surfaceContainer4)
                         )
                     }
                 }
@@ -153,7 +153,7 @@ private fun PreviewDriver() {
             SeasonList(fakeUiState.seasons)
             for (lineup in fakeUiState.rows) {
                 ConstructorItem(
-                    seasons = fakeUiState.seasons,
+                    seasonList = fakeUiState.seasons,
                     constructorLineup = lineup
                 )
             }
