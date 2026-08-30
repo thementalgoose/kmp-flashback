@@ -679,7 +679,7 @@
 
     <!-- Lineup -->
     <string name="driver_lineup_title">Driver lineup</string>
-    <string name="driver_lineup_subtitle">Drivers on the grid have contracts for race seats that have an expiry date. Below is all the current confirmed seats</string>
+    <string name="driver_lineup_subtitle">See the drivers who have contracts confirmed for future seasons at the Formula 1 teams</string>
 
 
     <string name="glossary_active_aero">Active Aero</string>
