@@ -126,3 +126,9 @@ fastlane build_upload_testflight version_number:"1.0.0"
 ./gradlew :composeApp:packageMsi   # Windows
 ./gradlew :composeApp:packageDeb   # Linux
 ```
+
+### Web
+
+```bash
+./gradlew :composeApp:wasmJsBrowserDevelopmentRun
+```
