@@ -13,6 +13,9 @@ kotlin {
             implementation(libs.okhttp.loggingInterceptor)
             implementation(libs.okhttp.dnsoverhttps)
         }
+        wasmJsMain.dependencies {
+            implementation(libs.ktor.client.js)
+        }
         commonMain.dependencies {
             implementation(projects.infrastructure)
             implementation(projects.core.configuration)

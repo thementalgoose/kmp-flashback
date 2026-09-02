@@ -1,8 +1,5 @@
 package tmg.flashback.persistence.flashback.di
 
-import androidx.sqlite.driver.bundled.BundledSQLiteDriver
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import org.koin.dsl.module
 import tmg.flashback.persistence.flashback.FlashbackDatabase
 import tmg.flashback.persistence.flashback.FlashbackDatabaseFactory
@@ -22,8 +19,6 @@ internal fun module() = module {
 
         get<FlashbackDatabaseFactory>()
             .createDatabase()
-            .setDriver(BundledSQLiteDriver())
-            .setQueryCoroutineContext(Dispatchers.IO)
             .addMigrations(*migrationsArray)
             .build()
     }

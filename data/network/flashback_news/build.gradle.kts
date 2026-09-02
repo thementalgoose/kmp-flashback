@@ -21,6 +21,9 @@ kotlin {
             implementation(libs.coroutines.core)
         }
         commonTest.dependencies {
+        wasmJsMain.dependencies {
+            implementation(libs.ktor.client.js)
+        }
             implementation(kotlin("test"))
         }
         desktopMain.dependencies {

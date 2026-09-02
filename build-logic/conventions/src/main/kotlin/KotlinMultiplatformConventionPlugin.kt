@@ -41,6 +41,9 @@ class KotlinMultiplatformConventionPlugin : Plugin<Project> {
             }
 
             jvm("desktop")
+            wasmJs {
+                browser()
+            }
 
             sourceSets.configureEach {
                 when (name) {

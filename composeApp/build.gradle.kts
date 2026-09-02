@@ -26,6 +26,9 @@ kotlin {
     // iosX64()
     iosArm64()
     iosSimulatorArm64()
+    wasmJs {
+        binaries.executable()
+    }
 
     jvmToolchain(21)
 
