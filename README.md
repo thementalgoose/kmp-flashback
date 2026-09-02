@@ -101,6 +101,10 @@ Contact Email: thementalgoose@gmail.com
 
 ### Project setup notes
 
+#### Android
+
+#### iOS
+
 ```bash
 # iOS
 cd iosApp/
@@ -108,3 +112,18 @@ pod install
 # To Release
 fastlane build_upload_testflight version_number:"1.0.0"
 ```
+
+#### Desktop
+
+```bash
+# Ensure JVM 21 is available
+# Run the desktop app from the project root
+./gradlew :composeApp:run
+
+# Build desktop distributions
+./gradlew :composeApp:packageDmg   # macOS
+./gradlew :composeApp:packageMsi   # Windows
+./gradlew :composeApp:packageDeb   # Linux
+```
+
+#### Web
