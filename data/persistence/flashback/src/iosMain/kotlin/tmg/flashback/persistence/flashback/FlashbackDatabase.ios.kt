@@ -22,7 +22,6 @@ actual class FlashbackDatabaseFactory {
             .databaseBuilder<FlashbackDatabase>(
                 name = dbFile,
             )
-            .setQueryCoroutineContext(Dispatchers.IO)
     }
 
     actual fun getSQLiteDriver(): SQLiteDriver = BundledSQLiteDriver()

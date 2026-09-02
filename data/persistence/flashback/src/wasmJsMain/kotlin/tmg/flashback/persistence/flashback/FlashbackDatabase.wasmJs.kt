@@ -5,6 +5,7 @@ import androidx.room3.RoomDatabase
 import androidx.sqlite.SQLiteDriver
 import androidx.sqlite.driver.web.WebWorkerSQLiteDriver
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import org.w3c.dom.Worker
 
 @OptIn(ExperimentalWasmJsInterop::class)
@@ -16,5 +17,5 @@ actual class FlashbackDatabaseFactory {
 
     actual fun getSQLiteDriver(): SQLiteDriver = WebWorkerSQLiteDriver(createSqliteWorker())
 
-    actual fun getDispatcher(): CoroutineDispatcher? = null
+    actual fun getDispatcher(): CoroutineDispatcher? = Dispatchers.Default
 }

@@ -19,7 +19,6 @@ actual class FlashbackDatabaseFactory(
                 klass = FlashbackDatabase::class.java,
                 name = DB_NAME
             )
-            .setQueryCoroutineContext(Dispatchers.IO)
     }
 
     actual fun getSQLiteDriver(): SQLiteDriver = BundledSQLiteDriver()

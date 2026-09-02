@@ -13,7 +13,6 @@ actual class FlashbackDatabaseFactory() {
 
         return Room
             .databaseBuilder<FlashbackDatabase>(DB_NAME)
-            .setQueryCoroutineContext(Dispatchers.IO)
     }
 
     actual fun getSQLiteDriver(): SQLiteDriver = BundledSQLiteDriver()
