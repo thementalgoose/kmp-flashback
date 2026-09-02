@@ -22,7 +22,7 @@ internal fun module() = module {
         return@single factory
             .createDatabase()
             .setDriver(factory.getSQLiteDriver())
-            .setQueryCoroutineContext(factory.getDispatcher() ?: Dispatchers.Default)
+//            .setQueryCoroutineContext(factory.getDispatcher() ?: Dispatchers.Default)
             .addMigrations(*migrationsArray)
             .build()
     }

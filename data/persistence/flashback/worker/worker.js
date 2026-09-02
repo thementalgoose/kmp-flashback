@@ -13,7 +13,10 @@ let nextStatementId = 0;
 function openRequest(id, requestData) {
     try {
         const newDatabaseId = nextDatabaseId++;
-        const newDatabase = new sqlite3.oo1.OpfsDb(requestData.fileName);
+        const databaseClass = (sqlite3 && typeof sqlite3.oo1?.OpfsDb === 'function' && 'opfs' in sqlite3)
+            ? sqlite3.oo1.OpfsDb
+            : sqlite3.oo1.DB;
+        const newDatabase = new databaseClass(requestData.fileName);
         databases.set(newDatabaseId, newDatabase);
         postMessage({'id': id, data: {'databaseId': newDatabaseId}});
     } catch (error) {

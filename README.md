@@ -130,5 +130,6 @@ fastlane build_upload_testflight version_number:"1.0.0"
 ### Web
 
 ```bash
+./gradlew :kotlinWasmUpgradeYarnLock
 ./gradlew :composeApp:wasmJsBrowserDevelopmentRun
 ```
