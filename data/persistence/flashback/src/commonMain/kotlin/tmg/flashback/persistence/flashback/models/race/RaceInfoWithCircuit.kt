@@ -8,8 +8,8 @@ data class RaceInfoWithCircuit(
     @Embedded
     val raceInfo: RaceInfo,
     @Relation(
-        parentColumn = "circuit_id",
-        entityColumn = "id"
+        parentColumns = ["circuit_id"],
+        entityColumns = ["id"]
     )
     val circuit: Circuit
 ) {

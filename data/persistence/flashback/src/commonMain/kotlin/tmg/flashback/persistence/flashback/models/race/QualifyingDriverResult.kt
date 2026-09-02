@@ -9,13 +9,13 @@ class QualifyingDriverResult(
     @Embedded
     val qualifyingResult: QualifyingResult,
     @Relation(
-        parentColumn = "driver_id",
-        entityColumn = "id"
+        parentColumns = ["driver_id"],
+        entityColumns = ["id"]
     )
     val driver: Driver,
     @Relation(
-        parentColumn = "constructor_id",
-        entityColumn = "id"
+        parentColumns = ["constructor_id"],
+        entityColumns = ["id"]
     )
     val constructor: Constructor
 ) {

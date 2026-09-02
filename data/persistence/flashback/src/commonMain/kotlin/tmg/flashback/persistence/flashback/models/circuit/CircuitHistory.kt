@@ -8,8 +8,8 @@ data class CircuitHistory(
     val circuit: Circuit,
     @Relation(
         entity = CircuitRound::class,
-        parentColumn = "id",
-        entityColumn = "circuit_id"
+        parentColumns = ["id"],
+        entityColumns = ["circuit_id"]
     )
     val races: List<CircuitRoundWithResults>
 ) {

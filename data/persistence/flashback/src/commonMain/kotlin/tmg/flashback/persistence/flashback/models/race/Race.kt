@@ -9,37 +9,37 @@ data class Race(
     @Embedded
     val raceInfo: RaceInfo,
     @Relation(
-        parentColumn = "circuit_id",
-        entityColumn = "id"
+        parentColumns = ["circuit_id"],
+        entityColumns = ["id"]
     )
     val circuit: Circuit,
     @Relation(
         entity = QualifyingResult::class,
-        parentColumn = "id",
-        entityColumn = "season_round_id"
+        parentColumns = ["id"],
+        entityColumns = ["season_round_id"]
     )
     val qualifying: List<QualifyingDriverResult>,
     @Relation(
         entity = RaceResult::class,
-        parentColumn = "id",
-        entityColumn = "season_round_id"
+        parentColumns = ["id"],
+        entityColumns = ["season_round_id"]
     )
     val race: List<RaceDriverResult>,
     @Relation(
-        parentColumn = "id",
-        entityColumn = "season_round_id"
+        parentColumns = ["id"],
+        entityColumns = ["season_round_id"]
     )
     val schedule: List<Schedule>,
     @Relation(
         entity = SprintQualifyingResult::class,
-        parentColumn = "id",
-        entityColumn = "season_round_id"
+        parentColumns = ["id"],
+        entityColumns = ["season_round_id"]
     )
     val sprintQualifying: List<SprintQualifyingDriverResult>,
     @Relation(
         entity = SprintRaceResult::class,
-        parentColumn = "id",
-        entityColumn = "season_round_id"
+        parentColumns = ["id"],
+        entityColumns = ["season_round_id"]
     )
     val sprintRace: List<SprintRaceDriverResult>
 ) {

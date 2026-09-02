@@ -9,13 +9,13 @@ data class LineupWithDrivers(
     @Embedded
     val lineup: Lineup,
     @Relation(
-        parentColumn = "constructor_id",
-        entityColumn = "id"
+        parentColumns = ["constructor_id"],
+        entityColumns = ["id"]
     )
     val constructor: Constructor,
     @Relation(
-        parentColumn = "driver_id",
-        entityColumn = "id"
+        parentColumns = ["driver_id"],
+        entityColumns = ["id"]
     )
     val driver: Driver
 ) {

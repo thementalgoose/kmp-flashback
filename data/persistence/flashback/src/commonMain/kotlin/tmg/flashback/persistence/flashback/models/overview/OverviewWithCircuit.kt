@@ -8,13 +8,13 @@ data class OverviewWithCircuit(
     @Embedded
     val overview: Overview,
     @Relation(
-        parentColumn = "circuit_id",
-        entityColumn = "id"
+        parentColumns = ["circuit_id"],
+        entityColumns = ["id"]
     )
     val circuit: Circuit,
     @Relation(
-        parentColumn = "id",
-        entityColumn = "season_round_id"
+        parentColumns = ["id"],
+        entityColumns = ["season_round_id"]
     )
     val schedule: List<Schedule>
 ) {

@@ -8,8 +8,8 @@ data class ConstructorSeasonDriverWithDriver(
     @Embedded
     val results: ConstructorSeasonDriver,
     @Relation(
-        parentColumn = "driver_id",
-        entityColumn = "id"
+        parentColumns = ["driver_id"],
+        entityColumns = ["id"]
     )
     val driver: Driver
 ) {

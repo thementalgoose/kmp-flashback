@@ -8,8 +8,8 @@ data class DriverStandingConstructorWithConstructor(
     @Embedded
     val standing: DriverStandingConstructor,
     @Relation(
-        parentColumn = "constructor_id",
-        entityColumn = "id"
+        parentColumns = ["constructor_id"],
+        entityColumns = ["id"]
     )
     val constructor: Constructor
 ) {

@@ -8,8 +8,8 @@ data class CircuitRoundWithResults(
     val round: CircuitRound,
     @Relation(
         entity = CircuitRoundResult::class,
-        parentColumn = "season_round",
-        entityColumn = "season_round_id"
+        parentColumns = ["season_round"],
+        entityColumns = ["season_round_id"]
     )
     val results: List<CircuitRoundResultWithDriverConstructor>
 ) {

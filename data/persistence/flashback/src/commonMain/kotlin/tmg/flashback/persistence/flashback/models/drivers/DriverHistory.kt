@@ -8,8 +8,8 @@ data class DriverHistory(
     val driver: Driver,
     @Relation(
         entity = DriverSeason::class,
-        parentColumn = "id",
-        entityColumn = "driver_id"
+        parentColumns = ["id"],
+        entityColumns = ["driver_id"]
     )
     val seasons: List<DriverSeasonWithRaces>
 ) {
