@@ -99,7 +99,16 @@ Flashback is also not affiliated in any way with any of the Formula One group of
 
 Contact Email: thementalgoose@gmail.com
 
-### Project setup notes
+## Project setup notes
+
+### Android
+
+```bash
+./gradlew :androidApp:assembleProductionRelease
+./gradlew :androidApp:bundleProductionRelease
+```
+
+### iOS
 
 ```bash
 # iOS
@@ -107,4 +116,13 @@ cd iosApp/
 pod install
 # To Release
 fastlane build_upload_testflight version_number:"1.0.0"
+```
+
+### Desktop
+
+```bash
+./gradlew :composeApp:run
+./gradlew :composeApp:packageDmg   # macOS
+./gradlew :composeApp:packageMsi   # Windows
+./gradlew :composeApp:packageDeb   # Linux
 ```
