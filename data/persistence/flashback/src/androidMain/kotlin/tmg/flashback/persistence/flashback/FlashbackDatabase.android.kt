@@ -1,7 +1,7 @@
 package tmg.flashback.persistence.flashback
 
 import android.content.Context
-import androidx.room.Room
+import androidx.room3.Room
 
 actual class FlashbackDatabaseFactory(
     private val applicationContext: Context

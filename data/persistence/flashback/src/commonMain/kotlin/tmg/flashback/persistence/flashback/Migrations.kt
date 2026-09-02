@@ -1,6 +1,6 @@
 package tmg.flashback.persistence.flashback
 
-import androidx.room.migration.Migration
+import androidx.room3.migration.Migration
 import androidx.sqlite.SQLiteConnection
 import androidx.sqlite.execSQL
 

@@ -1,6 +1,6 @@
 package tmg.flashback.persistence.flashback.dao
 
-import androidx.room.*
+import androidx.room3.*
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.format
 import tmg.flashback.infrastructure.datetime.dateFormatYYYYMMDD
