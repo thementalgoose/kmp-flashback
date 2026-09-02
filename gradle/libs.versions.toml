@@ -112,6 +112,7 @@ navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-co
 room3-compiler = { module = "androidx.room3:room3-compiler", version.ref = "room3" }
 room3-runtime = { module = "androidx.room3:room3-runtime", version.ref = "room3" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+sqlite-web = { module = "androidx.sqlite:sqlite-web", version.ref = "sqlite" }
 
 # Flags
 flagkit = "dev.carlsen.flagkit:flagkit:1.1.0"

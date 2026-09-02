@@ -25,6 +25,9 @@ kotlin {
         iosMain.dependencies {
             implementation(libs.sqlite.bundled)
         }
+        wasmJsMain.dependencies {
+            implementation(libs.sqlite.web)
+        }
     }
 }
 
