@@ -31,7 +31,7 @@ composeNav3 = "1.0.0-alpha06"
 koin = "4.2.2"
 room = "2.8.4"
 sqlite = "2.7.0"
-coil = "3.6.0"
+coil = "3.6.1"
 ksoup = "0.6.0"
 cmptoast = "1.0.8"
 
