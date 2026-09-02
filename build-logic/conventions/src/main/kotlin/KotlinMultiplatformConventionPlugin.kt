@@ -3,7 +3,9 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
+@OptIn(ExperimentalWasmDsl::class)
 class KotlinMultiplatformConventionPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         val libs = getLibs()
@@ -41,6 +43,9 @@ class KotlinMultiplatformConventionPlugin : Plugin<Project> {
             }
 
             jvm("desktop")
+            wasmJs {
+                browser()
+            }
 
             sourceSets.configureEach {
                 when (name) {

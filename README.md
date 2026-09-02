@@ -127,3 +127,11 @@ fastlane build_upload_testflight version_number:"1.0.0"
 ```
 
 #### Web
+
+```bash
+# Start the Kotlin/Wasm development server and open the app in a browser
+./gradlew :composeApp:wasmJsBrowserDevelopmentRun
+
+# Build the production web bundle
+./gradlew :composeApp:wasmJsBrowserProductionWebpack
+```

@@ -1,3 +1,5 @@
+@file:OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
+
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 
@@ -26,6 +28,10 @@ kotlin {
     // iosX64()
     iosArm64()
     iosSimulatorArm64()
+
+    wasmJs {
+        binaries.executable()
+    }
 
     jvmToolchain(21)
 
@@ -85,6 +91,7 @@ kotlin {
 
     sourceSets {
         val desktopMain by getting
+        val wasmJsMain by getting
 
         androidMain.dependencies {
             implementation(project.dependencies.platform(libs.firebase.bom))
@@ -161,6 +168,9 @@ kotlin {
             implementation(libs.turbine)
         }
         desktopMain.dependencies {
+
+        }
+        wasmJsMain.dependencies {
 
         }
     }

@@ -1,4 +1,4 @@
-package tmg.flashback
+package tmg.flashback.composeApp
 
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.ComposeViewport
