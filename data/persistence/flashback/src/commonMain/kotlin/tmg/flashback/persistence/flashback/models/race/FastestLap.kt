@@ -1,6 +1,6 @@
 package tmg.flashback.persistence.flashback.models.race
 
-import androidx.room.ColumnInfo
+import androidx.room3.ColumnInfo
 
 data class FastestLap(
     @ColumnInfo(name = "position")

@@ -1,7 +1,7 @@
 package tmg.flashback.persistence.flashback.models.race
 
-import androidx.room.Embedded
-import androidx.room.Relation
+import androidx.room3.Embedded
+import androidx.room3.Relation
 import tmg.flashback.persistence.flashback.models.constructors.Constructor
 import tmg.flashback.persistence.flashback.models.drivers.Driver
 
@@ -9,13 +9,13 @@ data class RaceDriverResult(
     @Embedded
     val raceResult: RaceResult,
     @Relation(
-        parentColumn = "driver_id",
-        entityColumn = "id"
+        parentColumns = ["driver_id"],
+        entityColumns = ["id"]
     )
     val driver: Driver,
     @Relation(
-        parentColumn = "constructor_id",
-        entityColumn = "id"
+        parentColumns = ["constructor_id"],
+        entityColumns = ["id"]
     )
     val constructor: Constructor
 ) {

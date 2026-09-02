@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.flashback.kotlinMultiplatform)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.room)
+    alias(libs.plugins.room3)
 }
 
 kotlin {
@@ -15,7 +15,7 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(libs.bundles.kotlin)
-            implementation(libs.room.runtime)
+            implementation(libs.room3.runtime)
             implementation(libs.sqlite.bundled)
             implementation(projects.infrastructure)
         }
@@ -26,13 +26,13 @@ kotlin {
 
 
 dependencies {
-    add("kspAndroid", libs.room.compiler)
-    add("kspDesktop", libs.room.compiler)
-    add("kspIosSimulatorArm64", libs.room.compiler)
-    // add("kspIosX64", libs.room.compiler)
-    add("kspIosArm64", libs.room.compiler)
+    add("kspAndroid", libs.room3.compiler)
+    add("kspDesktop", libs.room3.compiler)
+    add("kspIosSimulatorArm64", libs.room3.compiler)
+    add("kspIosArm64", libs.room3.compiler)
+//    add("kspJs", libs.room3.compiler)
 }
 
-room {
+room3 {
     schemaDirectory("$projectDir/schemas")
 }

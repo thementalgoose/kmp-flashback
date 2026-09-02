@@ -12,7 +12,7 @@ kotlin {
 
         }
         commonMain.dependencies {
-            implementation(libs.room.runtime)
+            implementation(libs.room3.runtime)
             implementation(libs.bundles.kotlin)
             implementation(projects.infrastructure)
             implementation(projects.domain.formula1)

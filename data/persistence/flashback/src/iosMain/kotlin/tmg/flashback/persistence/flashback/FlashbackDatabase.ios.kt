@@ -1,6 +1,7 @@
 package tmg.flashback.persistence.flashback
 
-import androidx.room.Room
+import androidx.room3.Room
+import androidx.room3.RoomDatabase
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.coroutines.Dispatchers
@@ -12,21 +13,13 @@ import platform.Foundation.NSUserDomainMask
 
 actual class FlashbackDatabaseFactory {
 
-    actual fun createDatabase(): FlashbackDatabase {
-        val migrationsArray = Migrations.entries
-            .map { it.migration }
-            .toTypedArray()
-
+    actual fun createDatabase(): RoomDatabase.Builder<FlashbackDatabase> {
         val dbFile = "${fileDirectory()}/$DB_NAME"
 
         return Room
             .databaseBuilder<FlashbackDatabase>(
                 name = dbFile,
             )
-            .setDriver(BundledSQLiteDriver())
-            .setQueryCoroutineContext(Dispatchers.IO)
-            .addMigrations(*migrationsArray)
-            .build()
     }
 
     @OptIn(ExperimentalForeignApi::class)

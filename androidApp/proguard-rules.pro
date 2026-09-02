@@ -52,3 +52,7 @@
 -keep class * extends androidx.work.InputMerger {
     public <init>();
 }
+
+# Room
+-keep class * extends androidx.room3.RoomDatabase { <init>(); }
+
