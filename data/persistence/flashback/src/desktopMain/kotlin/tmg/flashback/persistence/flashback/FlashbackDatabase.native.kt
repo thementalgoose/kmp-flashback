@@ -1,18 +1,12 @@
 package tmg.flashback.persistence.flashback
 
 import androidx.room3.Room
-import androidx.sqlite.driver.bundled.BundledSQLiteDriver
+import androidx.room3.RoomDatabase
 
 actual class FlashbackDatabaseFactory() {
-    actual fun createDatabase(): FlashbackDatabase {
-        val migrationsArray = Migrations.entries
-            .map { it.migration }
-            .toTypedArray()
+    actual fun createDatabase(): RoomDatabase.Builder<FlashbackDatabase> {
 
         return Room
             .databaseBuilder<FlashbackDatabase>(DB_NAME)
-            .setDriver(BundledSQLiteDriver())
-            .addMigrations(*migrationsArray)
-            .build()
     }
 }

@@ -29,8 +29,9 @@ dependencies {
     add("kspAndroid", libs.room3.compiler)
     add("kspDesktop", libs.room3.compiler)
     add("kspIosSimulatorArm64", libs.room3.compiler)
-    // add("kspIosX64", libs.room3.compiler)
+    add("kspIosX64", libs.room3.compiler)
     add("kspIosArm64", libs.room3.compiler)
+    add("kspJs", libs.room3.compiler)
 }
 
 room3 {

@@ -39,7 +39,7 @@ import tmg.flashback.persistence.flashback.models.standings.DriverStandingConstr
 internal val DB_NAME = "flashback-database"
 
 expect class FlashbackDatabaseFactory {
-    fun createDatabase(): FlashbackDatabase
+    fun createDatabase(): RoomDatabase.Builder<FlashbackDatabase>
 }
 
 @Database(
