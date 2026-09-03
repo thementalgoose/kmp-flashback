@@ -5,6 +5,7 @@ import org.koin.dsl.module
 import tmg.flashback.persistence.flashback.FlashbackDatabase
 import tmg.flashback.persistence.flashback.FlashbackDatabaseFactory
 import tmg.flashback.persistence.flashback.Migrations
+import tmg.flashback.infrastructure.coroutines.appIO
 
 val dataPersistenceFlashbackModule = listOf(
     platformModule(),
@@ -22,7 +23,7 @@ internal fun module() = module {
         return@single factory
             .createDatabase()
             .setDriver(factory.getSQLiteDriver())
-            .setQueryCoroutineContext(factory.getDispatcher() ?: Dispatchers.Default)
+            .setQueryCoroutineContext(Dispatchers.appIO)
             .addMigrations(*migrationsArray)
             .build()
     }

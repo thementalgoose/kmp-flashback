@@ -16,6 +16,4 @@ actual class FlashbackDatabaseFactory() {
     }
 
     actual fun getSQLiteDriver(): SQLiteDriver = BundledSQLiteDriver()
-
-    actual fun getDispatcher(): CoroutineDispatcher? = Dispatchers.IO
 }

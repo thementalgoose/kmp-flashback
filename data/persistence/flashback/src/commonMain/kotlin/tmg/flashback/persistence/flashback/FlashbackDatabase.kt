@@ -44,7 +44,6 @@ internal val DB_NAME = "flashback-database"
 expect class FlashbackDatabaseFactory {
     fun createDatabase(): RoomDatabase.Builder<FlashbackDatabase>
     fun getSQLiteDriver(): SQLiteDriver
-    fun getDispatcher(): CoroutineDispatcher?
 }
 
 @Database(
