@@ -8,7 +8,7 @@ actual object Device {
     actual val isRuntimeNotificationsSupported: Boolean get() = false
     actual val isEmulator: Boolean get() = false
     actual val isDebug: Boolean get() = false
-    actual val platform: Platform get() = Platform.Other
+    actual val platform: Platform get() = Platform.WasmJs
     actual val osVersion: String get() = "Web"
     actual val brand: String get() = "Browser"
     actual val hardware: String get() = "Unknown"
