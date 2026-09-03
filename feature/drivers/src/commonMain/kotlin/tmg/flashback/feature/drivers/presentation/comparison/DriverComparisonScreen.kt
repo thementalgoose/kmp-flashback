@@ -98,7 +98,8 @@ fun DriverComparisonScreen(
 
     SwipeRefresh(
         isLoading = state.value.isLoading,
-        onRefresh = viewModel::refresh
+        onRefresh = viewModel::refresh,
+        windowSizeClass = windowSizeClass
     ) {
         DriverComparisonScreen(
             paddingValues = paddingValues,

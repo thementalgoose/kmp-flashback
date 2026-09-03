@@ -117,7 +117,8 @@ private fun CircuitScreen(
 ) {
     SwipeRefresh(
         isLoading = uiState.isLoading,
-        onRefresh = refresh
+        onRefresh = refresh,
+        windowSizeClass = windowSizeClass
     ) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),

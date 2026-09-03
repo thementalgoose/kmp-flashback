@@ -111,7 +111,8 @@ fun AllCircuitsScreen(
     SwipeRefresh(
         modifier = modifier,
         isLoading = uiState.isLoading,
-        onRefresh = refresh
+        onRefresh = refresh,
+        windowSizeClass = windowSizeClass
     ) {
         LazyVerticalGrid(
             columns = GridCells.Adaptive(300.dp),

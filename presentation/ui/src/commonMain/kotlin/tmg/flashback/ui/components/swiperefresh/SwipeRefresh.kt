@@ -10,20 +10,19 @@ import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_EXPANDED_LOWER_BOUND
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3AdaptiveApi::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SwipeRefresh(
     isLoading: Boolean,
     onRefresh: () -> Unit,
+    windowSizeClass: WindowSizeClass,
     modifier: Modifier = Modifier,
     content: @Composable BoxScope.() -> Unit
 ) {
     // Disable pull-to-refresh on expanded (or larger) window sizes
-    val windowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
     val isExpandedOrLarger = windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_EXPANDED_LOWER_BOUND)
 
     if (isExpandedOrLarger) {

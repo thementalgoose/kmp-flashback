@@ -111,7 +111,8 @@ internal fun ConstructorStatsScreen(
     )
     SwipeRefresh(
         isLoading = isLoading,
-        onRefresh = refresh
+        onRefresh = refresh,
+        windowSizeClass = windowSizeClass
     ) {
         val option = remember(uiState.selection) {
             when (uiState.selection) {

@@ -140,6 +140,7 @@ fun WeekendScreenTab(
         SwipeRefresh(
             isLoading = isLoading,
             onRefresh = refresh,
+            windowSizeClass = windowSizeClass,
             content = {
                 // Add custom padding for nav bar
                 val direction = LocalLayoutDirection.current
