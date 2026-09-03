@@ -16,7 +16,7 @@ actual object Device {
     actual val isDebug: Boolean
         get() = false
     actual val platform: Platform
-        get() = Platform.Other
+        get() = Platform.Desktop
     actual val osVersion: String
         get() = "N/A"
     actual val brand: String

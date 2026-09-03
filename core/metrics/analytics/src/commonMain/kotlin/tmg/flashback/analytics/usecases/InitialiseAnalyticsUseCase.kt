@@ -29,7 +29,8 @@ internal class InitialiseAnalyticsUseCaseImpl(
         firebaseAnalyticsService.setProperty(PLATFORM.key, when (Device.platform) {
             Platform.Android -> "Android"
             Platform.IOS -> "iOS"
-            Platform.Other -> "Other"
+            Platform.Desktop -> "Desktop"
+            Platform.WasmJs -> "Web"
         })
         firebaseAnalyticsService.setProperty(DEVICE_BOARD.key, Device.board)
         firebaseAnalyticsService.setProperty(DEVICE_MODEL.key, Device.model)

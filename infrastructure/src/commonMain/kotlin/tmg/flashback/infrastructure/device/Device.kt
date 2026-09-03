@@ -27,14 +27,16 @@ expect object Device {
 enum class Platform {
     Android,
     IOS,
-    Other
+    Desktop,
+    WasmJs
 }
 
 val Platform.string: String
     get() = when (this) {
         Platform.Android -> "Android"
         Platform.IOS -> "iOS"
-        Platform.Other -> "Other"
+        Platform.Desktop -> "Desktop"
+        Platform.WasmJs -> "Web"
     }
 
 fun Device.log() {
