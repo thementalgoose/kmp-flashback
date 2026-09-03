@@ -12,22 +12,18 @@ import org.jetbrains.compose.resources.getString
 
 class ToastManagerImpl: ToastManager {
 
-    private val scope = CoroutineScope(Dispatchers.Default)
-
     override var backgroundColor: Color = Color.Black
     override var foregroundColor: Color = Color.White
-
 
     override fun showMessage(
         resourceId: StringResource,
         duration: Duration
     ) {
-        scope.launch {
-            showMessage(
-                message = getString(resourceId),
-                duration = duration
-            )
-        }
+        val message = runBlocking { getString(resourceId) }
+        showMessage(
+            message = message,
+            duration = duration
+        )
     }
 
     override fun showMessage(

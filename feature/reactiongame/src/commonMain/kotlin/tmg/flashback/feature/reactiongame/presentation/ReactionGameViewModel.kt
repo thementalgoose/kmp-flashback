@@ -15,14 +15,13 @@ import tmg.flashback.analytics.usecases.LogEventUseCase
 import tmg.flashback.feature.reactiongame.manager.LightsOutDelayProvider
 import tmg.flashback.infrastructure.datetime.TimeManager
 import kotlin.math.log
-
-expect val dispatcher: CoroutineDispatcher
+import tmg.flashback.infrastructure.coroutines.appIO
 
 class ReactionGameViewModel(
     private val lightsOutDelayProvider: LightsOutDelayProvider,
     private val timeManager: TimeManager,
     private val logEventUseCase: LogEventUseCase,
-    private val ioDispatcher: CoroutineDispatcher = dispatcher
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.appIO
 ): ViewModel() {
 
     private companion object {
