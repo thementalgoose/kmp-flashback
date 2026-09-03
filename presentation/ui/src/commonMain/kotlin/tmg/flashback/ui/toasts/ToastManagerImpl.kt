@@ -14,7 +14,7 @@ import tmg.flashback.infrastructure.coroutines.ioDispatcher
 
 class ToastManagerImpl: ToastManager {
 
-    private val scope = CoroutineScope(ioDispatcher)
+    private val scope = CoroutineScope(Dispatchers.Main)
 
     override var backgroundColor: Color = Color.Black
     override var foregroundColor: Color = Color.White
