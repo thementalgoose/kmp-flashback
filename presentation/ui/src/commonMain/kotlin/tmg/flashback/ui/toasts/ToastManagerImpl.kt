@@ -3,14 +3,18 @@ package tmg.flashback.ui.toasts
 import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import multiplatform.network.cmptoast.ToastDuration
 import multiplatform.network.cmptoast.ToastGravity
 import multiplatform.network.cmptoast.showToast
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.getString
+import tmg.flashback.infrastructure.coroutines.ioDispatcher
 
 class ToastManagerImpl: ToastManager {
+
+    private val scope = CoroutineScope(ioDispatcher)
 
     override var backgroundColor: Color = Color.Black
     override var foregroundColor: Color = Color.White
@@ -19,11 +23,13 @@ class ToastManagerImpl: ToastManager {
         resourceId: StringResource,
         duration: Duration
     ) {
-        val message = runBlocking { getString(resourceId) }
-        showMessage(
-            message = message,
-            duration = duration
-        )
+        scope.launch {
+            val message = getString(resourceId)
+            showMessage(
+                message = message,
+                duration = duration
+            )
+        }
     }
 
     override fun showMessage(
