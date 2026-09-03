@@ -21,6 +21,8 @@ import tmg.flashback.flashbackapi.api.models.races.Round
 import tmg.flashback.flashbackapi.api.models.races.Season
 import tmg.flashback.flashbackapi.api.models.races.Standings
 import tmg.flashback.flashbackapi.api.repositories.NetworkConfigRepository
+import tmg.flashback.infrastructure.device.Device
+import tmg.flashback.infrastructure.device.Platform
 import tmg.flashback.infrastructure.log.logInfo
 
 class FlashbackApiImpl(
@@ -87,14 +89,19 @@ class FlashbackApiImpl(
     private val baseUrl: String
         get() = networkConfigRepository.baseUrl
 
+    private val includeHeaders: Boolean
+        get() = Device.platform in listOf(Platform.Android, Platform.IOS, Platform.Desktop)
+
     @Throws(RuntimeException::class, IOException::class)
     private suspend inline fun <reified T> makeRequest(endpoint: String): T? {
         logInfo(">> $baseUrl/$endpoint")
         val httpResponse = httpClient.get("$baseUrl/$endpoint") {
-            headers {
-                set("Accept", "application/json")
-                set("ContentType", "application/json")
-                set("content-type", "application/json")
+            if (includeHeaders) {
+                headers {
+                    set("Accept", "application/json")
+                    set("ContentType", "application/json")
+                    set("content-type", "application/json")
+                }
             }
         }
         when (httpResponse.status) {
