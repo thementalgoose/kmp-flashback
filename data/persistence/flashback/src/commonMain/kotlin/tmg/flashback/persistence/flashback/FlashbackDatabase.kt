@@ -4,6 +4,9 @@ import androidx.room3.ConstructedBy
 import androidx.room3.Database
 import androidx.room3.RoomDatabase
 import androidx.room3.RoomDatabaseConstructor
+import androidx.sqlite.SQLiteDriver
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import tmg.flashback.persistence.flashback.dao.CircuitDao
 import tmg.flashback.persistence.flashback.dao.ConstructorDao
 import tmg.flashback.persistence.flashback.dao.DriverDao
@@ -40,6 +43,8 @@ internal val DB_NAME = "flashback-database"
 
 expect class FlashbackDatabaseFactory {
     fun createDatabase(): RoomDatabase.Builder<FlashbackDatabase>
+    fun getSQLiteDriver(): SQLiteDriver
+    fun getDispatcher(): CoroutineDispatcher?
 }
 
 @Database(

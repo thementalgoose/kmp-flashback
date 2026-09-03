@@ -26,6 +26,9 @@ kotlin {
         desktopMain.dependencies {
 
         }
+        wasmJsMain.dependencies {
+            implementation(libs.ktor.client.js)
+        }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
         }

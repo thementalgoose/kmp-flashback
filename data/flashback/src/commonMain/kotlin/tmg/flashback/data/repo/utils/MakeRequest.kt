@@ -1,18 +1,20 @@
 package tmg.flashback.data.repo.utils
 
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
 import tmg.flashback.data.repo.model.Response
 import tmg.flashback.flashbackapi.api.api.FlashbackApi
 import tmg.flashback.flashbackapi.api.api.NotFoundException
 import tmg.flashback.infrastructure.log.logException
 
+expect val dispatcher: CoroutineDispatcher
+
 suspend fun <T> FlashbackApi.makeRequest(
     request: suspend (FlashbackApi) -> T,
     response: suspend (T) -> Boolean
 ): Response {
-    return withContext(Dispatchers.IO) {
+    return withContext(dispatcher) {
         try {
             val response = request(this@makeRequest)
             val processed = response(response)
