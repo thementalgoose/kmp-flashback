@@ -16,6 +16,4 @@ actual class FlashbackDatabaseFactory {
         Room.inMemoryDatabaseBuilder()
 
     actual fun getSQLiteDriver(): SQLiteDriver = WebWorkerSQLiteDriver(createSqliteWorker())
-
-    actual fun getDispatcher(): CoroutineDispatcher? = Dispatchers.Default
 }

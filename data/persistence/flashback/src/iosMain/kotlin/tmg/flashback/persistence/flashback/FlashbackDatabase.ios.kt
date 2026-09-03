@@ -26,8 +26,6 @@ actual class FlashbackDatabaseFactory {
 
     actual fun getSQLiteDriver(): SQLiteDriver = BundledSQLiteDriver()
 
-    actual fun getDispatcher(): CoroutineDispatcher? = Dispatchers.IO
-
     @OptIn(ExperimentalForeignApi::class)
     private fun fileDirectory(): String {
         val documentDirectory: NSURL? = NSFileManager.defaultManager.URLForDirectory(

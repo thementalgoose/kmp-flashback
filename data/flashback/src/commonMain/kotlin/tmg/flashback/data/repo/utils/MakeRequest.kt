@@ -7,14 +7,13 @@ import tmg.flashback.data.repo.model.Response
 import tmg.flashback.flashbackapi.api.api.FlashbackApi
 import tmg.flashback.flashbackapi.api.api.NotFoundException
 import tmg.flashback.infrastructure.log.logException
-
-expect val dispatcher: CoroutineDispatcher
+import tmg.flashback.infrastructure.coroutines.ioDispatcher
 
 suspend fun <T> FlashbackApi.makeRequest(
     request: suspend (FlashbackApi) -> T,
     response: suspend (T) -> Boolean
 ): Response {
-    return withContext(dispatcher) {
+    return withContext(ioDispatcher) {
         try {
             val response = request(this@makeRequest)
             val processed = response(response)

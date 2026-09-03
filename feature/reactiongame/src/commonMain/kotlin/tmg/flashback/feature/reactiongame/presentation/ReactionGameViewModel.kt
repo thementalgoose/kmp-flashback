@@ -3,7 +3,6 @@ package tmg.flashback.feature.reactiongame.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
@@ -14,15 +13,12 @@ import kotlinx.coroutines.launch
 import tmg.flashback.analytics.usecases.LogEventUseCase
 import tmg.flashback.feature.reactiongame.manager.LightsOutDelayProvider
 import tmg.flashback.infrastructure.datetime.TimeManager
-import kotlin.math.log
-
-expect val dispatcher: CoroutineDispatcher
 
 class ReactionGameViewModel(
     private val lightsOutDelayProvider: LightsOutDelayProvider,
     private val timeManager: TimeManager,
     private val logEventUseCase: LogEventUseCase,
-    private val ioDispatcher: CoroutineDispatcher = dispatcher
+    private val ioDispatcher: CoroutineDispatcher = tmg.flashback.infrastructure.coroutines.ioDispatcher
 ): ViewModel() {
 
     private companion object {
