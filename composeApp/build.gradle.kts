@@ -169,6 +169,14 @@ kotlin {
     }
 }
 
+// Ensure Kotlin JVM target matches libraries compiled with newer JVM target (fix inlining errors)
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile>().configureEach {
+    compilerOptions {
+        // Match the JVM target used by dependent bytecode (25) to allow inlining
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget("25"))
+    }
+}
+
 compose.resources {
     publicResClass = true
 }
