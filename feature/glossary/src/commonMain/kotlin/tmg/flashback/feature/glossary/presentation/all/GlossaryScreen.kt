@@ -82,7 +82,8 @@ private fun GlossaryScreen(
     SwipeRefresh(
         modifier = modifier,
         isLoading = false,
-        onRefresh = { }
+        onRefresh = { },
+        windowSizeClass = windowSizeClass
     ) {
         LazyVerticalGrid(
             columns = GridCells.Adaptive(300.dp),

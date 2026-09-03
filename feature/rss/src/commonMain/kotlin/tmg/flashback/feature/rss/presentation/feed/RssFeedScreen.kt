@@ -117,6 +117,7 @@ internal fun RSSScreen(
     SwipeRefresh(
         isLoading = (uiState as? RssFeedUiState.Data)?.isLoading == true,
         onRefresh = refresh,
+        windowSizeClass = windowSizeClass,
         modifier = Modifier.fillMaxSize(),
         content = {
             LazyColumn(

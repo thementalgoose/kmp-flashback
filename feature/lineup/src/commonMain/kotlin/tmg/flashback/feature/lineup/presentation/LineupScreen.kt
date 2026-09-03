@@ -106,6 +106,7 @@ private fun LineupScreen(
         SwipeRefresh(
             isLoading = uiState.isLoading,
             onRefresh = refresh,
+            windowSizeClass = windowSizeClass,
             content = {
                 LazyColumn(
                     state = listState,

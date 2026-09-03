@@ -121,7 +121,8 @@ internal fun DriverStandingsScreen(
 
     SwipeRefresh(
         isLoading = uiState.isLoading,
-        onRefresh = refresh
+        onRefresh = refresh,
+        windowSizeClass = windowSizeClass
     ) {
         LazyColumn(
             contentPadding = paddingValues,
