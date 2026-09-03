@@ -89,14 +89,14 @@ class FlashbackApiImpl(
     private val baseUrl: String
         get() = networkConfigRepository.baseUrl
 
-    private val includeHeaders: Boolean
-        get() = Device.platform in listOf(Platform.Android, Platform.IOS, Platform.Desktop)
+    private val excludeHeaders: Boolean
+        get() = Device.platform in listOf(Platform.WasmJs)
 
     @Throws(RuntimeException::class, IOException::class)
     private suspend inline fun <reified T> makeRequest(endpoint: String): T? {
         logInfo(">> $baseUrl/$endpoint")
         val httpResponse = httpClient.get("$baseUrl/$endpoint") {
-            if (includeHeaders) {
+            if (!excludeHeaders) {
                 headers {
                     set("Accept", "application/json")
                     set("ContentType", "application/json")
