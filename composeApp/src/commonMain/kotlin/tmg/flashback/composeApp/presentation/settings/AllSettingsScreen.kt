@@ -90,7 +90,7 @@ private fun AllSettingsScreen(
         }
         PrefHeader(string.settings_header_data)
         PrefCategory(
-            item = Settings.LayoutCategory,
+            item = Settings.LayoutHomeCategory,
             itemClicked = { navigateToSubScreen(NavSettingsLayout)  }
         )
         PrefCategory(

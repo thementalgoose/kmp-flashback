@@ -27,7 +27,7 @@ import tmg.flashback.composeApp.presentation.navigation.scene.rememberSplitPaneS
 import tmg.flashback.composeApp.presentation.settings.AllSettingsScreen
 import tmg.flashback.composeApp.presentation.settings.browser.SettingsBrowserScreen
 import tmg.flashback.composeApp.presentation.settings.darkmode.SettingsDarkModeScreen
-import tmg.flashback.composeApp.presentation.settings.layout.SettingsLayoutScreen
+import tmg.flashback.composeApp.presentation.settings.layout_home.SettingsLayoutHomeScreen
 import tmg.flashback.composeApp.presentation.settings.notifications.results.SettingsNotificationResultsScreen
 import tmg.flashback.composeApp.presentation.settings.notifications.upcoming.SettingsNotificationUpcomingScreen
 import tmg.flashback.composeApp.presentation.settings.privacy.SettingsPrivacyScreen
@@ -299,7 +299,7 @@ fun AppGraph(
                 )
             }
             entry<NavSettingsLayout>(metadata = SplitPaneScene.detailPane()) {
-                SettingsLayoutScreen(
+                SettingsLayoutHomeScreen(
                     actionUpClicked = { backStack.removeDetail() },
                     insetPadding = insetPadding,
                     showBack = !isExpanded

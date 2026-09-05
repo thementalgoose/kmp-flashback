@@ -1,4 +1,4 @@
-package tmg.flashback.composeApp.presentation.settings.layout
+package tmg.flashback.composeApp.presentation.settings.layout_home
 
 import app.cash.turbine.test
 import dev.mokkery.MockMode.autoUnit
@@ -12,15 +12,15 @@ import tmg.flashback.feature.season.repositories.CalendarRepository
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-internal class SettingsLayoutViewModelTest {
+internal class SettingsLayoutHomeViewModelTest {
 
-    private lateinit var underTest: SettingsLayoutViewModel
+    private lateinit var underTest: SettingsLayoutHomeViewModel
 
     private val mockCalendarRepository: CalendarRepository = mock(autoUnit)
     private val mockHighlightsRepository: HighlightsRepository = mock(autoUnit)
 
     private fun initUnderTest() {
-        underTest = SettingsLayoutViewModel(
+        underTest = SettingsLayoutHomeViewModel(
             calendarRepository = mockCalendarRepository,
             highlightsRepository = mockHighlightsRepository
         )

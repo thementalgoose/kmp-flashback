@@ -1,4 +1,4 @@
-package tmg.flashback.composeApp.presentation.settings.layout
+package tmg.flashback.composeApp.presentation.settings.layout_home
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -7,23 +7,23 @@ import kotlinx.coroutines.flow.update
 import tmg.flashback.feature.highlights.repositories.HighlightsRepository
 import tmg.flashback.feature.season.repositories.CalendarRepository
 
-class SettingsLayoutViewModel(
+class SettingsLayoutHomeViewModel(
     private val calendarRepository: CalendarRepository,
     private val highlightsRepository: HighlightsRepository
 ): ViewModel() {
 
-    private val _uiState: MutableStateFlow<SettingsLayoutUiState> = MutableStateFlow(
-        SettingsLayoutUiState(
+    private val _uiState: MutableStateFlow<SettingsLayoutHomeUiState> = MutableStateFlow(
+        SettingsLayoutHomeUiState(
             recentHighlights = highlightsRepository.show,
             collapseRaces = calendarRepository.collapseList,
             showEmptyWeeks = calendarRepository.emptyWeeksInCalendar,
             keepLastSeason = calendarRepository.keepUserSelectedSeason
         ))
-    val uiState: StateFlow<SettingsLayoutUiState> = _uiState
+    val uiState: StateFlow<SettingsLayoutHomeUiState> = _uiState
 
     fun refresh() {
         _uiState.update {
-            SettingsLayoutUiState(
+            SettingsLayoutHomeUiState(
                 recentHighlights = highlightsRepository.show,
                 collapseRaces = calendarRepository.collapseList,
                 showEmptyWeeks = calendarRepository.emptyWeeksInCalendar,
