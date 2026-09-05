@@ -11,7 +11,7 @@ class WeekendRepositoryImpl(
 ): WeekendRepository {
 
     override var weatherDetails: Boolean
-        get() = preferenceManager.getBoolean(keyWeekendWeatherDetails, false)
+        get() = preferenceManager.getBoolean(keyWeekendWeatherDetails, true)
         set(value) = preferenceManager.save(keyWeekendWeatherDetails, value)
 
 

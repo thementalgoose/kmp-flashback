@@ -29,7 +29,7 @@ internal fun module() = module {
     single<WeekendRepository> { WeekendRepositoryImpl(get()) }
     single<GetPreviousRaceUseCase> { GetPreviousRaceUseCaseImpl(get()) }
 
-    single<InfoDataMapper> { InfoDataMapperImpl(get()) }
+    single<InfoDataMapper> { InfoDataMapperImpl(get(), get()) }
     single<QualifyingDataMapper> { QualifyingDataMapperImpl() }
     single<RaceDataMapper> { RaceDataMapperImpl() }
     single<SprintQualifyingDataMapper> { SprintQualifyingDataMapperImpl() }

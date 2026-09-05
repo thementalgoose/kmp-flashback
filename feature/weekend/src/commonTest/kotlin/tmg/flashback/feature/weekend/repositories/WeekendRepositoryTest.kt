@@ -24,12 +24,12 @@ internal class WeekendRepositoryTest {
 
     @Test
     fun `weather temperature metrics reads value from preferences repository`() {
-        every { mockPreferenceManager.getBoolean(keyWeekendWeatherDetails, false) } returns true
+        every { mockPreferenceManager.getBoolean(keyWeekendWeatherDetails, true) } returns true
         initSUT()
 
         assertTrue(underTest.weatherDetails)
         verify {
-            mockPreferenceManager.getBoolean(keyWeekendWeatherDetails, false)
+            mockPreferenceManager.getBoolean(keyWeekendWeatherDetails, true)
         }
     }
 
@@ -39,7 +39,7 @@ internal class WeekendRepositoryTest {
 
         underTest.weatherDetails = true
         verify {
-            mockPreferenceManager.save(keyWeekendWeatherDetails, false)
+            mockPreferenceManager.save(keyWeekendWeatherDetails, true)
         }
     }
 

@@ -28,7 +28,8 @@ data class InfoModel(
     val wikipediaUrl: String?,
     val days: List<Pair<LocalDate, List<Pair<Schedule, Boolean>>>>,
     val temperatureMetric: Boolean,
-    val windspeedMetric: Boolean
+    val windspeedMetric: Boolean,
+    val showWeatherDetails: Boolean,
 ) {
     val isUpcoming by lazy {
         LocalDate.now() <= date
@@ -99,5 +100,6 @@ fun InfoModel.Companion.preview(
         aerialUrl = null,
         temperatureMetric = true,
         windspeedMetric = true,
+        showWeatherDetails = true
     )
 }
