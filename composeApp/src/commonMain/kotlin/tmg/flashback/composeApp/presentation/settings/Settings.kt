@@ -8,9 +8,9 @@ import flashback.composeapp.generated.resources.ic_settings_home
 import flashback.composeapp.generated.resources.ic_settings_notifications_results
 import flashback.composeapp.generated.resources.ic_settings_notifications_upcoming
 import flashback.composeapp.generated.resources.ic_settings_privacy
+import flashback.composeapp.generated.resources.ic_settings_race
 import flashback.composeapp.generated.resources.ic_settings_rss_configure
 import flashback.composeapp.generated.resources.ic_settings_theme
-import flashback.composeapp.generated.resources.ic_settings_weather
 import flashback.composeapp.generated.resources.ic_settings_web
 import flashback.composeapp.generated.resources.ic_settings_widgets
 import flashback.presentation.localisation.generated.resources.Res.string
@@ -202,7 +202,7 @@ object Settings {
         _id = "layoutRace",
         title = string.settings_section_race_title,
         subtitle = string.settings_section_race_description,
-        icon = Res.drawable.ic_settings_home
+        icon = Res.drawable.ic_settings_race
     )
     object LayoutRace {
         fun Timezone(timezone: String) = Setting.Pref(
@@ -216,16 +216,8 @@ object Settings {
             _id = "weather_details",
             title = string.settings_pref_weather_details_title,
             subtitle = string.settings_pref_weather_details_description,
+            isBeta = true
         )
-    }
-
-    val WeatherCategory = Setting.Category(
-        _id = "weather",
-        title = string.settings_section_weather_title,
-        subtitle = string.settings_section_weather_description,
-        icon = Res.drawable.ic_settings_weather
-    )
-    object Weather {
         val TemperatureUnit = Setting.Pref(
             _id = "weather_temp",
             title = string.settings_pref_temperature_unit_title,

@@ -34,6 +34,8 @@ fun SettingsLayoutRaceScreen(
         showBack = showBack,
         uiState = uiState.value,
         updateWeatherPref = viewModel::updateWeatherPref,
+        temperatureMetricEnabled = viewModel::updateTemperatureMetric,
+        windspeedMetricEnabled = viewModel::updateWindspeedMetric
     )
 }
 
@@ -44,6 +46,8 @@ private fun SettingsLayoutRaceScreen(
     insetPadding: PaddingValues,
     actionUpClicked: () -> Unit,
     updateWeatherPref: (Boolean) -> Unit,
+    temperatureMetricEnabled: (Boolean) -> Unit,
+    windspeedMetricEnabled: (Boolean) -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -57,13 +61,23 @@ private fun SettingsLayoutRaceScreen(
             )
         }
         PrefLink(
-            item = Settings.LayoutHome.Timezone(TimeZone.currentSystemDefault().id),
+            item = Settings.LayoutRace.Timezone(TimeZone.currentSystemDefault().id),
             itemClicked = { },
         )
         PrefSwitch(
             item = Settings.LayoutRace.WeatherDetails,
             isChecked = uiState.weatherDetails,
             itemClicked = { updateWeatherPref(!uiState.weatherDetails) },
+        )
+        PrefSwitch(
+            item = Settings.LayoutRace.TemperatureUnit,
+            isChecked = uiState.temperatureMetrics,
+            itemClicked = { temperatureMetricEnabled(!uiState.temperatureMetrics) },
+        )
+        PrefSwitch(
+            item = Settings.LayoutRace.WindSpeed,
+            isChecked = uiState.windSpeedMetrics,
+            itemClicked = { windspeedMetricEnabled(!uiState.windSpeedMetrics) },
         )
     }
 }

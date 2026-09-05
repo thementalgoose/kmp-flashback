@@ -59,7 +59,6 @@ import tmg.flashback.composeApp.presentation.settings.notifications.results.Sett
 import tmg.flashback.composeApp.presentation.settings.notifications.upcoming.SettingsNotificationUpcomingViewModel
 import tmg.flashback.composeApp.presentation.settings.privacy.SettingsPrivacyViewModel
 import tmg.flashback.composeApp.presentation.settings.theme.SettingsThemeViewModel
-import tmg.flashback.composeApp.presentation.settings.weather.SettingsWeatherViewModel
 import tmg.flashback.composeApp.presentation.settings.widgets.SettingsWidgetsViewModel
 import tmg.flashback.composeApp.presentation.sync.SyncViewModel
 import tmg.flashback.composeApp.repositories.NavRepository
@@ -147,8 +146,7 @@ internal fun module() = module {
     viewModel { SettingsDarkModeViewModel(get(), get()) }
     viewModel { SettingsThemeViewModel(get(), get(), get()) }
     viewModel { SettingsLayoutHomeViewModel(get(), get()) }
-    viewModel { SettingsLayoutRaceViewModel(get()) }
-    viewModel { SettingsWeatherViewModel(get()) }
+    viewModel { SettingsLayoutRaceViewModel(get(), get()) }
     viewModel { SettingsBrowserViewModel(get()) }
     viewModel { SettingsAboutViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { SettingsPrivacyViewModel(get(), get(), get()) }

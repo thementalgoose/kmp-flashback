@@ -81,10 +81,10 @@ data object NavSettingsDarkMode: NavKey
 data object NavSettingsTheme: NavKey
 
 @Serializable
-data object NavSettingsLayout: NavKey
+data object NavSettingsLayoutHome: NavKey
 
 @Serializable
-data object NavSettingsWeather: NavKey
+data object NavSettingsLayoutRace: NavKey
 
 @Serializable
 data object NavSettingsRssConfigure: NavKey
