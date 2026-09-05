@@ -131,8 +131,11 @@ internal fun Schedule(
                                     windspeedMetric = model.windspeedMetric,
                                     showNotificationBell = isNotificationSet,
                                     modifier = Modifier.clickable(
-                                        enabled = !model.showWeatherDetails,
-                                        onClick = { showWeatherDetails.value = !showWeatherDetails.value }
+                                        onClick = {
+                                            if (!model.showWeatherDetails) {
+                                                showWeatherDetails.value = !showWeatherDetails.value
+                                            }
+                                        }
                                     )
                                 )
                             }
