@@ -122,7 +122,7 @@ internal fun Schedule(
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
                         ) {
-                            list.forEach { (schedule, isNotificationSet) ->
+                            for ((schedule, isNotificationSet) in list) {
                                 EventItem(
                                     item = schedule,
                                     showWeatherDetails = showWeatherDetails.value,
