@@ -15,3 +15,7 @@ jobs:
   ui-tests:
     uses: ./.github/workflows/job-android-uitest.yml
     secrets: inherit
+
+  deploy-wasmjs:
+    uses: ./.github/workflows/job-wasmjs-deploy.yml
+    secrets: inherit
