@@ -27,12 +27,12 @@ import tmg.flashback.composeApp.presentation.navigation.scene.rememberSplitPaneS
 import tmg.flashback.composeApp.presentation.settings.AllSettingsScreen
 import tmg.flashback.composeApp.presentation.settings.browser.SettingsBrowserScreen
 import tmg.flashback.composeApp.presentation.settings.darkmode.SettingsDarkModeScreen
-import tmg.flashback.composeApp.presentation.settings.layout.SettingsLayoutScreen
+import tmg.flashback.composeApp.presentation.settings.layout_home.SettingsLayoutHomeScreen
+import tmg.flashback.composeApp.presentation.settings.layout_race.SettingsLayoutRaceScreen
 import tmg.flashback.composeApp.presentation.settings.notifications.results.SettingsNotificationResultsScreen
 import tmg.flashback.composeApp.presentation.settings.notifications.upcoming.SettingsNotificationUpcomingScreen
 import tmg.flashback.composeApp.presentation.settings.privacy.SettingsPrivacyScreen
 import tmg.flashback.composeApp.presentation.settings.theme.SettingsThemeScreen
-import tmg.flashback.composeApp.presentation.settings.weather.SettingsWeatherScreen
 import tmg.flashback.composeApp.presentation.settings.widgets.SettingsWidgetScreen
 import tmg.flashback.feature.about.presentation.AboutScreen
 import tmg.flashback.feature.circuits.presentation.all.AllCircuitsScreen
@@ -67,13 +67,13 @@ import tmg.flashback.navigation.NavRss
 import tmg.flashback.navigation.NavSettings
 import tmg.flashback.navigation.NavSettingsDarkMode
 import tmg.flashback.navigation.NavSettingsInAppBrowser
-import tmg.flashback.navigation.NavSettingsLayout
+import tmg.flashback.navigation.NavSettingsLayoutHome
 import tmg.flashback.navigation.NavSettingsNotificationResults
 import tmg.flashback.navigation.NavSettingsNotificationUpcoming
 import tmg.flashback.navigation.NavSettingsPrivacy
 import tmg.flashback.navigation.NavSettingsRssConfigure
 import tmg.flashback.navigation.NavSettingsTheme
-import tmg.flashback.navigation.NavSettingsWeather
+import tmg.flashback.navigation.NavSettingsLayoutRace
 import tmg.flashback.navigation.NavSettingsWidgets
 import tmg.flashback.navigation.NavTeam
 import tmg.flashback.navigation.NavTeamStandings
@@ -298,15 +298,15 @@ fun AppGraph(
                     showBack = !isExpanded
                 )
             }
-            entry<NavSettingsLayout>(metadata = SplitPaneScene.detailPane()) {
-                SettingsLayoutScreen(
+            entry<NavSettingsLayoutHome>(metadata = SplitPaneScene.detailPane()) {
+                SettingsLayoutHomeScreen(
                     actionUpClicked = { backStack.removeDetail() },
                     insetPadding = insetPadding,
                     showBack = !isExpanded
                 )
             }
-            entry<NavSettingsWeather>(metadata = SplitPaneScene.detailPane()) {
-                SettingsWeatherScreen(
+            entry<NavSettingsLayoutRace>(metadata = SplitPaneScene.detailPane()) {
+                SettingsLayoutRaceScreen(
                     actionUpClicked = { backStack.removeDetail() },
                     insetPadding = insetPadding,
                     showBack = !isExpanded

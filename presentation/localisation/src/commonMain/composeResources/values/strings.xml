@@ -274,7 +274,7 @@
     <string name="settings_search">Search settings</string>
 
     <string name="settings_header_appearance">Appearance</string>
-    <string name="settings_header_data">Data</string>
+    <string name="settings_header_data">Layout</string>
     <string name="settings_header_rss_feed">RSS Feed</string>
     <string name="settings_header_web_browser">Web Browser</string>
     <string name="settings_header_notifications">Notifications</string>
@@ -296,8 +296,8 @@
     <string name="settings_pref_wind_speed_unit_title">Wind speed</string>
     <string name="settings_pref_wind_speed_unit_description">Show the wind speed in metric units (kph)</string>
 
-    <string name="settings_section_home_title">Calendar</string>
-    <string name="settings_section_home_description">Customise the calendar screen</string>
+    <string name="settings_section_home_title">Home</string>
+    <string name="settings_section_home_description">Customise the home screen</string>
     <string name="settings_header_home">Home</string>
     <string name="settings_pref_timezone_title">Timezone</string>
     <string name="settings_pref_timezone_description">All event times are shown in your device timezone (%1$s)</string>
@@ -309,6 +309,11 @@
     <string name="settings_pref_recent_highlights_description">Show the recent highlights banner on the home page if connected to the internet. This usually contains links to significant stories within the past week or so</string>
     <string name="settings_pref_remember_season_change_title">Keep last season</string>
     <string name="settings_pref_remember_season_change_description">Resume from the season that was last being viewed</string>
+
+    <string name="settings_section_race_title">Race</string>
+    <string name="settings_section_race_description">Customise the race screen</string>
+    <string name="settings_pref_weather_details_title">Show weather details</string>
+    <string name="settings_pref_weather_details_description">Show the weather rain, temp and wind by default on the race details screen. You can tap the cards to show this at any time.</string>
 
     <string name="settings_section_rss_configure_title">Configure</string>
     <string name="settings_section_rss_configure_description">Setup RSS sources or customise appearance</string>

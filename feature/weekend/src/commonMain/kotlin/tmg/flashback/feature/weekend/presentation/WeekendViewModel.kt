@@ -31,7 +31,6 @@ import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.QualifyingType
 import tmg.flashback.infrastructure.log.logDebug
-import tmg.flashback.infrastructure.log.logInfo
 
 class WeekendViewModel(
     private val racesRepository: RaceRepository,
@@ -101,7 +100,7 @@ class WeekendViewModel(
                 qualifyingSort = qualifyingSort,
                 raceResults = raceDataMapper(race, resultType),
                 sprintQualifyingResults = sprintQualifyingDataMapper(race),
-                sprintRaceResults = sprintRaceDataMapper(race, resultType),
+                sprintRaceResults = sprintRaceDataMapper(race, resultType)
             )
         }
         .stateIn(viewModelScope, SharingStarted.Lazily, WeekendUiState.Initial)

@@ -24,13 +24,13 @@ import tmg.flashback.navigation.NavAbout
 import tmg.flashback.navigation.NavPrivacyPolicy
 import tmg.flashback.navigation.NavSettingsDarkMode
 import tmg.flashback.navigation.NavSettingsInAppBrowser
-import tmg.flashback.navigation.NavSettingsLayout
+import tmg.flashback.navigation.NavSettingsLayoutHome
 import tmg.flashback.navigation.NavSettingsNotificationResults
 import tmg.flashback.navigation.NavSettingsNotificationUpcoming
 import tmg.flashback.navigation.NavSettingsPrivacy
 import tmg.flashback.navigation.NavSettingsRssConfigure
 import tmg.flashback.navigation.NavSettingsTheme
-import tmg.flashback.navigation.NavSettingsWeather
+import tmg.flashback.navigation.NavSettingsLayoutRace
 import tmg.flashback.navigation.NavSettingsWidgets
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
@@ -90,12 +90,12 @@ private fun AllSettingsScreen(
         }
         PrefHeader(string.settings_header_data)
         PrefCategory(
-            item = Settings.LayoutCategory,
-            itemClicked = { navigateToSubScreen(NavSettingsLayout)  }
+            item = Settings.LayoutHomeCategory,
+            itemClicked = { navigateToSubScreen(NavSettingsLayoutHome)  }
         )
         PrefCategory(
-            item = Settings.WeatherCategory,
-            itemClicked = { navigateToSubScreen(NavSettingsWeather)  }
+            item = Settings.LayoutRaceCategory,
+            itemClicked = { navigateToSubScreen(NavSettingsLayoutRace)  }
         )
         if (uiState.isRssEnabled) {
             PrefHeader(string.settings_header_rss_feed)

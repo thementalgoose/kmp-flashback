@@ -1,4 +1,4 @@
-package tmg.flashback.composeApp.presentation.settings.layout
+package tmg.flashback.composeApp.presentation.settings.layout_home
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import flashback.presentation.localisation.generated.resources.Res.string
-import flashback.presentation.localisation.generated.resources.settings_home
 import flashback.presentation.localisation.generated.resources.settings_section_home_title
 import kotlinx.datetime.TimeZone
 import org.jetbrains.compose.resources.stringResource
@@ -21,16 +20,16 @@ import tmg.flashback.ui.components.header.HeaderAction
 
 
 @Composable
-fun SettingsLayoutScreen(
+fun SettingsLayoutHomeScreen(
     actionUpClicked: () -> Unit,
     insetPadding: PaddingValues,
     showBack: Boolean,
-    viewModel: SettingsLayoutViewModel = koinViewModel(),
+    viewModel: SettingsLayoutHomeViewModel = koinViewModel(),
 ) {
-    ScreenView(screenName = "Settings - Layout")
+    ScreenView(screenName = "Settings - Layout Home")
 
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
-    SettingsLayoutScreen(
+    SettingsLayoutHomeScreen(
         actionUpClicked = actionUpClicked,
         insetPadding = insetPadding,
         showBack = showBack,
@@ -43,8 +42,8 @@ fun SettingsLayoutScreen(
 }
 
 @Composable
-private fun SettingsLayoutScreen(
-    uiState: SettingsLayoutUiState,
+private fun SettingsLayoutHomeScreen(
+    uiState: SettingsLayoutHomeUiState,
     showBack: Boolean,
     insetPadding: PaddingValues,
     actionUpClicked: () -> Unit,
@@ -65,26 +64,26 @@ private fun SettingsLayoutScreen(
             )
         }
         PrefLink(
-            item = Settings.Layout.Timezone(TimeZone.currentSystemDefault().id),
+            item = Settings.LayoutHome.Timezone(TimeZone.currentSystemDefault().id),
             itemClicked = { },
         )
         PrefSwitch(
-            item = Settings.Layout.RecentHighlights,
+            item = Settings.LayoutHome.RecentHighlights,
             isChecked = uiState.recentHighlights,
             itemClicked = { updateHighlights(!uiState.recentHighlights) },
         )
         PrefSwitch(
-            item = Settings.Layout.CollapsibleRaces,
+            item = Settings.LayoutHome.CollapsibleRaces,
             isChecked = uiState.collapseRaces,
             itemClicked = { updateCollapseRaces(!uiState.collapseRaces) },
         )
         PrefSwitch(
-            item = Settings.Layout.EmptyWeeks,
+            item = Settings.LayoutHome.EmptyWeeks,
             isChecked = uiState.showEmptyWeeks,
             itemClicked = { updateShowEmptyWeeks(!uiState.showEmptyWeeks) },
         )
         PrefSwitch(
-            item = Settings.Layout.KeepSeason,
+            item = Settings.LayoutHome.KeepSeason,
             isChecked = uiState.keepLastSeason,
             itemClicked = { updateKeepLastSeason(!uiState.keepLastSeason) },
         )
