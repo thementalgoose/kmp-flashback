@@ -1,0 +1,40 @@
+name: Deploy wasmJs build
+
+on:
+  workflow_call:
+
+jobs:
+  firebase_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      # Setup Java 21
+      - uses: actions/setup-java@v6
+        with:
+          distribution: 'zulu'
+          java-version: '21'
+    
+      # Caching gradle
+      - uses: actions/cache@v6
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: wasmjs-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/*.toml*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-wasmjs
+    
+      # Build
+      - name: Build
+        run: ./gradlew :composeApp:wasmJsBrowserDistribution
+
+      # Deploy
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_F1STATS_SAND }}
+          projectId: f1stats-sand
