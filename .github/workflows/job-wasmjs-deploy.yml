@@ -6,6 +6,7 @@ on:
 jobs:
   firebase_deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 18
     steps:
       # Checkout
       - uses: actions/checkout@v7
