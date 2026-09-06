@@ -16,7 +16,7 @@ jobs:
       # Check the deps files
       - name: Check dependency files
         id: filter
-        uses: dorny/paths-filter@v3
+        uses: dorny/paths-filter@v4
         with:
           filters: |
             changed:
