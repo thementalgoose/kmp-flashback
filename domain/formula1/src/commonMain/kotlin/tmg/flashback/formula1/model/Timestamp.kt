@@ -59,7 +59,6 @@ data class Timestamp(
                 now > expiredBound -> TimestampState.EXPIRED
                 else -> TimestampState.UPCOMING
             }
-            println("> $now\n> $buildUpBound\n> $liveBound\n> $expiredBound\n <<<< $state")
             return state
         }
 
