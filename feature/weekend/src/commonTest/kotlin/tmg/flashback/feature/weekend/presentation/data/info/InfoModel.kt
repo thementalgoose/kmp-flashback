@@ -21,7 +21,8 @@ fun InfoModel.Companion.model(
     wikipediaUrl: String? = "wikiUrl",
     cancelled: Boolean = false,
     temperatureMetric: Boolean = true,
-    windspeedMetric: Boolean = true
+    windspeedMetric: Boolean = true,
+    weatherDetails: Boolean = true,
 ): InfoModel = InfoModel(
     season = season,
     round = round,
@@ -41,5 +42,6 @@ fun InfoModel.Companion.model(
     cancelled = cancelled,
     aerialUrl = aerialUrl,
     temperatureMetric = temperatureMetric,
-    windspeedMetric = windspeedMetric
+    windspeedMetric = windspeedMetric,
+    showWeatherDetails = weatherDetails
 )
