@@ -9,6 +9,7 @@ name: Pull Request
       - '**/*.kt'
       - '**/*.kts'
       - '**/*.xml'
+      - '**/wasmJsMain/**'
       - '**/pull-request.yml'
 jobs:
   unit-tests:
