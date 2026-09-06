@@ -3,6 +3,13 @@ name: Pull Request
   pull_request:
     branches:
       - main
+    paths:
+      - '**/*.gradle'
+      - '**/*.toml'
+      - '**/*.kt'
+      - '**/*.kts'
+      - '**/*.xml'
+      - '**/pull-request.yml'
 jobs:
   unit-tests:
     uses: ./.github/workflows/job-unit-tests.yml
