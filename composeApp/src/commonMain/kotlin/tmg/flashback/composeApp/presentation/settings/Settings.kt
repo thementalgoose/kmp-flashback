@@ -8,9 +8,9 @@ import flashback.composeapp.generated.resources.ic_settings_home
 import flashback.composeapp.generated.resources.ic_settings_notifications_results
 import flashback.composeapp.generated.resources.ic_settings_notifications_upcoming
 import flashback.composeapp.generated.resources.ic_settings_privacy
+import flashback.composeapp.generated.resources.ic_settings_race
 import flashback.composeapp.generated.resources.ic_settings_rss_configure
 import flashback.composeapp.generated.resources.ic_settings_theme
-import flashback.composeapp.generated.resources.ic_settings_weather
 import flashback.composeapp.generated.resources.ic_settings_web
 import flashback.composeapp.generated.resources.ic_settings_widgets
 import flashback.presentation.localisation.generated.resources.Res.string
@@ -45,10 +45,10 @@ import flashback.presentation.localisation.generated.resources.settings_pref_res
 import flashback.presentation.localisation.generated.resources.settings_pref_reset_title
 import flashback.presentation.localisation.generated.resources.settings_pref_schedule_exact_alarm_description
 import flashback.presentation.localisation.generated.resources.settings_pref_schedule_exact_alarm_title
-import flashback.presentation.localisation.generated.resources.settings_pref_shake_to_report_description
-import flashback.presentation.localisation.generated.resources.settings_pref_shake_to_report_title
 import flashback.presentation.localisation.generated.resources.settings_pref_temperature_unit_description
 import flashback.presentation.localisation.generated.resources.settings_pref_temperature_unit_title
+import flashback.presentation.localisation.generated.resources.settings_pref_weather_details_description
+import flashback.presentation.localisation.generated.resources.settings_pref_weather_details_title
 import flashback.presentation.localisation.generated.resources.settings_pref_wind_speed_unit_description
 import flashback.presentation.localisation.generated.resources.settings_pref_wind_speed_unit_title
 import flashback.presentation.localisation.generated.resources.settings_section_about_description
@@ -63,6 +63,8 @@ import flashback.presentation.localisation.generated.resources.settings_section_
 import flashback.presentation.localisation.generated.resources.settings_section_notifications_upcoming_title
 import flashback.presentation.localisation.generated.resources.settings_section_privacy_description
 import flashback.presentation.localisation.generated.resources.settings_section_privacy_title
+import flashback.presentation.localisation.generated.resources.settings_section_race_description
+import flashback.presentation.localisation.generated.resources.settings_section_race_title
 import flashback.presentation.localisation.generated.resources.settings_section_refresh_widget_description
 import flashback.presentation.localisation.generated.resources.settings_section_refresh_widget_title
 import flashback.presentation.localisation.generated.resources.settings_section_rss_configure_description
@@ -160,13 +162,13 @@ object Settings {
         )
     }
 
-    val LayoutCategory = Setting.Category(
-        _id = "layout",
+    val LayoutHomeCategory = Setting.Category(
+        _id = "layoutHome",
         title = string.settings_section_home_title,
         subtitle = string.settings_section_home_description,
         icon = Res.drawable.ic_settings_home
     )
-    object Layout {
+    object LayoutHome {
         fun Timezone(timezone: String) = Setting.Pref(
             _id = "timezone",
             title = string.settings_pref_timezone_title,
@@ -196,13 +198,26 @@ object Settings {
         )
     }
 
-    val WeatherCategory = Setting.Category(
-        _id = "weather",
-        title = string.settings_section_weather_title,
-        subtitle = string.settings_section_weather_description,
-        icon = Res.drawable.ic_settings_weather
+    val LayoutRaceCategory = Setting.Category(
+        _id = "layoutRace",
+        title = string.settings_section_race_title,
+        subtitle = string.settings_section_race_description,
+        icon = Res.drawable.ic_settings_race
     )
-    object Weather {
+    object LayoutRace {
+        fun Timezone(timezone: String) = Setting.Pref(
+            _id = "timezone",
+            title = string.settings_pref_timezone_title,
+            subtitleResolver = @Composable {
+                stringResource(string.settings_pref_timezone_description, timezone)
+            }
+        )
+        val WeatherDetails = Setting.Pref(
+            _id = "weather_details",
+            title = string.settings_pref_weather_details_title,
+            subtitle = string.settings_pref_weather_details_description,
+            isBeta = true
+        )
         val TemperatureUnit = Setting.Pref(
             _id = "weather_temp",
             title = string.settings_pref_temperature_unit_title,

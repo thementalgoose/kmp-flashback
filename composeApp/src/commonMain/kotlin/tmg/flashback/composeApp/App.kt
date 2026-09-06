@@ -27,7 +27,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
@@ -35,7 +34,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
-import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.feature_banner_soft_upgrade
 import flashback.presentation.localisation.generated.resources.feature_banner_soft_upgrade_prompt
@@ -59,10 +57,8 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationTheme
 import tmg.flashback.ui.components.AppScaffold
 import tmg.flashback.ui.navigation.FloatingNavigationBar
-import tmg.flashback.ui.navigation.NavigationBar
 import tmg.flashback.ui.navigation.OverlappingPanelsValue
 import tmg.flashback.ui.navigation.appBarHeight
-import tmg.flashback.ui.navigation.appBarHeightWhenVertical
 import tmg.flashback.ui.navigation.rememberOverlappingPanelsState
 import tmg.flashback.ui.toasts.ToastManager
 
@@ -140,7 +136,7 @@ fun App() {
                 )
             },
             bottomBar = {
-                if (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
+                if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
                     val screen = appNavigationUiState.value.screen
                     val items = listOf(
                         MenuItem.Calendar.toNavigationItem(screen == NavCalendar),

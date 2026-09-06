@@ -20,6 +20,8 @@ import tmg.flashback.eastereggs.di.easterEggsModule
 import tmg.flashback.feature.about.di.featureAboutModule
 import tmg.flashback.feature.circuits.di.featureCircuitsModule
 import tmg.flashback.feature.constructors.di.featureConstructorsModule
+import tmg.flashback.feature.glossary.di.featureGlossaryModule
+import tmg.flashback.feature.lineup.di.featureLineupModule
 import tmg.flashback.feature.drivers.di.featureDriversModule
 import tmg.flashback.feature.maintenance.di.featureMaintenanceModule
 import tmg.flashback.feature.notifications.di.featureNotificationsModule
@@ -51,12 +53,12 @@ import tmg.flashback.composeApp.presentation.settings.AllSettingsViewModel
 import tmg.flashback.composeApp.presentation.settings.about.SettingsAboutViewModel
 import tmg.flashback.composeApp.presentation.settings.browser.SettingsBrowserViewModel
 import tmg.flashback.composeApp.presentation.settings.darkmode.SettingsDarkModeViewModel
-import tmg.flashback.composeApp.presentation.settings.layout.SettingsLayoutViewModel
+import tmg.flashback.composeApp.presentation.settings.layout_home.SettingsLayoutHomeViewModel
+import tmg.flashback.composeApp.presentation.settings.layout_race.SettingsLayoutRaceViewModel
 import tmg.flashback.composeApp.presentation.settings.notifications.results.SettingsNotificationResultsViewModel
 import tmg.flashback.composeApp.presentation.settings.notifications.upcoming.SettingsNotificationUpcomingViewModel
 import tmg.flashback.composeApp.presentation.settings.privacy.SettingsPrivacyViewModel
 import tmg.flashback.composeApp.presentation.settings.theme.SettingsThemeViewModel
-import tmg.flashback.composeApp.presentation.settings.weather.SettingsWeatherViewModel
 import tmg.flashback.composeApp.presentation.settings.widgets.SettingsWidgetsViewModel
 import tmg.flashback.composeApp.presentation.sync.SyncViewModel
 import tmg.flashback.composeApp.repositories.NavRepository
@@ -101,7 +103,9 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
         modules(featureCircuitsModule)
         modules(featureConstructorsModule)
         modules(featureDriversModule)
+        modules(featureGlossaryModule)
         modules(featureHighlightsModule)
+        modules(featureLineupModule)
         modules(featureMaintenanceModule)
         modules(featureNotificationsModule)
         modules(featurePrivacyPolicyModule)
@@ -141,8 +145,8 @@ internal fun module() = module {
     viewModel { AllSettingsViewModel(get(), get(), get()) }
     viewModel { SettingsDarkModeViewModel(get(), get()) }
     viewModel { SettingsThemeViewModel(get(), get(), get()) }
-    viewModel { SettingsLayoutViewModel(get(), get()) }
-    viewModel { SettingsWeatherViewModel(get()) }
+    viewModel { SettingsLayoutHomeViewModel(get(), get()) }
+    viewModel { SettingsLayoutRaceViewModel(get(), get()) }
     viewModel { SettingsBrowserViewModel(get()) }
     viewModel { SettingsAboutViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { SettingsPrivacyViewModel(get(), get(), get()) }

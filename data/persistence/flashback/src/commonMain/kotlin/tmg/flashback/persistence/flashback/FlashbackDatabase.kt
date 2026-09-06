@@ -1,13 +1,17 @@
 package tmg.flashback.persistence.flashback
 
-import androidx.room.ConstructedBy
-import androidx.room.Database
-import androidx.room.RoomDatabase
-import androidx.room.RoomDatabaseConstructor
+import androidx.room3.ConstructedBy
+import androidx.room3.Database
+import androidx.room3.RoomDatabase
+import androidx.room3.RoomDatabaseConstructor
+import androidx.sqlite.SQLiteDriver
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import tmg.flashback.persistence.flashback.dao.CircuitDao
 import tmg.flashback.persistence.flashback.dao.ConstructorDao
 import tmg.flashback.persistence.flashback.dao.DriverDao
 import tmg.flashback.persistence.flashback.dao.EventsDao
+import tmg.flashback.persistence.flashback.dao.LineupDao
 import tmg.flashback.persistence.flashback.dao.OverviewDao
 import tmg.flashback.persistence.flashback.dao.ScheduleDao
 import tmg.flashback.persistence.flashback.dao.SeasonDao
@@ -21,6 +25,7 @@ import tmg.flashback.persistence.flashback.models.constructors.ConstructorSeason
 import tmg.flashback.persistence.flashback.models.drivers.Driver
 import tmg.flashback.persistence.flashback.models.drivers.DriverSeason
 import tmg.flashback.persistence.flashback.models.drivers.DriverSeasonRace
+import tmg.flashback.persistence.flashback.models.lineup.Lineup
 import tmg.flashback.persistence.flashback.models.overview.Event
 import tmg.flashback.persistence.flashback.models.overview.Overview
 import tmg.flashback.persistence.flashback.models.overview.Schedule
@@ -37,11 +42,12 @@ import tmg.flashback.persistence.flashback.models.standings.DriverStandingConstr
 internal val DB_NAME = "flashback-database"
 
 expect class FlashbackDatabaseFactory {
-    fun createDatabase(): FlashbackDatabase
+    fun createDatabase(): RoomDatabase.Builder<FlashbackDatabase>
+    fun getSQLiteDriver(): SQLiteDriver
 }
 
 @Database(
-    version = 13,
+    version = 14,
     entities = [
         Circuit::class,
         CircuitRound::class,
@@ -53,6 +59,7 @@ expect class FlashbackDatabaseFactory {
         DriverSeason::class,
         DriverSeasonRace::class,
         Overview::class,
+        Lineup::class,
         Schedule::class,
         RaceInfo::class,
         RaceResult::class,
@@ -77,6 +84,7 @@ abstract class FlashbackDatabase: RoomDatabase() {
     abstract fun seasonStandingDao(): SeasonStandingsDao
     abstract fun scheduleDao(): ScheduleDao
     abstract fun eventsDao(): EventsDao
+    abstract fun lineupDao(): LineupDao
 }
 
 // The Room compiler generates the `actual` implementations.

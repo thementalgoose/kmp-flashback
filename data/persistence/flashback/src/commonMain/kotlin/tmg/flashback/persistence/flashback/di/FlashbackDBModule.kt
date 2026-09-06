@@ -1,8 +1,11 @@
 package tmg.flashback.persistence.flashback.di
 
+import kotlinx.coroutines.Dispatchers
 import org.koin.dsl.module
 import tmg.flashback.persistence.flashback.FlashbackDatabase
 import tmg.flashback.persistence.flashback.FlashbackDatabaseFactory
+import tmg.flashback.persistence.flashback.Migrations
+import tmg.flashback.infrastructure.coroutines.ioDispatcher
 
 val dataPersistenceFlashbackModule = listOf(
     platformModule(),
@@ -11,6 +14,17 @@ val dataPersistenceFlashbackModule = listOf(
 
 internal fun module() = module {
     single<FlashbackDatabase> {
-        get<FlashbackDatabaseFactory>().createDatabase()
+
+        val migrationsArray = Migrations.entries
+            .map { it.migration }
+            .toTypedArray()
+        val factory = get<FlashbackDatabaseFactory>()
+
+        return@single factory
+            .createDatabase()
+            .setDriver(factory.getSQLiteDriver())
+            .setQueryCoroutineContext(ioDispatcher)
+            .addMigrations(*migrationsArray)
+            .build()
     }
 }

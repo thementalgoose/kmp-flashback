@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_subtitle">Statistiche di F1</string>
 
     <!-- Splash -->
     <string name="splash_title">Ciao</string>
@@ -26,12 +27,15 @@
     <!-- Navigation -->
     <string name="nav_drivers">Piloti</string>
     <string name="nav_constructors">Team</string>
+    <string name="nav_driver_comparison">Confrontare</string>
     <string name="nav_calendar">Calendario</string>
     <string name="nav_schedule">Programma</string>
     <string name="nav_seasons">Stagioni</string>
     <string name="nav_settings">Impostazioni</string>
     <string name="nav_search">Cerca</string>
+    <string name="nav_lineup">Schieramento</string>
     <string name="nav_rss">RSS</string>
+    <string name="nav_glossary">Glossario</string>
     <string name="nav_reaction_game">Gioco di reazion</string>
     <string name="nav_contact">Contatti</string>
     <string name="nav_xr">XR</string>
@@ -607,4 +611,7 @@
     <string name="easter_egg_menu_halloween">Buon Halloween!</string>
     <string name="easter_egg_menu_diwali">Buon Diwali!</string>
     <string name="easter_egg_menu_christmas">Buon Natale!</string>
+
+    <string name="driver_lineup_title">Schieramento piloti</string>
+    <string name="driver_lineup_subtitle">Scopri i piloti che hanno un contratto confermato per le prossime stagioni con le scuderie di Formula 1.</string>
 </resources>

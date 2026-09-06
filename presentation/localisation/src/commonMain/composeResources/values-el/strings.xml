@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_subtitle">Στατιστικά στοιχεία F1</string>
 
     <!-- Splash -->
     <string name="splash_title">Γεια</string>
@@ -28,13 +29,16 @@
     <!-- Navigation -->
     <string name="nav_drivers">Οδηγοί</string>
     <string name="nav_constructors">Ομάδες</string>
+    <string name="nav_driver_comparison">Συγκρίνω</string>
     <string name="nav_calendar">Ημερολόγιο</string>
     <string name="nav_schedule">Πρόγραμμα</string>
     <string name="nav_seasons">Σεζόν</string>
     <string name="nav_settings">Ρυθμίσεις</string>
     <string name="nav_search">Αναζήτηση</string>
+    <string name="nav_lineup">Σύνθεση</string>
     <string name="nav_rss">RSS</string>
     <string name="nav_reaction_game">Παιχνίδι Αντίδρασης</string>
+    <string name="nav_glossary">Γλωσσάριο</string>
     <string name="nav_contact">Επικοινωνία</string>
     <string name="nav_xr">XR</string>
     <string name="nav_details">Λεπτομέρειες</string>
@@ -667,4 +671,6 @@
     <string name="reaction_tier_poor">Αργός</string>
     <string name="reaction_tier_poor_desc">Ο χρόνος αντίδρασής σας είναι πιο αργός από τον μέσο όρο. Ο μέσος χρόνος αντίδρασης είναι περίπου 250ms, φροντίστε να εξασκηθείτε περισσότερο πριν ξεκινήσετε την καριέρα σας ως οδηγός F1</string>
 
+    <string name="driver_lineup_title">Σύνθεση οδηγών</string>
+    <string name="driver_lineup_subtitle">Δείτε τους οδηγούς που έχουν επιβεβαιωμένα συμβόλαια για τις μελλοντικές σεζόν στις ομάδες της Formula 1</string>
 </resources>

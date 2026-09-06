@@ -8,6 +8,8 @@ import tmg.flashback.composeApp.presentation.MenuItem.Calendar
 import tmg.flashback.composeApp.presentation.MenuItem.Circuits
 import tmg.flashback.composeApp.presentation.MenuItem.Contact
 import tmg.flashback.composeApp.presentation.MenuItem.DriversStandings
+import tmg.flashback.composeApp.presentation.MenuItem.Glossary
+import tmg.flashback.composeApp.presentation.MenuItem.Lineup
 import tmg.flashback.composeApp.presentation.MenuItem.ReactionGame
 import tmg.flashback.composeApp.presentation.MenuItem.Results
 import tmg.flashback.composeApp.presentation.MenuItem.Rss
@@ -16,10 +18,13 @@ import tmg.flashback.composeApp.presentation.MenuItem.TeamsStandings
 import tmg.flashback.composeApp.presentation.MenuItem.XR_Spacial
 import tmg.flashback.composeApp.presentation.toNavigationItem
 import tmg.flashback.composeApp.presentation.toScreen
+import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.navigation.NavAbout
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavCircuits
 import tmg.flashback.navigation.NavDriverStandings
+import tmg.flashback.navigation.NavLineup
+import tmg.flashback.navigation.NavGlossary
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
 import tmg.flashback.navigation.NavSettings
@@ -43,10 +48,12 @@ fun AppNavigationOrbiter(
             DriversStandings.toNavigationItem(appNavigationUiState.screen == NavDriverStandings),
             TeamsStandings.toNavigationItem(appNavigationUiState.screen == NavTeamStandings),
             Circuits.toNavigationItem(appNavigationUiState.screen == NavCircuits),
+            Lineup.toNavigationItem(appNavigationUiState.screen == NavLineup),
         )
         val secondaryItems = listOfNotNull(
             Rss.toNavigationItem(appNavigationUiState.screen == NavRss).takeIf { appNavigationUiState.showRss },
             ReactionGame.toNavigationItem(appNavigationUiState.screen == NavReactionGame),
+//            Glossary.toNavigationItem(appNavigationUiState.screen == NavGlossary).takeIf { Device.isDebug },
             Settings.toNavigationItem(appNavigationUiState.screen == NavSettings),
             Contact.toNavigationItem(appNavigationUiState.screen == NavAbout)
         )
@@ -71,9 +78,11 @@ fun AppNavigationOrbiter(
                     DriversStandings,
                     TeamsStandings,
                     Circuits,
+                    Lineup,
                     Rss,
                     ReactionGame,
                     Settings,
+                    Glossary,
                     Contact -> {
                         val result = item.toScreen() ?: return@NavigationOrbiter
                         navigationItemClicked(result)

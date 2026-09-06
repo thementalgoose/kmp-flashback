@@ -27,7 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
-import androidx.window.core.layout.WindowWidthSizeClass
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_EXPANDED_LOWER_BOUND
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
@@ -87,11 +87,11 @@ fun <T> MasterDetailsPane(
 
         Box(
             Modifier
-                .width(if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.EXPANDED) maxWidth else detailsOffset.value)
+                .width(if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_EXPANDED_LOWER_BOUND)) maxWidth else detailsOffset.value)
                 .fillMaxHeight()
         ) {
             master()
-            if (windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.EXPANDED) {
+            if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_EXPANDED_LOWER_BOUND)) {
                 Fade(visible = navigator.destination != null) {
                     Box(
                         Modifier
@@ -105,7 +105,7 @@ fun <T> MasterDetailsPane(
                 }
             }
         }
-        if (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED) {
+        if (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_EXPANDED_LOWER_BOUND)) {
             Box(
                 modifier = Modifier
                     .offset(detailsOffset.value)

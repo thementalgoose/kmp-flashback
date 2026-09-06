@@ -1,11 +1,7 @@
 package tmg.flashback.composeApp.presentation
 
-import androidx.compose.animation.expandIn
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkOut
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
@@ -21,7 +17,6 @@ import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
-import androidx.navigation3.ui.defaultTransitionSpec
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_EXPANDED_LOWER_BOUND
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import flashback.composeapp.generated.resources.Res
@@ -32,12 +27,12 @@ import tmg.flashback.composeApp.presentation.navigation.scene.rememberSplitPaneS
 import tmg.flashback.composeApp.presentation.settings.AllSettingsScreen
 import tmg.flashback.composeApp.presentation.settings.browser.SettingsBrowserScreen
 import tmg.flashback.composeApp.presentation.settings.darkmode.SettingsDarkModeScreen
-import tmg.flashback.composeApp.presentation.settings.layout.SettingsLayoutScreen
+import tmg.flashback.composeApp.presentation.settings.layout_home.SettingsLayoutHomeScreen
+import tmg.flashback.composeApp.presentation.settings.layout_race.SettingsLayoutRaceScreen
 import tmg.flashback.composeApp.presentation.settings.notifications.results.SettingsNotificationResultsScreen
 import tmg.flashback.composeApp.presentation.settings.notifications.upcoming.SettingsNotificationUpcomingScreen
 import tmg.flashback.composeApp.presentation.settings.privacy.SettingsPrivacyScreen
 import tmg.flashback.composeApp.presentation.settings.theme.SettingsThemeScreen
-import tmg.flashback.composeApp.presentation.settings.weather.SettingsWeatherScreen
 import tmg.flashback.composeApp.presentation.settings.widgets.SettingsWidgetScreen
 import tmg.flashback.feature.about.presentation.AboutScreen
 import tmg.flashback.feature.circuits.presentation.all.AllCircuitsScreen
@@ -45,6 +40,9 @@ import tmg.flashback.feature.circuits.presentation.circuit.CircuitScreen
 import tmg.flashback.feature.constructors.presentation.stats.ConstructorStatsScreen
 import tmg.flashback.feature.drivers.presentation.comparison.DriverComparisonScreen
 import tmg.flashback.feature.drivers.presentation.stats.DriverStatsScreen
+import tmg.flashback.feature.glossary.presentation.all.GlossaryScreen
+import tmg.flashback.feature.glossary.presentation.details.GlossaryDetailScreen
+import tmg.flashback.feature.lineup.presentation.LineupScreen
 import tmg.flashback.feature.privacypolicy.presentation.PrivacyPolicyScreen
 import tmg.flashback.feature.reactiongame.presentation.ReactionGameScreen
 import tmg.flashback.feature.rss.presentation.configure.RssConfigureScreen
@@ -60,19 +58,22 @@ import tmg.flashback.navigation.NavCircuits
 import tmg.flashback.navigation.NavDriver
 import tmg.flashback.navigation.NavDriverComparison
 import tmg.flashback.navigation.NavDriverStandings
+import tmg.flashback.navigation.NavLineup
+import tmg.flashback.navigation.NavGlossary
+import tmg.flashback.navigation.NavGlossaryDetail
 import tmg.flashback.navigation.NavPrivacyPolicy
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
 import tmg.flashback.navigation.NavSettings
 import tmg.flashback.navigation.NavSettingsDarkMode
 import tmg.flashback.navigation.NavSettingsInAppBrowser
-import tmg.flashback.navigation.NavSettingsLayout
+import tmg.flashback.navigation.NavSettingsLayoutHome
 import tmg.flashback.navigation.NavSettingsNotificationResults
 import tmg.flashback.navigation.NavSettingsNotificationUpcoming
 import tmg.flashback.navigation.NavSettingsPrivacy
 import tmg.flashback.navigation.NavSettingsRssConfigure
 import tmg.flashback.navigation.NavSettingsTheme
-import tmg.flashback.navigation.NavSettingsWeather
+import tmg.flashback.navigation.NavSettingsLayoutRace
 import tmg.flashback.navigation.NavSettingsWidgets
 import tmg.flashback.navigation.NavTeam
 import tmg.flashback.navigation.NavTeamStandings
@@ -82,7 +83,7 @@ import tmg.flashback.navigation.removeDetail
 import tmg.flashback.navigation.replaceDetail
 import tmg.flashback.navigation.replaceList
 import tmg.flashback.style.AppTheme
-import tmg.flashback.ui.insets.compactOnly
+import tmg.flashback.ui.navigation.OverlappingPanelsState
 import tmg.flashback.webbrowser.presentation.WebScreen
 
 @Composable
@@ -90,6 +91,7 @@ fun AppGraph(
     openPanel: () -> Unit,
     appNavigationViewModel: AppNavigationViewModel,
     insetPadding: PaddingValues,
+    overlappingPanelsState: OverlappingPanelsState,
     windowAdaptiveInfo: WindowAdaptiveInfo,
     backStack: NavBackStack<NavKey>,
 ) {
@@ -178,6 +180,15 @@ fun AppGraph(
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
             }
+            entry<NavLineup>(metadata = SplitPaneScene.listPane()) {
+                LineupScreen(
+                    paddingValues = insetPadding,
+                    actionUpClicked = openPanel,
+                    windowSizeClass = windowAdaptiveInfo.windowSizeClass,
+                    navigateTo = {
+                        backStack.replaceDetail(it)
+                    })
+            }
             entry<NavCircuit>(metadata = SplitPaneScene.detailPane()) {
                 CircuitScreen(
                     data = it,
@@ -241,6 +252,27 @@ fun AppGraph(
                 )
             }
 
+            entry<NavGlossary>(metadata = SplitPaneScene.listPane()) {
+                GlossaryScreen(
+                    paddingValues = insetPadding,
+                    actionUpClicked = openPanel,
+                    navigateTo = {
+                        backStack.replaceDetail(it)
+                    },
+                    windowSizeClass = windowAdaptiveInfo.windowSizeClass
+                )
+            }
+
+            entry<NavGlossaryDetail>(metadata = SplitPaneScene.detailPane()) {
+                GlossaryDetailScreen(
+                    data = it,
+                    paddingValues = insetPadding,
+                    showBack = !isExpanded,
+                    actionUpClicked = { backStack.removeDetail() },
+                    windowSizeClass = windowAdaptiveInfo.windowSizeClass
+                )
+            }
+
             entry<NavSettings>(metadata = SplitPaneScene.listPane()) {
                 AllSettingsScreen(
                     actionUpClicked = { openPanel() },
@@ -266,15 +298,15 @@ fun AppGraph(
                     showBack = !isExpanded
                 )
             }
-            entry<NavSettingsLayout>(metadata = SplitPaneScene.detailPane()) {
-                SettingsLayoutScreen(
+            entry<NavSettingsLayoutHome>(metadata = SplitPaneScene.detailPane()) {
+                SettingsLayoutHomeScreen(
                     actionUpClicked = { backStack.removeDetail() },
                     insetPadding = insetPadding,
                     showBack = !isExpanded
                 )
             }
-            entry<NavSettingsWeather>(metadata = SplitPaneScene.detailPane()) {
-                SettingsWeatherScreen(
+            entry<NavSettingsLayoutRace>(metadata = SplitPaneScene.detailPane()) {
+                SettingsLayoutRaceScreen(
                     actionUpClicked = { backStack.removeDetail() },
                     insetPadding = insetPadding,
                     showBack = !isExpanded

@@ -14,12 +14,15 @@ import tmg.flashback.flashbackapi.api.models.constructors.AllConstructors
 import tmg.flashback.flashbackapi.api.models.constructors.ConstructorHistory
 import tmg.flashback.flashbackapi.api.models.drivers.AllDrivers
 import tmg.flashback.flashbackapi.api.models.drivers.DriverHistory
+import tmg.flashback.flashbackapi.api.models.lineup.Lineup
 import tmg.flashback.flashbackapi.api.models.overview.Event
 import tmg.flashback.flashbackapi.api.models.overview.Overview
 import tmg.flashback.flashbackapi.api.models.races.Round
 import tmg.flashback.flashbackapi.api.models.races.Season
 import tmg.flashback.flashbackapi.api.models.races.Standings
 import tmg.flashback.flashbackapi.api.repositories.NetworkConfigRepository
+import tmg.flashback.infrastructure.device.Device
+import tmg.flashback.infrastructure.device.Platform
 import tmg.flashback.infrastructure.log.logInfo
 
 class FlashbackApiImpl(
@@ -30,6 +33,10 @@ class FlashbackApiImpl(
     @Throws(RuntimeException::class, IOException::class)
     override suspend fun getOverview(): MetadataWrapper<Overview>? =
         makeRequest("overview.json")
+
+    @Throws(RuntimeException::class, IOException::class)
+    override suspend fun getLineup(): MetadataWrapper<Lineup>? =
+        makeRequest("lineup.json")
 
     @Throws(RuntimeException::class, IOException::class)
     override suspend fun getOverview(season: Int): MetadataWrapper<Overview>? =
@@ -82,14 +89,19 @@ class FlashbackApiImpl(
     private val baseUrl: String
         get() = networkConfigRepository.baseUrl
 
+    private val excludeHeaders: Boolean
+        get() = Device.platform in listOf(Platform.WasmJs)
+
     @Throws(RuntimeException::class, IOException::class)
     private suspend inline fun <reified T> makeRequest(endpoint: String): T? {
         logInfo(">> $baseUrl/$endpoint")
         val httpResponse = httpClient.get("$baseUrl/$endpoint") {
-            headers {
-                set("Accept", "application/json")
-                set("ContentType", "application/json")
-                set("content-type", "application/json")
+            if (!excludeHeaders) {
+                headers {
+                    set("Accept", "application/json")
+                    set("ContentType", "application/json")
+                    set("content-type", "application/json")
+                }
             }
         }
         when (httpResponse.status) {

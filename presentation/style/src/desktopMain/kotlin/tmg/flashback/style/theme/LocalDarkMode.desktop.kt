@@ -2,23 +2,17 @@ package tmg.flashback.style.theme
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidedValue
-import androidx.compose.ui.InternalComposeUiApi
-import androidx.compose.ui.LocalSystemTheme
-import androidx.compose.ui.SystemTheme
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.compositionLocalOf
 
-@OptIn(InternalComposeUiApi::class)
+private val LocalDesktopLightMode = compositionLocalOf<Boolean?> { null }
+
 actual object LocalDarkMode {
     actual val current: Boolean
-        @Composable get() = LocalSystemTheme.current == SystemTheme.Light
+        @Composable get() = LocalDesktopLightMode.current ?: !isSystemInDarkTheme()
 
     @Composable
     actual infix fun provides(value: Boolean?): ProvidedValue<*> {
-        val new = when(value) {
-            true -> SystemTheme.Light
-            false -> SystemTheme.Dark
-            null -> LocalSystemTheme.current
-        }
-
-        return LocalSystemTheme.provides(new)
+        return LocalDesktopLightMode.provides(value)
     }
 }

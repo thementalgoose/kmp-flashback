@@ -1,11 +1,11 @@
 package tmg.flashback.feature.weekend.presentation.data.info
 
-import dev.mokkery.MockMode
 import dev.mokkery.MockMode.autoUnit
 import dev.mokkery.answering.returns
 import dev.mokkery.every
 import dev.mokkery.mock
 import tmg.flashback.feature.weekend.repositories.WeatherRepository
+import tmg.flashback.feature.weekend.repositories.WeekendRepository
 import tmg.flashback.formula1.model.Race
 import tmg.flashback.formula1.model.model
 import kotlin.test.Test
@@ -16,12 +16,15 @@ internal class InfoDataMapperTest {
     private lateinit var underTest: InfoDataMapperImpl
 
     private val mockWeatherRepository: WeatherRepository = mock(autoUnit)
+    private val mockWeekendRepository: WeekendRepository = mock(autoUnit)
 
     private fun initUnderTest() {
         every { mockWeatherRepository.weatherTemperatureMetric } returns true
         every { mockWeatherRepository.weatherWindspeedMetric } returns true
+        every { mockWeekendRepository.weatherDetails } returns true
         underTest = InfoDataMapperImpl(
-            weatherRepository = mockWeatherRepository
+            weatherRepository = mockWeatherRepository,
+            weekendRepository = mockWeekendRepository
         )
     }
 

@@ -2,6 +2,7 @@ package tmg.flashback.feature.weekend.presentation.data.info
 
 import kotlinx.datetime.LocalDate
 import tmg.flashback.feature.weekend.repositories.WeatherRepository
+import tmg.flashback.feature.weekend.repositories.WeekendRepository
 import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Race
 import tmg.flashback.formula1.model.Schedule
@@ -10,7 +11,8 @@ interface InfoDataMapper {
     operator fun invoke(race: Race): InfoModel
 }
 internal class InfoDataMapperImpl(
-    private val weatherRepository: WeatherRepository
+    private val weatherRepository: WeatherRepository,
+    private val weekendRepository: WeekendRepository
 ): InfoDataMapper {
     override fun invoke(race: Race): InfoModel {
         return InfoModel(
@@ -29,7 +31,8 @@ internal class InfoDataMapperImpl(
             days = race.getScheduleGrouping(),
             cancelled = race.raceInfo.cancelled,
             temperatureMetric = weatherRepository.weatherTemperatureMetric,
-            windspeedMetric = weatherRepository.weatherWindspeedMetric
+            windspeedMetric = weatherRepository.weatherWindspeedMetric,
+            showWeatherDetails = weekendRepository.weatherDetails
         )
     }
 

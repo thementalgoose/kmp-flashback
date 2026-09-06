@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_subtitle">Formula 1 统计数据</string>
 
     <!-- Splash -->
     <string name="splash_title">嗨</string>
@@ -26,12 +27,15 @@
     <!-- Navigation -->
     <string name="nav_drivers">车手</string>
     <string name="nav_constructors">车队</string>
+    <string name="nav_driver_comparison">比较两位车手</string>
     <string name="nav_calendar">日历</string>
     <string name="nav_schedule">赛程</string>
     <string name="nav_seasons">赛季</string>
     <string name="nav_settings">设置</string>
     <string name="nav_search">搜索</string>
+    <string name="nav_lineup">车手阵容</string>
     <string name="nav_rss">RSS</string>
+    <string name="nav_glossary">术语表</string>
     <string name="nav_reaction_game">反应游戏</string>
     <string name="nav_contact">联系</string>
     <string name="nav_xr">XR</string>
@@ -601,4 +605,7 @@
     <string name="easter_egg_menu_halloween">万圣节快乐！</string>
     <string name="easter_egg_menu_diwali">排灯节快乐！</string>
     <string name="easter_egg_menu_christmas">圣诞快乐！</string>
+
+    <string name="driver_lineup_title">车手阵容</string>
+    <string name="driver_lineup_subtitle">查看已确认获得未来赛季一级方程式（F1）车队席位的车手名单。</string>
 </resources>

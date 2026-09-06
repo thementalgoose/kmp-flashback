@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_subtitle">Estadísticas de F1</string>
 
     <!-- Splash -->
     <string name="splash_title">Hola</string>
@@ -26,13 +27,16 @@
     <!-- Navigation -->
     <string name="nav_drivers">Pilotos</string>
     <string name="nav_constructors">Equipos</string>
+    <string name="nav_driver_comparison">Comparar</string>
     <string name="nav_calendar">Calendario</string>
     <string name="nav_schedule">Programa</string>
     <string name="nav_seasons">Temporadas</string>
     <string name="nav_settings">Ajustes</string>
     <string name="nav_search">Buscar</string>
+    <string name="nav_lineup">Alineación</string>
     <string name="nav_rss">RSS</string>
     <string name="nav_reaction_game">Reaction Game</string>
+    <string name="nav_glossary">Glosario</string>
     <string name="nav_contact">Contacto</string>
     <string name="nav_xr">XR</string>
     <string name="nav_details">Detalles</string>
@@ -607,5 +611,8 @@
     <string name="easter_egg_menu_halloween">¡Feliz Halloween!</string>
     <string name="easter_egg_menu_diwali">¡Feliz Diwali!</string>
     <string name="easter_egg_menu_christmas">¡Feliz Navidad!</string>
+
+    <string name="driver_lineup_title">Alineación de pilotos</string>
+    <string name="driver_lineup_subtitle">Consulta los pilotos que tienen contratos confirmados para futuras temporadas en los equipos de Fórmula 1</string>
 
 </resources>

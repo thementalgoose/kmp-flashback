@@ -28,7 +28,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
-import androidx.window.core.layout.WindowWidthSizeClass
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.search_category_circuits
 import flashback.presentation.localisation.generated.resources.search_title
@@ -111,7 +111,8 @@ fun AllCircuitsScreen(
     SwipeRefresh(
         modifier = modifier,
         isLoading = uiState.isLoading,
-        onRefresh = refresh
+        onRefresh = refresh,
+        windowSizeClass = windowSizeClass
     ) {
         LazyVerticalGrid(
             columns = GridCells.Adaptive(300.dp),
@@ -121,7 +122,7 @@ fun AllCircuitsScreen(
             item("header", span = { GridItemSpan(maxLineSpan) }) {
                 Header(
                     actionUpClicked = actionUpClicked,
-                    action = HeaderAction.MENU.takeIf { windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT },
+                    action = HeaderAction.MENU.takeIf { !windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND) },
                     text = stringResource(string.search_category_circuits),
                     overrideIcons = {
                         Refresh(onClick = refresh)

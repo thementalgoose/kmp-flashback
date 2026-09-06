@@ -31,6 +31,9 @@ data class NavCircuit(
 }
 
 @Serializable
+data object NavLineup: NavKey
+
+@Serializable
 data class NavDriver(
     val season: Int,
     val id: String,
@@ -61,6 +64,14 @@ data class NavWebpage(
 data object NavReactionGame: NavKey
 
 @Serializable
+data object NavGlossary: NavKey
+
+@Serializable
+data class NavGlossaryDetail(
+    val id: String
+): NavKey
+
+@Serializable
 data object NavSettings: NavKey
 
 @Serializable
@@ -70,10 +81,10 @@ data object NavSettingsDarkMode: NavKey
 data object NavSettingsTheme: NavKey
 
 @Serializable
-data object NavSettingsLayout: NavKey
+data object NavSettingsLayoutHome: NavKey
 
 @Serializable
-data object NavSettingsWeather: NavKey
+data object NavSettingsLayoutRace: NavKey
 
 @Serializable
 data object NavSettingsRssConfigure: NavKey

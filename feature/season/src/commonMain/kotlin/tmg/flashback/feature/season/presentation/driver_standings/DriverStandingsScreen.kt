@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
-import androidx.window.core.layout.WindowWidthSizeClass
 import flashback.feature.season.generated.resources.Res
 import flashback.feature.season.generated.resources.ic_driver_comparison
 import flashback.presentation.localisation.generated.resources.Res.string
@@ -122,7 +121,8 @@ internal fun DriverStandingsScreen(
 
     SwipeRefresh(
         isLoading = uiState.isLoading,
-        onRefresh = refresh
+        onRefresh = refresh,
+        windowSizeClass = windowSizeClass
     ) {
         LazyColumn(
             contentPadding = paddingValues,
@@ -133,9 +133,10 @@ internal fun DriverStandingsScreen(
                         content = {
                             ResultsSeasonPicker(subtitle = stringResource(resource = string.season_standings_driver))
                         },
-                        action = when (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
-                            true -> HeaderAction.MENU
-                            false -> null
+                        action = if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
+                            HeaderAction.MENU
+                        } else {
+                            null
                         },
                         actionUpClicked = actionUpClicked,
                         overrideIcons = {

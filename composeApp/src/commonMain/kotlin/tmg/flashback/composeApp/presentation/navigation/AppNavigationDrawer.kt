@@ -50,6 +50,8 @@ import tmg.flashback.navigation.NavAbout
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavCircuits
 import tmg.flashback.navigation.NavDriverStandings
+import tmg.flashback.navigation.NavGlossary
+import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
 import tmg.flashback.navigation.NavSettings
@@ -114,6 +116,16 @@ internal fun AppNavigationDrawer(
                         }
                     )
                 }
+                item("nav_lineup") {
+                    NavigationItem(
+                        menuItem = MenuItem.Lineup,
+                        isSelected = appNavigationUiState.screen == NavLineup,
+                        onClick = {
+                            navigationItemClicked(NavLineup)
+                            closeMenu()
+                        }
+                    )
+                }
                 item("mid_div") {
                     MenuDivider()
                 }
@@ -139,6 +151,18 @@ internal fun AppNavigationDrawer(
                         }
                     )
                 }
+//                if (Device.isDebug) {
+//                    item("nav_glossary") {
+//                        NavigationItem(
+//                            menuItem = MenuItem.Glossary,
+//                            isSelected = appNavigationUiState.screen == NavGlossary,
+//                            onClick = {
+//                                navigationItemClicked(NavGlossary)
+//                                closeMenu()
+//                            }
+//                        )
+//                    }
+//                }
                 item("nav_settings") {
                     NavigationItem(
                         menuItem = MenuItem.Settings,

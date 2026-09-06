@@ -1,7 +1,9 @@
 package tmg.flashback.feature.weekend.presentation.data.info
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -17,6 +19,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -89,6 +92,7 @@ internal fun Schedule(
         val scrollState = rememberLazyListState(
             initialFirstVisibleItemIndex = targetIndex.coerceIn(0, model.days.size - 1)
         )
+        val showWeatherDetails = remember(model.showWeatherDetails) { mutableStateOf(model.showWeatherDetails) }
 
         LazyRow(
             modifier = modifier
@@ -118,13 +122,21 @@ internal fun Schedule(
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
                         ) {
-                            list.forEach { (schedule, isNotificationSet) ->
+                            for ((schedule, isNotificationSet) in list) {
                                 EventItem(
                                     item = schedule,
+                                    showWeatherDetails = showWeatherDetails.value,
                                     isRoundUpcoming = isRoundUpcoming,
                                     temperatureMetric = model.temperatureMetric,
                                     windspeedMetric = model.windspeedMetric,
-                                    showNotificationBell = isNotificationSet
+                                    showNotificationBell = isNotificationSet,
+                                    modifier = Modifier.clickable(
+                                        onClick = {
+                                            if (!model.showWeatherDetails) {
+                                                showWeatherDetails.value = !showWeatherDetails.value
+                                            }
+                                        }
+                                    )
                                 )
                             }
                         }
@@ -163,6 +175,7 @@ private fun EventItem(
     isRoundUpcoming: Boolean,
     temperatureMetric: Boolean,
     windspeedMetric: Boolean,
+    showWeatherDetails: Boolean,
     showNotificationBell: Boolean,
     modifier: Modifier = Modifier
 ) {
@@ -244,55 +257,61 @@ private fun EventItem(
                     modifier = Modifier.size(weatherIconSize)
                 )
 
-                // Rain Percentage
-                val rainPercent = (weather.rainPercent * 100).roundToInt().coerceIn(0, 100)
-                Row {
-                    Image(
-                        modifier = Modifier.size(weatherMetadataIconSize),
-                        painter = painterResource(resource = flashback.domain.formula1.generated.resources.Res.drawable.weather_indicator_rain),
-                        contentDescription = stringResource(resource = string.ab_change_of_rain)
-                    )
-                    TextBody2(
-                        textColor = AppTheme.colors.onSurfaceVariant,
-                        modifier = Modifier
-                            .align(Alignment.CenterVertically)
-                            .padding(start = 2.dp),
-                        text = stringResource(resource = string.weather_rain_percent, rainPercent.toString())
-                    )
-                }
+                AnimatedVisibility(
+                    visible = showWeatherDetails,
+                ) {
+                    Column {
+                        // Rain Percentage
+                        val rainPercent = (weather.rainPercent * 100).roundToInt().coerceIn(0, 100)
+                        Row {
+                            Image(
+                                modifier = Modifier.size(weatherMetadataIconSize),
+                                painter = painterResource(resource = flashback.domain.formula1.generated.resources.Res.drawable.weather_indicator_rain),
+                                contentDescription = stringResource(resource = string.ab_change_of_rain)
+                            )
+                            TextBody2(
+                                textColor = AppTheme.colors.onSurfaceVariant,
+                                modifier = Modifier
+                                    .align(Alignment.CenterVertically)
+                                    .padding(start = 2.dp),
+                                text = stringResource(resource = string.weather_rain_percent, rainPercent.toString())
+                            )
+                        }
 
-                // Temp
-                Row(Modifier.fillMaxWidth()) {
-                    Image(
-                        modifier = Modifier.size(weatherMetadataIconSize),
-                        painter = painterResource(resource = flashback.domain.formula1.generated.resources.Res.drawable.weather_indicator_temp),
-                        contentDescription = null
-                    )
-                    TextBody2(
-                        textColor = AppTheme.colors.onSurfaceVariant,
-                        modifier = Modifier
-                            .align(Alignment.CenterVertically)
-                            .padding(start = 2.dp),
-                        text = weather.getAverageTemp(metric = temperatureMetric)
-                    )
-                }
+                        // Temp
+                        Row(Modifier.fillMaxWidth()) {
+                            Image(
+                                modifier = Modifier.size(weatherMetadataIconSize),
+                                painter = painterResource(resource = flashback.domain.formula1.generated.resources.Res.drawable.weather_indicator_temp),
+                                contentDescription = null
+                            )
+                            TextBody2(
+                                textColor = AppTheme.colors.onSurfaceVariant,
+                                modifier = Modifier
+                                    .align(Alignment.CenterVertically)
+                                    .padding(start = 2.dp),
+                                text = weather.getAverageTemp(metric = temperatureMetric)
+                            )
+                        }
 
-                // Wind
-                Row(Modifier.fillMaxWidth()) {
-                    Image(
-                        modifier = Modifier
-                            .rotate(-90 + weather.windBearing.toFloat())
-                            .size(weatherMetadataIconSize),
-                        painter = painterResource(resource = flashback.domain.formula1.generated.resources.Res.drawable.weather_indicator_wind),
-                        contentDescription = null
-                    )
-                    TextBody2(
-                        textColor = AppTheme.colors.onSurfaceVariant,
-                        modifier = Modifier
-                            .align(Alignment.CenterVertically)
-                            .padding(start = 2.dp),
-                        text = weather.getWindspeed(metric = windspeedMetric)
-                    )
+                        // Wind
+                        Row(Modifier.fillMaxWidth()) {
+                            Image(
+                                modifier = Modifier
+                                    .rotate(-90 + weather.windBearing.toFloat())
+                                    .size(weatherMetadataIconSize),
+                                painter = painterResource(resource = flashback.domain.formula1.generated.resources.Res.drawable.weather_indicator_wind),
+                                contentDescription = null
+                            )
+                            TextBody2(
+                                textColor = AppTheme.colors.onSurfaceVariant,
+                                modifier = Modifier
+                                    .align(Alignment.CenterVertically)
+                                    .padding(start = 2.dp),
+                                text = weather.getWindspeed(metric = windspeedMetric)
+                            )
+                        }
+                    }
                 }
             }
         }
