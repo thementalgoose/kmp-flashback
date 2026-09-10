@@ -103,10 +103,5 @@ internal class LineupViewModelTest {
         verifySuspend {
             mockLineupRepository.populateLineup()
         }
-
-        underTest.uiState.test {
-            val state = awaitItem()
-            assertTrue(state.isLoading == false || state.isLoading == true)
-        }
     }
 }
