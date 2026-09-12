@@ -193,6 +193,7 @@
     <string name="details_link_wikipedia">Wikipedia</string>
     <string name="details_link_report_issue">Πρόβλημα με τα δεδομένα</string>
 
+    <string name="report_issue_thanks">Το ζήτημα αναφέρθηκε, ευχαριστούμε!</string>
 
     <!-- Feature banners -->
     <string name="feature_banner_runtime_notifications">Δώστε άδεια στο Flashback να σας στέλνει ειδοποιήσεις</string>

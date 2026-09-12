@@ -197,6 +197,8 @@
     <string name="details_link_wikipedia">Wikipedia</string>
     <string name="details_link_report_issue">Report issue</string>
 
+    <string name="report_issue_thanks">Issue reported, thank you!</string>
+
 
     <!-- Feature banners -->
     <string name="feature_banner_runtime_notifications">Grant permission for Flashback to send you notifications</string>

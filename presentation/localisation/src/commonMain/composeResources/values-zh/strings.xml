@@ -175,6 +175,8 @@
     <string name="details_link_wikipedia">维基百科</string>
     <string name="details_link_report_issue">数据问题?</string>
 
+    <string name="report_issue_thanks">问题已上报，谢谢！</string>
+
     <!-- Feature banners -->
     <string name="feature_banner_runtime_notifications">授予 Flashback 发送通知的权限</string>
     <string name="feature_banner_notifications">获取即将到来的比赛周末的练习赛、排位赛和比赛活动的通知！</string>

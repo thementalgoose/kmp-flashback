@@ -2,6 +2,9 @@ package tmg.flashback.feature.weekend.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import flashback.presentation.localisation.generated.resources.Res
+import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.report_issue_thanks
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -13,6 +16,9 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsRound
+import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
+import tmg.flashback.analytics.manager.AnalyticsManager
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
 import tmg.flashback.device.usecases.OpenLocationUseCase
@@ -31,6 +37,7 @@ import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.QualifyingType
 import tmg.flashback.infrastructure.log.logDebug
+import tmg.flashback.ui.toasts.ToastManager
 
 class WeekendViewModel(
     private val racesRepository: RaceRepository,
@@ -42,7 +49,9 @@ class WeekendViewModel(
     private val sprintRaceDataMapper: SprintRaceDataMapper,
     private val openWebpageUseCase: OpenWebpageUseCase,
     private val openLocationUseCase: OpenLocationUseCase,
-    private val getPreviousRaceUseCase: GetPreviousRaceUseCase
+    private val getPreviousRaceUseCase: GetPreviousRaceUseCase,
+    private val analyticsManager: AnalyticsManager,
+    private val toastManager: ToastManager
 ): ViewModel() {
 
     private val seasonRound: MutableStateFlow<Pair<Int, Int>?> = MutableStateFlow(null)
@@ -145,6 +154,19 @@ class WeekendViewModel(
             lng = location.lng,
             name = name,
         )
+    }
+
+    fun reportIssue() {
+        viewModelScope.launch {
+            val seasonRound = seasonRound.value
+            if (seasonRound != null) {
+                analyticsManager.logEvent("report_issue", mapOf(
+                    analyticsSeason to seasonRound.first.toString(),
+                    analyticsRound to seasonRound.second.toString()
+                ))
+            }
+            toastManager.showMessage(string.report_issue_thanks)
+        }
     }
 
     fun selectResultType(resultType: ResultType) {
