@@ -119,7 +119,8 @@ enum class TrackLayout(
     ),
     DONINGTON(
         circuitId = "donington",
-        icon = Res.drawable.circuit_donington
+        icon = Res.drawable.circuit_donington,
+        breakdown = TrackBreakdown.DONINGTON_PARK
     ),
     ESTORIL(
         circuitId = "estoril",
