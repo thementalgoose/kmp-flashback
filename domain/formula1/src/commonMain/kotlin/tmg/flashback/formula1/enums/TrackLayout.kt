@@ -382,16 +382,19 @@ enum class TrackLayout(
             Configuration.Range(
                 min = 1997,
                 max = 2009,
-                _icon = Res.drawable.circuit_silverstone_1997_2009
+                _icon = Res.drawable.circuit_silverstone_1997_2009,
+                _breakdown = TrackBreakdown.SILVERSTONE_1997_2009
             ),
             Configuration.OneOff(
                 year = 1996,
-                _icon = Res.drawable.circuit_silverstone_1996
+                _icon = Res.drawable.circuit_silverstone_1996,
+                _breakdown = TrackBreakdown.SILVERSTONE_1996
             ),
             Configuration.Range(
                 min = 1994,
                 max = 1995,
-                _icon = Res.drawable.circuit_silverstone_1994_1995
+                _icon = Res.drawable.circuit_silverstone_1994_1995,
+                _breakdown = TrackBreakdown.SILVERSTONE_1994_1995
             ),
             Configuration.Range(
                 min = 1991,
