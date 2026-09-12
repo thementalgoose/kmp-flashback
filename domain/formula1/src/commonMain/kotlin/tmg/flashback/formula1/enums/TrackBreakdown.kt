@@ -7,6 +7,7 @@ enum class TrackBreakdown(
     val s1: String,
     val s2: String,
     val s3: String,
+    val showAs1Sector: Boolean = false,
     val startLine: String? = null,
     val straightModeZones: List<String> = emptyList(),
     val drsZones: List<String> = emptyList()
