@@ -111,6 +111,7 @@ fun WeekendScreen(
         windowSizeClass = windowSizeClass,
         uiState = uiState.value,
         clickWeekendTab = viewModel::updateTab,
+        clickReportIssue = viewModel::reportIssue,
         selectResultType = viewModel::selectResultType,
         selectQualifyingType = viewModel::sortQualifyingBy,
         refresh = viewModel::refresh
@@ -128,6 +129,7 @@ fun WeekendScreenTab(
     clickWeekendTab: (WeekendTabs) -> Unit,
     openLink: (String) -> Unit,
     openMap: (Location, String) -> Unit,
+    clickReportIssue: (Int, Int) -> Unit,
     windowSizeClass: WindowSizeClass,
     uiState: WeekendUiState,
     selectResultType: (ResultType) -> Unit,
@@ -274,6 +276,7 @@ fun WeekendScreenTab(
                             youtubeClicked = openLink,
                             wikipediaClicked = openLink,
                             mapsClicked = openMap,
+                            reportIssueClicked = clickReportIssue,
                             backgroundColor = scrimColor
                         )
                         addSchedule(
@@ -361,7 +364,8 @@ fun LazyListScope.addLinks(
     previousRaceClicked: (OverviewRace) -> Unit,
     youtubeClicked: (String) -> Unit,
     wikipediaClicked: (String) -> Unit,
-    mapsClicked: (Location, String) -> Unit
+    mapsClicked: (Location, String) -> Unit,
+    reportIssueClicked: (Int, Int) -> Unit
 ) {
     item("links") {
         RaceLinks(
@@ -374,7 +378,8 @@ fun LazyListScope.addLinks(
             previousRaceClicked = previousRaceClicked,
             youtubeClicked = youtubeClicked,
             wikipediaClicked = wikipediaClicked,
-            mapsClicked = mapsClicked
+            mapsClicked = mapsClicked,
+            reportIssueClicked = reportIssueClicked
         )
     }
 }

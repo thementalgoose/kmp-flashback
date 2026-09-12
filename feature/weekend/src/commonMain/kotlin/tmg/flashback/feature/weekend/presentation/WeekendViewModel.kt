@@ -156,15 +156,12 @@ class WeekendViewModel(
         )
     }
 
-    fun reportIssue() {
+    fun reportIssue(season: Int, round: Int) {
         viewModelScope.launch {
-            val seasonRound = seasonRound.value
-            if (seasonRound != null) {
-                analyticsManager.logEvent("report_issue", mapOf(
-                    analyticsSeason to seasonRound.first.toString(),
-                    analyticsRound to seasonRound.second.toString()
-                ))
-            }
+            analyticsManager.logEvent("report_issue", mapOf(
+                analyticsSeason to season.toString(),
+                analyticsRound to round.toString()
+            ))
             toastManager.showMessage(string.report_issue_thanks)
         }
     }
