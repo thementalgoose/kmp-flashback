@@ -86,7 +86,8 @@ enum class TrackLayout(
     ),
     BRANDS_HATCH(
         circuitId = "brands_hatch",
-        icon = Res.drawable.circuit_brands_hatch
+        icon = Res.drawable.circuit_brands_hatch,
+        breakdown = TrackBreakdown.BRANDS_HATCH
     ),
     BOAVISTA(
         circuitId = "boavista",
