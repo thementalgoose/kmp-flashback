@@ -195,6 +195,9 @@
     <string name="details_link_map">Location</string>
     <string name="details_link_laps">%1$s laps</string>
     <string name="details_link_wikipedia">Wikipedia</string>
+    <string name="details_link_report_issue">Report issue</string>
+
+    <string name="report_issue_thanks">Issue reported, thank you!</string>
 
 
     <!-- Feature banners -->

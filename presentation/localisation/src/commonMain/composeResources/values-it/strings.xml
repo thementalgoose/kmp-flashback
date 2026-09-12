@@ -175,6 +175,9 @@
     <string name="details_link_map">Posizione</string>
     <string name="details_link_laps">%1$s giri</string>
     <string name="details_link_wikipedia">Wikipedia</string>
+    <string name="details_link_report_issue">Problema con i dati?</string>
+
+    <string name="report_issue_thanks">Problema segnalato, grazie!</string>
 
     <!-- Feature banners -->
     <string name="feature_banner_runtime_notifications">Concedi a Flashback il permesso di inviarti notifiche</string>
