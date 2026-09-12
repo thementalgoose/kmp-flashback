@@ -220,7 +220,16 @@ enum class TrackLayout(
     ),
     KYALAMI(
         circuitId = "kyalami",
-        icon = Res.drawable.circuit_kyalami
+        icon = Res.drawable.circuit_kyalami,
+        breakdown = TrackBreakdown.KYALAMI,
+        overrides = listOf(
+            Configuration.Range(
+                min = 1992,
+                max = 1993,
+                _icon = Res.drawable.circuit_kyalami_1992_1993,
+                _breakdown = TrackBreakdown.KYALAMI_1992_1993
+            )
+        )
     ),
     LAS_VEGAS(
         circuitId = "las_vegas",
