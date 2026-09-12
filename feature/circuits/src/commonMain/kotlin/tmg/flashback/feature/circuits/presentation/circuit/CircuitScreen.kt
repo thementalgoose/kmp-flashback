@@ -343,6 +343,7 @@ private fun TrackBreakdown.toInfo() = TrackBreakdownInfo(
     pathS1 = s1,
     pathS2 = s2,
     pathS3 = s3,
+    differentColorSectors = !showAs1Sector,
     pathStartLine = startLine,
     pathOvertakeZones = straightModeZones,
     pathDrsZones = drsZones
