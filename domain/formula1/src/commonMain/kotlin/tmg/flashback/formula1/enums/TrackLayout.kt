@@ -15,7 +15,8 @@ enum class TrackLayout(
 ) {
     ADELAIDE(
         circuitId = "adelaide",
-        icon = Res.drawable.circuit_adelaide
+        icon = Res.drawable.circuit_adelaide,
+        breakdown = TrackBreakdown.ADELAIDE
     ),
     AINTREE(
         circuitId = "aintree",
