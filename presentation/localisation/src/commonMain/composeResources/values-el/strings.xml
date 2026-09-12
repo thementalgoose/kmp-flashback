@@ -191,6 +191,7 @@
     <string name="details_link_map">Τοποθεσία</string>
     <string name="details_link_laps">%1$s γύροι</string>
     <string name="details_link_wikipedia">Wikipedia</string>
+    <string name="details_link_report_issue">Πρόβλημα με τα δεδομένα</string>
 
 
     <!-- Feature banners -->

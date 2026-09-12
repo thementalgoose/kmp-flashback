@@ -175,6 +175,7 @@
     <string name="details_link_map">Ubicación</string>
     <string name="details_link_laps">%1$s vueltas</string>
     <string name="details_link_wikipedia">Wikipedia</string>
+    <string name="details_link_report_issue">¿Problema con los datos?</string>
 
     <!-- Feature banners -->
     <string name="feature_banner_runtime_notifications">Concede permiso para que Flashback te envíe notificaciones</string>
