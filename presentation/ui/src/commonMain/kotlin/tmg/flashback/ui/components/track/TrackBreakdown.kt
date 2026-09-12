@@ -31,15 +31,19 @@ import tmg.flashback.ui.extensions.px
 
 private const val duration = 1000
 
+private val singleSectorColor: Color
+    @Composable
+    get() = AppTheme.colors.f1Sector1
+
 @Composable
 fun TrackBreakdown(
     trackBreakdownInfo: TrackBreakdownInfo,
     showDrs: Boolean = false,
     showOvertake: Boolean = false,
     modifier: Modifier = Modifier,
-    s1Color: Color = AppTheme.colors.f1Sector1,
-    s2Color: Color = AppTheme.colors.f1Sector2,
-    s3Color: Color = AppTheme.colors.f1Sector3,
+    s1Color: Color = if (trackBreakdownInfo.differentColorSectors) AppTheme.colors.f1Sector1 else singleSectorColor,
+    s2Color: Color = if (trackBreakdownInfo.differentColorSectors) AppTheme.colors.f1Sector2 else singleSectorColor,
+    s3Color: Color = if (trackBreakdownInfo.differentColorSectors) AppTheme.colors.f1Sector3 else singleSectorColor,
     trackColor: Color = Color.Black,
     trackOutlineColor: Color = Color.White,
     overtakeZoneColor: Color = AppTheme.colors.f1DeltaPositive,

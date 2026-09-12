@@ -9,6 +9,7 @@ data class TrackBreakdownInfo(
     val pathS1: String,
     val pathS2: String,
     val pathS3: String,
+    val differentColorSectors: Boolean = true,
     val modifier: Modifier = Modifier,
     val pathAspectRatio: Float = pathWidth / pathHeight,
     val pathStartLine: String? = null,
