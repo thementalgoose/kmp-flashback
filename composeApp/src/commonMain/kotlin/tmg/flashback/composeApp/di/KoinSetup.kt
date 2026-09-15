@@ -6,6 +6,7 @@ import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
+import org.koin.plugin.module.dsl.modules
 import tmg.flashback.composeApp.AppStartup
 import tmg.flashback.analytics.di.coreMetricsAnalyticsModule
 import tmg.flashback.analytics.firebase.FirebaseAnalyticsService
@@ -17,10 +18,10 @@ import tmg.flashback.data.repo.di.dataFlashbackModule
 import tmg.flashback.device.di.coreDeviceModules
 import tmg.flashback.device.manager.UiManager
 import tmg.flashback.eastereggs.di.easterEggsModule
-import tmg.flashback.feature.about.di.featureAboutModule
+import tmg.flashback.feature.about.di.FeatureAboutModule
 import tmg.flashback.feature.circuits.di.featureCircuitsModule
 import tmg.flashback.feature.constructors.di.featureConstructorsModule
-import tmg.flashback.feature.glossary.di.featureGlossaryModule
+import tmg.flashback.feature.glossary.di.FeatureGlossaryModule
 import tmg.flashback.feature.lineup.di.featureLineupModule
 import tmg.flashback.feature.drivers.di.featureDriversModule
 import tmg.flashback.feature.maintenance.di.featureMaintenanceModule
@@ -39,7 +40,7 @@ import tmg.flashback.flashbackapi.api.di.dataNetworkFlashbackModule
 import tmg.flashback.feature.highlights.di.featureHighlightsModule
 import tmg.flashback.composeApp.firebase.FirebaseInstallationService
 import tmg.flashback.composeApp.firebase.FirebaseInstallationServiceImpl
-import tmg.flashback.infrastructure.di.infrastructureModule
+import tmg.flashback.infrastructure.di.InfrastructureModule
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.composeApp.manager.UiManagerImpl
 import tmg.flashback.network.rss.di.dataNetworkRssModule
@@ -97,13 +98,13 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
 
         modules(easterEggsModule)
 
-        modules(infrastructureModule)
+        modules(InfrastructureModule::class)
 
-        modules(featureAboutModule)
+        modules(FeatureAboutModule::class)
         modules(featureCircuitsModule)
         modules(featureConstructorsModule)
         modules(featureDriversModule)
-        modules(featureGlossaryModule)
+        modules(FeatureGlossaryModule::class)
         modules(featureHighlightsModule)
         modules(featureLineupModule)
         modules(featureMaintenanceModule)

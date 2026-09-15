@@ -1,6 +1,7 @@
 package tmg.flashback.infrastructure.datetime
 
 import kotlinx.datetime.LocalDateTime
+import org.koin.core.annotation.Single
 import kotlin.time.Clock.System
 import kotlin.time.ExperimentalTime
 
@@ -10,6 +11,7 @@ interface TimeManager {
 }
 
 @OptIn(ExperimentalTime::class)
+@Single
 internal class TimeManagerImpl(): TimeManager {
     override val now: LocalDateTime
         get() = LocalDateTime.now()

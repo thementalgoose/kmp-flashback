@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.androidKotlinMultiplatformLibrary) apply false
     alias(libs.plugins.composeMultiplatform) apply false
     alias(libs.plugins.composeCompiler) apply false
+    alias(libs.plugins.koinCompiler) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.googleServices) version libs.versions.google.services apply false
     alias(libs.plugins.crashlytics) version libs.versions.crashlytics apply false

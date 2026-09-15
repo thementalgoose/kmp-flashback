@@ -1,11 +1,8 @@
 package tmg.flashback.feature.about.di
 
-import org.koin.core.module.dsl.viewModel
-import org.koin.dsl.module
-import tmg.flashback.feature.about.presentation.AboutViewModel
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
 
-val featureAboutModule = listOf(module())
-
-internal fun module() = module {
-    viewModel { AboutViewModel(get(), get(), get(), get(), get(), get()) }
-}
+@Module
+@ComponentScan("tmg.flashback.feature.about")
+class FeatureAboutModule
