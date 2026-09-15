@@ -1,5 +1,7 @@
 package tmg.flashback.analytics.manager
 
+import org.koin.core.annotation.Provided
+import org.koin.core.annotation.Single
 import tmg.flashback.analytics.firebase.FirebaseAnalyticsService
 import tmg.flashback.infrastructure.log.logDebug
 import kotlin.reflect.KClass
@@ -9,8 +11,9 @@ interface AnalyticsManager {
     fun viewScreen(screenName: String, params: Map<String, String> = emptyMap(), clazz: KClass<*>? = null)
 }
 
+@Single(binds = [AnalyticsManager::class])
 internal class AnalyticsManagerImpl(
-    private val firebaseAnalyticsService: FirebaseAnalyticsService
+    @Provided private val firebaseAnalyticsService: FirebaseAnalyticsService
 ): AnalyticsManager {
 
     override fun logEvent(key: String, params: Map<String, String>) {

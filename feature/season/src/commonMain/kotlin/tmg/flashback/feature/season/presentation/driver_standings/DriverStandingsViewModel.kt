@@ -1,6 +1,7 @@
 package tmg.flashback.feature.season.presentation.driver_standings
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.KoinViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -14,6 +15,7 @@ import tmg.flashback.data.repo.repository.RaceRepository
 import tmg.flashback.data.repo.repository.StandingsRepository
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
 
+@KoinViewModel
 class DriverStandingsViewModel(
     private val standingsRepository: StandingsRepository,
     private val overviewRepository: OverviewRepository,

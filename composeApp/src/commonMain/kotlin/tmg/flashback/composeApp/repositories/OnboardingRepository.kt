@@ -1,11 +1,13 @@
 package tmg.flashback.composeApp.repositories
 
+import org.koin.core.annotation.Single
 import tmg.flashback.preferences.manager.PreferenceManager
 
 interface OnboardingRepository {
     var initialSyncCompleted: Boolean
 }
 
+@Single(binds = [OnboardingRepository::class])
 internal class OnboardingRepositoryImpl(
     private val preferenceManager: PreferenceManager
 ): OnboardingRepository {

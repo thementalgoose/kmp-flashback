@@ -1,5 +1,7 @@
 package tmg.flashback.feature.rss.usecases
 
+import org.koin.core.annotation.Provided
+import org.koin.core.annotation.Single
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
@@ -8,10 +10,11 @@ import tmg.flashback.feature.rss.repositories.RssRepository
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.network.rss.api.RssApi
 
+@Single(binds = [GetRssArticlesUseCase::class])
 class GetRssArticlesUseCaseImpl(
     private val rssRepository: RssRepository,
-    private val rssApi: RssApi,
-    private val rssXmlMapper: RssXMLMapper
+    @Provided private val rssApi: RssApi,
+    @Provided private val rssXmlMapper: RssXMLMapper
 ): GetRssArticlesUseCase {
     override suspend operator fun invoke(): Response {
         val responses = getAll()

@@ -1,12 +1,14 @@
 package tmg.flashback.composeApp.presentation.settings.layout_race
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.KoinViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import tmg.flashback.feature.weekend.repositories.WeatherRepository
 import tmg.flashback.feature.weekend.repositories.WeekendRepository
 
+@KoinViewModel
 class SettingsLayoutRaceViewModel(
     private val weekendRepository: WeekendRepository,
     private val weatherRepository: WeatherRepository,

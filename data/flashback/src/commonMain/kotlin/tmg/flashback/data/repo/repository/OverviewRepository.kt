@@ -1,5 +1,6 @@
 package tmg.flashback.data.repo.repository
 
+import org.koin.core.annotation.Single
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.datetime.LocalDate
@@ -24,6 +25,7 @@ interface OverviewRepository {
     suspend fun getUpcomingOverviews(): List<OverviewRace>?
 }
 
+@Single(binds = [OverviewRepository::class])
 internal class OverviewRepositoryImpl(
     private val api: FlashbackApi,
     private val persistence: FlashbackDatabase,

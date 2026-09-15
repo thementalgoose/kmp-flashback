@@ -1,5 +1,7 @@
 package tmg.flashback.feature.season.repositories
 
+import org.koin.core.annotation.Provided
+import org.koin.core.annotation.Single
 import tmg.flashback.preferences.manager.PreferenceManager
 
 interface CalendarRepository {
@@ -11,8 +13,9 @@ interface CalendarRepository {
     var seenDatePrompt: Boolean
 }
 
+@Single(binds = [CalendarRepository::class])
 internal class CalendarRepositoryImpl(
-    private val preferenceManager: PreferenceManager,
+    @Provided private val preferenceManager: PreferenceManager,
 ): CalendarRepository {
 
     companion object {

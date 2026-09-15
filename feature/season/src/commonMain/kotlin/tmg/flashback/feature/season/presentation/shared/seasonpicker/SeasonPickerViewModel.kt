@@ -1,8 +1,10 @@
 package tmg.flashback.feature.season.presentation.shared.seasonpicker
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.KoinViewModel
 import kotlinx.coroutines.flow.StateFlow
 
+@KoinViewModel
 class SeasonPickerViewModel (
     private val currentSeasonHolder: CurrentSeasonHolder,
 ): ViewModel() {

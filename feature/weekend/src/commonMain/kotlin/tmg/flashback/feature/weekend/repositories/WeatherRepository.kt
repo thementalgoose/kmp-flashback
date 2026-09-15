@@ -1,5 +1,7 @@
 package tmg.flashback.feature.weekend.repositories
 
+import org.koin.core.annotation.Provided
+import org.koin.core.annotation.Single
 import tmg.flashback.preferences.manager.PreferenceManager
 
 interface WeatherRepository {
@@ -7,8 +9,9 @@ interface WeatherRepository {
     var weatherWindspeedMetric: Boolean
 }
 
+@Single(binds = [WeatherRepository::class])
 class WeatherRepositoryImpl(
-    private val preferenceManager: PreferenceManager
+    @Provided private val preferenceManager: PreferenceManager
 ): WeatherRepository {
 
     override var weatherTemperatureMetric: Boolean

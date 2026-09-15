@@ -9,9 +9,11 @@ import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.email_copy_to_clipboard
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import org.koin.core.annotation.Single
 import tmg.flashback.device.manager.UiManager
 import kotlin.getValue
 
+@Single(binds = [CopyToClipboardUseCase::class])
 actual class CopyToClipboardUseCaseImpl actual constructor() : CopyToClipboardUseCase, KoinComponent {
 
     private val uiManager: UiManager by inject()

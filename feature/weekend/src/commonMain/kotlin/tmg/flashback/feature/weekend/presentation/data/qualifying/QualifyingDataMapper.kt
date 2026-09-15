@@ -1,5 +1,6 @@
 package tmg.flashback.feature.weekend.presentation.data.qualifying
 
+import org.koin.core.annotation.Single
 import tmg.flashback.formula1.model.QualifyingType
 import tmg.flashback.formula1.model.Race
 
@@ -7,6 +8,7 @@ interface QualifyingDataMapper {
     operator fun invoke(race: Race): List<QualifyingModel>
 }
 
+@Single(binds = [QualifyingDataMapper::class])
 class QualifyingDataMapperImpl: QualifyingDataMapper {
     override fun invoke(race: Race): List<QualifyingModel> {
         return when {

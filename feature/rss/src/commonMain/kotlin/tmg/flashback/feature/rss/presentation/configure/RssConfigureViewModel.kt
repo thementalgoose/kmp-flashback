@@ -1,6 +1,8 @@
 package tmg.flashback.feature.rss.presentation.configure
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.KoinViewModel
+import org.koin.core.annotation.Provided
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -10,10 +12,11 @@ import tmg.flashback.feature.rss.repositories.RssRepository
 import tmg.flashback.feature.rss.usecases.GetSourcesUseCase
 import tmg.flashback.infrastructure.log.logInfo
 
+@KoinViewModel
 class RssConfigureViewModel(
     private val rssRepository: RssRepository,
     private val getSourcesUseCase: GetSourcesUseCase,
-    private val openWebpageUseCase: OpenWebpageUseCase
+    @Provided private val openWebpageUseCase: OpenWebpageUseCase
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<RssConfigureUiState> = MutableStateFlow(

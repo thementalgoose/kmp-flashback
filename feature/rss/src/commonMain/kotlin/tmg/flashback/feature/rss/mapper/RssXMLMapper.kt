@@ -1,5 +1,6 @@
 package tmg.flashback.feature.rss.mapper
 
+import org.koin.core.annotation.Single
 import com.mohamedrejeb.ksoup.html.parser.KsoupHtmlHandler
 import com.mohamedrejeb.ksoup.html.parser.KsoupHtmlParser
 import io.ktor.http.URLProtocol.Companion.HTTP
@@ -30,6 +31,7 @@ interface RssXMLMapper {
     ): List<Article>
 }
 
+@Single(binds = [RssXMLMapper::class])
 internal class RssXMLMapperImpl(
     private val supportedSourceMapper: SupportedSourceMapper
 ): RssXMLMapper {

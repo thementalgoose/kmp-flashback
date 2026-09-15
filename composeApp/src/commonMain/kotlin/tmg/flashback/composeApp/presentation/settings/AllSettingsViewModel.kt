@@ -1,6 +1,7 @@
 package tmg.flashback.composeApp.presentation.settings
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.KoinViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
@@ -9,6 +10,7 @@ import tmg.flashback.infrastructure.device.Platform
 import tmg.flashback.webbrowser.usecases.IsInAppBrowserEnabledUseCase
 import tmg.flashback.widgets.upnext.usecases.IsWidgetsEnabledUseCase
 
+@KoinViewModel
 class AllSettingsViewModel(
     isWidgetsEnabledUseCase: IsWidgetsEnabledUseCase,
     isRssEnabledUseCase: IsRssEnabledUseCase,

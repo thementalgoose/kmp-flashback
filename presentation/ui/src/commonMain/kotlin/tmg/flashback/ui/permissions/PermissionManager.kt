@@ -1,6 +1,7 @@
 package tmg.flashback.ui.permissions
 
 import kotlinx.coroutines.CompletableDeferred
+import org.koin.core.annotation.Single
 
 /**
  * Facade around moko.PermissionsController because it doesn't contain
@@ -16,6 +17,7 @@ interface PermissionManager {
 
 }
 
+@Single(binds = [PermissionManager::class])
 internal expect class PermissionManagerImpl(): PermissionManager {
 
     override suspend fun requestPermission(permission: Permission): CompletableDeferred<PermissionState>

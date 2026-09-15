@@ -1,12 +1,14 @@
 package tmg.flashback.composeApp.presentation.settings.widgets
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.KoinViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import tmg.flashback.feature.weekend.repositories.WeatherRepository
 import tmg.flashback.widgets.upnext.repositories.UpNextWidgetRepository
 
+@KoinViewModel
 class SettingsWidgetsViewModel(
     private val widgetsRepository: UpNextWidgetRepository
 ): ViewModel() {

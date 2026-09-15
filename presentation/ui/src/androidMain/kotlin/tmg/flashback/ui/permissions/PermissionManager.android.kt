@@ -6,11 +6,13 @@ import android.util.Log
 import androidx.activity.result.ActivityResultCallback
 import androidx.core.app.AlarmManagerCompat
 import kotlinx.coroutines.CompletableDeferred
+import org.koin.core.annotation.Single
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import tmg.flashback.ui.activity.ActivityProvider
 import tmg.flashback.ui.activity.BaseActivity
 
+@Single(binds = [PermissionManager::class])
 actual class PermissionManagerImpl actual constructor(): PermissionManager, KoinComponent {
 
     private var completableDeferred: CompletableDeferred<PermissionState>? = null

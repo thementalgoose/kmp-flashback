@@ -1,5 +1,6 @@
 package tmg.flashback.feature.weekend.presentation.data.sprint_qualifying
 
+import org.koin.core.annotation.Single
 import tmg.flashback.formula1.model.Race
 import tmg.flashback.formula1.model.SprintQualifyingType
 
@@ -7,6 +8,7 @@ interface SprintQualifyingDataMapper {
     operator fun invoke(race: Race): List<SprintQualifyingModel>
 }
 
+@Single(binds = [SprintQualifyingDataMapper::class])
 internal class SprintQualifyingDataMapperImpl(): SprintQualifyingDataMapper {
     override fun invoke(race: Race): List<SprintQualifyingModel> {
         val list = race.sprint.qualifying.firstOrNull { it.label == SprintQualifyingType.SQ3 } ?: return emptyList()

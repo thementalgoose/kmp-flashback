@@ -1,6 +1,7 @@
 package tmg.flashback.composeApp.presentation.settings.notifications.results
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.KoinViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,6 +18,7 @@ import tmg.flashback.ui.permissions.PermissionState.NotDetermined
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
+@KoinViewModel
 class SettingsNotificationResultsViewModel(
     private val notificationSettingsRepository: NotificationSettingsRepository,
     private val subscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase,

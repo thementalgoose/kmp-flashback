@@ -1,6 +1,8 @@
 package tmg.flashback.feature.reactiongame.presentation
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.KoinViewModel
+import org.koin.core.annotation.Provided
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.SupervisorJob
@@ -14,10 +16,11 @@ import tmg.flashback.analytics.usecases.LogEventUseCase
 import tmg.flashback.feature.reactiongame.manager.LightsOutDelayProvider
 import tmg.flashback.infrastructure.datetime.TimeManager
 
+@KoinViewModel
 class ReactionGameViewModel(
     private val lightsOutDelayProvider: LightsOutDelayProvider,
-    private val timeManager: TimeManager,
-    private val logEventUseCase: LogEventUseCase,
+    @Provided private val timeManager: TimeManager,
+    @Provided private val logEventUseCase: LogEventUseCase,
     private val ioDispatcher: CoroutineDispatcher = tmg.flashback.infrastructure.coroutines.ioDispatcher
 ): ViewModel() {
 

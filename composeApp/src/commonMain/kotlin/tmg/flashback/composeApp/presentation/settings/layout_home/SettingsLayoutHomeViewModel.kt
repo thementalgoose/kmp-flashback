@@ -1,12 +1,14 @@
 package tmg.flashback.composeApp.presentation.settings.layout_home
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.KoinViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import tmg.flashback.feature.highlights.repositories.HighlightsRepository
 import tmg.flashback.feature.season.repositories.CalendarRepository
 
+@KoinViewModel
 class SettingsLayoutHomeViewModel(
     private val calendarRepository: CalendarRepository,
     private val highlightsRepository: HighlightsRepository

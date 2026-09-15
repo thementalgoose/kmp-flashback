@@ -1,6 +1,7 @@
 package tmg.flashback.feature.circuits.presentation.circuit
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.Provided
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,8 +22,8 @@ import kotlin.coroutines.EmptyCoroutineContext
 @KoinViewModel
 class CircuitViewModel(
     private val circuitRepository: CircuitRepository,
-    private val openWebpageUseCase: OpenWebpageUseCase,
-    private val openLocationUseCase: OpenLocationUseCase,
+    @Provided private val openWebpageUseCase: OpenWebpageUseCase,
+    @Provided private val openLocationUseCase: OpenLocationUseCase,
     private val coroutineContext: CoroutineContext = EmptyCoroutineContext
 ): ViewModel() {
 

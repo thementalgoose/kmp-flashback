@@ -1,11 +1,14 @@
 package tmg.flashback.feature.privacypolicy.presentation
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.KoinViewModel
+import org.koin.core.annotation.Provided
 import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.feature.privacypolicy.repository.PrivacyRepository
 
+@KoinViewModel
 class PrivacyPolicyViewModel(
-    private val openWebpageUseCase: OpenWebpageUseCase,
+    @Provided private val openWebpageUseCase: OpenWebpageUseCase,
     private val privacyRepository: PrivacyRepository
 ): ViewModel() {
 

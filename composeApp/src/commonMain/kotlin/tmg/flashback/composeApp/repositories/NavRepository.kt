@@ -1,5 +1,6 @@
 package tmg.flashback.composeApp.repositories
 
+import org.koin.core.annotation.Single
 import tmg.flashback.composeApp.repositories.mapper.convert
 import tmg.flashback.composeApp.repositories.model.NavLink
 import tmg.flashback.composeApp.repositories.model.NavLinksJson
@@ -9,6 +10,7 @@ interface NavRepository {
     val navLinks: List<NavLink>
 }
 
+@Single(binds = [NavRepository::class])
 internal class NavRepositoryImpl(
     private val configManager: ConfigManager,
 ): NavRepository {

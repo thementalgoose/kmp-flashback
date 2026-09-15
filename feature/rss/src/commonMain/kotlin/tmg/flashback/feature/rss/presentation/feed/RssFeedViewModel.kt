@@ -1,6 +1,8 @@
 package tmg.flashback.feature.rss.presentation.feed
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.KoinViewModel
+import org.koin.core.annotation.Provided
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,14 +23,15 @@ import kotlin.Boolean
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
+@KoinViewModel
 class RSSFeedViewModel(
     private val rssRepository: RssRepository,
-    private val openWebpageUseCase: OpenWebpageUseCase,
-    private val shareWebpageUseCase: ShareWebpageUseCase,
+    @Provided private val openWebpageUseCase: OpenWebpageUseCase,
+    @Provided private val shareWebpageUseCase: ShareWebpageUseCase,
     private val getRssArticlesUseCase: GetRssArticlesUseCase,
-    private val isInAppBrowserEnabledUseCase: IsInAppBrowserEnabledUseCase,
-    private val webRepository: WebRepository,
-    private val timeManager: TimeManager,
+    @Provided private val isInAppBrowserEnabledUseCase: IsInAppBrowserEnabledUseCase,
+    @Provided private val webRepository: WebRepository,
+    @Provided private val timeManager: TimeManager,
     private val coroutineContext: CoroutineContext = EmptyCoroutineContext
 ): ViewModel() {
 

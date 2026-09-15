@@ -1,6 +1,8 @@
 package tmg.flashback.feature.weekend.presentation
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.Provided
+import org.koin.core.annotation.KoinViewModel
 import androidx.lifecycle.viewModelScope
 import flashback.presentation.localisation.generated.resources.Res
 import flashback.presentation.localisation.generated.resources.Res.string
@@ -39,6 +41,7 @@ import tmg.flashback.formula1.model.QualifyingType
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.ui.toasts.ToastManager
 
+@KoinViewModel
 class WeekendViewModel(
     private val racesRepository: RaceRepository,
     private val overviewRepository: OverviewRepository,
@@ -48,7 +51,7 @@ class WeekendViewModel(
     private val sprintQualifyingDataMapper: SprintQualifyingDataMapper,
     private val sprintRaceDataMapper: SprintRaceDataMapper,
     private val openWebpageUseCase: OpenWebpageUseCase,
-    private val openLocationUseCase: OpenLocationUseCase,
+    @Provided private val openLocationUseCase: OpenLocationUseCase,
     private val getPreviousRaceUseCase: GetPreviousRaceUseCase,
     private val analyticsManager: AnalyticsManager,
     private val toastManager: ToastManager

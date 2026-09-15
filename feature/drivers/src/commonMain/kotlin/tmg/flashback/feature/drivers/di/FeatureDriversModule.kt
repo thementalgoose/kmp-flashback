@@ -2,7 +2,8 @@ package tmg.flashback.feature.drivers.di
 
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
+import tmg.flashback.data.repo.di.DataFlashbackModule
 
-@Module
+@Module(includes = [DataFlashbackModule::class])
 @ComponentScan("tmg.flashback.feature.drivers")
 class FeatureDriversModule

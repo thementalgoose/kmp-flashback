@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.annotation.KoinViewModel
+import org.koin.core.annotation.Provided
 import tmg.flashback.analytics.usecases.LogEventUseCase
 import tmg.flashback.device.API_LINK
 import tmg.flashback.device.APPLE_STORE_LINK
@@ -22,12 +23,12 @@ import kotlin.math.log
 
 @KoinViewModel
 class AboutViewModel(
-    private val deviceRepository: DeviceRepository,
+    @Provided private val deviceRepository: DeviceRepository,
     private val notificationRepository: NotificationRepository,
-    private val copyToClipboardUseCase: CopyToClipboardUseCase,
-    private val openWebpageUseCase: OpenWebpageUseCase,
-    private val openEmailUseCase: OpenEmailUseCase,
-    private val logEventUseCase: LogEventUseCase,
+    @Provided private val copyToClipboardUseCase: CopyToClipboardUseCase,
+    @Provided private val openWebpageUseCase: OpenWebpageUseCase,
+    @Provided private val openEmailUseCase: OpenEmailUseCase,
+    @Provided private val logEventUseCase: LogEventUseCase,
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<AboutUiState> = MutableStateFlow(AboutUiState(

@@ -1,5 +1,6 @@
 package tmg.flashback.feature.weekend.presentation.data.info
 
+import org.koin.core.annotation.Single
 import kotlinx.datetime.LocalDate
 import tmg.flashback.feature.weekend.repositories.WeatherRepository
 import tmg.flashback.feature.weekend.repositories.WeekendRepository
@@ -10,6 +11,7 @@ import tmg.flashback.formula1.model.Schedule
 interface InfoDataMapper {
     operator fun invoke(race: Race): InfoModel
 }
+@Single(binds = [InfoDataMapper::class])
 internal class InfoDataMapperImpl(
     private val weatherRepository: WeatherRepository,
     private val weekendRepository: WeekendRepository

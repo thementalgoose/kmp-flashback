@@ -1,9 +1,11 @@
 package tmg.flashback.feature.rss.usecases
 
+import org.koin.core.annotation.Single
 import io.ktor.http.URLBuilder
 import tmg.flashback.feature.rss.models.SupportedSource
 import tmg.flashback.feature.rss.repositories.RssRepository
 
+@Single(binds = [GetSourcesUseCase::class])
 internal class GetSourcesUseCaseImpl(
     private val rssRepository: RssRepository
 ): GetSourcesUseCase {

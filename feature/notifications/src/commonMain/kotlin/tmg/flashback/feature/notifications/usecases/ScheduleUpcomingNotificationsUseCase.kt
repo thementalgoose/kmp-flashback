@@ -4,6 +4,7 @@ import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
+import org.koin.core.annotation.Single
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.feature.notifications.model.NotificationReminder
 import tmg.flashback.feature.notifications.model.NotificationUpcoming
@@ -22,6 +23,7 @@ interface ScheduleUpcomingNotificationsUseCase {
     suspend operator fun invoke(force: Boolean = false): ScheduleResult
 }
 
+@Single(binds = [ScheduleUpcomingNotificationsUseCase::class])
 internal class ScheduleUpcomingNotificationsUseCaseImpl(
     private val overviewRepository: OverviewRepository,
     private val notificationRepository: NotificationRepository,

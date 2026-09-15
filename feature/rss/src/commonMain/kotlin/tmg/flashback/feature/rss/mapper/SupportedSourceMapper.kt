@@ -1,6 +1,7 @@
 package tmg.flashback.feature.rss.mapper
 
 import io.ktor.http.Url
+import org.koin.core.annotation.Single
 import tmg.flashback.feature.rss.extensions.stripHTTP
 import tmg.flashback.feature.rss.extensions.stripWWW
 import tmg.flashback.feature.rss.models.ArticleSource
@@ -11,6 +12,7 @@ interface SupportedSourceMapper {
     operator fun invoke(rssLink: String?): ArticleSource?
 }
 
+@Single(binds = [SupportedSourceMapper::class])
 internal class SupportedSourceMapperImpl(
     private val rssRepository: RssRepository
 ): SupportedSourceMapper {

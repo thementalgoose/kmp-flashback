@@ -1,7 +1,10 @@
 package tmg.flashback.feature.weekend.di
 
-import org.koin.core.module.dsl.viewModel
-import org.koin.dsl.module
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
+import tmg.flashback.analytics.di.CoreMetricsAnalyticsModule
+import tmg.flashback.data.repo.di.DataFlashbackModule
+import tmg.flashback.device.di.CoreDeviceModule
 import tmg.flashback.feature.weekend.presentation.WeekendViewModel
 import tmg.flashback.feature.weekend.presentation.data.info.InfoDataMapper
 import tmg.flashback.feature.weekend.presentation.data.info.InfoDataMapperImpl
@@ -20,6 +23,6 @@ import tmg.flashback.feature.weekend.repositories.WeekendRepositoryImpl
 import tmg.flashback.feature.weekend.usecases.GetPreviousRaceUseCase
 import tmg.flashback.feature.weekend.usecases.GetPreviousRaceUseCaseImpl
 
-@Module
+@Module(includes = [CoreMetricsAnalyticsModule::class, CoreDeviceModule::class, DataFlashbackModule::class])
 @ComponentScan("tmg.flashback.feature.weekend")
 class FeatureWeekendModule

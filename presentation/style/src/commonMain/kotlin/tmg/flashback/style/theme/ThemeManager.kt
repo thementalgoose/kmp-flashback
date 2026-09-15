@@ -1,5 +1,7 @@
 package tmg.flashback.style.theme
 
+import org.koin.core.annotation.Provided
+import org.koin.core.annotation.Single
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.preferences.manager.PreferenceManager
 
@@ -8,8 +10,9 @@ interface ThemeManager {
     var currentNightMode: NightMode
 }
 
+@Single(binds = [ThemeManager::class])
 internal class ThemeManagerImpl(
-    private val preferenceManager: PreferenceManager
+    @Provided private val preferenceManager: PreferenceManager
 ): ThemeManager {
 
     companion object {

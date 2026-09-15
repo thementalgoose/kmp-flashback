@@ -1,5 +1,6 @@
 package tmg.flashback.feature.notifications.usecases
 
+import org.koin.core.annotation.Single
 import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
 import tmg.flashback.infrastructure.log.logDebug
@@ -15,6 +16,7 @@ interface SubscribeResultNotificationsUseCase {
     suspend operator fun invoke()
 }
 
+@Single(binds = [SubscribeResultNotificationsUseCase::class])
 internal class SubscribeResultNotificationsUseCaseImpl(
     private val notificationSettingsRepository: NotificationSettingsRepository,
     private val subscribeUseCase: RemoteNotificationsSubscribeUseCase,

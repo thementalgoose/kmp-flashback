@@ -1,5 +1,7 @@
 package tmg.flashback.feature.rss.repositories
 
+import org.koin.core.annotation.Provided
+import org.koin.core.annotation.Single
 import tmg.flashback.configuration.manager.ConfigManager
 import tmg.flashback.feature.rss.models.SupportedSource
 import tmg.flashback.feature.rss.repositories.mapper.convert
@@ -14,9 +16,10 @@ interface RssRepository {
     var rssShowDescription: Boolean
 }
 
+@Single(binds = [RssRepository::class])
 internal class RssRepositoryImpl(
-    private val configManager: ConfigManager,
-    private val preferenceManager: PreferenceManager
+    @Provided private val configManager: ConfigManager,
+    @Provided private val preferenceManager: PreferenceManager
 ): RssRepository {
 
     override val isEnabled: Boolean

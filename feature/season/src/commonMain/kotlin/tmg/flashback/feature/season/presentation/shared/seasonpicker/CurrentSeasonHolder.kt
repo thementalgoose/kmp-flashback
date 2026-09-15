@@ -1,5 +1,6 @@
 package tmg.flashback.feature.season.presentation.shared.seasonpicker
 
+import org.koin.core.annotation.Single
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.datetime.LocalDate
@@ -22,6 +23,7 @@ interface CurrentSeasonHolder {
     fun refresh()
 }
 
+@Single(binds = [CurrentSeasonHolder::class])
 class CurrentSeasonHolderImpl(
     private val defaultSeasonUseCase: DefaultSeasonUseCase,
     private val calendarRepository: CalendarRepository,

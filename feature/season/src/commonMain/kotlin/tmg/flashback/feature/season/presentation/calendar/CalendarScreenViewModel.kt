@@ -1,6 +1,7 @@
 package tmg.flashback.feature.season.presentation.calendar
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.KoinViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -19,6 +20,7 @@ import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeas
 import tmg.flashback.feature.season.repositories.CalendarRepository
 import tmg.flashback.infrastructure.log.logInfo
 
+@KoinViewModel
 class CalendarScreenViewModel(
     private val overviewRepository: OverviewRepository,
     private val raceRepository: RaceRepository,

@@ -1,11 +1,13 @@
 package tmg.flashback.composeApp.presentation.settings.browser
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.KoinViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import tmg.flashback.webbrowser.repository.WebRepository
 
+@KoinViewModel
 class SettingsBrowserViewModel(
     private val webRepository: WebRepository
 ): ViewModel() {

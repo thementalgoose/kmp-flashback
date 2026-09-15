@@ -1,13 +1,16 @@
 package tmg.flashback.feature.privacypolicy.repository
 
+import org.koin.core.annotation.Provided
+import org.koin.core.annotation.Single
 import tmg.flashback.configuration.manager.ConfigManager
 
 interface PrivacyRepository {
     val privacyPolicyUrl: String?
 }
 
+@Single(binds = [PrivacyRepository::class])
 internal class PrivacyRepositoryImpl(
-    private val configManager: ConfigManager
+    @Provided private val configManager: ConfigManager
 ): PrivacyRepository {
     
     override val privacyPolicyUrl: String?

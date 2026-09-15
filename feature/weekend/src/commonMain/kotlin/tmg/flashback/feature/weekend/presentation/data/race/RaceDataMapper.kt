@@ -1,5 +1,6 @@
 package tmg.flashback.feature.weekend.presentation.data.race
 
+import org.koin.core.annotation.Single
 import tmg.flashback.feature.weekend.presentation.data.ResultType
 import tmg.flashback.formula1.model.Race
 
@@ -7,6 +8,7 @@ interface RaceDataMapper {
     operator fun invoke(race: Race, resultType: ResultType): List<RaceModel>
 }
 
+@Single(binds = [RaceDataMapper::class])
 internal class RaceDataMapperImpl(): RaceDataMapper {
     override fun invoke(
         race: Race,

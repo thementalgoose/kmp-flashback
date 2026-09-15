@@ -1,5 +1,6 @@
 package tmg.flashback.notifications.repositories
 
+import org.koin.core.annotation.Single
 import tmg.flashback.preferences.manager.PreferenceManager
 
 interface NotificationRepository {
@@ -9,6 +10,7 @@ interface NotificationRepository {
 //    var notificationUuids: Set<String>
 }
 
+@Single(binds = [NotificationRepository::class])
 internal class NotificationRepositoryImpl(
     private val preferenceManager: PreferenceManager,
 ): NotificationRepository {

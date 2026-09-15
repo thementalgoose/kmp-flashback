@@ -1,7 +1,9 @@
 package tmg.flashback.composeApp.firebase
 
+import org.koin.core.annotation.Single
 import tmg.flashback.crashlytics.firebase.FirebaseCrashlyticsService
 
+@Single(binds = [FirebaseCrashlyticsService::class])
 internal expect class FirebaseCrashlyticsServiceImpl(): FirebaseCrashlyticsService {
     override fun setCrashlyticsCollectionEnabled(enabled: Boolean)
     override fun setCustomKey(key: String, value: String)

@@ -1,12 +1,14 @@
 package tmg.flashback.feature.season.presentation.shared.device_time
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.KoinViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.datetime.TimeZone
 import tmg.flashback.feature.season.repositories.CalendarRepository
 
+@KoinViewModel
 class DeviceTimeViewModel(
     private val calendarRepository: CalendarRepository
 ): ViewModel() {

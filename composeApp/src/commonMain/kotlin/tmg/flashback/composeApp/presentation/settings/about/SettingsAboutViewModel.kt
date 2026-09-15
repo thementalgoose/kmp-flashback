@@ -1,6 +1,8 @@
 package tmg.flashback.composeApp.presentation.settings.about
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.KoinViewModel
+import org.koin.core.annotation.Provided
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.settings_pref_reset_toast
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,10 +16,11 @@ import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.composeApp.repositories.OnboardingRepository
 import tmg.flashback.ui.toasts.ToastManager
 
+@KoinViewModel
 class SettingsAboutViewModel(
-    private val openStorePageUseCase: OpenStorePageUseCase,
-    private val openEmailUseCase: OpenEmailUseCase,
-    private val openWebpageUseCase: OpenWebpageUseCase,
+    @Provided private val openStorePageUseCase: OpenStorePageUseCase,
+    @Provided private val openEmailUseCase: OpenEmailUseCase,
+    @Provided private val openWebpageUseCase: OpenWebpageUseCase,
     private val onboardingRepository: OnboardingRepository,
     private val deviceRepository: DeviceRepository,
     private val toastManager: ToastManager

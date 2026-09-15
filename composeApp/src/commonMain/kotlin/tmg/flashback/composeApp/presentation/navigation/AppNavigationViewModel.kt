@@ -1,6 +1,8 @@
 package tmg.flashback.composeApp.presentation.navigation
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.KoinViewModel
+import org.koin.core.annotation.Provided
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
@@ -22,6 +24,7 @@ import tmg.flashback.composeApp.usecases.RequiresSyncUseCase
 import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.navigation.isList
 
+@KoinViewModel
 class AppNavigationViewModel(
     isRssEnabledUseCase: IsRssEnabledUseCase,
     isMenuIconEnabledUseCase: IsMenuIconEnabledUseCase,
@@ -31,8 +34,8 @@ class AppNavigationViewModel(
     requiresSyncUseCase: RequiresSyncUseCase,
     maintenanceRepository: MaintenanceRepository,
     navRepository: NavRepository,
-    private val openWebpageUseCase: OpenWebpageUseCase,
-    private val openStorePageUseCase: OpenStorePageUseCase,
+    @Provided private val openWebpageUseCase: OpenWebpageUseCase,
+    @Provided private val openStorePageUseCase: OpenStorePageUseCase,
 ): ViewModel() {
 
     val easterEggs = AppNavigationEasterEggs(

@@ -8,10 +8,12 @@ import kotlinx.coroutines.launch
 import multiplatform.network.cmptoast.ToastDuration
 import multiplatform.network.cmptoast.ToastGravity
 import multiplatform.network.cmptoast.showToast
+import org.koin.core.annotation.Single
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.getString
 import tmg.flashback.infrastructure.coroutines.ioDispatcher
 
+@Single(binds = [ToastManager::class])
 class ToastManagerImpl: ToastManager {
 
     private val scope = CoroutineScope(Dispatchers.Main)

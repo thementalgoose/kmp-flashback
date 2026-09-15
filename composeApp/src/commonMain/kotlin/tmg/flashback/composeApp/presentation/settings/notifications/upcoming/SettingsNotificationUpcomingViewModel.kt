@@ -1,6 +1,7 @@
 package tmg.flashback.composeApp.presentation.settings.notifications.upcoming
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.KoinViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,6 +19,7 @@ import tmg.flashback.ui.permissions.PermissionState
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
+@KoinViewModel
 class SettingsNotificationUpcomingViewModel(
     private val notificationSettingsRepository: NotificationSettingsRepository,
     private val scheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase,

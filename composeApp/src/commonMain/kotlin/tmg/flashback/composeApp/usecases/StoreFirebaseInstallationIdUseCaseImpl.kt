@@ -1,9 +1,11 @@
 package tmg.flashback.composeApp.usecases
 
+import org.koin.core.annotation.Single
 import tmg.flashback.device.repositories.DeviceRepository
 import tmg.flashback.composeApp.firebase.FirebaseInstallationService
 import tmg.flashback.infrastructure.log.logDebug
 
+@Single(binds = [StoreFirebaseInstallationIdUseCase::class])
 class StoreFirebaseInstallationIdUseCaseImpl(
     private val deviceRepository: DeviceRepository,
     private val firebaseInstallationService: FirebaseInstallationService

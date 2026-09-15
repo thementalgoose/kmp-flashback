@@ -1,6 +1,7 @@
 package tmg.flashback.composeApp.presentation.sync
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.KoinViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,6 +26,7 @@ import tmg.flashback.composeApp.repositories.OnboardingRepository
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
+@KoinViewModel
 class SyncViewModel(
     private val circuitRepository: CircuitRepository,
     private val constructorRepository: ConstructorRepository,

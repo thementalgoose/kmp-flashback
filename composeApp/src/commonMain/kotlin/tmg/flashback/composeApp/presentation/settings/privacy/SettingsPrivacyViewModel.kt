@@ -1,6 +1,7 @@
 package tmg.flashback.composeApp.presentation.settings.privacy
 
 import androidx.lifecycle.ViewModel
+import org.koin.core.annotation.KoinViewModel
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.settings_restart_app_required
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,6 +11,7 @@ import tmg.flashback.analytics.repositories.AnalyticsRepository
 import tmg.flashback.crashlytics.repositories.CrashlyticsRepository
 import tmg.flashback.ui.toasts.ToastManager
 
+@KoinViewModel
 class SettingsPrivacyViewModel(
     private val crashlyticsRepository: CrashlyticsRepository,
     private val analyticsRepository: AnalyticsRepository,
