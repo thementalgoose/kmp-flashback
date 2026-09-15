@@ -1,5 +1,6 @@
 package tmg.flashback.feature.notifications.repositories
 
+import org.koin.core.annotation.Single
 import tmg.flashback.feature.notifications.model.NotificationReminder
 import tmg.flashback.feature.notifications.model.NotificationReminder.MINUTES_30
 import tmg.flashback.feature.notifications.model.NotificationReminder.MINUTES_60
@@ -15,6 +16,7 @@ interface NotificationSettingsRepository {
     var notificationPromptSeen: Boolean
 }
 
+@Single(binds = [NotificationSettingsRepository::class])
 internal class NotificationSettingsRepositoryImpl(
     private val preferenceManager: PreferenceManager
 ): NotificationSettingsRepository {

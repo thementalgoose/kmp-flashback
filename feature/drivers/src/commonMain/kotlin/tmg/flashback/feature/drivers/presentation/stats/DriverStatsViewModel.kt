@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.data.repo.repository.DriverRepository
 import tmg.flashback.feature.drivers.presentation.stats.DriverStatBuilder.getOverallStats
 import tmg.flashback.feature.drivers.presentation.stats.DriverStatBuilder.getSeasonStats
@@ -20,6 +21,7 @@ import tmg.flashback.formula1.model.DriverHistorySeason
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
+@KoinViewModel
 class DriverStatsViewModel(
     private val driverRepository: DriverRepository,
     private val coroutineContext: CoroutineContext = EmptyCoroutineContext

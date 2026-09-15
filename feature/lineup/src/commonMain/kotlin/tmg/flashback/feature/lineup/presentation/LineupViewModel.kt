@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.data.repo.repository.LineupRepository
 import tmg.flashback.formula1.model.LineupOverview
 import tmg.flashback.formula1.model.LineupSeason
@@ -15,6 +16,7 @@ import kotlin.collections.emptyList
 import kotlin.collections.map
 import kotlin.to
 
+@KoinViewModel
 class LineupViewModel(
     private val lineupRepository: LineupRepository
 ): ViewModel() {

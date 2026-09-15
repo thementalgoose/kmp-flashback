@@ -1,12 +1,10 @@
 package tmg.flashback.tracking.di
 
-import org.koin.core.module.dsl.singleOf
-import org.koin.dsl.module
-import tmg.flashback.tracking.manager.TrackingManager
-import tmg.flashback.tracking.manager.TrackingManagerImpl
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
 
-val coreTrackingModule = listOf(module(), platformModule())
+@Module
+@ComponentScan("tmg.flashback.tracking")
+class CoreTrackingModule
 
-internal fun module() = module {
-    singleOf<TrackingManager>(::TrackingManagerImpl)
-}
+val trackingPlatformModule = platformModule()

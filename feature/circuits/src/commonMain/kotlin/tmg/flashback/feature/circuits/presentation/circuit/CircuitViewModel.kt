@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.KoinViewModel
 import kotlinx.datetime.LocalDate
 import tmg.flashback.data.repo.repository.CircuitRepository
 import tmg.flashback.device.usecases.OpenLocationUseCase
@@ -17,6 +18,7 @@ import tmg.flashback.infrastructure.datetime.now
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
+@KoinViewModel
 class CircuitViewModel(
     private val circuitRepository: CircuitRepository,
     private val openWebpageUseCase: OpenWebpageUseCase,

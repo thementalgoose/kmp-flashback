@@ -1,29 +1,10 @@
 package tmg.flashback.notifications.di
 
-import org.koin.core.module.dsl.singleOf
-import org.koin.dsl.module
-import tmg.flashback.notifications.manager.NotificationManager
-import tmg.flashback.notifications.manager.NotificationManagerImpl
-import tmg.flashback.notifications.repositories.NotificationRepository
-import tmg.flashback.notifications.repositories.NotificationRepositoryImpl
-import tmg.flashback.notifications.usecases.LocalNotificationsCancelUseCase
-import tmg.flashback.notifications.usecases.LocalNotificationsCancelUseCaseImpl
-import tmg.flashback.notifications.usecases.LocalNotificationsScheduleUseCase
-import tmg.flashback.notifications.usecases.LocalNotificationsScheduleUseCaseImpl
-import tmg.flashback.notifications.usecases.RemoteNotificationsSubscribeUseCase
-import tmg.flashback.notifications.usecases.RemoteNotificationsSubscribeUseCaseImpl
-import tmg.flashback.notifications.usecases.RemoteNotificationsUnsubscribeUseCase
-import tmg.flashback.notifications.usecases.RemoteNotificationsUnsubscribeUseCaseImpl
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
 
-val coreNotificationsModule = listOf(module(), platformModule())
+@Module
+@ComponentScan("tmg.flashback.notifications")
+class CoreNotificationsModule
 
-internal fun module() = module {
-    singleOf<NotificationManager>(::NotificationManagerImpl)
-
-    single<NotificationRepository> { NotificationRepositoryImpl(get()) }
-
-    single<LocalNotificationsScheduleUseCase> { LocalNotificationsScheduleUseCaseImpl(get()) }
-    single<LocalNotificationsCancelUseCase> { LocalNotificationsCancelUseCaseImpl(get(), get()) }
-    single<RemoteNotificationsUnsubscribeUseCase> { RemoteNotificationsUnsubscribeUseCaseImpl(get(), get()) }
-    single<RemoteNotificationsSubscribeUseCase> { RemoteNotificationsSubscribeUseCaseImpl(get(), get()) }
-}
+val notificationsPlatformModule = platformModule()

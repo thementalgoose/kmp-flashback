@@ -1,11 +1,10 @@
 package tmg.flashback.preferences.di
 
-import org.koin.dsl.module
-import tmg.flashback.preferences.manager.PreferenceManager
-import tmg.flashback.preferences.manager.PreferenceManagerImpl
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
 
-val corePreferencesModule = listOf(platformModule(), module())
+@Module
+@ComponentScan("tmg.flashback.preferences")
+class CorePreferencesModule
 
-internal fun module() = module {
-    single<PreferenceManager> { PreferenceManagerImpl(get()) }
-}
+val preferencesPlatformModule = platformModule()

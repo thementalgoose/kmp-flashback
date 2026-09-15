@@ -16,18 +16,6 @@ import tmg.flashback.feature.season.repositories.CalendarRepositoryImpl
 import tmg.flashback.feature.season.usecases.DefaultSeasonUseCase
 import tmg.flashback.feature.season.usecases.DefaultSeasonUseCaseImpl
 
-val featureSeasonModule = listOf(module())
-
-internal fun module() = module {
-    viewModel { ProvidedByViewModel(get()) }
-    viewModel { DriverStandingsViewModel(get(), get(), get(), get()) }
-    viewModel { TeamStandingsViewModel(get(), get(), get(), get()) }
-    viewModel { CalendarScreenViewModel(get(), get(), get(), get(), get(), get()) }
-    viewModel { SeasonPickerViewModel(get()) }
-    viewModel { DeviceTimeViewModel(get()) }
-    single<CurrentSeasonHolder> { CurrentSeasonHolderImpl(get(), get(), get()) }
-
-    single<CalendarRepository> { CalendarRepositoryImpl(get()) }
-
-    single<DefaultSeasonUseCase> { DefaultSeasonUseCaseImpl(get(), get()) }
-}
+@Module
+@ComponentScan("tmg.flashback.feature.season")
+class FeatureSeasonModule

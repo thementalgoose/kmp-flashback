@@ -1,11 +1,8 @@
 package tmg.flashback.feature.maintenance.di
 
-import org.koin.dsl.module
-import tmg.flashback.feature.maintenance.repository.MaintenanceRepository
-import tmg.flashback.feature.maintenance.repository.MaintenanceRepositoryImpl
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
 
-val featureMaintenanceModule = listOf(module())
-
-internal fun module() = module {
-    single<MaintenanceRepository> { MaintenanceRepositoryImpl(get()) }
-}
+@Module
+@ComponentScan("tmg.flashback.feature.maintenance")
+class FeatureMaintenanceModule

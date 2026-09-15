@@ -20,19 +20,6 @@ import tmg.flashback.feature.weekend.repositories.WeekendRepositoryImpl
 import tmg.flashback.feature.weekend.usecases.GetPreviousRaceUseCase
 import tmg.flashback.feature.weekend.usecases.GetPreviousRaceUseCaseImpl
 
-val featureWeekendModule = listOf(module())
-
-internal fun module() = module {
-    viewModel { WeekendViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
-
-    single<WeatherRepository> { WeatherRepositoryImpl(get()) }
-    single<WeekendRepository> { WeekendRepositoryImpl(get()) }
-    single<GetPreviousRaceUseCase> { GetPreviousRaceUseCaseImpl(get()) }
-
-    single<InfoDataMapper> { InfoDataMapperImpl(get(), get()) }
-    single<QualifyingDataMapper> { QualifyingDataMapperImpl() }
-    single<RaceDataMapper> { RaceDataMapperImpl() }
-    single<SprintQualifyingDataMapper> { SprintQualifyingDataMapperImpl() }
-    single<SprintRaceDataMapper> { SprintRaceDataMapperImpl() }
-
-}
+@Module
+@ComponentScan("tmg.flashback.feature.weekend")
+class FeatureWeekendModule

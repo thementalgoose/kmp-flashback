@@ -1,30 +1,10 @@
 package tmg.flashback.persistence.flashback.di
 
-import kotlinx.coroutines.Dispatchers
-import org.koin.dsl.module
-import tmg.flashback.persistence.flashback.FlashbackDatabase
-import tmg.flashback.persistence.flashback.FlashbackDatabaseFactory
-import tmg.flashback.persistence.flashback.Migrations
-import tmg.flashback.infrastructure.coroutines.ioDispatcher
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
 
-val dataPersistenceFlashbackModule = listOf(
-    platformModule(),
-    module()
-)
+@Module
+@ComponentScan("tmg.flashback.persistence.flashback")
+class FlashbackDBModule
 
-internal fun module() = module {
-    single<FlashbackDatabase> {
-
-        val migrationsArray = Migrations.entries
-            .map { it.migration }
-            .toTypedArray()
-        val factory = get<FlashbackDatabaseFactory>()
-
-        return@single factory
-            .createDatabase()
-            .setDriver(factory.getSQLiteDriver())
-            .setQueryCoroutineContext(ioDispatcher)
-            .addMigrations(*migrationsArray)
-            .build()
-    }
-}
+val persistencePlatformModule = platformModule()

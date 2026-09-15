@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.data.repo.repository.RaceRepository
 import tmg.flashback.data.repo.repository.SeasonRepository
 import tmg.flashback.data.repo.repository.StandingsRepository
@@ -17,6 +18,7 @@ import tmg.flashback.formula1.model.SeasonDriverStandings
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
+@KoinViewModel
 class DriverComparisonViewModel(
     private val standingsRepository: StandingsRepository,
     private val seasonRepository: SeasonRepository,

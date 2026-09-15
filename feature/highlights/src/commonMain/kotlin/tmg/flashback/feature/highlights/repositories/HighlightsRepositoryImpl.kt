@@ -1,7 +1,9 @@
 package tmg.flashback.feature.highlights.repositories
 
+import org.koin.core.annotation.Single
 import tmg.flashback.preferences.manager.PreferenceManager
 
+@Single(binds = [HighlightsRepository::class])
 class HighlightsRepositoryImpl(
     private val preferenceManager: PreferenceManager
 ): HighlightsRepository {

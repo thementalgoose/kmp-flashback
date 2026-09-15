@@ -10,12 +10,14 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.data.repo.repository.CircuitRepository
 import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.infrastructure.log.logInfo
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
+@KoinViewModel
 class AllCircuitsViewModel(
     private val circuitRepository: CircuitRepository,
     private val coroutineContext: CoroutineContext = EmptyCoroutineContext

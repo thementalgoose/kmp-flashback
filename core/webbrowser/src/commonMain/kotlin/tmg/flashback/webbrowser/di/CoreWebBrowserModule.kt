@@ -1,17 +1,10 @@
 package tmg.flashback.webbrowser.di
 
-import org.koin.core.module.dsl.viewModel
-import org.koin.dsl.module
-import tmg.flashback.webbrowser.presentation.WebViewViewModel
-import tmg.flashback.webbrowser.repository.WebRepository
-import tmg.flashback.webbrowser.repository.WebRepositoryImpl
-import tmg.flashback.webbrowser.usecases.IsInAppBrowserEnabledUseCase
-import tmg.flashback.webbrowser.usecases.IsInAppBrowserEnabledUseCaseImpl
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
 
-val coreWebBrowserModule = listOf(modules(), platformModule())
+@Module
+@ComponentScan("tmg.flashback.webbrowser")
+class CoreWebBrowserModule
 
-internal fun modules() = module {
-    single<WebRepository> { WebRepositoryImpl(get()) }
-    viewModel { WebViewViewModel(get(), get(), get()) }
-    single<IsInAppBrowserEnabledUseCase> { IsInAppBrowserEnabledUseCaseImpl() }
-}
+val webBrowserPlatformModule = platformModule()

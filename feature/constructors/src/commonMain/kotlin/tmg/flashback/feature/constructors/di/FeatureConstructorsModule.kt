@@ -1,11 +1,8 @@
 package tmg.flashback.feature.constructors.di
 
-import org.koin.core.module.dsl.viewModel
-import org.koin.dsl.module
-import tmg.flashback.feature.constructors.presentation.stats.ConstructorStatsViewModel
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
 
-val featureConstructorsModule = listOf(module())
-
-internal fun module() = module {
-    viewModel { ConstructorStatsViewModel(get()) }
-}
+@Module
+@ComponentScan("tmg.flashback.feature.constructors")
+class FeatureConstructorsModule

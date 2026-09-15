@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.data.repo.repository.ConstructorRepository
 import tmg.flashback.feature.constructors.presentation.stats.ConstructorStatBuilder.getOverallStats
 import tmg.flashback.feature.constructors.presentation.stats.ConstructorStatBuilder.getSeasonStats
@@ -19,6 +20,7 @@ import tmg.flashback.formula1.model.ConstructorHistorySeason
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
+@KoinViewModel
 class ConstructorStatsViewModel(
     private val constructorRepository: ConstructorRepository,
     private val coroutineContext: CoroutineContext = EmptyCoroutineContext

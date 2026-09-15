@@ -1,11 +1,13 @@
 package tmg.flashback.feature.highlights.domain
 
+import org.koin.core.annotation.Single
 import tmg.flashback.feature.highlights.domain.models.NewsItem
 import tmg.flashback.infrastructure.datetime.requireFromDate
 import tmg.flashback.infrastructure.log.logException
 import tmg.flashback.news.api.FlashbackNewsApi
 import tmg.flashback.news.models.news.News
 
+@Single(binds = [GetNewsItemsUseCase::class])
 class GetNewsItemsUseCaseImpl(
     private val flashbackNewsApi: FlashbackNewsApi
 ): GetNewsItemsUseCase {

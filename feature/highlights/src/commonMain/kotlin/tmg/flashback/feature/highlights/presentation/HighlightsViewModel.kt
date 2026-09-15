@@ -7,12 +7,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.feature.highlights.domain.GetNewsItemsUseCase
 import tmg.flashback.feature.highlights.repositories.HighlightsRepository
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
+@KoinViewModel
 class HighlightsViewModel(
     private val getNewsItemsUseCase: GetNewsItemsUseCase,
     private val highlightsRepository: HighlightsRepository,

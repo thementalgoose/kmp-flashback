@@ -8,47 +8,53 @@ import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import org.koin.plugin.module.dsl.modules
 import tmg.flashback.composeApp.AppStartup
-import tmg.flashback.analytics.di.coreMetricsAnalyticsModule
+import tmg.flashback.analytics.di.CoreMetricsAnalyticsModule
+import tmg.flashback.analytics.di.analyticsPlatformModule
 import tmg.flashback.analytics.firebase.FirebaseAnalyticsService
-import tmg.flashback.configuration.di.coreConfigurationModule
+import tmg.flashback.configuration.di.ConfigurationModule
+import tmg.flashback.configuration.di.configurationPlatformModule
 import tmg.flashback.configuration.firebase.FirebaseRemoteConfigService
-import tmg.flashback.crashlytics.di.coreMetricsCrashlyticsModule
+import tmg.flashback.crashlytics.di.CoreMetricsCrashlyticsModule
+import tmg.flashback.crashlytics.di.crashlyticsPlatformModule
 import tmg.flashback.crashlytics.firebase.FirebaseCrashlyticsService
-import tmg.flashback.data.repo.di.dataFlashbackModule
-import tmg.flashback.device.di.coreDeviceModules
+import tmg.flashback.data.repo.di.DataFlashbackModule
+import tmg.flashback.device.di.CoreDeviceModule
 import tmg.flashback.device.manager.UiManager
-import tmg.flashback.eastereggs.di.easterEggsModule
+import tmg.flashback.eastereggs.di.EasterEggsModule
 import tmg.flashback.feature.about.di.FeatureAboutModule
-import tmg.flashback.feature.circuits.di.featureCircuitsModule
-import tmg.flashback.feature.constructors.di.featureConstructorsModule
+import tmg.flashback.feature.circuits.di.FeatureCircuitsModule
+import tmg.flashback.feature.constructors.di.FeatureConstructorsModule
 import tmg.flashback.feature.glossary.di.FeatureGlossaryModule
-import tmg.flashback.feature.lineup.di.featureLineupModule
-import tmg.flashback.feature.drivers.di.featureDriversModule
-import tmg.flashback.feature.maintenance.di.featureMaintenanceModule
-import tmg.flashback.feature.notifications.di.featureNotificationsModule
-import tmg.flashback.feature.privacypolicy.di.featurePrivacyPolicyModule
-import tmg.flashback.feature.reactiongame.di.featureReactionGameModule
-import tmg.flashback.feature.rss.di.featureRssModule
-import tmg.flashback.feature.search.di.featureSearchModule
-import tmg.flashback.feature.season.di.featureSeasonModule
-import tmg.flashback.feature.weekend.di.featureWeekendModule
+import tmg.flashback.feature.lineup.di.FeatureLineupModule
+import tmg.flashback.feature.drivers.di.FeatureDriversModule
+import tmg.flashback.feature.maintenance.di.FeatureMaintenanceModule
+import tmg.flashback.feature.notifications.di.FeatureNotificationsModule
+import tmg.flashback.feature.privacypolicy.di.FeaturePrivacyPolicyModule
+import tmg.flashback.feature.reactiongame.di.FeatureReactionModule
+import tmg.flashback.feature.rss.di.FeatureRssModule
+import tmg.flashback.feature.search.di.FeatureSearchModule
+import tmg.flashback.feature.season.di.FeatureSeasonModule
+import tmg.flashback.feature.weekend.di.FeatureWeekendModule
 import tmg.flashback.composeApp.firebase.FirebaseAnalyticsServiceImpl
 import tmg.flashback.composeApp.firebase.FirebaseCrashlyticsServiceImpl
 import tmg.flashback.composeApp.firebase.FirebaseMessagingServiceImpl
 import tmg.flashback.composeApp.firebase.FirebaseRemoteConfigServiceImpl
-import tmg.flashback.flashbackapi.api.di.dataNetworkFlashbackModule
-import tmg.flashback.feature.highlights.di.featureHighlightsModule
+import tmg.flashback.flashbackapi.api.di.FlashbackApiModule
+import tmg.flashback.feature.highlights.di.FeatureHighlightsModule
 import tmg.flashback.composeApp.firebase.FirebaseInstallationService
 import tmg.flashback.composeApp.firebase.FirebaseInstallationServiceImpl
 import tmg.flashback.infrastructure.di.InfrastructureModule
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.composeApp.manager.UiManagerImpl
-import tmg.flashback.network.rss.di.dataNetworkRssModule
-import tmg.flashback.news.di.dataNetworkFlashbackNewsModule
-import tmg.flashback.notifications.di.coreNotificationsModule
+import tmg.flashback.network.rss.di.DataNetworkRssModule
+import tmg.flashback.news.di.FlashbackNewsModule
+import tmg.flashback.notifications.di.CoreNotificationsModule
+import tmg.flashback.notifications.di.notificationsPlatformModule
 import tmg.flashback.notifications.firebase.FirebaseMessagingService
-import tmg.flashback.persistence.flashback.di.dataPersistenceFlashbackModule
-import tmg.flashback.preferences.di.corePreferencesModule
+import tmg.flashback.persistence.flashback.di.FlashbackDBModule
+import tmg.flashback.persistence.flashback.di.persistencePlatformModule
+import tmg.flashback.preferences.di.CorePreferencesModule
+import tmg.flashback.preferences.di.preferencesPlatformModule
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.composeApp.presentation.settings.AllSettingsViewModel
 import tmg.flashback.composeApp.presentation.settings.about.SettingsAboutViewModel
@@ -66,14 +72,17 @@ import tmg.flashback.composeApp.repositories.NavRepository
 import tmg.flashback.composeApp.repositories.NavRepositoryImpl
 import tmg.flashback.composeApp.repositories.OnboardingRepository
 import tmg.flashback.composeApp.repositories.OnboardingRepositoryImpl
-import tmg.flashback.style.di.presentationStyleModule
-import tmg.flashback.ui.di.presentationUiModule
+import tmg.flashback.style.di.PresentationStyleModule
+import tmg.flashback.ui.di.PresentationUiModule
+import tmg.flashback.ui.di.presentationUiPlatformModule
 import tmg.flashback.composeApp.usecases.RequiresSyncUseCase
 import tmg.flashback.composeApp.usecases.RequiresSyncUseCaseImpl
 import tmg.flashback.composeApp.usecases.StoreFirebaseInstallationIdUseCase
 import tmg.flashback.composeApp.usecases.StoreFirebaseInstallationIdUseCaseImpl
-import tmg.flashback.webbrowser.di.coreWebBrowserModule
-import tmg.flashback.widgets.upnext.di.featureWidgetUpNextModule
+import tmg.flashback.webbrowser.di.CoreWebBrowserModule
+import tmg.flashback.webbrowser.di.webBrowserPlatformModule
+import tmg.flashback.widgets.upnext.di.FeatureWidgetUpNextModule
+import tmg.flashback.widgets.upnext.di.widgetUpNextPlatformModule
 
 fun doInitKoin() {
     doInitKoin { }
@@ -82,43 +91,52 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
     logInfo("Initialising Koin")
     startKoin {
         platformModules(this)
-        modules(coreConfigurationModule)
-        modules(coreDeviceModules)
-        modules(coreMetricsCrashlyticsModule)
-        modules(coreMetricsAnalyticsModule)
-        modules(coreNotificationsModule)
+        modules(ConfigurationModule::class)
+        modules(configurationPlatformModule)
+        modules(CoreDeviceModule::class)
+        modules(CoreMetricsCrashlyticsModule::class)
+        modules(crashlyticsPlatformModule)
+        modules(CoreMetricsAnalyticsModule::class)
+        modules(analyticsPlatformModule)
+        modules(CoreNotificationsModule::class)
+        modules(notificationsPlatformModule)
         modules(corePreferencesModule)
-        modules(coreWebBrowserModule)
+        modules(CoreWebBrowserModule::class)
+        modules(preferencesPlatformModule)
+        modules(webBrowserPlatformModule)
 
-        modules(dataFlashbackModule)
-        modules(dataNetworkFlashbackModule)
-        modules(dataNetworkFlashbackNewsModule)
-        modules(dataNetworkRssModule)
-        modules(dataPersistenceFlashbackModule)
+        modules(DataFlashbackModule::class)
+        modules(FlashbackApiModule::class)
+        modules(FlashbackNewsModule::class)
+        modules(DataNetworkRssModule::class)
+        modules(FlashbackDBModule::class)
+        modules(persistencePlatformModule)
 
-        modules(easterEggsModule)
+        modules(EasterEggsModule::class)
 
         modules(InfrastructureModule::class)
 
         modules(FeatureAboutModule::class)
-        modules(featureCircuitsModule)
-        modules(featureConstructorsModule)
-        modules(featureDriversModule)
+        modules(FeatureCircuitsModule::class)
+        modules(FeatureConstructorsModule::class)
+        modules(FeatureDriversModule::class)
         modules(FeatureGlossaryModule::class)
-        modules(featureHighlightsModule)
-        modules(featureLineupModule)
-        modules(featureMaintenanceModule)
-        modules(featureNotificationsModule)
-        modules(featurePrivacyPolicyModule)
-        modules(featureReactionGameModule)
-        modules(featureRssModule)
-        modules(featureSearchModule)
-        modules(featureSeasonModule)
-        modules(featureWeekendModule)
-        modules(featureWidgetUpNextModule)
+        modules(FeatureHighlightsModule::class)
+        modules(FeatureLineupModule::class)
+        modules(FeatureMaintenanceModule::class)
+        modules(FeatureNotificationsModule::class)
+        modules(FeaturePrivacyPolicyModule::class)
+        modules(FeatureReactionModule::class)
+        modules(FeatureRssModule::class)
+        modules(FeatureSearchModule::class)
+        modules(FeatureSeasonModule::class)
+        modules(FeatureWeekendModule::class)
+        modules(FeatureWidgetUpNextModule::class)
+        modules(widgetUpNextPlatformModule)
 
-        modules(presentationStyleModule)
+        modules(PresentationStyleModule::class)
         modules(presentationUiModule)
+        modules(presentationUiPlatformModule)
 
         modules(module())
         modules(platformModule())
