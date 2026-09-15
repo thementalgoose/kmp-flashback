@@ -4,11 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
+import org.koin.core.annotation.Single
 import org.koin.java.KoinJavaComponent
 import tmg.flashback.analytics.firebase.FirebaseAnalyticsService
 import kotlin.reflect.KClass
 
-internal actual class FirebaseAnalyticsServiceImpl actual constructor(): FirebaseAnalyticsService {
+@Single(binds = [FirebaseAnalyticsService::class])
+actual class FirebaseAnalyticsServiceImpl actual constructor(): FirebaseAnalyticsService {
 
     private fun getApplicationContext(): Context {
         return KoinJavaComponent.get(Context::class.java)

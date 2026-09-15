@@ -1,11 +1,13 @@
 package tmg.flashback.composeApp.firebase
 
+import org.koin.core.annotation.Single
 import tmg.flashback.analytics.firebase.FirebaseAnalyticsService
 import tmg.flashback.configuration.firebase.FirebaseRemoteConfigService
 import tmg.flashback.crashlytics.firebase.FirebaseCrashlyticsService
 import tmg.flashback.notifications.firebase.FirebaseMessagingService
 
-internal actual class FirebaseAnalyticsServiceImpl actual constructor() : FirebaseAnalyticsService {
+@Single(binds = [FirebaseAnalyticsService::class])
+actual class FirebaseAnalyticsServiceImpl actual constructor() : FirebaseAnalyticsService {
     actual override fun setUserId(userId: String) { }
     actual override fun setAnalyticsCollectionEnabled(enabled: Boolean) { }
     actual override fun logEvent(event: String, params: Map<String, String>) { }

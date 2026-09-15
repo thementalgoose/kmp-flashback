@@ -1,5 +1,6 @@
 package tmg.flashback.composeApp.firebase
 
+import org.koin.core.annotation.Single
 import cocoapods.FirebaseAnalytics.FIRAnalytics
 import cocoapods.FirebaseAnalytics.kFIRParameterScreenClass
 import cocoapods.FirebaseAnalytics.kFIRParameterScreenName
@@ -8,7 +9,8 @@ import tmg.flashback.analytics.firebase.FirebaseAnalyticsService
 import kotlin.reflect.KClass
 
 @OptIn(ExperimentalForeignApi::class)
-internal actual class FirebaseAnalyticsServiceImpl actual constructor(): FirebaseAnalyticsService {
+@Single(binds = [FirebaseAnalyticsService::class])
+actual class FirebaseAnalyticsServiceImpl actual constructor(): FirebaseAnalyticsService {
 
     actual override fun setUserId(userId: String) {
         FIRAnalytics.setUserID(userId)
