@@ -6,5 +6,3 @@ import org.koin.core.annotation.Module
 @Module
 @ComponentScan("tmg.flashback.configuration")
 class ConfigurationModule
-
-val configurationPlatformModule = platformModule()

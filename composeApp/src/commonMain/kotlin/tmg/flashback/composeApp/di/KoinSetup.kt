@@ -59,22 +59,16 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
         modules(configurationPlatformModule)
         modules(CoreDeviceModule::class)
         modules(CoreMetricsCrashlyticsModule::class)
-        modules(crashlyticsPlatformModule)
         modules(CoreMetricsAnalyticsModule::class)
-        modules(analyticsPlatformModule)
         modules(CoreNotificationsModule::class)
-        modules(notificationsPlatformModule)
         modules(CorePreferencesModule::class)
         modules(CoreWebBrowserModule::class)
-        modules(preferencesPlatformModule)
-        modules(webBrowserPlatformModule)
 
         modules(DataFlashbackModule::class)
         modules(FlashbackApiModule::class)
         modules(FlashbackNewsModule::class)
         modules(DataNetworkRssModule::class)
         modules(FlashbackDBModule::class)
-        modules(persistencePlatformModule)
 
         modules(EasterEggsModule::class)
 

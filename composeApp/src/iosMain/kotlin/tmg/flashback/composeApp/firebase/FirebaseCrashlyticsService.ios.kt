@@ -3,9 +3,11 @@ package tmg.flashback.composeApp.firebase
 import tmg.flashback.crashlytics.firebase.FirebaseCrashlyticsService
 import cocoapods.FirebaseCrashlytics.FIRCrashlytics
 import kotlinx.cinterop.ExperimentalForeignApi
+import org.koin.core.annotation.Single
 import platform.Foundation.NSError
 
 @OptIn(ExperimentalForeignApi::class)
+@Single(binds = [FirebaseCrashlyticsService::class])
 internal actual class FirebaseCrashlyticsServiceImpl actual constructor(): FirebaseCrashlyticsService {
 
     companion object {
