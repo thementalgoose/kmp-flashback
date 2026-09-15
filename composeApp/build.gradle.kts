@@ -30,7 +30,7 @@ kotlin {
         binaries.executable()
     }
 
-    jvmToolchain(21)
+    jvmToolchain(25)
 
     cocoapods {
         summary = "Flashback"
@@ -173,7 +173,7 @@ kotlin {
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile>().configureEach {
     compilerOptions {
         // Match the JVM target used by the toolchain (21) to avoid producing class files newer than the runtime
-        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget("21"))
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget("25"))
     }
 }
 

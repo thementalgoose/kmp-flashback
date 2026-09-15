@@ -1,5 +1,6 @@
 package tmg.flashback.analytics.usecases
 
+import org.koin.core.annotation.Single
 import tmg.flashback.analytics.firebase.FirebaseAnalyticsService
 import tmg.flashback.analytics.model.UserProperty
 import tmg.flashback.analytics.model.UserProperty.APP_VERSION
@@ -17,7 +18,8 @@ interface InitialiseAnalyticsUseCase {
     fun initialise(userId: String)
 }
 
-internal class InitialiseAnalyticsUseCaseImpl(
+@Single(binds = [InitialiseAnalyticsUseCase::class])
+class InitialiseAnalyticsUseCaseImpl(
     private val firebaseAnalyticsService: FirebaseAnalyticsService,
     private val analyticsRepository: AnalyticsRepository
 ): InitialiseAnalyticsUseCase {

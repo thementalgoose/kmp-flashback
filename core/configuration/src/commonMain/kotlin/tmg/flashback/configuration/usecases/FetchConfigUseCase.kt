@@ -1,5 +1,6 @@
 package tmg.flashback.configuration.usecases
 
+import org.koin.core.annotation.Single
 import tmg.flashback.configuration.Migrations
 import tmg.flashback.configuration.manager.ConfigManager
 import tmg.flashback.configuration.repositories.ConfigRepository
@@ -9,7 +10,8 @@ interface FetchConfigUseCase {
     suspend fun fetchAndApply(): Boolean
 }
 
-internal class FetchConfigUseCaseImpl(
+@Single(binds = [FetchConfigUseCase::class])
+class FetchConfigUseCaseImpl(
     private val configManager: ConfigManager,
     private val configRepository: ConfigRepository
 ): FetchConfigUseCase {

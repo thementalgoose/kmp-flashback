@@ -1,5 +1,6 @@
 package tmg.flashback.configuration.repositories
 
+import org.koin.core.annotation.Single
 import tmg.flashback.configuration.Migrations
 import tmg.flashback.preferences.manager.PreferenceManager
 
@@ -9,6 +10,7 @@ interface ConfigRepository {
     var resetAtMigrationVersion: Int
 }
 
+@Single(binds = [ConfigRepository::class])
 class ConfigRepositoryImpl(
     private val preferenceManager: PreferenceManager
 ): ConfigRepository {
