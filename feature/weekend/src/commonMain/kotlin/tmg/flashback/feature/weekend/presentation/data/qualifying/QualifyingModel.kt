@@ -70,7 +70,7 @@ sealed class QualifyingModel(
     }
 }
 
-fun List<QualifyingModel>.sortedBy(type: QualifyingSortType?): List<QualifyingModel> {
+fun List<QualifyingModel>.sortedBySortType(type: QualifyingSortType): List<QualifyingModel> {
     return this.sortedBy {
         return@sortedBy when (it) {
             is QualifyingModel.Q1 -> it.comparatorValue(type)

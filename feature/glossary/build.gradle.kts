@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.flashback.featureModule)
     alias(libs.plugins.flashback.composeMultiplatform)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.mokkery)
 }
 
 kotlin {
@@ -35,6 +36,7 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
+            implementation(libs.turbine)
         }
         iosMain.dependencies {
 

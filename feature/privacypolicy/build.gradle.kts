@@ -34,6 +34,7 @@ kotlin {
         commonTest.dependencies {
             implementation(projects.test.formula1)
             implementation(kotlin("test"))
+            implementation(libs.turbine)
         }
         iosMain.dependencies {
 

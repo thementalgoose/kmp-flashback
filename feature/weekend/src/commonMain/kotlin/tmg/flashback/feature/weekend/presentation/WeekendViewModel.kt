@@ -27,7 +27,7 @@ import tmg.flashback.feature.weekend.presentation.data.QualifyingSortType
 import tmg.flashback.feature.weekend.presentation.data.ResultType
 import tmg.flashback.feature.weekend.presentation.data.info.InfoDataMapper
 import tmg.flashback.feature.weekend.presentation.data.qualifying.QualifyingDataMapper
-import tmg.flashback.feature.weekend.presentation.data.qualifying.sortedBy
+import tmg.flashback.feature.weekend.presentation.data.qualifying.sortedBySortType
 import tmg.flashback.feature.weekend.presentation.data.race.RaceDataMapper
 import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.SprintQualifyingDataMapper
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.SprintRaceDataMapper
@@ -75,42 +75,48 @@ class WeekendViewModel(
             tab,
             previousRace
         ) { race, qualifyingSort, resultType, tab, previousRace ->
-            logDebug("WeekendVM", "Calculating WeekendUiState ${race?.raceInfo} - $resultType - $tab")
-            if (race == null) {
-                return@combine WeekendUiState.NotFound
+            try {
+                logDebug("WeekendVM", "Calculating WeekendUiState ${race?.raceInfo} - $resultType - $tab")
+                if (race == null) {
+                    return@combine WeekendUiState.NotFound
+                }
+                _isLoading.update { false }
+                val maxLabel = race.qualifying.maxOfOrNull { it.label }
+                val qualifyingColumns = listOfNotNull(
+                    QualifyingType.Q1.takeIf { maxLabel == QualifyingType.Q3 || maxLabel == QualifyingType.Q2 || maxLabel == QualifyingType.Q1 },
+                    QualifyingType.Q2.takeIf { maxLabel == QualifyingType.Q3 || maxLabel == QualifyingType.Q2 },
+                    QualifyingType.Q3.takeIf { maxLabel == QualifyingType.Q3 },
+                )
+                return@combine WeekendUiState.Data(
+                    season = race.raceInfo.season,
+                    info = infoDataMapper(race),
+                    tab = tab,
+                    tabs = getWeekendEventOrder(
+                        isSprint = race.hasSprint,
+                        season = race.raceInfo.season
+                    ),
+                    resultType = resultType,
+                    cancelled = race.raceInfo.cancelled,
+                    previousRace = previousRace,
+                    qualifyingResults = qualifyingDataMapper(race)
+                        .sortedBySortType(qualifyingSort),
+                    qualifyingColumns = qualifyingColumns,
+                    qualifyingSortOptions = listOfNotNull(
+                        QualifyingSortType.Qualified,
+                        QualifyingSortType.Q1.takeIf { qualifyingColumns.contains(QualifyingType.Q1) },
+                        QualifyingSortType.Q2.takeIf { qualifyingColumns.contains(QualifyingType.Q2) },
+                        QualifyingSortType.Q3.takeIf { qualifyingColumns.contains(QualifyingType.Q3) }
+                    ),
+                    qualifyingSort = qualifyingSort,
+                    raceResults = raceDataMapper(race, resultType),
+                    sprintQualifyingResults = sprintQualifyingDataMapper(race),
+                    sprintRaceResults = sprintRaceDataMapper(race, resultType)
+                )
+            } catch (e: Throwable) {
+                println("COMBINE EXCEPTION: $e")
+                e.printStackTrace()
+                throw e
             }
-            _isLoading.update { false }
-            val maxLabel = race.qualifying.maxOfOrNull { it.label }
-            val qualifyingColumns = listOfNotNull(
-                QualifyingType.Q1.takeIf { maxLabel == QualifyingType.Q3 || maxLabel == QualifyingType.Q2 || maxLabel == QualifyingType.Q1 },
-                QualifyingType.Q2.takeIf { maxLabel == QualifyingType.Q3 || maxLabel == QualifyingType.Q2 },
-                QualifyingType.Q3.takeIf { maxLabel == QualifyingType.Q3 },
-            )
-            return@combine WeekendUiState.Data(
-                season = race.raceInfo.season,
-                info = infoDataMapper(race),
-                tab = tab,
-                tabs = getWeekendEventOrder(
-                    isSprint = race.hasSprint,
-                    season = race.raceInfo.season
-                ),
-                resultType = resultType,
-                cancelled = race.raceInfo.cancelled,
-                previousRace = previousRace,
-                qualifyingResults = qualifyingDataMapper(race)
-                    .sortedBy(qualifyingSort),
-                qualifyingColumns = qualifyingColumns,
-                qualifyingSortOptions = listOfNotNull(
-                    QualifyingSortType.Qualified,
-                    QualifyingSortType.Q1.takeIf { qualifyingColumns.contains(QualifyingType.Q1) },
-                    QualifyingSortType.Q2.takeIf { qualifyingColumns.contains(QualifyingType.Q2) },
-                    QualifyingSortType.Q3.takeIf { qualifyingColumns.contains(QualifyingType.Q3) }
-                ),
-                qualifyingSort = qualifyingSort,
-                raceResults = raceDataMapper(race, resultType),
-                sprintQualifyingResults = sprintQualifyingDataMapper(race),
-                sprintRaceResults = sprintRaceDataMapper(race, resultType)
-            )
         }
         .stateIn(viewModelScope, SharingStarted.Lazily, WeekendUiState.Initial)
 
