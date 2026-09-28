@@ -112,7 +112,7 @@ class WeekendViewModel(
                 sprintRaceResults = sprintRaceDataMapper(race, resultType)
             )
         }
-        .stateIn(viewModelScope, SharingStarted.Lazily, WeekendUiState.Initial)
+            .stateIn(viewModelScope, SharingStarted.Lazily, WeekendUiState.Initial)
 
     fun load(season: Int, round: Int) {
         this.seasonRound.update {
