@@ -10,6 +10,7 @@ name: Main
       - '**/*.kts'
       - '**/*.xml'
       - '**/main.yml'
+      - '**/gradle.properties'
 jobs:
   unit-tests:
     uses: ./.github/workflows/job-unit-tests.yml
