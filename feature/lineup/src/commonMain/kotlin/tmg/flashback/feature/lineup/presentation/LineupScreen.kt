@@ -2,7 +2,6 @@
 
 package tmg.flashback.feature.lineup.presentation
 
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -23,6 +21,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
@@ -85,19 +84,21 @@ private fun LineupScreen(
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        val scrollState = rememberScrollState()
         val listState = rememberLazyListState()
-        val isHeaderStuck by remember {
+        val density = LocalDensity.current
+        val topInsetDp = paddingValues.calculateTopPadding()
+        val topPadding by remember {
             derivedStateOf {
-                val firstItem = listState.layoutInfo.visibleItemsInfo
-                    .firstOrNull { it.index == 2 }
-                firstItem != null && firstItem.offset <= 0
+                val stickyItem = listState.layoutInfo.visibleItemsInfo
+                    .firstOrNull { it.key == "lineup-title" }
+                if (stickyItem != null) {
+                    val offsetDp = with(density) { stickyItem.offset.toDp() }
+                    (topInsetDp - offsetDp).coerceIn(0.dp, topInsetDp)
+                } else {
+                    if (listState.firstVisibleItemIndex > 2) topInsetDp else 0.dp
+                }
             }
         }
-        val topPadding by animateDpAsState(
-            targetValue = if (isHeaderStuck) paddingValues.calculateTopPadding() else 0.dp,
-            label = "stickyHeaderPadding"
-        )
         val scrimColor = when (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
             true -> AppTheme.colors.surfaceContainer1
             false -> AppTheme.colors.surface
