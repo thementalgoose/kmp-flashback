@@ -26,3 +26,5 @@ iosApp/iosApp/Firebase/GoogleService-sandbox.plist
 composeApp/flashback-database**
 
 .firebase/
+
+.sdkmanrc
