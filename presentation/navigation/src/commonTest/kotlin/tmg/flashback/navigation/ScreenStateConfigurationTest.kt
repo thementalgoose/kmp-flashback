@@ -1,5 +1,6 @@
 package tmg.flashback.navigation
 
+import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.ExperimentalSerializationApi
 import java.io.File
 import kotlin.reflect.KClass
@@ -23,7 +24,11 @@ class ScreenStateConfigurationTest {
             val expectedSerialName = "tmg.flashback.navigation.$className"
             val polymorphicSerializer = serializersModule.getPolymorphic(Screen::class, expectedSerialName)
             if (polymorphicSerializer == null) {
-                missingClasses.add("$className ($expectedSerialName)")
+                missingClasses.add("$className in Screen scope ($expectedSerialName)")
+            }
+            val navKeyPolymorphicSerializer = serializersModule.getPolymorphic(NavKey::class, expectedSerialName)
+            if (navKeyPolymorphicSerializer == null) {
+                missingClasses.add("$className in NavKey scope ($expectedSerialName)")
             }
         }
 
@@ -38,7 +43,11 @@ class ScreenStateConfigurationTest {
                 val expectedSerialName = "tmg.flashback.navigation.$className"
                 val polymorphicSerializer = serializersModule.getPolymorphic(Screen::class, expectedSerialName)
                 if (polymorphicSerializer == null) {
-                    missingClasses.add("$className ($expectedSerialName)")
+                    missingClasses.add("$className in Screen scope ($expectedSerialName)")
+                }
+                val navKeyPolymorphicSerializer = serializersModule.getPolymorphic(NavKey::class, expectedSerialName)
+                if (navKeyPolymorphicSerializer == null) {
+                    missingClasses.add("$className in NavKey scope ($expectedSerialName)")
                 }
             }
         }
