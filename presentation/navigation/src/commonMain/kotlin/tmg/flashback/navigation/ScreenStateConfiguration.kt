@@ -18,12 +18,16 @@ val saveStateConfiguration = SavedStateConfiguration {
             subclass(NavDriver::class, NavDriver.serializer())
             subclass(NavTeam::class, NavTeam.serializer())
             subclass(NavDriverComparison::class, NavDriverComparison.serializer())
+            
             subclass(NavLineup::class, NavLineup.serializer())
 
             subclass(NavRss::class, NavRss.serializer())
             subclass(NavWebpage::class, NavWebpage.serializer())
 
             subclass(NavReactionGame::class, NavReactionGame.serializer())
+
+            subclass(NavGlossary::class, NavGlossary.serializer())
+            subclass(NavGlossaryDetail::class, NavGlossaryDetail.serializer())
 
             subclass(NavSettings::class, NavSettings.serializer())
             subclass(NavSettingsDarkMode::class, NavSettingsDarkMode.serializer())
