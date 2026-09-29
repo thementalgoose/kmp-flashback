@@ -31,7 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.navigation3.runtime.NavKey
+import tmg.flashback.navigation.Screen
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowSizeClass.Companion.HEIGHT_DP_MEDIUM_LOWER_BOUND
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
@@ -75,7 +75,7 @@ fun WeekendScreen(
     paddingValues: PaddingValues,
     showBack: Boolean,
     actionUpClicked: () -> Unit,
-    navigateTo: (NavKey) -> Unit,
+    navigateTo: (Screen) -> Unit,
     windowSizeClass: WindowSizeClass,
     viewModel: WeekendViewModel = koinViewModel()
 ) {
@@ -124,7 +124,7 @@ fun WeekendScreenTab(
     isLoading: Boolean,
     paddingValues: PaddingValues,
     showBack: Boolean,
-    navigateTo: (NavKey) -> Unit,
+    navigateTo: (Screen) -> Unit,
     actionUpClicked: () -> Unit,
     clickWeekendTab: (WeekendTabs) -> Unit,
     openLink: (String) -> Unit,

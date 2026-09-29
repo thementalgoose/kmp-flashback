@@ -36,7 +36,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.navigation3.runtime.NavKey
+import tmg.flashback.navigation.Screen
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.formula1.enums.TrackLayout
@@ -63,7 +63,7 @@ fun AllCircuitsScreen(
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
-    navigateTo: (NavKey) -> Unit,
+    navigateTo: (Screen) -> Unit,
     viewModel: AllCircuitsViewModel = koinViewModel()
 ) {
     ScreenView(screenName = "All Circuits")

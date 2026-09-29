@@ -1,13 +1,12 @@
 package tmg.flashback.navigation
 
-import androidx.navigation3.runtime.NavKey
 import androidx.savedstate.serialization.SavedStateConfiguration
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 
 val saveStateConfiguration = SavedStateConfiguration {
     serializersModule = SerializersModule {
-        polymorphic(NavKey::class) {
+        polymorphic(Screen::class) {
             subclass(NavCalendar::class, NavCalendar.serializer())
             subclass(NavDriverStandings::class, NavDriverStandings.serializer())
             subclass(NavTeamStandings::class, NavTeamStandings.serializer())

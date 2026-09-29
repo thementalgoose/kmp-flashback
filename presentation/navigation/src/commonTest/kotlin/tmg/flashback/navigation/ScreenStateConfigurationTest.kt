@@ -1,6 +1,5 @@
 package tmg.flashback.navigation
 
-import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.ExperimentalSerializationApi
 import java.io.File
 import kotlin.reflect.KClass
@@ -22,7 +21,7 @@ class ScreenStateConfigurationTest {
         for (kclass in sealedSubclasses) {
             val className = kclass.simpleName ?: continue
             val expectedSerialName = "tmg.flashback.navigation.$className"
-            val polymorphicSerializer = serializersModule.getPolymorphic(NavKey::class, expectedSerialName)
+            val polymorphicSerializer = serializersModule.getPolymorphic(Screen::class, expectedSerialName)
             if (polymorphicSerializer == null) {
                 missingClasses.add("$className ($expectedSerialName)")
             }
@@ -37,7 +36,7 @@ class ScreenStateConfigurationTest {
             
             for (className in matches) {
                 val expectedSerialName = "tmg.flashback.navigation.$className"
-                val polymorphicSerializer = serializersModule.getPolymorphic(NavKey::class, expectedSerialName)
+                val polymorphicSerializer = serializersModule.getPolymorphic(Screen::class, expectedSerialName)
                 if (polymorphicSerializer == null) {
                     missingClasses.add("$className ($expectedSerialName)")
                 }
@@ -46,7 +45,7 @@ class ScreenStateConfigurationTest {
 
         assertTrue(
             missingClasses.isEmpty(),
-            "The following NavKey screens are declared in Screen.kt but are not registered in saveStateConfiguration:\n" +
+            "The following screens are declared in Screen.kt but are not registered in saveStateConfiguration:\n" +
                     missingClasses.joinToString("\n") { " - $it" }
         )
     }
