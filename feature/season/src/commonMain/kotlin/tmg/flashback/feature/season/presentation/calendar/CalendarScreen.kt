@@ -1,25 +1,18 @@
 package tmg.flashback.feature.season.presentation.calendar
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
@@ -29,26 +22,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.semantics.clearAndSetSemantics
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
-import tmg.flashback.navigation.Screen
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import flashback.domain.formula1.generated.resources.Res.drawable
 import flashback.domain.formula1.generated.resources.ic_tyre
-import flashback.feature.season.generated.resources.ic_collapsible_icon_bottom
-import flashback.feature.season.generated.resources.ic_collapsible_icon_top
-import flashback.feature.season.generated.resources.Res
 import flashback.presentation.localisation.generated.resources.Res.string
-import flashback.presentation.localisation.generated.resources.ab_collapsed_section
 import flashback.presentation.localisation.generated.resources.tyres_label
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.format
 import kotlinx.datetime.format.MonthNames
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -59,12 +41,11 @@ import tmg.flashback.feature.highlights.presentation.HighlightBanner
 import tmg.flashback.feature.notifications.presentation.NotificationPrompt
 import tmg.flashback.feature.season.presentation.calendar.components.CollapsableList
 import tmg.flashback.feature.season.presentation.calendar.components.RaceWeekCard
-import tmg.flashback.feature.season.presentation.calendar.components.Round
 import tmg.flashback.feature.season.presentation.shared.device_time.DeviceTimePrompt
 import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedBy
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.ResultsSeasonPicker
-import tmg.flashback.feature.season.presentation.tyres.TyreBottomSheet
 import tmg.flashback.formula1.enums.SeasonTyres
+import tmg.flashback.formula1.enums.getBySeason
 import tmg.flashback.formula1.enums.hasEntryForSeason
 import tmg.flashback.formula1.extensions.icon
 import tmg.flashback.formula1.extensions.label
@@ -72,18 +53,18 @@ import tmg.flashback.infrastructure.datetime.displayDate
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.startOfWeek
 import tmg.flashback.navigation.NavWeekend
+import tmg.flashback.navigation.Screen
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.ui.components.Refresh
-import tmg.flashback.ui.components.flag.Flag
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.loading.SkeletonViewList
 import tmg.flashback.ui.components.now.Now
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
-import tmg.flashback.ui.insets.compactOnly
-import tmg.flashback.ui.navigation.MasterDetailPaneState
+import tmg.flashback.ui.components.tyres.TyreBottomSheet
+import tmg.flashback.ui.components.tyres.TyreInfo
 import tmg.flashback.ui.navigation.appBarMaximumHeight
 
 private const val listAlpha = 0.6f
@@ -325,11 +306,12 @@ private fun Event(
 private fun Tyres(
     season: Int
 ) {
-    val seasonTyres = remember { mutableStateOf<Int?>(null) }
+    val seasonTyres = remember(season) { SeasonTyres.getBySeason(season) }
+    val showSeasonTyres = remember { mutableStateOf(false) }
     if (SeasonTyres.hasEntryForSeason(season)) {
         IconButton(
             onClick = {
-                seasonTyres.value = season
+                showSeasonTyres.value = true
             },
             content = {
                 Icon(
@@ -339,11 +321,28 @@ private fun Tyres(
                 )
             }
         )
-        if (seasonTyres.value != null) {
+        if (showSeasonTyres.value) {
             TyreBottomSheet(
+                show = showSeasonTyres,
                 season = season,
-                dismissed = { seasonTyres.value = null }
+                dry = seasonTyres.get(dry = true),
+                wet = seasonTyres.get(dry = false)
             )
         }
     }
+}
+
+private fun SeasonTyres?.get(dry: Boolean): List<TyreInfo> {
+    if (this == null) {
+        return emptyList()
+    }
+    return this.tyres
+        .filter { it.tyre.isDry == dry }
+        .map {
+            TyreInfo(
+                icon = it.tyre.icon,
+                label = it.label,
+                size = it.tyre.size
+            )
+        }
 }

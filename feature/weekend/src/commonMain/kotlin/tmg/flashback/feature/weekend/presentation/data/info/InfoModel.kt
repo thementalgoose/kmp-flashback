@@ -15,6 +15,7 @@ import tmg.flashback.formula1.model.ScheduleWeather
 import tmg.flashback.formula1.preview.preview
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.plusMinutes
+import tmg.flashback.ui.components.tyres.TyreInfo
 
 data class InfoModel(
     val season: Int,
@@ -38,6 +39,30 @@ data class InfoModel(
 
     val trackBreakdown: TrackBreakdown? by lazy {
         trackLayout?.getBreakdown(season, raceName)
+    }
+
+    val dryTyres: List<TyreInfo> by lazy {
+        (tyres?.tyres ?: emptyList())
+            .filter { it.tyre.isDry }
+            .map {
+                TyreInfo(
+                    icon = it.tyre.icon,
+                    label = it.label,
+                    size = it.tyre.size
+                )
+            }
+    }
+
+    val wetTyres: List<TyreInfo> by lazy {
+        (tyres?.tyres ?: emptyList())
+            .filter { !it.tyre.isDry }
+            .map {
+                TyreInfo(
+                    icon = it.tyre.icon,
+                    label = it.label,
+                    size = it.tyre.size
+                )
+            }
     }
 
     val isUpcoming by lazy {

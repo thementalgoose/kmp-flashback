@@ -74,6 +74,8 @@ import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.loading.SkeletonBox
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 import tmg.flashback.ui.components.track.TrackBreakdownBottomSheet
+import tmg.flashback.ui.components.tyres.TyreBottomSheet
+import tmg.flashback.ui.components.tyres.TyreInfo
 import tmg.flashback.ui.navigation.FloatingNavigationBar
 import tmg.flashback.ui.navigation.NavigationBar
 import tmg.flashback.ui.navigation.NavigationItem
@@ -200,6 +202,19 @@ fun WeekendScreenTab(
                     )
                 }
 
+                val showTyres = remember { mutableStateOf(false) }
+                if (showTyres.value && uiState is Data && uiState.info.tyres != null) {
+                    ScreenView("Tyres", args = mapOf(
+                        analyticsSeason to uiState.info.season.toString()
+                    ))
+                    TyreBottomSheet(
+                        show = showTyres,
+                        season = uiState.info.season,
+                        dry = uiState.info.dryTyres,
+                        wet = uiState.info.wetTyres,
+                    )
+                }
+
                 LazyColumn(
                     contentPadding = masterPadding,
                     modifier = Modifier.fillMaxSize()
@@ -225,7 +240,9 @@ fun WeekendScreenTab(
                         )
                         addLinks(
                             info = uiState.info,
-                            tyresClicked = {},
+                            tyresClicked = {
+                                showTyres.value = true
+                            },
                             zonesClicked = {
                                 showTrackBreakdown.value = true
                             },
