@@ -41,8 +41,8 @@ import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody2
 import kotlin.plus
 
-private val edgePadding: Dp = 6.dp
-private val iconVerticalPadding: Dp = 8.dp
+private val edgePadding: Dp = 8.dp
+private val iconVerticalPadding: Dp = 12.dp
 private val iconSize: Dp = 24.dp
 private val horizontalWidthThreshold: Dp = 180.dp
 val appBarHeight: Dp by lazy {
