@@ -39,7 +39,7 @@ import tmg.flashback.style.text.TextBody2
 
 private val edgePadding: Dp = 8.dp
 private val iconVerticalPadding: Dp = 10.dp
-private val iconSize: Dp = 24.dp
+private val iconSize: Dp = 26.dp
 private val horizontalWidthThreshold: Dp = 180.dp
 val appBarHeight: Dp by lazy {
     iconSize + (2 * edgePadding) + (2 * iconVerticalPadding)
