@@ -21,7 +21,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import androidx.navigation3.runtime.NavKey
+import tmg.flashback.navigation.Screen
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import flashback.presentation.localisation.generated.resources.Res.string
@@ -44,7 +44,7 @@ fun GlossaryScreen(
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
-    navigateTo: (NavKey) -> Unit,
+    navigateTo: (Screen) -> Unit,
     viewModel: GlossaryViewModel = koinViewModel()
 ) {
     ScreenView(screenName = "Glossary")

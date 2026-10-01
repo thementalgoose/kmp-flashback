@@ -3,7 +3,7 @@ package tmg.flashback.composeApp.presentation.navigation
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation3.runtime.NavKey
+import tmg.flashback.navigation.Screen
 import kotlinx.coroutines.coroutineScope
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.composeApp.presentation.MenuItem
@@ -38,7 +38,7 @@ import tmg.flashback.xr.LocalXR
 @Composable
 internal fun AppNavigationRail(
     appNavigationUiState: AppNavigationUIState,
-    navigationItemClicked: (NavKey) -> Unit,
+    navigationItemClicked: (Screen) -> Unit,
     insetPadding: PaddingValues,
     modifier: Modifier = Modifier,
     showXr: Boolean = false,

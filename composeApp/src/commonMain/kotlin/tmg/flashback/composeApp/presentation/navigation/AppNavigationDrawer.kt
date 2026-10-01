@@ -31,7 +31,7 @@ import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.dp
-import androidx.navigation3.runtime.NavKey
+import tmg.flashback.navigation.Screen
 import flashback.composeapp.generated.resources.ic_settings_web
 import flashback.presentation.localisation.generated.resources.Res
 import flashback.presentation.localisation.generated.resources.app_version_placeholder
@@ -66,7 +66,7 @@ import tmg.flashback.xr.XR
 @Composable
 internal fun AppNavigationDrawer(
     appNavigationUiState: AppNavigationUIState,
-    navigationItemClicked: (NavKey) -> Unit,
+    navigationItemClicked: (Screen) -> Unit,
     closeMenu: () -> Unit,
     openUrl: (String) -> Unit,
     modifier: Modifier = Modifier,
