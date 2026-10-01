@@ -60,7 +60,7 @@ fun FloatingNavigationBar(
             .height(appBarHeight)
             .dropShadow(
                 shape = RoundedCornerShape(100.dp),
-                shadow = Shadow(radius = 10.dp, color = Color.Black.copy(alpha = 0.15f))
+                shadow = Shadow(radius = 16.dp, color = Color.Black.copy(alpha = 0.2f))
             )
             .clip(RoundedCornerShape(100.dp))
             .background(AppTheme.colors.surfaceNav)
