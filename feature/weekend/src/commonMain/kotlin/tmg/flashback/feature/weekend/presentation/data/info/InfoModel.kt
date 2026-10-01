@@ -5,7 +5,9 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
+import tmg.flashback.formula1.enums.SeasonTyres
 import tmg.flashback.formula1.enums.TrackLayout
+import tmg.flashback.formula1.enums.getBySeason
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.ScheduleWeather
@@ -30,6 +32,7 @@ data class InfoModel(
     val temperatureMetric: Boolean,
     val windspeedMetric: Boolean,
     val showWeatherDetails: Boolean,
+    val tyres: SeasonTyres? = SeasonTyres.getBySeason(season)
 ) {
     val isUpcoming by lazy {
         LocalDate.now() <= date

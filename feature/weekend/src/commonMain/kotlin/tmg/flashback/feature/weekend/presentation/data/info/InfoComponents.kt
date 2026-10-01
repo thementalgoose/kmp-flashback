@@ -10,6 +10,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -50,7 +51,9 @@ import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsCircuitId
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.formula1.constants.Formula1
+import tmg.flashback.formula1.enums.SeasonTyres
 import tmg.flashback.formula1.enums.TrackBreakdown
+import tmg.flashback.formula1.enums.getBySeason
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.model.OverviewRace
@@ -160,11 +163,12 @@ internal fun RaceLinks(
     reportIssueClicked: (Int, Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Row(
+    FlowRow(
         modifier
             .edgeFade(backgroundColor = backgroundColor)
-            .horizontalScroll(rememberScrollState())
             .padding(horizontal = AppTheme.dimens.medium),
+        maxLines = 2,
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
     ) {
         if (model.laps != null) {
@@ -216,6 +220,9 @@ internal fun RaceLinks(
                     label = stringResource(string.straight_mode_zones, straightModeZones.toString()),
                 )
             }
+        }
+        if (model.tyres != null) {
+
         }
         if (previousRace != null) {
             BadgeView(
@@ -300,6 +307,27 @@ private fun PreviewDetailsTrackBreakdown() {
                 model = InfoModel.preview(
                     circuit = Circuit.preview(id = "albert_park")
                 )
+            )
+        }
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewLinks() {
+    ApplicationThemePreview {
+        Column {
+            RaceLinks(
+                model = InfoModel.preview(
+                    circuit = Circuit.preview(id = "albert_park")
+                ),
+                backgroundColor = AppTheme.colors.surface,
+                previousRace = null,
+                previousRaceClicked = { },
+                youtubeClicked = { },
+                wikipediaClicked = { },
+                mapsClicked = { location, label -> },
+                reportIssueClicked = { season, round -> }
             )
         }
     }
