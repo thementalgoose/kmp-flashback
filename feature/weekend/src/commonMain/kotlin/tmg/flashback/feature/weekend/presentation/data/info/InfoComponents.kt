@@ -154,7 +154,6 @@ internal fun RaceLinks(
         modifier
             .edgeFade(backgroundColor = backgroundColor)
             .padding(horizontal = AppTheme.dimens.medium),
-        maxLines = 2,
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
     ) {
