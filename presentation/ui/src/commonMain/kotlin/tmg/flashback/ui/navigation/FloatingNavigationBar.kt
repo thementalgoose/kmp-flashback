@@ -42,7 +42,7 @@ import tmg.flashback.style.text.TextBody2
 import kotlin.plus
 
 private val edgePadding: Dp = 8.dp
-private val iconVerticalPadding: Dp = 12.dp
+private val iconVerticalPadding: Dp = 10.dp
 private val iconSize: Dp = 28.dp
 private val horizontalWidthThreshold: Dp = 180.dp
 val appBarHeight: Dp by lazy {
