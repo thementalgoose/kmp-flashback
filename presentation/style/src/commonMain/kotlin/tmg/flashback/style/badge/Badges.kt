@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -19,12 +20,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.Key.Companion.R
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import flashback.presentation.style.generated.resources.Res
+import flashback.presentation.style.generated.resources.ic_preview_icon
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
@@ -32,8 +36,13 @@ import tmg.flashback.style.text.TextBody2
 
 data class Badge(
     val label: String,
-    val icon: DrawableResource? = null,
-)
+    val icons: List<DrawableResource>,
+) {
+    constructor(
+        label: String,
+        icon: DrawableResource? = null
+    ): this(label, listOfNotNull(icon))
+}
 
 @Composable
 fun BadgesView(
@@ -89,41 +98,39 @@ fun BadgeView(
         ),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        if (model.icon != null) {
-            if (tintIcon != null) {
-                Icon(
-                    painter = painterResource(resource = model.icon),
-                    contentDescription = null,
-                    tint = tintIcon,
-                    modifier = Modifier
-                        .size(16.dp)
-                        .then(iconModifier)
-                )
-            } else {
-                Image(
-                    painter = painterResource(resource = model.icon),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(16.dp)
-                        .then(iconModifier)
-                )
+        if (model.icons.isNotEmpty()) {
+            for (icon in model.icons) {
+                if (tintIcon != null) {
+                    Icon(
+                        painter = painterResource(resource = icon),
+                        contentDescription = null,
+                        tint = tintIcon,
+                        modifier = Modifier
+                            .size(16.dp)
+                            .then(iconModifier)
+                    )
+                } else {
+                    Image(
+                        painter = painterResource(resource = icon),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(16.dp)
+                            .then(iconModifier)
+                    )
+                }
             }
-            Spacer(Modifier.width(6.dp))
         } else {
             Spacer(modifier.height(16.dp))
         }
-        TextBody2(
-            text = model.label,
-            bold = true
-        )
-    }
-}
-
-@PreviewTheme
-@Composable
-private fun PreviewList() {
-    ApplicationThemePreview {
-        BadgesView(list = listOf(fakeMenuBadge, fakeBackIconBadge))
+        if (model.label.isNotBlank()) {
+            if (model.icons.isNotEmpty()) {
+                Spacer(Modifier.width(6.dp))
+            }
+            TextBody2(
+                text = model.label,
+                bold = true
+            )
+        }
     }
 }
 
@@ -131,7 +138,13 @@ private fun PreviewList() {
 @Composable
 private fun Preview() {
     ApplicationThemePreview {
-        BadgeView(fakeBackBadge)
+        Column(
+            verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
+        ) {
+            BadgesView(list = listOf(fakeMenuBadge, fakeBackIconBadge))
+            BadgeView(fakeBackBadge)
+            BadgeView(fakeBackMultipleIconsBadge)
+        }
     }
 }
 
@@ -147,5 +160,11 @@ private val fakeBackBadge = Badge(
 )
 private val fakeBackIconBadge = Badge(
     label = "Pause",
-//    icon = androidx.core.R.drawable.ic_call_answer_low
+    icon = Res.drawable.ic_preview_icon
+)
+private val fakeBackMultipleIconsBadge = Badge(
+    label = "",
+    icons = List(5) {
+        Res.drawable.ic_preview_icon
+    }
 )
