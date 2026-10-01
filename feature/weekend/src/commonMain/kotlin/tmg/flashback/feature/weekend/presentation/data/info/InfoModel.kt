@@ -5,13 +5,17 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
+import tmg.flashback.formula1.enums.SeasonTyres
+import tmg.flashback.formula1.enums.TrackBreakdown
 import tmg.flashback.formula1.enums.TrackLayout
+import tmg.flashback.formula1.enums.getBySeason
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.ScheduleWeather
 import tmg.flashback.formula1.preview.preview
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.plusMinutes
+import tmg.flashback.ui.components.tyres.TyreInfo
 
 data class InfoModel(
     val season: Int,
@@ -30,7 +34,37 @@ data class InfoModel(
     val temperatureMetric: Boolean,
     val windspeedMetric: Boolean,
     val showWeatherDetails: Boolean,
+    val tyres: SeasonTyres? = SeasonTyres.getBySeason(season)
 ) {
+
+    val trackBreakdown: TrackBreakdown? by lazy {
+        trackLayout?.getBreakdown(season, raceName)
+    }
+
+    val dryTyres: List<TyreInfo> by lazy {
+        (tyres?.tyres ?: emptyList())
+            .filter { it.tyre.isDry }
+            .map {
+                TyreInfo(
+                    icon = it.tyre.icon,
+                    label = it.label,
+                    size = it.tyre.size
+                )
+            }
+    }
+
+    val wetTyres: List<TyreInfo> by lazy {
+        (tyres?.tyres ?: emptyList())
+            .filter { !it.tyre.isDry }
+            .map {
+                TyreInfo(
+                    icon = it.tyre.icon,
+                    label = it.label,
+                    size = it.tyre.size
+                )
+            }
+    }
+
     val isUpcoming by lazy {
         LocalDate.now() <= date
     }

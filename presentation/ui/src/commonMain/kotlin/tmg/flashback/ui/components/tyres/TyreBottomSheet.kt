@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package tmg.flashback.feature.season.presentation.tyres
+package tmg.flashback.ui.components.tyres
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,58 +14,47 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.ModalBottomSheetProperties
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.tyres_dry_compounds
 import flashback.presentation.localisation.generated.resources.tyres_label
 import flashback.presentation.localisation.generated.resources.tyres_size
 import flashback.presentation.localisation.generated.resources.tyres_wet_compounds
+import flashback.presentation.ui.generated.resources.Res
+import flashback.presentation.ui.generated.resources.unknown_avatar
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
-import tmg.flashback.analytics.presentation.ScreenView
-import tmg.flashback.formula1.enums.SeasonTyres
-import tmg.flashback.formula1.enums.TyreLabel
-import tmg.flashback.formula1.enums.getBySeason
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
-import tmg.flashback.style.text.TextHeadline2
 import tmg.flashback.style.text.TextHeadline3
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.header.Header
-import tmg.flashback.ui.components.header.HeaderAction
 
 @Composable
 fun TyreBottomSheet(
     season: Int,
-    dismissed: () -> Unit
+    dry: List<TyreInfo>,
+    wet: List<TyreInfo>,
+    show: MutableState<Boolean>,
+    modifier: Modifier = Modifier,
 ) {
     ModalBottomSheet(
-        onDismissRequest = dismissed,
+        modifier = modifier,
+        onDismissRequest = { show.value = false },
         containerColor = AppTheme.colors.surface,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         dragHandle = {
@@ -79,7 +68,9 @@ fun TyreBottomSheet(
         content = {
             TyreScreen(
                 season = season,
-                dismissed = dismissed
+                dry = dry,
+                wet = wet,
+                dismissed = { show.value = false}
             )
         }
     )
@@ -88,14 +79,10 @@ fun TyreBottomSheet(
 @Composable
 private fun TyreScreen(
     season: Int,
+    dry: List<TyreInfo>,
+    wet: List<TyreInfo>,
     dismissed: () -> Unit
 ) {
-    ScreenView("Tyres", args = mapOf(
-        analyticsSeason to season.toString()
-    ))
-    val tyres = SeasonTyres.getBySeason(season)
-    val dry = tyres?.tyres?.filter { it.tyre.isDry } ?: emptyList()
-    val wet = tyres?.tyres?.filter { !it.tyre.isDry } ?: emptyList()
     LazyVerticalGrid(
         modifier = Modifier
             .background(AppTheme.colors.surface),
@@ -105,7 +92,7 @@ private fun TyreScreen(
                 Header(
                     // Needed for the dialog to show the background colour in XR.
                     modifier = Modifier.background(AppTheme.colors.surface),
-                    text = stringResource(resource = string.tyres_label),
+                    text = "$season\n${stringResource(resource = string.tyres_label)}",
                     action = null,
                     actionUpClicked = dismissed
                 )
@@ -117,7 +104,7 @@ private fun TyreScreen(
                 )
             }
             items(dry) {
-                TyreRow(tyreLabel = it)
+                TyreRow(tyreInfo = it)
             }
             item("wet", span = { GridItemSpan(maxLineSpan) }) {
                 TextHeadline3(
@@ -126,7 +113,7 @@ private fun TyreScreen(
                 )
             }
             items(wet) {
-                TyreRow(tyreLabel = it)
+                TyreRow(tyreInfo = it)
             }
             item("spacer", span = { GridItemSpan(maxLineSpan) }) {
                 Spacer(modifier = Modifier
@@ -139,7 +126,7 @@ private fun TyreScreen(
 
 @Composable
 private fun TyreRow(
-    tyreLabel: TyreLabel,
+    tyreInfo: TyreInfo,
     modifier: Modifier = Modifier
 ) {
     Row(modifier = modifier.padding(
@@ -148,7 +135,7 @@ private fun TyreRow(
     )) {
         Image(
             modifier = Modifier.size(64.dp),
-            painter = painterResource(resource = tyreLabel.tyre.icon),
+            painter = painterResource(resource = tyreInfo.icon),
             contentDescription = null
         )
         Column(modifier = Modifier
@@ -158,8 +145,8 @@ private fun TyreRow(
                 vertical = AppTheme.dimens.xsmall
             )
         ) {
-            TextTitle(text = stringResource(resource = tyreLabel.label), bold = true)
-            TextBody1(text = stringResource(resource = string.tyres_size, tyreLabel.tyre.size))
+            TextTitle(text = stringResource(resource = tyreInfo.label), bold = true)
+            TextBody1(text = stringResource(resource = string.tyres_size, tyreInfo.size))
         }
     }
 }
@@ -170,7 +157,15 @@ private fun Preview() {
     ApplicationThemePreview {
         TyreScreen(
             season = 2022,
+            dry = listOf(fakeTyre),
+            wet = listOf(fakeTyre),
             dismissed = { }
         )
     }
 }
+
+private val fakeTyre = TyreInfo(
+    icon = Res.drawable.unknown_avatar,
+    label = string.tyres_label,
+    size = 13
+)
