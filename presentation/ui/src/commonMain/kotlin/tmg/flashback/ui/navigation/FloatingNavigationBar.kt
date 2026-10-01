@@ -18,18 +18,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.internal.rememberComposableLambda
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.role
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
@@ -39,11 +36,10 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody2
-import kotlin.plus
 
 private val edgePadding: Dp = 8.dp
 private val iconVerticalPadding: Dp = 10.dp
-private val iconSize: Dp = 28.dp
+private val iconSize: Dp = 26.dp
 private val horizontalWidthThreshold: Dp = 180.dp
 val appBarHeight: Dp by lazy {
     iconSize + (2 * edgePadding) + (2 * iconVerticalPadding)
@@ -54,7 +50,6 @@ fun FloatingNavigationBar(
     list: List<NavigationItem>,
     itemClicked: (NavigationItem) -> Unit,
     modifier: Modifier = Modifier,
-    shadow: Dp = 8.dp,
     bottomPadding: Dp = 0.dp,
     showLabels: Boolean = false,
 ) {
@@ -63,7 +58,10 @@ fun FloatingNavigationBar(
             .padding(bottom = bottomPadding)
             .fillMaxWidth()
             .height(appBarHeight)
-            .shadow(shadow, shape = RoundedCornerShape(100.dp))
+            .dropShadow(
+                shape = RoundedCornerShape(100.dp),
+                shadow = Shadow(radius = 16.dp, color = Color.Black.copy(alpha = 0.2f))
+            )
             .clip(RoundedCornerShape(100.dp))
             .background(AppTheme.colors.surfaceNav)
     ) {
