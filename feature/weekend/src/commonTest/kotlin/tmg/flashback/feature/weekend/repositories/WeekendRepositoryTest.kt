@@ -39,7 +39,7 @@ internal class WeekendRepositoryTest {
 
         underTest.weatherDetails = true
         verify {
-            mockPreferenceManager.save(keyWeekendWeatherDetails, false)
+            mockPreferenceManager.save(keyWeekendWeatherDetails, true)
         }
     }
 
