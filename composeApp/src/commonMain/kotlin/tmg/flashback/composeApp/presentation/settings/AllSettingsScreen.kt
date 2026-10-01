@@ -6,7 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation3.runtime.NavKey
+import tmg.flashback.navigation.Screen
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.nav_settings
 import flashback.presentation.localisation.generated.resources.settings_header_appearance
@@ -39,8 +39,8 @@ import tmg.flashback.ui.components.header.HeaderAction
 internal fun AllSettingsScreen(
     actionUpClicked: () -> Unit,
     showMenu: Boolean,
-    navigateToSubScreen: (NavKey) -> Unit,
-    navigateTo: (NavKey) -> Unit,
+    navigateToSubScreen: (Screen) -> Unit,
+    navigateTo: (Screen) -> Unit,
     insetPadding: PaddingValues,
     viewModel: AllSettingsViewModel = koinViewModel(),
 ) {
@@ -61,8 +61,8 @@ internal fun AllSettingsScreen(
 private fun AllSettingsScreen(
     actionUpClicked: () -> Unit,
     showMenu: Boolean,
-    navigateToSubScreen: (NavKey) -> Unit,
-    navigateTo: (NavKey) -> Unit,
+    navigateToSubScreen: (Screen) -> Unit,
+    navigateTo: (Screen) -> Unit,
     uiState: AllSettingsUiState,
     paddingValues: PaddingValues,
 ) {

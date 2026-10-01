@@ -3,109 +3,111 @@ package tmg.flashback.navigation
 import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
-@Serializable
-data object NavCalendar: NavKey
+sealed interface Screen : NavKey
 
 @Serializable
-data object NavDriverStandings: NavKey
+data object NavCalendar: Screen
 
 @Serializable
-data object NavTeamStandings: NavKey
+data object NavDriverStandings: Screen
 
 @Serializable
-data object NavCircuits: NavKey
+data object NavTeamStandings: Screen
+
+@Serializable
+data object NavCircuits: Screen
 
 @Serializable
 data class NavWeekend(
     val season: Int,
     val round: Int,
     val raceName: String,
-): NavKey
+): Screen
 
 @Serializable
 data class NavCircuit(
     val id: String,
     val name: String,
-): NavKey {
+): Screen {
     companion object
 }
 
 @Serializable
-data object NavLineup: NavKey
+data object NavLineup: Screen
 
 @Serializable
 data class NavDriver(
     val season: Int,
     val id: String,
     val name: String
-): NavKey
+): Screen
 
 @Serializable
 data class NavTeam(
     val season: Int,
     val id: String,
     val name: String
-): NavKey
+): Screen
 
 @Serializable
 data class NavDriverComparison(
     val season: Int
-): NavKey
+): Screen
 
 @Serializable
-data object NavRss: NavKey
+data object NavRss: Screen
 
 @Serializable
 data class NavWebpage(
     val url: String
-): NavKey
+): Screen
 
 @Serializable
-data object NavReactionGame: NavKey
+data object NavReactionGame: Screen
 
 @Serializable
-data object NavGlossary: NavKey
+data object NavGlossary: Screen
 
 @Serializable
 data class NavGlossaryDetail(
     val id: String
-): NavKey
+): Screen
 
 @Serializable
-data object NavSettings: NavKey
+data object NavSettings: Screen
 
 @Serializable
-data object NavSettingsDarkMode: NavKey
+data object NavSettingsDarkMode: Screen
 
 @Serializable
-data object NavSettingsTheme: NavKey
+data object NavSettingsTheme: Screen
 
 @Serializable
-data object NavSettingsLayoutHome: NavKey
+data object NavSettingsLayoutHome: Screen
 
 @Serializable
-data object NavSettingsLayoutRace: NavKey
+data object NavSettingsLayoutRace: Screen
 
 @Serializable
-data object NavSettingsRssConfigure: NavKey
+data object NavSettingsRssConfigure: Screen
 
 @Serializable
-data object NavSettingsInAppBrowser: NavKey
+data object NavSettingsInAppBrowser: Screen
 
 @Serializable
-data object NavSettingsNotificationResults: NavKey
+data object NavSettingsNotificationResults: Screen
 
 @Serializable
-data object NavSettingsNotificationUpcoming: NavKey
+data object NavSettingsNotificationUpcoming: Screen
 
 @Serializable
-data object NavSettingsWidgets: NavKey
+data object NavSettingsWidgets: Screen
 
 @Serializable
-data object NavSettingsPrivacy: NavKey
+data object NavSettingsPrivacy: Screen
 
 @Serializable
-data object NavPrivacyPolicy: NavKey
+data object NavPrivacyPolicy: Screen
 
 @Serializable
-data object NavAbout: NavKey
+data object NavAbout: Screen

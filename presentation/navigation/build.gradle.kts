@@ -12,5 +12,9 @@ kotlin {
             implementation(libs.bundles.kotlin)
             implementation(libs.compose.resources)
         }
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+            implementation(kotlin("reflect"))
+        }
     }
 }

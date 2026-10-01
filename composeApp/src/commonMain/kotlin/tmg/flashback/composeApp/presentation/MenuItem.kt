@@ -1,6 +1,6 @@
 package tmg.flashback.composeApp.presentation
 
-import androidx.navigation3.runtime.NavKey
+import tmg.flashback.navigation.Screen
 import flashback.composeapp.generated.resources.Res
 import flashback.composeapp.generated.resources.dashboard_nav_calendar
 import flashback.composeapp.generated.resources.dashboard_nav_constructor
@@ -129,7 +129,7 @@ fun MenuItem.toNavigationItem(
     isSelected = isSelected
 )
 
-fun MenuItem.toScreen(): NavKey? {
+fun MenuItem.toScreen(): Screen? {
     return when (this) {
         MenuItem.Results -> NavCalendar
         MenuItem.Calendar -> NavCalendar

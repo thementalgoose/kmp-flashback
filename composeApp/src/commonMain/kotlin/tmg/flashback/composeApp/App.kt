@@ -52,6 +52,7 @@ import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavDriverStandings
 import tmg.flashback.navigation.NavTeamStandings
+import tmg.flashback.navigation.Screen
 import tmg.flashback.navigation.saveStateConfiguration
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationTheme
@@ -83,7 +84,7 @@ fun App() {
     val backStack = rememberNavBackStack(saveStateConfiguration, NavCalendar)
     DisposableEffect(backStack.lastOrNull()) {
         logDebug("Stack", "Back Stack contents: \n${backStack.joinToString(separator = "\n") { "- $it" }}")
-        appNavigationViewModel.destinationUpdated(backStack.lastOrNull())
+        appNavigationViewModel.destinationUpdated(backStack.lastOrNull() as? Screen)
         return@DisposableEffect onDispose {  }
     }
 

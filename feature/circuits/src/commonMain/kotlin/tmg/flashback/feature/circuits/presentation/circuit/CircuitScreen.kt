@@ -38,7 +38,7 @@ import flashback.presentation.ui.generated.resources.ic_details_maps
 import flashback.presentation.ui.generated.resources.ic_details_wikipedia
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import androidx.navigation3.runtime.NavKey
+import tmg.flashback.navigation.Screen
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsCircuitId
 import tmg.flashback.analytics.presentation.ScreenView
@@ -72,7 +72,7 @@ import tmg.flashback.ui.components.track.TrackBreakdownInfo
 fun CircuitScreen(
     data: NavCircuit,
     paddingValues: PaddingValues,
-    navigateTo: (NavKey) -> Unit,
+    navigateTo: (Screen) -> Unit,
     actionUpClicked: () -> Unit,
     showBack: Boolean,
     windowSizeClass: WindowSizeClass,
@@ -107,7 +107,7 @@ private fun CircuitScreen(
     data: NavCircuit,
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
-    navigateTo: (NavKey) -> Unit,
+    navigateTo: (Screen) -> Unit,
     windowSizeClass: WindowSizeClass,
     showBack: Boolean,
     uiState: CircuitUiState,
@@ -249,7 +249,7 @@ internal fun CircuitLinks(
 @Composable
 private fun Event(
     model: CircuitEvent,
-    navigateTo: (NavKey) -> Unit,
+    navigateTo: (Screen) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(

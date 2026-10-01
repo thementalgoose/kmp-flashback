@@ -15,7 +15,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource

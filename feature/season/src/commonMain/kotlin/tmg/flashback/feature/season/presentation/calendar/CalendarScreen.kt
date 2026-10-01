@@ -36,7 +36,7 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
-import androidx.navigation3.runtime.NavKey
+import tmg.flashback.navigation.Screen
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import flashback.domain.formula1.generated.resources.Res.drawable
@@ -93,7 +93,7 @@ fun CalendarScreen(
     paddingValues: PaddingValues,
     actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
-    navigateTo: (NavKey) -> Unit,
+    navigateTo: (Screen) -> Unit,
     viewModel: CalendarScreenViewModel = koinViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsState()

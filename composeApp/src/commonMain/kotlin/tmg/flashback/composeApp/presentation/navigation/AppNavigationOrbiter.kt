@@ -1,7 +1,7 @@
 package tmg.flashback.composeApp.presentation.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation3.runtime.NavKey
+import tmg.flashback.navigation.Screen
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.composeApp.presentation.MenuItem
 import tmg.flashback.composeApp.presentation.MenuItem.Calendar
@@ -38,7 +38,7 @@ import tmg.flashback.xr.components.XROrbiter
 @Composable
 fun AppNavigationOrbiter(
     appNavigationUiState: AppNavigationUIState,
-    navigationItemClicked: (NavKey) -> Unit,
+    navigationItemClicked: (Screen) -> Unit,
 ) {
     XROrbiter(
         offset = navigationOrbiterColumnWidth + AppTheme.dimens.small

@@ -58,9 +58,9 @@ import tmg.flashback.navigation.NavCircuits
 import tmg.flashback.navigation.NavDriver
 import tmg.flashback.navigation.NavDriverComparison
 import tmg.flashback.navigation.NavDriverStandings
-import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavGlossary
 import tmg.flashback.navigation.NavGlossaryDetail
+import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavPrivacyPolicy
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
@@ -68,12 +68,12 @@ import tmg.flashback.navigation.NavSettings
 import tmg.flashback.navigation.NavSettingsDarkMode
 import tmg.flashback.navigation.NavSettingsInAppBrowser
 import tmg.flashback.navigation.NavSettingsLayoutHome
+import tmg.flashback.navigation.NavSettingsLayoutRace
 import tmg.flashback.navigation.NavSettingsNotificationResults
 import tmg.flashback.navigation.NavSettingsNotificationUpcoming
 import tmg.flashback.navigation.NavSettingsPrivacy
 import tmg.flashback.navigation.NavSettingsRssConfigure
 import tmg.flashback.navigation.NavSettingsTheme
-import tmg.flashback.navigation.NavSettingsLayoutRace
 import tmg.flashback.navigation.NavSettingsWidgets
 import tmg.flashback.navigation.NavTeam
 import tmg.flashback.navigation.NavTeamStandings

@@ -30,7 +30,7 @@ kotlin {
         binaries.executable()
     }
 
-    jvmToolchain(21)
+    jvmToolchain(25)
 
     cocoapods {
         summary = "Flashback"
@@ -172,8 +172,8 @@ kotlin {
 // Ensure Kotlin JVM target matches libraries compiled with newer JVM target (fix inlining errors)
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile>().configureEach {
     compilerOptions {
-        // Match the JVM target used by the toolchain (21) to avoid producing class files newer than the runtime
-        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget("21"))
+        // Match the JVM target used by the toolchain (25) to avoid producing class files newer than the runtime
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget("25"))
     }
 }
 

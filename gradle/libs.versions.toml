@@ -7,7 +7,7 @@ kotlinx-datetime = "0.8.0"
 kotlinx-coroutines = "1.11.0"
 
 # Android
-agp = "9.4.0"
+agp = "9.4.1"
 android-compileSdk = "37"
 android-minSdk = "26"
 android-targetSdk = "37"
@@ -22,16 +22,16 @@ crashlytics = "3.0.4"
 firebase-bom = "34.19.0"
 
 # Shared
-ktor = "3.5.2"
+ktor = "3.6.0"
 okhttp = "5.5.0"
-compose = "1.12.0"
+compose = "1.12.1"
 composeAdaptive = "1.2.0"
 composeNavigation = "2.9.2"
 composeNav3 = "1.0.0-alpha06"
 koin = "4.2.2"
 room3 = "3.0.3"
 sqlite = "2.7.1"
-coil = "3.6.2"
+coil = "3.6.3"
 ksoup = "0.6.0"
 cmptoast = "1.0.8"
 
@@ -64,10 +64,10 @@ androidx_glance_appwidget = { module = "androidx.glance:glance-appwidget", versi
 androidx_glance_appwidgetpreview = { module = "androidx.glance:glance-appwidget-preview", version.ref = "androidx-glance" }
 androidx_splashscreen = "androidx.core:core-splashscreen:1.2.0"
 android_flagkit = "com.github.murgupluoglu:flagkit-android:1.0.5"
-androidx_core = "androidx.core:core-ktx:1.19.0"
+androidx_core = "androidx.core:core-ktx:1.19.1"
 androidx_appcompat = "androidx.appcompat:appcompat:1.8.0"
 androidx_browser = "androidx.browser:browser:1.10.0"
-androidx_webkit = "androidx.webkit:webkit:1.17.0"
+androidx_webkit = "androidx.webkit:webkit:1.17.1"
 
 androidx_xr_runtime = { module = "androidx.xr.runtime:runtime", version.ref = "androidx-xr" }
 androidx_xr_scenecore = { module = "androidx.xr.scenecore:scenecore", version.ref = "androidx-xr" }
@@ -85,7 +85,7 @@ firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
 firebase-installations = { module = "com.google.firebase:firebase-installations" }
 
 # Compose
-compose-nav3 = "org.jetbrains.androidx.navigation3:navigation3-ui:1.1.1"
+compose-nav3 = "org.jetbrains.androidx.navigation3:navigation3-ui:1.1.2"
 compose-nav3Adaptive = "org.jetbrains.compose.material3.adaptive:adaptive-navigation3:1.3.0-rc01"
 compose-nav3ViewModel = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3:2.11.0"
 
