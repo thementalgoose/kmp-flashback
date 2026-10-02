@@ -9,32 +9,22 @@ import kotlin.test.Test
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
+private const val startingYear = 2011
+
 internal class SeasonTyresTest {
+
+    private val currentYear: Int
+        get() = Clock.System.now().toLocalDateTime(TimeZone.UTC).year
 
     @Test
     fun `season tyres have value for current year`() {
-        val currentYear = Clock.System.now().toLocalDateTime(TimeZone.UTC).year
-
         assertNotNull(SeasonTyres.getBySeason(currentYear))
     }
 
-    val seasons = listOf(
-        2011,
-        2012,
-        2013,
-        2014,
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-    )
+    private val seasons: List<Int>
+        get() = List((currentYear + 1) - startingYear) {
+            it + startingYear
+        }
 
     @Test
     fun `season tyres have value for historical years`() {
@@ -45,7 +35,7 @@ internal class SeasonTyresTest {
 
     @Test
     fun `all dry compound labels are in an order`() {
-        SeasonTyres.entries.forEach { tyres ->
+        seasons.forEach { season ->
             val order = mapOf(
                 string.tyre_hyper_soft to 1,
                 string.tyre_ultra_soft to 2,
@@ -57,7 +47,8 @@ internal class SeasonTyresTest {
             )
 
             var ref = 0
-            tyres.tyres
+            SeasonTyres.getBySeason(season)!!
+                .tyres
                 .filter { it.tyre.isDry }
                 .forEach { list ->
                     val orderVal = order[list.label]!!
@@ -71,14 +62,15 @@ internal class SeasonTyresTest {
 
     @Test
     fun `all wet compound labels are in an order`() {
-        SeasonTyres.entries.forEach { tyres ->
+        seasons.forEach { season ->
             val order = mapOf(
                 string.tyre_intermediate to 1,
                 string.tyre_wet to 2
             )
 
             var ref = 0
-            tyres.tyres
+            SeasonTyres.getBySeason(season)!!
+                .tyres
                 .filter { !it.tyre.isDry }
                 .forEach { list ->
                     val orderVal = order[list.label]!!
