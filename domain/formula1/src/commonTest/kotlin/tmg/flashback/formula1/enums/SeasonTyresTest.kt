@@ -16,6 +16,7 @@ internal class SeasonTyresTest {
         val currentYear = Clock.System.now().toLocalDateTime(TimeZone.UTC).year
 
         assertNotNull(SeasonTyres.getBySeason(currentYear))
+        assertTrue(currentYear in seasons)
     }
 
     val seasons = listOf(
@@ -45,7 +46,7 @@ internal class SeasonTyresTest {
 
     @Test
     fun `all dry compound labels are in an order`() {
-        SeasonTyres.entries.forEach { tyres ->
+        seasons.forEach { season ->
             val order = mapOf(
                 string.tyre_hyper_soft to 1,
                 string.tyre_ultra_soft to 2,
@@ -57,7 +58,8 @@ internal class SeasonTyresTest {
             )
 
             var ref = 0
-            tyres.tyres
+            SeasonTyres.getBySeason(season)!!
+                .tyres
                 .filter { it.tyre.isDry }
                 .forEach { list ->
                     val orderVal = order[list.label]!!
@@ -71,14 +73,15 @@ internal class SeasonTyresTest {
 
     @Test
     fun `all wet compound labels are in an order`() {
-        SeasonTyres.entries.forEach { tyres ->
+        seasons.forEach { season ->
             val order = mapOf(
                 string.tyre_intermediate to 1,
                 string.tyre_wet to 2
             )
 
             var ref = 0
-            tyres.tyres
+            SeasonTyres.getBySeason(season)!!
+                .tyres
                 .filter { !it.tyre.isDry }
                 .forEach { list ->
                     val orderVal = order[list.label]!!
