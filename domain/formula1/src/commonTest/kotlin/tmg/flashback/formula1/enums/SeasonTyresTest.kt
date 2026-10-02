@@ -9,33 +9,22 @@ import kotlin.test.Test
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
+private const val startingYear = 2011
+
 internal class SeasonTyresTest {
+
+    private val currentYear: Int
+        get() = Clock.System.now().toLocalDateTime(TimeZone.UTC).year
 
     @Test
     fun `season tyres have value for current year`() {
-        val currentYear = Clock.System.now().toLocalDateTime(TimeZone.UTC).year
-
         assertNotNull(SeasonTyres.getBySeason(currentYear))
-        assertTrue(currentYear in seasons)
     }
 
-    val seasons = listOf(
-        2011,
-        2012,
-        2013,
-        2014,
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-    )
+    private val seasons: List<Int>
+        get() = List((currentYear + 1) - startingYear) {
+            it + startingYear
+        }
 
     @Test
     fun `season tyres have value for historical years`() {
