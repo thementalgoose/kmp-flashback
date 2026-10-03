@@ -111,3 +111,6 @@ data object NavPrivacyPolicy: Screen
 
 @Serializable
 data object NavAbout: Screen
+
+@Serializable
+data object NavStyleGuide: Screen

@@ -6,6 +6,10 @@ plugins {
     alias(libs.plugins.mokkery)
 }
 
+compose.resources {
+    publicResClass = true
+}
+
 kotlin {
     sourceSets {
         val desktopMain by getting

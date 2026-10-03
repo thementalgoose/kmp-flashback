@@ -17,6 +17,7 @@ import tmg.flashback.composeApp.presentation.MenuItem.ReactionGame
 import tmg.flashback.composeApp.presentation.MenuItem.Results
 import tmg.flashback.composeApp.presentation.MenuItem.Rss
 import tmg.flashback.composeApp.presentation.MenuItem.Settings
+import tmg.flashback.composeApp.presentation.MenuItem.StyleGuide
 import tmg.flashback.composeApp.presentation.MenuItem.TeamsStandings
 import tmg.flashback.composeApp.presentation.MenuItem.XR_Spacial
 import tmg.flashback.composeApp.presentation.toNavigationItem
@@ -84,6 +85,7 @@ internal fun AppNavigationRail(
                 ReactionGame,
                 Glossary,
                 Settings,
+                StyleGuide,
                 Contact -> {
                     val result = item.toScreen() ?: return@NavigationColumn
                     navigationItemClicked(result)

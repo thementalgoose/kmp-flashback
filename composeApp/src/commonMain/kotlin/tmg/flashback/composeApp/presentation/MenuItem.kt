@@ -25,6 +25,8 @@ import flashback.composeapp.generated.resources.dashboard_nav_glossary_selected
 import flashback.composeapp.generated.resources.dashboard_reaction_selected
 import flashback.composeapp.generated.resources.dashboard_rss_selected
 import flashback.composeapp.generated.resources.dashboard_settings_selected
+import flashback.composeapp.generated.resources.dashboard_style_guide
+import flashback.composeapp.generated.resources.dashboard_style_guide_selected
 import flashback.composeapp.generated.resources.dashboard_xr_selected
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.dashboard_tab_results
@@ -39,6 +41,7 @@ import flashback.presentation.localisation.generated.resources.nav_search
 import flashback.presentation.localisation.generated.resources.nav_lineup
 import flashback.presentation.localisation.generated.resources.nav_xr
 import flashback.presentation.localisation.generated.resources.nav_settings
+import flashback.presentation.localisation.generated.resources.nav_style_guide
 import flashback.presentation.localisation.generated.resources.search_category_circuits
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
@@ -51,6 +54,7 @@ import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
 import tmg.flashback.navigation.NavSettings
+import tmg.flashback.navigation.NavStyleGuide
 import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.ui.navigation.NavigationItem
 
@@ -68,7 +72,8 @@ enum class MenuItem(
     ReactionGame(key = "ReactionGame"),
     Settings(key = "Settings"),
     Contact(key = "Contact"),
-    XR_Spacial(key = "XR_Spacial")
+    StyleGuide(key = "Style Guide"),
+    XR_Spacial(key = "XR_Spacial"),
 }
 
 val MenuItem.label: StringResource
@@ -84,6 +89,7 @@ val MenuItem.label: StringResource
         MenuItem.ReactionGame -> string.nav_reaction_game
         MenuItem.Settings -> string.nav_settings
         MenuItem.Contact -> string.nav_contact
+        MenuItem.StyleGuide -> string.nav_style_guide
         MenuItem.XR_Spacial -> string.nav_xr
     }
 
@@ -100,6 +106,7 @@ val MenuItem.icon: DrawableResource
         MenuItem.ReactionGame -> Res.drawable.dashboard_reaction
         MenuItem.Settings -> Res.drawable.dashboard_settings
         MenuItem.Contact -> Res.drawable.dashboard_contact
+        MenuItem.StyleGuide -> Res.drawable.dashboard_style_guide
         MenuItem.XR_Spacial -> Res.drawable.dashboard_xr
     }
 
@@ -116,6 +123,7 @@ val MenuItem.selectedIcon: DrawableResource
         MenuItem.ReactionGame -> Res.drawable.dashboard_reaction_selected
         MenuItem.Settings -> Res.drawable.dashboard_settings_selected
         MenuItem.Contact -> Res.drawable.dashboard_contact_selected
+        MenuItem.StyleGuide -> Res.drawable.dashboard_style_guide_selected
         MenuItem.XR_Spacial -> Res.drawable.dashboard_xr_selected
     }
 
@@ -141,6 +149,7 @@ fun MenuItem.toScreen(): Screen? {
         MenuItem.Glossary -> NavGlossary
         MenuItem.ReactionGame -> NavReactionGame
         MenuItem.Settings -> NavSettings
+        MenuItem.StyleGuide -> NavStyleGuide
         MenuItem.Contact -> NavAbout
         MenuItem.XR_Spacial -> null
     }
