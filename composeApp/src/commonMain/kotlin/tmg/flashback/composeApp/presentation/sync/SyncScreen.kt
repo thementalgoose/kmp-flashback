@@ -231,12 +231,14 @@ fun SyncScreen(
                     SyncState.LOADING -> { }
                     SyncState.DONE -> {
                         ButtonPrimary(
+                            modifier = Modifier.fillMaxWidth(),
                             text = stringResource(string.splash_continue),
                             onClick = continueClicked
                         )
                     }
                     SyncState.FAILED -> {
                         ButtonSecondary(
+                            modifier = Modifier.fillMaxWidth(),
                             text = stringResource(string.splash_sync_try_again),
                             onClick = tryAgainClicked
                         )
@@ -344,6 +346,24 @@ private fun PreviewLoading() {
             constructors = SyncState.DONE,
             races = SyncState.LOADING,
             overall = SyncState.LOADING,
+            continueClicked = { },
+            tryAgainClicked = { },
+            windowSizeClass = WindowSizeClass.compute(400f, 700f)
+        )
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewDone() {
+    ApplicationThemePreview {
+        SyncScreen(
+            drivers = SyncState.DONE,
+            circuits = SyncState.DONE,
+            config = SyncState.DONE,
+            constructors = SyncState.DONE,
+            races = SyncState.DONE,
+            overall = SyncState.DONE,
             continueClicked = { },
             tryAgainClicked = { },
             windowSizeClass = WindowSizeClass.compute(400f, 700f)
