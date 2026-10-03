@@ -3,9 +3,9 @@ package tmg.flashback.data.repo.mappers.network
 import tmg.flashback.persistence.flashback.models.overview.model
 import tmg.flashback.flashbackapi.api.models.overview.Event
 import tmg.flashback.flashbackapi.api.models.overview.model
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNull
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
 
 internal class NetworkEventMapperTest {
 

@@ -3,9 +3,9 @@ package tmg.flashback.formula1.model
 import tmg.flashback.formula1.enums.RaceStatus
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNull
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
 
 internal class DriverHistorySeasonTest {
 

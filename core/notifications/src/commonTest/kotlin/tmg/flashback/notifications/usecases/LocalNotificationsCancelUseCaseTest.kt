@@ -7,7 +7,7 @@ import dev.mokkery.mock
 import dev.mokkery.verify
 import tmg.flashback.notifications.manager.NotificationManager
 import tmg.flashback.notifications.repositories.NotificationRepository
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
 
 internal class LocalNotificationsCancelUseCaseTest {
 

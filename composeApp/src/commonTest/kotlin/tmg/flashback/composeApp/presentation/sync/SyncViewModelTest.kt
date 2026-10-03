@@ -27,8 +27,8 @@ import tmg.flashback.feature.notifications.usecases.ScheduleResult
 import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
 import tmg.flashback.composeApp.repositories.OnboardingRepository
 import kotlin.coroutines.coroutineContext
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.seconds
 

@@ -10,9 +10,9 @@ import dev.mokkery.verify
 import dev.mokkery.verify.VerifyMode.Companion.exactly
 import tmg.flashback.configuration.manager.ConfigManager
 import tmg.flashback.preferences.manager.PreferenceManager
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 
 internal class DeviceRepositoryTest {
     private lateinit var underTest: DeviceRepositoryImpl

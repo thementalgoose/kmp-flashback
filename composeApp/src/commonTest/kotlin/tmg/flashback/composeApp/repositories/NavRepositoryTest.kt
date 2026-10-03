@@ -8,9 +8,9 @@ import tmg.flashback.composeApp.repositories.model.NavLink
 import tmg.flashback.composeApp.repositories.model.NavLinkJson
 import tmg.flashback.composeApp.repositories.model.NavLinksJson
 import tmg.flashback.configuration.manager.ConfigManager
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 
 internal class NavRepositoryTest {
 
@@ -28,7 +28,7 @@ internal class NavRepositoryTest {
     fun `getting nav links returns empty list when config returns null`() {
         every { mockConfigManager.getJson(expectedKeyNav, NavLinksJson.serializer()) } returns null
         initUnderTest()
-        assertEquals(emptyList(), underTest.navLinks)
+        assertEquals(emptyList<NavLink>(), underTest.navLinks)
     }
 
     @Test

@@ -15,9 +15,9 @@ import tmg.flashback.formula1.model.ConstructorHistory
 import tmg.flashback.formula1.model.ConstructorHistorySeasonDriver
 import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.model.model
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 
 internal class ConstructorStatsViewModelTest {
 

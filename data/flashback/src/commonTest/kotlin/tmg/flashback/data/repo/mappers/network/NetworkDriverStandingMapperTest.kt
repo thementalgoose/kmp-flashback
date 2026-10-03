@@ -5,9 +5,9 @@ import tmg.flashback.persistence.flashback.models.standings.DriverStandingConstr
 import tmg.flashback.persistence.flashback.models.standings.model
 import tmg.flashback.flashbackapi.api.models.races.DriverStandings
 import tmg.flashback.flashbackapi.api.models.races.model
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
 
 internal class NetworkDriverStandingMapperTest {
 

@@ -1,8 +1,8 @@
 package tmg.flashback.feature.rss.usecases
 
 import tmg.flashback.feature.rss.repositories.FakeRssRepository
-import kotlin.test.Test
-import kotlin.test.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertTrue
 
 internal class IsRssEnabledUseCaseTest {
 

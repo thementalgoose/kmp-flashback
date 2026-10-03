@@ -6,8 +6,8 @@ import tmg.flashback.persistence.flashback.models.constructors.model
 import tmg.flashback.flashbackapi.api.models.constructors.ConstructorHistoryStanding
 import tmg.flashback.flashbackapi.api.models.constructors.ConstructorHistoryStandingDriver
 import tmg.flashback.flashbackapi.api.models.constructors.model
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
 
 internal class NetworkConstructorMapperTest {
 

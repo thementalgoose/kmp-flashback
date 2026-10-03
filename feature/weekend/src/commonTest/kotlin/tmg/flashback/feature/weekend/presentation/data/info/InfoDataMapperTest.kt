@@ -8,8 +8,8 @@ import tmg.flashback.feature.weekend.repositories.WeatherRepository
 import tmg.flashback.feature.weekend.repositories.WeekendRepository
 import tmg.flashback.formula1.model.Race
 import tmg.flashback.formula1.model.model
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
 
 internal class InfoDataMapperTest {
 

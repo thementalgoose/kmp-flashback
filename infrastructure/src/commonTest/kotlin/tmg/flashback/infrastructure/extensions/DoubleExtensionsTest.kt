@@ -1,8 +1,8 @@
 package tmg.flashback.infrastructure.extensions
 
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 
 internal class DoubleExtensionsTest {
 

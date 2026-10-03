@@ -4,7 +4,7 @@ import dev.mokkery.MockMode.autoUnit
 import dev.mokkery.mock
 import dev.mokkery.verify
 import tmg.flashback.configuration.manager.ConfigManager
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
 
 internal class InitialiseConfigUseCaseTest {
 

@@ -4,8 +4,8 @@ import tmg.flashback.flashbackapi.NetworkCircuit
 import tmg.flashback.persistence.flashback.models.circuit.Circuit
 import tmg.flashback.persistence.flashback.models.circuit.model
 import tmg.flashback.flashbackapi.api.models.circuits.model
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
 
 internal class NetworkCircuitDataMapperTest {
 

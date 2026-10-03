@@ -11,7 +11,7 @@ import tmg.flashback.device.usecases.OpenStorePageUseCase
 import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.composeApp.repositories.OnboardingRepository
 import tmg.flashback.ui.toasts.ToastManager
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
 
 internal class SettingsAboutViewModelTest {
 

@@ -8,8 +8,8 @@ import dev.mokkery.mock
 import dev.mokkery.verify
 import kotlinx.coroutines.test.runTest
 import tmg.flashback.webbrowser.repository.WebRepository
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
 
 internal class SettingsBrowserViewModelTest {
 

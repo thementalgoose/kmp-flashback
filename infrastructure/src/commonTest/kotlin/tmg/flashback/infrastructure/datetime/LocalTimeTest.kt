@@ -1,10 +1,10 @@
 package tmg.flashback.infrastructure.datetime
 
 import kotlinx.datetime.LocalTime
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertNull
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.api.Assertions.assertNull
 
 internal class LocalTimeTest {
 
@@ -33,22 +33,22 @@ internal class LocalTimeTest {
 
     @Test
     fun `requireFromTime throws IllegalArgumentException for invalid format`() {
-        assertFailsWith<IllegalArgumentException> {
+        assertThrows<IllegalArgumentException> {
             requireFromTime("invalid")
         }
-        assertFailsWith<IllegalArgumentException> {
+        assertThrows<IllegalArgumentException> {
             requireFromTime("10:30:45:00")
         }
-        assertFailsWith<IllegalArgumentException> {
+        assertThrows<IllegalArgumentException> {
             requireFromTime("10-30-45")
         }
-        assertFailsWith<IllegalArgumentException> {
+        assertThrows<IllegalArgumentException> {
             requireFromTime("")
         }
-        assertFailsWith<IllegalArgumentException> {
+        assertThrows<IllegalArgumentException> {
             requireFromTime("25:00")
         }
-        assertFailsWith<IllegalArgumentException> {
+        assertThrows<IllegalArgumentException> {
             requireFromTime("10:60")
         }
     }

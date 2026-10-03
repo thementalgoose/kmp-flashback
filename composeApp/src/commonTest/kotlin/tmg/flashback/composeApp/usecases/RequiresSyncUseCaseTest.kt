@@ -6,9 +6,9 @@ import dev.mokkery.every
 import dev.mokkery.mock
 import tmg.flashback.configuration.usecases.DoesConfigRequireSyncUseCase
 import tmg.flashback.composeApp.repositories.OnboardingRepository
-import kotlin.test.Test
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 
 internal class RequiresSyncUseCaseTest {
 

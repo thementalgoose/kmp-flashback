@@ -8,8 +8,8 @@ import tmg.flashback.formula1.model.LineupSeason
 import tmg.flashback.formula1.model.model
 import tmg.flashback.persistence.flashback.models.lineup.LineupWithDrivers
 import tmg.flashback.persistence.flashback.models.lineup.model
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
 
 internal class LineupMapperTest {
 

@@ -1,10 +1,10 @@
 package tmg.flashback.formula1.model
 
 import tmg.flashback.formula1.enums.RaceStatus
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 
 internal class DriverHistoryTest {
 

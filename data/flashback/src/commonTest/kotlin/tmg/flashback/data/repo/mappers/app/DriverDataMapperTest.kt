@@ -4,8 +4,8 @@ import tmg.flashback.persistence.flashback.models.drivers.model
 import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.model.model
 import tmg.flashback.persistence.flashback.RoomDriver
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
 
 internal class DriverDataMapperTest {
 

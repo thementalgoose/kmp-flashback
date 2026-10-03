@@ -2,8 +2,8 @@ package tmg.flashback.formula1.enums
 
 import flashback.domain.formula1.generated.resources.Res
 import flashback.domain.formula1.generated.resources.*
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
 
 internal class TrackLayoutTest {
 

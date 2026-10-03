@@ -6,8 +6,8 @@ import dev.mokkery.every
 import dev.mokkery.mock
 import dev.mokkery.verify
 import tmg.flashback.preferences.manager.PreferenceManager
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
 
 internal class OnboardingRepositoryTest {
 

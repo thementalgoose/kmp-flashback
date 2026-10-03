@@ -14,8 +14,8 @@ import tmg.flashback.feature.notifications.model.NotificationUpcoming.QUALIFYING
 import tmg.flashback.feature.notifications.model.NotificationUpcoming.RACE
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepositoryImpl.Companion.saveKey
 import tmg.flashback.preferences.manager.PreferenceManager
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
 
 internal class NotificationSettingsRepositoryTest {
 

@@ -11,10 +11,10 @@ import tmg.flashback.formula1.model.model
 import tmg.flashback.persistence.flashback.RoomRace
 import tmg.flashback.persistence.flashback.RoomRaceInfo
 import tmg.flashback.persistence.flashback.RoomRaceInfoWithCircuit
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFails
-import kotlin.test.assertNull
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.api.Assertions.assertNull
 
 internal class RaceMapperTest {
 
@@ -45,7 +45,7 @@ internal class RaceMapperTest {
 
         val input = RoomRace.model(raceInfo = RoomRaceInfo.model(date = "invalid"))
 
-        assertFails {
+        assertThrows<Throwable> {
             underTest.mapRaceInfo(input)
         }
     }

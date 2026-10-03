@@ -11,7 +11,7 @@ import kotlinx.coroutines.runBlocking
 import tmg.flashback.configuration.Migrations
 import tmg.flashback.configuration.manager.ConfigManager
 import tmg.flashback.configuration.repositories.ConfigRepository
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
 
 internal class ApplyConfigUseCaseTest {
 

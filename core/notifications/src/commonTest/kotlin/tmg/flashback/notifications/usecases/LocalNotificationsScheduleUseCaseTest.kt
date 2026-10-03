@@ -5,7 +5,7 @@ import dev.mokkery.mock
 import dev.mokkery.verify
 import kotlinx.datetime.LocalDateTime
 import tmg.flashback.notifications.manager.NotificationManager
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
 
 internal class LocalNotificationsScheduleUseCaseTest {
 

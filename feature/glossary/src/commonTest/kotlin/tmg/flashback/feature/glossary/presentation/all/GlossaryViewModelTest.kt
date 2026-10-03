@@ -3,9 +3,9 @@ package tmg.flashback.feature.glossary.presentation.all
 import app.cash.turbine.test
 import kotlinx.coroutines.test.runTest
 import tmg.flashback.formula1.constants.Glossary
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNull
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
 
 internal class GlossaryViewModelTest {
 

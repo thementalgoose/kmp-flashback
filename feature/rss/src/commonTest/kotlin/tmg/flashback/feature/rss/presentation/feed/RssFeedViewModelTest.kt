@@ -21,10 +21,10 @@ import tmg.flashback.infrastructure.datetime.TimeManager
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.webbrowser.repository.WebRepository
 import tmg.flashback.webbrowser.usecases.IsInAppBrowserEnabledUseCase
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 
 internal class RssFeedViewModelTest {
 
@@ -63,7 +63,7 @@ internal class RssFeedViewModelTest {
             val initial = awaitItem() as RssFeedUiState.Data
             assertEquals(null, initial.lastUpdated)
             assertEquals(false, initial.isLoading)
-            assertEquals(emptyList(), initial.rssItems)
+            assertEquals(emptyList<RssFeedItem>(), initial.rssItems)
             assertEquals(false, initial.hasSources)
         }
     }

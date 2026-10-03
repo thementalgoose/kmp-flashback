@@ -7,8 +7,8 @@ import dev.mokkery.every
 import dev.mokkery.mock
 import dev.mokkery.verify
 import tmg.flashback.preferences.manager.PreferenceManager
-import kotlin.test.Test
-import kotlin.test.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertTrue
 
 internal class WeatherRepositoryTest {
 

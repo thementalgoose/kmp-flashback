@@ -8,8 +8,8 @@ import tmg.flashback.flashbackapi.api.models.overview.model
 import tmg.flashback.flashbackapi.api.models.races.Race
 import tmg.flashback.flashbackapi.api.models.races.model
 import tmg.flashback.persistence.flashback.RoomSchedule
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
 
 internal class NetworkScheduleMapperTest {
 

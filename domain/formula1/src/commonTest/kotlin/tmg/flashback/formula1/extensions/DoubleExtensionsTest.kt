@@ -3,7 +3,7 @@ package tmg.flashback.formula1.extensions
 import tmg.flashback.infrastructure.extensions.roundToHalf
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Assertions.assertEquals
 
 internal class DoubleExtensionsTest {
 

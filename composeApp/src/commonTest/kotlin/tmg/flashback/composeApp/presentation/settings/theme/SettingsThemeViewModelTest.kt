@@ -15,8 +15,8 @@ import tmg.flashback.style.theme.Theme.Default
 import tmg.flashback.style.theme.Theme.MaterialYou
 import tmg.flashback.style.theme.ThemeManager
 import tmg.flashback.ui.toasts.ToastManager
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
 
 internal class SettingsThemeViewModelTest {
 
