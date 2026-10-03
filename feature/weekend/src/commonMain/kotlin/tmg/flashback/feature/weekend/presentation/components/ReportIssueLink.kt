@@ -24,17 +24,15 @@ fun ReportIssueLink(
     Box(
         modifier = modifier
             .fillMaxWidth()
+            .clickable(onClick = onClick)
             .padding(
-                vertical = AppTheme.dimens.medium,
+                vertical = AppTheme.dimens.small,
                 horizontal = AppTheme.dimens.medium
-            ),
-        contentAlignment = Alignment.Center
+            )
     ) {
         TextCaption(
             text = stringResource(string.report_issue_link),
             textColor = AppTheme.colors.onSurfaceVariant,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.clickable(onClick = onClick)
         )
     }
 }

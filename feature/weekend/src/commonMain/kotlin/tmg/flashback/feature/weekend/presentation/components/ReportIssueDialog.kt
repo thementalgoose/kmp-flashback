@@ -38,44 +38,51 @@ fun ReportIssueDialog(
         onDismissRequest = onDismiss,
         modifier = modifier,
         content = {
-            Column(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-                    .background(AppTheme.colors.surface)
-                    .padding(AppTheme.dimens.medium),
-                verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
-            ) {
-                TextTitle(
-                    text = stringResource(string.report_issue_dialog_title),
-                    bold = true
-                )
-                TextBody2(
-                    text = stringResource(string.report_issue_dialog_message)
-                )
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
-                ) {
-                    Spacer(Modifier.weight(1f))
-                    ButtonSecondary(
-                        text = stringResource(string.report_issue_dialog_cancel),
-                        onClick = onDismiss
-                    )
-                    ButtonPrimary(
-                        text = stringResource(string.report_issue_dialog_confirm),
-                        onClick = onConfirm
-                    )
-                }
-            }
+            ReportIssueDialogContent(
+                onConfirm = onConfirm,
+                onDismiss = onDismiss
+            )
         }
     )
 }
 
+@Composable
+private fun ReportIssueDialogContent(
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
+            .background(AppTheme.colors.surface)
+            .padding(AppTheme.dimens.medium),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.nsmall)
+    ) {
+        TextTitle(
+            text = stringResource(string.report_issue_dialog_title),
+            bold = true
+        )
+        TextBody2(
+            text = stringResource(string.report_issue_dialog_message)
+        )
+        ButtonPrimary(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(string.report_issue_dialog_confirm),
+            onClick = onConfirm
+        )
+        ButtonSecondary(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(string.report_issue_dialog_cancel),
+            onClick = onDismiss
+        )
+    }
+}
+
 @PreviewTheme
 @Composable
-private fun ReportIssueDialogPreview() {
+private fun Preview() {
     ApplicationThemePreview {
-        ReportIssueDialog(
+        ReportIssueDialogContent(
             onConfirm = { },
             onDismiss = { }
         )
