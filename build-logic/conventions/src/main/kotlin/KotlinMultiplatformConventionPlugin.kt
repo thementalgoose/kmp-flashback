@@ -40,7 +40,13 @@ class KotlinMultiplatformConventionPlugin : Plugin<Project> {
                 }
             }
 
-            jvm("desktop")
+            jvm("desktop") {
+                testRuns.all {
+                    executionTask.configure {
+                        useJUnitPlatform()
+                    }
+                }
+            }
             wasmJs {
                 browser()
             }
@@ -50,10 +56,22 @@ class KotlinMultiplatformConventionPlugin : Plugin<Project> {
                     "commonMain" -> dependencies {
                         implementation(libs.findLibrary("koin.core").get().get())
                     }
+                    "commonTest" -> dependencies {
+                        implementation(libs.findLibrary("kotlin-test-junit5").get().get())
+                        implementation(libs.findLibrary("junit-jupiter-api").get().get())
+                        implementation(libs.findLibrary("junit-jupiter-params").get().get())
+                    }
+                    "desktopTest" -> dependencies {
+                        implementation(libs.findLibrary("junit-jupiter-engine").get().get())
+                    }
                 }
                 languageSettings {
                     optIn("kotlin.time.ExperimentalTime")
                 }
+            }
+
+            tasks.withType(org.gradle.api.tasks.testing.Test::class.java).configureEach {
+                useJUnitPlatform()
             }
         }
     }

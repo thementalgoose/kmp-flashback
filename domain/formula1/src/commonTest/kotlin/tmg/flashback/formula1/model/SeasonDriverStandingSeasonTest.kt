@@ -1,30 +1,23 @@
 package tmg.flashback.formula1.model
 
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 internal class SeasonDriverStandingSeasonTest {
 
-    private data class TestCase(
+    data class TestCase(
         val championshipPosition: Int?,
         val expectedResult: Boolean
     )
 
-    private val testCases = listOf(
-        TestCase(null, false),
-        TestCase(0, false),
-        TestCase(1, true),
-        TestCase(5, true),
-        TestCase(15, true),
-    )
-    @Test
-    fun `has valid championship position returns based on position`() {
-        testCases.forEach { (championshipPosition, expectedResult) ->
-            val model = SeasonDriverStandingSeason.model(championshipPosition = championshipPosition)
-
-            assertEquals(expectedResult, model.hasValidChampionshipPosition)
-        }
+    @ParameterizedTest
+    @MethodSource("testCases")
+    fun `has valid championship position returns based on position`(testCase: TestCase) {
+        val model = SeasonDriverStandingSeason.model(championshipPosition = testCase.championshipPosition)
+        assertEquals(testCase.expectedResult, model.hasValidChampionshipPosition)
     }
 
     @Test
@@ -47,5 +40,16 @@ internal class SeasonDriverStandingSeasonTest {
         )
 
         assertNull(model.inProgressContent)
+    }
+
+    companion object {
+        @JvmStatic
+        fun testCases() = listOf(
+            TestCase(null, false),
+            TestCase(0, false),
+            TestCase(1, true),
+            TestCase(5, true),
+            TestCase(15, true)
+        )
     }
 }

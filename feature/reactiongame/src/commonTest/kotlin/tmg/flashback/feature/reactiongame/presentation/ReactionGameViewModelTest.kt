@@ -13,17 +13,13 @@ import kotlinx.coroutines.test.runTest
 import tmg.flashback.analytics.usecases.LogEventUseCase
 import tmg.flashback.feature.reactiongame.manager.LightsOutDelayProvider
 import tmg.flashback.infrastructure.datetime.TimeManager
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 @ExperimentalCoroutinesApi
 internal class ReactionViewModelTest {
-
-    private companion object {
-        private const val LIGHTS_OUT_DELAY = 2000L
-        private const val TIME_BETWEEN_LIGHTS = 1000L
-        private const val TEST_TIMEOUT = 2500L
-    }
 
     private val mockLightsOutDelayProvider: LightsOutDelayProvider = mock(autoUnit)
     private val mockTimeManager: TimeManager = mock(autoUnit)
@@ -115,55 +111,41 @@ internal class ReactionViewModelTest {
         val millis: Int,
         val expectedTier: ReactionResultTier
     )
-    private val testCases = listOf(
-        TestCase(10, ReactionResultTier.SUPERHUMAN),
-        TestCase(149, ReactionResultTier.SUPERHUMAN),
-        TestCase(150, ReactionResultTier.EXCEPTIONAL),
-        TestCase(179, ReactionResultTier.EXCEPTIONAL),
-        TestCase(181, ReactionResultTier.GOOD),
-        TestCase(229, ReactionResultTier.GOOD),
-        TestCase(240, ReactionResultTier.AVERAGE),
-        TestCase(279, ReactionResultTier.AVERAGE),
-        TestCase(280, ReactionResultTier.NOT_GOOD),
-        TestCase(400, ReactionResultTier.POOR),
-        TestCase(401, ReactionResultTier.POOR),
-        TestCase(1000, ReactionResultTier.POOR),
-    )
 
-    @Test
-    fun `reacting to sequence after millis results in tier`() = runTest(testDispatcher) {
-        testCases.forEach { (millis, expectedTier) ->
-            initUnderTest()
+    @ParameterizedTest
+    @MethodSource("testCases")
+    fun `reacting to sequence after millis results in tier`(testCase: TestCase) = runTest(testDispatcher) {
+        val (millis, expectedTier) = testCase
+        initUnderTest()
 
-            underTest.uiState.test {
-                assertEquals(ReactionUiState.Start, awaitItem())
+        underTest.uiState.test {
+            assertEquals(ReactionUiState.Start, awaitItem())
 
-                underTest.start()
+            underTest.start()
 
-                testDispatcher.scheduler.advanceTimeBy(TIME_BETWEEN_LIGHTS * 5)
-                assertEquals(ReactionUiState.Game(0), awaitItem())
-                assertEquals(ReactionUiState.Game(1), awaitItem())
-                assertEquals(ReactionUiState.Game(2), awaitItem())
-                assertEquals(ReactionUiState.Game(3), awaitItem())
-                assertEquals(ReactionUiState.Game(4), awaitItem())
-                assertEquals(ReactionUiState.Game(5), awaitItem())
+            testDispatcher.scheduler.advanceTimeBy(TIME_BETWEEN_LIGHTS * 5)
+            assertEquals(ReactionUiState.Game(0), awaitItem())
+            assertEquals(ReactionUiState.Game(1), awaitItem())
+            assertEquals(ReactionUiState.Game(2), awaitItem())
+            assertEquals(ReactionUiState.Game(3), awaitItem())
+            assertEquals(ReactionUiState.Game(4), awaitItem())
+            assertEquals(ReactionUiState.Game(5), awaitItem())
 
-                setNow(100)
-                advanceTimeBy(LIGHTS_OUT_DELAY)
-                assertEquals(ReactionUiState.Game(lights = 0, hasDisplayedSequence = true), awaitItem())
+            setNow(100)
+            advanceTimeBy(LIGHTS_OUT_DELAY)
+            assertEquals(ReactionUiState.Game(lights = 0, hasDisplayedSequence = true), awaitItem())
 
-                setNow(100 + millis)
-                advanceTimeBy(millis.toLong())
+            setNow(100 + millis)
+            advanceTimeBy(millis.toLong())
 
-                underTest.react()
+            underTest.react()
 
-                val expected = ReactionUiState.Results(
-                    timeMillis = millis.toLong(),
-                    tier = expectedTier,
-                    percentage = (millis / 500f).coerceIn(0f, 1f)
-                )
-                assertEquals(expected, awaitItem())
-            }
+            val expected = ReactionUiState.Results(
+                timeMillis = millis.toLong(),
+                tier = expectedTier,
+                percentage = (millis / 500f).coerceIn(0f, 1f)
+            )
+            assertEquals(expected, awaitItem())
         }
     }
 
@@ -199,5 +181,27 @@ internal class ReactionViewModelTest {
 
     private fun setNow(millis: Int) {
         every { mockTimeManager.nowMillis } returns millis.toLong()
+    }
+
+    companion object {
+        private const val LIGHTS_OUT_DELAY = 2000L
+        private const val TIME_BETWEEN_LIGHTS = 1000L
+        private const val TEST_TIMEOUT = 2500L
+
+        @JvmStatic
+        fun testCases() = listOf(
+            TestCase(10, ReactionResultTier.SUPERHUMAN),
+            TestCase(149, ReactionResultTier.SUPERHUMAN),
+            TestCase(150, ReactionResultTier.EXCEPTIONAL),
+            TestCase(179, ReactionResultTier.EXCEPTIONAL),
+            TestCase(181, ReactionResultTier.GOOD),
+            TestCase(229, ReactionResultTier.GOOD),
+            TestCase(240, ReactionResultTier.AVERAGE),
+            TestCase(279, ReactionResultTier.AVERAGE),
+            TestCase(280, ReactionResultTier.NOT_GOOD),
+            TestCase(400, ReactionResultTier.POOR),
+            TestCase(401, ReactionResultTier.POOR),
+            TestCase(1000, ReactionResultTier.POOR)
+        )
     }
 }

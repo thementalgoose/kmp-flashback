@@ -12,6 +12,8 @@ import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
 import tmg.flashback.infrastructure.datetime.plus
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -35,47 +37,26 @@ internal class TimestampTest {
         assertEquals(LocalDateTime(2020, 1, 1, 12, 0), resultDateTimeDevice)
     }
 
-    private data class TestCaseDateTimes(
+    data class TestCaseDateTimes(
         val offset: Int,
         val utcHour: Int,
         val deviceHour: Int
     )
-    private val testCasesDateTimes = listOf(
-        TestCaseDateTimes(-9,12,3),
-        TestCaseDateTimes(-8,12,4),
-        TestCaseDateTimes(-7,12,5),
-        TestCaseDateTimes(-6,12,6),
-        TestCaseDateTimes(-5,12,7),
-        TestCaseDateTimes(-4,12,8),
-        TestCaseDateTimes(-3,12,9),
-        TestCaseDateTimes(-2,12,10),
-        TestCaseDateTimes(-1,12,11),
-        TestCaseDateTimes(0,12,12),
-        TestCaseDateTimes(1,12,13),
-        TestCaseDateTimes(2,12,14),
-        TestCaseDateTimes(3,12,15),
-        TestCaseDateTimes(4,12,16),
-        TestCaseDateTimes(5,12,17),
-        TestCaseDateTimes(6,12,18),
-        TestCaseDateTimes(7,12,19),
-        TestCaseDateTimes(8,12,20),
-        TestCaseDateTimes(9,12,21),
-    )
-    @Test
-    fun `perform runs if time when time is supplied and adheres to zone offset`() {
-        testCasesDateTimes.forEach { (offset, utcHour, deviceHour) ->
-            val localDate = LocalDate(2020, 1, 1)
-            val localTime = LocalTime(utcHour, 0, 0)
-            val zone = FixedOffsetTimeZone(UtcOffset(offset))
 
-            val sut = Timestamp(localDate, localTime, zone)
+    @ParameterizedTest
+    @MethodSource("testCasesDateTimes")
+    fun `perform runs if time when time is supplied and adheres to zone offset`(testCase: TestCaseDateTimes) {
+        val localDate = LocalDate(2020, 1, 1)
+        val localTime = LocalTime(testCase.utcHour, 0, 0)
+        val zone = FixedOffsetTimeZone(UtcOffset(testCase.offset))
 
-            val resultDateTimeUTC: LocalDateTime = sut.utcLocalDateTime
-            val resultDateTimeDevice: LocalDateTime = sut.deviceLocalDateTime
+        val sut = Timestamp(localDate, localTime, zone)
 
-            assertEquals(LocalDateTime(2020, 1, 1, 12, 0), resultDateTimeUTC)
-            assertEquals(LocalDateTime(2020, 1, 1, deviceHour, 0), resultDateTimeDevice)
-        }
+        val resultDateTimeUTC: LocalDateTime = sut.utcLocalDateTime
+        val resultDateTimeDevice: LocalDateTime = sut.deviceLocalDateTime
+
+        assertEquals(LocalDateTime(2020, 1, 1, 12, 0), resultDateTimeUTC)
+        assertEquals(LocalDateTime(2020, 1, 1, testCase.deviceHour, 0), resultDateTimeDevice)
     }
 
     @Test
@@ -305,5 +286,30 @@ internal class TimestampTest {
         val millisPerDay = 24L * 60 * 60 * 1000
         val millis = ((this.toMillisecondOfDay().toLong() + seconds * 1000L) % millisPerDay + millisPerDay) % millisPerDay
         return LocalTime.fromMillisecondOfDay(millis.toInt())
+    }
+
+    companion object {
+        @JvmStatic
+        fun testCasesDateTimes() = listOf(
+            TestCaseDateTimes(-9, 12, 3),
+            TestCaseDateTimes(-8, 12, 4),
+            TestCaseDateTimes(-7, 12, 5),
+            TestCaseDateTimes(-6, 12, 6),
+            TestCaseDateTimes(-5, 12, 7),
+            TestCaseDateTimes(-4, 12, 8),
+            TestCaseDateTimes(-3, 12, 9),
+            TestCaseDateTimes(-2, 12, 10),
+            TestCaseDateTimes(-1, 12, 11),
+            TestCaseDateTimes(0, 12, 12),
+            TestCaseDateTimes(1, 12, 13),
+            TestCaseDateTimes(2, 12, 14),
+            TestCaseDateTimes(3, 12, 15),
+            TestCaseDateTimes(4, 12, 16),
+            TestCaseDateTimes(5, 12, 17),
+            TestCaseDateTimes(6, 12, 18),
+            TestCaseDateTimes(7, 12, 19),
+            TestCaseDateTimes(8, 12, 20),
+            TestCaseDateTimes(9, 12, 21)
+        )
     }
 }
