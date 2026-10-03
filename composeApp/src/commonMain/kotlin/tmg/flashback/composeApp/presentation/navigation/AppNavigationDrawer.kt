@@ -35,6 +35,7 @@ import tmg.flashback.navigation.Screen
 import flashback.composeapp.generated.resources.ic_settings_web
 import flashback.presentation.localisation.generated.resources.Res
 import flashback.presentation.localisation.generated.resources.app_version_placeholder
+import flashback.presentation.localisation.generated.resources.nav_style_guide
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -55,6 +56,7 @@ import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
 import tmg.flashback.navigation.NavSettings
+import tmg.flashback.navigation.NavStyleGuide
 import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
@@ -151,18 +153,6 @@ internal fun AppNavigationDrawer(
                         }
                     )
                 }
-//                if (Device.isDebug) {
-//                    item("nav_glossary") {
-//                        NavigationItem(
-//                            menuItem = MenuItem.Glossary,
-//                            isSelected = appNavigationUiState.screen == NavGlossary,
-//                            onClick = {
-//                                navigationItemClicked(NavGlossary)
-//                                closeMenu()
-//                            }
-//                        )
-//                    }
-//                }
                 item("nav_settings") {
                     NavigationItem(
                         menuItem = MenuItem.Settings,
@@ -197,9 +187,21 @@ internal fun AppNavigationDrawer(
                         )
                     }
                 }
-                if (appNavigationUiState.extraLinks.isNotEmpty()) {
+                if (appNavigationUiState.extraLinks.isNotEmpty() || Device.isDebug) {
                     item("extra_div") {
                         MenuDivider()
+                    }
+                }
+                if (Device.isDebug) {
+                    item("nav_style_guide") {
+                        NavigationItem(
+                            menuItem = MenuItem.StyleGuide,
+                            isSelected = appNavigationUiState.screen == NavStyleGuide,
+                            onClick = {
+                                navigationItemClicked(NavStyleGuide)
+                                closeMenu()
+                            }
+                        )
                     }
                 }
                 items(appNavigationUiState.extraLinks, key = { it.id }) {

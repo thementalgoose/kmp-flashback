@@ -1,24 +1,30 @@
 @file:OptIn(ExperimentalLayoutApi::class)
 
-package tmg.flashback.style
+package tmg.flashback.style.styleguide
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Divider
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,7 +35,9 @@ import flashback.presentation.style.generated.resources.Res
 import flashback.presentation.style.generated.resources.ic_preview_icon
 import flashback.presentation.style.generated.resources.preview
 import org.jetbrains.compose.resources.painterResource
-import androidx.compose.ui.tooling.preview.Preview
+import org.jetbrains.compose.resources.vectorResource
+import tmg.flashback.style.AppTheme
+import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.buttons.ButtonItem
 import tmg.flashback.style.buttons.ButtonPrimary
 import tmg.flashback.style.buttons.ButtonSecondary
@@ -38,6 +46,7 @@ import tmg.flashback.style.buttons.Segments
 import tmg.flashback.style.input.InputRadio
 import tmg.flashback.style.input.InputSelection
 import tmg.flashback.style.input.InputSwitch
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextCaption
@@ -45,27 +54,102 @@ import tmg.flashback.style.text.TextHeadline1
 import tmg.flashback.style.text.TextHeadline2
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.style.textinput.TextInput
+import tmg.flashback.style.theme.LocalDarkMode
 
-@Preview
 @Composable
-private fun PreviewTextLight() {
-    ApplicationThemePreview(isLight = true) {
-        PreviewTexts()
+fun StyleGuideScreen(
+    actionUpClicked: () -> Unit,
+    modifier: Modifier = Modifier,
+    paddingValues: PaddingValues = PaddingValues(0.dp),
+) {
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .background(AppTheme.colors.surfaceContainer1),
+        contentPadding = paddingValues,
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.medium)
+    ) {
+        item("header") {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                IconButton(
+                    onClick = actionUpClicked,
+                    content = {
+                        Icon(
+                            imageVector = Icons.Default.Menu,
+                            contentDescription = null
+                        )
+                    }
+                )
+                TextHeadline1(
+                    text = "Style Guide",
+                    modifier = Modifier
+                        .padding(horizontal = AppTheme.dimens.medium)
+                        .fillMaxWidth()
+                )
+            }
+        }
+        item("texts") {
+            StyleGuideSection(title = "Texts") {
+                StyleGuideTexts()
+            }
+        }
+        item("buttons") {
+            StyleGuideSection(title = "Buttons") {
+                StyleGuideButtons()
+            }
+        }
+        item("inputs") {
+            StyleGuideSection(title = "Inputs") {
+                StyleGuideInputs()
+            }
+        }
+        item("surfaces") {
+            StyleGuideSection(title = "Surfaces") {
+                StyleGuideSurfaces()
+            }
+        }
+        item("formula1") {
+            StyleGuideSection(title = "Formula 1 Colors") {
+                StyleGuideFormula1()
+            }
+        }
     }
 }
 
-@Preview
 @Composable
-private fun PreviewTextDark() {
-    ApplicationThemePreview(isLight = false) {
-        PreviewTexts()
-    }
-}
-
-@Composable
-private fun PreviewTexts() {
+private fun StyleGuideSection(
+    title: String,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
     Column(
-        modifier = Modifier.fillMaxWidth().padding(8.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = AppTheme.dimens.medium),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
+    ) {
+        TextHeadline2(text = title)
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
+                .background(AppTheme.colors.surfaceContainer2)
+                .padding(AppTheme.dimens.medium)
+        ) {
+            content()
+        }
+    }
+}
+
+@Composable
+fun StyleGuideTexts(
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         TextHeadline1("Headline 1")
@@ -77,26 +161,12 @@ private fun PreviewTexts() {
     }
 }
 
-@Preview
 @Composable
-private fun PreviewButtonLight() {
-    ApplicationThemePreview(isLight = true) {
-        PreviewButtons()
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewButtonDark() {
-    ApplicationThemePreview(isLight = false) {
-        PreviewButtons()
-    }
-}
-
-@Composable
-private fun PreviewButtons() {
+fun StyleGuideButtons(
+    modifier: Modifier = Modifier
+) {
     Column(
-        modifier = Modifier.fillMaxWidth().padding(8.dp),
+        modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         ButtonPrimary("Primary button", onClick = { })
@@ -116,30 +186,17 @@ private fun PreviewButtons() {
     }
 }
 
-@Preview
 @Composable
-private fun PreviewInputLight() {
-    ApplicationThemePreview(isLight = true) {
-        PreviewInputs()
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewInputDark() {
-    ApplicationThemePreview(isLight = false) {
-        PreviewInputs()
-    }
-}
-
-@Composable
-private fun PreviewInputs() {
+fun StyleGuideInputs(
+    modifier: Modifier = Modifier
+) {
+    val textState = remember { mutableStateOf(TextFieldValue("Hey")) }
     Column(
-        modifier = Modifier.fillMaxWidth().padding(8.dp),
+        modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        TextInput(mutableStateOf(TextFieldValue("Hey")), placeholder = "backup")
-        Divider()
+        TextInput(textState, placeholder = "backup")
+        HorizontalDivider()
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
@@ -149,37 +206,23 @@ private fun PreviewInputs() {
             InputSwitch(isChecked = true)
             InputSwitch(isChecked = false)
         }
-        Divider()
+        HorizontalDivider()
         InputSelection("label", icon = Res.drawable.ic_preview_icon, isSelected = false)
         InputSelection("label", icon = Res.drawable.ic_preview_icon, isSelected = true)
     }
 }
 
-
-@Preview
 @Composable
-private fun PreviewSurfacesLight() {
-    ApplicationThemePreview(isLight = true) {
-        PreviewSurfacess()
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewSurfacesDark() {
-    ApplicationThemePreview(isLight = false) {
-        PreviewSurfacess()
-    }
-}
-
-@Composable
-private fun PreviewSurfacess() {
+fun StyleGuideSurfaces(
+    modifier: Modifier = Modifier
+) {
     @Composable
     fun Container(colour: Color, label: String, labelColour: Color? = null) {
-        Box(Modifier
-            .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-            .background(colour)
-            .padding(16.dp)
+        Box(
+            Modifier
+                .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
+                .background(colour)
+                .padding(16.dp)
         ) {
             TextBody2(label, textColor = labelColour)
         }
@@ -187,16 +230,18 @@ private fun PreviewSurfacess() {
 
     @Composable
     fun Component(colour: Color, label: String, labelColour: Color? = null) {
-        Box(Modifier
-            .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-            .background(colour)
-            .padding(16.dp)
+        Box(
+            Modifier
+                .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
+                .background(colour)
+                .padding(16.dp)
         ) {
             TextBody2(label, textColor = labelColour)
         }
     }
+
     FlowRow(
-        modifier = Modifier.padding(8.dp),
+        modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
@@ -208,10 +253,10 @@ private fun PreviewSurfacess() {
         Container(AppTheme.colors.primaryContainer, "primaryContainer", AppTheme.colors.onPrimaryContainer)
         Container(AppTheme.colors.secondaryContainer, "secondaryContainer", AppTheme.colors.onSecondaryContainer)
         Container(AppTheme.colors.tertiaryContainer, "tertiaryContainer", AppTheme.colors.onTertiaryContainer)
-        Container(AppTheme.colors.errorContainer, "tertiaryContainer", AppTheme.colors.onErrorContainer)
+        Container(AppTheme.colors.errorContainer, "errorContainer", AppTheme.colors.onErrorContainer)
         Container(AppTheme.colors.surfaceInverse, "surfaceInverse", AppTheme.colors.onSurfaceInverse)
         Container(AppTheme.colors.surfaceNav, "surfaceNav")
-        Divider()
+        HorizontalDivider()
         Component(AppTheme.colors.primary, "primary", AppTheme.colors.onPrimary)
         Component(AppTheme.colors.secondary, "secondary", AppTheme.colors.onSecondary)
         Component(AppTheme.colors.tertiary, "tertiary", AppTheme.colors.onTertiary)
@@ -220,35 +265,21 @@ private fun PreviewSurfacess() {
     }
 }
 
-
-@Preview
 @Composable
-private fun PreviewFormula1Light() {
-    ApplicationThemePreview(isLight = true) {
-        PreviewFormula1s()
-    }
-}
-
-@Preview
-@Composable
-private fun PreviewFormula1Dark() {
-    ApplicationThemePreview(isLight = false) {
-        PreviewFormula1s()
-    }
-}
-
-@Composable
-private fun PreviewFormula1s() {
+fun StyleGuideFormula1(
+    modifier: Modifier = Modifier
+) {
     @Composable
     fun ColourDesc(colour: Color, label: String) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             TextBody2(label)
-            Box(Modifier
-                .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-                .padding(top = 8.dp)
-                .size(40.dp)
+            Box(
+                Modifier
+                    .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
+                    .padding(top = 8.dp)
+                    .size(40.dp)
             ) {
                 Icon(
                     painter = painterResource(Res.drawable.ic_preview_icon),
@@ -258,30 +289,81 @@ private fun PreviewFormula1s() {
             }
         }
     }
+
     FlowRow(
-        modifier = Modifier.padding(8.dp),
+        modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         ColourDesc(AppTheme.colors.f1DeltaPositive, "delta positive")
         ColourDesc(AppTheme.colors.f1DeltaNeutral, "delta neutral")
         ColourDesc(AppTheme.colors.f1DeltaNegative, "delta negative")
-        Divider()
+        HorizontalDivider()
         ColourDesc(AppTheme.colors.f1ResultsFull, "result full")
         ColourDesc(AppTheme.colors.f1ResultsNeutral, "result neutral")
         ColourDesc(AppTheme.colors.f1ResultsPartial, "result partial")
         ColourDesc(AppTheme.colors.f1ResultsUpcoming, "result upcoming")
-        Divider()
+        HorizontalDivider()
         ColourDesc(AppTheme.colors.f1FastestSector, "purple sector")
-        Divider()
+        HorizontalDivider()
         ColourDesc(AppTheme.colors.f1Championship, "championship")
-        Divider()
+        HorizontalDivider()
         ColourDesc(AppTheme.colors.f1StartLightGreen, "start green")
         ColourDesc(AppTheme.colors.f1StartLightAmber, "start amber")
         ColourDesc(AppTheme.colors.f1StartLightRed, "start red")
-        Divider()
+        HorizontalDivider()
         ColourDesc(AppTheme.colors.f1Podium1, "podium 1")
         ColourDesc(AppTheme.colors.f1Podium2, "podium 2")
         ColourDesc(AppTheme.colors.f1Podium3, "podium 3")
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewStyleGuideScreen() {
+    ApplicationThemePreview {
+        StyleGuideScreen(
+            actionUpClicked = { }
+        )
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewTexts() {
+    ApplicationThemePreview {
+        StyleGuideTexts(modifier = Modifier.padding(8.dp))
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewButtons() {
+    ApplicationThemePreview {
+        StyleGuideButtons(modifier = Modifier.padding(8.dp))
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewInputs() {
+    ApplicationThemePreview {
+        StyleGuideInputs(modifier = Modifier.padding(8.dp))
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewSurfaces() {
+    ApplicationThemePreview {
+        StyleGuideSurfaces(modifier = Modifier.padding(8.dp))
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewFormula1s() {
+    ApplicationThemePreview {
+        StyleGuideFormula1(modifier = Modifier.padding(8.dp))
     }
 }

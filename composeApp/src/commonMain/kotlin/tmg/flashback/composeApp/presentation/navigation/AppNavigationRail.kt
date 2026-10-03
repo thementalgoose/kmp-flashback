@@ -17,6 +17,7 @@ import tmg.flashback.composeApp.presentation.MenuItem.ReactionGame
 import tmg.flashback.composeApp.presentation.MenuItem.Results
 import tmg.flashback.composeApp.presentation.MenuItem.Rss
 import tmg.flashback.composeApp.presentation.MenuItem.Settings
+import tmg.flashback.composeApp.presentation.MenuItem.StyleGuide
 import tmg.flashback.composeApp.presentation.MenuItem.TeamsStandings
 import tmg.flashback.composeApp.presentation.MenuItem.XR_Spacial
 import tmg.flashback.composeApp.presentation.toNavigationItem
@@ -31,6 +32,7 @@ import tmg.flashback.navigation.NavGlossary
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
 import tmg.flashback.navigation.NavSettings
+import tmg.flashback.navigation.NavStyleGuide
 import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.ui.navigation.NavigationColumn
 import tmg.flashback.xr.LocalXR
@@ -58,6 +60,7 @@ internal fun AppNavigationRail(
         Contact.toNavigationItem(appNavigationUiState.screen == NavAbout)
     )
     val tertiaryItems = listOfNotNull(
+        StyleGuide.toNavigationItem(appNavigationUiState.screen == NavStyleGuide).takeIf { Device.isDebug },
         XR_Spacial.toNavigationItem(false).takeIf { showXr }
     )
 
@@ -84,6 +87,7 @@ internal fun AppNavigationRail(
                 ReactionGame,
                 Glossary,
                 Settings,
+                StyleGuide,
                 Contact -> {
                     val result = item.toScreen() ?: return@NavigationColumn
                     navigationItemClicked(result)

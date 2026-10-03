@@ -52,6 +52,8 @@ import tmg.flashback.feature.season.presentation.driver_standings.DriverStanding
 import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsScreen
 import tmg.flashback.feature.weekend.presentation.WeekendScreen
 import tmg.flashback.navigation.NavAbout
+import tmg.flashback.navigation.NavStyleGuide
+import tmg.flashback.style.styleguide.StyleGuideScreen
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavCircuit
 import tmg.flashback.navigation.NavCircuits
@@ -369,6 +371,13 @@ fun AppGraph(
                     paddingValues = insetPadding,
                     actionUpClicked = openPanel,
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
+                )
+            }
+
+            entry<NavStyleGuide>(metadata = SplitPaneScene.listPane()) {
+                StyleGuideScreen(
+                    actionUpClicked = openPanel,
+                    paddingValues = insetPadding
                 )
             }
         }

@@ -42,6 +42,7 @@ private fun PolymorphicModuleBuilder<Screen>.registerScreens() {
     subclass(NavPrivacyPolicy::class, NavPrivacyPolicy.serializer())
 
     subclass(NavAbout::class, NavAbout.serializer())
+    subclass(NavStyleGuide::class, NavStyleGuide.serializer())
 }
 
 val saveStateConfiguration = SavedStateConfiguration {
