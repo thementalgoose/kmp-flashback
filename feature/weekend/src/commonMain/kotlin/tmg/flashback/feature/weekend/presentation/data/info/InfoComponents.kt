@@ -31,7 +31,6 @@ import flashback.domain.formula1.generated.resources.ic_straight_mode
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.details_link_laps
 import flashback.presentation.localisation.generated.resources.details_link_map
-import flashback.presentation.localisation.generated.resources.details_link_report_issue
 import flashback.presentation.localisation.generated.resources.details_link_wikipedia
 import flashback.presentation.localisation.generated.resources.details_link_youtube
 import flashback.presentation.localisation.generated.resources.drs_zones
@@ -39,7 +38,6 @@ import flashback.presentation.localisation.generated.resources.straight_mode_zon
 import flashback.presentation.localisation.generated.resources.weekend_info_tyres
 import flashback.presentation.localisation.generated.resources.weekend_race_round
 import flashback.presentation.ui.generated.resources.Res
-import flashback.presentation.ui.generated.resources.ic_details_issue
 import flashback.presentation.ui.generated.resources.ic_details_laps
 import flashback.presentation.ui.generated.resources.ic_details_maps
 import flashback.presentation.ui.generated.resources.ic_details_previous_race
@@ -147,7 +145,6 @@ internal fun RaceLinks(
     youtubeClicked: (String) -> Unit,
     wikipediaClicked: (String) -> Unit,
     mapsClicked: (Location, String) -> Unit,
-    reportIssueClicked: (Int, Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     FlowRow(
@@ -257,13 +254,6 @@ internal fun RaceLinks(
                 icon = Res.drawable.ic_details_wikipedia
             )
         }
-        BadgeView(
-            modifier = Modifier.clickable {
-                reportIssueClicked(model.season, model.round)
-            },
-            label = stringResource(string.details_link_report_issue),
-            icon = Res.drawable.ic_details_issue
-        )
     }
 }
 
@@ -327,8 +317,7 @@ private fun PreviewLinks() {
                 previousRaceClicked = { },
                 youtubeClicked = { },
                 wikipediaClicked = { },
-                mapsClicked = { location, label -> },
-                reportIssueClicked = { season, round -> }
+                mapsClicked = { location, label -> }
             )
         }
     }

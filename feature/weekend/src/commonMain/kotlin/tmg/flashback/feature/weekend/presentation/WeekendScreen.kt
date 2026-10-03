@@ -215,6 +215,19 @@ fun WeekendScreenTab(
                     )
                 }
 
+                val showReportIssueDialog = remember { mutableStateOf(false) }
+                if (showReportIssueDialog.value && uiState is Data) {
+                    tmg.flashback.feature.weekend.presentation.components.ReportIssueDialog(
+                        onConfirm = {
+                            showReportIssueDialog.value = false
+                            clickReportIssue(uiState.season, uiState.info.round)
+                        },
+                        onDismiss = {
+                            showReportIssueDialog.value = false
+                        }
+                    )
+                }
+
                 LazyColumn(
                     contentPadding = masterPadding,
                     modifier = Modifier.fillMaxSize()
@@ -259,7 +272,6 @@ fun WeekendScreenTab(
                             youtubeClicked = openLink,
                             wikipediaClicked = openLink,
                             mapsClicked = openMap,
-                            reportIssueClicked = clickReportIssue,
                             backgroundColor = scrimColor
                         )
                         addSchedule(
@@ -270,24 +282,28 @@ fun WeekendScreenTab(
                         if (uiState.tab == WeekendTabs.Qualifying) {
                             addQualifyingData(
                                 uiState = uiState,
-                                selectQualifyingType = selectQualifyingType
+                                selectQualifyingType = selectQualifyingType,
+                                reportIssueClicked = { showReportIssueDialog.value = true }
                             )
                         }
                         if (uiState.tab == WeekendTabs.Race) {
                             addRaceData(
                                 uiState = uiState,
                                 selectResultType = selectResultType,
+                                reportIssueClicked = { showReportIssueDialog.value = true }
                             )
                         }
                         if (uiState.tab == WeekendTabs.SprintQualifying) {
                             addSprintQualifyingData(
-                                uiState = uiState
+                                uiState = uiState,
+                                reportIssueClicked = { showReportIssueDialog.value = true }
                             )
                         }
                         if (uiState.tab == WeekendTabs.SprintRace) {
                             addSprintRaceData(
                                 uiState = uiState,
                                 selectResultType = selectResultType,
+                                reportIssueClicked = { showReportIssueDialog.value = true }
                             )
                         }
                     }
@@ -451,8 +467,7 @@ fun LazyListScope.addLinks(
     previousRaceClicked: (OverviewRace) -> Unit,
     youtubeClicked: (String) -> Unit,
     wikipediaClicked: (String) -> Unit,
-    mapsClicked: (Location, String) -> Unit,
-    reportIssueClicked: (Int, Int) -> Unit
+    mapsClicked: (Location, String) -> Unit
 ) {
     item("links") {
         RaceLinks(
@@ -467,8 +482,7 @@ fun LazyListScope.addLinks(
             previousRaceClicked = previousRaceClicked,
             youtubeClicked = youtubeClicked,
             wikipediaClicked = wikipediaClicked,
-            mapsClicked = mapsClicked,
-            reportIssueClicked = reportIssueClicked
+            mapsClicked = mapsClicked
         )
     }
 }

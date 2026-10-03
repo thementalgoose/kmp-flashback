@@ -52,9 +52,12 @@ import tmg.flashback.ui.components.driver.DriverPoints
 import tmg.flashback.ui.components.driver.driverIconSize
 import tmg.flashback.ui.components.edgeBar
 
+import tmg.flashback.feature.weekend.presentation.components.ReportIssueLink
+
 fun LazyListScope.addSprintRaceData(
     uiState: WeekendUiState.Data,
     selectResultType: (ResultType) -> Unit,
+    reportIssueClicked: () -> Unit,
 ) {
     item("sprint_race_label") {
         TypeHeader(
@@ -101,6 +104,14 @@ fun LazyListScope.addSprintRaceData(
                     driverClicked = { }
                 )
             }
+        }
+    }
+    if (uiState.sprintRaceResults.isNotEmpty()) {
+        item("sprint_race_report_issue") {
+            ReportIssueLink(
+                onClick = reportIssueClicked,
+                modifier = Modifier.animateItem()
+            )
         }
     }
 }
