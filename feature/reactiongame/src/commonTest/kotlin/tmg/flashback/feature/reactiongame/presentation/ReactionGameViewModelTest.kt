@@ -15,8 +15,8 @@ import tmg.flashback.feature.reactiongame.manager.LightsOutDelayProvider
 import tmg.flashback.infrastructure.datetime.TimeManager
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 @ExperimentalCoroutinesApi
 internal class ReactionViewModelTest {

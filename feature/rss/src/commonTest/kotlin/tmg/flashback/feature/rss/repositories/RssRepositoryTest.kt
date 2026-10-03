@@ -10,9 +10,9 @@ import tmg.flashback.feature.rss.models.SupportedSource
 import tmg.flashback.feature.rss.repositories.model.SupportedSourceJson
 import tmg.flashback.feature.rss.repositories.model.SupportedSourcesJson
 import tmg.flashback.preferences.manager.PreferenceManager
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 internal class RssRepositoryTest {
 

@@ -7,9 +7,9 @@ import dev.mokkery.every
 import dev.mokkery.mock
 import tmg.flashback.configuration.Migrations
 import tmg.flashback.configuration.repositories.ConfigRepository
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertTrue
+import kotlin.test.Test
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 internal class DoesConfigRequireSyncUseCaseTest {
 

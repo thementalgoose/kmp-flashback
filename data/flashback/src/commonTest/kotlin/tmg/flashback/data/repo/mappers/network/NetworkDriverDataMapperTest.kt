@@ -4,9 +4,9 @@ import tmg.flashback.flashbackapi.NetworkDriver
 import tmg.flashback.persistence.flashback.models.drivers.Driver
 import tmg.flashback.persistence.flashback.models.drivers.model
 import tmg.flashback.flashbackapi.api.models.drivers.model
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNull
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 internal class NetworkDriverDataMapperTest {
 

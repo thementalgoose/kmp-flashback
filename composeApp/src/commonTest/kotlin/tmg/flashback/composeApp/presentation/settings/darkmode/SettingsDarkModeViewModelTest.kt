@@ -12,8 +12,8 @@ import tmg.flashback.analytics.usecases.LogEventUseCase
 import tmg.flashback.style.theme.NightMode.DAY
 import tmg.flashback.style.theme.NightMode.NIGHT
 import tmg.flashback.style.theme.ThemeManager
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class SettingsDarkModeViewModelTest {
 

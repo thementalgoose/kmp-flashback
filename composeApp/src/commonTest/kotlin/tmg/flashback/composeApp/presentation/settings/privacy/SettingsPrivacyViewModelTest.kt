@@ -14,8 +14,8 @@ import kotlinx.coroutines.test.runTest
 import tmg.flashback.analytics.repositories.AnalyticsRepository
 import tmg.flashback.crashlytics.repositories.CrashlyticsRepository
 import tmg.flashback.ui.toasts.ToastManager
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class SettingsPrivacyViewModelTest {
 

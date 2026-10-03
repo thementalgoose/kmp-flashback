@@ -9,8 +9,8 @@ import dev.mokkery.verify
 import kotlinx.coroutines.test.runTest
 import tmg.flashback.feature.weekend.repositories.WeatherRepository
 import tmg.flashback.feature.weekend.repositories.WeekendRepository
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class SettingsLayoutRaceViewModelTest {
 

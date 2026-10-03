@@ -20,8 +20,8 @@ import tmg.flashback.formula1.model.CircuitHistoryRace
 import tmg.flashback.formula1.model.CircuitHistoryRaceResult
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.model.model
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class CircuitViewModelTest {
 

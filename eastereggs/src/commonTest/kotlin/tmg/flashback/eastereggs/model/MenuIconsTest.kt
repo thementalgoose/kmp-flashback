@@ -3,8 +3,8 @@ package tmg.flashback.eastereggs.model
 import kotlinx.datetime.LocalDate
 import tmg.flashback.infrastructure.datetime.now
 import kotlin.math.min
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertTrue
+import kotlin.test.Test
+import kotlin.test.assertTrue
 
 internal class MenuIconsTest {
 

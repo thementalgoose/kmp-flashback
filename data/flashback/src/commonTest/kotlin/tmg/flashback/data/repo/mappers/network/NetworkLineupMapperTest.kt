@@ -3,8 +3,8 @@ package tmg.flashback.data.repo.mappers.network
 import tmg.flashback.flashbackapi.api.models.lineup.Lineup
 import tmg.flashback.flashbackapi.api.models.lineup.model
 import tmg.flashback.persistence.flashback.models.lineup.model
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class NetworkLineupMapperTest {
 

@@ -9,8 +9,8 @@ import kotlinx.coroutines.runBlocking
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
 import tmg.flashback.webbrowser.usecases.IsInAppBrowserEnabledUseCase
 import tmg.flashback.widgets.upnext.usecases.IsWidgetsEnabledUseCase
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class AllSettingsViewModelTest {
 

@@ -10,7 +10,7 @@ import dev.mokkery.verify
 import dev.mokkery.verify.VerifyMode.Companion.exactly
 import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.feature.privacypolicy.repository.PrivacyRepository
-import org.junit.jupiter.api.Test
+import kotlin.test.Test
 
 internal class PrivacyPolicyViewModelTest {
 

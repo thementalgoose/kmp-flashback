@@ -6,10 +6,10 @@ import tmg.flashback.persistence.flashback.models.overview.OverviewWithCircuit
 import tmg.flashback.persistence.flashback.models.overview.model
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.model
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.assertThrows
-import org.junit.jupiter.api.Assertions.assertNull
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+import kotlin.test.assertNull
 
 internal class OverviewMapperTest {
 
@@ -37,7 +37,7 @@ internal class OverviewMapperTest {
 
         val input = OverviewWithCircuit.model(overview = Overview.model(date = "invalid"))
 
-        assertThrows<Throwable> {
+        assertFailsWith<Throwable> {
             underTest.mapOverview(input)
         }
     }

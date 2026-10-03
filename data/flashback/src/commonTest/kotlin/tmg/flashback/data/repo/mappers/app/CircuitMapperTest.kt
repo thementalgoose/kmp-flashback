@@ -6,9 +6,9 @@ import tmg.flashback.persistence.flashback.models.circuit.model
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.CircuitHistory
 import tmg.flashback.formula1.model.model
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNull
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 internal class CircuitMapperTest {
 

@@ -11,8 +11,8 @@ import tmg.flashback.feature.highlights.domain.models.NewsItem
 import tmg.flashback.news.api.FlashbackNewsApi
 import tmg.flashback.news.models.MetadataWrapper
 import tmg.flashback.news.models.news.News
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class GetNewsItemsUseCaseImplTest {
 

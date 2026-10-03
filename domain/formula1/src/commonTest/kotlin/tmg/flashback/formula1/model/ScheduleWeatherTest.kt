@@ -1,7 +1,7 @@
 package tmg.flashback.formula1.model
 
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class ScheduleWeatherTest {
 

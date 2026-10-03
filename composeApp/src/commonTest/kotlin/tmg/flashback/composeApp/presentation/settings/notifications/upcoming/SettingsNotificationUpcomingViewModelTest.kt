@@ -23,8 +23,8 @@ import tmg.flashback.ui.permissions.Permission.Notifications
 import tmg.flashback.ui.permissions.PermissionManager
 import tmg.flashback.ui.permissions.PermissionState.Granted
 import tmg.flashback.ui.permissions.PermissionState.NotDetermined
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class SettingsNotificationUpcomingViewModelTest {
 

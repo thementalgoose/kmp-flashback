@@ -17,8 +17,8 @@ import tmg.flashback.feature.highlights.domain.GetNewsItemsUseCase
 import tmg.flashback.feature.highlights.domain.models.NewsItem
 import tmg.flashback.feature.highlights.repositories.HighlightsRepository
 import tmg.flashback.infrastructure.datetime.now
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class HighlightsViewModelTest {
 

@@ -8,10 +8,10 @@ import dev.mokkery.mock
 import dev.mokkery.verify
 import tmg.flashback.configuration.Migrations
 import tmg.flashback.preferences.manager.PreferenceManager
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertTrue
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 internal class ConfigRepositoryTest {
 

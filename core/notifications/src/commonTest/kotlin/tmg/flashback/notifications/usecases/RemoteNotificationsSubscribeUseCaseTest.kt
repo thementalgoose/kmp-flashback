@@ -10,8 +10,8 @@ import dev.mokkery.verifySuspend
 import kotlinx.coroutines.runBlocking
 import tmg.flashback.notifications.firebase.FirebaseMessagingService
 import tmg.flashback.notifications.repositories.NotificationRepository
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertTrue
+import kotlin.test.Test
+import kotlin.test.assertTrue
 
 internal class RemoteNotificationsSubscribeUseCaseTest {
 

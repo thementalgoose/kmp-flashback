@@ -5,7 +5,7 @@ import dev.mokkery.MockMode.autoUnit
 import dev.mokkery.mock
 import dev.mokkery.verify
 import tmg.flashback.analytics.manager.AnalyticsManager
-import org.junit.jupiter.api.Test
+import kotlin.test.Test
 
 internal class LogEventUseCaseImplTest {
 

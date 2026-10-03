@@ -7,9 +7,9 @@ import tmg.flashback.persistence.flashback.models.race.QualifyingResult
 import tmg.flashback.persistence.flashback.models.race.RaceResult
 import tmg.flashback.persistence.flashback.models.race.model
 import tmg.flashback.flashbackapi.api.models.races.model
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNull
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 internal class NetworkRaceMapperTest {
 

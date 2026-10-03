@@ -8,9 +8,9 @@ import tmg.flashback.composeApp.repositories.model.NavLink
 import tmg.flashback.composeApp.repositories.model.NavLinkJson
 import tmg.flashback.composeApp.repositories.model.NavLinksJson
 import tmg.flashback.configuration.manager.ConfigManager
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 internal class NavRepositoryTest {
 

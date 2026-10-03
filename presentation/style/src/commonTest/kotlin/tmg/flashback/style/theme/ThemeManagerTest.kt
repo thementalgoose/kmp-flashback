@@ -8,8 +8,8 @@ import dev.mokkery.verify
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
 import tmg.flashback.preferences.manager.PreferenceManager
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class ThemeManagerTest {
 

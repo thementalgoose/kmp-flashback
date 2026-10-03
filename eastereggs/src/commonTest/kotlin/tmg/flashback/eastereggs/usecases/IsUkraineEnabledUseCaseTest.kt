@@ -1,8 +1,8 @@
 package tmg.flashback.eastereggs.usecases
 
 import tmg.flashback.eastereggs.repository.FakeEasterEggsRepository
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertTrue
+import kotlin.test.Test
+import kotlin.test.assertTrue
 
 internal class IsUkraineEnabledUseCaseTest {
 

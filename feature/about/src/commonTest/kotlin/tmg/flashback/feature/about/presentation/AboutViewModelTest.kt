@@ -18,9 +18,9 @@ import tmg.flashback.device.usecases.CopyToClipboardUseCase
 import tmg.flashback.device.usecases.OpenEmailUseCase
 import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.notifications.repositories.NotificationRepository
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 internal class AboutViewModelTest {
 

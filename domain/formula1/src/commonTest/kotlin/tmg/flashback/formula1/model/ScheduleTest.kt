@@ -3,8 +3,8 @@ package tmg.flashback.formula1.model
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 import tmg.flashback.infrastructure.datetime.now
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class ScheduleTest {
 

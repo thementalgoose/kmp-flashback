@@ -5,7 +5,7 @@ import tmg.flashback.formula1.enums.LapTimeFormats.MIN_SECOND_MILLIS
 import tmg.flashback.formula1.enums.LapTimeFormats.SECOND_MILLIS
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
-import org.junit.jupiter.api.Assertions.assertEquals
+import kotlin.test.assertEquals
 
 class LapTimeFormatsTest {
 

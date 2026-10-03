@@ -20,11 +20,11 @@ import tmg.flashback.eastereggs.usecases.IsSummerEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsUkraineEnabledUseCase
 import tmg.flashback.feature.maintenance.repository.MaintenanceRepository
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertNull
-import org.junit.jupiter.api.Assertions.assertTrue
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 internal class AppNavigationViewModelTest {
 

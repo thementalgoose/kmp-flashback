@@ -2,8 +2,8 @@ package tmg.flashback.feature.weekend.presentation.data.sprint_qualifying
 
 import tmg.flashback.formula1.model.Race
 import tmg.flashback.formula1.model.model
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class SprintQualifyingDataMapperTest {
 

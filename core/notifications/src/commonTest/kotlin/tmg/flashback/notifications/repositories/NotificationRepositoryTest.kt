@@ -6,10 +6,10 @@ import dev.mokkery.every
 import dev.mokkery.mock
 import dev.mokkery.verify
 import tmg.flashback.preferences.manager.PreferenceManager
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNull
-import org.junit.jupiter.api.Assertions.assertTrue
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 internal class NotificationRepositoryTest {
 

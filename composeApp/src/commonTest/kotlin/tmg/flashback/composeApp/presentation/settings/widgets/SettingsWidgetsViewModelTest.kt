@@ -8,8 +8,8 @@ import dev.mokkery.mock
 import dev.mokkery.verify
 import kotlinx.coroutines.test.runTest
 import tmg.flashback.widgets.upnext.repositories.UpNextWidgetRepository
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class SettingsWeatherViewModelTest {
 

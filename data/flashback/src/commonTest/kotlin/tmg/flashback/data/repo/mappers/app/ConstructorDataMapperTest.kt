@@ -4,8 +4,8 @@ import tmg.flashback.persistence.flashback.models.constructors.model
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.model
 import tmg.flashback.persistence.flashback.RoomConstructor
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class ConstructorDataMapperTest {
 

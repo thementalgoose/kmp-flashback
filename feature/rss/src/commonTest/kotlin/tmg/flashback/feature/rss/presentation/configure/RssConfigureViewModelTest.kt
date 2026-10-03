@@ -14,8 +14,8 @@ import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.feature.rss.models.SupportedSource
 import tmg.flashback.feature.rss.repositories.RssRepository
 import tmg.flashback.feature.rss.usecases.GetSourcesUseCase
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class RssConfigureViewModelTest {
 

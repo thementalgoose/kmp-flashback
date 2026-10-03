@@ -3,9 +3,9 @@ package tmg.flashback.data.repo.mappers.app
 import tmg.flashback.persistence.flashback.models.overview.Event
 import tmg.flashback.persistence.flashback.models.overview.model
 import tmg.flashback.formula1.model.model
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNull
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 internal class EventMapperTest {
 
