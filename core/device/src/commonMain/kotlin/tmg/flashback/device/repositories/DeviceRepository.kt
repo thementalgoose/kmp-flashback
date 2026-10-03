@@ -39,7 +39,7 @@ internal class DeviceRepositoryImpl(
         get() = preferenceManager.getString(keyInstallationId, "") ?: ""
 
     override val contactEmail: String
-        get() = configManager.getString(keyContactEmail) ?: "thementalgoose@gmail.com"
+        get() = configManager.getString(keyContactEmail) ?: "flashback@thementalgoose.com"
 
     companion object {
 

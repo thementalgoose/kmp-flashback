@@ -518,7 +518,7 @@ private fun PreviewList() {
     ApplicationThemePreview {
         AboutListScreen(
             paddingValues = PaddingValues(0.dp),
-            email = "thementalgoose@gmail.com",
+            email = "flashback@thementalgoose.com",
             deviceId = "uuid",
             buttons = AboutButtons.entries,
             installationId = "installation-uuid",
@@ -539,7 +539,7 @@ private fun PreviewPane() {
     ApplicationThemePreview {
         AboutPaneScreen(
             paddingValues = PaddingValues(0.dp),
-            email = "thementalgoose@gmail.com",
+            email = "flashback@thementalgoose.com",
             deviceId = "uuid",
             buttons = AboutButtons.entries,
             installationId = "installation-uuid",
