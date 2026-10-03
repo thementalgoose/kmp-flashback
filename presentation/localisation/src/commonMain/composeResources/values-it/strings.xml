@@ -179,6 +179,11 @@
     <string name="details_link_report_issue">Problema con i dati?</string>
 
     <string name="report_issue_thanks">Problema segnalato, grazie!</string>
+    <string name="report_issue_link">Notato un problema? Segnalalo qui</string>
+    <string name="report_issue_dialog_title">Segnala problema</string>
+    <string name="report_issue_dialog_message">Sei sicuro di voler segnalare un problema con i dati?</string>
+    <string name="report_issue_dialog_confirm">Sì</string>
+    <string name="report_issue_dialog_cancel">Annulla</string>
 
     <!-- Feature banners -->
     <string name="feature_banner_runtime_notifications">Concedi a Flashback il permesso di inviarti notifiche</string>

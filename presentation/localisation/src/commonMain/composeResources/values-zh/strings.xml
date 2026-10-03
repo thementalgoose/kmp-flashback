@@ -177,6 +177,11 @@
     <string name="details_link_report_issue">数据问题?</string>
 
     <string name="report_issue_thanks">问题已上报，谢谢！</string>
+    <string name="report_issue_link">发现问题？在此上报</string>
+    <string name="report_issue_dialog_title">上报问题</string>
+    <string name="report_issue_dialog_message">您确定要上报此数据的问题吗？</string>
+    <string name="report_issue_dialog_confirm">是</string>
+    <string name="report_issue_dialog_cancel">取消</string>
 
     <!-- Feature banners -->
     <string name="feature_banner_runtime_notifications">授予 Flashback 发送通知的权限</string>

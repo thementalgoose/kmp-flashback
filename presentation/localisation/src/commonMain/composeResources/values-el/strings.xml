@@ -195,6 +195,11 @@
     <string name="details_link_report_issue">Πρόβλημα με τα δεδομένα</string>
 
     <string name="report_issue_thanks">Το ζήτημα αναφέρθηκε, ευχαριστούμε!</string>
+    <string name="report_issue_link">Εντοπίσατε κάποιο πρόβλημα; Αναφέρετέ το εδώ</string>
+    <string name="report_issue_dialog_title">Αναφορά προβλήματος</string>
+    <string name="report_issue_dialog_message">Είστε βέβαιοι ότι θέλετε να αναφέρετε ένα πρόβλημα με τα δεδομένα;</string>
+    <string name="report_issue_dialog_confirm">Ναι</string>
+    <string name="report_issue_dialog_cancel">Ακύρωση</string>
 
     <!-- Feature banners -->
     <string name="feature_banner_runtime_notifications">Δώστε άδεια στο Flashback να σας στέλνει ειδοποιήσεις</string>
