@@ -16,6 +16,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -32,6 +35,7 @@ import flashback.presentation.style.generated.resources.Res
 import flashback.presentation.style.generated.resources.ic_preview_icon
 import flashback.presentation.style.generated.resources.preview
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.vectorResource
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.buttons.ButtonItem
@@ -50,6 +54,7 @@ import tmg.flashback.style.text.TextHeadline1
 import tmg.flashback.style.text.TextHeadline2
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.style.textinput.TextInput
+import tmg.flashback.style.theme.LocalDarkMode
 
 @Composable
 fun StyleGuideScreen(
@@ -58,30 +63,31 @@ fun StyleGuideScreen(
     paddingValues: PaddingValues = PaddingValues(0.dp),
 ) {
     LazyColumn(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .background(AppTheme.colors.surfaceContainer1),
         contentPadding = paddingValues,
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.medium)
     ) {
         item("header") {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(
-                        horizontal = AppTheme.dimens.medium,
-                        vertical = AppTheme.dimens.small
-                    )
             ) {
-                IconButton(onClick = actionUpClicked) {
-                    Icon(
-                        painter = painterResource(Res.drawable.ic_preview_icon),
-                        contentDescription = null,
-                        tint = AppTheme.colors.onSurface
-                    )
-                }
+                IconButton(
+                    onClick = actionUpClicked,
+                    content = {
+                        Icon(
+                            imageVector = Icons.Default.Menu,
+                            contentDescription = null
+                        )
+                    }
+                )
                 TextHeadline1(
                     text = "Style Guide",
-                    modifier = Modifier.padding(start = AppTheme.dimens.small)
+                    modifier = Modifier
+                        .padding(horizontal = AppTheme.dimens.medium)
+                        .fillMaxWidth()
                 )
             }
         }

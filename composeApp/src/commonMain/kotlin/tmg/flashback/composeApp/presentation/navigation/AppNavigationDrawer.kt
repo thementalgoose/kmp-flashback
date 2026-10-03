@@ -196,7 +196,7 @@ internal fun AppNavigationDrawer(
                     item("nav_style_guide") {
                         NavigationItem(
                             menuItem = MenuItem.StyleGuide,
-                            isSelected = false,
+                            isSelected = appNavigationUiState.screen == NavStyleGuide,
                             onClick = {
                                 navigationItemClicked(NavStyleGuide)
                                 closeMenu()
