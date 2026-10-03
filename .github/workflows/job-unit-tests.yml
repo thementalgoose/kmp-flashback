@@ -42,7 +42,7 @@ jobs:
           echo $GOOGLE_SERVICES_PLIST_SANDBOX | base64 --decode >> iosApp/iosApp/Firebase/GoogleService-sandbox.plist
 
       # Running unit tests
-      - name: Unit tests
+      - name: JUnit 5 Unit tests
         run: ./gradlew desktopTest testSandboxDebugUnitTest
 
       # Publish test report

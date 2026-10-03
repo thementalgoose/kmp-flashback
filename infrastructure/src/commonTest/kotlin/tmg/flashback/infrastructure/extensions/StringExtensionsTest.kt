@@ -1,5 +1,7 @@
 package tmg.flashback.infrastructure.extensions
 
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -8,39 +10,15 @@ internal class StringExtensionsTest {
 
     //region toColourInt
 
-    private data class TestCaseToColourInt(
+    data class TestCaseToColourInt(
         val input: String,
         val expected: Int
     )
 
-    private val testCasesToColourInt = listOf(
-        // Standard 6-digit hex with hash
-        TestCaseToColourInt("#FF0000", 0xFFFF0000.toInt()),
-        TestCaseToColourInt("#00FF00", 0xFF00FF00.toInt()),
-        TestCaseToColourInt("#0000FF", 0xFF0000FF.toInt()),
-        TestCaseToColourInt("#FFFFFF", 0xFFFFFFFF.toInt()),
-        TestCaseToColourInt("#000000", 0xFF000000.toInt()),
-        // Standard 6-digit hex without hash
-        TestCaseToColourInt("FF0000", 0xFFFF0000.toInt()),
-        TestCaseToColourInt("00FF00", 0xFF00FF00.toInt()),
-        TestCaseToColourInt("0000FF", 0xFF0000FF.toInt()),
-        // 8-digit hex with alpha (AARRGGBB format)
-        TestCaseToColourInt("#80FF0000", 0x80FF0000.toInt()),
-        TestCaseToColourInt("#00FF0000", 0x00FF0000),
-        TestCaseToColourInt("#FFFF0000", 0xFFFF0000.toInt()),
-        // 8-digit hex without hash
-        TestCaseToColourInt("80FF0000", 0x80FF0000.toInt()),
-        TestCaseToColourInt("00FFFFFF", 0x00FFFFFF),
-        // Lowercase hex
-        TestCaseToColourInt("#ff0000", 0xFFFF0000.toInt()),
-        TestCaseToColourInt("aabbcc", 0xFFAABBCC.toInt()),
-    )
-
-    @Test
-    fun `toColourInt parses valid hex color strings correctly`() {
-        testCasesToColourInt.forEach { (input, expected) ->
-            assertEquals(expected, input.toColourInt(), "Failed for input: $input")
-        }
+    @ParameterizedTest
+    @MethodSource("testCasesToColourInt")
+    fun `toColourInt parses valid hex color strings correctly`(testCase: TestCaseToColourInt) {
+        assertEquals(testCase.expected, testCase.input.toColourInt(), "Failed for input: ${testCase.input}")
     }
 
     @Test
@@ -115,4 +93,25 @@ internal class StringExtensionsTest {
     }
 
     //endregion
+
+    companion object {
+        @JvmStatic
+        fun testCasesToColourInt() = listOf(
+            TestCaseToColourInt("#FF0000", 0xFFFF0000.toInt()),
+            TestCaseToColourInt("#00FF00", 0xFF00FF00.toInt()),
+            TestCaseToColourInt("#0000FF", 0xFF0000FF.toInt()),
+            TestCaseToColourInt("#FFFFFF", 0xFFFFFFFF.toInt()),
+            TestCaseToColourInt("#000000", 0xFF000000.toInt()),
+            TestCaseToColourInt("FF0000", 0xFFFF0000.toInt()),
+            TestCaseToColourInt("00FF00", 0xFF00FF00.toInt()),
+            TestCaseToColourInt("0000FF", 0xFF0000FF.toInt()),
+            TestCaseToColourInt("#80FF0000", 0x80FF0000.toInt()),
+            TestCaseToColourInt("#00FF0000", 0x00FF0000),
+            TestCaseToColourInt("#FFFF0000", 0xFFFF0000.toInt()),
+            TestCaseToColourInt("80FF0000", 0x80FF0000.toInt()),
+            TestCaseToColourInt("00FFFFFF", 0x00FFFFFF),
+            TestCaseToColourInt("#ff0000", 0xFFFF0000.toInt()),
+            TestCaseToColourInt("aabbcc", 0xFFAABBCC.toInt())
+        )
+    }
 }

@@ -1,5 +1,7 @@
 package tmg.flashback.infrastructure.extensions
 
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -8,29 +10,17 @@ internal class IntExtensionsTest {
 
     //region extend
 
-    private data class TestCaseExtend(
+    data class TestCaseExtend(
         val value: Int,
         val extendWithChar: Char?,
         val numberOfDigits: Int,
         val expected: String
     )
 
-    private val testCasesExtend = listOf(
-        TestCaseExtend(3, '0', 4, "0003"),
-        TestCaseExtend(0, '1', 2, "10"),
-        TestCaseExtend(-1, '2', 4, "-1"),
-        TestCaseExtend(34, 'A', 4, "AA34"),
-        TestCaseExtend(123, '0', 3, "123"),
-        TestCaseExtend(1234, '0', 3, "1234"),
-        TestCaseExtend(0, '0', 1, "0"),
-        TestCaseExtend(9, '0', 2, "09"),
-    )
-
-    @Test
-    fun `extend pads integer with specified character to reach desired length`() {
-        testCasesExtend.forEach { (value, extendWithChar, numberOfDigits, expected) ->
-            assertEquals(expected, value.extend(numberOfDigits, extendWithChar ?: '0'), "Failed for value: $value")
-        }
+    @ParameterizedTest
+    @MethodSource("testCasesExtend")
+    fun `extend pads integer with specified character to reach desired length`(testCase: TestCaseExtend) {
+        assertEquals(testCase.expected, testCase.value.extend(testCase.numberOfDigits, testCase.extendWithChar ?: '0'), "Failed for value: ${testCase.value}")
     }
 
     @Test
@@ -62,7 +52,7 @@ internal class IntExtensionsTest {
 
     @Test
     fun `itemsOf with zero creates empty list`() {
-        assertEquals(emptyList(), 0.itemsOf { it })
+        assertEquals(emptyList<Int>(), 0.itemsOf { it })
     }
 
     @Test
@@ -135,56 +125,63 @@ internal class IntExtensionsTest {
 
     //region ordinalAbbreviation
 
-    private data class TestCaseOrdinal(
+    data class TestCaseOrdinal(
         val value: Int,
         val expected: String
     )
 
-    private val testCasesOrdinal = listOf(
-        // Special cases for 11, 12, 13 only (implementation specific)
-        TestCaseOrdinal(11, "11th"),
-        TestCaseOrdinal(12, "12th"),
-        TestCaseOrdinal(13, "13th"),
-        // Standard 1st, 2nd, 3rd
-        TestCaseOrdinal(1, "1st"),
-        TestCaseOrdinal(2, "2nd"),
-        TestCaseOrdinal(3, "3rd"),
-        // Standard th
-        TestCaseOrdinal(4, "4th"),
-        TestCaseOrdinal(5, "5th"),
-        TestCaseOrdinal(6, "6th"),
-        TestCaseOrdinal(7, "7th"),
-        TestCaseOrdinal(8, "8th"),
-        TestCaseOrdinal(9, "9th"),
-        TestCaseOrdinal(10, "10th"),
-        // Larger numbers ending in 1, 2, 3
-        TestCaseOrdinal(21, "21st"),
-        TestCaseOrdinal(22, "22nd"),
-        TestCaseOrdinal(23, "23rd"),
-        TestCaseOrdinal(31, "31st"),
-        TestCaseOrdinal(32, "32nd"),
-        TestCaseOrdinal(33, "33rd"),
-        // Larger numbers with th
-        TestCaseOrdinal(14, "14th"),
-        TestCaseOrdinal(20, "20th"),
-        TestCaseOrdinal(24, "24th"),
-        TestCaseOrdinal(100, "100th"),
-        TestCaseOrdinal(101, "101st"),
-        // Note: 111, 112, 113 are handled by endsWith logic, not special cased
-        TestCaseOrdinal(111, "111st"),
-        TestCaseOrdinal(112, "112nd"),
-        TestCaseOrdinal(113, "113rd"),
-        // Zero and negative
-        TestCaseOrdinal(0, "0th"),
-        TestCaseOrdinal(-1, "-1st"),
-    )
-
-    @Test
-    fun `ordinalAbbreviation returns correct suffix for integers`() {
-        testCasesOrdinal.forEach { (value, expected) ->
-            assertEquals(expected, value.ordinalAbbreviation, "Failed for value: $value")
-        }
+    @ParameterizedTest
+    @MethodSource("testCasesOrdinal")
+    fun `ordinalAbbreviation returns correct suffix for integers`(testCase: TestCaseOrdinal) {
+        assertEquals(testCase.expected, testCase.value.ordinalAbbreviation, "Failed for value: ${testCase.value}")
     }
 
     //endregion
+
+    companion object {
+        @JvmStatic
+        fun testCasesExtend() = listOf(
+            TestCaseExtend(3, '0', 4, "0003"),
+            TestCaseExtend(0, '1', 2, "10"),
+            TestCaseExtend(-1, '2', 4, "-1"),
+            TestCaseExtend(34, 'A', 4, "AA34"),
+            TestCaseExtend(123, '0', 3, "123"),
+            TestCaseExtend(1234, '0', 3, "1234"),
+            TestCaseExtend(0, '0', 1, "0"),
+            TestCaseExtend(9, '0', 2, "09")
+        )
+
+        @JvmStatic
+        fun testCasesOrdinal() = listOf(
+            TestCaseOrdinal(11, "11th"),
+            TestCaseOrdinal(12, "12th"),
+            TestCaseOrdinal(13, "13th"),
+            TestCaseOrdinal(1, "1st"),
+            TestCaseOrdinal(2, "2nd"),
+            TestCaseOrdinal(3, "3rd"),
+            TestCaseOrdinal(4, "4th"),
+            TestCaseOrdinal(5, "5th"),
+            TestCaseOrdinal(6, "6th"),
+            TestCaseOrdinal(7, "7th"),
+            TestCaseOrdinal(8, "8th"),
+            TestCaseOrdinal(9, "9th"),
+            TestCaseOrdinal(10, "10th"),
+            TestCaseOrdinal(21, "21st"),
+            TestCaseOrdinal(22, "22nd"),
+            TestCaseOrdinal(23, "23rd"),
+            TestCaseOrdinal(31, "31st"),
+            TestCaseOrdinal(32, "32nd"),
+            TestCaseOrdinal(33, "33rd"),
+            TestCaseOrdinal(14, "14th"),
+            TestCaseOrdinal(20, "20th"),
+            TestCaseOrdinal(24, "24th"),
+            TestCaseOrdinal(100, "100th"),
+            TestCaseOrdinal(101, "101st"),
+            TestCaseOrdinal(111, "111st"),
+            TestCaseOrdinal(112, "112nd"),
+            TestCaseOrdinal(113, "113rd"),
+            TestCaseOrdinal(0, "0th"),
+            TestCaseOrdinal(-1, "-1st")
+        )
+    }
 }

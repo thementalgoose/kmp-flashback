@@ -2,6 +2,8 @@ package tmg.flashback.infrastructure.datetime
 
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -11,55 +13,16 @@ internal class LocalDateTest {
 
     //region daysBetween
 
-    private data class TestCaseDaysBetween(
+    data class TestCaseDaysBetween(
         val start: LocalDate,
         val end: LocalDate,
         val expected: Int
     )
 
-    private val testCasesDaysBetween = listOf(
-        TestCaseDaysBetween(
-            LocalDate(2024, 1, 1),
-            LocalDate(2024, 1, 1),
-            0
-        ),
-        TestCaseDaysBetween(
-            LocalDate(2024, 1, 1),
-            LocalDate(2024, 1, 2),
-            1
-        ),
-        TestCaseDaysBetween(
-            LocalDate(2024, 1, 1),
-            LocalDate(2024, 1, 31),
-            30
-        ),
-        TestCaseDaysBetween(
-            LocalDate(2024, 1, 1),
-            LocalDate(2024, 12, 31),
-            365
-        ),
-        TestCaseDaysBetween(
-            LocalDate(2024, 1, 2),
-            LocalDate(2024, 1, 1),
-            -1
-        ),
-        TestCaseDaysBetween(
-            LocalDate(2023, 1, 1),
-            LocalDate(2024, 1, 1),
-            365
-        ),
-        TestCaseDaysBetween(
-            LocalDate(2024, 2, 28),
-            LocalDate(2024, 3, 1),
-            2
-        ),
-    )
-
-    @Test
-    fun `daysBetween calculates correct number of days`() {
-        testCasesDaysBetween.forEach { (start, end, expected) ->
-            assertEquals(expected, daysBetween(start, end), "Failed for start: $start, end: $end")
-        }
+    @ParameterizedTest
+    @MethodSource("testCasesDaysBetween")
+    fun `daysBetween calculates correct number of days`(testCase: TestCaseDaysBetween) {
+        assertEquals(testCase.expected, daysBetween(testCase.start, testCase.end), "Failed for start: ${testCase.start}, end: ${testCase.end}")
     }
 
     //endregion
@@ -150,70 +113,107 @@ internal class LocalDateTest {
 
     //region startOfWeek
 
-    private data class TestCaseStartOfWeek(
+    data class TestCaseStartOfWeek(
         val date: LocalDate,
         val expectedStartOfWeek: LocalDate
     )
 
-    private val testCasesStartOfWeek = listOf(
-        // Monday is the start of week (ordinal 0)
-        TestCaseStartOfWeek(
-            LocalDate(2024, 1, 1), // Monday
-            LocalDate(2024, 1, 1)
-        ),
-        TestCaseStartOfWeek(
-            LocalDate(2024, 1, 2), // Tuesday
-            LocalDate(2024, 1, 1)
-        ),
-        TestCaseStartOfWeek(
-            LocalDate(2024, 1, 3), // Wednesday
-            LocalDate(2024, 1, 1)
-        ),
-        TestCaseStartOfWeek(
-            LocalDate(2024, 1, 4), // Thursday
-            LocalDate(2024, 1, 1)
-        ),
-        TestCaseStartOfWeek(
-            LocalDate(2024, 1, 5), // Friday
-            LocalDate(2024, 1, 1)
-        ),
-        TestCaseStartOfWeek(
-            LocalDate(2024, 1, 6), // Saturday
-            LocalDate(2024, 1, 1)
-        ),
-        TestCaseStartOfWeek(
-            LocalDate(2024, 1, 7), // Sunday
-            LocalDate(2024, 1, 1)
-        ),
-        // Next week
-        TestCaseStartOfWeek(
-            LocalDate(2024, 1, 8), // Monday
-            LocalDate(2024, 1, 8)
-        ),
-        TestCaseStartOfWeek(
-            LocalDate(2024, 1, 14), // Sunday
-            LocalDate(2024, 1, 8)
-        ),
-        // Cross month boundary
-        TestCaseStartOfWeek(
-            LocalDate(2024, 2, 1), // Thursday
-            LocalDate(2024, 1, 29)
-        ),
-        // Cross year boundary
-        TestCaseStartOfWeek(
-            LocalDate(2024, 1, 3), // Wednesday
-            LocalDate(2024, 1, 1)
-        ),
-    )
-
-    @Test
-    fun `startOfWeek returns Monday of the week`() {
-        testCasesStartOfWeek.forEach { (date, expectedStartOfWeek) ->
-            val result = date.startOfWeek()
-            assertEquals(expectedStartOfWeek, result, "Failed for date: $date")
-            assertEquals(DayOfWeek.MONDAY, result.dayOfWeek, "Start of week should be Monday for date: $date")
-        }
+    @ParameterizedTest
+    @MethodSource("testCasesStartOfWeek")
+    fun `startOfWeek returns Monday of the week`(testCase: TestCaseStartOfWeek) {
+        val result = testCase.date.startOfWeek()
+        assertEquals(testCase.expectedStartOfWeek, result, "Failed for date: ${testCase.date}")
+        assertEquals(DayOfWeek.MONDAY, result.dayOfWeek, "Start of week should be Monday for date: ${testCase.date}")
     }
 
     //endregion
+
+    companion object {
+        @JvmStatic
+        fun testCasesDaysBetween() = listOf(
+            TestCaseDaysBetween(
+                LocalDate(2024, 1, 1),
+                LocalDate(2024, 1, 1),
+                0
+            ),
+            TestCaseDaysBetween(
+                LocalDate(2024, 1, 1),
+                LocalDate(2024, 1, 2),
+                1
+            ),
+            TestCaseDaysBetween(
+                LocalDate(2024, 1, 1),
+                LocalDate(2024, 1, 31),
+                30
+            ),
+            TestCaseDaysBetween(
+                LocalDate(2024, 1, 1),
+                LocalDate(2024, 12, 31),
+                365
+            ),
+            TestCaseDaysBetween(
+                LocalDate(2024, 1, 2),
+                LocalDate(2024, 1, 1),
+                -1
+            ),
+            TestCaseDaysBetween(
+                LocalDate(2023, 1, 1),
+                LocalDate(2024, 1, 1),
+                365
+            ),
+            TestCaseDaysBetween(
+                LocalDate(2024, 2, 28),
+                LocalDate(2024, 3, 1),
+                2
+            )
+        )
+
+        @JvmStatic
+        fun testCasesStartOfWeek() = listOf(
+            TestCaseStartOfWeek(
+                LocalDate(2024, 1, 1),
+                LocalDate(2024, 1, 1)
+            ),
+            TestCaseStartOfWeek(
+                LocalDate(2024, 1, 2),
+                LocalDate(2024, 1, 1)
+            ),
+            TestCaseStartOfWeek(
+                LocalDate(2024, 1, 3),
+                LocalDate(2024, 1, 1)
+            ),
+            TestCaseStartOfWeek(
+                LocalDate(2024, 1, 4),
+                LocalDate(2024, 1, 1)
+            ),
+            TestCaseStartOfWeek(
+                LocalDate(2024, 1, 5),
+                LocalDate(2024, 1, 1)
+            ),
+            TestCaseStartOfWeek(
+                LocalDate(2024, 1, 6),
+                LocalDate(2024, 1, 1)
+            ),
+            TestCaseStartOfWeek(
+                LocalDate(2024, 1, 7),
+                LocalDate(2024, 1, 1)
+            ),
+            TestCaseStartOfWeek(
+                LocalDate(2024, 1, 8),
+                LocalDate(2024, 1, 8)
+            ),
+            TestCaseStartOfWeek(
+                LocalDate(2024, 1, 14),
+                LocalDate(2024, 1, 8)
+            ),
+            TestCaseStartOfWeek(
+                LocalDate(2024, 2, 1),
+                LocalDate(2024, 1, 29)
+            ),
+            TestCaseStartOfWeek(
+                LocalDate(2024, 1, 3),
+                LocalDate(2024, 1, 1)
+            )
+        )
+    }
 }
