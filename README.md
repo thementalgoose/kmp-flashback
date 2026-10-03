@@ -97,7 +97,7 @@ Flashback includes quick links for Formula 1 RSS feeds from autosport.com, crash
 
 Flashback is also not affiliated in any way with any of the Formula One group of companies: FORMULA 1, FIA FORMULA ONE and related trademarks of Formula One Licensing BV
 
-Contact Email: thementalgoose@gmail.com
+Contact Email: flashback@thementalgoose.com
 
 ## Project setup notes
 
