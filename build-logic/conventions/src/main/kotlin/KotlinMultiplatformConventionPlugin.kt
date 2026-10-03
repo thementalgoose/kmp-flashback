@@ -57,11 +57,12 @@ class KotlinMultiplatformConventionPlugin : Plugin<Project> {
                         implementation(libs.findLibrary("koin.core").get().get())
                     }
                     "commonTest" -> dependencies {
+                        implementation(kotlin("test"))
+                    }
+                    "desktopTest" -> dependencies {
                         implementation(libs.findLibrary("kotlin-test-junit5").get().get())
                         implementation(libs.findLibrary("junit-jupiter-api").get().get())
                         implementation(libs.findLibrary("junit-jupiter-params").get().get())
-                    }
-                    "desktopTest" -> dependencies {
                         implementation(libs.findLibrary("junit-jupiter-engine").get().get())
                     }
                 }

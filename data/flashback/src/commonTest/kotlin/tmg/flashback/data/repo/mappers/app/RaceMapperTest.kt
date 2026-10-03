@@ -75,7 +75,7 @@ internal class RaceMapperTest {
 
         val input = RoomRaceInfoWithCircuit.model(raceInfo = RoomRaceInfo.model(date = "invalid"))
 
-        assertFails {
+        assertThrows<Throwable> {
             underTest.mapRaceInfoWithCircuit(input)
         }
     }
