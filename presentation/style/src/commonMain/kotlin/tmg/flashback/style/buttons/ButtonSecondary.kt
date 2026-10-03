@@ -41,10 +41,10 @@ fun ButtonSecondary(
             false -> AppTheme.colors.outline.copy(alpha = disabledAlpha)
         }),
         colors = ButtonDefaults.buttonColors(
-            containerColor = AppTheme.colors.secondary,
-            contentColor = AppTheme.colors.onSecondary,
-            disabledContainerColor = AppTheme.colors.secondary.copy(alpha = disabledAlpha),
-            disabledContentColor = AppTheme.colors.onSecondary,
+            containerColor = AppTheme.colors.secondaryContainer,
+            contentColor = AppTheme.colors.onSecondaryContainer,
+            disabledContainerColor = AppTheme.colors.secondaryContainer.copy(alpha = disabledAlpha),
+            disabledContentColor = AppTheme.colors.onSecondaryContainer,
         ),
         enabled = enabled,
         shape = RoundedCornerShape(AppTheme.dimens.radiusMedium),
@@ -54,8 +54,8 @@ fun ButtonSecondary(
             text,
             bold = true,
             textColor = when (enabled) {
-                true -> AppTheme.colors.onSecondary
-                false -> AppTheme.colors.onSecondary.copy(alpha = disabledAlpha)
+                true -> AppTheme.colors.onSecondaryContainer
+                false -> AppTheme.colors.onSecondaryContainer.copy(alpha = disabledAlpha)
             },
             modifier = Modifier
                 .padding(
