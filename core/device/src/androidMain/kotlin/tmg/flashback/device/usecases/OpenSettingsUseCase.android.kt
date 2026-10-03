@@ -2,7 +2,7 @@ package tmg.flashback.device.usecases
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
+import androidx.core.net.toUri
 import android.os.Build
 import android.provider.Settings
 import org.koin.java.KoinJavaComponent
@@ -36,7 +36,7 @@ actual class OpenSettingsUseCaseImpl actual constructor(): OpenSettingsUseCase {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                data = Uri.parse("package:${Device.applicationId}")
+                data = "package:${Device.applicationId}".toUri()
             }
             getApplicationContext().startActivity(intent)
         } else {
