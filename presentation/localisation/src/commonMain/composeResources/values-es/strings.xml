@@ -61,9 +61,9 @@
     <string name="sprint_qualifying_header_q1">SQ1</string>
     <string name="sprint_qualifying_header_q2">SQ2</string>
     <string name="sprint_qualifying_header_q3">SQ3</string>
-    <string name="qualifying_penalty_starts">Penalización, comienza %1$s</string>
-    <string name="qualifying_penalty">Penalización, comienza en el pit lane</string>
-    <string name="qualifying_penalty_starts_sprint">Penalización, comienza el sprint %1$s</string>
+    <string name="qualifying_penalty_starts">Comienza %1$s</string>
+    <string name="qualifying_penalty">Comienza en el pit lane</string>
+    <string name="qualifying_penalty_starts_sprint">Comienza el sprint %1$s</string>
 
     <!-- Results -->
     <string name="weekend_race_round">Ronda %1$d</string>

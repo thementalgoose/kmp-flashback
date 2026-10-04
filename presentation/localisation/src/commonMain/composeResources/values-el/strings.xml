@@ -64,9 +64,9 @@
     <string name="sprint_qualifying_header_q1">SQ1</string>
     <string name="sprint_qualifying_header_q2">SQ2</string>
     <string name="sprint_qualifying_header_q3">SQ3</string>
-    <string name="qualifying_penalty_starts">Ποινή, εκκινεί %1$s</string>
-    <string name="qualifying_penalty">Ποινή, εκκίνηση από pit-lane</string>
-    <string name="qualifying_penalty_starts_sprint">Ποινή, εκκινεί sprint %1$s</string>
+    <string name="qualifying_penalty_starts">Εκκινεί %1$s</string>
+    <string name="qualifying_penalty">Εκκίνηση από pit-lane</string>
+    <string name="qualifying_penalty_starts_sprint">Εκκινεί sprint %1$s</string>
     <string name="qualifying_visualisation_subtitle">Οπτικοποιήστε τις διαφορές στις κατατακτήριες δοκιμές</string>
     <string name="qualifying_visualisation_title">Διαφορές κατατακτήριων</string>
     <string name="qualifying_visualisation_not_found">Δεν υπάρχουν διαθέσιμα δεδομένα κατατακτήριων για οπτικοποίηση</string>
