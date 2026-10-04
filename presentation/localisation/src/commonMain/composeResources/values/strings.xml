@@ -69,9 +69,9 @@
     <string name="sprint_qualifying_header_q1">SQ1</string>
     <string name="sprint_qualifying_header_q2">SQ2</string>
     <string name="sprint_qualifying_header_q3">SQ3</string>
-    <string name="qualifying_penalty_starts">Penalty, starts %1$s</string>
-    <string name="qualifying_penalty">Penalty, pit-lane start</string>
-    <string name="qualifying_penalty_starts_sprint">Penalty, starts sprint %1$s</string>
+    <string name="qualifying_penalty_starts">Starts %1$s</string>
+    <string name="qualifying_penalty">Pit-lane start</string>
+    <string name="qualifying_penalty_starts_sprint">Starts sprint %1$s</string>
     <string name="qualifying_visualisation_subtitle">Visualise the qualifying gaps in the qualifying session</string>
     <string name="qualifying_visualisation_title">Qualifying gaps</string>
     <string name="qualifying_visualisation_not_found">No qualifying data is available to visualise</string>

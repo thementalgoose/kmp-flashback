@@ -59,9 +59,9 @@
     <string name="sprint_qualifying_header_q1">SQ1</string>
     <string name="sprint_qualifying_header_q2">SQ2</string>
     <string name="sprint_qualifying_header_q3">SQ3</string>
-    <string name="qualifying_penalty_starts">处罚，从第 %1$s 位发车</string>
-    <string name="qualifying_penalty">处罚，维修区发车</string>
-    <string name="qualifying_penalty_starts_sprint">处罚，从第 %1$s 位发车</string>
+    <string name="qualifying_penalty_starts">从第 %1$s 位发车</string>
+    <string name="qualifying_penalty">维修区发车</string>
+    <string name="qualifying_penalty_starts_sprint">从第 %1$s 位发车</string>
 
     <!-- Results -->
     <string name="weekend_race_round">第 %1$d 轮</string>
