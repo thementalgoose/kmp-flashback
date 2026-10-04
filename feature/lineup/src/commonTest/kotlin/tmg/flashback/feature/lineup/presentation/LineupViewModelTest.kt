@@ -7,6 +7,7 @@ import dev.mokkery.every
 import dev.mokkery.everySuspend
 import dev.mokkery.mock
 import dev.mokkery.verifySuspend
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
@@ -28,7 +29,8 @@ internal class LineupViewModelTest {
 
     private fun initUnderTest() {
         underTest = LineupViewModel(
-            lineupRepository = mockLineupRepository
+            lineupRepository = mockLineupRepository,
+            coroutineContext = Dispatchers.Unconfined
         )
     }
 
@@ -66,7 +68,7 @@ internal class LineupViewModelTest {
                 driverTwo to constructor,
             )
         )
-        val channel = MutableSharedFlow<List<LineupSeason>>()
+        val channel = MutableSharedFlow<List<LineupSeason>>(replay = 1)
         every { mockLineupRepository.getLineup() } returns channel
 
         initUnderTest()
