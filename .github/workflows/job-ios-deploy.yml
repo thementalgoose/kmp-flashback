@@ -1,4 +1,4 @@
-name: iOS Deployment
+name: Job - Deploy iOS
 
 on:
   workflow_call:
