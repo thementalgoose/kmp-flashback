@@ -448,7 +448,7 @@ object Settings {
         val BuildVersion = Setting.Pref(
             _id = "about_build",
             title = string.settings_build_version,
-            subtitleString = Device.versionName
+            subtitleString = "${Device.versionName} ($Device.versionCode)"
         )
         val DeviceInfo = Setting.Pref(
             _id = "about_device_info",
