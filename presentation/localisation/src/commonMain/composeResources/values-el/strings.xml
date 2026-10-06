@@ -360,6 +360,8 @@
     <string name="settings_header_widgets">Widgets</string>
     <string name="settings_section_widgets_title">Widgets</string>
     <string name="settings_section_widgets_description">Προσαρμογές widgets</string>
+    <string name="settings_section_widgets_add_title">Προσθήκη widget</string>
+    <string name="settings_section_widgets_add_description">Προσθέστε το widget στην αρχική οθόνη σας</string>
     <string name="settings_section_widgets_show_background_title">Εμφάνιση φόντου;</string>
     <string name="settings_section_widgets_show_background_description">Εμφάνιση συμπαγούς φόντου αντί για διαφανές</string>
     <string name="settings_section_widgets_deeplink_event_title">Σύνδεσμος σε γεγονός;</string>

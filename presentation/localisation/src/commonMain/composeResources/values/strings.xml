@@ -371,6 +371,8 @@
     <string name="settings_header_widgets">Widgets</string>
     <string name="settings_section_widgets_title">Widgets</string>
     <string name="settings_section_widgets_description">Widget customisations</string>
+    <string name="settings_section_widgets_add_title">Add a widget</string>
+    <string name="settings_section_widgets_add_description">Add the widget to your home screen</string>
     <string name="settings_section_widgets_show_background_title">Show background?</string>
     <string name="settings_section_widgets_show_background_description">Show a solid background instead of a transparent one</string>
     <string name="settings_section_widgets_deeplink_event_title">Link to event?</string>
