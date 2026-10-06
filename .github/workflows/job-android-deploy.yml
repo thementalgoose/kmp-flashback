@@ -1,4 +1,4 @@
-name: Job - Android Deploy
+name: Workflow - Android Deploy
 
 on:
   workflow_call:
