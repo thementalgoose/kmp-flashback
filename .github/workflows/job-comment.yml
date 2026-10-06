@@ -1,4 +1,4 @@
-name: Job - Pull Request Comment
+name: Workflow - Pull Request Comment
 
 on:
   workflow_call:

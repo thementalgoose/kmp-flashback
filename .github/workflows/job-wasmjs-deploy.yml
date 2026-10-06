@@ -1,4 +1,4 @@
-name: Job - Deploy wasmJs build
+name: Workflow - Deploy wasmJs build
 
 on:
   workflow_call:
