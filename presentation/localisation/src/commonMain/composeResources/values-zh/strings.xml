@@ -327,6 +327,8 @@
     <string name="settings_header_widgets">小部件</string>
     <string name="settings_section_widgets_title">小部件</string>
     <string name="settings_section_widgets_description">小部件定制</string>
+    <string name="settings_section_widgets_add_title">添加小部件</string>
+    <string name="settings_section_widgets_add_description">将小部件添加到主屏幕</string>
     <string name="settings_section_widgets_show_background_title">显示背景？</string>
     <string name="settings_section_widgets_show_background_description">显示纯色背景而不是透明背景</string>
     <string name="settings_section_widgets_deeplink_event_title">活动链接？</string>

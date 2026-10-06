@@ -150,7 +150,7 @@ internal fun module() = module {
     viewModel { SettingsBrowserViewModel(get()) }
     viewModel { SettingsAboutViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { SettingsPrivacyViewModel(get(), get(), get()) }
-    viewModel { SettingsWidgetsViewModel(get()) }
+    viewModel { SettingsWidgetsViewModel(get(), get()) }
     viewModel { SettingsNotificationUpcomingViewModel(get(), get(), get(), get(), get()) }
     viewModel { SettingsNotificationResultsViewModel(get(), get(), get(), get()) }
 

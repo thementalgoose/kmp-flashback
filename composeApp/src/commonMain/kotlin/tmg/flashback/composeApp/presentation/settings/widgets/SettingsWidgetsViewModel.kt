@@ -4,18 +4,20 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
-import tmg.flashback.feature.weekend.repositories.WeatherRepository
 import tmg.flashback.widgets.upnext.repositories.UpNextWidgetRepository
+import tmg.flashback.widgets.upnext.usecases.AddWidgetUseCase
 
 class SettingsWidgetsViewModel(
-    private val widgetsRepository: UpNextWidgetRepository
+    private val widgetsRepository: UpNextWidgetRepository,
+    private val addWidgetUseCase: AddWidgetUseCase,
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<SettingsWidgetsUiState> = MutableStateFlow(
         SettingsWidgetsUiState(
             showBackground = widgetsRepository.showBackground,
             linkToEvent = widgetsRepository.deeplinkToEvent,
-            showWeather = widgetsRepository.showWeather
+            showWeather = widgetsRepository.showWeather,
+            isAddWidgetSupported = addWidgetUseCase.isSupported,
         ))
     val uiState: StateFlow<SettingsWidgetsUiState> = _uiState
 
@@ -24,9 +26,14 @@ class SettingsWidgetsViewModel(
             SettingsWidgetsUiState(
                 showBackground = widgetsRepository.showBackground,
                 linkToEvent = widgetsRepository.deeplinkToEvent,
-                showWeather = widgetsRepository.showWeather
+                showWeather = widgetsRepository.showWeather,
+                isAddWidgetSupported = addWidgetUseCase.isSupported,
             )
         }
+    }
+
+    fun addWidget() {
+        addWidgetUseCase()
     }
 
     fun updateShowBackground(enabled: Boolean) {

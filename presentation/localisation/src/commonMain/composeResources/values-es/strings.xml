@@ -330,6 +330,8 @@
     <string name="settings_header_widgets">Widgets</string>
     <string name="settings_section_widgets_title">Widgets</string>
     <string name="settings_section_widgets_description">Personalizaciones de widgets</string>
+    <string name="settings_section_widgets_add_title">Añadir un widget</string>
+    <string name="settings_section_widgets_add_description">Añade el widget a tu pantalla de inicio</string>
     <string name="settings_section_widgets_show_background_title">¿Mostrar fondo?</string>
     <string name="settings_section_widgets_show_background_description">Mostrar un fondo sólido en lugar de uno transparente</string>
     <string name="settings_section_widgets_deeplink_event_title">Enlace al evento?</string>

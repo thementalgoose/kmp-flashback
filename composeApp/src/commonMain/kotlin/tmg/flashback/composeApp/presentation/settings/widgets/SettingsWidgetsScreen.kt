@@ -12,6 +12,7 @@ import flashback.presentation.localisation.generated.resources.settings_header_w
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
+import tmg.flashback.composeApp.presentation.settings.PrefLink
 import tmg.flashback.composeApp.presentation.settings.PrefSwitch
 import tmg.flashback.composeApp.presentation.settings.Settings
 import tmg.flashback.ui.components.header.Header
@@ -32,6 +33,7 @@ fun SettingsWidgetScreen(
         showBack = showBack,
         uiState = uiState.value,
         actionUpClicked = actionUpClicked,
+        addWidget = viewModel::addWidget,
         updateShowBackground = viewModel::updateShowBackground,
         updateDeeplinkToEvent = viewModel::updateDeeplinkToEvent,
         updateShowWeather = viewModel::updateShowWeather
@@ -44,6 +46,7 @@ private fun SettingsWidgetScreen(
     showBack: Boolean,
     insetPadding: PaddingValues,
     actionUpClicked: () -> Unit,
+    addWidget: () -> Unit,
     updateShowBackground: (Boolean) -> Unit,
     updateDeeplinkToEvent: (Boolean) -> Unit,
     updateShowWeather: (Boolean) -> Unit,
@@ -57,6 +60,12 @@ private fun SettingsWidgetScreen(
                 text = stringResource(string.settings_header_widgets),
                 actionUpClicked = actionUpClicked,
                 action = HeaderAction.BACK.takeIf { showBack }
+            )
+        }
+        if (uiState.isAddWidgetSupported) {
+            PrefLink(
+                item = Settings.Widgets.AddWidget,
+                itemClicked = { addWidget() }
             )
         }
         PrefSwitch(
