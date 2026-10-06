@@ -190,7 +190,7 @@ private fun AboutListScreen(
                 idsClicked = idsClicked,
                 modifier = Modifier
                     .animateItem(),
-                version = "${Device.versionName}.${Device.versionCode}",
+                version = "${Device.versionName} (${Device.versionCode})",
                 debugIds = listOfNotNull(deviceId, installationId, remoteNotificationId)
                     .joinToString(separator = "\n")
             )
@@ -245,7 +245,7 @@ private fun AboutPaneScreen(
                     idsClicked = idsClicked,
                     modifier = Modifier
                         .animateItem(),
-                    version = "${Device.versionName}.${Device.versionCode}",
+                    version = "${Device.versionName} (${Device.versionCode})",
                     debugIds = listOfNotNull(deviceId, installationId, remoteNotificationId)
                         .joinToString(separator = "\n")
                 )

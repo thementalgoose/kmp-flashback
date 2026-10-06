@@ -333,7 +333,7 @@ private fun NavigationItem(
 @Composable
 private fun Footer(
     modifier: Modifier = Modifier,
-    version: String = "${Device.versionName}.${Device.versionCode}",
+    version: String = "${Device.versionName} (${Device.versionCode})",
 ) {
     Row(
         modifier = modifier,
