@@ -12,7 +12,7 @@ kotlin {
         val desktopMain by getting
 
         androidMain.dependencies {
-            implementation(libs.sqlite.bundled)
+            implementation(libs.sqlite.framework)
         }
         commonMain.dependencies {
             implementation(libs.bundles.kotlin)

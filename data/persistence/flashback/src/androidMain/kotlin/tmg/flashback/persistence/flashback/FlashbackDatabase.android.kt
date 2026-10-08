@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room3.Room
 import androidx.room3.RoomDatabase
 import androidx.sqlite.SQLiteDriver
-import androidx.sqlite.driver.bundled.BundledSQLiteDriver
+import androidx.sqlite.driver.AndroidSQLiteDriver
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -21,6 +21,6 @@ actual class FlashbackDatabaseFactory(
             )
     }
 
-    actual fun getSQLiteDriver(): SQLiteDriver = BundledSQLiteDriver()
+    actual fun getSQLiteDriver(): SQLiteDriver = AndroidSQLiteDriver()
 
 }
