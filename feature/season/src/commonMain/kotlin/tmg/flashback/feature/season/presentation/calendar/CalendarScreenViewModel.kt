@@ -14,6 +14,7 @@ import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
 import tmg.flashback.data.repo.repository.StandingsRepository
 import tmg.flashback.feature.notifications.model.NotificationUpcomingState
+import tmg.flashback.feature.notifications.usecases.GetNotificationUpcomingStateUseCase
 import tmg.flashback.feature.season.presentation.calendar.ScheduleBuilder.generateScheduleModel
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
 import tmg.flashback.feature.season.repositories.CalendarRepository
@@ -25,6 +26,7 @@ class CalendarScreenViewModel(
     private val currentSeasonHolder: CurrentSeasonHolder,
     calendarRepository: CalendarRepository,
     private val eventsRepository: EventRepository,
+    private val getNotificationUpcomingStateUseCase: GetNotificationUpcomingStateUseCase,
     private val mainDispatcher: CoroutineDispatcher = Dispatchers.Main
 ): ViewModel() {
 
@@ -77,7 +79,7 @@ class CalendarScreenViewModel(
         val raceList = generateScheduleModel(
             overview = overview,
             events = events ?: emptyList(),
-            notificationSchedule = NotificationUpcomingState(false, false, false, false, false, false),
+            notificationSchedule = getNotificationUpcomingStateUseCase(),
             showCollapsePreviousRaces = collapseRaces,
             showEmptyWeeks = showEmptyWeeks,
         )

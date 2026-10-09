@@ -22,6 +22,7 @@ import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
 import tmg.flashback.data.repo.repository.StandingsRepository
 import tmg.flashback.feature.notifications.model.NotificationUpcomingState
+import tmg.flashback.feature.notifications.usecases.GetNotificationUpcomingStateUseCase
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
 import tmg.flashback.feature.season.repositories.CalendarRepository
 import tmg.flashback.formula1.model.Overview
@@ -41,6 +42,7 @@ internal class CalendarScreenViewModelTest {
     private val mockCurrentSeasonHolder: CurrentSeasonHolder = mock(autoUnit)
     private val mockEventsRepository: EventRepository = mock(autoUnit)
     private val mockCalendarRepository: CalendarRepository = mock(autoUnit)
+    private val mockGetNotificationUpcomingStateUseCase: GetNotificationUpcomingStateUseCase = mock(autoUnit)
 
     private val currentSeasonFlow: MutableStateFlow<Int> = MutableStateFlow(2020)
 
@@ -58,7 +60,9 @@ internal class CalendarScreenViewModelTest {
 
     private lateinit var underTest: CalendarScreenViewModel
 
-    private fun initUnderTest() {
+    private fun initUnderTest(
+        notificationSchedule: NotificationUpcomingState = fakeNotificationSchedule
+    ) {
         every { mockOverviewRepository.getOverview(2022) } returns flow {
             emit(Overview.model(overviewRaces = listOf(overview5)))
         }
@@ -72,6 +76,7 @@ internal class CalendarScreenViewModelTest {
         every { mockEventsRepository.getEvents(any<Int>()) } returns flow { emit(emptyList()) }
         every { mockCurrentSeasonHolder.currentSeason } returns 2019
         every { mockCurrentSeasonHolder.currentSeasonFlow } returns currentSeasonFlow
+        every { mockGetNotificationUpcomingStateUseCase() } returns notificationSchedule
 
         underTest = CalendarScreenViewModel(
             overviewRepository = mockOverviewRepository,
@@ -80,6 +85,7 @@ internal class CalendarScreenViewModelTest {
             currentSeasonHolder = mockCurrentSeasonHolder,
             eventsRepository = mockEventsRepository,
             calendarRepository = mockCalendarRepository,
+            getNotificationUpcomingStateUseCase = mockGetNotificationUpcomingStateUseCase,
             mainDispatcher = testDispatcher
         )
     }
@@ -274,6 +280,32 @@ internal class CalendarScreenViewModelTest {
 
             val uncollapsed = awaitItem()
             assertEquals(true, uncollapsed.items!!.none { it is CalendarItem.GroupedCompletedRaces })
+        }
+    }
+
+    @Test
+    fun `populate uses getNotificationUpcomingStateUseCase to set notificationSchedule`() = runTest {
+        val customNotificationSchedule = NotificationUpcomingState(
+            race = true,
+            sprint = false,
+            sprintQualifying = true,
+            qualifying = false,
+            freePractice = true,
+            other = false
+        )
+        every { mockCurrentSeasonHolder.defaultSeason } returns 2021
+        every { mockCalendarRepository.collapseList } returns false
+        every { mockOverviewRepository.getOverview(2020) } returns flow {
+            emit(Overview.model(overviewRaces = listOf(overview1)))
+        }
+        initUnderTest(customNotificationSchedule)
+        underTest.uiState.test {
+            awaitItem() // 2019
+            testDispatcher.scheduler.advanceUntilIdle()
+            awaitItem() // 2020
+            val data = awaitItem()
+            val raceWeek = data.items?.first() as CalendarItem.RaceWeek
+            assertEquals(customNotificationSchedule, raceWeek.notificationSchedule)
         }
     }
 }
