@@ -44,6 +44,7 @@ import tmg.flashback.feature.season.presentation.calendar.components.RaceWeekCar
 import tmg.flashback.feature.season.presentation.shared.device_time.DeviceTimePrompt
 import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedBy
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.ResultsSeasonPicker
+import tmg.flashback.formula1.enums.RaceWeekend
 import tmg.flashback.formula1.enums.SeasonTyres
 import tmg.flashback.formula1.enums.getBySeason
 import tmg.flashback.formula1.enums.hasEntryForSeason
@@ -99,12 +100,13 @@ fun CalendarScreen(
         windowSizeClass = windowSizeClass,
         uiState = uiState.value,
         refresh = viewModel::refresh,
-        goToWeekend = {
+        goToWeekend = { item, defaultTab ->
             navigateTo(
                 NavWeekend(
-                    season = it.model.season,
-                    round = it.model.round,
-                    raceName = it.model.raceName
+                    season = item.model.season,
+                    round = item.model.round,
+                    raceName = item.model.raceName,
+                    defaultTab = defaultTab
                 )
             )
         },
@@ -120,7 +122,7 @@ fun CalendarScreen(
     uiState: CalendarScreenState,
     refresh: () -> Unit,
     expandGroupedRaces: () -> Unit,
-    goToWeekend: (CalendarItem.RaceWeek) -> Unit,
+    goToWeekend: (CalendarItem.RaceWeek, RaceWeekend?) -> Unit,
 ) {
     ScreenView(screenName = "Calendar", updateKey = uiState.season, args = mapOf(
         analyticsSeason to uiState.season.toString()
@@ -197,7 +199,7 @@ fun CalendarScreen(
                         is CalendarItem.RaceWeek -> {
                             RaceWeekCard(
                                 model = item,
-                                itemClicked = { goToWeekend(it) },
+                                itemClicked = { model, defaultTab -> goToWeekend(model, defaultTab) },
                                 modifier = Modifier.animateItem()
                             )
                         }

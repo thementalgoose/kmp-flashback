@@ -11,6 +11,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.bundles.kotlin)
             implementation(libs.compose.resources)
+            implementation(projects.domain.formula1)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))

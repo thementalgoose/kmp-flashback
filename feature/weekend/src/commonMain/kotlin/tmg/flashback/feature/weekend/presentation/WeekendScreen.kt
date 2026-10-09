@@ -59,6 +59,7 @@ import tmg.flashback.feature.weekend.presentation.data.race.addRaceData
 import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.addSprintQualifyingData
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.addSprintRaceData
 import tmg.flashback.formula1.constants.Formula1
+import tmg.flashback.formula1.enums.RaceWeekend
 import tmg.flashback.formula1.enums.TrackBreakdown
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.model.OverviewRace
@@ -89,14 +90,16 @@ fun WeekendScreen(
     actionUpClicked: () -> Unit,
     navigateTo: (Screen) -> Unit,
     windowSizeClass: WindowSizeClass,
+    defaultTab: RaceWeekend? = data.defaultTab,
     viewModel: WeekendViewModel = koinViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsState()
     val isLoading = viewModel.isLoading.collectAsState()
-    LaunchedEffect(data) {
+    LaunchedEffect(data, defaultTab) {
         viewModel.load(
             season = data.season,
-            round = data.round
+            round = data.round,
+            defaultTab = defaultTab
         )
     }
 

@@ -23,6 +23,7 @@ import tmg.flashback.feature.weekend.presentation.data.qualifying.QualifyingMode
 import tmg.flashback.feature.weekend.presentation.data.race.RaceModel
 import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.SprintQualifyingModel
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.SprintRaceModel
+import tmg.flashback.formula1.enums.RaceWeekend
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.QualifyingType
 import tmg.flashback.formula1.model.SprintQualifyingType
@@ -80,3 +81,11 @@ val WeekendTabs.selectedIcon: DrawableResource
         WeekendTabs.SprintQualifying -> Res.drawable.nav_sprint_qualifying_selected
         WeekendTabs.SprintRace -> Res.drawable.nav_sprint_selected
     }
+
+fun RaceWeekend.toWeekendTab(): WeekendTabs? = when (this) {
+    RaceWeekend.QUALIFYING -> WeekendTabs.Qualifying
+    RaceWeekend.RACE -> WeekendTabs.Race
+    RaceWeekend.SPRINT_QUALIFYING -> WeekendTabs.SprintQualifying
+    RaceWeekend.SPRINT -> WeekendTabs.SprintRace
+    RaceWeekend.FREE_PRACTICE -> null
+}
