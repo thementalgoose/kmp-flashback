@@ -7,8 +7,6 @@ import dev.mokkery.every
 import dev.mokkery.everySuspend
 import dev.mokkery.matcher.any
 import dev.mokkery.mock
-import dev.mokkery.verify
-import dev.mokkery.verify.VerifyMode.Companion.exactly
 import dev.mokkery.verifySuspend
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
@@ -23,7 +21,7 @@ import tmg.flashback.data.repo.repository.EventRepository
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
 import tmg.flashback.data.repo.repository.StandingsRepository
-import tmg.flashback.feature.season.models.NotificationSchedule
+import tmg.flashback.feature.notifications.model.NotificationUpcomingState
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
 import tmg.flashback.feature.season.repositories.CalendarRepository
 import tmg.flashback.formula1.model.Overview
@@ -32,7 +30,6 @@ import tmg.flashback.formula1.model.model
 import tmg.flashback.infrastructure.datetime.now
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 internal class CalendarScreenViewModelTest {
 
@@ -52,7 +49,7 @@ internal class CalendarScreenViewModelTest {
     private val overview3 = OverviewRace.model(round = 3, date = LocalDate(2020, 1, 6))
     private val overview4 = OverviewRace.model(round = 4, date = LocalDate(2020, 1, 9))
     private val overview5 = OverviewRace.model(round = 1, date = LocalDate(2021, 1, 9))
-    private val fakeNotificationSchedule = NotificationSchedule(false, false, false, false, false, false)
+    private val fakeNotificationSchedule = NotificationUpcomingState(false, false, false, false, false, false)
     private val expectedRaceWeek1 = CalendarItem.RaceWeek(model = overview1, notificationSchedule = fakeNotificationSchedule)
     private val expectedRaceWeek2 = CalendarItem.RaceWeek(model = overview2, notificationSchedule = fakeNotificationSchedule)
     private val expectedRaceWeek3 = CalendarItem.RaceWeek(model = overview3, notificationSchedule = fakeNotificationSchedule)
