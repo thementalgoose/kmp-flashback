@@ -1,6 +1,7 @@
 package tmg.flashback.notifications.manager
 
 import android.app.AlarmManager
+import android.app.NotificationManager as AndroidNotificationManager
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
@@ -23,6 +24,10 @@ actual class NotificationManagerImpl actual constructor(): NotificationManager, 
 
     private val alarmManager: AlarmManager? by lazy {
         applicationContext.getSystemService(Context.ALARM_SERVICE) as? AlarmManager
+    }
+
+    private val notificationManager: AndroidNotificationManager? by lazy {
+        applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as? AndroidNotificationManager
     }
 
     actual override fun schedule(
@@ -69,6 +74,27 @@ actual class NotificationManagerImpl actual constructor(): NotificationManager, 
             logDebug("Notifications", "canScheduleExactAlarms() $canScheduleExactAlarm")
             return canScheduleExactAlarm
         }
+
+    actual override fun isChannelActive(channelId: String): Boolean {
+        val notificationManager = notificationManager ?: return false
+        if (!notificationManager.areNotificationsEnabled()) {
+            return false
+        }
+        val channel = notificationManager.getNotificationChannel(channelId) ?: return false
+        if (channel.importance == AndroidNotificationManager.IMPORTANCE_NONE) {
+            return false
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val groupId = channel.group
+            if (groupId != null) {
+                val group = notificationManager.getNotificationChannelGroup(groupId)
+                if (group?.isBlocked == true) {
+                    return false
+                }
+            }
+        }
+        return true
+    }
 
     private fun pendingIntent(context: Context, channelId: String, requestCode: Int, title: String, description: String): PendingIntent {
         val localNotificationReceiverIntent = LocalNotificationBroadcastReceiver.intent(context,
