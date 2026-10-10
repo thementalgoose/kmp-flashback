@@ -28,8 +28,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.shadow.Shadow
-import androidx.compose.ui.semantics.clearAndSetSemantics
-import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
@@ -76,7 +74,7 @@ fun FloatingNavigationBar(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             list.forEach { item ->
-                HorizontalItem(
+                Item(
                     item = item,
                     itemClicked = itemClicked,
                     modifier = Modifier.weight(1f),
@@ -87,7 +85,7 @@ fun FloatingNavigationBar(
     }
 }
 @Composable
-private fun HorizontalItem(
+private fun Item(
     item: NavigationItem,
     itemClicked: (NavigationItem) -> Unit,
     modifier: Modifier = Modifier,

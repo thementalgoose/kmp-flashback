@@ -92,7 +92,7 @@ fun NavigationBar(
             } else {
                 // Horizontal Items
                 list.forEach { item ->
-                    HorizontalItem(
+                    Item(
                         item = item,
                         itemClicked = itemClicked,
                         modifier = Modifier.weight(1f)
@@ -104,7 +104,7 @@ fun NavigationBar(
 }
 
 @Composable
-private fun RowScope.HorizontalItem(
+private fun RowScope.Item(
     item: NavigationItem,
     itemClicked: (NavigationItem) -> Unit,
     modifier: Modifier = Modifier
