@@ -6,6 +6,7 @@ import tmg.flashback.formula1.constants.Formula1
 
 interface DefaultSeasonUseCase {
     val defaultSeason: Int
+    val serverDefaultSeason: Int
 }
 
 internal class DefaultSeasonUseCaseImpl(
@@ -40,7 +41,7 @@ internal class DefaultSeasonUseCaseImpl(
             }
         }
 
-    private val serverDefaultSeason: Int
+    override val serverDefaultSeason: Int
         get() = infoRepository.defaultSeason
 
 }

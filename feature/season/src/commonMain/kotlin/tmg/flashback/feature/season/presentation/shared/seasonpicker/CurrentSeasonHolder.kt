@@ -55,7 +55,7 @@ class CurrentSeasonHolderImpl(
     }
 
     override fun updateToLatest() {
-        updateTo(defaultSeason)
+        updateTo(defaultSeasonUseCase.serverDefaultSeason)
     }
 
     override fun refresh() {
