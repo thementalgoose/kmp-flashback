@@ -97,6 +97,10 @@ private fun HorizontalItem(
         true -> AppTheme.colors.primary.copy(alpha = 0.3f)
         false -> Color.Transparent
     }, label = "backgroundColor")
+    val textColor = animateColorAsState(targetValue = when (item.isSelected ?: false) {
+        true -> AppTheme.colors.onPrimaryContainer
+        false -> AppTheme.colors.onSurface
+    }, label = "backgroundColor")
     val fractionWidth = animateFloatAsState(targetValue = when (item.isSelected ?: false) {
         true -> 1f
         false -> 0.5f
@@ -157,6 +161,8 @@ private fun HorizontalItem(
             }
             if (showLabel) {
                 TextBody2(
+                    bold = true,
+                    textColor = textColor.value,
                     text = stringResource(item.label),
                     maxLines = 1,
                 )
