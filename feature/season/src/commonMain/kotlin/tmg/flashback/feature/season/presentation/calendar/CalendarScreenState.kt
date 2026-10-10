@@ -1,7 +1,7 @@
 package tmg.flashback.feature.season.presentation.calendar
 
 import kotlinx.datetime.LocalDate
-import tmg.flashback.feature.season.models.NotificationSchedule
+import tmg.flashback.feature.notifications.model.NotificationUpcomingState
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.infrastructure.datetime.now
 
@@ -32,7 +32,7 @@ sealed class CalendarItem(
     data class RaceWeek(
         val model: OverviewRace,
         private val showScheduleList: Boolean = false,
-        val notificationSchedule: NotificationSchedule,
+        val notificationSchedule: NotificationUpcomingState,
         val id: String = model.raceName
     ): CalendarItem(
         key = "race-${model.raceName}"

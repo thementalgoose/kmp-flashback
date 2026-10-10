@@ -4,7 +4,7 @@ import kotlinx.datetime.DateTimeUnit.Companion.DAY
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
-import tmg.flashback.feature.season.models.NotificationSchedule
+import tmg.flashback.feature.notifications.model.NotificationUpcomingState
 import tmg.flashback.formula1.model.Event
 import tmg.flashback.formula1.model.Overview
 import tmg.flashback.formula1.model.OverviewRace
@@ -28,7 +28,7 @@ internal class ScheduleBuilderTest {
 
     private val event = Event.model()
 
-    private val fakeNotificationSchedule = NotificationSchedule(
+    private val fakeNotificationSchedule = NotificationUpcomingState(
         freePractice = true,
         qualifying = false,
         sprint = true,

@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -49,7 +48,7 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import tmg.flashback.feature.season.models.NotificationSchedule
+import tmg.flashback.feature.notifications.model.NotificationUpcomingState
 import tmg.flashback.feature.season.presentation.calendar.CalendarItem
 import tmg.flashback.formula1.constants.Formula1.sprintsIntroducedIn
 import tmg.flashback.formula1.enums.SprintFormat
@@ -255,7 +254,7 @@ private fun RowScope.IconResult(
 @Composable
 private fun Dates(
     scheduleList: List<Schedule>,
-    notificationSchedule: NotificationSchedule,
+    notificationSchedule: NotificationUpcomingState,
     eventClicked: (String?) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -420,7 +419,7 @@ private fun PreviewUpcoming() {
             model = CalendarItem.RaceWeek(
                 model = OverviewRace.preview(),
                 showScheduleList = true,
-                notificationSchedule = NotificationSchedule(false, false, false, false, false, false),
+                notificationSchedule = NotificationUpcomingState(false, false, false, true, true, false),
             ),
             itemClicked = { _, _ -> }
         )
@@ -435,7 +434,7 @@ private fun PreviewUpcomingFuture() {
             model = CalendarItem.RaceWeek(
                 model = OverviewRace.preview(),
                 showScheduleList = false,
-                notificationSchedule = NotificationSchedule(false, false, false, false, false, false),
+                notificationSchedule = NotificationUpcomingState(false, false, false, false, false, false),
             ),
             itemClicked = { _, _ -> }
         )
@@ -454,7 +453,7 @@ private fun PreviewPast() {
                     hasResults = true
                 ),
                 showScheduleList = false,
-                notificationSchedule = NotificationSchedule(false, false, false, false, false, false),
+                notificationSchedule = NotificationUpcomingState(false, false, false, false, false, false),
             ),
             itemClicked = { _, _ -> }
         )
@@ -471,7 +470,7 @@ private fun PreviewCancelled() {
                     cancelled = true
                 ),
                 showScheduleList = false,
-                notificationSchedule = NotificationSchedule(false, false, false, false, false, false),
+                notificationSchedule = NotificationUpcomingState(false, false, false, false, false, false),
             ),
             itemClicked = { _, _ -> }
         )
