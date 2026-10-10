@@ -44,7 +44,6 @@ import tmg.flashback.feature.season.presentation.calendar.components.RaceWeekCar
 import tmg.flashback.feature.season.presentation.shared.device_time.DeviceTimePrompt
 import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedBy
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.ResultsSeasonPicker
-import tmg.flashback.formula1.enums.RaceWeekend
 import tmg.flashback.formula1.enums.SeasonTyres
 import tmg.flashback.formula1.enums.getBySeason
 import tmg.flashback.formula1.enums.hasEntryForSeason
@@ -122,7 +121,7 @@ fun CalendarScreen(
     uiState: CalendarScreenState,
     refresh: () -> Unit,
     expandGroupedRaces: () -> Unit,
-    goToWeekend: (CalendarItem.RaceWeek, RaceWeekend?) -> Unit,
+    goToWeekend: (CalendarItem.RaceWeek, String?) -> Unit,
 ) {
     ScreenView(screenName = "Calendar", updateKey = uiState.season, args = mapOf(
         analyticsSeason to uiState.season.toString()

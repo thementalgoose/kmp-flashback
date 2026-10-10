@@ -52,10 +52,8 @@ import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.feature.season.models.NotificationSchedule
 import tmg.flashback.feature.season.presentation.calendar.CalendarItem
 import tmg.flashback.formula1.constants.Formula1.sprintsIntroducedIn
-import tmg.flashback.formula1.enums.RaceWeekend
 import tmg.flashback.formula1.enums.SprintFormat
 import tmg.flashback.formula1.enums.SprintFormat.Companion.getSeasonFormat
-import tmg.flashback.formula1.enums.toRaceWeekend
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.Timestamp
@@ -87,7 +85,7 @@ private val weatherIconSize = 42.dp
 @Composable
 internal fun RaceWeekCard(
     model: CalendarItem.RaceWeek,
-    itemClicked: (CalendarItem.RaceWeek, RaceWeekend?) -> Unit,
+    itemClicked: (CalendarItem.RaceWeek, String?) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier
@@ -179,7 +177,6 @@ internal fun RaceWeekCard(
         }
         if (model.shouldShowScheduleList) {
             Dates(
-                season = model.model.season,
                 scheduleList = model.model.schedule,
                 notificationSchedule = model.notificationSchedule,
                 eventClicked = { defaultTab -> itemClicked(model, defaultTab) },
@@ -257,10 +254,9 @@ private fun RowScope.IconResult(
 
 @Composable
 private fun Dates(
-    season: Int?,
     scheduleList: List<Schedule>,
     notificationSchedule: NotificationSchedule,
-    eventClicked: (RaceWeekend?) -> Unit,
+    eventClicked: (String?) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val schedule = scheduleList.groupBy { it.timestamp.deviceLocalDateTime.date }
@@ -302,7 +298,7 @@ private fun Dates(
                                     showWeather = showWeather,
                                     showNotificationBadge = false,
                                     itemClicked = {
-                                        eventClicked(it.toRaceWeekend(season))
+                                        eventClicked(it.label)
                                     }
                                 )
                                 Spacer(Modifier.width(AppTheme.dimens.xsmall))

@@ -22,7 +22,6 @@ import tmg.flashback.feature.weekend.presentation.data.race.RaceDataMapper
 import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.SprintQualifyingDataMapper
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.SprintRaceDataMapper
 import tmg.flashback.feature.weekend.usecases.GetPreviousRaceUseCase
-import tmg.flashback.formula1.enums.RaceWeekend
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.Race
 import tmg.flashback.formula1.model.RaceInfo
@@ -84,7 +83,7 @@ class WeekendViewModelTest {
         setupMocks(race)
 
         val viewModel = createViewModel()
-        viewModel.load(2024, 1, defaultTab = RaceWeekend.RACE)
+        viewModel.load(2024, 1, defaultTab = "Race")
 
         viewModel.uiState.test {
             val state = awaitItem()
@@ -102,13 +101,31 @@ class WeekendViewModelTest {
         setupMocks(race)
 
         val viewModel = createViewModel()
-        viewModel.load(2024, 1, defaultTab = RaceWeekend.SPRINT)
+        viewModel.load(2024, 1, defaultTab = "Sprint")
 
         viewModel.uiState.test {
             val state = awaitItem()
             val dataState = if (state is WeekendUiState.Data) state else awaitItem()
             assertTrue(dataState is WeekendUiState.Data)
             assertEquals(WeekendTabs.SprintRace, dataState.tab)
+        }
+    }
+
+    @Test
+    fun `load with defaultTab Sprint Qualifying sets tab to SprintQualifying in 2024`() = runTest {
+        val race = Race.model(
+            raceInfo = RaceInfo.model(season = 2024, round = 1)
+        )
+        setupMocks(race)
+
+        val viewModel = createViewModel()
+        viewModel.load(2024, 1, defaultTab = "Sprint Qualifying")
+
+        viewModel.uiState.test {
+            val state = awaitItem()
+            val dataState = if (state is WeekendUiState.Data) state else awaitItem()
+            assertTrue(dataState is WeekendUiState.Data)
+            assertEquals(WeekendTabs.SprintQualifying, dataState.tab)
         }
     }
 
@@ -131,14 +148,14 @@ class WeekendViewModelTest {
     }
 
     @Test
-    fun `load with defaultTab FreePractice defaults to Qualifying`() = runTest {
+    fun `load with defaultTab Free Practice defaults to Qualifying`() = runTest {
         val race = Race.model(
             raceInfo = RaceInfo.model(season = 2024, round = 1)
         )
         setupMocks(race)
 
         val viewModel = createViewModel()
-        viewModel.load(2024, 1, defaultTab = RaceWeekend.FREE_PRACTICE)
+        viewModel.load(2024, 1, defaultTab = "FP1")
 
         viewModel.uiState.test {
             val state = awaitItem()
@@ -157,7 +174,7 @@ class WeekendViewModelTest {
         setupMocks(race)
 
         val viewModel = createViewModel()
-        viewModel.load(2024, 1, defaultTab = RaceWeekend.SPRINT)
+        viewModel.load(2024, 1, defaultTab = "Sprint")
 
         viewModel.uiState.test {
             val state = awaitItem()

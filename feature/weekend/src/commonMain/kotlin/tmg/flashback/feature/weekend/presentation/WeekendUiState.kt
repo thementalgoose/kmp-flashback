@@ -23,7 +23,6 @@ import tmg.flashback.feature.weekend.presentation.data.qualifying.QualifyingMode
 import tmg.flashback.feature.weekend.presentation.data.race.RaceModel
 import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.SprintQualifyingModel
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.SprintRaceModel
-import tmg.flashback.formula1.enums.RaceWeekend
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.QualifyingType
 import tmg.flashback.formula1.model.SprintQualifyingType
@@ -82,10 +81,24 @@ val WeekendTabs.selectedIcon: DrawableResource
         WeekendTabs.SprintRace -> Res.drawable.nav_sprint_selected
     }
 
-fun RaceWeekend.toWeekendTab(): WeekendTabs? = when (this) {
-    RaceWeekend.QUALIFYING -> WeekendTabs.Qualifying
-    RaceWeekend.RACE -> WeekendTabs.Race
-    RaceWeekend.SPRINT_QUALIFYING -> WeekendTabs.SprintQualifying
-    RaceWeekend.SPRINT -> WeekendTabs.SprintRace
-    RaceWeekend.FREE_PRACTICE -> null
+fun String.toWeekendTab(season: Int? = null): WeekendTabs? {
+    val clean = this.lowercase()
+    return when {
+        clean.includes("shootout", "sprint shootout") -> WeekendTabs.SprintQualifying
+        clean.includes("sprint qualifying", "sprint quali") -> {
+            if (season != null && season in 2021..2022) {
+                WeekendTabs.SprintRace
+            } else {
+                WeekendTabs.SprintQualifying
+            }
+        }
+        clean.includes("sprint") -> WeekendTabs.SprintRace
+        clean.includes("qualifying", "quali") -> WeekendTabs.Qualifying
+        clean.includes("race", "grand prix") -> WeekendTabs.Race
+        else -> null
+    }
+}
+
+private fun String.includes(vararg partials: String): Boolean {
+    return partials.any { partial -> this.contains(partial) }
 }

@@ -34,7 +34,6 @@ import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.SprintQ
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.SprintRaceDataMapper
 import tmg.flashback.feature.weekend.usecases.GetPreviousRaceUseCase
 import tmg.flashback.feature.weekend.utils.getWeekendEventOrder
-import tmg.flashback.formula1.enums.RaceWeekend
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.QualifyingType
@@ -121,12 +120,12 @@ class WeekendViewModel(
         }
             .stateIn(scope, SharingStarted.Lazily, WeekendUiState.Initial)
 
-    fun load(season: Int, round: Int, defaultTab: RaceWeekend? = null) {
+    fun load(season: Int, round: Int, defaultTab: String? = null) {
         this.seasonRound.update {
             season to round
         }
         this.qualifyingSort.update { QualifyingSortType.Qualified }
-        this.tab.update { defaultTab?.toWeekendTab() ?: WeekendTabs.Qualifying }
+        this.tab.update { defaultTab?.toWeekendTab(season) ?: WeekendTabs.Qualifying }
         scope.launch {
             val data = racesRepository.getRace(season, round).firstOrNull()
             if (data?.race?.isEmpty() == true && data.qualifying.isEmpty() || data == null) {

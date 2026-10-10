@@ -3,8 +3,6 @@ package tmg.flashback.navigation
 import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
-import tmg.flashback.formula1.enums.RaceWeekend
-
 sealed interface Screen : NavKey
 
 @Serializable
@@ -24,7 +22,7 @@ data class NavWeekend(
     val season: Int,
     val round: Int,
     val raceName: String,
-    val defaultTab: RaceWeekend? = null,
+    val defaultTab: String? = null,
 ): Screen
 
 @Serializable
