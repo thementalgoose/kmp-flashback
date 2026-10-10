@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package tmg.flashback.ui.navigation
 
 import androidx.compose.animation.animateColorAsState
@@ -16,6 +18,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -50,8 +53,7 @@ fun FloatingNavigationBar(
     list: List<NavigationItem>,
     itemClicked: (NavigationItem) -> Unit,
     modifier: Modifier = Modifier,
-    bottomPadding: Dp = 0.dp,
-    showLabels: Boolean = false,
+    bottomPadding: Dp = 0.dp
 ) {
     BoxWithConstraints(
         modifier = modifier
@@ -65,7 +67,7 @@ fun FloatingNavigationBar(
             .clip(RoundedCornerShape(100.dp))
             .background(AppTheme.colors.surfaceNav)
     ) {
-        val displayAsVertical = (horizontalWidthThreshold * list.size) > minWidth
+        val showLabels = (horizontalWidthThreshold * list.size) < minWidth
         Row(
             modifier = Modifier
                 .background(AppTheme.colors.surfaceNav)
@@ -73,114 +75,17 @@ fun FloatingNavigationBar(
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            if (displayAsVertical) {
-                list.forEach { item ->
-                    VerticalItem(
-                        item = item,
-                        itemClicked = itemClicked,
-                        modifier = Modifier.weight(1f),
-                        showLabel = showLabels
-                    )
-                }
-            } else {
-                list.forEach { item ->
-                    HorizontalItem(
-                        item = item,
-                        itemClicked = itemClicked,
-                        modifier = Modifier.weight(1f),
-                        showLabel = showLabels
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun VerticalItem(
-    item: NavigationItem,
-    itemClicked: (NavigationItem) -> Unit,
-    modifier: Modifier = Modifier,
-    showLabel: Boolean
-) {
-    val backgroundColor = animateColorAsState(targetValue = when (item.isSelected ?: false) {
-        true -> AppTheme.colors.primary.copy(alpha = 0.3f)
-        false -> Color.Transparent
-    }, label = "backgroundColor")
-    val fractionWidth = animateFloatAsState(targetValue = when (item.isSelected ?: false) {
-        true -> 1f
-        false -> 0.5f
-    }, label = "fractionWidth")
-    val fractionHeight = animateFloatAsState(targetValue = when (item.isSelected ?: false) {
-        true -> 1f
-        false -> 0.8f
-    }, label = "fractionWidth")
-    val iconTransition = animateFloatAsState(targetValue = when (item.isSelected ?: false) {
-        true -> 1f
-        false -> 0f
-    })
-    Box(
-        modifier = modifier
-            .padding(vertical = edgePadding)
-            .height(IntrinsicSize.Min)
-            .clip(RoundedCornerShape(100.dp))
-            .clickable(onClick = { itemClicked(item) })
-    ) {
-        Box(Modifier
-            .align(Alignment.Center)
-            .fillMaxWidth(fractionWidth.value)
-            .fillMaxHeight(fractionHeight.value)
-            .clip(RoundedCornerShape(100.dp))
-            .background(backgroundColor.value)
-        )
-        Column(
-            modifier = Modifier
-                .align(Alignment.Center)
-                .padding(
-                    vertical = iconVerticalPadding,
-                    horizontal = AppTheme.dimens.xsmall
-                ),
-            verticalArrangement = Arrangement.spacedBy(2.dp)
-        ) {
-            val contentDescription = stringResource(item.label)
-            Box(
-                modifier = Modifier
-                    .size(iconSize)
-                    .clearAndSetSemantics {
-                        this.contentDescription = contentDescription
-                    }
-                    .align(Alignment.CenterHorizontally)
-            ) {
-                Icon(
-                    modifier = Modifier
-                        .size(iconSize)
-                        .alpha(1f - iconTransition.value),
-                    painter = painterResource(resource = item.icon),
-                    tint = AppTheme.colors.onSurface,
-                    contentDescription = null,
-                )
-                Icon(
-                    modifier = Modifier
-                        .size(iconSize)
-                        .alpha(iconTransition.value),
-                    painter = painterResource(resource = item.selectedIcon),
-                    tint = AppTheme.colors.onPrimaryContainer,
-                    contentDescription = null,
-                )
-            }
-            if (showLabel) {
-                TextBody2(
-                    modifier = Modifier
-                        .align(Alignment.CenterHorizontally)
-                        .padding(horizontal = 4.dp),
-                    text = stringResource(item.label),
-                    maxLines = 1,
+            list.forEach { item ->
+                HorizontalItem(
+                    item = item,
+                    itemClicked = itemClicked,
+                    modifier = Modifier.weight(1f),
+                    showLabel = showLabels
                 )
             }
         }
     }
 }
-
 @Composable
 private fun HorizontalItem(
     item: NavigationItem,
@@ -265,8 +170,8 @@ private fun HorizontalItem(
 private fun Preview5() {
     ApplicationThemePreview {
         Column {
-            Preview(itemCount = 5, showLabels = false)
-            Preview(itemCount = 5, showLabels = true)
+            Preview(itemCount = 5)
+            Preview(itemCount = 5)
         }
     }
 }
@@ -276,8 +181,8 @@ private fun Preview5() {
 private fun Preview4() {
     ApplicationThemePreview {
         Column {
-            Preview(itemCount = 4, showLabels = false)
-            Preview(itemCount = 4, showLabels = true)
+            Preview(itemCount = 4)
+            Preview(itemCount = 4)
         }
     }
 }
@@ -287,8 +192,8 @@ private fun Preview4() {
 private fun Preview3() {
     ApplicationThemePreview {
         Column {
-            Preview(itemCount = 3, showLabels = false)
-            Preview(itemCount = 3, showLabels = true)
+            Preview(itemCount = 3)
+            Preview(itemCount = 3)
         }
     }
 }
@@ -298,16 +203,15 @@ private fun Preview3() {
 private fun Preview2() {
     ApplicationThemePreview {
         Column {
-            Preview(itemCount = 2, showLabels = false)
-            Preview(itemCount = 2, showLabels = true)
+            Preview(itemCount = 2)
+            Preview(itemCount = 2)
         }
     }
 }
 
 @Composable
 private fun Preview(
-    itemCount: Int,
-    showLabels: Boolean
+    itemCount: Int
 ) {
     Box(
         modifier = Modifier
@@ -318,7 +222,6 @@ private fun Preview(
         FloatingNavigationBar(
             list = fakeNavigationItems.take(itemCount),
             itemClicked = { },
-            showLabels = showLabels
         )
     }
 }
