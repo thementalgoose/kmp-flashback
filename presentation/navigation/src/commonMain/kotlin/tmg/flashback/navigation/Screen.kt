@@ -22,6 +22,7 @@ data class NavWeekend(
     val season: Int,
     val round: Int,
     val raceName: String,
+    val defaultTab: String? = null,
 ): Screen
 
 @Serializable

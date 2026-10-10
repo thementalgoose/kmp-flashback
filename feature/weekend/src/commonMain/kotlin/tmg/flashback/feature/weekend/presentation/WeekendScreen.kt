@@ -89,14 +89,16 @@ fun WeekendScreen(
     actionUpClicked: () -> Unit,
     navigateTo: (Screen) -> Unit,
     windowSizeClass: WindowSizeClass,
+    defaultTab: String? = data.defaultTab,
     viewModel: WeekendViewModel = koinViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsState()
     val isLoading = viewModel.isLoading.collectAsState()
-    LaunchedEffect(data) {
+    LaunchedEffect(data, defaultTab) {
         viewModel.load(
             season = data.season,
-            round = data.round
+            round = data.round,
+            defaultTab = defaultTab
         )
     }
 

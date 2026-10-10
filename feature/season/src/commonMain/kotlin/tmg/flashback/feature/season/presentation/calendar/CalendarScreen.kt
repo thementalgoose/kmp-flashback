@@ -99,12 +99,13 @@ fun CalendarScreen(
         windowSizeClass = windowSizeClass,
         uiState = uiState.value,
         refresh = viewModel::refresh,
-        goToWeekend = {
+        goToWeekend = { item, defaultTab ->
             navigateTo(
                 NavWeekend(
-                    season = it.model.season,
-                    round = it.model.round,
-                    raceName = it.model.raceName
+                    season = item.model.season,
+                    round = item.model.round,
+                    raceName = item.model.raceName,
+                    defaultTab = defaultTab
                 )
             )
         },
@@ -120,7 +121,7 @@ fun CalendarScreen(
     uiState: CalendarScreenState,
     refresh: () -> Unit,
     expandGroupedRaces: () -> Unit,
-    goToWeekend: (CalendarItem.RaceWeek) -> Unit,
+    goToWeekend: (CalendarItem.RaceWeek, String?) -> Unit,
 ) {
     ScreenView(screenName = "Calendar", updateKey = uiState.season, args = mapOf(
         analyticsSeason to uiState.season.toString()
@@ -197,7 +198,7 @@ fun CalendarScreen(
                         is CalendarItem.RaceWeek -> {
                             RaceWeekCard(
                                 model = item,
-                                itemClicked = { goToWeekend(it) },
+                                itemClicked = { model, defaultTab -> goToWeekend(model, defaultTab) },
                                 modifier = Modifier.animateItem()
                             )
                         }

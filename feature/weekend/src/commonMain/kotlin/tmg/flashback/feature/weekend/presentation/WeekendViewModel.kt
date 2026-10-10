@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import flashback.presentation.localisation.generated.resources.Res
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.report_issue_thanks
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -51,8 +52,11 @@ class WeekendViewModel(
     private val openLocationUseCase: OpenLocationUseCase,
     private val getPreviousRaceUseCase: GetPreviousRaceUseCase,
     private val analyticsManager: AnalyticsManager,
-    private val toastManager: ToastManager
+    private val toastManager: ToastManager,
+    coroutineScope: CoroutineScope? = null
 ): ViewModel() {
+
+    private val scope: CoroutineScope = coroutineScope ?: viewModelScope
 
     private val seasonRound: MutableStateFlow<Pair<Int, Int>?> = MutableStateFlow(null)
 
@@ -86,14 +90,16 @@ class WeekendViewModel(
                 QualifyingType.Q2.takeIf { maxLabel == QualifyingType.Q3 || maxLabel == QualifyingType.Q2 },
                 QualifyingType.Q3.takeIf { maxLabel == QualifyingType.Q3 },
             )
+            val tabs = getWeekendEventOrder(
+                isSprint = race.hasSprint,
+                season = race.raceInfo.season
+            )
+            val selectedTab = if (tabs.contains(tab)) tab else WeekendTabs.Qualifying
             return@combine WeekendUiState.Data(
                 season = race.raceInfo.season,
                 info = infoDataMapper(race),
-                tab = tab,
-                tabs = getWeekendEventOrder(
-                    isSprint = race.hasSprint,
-                    season = race.raceInfo.season
-                ),
+                tab = selectedTab,
+                tabs = tabs,
                 resultType = resultType,
                 cancelled = race.raceInfo.cancelled,
                 previousRace = previousRace,
@@ -112,15 +118,15 @@ class WeekendViewModel(
                 sprintRaceResults = sprintRaceDataMapper(race, resultType)
             )
         }
-            .stateIn(viewModelScope, SharingStarted.Lazily, WeekendUiState.Initial)
+            .stateIn(scope, SharingStarted.Lazily, WeekendUiState.Initial)
 
-    fun load(season: Int, round: Int) {
+    fun load(season: Int, round: Int, defaultTab: String? = null) {
         this.seasonRound.update {
             season to round
         }
         this.qualifyingSort.update { QualifyingSortType.Qualified }
-        this.tab.update { WeekendTabs.Qualifying }
-        viewModelScope.launch {
+        this.tab.update { defaultTab?.toWeekendTab(season) ?: WeekendTabs.Qualifying }
+        scope.launch {
             val data = racesRepository.getRace(season, round).firstOrNull()
             if (data?.race?.isEmpty() == true && data.qualifying.isEmpty() || data == null) {
                 refresh(season)
@@ -157,7 +163,7 @@ class WeekendViewModel(
     }
 
     fun reportIssue(season: Int, round: Int) {
-        viewModelScope.launch {
+        scope.launch {
             analyticsManager.logEvent("report_issue", mapOf(
                 analyticsSeason to season.toString(),
                 analyticsRound to round.toString()
@@ -178,7 +184,7 @@ class WeekendViewModel(
     }
 
     fun refresh() {
-        viewModelScope.launch {
+        scope.launch {
             val (season, _) = seasonRound.value ?: return@launch
             refresh(season)
         }

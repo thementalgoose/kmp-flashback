@@ -80,3 +80,25 @@ val WeekendTabs.selectedIcon: DrawableResource
         WeekendTabs.SprintQualifying -> Res.drawable.nav_sprint_qualifying_selected
         WeekendTabs.SprintRace -> Res.drawable.nav_sprint_selected
     }
+
+fun String.toWeekendTab(season: Int? = null): WeekendTabs? {
+    val clean = this.lowercase()
+    return when {
+        clean.includes("shootout", "sprint shootout") -> WeekendTabs.SprintQualifying
+        clean.includes("sprint qualifying", "sprint quali") -> {
+            if (season != null && season in 2021..2022) {
+                WeekendTabs.SprintRace
+            } else {
+                WeekendTabs.SprintQualifying
+            }
+        }
+        clean.includes("sprint") -> WeekendTabs.SprintRace
+        clean.includes("qualifying", "quali") -> WeekendTabs.Qualifying
+        clean.includes("race", "grand prix") -> WeekendTabs.Race
+        else -> null
+    }
+}
+
+private fun String.includes(vararg partials: String): Boolean {
+    return partials.any { partial -> this.contains(partial) }
+}

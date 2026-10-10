@@ -84,7 +84,7 @@ private val weatherIconSize = 42.dp
 @Composable
 internal fun RaceWeekCard(
     model: CalendarItem.RaceWeek,
-    itemClicked: (CalendarItem.RaceWeek) -> Unit,
+    itemClicked: (CalendarItem.RaceWeek, String?) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier
@@ -95,7 +95,7 @@ internal fun RaceWeekCard(
             false -> Color.Transparent
         })
         .alpha(if (model.model.cancelled) 0.6f else 1f)
-        .clickable { itemClicked(model) }
+        .clickable { itemClicked(model, null) }
     ) {
         Row {
             Box(modifier = Modifier
@@ -178,6 +178,7 @@ internal fun RaceWeekCard(
             Dates(
                 scheduleList = model.model.schedule,
                 notificationSchedule = model.notificationSchedule,
+                eventClicked = { defaultTab -> itemClicked(model, defaultTab) },
                 modifier = Modifier.padding(top = AppTheme.dimens.xsmall)
             )
         }
@@ -254,6 +255,7 @@ private fun RowScope.IconResult(
 private fun Dates(
     scheduleList: List<Schedule>,
     notificationSchedule: NotificationUpcomingState,
+    eventClicked: (String?) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val schedule = scheduleList.groupBy { it.timestamp.deviceLocalDateTime.date }
@@ -293,7 +295,10 @@ private fun Dates(
                                 DateCard(
                                     schedule = it,
                                     showWeather = showWeather,
-                                    showNotificationBadge = false
+                                    showNotificationBadge = false,
+                                    itemClicked = {
+                                        eventClicked(it.label)
+                                    }
                                 )
                                 Spacer(Modifier.width(AppTheme.dimens.xsmall))
                             }
@@ -324,6 +329,7 @@ private fun DateCard(
     schedule: Schedule,
     showNotificationBadge: Boolean,
     showWeather: Boolean,
+    itemClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val state = remember { schedule.timestamp.state }
@@ -346,6 +352,7 @@ private fun DateCard(
         .background(AppTheme.colors.surfaceContainer5)
         .stateBorder(color)
         .alpha(if (state == Timestamp.TimestampState.EXPIRED) pastScheduleAlpha else 1f)
+        .clickable { itemClicked() }
         .padding(
             bottom = AppTheme.dimens.nsmall,
             start = AppTheme.dimens.nsmall,
@@ -414,7 +421,7 @@ private fun PreviewUpcoming() {
                 showScheduleList = true,
                 notificationSchedule = NotificationUpcomingState(false, false, false, true, true, false),
             ),
-            itemClicked = { }
+            itemClicked = { _, _ -> }
         )
     }
 }
@@ -429,7 +436,7 @@ private fun PreviewUpcomingFuture() {
                 showScheduleList = false,
                 notificationSchedule = NotificationUpcomingState(false, false, false, false, false, false),
             ),
-            itemClicked = { }
+            itemClicked = { _, _ -> }
         )
     }
 }
@@ -448,7 +455,7 @@ private fun PreviewPast() {
                 showScheduleList = false,
                 notificationSchedule = NotificationUpcomingState(false, false, false, false, false, false),
             ),
-            itemClicked = { }
+            itemClicked = { _, _ -> }
         )
     }
 }
@@ -465,7 +472,7 @@ private fun PreviewCancelled() {
                 showScheduleList = false,
                 notificationSchedule = NotificationUpcomingState(false, false, false, false, false, false),
             ),
-            itemClicked = { }
+            itemClicked = { _, _ -> }
         )
     }
 }
