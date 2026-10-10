@@ -15,8 +15,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.customActions
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.ab_action_jump_to_latest_season
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
@@ -36,12 +41,25 @@ fun Picker(
     defaultExpanded: Boolean = false,
     counter: Boolean = false
 ) {
-    val expanded = remember { mutableStateOf(defaultExpanded)  }
+    val expanded = remember { mutableStateOf(defaultExpanded) }
+    val jumpToLatestLabel = stringResource(string.ab_action_jump_to_latest_season)
     Row(
         modifier = Modifier
+            .semantics {
+                customActions = listOf(
+                    CustomAccessibilityAction(
+                        label = jumpToLatestLabel,
+                        action = {
+                            longClicked()
+                            true
+                        }
+                    )
+                )
+            }
             .combinedClickable(
                 onClick = { expanded.value = true },
-                onLongClick = longClicked
+                onLongClick = longClicked,
+                onLongClickLabel = jumpToLatestLabel
             )
             .then(modifier),
         verticalAlignment = Alignment.CenterVertically

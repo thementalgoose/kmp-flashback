@@ -39,8 +39,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.shadow.Shadow
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
@@ -140,7 +144,12 @@ private fun Item(
             .padding(vertical = edgePadding)
             .height(IntrinsicSize.Min)
             .clip(RoundedCornerShape(100.dp))
+            .semantics {
+                role = Role.Tab
+                selected = item.isSelected == true
+            }
             .combinedClickable(
+                role = Role.Tab,
                 onClick = { itemClicked(item) },
                 onLongClick = {
                     scope.launch {

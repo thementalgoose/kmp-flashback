@@ -21,6 +21,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.*
 import flashback.presentation.ui.generated.resources.Res
@@ -130,6 +132,7 @@ fun Header(
             TextHeadline1(
                 text = text,
                 modifier = Modifier
+                    .semantics { heading() }
                     .weight(1f)
                     .padding(
                         start = AppTheme.dimens.medium,

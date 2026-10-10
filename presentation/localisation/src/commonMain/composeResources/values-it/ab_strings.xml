@@ -43,4 +43,6 @@
     <string name="ab_schedule_date_card">%1$s, alle %2$s ora del dispositivo</string>
     <string name="ab_schedule_date_card_notifications_enabled">%1$s, alle %2$s ora del dispositivo. Notifiche abilitate</string>
     <string name="ab_change_of_rain">Probabilità di pioggia</string>
+    <string name="ab_action_jump_to_latest_season">Passa all\'ultima stagione</string>
+    <string name="ab_action_copy_debug_ids">Copia identificatori di debug</string>
 </resources>

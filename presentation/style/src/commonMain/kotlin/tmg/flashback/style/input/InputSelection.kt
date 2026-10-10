@@ -17,6 +17,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import flashback.presentation.style.generated.resources.Res
 import flashback.presentation.style.generated.resources.ic_preview_icon
@@ -41,7 +44,11 @@ fun InputSelection(
     Row(
         modifier = modifier
             .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
+            .semantics {
+                role = if (isChecked != null) Role.Switch else Role.Button
+            }
             .clickable(
+                role = if (isChecked != null) Role.Switch else Role.Button,
                 enabled = itemClicked != null,
                 onClick = itemClicked ?: {}
             )
