@@ -23,6 +23,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.nav_race
 import org.jetbrains.compose.resources.StringResource
@@ -62,7 +64,9 @@ internal fun TypeHeader(
     ) {
         TextHeadline2(
             text = stringResource(resource),
-            modifier = Modifier.weight(1f)
+            modifier = Modifier
+                .semantics { heading() }
+                .weight(1f)
         )
     }
 }
@@ -89,7 +93,9 @@ internal fun <E: Enum<E>> TypeHeader(
     ) {
         TextHeadline2(
             text = stringResource(resource),
-            modifier = Modifier.weight(1f)
+            modifier = Modifier
+                .semantics { heading() }
+                .weight(1f)
         )
         if (optionsToShowBadge.contains(option)) {
             BadgeView(

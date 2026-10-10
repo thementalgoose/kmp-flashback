@@ -31,8 +31,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -120,7 +124,12 @@ private fun RowScope.Item(
     Box(modifier = Modifier
         .weight(1f)
         .fillMaxHeight()
+        .semantics {
+            role = Role.Tab
+            selected = item.isSelected == true
+        }
         .combinedClickable(
+            role = Role.Tab,
             onClick = {
                 if (item.isSelected != true) {
                     itemClicked(item)
@@ -206,7 +215,12 @@ private fun VerticalItem(
 
     Column(
         modifier = modifier
+            .semantics {
+                role = Role.Tab
+                selected = item.isSelected == true
+            }
             .combinedClickable(
+                role = Role.Tab,
                 onClick = {
                     if (item.isSelected != true) {
                         itemClicked(item)
