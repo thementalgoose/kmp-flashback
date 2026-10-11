@@ -232,7 +232,7 @@ val lightColours = AppColors(
     systemNavigationBarColor = Color(0xFFFCFCFC),
 
     f1Podium1 = Color(0xFFA38B21),
-    f1Podium2 = Color(0xFFC2C2C2),
+    f1Podium2 = Color(0xff6f797b),
     f1Podium3 = Color(0xFFD29342),
     f1DeltaPositive = Color(0xFFF44336),
 //    f1DeltaNeutral = ,
