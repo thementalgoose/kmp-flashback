@@ -159,10 +159,13 @@ fun CircuitHistoryRaceResult.Companion.preview(
     constructor = Constructor.preview()
 )
 
-fun RaceInfo.Companion.preview() = RaceInfo(
-    season = 2020,
-    round = 1,
-    date = LocalDate(2020, 1, 1),
+fun RaceInfo.Companion.preview(
+    season: Int = 2020,
+    round: Int = 1,
+) = RaceInfo(
+    season = season,
+    round = round,
+    date = LocalDate(season, 1, 1),
     time = LocalTime(12, 0),
     name = "British Grand Prix",
     laps = "100",

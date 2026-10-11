@@ -1,5 +1,6 @@
 package tmg.flashback.feature.drivers.presentation.stats
 
+import androidx.compose.runtime.isTraceInProgress
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,6 +16,7 @@ import tmg.flashback.data.repo.repository.DriverRepository
 import tmg.flashback.feature.drivers.presentation.stats.DriverStatBuilder.getOverallStats
 import tmg.flashback.feature.drivers.presentation.stats.DriverStatBuilder.getSeasonStats
 import tmg.flashback.formula1.model.Constructor
+import tmg.flashback.formula1.model.DriverEntry
 import tmg.flashback.formula1.model.DriverHistory
 import tmg.flashback.formula1.model.DriverHistorySeason
 import kotlin.coroutines.CoroutineContext
@@ -107,9 +109,56 @@ class DriverStatsViewModel(
     }
 
     private fun DriverHistorySeason?.getSeasonRaces(): DriverStatsData.Season {
-        return DriverStatsData.Season(
-            races = this?.raceOverview ?: emptyList()
-        )
+        val raceOverviews = (this?.raceOverview ?: emptyList())
+            .groupBy { "${it.raceInfo.season}-${it.raceInfo.round}" }
+
+        val races = buildList {
+            var currentConstructor: Constructor? = null
+            for ((key, listOfRaces) in raceOverviews) {
+                val race = listOfRaces.firstOrNull { !it.isSprint }
+                val sprint = listOfRaces.firstOrNull { it.isSprint }
+                if (listOfRaces.distinctBy { it.constructor }.size == 1) {
+                    val team = listOfRaces.firstNotNullOf { it.constructor }
+                    if (currentConstructor == null || currentConstructor != team) {
+                        add(DriverSeasonFeed.TeamHeader(
+                            team = team,
+                            firstRound = race?.raceInfo?.round ?: sprint!!.raceInfo.round
+                        ))
+                        currentConstructor = team
+                    }
+                    add(DriverSeasonFeed.Weekend(
+                        race = race,
+                        sprint = sprint
+                    ))
+                } else {
+                    // Driver has switched teams they are driving for mid-weekend
+                    // Race and sprint must be available to know this!
+                    if (currentConstructor == null || race!!.constructor != currentConstructor) {
+                        add(DriverSeasonFeed.TeamHeader(
+                            team = race!!.constructor,
+                            firstRound = race.raceInfo.round
+                        ))
+                        currentConstructor = race.constructor
+                    }
+                    add(DriverSeasonFeed.Weekend(
+                        race = race,
+                        sprint = null
+                    ))
+                    if (sprint!!.constructor != currentConstructor) {
+                        add(DriverSeasonFeed.TeamHeader(
+                            team = sprint.constructor,
+                            firstRound = sprint.raceInfo.round
+                        ))
+                        currentConstructor = race.constructor
+                    }
+                    add(DriverSeasonFeed.Weekend(
+                        race = null,
+                        sprint = sprint
+                    ))
+                }
+            }
+        }
+        return DriverStatsData.Season(races = races)
     }
 
     private fun DriverHistory?.getConstructors(): List<Constructor> {

@@ -5,6 +5,7 @@ import org.jetbrains.compose.resources.StringResource
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.model.DriverHistorySeasonRace
+import tmg.flashback.formula1.model.RaceInfo
 
 data class DriverStatsUiState(
     val driver: Driver? = null,
@@ -22,8 +23,34 @@ sealed interface DriverStatsData {
     ): DriverStatsData
 
     data class Season(
-        val races: List<DriverHistorySeasonRace>,
+        val races: List<DriverSeasonFeed>,
     ): DriverStatsData
+}
+
+sealed interface DriverSeasonFeed {
+
+    val id: String
+    data class TeamHeader(
+        val team: Constructor,
+        val firstRound: Int,
+    ): DriverSeasonFeed {
+        override val id: String
+            get() = "header-${team.id}-${firstRound}"
+    }
+
+    data class Weekend(
+        val race: DriverHistorySeasonRace?,
+        val sprint: DriverHistorySeasonRace?
+    ): DriverSeasonFeed {
+        val raceInfo: RaceInfo
+            get() = race?.raceInfo ?: sprint!!.raceInfo
+
+        val team: Constructor
+            get() = race?.constructor ?: sprint!!.constructor
+
+        override val id: String
+            get() = "header-${raceInfo.season}-${raceInfo.round}"
+    }
 }
 
 data class DriverStatTeamOverview(

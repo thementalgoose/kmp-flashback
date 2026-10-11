@@ -42,7 +42,7 @@ class CurrentSeasonHolderImpl(
         get() = defaultSeasonUseCase.defaultSeason
 
     init {
-        calendarRepository.viewedSeasons = calendarRepository.viewedSeasons + currentSeason
+        calendarRepository.viewedSeasons += currentSeason
     }
 
     override fun updateTo(season: Int) {

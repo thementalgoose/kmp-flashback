@@ -40,8 +40,13 @@ import tmg.flashback.feature.drivers.presentation.shared.DriverHeader
 import tmg.flashback.feature.drivers.presentation.shared.DriverTeam
 import tmg.flashback.feature.drivers.presentation.shared.ResultHeader
 import tmg.flashback.feature.drivers.presentation.shared.ResultRace
+import tmg.flashback.feature.drivers.presentation.shared.TeamHeader
+import tmg.flashback.formula1.enums.RaceStatus
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.Driver
+import tmg.flashback.formula1.model.DriverHistorySeason
+import tmg.flashback.formula1.model.DriverHistorySeasonRace
+import tmg.flashback.formula1.model.RaceInfo
 import tmg.flashback.formula1.preview.preview
 import tmg.flashback.navigation.NavDriver
 import tmg.flashback.style.AppTheme
@@ -197,14 +202,23 @@ private fun DriverStatsScreen(
                     }
                     items(
                         items = uiState.data.races,
-                        key = { "${it.raceInfo.season}-${it.raceInfo.round}-${it.isSprint}}" }
+                        key = { it.id }
                     ) {
-                        ResultRace(
-                            modifier = Modifier.animateItem(),
-                            multipleConstructors = uiState.constructors.size > 1,
-                            model = it,
-                            clickResult = { }
-                        )
+                        when (it) {
+                            is DriverSeasonFeed.TeamHeader -> {
+                                TeamHeader(
+                                    modifier = Modifier.animateItem(),
+                                    entry = it
+                                )
+                            }
+                            is DriverSeasonFeed.Weekend -> {
+                                ResultRace(
+                                    entry = it,
+                                    modifier = Modifier.animateItem(),
+                                    clickResult = { }
+                                )
+                            }
+                        }
                     }
                 }
                 null -> {
@@ -275,6 +289,7 @@ private fun PreviewAll() {
         )
     }
 }
+
 @PreviewTheme
 @Composable
 private fun PreviewSeason() {
@@ -293,10 +308,38 @@ private fun PreviewSeason() {
                 availableSeasons = listOf(2020, 2019),
                 stats = listOf(DriverStat(string.dashboard_all_title, flashback.presentation.ui.generated.resources.Res.drawable.ic_menu_drivers, "value")),
                 data = DriverStatsData.Season(
-                    races = listOf()
+                    races = listOf(
+                        DriverSeasonFeed.TeamHeader(
+                            team = Constructor.preview(), firstRound = 1
+                        ),
+                        fakeRace
+                    )
                 )
             ),
             changeSelection = { }
         )
     }
 }
+
+private val fakeRace = DriverSeasonFeed.Weekend(
+    race = DriverHistorySeasonRace(
+        isSprint = false,
+        status = RaceStatus.FINISHED,
+        finished = 5,
+        points = 12.0,
+        qualified = 4,
+        gridPos = 5,
+        constructor = Constructor.preview(),
+        raceInfo = RaceInfo.preview(round = 5)
+    ),
+    sprint = DriverHistorySeasonRace(
+        isSprint = true,
+        status = RaceStatus.FINISHED,
+        finished = 5,
+        points = 12.0,
+        qualified = 4,
+        gridPos = 5,
+        constructor = Constructor.preview(),
+        raceInfo = RaceInfo.preview(round = 5)
+    )
+)
