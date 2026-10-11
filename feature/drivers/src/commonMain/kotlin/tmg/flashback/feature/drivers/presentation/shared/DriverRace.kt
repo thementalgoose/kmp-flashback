@@ -33,6 +33,7 @@ import flashback.domain.formula1.generated.resources.ic_status_finished
 import flashback.domain.formula1.generated.resources.ic_status_results_qualifying
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.nav_sprint
+import flashback.presentation.localisation.generated.resources.race_status_retired
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.feature.drivers.presentation.stats.DriverSeasonFeed
@@ -54,9 +55,9 @@ import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.edgeBar
 import tmg.flashback.ui.components.flag.Flag
 
-private val resultColumnFlexBorder: Dp = 300.dp
 private val resultColumnWidth: Dp = 50.dp
-private val headerImageSize: Dp = 120.dp
+
+private val dnfAlpha = 0.2f
 
 @Composable
 internal fun ResultHeader(
@@ -118,7 +119,8 @@ internal fun TeamHeader(
             modifier = Modifier.padding(
                 horizontal = AppTheme.dimens.small,
                 vertical = AppTheme.dimens.small
-            )
+            ),
+            bold = true
         )
     }
 }
@@ -162,6 +164,9 @@ internal fun ResultRace(
                     Modifier.padding(end = AppTheme.dimens.small)
                 ) {
                     AlignedResults(
+                        modifier = Modifier.alpha(
+                            if (entry.race.status.isStatusFinished()) 1f else dnfAlpha
+                        ),
                         qualified = entry.race.qualified,
                         finished = entry.race.finished,
                         points = entry.race.points,
@@ -205,6 +210,9 @@ private fun Sprint(
             )
         )
         AlignedResults(
+            modifier = Modifier.alpha(
+                if (sprint.status.isStatusFinished()) 1f else dnfAlpha
+            ),
             qualified = sprint.qualified,
             finished = sprint.finished,
             points = sprint.points,
@@ -270,6 +278,10 @@ private fun AlignedResults(
                     .fillMaxWidth()
                     .padding(top = AppTheme.dimens.xsmall)
             ) {
+                val label = when (status.isStatusFinished()) {
+                    true -> finished.ordinalAbbreviation
+                    false -> stringResource(string.race_status_retired)
+                }
                 if (highlight) {
                     TextBody1(
                         textColor = when (finished) {
@@ -281,7 +293,7 @@ private fun AlignedResults(
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
                         bold = true,
-                        text = finished.ordinalAbbreviation
+                        text = label
                     )
                 } else {
                     TextBody2(
@@ -293,7 +305,7 @@ private fun AlignedResults(
                         },
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
-                        text = finished.ordinalAbbreviation
+                        text = label
                     )
                 }
                 if (!status.isStatusFinished()) {
