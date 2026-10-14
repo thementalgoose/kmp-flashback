@@ -61,6 +61,7 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationTheme
 import tmg.flashback.ui.navigation.FloatingHorizontalNavigationBar
 import tmg.flashback.ui.navigation.FloatingVerticalNavigationBar
+import tmg.flashback.ui.navigation.NavigationType
 import tmg.flashback.ui.navigation.NavigationType.NavDrawerBottomNav
 import tmg.flashback.ui.navigation.NavigationType.NavDrawerSideNav
 import tmg.flashback.ui.navigation.OverlappingPanelsValue
@@ -217,9 +218,10 @@ fun App() {
                 hostState = snackbarHostState,
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .navigationBarsPadding() // Prevents overlap with system navigation
-                    .imePadding()            // Shifts up if the keyboard opens
-                    .padding(bottom = AppTheme.dimens.medium) // Optional offset from the edge
+                    .padding(bottom = if (showFloatingBar && navigationType == NavDrawerBottomNav) floatingHorizontalNavHeight else 0.dp)
+                    .navigationBarsPadding()
+                    .imePadding()
+                    .padding(bottom = AppTheme.dimens.medium)
             )
 
             // Initial sync
