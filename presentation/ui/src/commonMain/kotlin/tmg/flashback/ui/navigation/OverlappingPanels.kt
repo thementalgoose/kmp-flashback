@@ -25,7 +25,9 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
+import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
+import tmg.flashback.style.preview.PreviewTheme
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
@@ -323,37 +325,37 @@ private class DefaultCenterPanelAlpha(
 
 }
 
-@Preview
+@PreviewTheme
 @Composable
 private fun PreviewStart() {
-    ApplicationThemePreview(isLight = true) {
+    ApplicationThemePreview {
         val panelsState = rememberOverlappingPanelsState(OverlappingPanelsValue.OpenEnd)
         OverlappingPanels(
             modifier = Modifier.fillMaxSize(),
             panelsState = panelsState,
             panelStart = {
-                Box(modifier = Modifier.fillMaxSize().background(Color.Blue))
+                Box(modifier = Modifier.fillMaxSize().background(AppTheme.colors.surfaceNav))
             },
             panelCenter = {
-                Box(modifier = Modifier.fillMaxSize().background(Color.Red))
+                Box(modifier = Modifier.fillMaxSize().background(AppTheme.colors.surfaceContainer1))
             }
         )
     }
 }
 
-@Preview
+@PreviewTheme
 @Composable
 private fun PreviewCenter() {
-    ApplicationThemePreview(isLight = true) {
+    ApplicationThemePreview {
         val panelsState = rememberOverlappingPanelsState(OverlappingPanelsValue.Closed)
         OverlappingPanels(
             modifier = Modifier.fillMaxSize(),
             panelsState = panelsState,
             panelStart = {
-                Box(modifier = Modifier.fillMaxSize().background(Color.Blue))
+                Box(modifier = Modifier.fillMaxSize().background(AppTheme.colors.surfaceNav))
             },
             panelCenter = {
-                Box(modifier = Modifier.fillMaxSize().background(Color.Red).alpha(0.5f))
+                Box(modifier = Modifier.fillMaxSize().background(AppTheme.colors.surfaceContainer1))
             }
         )
     }
