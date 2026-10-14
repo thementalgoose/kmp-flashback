@@ -20,6 +20,9 @@ import tmg.flashback.composeApp.presentation.MenuItem.Settings
 import tmg.flashback.composeApp.presentation.MenuItem.StyleGuide
 import tmg.flashback.composeApp.presentation.MenuItem.TeamsStandings
 import tmg.flashback.composeApp.presentation.MenuItem.XR_Spacial
+import tmg.flashback.composeApp.presentation.generateNavPrimaryItems
+import tmg.flashback.composeApp.presentation.generateNavSecondaryItems
+import tmg.flashback.composeApp.presentation.generateNavTertiaryItems
 import tmg.flashback.composeApp.presentation.toNavigationItem
 import tmg.flashback.composeApp.presentation.toScreen
 import tmg.flashback.infrastructure.device.Device
@@ -45,23 +48,17 @@ internal fun AppNavigationRail(
     modifier: Modifier = Modifier,
     showXr: Boolean = false,
 ) {
-    val primaryItems = listOfNotNull(
-        Calendar.toNavigationItem(appNavigationUiState.screen == NavCalendar),
-        DriversStandings.toNavigationItem(appNavigationUiState.screen == NavDriverStandings),
-        TeamsStandings.toNavigationItem(appNavigationUiState.screen == NavTeamStandings),
-        Circuits.toNavigationItem(appNavigationUiState.screen == NavCircuits),
-        Lineup.toNavigationItem(appNavigationUiState.screen == NavLineup),
+    val primaryItems = generateNavPrimaryItems(
+        currentlySelectedScreen = appNavigationUiState.screen
     )
-    val secondaryItems = listOfNotNull(
-        Rss.toNavigationItem(appNavigationUiState.screen == NavRss).takeIf { appNavigationUiState.showRss },
-        ReactionGame.toNavigationItem(appNavigationUiState.screen == NavReactionGame),
-//        Glossary.toNavigationItem(appNavigationUiState.screen == NavGlossary).takeIf { Device.isDebug },
-        Settings.toNavigationItem(appNavigationUiState.screen == NavSettings),
-        Contact.toNavigationItem(appNavigationUiState.screen == NavAbout)
+    val secondaryItems = generateNavSecondaryItems(
+        currentlySelectedScreen = appNavigationUiState.screen,
+        showRss = appNavigationUiState.showRss
     )
-    val tertiaryItems = listOfNotNull(
-        StyleGuide.toNavigationItem(appNavigationUiState.screen == NavStyleGuide).takeIf { Device.isDebug },
-        XR_Spacial.toNavigationItem(false).takeIf { showXr }
+    val tertiaryItems = generateNavTertiaryItems(
+        currentlySelectedScreen = appNavigationUiState.screen,
+        showXr = showXr,
+        isXrSelected = false
     )
 
     val xr = LocalXR.current

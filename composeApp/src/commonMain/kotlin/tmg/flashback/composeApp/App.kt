@@ -43,6 +43,7 @@ import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.composeApp.presentation.AppContainer
 import tmg.flashback.composeApp.presentation.MenuItem
+import tmg.flashback.composeApp.presentation.generateFloatingNavItems
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.composeApp.presentation.sync.SyncBottomSheet
 import tmg.flashback.composeApp.presentation.toNavigationItem
@@ -60,8 +61,10 @@ import tmg.flashback.ui.components.AppScaffold
 import tmg.flashback.ui.navigation.FloatingHorizontalNavigationBar
 import tmg.flashback.ui.navigation.OverlappingPanelsValue
 import tmg.flashback.ui.navigation.appBarHeight
+import tmg.flashback.ui.navigation.rememberNavigationLayoutType
 import tmg.flashback.ui.navigation.rememberOverlappingPanelsState
 import tmg.flashback.ui.toasts.ToastManager
+import tmg.flashback.xr.LocalXR
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -139,11 +142,7 @@ fun App() {
             bottomBar = {
                 if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
                     val screen = appNavigationUiState.value.screen
-                    val items = listOf(
-                        MenuItem.Calendar.toNavigationItem(screen == NavCalendar),
-                        MenuItem.DriversStandings.toNavigationItem(screen == NavDriverStandings),
-                        MenuItem.TeamsStandings.toNavigationItem(screen == NavTeamStandings)
-                    )
+                    val items = generateFloatingNavItems(screen)
                     FloatingHorizontalNavigationBar(
                         modifier = Modifier
                             .offset(y = navigationBarPosition.value)
