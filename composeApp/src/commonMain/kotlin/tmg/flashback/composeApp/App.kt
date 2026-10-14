@@ -60,6 +60,7 @@ import tmg.flashback.navigation.saveStateConfiguration
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationTheme
 import tmg.flashback.ui.navigation.FloatingHorizontalNavigationBar
+import tmg.flashback.ui.navigation.FloatingVerticalNavigationBar
 import tmg.flashback.ui.navigation.NavigationType.NavDrawerBottomNav
 import tmg.flashback.ui.navigation.NavigationType.NavDrawerSideNav
 import tmg.flashback.ui.navigation.OverlappingPanelsValue
@@ -140,7 +141,7 @@ fun App() {
                 panelsState = panelsState,
                 windowAdaptiveInfo = windowAdaptiveInfo,
                 windowSizeClass = windowSizeClass,
-                paddingValues = PaddingValues(0.dp),
+                paddingValues = WindowInsets.safeDrawing.asPaddingValues(),
                 appNavigationViewModel = appNavigationViewModel,
                 backStack = backStack
             )
@@ -194,15 +195,17 @@ fun App() {
             if (navigationType == NavDrawerSideNav) {
                 val screen = appNavigationUiState.value.screen
                 val items = generateFloatingNavItems(screen)
-                FloatingHorizontalNavigationBar(
+                FloatingVerticalNavigationBar(
                     modifier = Modifier
+                        .align(Alignment.BottomEnd)
                         .offset(x = rightNavPosition.value)
                         .background(Brush.verticalGradient(listOf(Color.Transparent, AppTheme.colors.surface)))
-                        .padding(end = rightNavPadding),
+                        .padding(end = rightNavPadding)
+                        .padding(bottom = systemNavigationBarHeight + AppTheme.dimens.medium),
                     list = items,
                     itemClicked = { item ->
-                        val menuItem = item.id.toEnum<MenuItem> { it.key } ?: return@FloatingHorizontalNavigationBar
-                        val screen = menuItem.toScreen() ?: return@FloatingHorizontalNavigationBar
+                        val menuItem = item.id.toEnum<MenuItem> { it.key } ?: return@FloatingVerticalNavigationBar
+                        val screen = menuItem.toScreen() ?: return@FloatingVerticalNavigationBar
                         backStack.clear()
                         backStack.add(screen)
                     }

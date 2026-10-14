@@ -313,7 +313,7 @@ fun WeekendScreenTab(
                     .background(Brush.verticalGradient(listOf(Color.Transparent, AppTheme.colors.surface)))
                     .padding(horizontal = AppTheme.dimens.medium)
                     .align(Alignment.BottomCenter)
-                    .padding(paddingValues.calculateBottomPadding() + 16.dp),
+                    .padding(bottom = paddingValues.calculateBottomPadding() + AppTheme.dimens.medium),
                 list = navigationItems,
                 itemClicked = {
                     val tab = it.id.toEnum<WeekendTabs> { it.id }
