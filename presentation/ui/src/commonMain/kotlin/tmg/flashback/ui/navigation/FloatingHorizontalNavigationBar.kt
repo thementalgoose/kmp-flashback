@@ -5,7 +5,6 @@ package tmg.flashback.ui.navigation
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,14 +12,11 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -40,8 +36,6 @@ import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.clearAndSetSemantics
-import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
@@ -65,15 +59,13 @@ val appBarHeight: Dp by lazy {
 }
 
 @Composable
-fun FloatingNavigationBar(
+fun FloatingHorizontalNavigationBar(
     list: List<NavigationItem>,
     itemClicked: (NavigationItem) -> Unit,
     modifier: Modifier = Modifier,
-    bottomPadding: Dp = 0.dp
 ) {
     BoxWithConstraints(
         modifier = modifier
-            .padding(bottom = bottomPadding)
             .fillMaxWidth()
             .height(appBarHeight)
             .dropShadow(
@@ -227,7 +219,6 @@ private fun Preview5() {
     ApplicationThemePreview {
         Column {
             Preview(itemCount = 5)
-            Preview(itemCount = 5)
         }
     }
 }
@@ -237,7 +228,6 @@ private fun Preview5() {
 private fun Preview4() {
     ApplicationThemePreview {
         Column {
-            Preview(itemCount = 4)
             Preview(itemCount = 4)
         }
     }
@@ -249,7 +239,6 @@ private fun Preview3() {
     ApplicationThemePreview {
         Column {
             Preview(itemCount = 3)
-            Preview(itemCount = 3)
         }
     }
 }
@@ -259,7 +248,6 @@ private fun Preview3() {
 private fun Preview2() {
     ApplicationThemePreview {
         Column {
-            Preview(itemCount = 2)
             Preview(itemCount = 2)
         }
     }
@@ -275,7 +263,7 @@ private fun Preview(
             .fillMaxWidth()
             .padding(all = 16.dp)
     ) {
-        FloatingNavigationBar(
+        FloatingHorizontalNavigationBar(
             list = fakeNavigationItems.take(itemCount),
             itemClicked = { },
         )

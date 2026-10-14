@@ -18,7 +18,6 @@ import androidx.compose.material3.SnackbarDuration.Indefinite
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -58,7 +57,7 @@ import tmg.flashback.navigation.saveStateConfiguration
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationTheme
 import tmg.flashback.ui.components.AppScaffold
-import tmg.flashback.ui.navigation.FloatingNavigationBar
+import tmg.flashback.ui.navigation.FloatingHorizontalNavigationBar
 import tmg.flashback.ui.navigation.OverlappingPanelsValue
 import tmg.flashback.ui.navigation.appBarHeight
 import tmg.flashback.ui.navigation.rememberOverlappingPanelsState
@@ -145,16 +144,16 @@ fun App() {
                         MenuItem.DriversStandings.toNavigationItem(screen == NavDriverStandings),
                         MenuItem.TeamsStandings.toNavigationItem(screen == NavTeamStandings)
                     )
-                    FloatingNavigationBar(
-                        bottomPadding = systemNavigationBarHeight,
+                    FloatingHorizontalNavigationBar(
                         modifier = Modifier
                             .offset(y = navigationBarPosition.value)
                             .background(Brush.verticalGradient(listOf(Color.Transparent, AppTheme.colors.surface)))
-                            .padding(horizontal = AppTheme.dimens.medium),
+                            .padding(horizontal = AppTheme.dimens.medium)
+                            .padding(bottom = systemNavigationBarHeight),
                         list = items,
                         itemClicked = { item ->
-                            val menuItem = item.id.toEnum<MenuItem> { it.key } ?: return@FloatingNavigationBar
-                            val screen = menuItem.toScreen() ?: return@FloatingNavigationBar
+                            val menuItem = item.id.toEnum<MenuItem> { it.key } ?: return@FloatingHorizontalNavigationBar
+                            val screen = menuItem.toScreen() ?: return@FloatingHorizontalNavigationBar
                             backStack.clear()
                             backStack.add(screen)
                         }
