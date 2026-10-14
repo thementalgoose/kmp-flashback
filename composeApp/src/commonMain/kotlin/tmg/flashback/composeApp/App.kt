@@ -5,16 +5,20 @@ package tmg.flashback.composeApp
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SnackbarDuration.Indefinite
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
@@ -33,7 +37,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.rememberNavBackStack
-import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.feature_banner_soft_upgrade
 import flashback.presentation.localisation.generated.resources.feature_banner_soft_upgrade_prompt
@@ -46,7 +49,6 @@ import tmg.flashback.composeApp.presentation.MenuItem
 import tmg.flashback.composeApp.presentation.generateFloatingNavItems
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.composeApp.presentation.sync.SyncBottomSheet
-import tmg.flashback.composeApp.presentation.toNavigationItem
 import tmg.flashback.composeApp.presentation.toScreen
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.infrastructure.log.logDebug
@@ -57,10 +59,12 @@ import tmg.flashback.navigation.Screen
 import tmg.flashback.navigation.saveStateConfiguration
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationTheme
-import tmg.flashback.ui.components.AppScaffold
 import tmg.flashback.ui.navigation.FloatingHorizontalNavigationBar
+import tmg.flashback.ui.navigation.NavigationType.NavDrawerBottomNav
+import tmg.flashback.ui.navigation.NavigationType.NavDrawerSideNav
 import tmg.flashback.ui.navigation.OverlappingPanelsValue
-import tmg.flashback.ui.navigation.appBarHeight
+import tmg.flashback.ui.navigation.floatingHorizontalNavHeight
+import tmg.flashback.ui.navigation.floatingVerticalAppWidth
 import tmg.flashback.ui.navigation.rememberNavigationLayoutType
 import tmg.flashback.ui.navigation.rememberOverlappingPanelsState
 import tmg.flashback.ui.toasts.ToastManager
@@ -74,7 +78,6 @@ fun App() {
 
     val windowAdaptiveInfo = currentWindowAdaptiveInfoV2()
     val windowSizeClass = windowAdaptiveInfo.windowSizeClass
-    val isCompact = !windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)
 
     val toastManager: ToastManager = koinInject()
     val toastBackground: Color = AppTheme.colors.primaryContainer
@@ -94,14 +97,18 @@ fun App() {
     val panelsState = rememberOverlappingPanelsState(OverlappingPanelsValue.Closed)
     val coroutineScope = rememberCoroutineScope()
 
-    val showBottomBar = isCompact && appNavigationUiState.value.screen in listOf(NavCalendar, NavDriverStandings, NavTeamStandings) && !appNavigationUiState.value.intoSubNavigation
-    val systemNavigationBarHeight = WindowInsets.safeDrawing.asPaddingValues().calculateBottomPadding() + 16.dp
-    val navigationBarHeight = appBarHeight + systemNavigationBarHeight
-    val navigationBarPosition = animateDpAsState(
-        targetValue = if (panelsState.isStartPanelOpen || !showBottomBar) navigationBarHeight else 0.dp,
-        label = "navigationBarPosition"
-    )
+    val systemNavigationBarHeight = WindowInsets.safeDrawing.asPaddingValues().calculateBottomPadding()
 
+
+//    val showBottomBar = isCompact && appNavigationUiState.value.screen in listOf(NavCalendar, NavDriverStandings, NavTeamStandings) && !appNavigationUiState.value.intoSubNavigation
+//    val navigationBarHeight = appBarHeight + systemNavigationBarHeight
+//    val navigationBarPosition = animateDpAsState(
+//        targetValue = if (panelsState.isStartPanelOpen || !showBottomBar) navigationBarHeight else 0.dp,
+//        label = "navigationBarPosition"
+//    )
+
+    val bottomNavPadding = AppTheme.dimens.medium
+    val rightNavPadding = AppTheme.dimens.medium
     val snackbarHostState = remember { SnackbarHostState() }
 
     // Soft upgrade
@@ -113,62 +120,113 @@ fun App() {
 
     // Screen
     ApplicationTheme {
-        AppScaffold(
-            modifier = Modifier.testTag("App"),
-            content = { paddingValues ->
-                AppContainer(
-                    openPanel = {
-                        coroutineScope.launch { panelsState.openStartPanel() }
-                    },
-                    panelsState = panelsState,
-                    windowAdaptiveInfo = windowAdaptiveInfo,
-                    windowSizeClass = windowSizeClass,
-                    paddingValues = paddingValues,
-                    appNavigationViewModel = appNavigationViewModel,
-                    backStack = backStack
-                )
 
-                // Fake translucent status bar
-                Box(
-                    modifier = Modifier
-                        .height(WindowInsets.statusBars.asPaddingValues().calculateTopPadding())
-                        .fillMaxWidth()
-                        .align(Alignment.TopCenter)
-                        .background(Brush.verticalGradient(
-                            colors = listOf(AppTheme.colors.surface, Color.Transparent)
-                        ))
-                )
-            },
-            bottomBar = {
-                if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
-                    val screen = appNavigationUiState.value.screen
-                    val items = generateFloatingNavItems(screen)
-                    FloatingHorizontalNavigationBar(
-                        modifier = Modifier
-                            .offset(y = navigationBarPosition.value)
-                            .background(Brush.verticalGradient(listOf(Color.Transparent, AppTheme.colors.surface)))
-                            .padding(horizontal = AppTheme.dimens.medium)
-                            .padding(bottom = systemNavigationBarHeight),
-                        list = items,
-                        itemClicked = { item ->
-                            val menuItem = item.id.toEnum<MenuItem> { it.key } ?: return@FloatingHorizontalNavigationBar
-                            val screen = menuItem.toScreen() ?: return@FloatingHorizontalNavigationBar
-                            backStack.clear()
-                            backStack.add(screen)
-                        }
-                    )
-                }
-            },
-            snackbarHostState = snackbarHostState,
+        val navigationType = rememberNavigationLayoutType(
+            showXr = LocalXR.current.isSpatialUiEnabled
         )
+        val isSubNavigation = appNavigationUiState.value.intoSubNavigation
+        val showFloatingBar = (navigationType == NavDrawerBottomNav || navigationType == NavDrawerSideNav) &&
+                appNavigationUiState.value.screen in listOf(NavCalendar, NavDriverStandings, NavTeamStandings) &&
+                !isSubNavigation &&
+                panelsState.isPanelsClosed
 
-        // Initial sync
-        val isOpen = remember { mutableStateOf(appNavigationUiState.value.promptContentSync) }
-        if (isOpen.value) {
-            SyncBottomSheet(
-                hide = { isOpen.value = false },
-                windowSizeClass = windowSizeClass
+        Box(
+            modifier = Modifier.testTag("App")
+        ) {
+            AppContainer(
+                openPanel = {
+                    coroutineScope.launch { panelsState.openStartPanel() }
+                },
+                panelsState = panelsState,
+                windowAdaptiveInfo = windowAdaptiveInfo,
+                windowSizeClass = windowSizeClass,
+                paddingValues = PaddingValues(0.dp),
+                appNavigationViewModel = appNavigationViewModel,
+                backStack = backStack
             )
+
+            // Fake translucent status bar
+            Box(
+                modifier = Modifier
+                    .height(WindowInsets.statusBars.asPaddingValues().calculateTopPadding())
+                    .fillMaxWidth()
+                    .align(Alignment.TopCenter)
+                    .background(Brush.verticalGradient(
+                        colors = listOf(AppTheme.colors.surface, Color.Transparent)
+                    ))
+            )
+
+            // Floating Nav from bottom
+            val bottomNavPosition = animateDpAsState(
+                targetValue = when ((navigationType == NavDrawerBottomNav) && showFloatingBar) {
+                    true -> 0.dp
+                    false -> floatingHorizontalNavHeight + systemNavigationBarHeight + bottomNavPadding
+                }
+            )
+            if (navigationType == NavDrawerBottomNav) {
+                val screen = appNavigationUiState.value.screen
+                val items = generateFloatingNavItems(screen)
+                FloatingHorizontalNavigationBar(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .fillMaxWidth()
+                        .offset(y = bottomNavPosition.value)
+                        .background(Brush.verticalGradient(listOf(Color.Transparent, AppTheme.colors.surface)))
+                        .padding(horizontal = AppTheme.dimens.medium)
+                        .padding(bottom = systemNavigationBarHeight + bottomNavPadding),
+                    list = items,
+                    itemClicked = { item ->
+                        val menuItem = item.id.toEnum<MenuItem> { it.key } ?: return@FloatingHorizontalNavigationBar
+                        val screen = menuItem.toScreen() ?: return@FloatingHorizontalNavigationBar
+                        backStack.clear()
+                        backStack.add(screen)
+                    }
+                )
+            }
+
+            // Floating Nav from right
+            val rightNavPosition = animateDpAsState(
+                targetValue = when ((navigationType == NavDrawerSideNav) && showFloatingBar) {
+                    true -> 0.dp
+                    false -> floatingVerticalAppWidth + rightNavPadding
+                }
+            )
+            if (navigationType == NavDrawerSideNav) {
+                val screen = appNavigationUiState.value.screen
+                val items = generateFloatingNavItems(screen)
+                FloatingHorizontalNavigationBar(
+                    modifier = Modifier
+                        .offset(x = rightNavPosition.value)
+                        .background(Brush.verticalGradient(listOf(Color.Transparent, AppTheme.colors.surface)))
+                        .padding(end = rightNavPadding),
+                    list = items,
+                    itemClicked = { item ->
+                        val menuItem = item.id.toEnum<MenuItem> { it.key } ?: return@FloatingHorizontalNavigationBar
+                        val screen = menuItem.toScreen() ?: return@FloatingHorizontalNavigationBar
+                        backStack.clear()
+                        backStack.add(screen)
+                    }
+                )
+            }
+
+            // Snackbar host
+            SnackbarHost(
+                hostState = snackbarHostState,
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .navigationBarsPadding() // Prevents overlap with system navigation
+                    .imePadding()            // Shifts up if the keyboard opens
+                    .padding(bottom = AppTheme.dimens.medium) // Optional offset from the edge
+            )
+
+            // Initial sync
+            val isOpen = remember { mutableStateOf(appNavigationUiState.value.promptContentSync) }
+            if (isOpen.value) {
+                SyncBottomSheet(
+                    hide = { isOpen.value = false },
+                    windowSizeClass = windowSizeClass
+                )
+            }
         }
     }
 }

@@ -327,7 +327,7 @@ private class DefaultCenterPanelAlpha(
 
 @PreviewTheme
 @Composable
-private fun PreviewStart() {
+private fun PreviewOpenEnd() {
     ApplicationThemePreview {
         val panelsState = rememberOverlappingPanelsState(OverlappingPanelsValue.OpenEnd)
         OverlappingPanels(
@@ -345,7 +345,7 @@ private fun PreviewStart() {
 
 @PreviewTheme
 @Composable
-private fun PreviewCenter() {
+private fun PreviewClosed() {
     ApplicationThemePreview {
         val panelsState = rememberOverlappingPanelsState(OverlappingPanelsValue.Closed)
         OverlappingPanels(

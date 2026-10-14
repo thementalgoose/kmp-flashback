@@ -54,7 +54,8 @@ private val edgePadding: Dp = 8.dp
 private val iconVerticalPadding: Dp = 10.dp
 private val iconSize: Dp = 26.dp
 private val horizontalWidthThreshold: Dp = 180.dp
-val appBarHeight: Dp by lazy {
+
+val floatingHorizontalNavHeight: Dp by lazy {
     iconSize + (2 * edgePadding) + (2 * iconVerticalPadding)
 }
 
@@ -67,7 +68,7 @@ fun FloatingHorizontalNavigationBar(
     BoxWithConstraints(
         modifier = modifier
             .fillMaxWidth()
-            .height(appBarHeight)
+            .height(floatingHorizontalNavHeight)
             .dropShadow(
                 shape = RoundedCornerShape(100.dp),
                 shadow = Shadow(radius = 16.dp, color = Color.Black.copy(alpha = 0.2f))

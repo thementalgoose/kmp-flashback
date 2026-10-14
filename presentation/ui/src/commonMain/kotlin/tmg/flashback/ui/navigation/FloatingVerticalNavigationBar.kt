@@ -52,9 +52,11 @@ import tmg.flashback.style.preview.PreviewTheme
 private val edgePadding: Dp = 8.dp
 private val iconSpacing: Dp = 12.dp
 private val iconSize: Dp = 26.dp
-val verticalAppBarWidth: Dp by lazy {
+
+val floatingVerticalAppWidth: Dp by lazy {
     iconSize + (2 * edgePadding) + (2 * iconSpacing)
 }
+
 @Composable
 fun FloatingVerticalNavigationBar(
     list: List<NavigationItem>,
@@ -63,6 +65,7 @@ fun FloatingVerticalNavigationBar(
 ) {
     BoxWithConstraints(
         modifier = modifier
+            .width(floatingVerticalAppWidth)
             .dropShadow(
                 shape = RoundedCornerShape(100.dp),
                 shadow = Shadow(radius = 16.dp, color = Color.Black.copy(alpha = 0.2f))
