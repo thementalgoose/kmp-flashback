@@ -42,6 +42,7 @@ import tmg.flashback.composeApp.firebase.FirebaseInstallationServiceImpl
 import tmg.flashback.infrastructure.di.infrastructureModule
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.composeApp.manager.UiManagerImpl
+import tmg.flashback.composeApp.presentation.info.InfoViewModel
 import tmg.flashback.network.rss.di.dataNetworkRssModule
 import tmg.flashback.news.di.dataNetworkFlashbackNewsModule
 import tmg.flashback.notifications.di.coreNotificationsModule
@@ -141,6 +142,8 @@ internal fun module() = module {
 
     single<StoreFirebaseInstallationIdUseCase> { StoreFirebaseInstallationIdUseCaseImpl(get(), get()) }
     single<RequiresSyncUseCase> { RequiresSyncUseCaseImpl(get(), get()) }
+
+    viewModel { InfoViewModel(get()) }
 
     viewModel { AllSettingsViewModel(get(), get(), get()) }
     viewModel { SettingsDarkModeViewModel(get(), get()) }

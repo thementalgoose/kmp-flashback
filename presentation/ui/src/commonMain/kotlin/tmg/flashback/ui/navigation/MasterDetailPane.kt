@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
@@ -69,7 +70,7 @@ fun <T> rememberMasterDetailPaneState(
 @Composable
 fun <T> MasterDetailsPane(
     navigator: MasterDetailPaneState<T> = rememberMasterDetailPaneState<T>(),
-    windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfo().windowSizeClass,
+    windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass,
     master: @Composable () -> Unit,
     details: @Composable (T, closeDetails: () -> Unit) -> Unit,
     detailsActionUpClicked: () -> Unit

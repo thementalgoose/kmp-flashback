@@ -5,7 +5,6 @@ package tmg.flashback.ui.navigation
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,14 +12,11 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -34,14 +30,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.clearAndSetSemantics
-import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
@@ -56,37 +52,40 @@ import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody2
 
-private val edgePadding: Dp = 8.dp
+private val edgePadding: Dp = 6.dp
 private val iconVerticalPadding: Dp = 10.dp
 private val iconSize: Dp = 26.dp
 private val horizontalWidthThreshold: Dp = 180.dp
-val appBarHeight: Dp by lazy {
+
+val floatingHorizontalNavHeight: Dp by lazy {
     iconSize + (2 * edgePadding) + (2 * iconVerticalPadding)
 }
 
 @Composable
-fun FloatingNavigationBar(
+fun FloatingHorizontalNavigationBar(
     list: List<NavigationItem>,
     itemClicked: (NavigationItem) -> Unit,
     modifier: Modifier = Modifier,
-    bottomPadding: Dp = 0.dp
 ) {
     BoxWithConstraints(
         modifier = modifier
-            .padding(bottom = bottomPadding)
             .fillMaxWidth()
-            .height(appBarHeight)
-            .dropShadow(
-                shape = RoundedCornerShape(100.dp),
-                shadow = Shadow(radius = 16.dp, color = Color.Black.copy(alpha = 0.2f))
-            )
-            .clip(RoundedCornerShape(100.dp))
-            .background(AppTheme.colors.surfaceNav)
+            .height(floatingHorizontalNavHeight)
     ) {
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .dropShadow(
+                    shape = RoundedCornerShape(100.dp),
+                    shadow = Shadow(radius = 16.dp, color = Color.Black.copy(alpha = 0.2f))
+                )
+                .clip(RoundedCornerShape(100.dp))
+                .background(AppTheme.colors.surfaceNav.copy(alpha = 0.95f))
+                .blur(radius = 8.dp)
+        )
         val showLabels = (horizontalWidthThreshold * list.size) < minWidth
         Row(
             modifier = Modifier
-                .background(AppTheme.colors.surfaceNav)
                 .padding(horizontal = edgePadding),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically,
@@ -227,7 +226,6 @@ private fun Preview5() {
     ApplicationThemePreview {
         Column {
             Preview(itemCount = 5)
-            Preview(itemCount = 5)
         }
     }
 }
@@ -237,7 +235,6 @@ private fun Preview5() {
 private fun Preview4() {
     ApplicationThemePreview {
         Column {
-            Preview(itemCount = 4)
             Preview(itemCount = 4)
         }
     }
@@ -249,7 +246,6 @@ private fun Preview3() {
     ApplicationThemePreview {
         Column {
             Preview(itemCount = 3)
-            Preview(itemCount = 3)
         }
     }
 }
@@ -259,7 +255,6 @@ private fun Preview3() {
 private fun Preview2() {
     ApplicationThemePreview {
         Column {
-            Preview(itemCount = 2)
             Preview(itemCount = 2)
         }
     }
@@ -273,9 +268,10 @@ private fun Preview(
         modifier = Modifier
             .background(AppTheme.colors.surfaceContainer5)
             .fillMaxWidth()
-            .padding(all = 16.dp)
     ) {
-        FloatingNavigationBar(
+        FloatingHorizontalNavigationBar(
+            modifier = Modifier
+                .padding(all = 16.dp),
             list = fakeNavigationItems.take(itemCount),
             itemClicked = { },
         )

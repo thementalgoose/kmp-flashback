@@ -2,7 +2,6 @@ package tmg.flashback.feature.weekend.presentation
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -37,7 +36,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import tmg.flashback.navigation.Screen
 import androidx.window.core.layout.WindowSizeClass
-import androidx.window.core.layout.WindowSizeClass.Companion.HEIGHT_DP_MEDIUM_LOWER_BOUND
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import coil3.compose.AsyncImagePainter
 import coil3.compose.rememberAsyncImagePainter
@@ -59,10 +57,8 @@ import tmg.flashback.feature.weekend.presentation.data.race.addRaceData
 import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.addSprintQualifyingData
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.addSprintRaceData
 import tmg.flashback.formula1.constants.Formula1
-import tmg.flashback.formula1.enums.TrackBreakdown
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.model.OverviewRace
-import tmg.flashback.formula1.model.QualifyingType
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.navigation.NavWeekend
 import tmg.flashback.style.AppTheme
@@ -75,9 +71,7 @@ import tmg.flashback.ui.components.loading.SkeletonBox
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 import tmg.flashback.ui.components.track.TrackBreakdownBottomSheet
 import tmg.flashback.ui.components.tyres.TyreBottomSheet
-import tmg.flashback.ui.components.tyres.TyreInfo
-import tmg.flashback.ui.navigation.FloatingNavigationBar
-import tmg.flashback.ui.navigation.NavigationBar
+import tmg.flashback.ui.navigation.FloatingHorizontalNavigationBar
 import tmg.flashback.ui.navigation.NavigationItem
 import tmg.flashback.ui.navigation.appBarMaximumHeight
 
@@ -314,19 +308,19 @@ fun WeekendScreenTab(
         )
         if (uiState is Data) {
             val navigationItems = uiState.tabs.toNavigationItem(uiState.tab)
-            FloatingNavigationBar(
+            FloatingHorizontalNavigationBar(
                 modifier = Modifier
                     .background(Brush.verticalGradient(listOf(Color.Transparent, AppTheme.colors.surface)))
                     .padding(horizontal = AppTheme.dimens.medium)
-                    .align(Alignment.BottomCenter),
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = paddingValues.calculateBottomPadding() + AppTheme.dimens.medium),
                 list = navigationItems,
                 itemClicked = {
                     val tab = it.id.toEnum<WeekendTabs> { it.id }
                     if (tab != null) {
                         clickWeekendTab(tab)
                     }
-                },
-                bottomPadding = paddingValues.calculateBottomPadding() + 16.dp
+                }
             )
         }
     }

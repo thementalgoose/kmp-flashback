@@ -49,4 +49,5 @@ fun Screen.isList(): Boolean = when (this) {
     is NavGlossaryDetail -> false
     is NavAbout -> true
     is NavStyleGuide -> true
+    is NavInfo -> true
 }

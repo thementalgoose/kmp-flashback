@@ -17,6 +17,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddBox
+import androidx.compose.material.icons.filled.CarRental
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.HorizontalDivider
@@ -79,7 +81,8 @@ fun StyleGuideScreen(
                     content = {
                         Icon(
                             imageVector = Icons.Default.Menu,
-                            contentDescription = null
+                            contentDescription = null,
+                            tint = AppTheme.colors.onSurface
                         )
                     }
                 )
@@ -282,7 +285,7 @@ fun StyleGuideFormula1(
                     .size(40.dp)
             ) {
                 Icon(
-                    painter = painterResource(Res.drawable.ic_preview_icon),
+                    imageVector= Icons.Default.AddBox,
                     tint = colour,
                     contentDescription = null
                 )

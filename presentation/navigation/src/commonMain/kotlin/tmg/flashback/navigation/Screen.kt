@@ -115,3 +115,6 @@ data object NavAbout: Screen
 
 @Serializable
 data object NavStyleGuide: Screen
+
+@Serializable
+data object NavInfo: Screen
