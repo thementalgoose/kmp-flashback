@@ -30,7 +30,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.graphics.Color
@@ -50,7 +52,7 @@ import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody2
 
-private val edgePadding: Dp = 8.dp
+private val edgePadding: Dp = 6.dp
 private val iconVerticalPadding: Dp = 10.dp
 private val iconSize: Dp = 26.dp
 private val horizontalWidthThreshold: Dp = 180.dp
@@ -69,17 +71,21 @@ fun FloatingHorizontalNavigationBar(
         modifier = modifier
             .fillMaxWidth()
             .height(floatingHorizontalNavHeight)
-            .dropShadow(
-                shape = RoundedCornerShape(100.dp),
-                shadow = Shadow(radius = 16.dp, color = Color.Black.copy(alpha = 0.2f))
-            )
-            .clip(RoundedCornerShape(100.dp))
-            .background(AppTheme.colors.surfaceNav)
     ) {
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .dropShadow(
+                    shape = RoundedCornerShape(100.dp),
+                    shadow = Shadow(radius = 16.dp, color = Color.Black.copy(alpha = 0.2f))
+                )
+                .clip(RoundedCornerShape(100.dp))
+                .background(AppTheme.colors.surfaceNav.copy(alpha = 0.95f))
+                .blur(radius = 8.dp)
+        )
         val showLabels = (horizontalWidthThreshold * list.size) < minWidth
         Row(
             modifier = Modifier
-                .background(AppTheme.colors.surfaceNav)
                 .padding(horizontal = edgePadding),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically,
@@ -262,9 +268,10 @@ private fun Preview(
         modifier = Modifier
             .background(AppTheme.colors.surfaceContainer5)
             .fillMaxWidth()
-            .padding(all = 16.dp)
     ) {
         FloatingHorizontalNavigationBar(
+            modifier = Modifier
+                .padding(all = 16.dp),
             list = fakeNavigationItems.take(itemCount),
             itemClicked = { },
         )

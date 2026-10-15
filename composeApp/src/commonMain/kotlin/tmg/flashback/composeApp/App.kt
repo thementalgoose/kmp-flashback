@@ -163,7 +163,8 @@ fun App() {
                 targetValue = when ((navigationType == NavDrawerBottomNav) && showFloatingBar) {
                     true -> 0.dp
                     false -> floatingHorizontalNavHeight + systemNavigationBarHeight + bottomNavPadding
-                }
+                },
+                label = "BottomNavPosition"
             )
             if (navigationType == NavDrawerBottomNav) {
                 val screen = appNavigationUiState.value.screen
@@ -191,7 +192,8 @@ fun App() {
                 targetValue = when ((navigationType == NavDrawerSideNav) && showFloatingBar) {
                     true -> 0.dp
                     false -> floatingVerticalAppWidth + rightNavPadding
-                }
+                },
+                label = "SideNavPosition"
             )
             if (navigationType == NavDrawerSideNav) {
                 val screen = appNavigationUiState.value.screen
@@ -213,12 +215,16 @@ fun App() {
                 )
             }
 
+            val snackbarHostPadding = animateDpAsState(
+                targetValue = if (showFloatingBar && navigationType == NavDrawerBottomNav) floatingHorizontalNavHeight else 0.dp,
+                label = "SnackbarHostPadding"
+            )
             // Snackbar host
             SnackbarHost(
                 hostState = snackbarHostState,
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .padding(bottom = if (showFloatingBar && navigationType == NavDrawerBottomNav) floatingHorizontalNavHeight else 0.dp)
+                    .padding(bottom = snackbarHostPadding.value)
                     .navigationBarsPadding()
                     .imePadding()
                     .padding(bottom = AppTheme.dimens.medium)

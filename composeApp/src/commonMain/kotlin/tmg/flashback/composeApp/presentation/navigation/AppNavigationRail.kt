@@ -13,6 +13,7 @@ import tmg.flashback.composeApp.presentation.MenuItem.Contact
 import tmg.flashback.composeApp.presentation.MenuItem.DriversStandings
 import tmg.flashback.composeApp.presentation.MenuItem.Lineup
 import tmg.flashback.composeApp.presentation.MenuItem.Glossary
+import tmg.flashback.composeApp.presentation.MenuItem.Info
 import tmg.flashback.composeApp.presentation.MenuItem.ReactionGame
 import tmg.flashback.composeApp.presentation.MenuItem.Results
 import tmg.flashback.composeApp.presentation.MenuItem.Rss
@@ -74,22 +75,11 @@ internal fun AppNavigationRail(
                 XR_Spacial -> {
                     xr.requestImmersiveMode()
                 }
-                Results,
-                Calendar,
-                DriversStandings,
-                TeamsStandings,
-                Circuits,
-                Lineup,
-                Rss,
-                ReactionGame,
-                Glossary,
-                Settings,
-                StyleGuide,
-                Contact -> {
+                null -> { /* Do nothing */ }
+                else -> {
                     val result = item.toScreen() ?: return@NavigationColumn
                     navigationItemClicked(result)
                 }
-                null -> { /* Do nothing */ }
             }
         },
         padding = insetPadding

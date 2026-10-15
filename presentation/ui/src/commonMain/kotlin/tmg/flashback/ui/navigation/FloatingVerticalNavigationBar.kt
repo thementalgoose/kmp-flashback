@@ -49,7 +49,7 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
 
-private val edgePadding: Dp = 8.dp
+private val edgePadding: Dp = 6.dp
 private val iconSpacing: Dp = 12.dp
 private val iconSize: Dp = 26.dp
 

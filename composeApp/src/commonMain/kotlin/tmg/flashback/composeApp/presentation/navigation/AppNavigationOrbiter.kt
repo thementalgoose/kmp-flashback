@@ -9,6 +9,7 @@ import tmg.flashback.composeApp.presentation.MenuItem.Circuits
 import tmg.flashback.composeApp.presentation.MenuItem.Contact
 import tmg.flashback.composeApp.presentation.MenuItem.DriversStandings
 import tmg.flashback.composeApp.presentation.MenuItem.Glossary
+import tmg.flashback.composeApp.presentation.MenuItem.Info
 import tmg.flashback.composeApp.presentation.MenuItem.Lineup
 import tmg.flashback.composeApp.presentation.MenuItem.ReactionGame
 import tmg.flashback.composeApp.presentation.MenuItem.Results
@@ -73,22 +74,11 @@ fun AppNavigationOrbiter(
                     XR_Spacial -> {
                         xr.requestPassthroughMode()
                     }
-                    Results,
-                    Calendar,
-                    DriversStandings,
-                    TeamsStandings,
-                    Circuits,
-                    Lineup,
-                    Rss,
-                    ReactionGame,
-                    Settings,
-                    Glossary,
-                    StyleGuide,
-                    Contact -> {
+                    null -> { /* Do nothing */ }
+                    else -> {
                         val result = item.toScreen() ?: return@NavigationOrbiter
                         navigationItemClicked(result)
                     }
-                    null -> { /* Do nothing */ }
                 }
             }
         )

@@ -16,11 +16,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.metadata
 import androidx.navigation3.ui.NavDisplay
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_EXPANDED_LOWER_BOUND
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import flashback.composeapp.generated.resources.Res
 import flashback.composeapp.generated.resources.logo
+import tmg.flashback.composeApp.presentation.info.InfoScreen
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.composeApp.presentation.navigation.scene.SplitPaneScene
 import tmg.flashback.composeApp.presentation.navigation.scene.rememberSplitPaneSceneStrategy
@@ -62,6 +64,7 @@ import tmg.flashback.navigation.NavDriverComparison
 import tmg.flashback.navigation.NavDriverStandings
 import tmg.flashback.navigation.NavGlossary
 import tmg.flashback.navigation.NavGlossaryDetail
+import tmg.flashback.navigation.NavInfo
 import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavPrivacyPolicy
 import tmg.flashback.navigation.NavReactionGame
@@ -378,6 +381,14 @@ fun AppGraph(
                 StyleGuideScreen(
                     actionUpClicked = openPanel,
                     paddingValues = insetPadding
+                )
+            }
+
+            entry<NavInfo>(metadata = SplitPaneScene.listPane()) {
+                InfoScreen(
+                    actionUpClicked = openPanel,
+                    paddingValues = insetPadding,
+                    windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
             }
         }
