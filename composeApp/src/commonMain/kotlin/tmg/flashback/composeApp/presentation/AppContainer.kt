@@ -157,7 +157,7 @@ fun AppContainer(
             .background(AppTheme.colors.surface)
             .padding(
                 paddingValues.only(
-                    start = true
+                    horizontal = true
                 )
             )
             .then(expandedEasterEggModifier)
@@ -171,8 +171,7 @@ fun AppContainer(
                 },
                 windowSizeClass = windowSizeClass,
                 insetPadding = paddingValues.only(
-                    top = true,
-                    bottom = true
+                    vertical = true
                 )
             )
             Box(
@@ -192,15 +191,12 @@ fun AppContainer(
                     }
                 } else {
                     appGraph(this, paddingValues.only(
-                        top = true,
-                        bottom = true,
-                        end = true
+                        vertical = true
                     ))
                 }
             }
         }
     }
-
 
     // Close panel if window size is changes via. configuration change
     DisposableEffect(windowSizeClass) {
