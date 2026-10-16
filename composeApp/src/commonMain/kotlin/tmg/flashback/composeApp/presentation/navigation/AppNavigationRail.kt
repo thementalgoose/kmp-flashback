@@ -40,6 +40,7 @@ import tmg.flashback.navigation.NavStyleGuide
 import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.ui.navigation.NavigationColumn
 import tmg.flashback.xr.LocalXR
+import tmg.flashback.xr.XR
 
 @Composable
 internal fun AppNavigationRail(
@@ -47,7 +48,7 @@ internal fun AppNavigationRail(
     navigationItemClicked: (Screen) -> Unit,
     insetPadding: PaddingValues,
     modifier: Modifier = Modifier,
-    showXr: Boolean = false,
+    showXr: XR? = LocalXR.current,
 ) {
     val primaryItems = generateNavPrimaryItems(
         currentlySelectedScreen = appNavigationUiState.screen
@@ -58,7 +59,7 @@ internal fun AppNavigationRail(
     )
     val tertiaryItems = generateNavTertiaryItems(
         currentlySelectedScreen = appNavigationUiState.screen,
-        showXr = showXr,
+        showXr = showXr?.isXrDevice == true,
         isXrSelected = false
     )
 

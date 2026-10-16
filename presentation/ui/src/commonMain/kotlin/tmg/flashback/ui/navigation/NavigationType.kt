@@ -34,7 +34,7 @@ fun rememberNavigationLayoutType(showXr: Boolean): NavigationType {
     val hasProminentSideInset = endInset >= sideNavThreshold
 
     return when {
-        hasProminentSideInset -> NavigationType.NavDrawerBottomNav
+        hasProminentSideInset -> NavigationType.NavDrawerSideNav
         windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND) -> NavigationType.NavRail
         else -> NavigationType.NavDrawerBottomNav
     }

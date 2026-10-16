@@ -81,7 +81,6 @@ internal fun AppNavigationDrawer(
     openUrl: (String) -> Unit,
     modifier: Modifier = Modifier,
     insetPadding: PaddingValues = WindowInsets.safeContent.asPaddingValues(),
-    showXr: Boolean = false,
     xr: XR? = LocalXR.current,
 ) {
     val primaryItems = generateNavPrimaryItems(
@@ -94,7 +93,7 @@ internal fun AppNavigationDrawer(
     )
     val tertiaryItems = generateNavTertiaryItems(
         currentlySelectedScreen = appNavigationUiState.screen,
-        showXr = showXr,
+        showXr = xr?.isXrDevice == true,
         isXrSelected = false
     )
     Box(modifier) {
