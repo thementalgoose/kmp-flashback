@@ -114,10 +114,6 @@ fun AppGraph(
         false -> Modifier
             .fillMaxSize()
     }
-    val insetPadding = when (isCompact) {
-        true -> insetPadding
-        false -> PaddingValues(0.dp)
-    }
 
     NavDisplay(
         backStack = backStack,
