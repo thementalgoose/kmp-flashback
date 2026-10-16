@@ -309,6 +309,9 @@ enum class TrackBreakdown(
         startLine = "M 713.006 705.451 L 713.866 778.856",
         drsZones = listOf(
             "M 305.307 701.83 L 881.321 688.604"
+        ),
+        straightModeZones = listOf(
+            "M 305.307 701.83 L 1056.46 684.583"
         )
     ),
     MADRING(
