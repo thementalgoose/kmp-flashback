@@ -131,7 +131,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
-				LastUpgradeCheck = 1640;
+				LastUpgradeCheck = 2710;
 				TargetAttributes = {
 					B9DA97B02DC1472C00A4DA20 = {
 						CreatedOnToolsVersion = 16.2;
@@ -337,6 +337,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "Flashback Sandbox";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 				VARIANT = development;
@@ -447,6 +448,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = Flashback;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VARIANT = production;
@@ -553,6 +555,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = Flashback;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 				VARIANT = production;
@@ -666,6 +669,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Flashback Sandbox";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VARIANT = development;
