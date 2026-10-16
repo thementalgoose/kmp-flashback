@@ -103,7 +103,6 @@ fun App() {
     }
 }
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppContent(
@@ -123,7 +122,6 @@ fun AppContent(
 
     val panelsState = rememberOverlappingPanelsState(OverlappingPanelsValue.Closed)
     val coroutineScope = rememberCoroutineScope()
-
     val snackbarHostState = remember { SnackbarHostState() }
 
     // Soft upgrade

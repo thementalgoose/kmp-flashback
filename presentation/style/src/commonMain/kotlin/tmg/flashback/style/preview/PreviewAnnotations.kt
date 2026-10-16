@@ -28,12 +28,14 @@ annotation class PreviewTheme
     device = Devices.PIXEL,
 )
 @Preview(
-    name = "Foldable - Light Mode",
+    name = "Pixel - Dark Mode",
     showBackground = true,
-    uiMode = UI_MODE_NIGHT_NO,
-    backgroundColor = 0xFFF8F8F8,
-    device = Devices.FOLDABLE,
+    backgroundColor = 0xFF080808,
+    uiMode = UI_MODE_NIGHT_YES or UI_MODE_TYPE_NORMAL,
+    device = Devices.PIXEL,
 )
+annotation class PreviewDevicePixel
+
 @Preview(
     name = "Tablet - Light Mode",
     showBackground = true,
@@ -42,11 +44,19 @@ annotation class PreviewTheme
     device = Devices.TABLET,
 )
 @Preview(
-    name = "Pixel - Dark Mode",
+    name = "Tablet - Dark Mode",
     showBackground = true,
     backgroundColor = 0xFF080808,
     uiMode = UI_MODE_NIGHT_YES or UI_MODE_TYPE_NORMAL,
-    device = Devices.PIXEL,
+    device = Devices.TABLET,
+)
+annotation class PreviewDeviceTablet
+@Preview(
+    name = "Foldable - Light Mode",
+    showBackground = true,
+    uiMode = UI_MODE_NIGHT_NO,
+    backgroundColor = 0xFFF8F8F8,
+    device = Devices.FOLDABLE,
 )
 @Preview(
     name = "Foldable - Dark Mode",
@@ -55,11 +65,9 @@ annotation class PreviewTheme
     uiMode = UI_MODE_NIGHT_YES or UI_MODE_TYPE_NORMAL,
     device = Devices.FOLDABLE,
 )
-@Preview(
-    name = "Tablet - Dark Mode",
-    showBackground = true,
-    backgroundColor = 0xFF080808,
-    uiMode = UI_MODE_NIGHT_YES or UI_MODE_TYPE_NORMAL,
-    device = Devices.TABLET,
-)
+annotation class PreviewDeviceFoldable
+
+@PreviewDevicePixel
+@PreviewDeviceFoldable
+@PreviewDeviceTablet
 annotation class PreviewDevices
