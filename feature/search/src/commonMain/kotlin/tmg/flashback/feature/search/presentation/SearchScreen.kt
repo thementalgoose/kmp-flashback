@@ -149,7 +149,7 @@ private fun SearchScreen(
                 }
             }
             if (uiState.resultsDrivers.isNotEmpty()) {
-                item("driver-header") {
+                item("driver-header", span = { GridItemSpan(maxLineSpan) }) {
                     SearchHeader(
                         category = Category.Drivers,
                         modifier = Modifier.animateItem()
@@ -162,7 +162,7 @@ private fun SearchScreen(
                 )
             }
             if (uiState.resultsConstructors.isNotEmpty()) {
-                item("constructor-header") {
+                item("constructor-header", span = { GridItemSpan(maxLineSpan) }) {
                     SearchHeader(
                         category = Category.Teams,
                         modifier = Modifier.animateItem()
@@ -175,7 +175,7 @@ private fun SearchScreen(
                 )
             }
             if (uiState.resultsCircuits.isNotEmpty()) {
-                item("circuits-header") {
+                item("circuits-header", span = { GridItemSpan(maxLineSpan) }) {
                     SearchHeader(
                         category = Category.Circuits,
                         modifier = Modifier.animateItem()
