@@ -9,13 +9,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -26,17 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
-import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import flashback.presentation.localisation.generated.resources.Res.string
-import flashback.presentation.localisation.generated.resources.nav_constructors
-import flashback.presentation.localisation.generated.resources.nav_drivers
-import flashback.presentation.localisation.generated.resources.search_category_circuits
-import flashback.presentation.localisation.generated.resources.search_category_constructors
-import flashback.presentation.localisation.generated.resources.search_category_driver
-import flashback.presentation.localisation.generated.resources.search_category_option_title
-import flashback.presentation.localisation.generated.resources.search_category_races
 import flashback.presentation.localisation.generated.resources.search_title
-import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.formula1.model.Circuit
@@ -51,7 +40,6 @@ import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.textinput.TextInput
 import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.header.Header
-import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 
 @Composable
@@ -104,6 +92,7 @@ private fun SearchScreen(
         ) {
             item("header", span = { GridItemSpan(maxLineSpan) }) {
                 Header(
+                    modifier = Modifier.animateItem(),
                     actionUpClicked = actionUpClicked,
                     action = null,
                     text = stringResource(string.search_title),
@@ -134,8 +123,10 @@ private fun SearchScreen(
             item("filters", span = { GridItemSpan(maxLineSpan) }) {
                 Row(
                     modifier = Modifier
+                        .animateItem()
                         .fillMaxWidth()
-                        .horizontalScroll(rememberScrollState()),
+                        .horizontalScroll(rememberScrollState())
+                        .padding(bottom = AppTheme.dimens.medium),
                     horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
 
                 ) {
@@ -158,7 +149,9 @@ private fun SearchScreen(
             }
             items(uiState.resultsDrivers, key = { it.id }) {
                 DriverEntry(
-                    model = it
+                    model = it,
+                    driverClicked = { },
+                    modifier = Modifier.animateItem()
                 )
             }
             if (uiState.resultsConstructors.isNotEmpty()) {
@@ -171,7 +164,9 @@ private fun SearchScreen(
             }
             items(uiState.resultsConstructors, key = { it.id }) {
                 ConstructorEntry(
-                    model = it
+                    model = it,
+                    constructorClicked = { },
+                    modifier = Modifier.animateItem()
                 )
             }
             if (uiState.resultsCircuits.isNotEmpty()) {
@@ -184,7 +179,9 @@ private fun SearchScreen(
             }
             items(uiState.resultsCircuits, key = { it.id }) {
                 CircuitEntry(
-                    model = it
+                    model = it,
+                    circuitClicked = { },
+                    modifier = Modifier.animateItem()
                 )
             }
         }
