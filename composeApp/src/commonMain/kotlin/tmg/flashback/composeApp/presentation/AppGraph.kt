@@ -88,6 +88,7 @@ import tmg.flashback.navigation.removeDetail
 import tmg.flashback.navigation.replaceDetail
 import tmg.flashback.navigation.replaceList
 import tmg.flashback.style.AppTheme
+import tmg.flashback.ui.extensions.only
 import tmg.flashback.ui.navigation.OverlappingPanelsState
 import tmg.flashback.webbrowser.presentation.WebScreen
 
@@ -116,7 +117,7 @@ fun AppGraph(
     }
     val insetPadding = when (isCompact) {
         true -> insetPadding
-        false -> PaddingValues(0.dp)
+        false -> insetPadding.only(vertical = true)
     }
 
     NavDisplay(

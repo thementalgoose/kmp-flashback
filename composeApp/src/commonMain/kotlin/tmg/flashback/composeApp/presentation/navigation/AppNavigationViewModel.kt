@@ -8,9 +8,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import tmg.flashback.composeApp.repositories.NavRepository
+import tmg.flashback.composeApp.repositories.model.NavLink
 import tmg.flashback.composeApp.usecases.RequiresSyncUseCase
 import tmg.flashback.device.usecases.OpenStorePageUseCase
 import tmg.flashback.device.usecases.OpenWebpageUseCase
+import tmg.flashback.eastereggs.model.MenuIcons
 import tmg.flashback.eastereggs.usecases.IsMenuIconEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSnowEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSummerEnabledUseCase
@@ -77,3 +79,43 @@ class AppNavigationViewModel(
         openWebpageUseCase(url)
     }
 }
+
+internal val previewAppNavigationViewModel = AppNavigationViewModel(
+    isRssEnabledUseCase = object : IsRssEnabledUseCase {
+        override fun invoke(): Boolean = true
+    },
+    isMenuIconEnabledUseCase = object : IsMenuIconEnabledUseCase {
+        override fun invoke(): MenuIcons? = null
+    },
+    isSnowEnabledUseCase = object : IsSnowEnabledUseCase {
+        override fun invoke(): Boolean = false
+    },
+    isSummerEnabledUseCase = object : IsSummerEnabledUseCase {
+        override fun invoke(): Boolean = false
+    },
+    isUkraineEnabledUseCase = object : IsUkraineEnabledUseCase {
+        override fun invoke(): Boolean = false
+    },
+    requiresSyncUseCase = object : RequiresSyncUseCase {
+        override fun invoke(): Boolean = false
+    },
+    maintenanceRepository = object : MaintenanceRepository {
+        override val softUpgrade: Boolean get() = false
+    },
+    navRepository = object : NavRepository {
+        override val navLinks: List<NavLink> = listOf(
+            NavLink.Url("Navigation Link", "https://flashback.pages.dev"),
+            NavLink.Url("Navigation Link 2", "https://github.com/thementalgoose/kmp-flashback")
+        )
+    },
+    openWebpageUseCase = object : OpenWebpageUseCase {
+        override fun invoke(url: String, title: String) {
+            // No-op
+        }
+    },
+    openStorePageUseCase = object : OpenStorePageUseCase {
+        override fun invoke() {
+            // No-op
+        }
+    },
+)

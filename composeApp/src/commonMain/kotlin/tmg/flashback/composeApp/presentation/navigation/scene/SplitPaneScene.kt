@@ -45,18 +45,8 @@ class SplitPaneScene<T : Any>(
 ) : Scene<T> {
     override val entries: List<NavEntry<T>> = listOfNotNull(listEntry, detailEntry)
     override val content: @Composable (() -> Unit) = {
-        val safeDrawingInsets = WindowInsets.safeDrawing.asPaddingValues()
-        val paddingInsets = PaddingValues(
-            start = 0.dp,
-            end = 0.dp,
-            top = safeDrawingInsets.calculateTopPadding(),
-            bottom = safeDrawingInsets.calculateBottomPadding()
-        )
         BoxWithConstraints(modifier = Modifier
             .fillMaxSize()
-            .padding(paddingInsets)
-            .padding(end = AppTheme.dimens.small)
-            .consumeWindowInsets(WindowInsets.safeDrawing),
         ) {
             val listWidth = animateDpAsState(
                 targetValue = when {

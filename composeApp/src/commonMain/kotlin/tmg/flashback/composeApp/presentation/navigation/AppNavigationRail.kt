@@ -3,6 +3,8 @@ package tmg.flashback.composeApp.presentation.navigation
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_LARGE_LOWER_BOUND
 import tmg.flashback.navigation.Screen
 import kotlinx.coroutines.coroutineScope
 import tmg.flashback.infrastructure.extensions.toEnum
@@ -40,14 +42,16 @@ import tmg.flashback.navigation.NavStyleGuide
 import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.ui.navigation.NavigationColumn
 import tmg.flashback.xr.LocalXR
+import tmg.flashback.xr.XR
 
 @Composable
 internal fun AppNavigationRail(
+    windowSizeClass: WindowSizeClass,
     appNavigationUiState: AppNavigationUIState,
     navigationItemClicked: (Screen) -> Unit,
     insetPadding: PaddingValues,
     modifier: Modifier = Modifier,
-    showXr: Boolean = false,
+    showXr: XR? = LocalXR.current,
 ) {
     val primaryItems = generateNavPrimaryItems(
         currentlySelectedScreen = appNavigationUiState.screen
@@ -58,10 +62,11 @@ internal fun AppNavigationRail(
     )
     val tertiaryItems = generateNavTertiaryItems(
         currentlySelectedScreen = appNavigationUiState.screen,
-        showXr = showXr,
+        showXr = showXr?.isXrDevice == true,
         isXrSelected = false
     )
 
+    val xl = windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_LARGE_LOWER_BOUND)
     val xr = LocalXR.current
     NavigationColumn(
         modifier = modifier,
@@ -82,6 +87,7 @@ internal fun AppNavigationRail(
                 }
             }
         },
-        padding = insetPadding
+        padding = insetPadding,
+        lockExpanded = xl
     )
 }
