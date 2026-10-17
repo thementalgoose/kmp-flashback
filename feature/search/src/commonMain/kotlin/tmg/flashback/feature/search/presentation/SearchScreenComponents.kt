@@ -95,8 +95,8 @@ internal fun DriverEntry(
                 bold = true
             )
             val label = listOfNotNull(
-                model.driver.code,
-                model.driver.number?.toString(),
+//                model.driver.code,
+//                model.driver.number?.toString(),
                 model.driver.nationality
             ).joinToString(separator = " - ")
             TextBody2(label)
