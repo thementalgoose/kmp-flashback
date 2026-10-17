@@ -86,7 +86,7 @@ private fun SearchScreen(
         windowSizeClass = windowSizeClass
     ) {
         LazyVerticalGrid(
-            columns = GridCells.Adaptive(300.dp),
+            columns = GridCells.Adaptive(250.dp),
             contentPadding = paddingValues,
             modifier = Modifier.fillMaxSize()
         ) {
