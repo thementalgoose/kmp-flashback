@@ -52,9 +52,9 @@ class SearchViewModel(
             filtering.asFlow(),
             isLoading.asFlow()
         ) { arr ->
-            val circuits = arr[0] as List<Result>
-            val drivers = arr[1] as List<Result>
-            val constructors = arr[2] as List<Result>
+            val circuits = arr[0] as List<Result.ResultCircuit>
+            val drivers = arr[1] as List<Result.ResultDriver>
+            val constructors = arr[2] as List<Result.ResultTeam>
             val search = arr[3] as String
             val filtering = arr[4] as List<Category>
             val isLoading = arr[5] as Boolean
@@ -96,7 +96,7 @@ class SearchViewModel(
         }
     }
 
-    private fun List<Result>.filter(searchTerm: String): List<Result> {
+    private fun <T: Result> List<T>.filter(searchTerm: String): List<T> {
         return this.filter {
             it.search.contains(searchTerm.lowercase())
         }

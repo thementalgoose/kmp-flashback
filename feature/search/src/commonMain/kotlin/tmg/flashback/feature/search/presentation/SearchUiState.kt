@@ -9,9 +9,9 @@ data class SearchUiState(
     val categories: List<Category>,
     val searchTerm: String,
     val isLoading: Boolean,
-    val resultsDrivers: List<Result>,
-    val resultsConstructors: List<Result>,
-    val resultsCircuits: List<Result>,
+    val resultsDrivers: List<Result.ResultDriver>,
+    val resultsConstructors: List<Result.ResultTeam>,
+    val resultsCircuits: List<Result.ResultCircuit>,
 )
 
 sealed interface Result {

@@ -148,28 +148,48 @@ private fun SearchScreen(
                     Spacer(Modifier.width(AppTheme.dimens.nsmall))
                 }
             }
+            if (uiState.resultsDrivers.isNotEmpty()) {
+                item("driver-header") {
+                    SearchHeader(
+                        category = Category.Drivers,
+                        modifier = Modifier.animateItem()
+                    )
+                }
+            }
             items(uiState.resultsDrivers, key = { it.id }) {
-
+                DriverEntry(
+                    model = it
+                )
+            }
+            if (uiState.resultsConstructors.isNotEmpty()) {
+                item("constructor-header") {
+                    SearchHeader(
+                        category = Category.Teams,
+                        modifier = Modifier.animateItem()
+                    )
+                }
             }
             items(uiState.resultsConstructors, key = { it.id }) {
-
+                ConstructorEntry(
+                    model = it
+                )
+            }
+            if (uiState.resultsCircuits.isNotEmpty()) {
+                item("circuits-header") {
+                    SearchHeader(
+                        category = Category.Circuits,
+                        modifier = Modifier.animateItem()
+                    )
+                }
             }
             items(uiState.resultsCircuits, key = { it.id }) {
-
+                CircuitEntry(
+                    model = it
+                )
             }
         }
     }
 }
-
-private val Category.label: StringResource
-    get() {
-        return when (this) {
-            Category.Drivers -> string.search_category_driver
-            Category.Teams -> string.search_category_constructors
-            Category.Circuits -> string.search_category_circuits
-            Category.Races -> string.search_category_races
-        }
-    }
 
 @PreviewTheme
 @Composable
