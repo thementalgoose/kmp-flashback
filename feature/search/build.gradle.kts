@@ -18,6 +18,8 @@ kotlin {
             implementation(libs.bundles.kotlin)
             implementation(libs.bundles.compose)
 
+            implementation(libs.coil.compose)
+
             implementation(projects.core.configuration)
             implementation(projects.core.metrics.analytics)
             implementation(projects.core.metrics.crashlytics)
