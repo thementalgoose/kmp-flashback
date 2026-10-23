@@ -42,7 +42,7 @@ import tmg.flashback.style.text.TextHeadline1
 
 @Composable
 fun Header(
-    actionUpClicked: () -> Unit,
+    actionUpClicked: (() -> Unit)? = null,
     modifier: Modifier = Modifier,
     topInset: Dp = 0.dp,
     scrim: Boolean = false,
@@ -72,7 +72,9 @@ fun Header(
             Row {
                 IconButton(
                     modifier = actionModifier,
-                    onClick = actionUpClicked,
+                    onClick = {
+                        actionUpClicked?.invoke()
+                    },
                 ) {
                     Icon(
                         painter = painterResource(resource = action.icon),
@@ -108,7 +110,7 @@ fun Header(
 @Composable
 fun Header(
     text: String,
-    actionUpClicked: () -> Unit,
+    actionUpClicked: (() -> Unit)? = null,
     topInset: Dp = 0.dp,
     scrim: Boolean = false,
     scrimColour: Color = AppTheme.colors.surface,

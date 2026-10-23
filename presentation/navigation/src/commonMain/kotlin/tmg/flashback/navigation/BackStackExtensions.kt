@@ -29,6 +29,7 @@ fun Screen.isList(): Boolean = when (this) {
     is NavDriver -> false
     is NavTeam -> false
     is NavDriverComparison -> false
+    is NavPaddock -> true
     is NavRss -> true
     is NavGlossary -> true
     is NavWebpage -> false

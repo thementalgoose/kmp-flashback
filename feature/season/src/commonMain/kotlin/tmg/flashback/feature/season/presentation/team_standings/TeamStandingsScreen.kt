@@ -53,7 +53,6 @@ import tmg.flashback.ui.navigation.appBarMaximumHeight
 @Composable
 fun TeamStandingsScreen(
     paddingValues: PaddingValues,
-    actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
     navigateTo: (Screen) -> Unit,
     viewModel: TeamStandingsViewModel = koinViewModel()
@@ -75,7 +74,6 @@ fun TeamStandingsScreen(
 
     TeamStandingsScreen(
         paddingValues = insets,
-        actionUpClicked = actionUpClicked,
         windowSizeClass = windowSizeClass,
         uiState = state.value,
         constructorClicked = {
@@ -94,7 +92,6 @@ fun TeamStandingsScreen(
 @Composable
 internal fun TeamStandingsScreen(
     paddingValues: PaddingValues,
-    actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
     uiState: TeamStandingsState,
     constructorClicked: (SeasonConstructorStandingSeason) -> Unit,
@@ -117,12 +114,7 @@ internal fun TeamStandingsScreen(
                         content = {
                             ResultsSeasonPicker(subtitle = stringResource(resource = string.season_standings_constructor))
                         },
-                        action = if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
-                            HeaderAction.MENU
-                        } else {
-                            null
-                        },
-                        actionUpClicked = actionUpClicked,
+                        action = null,
                         overrideIcons = {
                             Refresh(onClick = refresh)
                         }

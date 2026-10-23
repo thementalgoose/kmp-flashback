@@ -64,7 +64,6 @@ import tmg.flashback.ui.navigation.appBarMaximumHeight
 @Composable
 fun DriverStandingsScreen(
     paddingValues: PaddingValues,
-    actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
     navigateTo: (Screen) -> Unit,
     viewModel: DriverStandingsViewModel = koinViewModel()
@@ -88,7 +87,6 @@ fun DriverStandingsScreen(
 
     DriverStandingsScreen(
         paddingValues = insets,
-        actionUpClicked = actionUpClicked,
         uiState = state.value,
         windowSizeClass = windowSizeClass,
         driverClicked = {
@@ -108,7 +106,6 @@ fun DriverStandingsScreen(
 @Composable
 internal fun DriverStandingsScreen(
     paddingValues: PaddingValues,
-    actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
     uiState: DriverStandingsState,
     driverClicked: (SeasonDriverStandingSeason) -> Unit,
@@ -133,12 +130,7 @@ internal fun DriverStandingsScreen(
                         content = {
                             ResultsSeasonPicker(subtitle = stringResource(resource = string.season_standings_driver))
                         },
-                        action = if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
-                            HeaderAction.MENU
-                        } else {
-                            null
-                        },
-                        actionUpClicked = actionUpClicked,
+                        action = null,
                         overrideIcons = {
                             Refresh(onClick = refresh)
                             IconButton(

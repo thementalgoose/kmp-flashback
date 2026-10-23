@@ -12,11 +12,9 @@ import androidx.compose.material3.adaptive.WindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
-import androidx.navigation3.runtime.metadata
 import androidx.navigation3.ui.NavDisplay
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_EXPANDED_LOWER_BOUND
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
@@ -45,6 +43,7 @@ import tmg.flashback.feature.drivers.presentation.stats.DriverStatsScreen
 import tmg.flashback.feature.glossary.presentation.all.GlossaryScreen
 import tmg.flashback.feature.glossary.presentation.details.GlossaryDetailScreen
 import tmg.flashback.feature.lineup.presentation.LineupScreen
+import tmg.flashback.feature.paddock.presentation.PaddockScreen
 import tmg.flashback.feature.privacypolicy.presentation.PrivacyPolicyScreen
 import tmg.flashback.feature.reactiongame.presentation.ReactionGameScreen
 import tmg.flashback.feature.rss.presentation.configure.RssConfigureScreen
@@ -54,8 +53,6 @@ import tmg.flashback.feature.season.presentation.driver_standings.DriverStanding
 import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsScreen
 import tmg.flashback.feature.weekend.presentation.WeekendScreen
 import tmg.flashback.navigation.NavAbout
-import tmg.flashback.navigation.NavStyleGuide
-import tmg.flashback.style.styleguide.StyleGuideScreen
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavCircuit
 import tmg.flashback.navigation.NavCircuits
@@ -66,6 +63,7 @@ import tmg.flashback.navigation.NavGlossary
 import tmg.flashback.navigation.NavGlossaryDetail
 import tmg.flashback.navigation.NavInfo
 import tmg.flashback.navigation.NavLineup
+import tmg.flashback.navigation.NavPaddock
 import tmg.flashback.navigation.NavPrivacyPolicy
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
@@ -80,6 +78,7 @@ import tmg.flashback.navigation.NavSettingsPrivacy
 import tmg.flashback.navigation.NavSettingsRssConfigure
 import tmg.flashback.navigation.NavSettingsTheme
 import tmg.flashback.navigation.NavSettingsWidgets
+import tmg.flashback.navigation.NavStyleGuide
 import tmg.flashback.navigation.NavTeam
 import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.navigation.NavWebpage
@@ -88,8 +87,8 @@ import tmg.flashback.navigation.removeDetail
 import tmg.flashback.navigation.replaceDetail
 import tmg.flashback.navigation.replaceList
 import tmg.flashback.style.AppTheme
+import tmg.flashback.style.styleguide.StyleGuideScreen
 import tmg.flashback.ui.extensions.only
-import tmg.flashback.ui.navigation.OverlappingPanelsState
 import tmg.flashback.webbrowser.presentation.WebScreen
 
 @Composable
@@ -97,7 +96,6 @@ fun AppGraph(
     openPanel: () -> Unit,
     appNavigationViewModel: AppNavigationViewModel,
     insetPadding: PaddingValues,
-    overlappingPanelsState: OverlappingPanelsState,
     windowAdaptiveInfo: WindowAdaptiveInfo,
     backStack: NavBackStack<NavKey>,
 ) {
@@ -138,7 +136,6 @@ fun AppGraph(
             entry<NavCalendar>(metadata = SplitPaneScene.listPane()) {
                 CalendarScreen(
                     paddingValues = insetPadding,
-                    actionUpClicked = openPanel,
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
                         backStack.replaceDetail(it)
@@ -148,7 +145,6 @@ fun AppGraph(
             entry<NavDriverStandings>(metadata = SplitPaneScene.listPane()) {
                 DriverStandingsScreen(
                     paddingValues = insetPadding,
-                    actionUpClicked = openPanel,
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
                         backStack.replaceDetail(it)
@@ -158,7 +154,15 @@ fun AppGraph(
             entry<NavTeamStandings>(metadata = SplitPaneScene.listPane()) {
                 TeamStandingsScreen(
                     paddingValues = insetPadding,
-                    actionUpClicked = openPanel,
+                    windowSizeClass = windowAdaptiveInfo.windowSizeClass,
+                    navigateTo = {
+                        backStack.replaceDetail(it)
+                    }
+                )
+            }
+            entry<NavPaddock>(metadata = SplitPaneScene.listPane()) {
+                PaddockScreen(
+                    paddingValues = insetPadding,
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
                         backStack.replaceDetail(it)
@@ -281,8 +285,6 @@ fun AppGraph(
 
             entry<NavSettings>(metadata = SplitPaneScene.listPane()) {
                 AllSettingsScreen(
-                    actionUpClicked = { openPanel() },
-                    showMenu = isCompact,
                     navigateToSubScreen = { backStack.add(it) },
                     navigateTo = {
                         backStack.replaceList(it)

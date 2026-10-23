@@ -15,13 +15,11 @@ import tmg.flashback.style.AppTheme
 
 private val sideNavThreshold = 72.dp
 
-enum class NavigationType(
-    val enablePane: Boolean
-) {
-    NavDrawerBottomNav(enablePane = true),
-    NavDrawerSideNav(enablePane = true),
-    NavRail(enablePane = false),
-    NavOrbiter(enablePane = false);
+enum class NavigationType {
+    BottomNav,
+    SideNav,
+    NavRail,
+    NavOrbiter;
 }
 
 @Composable
@@ -37,8 +35,8 @@ fun rememberNavigationLayoutType(showXr: Boolean): NavigationType {
     val hasProminentSideInset = insets.calculateEndPadding(layoutDirection) >= sideNavThreshold
 
     return when {
-        hasProminentSideInset -> NavigationType.NavDrawerSideNav
+        hasProminentSideInset -> NavigationType.SideNav
         windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND) -> NavigationType.NavRail
-        else -> NavigationType.NavDrawerBottomNav
+        else -> NavigationType.BottomNav
     }
 }

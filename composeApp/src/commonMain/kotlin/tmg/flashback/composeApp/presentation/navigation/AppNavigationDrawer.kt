@@ -85,7 +85,6 @@ internal fun AppNavigationDrawer(
 ) {
     val primaryItems = generateNavPrimaryItems(
         currentlySelectedScreen = appNavigationUiState.screen,
-        groupAsResults = true
     )
     val secondaryItems = generateNavSecondaryItems(
         currentlySelectedScreen = appNavigationUiState.screen,

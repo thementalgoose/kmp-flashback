@@ -72,7 +72,6 @@ private const val listAlpha = 0.6f
 @Composable
 fun CalendarScreen(
     paddingValues: PaddingValues,
-    actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
     navigateTo: (Screen) -> Unit,
     viewModel: CalendarScreenViewModel = koinViewModel()
@@ -95,7 +94,6 @@ fun CalendarScreen(
 
     CalendarScreen(
         paddingValues = insets,
-        actionUpClicked = actionUpClicked,
         windowSizeClass = windowSizeClass,
         uiState = uiState.value,
         refresh = viewModel::refresh,
@@ -116,7 +114,6 @@ fun CalendarScreen(
 @Composable
 fun CalendarScreen(
     paddingValues: PaddingValues,
-    actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
     uiState: CalendarScreenState,
     refresh: () -> Unit,
@@ -144,12 +141,7 @@ fun CalendarScreen(
                         content = {
                             ResultsSeasonPicker(subtitle = null)
                         },
-                        action = if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
-                            HeaderAction.MENU
-                        } else {
-                            null
-                        },
-                        actionUpClicked = actionUpClicked,
+                        action = null,
                         overrideIcons = {
                             Refresh(onClick = refresh)
                             Tyres(uiState.season)

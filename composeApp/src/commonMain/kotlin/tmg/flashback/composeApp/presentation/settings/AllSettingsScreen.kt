@@ -37,8 +37,6 @@ import tmg.flashback.ui.components.header.HeaderAction
 
 @Composable
 internal fun AllSettingsScreen(
-    actionUpClicked: () -> Unit,
-    showMenu: Boolean,
     navigateToSubScreen: (Screen) -> Unit,
     navigateTo: (Screen) -> Unit,
     insetPadding: PaddingValues,
@@ -48,10 +46,8 @@ internal fun AllSettingsScreen(
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
     AllSettingsScreen(
-        actionUpClicked = actionUpClicked,
         navigateTo = navigateTo,
         navigateToSubScreen = navigateToSubScreen,
-        showMenu = showMenu,
         uiState = uiState.value,
         paddingValues = insetPadding
     )
@@ -59,8 +55,6 @@ internal fun AllSettingsScreen(
 
 @Composable
 private fun AllSettingsScreen(
-    actionUpClicked: () -> Unit,
-    showMenu: Boolean,
     navigateToSubScreen: (Screen) -> Unit,
     navigateTo: (Screen) -> Unit,
     uiState: AllSettingsUiState,
@@ -73,8 +67,7 @@ private fun AllSettingsScreen(
         item("header") {
             Header(
                 text = stringResource(string.nav_settings),
-                actionUpClicked = actionUpClicked,
-                action = HeaderAction.MENU.takeIf { showMenu }
+                action = null,
             )
         }
         PrefSection(

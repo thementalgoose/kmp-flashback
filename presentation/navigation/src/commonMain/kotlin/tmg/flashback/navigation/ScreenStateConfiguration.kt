@@ -17,6 +17,7 @@ private fun PolymorphicModuleBuilder<Screen>.registerScreens() {
     subclass(NavDriver::class, NavDriver.serializer())
     subclass(NavTeam::class, NavTeam.serializer())
     subclass(NavDriverComparison::class, NavDriverComparison.serializer())
+    subclass(NavPaddock::class, NavPaddock.serializer())
 
     subclass(NavLineup::class, NavLineup.serializer())
 
