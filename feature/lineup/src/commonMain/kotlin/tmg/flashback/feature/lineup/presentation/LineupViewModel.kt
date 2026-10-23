@@ -15,8 +15,12 @@ import kotlin.collections.emptyList
 import kotlin.collections.map
 import kotlin.to
 
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
+
 class LineupViewModel(
-    private val lineupRepository: LineupRepository
+    private val lineupRepository: LineupRepository,
+    private val coroutineContext: CoroutineContext = EmptyCoroutineContext
 ): ViewModel() {
 
     private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false);
@@ -35,7 +39,7 @@ class LineupViewModel(
         }.stateIn(viewModelScope, SharingStarted.Lazily, LineupUiState())
 
     fun refresh() {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineContext) {
             isLoading.value = true
             lineupRepository.populateLineup()
             isLoading.value = false

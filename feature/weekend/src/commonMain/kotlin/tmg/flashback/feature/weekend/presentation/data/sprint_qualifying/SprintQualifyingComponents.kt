@@ -55,10 +55,13 @@ import tmg.flashback.style.text.TextSection
 import tmg.flashback.ui.components.driver.DriverName
 import tmg.flashback.ui.components.edgeBar
 
+import tmg.flashback.feature.weekend.presentation.components.ReportIssueLink
+
 private val lapTimeWidth: Dp = 64.dp
 
 fun LazyListScope.addSprintQualifyingData(
     uiState: Data,
+    reportIssueClicked: () -> Unit,
 ) {
     item("sprint_qualifying_label") {
         TypeHeader(
@@ -91,6 +94,14 @@ fun LazyListScope.addSprintQualifyingData(
                 modifier = Modifier.animateItem(),
                 model = it,
                 driverClicked = { }
+            )
+        }
+    }
+    if (uiState.sprintQualifyingResults.isNotEmpty()) {
+        item("sprint_qualifying_report_issue") {
+            ReportIssueLink(
+                onClick = reportIssueClicked,
+                modifier = Modifier.animateItem()
             )
         }
     }

@@ -10,6 +10,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -30,14 +31,13 @@ import flashback.domain.formula1.generated.resources.ic_straight_mode
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.details_link_laps
 import flashback.presentation.localisation.generated.resources.details_link_map
-import flashback.presentation.localisation.generated.resources.details_link_report_issue
 import flashback.presentation.localisation.generated.resources.details_link_wikipedia
 import flashback.presentation.localisation.generated.resources.details_link_youtube
 import flashback.presentation.localisation.generated.resources.drs_zones
 import flashback.presentation.localisation.generated.resources.straight_mode_zones
+import flashback.presentation.localisation.generated.resources.weekend_info_tyres
 import flashback.presentation.localisation.generated.resources.weekend_race_round
 import flashback.presentation.ui.generated.resources.Res
-import flashback.presentation.ui.generated.resources.ic_details_issue
 import flashback.presentation.ui.generated.resources.ic_details_laps
 import flashback.presentation.ui.generated.resources.ic_details_maps
 import flashback.presentation.ui.generated.resources.ic_details_previous_race
@@ -50,7 +50,9 @@ import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsCircuitId
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.formula1.constants.Formula1
+import tmg.flashback.formula1.enums.SeasonTyres
 import tmg.flashback.formula1.enums.TrackBreakdown
+import tmg.flashback.formula1.enums.getBySeason
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.model.OverviewRace
@@ -71,6 +73,7 @@ import tmg.flashback.ui.components.track.TrackBreakdownInfo
 @Composable
 internal fun RaceDetails(
     model: InfoModel,
+    showTrackBreakdown: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val trackIcon = remember(model) {
@@ -113,29 +116,12 @@ internal fun RaceDetails(
         val sizeModifier = Modifier.size(width = 150.dp, height = 90.dp)
         if (trackBreakdown != null) {
             val trackBreakdownInfo = remember(trackBreakdown) { trackBreakdown.toInfo() }
-            val showDialog = remember { mutableStateOf(false) }
             TrackBreakdown(
                 trackBreakdownInfo = trackBreakdownInfo,
                 modifier = Modifier
-                    .clickable(onClick = { showDialog.value = true })
+                    .clickable(onClick = showTrackBreakdown)
                     .then(sizeModifier)
             )
-            if (showDialog.value) {
-                ScreenView(screenName = "Track Breakdown", args = mapOf(
-                    analyticsCircuitId to model.circuit.id,
-                    analyticsSeason to model.season.toString()
-                ))
-                TrackBreakdownBottomSheet(
-                    showBottomSheet = showDialog,
-                    showDrs = model.season in Formula1.drs,
-                    showOvertake = model.season in Formula1.straightModeZones,
-                    laps = model.laps,
-                    circuitName = model.circuit.name,
-                    countryName = model.circuit.country,
-                    countryISO = model.circuit.countryISO,
-                    trackBreakdownInfo = trackBreakdownInfo
-                )
-            }
         }
         else if (trackIcon != null) {
             Icon(
@@ -152,19 +138,20 @@ internal fun RaceDetails(
 internal fun RaceLinks(
     model: InfoModel,
     backgroundColor: Color,
+    zonesClicked: () -> Unit,
+    tyresClicked: () -> Unit,
     previousRace: OverviewRace?,
     previousRaceClicked: (OverviewRace) -> Unit,
     youtubeClicked: (String) -> Unit,
     wikipediaClicked: (String) -> Unit,
     mapsClicked: (Location, String) -> Unit,
-    reportIssueClicked: (Int, Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Row(
+    FlowRow(
         modifier
             .edgeFade(backgroundColor = backgroundColor)
-            .horizontalScroll(rememberScrollState())
             .padding(horizontal = AppTheme.dimens.medium),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
     ) {
         if (model.laps != null) {
@@ -185,7 +172,9 @@ internal fun RaceLinks(
 
             if (drsZones > 0 && model.season in Formula1.drs) {
                 BadgeView(
-                    modifier = Modifier,
+                    modifier = Modifier.clickable {
+                        zonesClicked()
+                    },
                     icon = flashback.domain.formula1.generated.resources.Res.drawable.ic_drs,
                     label = stringResource(string.drs_zones, drsZones.toString()),
                 )
@@ -210,12 +199,24 @@ internal fun RaceLinks(
                 )
 
                 BadgeView(
-                    modifier = Modifier,
+                    modifier = Modifier.clickable {
+                        zonesClicked()
+                    },
                     iconModifier = Modifier.rotate(rotationAngle),
                     icon = flashback.domain.formula1.generated.resources.Res.drawable.ic_straight_mode,
                     label = stringResource(string.straight_mode_zones, straightModeZones.toString()),
                 )
             }
+        }
+        if (model.tyres != null) {
+            BadgeView(
+                modifier = Modifier.clickable {
+                    tyresClicked()
+                },
+                icons = model.tyres.tyres.map { it.tyre.icon },
+                label = stringResource(string.weekend_info_tyres),
+                tintIcon = null
+            )
         }
         if (previousRace != null) {
             BadgeView(
@@ -253,17 +254,10 @@ internal fun RaceLinks(
                 icon = Res.drawable.ic_details_wikipedia
             )
         }
-        BadgeView(
-            modifier = Modifier.clickable {
-                reportIssueClicked(model.season, model.round)
-            },
-            label = stringResource(string.details_link_report_issue),
-            icon = Res.drawable.ic_details_issue
-        )
     }
 }
 
-private fun TrackBreakdown.toInfo() = TrackBreakdownInfo(
+internal fun TrackBreakdown.toInfo() = TrackBreakdownInfo(
     pathWidth = this.pathWidth,
     pathHeight = this.pathHeight,
     pathTrackWidth = this.trackWidth,
@@ -284,7 +278,8 @@ private fun PreviewDetailsTrackIcon() {
             RaceDetails(
                 model = InfoModel.preview(
                     circuit = Circuit.preview(id = "sebring")
-                )
+                ),
+                showTrackBreakdown = { }
             )
         }
     }
@@ -299,7 +294,30 @@ private fun PreviewDetailsTrackBreakdown() {
             RaceDetails(
                 model = InfoModel.preview(
                     circuit = Circuit.preview(id = "albert_park")
-                )
+                ),
+                showTrackBreakdown = { }
+            )
+        }
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewLinks() {
+    ApplicationThemePreview {
+        Column {
+            RaceLinks(
+                model = InfoModel.preview(
+                    circuit = Circuit.preview(id = "albert_park")
+                ),
+                backgroundColor = AppTheme.colors.surface,
+                tyresClicked = { },
+                zonesClicked = { },
+                previousRace = null,
+                previousRaceClicked = { },
+                youtubeClicked = { },
+                wikipediaClicked = { },
+                mapsClicked = { location, label -> }
             )
         }
     }

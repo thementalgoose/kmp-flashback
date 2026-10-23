@@ -63,7 +63,7 @@ internal class RssFeedViewModelTest {
             val initial = awaitItem() as RssFeedUiState.Data
             assertEquals(null, initial.lastUpdated)
             assertEquals(false, initial.isLoading)
-            assertEquals(emptyList(), initial.rssItems)
+            assertEquals(emptyList<Article>(), initial.rssItems)
             assertEquals(false, initial.hasSources)
         }
     }

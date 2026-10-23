@@ -28,7 +28,7 @@ internal class NavRepositoryTest {
     fun `getting nav links returns empty list when config returns null`() {
         every { mockConfigManager.getJson(expectedKeyNav, NavLinksJson.serializer()) } returns null
         initUnderTest()
-        assertEquals(emptyList(), underTest.navLinks)
+        assertEquals(emptyList<NavLink>(), underTest.navLinks)
     }
 
     @Test

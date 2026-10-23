@@ -26,6 +26,17 @@ internal class DriverStatsViewModelTest {
 
     private lateinit var underTest: DriverStatsViewModel
 
+    private val expectedSeasonRaces: List<DriverSeasonFeed> = listOf(
+        DriverSeasonFeed.TeamHeader(
+            team = Constructor.model(),
+            firstRound = 1
+        ),
+        DriverSeasonFeed.Weekend(
+            race = DriverHistorySeasonRace.model(),
+            sprint = null
+        )
+    )
+
     private fun initUnderTest() {
         every { mockDriverRepository.getDriverOverview("driverId") } returns flow {
             emit(DriverHistory.model())
@@ -99,7 +110,7 @@ internal class DriverStatsViewModelTest {
             assertEquals(12, state.stats.size)
             assertEquals(listOf(Constructor.model()), state.constructors)
             assertEquals(listOf(2020), state.availableSeasons)
-            assertEquals(listOf(DriverHistorySeasonRace.model()), (state.data as DriverStatsData.Season).races)
+            assertEquals(expectedSeasonRaces, (state.data as DriverStatsData.Season).races)
         }
     }
 
@@ -117,7 +128,7 @@ internal class DriverStatsViewModelTest {
 
             val state = awaitItem()
             assertEquals(Driver.model(), state.driver)
-            assertEquals(listOf(DriverHistorySeasonRace.model()), (state.data as DriverStatsData.Season).races)
+            assertEquals(expectedSeasonRaces, (state.data as DriverStatsData.Season).races)
 
             underTest.refresh()
 

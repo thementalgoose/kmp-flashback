@@ -17,7 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -45,18 +45,8 @@ class SplitPaneScene<T : Any>(
 ) : Scene<T> {
     override val entries: List<NavEntry<T>> = listOfNotNull(listEntry, detailEntry)
     override val content: @Composable (() -> Unit) = {
-        val safeDrawingInsets = WindowInsets.safeDrawing.asPaddingValues()
-        val paddingInsets = PaddingValues(
-            start = 0.dp,
-            end = 0.dp,
-            top = safeDrawingInsets.calculateTopPadding(),
-            bottom = safeDrawingInsets.calculateBottomPadding()
-        )
         BoxWithConstraints(modifier = Modifier
             .fillMaxSize()
-            .padding(paddingInsets)
-            .padding(end = AppTheme.dimens.small)
-            .consumeWindowInsets(WindowInsets.safeDrawing),
         ) {
             val listWidth = animateDpAsState(
                 targetValue = when {
@@ -108,7 +98,7 @@ class SplitPaneScene<T : Any>(
 
 @Composable
 fun <T : Any> rememberSplitPaneSceneStrategy(): ListDetailSceneStrategy<T> {
-    val windowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
+    val windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass
 
     return remember(windowSizeClass) {
         ListDetailSceneStrategy(windowSizeClass)

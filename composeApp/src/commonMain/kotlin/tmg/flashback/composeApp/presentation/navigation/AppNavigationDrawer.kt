@@ -21,6 +21,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationItemIconPosition
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,17 +36,24 @@ import tmg.flashback.navigation.Screen
 import flashback.composeapp.generated.resources.ic_settings_web
 import flashback.presentation.localisation.generated.resources.Res
 import flashback.presentation.localisation.generated.resources.app_version_placeholder
+import flashback.presentation.localisation.generated.resources.nav_style_guide
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.composeApp.presentation.MenuItem
+import tmg.flashback.composeApp.presentation.generateNavPrimaryItems
+import tmg.flashback.composeApp.presentation.generateNavSecondaryItems
+import tmg.flashback.composeApp.presentation.generateNavTertiaryItems
 import tmg.flashback.composeApp.presentation.icon
 import tmg.flashback.composeApp.presentation.label
 import tmg.flashback.composeApp.presentation.navigation.hero.DashboardHero
 import tmg.flashback.composeApp.presentation.selectedIcon
+import tmg.flashback.composeApp.presentation.toNavigationItem
+import tmg.flashback.composeApp.presentation.toScreen
 import tmg.flashback.composeApp.repositories.model.NavLink
 import tmg.flashback.eastereggs.model.MenuIcons
 import tmg.flashback.infrastructure.device.Device
+import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.navigation.NavAbout
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavCircuits
@@ -55,11 +63,13 @@ import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
 import tmg.flashback.navigation.NavSettings
+import tmg.flashback.navigation.NavStyleGuide
 import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
+import tmg.flashback.ui.navigation.NavigationItem
 import tmg.flashback.xr.LocalXR
 import tmg.flashback.xr.XR
 
@@ -71,9 +81,21 @@ internal fun AppNavigationDrawer(
     openUrl: (String) -> Unit,
     modifier: Modifier = Modifier,
     insetPadding: PaddingValues = WindowInsets.safeContent.asPaddingValues(),
-    showXr: Boolean = false,
     xr: XR? = LocalXR.current,
 ) {
+    val primaryItems = generateNavPrimaryItems(
+        currentlySelectedScreen = appNavigationUiState.screen,
+        groupAsResults = true
+    )
+    val secondaryItems = generateNavSecondaryItems(
+        currentlySelectedScreen = appNavigationUiState.screen,
+        showRss = appNavigationUiState.showRss
+    )
+    val tertiaryItems = generateNavTertiaryItems(
+        currentlySelectedScreen = appNavigationUiState.screen,
+        showXr = xr?.isXrDevice == true,
+        isXrSelected = false
+    )
     Box(modifier) {
         LazyColumn(
             contentPadding = insetPadding,
@@ -94,34 +116,14 @@ internal fun AppNavigationDrawer(
                 item("header_div") {
                     MenuDivider()
                 }
-                item("nav_results") {
-                    NavigationItem(
-                        menuItem = MenuItem.Results,
-                        isSelected = appNavigationUiState.screen == NavCalendar ||
-                                appNavigationUiState.screen == NavDriverStandings ||
-                                appNavigationUiState.screen == NavTeamStandings,
+                items(primaryItems, { it.id }) {
+                    NavItem(
+                        menuItem = it,
+                        isSelected = it.isSelected == true,
                         onClick = {
-                            navigationItemClicked(NavCalendar)
-                            closeMenu()
-                        }
-                    )
-                }
-                item("nav_circuits") {
-                    NavigationItem(
-                        menuItem = MenuItem.Circuits,
-                        isSelected = appNavigationUiState.screen == NavCircuits,
-                        onClick = {
-                            navigationItemClicked(NavCircuits)
-                            closeMenu()
-                        }
-                    )
-                }
-                item("nav_lineup") {
-                    NavigationItem(
-                        menuItem = MenuItem.Lineup,
-                        isSelected = appNavigationUiState.screen == NavLineup,
-                        onClick = {
-                            navigationItemClicked(NavLineup)
+                            val item = it.id.toEnum<MenuItem> { it.key }
+                            val screen = item?.toScreen() ?: return@NavItem
+                            navigationItemClicked(screen)
                             closeMenu()
                         }
                     )
@@ -129,70 +131,36 @@ internal fun AppNavigationDrawer(
                 item("mid_div") {
                     MenuDivider()
                 }
-                if (appNavigationUiState.showRss) {
-                    item("nav_rss") {
-                        NavigationItem(
-                            menuItem = MenuItem.Rss,
-                            isSelected = appNavigationUiState.screen == NavRss,
-                            onClick = {
-                                navigationItemClicked(NavRss)
-                                closeMenu()
-                            }
-                        )
-                    }
-                }
-                item("nav_reaction_game") {
-                    NavigationItem(
-                        menuItem = MenuItem.ReactionGame,
-                        isSelected = appNavigationUiState.screen == NavReactionGame,
+                items(secondaryItems, { it.id }) {
+                    NavItem(
+                        menuItem = it,
+                        isSelected = it.isSelected == true,
                         onClick = {
-                            navigationItemClicked(NavReactionGame)
+                            val item = it.id.toEnum<MenuItem> { it.key }
+                            val screen = item?.toScreen() ?: return@NavItem
+                            navigationItemClicked(screen)
                             closeMenu()
                         }
                     )
                 }
-//                if (Device.isDebug) {
-//                    item("nav_glossary") {
-//                        NavigationItem(
-//                            menuItem = MenuItem.Glossary,
-//                            isSelected = appNavigationUiState.screen == NavGlossary,
-//                            onClick = {
-//                                navigationItemClicked(NavGlossary)
-//                                closeMenu()
-//                            }
-//                        )
-//                    }
-//                }
-                item("nav_settings") {
-                    NavigationItem(
-                        menuItem = MenuItem.Settings,
-                        isSelected = appNavigationUiState.screen == NavSettings,
-                        onClick = {
-                            navigationItemClicked(NavSettings)
-                            closeMenu()
-                        }
-                    )
-                }
-                item("nav_contact") {
-                    NavigationItem(
-                        menuItem = MenuItem.Contact,
-                        isSelected = appNavigationUiState.screen == NavAbout,
-                        onClick = {
-                            navigationItemClicked(NavAbout)
-                            closeMenu()
-                        }
-                    )
-                }
-                if (showXr) {
+                if (tertiaryItems.isNotEmpty()) {
                     item("xr_div") {
                         MenuDivider()
                     }
-                    item("nav_xr") {
-                        NavigationItem(
-                            menuItem = MenuItem.XR_Spacial,
-                            isSelected = false,
+                    items(tertiaryItems, { it.id }) {
+                        NavItem(
+                            menuItem = it,
+                            isSelected = it.isSelected == true,
                             onClick = {
-                                xr?.requestImmersiveMode()
+                                val item = it.id.toEnum<MenuItem> { it.key }
+                                when (item) {
+                                    MenuItem.XR_Spacial -> xr?.requestImmersiveMode()
+                                    else -> {
+                                        val screen = item?.toScreen() ?: return@NavItem
+                                        navigationItemClicked(screen)
+                                        closeMenu()
+                                    }
+                                }
                             }
                         )
                     }
@@ -201,18 +169,18 @@ internal fun AppNavigationDrawer(
                     item("extra_div") {
                         MenuDivider()
                     }
-                }
-                items(appNavigationUiState.extraLinks, key = { it.id }) {
-                    when (it) {
-                        is NavLink.Url -> {
-                            NavigationItem(
-                                label = it.name,
-                                icon = flashback.composeapp.generated.resources.Res.drawable.ic_settings_web,
-                                isSelected = false,
-                                onClick = {
-                                    openUrl(it.url)
-                                }
-                            )
+                    items(appNavigationUiState.extraLinks, key = { it.id }) {
+                        when (it) {
+                            is NavLink.Url -> {
+                                NavItem(
+                                    label = it.name,
+                                    icon = flashback.composeapp.generated.resources.Res.drawable.ic_settings_web,
+                                    isSelected = false,
+                                    onClick = {
+                                        openUrl(it.url)
+                                    }
+                                )
+                            }
                         }
                     }
                 }
@@ -236,24 +204,26 @@ internal fun AppNavigationDrawer(
 
 
 @Composable
-private fun NavigationItem(
-    menuItem: MenuItem,
+private fun NavItem(
+    menuItem: NavigationItem,
     isSelected: Boolean,
-    onClick: () -> Unit,
+    onClick: (NavigationItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    NavigationItem(
+    NavItem(
         icon = menuItem.icon,
         selectedIcon = menuItem.selectedIcon,
         label = stringResource(menuItem.label),
         isSelected = isSelected,
-        onClick = onClick,
+        onClick = {
+            onClick(menuItem)
+        },
         modifier = modifier,
     )
 }
 
 @Composable
-private fun NavigationItem(
+private fun NavItem(
     icon: DrawableResource,
     label: String,
     isSelected: Boolean,
@@ -331,7 +301,7 @@ private fun NavigationItem(
 @Composable
 private fun Footer(
     modifier: Modifier = Modifier,
-    version: String = "${Device.versionName}.${Device.versionCode}",
+    version: String = "${Device.versionName} (${Device.versionCode})",
 ) {
     Row(
         modifier = modifier,

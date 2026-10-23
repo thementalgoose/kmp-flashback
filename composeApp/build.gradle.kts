@@ -36,7 +36,7 @@ kotlin {
         summary = "Flashback"
         version = "1.0"
         homepage = "https://flashback.pages.dev"
-        ios.deploymentTarget = "26.0"
+        ios.deploymentTarget = "27.1"
 
         framework {
             baseName = "ComposeApp"

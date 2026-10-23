@@ -1,0 +1,98 @@
+name: Release Store
+env:
+  ANDROID_RUN_OFFSET: 4
+
+'on':
+  release:
+    types: [published]
+
+jobs:
+  unit-tests:
+    uses: ./.github/workflows/job-unit-tests.yml
+    secrets: inherit
+
+  ui-tests:
+    uses: ./.github/workflows/job-android-uitest.yml
+    secrets: inherit
+
+  versions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      version_name: ${{ steps.get_version_name.outputs.version_name }}
+      version_code_app: ${{ steps.get_version_name.outputs.version_code_app }}
+    steps:
+      - name: Version Name
+        id: get_version_name
+        run: |
+          VERSION_NAME=$(echo $GITHUB_REF | cut -d / -f 3)
+          BASE_CODE=$((${{ github.run_number }} + $ANDROID_RUN_OFFSET))
+          echo "version_name=$VERSION_NAME" >> $GITHUB_OUTPUT
+          echo "version_code_app=${BASE_CODE}00" >> $GITHUB_OUTPUT
+
+  android-assemble-deploy:
+    needs: [unit-tests, versions, ui-tests]
+    uses: ./.github/workflows/job-android-deploy.yml
+    secrets: inherit
+    with:
+      version_name: ${{ needs.versions.outputs.version_name }}
+      version_code: ${{ needs.versions.outputs.version_code_app }}
+
+  # This is in working in theory but the kotlin compilation step takes fucking ages
+  #  so disabled to save build minutes
+#  ios-assemble-deploy:
+#    needs: [unit-tests, versions]
+#    uses: ./.github/workflows/job-ios-deploy.yml
+#    secrets: inherit
+#    with:
+#      version_name: ${{ needs.versions.outputs.version_name }}
+#      version_code: "1"
+
+  discord_notify_success:
+    runs-on: ubuntu-latest
+    needs:
+      - versions
+      - android-assemble-deploy
+#      - ios-assemble-deploy
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Notify discord of success
+        uses: sarisia/actions-status-discord@v1.16.0
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        with:
+          nodetail: true
+          title: "Release ${{ needs.versions.outputs.version_name }} (App: ${{ needs.versions.outputs.version_code_app }}) deployed"
+          description: |
+            Github Action [#${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            [Google Play](https://play.google.com/store/apps/details?id=tmg.flashback)
+          color: 0x3dc91a
+
+  discord_notify_failed:
+    runs-on: ubuntu-latest
+    needs:
+      - versions
+      - android-assemble-deploy
+#      - ios-assemble-deploy
+    if: always() && (needs.android-assemble-deploy.result == 'failure') # || needs.ios-assemble-deploy.result == 'failure')
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Notify discord of failure
+        uses: sarisia/actions-status-discord@v1.16.0
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        with:
+          nodetail: true
+          title: "Release ${{ needs.versions.outputs.version_name }} deployment FAILED"
+          description: |
+            Deployment status:
+            - Android: ${{ needs.android-assemble-deploy.result }}
+            Github Action [#${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            [Google Play](https://play.google.com/store/apps/details?id=tmg.flashback)
+          color: 0xdf0000

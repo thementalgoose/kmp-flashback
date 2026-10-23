@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,10 +33,10 @@ import flashback.domain.formula1.generated.resources.ic_status_finished
 import flashback.domain.formula1.generated.resources.ic_status_results_qualifying
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.nav_sprint
+import flashback.presentation.localisation.generated.resources.race_status_retired
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
+import tmg.flashback.feature.drivers.presentation.stats.DriverSeasonFeed
 import tmg.flashback.formula1.enums.RaceStatus
 import tmg.flashback.formula1.enums.isStatusFinished
 import tmg.flashback.formula1.model.Constructor
@@ -53,9 +55,9 @@ import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.edgeBar
 import tmg.flashback.ui.components.flag.Flag
 
-private val resultColumnFlexBorder: Dp = 300.dp
 private val resultColumnWidth: Dp = 50.dp
-private val headerImageSize: Dp = 120.dp
+
+private val dnfAlpha = 0.2f
 
 @Composable
 internal fun ResultHeader(
@@ -104,62 +106,132 @@ internal fun ResultHeader(
 }
 
 @Composable
-internal fun ResultRace(
-    multipleConstructors: Boolean,
-    model: DriverHistorySeasonRace,
-    clickResult: (DriverHistorySeasonRace) -> Unit,
+internal fun TeamHeader(
+    entry: DriverSeasonFeed.TeamHeader,
     modifier: Modifier = Modifier
 ) {
-    val backgroundColor = when {
-        model.isSprint -> AppTheme.colors.surfaceContainer3
-        model.finished == 1 -> AppTheme.colors.f1Podium1Highlight
-        model.finished == 2 -> AppTheme.colors.f1Podium2Highlight
-        model.finished == 3 -> AppTheme.colors.f1Podium3Highlight
-        else -> AppTheme.colors.surfaceContainer3
-    }
-    Row(
-        modifier = modifier
-            .alpha(
-                when (model.status.isStatusFinished()) {
-                    true -> 1.0f
-                    false -> 0.5f
-                }
-            )
-            .padding(
+    Box(modifier = modifier
+        .fillMaxWidth()
+        .edgeBar(entry.team.colour)
+    ) {
+        TextBody1(
+            text = entry.team.name,
+            modifier = Modifier.padding(
                 horizontal = AppTheme.dimens.small,
+                vertical = AppTheme.dimens.small
+            ),
+            bold = true
+        )
+    }
+}
+
+@Composable
+internal fun ResultRace(
+    entry: DriverSeasonFeed.Weekend,
+    clickResult: (RaceInfo) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .edgeBar(entry.team.colour)
+            .padding(
                 vertical = AppTheme.dimens.xsmall
             )
-            .clickable(onClick = { clickResult(model) })
-            .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
-            .background(backgroundColor)
-            .padding(AppTheme.dimens.small)
     ) {
-        Column(
-            Modifier.weight(1f)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    horizontal = AppTheme.dimens.small
+                )
+                .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
+                .background(AppTheme.colors.surfaceContainer3)
+                .clickable(onClick = { clickResult(entry.raceInfo) })
+                .padding(
+                    vertical = AppTheme.dimens.small
+                )
         ) {
-            if (model.isSprint) {
-                SprintInfo(
-                    raceName = model.raceInfo.name,
-                    raceCountryISO = model.raceInfo.circuit.countryISO,
-                    constructorColor = model.constructor.colour,
-                    circuitName = model.raceInfo.circuit.name,
-                    country = model.raceInfo.circuit.country,
-                    constructor = model.constructor,
-                    round = model.raceInfo.round,
-                    showConstructorLabel = multipleConstructors
-                )
-            } else {
-                RaceInfo(
-                    raceName = model.raceInfo.name,
-                    raceCountryISO = model.raceInfo.circuit.countryISO,
-                    constructorColor = model.constructor.colour,
-                    circuitName = model.raceInfo.circuit.name,
-                    constructor = model.constructor,
-                    round = model.raceInfo.round,
-                    showConstructorLabel = multipleConstructors
-                )
+            RaceInfo(
+                modifier = Modifier.weight(1f),
+                raceName = entry.raceInfo.name,
+                raceCountryISO = entry.raceInfo.circuit.countryISO,
+                circuitName = entry.raceInfo.circuit.name,
+                round = entry.raceInfo.round
+            )
+            if (entry.race != null) {
+                Column(
+                    Modifier.padding(end = AppTheme.dimens.small)
+                ) {
+                    AlignedResults(
+                        modifier = Modifier.alpha(
+                            if (entry.race.status.isStatusFinished()) 1f else dnfAlpha
+                        ),
+                        qualified = entry.race.qualified,
+                        finished = entry.race.finished,
+                        points = entry.race.points,
+                        status = entry.race.status,
+                        highlight = true,
+                    )
+                }
             }
         }
+        if (entry.sprint != null) {
+            Sprint(
+                sprint = entry.sprint,
+                modifier = Modifier
+                    .padding(end = AppTheme.dimens.medium)
+                    .align(Alignment.End)
+            )
+        }
+    }
+}
+
+@Composable
+private fun Sprint(
+    sprint: DriverHistorySeasonRace,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier
+            .clip(RoundedCornerShape(
+                bottomStart = AppTheme.dimens.radiusSmall,
+                bottomEnd = AppTheme.dimens.radiusSmall
+            ))
+            .background(AppTheme.colors.surfaceContainer2),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.medium)
+    ) {
+        TextBody2(
+            text = stringResource(string.nav_sprint),
+            bold = true,
+            modifier = Modifier.padding(
+                horizontal = AppTheme.dimens.medium
+            )
+        )
+        AlignedResults(
+            modifier = Modifier.alpha(
+                if (sprint.status.isStatusFinished()) 1f else dnfAlpha
+            ),
+            qualified = sprint.qualified,
+            finished = sprint.finished,
+            points = sprint.points,
+            status = sprint.status,
+            highlight = false,
+        )
+    }
+}
+
+@Composable
+private fun AlignedResults(
+    qualified: Int?,
+    finished: Int,
+    points: Double,
+    status: RaceStatus,
+    highlight: Boolean = true,
+    modifier: Modifier = Modifier
+) {
+    Row(modifier = modifier) {
         Box(
             Modifier
                 .width(resultColumnWidth)
@@ -171,13 +243,22 @@ internal fun ResultRace(
                     .fillMaxWidth()
                     .padding(top = AppTheme.dimens.xsmall)
             ) {
-                TextBody2(
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth(),
-                    bold = false,
-                    text = model.qualified?.ordinalAbbreviation ?: "-"
-                )
-                if (!model.status.isStatusFinished()) {
+                if (highlight) {
+                    TextBody1(
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth(),
+                        bold = false,
+                        text = qualified?.ordinalAbbreviation ?: "-"
+                    )
+                } else {
+                    TextBody2(
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth(),
+                        bold = false,
+                        text = qualified?.ordinalAbbreviation ?: "-"
+                    )
+                }
+                if (!status.isStatusFinished()) {
                     TextCaption(
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
@@ -197,30 +278,41 @@ internal fun ResultRace(
                     .fillMaxWidth()
                     .padding(top = AppTheme.dimens.xsmall)
             ) {
-                if (model.isSprint) {
-                    TextBody2(
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth(),
-                        bold = true,
-                        text = model.finished.ordinalAbbreviation
-                    )
-                } else {
+                val label = when (status.isStatusFinished()) {
+                    true -> finished.ordinalAbbreviation
+                    false -> stringResource(string.race_status_retired)
+                }
+                if (highlight) {
                     TextBody1(
-                        textColor = when (model.finished) {
+                        textColor = when (finished) {
                             1 -> AppTheme.colors.f1Podium1
+                            2 -> AppTheme.colors.f1Podium2
+                            3 -> AppTheme.colors.f1Podium3
                             else -> null
                         },
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
                         bold = true,
-                        text = model.finished.ordinalAbbreviation
+                        text = label
+                    )
+                } else {
+                    TextBody2(
+                        textColor = when (finished) {
+                            1 -> AppTheme.colors.f1Podium1
+                            2 -> AppTheme.colors.f1Podium2
+                            3 -> AppTheme.colors.f1Podium3
+                            else -> null
+                        },
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth(),
+                        text = label
                     )
                 }
-                if (!model.status.isStatusFinished()) {
+                if (!status.isStatusFinished()) {
                     TextCaption(
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
-                        text = model.status.label
+                        text = status.label
                     )
                 }
             }
@@ -230,12 +322,21 @@ internal fun ResultRace(
                 .width(resultColumnWidth)
                 .padding(vertical = AppTheme.dimens.small)
         ) {
-            TextBody1(
-                text = model.points.roundToHalf(),
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-            )
+            if (highlight) {
+                TextBody1(
+                    text = points.roundToHalf(),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                )
+            } else {
+                TextBody2(
+                    text = points.roundToHalf(),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                )
+            }
         }
     }
 }
@@ -245,23 +346,12 @@ private fun RaceInfo(
     raceName: String,
     raceCountryISO: String,
     circuitName: String,
-    constructorColor: Color,
-    constructor: Constructor,
-    showConstructorLabel: Boolean,
     round: Int?,
     modifier: Modifier = Modifier,
 ) {
-
     Row(
         modifier = modifier
-            .height(IntrinsicSize.Min)
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxHeight()
-                .width(6.dp)
-                .background(constructorColor)
-        )
         if (round != null) {
             TextTitle(
                 modifier = Modifier
@@ -301,62 +391,9 @@ private fun RaceInfo(
                 Spacer(Modifier.width(AppTheme.dimens.small))
                 TextBody2(text = circuitName)
             }
-
-            if (showConstructorLabel) {
-                Spacer(Modifier.height(AppTheme.dimens.xsmall))
-                ConstructorBadge(constructor)
-            }
         }
     }
 }
-
-@Composable
-private fun SprintInfo(
-    raceName: String,
-    raceCountryISO: String,
-    circuitName: String,
-    country: String,
-    constructorColor: Color,
-    constructor: Constructor,
-    showConstructorLabel: Boolean,
-    round: Int?,
-    modifier: Modifier = Modifier,
-) {
-
-    Row(
-        modifier = modifier
-            .edgeBar(constructorColor)
-    ) {
-        if (round != null) {
-            TextTitle(
-                modifier = Modifier
-                    .width(36.dp)
-                    .padding(horizontal = AppTheme.dimens.xsmall)
-                    .align(Alignment.CenterVertically),
-                bold = true,
-                textAlign = TextAlign.Center,
-                text = ""
-            )
-        } else {
-            Spacer(Modifier.width(AppTheme.dimens.medium - 6.dp))
-        }
-        Column(
-            modifier = Modifier
-                .weight(1f)
-        ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                TextTitle(text = stringResource(string.nav_sprint))
-            }
-            if (showConstructorLabel) {
-                Spacer(Modifier.height(AppTheme.dimens.xsmall))
-                ConstructorBadge(constructor)
-            }
-        }
-    }
-}
-
 
 @PreviewTheme
 @Composable
@@ -364,26 +401,41 @@ private fun Preview() {
     ApplicationThemePreview {
         Column {
             ResultHeader()
+            TeamHeader(
+                entry = fakeTeamHeader()
+            )
             ResultRace(
-                multipleConstructors = true,
-                model = fakeModel,
+                entry = fakeWeekendWithSprint(round = 1, finished = 1),
                 clickResult = { }
             )
             ResultRace(
-                multipleConstructors = true,
-                model = fakeModel.copy(isSprint = true),
+                entry = fakeWeekendWithSprint(round = 2, finished = 2, status = RaceStatus.WATER_PRESSURE),
                 clickResult = { }
             )
             ResultRace(
-                multipleConstructors = false,
-                model = fakeModel,
+                entry = fakeWeekendRace(round = 3, finished = 3),
+                clickResult = { }
+            )
+            ResultRace(
+                entry = fakeWeekendSprint(round = 4, finished = 4),
+                clickResult = { }
+            )
+            ResultRace(
+                entry = fakeWeekendSprint(round = 4, finished = 5),
                 clickResult = { }
             )
         }
     }
 }
 
-private val fakeModel = DriverHistorySeasonRace(
+private fun fakeTeamHeader(
+    round: Int = 1,
+    constructor: Constructor = Constructor.preview()
+) = DriverSeasonFeed.TeamHeader(
+    team = constructor,
+    firstRound = round
+)
+private val fakeRace = DriverHistorySeasonRace(
     isSprint = false,
     status = RaceStatus.FINISHED,
     finished = 1,
@@ -392,4 +444,47 @@ private val fakeModel = DriverHistorySeasonRace(
     gridPos = 3,
     constructor = Constructor.preview(),
     raceInfo = RaceInfo.preview()
+)
+private fun fakeWeekendWithSprint(
+    status: RaceStatus = RaceStatus.FINISHED,
+    finished: Int = 1,
+    round: Int = 1,
+) = DriverSeasonFeed.Weekend(
+    race = fakeRace.copy(
+        isSprint = false,
+        status = status,
+        finished = finished,
+        raceInfo = RaceInfo.preview(round = round)
+    ),
+    sprint = fakeRace.copy(
+        isSprint = false,
+        finished = finished,
+        raceInfo = RaceInfo.preview(round = round)
+    )
+)
+private fun fakeWeekendRace(
+    status: RaceStatus = RaceStatus.FINISHED,
+    finished: Int = 1,
+    round: Int = 1,
+) = DriverSeasonFeed.Weekend(
+    race = fakeRace.copy(
+        isSprint = false,
+        status = status,
+        finished = finished,
+        raceInfo = RaceInfo.preview(round = round)
+    ),
+    sprint = null
+)
+private fun fakeWeekendSprint(
+    status: RaceStatus = RaceStatus.FINISHED,
+    finished: Int = 1,
+    round: Int = 1,
+) = DriverSeasonFeed.Weekend(
+    race = null,
+    sprint = fakeRace.copy(
+        isSprint = false,
+        status = status,
+        finished = finished,
+        raceInfo = RaceInfo.preview(round = round)
+    )
 )

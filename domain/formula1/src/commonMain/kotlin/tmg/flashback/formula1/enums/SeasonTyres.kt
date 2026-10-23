@@ -20,99 +20,78 @@ import tmg.flashback.formula1.enums.Tyre.YELLOW_DRY_13
 import tmg.flashback.formula1.enums.Tyre.YELLOW_DRY_18
 
 fun SeasonTyres.Companion.getBySeason(season: Int): SeasonTyres? {
-    return SeasonTyres.entries.firstOrNull { model -> model.season == season }
+    val result = TyreInfo.entries.firstOrNull { it.includesYear(season) } ?: return null
+    return SeasonTyres(
+        season = season,
+        tyres = result.tyres
+    )
 }
 
 fun SeasonTyres.Companion.hasEntryForSeason(season: Int): Boolean {
-    return SeasonTyres.entries.any { it.season == season }
+    return TyreInfo.entries.any { it.includesYear(season) }
 }
 
-enum class SeasonTyres(
+data class SeasonTyres(
     val season: Int,
     val tyres: List<TyreLabel>
 ) {
-    S2026(
-        season = 2026,
+    companion object
+}
+
+private enum class TyreInfo(
+    val from: Int,
+    val to: Int? = null,
+    val tyres: List<TyreLabel>
+) {
+    S2011(
+        singleYear = 2011,
         tyres = listOf(
-            TyreLabel(tyre = RED_DRY_18, label = string.tyre_soft),
-            TyreLabel(tyre = YELLOW_DRY_18, label = string.tyre_medium),
-            TyreLabel(tyre = WHITE_DRY_18, label = string.tyre_hard),
-            TyreLabel(tyre = GREEN_WET_18, label = string.tyre_intermediate),
-            TyreLabel(tyre = BLUE_WET_18, label = string.tyre_wet)
+            TyreLabel(tyre = RED_DRY_13, label = string.tyre_super_soft),
+            TyreLabel(tyre = YELLOW_DRY_13, label = string.tyre_soft),
+            TyreLabel(tyre = WHITE_DRY_13, label = string.tyre_medium),
+            TyreLabel(tyre = GRAY_DRY_13, label = string.tyre_hard),
+            TyreLabel(tyre = BLUE_WET_13, label = string.tyre_intermediate),
+            TyreLabel(tyre = ORANGE_WET_13, label = string.tyre_wet)
         )
     ),
-    S2025(
-        season = 2025,
+    S2012(
+        singleYear = 2012,
         tyres = listOf(
-            TyreLabel(tyre = RED_DRY_18, label = string.tyre_soft),
-            TyreLabel(tyre = YELLOW_DRY_18, label = string.tyre_medium),
-            TyreLabel(tyre = WHITE_DRY_18, label = string.tyre_hard),
-            TyreLabel(tyre = GREEN_WET_18, label = string.tyre_intermediate),
-            TyreLabel(tyre = BLUE_WET_18, label = string.tyre_wet)
-        )
-    ),
-    S2024(
-        season = 2024,
-        tyres = listOf(
-            TyreLabel(tyre = RED_DRY_18, label = string.tyre_soft),
-            TyreLabel(tyre = YELLOW_DRY_18, label = string.tyre_medium),
-            TyreLabel(tyre = WHITE_DRY_18, label = string.tyre_hard),
-            TyreLabel(tyre = GREEN_WET_18, label = string.tyre_intermediate),
-            TyreLabel(tyre = BLUE_WET_18, label = string.tyre_wet)
-        )
-    ),
-    S2023(
-        season = 2023,
-        tyres = listOf(
-            TyreLabel(tyre = RED_DRY_18, label = string.tyre_soft),
-            TyreLabel(tyre = YELLOW_DRY_18, label = string.tyre_medium),
-            TyreLabel(tyre = WHITE_DRY_18, label = string.tyre_hard),
-            TyreLabel(tyre = GREEN_WET_18, label = string.tyre_intermediate),
-            TyreLabel(tyre = BLUE_WET_18, label = string.tyre_wet)
-        )
-    ),
-    S2022(
-        season = 2022,
-        tyres = listOf(
-            TyreLabel(tyre = RED_DRY_18, label = string.tyre_soft),
-            TyreLabel(tyre = YELLOW_DRY_18, label = string.tyre_medium),
-            TyreLabel(tyre = WHITE_DRY_18, label = string.tyre_hard),
-            TyreLabel(tyre = GREEN_WET_18, label = string.tyre_intermediate),
-            TyreLabel(tyre = BLUE_WET_18, label = string.tyre_wet)
-        )
-    ),
-    S2021(
-        season = 2021,
-        tyres = listOf(
-            TyreLabel(tyre = RED_DRY_13, label = string.tyre_soft),
-            TyreLabel(tyre = YELLOW_DRY_13, label = string.tyre_medium),
-            TyreLabel(tyre = WHITE_DRY_13, label = string.tyre_hard),
+            TyreLabel(tyre = RED_DRY_13, label = string.tyre_super_soft),
+            TyreLabel(tyre = YELLOW_DRY_13, label = string.tyre_soft),
+            TyreLabel(tyre = WHITE_DRY_13, label = string.tyre_medium),
+            TyreLabel(tyre = GRAY_DRY_13, label = string.tyre_hard),
             TyreLabel(tyre = GREEN_WET_13, label = string.tyre_intermediate),
             TyreLabel(tyre = BLUE_WET_13, label = string.tyre_wet)
         )
     ),
-    S2020(
-        season = 2020,
+    S2013_S2015(
+        from = 2013,
+        to = 2015,
         tyres = listOf(
-            TyreLabel(tyre = RED_DRY_13, label = string.tyre_soft),
-            TyreLabel(tyre = YELLOW_DRY_13, label = string.tyre_medium),
-            TyreLabel(tyre = WHITE_DRY_13, label = string.tyre_hard),
+            TyreLabel(tyre = RED_DRY_13, label = string.tyre_super_soft),
+            TyreLabel(tyre = YELLOW_DRY_13, label = string.tyre_soft),
+            TyreLabel(tyre = WHITE_DRY_13, label = string.tyre_medium),
+            TyreLabel(tyre = ORANGE_DRY_13, label = string.tyre_hard),
             TyreLabel(tyre = GREEN_WET_13, label = string.tyre_intermediate),
             TyreLabel(tyre = BLUE_WET_13, label = string.tyre_wet)
         )
     ),
-    S2019(
-        season = 2019,
+    S2016_S2017(
+        from = 2016,
+        to = 2017,
         tyres = listOf(
-            TyreLabel(tyre = RED_DRY_13, label = string.tyre_soft),
-            TyreLabel(tyre = YELLOW_DRY_13, label = string.tyre_medium),
-            TyreLabel(tyre = WHITE_DRY_13, label = string.tyre_hard),
+            TyreLabel(tyre = PURPLE_DRY_13, label = string.tyre_ultra_soft),
+            TyreLabel(tyre = RED_DRY_13, label = string.tyre_super_soft),
+            TyreLabel(tyre = YELLOW_DRY_13, label = string.tyre_soft),
+            TyreLabel(tyre = WHITE_DRY_13, label = string.tyre_medium),
+            TyreLabel(tyre = ORANGE_DRY_13, label = string.tyre_hard),
             TyreLabel(tyre = GREEN_WET_13, label = string.tyre_intermediate),
             TyreLabel(tyre = BLUE_WET_13, label = string.tyre_wet)
         )
     ),
     S2018(
-        season = 2018,
+        singleYear = 2018,
         tyres = listOf(
             TyreLabel(tyre = PINK_DRY_13, label = string.tyre_hyper_soft),
             TyreLabel(tyre = PURPLE_DRY_13, label = string.tyre_ultra_soft),
@@ -125,85 +104,46 @@ enum class SeasonTyres(
             TyreLabel(tyre = BLUE_WET_13, label = string.tyre_wet)
         )
     ),
-    S2017(
-        season = 2017,
+    S2019_S2021(
+        from = 2019,
+        to = 2021,
         tyres = listOf(
-            TyreLabel(tyre = PURPLE_DRY_13, label = string.tyre_ultra_soft),
-            TyreLabel(tyre = RED_DRY_13, label = string.tyre_super_soft),
-            TyreLabel(tyre = YELLOW_DRY_13, label = string.tyre_soft),
-            TyreLabel(tyre = WHITE_DRY_13, label = string.tyre_medium),
-            TyreLabel(tyre = ORANGE_DRY_13, label = string.tyre_hard),
+            TyreLabel(tyre = RED_DRY_13, label = string.tyre_soft),
+            TyreLabel(tyre = YELLOW_DRY_13, label = string.tyre_medium),
+            TyreLabel(tyre = WHITE_DRY_13, label = string.tyre_hard),
             TyreLabel(tyre = GREEN_WET_13, label = string.tyre_intermediate),
             TyreLabel(tyre = BLUE_WET_13, label = string.tyre_wet)
         )
     ),
-    S2016(
-        season = 2016,
+    S2022(
+        from = 2022,
         tyres = listOf(
-            TyreLabel(tyre = PURPLE_DRY_13, label = string.tyre_ultra_soft),
-            TyreLabel(tyre = RED_DRY_13, label = string.tyre_super_soft),
-            TyreLabel(tyre = YELLOW_DRY_13, label = string.tyre_soft),
-            TyreLabel(tyre = WHITE_DRY_13, label = string.tyre_medium),
-            TyreLabel(tyre = ORANGE_DRY_13, label = string.tyre_hard),
-            TyreLabel(tyre = GREEN_WET_13, label = string.tyre_intermediate),
-            TyreLabel(tyre = BLUE_WET_13, label = string.tyre_wet)
-        )
-    ),
-    S2015(
-        season = 2015,
-        tyres = listOf(
-            TyreLabel(tyre = RED_DRY_13, label = string.tyre_super_soft),
-            TyreLabel(tyre = YELLOW_DRY_13, label = string.tyre_soft),
-            TyreLabel(tyre = WHITE_DRY_13, label = string.tyre_medium),
-            TyreLabel(tyre = ORANGE_DRY_13, label = string.tyre_hard),
-            TyreLabel(tyre = GREEN_WET_13, label = string.tyre_intermediate),
-            TyreLabel(tyre = BLUE_WET_13, label = string.tyre_wet)
-        )
-    ),
-    S2014(
-        season = 2014,
-        tyres = listOf(
-            TyreLabel(tyre = RED_DRY_13, label = string.tyre_super_soft),
-            TyreLabel(tyre = YELLOW_DRY_13, label = string.tyre_soft),
-            TyreLabel(tyre = WHITE_DRY_13, label = string.tyre_medium),
-            TyreLabel(tyre = ORANGE_DRY_13, label = string.tyre_hard),
-            TyreLabel(tyre = GREEN_WET_13, label = string.tyre_intermediate),
-            TyreLabel(tyre = BLUE_WET_13, label = string.tyre_wet)
-        )
-    ),
-    S2013(
-        season = 2013,
-        tyres = listOf(
-            TyreLabel(tyre = RED_DRY_13, label = string.tyre_super_soft),
-            TyreLabel(tyre = YELLOW_DRY_13, label = string.tyre_soft),
-            TyreLabel(tyre = WHITE_DRY_13, label = string.tyre_medium),
-            TyreLabel(tyre = ORANGE_DRY_13, label = string.tyre_hard),
-            TyreLabel(tyre = GREEN_WET_13, label = string.tyre_intermediate),
-            TyreLabel(tyre = BLUE_WET_13, label = string.tyre_wet)
-        )
-    ),
-    S2012(
-        season = 2012,
-        tyres = listOf(
-            TyreLabel(tyre = RED_DRY_13, label = string.tyre_super_soft),
-            TyreLabel(tyre = YELLOW_DRY_13, label = string.tyre_soft),
-            TyreLabel(tyre = WHITE_DRY_13, label = string.tyre_medium),
-            TyreLabel(tyre = GRAY_DRY_13, label = string.tyre_hard),
-            TyreLabel(tyre = GREEN_WET_13, label = string.tyre_intermediate),
-            TyreLabel(tyre = BLUE_WET_13, label = string.tyre_wet)
-        )
-    ),
-    S2011(
-        season = 2011,
-        tyres = listOf(
-            TyreLabel(tyre = RED_DRY_13, label = string.tyre_super_soft),
-            TyreLabel(tyre = YELLOW_DRY_13, label = string.tyre_soft),
-            TyreLabel(tyre = WHITE_DRY_13, label = string.tyre_medium),
-            TyreLabel(tyre = GRAY_DRY_13, label = string.tyre_hard),
-            TyreLabel(tyre = BLUE_WET_13, label = string.tyre_intermediate),
-            TyreLabel(tyre = ORANGE_WET_13, label = string.tyre_wet)
+            TyreLabel(tyre = RED_DRY_18, label = string.tyre_soft),
+            TyreLabel(tyre = YELLOW_DRY_18, label = string.tyre_medium),
+            TyreLabel(tyre = WHITE_DRY_18, label = string.tyre_hard),
+            TyreLabel(tyre = GREEN_WET_18, label = string.tyre_intermediate),
+            TyreLabel(tyre = BLUE_WET_18, label = string.tyre_wet)
         )
     );
+
+    constructor(
+        singleYear: Int,
+        tyres: List<TyreLabel>
+    ): this(
+        from = singleYear,
+        to = singleYear,
+        tyres = tyres
+    )
+
+    fun includesYear(year: Int): Boolean {
+        if (year >= from && to == null) {
+            return true
+        }
+        if (year >= from && to != null && year <= to) {
+            return true
+        }
+        return false
+    }
 
     companion object
 }

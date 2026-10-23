@@ -38,6 +38,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.customActions
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush.Companion.linearGradient
@@ -46,6 +49,7 @@ import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
 import coil3.compose.AsyncImage
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.ab_action_copy_debug_ids
 import flashback.presentation.localisation.generated.resources.ab_back
 import flashback.presentation.localisation.generated.resources.about_additional
 import flashback.presentation.localisation.generated.resources.about_dependencies
@@ -190,7 +194,7 @@ private fun AboutListScreen(
                 idsClicked = idsClicked,
                 modifier = Modifier
                     .animateItem(),
-                version = "${Device.versionName}.${Device.versionCode}",
+                version = "${Device.versionName} (${Device.versionCode})",
                 debugIds = listOfNotNull(deviceId, installationId, remoteNotificationId)
                     .joinToString(separator = "\n")
             )
@@ -245,7 +249,7 @@ private fun AboutPaneScreen(
                     idsClicked = idsClicked,
                     modifier = Modifier
                         .animateItem(),
-                    version = "${Device.versionName}.${Device.versionCode}",
+                    version = "${Device.versionName} (${Device.versionCode})",
                     debugIds = listOfNotNull(deviceId, installationId, remoteNotificationId)
                         .joinToString(separator = "\n")
                 )
@@ -398,11 +402,24 @@ private fun Footer(
             text = stringResource(string.about_additional)
         )
 
+        val copyIdsLabel = stringResource(string.ab_action_copy_debug_ids)
         TextBody2(
             modifier = Modifier
+                .semantics {
+                    customActions = listOf(
+                        CustomAccessibilityAction(
+                            label = copyIdsLabel,
+                            action = {
+                                idsClicked()
+                                true
+                            }
+                        )
+                    )
+                }
                 .combinedClickable(
                     onClick = { },
-                    onLongClick = idsClicked
+                    onLongClick = idsClicked,
+                    onLongClickLabel = copyIdsLabel
                 )
                 .padding(
                     horizontal = AppTheme.dimens.medium,
@@ -518,7 +535,7 @@ private fun PreviewList() {
     ApplicationThemePreview {
         AboutListScreen(
             paddingValues = PaddingValues(0.dp),
-            email = "thementalgoose@gmail.com",
+            email = "flashback@thementalgoose.com",
             deviceId = "uuid",
             buttons = AboutButtons.entries,
             installationId = "installation-uuid",
@@ -539,7 +556,7 @@ private fun PreviewPane() {
     ApplicationThemePreview {
         AboutPaneScreen(
             paddingValues = PaddingValues(0.dp),
-            email = "thementalgoose@gmail.com",
+            email = "flashback@thementalgoose.com",
             deviceId = "uuid",
             buttons = AboutButtons.entries,
             installationId = "installation-uuid",

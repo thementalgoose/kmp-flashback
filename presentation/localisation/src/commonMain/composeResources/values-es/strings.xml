@@ -38,6 +38,8 @@
     <string name="nav_reaction_game">Reaction Game</string>
     <string name="nav_glossary">Glosario</string>
     <string name="nav_contact">Contacto</string>
+    <string name="nav_style_guide">Style Guide</string>
+    <string name="nav_info">Info</string>
     <string name="nav_xr">XR</string>
     <string name="nav_details">Detalles</string>
     <string name="nav_qualifying">Clasificación</string>
@@ -61,9 +63,9 @@
     <string name="sprint_qualifying_header_q1">SQ1</string>
     <string name="sprint_qualifying_header_q2">SQ2</string>
     <string name="sprint_qualifying_header_q3">SQ3</string>
-    <string name="qualifying_penalty_starts">Penalización, comienza %1$s</string>
-    <string name="qualifying_penalty">Penalización, comienza en el pit lane</string>
-    <string name="qualifying_penalty_starts_sprint">Penalización, comienza el sprint %1$s</string>
+    <string name="qualifying_penalty_starts">Comienza %1$s</string>
+    <string name="qualifying_penalty">Comienza en el pit lane</string>
+    <string name="qualifying_penalty_starts_sprint">Comienza el sprint %1$s</string>
 
     <!-- Results -->
     <string name="weekend_race_round">Ronda %1$d</string>
@@ -79,6 +81,7 @@
     <string name="weekend_track_zones_overtake">Modo recto</string>
     <string name="drs_zones">%1$s DRS zonas</string>
     <string name="straight_mode_zones">%1$s Modo recto zonas</string>
+    <string name="weekend_info_tyres">Llantas</string>
 
     <!-- Dashboard -->
     <string name="dashboard_now">Lo más destacado reciente…</string>
@@ -178,6 +181,11 @@
     <string name="details_link_report_issue">¿Problema con los datos?</string>
 
     <string name="report_issue_thanks">Problema reportado, ¡gracias!</string>
+    <string name="report_issue_link">¿Ves algún problema? Repórtalo aquí</string>
+    <string name="report_issue_dialog_title">Reportar problema</string>
+    <string name="report_issue_dialog_message">¿Estás seguro de que deseas reportar un problema con los datos?</string>
+    <string name="report_issue_dialog_confirm">Sí</string>
+    <string name="report_issue_dialog_cancel">Cancelar</string>
 
     <!-- Feature banners -->
     <string name="feature_banner_runtime_notifications">Concede permiso para que Flashback te envíe notificaciones</string>
@@ -324,6 +332,8 @@
     <string name="settings_header_widgets">Widgets</string>
     <string name="settings_section_widgets_title">Widgets</string>
     <string name="settings_section_widgets_description">Personalizaciones de widgets</string>
+    <string name="settings_section_widgets_add_title">Añadir un widget</string>
+    <string name="settings_section_widgets_add_description">Añade el widget a tu pantalla de inicio</string>
     <string name="settings_section_widgets_show_background_title">¿Mostrar fondo?</string>
     <string name="settings_section_widgets_show_background_description">Mostrar un fondo sólido en lugar de uno transparente</string>
     <string name="settings_section_widgets_deeplink_event_title">Enlace al evento?</string>

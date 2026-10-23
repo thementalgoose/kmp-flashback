@@ -75,4 +75,12 @@ internal class DefaultSeasonUseCaseTest {
         initUnderTest()
         assertEquals(2018, underTest.defaultSeason)
     }
+
+    @Test
+    fun `serverDefaultSeason returns info repository default season`() {
+        every { mockInfoRepository.defaultSeason } returns 2024
+
+        initUnderTest()
+        assertEquals(2024, underTest.serverDefaultSeason)
+    }
 }

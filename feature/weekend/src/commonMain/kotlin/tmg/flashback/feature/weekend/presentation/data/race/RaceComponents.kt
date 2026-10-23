@@ -53,9 +53,12 @@ import tmg.flashback.ui.components.driver.driverIconSize
 import tmg.flashback.ui.components.edgeBar
 
 
+import tmg.flashback.feature.weekend.presentation.components.ReportIssueLink
+
 fun LazyListScope.addRaceData(
     uiState: Data,
-    selectResultType: (ResultType) -> Unit
+    selectResultType: (ResultType) -> Unit,
+    reportIssueClicked: () -> Unit
 ) {
     item("race_label") {
         TypeHeader(
@@ -102,6 +105,14 @@ fun LazyListScope.addRaceData(
                     driverClicked = { }
                 )
             }
+        }
+    }
+    if (uiState.raceResults.isNotEmpty()) {
+        item("race_report_issue") {
+            ReportIssueLink(
+                onClick = reportIssueClicked,
+                modifier = Modifier.animateItem()
+            )
         }
     }
 }

@@ -19,6 +19,8 @@ interface NotificationManager {
     )
 
     val canScheduleExact: Boolean
+
+    fun isChannelActive(channelId: String): Boolean
 }
 
 expect class NotificationManagerImpl(): NotificationManager {
@@ -31,4 +33,5 @@ expect class NotificationManagerImpl(): NotificationManager {
     )
     override fun cancel(uuid: Int)
     override val canScheduleExact: Boolean
+    override fun isChannelActive(channelId: String): Boolean
 }

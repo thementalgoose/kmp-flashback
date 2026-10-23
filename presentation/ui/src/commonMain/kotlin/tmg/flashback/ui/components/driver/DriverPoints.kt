@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.plurals
 import flashback.presentation.localisation.generated.resources.race_points
@@ -31,8 +33,12 @@ fun DriverPoints(
     points: Double,
     modifier: Modifier = Modifier
 ) {
+    val pointsLabel = pluralStringResource(plurals.race_points, points.takeIf { !it.isNaN() }?.roundToInt() ?: 0, points.roundToHalf())
+    val fullDescription = "$name, $nationality, $pointsLabel"
     FlowRow(
-        modifier = modifier,
+        modifier = modifier.clearAndSetSemantics {
+            this.contentDescription = fullDescription
+        },
         itemVerticalAlignment = Alignment.CenterVertically
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -52,8 +58,7 @@ fun DriverPoints(
                 modifier = Modifier.padding(horizontal = AppTheme.dimens.xsmall)
             )
         }
-        val points = pluralStringResource(plurals.race_points, points.takeIf { !it.isNaN() }?.roundToInt() ?: 0, points.roundToHalf())
-        TextCaption(text = points)
+        TextCaption(text = pointsLabel)
     }
 }
 

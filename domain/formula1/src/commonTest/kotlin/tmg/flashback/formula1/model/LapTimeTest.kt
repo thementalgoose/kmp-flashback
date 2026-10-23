@@ -1,5 +1,7 @@
 package tmg.flashback.formula1.model
 
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -33,7 +35,7 @@ internal class LapTimeTest {
         assertEquals("", model.time)
     }
 
-    private data class TestCaseTime(
+    data class TestCaseTime(
         val hours: Int,
         val mins: Int,
         val seconds: Int,
@@ -42,58 +44,32 @@ internal class LapTimeTest {
         val expected: String
     )
 
-    private val testCasesTime = listOf(
-        TestCaseTime(-1,-1,-1,-1, 3, ""),
-        TestCaseTime(0,0,0,0, 3, "0.000"),
-        TestCaseTime(0,0,1,1, 3, "1.001"),
-        TestCaseTime(0,1,1,1, 3, "1:01.001"),
-        TestCaseTime(1,1,1,1, 3, "1:01:01.001"),
-        TestCaseTime(1,1,1,10, 3, "1:01:01.010"),
-        TestCaseTime(1,1,1,100, 2, "1:01:01.10"),
-        TestCaseTime(1,1,1,100, 1, "1:01:01.1"),
-    )
-    @Test
-    fun `time returns valid value`() {
-        testCasesTime.forEach { (hours, mins, seconds, milliseconds, millisPrecision, expected) ->
-            val model = LapTime(hours, mins, seconds, milliseconds, millisPrecision)
-            assertEquals(expected, model.time)
-        }
+    @ParameterizedTest
+    @MethodSource("testCasesTime")
+    fun `time returns valid value`(testCase: TestCaseTime) {
+        val model = LapTime(testCase.hours, testCase.mins, testCase.seconds, testCase.milliseconds, testCase.millisPrecision)
+        assertEquals(testCase.expected, model.time)
     }
 
-    private val testCasesContentDescription = listOf(
-        TestCaseTime(-1,-1,-1,-1, 3,"No time"),
-        TestCaseTime(0,0,0,0, 3,"0 seconds and 000 milliseconds"),
-        TestCaseTime(0,0,1,1, 3,"1 seconds and 001 milliseconds"),
-        TestCaseTime(0,1,1,1, 3,"1 minutes, 01 seconds and 001 milliseconds"),
-        TestCaseTime(1,1,1,1, 3,"1 hours, 1 minutes, 01 seconds and 001 milliseconds"),
-    )
-    @Test
-    fun `content description returns valid value`() {
-        testCasesContentDescription.forEach { (hours, mins, seconds, milliseconds, millisPrecision, expected) ->
-            val model = LapTime(hours, mins, seconds, milliseconds, millisPrecision)
-            assertEquals(expected, model.contentDescription)
-        }
+    @ParameterizedTest
+    @MethodSource("testCasesContentDescription")
+    fun `content description returns valid value`(testCase: TestCaseTime) {
+        val model = LapTime(testCase.hours, testCase.mins, testCase.seconds, testCase.milliseconds, testCase.millisPrecision)
+        assertEquals(testCase.expected, model.contentDescription)
     }
 
-    private data class TestCaseDelta(
+    data class TestCaseDelta(
         val fromMillis: Int,
         val toMillis: Int,
         val delta: String
     )
 
-    private val testCasesDelta = listOf(
-        TestCaseDelta(1001,1002,"+0.001"),
-        TestCaseDelta(1003,1002,"-0.001"),
-        TestCaseDelta(132456,654321,"+8:41.865")
-    )
-    @Test
-    fun `deltaTo shows correct delta`() {
-        testCasesDelta.forEach { (fromMillis, toMillis, delta) ->
-            val model = LapTime(fromMillis)
-            val toModel = LapTime(toMillis)
-
-            assertEquals(delta, model.deltaTo(toModel))
-        }
+    @ParameterizedTest
+    @MethodSource("testCasesDelta")
+    fun `deltaTo shows correct delta`(testCase: TestCaseDelta) {
+        val model = LapTime(testCase.fromMillis)
+        val toModel = LapTime(testCase.toMillis)
+        assertEquals(testCase.delta, model.deltaTo(toModel))
     }
 
     @Test
@@ -113,5 +89,35 @@ internal class LapTimeTest {
         val model = LapTime(hours, mins, seconds, millis)
 
         assertEquals(expected, model.totalMillis)
+    }
+
+    companion object {
+        @JvmStatic
+        fun testCasesTime() = listOf(
+            TestCaseTime(-1, -1, -1, -1, 3, ""),
+            TestCaseTime(0, 0, 0, 0, 3, "0.000"),
+            TestCaseTime(0, 0, 1, 1, 3, "1.001"),
+            TestCaseTime(0, 1, 1, 1, 3, "1:01.001"),
+            TestCaseTime(1, 1, 1, 1, 3, "1:01:01.001"),
+            TestCaseTime(1, 1, 1, 10, 3, "1:01:01.010"),
+            TestCaseTime(1, 1, 1, 100, 2, "1:01:01.10"),
+            TestCaseTime(1, 1, 1, 100, 1, "1:01:01.1")
+        )
+
+        @JvmStatic
+        fun testCasesContentDescription() = listOf(
+            TestCaseTime(-1, -1, -1, -1, 3, "No time"),
+            TestCaseTime(0, 0, 0, 0, 3, "0 seconds and 000 milliseconds"),
+            TestCaseTime(0, 0, 1, 1, 3, "1 seconds and 001 milliseconds"),
+            TestCaseTime(0, 1, 1, 1, 3, "1 minutes, 01 seconds and 001 milliseconds"),
+            TestCaseTime(1, 1, 1, 1, 3, "1 hours, 1 minutes, 01 seconds and 001 milliseconds")
+        )
+
+        @JvmStatic
+        fun testCasesDelta() = listOf(
+            TestCaseDelta(1001, 1002, "+0.001"),
+            TestCaseDelta(1003, 1002, "-0.001"),
+            TestCaseDelta(132456, 654321, "+8:41.865")
+        )
     }
 }

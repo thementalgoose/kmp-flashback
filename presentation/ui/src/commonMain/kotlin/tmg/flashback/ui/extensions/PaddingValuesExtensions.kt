@@ -23,3 +23,30 @@ fun PaddingValues.add(
         end = this.calculateEndPadding(direction) + end
     )
 }
+
+@Composable
+fun PaddingValues.only(
+    horizontal: Boolean = false,
+    vertical: Boolean = false
+) = this.only(
+    start = horizontal,
+    end = horizontal,
+    top = vertical,
+    bottom = vertical
+)
+
+@Composable
+fun PaddingValues.only(
+    start: Boolean = false,
+    end: Boolean = false,
+    top: Boolean = false,
+    bottom: Boolean = false
+): PaddingValues {
+    val layoutDirection = LocalLayoutDirection.current
+    return PaddingValues(
+        start = this.calculateStartPadding(layoutDirection).takeIf { start } ?: 0.dp,
+        end = this.calculateEndPadding(layoutDirection).takeIf { end } ?: 0.dp,
+        top = this.calculateTopPadding().takeIf { top } ?: 0.dp,
+        bottom = this.calculateBottomPadding().takeIf { bottom } ?: 0.dp
+    )
+}

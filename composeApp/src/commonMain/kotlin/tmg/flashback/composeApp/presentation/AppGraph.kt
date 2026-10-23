@@ -16,11 +16,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.metadata
 import androidx.navigation3.ui.NavDisplay
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_EXPANDED_LOWER_BOUND
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import flashback.composeapp.generated.resources.Res
 import flashback.composeapp.generated.resources.logo
+import tmg.flashback.composeApp.presentation.info.InfoScreen
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.composeApp.presentation.navigation.scene.SplitPaneScene
 import tmg.flashback.composeApp.presentation.navigation.scene.rememberSplitPaneSceneStrategy
@@ -52,6 +54,8 @@ import tmg.flashback.feature.season.presentation.driver_standings.DriverStanding
 import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsScreen
 import tmg.flashback.feature.weekend.presentation.WeekendScreen
 import tmg.flashback.navigation.NavAbout
+import tmg.flashback.navigation.NavStyleGuide
+import tmg.flashback.style.styleguide.StyleGuideScreen
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavCircuit
 import tmg.flashback.navigation.NavCircuits
@@ -60,6 +64,7 @@ import tmg.flashback.navigation.NavDriverComparison
 import tmg.flashback.navigation.NavDriverStandings
 import tmg.flashback.navigation.NavGlossary
 import tmg.flashback.navigation.NavGlossaryDetail
+import tmg.flashback.navigation.NavInfo
 import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavPrivacyPolicy
 import tmg.flashback.navigation.NavReactionGame
@@ -83,6 +88,7 @@ import tmg.flashback.navigation.removeDetail
 import tmg.flashback.navigation.replaceDetail
 import tmg.flashback.navigation.replaceList
 import tmg.flashback.style.AppTheme
+import tmg.flashback.ui.extensions.only
 import tmg.flashback.ui.navigation.OverlappingPanelsState
 import tmg.flashback.webbrowser.presentation.WebScreen
 
@@ -111,7 +117,7 @@ fun AppGraph(
     }
     val insetPadding = when (isCompact) {
         true -> insetPadding
-        false -> PaddingValues(0.dp)
+        false -> insetPadding.only(vertical = true)
     }
 
     NavDisplay(
@@ -368,6 +374,21 @@ fun AppGraph(
                     appIcon = Res.drawable.logo,
                     paddingValues = insetPadding,
                     actionUpClicked = openPanel,
+                    windowSizeClass = windowAdaptiveInfo.windowSizeClass
+                )
+            }
+
+            entry<NavStyleGuide>(metadata = SplitPaneScene.listPane()) {
+                StyleGuideScreen(
+                    actionUpClicked = openPanel,
+                    paddingValues = insetPadding
+                )
+            }
+
+            entry<NavInfo>(metadata = SplitPaneScene.listPane()) {
+                InfoScreen(
+                    actionUpClicked = openPanel,
+                    paddingValues = insetPadding,
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
             }

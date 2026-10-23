@@ -14,7 +14,7 @@ object RemoteConfigDefaults {
         "easteregg_snow" to false,
         "easteregg_summer" to false,
         "easteregg_ukraine" to false,
-        "email" to "thementalgoose@gmail.com",
+        "email" to "flashback@thementalgoose.com",
         "nav" to emptyNav(),
         "privacy_policy_url" to "https://flashback.pages.dev/privacy-policy.html",
         "reaction_game" to false,

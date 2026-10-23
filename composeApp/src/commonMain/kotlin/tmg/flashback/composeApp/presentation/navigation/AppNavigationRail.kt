@@ -3,6 +3,8 @@ package tmg.flashback.composeApp.presentation.navigation
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_LARGE_LOWER_BOUND
 import tmg.flashback.navigation.Screen
 import kotlinx.coroutines.coroutineScope
 import tmg.flashback.infrastructure.extensions.toEnum
@@ -13,12 +15,17 @@ import tmg.flashback.composeApp.presentation.MenuItem.Contact
 import tmg.flashback.composeApp.presentation.MenuItem.DriversStandings
 import tmg.flashback.composeApp.presentation.MenuItem.Lineup
 import tmg.flashback.composeApp.presentation.MenuItem.Glossary
+import tmg.flashback.composeApp.presentation.MenuItem.Info
 import tmg.flashback.composeApp.presentation.MenuItem.ReactionGame
 import tmg.flashback.composeApp.presentation.MenuItem.Results
 import tmg.flashback.composeApp.presentation.MenuItem.Rss
 import tmg.flashback.composeApp.presentation.MenuItem.Settings
+import tmg.flashback.composeApp.presentation.MenuItem.StyleGuide
 import tmg.flashback.composeApp.presentation.MenuItem.TeamsStandings
 import tmg.flashback.composeApp.presentation.MenuItem.XR_Spacial
+import tmg.flashback.composeApp.presentation.generateNavPrimaryItems
+import tmg.flashback.composeApp.presentation.generateNavSecondaryItems
+import tmg.flashback.composeApp.presentation.generateNavTertiaryItems
 import tmg.flashback.composeApp.presentation.toNavigationItem
 import tmg.flashback.composeApp.presentation.toScreen
 import tmg.flashback.infrastructure.device.Device
@@ -31,36 +38,35 @@ import tmg.flashback.navigation.NavGlossary
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
 import tmg.flashback.navigation.NavSettings
+import tmg.flashback.navigation.NavStyleGuide
 import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.ui.navigation.NavigationColumn
 import tmg.flashback.xr.LocalXR
+import tmg.flashback.xr.XR
 
 @Composable
 internal fun AppNavigationRail(
+    windowSizeClass: WindowSizeClass,
     appNavigationUiState: AppNavigationUIState,
     navigationItemClicked: (Screen) -> Unit,
     insetPadding: PaddingValues,
     modifier: Modifier = Modifier,
-    showXr: Boolean = false,
+    showXr: XR? = LocalXR.current,
 ) {
-    val primaryItems = listOfNotNull(
-        Calendar.toNavigationItem(appNavigationUiState.screen == NavCalendar),
-        DriversStandings.toNavigationItem(appNavigationUiState.screen == NavDriverStandings),
-        TeamsStandings.toNavigationItem(appNavigationUiState.screen == NavTeamStandings),
-        Circuits.toNavigationItem(appNavigationUiState.screen == NavCircuits),
-        Lineup.toNavigationItem(appNavigationUiState.screen == NavLineup),
+    val primaryItems = generateNavPrimaryItems(
+        currentlySelectedScreen = appNavigationUiState.screen
     )
-    val secondaryItems = listOfNotNull(
-        Rss.toNavigationItem(appNavigationUiState.screen == NavRss).takeIf { appNavigationUiState.showRss },
-        ReactionGame.toNavigationItem(appNavigationUiState.screen == NavReactionGame),
-//        Glossary.toNavigationItem(appNavigationUiState.screen == NavGlossary).takeIf { Device.isDebug },
-        Settings.toNavigationItem(appNavigationUiState.screen == NavSettings),
-        Contact.toNavigationItem(appNavigationUiState.screen == NavAbout)
+    val secondaryItems = generateNavSecondaryItems(
+        currentlySelectedScreen = appNavigationUiState.screen,
+        showRss = appNavigationUiState.showRss
     )
-    val tertiaryItems = listOfNotNull(
-        XR_Spacial.toNavigationItem(false).takeIf { showXr }
+    val tertiaryItems = generateNavTertiaryItems(
+        currentlySelectedScreen = appNavigationUiState.screen,
+        showXr = showXr?.isXrDevice == true,
+        isXrSelected = false
     )
 
+    val xl = windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_LARGE_LOWER_BOUND)
     val xr = LocalXR.current
     NavigationColumn(
         modifier = modifier,
@@ -74,23 +80,14 @@ internal fun AppNavigationRail(
                 XR_Spacial -> {
                     xr.requestImmersiveMode()
                 }
-                Results,
-                Calendar,
-                DriversStandings,
-                TeamsStandings,
-                Circuits,
-                Lineup,
-                Rss,
-                ReactionGame,
-                Glossary,
-                Settings,
-                Contact -> {
+                null -> { /* Do nothing */ }
+                else -> {
                     val result = item.toScreen() ?: return@NavigationColumn
                     navigationItemClicked(result)
                 }
-                null -> { /* Do nothing */ }
             }
         },
-        padding = insetPadding
+        padding = insetPadding,
+        lockExpanded = xl
     )
 }

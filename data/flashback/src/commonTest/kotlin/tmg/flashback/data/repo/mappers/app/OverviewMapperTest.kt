@@ -8,7 +8,7 @@ import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.model
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertFails
+import kotlin.test.assertFailsWith
 import kotlin.test.assertNull
 
 internal class OverviewMapperTest {
@@ -37,7 +37,7 @@ internal class OverviewMapperTest {
 
         val input = OverviewWithCircuit.model(overview = Overview.model(date = "invalid"))
 
-        assertFails {
+        assertFailsWith<Throwable> {
             underTest.mapOverview(input)
         }
     }

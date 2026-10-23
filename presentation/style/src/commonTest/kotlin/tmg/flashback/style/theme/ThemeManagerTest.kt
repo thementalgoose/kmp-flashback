@@ -5,6 +5,8 @@ import dev.mokkery.answering.returns
 import dev.mokkery.every
 import dev.mokkery.mock
 import dev.mokkery.verify
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.EnumSource
 import tmg.flashback.preferences.manager.PreferenceManager
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -26,7 +28,6 @@ internal class ThemeManagerTest {
             Theme.Default -> "default"
             Theme.MaterialYou -> "material_you"
         }
-
 
     private val NightMode.expectedSaveKey: String
         get() = when (this) {
@@ -61,14 +62,13 @@ internal class ThemeManagerTest {
         }
     }
 
-    @Test
-    fun `getting current night mode`() {
+    @ParameterizedTest
+    @EnumSource(NightMode::class)
+    fun `getting current night mode`(nightMode: NightMode) {
         initUnderTest()
-        NightMode.entries.forEach {
-            every { mockPreferenceManager.getString(EXPECTED_PREFERENCE_NIGHT_MODE) } returns it.expectedSaveKey
+        every { mockPreferenceManager.getString(EXPECTED_PREFERENCE_NIGHT_MODE) } returns nightMode.expectedSaveKey
 
-            assertEquals(it, underTest.currentNightMode)
-        }
+        assertEquals(nightMode, underTest.currentNightMode)
     }
 
     @Test

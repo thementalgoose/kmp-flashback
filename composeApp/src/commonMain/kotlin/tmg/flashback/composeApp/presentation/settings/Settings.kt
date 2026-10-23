@@ -73,6 +73,8 @@ import flashback.presentation.localisation.generated.resources.settings_section_
 import flashback.presentation.localisation.generated.resources.settings_section_weather_title
 import flashback.presentation.localisation.generated.resources.settings_section_web_browser_description
 import flashback.presentation.localisation.generated.resources.settings_section_web_browser_title
+import flashback.presentation.localisation.generated.resources.settings_section_widgets_add_description
+import flashback.presentation.localisation.generated.resources.settings_section_widgets_add_title
 import flashback.presentation.localisation.generated.resources.settings_section_widgets_deeplink_event_description
 import flashback.presentation.localisation.generated.resources.settings_section_widgets_deeplink_event_title
 import flashback.presentation.localisation.generated.resources.settings_section_widgets_description
@@ -365,6 +367,11 @@ object Settings {
         icon = Res.drawable.ic_settings_widgets
     )
     object Widgets {
+        val AddWidget = Setting.Pref(
+            _id = "widgets_add",
+            title = string.settings_section_widgets_add_title,
+            subtitle = string.settings_section_widgets_add_description,
+        )
         val RefreshWidgets = Setting.Pref(
             _id = "widgets_refresh",
             title = string.settings_section_refresh_widget_title,
@@ -448,7 +455,7 @@ object Settings {
         val BuildVersion = Setting.Pref(
             _id = "about_build",
             title = string.settings_build_version,
-            subtitleString = Device.versionName
+            subtitleString = "${Device.versionName} ($Device.versionCode)"
         )
         val DeviceInfo = Setting.Pref(
             _id = "about_device_info",

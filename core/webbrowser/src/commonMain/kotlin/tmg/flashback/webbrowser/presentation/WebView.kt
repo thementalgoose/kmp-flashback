@@ -41,6 +41,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 
 @Composable
@@ -122,6 +123,10 @@ private fun ControlPanel(
     ) {
         Row(
             modifier = Modifier
+                .dropShadow(
+                    shape = RoundedCornerShape(50.dp),
+                    shadow = Shadow(8.dp, color = Color.Black.copy(alpha = 0.2f))
+                )
                 .clip(RoundedCornerShape(50.dp))
                 .background(AppTheme.colors.surfaceContainer5)
                 .padding(AppTheme.dimens.xsmall)
@@ -157,6 +162,10 @@ private fun ControlPanel(
         Spacer(Modifier.weight(1f))
         Row(
             modifier = Modifier
+                .dropShadow(
+                    shape = RoundedCornerShape(50.dp),
+                    shadow = Shadow(8.dp, color = Color.Black.copy(alpha = 0.2f))
+                )
                 .clip(RoundedCornerShape(50.dp))
                 .background(AppTheme.colors.surfaceContainer5)
                 .padding(AppTheme.dimens.xsmall)
@@ -199,7 +208,7 @@ private fun PreviewWebView() {
 }
 
 @Composable
-@Preview
+@PreviewTheme
 private fun PreviewTop() {
     ApplicationThemePreview {
         WebScreen(
@@ -214,7 +223,7 @@ private fun PreviewTop() {
 }
 
 @Composable
-@Preview
+@PreviewTheme
 private fun PreviewBottom() {
     ApplicationThemePreview {
         WebScreen(

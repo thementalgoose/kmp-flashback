@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -49,7 +48,7 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import tmg.flashback.feature.season.models.NotificationSchedule
+import tmg.flashback.feature.notifications.model.NotificationUpcomingState
 import tmg.flashback.feature.season.presentation.calendar.CalendarItem
 import tmg.flashback.formula1.constants.Formula1.sprintsIntroducedIn
 import tmg.flashback.formula1.enums.SprintFormat
@@ -85,7 +84,7 @@ private val weatherIconSize = 42.dp
 @Composable
 internal fun RaceWeekCard(
     model: CalendarItem.RaceWeek,
-    itemClicked: (CalendarItem.RaceWeek) -> Unit,
+    itemClicked: (CalendarItem.RaceWeek, String?) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier
@@ -96,7 +95,7 @@ internal fun RaceWeekCard(
             false -> Color.Transparent
         })
         .alpha(if (model.model.cancelled) 0.6f else 1f)
-        .clickable { itemClicked(model) }
+        .clickable { itemClicked(model, null) }
     ) {
         Row {
             Box(modifier = Modifier
@@ -179,6 +178,7 @@ internal fun RaceWeekCard(
             Dates(
                 scheduleList = model.model.schedule,
                 notificationSchedule = model.notificationSchedule,
+                eventClicked = { defaultTab -> itemClicked(model, defaultTab) },
                 modifier = Modifier.padding(top = AppTheme.dimens.xsmall)
             )
         }
@@ -254,7 +254,8 @@ private fun RowScope.IconResult(
 @Composable
 private fun Dates(
     scheduleList: List<Schedule>,
-    notificationSchedule: NotificationSchedule,
+    notificationSchedule: NotificationUpcomingState,
+    eventClicked: (String?) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val schedule = scheduleList.groupBy { it.timestamp.deviceLocalDateTime.date }
@@ -294,7 +295,10 @@ private fun Dates(
                                 DateCard(
                                     schedule = it,
                                     showWeather = showWeather,
-                                    showNotificationBadge = false
+                                    showNotificationBadge = false,
+                                    itemClicked = {
+                                        eventClicked(it.label)
+                                    }
                                 )
                                 Spacer(Modifier.width(AppTheme.dimens.xsmall))
                             }
@@ -325,6 +329,7 @@ private fun DateCard(
     schedule: Schedule,
     showNotificationBadge: Boolean,
     showWeather: Boolean,
+    itemClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val state = remember { schedule.timestamp.state }
@@ -347,6 +352,7 @@ private fun DateCard(
         .background(AppTheme.colors.surfaceContainer5)
         .stateBorder(color)
         .alpha(if (state == Timestamp.TimestampState.EXPIRED) pastScheduleAlpha else 1f)
+        .clickable { itemClicked() }
         .padding(
             bottom = AppTheme.dimens.nsmall,
             start = AppTheme.dimens.nsmall,
@@ -413,9 +419,9 @@ private fun PreviewUpcoming() {
             model = CalendarItem.RaceWeek(
                 model = OverviewRace.preview(),
                 showScheduleList = true,
-                notificationSchedule = NotificationSchedule(false, false, false, false, false, false),
+                notificationSchedule = NotificationUpcomingState(false, false, false, true, true, false),
             ),
-            itemClicked = { }
+            itemClicked = { _, _ -> }
         )
     }
 }
@@ -428,9 +434,9 @@ private fun PreviewUpcomingFuture() {
             model = CalendarItem.RaceWeek(
                 model = OverviewRace.preview(),
                 showScheduleList = false,
-                notificationSchedule = NotificationSchedule(false, false, false, false, false, false),
+                notificationSchedule = NotificationUpcomingState(false, false, false, false, false, false),
             ),
-            itemClicked = { }
+            itemClicked = { _, _ -> }
         )
     }
 }
@@ -447,9 +453,9 @@ private fun PreviewPast() {
                     hasResults = true
                 ),
                 showScheduleList = false,
-                notificationSchedule = NotificationSchedule(false, false, false, false, false, false),
+                notificationSchedule = NotificationUpcomingState(false, false, false, false, false, false),
             ),
-            itemClicked = { }
+            itemClicked = { _, _ -> }
         )
     }
 }
@@ -464,9 +470,9 @@ private fun PreviewCancelled() {
                     cancelled = true
                 ),
                 showScheduleList = false,
-                notificationSchedule = NotificationSchedule(false, false, false, false, false, false),
+                notificationSchedule = NotificationUpcomingState(false, false, false, false, false, false),
             ),
-            itemClicked = { }
+            itemClicked = { _, _ -> }
         )
     }
 }

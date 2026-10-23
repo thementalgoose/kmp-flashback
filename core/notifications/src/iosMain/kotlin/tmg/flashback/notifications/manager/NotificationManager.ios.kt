@@ -57,4 +57,6 @@ actual class NotificationManagerImpl actual constructor(): NotificationManager {
 
     actual override val canScheduleExact: Boolean
         get() = true
+
+    actual override fun isChannelActive(channelId: String): Boolean = true
 }

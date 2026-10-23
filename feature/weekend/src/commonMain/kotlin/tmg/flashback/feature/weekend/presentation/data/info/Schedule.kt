@@ -194,7 +194,7 @@ private fun EventItem(
         .stateBorder(color)
         .padding(
             vertical = AppTheme.dimens.xsmall,
-            horizontal = AppTheme.dimens.nsmall
+            horizontal = AppTheme.dimens.small
         )
     ) {
         val contentDescription = when (showNotificationBell) {

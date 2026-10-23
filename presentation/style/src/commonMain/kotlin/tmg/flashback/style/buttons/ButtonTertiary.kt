@@ -50,10 +50,10 @@ fun ButtonTertiary(
             .alpha(if (enabled) 1f else disabledAlpha),
         border = BorderStroke(1.dp, AppTheme.colors.outline),
         colors = ButtonDefaults.outlinedButtonColors(
-            containerColor = AppTheme.colors.tertiary,
-            contentColor = AppTheme.colors.onTertiary,
-            disabledContainerColor = AppTheme.colors.tertiary,
-            disabledContentColor = AppTheme.colors.onTertiary
+            containerColor = AppTheme.colors.tertiaryContainer,
+            contentColor = AppTheme.colors.onTertiaryContainer,
+            disabledContainerColor = AppTheme.colors.tertiaryContainer,
+            disabledContentColor = AppTheme.colors.onTertiaryContainer
         ),
         enabled = enabled,
         shape = RoundedCornerShape(AppTheme.dimens.radiusMedium),
@@ -62,7 +62,7 @@ fun ButtonTertiary(
         TextBody2(
             text,
             bold = true,
-            textColor = AppTheme.colors.onTertiary,
+            textColor = AppTheme.colors.onTertiaryContainer,
             modifier = Modifier
                 .padding(
                     vertical = AppTheme.dimens.xsmall,
@@ -74,7 +74,7 @@ fun ButtonTertiary(
                 modifier = Modifier.size(16.dp),
                 painter = painterResource(resource = icon),
                 contentDescription = null,
-                tint = AppTheme.colors.onTertiary
+                tint = AppTheme.colors.onTertiaryContainer
             )
             Spacer(Modifier.width(AppTheme.dimens.nsmall))
         }

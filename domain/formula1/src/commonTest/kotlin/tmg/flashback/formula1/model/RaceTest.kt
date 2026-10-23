@@ -6,6 +6,8 @@ import tmg.flashback.formula1.model.QualifyingType.Q3
 import tmg.flashback.formula1.model.SprintQualifyingType.SQ1
 import tmg.flashback.formula1.model.SprintQualifyingType.SQ2
 import tmg.flashback.formula1.model.SprintQualifyingType.SQ3
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -48,32 +50,20 @@ internal class RaceTest {
         assertEquals(listOf(driver1, driver2, driver3, driver4), model.entries)
     }
 
-    private data class TestCase(
+    data class TestCase(
         val qualifyingTypes: List<QualifyingType>,
         val query: QualifyingType,
         val expectedResult: Boolean
     )
-    private val testCases = listOf(
-        TestCase(listOf(Q1,Q2,Q3),Q1,true),
-        TestCase(listOf(Q1,Q2,Q3),Q2,true),
-        TestCase(listOf(Q1,Q2,Q3),Q3,true),
-        TestCase(listOf(Q1,Q2,Q3),Q1,true),
-        TestCase(listOf(Q1,Q2,Q3),Q2,true),
-        TestCase(listOf(Q1,Q2,Q3),Q3,true),
-        TestCase(listOf(Q1),Q1,true),
-        TestCase(listOf(Q1),Q2,false),
-        TestCase(listOf(Q1),Q3,false),
-    )
 
-    @Test
-    fun `has qualifying type with data loaded returns true`() {
-        testCases.forEach { (inputQualifying, query, expectedResult) ->
-            val model = Race.model(qualifying = inputQualifying.map { qualiType ->
-                QualifyingRound.model(label = qualiType)
-            })
+    @ParameterizedTest
+    @MethodSource("testCases")
+    fun `has qualifying type with data loaded returns true`(testCase: TestCase) {
+        val model = Race.model(qualifying = testCase.qualifyingTypes.map { qualiType ->
+            QualifyingRound.model(label = qualiType)
+        })
 
-            assertEquals(expectedResult, model.has(query))
-        }
+        assertEquals(testCase.expectedResult, model.has(testCase.query))
     }
 
     @Test
@@ -483,5 +473,20 @@ internal class RaceTest {
         )
 
         assertEquals(expected, model.constructorStandings)
+    }
+
+    companion object {
+        @JvmStatic
+        fun testCases() = listOf(
+            TestCase(listOf(Q1, Q2, Q3), Q1, true),
+            TestCase(listOf(Q1, Q2, Q3), Q2, true),
+            TestCase(listOf(Q1, Q2, Q3), Q3, true),
+            TestCase(listOf(Q1, Q2, Q3), Q1, true),
+            TestCase(listOf(Q1, Q2, Q3), Q2, true),
+            TestCase(listOf(Q1, Q2, Q3), Q3, true),
+            TestCase(listOf(Q1), Q1, true),
+            TestCase(listOf(Q1), Q2, false),
+            TestCase(listOf(Q1), Q3, false)
+        )
     }
 }

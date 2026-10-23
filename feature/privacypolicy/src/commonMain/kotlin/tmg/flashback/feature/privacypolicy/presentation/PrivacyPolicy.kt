@@ -1,6 +1,6 @@
 package tmg.flashback.feature.privacypolicy.presentation
 
-fun getPolicy(email: String = "thementalgoose@gmail.com") = policy {
+fun getPolicy(email: String = "flashback@thementalgoose.com") = policy {
     h1("Flashback")
     text("""
         This privacy policy applies to the Flashback app (hereby referred to as "Application") for mobile devices

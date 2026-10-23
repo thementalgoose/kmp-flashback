@@ -11,6 +11,8 @@ import flashback.composeapp.generated.resources.dashboard_xr
 import flashback.composeapp.generated.resources.dashboard_settings
 import flashback.composeapp.generated.resources.dashboard_contact
 import flashback.composeapp.generated.resources.dashboard_contact_selected
+import flashback.composeapp.generated.resources.dashboard_info
+import flashback.composeapp.generated.resources.dashboard_info_selected
 import flashback.composeapp.generated.resources.dashboard_nav_calendar_selected
 import flashback.composeapp.generated.resources.dashboard_nav_circuits
 import flashback.composeapp.generated.resources.dashboard_nav_circuits_selected
@@ -25,6 +27,8 @@ import flashback.composeapp.generated.resources.dashboard_nav_glossary_selected
 import flashback.composeapp.generated.resources.dashboard_reaction_selected
 import flashback.composeapp.generated.resources.dashboard_rss_selected
 import flashback.composeapp.generated.resources.dashboard_settings_selected
+import flashback.composeapp.generated.resources.dashboard_style_guide
+import flashback.composeapp.generated.resources.dashboard_style_guide_selected
 import flashback.composeapp.generated.resources.dashboard_xr_selected
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.dashboard_tab_results
@@ -33,12 +37,14 @@ import flashback.presentation.localisation.generated.resources.nav_constructors
 import flashback.presentation.localisation.generated.resources.nav_contact
 import flashback.presentation.localisation.generated.resources.nav_drivers
 import flashback.presentation.localisation.generated.resources.nav_glossary
+import flashback.presentation.localisation.generated.resources.nav_info
 import flashback.presentation.localisation.generated.resources.nav_reaction_game
 import flashback.presentation.localisation.generated.resources.nav_rss
 import flashback.presentation.localisation.generated.resources.nav_search
 import flashback.presentation.localisation.generated.resources.nav_lineup
 import flashback.presentation.localisation.generated.resources.nav_xr
 import flashback.presentation.localisation.generated.resources.nav_settings
+import flashback.presentation.localisation.generated.resources.nav_style_guide
 import flashback.presentation.localisation.generated.resources.search_category_circuits
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
@@ -47,10 +53,12 @@ import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavCircuits
 import tmg.flashback.navigation.NavDriverStandings
 import tmg.flashback.navigation.NavGlossary
+import tmg.flashback.navigation.NavInfo
 import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
 import tmg.flashback.navigation.NavSettings
+import tmg.flashback.navigation.NavStyleGuide
 import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.ui.navigation.NavigationItem
 
@@ -68,7 +76,9 @@ enum class MenuItem(
     ReactionGame(key = "ReactionGame"),
     Settings(key = "Settings"),
     Contact(key = "Contact"),
-    XR_Spacial(key = "XR_Spacial")
+    StyleGuide(key = "Style Guide"),
+    Info(key = "Debug Info"),
+    XR_Spacial(key = "XR_Spacial"),
 }
 
 val MenuItem.label: StringResource
@@ -84,6 +94,8 @@ val MenuItem.label: StringResource
         MenuItem.ReactionGame -> string.nav_reaction_game
         MenuItem.Settings -> string.nav_settings
         MenuItem.Contact -> string.nav_contact
+        MenuItem.StyleGuide -> string.nav_style_guide
+        MenuItem.Info -> string.nav_info
         MenuItem.XR_Spacial -> string.nav_xr
     }
 
@@ -100,6 +112,8 @@ val MenuItem.icon: DrawableResource
         MenuItem.ReactionGame -> Res.drawable.dashboard_reaction
         MenuItem.Settings -> Res.drawable.dashboard_settings
         MenuItem.Contact -> Res.drawable.dashboard_contact
+        MenuItem.StyleGuide -> Res.drawable.dashboard_style_guide
+        MenuItem.Info -> Res.drawable.dashboard_info
         MenuItem.XR_Spacial -> Res.drawable.dashboard_xr
     }
 
@@ -116,6 +130,8 @@ val MenuItem.selectedIcon: DrawableResource
         MenuItem.ReactionGame -> Res.drawable.dashboard_reaction_selected
         MenuItem.Settings -> Res.drawable.dashboard_settings_selected
         MenuItem.Contact -> Res.drawable.dashboard_contact_selected
+        MenuItem.StyleGuide -> Res.drawable.dashboard_style_guide_selected
+        MenuItem.Info -> Res.drawable.dashboard_info_selected
         MenuItem.XR_Spacial -> Res.drawable.dashboard_xr_selected
     }
 
@@ -141,6 +157,8 @@ fun MenuItem.toScreen(): Screen? {
         MenuItem.Glossary -> NavGlossary
         MenuItem.ReactionGame -> NavReactionGame
         MenuItem.Settings -> NavSettings
+        MenuItem.StyleGuide -> NavStyleGuide
+        MenuItem.Info -> NavInfo
         MenuItem.Contact -> NavAbout
         MenuItem.XR_Spacial -> null
     }

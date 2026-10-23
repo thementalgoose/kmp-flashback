@@ -1,6 +1,8 @@
 package tmg.flashback.formula1.model
 
 import tmg.flashback.formula1.enums.RaceStatus
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -125,116 +127,122 @@ internal class DriverHistorySeasonTest {
         assertEquals(3, model.finishesInPoints)
     }
 
-    private val testCasesValidStatuses = listOf(
-        "Finished",
-        "+1 Lap",
-        "+2 Laps",
-        "+3 Laps",
-        "+4 Laps",
-        "+5 Laps",
-        "+6 Laps",
-        "+7 Laps",
-        "+8 Laps",
-        "+9 Laps"
-    )
-    @Test
-    fun `race finishes`() {
-        testCasesValidStatuses.forEach { status ->
-            val model = DriverHistorySeason.model(raceOverview = listOf(
-                DriverHistorySeasonRace.model(status = RaceStatus.from(status)),
-            ))
+    @ParameterizedTest
+    @MethodSource("testCasesValidStatuses")
+    fun `race finishes`(status: String) {
+        val model = DriverHistorySeason.model(raceOverview = listOf(
+            DriverHistorySeasonRace.model(status = RaceStatus.from(status)),
+        ))
 
-            assertEquals(1, model.raceFinishes)
-            assertEquals(0, model.raceRetirements)
-        }
+        assertEquals(1, model.raceFinishes)
+        assertEquals(0, model.raceRetirements)
     }
 
-    private val testCasesInvalidStatuses = listOf(
-        "Engine",
-        "Wheel nut",
-        "Tyre",
-        "Wheel",
-        "Damage",
-        "Steering",
-        "Brakes",
-        "Vibrations",
-        "Suspension",
-        "Power Unit",
-        "Hydraulics",
-        "Water leak",
-        "Mechanical",
-        "Gearbox",
-        "Illness",
-        "Debris",
-        "Collision",
-        "Collision damage",
-        "Power loss",
-        "Withdrew",
-        "Accident",
-        "Oil pressure",
-        "Disqualified",
-        "Puncture",
-        "ERS",
-        "Electrical",
-        "Electronics",
-        "Electronic",
-        "Driveshaft",
-        "Fuel pressure",
-        "Spun off",
-        "Turbo",
-        "Fuel system",
-        "Transmission",
-        "Clutch",
-        "Oil leak",
-        "Exhaust",
-        "Drivetrain",
-        "Rear wing",
-        "Front wing",
-        "Water pressure",
-        "Seat",
-        "Battery",
-        "Out of fuel",
-        "Overheating",
-        "Spark plugs",
-        "Throttle",
-        "Unknown"
-    )
-    @Test
-    fun `race retirements`() {
-        testCasesInvalidStatuses.forEach { status ->
-            val model = DriverHistorySeason.model(raceOverview = listOf(
-                DriverHistorySeasonRace.model(status = RaceStatus.from(status)),
-            ))
+    @ParameterizedTest
+    @MethodSource("testCasesInvalidStatuses")
+    fun `race retirements`(status: String) {
+        val model = DriverHistorySeason.model(raceOverview = listOf(
+            DriverHistorySeasonRace.model(status = RaceStatus.from(status)),
+        ))
 
-            assertEquals(0, model.raceFinishes)
-            assertEquals(1, model.raceRetirements)
-        }
+        assertEquals(0, model.raceFinishes)
+        assertEquals(1, model.raceRetirements)
     }
 
-    private data class TestCase(
+    data class TestCaseQualiAbove(
         val quali1: Int?,
         val quali2: Int?,
         val quali3: Int?,
         val input: Int,
         val expectedResult: Int
     )
-    private val testCasesQualiAbove = listOf(
-        TestCase(1 ,1 ,1 ,1 ,3),
-        TestCase(1 ,1 ,1 ,10,3),
-        TestCase(1 ,2 ,1 ,1 ,2),
-        TestCase(1 ,2 ,1 ,2 ,3),
-        TestCase(12,25,13,10,0),
-        TestCase(12,25,10,10,1)
-    )
-    @Test
-    fun `total qualifying above value returns accurate result`() {
-        testCasesQualiAbove.forEach { (q1, q2, q3, input, expectedResult) ->
-            val model = DriverHistorySeason.model(raceOverview = listOf(
-                DriverHistorySeasonRace.model(qualified = q1),
-                DriverHistorySeasonRace.model(qualified = q2),
-                DriverHistorySeasonRace.model(qualified = q3)
-            ))
-            assertEquals(expectedResult, model.totalQualifyingAbove(input))
-        }
+
+    @ParameterizedTest
+    @MethodSource("testCasesQualiAbove")
+    fun `total qualifying above value returns accurate result`(testCase: TestCaseQualiAbove) {
+        val model = DriverHistorySeason.model(raceOverview = listOf(
+            DriverHistorySeasonRace.model(qualified = testCase.quali1),
+            DriverHistorySeasonRace.model(qualified = testCase.quali2),
+            DriverHistorySeasonRace.model(qualified = testCase.quali3)
+        ))
+        assertEquals(testCase.expectedResult, model.totalQualifyingAbove(testCase.input))
+    }
+
+    companion object {
+        @JvmStatic
+        fun testCasesValidStatuses() = listOf(
+            "Finished",
+            "+1 Lap",
+            "+2 Laps",
+            "+3 Laps",
+            "+4 Laps",
+            "+5 Laps",
+            "+6 Laps",
+            "+7 Laps",
+            "+8 Laps",
+            "+9 Laps"
+        )
+
+        @JvmStatic
+        fun testCasesInvalidStatuses() = listOf(
+            "Engine",
+            "Wheel nut",
+            "Tyre",
+            "Wheel",
+            "Damage",
+            "Steering",
+            "Brakes",
+            "Vibrations",
+            "Suspension",
+            "Power Unit",
+            "Hydraulics",
+            "Water leak",
+            "Mechanical",
+            "Gearbox",
+            "Illness",
+            "Debris",
+            "Collision",
+            "Collision damage",
+            "Power loss",
+            "Withdrew",
+            "Accident",
+            "Oil pressure",
+            "Disqualified",
+            "Puncture",
+            "ERS",
+            "Electrical",
+            "Electronics",
+            "Electronic",
+            "Driveshaft",
+            "Fuel pressure",
+            "Spun off",
+            "Turbo",
+            "Fuel system",
+            "Transmission",
+            "Clutch",
+            "Oil leak",
+            "Exhaust",
+            "Drivetrain",
+            "Rear wing",
+            "Front wing",
+            "Water pressure",
+            "Seat",
+            "Battery",
+            "Out of fuel",
+            "Overheating",
+            "Spark plugs",
+            "Throttle",
+            "Unknown"
+        )
+
+        @JvmStatic
+        fun testCasesQualiAbove() = listOf(
+            TestCaseQualiAbove(1, 1, 1, 1, 3),
+            TestCaseQualiAbove(1, 1, 1, 10, 3),
+            TestCaseQualiAbove(1, 2, 1, 1, 2),
+            TestCaseQualiAbove(1, 2, 1, 2, 3),
+            TestCaseQualiAbove(12, 25, 13, 10, 0),
+            TestCaseQualiAbove(12, 25, 10, 10, 1)
+        )
     }
 }

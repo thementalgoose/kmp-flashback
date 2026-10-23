@@ -7,6 +7,9 @@ import androidx.activity.compose.LocalActivity
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import org.koin.java.KoinJavaComponent.getKoin
 import tmg.flashback.style.theme.Theme
@@ -40,6 +43,17 @@ actual fun getColours(theme: Theme): ThemeColours {
 @Composable
 actual fun setSystemBarsIconColours(isLight: Boolean) {
     val context = LocalActivity.current ?: return
-    val controller = WindowCompat.getInsetsController(context.window, context.window.decorView)
-    controller.isAppearanceLightStatusBars = isLight
+    val view = LocalView.current
+    if (view.isInEditMode) return
+    val configuration = LocalConfiguration.current // Triggers recomposition on orientation changes
+
+    SideEffect {
+        val controller = WindowCompat.getInsetsController(context.window, view)
+        controller.isAppearanceLightStatusBars = isLight
+        controller.isAppearanceLightNavigationBars = isLight
+        view.post {
+            controller.isAppearanceLightStatusBars = isLight
+            controller.isAppearanceLightNavigationBars = isLight
+        }
+    }
 }

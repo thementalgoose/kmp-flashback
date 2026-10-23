@@ -33,6 +33,8 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
@@ -192,7 +194,12 @@ private fun NavigationItem(
         .height(itemSize)
         .clip(RoundedCornerShape(100.dp))
         .background(backgroundColor.value)
+        .semantics {
+            role = Role.Tab
+            selected = item.isSelected == true
+        }
         .clickable(
+            role = Role.Tab,
             enabled = onClick != null,
             onClick = {
                 onClick?.invoke(item)

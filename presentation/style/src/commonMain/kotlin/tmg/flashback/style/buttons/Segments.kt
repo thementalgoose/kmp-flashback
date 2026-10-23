@@ -24,6 +24,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import flashback.presentation.style.generated.resources.Res
 import flashback.presentation.style.generated.resources.preview
@@ -127,8 +131,16 @@ private fun SegmentButton(
     }
     Row(
         modifier = modifier
+            .semantics {
+                role = Role.RadioButton
+                this.selected = selected
+            }
             .background(background)
-            .clickable { onClick(item) }
+            .clickable(
+                role = Role.RadioButton,
+                enabled = enabled,
+                onClick = { onClick(item) }
+            )
             .padding(
                 horizontal = AppTheme.dimens.xsmall,
                 vertical = AppTheme.dimens.small

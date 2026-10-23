@@ -60,11 +60,15 @@ import tmg.flashback.style.text.TextSection
 import tmg.flashback.ui.components.driver.DriverName
 import tmg.flashback.ui.components.edgeBar
 
+import tmg.flashback.feature.weekend.presentation.components.ReportIssueLink
+import tmg.flashback.infrastructure.extensions.ordinalAbbreviation
+
 private val lapTimeWidth: Dp = 64.dp
 
 fun LazyListScope.addQualifyingData(
     uiState: Data,
     selectQualifyingType: (QualifyingSortType) -> Unit,
+    reportIssueClicked: () -> Unit,
 ) {
     item("qualifying_label") {
         TypeHeader(
@@ -121,6 +125,14 @@ fun LazyListScope.addQualifyingData(
                 modifier = Modifier.animateItem(),
                 model = it,
                 driverClicked = { },
+            )
+        }
+    }
+    if (uiState.qualifyingResults.isNotEmpty()) {
+        item("qualifying_report_issue") {
+            ReportIssueLink(
+                onClick = reportIssueClicked,
+                modifier = Modifier.animateItem()
             )
         }
     }
@@ -307,24 +319,24 @@ private fun DriverLabel(
                     if (sprintQualifyingGrid > qualifyingPosition) {
                         BadgeView(
                             modifier = Modifier.padding(bottom = AppTheme.dimens.xsmall),
-                            model = Badge(stringResource(resource = string.qualifying_penalty_starts_sprint, sprintQualifyingGrid.toString()))
+                            model = Badge(stringResource(resource = string.qualifying_penalty_starts_sprint, sprintQualifyingGrid.ordinalAbbreviation))
                         )
                     } else if (sprintQualifyingGrid == 0) {
                         BadgeView(
                             modifier = Modifier.padding(bottom = AppTheme.dimens.xsmall),
-                            model = Badge(stringResource(resource = string.qualifying_penalty, sprintQualifyingGrid.toString()))
+                            model = Badge(stringResource(resource = string.qualifying_penalty))
                         )
                     }
                 } else if (grid != null) {
                     if (grid > qualifyingPosition) {
                         BadgeView(
                             modifier = Modifier.padding(bottom = AppTheme.dimens.xsmall),
-                            model = Badge(stringResource(resource = string.qualifying_penalty_starts, grid.toString()))
+                            model = Badge(stringResource(resource = string.qualifying_penalty_starts, grid.ordinalAbbreviation))
                         )
                     } else if (grid == 0) {
                         BadgeView(
                             modifier = Modifier.padding(bottom = AppTheme.dimens.xsmall),
-                            model = Badge(stringResource(resource = string.qualifying_penalty, grid.toString()))
+                            model = Badge(stringResource(resource = string.qualifying_penalty))
                         )
                     }
                 }

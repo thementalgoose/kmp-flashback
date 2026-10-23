@@ -1,5 +1,7 @@
 package tmg.flashback.formula1.model
 
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -18,7 +20,7 @@ internal class ConstructorHistoryTest {
         assertEquals(1, model.championshipWins)
     }
 
-    private data class TestCase(
+    data class TestCase(
         val season1Standing: Int?,
         val season1InProgress: Boolean,
         val season2Standing: Int?,
@@ -26,23 +28,15 @@ internal class ConstructorHistoryTest {
         val expected: Int?
     )
 
-    private val testCases = listOf(
-        TestCase(1, false,2 ,false ,1),
-        TestCase(1, true,2 ,false ,2),
-        TestCase(null,false,2 ,false ,2),
-        TestCase(null,false,null,false, null),
-        TestCase(1, true ,null,false, null),
-    )
-    @Test
-    fun `best championship position`() {
-        testCases.forEach { (season1Standing, season1InProgress, season2Standing, season2InProgress, expected) ->
-            val model = ConstructorHistory.model(standings = listOf(
-                ConstructorHistorySeason.model(season = 2019, championshipStanding = season1Standing, isInProgress = season1InProgress),
-                ConstructorHistorySeason.model(season = 2020, championshipStanding = season2Standing, isInProgress = season2InProgress)
-            ))
+    @ParameterizedTest
+    @MethodSource("testCases")
+    fun `best championship position`(testCase: TestCase) {
+        val model = ConstructorHistory.model(standings = listOf(
+            ConstructorHistorySeason.model(season = 2019, championshipStanding = testCase.season1Standing, isInProgress = testCase.season1InProgress),
+            ConstructorHistorySeason.model(season = 2020, championshipStanding = testCase.season2Standing, isInProgress = testCase.season2InProgress)
+        ))
 
-            assertEquals(expected, model.bestChampionship)
-        }
+        assertEquals(testCase.expected, model.bestChampionship)
     }
 
     @Test
@@ -201,5 +195,16 @@ internal class ConstructorHistoryTest {
         ))
 
         assertFalse(model.isWorldChampionFor(2020))
+    }
+
+    companion object {
+        @JvmStatic
+        fun testCases() = listOf(
+            TestCase(1, false, 2, false, 1),
+            TestCase(1, true, 2, false, 2),
+            TestCase(null, false, 2, false, 2),
+            TestCase(null, false, null, false, null),
+            TestCase(1, true, null, false, null)
+        )
     }
 }

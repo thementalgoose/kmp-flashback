@@ -38,6 +38,8 @@
     <string name="nav_glossary">术语表</string>
     <string name="nav_reaction_game">反应游戏</string>
     <string name="nav_contact">联系</string>
+    <string name="nav_style_guide">Style Guide</string>
+    <string name="nav_info">Info</string>
     <string name="nav_xr">XR</string>
     <string name="nav_details">详细信息</string>
     <string name="nav_qualifying">排位赛</string>
@@ -59,9 +61,9 @@
     <string name="sprint_qualifying_header_q1">SQ1</string>
     <string name="sprint_qualifying_header_q2">SQ2</string>
     <string name="sprint_qualifying_header_q3">SQ3</string>
-    <string name="qualifying_penalty_starts">处罚，从第 %1$s 位发车</string>
-    <string name="qualifying_penalty">处罚，维修区发车</string>
-    <string name="qualifying_penalty_starts_sprint">处罚，从第 %1$s 位发车</string>
+    <string name="qualifying_penalty_starts">从第 %1$s 位发车</string>
+    <string name="qualifying_penalty">维修区发车</string>
+    <string name="qualifying_penalty_starts_sprint">从第 %1$s 位发车</string>
 
     <!-- Results -->
     <string name="weekend_race_round">第 %1$d 轮</string>
@@ -77,6 +79,7 @@
     <string name="weekend_track_zones_overtake">直线模式</string>
     <string name="drs_zones">%1$s DRS 赛道分区</string>
     <string name="straight_mode_zones">%1$s 直线模式 赛道分区</string>
+    <string name="weekend_info_tyres">轮胎</string>
 
     <!-- Dashboard -->
     <string name="dashboard_now">最近的精彩瞬间…</string>
@@ -176,6 +179,11 @@
     <string name="details_link_report_issue">数据问题?</string>
 
     <string name="report_issue_thanks">问题已上报，谢谢！</string>
+    <string name="report_issue_link">发现问题？在此上报</string>
+    <string name="report_issue_dialog_title">上报问题</string>
+    <string name="report_issue_dialog_message">您确定要上报此数据的问题吗？</string>
+    <string name="report_issue_dialog_confirm">是</string>
+    <string name="report_issue_dialog_cancel">取消</string>
 
     <!-- Feature banners -->
     <string name="feature_banner_runtime_notifications">授予 Flashback 发送通知的权限</string>
@@ -321,6 +329,8 @@
     <string name="settings_header_widgets">小部件</string>
     <string name="settings_section_widgets_title">小部件</string>
     <string name="settings_section_widgets_description">小部件定制</string>
+    <string name="settings_section_widgets_add_title">添加小部件</string>
+    <string name="settings_section_widgets_add_description">将小部件添加到主屏幕</string>
     <string name="settings_section_widgets_show_background_title">显示背景？</string>
     <string name="settings_section_widgets_show_background_description">显示纯色背景而不是透明背景</string>
     <string name="settings_section_widgets_deeplink_event_title">活动链接？</string>
