@@ -15,6 +15,9 @@ data object NavDriverStandings: Screen
 data object NavTeamStandings: Screen
 
 @Serializable
+data object NavPaddock: Screen
+
+@Serializable
 data object NavCircuits: Screen
 
 @Serializable

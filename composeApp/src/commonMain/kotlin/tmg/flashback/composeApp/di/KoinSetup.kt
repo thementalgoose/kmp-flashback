@@ -72,6 +72,7 @@ import tmg.flashback.composeApp.usecases.RequiresSyncUseCase
 import tmg.flashback.composeApp.usecases.RequiresSyncUseCaseImpl
 import tmg.flashback.composeApp.usecases.StoreFirebaseInstallationIdUseCase
 import tmg.flashback.composeApp.usecases.StoreFirebaseInstallationIdUseCaseImpl
+import tmg.flashback.feature.paddock.di.featurePaddockModule
 import tmg.flashback.webbrowser.di.coreWebBrowserModule
 import tmg.flashback.widgets.upnext.di.featureWidgetUpNextModule
 
@@ -112,6 +113,7 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
         modules(featurePrivacyPolicyModule)
         modules(featureReactionGameModule)
         modules(featureRssModule)
+        modules(featurePaddockModule)
         modules(featureSearchModule)
         modules(featureSeasonModule)
         modules(featureWeekendModule)
