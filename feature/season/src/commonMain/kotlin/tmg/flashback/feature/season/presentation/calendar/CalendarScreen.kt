@@ -293,18 +293,3 @@ private fun Event(
         )
     }
 }
-
-private fun SeasonTyres?.get(dry: Boolean): List<TyreInfo> {
-    if (this == null) {
-        return emptyList()
-    }
-    return this.tyres
-        .filter { it.tyre.isDry == dry }
-        .map {
-            TyreInfo(
-                icon = it.tyre.icon,
-                label = it.label,
-                size = it.tyre.size
-            )
-        }
-}
