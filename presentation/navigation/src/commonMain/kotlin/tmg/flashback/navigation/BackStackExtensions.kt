@@ -18,6 +18,9 @@ inline fun <reified T: Screen> NavBackStack<NavKey>.addList(vararg with: T) {
         if (x.requiresPaddock() && !this.contains(NavPaddock)) {
             this.add(NavPaddock)
         }
+        if (x.requiresSettings() && !this.contains(NavSettings)) {
+            this.add(NavSettings)
+        }
         if (this.lastOrNull() != x) {
             this.add(x)
         }
@@ -29,6 +32,9 @@ inline fun <reified T: Screen> NavBackStack<NavKey>.replaceList(vararg with: T) 
     for (x in with) {
         if (x.requiresPaddock() && !this.contains(NavPaddock)) {
             this.add(NavPaddock)
+        }
+        if (x.requiresSettings() && !this.contains(NavSettings)) {
+            this.add(NavSettings)
         }
         this.add(x)
     }
@@ -61,3 +67,5 @@ fun NavBackStack<NavKey>.popList(): Boolean {
 fun NavKey.isList(): Boolean = (this as? Screen)?.isList() ?: true
 
 fun NavKey.requiresPaddock(): Boolean = (this as? Screen)?.requiresPaddock() ?: false
+
+fun NavKey.requiresSettings(): Boolean = (this as? Screen)?.requiresSettings() ?: false

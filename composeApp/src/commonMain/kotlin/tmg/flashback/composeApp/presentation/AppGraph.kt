@@ -392,10 +392,13 @@ fun AppGraph(
                 )
             }
 
-            entry<NavAbout>(metadata = SplitPaneScene.listPane()) {
+            entry<NavAbout>(metadata = SplitPaneScene.detailPane()) {
                 AboutScreen(
                     appIcon = Res.drawable.logo,
                     paddingValues = insetPadding,
+                    actionUpClicked = {
+                        backStack.removeDetail()
+                    },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
             }

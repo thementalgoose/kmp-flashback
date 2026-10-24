@@ -151,10 +151,10 @@ fun Screen.isList(): Boolean = when (this) {
     is NavCircuits -> true
     is NavLineup -> true
     is NavGlossary -> true
-    is NavAbout -> true
     is NavStyleGuide -> true
     is NavInfo -> true
 
+    is NavAbout -> false
     is NavWeekend -> false
     is NavCircuit -> false
     is NavDriver -> false
@@ -181,3 +181,9 @@ fun Screen.requiresPaddock(): Boolean = when (this) {
     is NavSearch -> true
     else -> false
 }
+
+fun Screen.requiresSettings(): Boolean = when (this) {
+    is NavAbout -> true
+    else -> false
+}
+

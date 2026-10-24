@@ -7,13 +7,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -38,35 +37,33 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.CustomAccessibilityAction
-import androidx.compose.ui.semantics.customActions
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush.Companion.linearGradient
+import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.customActions
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import coil3.compose.AsyncImage
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.ab_action_copy_debug_ids
 import flashback.presentation.localisation.generated.resources.ab_back
 import flashback.presentation.localisation.generated.resources.about_additional
 import flashback.presentation.localisation.generated.resources.about_dependencies
-import flashback.presentation.localisation.generated.resources.about_desc
 import flashback.presentation.localisation.generated.resources.app_name
 import flashback.presentation.localisation.generated.resources.app_version
 import flashback.presentation.localisation.generated.resources.dependency_thank_you
 import flashback.presentation.ui.generated.resources.Res
 import flashback.presentation.ui.generated.resources.arrow_down
+import flashback.presentation.ui.generated.resources.ic_back
 import flashback.presentation.ui.generated.resources.ic_menu
 import flashback.presentation.ui.generated.resources.unknown_avatar
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.infrastructure.device.Device
@@ -83,6 +80,7 @@ import tmg.flashback.style.text.TextHeadline2
 @Composable
 fun AboutScreen(
     appIcon: DrawableResource,
+    actionUpClicked: () -> Unit,
     paddingValues: PaddingValues,
     windowSizeClass: WindowSizeClass,
     viewModel: AboutViewModel = koinViewModel()
@@ -90,32 +88,35 @@ fun AboutScreen(
     ScreenView("About")
 
     val uiState = viewModel.uiState.collectAsState()
-    if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
-        AboutListScreen(
-            icon = appIcon,
-            paddingValues = paddingValues,
-            email = uiState.value.contactEmail,
-            deviceId = uiState.value.deviceUuid,
-            buttons = uiState.value.buttons,
-            dependencyClicked = viewModel::openDependency,
-            buttonClicked = viewModel::openButton,
-            remoteNotificationId = uiState.value.remoteTokenId,
-            installationId = uiState.value.installationId,
-            idsClicked = viewModel::idsClicked
-        )
-    } else {
-        AboutPaneScreen(
-            icon = appIcon,
-            paddingValues = paddingValues,
-            email = uiState.value.contactEmail,
-            deviceId = uiState.value.deviceUuid,
-            buttons = uiState.value.buttons,
-            dependencyClicked = viewModel::openDependency,
-            buttonClicked = viewModel::openButton,
-            installationId = uiState.value.installationId,
-            remoteNotificationId = uiState.value.remoteTokenId,
-            idsClicked = viewModel::idsClicked
-        )
+    BoxWithConstraints {
+        if (maxWidth <= WIDTH_DP_MEDIUM_LOWER_BOUND.dp) {
+            AboutListScreen(
+                icon = appIcon,
+                paddingValues = paddingValues,
+                email = uiState.value.contactEmail,
+                deviceId = uiState.value.deviceUuid,
+                buttons = uiState.value.buttons,
+                dependencyClicked = viewModel::openDependency,
+                buttonClicked = viewModel::openButton,
+                remoteNotificationId = uiState.value.remoteTokenId,
+                installationId = uiState.value.installationId,
+                idsClicked = viewModel::idsClicked,
+                backClicked = actionUpClicked
+            )
+        } else {
+            AboutPaneScreen(
+                icon = appIcon,
+                paddingValues = paddingValues,
+                email = uiState.value.contactEmail,
+                deviceId = uiState.value.deviceUuid,
+                buttons = uiState.value.buttons,
+                dependencyClicked = viewModel::openDependency,
+                buttonClicked = viewModel::openButton,
+                installationId = uiState.value.installationId,
+                remoteNotificationId = uiState.value.remoteTokenId,
+                idsClicked = viewModel::idsClicked
+            )
+        }
     }
 }
 
@@ -131,6 +132,7 @@ private fun AboutListScreen(
     buttonClicked: (AboutButtons) -> Unit,
     dependencyClicked: (AboutDependency) -> Unit,
     idsClicked: () -> Unit,
+    backClicked: () -> Unit,
 ) {
     val showDependencies = remember { mutableStateOf(true) }
     LazyColumn(
@@ -138,11 +140,25 @@ private fun AboutListScreen(
         contentPadding = paddingValues,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
+        item("back") {
+            IconButton(
+                onClick = backClicked,
+            ) {
+                Icon(
+                    painter = painterResource(resource = Res.drawable.ic_back),
+                    contentDescription = stringResource(resource = string.ab_back),
+                    tint = AppTheme.colors.onSurface
+                )
+            }
+        }
         item("hero") {
             Hero(
                 modifier = Modifier
                     .animateItem()
-                    .padding(horizontal = AppTheme.dimens.medium),
+                    .padding(
+                        start = AppTheme.dimens.medium,
+                        end = AppTheme.dimens.medium,
+                    ),
                 email = email,
                 icon = icon,
                 buttons = buttons,
@@ -537,7 +553,8 @@ private fun PreviewList() {
             dependencyClicked = { },
             buttonClicked = { },
             icon = Res.drawable.unknown_avatar,
-            idsClicked = { }
+            idsClicked = { },
+            backClicked = { }
         )
     }
 }
