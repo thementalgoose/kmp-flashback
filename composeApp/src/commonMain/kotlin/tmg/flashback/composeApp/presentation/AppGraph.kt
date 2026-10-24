@@ -377,7 +377,6 @@ fun AppGraph(
                 AboutScreen(
                     appIcon = Res.drawable.logo,
                     paddingValues = insetPadding,
-                    actionUpClicked = openPanel,
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
             }

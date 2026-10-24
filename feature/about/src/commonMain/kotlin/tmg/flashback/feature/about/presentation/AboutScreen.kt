@@ -84,7 +84,6 @@ import tmg.flashback.style.text.TextHeadline2
 fun AboutScreen(
     appIcon: DrawableResource,
     paddingValues: PaddingValues,
-    actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
     viewModel: AboutViewModel = koinViewModel()
 ) {
@@ -95,7 +94,6 @@ fun AboutScreen(
         AboutListScreen(
             icon = appIcon,
             paddingValues = paddingValues,
-            actionUpClicked = actionUpClicked,
             email = uiState.value.contactEmail,
             deviceId = uiState.value.deviceUuid,
             buttons = uiState.value.buttons,
@@ -132,7 +130,6 @@ private fun AboutListScreen(
     paddingValues: PaddingValues,
     buttonClicked: (AboutButtons) -> Unit,
     dependencyClicked: (AboutDependency) -> Unit,
-    actionUpClicked: () -> Unit,
     idsClicked: () -> Unit,
 ) {
     val showDependencies = remember { mutableStateOf(true) }
@@ -141,9 +138,6 @@ private fun AboutListScreen(
         contentPadding = paddingValues,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        item("back") {
-            ActionUpButton(actionUpClicked = actionUpClicked)
-        }
         item("hero") {
             Hero(
                 modifier = Modifier
@@ -540,7 +534,6 @@ private fun PreviewList() {
             buttons = AboutButtons.entries,
             installationId = "installation-uuid",
             remoteNotificationId = "notification-id",
-            actionUpClicked = { },
             dependencyClicked = { },
             buttonClicked = { },
             icon = Res.drawable.unknown_avatar,

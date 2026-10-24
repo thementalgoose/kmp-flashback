@@ -17,6 +17,7 @@ import flashback.presentation.localisation.generated.resources.notification_chan
 import flashback.presentation.localisation.generated.resources.notification_channel_sprint_notify
 import flashback.presentation.localisation.generated.resources.notification_channel_sprint_qualifying
 import flashback.presentation.localisation.generated.resources.notification_channel_sprint_qualifying_notify
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -84,6 +85,7 @@ class FlashbackAndroidStartup(
         refreshWidgetsUseCase()
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     private fun Application.setupResultNotifications() {
         GlobalScope.launch {
             subscribeResultNotificationsUseCase.invoke()
