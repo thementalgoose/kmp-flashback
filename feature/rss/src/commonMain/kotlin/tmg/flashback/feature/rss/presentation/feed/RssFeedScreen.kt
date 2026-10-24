@@ -42,8 +42,6 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.format
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.navigation.Screen
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import org.koin.compose.viewmodel.koinViewModel
@@ -97,7 +95,7 @@ fun RSSScreen(
         configureSources = {
             navigateTo(NavSettingsRssConfigure)
         },
-        showMenu = !windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)
+        showBack = !windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)
     )
 }
 
@@ -107,7 +105,7 @@ internal fun RSSScreen(
     refresh: () -> Unit,
     paddingValues: PaddingValues,
     uiState: RssFeedUiState,
-    showMenu: Boolean,
+    showBack: Boolean,
     itemClicked: (Article) -> Unit,
     windowSizeClass: WindowSizeClass,
     configureSources: () -> Unit,
@@ -126,7 +124,7 @@ internal fun RSSScreen(
                     item("header") {
                         Header(
                             text = stringResource(resource = string.title_rss),
-                            action = HeaderAction.MENU.takeIf { showMenu },
+                            action = HeaderAction.BACK.takeIf { showBack },
                             overrideIcons = {
                                 Refresh(onClick = refresh)
                                 IconButton(onClick = configureSources) {
@@ -308,7 +306,7 @@ private fun Preview() {
             itemClicked = {},
             configureSources = {},
             actionUpClicked = {},
-            showMenu = true,
+            showBack = true,
             refresh = { },
             windowSizeClass = WindowSizeClass.compute(400f, 700f)
         )

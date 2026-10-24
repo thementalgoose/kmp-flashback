@@ -5,6 +5,9 @@ import tmg.flashback.composeApp.presentation.MenuItem.Contact
 import tmg.flashback.composeApp.presentation.MenuItem.DriversStandings
 import tmg.flashback.composeApp.presentation.MenuItem.Info
 import tmg.flashback.composeApp.presentation.MenuItem.Paddock
+import tmg.flashback.composeApp.presentation.MenuItem.ReactionGame
+import tmg.flashback.composeApp.presentation.MenuItem.Rss
+import tmg.flashback.composeApp.presentation.MenuItem.Search
 import tmg.flashback.composeApp.presentation.MenuItem.Settings
 import tmg.flashback.composeApp.presentation.MenuItem.StyleGuide
 import tmg.flashback.composeApp.presentation.MenuItem.TeamsStandings
@@ -15,6 +18,9 @@ import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavDriverStandings
 import tmg.flashback.navigation.NavInfo
 import tmg.flashback.navigation.NavPaddock
+import tmg.flashback.navigation.NavReactionGame
+import tmg.flashback.navigation.NavRss
+import tmg.flashback.navigation.NavSearch
 import tmg.flashback.navigation.NavSettings
 import tmg.flashback.navigation.NavStyleGuide
 import tmg.flashback.navigation.NavTeamStandings
@@ -45,13 +51,15 @@ fun generateNavPrimaryItems(
     Calendar.toNavigationItem(currentlySelectedScreen == NavCalendar),
     DriversStandings.toNavigationItem(currentlySelectedScreen == NavDriverStandings),
     TeamsStandings.toNavigationItem(currentlySelectedScreen == NavTeamStandings),
-    Paddock.toNavigationItem(currentlySelectedScreen == NavPaddock)
 )
 
 fun generateNavSecondaryItems(
     currentlySelectedScreen: Screen?,
     showRss: Boolean
 ): List<NavigationItem> = listOfNotNull(
+    Rss.toNavigationItem(currentlySelectedScreen == NavRss).takeIf { showRss },
+    ReactionGame.toNavigationItem(currentlySelectedScreen == NavReactionGame),
+    Search.toNavigationItem(currentlySelectedScreen == NavSearch),
     Settings.toNavigationItem(currentlySelectedScreen == NavSettings),
     Contact.toNavigationItem(currentlySelectedScreen == NavAbout)
 )

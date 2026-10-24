@@ -171,7 +171,7 @@ fun AppGraph(
                     paddingValues = insetPadding,
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
-                        backStack.replaceDetail(it)
+                        backStack.replaceList(it)
                     }
                 )
             }

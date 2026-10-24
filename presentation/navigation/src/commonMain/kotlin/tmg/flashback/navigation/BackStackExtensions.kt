@@ -12,9 +12,11 @@ fun NavBackStack<NavKey>.removeDetail() {
     this.removeAll { key -> !key.isList() }
 }
 
-inline fun <reified T: Screen> NavBackStack<NavKey>.replaceList(with: T) {
+inline fun <reified T: Screen> NavBackStack<NavKey>.replaceList(vararg with: T) {
     this.clear()
-    this.add(with)
+    for (x in with) {
+        this.add(x)
+    }
 }
 
 fun NavKey.isList(): Boolean = (this as? Screen)?.isList() ?: true
