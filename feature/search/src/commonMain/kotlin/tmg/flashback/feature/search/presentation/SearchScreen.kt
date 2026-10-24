@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.search_title
 import org.jetbrains.compose.resources.stringResource
@@ -32,6 +33,10 @@ import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.preview.preview
+import tmg.flashback.navigation.NavCircuit
+import tmg.flashback.navigation.NavDriver
+import tmg.flashback.navigation.NavSearchFilter
+import tmg.flashback.navigation.NavTeam
 import tmg.flashback.navigation.Screen
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
@@ -40,6 +45,7 @@ import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.textinput.TextInput
 import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.header.Header
+import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 
 @Composable
@@ -48,13 +54,14 @@ fun SearchScreen(
     actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
     navigateTo: (Screen) -> Unit,
-    filtering: List<Category>,
+    filtering: List<NavSearchFilter>,
     viewModel: SearchViewModel = koinViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsState()
 
     LaunchedEffect(filtering) {
-        viewModel.applyFilters(filtering)
+        val filters = filtering.map { it.toCategory }
+        viewModel.applyFilters(filters)
     }
 
     SearchScreen(
@@ -94,7 +101,7 @@ private fun SearchScreen(
                 Header(
                     modifier = Modifier.animateItem(),
                     actionUpClicked = actionUpClicked,
-                    action = null,
+                    action = if (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) null else HeaderAction.BACK,
                     text = stringResource(string.search_title),
                     overrideIcons = {
                         Refresh(onClick = refresh)
@@ -150,7 +157,13 @@ private fun SearchScreen(
             items(uiState.resultsDrivers, key = { it.id }) {
                 DriverEntry(
                     model = it,
-                    driverClicked = { },
+                    driverClicked = {
+                        navigateTo(NavDriver(
+                            season = null,
+                            id = it.id,
+                            name = it.name
+                        ))
+                    },
                     modifier = Modifier.animateItem()
                 )
             }
@@ -165,7 +178,13 @@ private fun SearchScreen(
             items(uiState.resultsConstructors, key = { it.id }) {
                 ConstructorEntry(
                     model = it,
-                    constructorClicked = { },
+                    constructorClicked = {
+                        navigateTo(NavTeam(
+                            season = null,
+                            id = it.id,
+                            name = it.name
+                        ))
+                    },
                     modifier = Modifier.animateItem()
                 )
             }
@@ -180,13 +199,26 @@ private fun SearchScreen(
             items(uiState.resultsCircuits, key = { it.id }) {
                 CircuitEntry(
                     model = it,
-                    circuitClicked = { },
+                    circuitClicked = {
+                        navigateTo(NavCircuit(
+                            id = it.id,
+                            name = it.name
+                        ))
+                    },
                     modifier = Modifier.animateItem()
                 )
             }
         }
     }
 }
+
+private val NavSearchFilter.toCategory: Category
+    get() = when (this) {
+        NavSearchFilter.Drivers -> Category.Drivers
+        NavSearchFilter.Teams -> Category.Teams
+        NavSearchFilter.Circuits -> Category.Circuits
+        NavSearchFilter.Races -> Category.Races
+    }
 
 @PreviewTheme
 @Composable

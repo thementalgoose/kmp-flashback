@@ -18,37 +18,3 @@ inline fun <reified T: Screen> NavBackStack<NavKey>.replaceList(with: T) {
 }
 
 fun NavKey.isList(): Boolean = (this as? Screen)?.isList() ?: true
-
-fun Screen.isList(): Boolean = when (this) {
-    is NavCalendar -> true
-    is NavDriverStandings -> true
-    is NavTeamStandings -> true
-    is NavCircuits -> true
-    is NavWeekend -> false
-    is NavCircuit -> false
-    is NavDriver -> false
-    is NavTeam -> false
-    is NavDriverComparison -> false
-    is NavPaddock -> true
-    is NavRss -> true
-    is NavGlossary -> true
-    is NavWebpage -> false
-    is NavReactionGame -> true
-    is NavSettings -> true
-    is NavLineup -> true
-    is NavSettingsDarkMode -> false
-    is NavSettingsTheme -> false
-    is NavSettingsLayoutHome -> false
-    is NavSettingsLayoutRace -> false
-    is NavSettingsRssConfigure -> false
-    is NavSettingsInAppBrowser -> false
-    is NavSettingsNotificationResults -> false
-    is NavSettingsNotificationUpcoming -> false
-    is NavSettingsWidgets -> false
-    is NavSettingsPrivacy -> false
-    is NavPrivacyPolicy -> false
-    is NavGlossaryDetail -> false
-    is NavAbout -> true
-    is NavStyleGuide -> true
-    is NavInfo -> true
-}

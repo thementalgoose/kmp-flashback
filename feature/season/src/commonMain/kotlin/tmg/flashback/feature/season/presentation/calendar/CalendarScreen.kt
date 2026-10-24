@@ -29,7 +29,12 @@ import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOW
 import flashback.domain.formula1.generated.resources.Res.drawable
 import flashback.domain.formula1.generated.resources.ic_tyre
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.ab_refresh
+import flashback.presentation.localisation.generated.resources.search_title
 import flashback.presentation.localisation.generated.resources.tyres_label
+import flashback.presentation.ui.generated.resources.Res
+import flashback.presentation.ui.generated.resources.ic_refresh
+import flashback.presentation.ui.generated.resources.ic_search
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.format.MonthNames
 import org.jetbrains.compose.resources.painterResource
@@ -52,11 +57,14 @@ import tmg.flashback.formula1.extensions.label
 import tmg.flashback.infrastructure.datetime.displayDate
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.startOfWeek
+import tmg.flashback.navigation.NavSearch
+import tmg.flashback.navigation.NavSearchFilter
 import tmg.flashback.navigation.NavWeekend
 import tmg.flashback.navigation.Screen
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
+import tmg.flashback.style.text.TextHeadline1
 import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
@@ -97,6 +105,11 @@ fun CalendarScreen(
         windowSizeClass = windowSizeClass,
         uiState = uiState.value,
         refresh = viewModel::refresh,
+        goToSearch = {
+            navigateTo(
+                NavSearch(NavSearchFilter.Circuits)
+            )
+        },
         goToWeekend = { item, defaultTab ->
             navigateTo(
                 NavWeekend(
@@ -118,6 +131,7 @@ fun CalendarScreen(
     uiState: CalendarScreenState,
     refresh: () -> Unit,
     expandGroupedRaces: () -> Unit,
+    goToSearch: () -> Unit,
     goToWeekend: (CalendarItem.RaceWeek, String?) -> Unit,
 ) {
     ScreenView(screenName = "Calendar", updateKey = uiState.season, args = mapOf(
@@ -137,13 +151,25 @@ fun CalendarScreen(
             content = {
                 item(key = "header") {
                     Header(
-                        modifier = Modifier.animateItem(),
+                        modifier = Modifier
+                            .animateItem()
+                            .padding(vertical = AppTheme.dimens.medium),
                         content = {
-                            ResultsSeasonPicker(subtitle = null)
+                            ResultsSeasonPicker()
                         },
                         action = null,
                         overrideIcons = {
                             Refresh(onClick = refresh)
+                            IconButton(
+                                onClick = goToSearch,
+                                content = {
+                                    Icon(
+                                        painter = painterResource(Res.drawable.ic_search),
+                                        contentDescription = stringResource(string.search_title),
+                                        tint = AppTheme.colors.onSurface
+                                    )
+                                }
+                            )
                         }
                     )
                 }

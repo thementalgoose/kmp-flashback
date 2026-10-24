@@ -65,7 +65,6 @@ internal fun AllSettingsScreen(
     }
 
     AllSettingsScreen(
-        navigateTo = navigateTo,
         navigateToSubScreen = navigateToSubScreen,
         uiState = uiState.value,
         paddingValues = insets
@@ -75,7 +74,6 @@ internal fun AllSettingsScreen(
 @Composable
 private fun AllSettingsScreen(
     navigateToSubScreen: (Screen) -> Unit,
-    navigateTo: (Screen) -> Unit,
     uiState: AllSettingsUiState,
     paddingValues: PaddingValues,
 ) {
@@ -175,7 +173,7 @@ private fun AllSettingsScreen(
                 )
                 SettingCategory(
                     item = Settings.AboutCategory,
-                    itemClicked = { navigateTo(NavAbout) }
+                    itemClicked = { navigateToSubScreen(NavAbout) }
                 )
             }
         )

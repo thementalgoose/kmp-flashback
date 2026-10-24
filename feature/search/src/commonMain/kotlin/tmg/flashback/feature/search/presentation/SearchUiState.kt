@@ -74,9 +74,11 @@ sealed interface Result {
     }
 }
 
-enum class Category {
-    Drivers,
-    Teams,
-    Circuits,
-    Races;
+enum class Category(
+    val key: String
+) {
+    Drivers(key = "Drivers"),
+    Teams(key = "Teams"),
+    Circuits(key = "Circuits"),
+    Races(key = "Races");
 }

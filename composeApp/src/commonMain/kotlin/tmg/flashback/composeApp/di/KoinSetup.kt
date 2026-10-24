@@ -50,6 +50,7 @@ import tmg.flashback.notifications.firebase.FirebaseMessagingService
 import tmg.flashback.persistence.flashback.di.dataPersistenceFlashbackModule
 import tmg.flashback.preferences.di.corePreferencesModule
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
+import tmg.flashback.composeApp.presentation.paddock.PaddockViewModel
 import tmg.flashback.composeApp.presentation.settings.AllSettingsViewModel
 import tmg.flashback.composeApp.presentation.settings.about.SettingsAboutViewModel
 import tmg.flashback.composeApp.presentation.settings.browser.SettingsBrowserViewModel
@@ -72,7 +73,6 @@ import tmg.flashback.composeApp.usecases.RequiresSyncUseCase
 import tmg.flashback.composeApp.usecases.RequiresSyncUseCaseImpl
 import tmg.flashback.composeApp.usecases.StoreFirebaseInstallationIdUseCase
 import tmg.flashback.composeApp.usecases.StoreFirebaseInstallationIdUseCaseImpl
-import tmg.flashback.feature.paddock.di.featurePaddockModule
 import tmg.flashback.webbrowser.di.coreWebBrowserModule
 import tmg.flashback.widgets.upnext.di.featureWidgetUpNextModule
 
@@ -113,7 +113,6 @@ fun doInitKoin(platformModules: KoinApplication.() -> Unit) {
         modules(featurePrivacyPolicyModule)
         modules(featureReactionGameModule)
         modules(featureRssModule)
-        modules(featurePaddockModule)
         modules(featureSearchModule)
         modules(featureSeasonModule)
         modules(featureWeekendModule)
@@ -144,6 +143,8 @@ internal fun module() = module {
 
     single<StoreFirebaseInstallationIdUseCase> { StoreFirebaseInstallationIdUseCaseImpl(get(), get()) }
     single<RequiresSyncUseCase> { RequiresSyncUseCaseImpl(get(), get()) }
+
+    viewModel { PaddockViewModel(get()) }
 
     viewModel { InfoViewModel(get()) }
 

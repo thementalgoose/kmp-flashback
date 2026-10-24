@@ -24,14 +24,14 @@ import tmg.flashback.ui.components.season.Picker
 
 @Composable
 fun ResultsSeasonPicker(
-    subtitle: String?,
+    modifier: Modifier = Modifier,
     viewModel: SeasonPickerViewModel = koinViewModel()
 ) {
     val seasons = viewModel.supportedSeasons.collectAsState()
     val currentSeason = viewModel.currentSeason.collectAsState()
     val newSeasonAvailable = viewModel.newSeasonAvailable.collectAsState()
     ResultsSeasonPicker(
-        subtitle = subtitle,
+        modifier = modifier,
         currentSeason = currentSeason.value,
         supportedSeasons = seasons.value,
         newSeasonAvailable = newSeasonAvailable.value,
@@ -41,18 +41,17 @@ fun ResultsSeasonPicker(
 }
 
 @Composable
-fun ResultsSeasonPicker(
-    subtitle: String?,
+private fun ResultsSeasonPicker(
     currentSeason: Int,
     supportedSeasons: List<Int>,
     newSeasonAvailable: Boolean,
     currentSeasonUpdated: (season: Int) -> Unit,
     goToLatestSeason: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val seasons = remember(supportedSeasons) { supportedSeasons.map { PickerItem.Text(it.toString()) } }
     Column(
-        modifier = Modifier
-            .padding(vertical = AppTheme.dimens.medium)
+        modifier = modifier
             .fillMaxWidth()
     ) {
         Picker(
@@ -74,12 +73,6 @@ fun ResultsSeasonPicker(
             },
             counter = true
         )
-        if (subtitle != null) {
-            TextHeadline1(
-                text = subtitle,
-                modifier = Modifier.padding(horizontal = AppTheme.dimens.medium)
-            )
-        }
     }
 }
 
@@ -88,7 +81,6 @@ fun ResultsSeasonPicker(
 private fun PreviewWithNewSeason() {
     ApplicationThemePreview {
         ResultsSeasonPicker(
-            subtitle = "Subtitle",
             currentSeason = 2023,
             supportedSeasons = listOf(2023, 2024),
             newSeasonAvailable = true,
@@ -103,7 +95,6 @@ private fun PreviewWithNewSeason() {
 private fun Preview() {
     ApplicationThemePreview {
         ResultsSeasonPicker(
-            subtitle = "Subtitle",
             currentSeason = 2023,
             supportedSeasons = listOf(2023, 2024),
             newSeasonAvailable = false,

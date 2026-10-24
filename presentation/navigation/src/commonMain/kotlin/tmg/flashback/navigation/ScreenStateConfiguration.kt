@@ -23,6 +23,7 @@ private fun PolymorphicModuleBuilder<Screen>.registerScreens() {
 
     subclass(NavRss::class, NavRss.serializer())
     subclass(NavWebpage::class, NavWebpage.serializer())
+    subclass(NavSearch::class, NavSearch.serializer())
 
     subclass(NavReactionGame::class, NavReactionGame.serializer())
 

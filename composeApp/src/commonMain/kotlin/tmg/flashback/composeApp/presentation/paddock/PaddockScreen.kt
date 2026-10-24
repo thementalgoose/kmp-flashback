@@ -1,4 +1,4 @@
-package tmg.flashback.feature.paddock.presentation
+package tmg.flashback.composeApp.presentation.paddock
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
@@ -49,7 +49,7 @@ fun PaddockScreen(
 }
 
 @Composable
-private fun PaddockScreen(
+fun PaddockScreen(
     paddingValues: PaddingValues,
     windowSizeClass: WindowSizeClass,
     navigateTo: (Screen) -> Unit,

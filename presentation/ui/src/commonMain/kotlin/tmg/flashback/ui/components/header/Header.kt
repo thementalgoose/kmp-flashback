@@ -51,7 +51,8 @@ fun Header(
     actionModifier: Modifier = Modifier,
     overrideIcons: @Composable RowScope.(Modifier) -> Unit = { },
     contentSpacing: Dp = 0.dp,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable RowScope.() -> Unit,
+    subContent: @Composable RowScope.() -> Unit = { },
 ) {
 
     val scrimModifier = when (scrim) {
@@ -87,8 +88,7 @@ fun Header(
             }
         }
         Spacer(Modifier.height(contentSpacing))
-        Box {
-
+        Column {
             Row(
                 verticalAlignment = Alignment.Top
             ) {
@@ -102,6 +102,9 @@ fun Header(
                         overrideIcons(Modifier)
                     }
                 }
+            }
+            Row {
+                subContent()
             }
         }
     }

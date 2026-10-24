@@ -83,7 +83,11 @@ class SearchViewModel(
     }
 
     fun applyFilters(categories: List<Category>) {
-        this.filtering.update { categories }
+        if (categories.isEmpty()) {
+            this.filtering.update { Category.entries }
+        } else {
+            this.filtering.update { categories }
+        }
     }
 
     fun refresh() {

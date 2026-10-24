@@ -43,15 +43,18 @@ import tmg.flashback.feature.drivers.presentation.stats.DriverStatsScreen
 import tmg.flashback.feature.glossary.presentation.all.GlossaryScreen
 import tmg.flashback.feature.glossary.presentation.details.GlossaryDetailScreen
 import tmg.flashback.feature.lineup.presentation.LineupScreen
-import tmg.flashback.feature.paddock.presentation.PaddockScreen
+import tmg.flashback.composeApp.presentation.paddock.PaddockScreen
 import tmg.flashback.feature.privacypolicy.presentation.PrivacyPolicyScreen
 import tmg.flashback.feature.reactiongame.presentation.ReactionGameScreen
 import tmg.flashback.feature.rss.presentation.configure.RssConfigureScreen
 import tmg.flashback.feature.rss.presentation.feed.RSSScreen
+import tmg.flashback.feature.search.presentation.Category
+import tmg.flashback.feature.search.presentation.SearchScreen
 import tmg.flashback.feature.season.presentation.calendar.CalendarScreen
 import tmg.flashback.feature.season.presentation.driver_standings.DriverStandingsScreen
 import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsScreen
 import tmg.flashback.feature.weekend.presentation.WeekendScreen
+import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.navigation.NavAbout
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavCircuit
@@ -67,6 +70,8 @@ import tmg.flashback.navigation.NavPaddock
 import tmg.flashback.navigation.NavPrivacyPolicy
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
+import tmg.flashback.navigation.NavSearch
+import tmg.flashback.navigation.NavSearchFilter
 import tmg.flashback.navigation.NavSettings
 import tmg.flashback.navigation.NavSettingsDarkMode
 import tmg.flashback.navigation.NavSettingsInAppBrowser
@@ -252,6 +257,17 @@ fun AppGraph(
                     url = it.url,
                     paddingValues = insetPadding,
                     actionUpClicked = { backStack.removeDetail() }
+                )
+            }
+            entry<NavSearch>(metadata = SplitPaneScene.detailPane()) {
+                SearchScreen(
+                    paddingValues = insetPadding,
+                    actionUpClicked = { backStack.removeDetail() },
+                    windowSizeClass = windowAdaptiveInfo.windowSizeClass,
+                    navigateTo = {
+                        backStack.replaceDetail(it)
+                    },
+                    filtering = it.filter ?: emptyList()
                 )
             }
 
