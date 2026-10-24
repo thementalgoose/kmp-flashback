@@ -140,7 +140,6 @@ fun AppContent(
     Box(
         modifier = Modifier.testTag("App")
     ) {
-
         Row {
             // Navigation Rail
             if (navigationType == NavigationType.NavRail || navigationType == NavigationType.NavOrbiter) {

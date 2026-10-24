@@ -112,6 +112,7 @@ fun AppGraph(
             .background(AppTheme.colors.surfaceContainer1)
         false -> Modifier
             .fillMaxSize()
+            .background(AppTheme.colors.surfaceContainer1)
     }
     val insetPadding = when (isCompact) {
         true -> insetPadding
@@ -289,7 +290,8 @@ fun AppGraph(
                     navigateTo = {
                         backStack.replaceList(it)
                     },
-                    insetPadding = insetPadding
+                    windowSizeClass = windowAdaptiveInfo.windowSizeClass,
+                    paddingValues = insetPadding
                 )
             }
             entry<NavSettingsDarkMode>(metadata = SplitPaneScene.detailPane()) {
