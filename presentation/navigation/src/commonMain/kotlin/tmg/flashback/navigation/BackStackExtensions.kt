@@ -12,11 +12,52 @@ fun NavBackStack<NavKey>.removeDetail() {
     this.removeAll { key -> !key.isList() }
 }
 
+inline fun <reified T: Screen> NavBackStack<NavKey>.addList(vararg with: T) {
+    this.removeDetail()
+    for (x in with) {
+        if (x.requiresPaddock() && !this.contains(NavPaddock)) {
+            this.add(NavPaddock)
+        }
+        if (this.lastOrNull() != x) {
+            this.add(x)
+        }
+    }
+}
+
 inline fun <reified T: Screen> NavBackStack<NavKey>.replaceList(vararg with: T) {
     this.clear()
     for (x in with) {
+        if (x.requiresPaddock() && !this.contains(NavPaddock)) {
+            this.add(NavPaddock)
+        }
         this.add(x)
     }
 }
 
+fun NavBackStack<NavKey>.pop(): Boolean {
+    if (this.isEmpty()) return false
+    val last = this.lastOrNull() ?: return false
+    return if (!last.isList()) {
+        this.removeDetail()
+        true
+    } else if (this.size > 1) {
+        this.removeAt(this.lastIndex)
+        true
+    } else {
+        false
+    }
+}
+
+fun NavBackStack<NavKey>.popList(): Boolean {
+    this.removeDetail()
+    return if (this.size > 1) {
+        this.removeAt(this.lastIndex)
+        true
+    } else {
+        false
+    }
+}
+
 fun NavKey.isList(): Boolean = (this as? Screen)?.isList() ?: true
+
+fun NavKey.requiresPaddock(): Boolean = (this as? Screen)?.requiresPaddock() ?: false

@@ -60,6 +60,7 @@ import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.Screen
+import tmg.flashback.navigation.replaceList
 import tmg.flashback.navigation.saveStateConfiguration
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationTheme
@@ -147,8 +148,7 @@ fun AppContent(
                     modifier = Modifier.fillMaxHeight(),
                     appNavigationUiState = appNavigationUiState.value,
                     navigationItemClicked = {
-                        backStack.clear()
-                        backStack.add(it)
+                        backStack.replaceList(it)
                     },
                     windowSizeClass = windowSizeClass,
                     insetPadding = WindowInsets.safeDrawing.asPaddingValues().only(
@@ -188,8 +188,7 @@ fun AppContent(
             showFloatingBar = showFloatingBar,
             screen = appNavigationUiState.value.screen,
             itemClicked = {
-                backStack.clear()
-                backStack.add(it)
+                backStack.replaceList(it)
             }
         )
 
@@ -199,8 +198,7 @@ fun AppContent(
             showFloatingBar = showFloatingBar,
             screen = appNavigationUiState.value.screen,
             itemClicked = {
-                backStack.clear()
-                backStack.add(it)
+                backStack.replaceList(it)
             }
         )
 
@@ -226,8 +224,7 @@ fun AppContent(
         AppNavigationOrbiter(
             appNavigationUiState = appNavigationUiState.value,
             navigationItemClicked = {
-                backStack.clear()
-                backStack.add(it)
+                backStack.replaceList(it)
             }
         )
     }

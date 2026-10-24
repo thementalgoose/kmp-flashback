@@ -88,6 +88,9 @@ import tmg.flashback.navigation.NavTeam
 import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.navigation.NavWebpage
 import tmg.flashback.navigation.NavWeekend
+import tmg.flashback.navigation.addList
+import tmg.flashback.navigation.pop
+import tmg.flashback.navigation.popList
 import tmg.flashback.navigation.removeDetail
 import tmg.flashback.navigation.replaceDetail
 import tmg.flashback.navigation.replaceList
@@ -126,7 +129,7 @@ fun AppGraph(
 
     NavDisplay(
         backStack = backStack,
-        onBack = { backStack.removeDetail() },
+        onBack = { backStack.pop() },
         sceneStrategies = listOf(listDetailStrategy),
         transitionSpec = {
             fadeIn() togetherWith fadeOut()
@@ -171,7 +174,7 @@ fun AppGraph(
                     paddingValues = insetPadding,
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
-                        backStack.replaceList(it)
+                        backStack.addList(it)
                     }
                 )
             }
@@ -245,7 +248,7 @@ fun AppGraph(
             entry<NavRss>(metadata = SplitPaneScene.listPane()) {
                 RSSScreen(
                     paddingValues = insetPadding,
-                    actionUpClicked = { openPanel() },
+                    actionUpClicked = { if (!backStack.popList()) openPanel() },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
                         backStack.replaceDetail(it)
@@ -259,10 +262,10 @@ fun AppGraph(
                     actionUpClicked = { backStack.removeDetail() }
                 )
             }
-            entry<NavSearch>(metadata = SplitPaneScene.detailPane()) {
+            entry<NavSearch>(metadata = SplitPaneScene.listPane()) {
                 SearchScreen(
                     paddingValues = insetPadding,
-                    actionUpClicked = { backStack.removeDetail() },
+                    actionUpClicked = { if (!backStack.popList()) openPanel() },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
                         backStack.replaceDetail(it)
@@ -274,7 +277,7 @@ fun AppGraph(
             entry<NavReactionGame>(metadata = SplitPaneScene.listPane()) {
                 ReactionGameScreen(
                     paddingValues = insetPadding,
-                    actionUpClicked = openPanel,
+                    actionUpClicked = { if (!backStack.popList()) openPanel() },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
             }
@@ -302,7 +305,7 @@ fun AppGraph(
 
             entry<NavSettings>(metadata = SplitPaneScene.listPane()) {
                 AllSettingsScreen(
-                    navigateToSubScreen = { backStack.add(it) },
+                    navigateToSubScreen = { backStack.replaceDetail(it) },
                     navigateTo = {
                         backStack.replaceList(it)
                     },

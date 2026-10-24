@@ -144,20 +144,24 @@ fun Screen.isList(): Boolean = when (this) {
     is NavPaddock -> true
     is NavSettings -> true
 
+    is NavRss -> true
+    is NavReactionGame -> true
+    is NavSearch -> true
+
+    is NavCircuits -> true
+    is NavLineup -> true
+    is NavGlossary -> true
+    is NavAbout -> true
     is NavStyleGuide -> true
     is NavInfo -> true
 
-    is NavCircuits -> false
     is NavWeekend -> false
     is NavCircuit -> false
     is NavDriver -> false
     is NavTeam -> false
     is NavDriverComparison -> false
-    is NavRss -> false
-    is NavGlossary -> false
     is NavWebpage -> false
-    is NavReactionGame -> false
-    is NavLineup -> false
+    is NavGlossaryDetail -> false
     is NavSettingsDarkMode -> false
     is NavSettingsTheme -> false
     is NavSettingsLayoutHome -> false
@@ -169,7 +173,11 @@ fun Screen.isList(): Boolean = when (this) {
     is NavSettingsWidgets -> false
     is NavSettingsPrivacy -> false
     is NavPrivacyPolicy -> false
-    is NavGlossaryDetail -> false
-    is NavAbout -> false
-    is NavSearch -> false
+}
+
+fun Screen.requiresPaddock(): Boolean = when (this) {
+    is NavRss,
+    is NavReactionGame,
+    is NavSearch -> true
+    else -> false
 }
