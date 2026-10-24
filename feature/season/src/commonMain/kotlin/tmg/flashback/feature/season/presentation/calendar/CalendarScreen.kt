@@ -144,7 +144,6 @@ fun CalendarScreen(
                         action = null,
                         overrideIcons = {
                             Refresh(onClick = refresh)
-                            Tyres(uiState.season)
                         }
                     )
                 }
@@ -292,36 +291,6 @@ private fun Event(
                 includeYear = false
             ),
         )
-    }
-}
-
-@Composable
-private fun Tyres(
-    season: Int
-) {
-    val seasonTyres = remember(season) { SeasonTyres.getBySeason(season) }
-    val showSeasonTyres = remember { mutableStateOf(false) }
-    if (SeasonTyres.hasEntryForSeason(season)) {
-        IconButton(
-            onClick = {
-                showSeasonTyres.value = true
-            },
-            content = {
-                Icon(
-                    painter = painterResource(resource = drawable.ic_tyre),
-                    contentDescription = stringResource(resource = string.tyres_label),
-                    tint = AppTheme.colors.onSurface
-                )
-            }
-        )
-        if (showSeasonTyres.value) {
-            TyreBottomSheet(
-                show = showSeasonTyres,
-                season = season,
-                dry = seasonTyres.get(dry = true),
-                wet = seasonTyres.get(dry = false)
-            )
-        }
     }
 }
 
