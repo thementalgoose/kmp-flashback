@@ -53,7 +53,7 @@ fun TextBody2(
                 true -> FontWeight.Bold
                 false -> FontWeight.Normal
             },
-            color = textColor ?: AppTheme.colors.onSurface
+            color = textColor ?: AppTheme.colors.onSurfaceVariant
         )
     )
 }

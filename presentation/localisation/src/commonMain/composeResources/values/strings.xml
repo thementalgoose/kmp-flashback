@@ -54,6 +54,14 @@
     <string name="nav_sprint_qualifying">Sprint Qualifying</string>
     <string name="nav_sprint">Sprint</string>
 
+    <!-- Paddock -->
+    <string name="paddock_title">Paddock</string>
+    <string name="paddock_rss_title">RSS Feed</string>
+    <string name="paddock_rss_description">Latest updates &amp; team updates from a variety of sources</string>
+    <string name="paddock_reaction_game_title">Reaction Game</string>
+    <string name="paddock_reaction_game_description">Test your response times against the lights</string>
+    <string name="paddock_directory_title">Directory</string>
+    <string name="paddock_directory_description">Search drivers, teams, circuits &amp; stats</string>
 
     <!-- Race -->
     <plurals name="race_points">

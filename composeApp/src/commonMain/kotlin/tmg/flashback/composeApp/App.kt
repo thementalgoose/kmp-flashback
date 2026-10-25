@@ -139,7 +139,9 @@ fun AppContent(
             !isSubNavigation
 
     Box(
-        modifier = Modifier.testTag("App")
+        modifier = Modifier
+            .testTag("App")
+            .background(AppTheme.colors.surfaceContainer1)
     ) {
         Row {
             // Navigation Rail

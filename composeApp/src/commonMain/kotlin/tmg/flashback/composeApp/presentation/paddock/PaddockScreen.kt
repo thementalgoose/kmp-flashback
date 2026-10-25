@@ -17,10 +17,34 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.FlashOn
+import androidx.compose.material.icons.filled.Light
+import androidx.compose.material.icons.filled.Lightbulb
+import androidx.compose.material.icons.filled.NetworkCell
+import androidx.compose.material.icons.filled.RssFeed
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Web
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
@@ -30,6 +54,12 @@ import flashback.presentation.localisation.generated.resources.about_this_app_de
 import flashback.presentation.localisation.generated.resources.nav_paddock
 import flashback.presentation.localisation.generated.resources.nav_rss
 import flashback.presentation.localisation.generated.resources.nav_search
+import flashback.presentation.localisation.generated.resources.paddock_directory_description
+import flashback.presentation.localisation.generated.resources.paddock_directory_title
+import flashback.presentation.localisation.generated.resources.paddock_reaction_game_description
+import flashback.presentation.localisation.generated.resources.paddock_reaction_game_title
+import flashback.presentation.localisation.generated.resources.paddock_rss_description
+import flashback.presentation.localisation.generated.resources.paddock_rss_title
 import flashback.presentation.localisation.generated.resources.reaction_screen_subtitle
 import flashback.presentation.localisation.generated.resources.reaction_screen_title
 import flashback.presentation.localisation.generated.resources.title_rss
@@ -50,6 +80,9 @@ import tmg.flashback.style.buttons.ButtonSecondary
 import tmg.flashback.style.buttons.ButtonTertiary
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
+import tmg.flashback.style.text.TextBody2
+import tmg.flashback.style.text.TextHeadline2
+import tmg.flashback.style.text.TextHeadline3
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.navigation.appBarMaximumHeight
@@ -92,7 +125,8 @@ fun PaddockScreen(
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        contentPadding = paddingValues
+        contentPadding = paddingValues,
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
     ) {
         item(key = "header") {
             Header(
@@ -102,14 +136,26 @@ fun PaddockScreen(
         }
         if (uiState.isRssEnabled) {
             item(key = "rss") {
-                RSS()
+                RSS(
+                    modifier = Modifier.clickable(
+                        onClick = { navigateTo(NavRss) }
+                    )
+                )
             }
         }
         item(key = "reaction_game") {
-            ReactionGame()
+            ReactionGame(
+                modifier = Modifier.clickable(
+                    onClick = { navigateTo(NavReactionGame) }
+                )
+            )
         }
         item(key = "search") {
-            Search()
+            Search(
+                modifier = Modifier.clickable(
+                    onClick = { navigateTo(NavSearch()) }
+                )
+            )
         }
     }
 }
@@ -120,8 +166,15 @@ private fun RSS(
 ) {
     Container(
         modifier = modifier,
-        title = stringResource(string.title_rss),
-        subtitle = null
+        title = stringResource(string.paddock_rss_title),
+        subtitle = stringResource(string.paddock_rss_description),
+        icon = {
+            Icon(
+                imageVector = Icons.Default.RssFeed,
+                contentDescription = null,
+                tint = AppTheme.colors.primary,
+            )
+        },
     )
 }
 
@@ -131,8 +184,15 @@ private fun ReactionGame(
 ) {
     Container(
         modifier = modifier,
-        title = stringResource(string.reaction_screen_title),
-        subtitle = null
+        title = stringResource(string.paddock_reaction_game_title),
+        subtitle = stringResource(string.paddock_reaction_game_description),
+        icon = {
+            Icon(
+                imageVector = Icons.Default.FlashOn,
+                contentDescription = null,
+                tint = AppTheme.colors.primary
+            )
+        },
     )
 }
 
@@ -142,16 +202,16 @@ private fun Search(
 ) {
     Container(
         modifier = modifier,
-        title = "Search",
-        subtitle = "Info",
-        content = {
-            FlowRow {
-                BadgeView("Drivers")
-                BadgeView("Teams")
-                BadgeView("Races")
-                BadgeView("Circuits")
-            }
-        }
+        title = stringResource(string.paddock_directory_title),
+        subtitle = stringResource(string.paddock_directory_description),
+        icon = {
+            Icon(
+                imageVector = Icons.Default.Search,
+                contentDescription = null,
+                tint = AppTheme.colors.primary
+            )
+        },
+        content = { }
     )
 }
 
@@ -160,6 +220,7 @@ private fun Container(
     title: String,
     subtitle: String?,
     modifier: Modifier = Modifier,
+    icon: (@Composable () -> Unit)? = null,
     content: @Composable () -> Unit = { },
 ) {
     Column(
@@ -172,9 +233,9 @@ private fun Container(
             .background(AppTheme.colors.surfaceContainer3)
             .padding(
                 start = AppTheme.dimens.medium,
-                end = AppTheme.dimens.small,
-                top = AppTheme.dimens.small,
-                bottom = AppTheme.dimens.small
+                end = AppTheme.dimens.medium,
+                top = AppTheme.dimens.medium,
+                bottom = AppTheme.dimens.medium
             )
             .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
@@ -183,16 +244,23 @@ private fun Container(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = AppTheme.dimens.small),
+                verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
             ) {
-                TextTitle(title)
+                icon?.invoke()
+                TextHeadline3(
+                    text = title.uppercase(),
+                    bold = true,
+                    italic = true
+                )
                 if (subtitle != null) {
-                    TextBody1(subtitle)
+                    TextBody2(subtitle)
                 }
             }
             Icon(
-                painter = painterResource(Res.drawable.arrow_more),
+                imageVector = Icons.AutoMirrored.Default.ArrowForward,
                 contentDescription = null,
                 tint = AppTheme.colors.onSurface
             )

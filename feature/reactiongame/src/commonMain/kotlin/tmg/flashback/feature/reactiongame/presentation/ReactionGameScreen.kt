@@ -121,7 +121,7 @@ private fun ReactionScreen(
             action = if (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
                 null
             } else {
-                HeaderAction.MENU
+                HeaderAction.BACK
             },
             actionUpClicked = actionUpClicked
         )
