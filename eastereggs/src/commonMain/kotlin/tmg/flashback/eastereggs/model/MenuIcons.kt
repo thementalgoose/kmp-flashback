@@ -110,7 +110,6 @@ enum class MenuIcons(
     ST_PATRICKS_DAY(
         key = "st_patricks_day",
         dateRanges = listOf(
-            LocalDate.now() to LocalDate.now(),
             LocalDate(year, 3, 17) to LocalDate(year, 3, 17)
         ),
         label = string.easter_egg_menu_st_patricks_day,
