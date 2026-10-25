@@ -50,12 +50,15 @@ import tmg.flashback.composeApp.presentation.AppContainer
 import tmg.flashback.composeApp.presentation.MenuItem
 import tmg.flashback.composeApp.presentation.floatingNavItems
 import tmg.flashback.composeApp.presentation.generateFloatingNavItems
+import tmg.flashback.composeApp.presentation.navigation.AppNavigationEasterEggs
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationOrbiter
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationRail
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.composeApp.presentation.navigation.previewAppNavigationViewModel
 import tmg.flashback.composeApp.presentation.sync.SyncBottomSheet
 import tmg.flashback.composeApp.presentation.toScreen
+import tmg.flashback.eastereggs.presentation.snow
+import tmg.flashback.eastereggs.presentation.summer
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.navigation.NavCalendar
@@ -142,6 +145,8 @@ fun AppContent(
         modifier = Modifier
             .testTag("App")
             .background(AppTheme.colors.surfaceContainer1)
+            .summer(appNavigationUiState.value.easterEggs.summer)
+            .snow(appNavigationUiState.value.easterEggs.snow)
     ) {
         Row {
             // Navigation Rail
@@ -188,6 +193,7 @@ fun AppContent(
         BottomNav(
             navigationType = navigationType,
             showFloatingBar = showFloatingBar,
+            easterEggs = appNavigationUiState.value.easterEggs,
             screen = appNavigationUiState.value.screen,
             itemClicked = {
                 backStack.replaceList(it)
@@ -236,6 +242,7 @@ fun AppContent(
 private fun BoxScope.BottomNav(
     navigationType: NavigationType,
     showFloatingBar: Boolean,
+    easterEggs: AppNavigationEasterEggs,
     screen: Screen?,
     itemClicked: (Screen) -> Unit
 ) {
