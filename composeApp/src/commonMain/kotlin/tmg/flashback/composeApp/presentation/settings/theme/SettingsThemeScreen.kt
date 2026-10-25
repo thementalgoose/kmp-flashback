@@ -7,19 +7,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import flashback.presentation.localisation.generated.resources.Res.string
-import flashback.presentation.localisation.generated.resources.settings_restart_app_required
 import flashback.presentation.localisation.generated.resources.settings_theme_theme_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
-import tmg.flashback.composeApp.presentation.settings.PrefRadio
+import tmg.flashback.composeApp.presentation.settings.PrefSection
+import tmg.flashback.composeApp.presentation.settings.SettingRadio
 import tmg.flashback.composeApp.presentation.settings.Settings
-import tmg.flashback.style.AppTheme
-import tmg.flashback.ui.components.header.Header
-import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.style.theme.Theme
 import tmg.flashback.style.theme.Theme.Default
 import tmg.flashback.style.theme.Theme.MaterialYou
+import tmg.flashback.ui.components.header.Header
+import tmg.flashback.ui.components.header.HeaderAction
 
 @Composable
 fun SettingsThemeScreen(
@@ -59,19 +58,24 @@ private fun SettingsThemeScreen(
                 action = HeaderAction.BACK.takeIf { showBack }
             )
         }
-        PrefRadio(
-            item = Settings.Theme.ThemeDefault,
-            itemClicked = {
-                clickTheme(Default)
-            },
-            isChecked = uiState.theme == Default
-        )
-        PrefRadio(
-            item = Settings.Theme.ThemeMaterialYou,
-            itemClicked = {
-                clickTheme(MaterialYou)
-            },
-            isChecked = uiState.theme == MaterialYou
+        PrefSection(
+            title = string.settings_theme_theme_title,
+            content = {
+                SettingRadio(
+                    item = Settings.Theme.ThemeDefault,
+                    itemClicked = {
+                        clickTheme(Default)
+                    },
+                    isChecked = uiState.theme == Default
+                )
+                SettingRadio(
+                    item = Settings.Theme.ThemeMaterialYou,
+                    itemClicked = {
+                        clickTheme(MaterialYou)
+                    },
+                    isChecked = uiState.theme == MaterialYou
+                )
+            }
         )
     }
 }

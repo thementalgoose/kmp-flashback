@@ -12,8 +12,9 @@ import kotlinx.datetime.TimeZone
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
-import tmg.flashback.composeApp.presentation.settings.PrefLink
-import tmg.flashback.composeApp.presentation.settings.PrefSwitch
+import tmg.flashback.composeApp.presentation.settings.PrefSection
+import tmg.flashback.composeApp.presentation.settings.SettingLink
+import tmg.flashback.composeApp.presentation.settings.SettingSwitch
 import tmg.flashback.composeApp.presentation.settings.Settings
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
@@ -63,29 +64,34 @@ private fun SettingsLayoutHomeScreen(
                 action = HeaderAction.BACK.takeIf { showBack }
             )
         }
-        PrefLink(
-            item = Settings.LayoutHome.Timezone(TimeZone.currentSystemDefault().id),
-            itemClicked = { },
-        )
-        PrefSwitch(
-            item = Settings.LayoutHome.RecentHighlights,
-            isChecked = uiState.recentHighlights,
-            itemClicked = { updateHighlights(!uiState.recentHighlights) },
-        )
-        PrefSwitch(
-            item = Settings.LayoutHome.CollapsibleRaces,
-            isChecked = uiState.collapseRaces,
-            itemClicked = { updateCollapseRaces(!uiState.collapseRaces) },
-        )
-        PrefSwitch(
-            item = Settings.LayoutHome.EmptyWeeks,
-            isChecked = uiState.showEmptyWeeks,
-            itemClicked = { updateShowEmptyWeeks(!uiState.showEmptyWeeks) },
-        )
-        PrefSwitch(
-            item = Settings.LayoutHome.KeepSeason,
-            isChecked = uiState.keepLastSeason,
-            itemClicked = { updateKeepLastSeason(!uiState.keepLastSeason) },
+        PrefSection(
+            title = string.settings_section_home_title,
+            content = {
+                SettingLink(
+                    item = Settings.LayoutHome.Timezone(TimeZone.currentSystemDefault().id),
+                    itemClicked = { },
+                )
+                SettingSwitch(
+                    item = Settings.LayoutHome.RecentHighlights,
+                    isChecked = uiState.recentHighlights,
+                    itemClicked = { updateHighlights(!uiState.recentHighlights) },
+                )
+                SettingSwitch(
+                    item = Settings.LayoutHome.CollapsibleRaces,
+                    isChecked = uiState.collapseRaces,
+                    itemClicked = { updateCollapseRaces(!uiState.collapseRaces) },
+                )
+                SettingSwitch(
+                    item = Settings.LayoutHome.EmptyWeeks,
+                    isChecked = uiState.showEmptyWeeks,
+                    itemClicked = { updateShowEmptyWeeks(!uiState.showEmptyWeeks) },
+                )
+                SettingSwitch(
+                    item = Settings.LayoutHome.KeepSeason,
+                    isChecked = uiState.keepLastSeason,
+                    itemClicked = { updateKeepLastSeason(!uiState.keepLastSeason) },
+                )
+            }
         )
     }
 }
