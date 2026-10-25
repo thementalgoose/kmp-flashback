@@ -216,9 +216,11 @@ private fun SearchScreen(
                 items(Category.entries, key = { it.key }) {
                     Container(
                         title = stringResource(it.label),
-                        modifier = Modifier.clickable(
-                            onClick = { applyFilter(it) }
-                        ),
+                        modifier = Modifier
+                            .animateItem()
+                            .clickable(
+                                onClick = { applyFilter(it) }
+                            ),
                         icon = {
                             Icon(
                                 painter = painterResource(it.icon),
@@ -270,7 +272,6 @@ private fun Container(
                 TextHeadline4(
                     text = title.uppercase(),
                     bold = true,
-                    italic = true
                 )
             }
         }

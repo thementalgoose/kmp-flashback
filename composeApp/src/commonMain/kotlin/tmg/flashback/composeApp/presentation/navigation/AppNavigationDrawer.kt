@@ -164,25 +164,6 @@ internal fun AppNavigationDrawer(
                         )
                     }
                 }
-                if (appNavigationUiState.extraLinks.isNotEmpty()) {
-                    item("extra_div") {
-                        MenuDivider()
-                    }
-                    items(appNavigationUiState.extraLinks, key = { it.id }) {
-                        when (it) {
-                            is NavLink.Url -> {
-                                NavItem(
-                                    label = it.name,
-                                    icon = flashback.composeapp.generated.resources.Res.drawable.ic_settings_web,
-                                    isSelected = false,
-                                    onClick = {
-                                        openUrl(it.url)
-                                    }
-                                )
-                            }
-                        }
-                    }
-                }
                 item("footer_div") {
                     MenuDivider()
                 }
@@ -328,7 +309,6 @@ private fun Preview() {
                 intoSubNavigation = false,
                 promptContentSync = false,
                 promptSoftUpgrade = false,
-                extraLinks = emptyList()
             ),
             navigationItemClicked = { },
             closeMenu = { },

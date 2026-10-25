@@ -30,7 +30,6 @@ class AppNavigationViewModel(
     isUkraineEnabledUseCase: IsUkraineEnabledUseCase,
     requiresSyncUseCase: RequiresSyncUseCase,
     maintenanceRepository: MaintenanceRepository,
-    navRepository: NavRepository,
     private val openWebpageUseCase: OpenWebpageUseCase,
     private val openStorePageUseCase: OpenStorePageUseCase,
 ): ViewModel() {
@@ -49,7 +48,6 @@ class AppNavigationViewModel(
         intoSubNavigation = false,
         promptContentSync = requiresSyncUseCase(),
         promptSoftUpgrade = maintenanceRepository.softUpgrade,
-        extraLinks = navRepository.navLinks
     ))
     val uiState: StateFlow<AppNavigationUIState> = _uiState
 
@@ -101,12 +99,6 @@ internal val previewAppNavigationViewModel = AppNavigationViewModel(
     },
     maintenanceRepository = object : MaintenanceRepository {
         override val softUpgrade: Boolean get() = false
-    },
-    navRepository = object : NavRepository {
-        override val navLinks: List<NavLink> = listOf(
-            NavLink.Url("Navigation Link", "https://flashback.pages.dev"),
-            NavLink.Url("Navigation Link 2", "https://github.com/thementalgoose/kmp-flashback")
-        )
     },
     openWebpageUseCase = object : OpenWebpageUseCase {
         override fun invoke(url: String, title: String) {

@@ -136,7 +136,7 @@ internal fun module() = module {
 
     single { AppStartup(get(), get(), get(), get(),get(), get(), get(), get()) }
 
-    viewModel { AppNavigationViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { AppNavigationViewModel(get(), get(), get(), get(), get(), get(), get(), get(),  get()) }
 
     single<OnboardingRepository> { OnboardingRepositoryImpl(get()) }
     single<NavRepository> { NavRepositoryImpl(get()) }
@@ -144,7 +144,7 @@ internal fun module() = module {
     single<StoreFirebaseInstallationIdUseCase> { StoreFirebaseInstallationIdUseCaseImpl(get(), get()) }
     single<RequiresSyncUseCase> { RequiresSyncUseCaseImpl(get(), get()) }
 
-    viewModel { PaddockViewModel(get()) }
+    viewModel { PaddockViewModel(get(), get()) }
 
     viewModel { InfoViewModel(get()) }
 

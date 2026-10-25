@@ -48,6 +48,17 @@
     <string name="nav_sprint_qualifying">Sprint Qualifiche</string>
     <string name="nav_sprint">Sprint</string>
 
+    <!-- Paddock -->
+    <string name="paddock_title">Paddock</string>
+    <string name="paddock_lineup_title">Schieramento piloti</string>
+    <string name="paddock_lineup_description">Scopri quali piloti sono confermati per le prossime stagioni</string>
+    <string name="paddock_rss_title">Feed RSS</string>
+    <string name="paddock_rss_description">Ultime novità e aggiornamenti delle scuderie da varie fonti</string>
+    <string name="paddock_reaction_game_title">Gioco di reazione</string>
+    <string name="paddock_reaction_game_description">Metti alla prova i tuoi tempi di reazione allo spegnimento dei semafori</string>
+    <string name="paddock_directory_title">Directory</string>
+    <string name="paddock_directory_description">Cerca piloti, team, circuiti e statistiche</string>
+
     <!-- Race -->
     <plurals name="race_points">
         <item quantity="one">%1$s punti</item>

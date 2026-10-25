@@ -14,6 +14,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
@@ -50,6 +55,7 @@ import flashback.presentation.localisation.generated.resources.search_category_d
 import flashback.presentation.localisation.generated.resources.search_category_races
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.composeApp.repositories.model.NavLink
 import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
@@ -102,12 +108,13 @@ fun PaddockScreen(
     navigateTo: (Screen) -> Unit,
     uiState: PaddockUiState
 ) {
-    LazyColumn(
+    LazyVerticalGrid(
         modifier = Modifier.fillMaxSize(),
         contentPadding = paddingValues,
-        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small),
+        columns = GridCells.Adaptive(250.dp),
     ) {
-        item(key = "header") {
+        item(key = "header", span = { GridItemSpan(maxLineSpan) }) {
             Header(
                 text = stringResource(string.nav_paddock),
                 action = null
@@ -142,6 +149,18 @@ fun PaddockScreen(
                     onClick = { navigateTo(NavSearch()) }
                 )
             )
+        }
+        items(uiState.navLinks, key = { it.id }) {
+            when (it) {
+                is NavLink.Url -> {
+                    Links(
+                        navLink = it,
+                        modifier = Modifier.clickable(
+                            onClick = { }
+                        )
+                    )
+                }
+            }
         }
     }
 }
@@ -214,24 +233,19 @@ private fun Search(
                 contentDescription = null,
                 tint = AppTheme.colors.primary
             )
-        },
-        content = {
-            FlowRow(
-                modifier = Modifier.padding(top = AppTheme.dimens.small),
-                verticalArrangement = Arrangement.spacedBy(0.dp),
-                horizontalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                BadgeView(
-                    label = stringResource(string.search_category_driver),
-                )
-                BadgeView(
-                    label = stringResource(string.search_category_constructors),
-                )
-                BadgeView(
-                    label = stringResource(string.search_category_circuits),
-                )
-            }
         }
+    )
+}
+
+@Composable
+private fun Links(
+    navLink: NavLink.Url,
+    modifier: Modifier = Modifier,
+) {
+    Container(
+        modifier = modifier,
+        title = navLink.name,
+        subtitle = null
     )
 }
 
@@ -273,7 +287,6 @@ private fun Container(
                 TextHeadline3(
                     text = title.uppercase(),
                     bold = true,
-                    italic = true
                 )
                 if (subtitle != null) {
                     TextBody2(subtitle)
@@ -298,7 +311,10 @@ private fun Preview() {
             windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass,
             navigateTo = { },
             uiState = PaddockUiState(
-                isRssEnabled = true
+                isRssEnabled = true,
+                navLinks = listOf(
+                    NavLink.Url("formula1", "https://formula1.com")
+                )
             )
         )
     }

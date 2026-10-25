@@ -11,7 +11,6 @@ data class AppNavigationUIState(
     val intoSubNavigation: Boolean,
     val promptContentSync: Boolean,
     val promptSoftUpgrade: Boolean,
-    val extraLinks: List<NavLink>
 )
 
 data class AppNavigationEasterEggs(
