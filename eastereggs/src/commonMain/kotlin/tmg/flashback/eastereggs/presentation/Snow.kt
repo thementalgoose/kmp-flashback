@@ -26,7 +26,7 @@ import kotlin.math.sin
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.nanoseconds
 
-private const val snowflakeDensity = 0.02
+private const val snowflakeDensity = 0.025
 private val incrementRange = 0.4f..0.8f
 private val sizeRange = 5.0f..12.0f
 private const val angleSeed = 25.0f
