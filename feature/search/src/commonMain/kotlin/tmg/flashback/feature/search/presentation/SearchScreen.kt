@@ -20,7 +20,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.LayersClear
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -37,6 +39,7 @@ import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOW
 import flashback.domain.formula1.generated.resources.Res
 import flashback.domain.formula1.generated.resources.ic_driver
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.ab_clear_filters
 import flashback.presentation.localisation.generated.resources.search_title
 import flashback.presentation.localisation.generated.resources.weather_type_clear_sky
 import flashback.presentation.ui.generated.resources.ic_close
@@ -88,6 +91,7 @@ fun SearchScreen(
         windowSizeClass = windowSizeClass,
         applyFilter = viewModel::applyFilter,
         navigateTo = navigateTo,
+        clearFilter = filtering == null,
         searchTerm = viewModel::searchTerm,
         refresh = viewModel::refresh
     )
@@ -101,7 +105,8 @@ private fun SearchScreen(
     windowSizeClass: WindowSizeClass,
     navigateTo: (Screen) -> Unit,
     searchTerm: (String) -> Unit,
-    applyFilter: (Category) -> Unit,
+    applyFilter: (Category?) -> Unit,
+    clearFilter: Boolean,
     refresh: () -> Unit
 ) {
     val searchTerm = remember { mutableStateOf(TextFieldValue(uiState.searchTerm)) }
@@ -124,6 +129,20 @@ private fun SearchScreen(
                     text = stringResource(uiState.selectedCategory?.label ?: string.search_title),
                     overrideIcons = {
                         Refresh(onClick = refresh)
+                        if (clearFilter) {
+                            IconButton(
+                                onClick = {
+                                    applyFilter(null)
+                                },
+                                content = {
+                                    Icon(
+                                        imageVector = Icons.Default.LayersClear,
+                                        contentDescription = stringResource(string.ab_clear_filters),
+                                        tint = AppTheme.colors.onSurface
+                                    )
+                                }
+                            )
+                        }
                     }
                 )
             }
@@ -282,6 +301,7 @@ private fun Preview() {
                     Result.ResultTeam(Constructor.preview())
                 ),
             ),
+            clearFilter = true,
             applyFilter = { },
             actionUpClicked = { },
             paddingValues = PaddingValues(0.dp),
@@ -308,6 +328,7 @@ private fun PreviewNoCategory() {
                     Result.ResultTeam(Constructor.preview())
                 ),
             ),
+            clearFilter = false,
             actionUpClicked = { },
             paddingValues = PaddingValues(0.dp),
             windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass,

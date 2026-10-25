@@ -78,7 +78,8 @@ internal fun Source(
                 .padding(horizontal = AppTheme.dimens.small)
         ) {
             TextTitle(
-                text = model.article.source
+                text = model.article.source,
+                bold = true,
             )
             TextBody2(
                 text = model.article.rssLink,
