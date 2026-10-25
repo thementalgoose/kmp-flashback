@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -20,6 +21,7 @@ fun TextBody2(
     modifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Start,
     bold: Boolean = false,
+    italic: Boolean = false,
     textColor: Color? = null,
     maxLines: Int? = null
 ) {
@@ -28,8 +30,10 @@ fun TextBody2(
         modifier = modifier,
         textAlign = textAlign,
         bold = bold,
+        italic = italic,
         textColor = textColor,
-        maxLines = maxLines
+        maxLines = maxLines,
+
     )
 }
 
@@ -39,6 +43,7 @@ fun TextBody2(
     modifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Start,
     bold: Boolean = false,
+    italic: Boolean = false,
     textColor: Color? = null,
     maxLines: Int? = null
 ) {
@@ -54,7 +59,8 @@ fun TextBody2(
                 false -> FontWeight.Normal
             },
             color = textColor ?: AppTheme.colors.onSurfaceVariant
-        )
+        ),
+        fontStyle = if (italic) FontStyle.Italic else FontStyle.Normal
     )
 }
 

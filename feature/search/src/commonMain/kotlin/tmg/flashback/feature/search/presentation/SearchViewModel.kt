@@ -39,12 +39,15 @@ class SearchViewModel(
         combine(
             circuitRepository.getCircuits().map {
                     list -> list.map { Result.ResultCircuit(it) }
+                        .sortedBy { it.circuit.name }
             },
             driversRepository.getDrivers().map {
-                list -> list.map { Result.ResultDriver(it) }
+                    list -> list.map { Result.ResultDriver(it) }
+                        .sortedBy { it.driver.name }
             },
             constructorRepository.getConstructors().map {
                     list -> list.map { Result.ResultTeam(it) }
+                        .sortedBy { it.constructor.name }
             },
             searchTerm.asFlow(),
             filtering.asFlow(),
