@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -71,7 +72,7 @@ internal fun InfoScreen(
                         onClick = actionUpClicked,
                         content = {
                             Icon(
-                                imageVector = Icons.Default.Menu,
+                                imageVector = Icons.AutoMirrored.Default.ArrowBack,
                                 contentDescription = null,
                                 tint = AppTheme.colors.onSurface
                             )

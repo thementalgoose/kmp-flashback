@@ -17,8 +17,10 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.BugReport
 import androidx.compose.material.icons.filled.DriveFileRenameOutline
 import androidx.compose.material.icons.filled.FlashOn
+import androidx.compose.material.icons.filled.FormatPaint
 import androidx.compose.material.icons.filled.Link
 import androidx.compose.material.icons.filled.RssFeed
 import androidx.compose.material.icons.filled.Search
@@ -29,11 +31,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.nav_info
 import flashback.presentation.localisation.generated.resources.nav_paddock
+import flashback.presentation.localisation.generated.resources.nav_style_guide
 import flashback.presentation.localisation.generated.resources.paddock_directory_description
 import flashback.presentation.localisation.generated.resources.paddock_directory_title
 import flashback.presentation.localisation.generated.resources.paddock_lineup_description
@@ -46,10 +52,13 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.composeApp.repositories.model.NavLink
+import tmg.flashback.infrastructure.device.Device
+import tmg.flashback.navigation.NavInfo
 import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
 import tmg.flashback.navigation.NavSearch
+import tmg.flashback.navigation.NavStyleGuide
 import tmg.flashback.navigation.Screen
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
@@ -71,7 +80,7 @@ fun PaddockScreen(
     val uiState = viewModel.uiState.collectAsState()
     val insets = paddingValues + PaddingValues(
         top = 0.dp,
-        bottom = if (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) appBarMaximumHeight else 0.dp,
+        bottom = if (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) 0.dp else appBarMaximumHeight,
         start = AppTheme.dimens.medium,
         end = AppTheme.dimens.medium
     )
@@ -95,6 +104,7 @@ fun PaddockScreen(
     openUrl: (NavLink.Url) -> Unit,
     uiState: PaddockUiState
 ) {
+    val showDebug = !LocalInspectionMode.current && Device.isDebug
     LazyVerticalGrid(
         modifier = Modifier.fillMaxSize(),
         contentPadding = paddingValues,
@@ -138,6 +148,22 @@ fun PaddockScreen(
                     onClick = { navigateTo(NavSearch()) }
                 )
             )
+        }
+        if (showDebug) {
+            item(key = "debug_style_guide") {
+                DebugStyleGuide(
+                    modifier = Modifier.clickable(
+                        onClick = { navigateTo(NavStyleGuide) }
+                    )
+                )
+            }
+            item(key = "debug_info") {
+                DebugInfo(
+                    modifier = Modifier.clickable(
+                        onClick = { navigateTo(NavInfo) }
+                    )
+                )
+            }
         }
         items(uiState.navLinks, key = { it.id }) {
             when (it) {
@@ -238,6 +264,43 @@ private fun Links(
         icon = {
             Icon(
                 imageVector = Icons.Default.Link,
+                contentDescription = null,
+                tint = AppTheme.colors.primary
+            )
+        }
+    )
+}
+
+@Composable
+private fun DebugStyleGuide(
+    modifier: Modifier = Modifier,
+) {
+    Container(
+        modifier = modifier,
+        title = stringResource(string.nav_style_guide),
+        subtitle = stringResource(string.nav_style_guide),
+        icon = {
+            Icon(
+                imageVector = Icons.Default.FormatPaint,
+                contentDescription = null,
+                tint = AppTheme.colors.primary
+            )
+        }
+    )
+}
+
+
+@Composable
+private fun DebugInfo(
+    modifier: Modifier = Modifier,
+) {
+    Container(
+        modifier = modifier,
+        title = stringResource(string.nav_info),
+        subtitle = stringResource(string.nav_info),
+        icon = {
+            Icon(
+                imageVector = Icons.Default.BugReport,
                 contentDescription = null,
                 tint = AppTheme.colors.primary
             )

@@ -17,7 +17,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AddBox
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.CarRental
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Menu
@@ -80,7 +82,7 @@ fun StyleGuideScreen(
                     onClick = actionUpClicked,
                     content = {
                         Icon(
-                            imageVector = Icons.Default.Menu,
+                            imageVector = Icons.AutoMirrored.Default.ArrowBack,
                             contentDescription = null,
                             tint = AppTheme.colors.onSurface
                         )
