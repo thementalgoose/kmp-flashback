@@ -33,22 +33,8 @@ import tmg.flashback.style.text.TextHeadline2
 import tmg.flashback.ui.components.text.ShimmerText
 import tmg.flashback.ui.components.text.TextWithIcon
 
-private val MenuIcons.drawable: DrawableResource get() = when (this) {
-    MenuIcons.VALENTINES_DAY -> Res.drawable.ic_easteregg_valentines
-    MenuIcons.EASTER -> Res.drawable.ic_easteregg_easter
-    MenuIcons.HALLOWEEN -> Res.drawable.ic_easteregg_halloween
-    MenuIcons.BONFIRE -> Res.drawable.ic_easteregg_bonfire
-    MenuIcons.CHRISTMAS -> Res.drawable.ic_easteregg_christmas
-    MenuIcons.NEW_YEARS -> Res.drawable.ic_easteregg_newyears
-    MenuIcons.DIWALI -> Res.drawable.ic_easteregg_diwali
-    MenuIcons.CHINESE_NEW_YEAR -> Res.drawable.ic_easteregg_newyears
-    MenuIcons.NEW_YEARS_EVE -> Res.drawable.ic_easteregg_newyears
-}
-
 @Composable
 internal fun DashboardHero(
-    menuIcons: MenuIcons?,
-    showUkraine: Boolean,
     modifier: Modifier = Modifier,
     rainbow: Boolean = false,
 ) {
@@ -58,7 +44,7 @@ internal fun DashboardHero(
         end = AppTheme.dimens.nsmall
     )) {
         TextWithIcon(
-            icon = menuIcons?.let { painterResource(resource = it.drawable) },
+            icon = null,
             iconModifier = Modifier
                 .rotate(20f)
                 .size(18.dp),
@@ -81,14 +67,6 @@ internal fun DashboardHero(
             text = stringResource(resource = string.app_subtitle),
             maxLines = 1
         )
-        if (showUkraine) {
-            TextCaption(
-                modifier = Modifier.padding(top = 4.dp),
-                fontStyle = FontStyle.Italic,
-                text = stringResource(resource = string.easter_egg_slava_ukraine),
-                maxLines = 1
-            )
-        }
     }
 }
 
@@ -96,10 +74,7 @@ internal fun DashboardHero(
 @Composable
 private fun Preview() {
     ApplicationThemePreview {
-        DashboardHero(
-            menuIcons = null,
-            showUkraine = false
-        )
+        DashboardHero()
     }
 }
 
@@ -107,10 +82,7 @@ private fun Preview() {
 @Composable
 private fun PreviewValentinesDay() {
     ApplicationThemePreview {
-        DashboardHero(
-            menuIcons = MenuIcons.VALENTINES_DAY,
-            showUkraine = false
-        )
+        DashboardHero()
     }
 }
 
@@ -118,21 +90,7 @@ private fun PreviewValentinesDay() {
 @Composable
 private fun PreviewChristmas() {
     ApplicationThemePreview {
-        DashboardHero(
-            menuIcons = MenuIcons.CHRISTMAS,
-            showUkraine = false
-        )
-    }
-}
-
-@PreviewTheme
-@Composable
-private fun PreviewUkraine() {
-    ApplicationThemePreview {
-        DashboardHero(
-            menuIcons = null,
-            showUkraine = true
-        )
+        DashboardHero()
     }
 }
 
@@ -141,8 +99,6 @@ private fun PreviewUkraine() {
 private fun PreviewPride() {
     ApplicationThemePreview {
         DashboardHero(
-            menuIcons = null,
-            showUkraine = false,
             rainbow = true
         )
     }

@@ -244,7 +244,7 @@ private fun AddCustom(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .then(settingsModifier),
         verticalAlignment = Alignment.CenterVertically
     ) {

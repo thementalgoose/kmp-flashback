@@ -76,6 +76,7 @@ import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextHeadline2
+import tmg.flashback.ui.components.text.ShimmerText
 
 @Composable
 fun AboutScreen(
@@ -327,7 +328,7 @@ private fun Hero(
         Column(
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
         ) {
-            TextHeadline2(
+            ShimmerText(
                 text = stringResource(string.app_name)
             )
             FlowRow(

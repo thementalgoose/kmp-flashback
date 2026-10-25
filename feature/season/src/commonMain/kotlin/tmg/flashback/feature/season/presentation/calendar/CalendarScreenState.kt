@@ -1,6 +1,7 @@
 package tmg.flashback.feature.season.presentation.calendar
 
 import kotlinx.datetime.LocalDate
+import tmg.flashback.eastereggs.model.MenuIcons
 import tmg.flashback.feature.notifications.model.NotificationUpcomingState
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.infrastructure.datetime.now
@@ -9,7 +10,8 @@ data class CalendarScreenState(
     val season: Int,
     val items: List<CalendarItem>? = listOf(),
     val isLoading: Boolean = false,
-    val showEvents: Boolean = false
+    val showEvents: Boolean = false,
+    val menuIcon: MenuIcons? = null
 )
 
 sealed class CalendarItem(

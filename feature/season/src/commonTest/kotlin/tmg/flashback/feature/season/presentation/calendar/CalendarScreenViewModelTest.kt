@@ -21,6 +21,8 @@ import tmg.flashback.data.repo.repository.EventRepository
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
 import tmg.flashback.data.repo.repository.StandingsRepository
+import tmg.flashback.eastereggs.model.MenuIcons
+import tmg.flashback.eastereggs.usecases.IsMenuIconEnabledUseCase
 import tmg.flashback.feature.notifications.model.NotificationUpcomingState
 import tmg.flashback.feature.notifications.usecases.GetNotificationUpcomingStateUseCase
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
@@ -29,6 +31,8 @@ import tmg.flashback.formula1.model.Overview
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.model
 import tmg.flashback.infrastructure.datetime.now
+import tmg.flashback.ui.toasts.ToastManager
+import tmg.flashback.ui.toasts.ToastManagerImpl
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -41,6 +45,7 @@ internal class CalendarScreenViewModelTest {
     private val mockStandingsRepository: StandingsRepository = mock(autoUnit)
     private val mockCurrentSeasonHolder: CurrentSeasonHolder = mock(autoUnit)
     private val mockEventsRepository: EventRepository = mock(autoUnit)
+    private val mockIsMenuIconsEnabledUseCase: IsMenuIconEnabledUseCase= mock(autoUnit)
     private val mockCalendarRepository: CalendarRepository = mock(autoUnit)
     private val mockGetNotificationUpcomingStateUseCase: GetNotificationUpcomingStateUseCase = mock(autoUnit)
 
@@ -77,6 +82,7 @@ internal class CalendarScreenViewModelTest {
         every { mockCurrentSeasonHolder.currentSeason } returns 2019
         every { mockCurrentSeasonHolder.currentSeasonFlow } returns currentSeasonFlow
         every { mockGetNotificationUpcomingStateUseCase() } returns notificationSchedule
+        every { mockIsMenuIconsEnabledUseCase.invoke() } returns null
 
         underTest = CalendarScreenViewModel(
             overviewRepository = mockOverviewRepository,
@@ -85,6 +91,7 @@ internal class CalendarScreenViewModelTest {
             currentSeasonHolder = mockCurrentSeasonHolder,
             eventsRepository = mockEventsRepository,
             calendarRepository = mockCalendarRepository,
+            isMenuIconsEnabledUseCase = mockIsMenuIconsEnabledUseCase,
             getNotificationUpcomingStateUseCase = mockGetNotificationUpcomingStateUseCase,
             mainDispatcher = testDispatcher
         )

@@ -9,8 +9,6 @@ import tmg.flashback.eastereggs.usecases.IsSnowEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSnowEnabledUseCaseImpl
 import tmg.flashback.eastereggs.usecases.IsSummerEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSummerEnabledUseCaseImpl
-import tmg.flashback.eastereggs.usecases.IsUkraineEnabledUseCase
-import tmg.flashback.eastereggs.usecases.IsUkraineEnabledUseCaseImpl
 
 val easterEggsModule = listOf(module())
 
@@ -20,5 +18,4 @@ internal fun module() = module {
     single<IsMenuIconEnabledUseCase> { IsMenuIconEnabledUseCaseImpl(get()) }
     single<IsSnowEnabledUseCase> { IsSnowEnabledUseCaseImpl(get(), get()) }
     single<IsSummerEnabledUseCase> { IsSummerEnabledUseCaseImpl(get()) }
-    single<IsUkraineEnabledUseCase> { IsUkraineEnabledUseCaseImpl(get()) }
 }

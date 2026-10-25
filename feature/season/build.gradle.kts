@@ -33,6 +33,8 @@ kotlin {
 
             implementation(projects.infrastructure)
 
+            implementation(projects.eastereggs)
+
             implementation(projects.feature.highlights)
             implementation(projects.feature.notifications)
 

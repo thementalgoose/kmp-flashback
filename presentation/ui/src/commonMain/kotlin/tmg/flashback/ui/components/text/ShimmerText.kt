@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.LinearGradientShader
 import androidx.compose.ui.graphics.Shader
 import androidx.compose.ui.graphics.ShaderBrush
+import androidx.compose.ui.text.font.FontWeight
 import tmg.flashback.style.AppTheme
 
 @Composable
@@ -29,7 +30,7 @@ fun ShimmerText(
     textColor: Color = AppTheme.colors.onSurface,
 ) {
     val infiniteTransition = rememberInfiniteTransition(label = "ShimmeringTextTransition")
-    val animationSpec: DurationBasedAnimationSpec<Float> = tween(1000, 4500, LinearEasing)
+    val animationSpec: DurationBasedAnimationSpec<Float> = tween(1000, 2500, LinearEasing)
     val shimmerProgress by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 1f,
@@ -58,8 +59,9 @@ fun ShimmerText(
         text,
         modifier = modifier,
         maxLines = maxLines,
-        style = AppTheme.typography.h2.copy(
-            brush = brush
+        style = AppTheme.typography.h1.copy(
+            brush = brush,
+            fontWeight = FontWeight.Black
         )
     )
 }

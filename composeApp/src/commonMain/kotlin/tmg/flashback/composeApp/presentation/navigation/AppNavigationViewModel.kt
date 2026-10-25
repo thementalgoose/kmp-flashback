@@ -16,7 +16,6 @@ import tmg.flashback.eastereggs.model.MenuIcons
 import tmg.flashback.eastereggs.usecases.IsMenuIconEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSnowEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSummerEnabledUseCase
-import tmg.flashback.eastereggs.usecases.IsUkraineEnabledUseCase
 import tmg.flashback.feature.maintenance.repository.MaintenanceRepository
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
 import tmg.flashback.navigation.Screen
@@ -24,10 +23,8 @@ import tmg.flashback.navigation.isList
 
 class AppNavigationViewModel(
     isRssEnabledUseCase: IsRssEnabledUseCase,
-    isMenuIconEnabledUseCase: IsMenuIconEnabledUseCase,
     isSnowEnabledUseCase: IsSnowEnabledUseCase,
     isSummerEnabledUseCase: IsSummerEnabledUseCase,
-    isUkraineEnabledUseCase: IsUkraineEnabledUseCase,
     requiresSyncUseCase: RequiresSyncUseCase,
     maintenanceRepository: MaintenanceRepository,
     private val openWebpageUseCase: OpenWebpageUseCase,
@@ -35,10 +32,8 @@ class AppNavigationViewModel(
 ): ViewModel() {
 
     val easterEggs = AppNavigationEasterEggs(
-        menuIcon = isMenuIconEnabledUseCase(),
         snow = isSnowEnabledUseCase(),
         summer = isSummerEnabledUseCase(),
-        ukraine = isUkraineEnabledUseCase()
     )
 
     private val _uiState: MutableStateFlow<AppNavigationUIState> = MutableStateFlow(AppNavigationUIState(
@@ -82,16 +77,10 @@ internal val previewAppNavigationViewModel = AppNavigationViewModel(
     isRssEnabledUseCase = object : IsRssEnabledUseCase {
         override fun invoke(): Boolean = true
     },
-    isMenuIconEnabledUseCase = object : IsMenuIconEnabledUseCase {
-        override fun invoke(): MenuIcons? = null
-    },
     isSnowEnabledUseCase = object : IsSnowEnabledUseCase {
         override fun invoke(): Boolean = false
     },
     isSummerEnabledUseCase = object : IsSummerEnabledUseCase {
-        override fun invoke(): Boolean = false
-    },
-    isUkraineEnabledUseCase = object : IsUkraineEnabledUseCase {
         override fun invoke(): Boolean = false
     },
     requiresSyncUseCase = object : RequiresSyncUseCase {

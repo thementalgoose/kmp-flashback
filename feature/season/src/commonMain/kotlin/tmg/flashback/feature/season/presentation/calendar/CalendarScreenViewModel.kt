@@ -13,11 +13,14 @@ import tmg.flashback.data.repo.repository.EventRepository
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
 import tmg.flashback.data.repo.repository.StandingsRepository
+import tmg.flashback.eastereggs.model.MenuIcons
+import tmg.flashback.eastereggs.usecases.IsMenuIconEnabledUseCase
 import tmg.flashback.feature.notifications.model.NotificationUpcomingState
 import tmg.flashback.feature.notifications.usecases.GetNotificationUpcomingStateUseCase
 import tmg.flashback.feature.season.presentation.calendar.ScheduleBuilder.generateScheduleModel
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
 import tmg.flashback.feature.season.repositories.CalendarRepository
+import tmg.flashback.ui.toasts.ToastManager
 
 class CalendarScreenViewModel(
     private val overviewRepository: OverviewRepository,
@@ -27,11 +30,13 @@ class CalendarScreenViewModel(
     calendarRepository: CalendarRepository,
     private val eventsRepository: EventRepository,
     private val getNotificationUpcomingStateUseCase: GetNotificationUpcomingStateUseCase,
+    private val isMenuIconsEnabledUseCase: IsMenuIconEnabledUseCase,
     private val mainDispatcher: CoroutineDispatcher = Dispatchers.Main
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<CalendarScreenState> = MutableStateFlow(CalendarScreenState(
         season = currentSeasonHolder.currentSeason,
+        menuIcon = isMenuIconsEnabledUseCase()
     ))
     val uiState: StateFlow<CalendarScreenState> = _uiState
 

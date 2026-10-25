@@ -5,7 +5,6 @@ import tmg.flashback.configuration.manager.ConfigManager
 internal interface EasterEggsRepository {
     val isSnowEnabled: Boolean
     val isSummerEnabled: Boolean
-    val isUkraineEnabled: Boolean
 }
 
 internal class EasterEggsRepositoryImpl(
@@ -15,7 +14,6 @@ internal class EasterEggsRepositoryImpl(
     companion object {
         private const val keySnow = "easteregg_snow"
         private const val keySummer = "easteregg_summer"
-        private const val keyUkraine = "easteregg_ukraine"
     }
 
     override val isSnowEnabled: Boolean
@@ -24,6 +22,5 @@ internal class EasterEggsRepositoryImpl(
     override val isSummerEnabled: Boolean
         get() = configManager.getBoolean(keySummer)
 
-    override val isUkraineEnabled: Boolean
-        get() = configManager.getBoolean(keyUkraine)
+
 }

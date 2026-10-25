@@ -623,8 +623,11 @@
     <string name="reaction_tier_poor_desc">你的反应时间比平均水平慢。平均反应时间约为 250 毫秒，在你开始你的 F1 车手生涯之前，请务必多加练习</string>
 
     <!-- Easter Eggs -->
-    <string name="easter_egg_menu_new_years">新年快乐！</string>
+    <string name="easter_egg_menu_new_years">元旦！</string>
+    <string name="easter_egg_menu_independence_day">独立日快乐!</string>
     <string name="easter_egg_menu_chinese_new_year">春节快乐！</string>
+    <string name="easter_egg_menu_bonfire_night">尽情欣赏篝火之夜的烟火吧！</string>
+    <string name="easter_egg_menu_st_patricks_day">圣帕特里克节快乐！</string>
     <string name="easter_egg_menu_valentines">情人节快乐！</string>
     <string name="easter_egg_menu_easter">复活节快乐！</string>
     <string name="easter_egg_menu_halloween">万圣节快乐！</string>
