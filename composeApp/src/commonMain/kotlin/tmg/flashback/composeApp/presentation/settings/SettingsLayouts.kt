@@ -88,74 +88,6 @@ fun LazyListScope.PrefSection(
     }
 }
 
-//fun LazyListScope.PrefHeader(
-//    title: StringResource
-//) {
-//    item(title.key) {
-//        SettingHeader(title = title)
-//    }
-//}
-//
-//fun LazyListScope.PrefCategory(
-//    item: Setting.Category,
-//    itemClicked: (Setting.Category) -> Unit,
-//    isEnabled: Boolean = item.isEnabled,
-//) {
-//    item(item.id) {
-//        SettingCategory(
-//            item = item,
-//            itemClicked = itemClicked,
-//            isEnabled = isEnabled
-//        )
-//    }
-//}
-//
-//fun LazyListScope.PrefLink(
-//    item: Setting.Pref,
-//    itemClicked: (Setting.Pref) -> Unit,
-//    isEnabled: Boolean = item.isEnabled
-//) {
-//    item(item.id) {
-//        SettingLink(
-//            item = item,
-//            itemClicked = itemClicked,
-//            isEnabled = isEnabled
-//        )
-//    }
-//}
-//
-//fun LazyListScope.PrefRadio(
-//    item: Setting.Pref,
-//    itemClicked: (Setting.Pref) -> Unit,
-//    isChecked: Boolean,
-//    isEnabled: Boolean = item.isEnabled
-//) {
-//    item(item.id) {
-//        SettingRadio(
-//            item = item,
-//            itemClicked = itemClicked,
-//            isChecked = isChecked,
-//            isEnabled = isEnabled
-//        )
-//    }
-//}
-//
-//fun LazyListScope.PrefSwitch(
-//    item: Setting.Pref,
-//    itemClicked: (Setting.Pref) -> Unit,
-//    isChecked: Boolean,
-//    isEnabled: Boolean = item.isEnabled
-//) {
-//    item(item.id) {
-//        SettingSwitch(
-//            item = item,
-//            itemClicked = itemClicked,
-//            isChecked = isChecked,
-//            isEnabled = isEnabled
-//        )
-//    }
-//}
-
 @Composable
 fun SettingHeader(
     title: StringResource,
@@ -319,11 +251,10 @@ fun SettingCategory(
             Icon(
                 modifier = Modifier
                     .size(categoryIconSize)
-                    .align(Alignment.CenterVertically)
-                    .padding(start = AppTheme.dimens.small),
+                    .align(Alignment.CenterVertically),
                 painter = painterResource(resource = item.icon),
                 contentDescription = null,
-                tint = AppTheme.colors.onSurface
+                tint = AppTheme.colors.onSurfaceVariant
             )
         } else {
             Spacer(Modifier.size(categoryIconSize))

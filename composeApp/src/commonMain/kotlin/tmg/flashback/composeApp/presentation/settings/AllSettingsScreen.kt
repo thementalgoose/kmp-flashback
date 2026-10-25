@@ -101,8 +101,8 @@ private fun AllSettingsScreen(
                     itemClicked = { navigateToSubScreen(NavSettingsLayoutHome)  }
                 )
                 SettingCategory(
-                    item = Settings.LayoutHomeCategory,
-                    itemClicked = { navigateToSubScreen(NavSettingsLayoutHome)  }
+                    item = Settings.LayoutRaceCategory,
+                    itemClicked = { navigateToSubScreen(NavSettingsLayoutRace)  }
                 )
             }
         )
