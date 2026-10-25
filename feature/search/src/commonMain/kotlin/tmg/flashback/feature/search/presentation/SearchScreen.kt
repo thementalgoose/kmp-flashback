@@ -47,6 +47,7 @@ import flashback.presentation.ui.generated.resources.ic_close
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.Driver
@@ -78,6 +79,8 @@ fun SearchScreen(
     filtering: NavSearchFilter?,
     viewModel: SearchViewModel = koinViewModel()
 ) {
+    ScreenView("Search")
+
     val uiState = viewModel.uiState.collectAsState()
 
     LaunchedEffect(filtering) {
