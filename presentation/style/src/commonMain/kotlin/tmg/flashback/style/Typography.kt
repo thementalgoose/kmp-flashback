@@ -47,7 +47,7 @@ fun AppTypography() = AppTypography(
         fontFamily = FontFamily.Monospace,
         fontWeight = FontWeight.Bold,
         letterSpacing = (-1.5).sp,
-        fontSize = 36.sp
+        fontSize = 32.sp
     ),
     h2 = TextStyle(
         fontFamily = FontFamily.Monospace,
