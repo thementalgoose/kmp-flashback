@@ -25,6 +25,7 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.ModalBottomSheetProperties
 import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -348,7 +349,7 @@ private fun PreviewLoading() {
             overall = SyncState.LOADING,
             continueClicked = { },
             tryAgainClicked = { },
-            windowSizeClass = WindowSizeClass.compute(400f, 700f)
+            windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass
         )
     }
 }
@@ -366,7 +367,7 @@ private fun PreviewDone() {
             overall = SyncState.DONE,
             continueClicked = { },
             tryAgainClicked = { },
-            windowSizeClass = WindowSizeClass.compute(400f, 700f)
+            windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass
         )
     }
 }
@@ -384,7 +385,7 @@ private fun PreviewFailed() {
             overall = SyncState.FAILED,
             continueClicked = { },
             tryAgainClicked = { },
-            windowSizeClass = WindowSizeClass.compute(400f, 700f)
+            windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass
         )
     }
 }

@@ -1,7 +1,11 @@
 package tmg.flashback.feature.search.presentation
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,32 +18,56 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.LayersClear
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
+import flashback.domain.formula1.generated.resources.Res
+import flashback.domain.formula1.generated.resources.ic_driver
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.ab_clear_filters
 import flashback.presentation.localisation.generated.resources.search_title
+import flashback.presentation.localisation.generated.resources.weather_type_clear_sky
+import flashback.presentation.ui.generated.resources.ic_close
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.preview.preview
+import tmg.flashback.navigation.NavCircuit
+import tmg.flashback.navigation.NavDriver
+import tmg.flashback.navigation.NavSearchFilter
+import tmg.flashback.navigation.NavTeam
 import tmg.flashback.navigation.Screen
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.badge.BadgeView
 import tmg.flashback.style.preview.PreviewTheme
+import tmg.flashback.style.text.TextBody2
+import tmg.flashback.style.text.TextHeadline3
+import tmg.flashback.style.text.TextHeadline4
 import tmg.flashback.style.textinput.TextInput
 import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.header.Header
+import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
 
 @Composable
@@ -48,13 +76,16 @@ fun SearchScreen(
     actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
     navigateTo: (Screen) -> Unit,
-    filtering: List<Category>,
+    filtering: NavSearchFilter?,
     viewModel: SearchViewModel = koinViewModel()
 ) {
+    ScreenView("Search")
+
     val uiState = viewModel.uiState.collectAsState()
 
     LaunchedEffect(filtering) {
-        viewModel.applyFilters(filtering)
+        val filters = filtering?.toCategory
+        viewModel.applyFilter(filters)
     }
 
     SearchScreen(
@@ -62,7 +93,9 @@ fun SearchScreen(
         paddingValues = paddingValues,
         actionUpClicked = actionUpClicked,
         windowSizeClass = windowSizeClass,
+        applyFilter = viewModel::applyFilter,
         navigateTo = navigateTo,
+        clearFilter = filtering == null,
         searchTerm = viewModel::searchTerm,
         refresh = viewModel::refresh
     )
@@ -76,6 +109,8 @@ private fun SearchScreen(
     windowSizeClass: WindowSizeClass,
     navigateTo: (Screen) -> Unit,
     searchTerm: (String) -> Unit,
+    applyFilter: (Category?) -> Unit,
+    clearFilter: Boolean,
     refresh: () -> Unit
 ) {
     val searchTerm = remember { mutableStateOf(TextFieldValue(uiState.searchTerm)) }
@@ -94,10 +129,27 @@ private fun SearchScreen(
                 Header(
                     modifier = Modifier.animateItem(),
                     actionUpClicked = actionUpClicked,
-                    action = null,
-                    text = stringResource(string.search_title),
+                    action = if (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) null else HeaderAction.BACK,
+                    text = stringResource(uiState.selectedCategory?.label ?: string.search_title),
                     overrideIcons = {
                         Refresh(onClick = refresh)
+                        AnimatedVisibility(
+                            visible = clearFilter && uiState.selectedCategory != null,
+                            content = {
+                                IconButton(
+                                    onClick = {
+                                        applyFilter(null)
+                                    },
+                                    content = {
+                                        Icon(
+                                            imageVector = Icons.Default.LayersClear,
+                                            contentDescription = stringResource(string.ab_clear_filters),
+                                            tint = AppTheme.colors.onSurface
+                                        )
+                                    }
+                                )
+                            }
+                        )
                     }
                 )
             }
@@ -120,73 +172,127 @@ private fun SearchScreen(
                     placeholder = stringResource(string.search_title)
                 )
             }
-            item("filters", span = { GridItemSpan(maxLineSpan) }) {
-                Row(
-                    modifier = Modifier
-                        .animateItem()
-                        .fillMaxWidth()
-                        .horizontalScroll(rememberScrollState())
-                        .padding(bottom = AppTheme.dimens.medium),
-                    horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
 
-                ) {
-                    Spacer(Modifier.width(AppTheme.dimens.nsmall))
-                    for (cat in uiState.categories) {
-                        BadgeView(
-                            label = stringResource(cat.label),
-                        )
+            if (uiState.results.isNotEmpty()) {
+                items(uiState.results, key = { it.id }) {
+                    when (it) {
+                        is Result.ResultCircuit -> {
+                            CircuitEntry(
+                                model = it,
+                                circuitClicked = {
+                                    navigateTo(NavCircuit(
+                                        id = it.id,
+                                        name = it.name
+                                    ))
+                                },
+                                modifier = Modifier.animateItem()
+                            )
+                        }
+                        is Result.ResultDriver -> {
+                            DriverEntry(
+                                model = it,
+                                driverClicked = {
+                                    navigateTo(NavDriver(
+                                        season = null,
+                                        id = it.id,
+                                        name = it.name
+                                    ))
+                                },
+                                modifier = Modifier.animateItem()
+                            )
+                        }
+//                            is Result.ResultRace -> TODO()
+                        is Result.ResultTeam -> {
+                            ConstructorEntry(
+                                model = it,
+                                constructorClicked = {
+                                    navigateTo(NavTeam(
+                                        season = null,
+                                        id = it.id,
+                                        name = it.name
+                                    ))
+                                },
+                                modifier = Modifier.animateItem()
+                            )
+                        }
+                        else -> {}
                     }
-                    Spacer(Modifier.width(AppTheme.dimens.nsmall))
                 }
             }
-            if (uiState.resultsDrivers.isNotEmpty()) {
-                item("driver-header", span = { GridItemSpan(maxLineSpan) }) {
-                    SearchHeader(
-                        category = Category.Drivers,
-                        modifier = Modifier.animateItem()
+            if (uiState.selectedCategory == null) {
+                items(Category.entries, key = { it.key }) {
+                    Container(
+                        title = stringResource(it.label),
+                        modifier = Modifier
+                            .animateItem()
+                            .clickable(
+                                onClick = { applyFilter(it) }
+                            ),
+                        icon = {
+                            Icon(
+                                painter = painterResource(it.icon),
+                                tint = AppTheme.colors.onPrimaryContainer,
+                                contentDescription = null
+                            )
+                        }
                     )
                 }
-            }
-            items(uiState.resultsDrivers, key = { it.id }) {
-                DriverEntry(
-                    model = it,
-                    driverClicked = { },
-                    modifier = Modifier.animateItem()
-                )
-            }
-            if (uiState.resultsConstructors.isNotEmpty()) {
-                item("constructor-header", span = { GridItemSpan(maxLineSpan) }) {
-                    SearchHeader(
-                        category = Category.Teams,
-                        modifier = Modifier.animateItem()
-                    )
-                }
-            }
-            items(uiState.resultsConstructors, key = { it.id }) {
-                ConstructorEntry(
-                    model = it,
-                    constructorClicked = { },
-                    modifier = Modifier.animateItem()
-                )
-            }
-            if (uiState.resultsCircuits.isNotEmpty()) {
-                item("circuits-header", span = { GridItemSpan(maxLineSpan) }) {
-                    SearchHeader(
-                        category = Category.Circuits,
-                        modifier = Modifier.animateItem()
-                    )
-                }
-            }
-            items(uiState.resultsCircuits, key = { it.id }) {
-                CircuitEntry(
-                    model = it,
-                    circuitClicked = { },
-                    modifier = Modifier.animateItem()
-                )
             }
         }
     }
 }
+
+@Composable
+private fun Container(
+    title: String,
+    modifier: Modifier = Modifier,
+    icon: (@Composable () -> Unit)? = null,
+    content: @Composable () -> Unit = { },
+) {
+    Column(
+        modifier = modifier
+            .padding(
+                horizontal = AppTheme.dimens.medium,
+                vertical = AppTheme.dimens.xxsmall
+            )
+            .clip(RoundedCornerShape(6.dp))
+            .background(AppTheme.colors.primaryContainer)
+            .padding(
+                start = AppTheme.dimens.medium,
+                end = AppTheme.dimens.medium,
+                top = AppTheme.dimens.medium,
+                bottom = AppTheme.dimens.medium
+            )
+            .fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = AppTheme.dimens.small),
+                verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
+            ) {
+                icon?.invoke()
+                TextHeadline4(
+                    text = title.uppercase(),
+                    bold = true,
+                )
+            }
+        }
+        content()
+    }
+}
+
+private val NavSearchFilter.toCategory: Category
+    get() = when (this) {
+        NavSearchFilter.Drivers -> Category.Drivers
+        NavSearchFilter.Teams -> Category.Teams
+        NavSearchFilter.Circuits -> Category.Circuits
+//        NavSearchFilter.Races -> Category.Races
+    }
 
 @PreviewTheme
 @Composable
@@ -194,23 +300,48 @@ private fun Preview() {
     ApplicationThemePreview {
         SearchScreen(
             uiState = SearchUiState(
-                categories = Category.entries,
+                selectedCategory = Category.Drivers,
                 searchTerm = "f1",
                 isLoading = false,
-                resultsCircuits = listOf(
-                    Result.ResultCircuit(Circuit.preview())
-                ),
-                resultsDrivers = listOf(
-                    Result.ResultDriver(Driver.preview())
-                ),
-                resultsConstructors = listOf(
+                results = listOf(
+                    Result.ResultCircuit(Circuit.preview()),
+                    Result.ResultDriver(Driver.preview()),
                     Result.ResultTeam(Constructor.preview())
                 ),
             ),
+            clearFilter = true,
+            applyFilter = { },
             actionUpClicked = { },
             paddingValues = PaddingValues(0.dp),
             windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass,
             navigateTo = { },
+            searchTerm = { },
+            refresh = { }
+        )
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewNoCategory() {
+    ApplicationThemePreview {
+        SearchScreen(
+            uiState = SearchUiState(
+                selectedCategory = null,
+                searchTerm = "f1",
+                isLoading = false,
+                results = listOf(
+                    Result.ResultCircuit(Circuit.preview()),
+                    Result.ResultDriver(Driver.preview()),
+                    Result.ResultTeam(Constructor.preview())
+                ),
+            ),
+            clearFilter = false,
+            actionUpClicked = { },
+            paddingValues = PaddingValues(0.dp),
+            windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass,
+            navigateTo = { },
+            applyFilter = { },
             searchTerm = { },
             refresh = { }
         )

@@ -37,7 +37,6 @@ internal class AppNavigationViewModelTest {
     private val mockIsUkraineEnabledUseCase: IsUkraineEnabledUseCase = mock(autofill)
     private val mockRequiresSyncUseCase: RequiresSyncUseCase = mock(autofill)
     private val mockMaintenanceRepository: MaintenanceRepository = mock(autofill)
-    private val mockNavRepository: NavRepository = mock(autofill)
     private val mockOpenWebpageUseCase: OpenWebpageUseCase = mock(autoUnit)
     private val mockOpenStorePageUseCase: OpenStorePageUseCase = mock(autoUnit)
 
@@ -49,7 +48,6 @@ internal class AppNavigationViewModelTest {
         ukraine: Boolean = false,
         sync: Boolean = false,
         softUpgrade: Boolean = false,
-        navLinks: List<NavLink> = emptyList()
     ) {
         every { mockIsRssEnabledUseCase.invoke() } returns isRss
         every { mockIsMenuIconEnabledUseCase.invoke() } returns menuIcon
@@ -58,7 +56,6 @@ internal class AppNavigationViewModelTest {
         every { mockIsUkraineEnabledUseCase.invoke() } returns ukraine
         every { mockRequiresSyncUseCase.invoke() } returns sync
         every { mockMaintenanceRepository.softUpgrade } returns softUpgrade
-        every { mockNavRepository.navLinks } returns navLinks
 
         underTest = AppNavigationViewModel(
             isRssEnabledUseCase = mockIsRssEnabledUseCase,
@@ -68,7 +65,6 @@ internal class AppNavigationViewModelTest {
             isUkraineEnabledUseCase = mockIsUkraineEnabledUseCase,
             requiresSyncUseCase = mockRequiresSyncUseCase,
             maintenanceRepository = mockMaintenanceRepository,
-            navRepository = mockNavRepository,
             openWebpageUseCase = mockOpenWebpageUseCase,
             openStorePageUseCase = mockOpenStorePageUseCase
         )
@@ -84,7 +80,6 @@ internal class AppNavigationViewModelTest {
             ukraine = false,
             sync = true,
             softUpgrade = false,
-            navLinks = emptyList()
         )
 
         underTest.uiState.test {

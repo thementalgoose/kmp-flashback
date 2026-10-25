@@ -29,6 +29,7 @@
     <string name="nav_constructors">车队</string>
     <string name="nav_driver_comparison">比较两位车手</string>
     <string name="nav_calendar">日历</string>
+    <string name="nav_paddock">围场</string>
     <string name="nav_schedule">赛程</string>
     <string name="nav_seasons">赛季</string>
     <string name="nav_settings">设置</string>
@@ -46,6 +47,17 @@
     <string name="nav_race">比赛</string>
     <string name="nav_sprint_qualifying">冲刺赛排位赛</string>
     <string name="nav_sprint">冲刺赛</string>
+
+    <!-- Paddock -->
+    <string name="paddock_title">围场</string>
+    <string name="paddock_lineup_title">车手阵容</string>
+    <string name="paddock_lineup_description">查看哪些车手已确认参加未来赛季</string>
+    <string name="paddock_rss_title">RSS 源</string>
+    <string name="paddock_rss_description">来自多种渠道的最新动态和车队资讯</string>
+    <string name="paddock_reaction_game_title">反应测试</string>
+    <string name="paddock_reaction_game_description">在发车灯熄灭时测试您的反应速度</string>
+    <string name="paddock_directory_title">名录</string>
+    <string name="paddock_directory_description">搜索车手、车队、赛道和统计数据</string>
 
     <!-- Race -->
     <plurals name="race_points">

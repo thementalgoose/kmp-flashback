@@ -17,6 +17,7 @@ fun ResultAsOf(
 ) {
     TextBody2(
         text = stringResource(string.results_accurate_for, grandPrixName, round),
+        italic = true,
         modifier = modifier,
     )
 }

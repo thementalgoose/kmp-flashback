@@ -6,9 +6,10 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
@@ -35,7 +36,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.rememberNavBackStack
@@ -48,32 +48,31 @@ import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.composeApp.presentation.AppContainer
 import tmg.flashback.composeApp.presentation.MenuItem
+import tmg.flashback.composeApp.presentation.floatingNavItems
 import tmg.flashback.composeApp.presentation.generateFloatingNavItems
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationOrbiter
+import tmg.flashback.composeApp.presentation.navigation.AppNavigationRail
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
 import tmg.flashback.composeApp.presentation.navigation.previewAppNavigationViewModel
 import tmg.flashback.composeApp.presentation.sync.SyncBottomSheet
 import tmg.flashback.composeApp.presentation.toScreen
-import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
-import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.navigation.NavCalendar
-import tmg.flashback.navigation.NavDriverStandings
-import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.navigation.Screen
+import tmg.flashback.navigation.replaceList
 import tmg.flashback.navigation.saveStateConfiguration
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewDevices
-import tmg.flashback.style.text.TextBody1
+import tmg.flashback.ui.extensions.only
 import tmg.flashback.ui.navigation.FloatingHorizontalNavigationBar
 import tmg.flashback.ui.navigation.FloatingVerticalNavigationBar
 import tmg.flashback.ui.navigation.NavigationType
-import tmg.flashback.ui.navigation.NavigationType.NavDrawerBottomNav
-import tmg.flashback.ui.navigation.NavigationType.NavDrawerSideNav
+import tmg.flashback.ui.navigation.NavigationType.BottomNav
 import tmg.flashback.ui.navigation.NavigationType.NavOrbiter
+import tmg.flashback.ui.navigation.NavigationType.SideNav
 import tmg.flashback.ui.navigation.OverlappingPanelsValue
 import tmg.flashback.ui.navigation.floatingHorizontalNavHeight
 import tmg.flashback.ui.navigation.floatingVerticalAppWidth
@@ -81,7 +80,6 @@ import tmg.flashback.ui.navigation.rememberNavigationLayoutType
 import tmg.flashback.ui.navigation.rememberOverlappingPanelsState
 import tmg.flashback.ui.toasts.ToastManager
 import tmg.flashback.xr.LocalXR
-import kotlin.text.clear
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -136,27 +134,44 @@ fun AppContent(
         showXr = LocalXR.current.isSpatialUiEnabled
     )
     val isSubNavigation = appNavigationUiState.value.intoSubNavigation
-    val showFloatingBar = (navigationType == NavDrawerBottomNav || navigationType == NavDrawerSideNav) &&
-            appNavigationUiState.value.screen in listOf(NavCalendar, NavDriverStandings, NavTeamStandings) &&
-            !isSubNavigation &&
-            panelsState.isPanelsClosed
+    val showFloatingBar = (navigationType == BottomNav || navigationType == SideNav) &&
+            appNavigationUiState.value.screen in floatingNavItems &&
+            !isSubNavigation
 
     Box(
-        modifier = Modifier.testTag("App")
+        modifier = Modifier
+            .testTag("App")
+            .background(AppTheme.colors.surfaceContainer1)
     ) {
-        // App Content
-        AppContainer(
-            openPanel = {
-                coroutineScope.launch { panelsState.openStartPanel() }
-            },
-            navigationType = navigationType,
-            panelsState = panelsState,
-            windowAdaptiveInfo = windowAdaptiveInfo,
-            windowSizeClass = windowSizeClass,
-            paddingValues = WindowInsets.safeDrawing.asPaddingValues(),
-            appNavigationViewModel = appNavigationViewModel,
-            backStack = backStack,
-        )
+        Row {
+            // Navigation Rail
+            if (navigationType == NavigationType.NavRail || navigationType == NavigationType.NavOrbiter) {
+                AppNavigationRail(
+                    modifier = Modifier.fillMaxHeight(),
+                    appNavigationUiState = appNavigationUiState.value,
+                    navigationItemClicked = {
+                        backStack.replaceList(it)
+                    },
+                    windowSizeClass = windowSizeClass,
+                    insetPadding = WindowInsets.safeDrawing.asPaddingValues().only(
+                        vertical = true
+                    )
+                )
+            }
+
+            // App Content
+            AppContainer(
+                openPanel = {
+                    coroutineScope.launch { panelsState.openStartPanel() }
+                },
+                windowAdaptiveInfo = windowAdaptiveInfo,
+                windowSizeClass = windowSizeClass,
+                paddingValues = WindowInsets.safeDrawing.asPaddingValues(),
+                appNavigationViewModel = appNavigationViewModel,
+                backStack = backStack,
+                modifier = Modifier.weight(1f)
+            )
+        }
 
         // Fake translucent status bar
         Box(
@@ -175,8 +190,7 @@ fun AppContent(
             showFloatingBar = showFloatingBar,
             screen = appNavigationUiState.value.screen,
             itemClicked = {
-                backStack.clear()
-                backStack.add(it)
+                backStack.replaceList(it)
             }
         )
 
@@ -186,8 +200,7 @@ fun AppContent(
             showFloatingBar = showFloatingBar,
             screen = appNavigationUiState.value.screen,
             itemClicked = {
-                backStack.clear()
-                backStack.add(it)
+                backStack.replaceList(it)
             }
         )
 
@@ -213,8 +226,7 @@ fun AppContent(
         AppNavigationOrbiter(
             appNavigationUiState = appNavigationUiState.value,
             navigationItemClicked = {
-                backStack.clear()
-                backStack.add(it)
+                backStack.replaceList(it)
             }
         )
     }
@@ -230,13 +242,13 @@ private fun BoxScope.BottomNav(
     val bottomNavPadding = AppTheme.dimens.medium
     val systemNavigationBarHeight = WindowInsets.safeDrawing.asPaddingValues().calculateBottomPadding()
     val bottomNavPosition = animateDpAsState(
-        targetValue = when ((navigationType == NavDrawerBottomNav) && showFloatingBar) {
+        targetValue = when ((navigationType == BottomNav) && showFloatingBar) {
             true -> 0.dp
             false -> floatingHorizontalNavHeight + systemNavigationBarHeight + bottomNavPadding
         },
         label = "BottomNavPosition"
     )
-    if (navigationType == NavDrawerBottomNav) {
+    if (navigationType == BottomNav) {
         val screen = screen
         val items = generateFloatingNavItems(screen)
         FloatingHorizontalNavigationBar(
@@ -268,13 +280,13 @@ private fun BoxScope.RightNav(
     val systemNavigationBarHeight = WindowInsets.safeDrawing.asPaddingValues().calculateBottomPadding()
     // Floating Nav from right
     val rightNavPosition = animateDpAsState(
-        targetValue = when ((navigationType == NavDrawerSideNav) && showFloatingBar) {
+        targetValue = when ((navigationType == SideNav) && showFloatingBar) {
             true -> 0.dp
             false -> floatingVerticalAppWidth + rightNavPadding
         },
         label = "SideNavPosition"
     )
-    if (navigationType == NavDrawerSideNav) {
+    if (navigationType == SideNav) {
         val screen = screen
         val items = generateFloatingNavItems(screen)
         FloatingVerticalNavigationBar(
@@ -301,7 +313,7 @@ private fun BoxScope.SnackbarHost(
     snackbarHostState: SnackbarHostState
 ) {
     val snackbarHostPadding = animateDpAsState(
-        targetValue = if (showFloatingBar && navigationType == NavDrawerBottomNav) floatingHorizontalNavHeight else 0.dp,
+        targetValue = if (showFloatingBar && navigationType == BottomNav) floatingHorizontalNavHeight else 0.dp,
         label = "SnackbarHostPadding"
     )
     // Snackbar host

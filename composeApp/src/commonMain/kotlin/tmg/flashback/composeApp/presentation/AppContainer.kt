@@ -62,207 +62,56 @@ import tmg.flashback.xr.LocalXR
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun AppContainer(
+    modifier: Modifier = Modifier,
     openPanel: () -> Unit,
-    navigationType: NavigationType,
     windowAdaptiveInfo: WindowAdaptiveInfo,
     windowSizeClass: WindowSizeClass,
     backStack: NavBackStack<NavKey>,
-    panelsState: OverlappingPanelsState,
     paddingValues: PaddingValues,
     appNavigationViewModel: AppNavigationViewModel,
 ) {
-    val coroutineScope = rememberCoroutineScope()
-
-    val appGraph = movableContentWithReceiverOf<BoxScope, PaddingValues> { padding ->
-        AppGraph(
-            openPanel = {
-                openPanel()
-            },
-            overlappingPanelsState = panelsState,
-            backStack = backStack,
-            appNavigationViewModel = appNavigationViewModel,
-            insetPadding = padding,
-            windowAdaptiveInfo = windowAdaptiveInfo,
-        )
-    }
-
-    val appNavigationUiState = appNavigationViewModel.uiState.collectAsStateWithLifecycle()
-    val menuAccessible = !appNavigationUiState.value.intoSubNavigation // Derive from VM
-    val isCompact = !windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)
-
-    val compactEasterEggModifier = Modifier
-        .background(AppTheme.colors.surfaceNav)
-        .snow(appNavigationUiState.value.easterEggs.snow)
-        .summer(appNavigationUiState.value.easterEggs.summer)
-        .takeIf { isCompact } ?: Modifier
-    val expandedEasterEggModifier = Modifier
-        .snow(appNavigationUiState.value.easterEggs.snow, drawOver = false)
-        .summer(appNavigationUiState.value.easterEggs.summer, drawOver = false)
-        .takeIf { !isCompact } ?: Modifier
-
-    if (navigationType.enablePane) {
-        OverlappingPanels(
-            modifier = Modifier
-                .background(AppTheme.colors.surface),
-            panelsState = when (menuAccessible) {
-                true -> panelsState
-                false -> OverlappingPanelsState(OverlappingPanelsValue.Closed)
-            },
-            gesturesEnabled = menuAccessible,
-            centerPanelElevation = if (isCompact) 8.dp else 0.dp,
-            panelStart = {
-                AppNavigationDrawer(
-                    appNavigationUiState = appNavigationUiState.value,
-                    navigationItemClicked = {
-                        backStack.clear()
-                        backStack.add(it)
-                    },
-                    insetPadding = paddingValues,
-                    closeMenu = {
-                        coroutineScope.launch { panelsState.closePanels() }
-                    },
-                    openUrl = appNavigationViewModel::openWebpage,
-                    modifier = compactEasterEggModifier
+    Box(
+        modifier = modifier
+    ) {
+        if (LocalInspectionMode.current) {
+            Box(Modifier
+                .fillMaxSize()
+                .background(AppTheme.colors.surfaceContainer5)
+                .padding(16.dp)
+                .background(AppTheme.colors.surfaceContainer4)
+            ) {
+                TextBody1(
+                    text = "App Content",
+                    modifier = Modifier.align(Alignment.Center)
                 )
-            },
-            panelCenter = {
-                Row(modifier = Modifier
-                    .fillMaxSize()
-                    .background(AppTheme.colors.surface)
-                    .then(expandedEasterEggModifier)
-                ) {
-                    if (LocalInspectionMode.current) {
-                        Box(Modifier
-                            .fillMaxSize()
-                            .background(AppTheme.colors.surfaceContainer5)
-                            .padding(16.dp)
-                            .background(AppTheme.colors.surfaceContainer4)
-                        ) {
-                            TextBody1(
-                                text = "App Content",
-                                modifier = Modifier.align(Alignment.Center)
-                            )
-                        }
-                    } else {
-                        Box(modifier = Modifier.fillMaxSize()) {
-                            appGraph(this, paddingValues)
-                        }
-                    }
-                }
             }
-        )
-    } else {
-        Row(modifier = Modifier
-            .fillMaxSize()
-            .background(AppTheme.colors.surface)
-            .padding(
-                paddingValues.only(
-                    horizontal = true
-                )
-            )
-            .then(expandedEasterEggModifier)
-        ) {
-            AppNavigationRail(
-                modifier = Modifier.fillMaxHeight(),
-                appNavigationUiState = appNavigationUiState.value,
-                navigationItemClicked = {
-                    backStack.clear()
-                    backStack.add(it)
+        } else {
+            AppGraph(
+                openPanel = {
+                    openPanel()
                 },
-                windowSizeClass = windowSizeClass,
+                backStack = backStack,
+                appNavigationViewModel = appNavigationViewModel,
                 insetPadding = paddingValues.only(
                     vertical = true
-                )
+                ),
+                windowAdaptiveInfo = windowAdaptiveInfo,
             )
-            Box(
-                modifier = Modifier.weight(1f)
-            ) {
-                if (LocalInspectionMode.current) {
-                    Box(Modifier
-                        .fillMaxSize()
-                        .background(AppTheme.colors.surfaceContainer5)
-                        .padding(16.dp)
-                        .background(AppTheme.colors.surfaceContainer4)
-                    ) {
-                        TextBody1(
-                            text = "App Content",
-                            modifier = Modifier.align(Alignment.Center)
-                        )
-                    }
-                } else {
-                    appGraph(this, paddingValues.only(
-                        vertical = true
-                    ))
-                }
-            }
-        }
-    }
-
-    // Close panel if window size is changes via. configuration change
-    DisposableEffect(windowSizeClass) {
-        logDebug("Orientation change, closing panels if open")
-        coroutineScope.launch { panelsState.closePanels() }
-        return@DisposableEffect onDispose { }
-    }
-
-    // Close the menu if we shouldn't be showing it
-    LaunchedEffect(menuAccessible, block = {
-        if (!menuAccessible) {
-            panelsState.closePanels()
-        }
-    })
-
-    // Close the menu if bck is pressed on the menu
-    BackHandler(panelsState.isStartPanelOpen) {
-        coroutineScope.launch {
-            panelsState.closePanels()
         }
     }
 }
 
 @PreviewDevicePixel
 @Composable
-private fun PreviewBottomNav() {
+private fun Preview() {
     ApplicationThemePreview {
-        Preview(
-            navigationType = NavigationType.NavDrawerBottomNav
+        AppContainer(
+            openPanel = { },
+            windowAdaptiveInfo = currentWindowAdaptiveInfoV2(),
+            windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass,
+            backStack = rememberNavBackStack(saveStateConfiguration, NavCalendar),
+            paddingValues = PaddingValues(0.dp),
+            appNavigationViewModel = previewAppNavigationViewModel
         )
     }
-}
-
-@PreviewDevicePixel
-@Composable
-private fun PreviewSideNav() {
-    ApplicationThemePreview {
-        Preview(
-            navigationType = NavigationType.NavDrawerSideNav
-        )
-    }
-}
-
-@PreviewDeviceFoldable
-@PreviewDeviceTablet
-@Composable
-private fun PreviewTablet() {
-    ApplicationThemePreview {
-        Preview(
-            navigationType = NavigationType.NavRail
-        )
-    }
-}
-
-@Composable
-private fun Preview(
-    navigationType: NavigationType
-) {
-    AppContainer(
-        openPanel = { },
-        navigationType = navigationType,
-        windowAdaptiveInfo = currentWindowAdaptiveInfoV2(),
-        windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass,
-        backStack = rememberNavBackStack(saveStateConfiguration, NavCalendar),
-        panelsState = rememberOverlappingPanelsState(),
-        paddingValues = PaddingValues(0.dp),
-        appNavigationViewModel = previewAppNavigationViewModel
-    )
 }

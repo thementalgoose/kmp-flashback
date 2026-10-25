@@ -29,6 +29,7 @@
     <string name="nav_constructors">Equipos</string>
     <string name="nav_driver_comparison">Comparar</string>
     <string name="nav_calendar">Calendario</string>
+    <string name="nav_paddock">Paddock</string>
     <string name="nav_schedule">Programa</string>
     <string name="nav_seasons">Temporadas</string>
     <string name="nav_settings">Ajustes</string>
@@ -46,6 +47,17 @@
     <string name="nav_race">Carrera</string>
     <string name="nav_sprint_qualifying">Clasificación al sprint</string>
     <string name="nav_sprint">Sprint</string>
+
+    <!-- Paddock -->
+    <string name="paddock_title">Paddock</string>
+    <string name="paddock_lineup_title">Alineación de pilotos</string>
+    <string name="paddock_lineup_description">Consulta qué pilotos están confirmados para las próximas temporadas</string>
+    <string name="paddock_rss_title">Fuente RSS</string>
+    <string name="paddock_rss_description">Últimas novedades y actualizaciones de equipos de una variedad de fuentes</string>
+    <string name="paddock_reaction_game_title">Juego de reacción</string>
+    <string name="paddock_reaction_game_description">Pon a prueba tus tiempos de reacción ante los semáforos</string>
+    <string name="paddock_directory_title">Directorio</string>
+    <string name="paddock_directory_description">Busca pilotos, equipos, circuitos y estadísticas</string>
 
     <!-- Race -->
     <plurals name="race_points">

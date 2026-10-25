@@ -29,7 +29,12 @@ import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOW
 import flashback.domain.formula1.generated.resources.Res.drawable
 import flashback.domain.formula1.generated.resources.ic_tyre
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.ab_refresh
+import flashback.presentation.localisation.generated.resources.search_title
 import flashback.presentation.localisation.generated.resources.tyres_label
+import flashback.presentation.ui.generated.resources.Res
+import flashback.presentation.ui.generated.resources.ic_refresh
+import flashback.presentation.ui.generated.resources.ic_search
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.format.MonthNames
 import org.jetbrains.compose.resources.painterResource
@@ -52,11 +57,14 @@ import tmg.flashback.formula1.extensions.label
 import tmg.flashback.infrastructure.datetime.displayDate
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.startOfWeek
+import tmg.flashback.navigation.NavSearch
+import tmg.flashback.navigation.NavSearchFilter
 import tmg.flashback.navigation.NavWeekend
 import tmg.flashback.navigation.Screen
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
+import tmg.flashback.style.text.TextHeadline1
 import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
@@ -72,7 +80,6 @@ private const val listAlpha = 0.6f
 @Composable
 fun CalendarScreen(
     paddingValues: PaddingValues,
-    actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
     navigateTo: (Screen) -> Unit,
     viewModel: CalendarScreenViewModel = koinViewModel()
@@ -95,10 +102,14 @@ fun CalendarScreen(
 
     CalendarScreen(
         paddingValues = insets,
-        actionUpClicked = actionUpClicked,
         windowSizeClass = windowSizeClass,
         uiState = uiState.value,
         refresh = viewModel::refresh,
+        goToSearch = {
+            navigateTo(
+                NavSearch(NavSearchFilter.Circuits)
+            )
+        },
         goToWeekend = { item, defaultTab ->
             navigateTo(
                 NavWeekend(
@@ -116,11 +127,11 @@ fun CalendarScreen(
 @Composable
 fun CalendarScreen(
     paddingValues: PaddingValues,
-    actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
     uiState: CalendarScreenState,
     refresh: () -> Unit,
     expandGroupedRaces: () -> Unit,
+    goToSearch: () -> Unit,
     goToWeekend: (CalendarItem.RaceWeek, String?) -> Unit,
 ) {
     ScreenView(screenName = "Calendar", updateKey = uiState.season, args = mapOf(
@@ -140,19 +151,25 @@ fun CalendarScreen(
             content = {
                 item(key = "header") {
                     Header(
-                        modifier = Modifier.animateItem(),
+                        modifier = Modifier
+                            .animateItem()
+                            .padding(vertical = AppTheme.dimens.medium),
                         content = {
-                            ResultsSeasonPicker(subtitle = null)
+                            ResultsSeasonPicker()
                         },
-                        action = if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
-                            HeaderAction.MENU
-                        } else {
-                            null
-                        },
-                        actionUpClicked = actionUpClicked,
+                        action = null,
                         overrideIcons = {
                             Refresh(onClick = refresh)
-                            Tyres(uiState.season)
+                            IconButton(
+                                onClick = goToSearch,
+                                content = {
+                                    Icon(
+                                        painter = painterResource(Res.drawable.ic_search),
+                                        contentDescription = stringResource(string.search_title),
+                                        tint = AppTheme.colors.onSurface
+                                    )
+                                }
+                            )
                         }
                     )
                 }
@@ -301,49 +318,4 @@ private fun Event(
             ),
         )
     }
-}
-
-@Composable
-private fun Tyres(
-    season: Int
-) {
-    val seasonTyres = remember(season) { SeasonTyres.getBySeason(season) }
-    val showSeasonTyres = remember { mutableStateOf(false) }
-    if (SeasonTyres.hasEntryForSeason(season)) {
-        IconButton(
-            onClick = {
-                showSeasonTyres.value = true
-            },
-            content = {
-                Icon(
-                    painter = painterResource(resource = drawable.ic_tyre),
-                    contentDescription = stringResource(resource = string.tyres_label),
-                    tint = AppTheme.colors.onSurface
-                )
-            }
-        )
-        if (showSeasonTyres.value) {
-            TyreBottomSheet(
-                show = showSeasonTyres,
-                season = season,
-                dry = seasonTyres.get(dry = true),
-                wet = seasonTyres.get(dry = false)
-            )
-        }
-    }
-}
-
-private fun SeasonTyres?.get(dry: Boolean): List<TyreInfo> {
-    if (this == null) {
-        return emptyList()
-    }
-    return this.tyres
-        .filter { it.tyre.isDry == dry }
-        .map {
-            TyreInfo(
-                icon = it.tyre.icon,
-                label = it.label,
-                size = it.tyre.size
-            )
-        }
 }

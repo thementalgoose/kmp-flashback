@@ -1,80 +1,75 @@
 package tmg.flashback.composeApp.presentation
 
-import tmg.flashback.navigation.Screen
 import flashback.composeapp.generated.resources.Res
-import flashback.composeapp.generated.resources.dashboard_nav_calendar
-import flashback.composeapp.generated.resources.dashboard_nav_constructor
-import flashback.composeapp.generated.resources.dashboard_nav_drivers
-import flashback.composeapp.generated.resources.dashboard_reaction
-import flashback.composeapp.generated.resources.dashboard_rss
-import flashback.composeapp.generated.resources.dashboard_xr
-import flashback.composeapp.generated.resources.dashboard_settings
 import flashback.composeapp.generated.resources.dashboard_contact
 import flashback.composeapp.generated.resources.dashboard_contact_selected
 import flashback.composeapp.generated.resources.dashboard_info
 import flashback.composeapp.generated.resources.dashboard_info_selected
+import flashback.composeapp.generated.resources.dashboard_nav_calendar
 import flashback.composeapp.generated.resources.dashboard_nav_calendar_selected
-import flashback.composeapp.generated.resources.dashboard_nav_circuits
-import flashback.composeapp.generated.resources.dashboard_nav_circuits_selected
+import flashback.composeapp.generated.resources.dashboard_nav_constructor
 import flashback.composeapp.generated.resources.dashboard_nav_constructor_selected
+import flashback.composeapp.generated.resources.dashboard_nav_drivers
 import flashback.composeapp.generated.resources.dashboard_nav_drivers_selected
-import flashback.composeapp.generated.resources.dashboard_nav_lineup
-import flashback.composeapp.generated.resources.dashboard_nav_lineup_selected
-import flashback.composeapp.generated.resources.dashboard_nav_results
-import flashback.composeapp.generated.resources.dashboard_nav_results_selected
-import flashback.composeapp.generated.resources.dashboard_nav_glossary
-import flashback.composeapp.generated.resources.dashboard_nav_glossary_selected
+import flashback.composeapp.generated.resources.dashboard_nav_paddock
+import flashback.composeapp.generated.resources.dashboard_nav_paddock_selected
+import flashback.composeapp.generated.resources.dashboard_reaction
 import flashback.composeapp.generated.resources.dashboard_reaction_selected
+import flashback.composeapp.generated.resources.dashboard_rss
 import flashback.composeapp.generated.resources.dashboard_rss_selected
+import flashback.composeapp.generated.resources.dashboard_search
+import flashback.composeapp.generated.resources.dashboard_search_selected
+import flashback.composeapp.generated.resources.dashboard_settings
 import flashback.composeapp.generated.resources.dashboard_settings_selected
 import flashback.composeapp.generated.resources.dashboard_style_guide
 import flashback.composeapp.generated.resources.dashboard_style_guide_selected
+import flashback.composeapp.generated.resources.dashboard_xr
 import flashback.composeapp.generated.resources.dashboard_xr_selected
 import flashback.presentation.localisation.generated.resources.Res.string
-import flashback.presentation.localisation.generated.resources.dashboard_tab_results
 import flashback.presentation.localisation.generated.resources.nav_calendar
 import flashback.presentation.localisation.generated.resources.nav_constructors
 import flashback.presentation.localisation.generated.resources.nav_contact
 import flashback.presentation.localisation.generated.resources.nav_drivers
-import flashback.presentation.localisation.generated.resources.nav_glossary
 import flashback.presentation.localisation.generated.resources.nav_info
+import flashback.presentation.localisation.generated.resources.nav_paddock
 import flashback.presentation.localisation.generated.resources.nav_reaction_game
 import flashback.presentation.localisation.generated.resources.nav_rss
 import flashback.presentation.localisation.generated.resources.nav_search
-import flashback.presentation.localisation.generated.resources.nav_lineup
-import flashback.presentation.localisation.generated.resources.nav_xr
 import flashback.presentation.localisation.generated.resources.nav_settings
 import flashback.presentation.localisation.generated.resources.nav_style_guide
-import flashback.presentation.localisation.generated.resources.search_category_circuits
+import flashback.presentation.localisation.generated.resources.nav_xr
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import tmg.flashback.navigation.NavAbout
 import tmg.flashback.navigation.NavCalendar
-import tmg.flashback.navigation.NavCircuits
 import tmg.flashback.navigation.NavDriverStandings
-import tmg.flashback.navigation.NavGlossary
 import tmg.flashback.navigation.NavInfo
-import tmg.flashback.navigation.NavLineup
+import tmg.flashback.navigation.NavPaddock
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
+import tmg.flashback.navigation.NavSearch
 import tmg.flashback.navigation.NavSettings
 import tmg.flashback.navigation.NavStyleGuide
 import tmg.flashback.navigation.NavTeamStandings
+import tmg.flashback.navigation.Screen
 import tmg.flashback.ui.navigation.NavigationItem
 
 enum class MenuItem(
     val key: String
 ) {
-    Results(key = "Results"),
+    // Main tabs
     Calendar(key = "Calendar"),
     DriversStandings(key = "DriversStandings"),
     TeamsStandings(key = "TeamsStandings"),
-    Circuits(key = "Circuits"),
-    Rss(key = "Rss"),
-    Lineup(key = "Lineup"),
-    Glossary(key = "Glossary"),
-    ReactionGame(key = "ReactionGame"),
+    Paddock(key = "Paddock"),
     Settings(key = "Settings"),
+
+    // Extra options
+    Rss(key = "RSS"),
+    ReactionGame(key = "Reaction Game"),
+    Search(key = "Search"),
+
+    // Extra options (visible in expanded views)
     Contact(key = "Contact"),
     StyleGuide(key = "Style Guide"),
     Info(key = "Debug Info"),
@@ -83,16 +78,16 @@ enum class MenuItem(
 
 val MenuItem.label: StringResource
     get() = when (this) {
-        MenuItem.Results -> string.dashboard_tab_results
         MenuItem.Calendar -> string.nav_calendar
         MenuItem.DriversStandings -> string.nav_drivers
         MenuItem.TeamsStandings -> string.nav_constructors
-        MenuItem.Circuits -> string.search_category_circuits
-        MenuItem.Lineup -> string.nav_lineup
-        MenuItem.Rss -> string.nav_rss
-        MenuItem.Glossary -> string.nav_glossary
-        MenuItem.ReactionGame -> string.nav_reaction_game
+        MenuItem.Paddock -> string.nav_paddock
         MenuItem.Settings -> string.nav_settings
+
+        MenuItem.Rss -> string.nav_rss
+        MenuItem.ReactionGame -> string.nav_reaction_game
+        MenuItem.Search -> string.nav_search
+
         MenuItem.Contact -> string.nav_contact
         MenuItem.StyleGuide -> string.nav_style_guide
         MenuItem.Info -> string.nav_info
@@ -101,16 +96,16 @@ val MenuItem.label: StringResource
 
 val MenuItem.icon: DrawableResource
     get() = when (this) {
-        MenuItem.Results -> Res.drawable.dashboard_nav_results
         MenuItem.Calendar -> Res.drawable.dashboard_nav_calendar
         MenuItem.DriversStandings -> Res.drawable.dashboard_nav_drivers
         MenuItem.TeamsStandings -> Res.drawable.dashboard_nav_constructor
-        MenuItem.Circuits -> Res.drawable.dashboard_nav_circuits
-        MenuItem.Lineup -> Res.drawable.dashboard_nav_lineup
-        MenuItem.Rss -> Res.drawable.dashboard_rss
-        MenuItem.Glossary -> Res.drawable.dashboard_nav_glossary
-        MenuItem.ReactionGame -> Res.drawable.dashboard_reaction
+        MenuItem.Paddock -> Res.drawable.dashboard_nav_paddock
         MenuItem.Settings -> Res.drawable.dashboard_settings
+
+        MenuItem.Rss -> Res.drawable.dashboard_rss
+        MenuItem.ReactionGame -> Res.drawable.dashboard_reaction
+        MenuItem.Search -> Res.drawable.dashboard_search
+
         MenuItem.Contact -> Res.drawable.dashboard_contact
         MenuItem.StyleGuide -> Res.drawable.dashboard_style_guide
         MenuItem.Info -> Res.drawable.dashboard_info
@@ -119,16 +114,16 @@ val MenuItem.icon: DrawableResource
 
 val MenuItem.selectedIcon: DrawableResource
     get() = when (this) {
-        MenuItem.Results -> Res.drawable.dashboard_nav_results_selected
         MenuItem.Calendar -> Res.drawable.dashboard_nav_calendar_selected
         MenuItem.DriversStandings -> Res.drawable.dashboard_nav_drivers_selected
         MenuItem.TeamsStandings -> Res.drawable.dashboard_nav_constructor_selected
-        MenuItem.Circuits -> Res.drawable.dashboard_nav_circuits_selected
-        MenuItem.Lineup -> Res.drawable.dashboard_nav_lineup_selected
-        MenuItem.Rss -> Res.drawable.dashboard_rss_selected
-        MenuItem.Glossary -> Res.drawable.dashboard_nav_glossary_selected
-        MenuItem.ReactionGame -> Res.drawable.dashboard_reaction_selected
+        MenuItem.Paddock -> Res.drawable.dashboard_nav_paddock_selected
         MenuItem.Settings -> Res.drawable.dashboard_settings_selected
+
+        MenuItem.Rss -> Res.drawable.dashboard_rss_selected
+        MenuItem.ReactionGame -> Res.drawable.dashboard_reaction_selected
+        MenuItem.Search -> Res.drawable.dashboard_search_selected
+
         MenuItem.Contact -> Res.drawable.dashboard_contact_selected
         MenuItem.StyleGuide -> Res.drawable.dashboard_style_guide_selected
         MenuItem.Info -> Res.drawable.dashboard_info_selected
@@ -147,19 +142,19 @@ fun MenuItem.toNavigationItem(
 
 fun MenuItem.toScreen(): Screen? {
     return when (this) {
-        MenuItem.Results -> NavCalendar
         MenuItem.Calendar -> NavCalendar
         MenuItem.DriversStandings -> NavDriverStandings
         MenuItem.TeamsStandings -> NavTeamStandings
-        MenuItem.Circuits -> NavCircuits
-        MenuItem.Lineup -> NavLineup
-        MenuItem.Rss -> NavRss
-        MenuItem.Glossary -> NavGlossary
-        MenuItem.ReactionGame -> NavReactionGame
+        MenuItem.Paddock -> NavPaddock
         MenuItem.Settings -> NavSettings
+
+        MenuItem.Rss -> NavRss
+        MenuItem.ReactionGame -> NavReactionGame
+        MenuItem.Search -> NavSearch()
+
+        MenuItem.Contact -> NavAbout
         MenuItem.StyleGuide -> NavStyleGuide
         MenuItem.Info -> NavInfo
-        MenuItem.Contact -> NavAbout
         MenuItem.XR_Spacial -> null
     }
 }

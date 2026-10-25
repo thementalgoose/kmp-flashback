@@ -17,7 +17,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AddBox
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.CarRental
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Menu
@@ -54,6 +56,8 @@ import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextCaption
 import tmg.flashback.style.text.TextHeadline1
 import tmg.flashback.style.text.TextHeadline2
+import tmg.flashback.style.text.TextHeadline3
+import tmg.flashback.style.text.TextHeadline4
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.style.textinput.TextInput
 import tmg.flashback.style.theme.LocalDarkMode
@@ -80,7 +84,7 @@ fun StyleGuideScreen(
                     onClick = actionUpClicked,
                     content = {
                         Icon(
-                            imageVector = Icons.Default.Menu,
+                            imageVector = Icons.AutoMirrored.Default.ArrowBack,
                             contentDescription = null,
                             tint = AppTheme.colors.onSurface
                         )
@@ -157,6 +161,8 @@ fun StyleGuideTexts(
     ) {
         TextHeadline1("Headline 1")
         TextHeadline2("Headline 2")
+        TextHeadline3("Headline 3")
+        TextHeadline4("Headline 4")
         TextTitle("Title 1")
         TextBody1("Body 1")
         TextBody2("Body 2")

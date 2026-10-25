@@ -66,6 +66,7 @@ data class AppColors(
     val systemNavigationBarColor: Color,
 
     // F1
+    val f1: Color,
     val f1Podium1: Color,
     val f1Podium1Highlight: Color = f1Podium1.copy(alpha = 0.2f),
     val f1Podium2: Color,
@@ -231,6 +232,8 @@ val lightColours = AppColors(
     systemStatusBarColor = Color(0xFF0274D1),
     systemNavigationBarColor = Color(0xFFFCFCFC),
 
+    f1 = Color(0xffe10500),
+
     f1Podium1 = Color(0xFFA38B21),
     f1Podium2 = Color(0xff6f797b),
     f1Podium3 = Color(0xFFD29342),
@@ -284,8 +287,8 @@ val darkColours = AppColors(
     surface = Color(0xff0e1416),
     surfaceBright = Color(0xff343a3c),
     surfaceContainer1 = Color(0xff090f11),
-    surfaceContainer2 = Color(0xff171d1e),
-    surfaceContainer3 = Color(0xff1b2122),
+    surfaceContainer2 = Color(0xff15181e),
+    surfaceContainer3 = Color(0xff1f1f22),
     surfaceContainer4 = Color(0xff252b2c),
     surfaceContainer5 = Color(0xff303637),
     onSurface = Color(0xffdee3e5),
@@ -298,6 +301,8 @@ val darkColours = AppColors(
 
     systemStatusBarColor = Color(0xFF181818),
     systemNavigationBarColor = Color(0xFF383838),
+
+    f1 = Color(0xFFF44336),
 
     f1Podium1 = Color(0xFFD3BC4D),
     f1Podium2 = Color(0xFFC2C2C2),

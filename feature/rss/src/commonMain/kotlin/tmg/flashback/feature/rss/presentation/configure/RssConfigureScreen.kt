@@ -223,7 +223,8 @@ private fun ShowDescription(
                 .padding(end = 8.dp)
         ) {
             TextTitle(
-                text = stringResource(resource = string.settings_rss_show_description_title)
+                text = stringResource(resource = string.settings_rss_show_description_title),
+                bold = true,
             )
             TextBody2(
                 text = stringResource(resource = string.settings_rss_show_description_description),
@@ -252,7 +253,8 @@ private fun AddCustom(
                 .padding(end = 8.dp)
         ) {
             TextTitle(
-                text = stringResource(resource = string.settings_rss_add_title)
+                text = stringResource(resource = string.settings_rss_add_title),
+                bold = true,
             )
             TextBody2(
                 text = stringResource(resource = string.settings_rss_add_description),

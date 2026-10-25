@@ -35,6 +35,7 @@
     <string name="nav_constructors">Teams</string>
     <string name="nav_driver_comparison">Comparison</string>
     <string name="nav_calendar">Calendar</string>
+    <string name="nav_paddock">Paddock</string>
     <string name="nav_schedule">Schedule</string>
     <string name="nav_seasons">Seasons</string>
     <string name="nav_settings">Settings</string>
@@ -53,6 +54,16 @@
     <string name="nav_sprint_qualifying">Sprint Qualifying</string>
     <string name="nav_sprint">Sprint</string>
 
+    <!-- Paddock -->
+    <string name="paddock_title">Paddock</string>
+    <string name="paddock_lineup_title">Driver Lineup</string>
+    <string name="paddock_lineup_description">See which drivers are confirmed for future seasons</string>
+    <string name="paddock_rss_title">RSS Feed</string>
+    <string name="paddock_rss_description">Latest updates &amp; team updates from a variety of sources</string>
+    <string name="paddock_reaction_game_title">Reaction Game</string>
+    <string name="paddock_reaction_game_description">Test your response times against the lights</string>
+    <string name="paddock_directory_title">Directory</string>
+    <string name="paddock_directory_description">Search drivers, teams, circuits &amp; stats</string>
 
     <!-- Race -->
     <plurals name="race_points">

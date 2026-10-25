@@ -50,6 +50,7 @@ import tmg.flashback.notifications.firebase.FirebaseMessagingService
 import tmg.flashback.persistence.flashback.di.dataPersistenceFlashbackModule
 import tmg.flashback.preferences.di.corePreferencesModule
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
+import tmg.flashback.composeApp.presentation.paddock.PaddockViewModel
 import tmg.flashback.composeApp.presentation.settings.AllSettingsViewModel
 import tmg.flashback.composeApp.presentation.settings.about.SettingsAboutViewModel
 import tmg.flashback.composeApp.presentation.settings.browser.SettingsBrowserViewModel
@@ -135,13 +136,15 @@ internal fun module() = module {
 
     single { AppStartup(get(), get(), get(), get(),get(), get(), get(), get()) }
 
-    viewModel { AppNavigationViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { AppNavigationViewModel(get(), get(), get(), get(), get(), get(), get(), get(),  get()) }
 
     single<OnboardingRepository> { OnboardingRepositoryImpl(get()) }
     single<NavRepository> { NavRepositoryImpl(get()) }
 
     single<StoreFirebaseInstallationIdUseCase> { StoreFirebaseInstallationIdUseCaseImpl(get(), get()) }
     single<RequiresSyncUseCase> { RequiresSyncUseCaseImpl(get(), get()) }
+
+    viewModel { PaddockViewModel(get(), get(), get()) }
 
     viewModel { InfoViewModel(get()) }
 

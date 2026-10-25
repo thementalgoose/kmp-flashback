@@ -35,7 +35,10 @@ import flashback.feature.season.generated.resources.Res
 import flashback.feature.season.generated.resources.ic_driver_comparison
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.driver_comparison_title
+import flashback.presentation.localisation.generated.resources.search_title
+import flashback.presentation.localisation.generated.resources.season_standings_constructor
 import flashback.presentation.localisation.generated.resources.season_standings_driver
+import flashback.presentation.ui.generated.resources.ic_search
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -47,8 +50,11 @@ import tmg.flashback.feature.season.presentation.shared.seasonpicker.ResultsSeas
 import tmg.flashback.formula1.model.SeasonDriverStandingSeason
 import tmg.flashback.navigation.NavDriver
 import tmg.flashback.navigation.NavDriverComparison
+import tmg.flashback.navigation.NavSearch
+import tmg.flashback.navigation.NavSearchFilter
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextBody2
+import tmg.flashback.style.text.TextHeadline1
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.driver.DriverIcon
@@ -64,7 +70,6 @@ import tmg.flashback.ui.navigation.appBarMaximumHeight
 @Composable
 fun DriverStandingsScreen(
     paddingValues: PaddingValues,
-    actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
     navigateTo: (Screen) -> Unit,
     viewModel: DriverStandingsViewModel = koinViewModel()
@@ -88,9 +93,13 @@ fun DriverStandingsScreen(
 
     DriverStandingsScreen(
         paddingValues = insets,
-        actionUpClicked = actionUpClicked,
         uiState = state.value,
         windowSizeClass = windowSizeClass,
+        goToSearch = {
+            navigateTo(
+                NavSearch(NavSearchFilter.Drivers)
+            )
+        },
         driverClicked = {
             navigateTo(NavDriver(
                 season = it.season,
@@ -108,9 +117,9 @@ fun DriverStandingsScreen(
 @Composable
 internal fun DriverStandingsScreen(
     paddingValues: PaddingValues,
-    actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
     uiState: DriverStandingsState,
+    goToSearch: () -> Unit,
     driverClicked: (SeasonDriverStandingSeason) -> Unit,
     comparisonClicked: () -> Unit,
     refresh: () -> Unit
@@ -129,16 +138,19 @@ internal fun DriverStandingsScreen(
             content = {
                 item(key = "header") {
                     Header(
-                        modifier = Modifier.animateItem(),
+                        modifier = Modifier
+                            .animateItem()
+                            .padding(vertical = AppTheme.dimens.medium),
                         content = {
-                            ResultsSeasonPicker(subtitle = stringResource(resource = string.season_standings_driver))
+                            ResultsSeasonPicker()
                         },
-                        action = if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
-                            HeaderAction.MENU
-                        } else {
-                            null
+                        subContent = {
+                            TextHeadline1(
+                                text = stringResource(resource = string.season_standings_driver),
+                                modifier = Modifier.padding(horizontal = AppTheme.dimens.medium)
+                            )
                         },
-                        actionUpClicked = actionUpClicked,
+                        action = null,
                         overrideIcons = {
                             Refresh(onClick = refresh)
                             IconButton(
@@ -147,6 +159,16 @@ internal fun DriverStandingsScreen(
                                     Icon(
                                         painter = painterResource(Res.drawable.ic_driver_comparison),
                                         contentDescription = stringResource(string.driver_comparison_title),
+                                        tint = AppTheme.colors.onSurface
+                                    )
+                                }
+                            )
+                            IconButton(
+                                onClick = goToSearch,
+                                content = {
+                                    Icon(
+                                        painter = painterResource(flashback.presentation.ui.generated.resources.Res.drawable.ic_search),
+                                        contentDescription = stringResource(string.search_title),
                                         tint = AppTheme.colors.onSurface
                                     )
                                 }

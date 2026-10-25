@@ -131,6 +131,7 @@ kotlin {
             implementation(projects.feature.maintenance)
             implementation(projects.feature.notifications)
             implementation(projects.feature.privacypolicy)
+            implementation(projects.feature.paddock)
             implementation(projects.feature.reactiongame)
             implementation(projects.feature.rss)
             implementation(projects.feature.sandbox)

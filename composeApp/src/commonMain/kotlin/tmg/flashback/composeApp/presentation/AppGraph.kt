@@ -12,11 +12,9 @@ import androidx.compose.material3.adaptive.WindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
-import androidx.navigation3.runtime.metadata
 import androidx.navigation3.ui.NavDisplay
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_EXPANDED_LOWER_BOUND
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
@@ -45,17 +43,19 @@ import tmg.flashback.feature.drivers.presentation.stats.DriverStatsScreen
 import tmg.flashback.feature.glossary.presentation.all.GlossaryScreen
 import tmg.flashback.feature.glossary.presentation.details.GlossaryDetailScreen
 import tmg.flashback.feature.lineup.presentation.LineupScreen
+import tmg.flashback.composeApp.presentation.paddock.PaddockScreen
 import tmg.flashback.feature.privacypolicy.presentation.PrivacyPolicyScreen
 import tmg.flashback.feature.reactiongame.presentation.ReactionGameScreen
 import tmg.flashback.feature.rss.presentation.configure.RssConfigureScreen
 import tmg.flashback.feature.rss.presentation.feed.RSSScreen
+import tmg.flashback.feature.search.presentation.Category
+import tmg.flashback.feature.search.presentation.SearchScreen
 import tmg.flashback.feature.season.presentation.calendar.CalendarScreen
 import tmg.flashback.feature.season.presentation.driver_standings.DriverStandingsScreen
 import tmg.flashback.feature.season.presentation.team_standings.TeamStandingsScreen
 import tmg.flashback.feature.weekend.presentation.WeekendScreen
+import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.navigation.NavAbout
-import tmg.flashback.navigation.NavStyleGuide
-import tmg.flashback.style.styleguide.StyleGuideScreen
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavCircuit
 import tmg.flashback.navigation.NavCircuits
@@ -66,9 +66,12 @@ import tmg.flashback.navigation.NavGlossary
 import tmg.flashback.navigation.NavGlossaryDetail
 import tmg.flashback.navigation.NavInfo
 import tmg.flashback.navigation.NavLineup
+import tmg.flashback.navigation.NavPaddock
 import tmg.flashback.navigation.NavPrivacyPolicy
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
+import tmg.flashback.navigation.NavSearch
+import tmg.flashback.navigation.NavSearchFilter
 import tmg.flashback.navigation.NavSettings
 import tmg.flashback.navigation.NavSettingsDarkMode
 import tmg.flashback.navigation.NavSettingsInAppBrowser
@@ -80,16 +83,20 @@ import tmg.flashback.navigation.NavSettingsPrivacy
 import tmg.flashback.navigation.NavSettingsRssConfigure
 import tmg.flashback.navigation.NavSettingsTheme
 import tmg.flashback.navigation.NavSettingsWidgets
+import tmg.flashback.navigation.NavStyleGuide
 import tmg.flashback.navigation.NavTeam
 import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.navigation.NavWebpage
 import tmg.flashback.navigation.NavWeekend
+import tmg.flashback.navigation.addList
+import tmg.flashback.navigation.pop
+import tmg.flashback.navigation.popList
 import tmg.flashback.navigation.removeDetail
 import tmg.flashback.navigation.replaceDetail
 import tmg.flashback.navigation.replaceList
 import tmg.flashback.style.AppTheme
+import tmg.flashback.style.styleguide.StyleGuideScreen
 import tmg.flashback.ui.extensions.only
-import tmg.flashback.ui.navigation.OverlappingPanelsState
 import tmg.flashback.webbrowser.presentation.WebScreen
 
 @Composable
@@ -97,7 +104,6 @@ fun AppGraph(
     openPanel: () -> Unit,
     appNavigationViewModel: AppNavigationViewModel,
     insetPadding: PaddingValues,
-    overlappingPanelsState: OverlappingPanelsState,
     windowAdaptiveInfo: WindowAdaptiveInfo,
     backStack: NavBackStack<NavKey>,
 ) {
@@ -114,6 +120,7 @@ fun AppGraph(
             .background(AppTheme.colors.surfaceContainer1)
         false -> Modifier
             .fillMaxSize()
+            .background(AppTheme.colors.surfaceContainer1)
     }
     val insetPadding = when (isCompact) {
         true -> insetPadding
@@ -122,7 +129,7 @@ fun AppGraph(
 
     NavDisplay(
         backStack = backStack,
-        onBack = { backStack.removeDetail() },
+        onBack = { backStack.pop() },
         sceneStrategies = listOf(listDetailStrategy),
         transitionSpec = {
             fadeIn() togetherWith fadeOut()
@@ -138,7 +145,6 @@ fun AppGraph(
             entry<NavCalendar>(metadata = SplitPaneScene.listPane()) {
                 CalendarScreen(
                     paddingValues = insetPadding,
-                    actionUpClicked = openPanel,
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
                         backStack.replaceDetail(it)
@@ -148,7 +154,6 @@ fun AppGraph(
             entry<NavDriverStandings>(metadata = SplitPaneScene.listPane()) {
                 DriverStandingsScreen(
                     paddingValues = insetPadding,
-                    actionUpClicked = openPanel,
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
                         backStack.replaceDetail(it)
@@ -158,10 +163,18 @@ fun AppGraph(
             entry<NavTeamStandings>(metadata = SplitPaneScene.listPane()) {
                 TeamStandingsScreen(
                     paddingValues = insetPadding,
-                    actionUpClicked = openPanel,
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
                         backStack.replaceDetail(it)
+                    }
+                )
+            }
+            entry<NavPaddock>(metadata = SplitPaneScene.listPane()) {
+                PaddockScreen(
+                    paddingValues = insetPadding,
+                    windowSizeClass = windowAdaptiveInfo.windowSizeClass,
+                    navigateTo = {
+                        backStack.addList(it)
                     }
                 )
             }
@@ -235,7 +248,7 @@ fun AppGraph(
             entry<NavRss>(metadata = SplitPaneScene.listPane()) {
                 RSSScreen(
                     paddingValues = insetPadding,
-                    actionUpClicked = { openPanel() },
+                    actionUpClicked = { if (!backStack.popList()) openPanel() },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
                         backStack.replaceDetail(it)
@@ -249,11 +262,22 @@ fun AppGraph(
                     actionUpClicked = { backStack.removeDetail() }
                 )
             }
+            entry<NavSearch>(metadata = SplitPaneScene.listPane()) {
+                SearchScreen(
+                    paddingValues = insetPadding,
+                    actionUpClicked = { if (!backStack.popList()) openPanel() },
+                    windowSizeClass = windowAdaptiveInfo.windowSizeClass,
+                    navigateTo = {
+                        backStack.replaceDetail(it)
+                    },
+                    filtering = it.filter
+                )
+            }
 
             entry<NavReactionGame>(metadata = SplitPaneScene.listPane()) {
                 ReactionGameScreen(
                     paddingValues = insetPadding,
-                    actionUpClicked = openPanel,
+                    actionUpClicked = { if (!backStack.popList()) openPanel() },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
             }
@@ -281,13 +305,12 @@ fun AppGraph(
 
             entry<NavSettings>(metadata = SplitPaneScene.listPane()) {
                 AllSettingsScreen(
-                    actionUpClicked = { openPanel() },
-                    showMenu = isCompact,
-                    navigateToSubScreen = { backStack.add(it) },
+                    navigateToSubScreen = { backStack.replaceDetail(it) },
                     navigateTo = {
                         backStack.replaceList(it)
                     },
-                    insetPadding = insetPadding
+                    windowSizeClass = windowAdaptiveInfo.windowSizeClass,
+                    paddingValues = insetPadding
                 )
             }
             entry<NavSettingsDarkMode>(metadata = SplitPaneScene.detailPane()) {
@@ -369,11 +392,13 @@ fun AppGraph(
                 )
             }
 
-            entry<NavAbout>(metadata = SplitPaneScene.listPane()) {
+            entry<NavAbout>(metadata = SplitPaneScene.detailPane()) {
                 AboutScreen(
                     appIcon = Res.drawable.logo,
                     paddingValues = insetPadding,
-                    actionUpClicked = openPanel,
+                    actionUpClicked = {
+                        backStack.removeDetail()
+                    },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
             }

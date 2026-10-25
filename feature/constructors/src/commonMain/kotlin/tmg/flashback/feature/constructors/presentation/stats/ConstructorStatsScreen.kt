@@ -66,7 +66,6 @@ fun ConstructorStatsScreen(
 
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     val loading = viewModel.loading.collectAsStateWithLifecycle()
-
     val currentSeason = when (val selection = uiState.value.selection) {
         ConstructorFilter.Overview -> "All"
         is ConstructorFilter.Season -> selection.season.toString()

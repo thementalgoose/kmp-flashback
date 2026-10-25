@@ -1,11 +1,16 @@
 package tmg.flashback.composeApp.presentation.settings
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import tmg.flashback.navigation.Screen
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.nav_settings
@@ -34,35 +39,41 @@ import tmg.flashback.navigation.NavSettingsLayoutRace
 import tmg.flashback.navigation.NavSettingsWidgets
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
+import tmg.flashback.ui.navigation.appBarMaximumHeight
 
 @Composable
 internal fun AllSettingsScreen(
-    actionUpClicked: () -> Unit,
-    showMenu: Boolean,
     navigateToSubScreen: (Screen) -> Unit,
     navigateTo: (Screen) -> Unit,
-    insetPadding: PaddingValues,
+    paddingValues: PaddingValues,
+    windowSizeClass: WindowSizeClass,
     viewModel: AllSettingsViewModel = koinViewModel(),
 ) {
     ScreenView(screenName = "Settings")
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
+    val insets = when (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
+        true -> paddingValues
+        false -> {
+            val direction = LocalLayoutDirection.current
+            PaddingValues(
+                top = paddingValues.calculateTopPadding(),
+                bottom = paddingValues.calculateBottomPadding() + appBarMaximumHeight,
+                start = paddingValues.calculateStartPadding(direction),
+                end = paddingValues.calculateEndPadding(direction)
+            )
+        }
+    }
 
     AllSettingsScreen(
-        actionUpClicked = actionUpClicked,
-        navigateTo = navigateTo,
         navigateToSubScreen = navigateToSubScreen,
-        showMenu = showMenu,
         uiState = uiState.value,
-        paddingValues = insetPadding
+        paddingValues = insets
     )
 }
 
 @Composable
 private fun AllSettingsScreen(
-    actionUpClicked: () -> Unit,
-    showMenu: Boolean,
     navigateToSubScreen: (Screen) -> Unit,
-    navigateTo: (Screen) -> Unit,
     uiState: AllSettingsUiState,
     paddingValues: PaddingValues,
 ) {
@@ -73,8 +84,7 @@ private fun AllSettingsScreen(
         item("header") {
             Header(
                 text = stringResource(string.nav_settings),
-                actionUpClicked = actionUpClicked,
-                action = HeaderAction.MENU.takeIf { showMenu }
+                action = null,
             )
         }
         PrefSection(
@@ -163,7 +173,7 @@ private fun AllSettingsScreen(
                 )
                 SettingCategory(
                     item = Settings.AboutCategory,
-                    itemClicked = { navigateTo(NavAbout) }
+                    itemClicked = { navigateToSubScreen(NavAbout) }
                 )
             }
         )

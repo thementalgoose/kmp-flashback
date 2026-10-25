@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -28,7 +30,11 @@ import tmg.flashback.navigation.Screen
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.search_title
 import flashback.presentation.localisation.generated.resources.season_standings_constructor
+import flashback.presentation.ui.generated.resources.Res
+import flashback.presentation.ui.generated.resources.ic_search
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
@@ -37,8 +43,11 @@ import tmg.flashback.feature.season.presentation.shared.ongoing_banner.ResultAsO
 import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedBy
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.ResultsSeasonPicker
 import tmg.flashback.formula1.model.SeasonConstructorStandingSeason
+import tmg.flashback.navigation.NavSearch
+import tmg.flashback.navigation.NavSearchFilter
 import tmg.flashback.navigation.NavTeam
 import tmg.flashback.style.AppTheme
+import tmg.flashback.style.text.TextHeadline1
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.driver.DriverPoints
@@ -53,7 +62,6 @@ import tmg.flashback.ui.navigation.appBarMaximumHeight
 @Composable
 fun TeamStandingsScreen(
     paddingValues: PaddingValues,
-    actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
     navigateTo: (Screen) -> Unit,
     viewModel: TeamStandingsViewModel = koinViewModel()
@@ -75,9 +83,13 @@ fun TeamStandingsScreen(
 
     TeamStandingsScreen(
         paddingValues = insets,
-        actionUpClicked = actionUpClicked,
         windowSizeClass = windowSizeClass,
         uiState = state.value,
+        goToSearch = {
+            navigateTo(
+                NavSearch(NavSearchFilter.Teams)
+            )
+        },
         constructorClicked = {
             navigateTo(
                 NavTeam(
@@ -94,9 +106,9 @@ fun TeamStandingsScreen(
 @Composable
 internal fun TeamStandingsScreen(
     paddingValues: PaddingValues,
-    actionUpClicked: () -> Unit,
     windowSizeClass: WindowSizeClass,
     uiState: TeamStandingsState,
+    goToSearch: () -> Unit,
     constructorClicked: (SeasonConstructorStandingSeason) -> Unit,
     refresh: () -> Unit
 ) {
@@ -113,18 +125,31 @@ internal fun TeamStandingsScreen(
             content = {
                 item(key = "header") {
                     Header(
-                        modifier = Modifier.animateItem(),
+                        modifier = Modifier
+                            .animateItem()
+                            .padding(vertical = AppTheme.dimens.medium),
                         content = {
-                            ResultsSeasonPicker(subtitle = stringResource(resource = string.season_standings_constructor))
+                            ResultsSeasonPicker()
                         },
-                        action = if (!windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
-                            HeaderAction.MENU
-                        } else {
-                            null
+                        subContent = {
+                            TextHeadline1(
+                                text = stringResource(resource = string.season_standings_constructor),
+                                modifier = Modifier.padding(horizontal = AppTheme.dimens.medium)
+                            )
                         },
-                        actionUpClicked = actionUpClicked,
+                        action = null,
                         overrideIcons = {
                             Refresh(onClick = refresh)
+                            IconButton(
+                                onClick = goToSearch,
+                                content = {
+                                    Icon(
+                                        painter = painterResource(Res.drawable.ic_search),
+                                        contentDescription = stringResource(string.search_title),
+                                        tint = AppTheme.colors.onSurface
+                                    )
+                                }
+                            )
                         }
                     )
                 }

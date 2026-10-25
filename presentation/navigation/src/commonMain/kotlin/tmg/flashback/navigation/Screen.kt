@@ -15,6 +15,9 @@ data object NavDriverStandings: Screen
 data object NavTeamStandings: Screen
 
 @Serializable
+data object NavPaddock: Screen
+
+@Serializable
 data object NavCircuits: Screen
 
 @Serializable
@@ -38,14 +41,14 @@ data object NavLineup: Screen
 
 @Serializable
 data class NavDriver(
-    val season: Int,
+    val season: Int?,
     val id: String,
     val name: String
 ): Screen
 
 @Serializable
 data class NavTeam(
-    val season: Int,
+    val season: Int?,
     val id: String,
     val name: String
 ): Screen
@@ -62,6 +65,19 @@ data object NavRss: Screen
 data class NavWebpage(
     val url: String
 ): Screen
+
+@Serializable
+data class NavSearch(
+    val filter: NavSearchFilter? = null,
+): Screen
+
+@Serializable
+enum class NavSearchFilter {
+    Drivers,
+    Teams,
+    Circuits
+//    Races;
+}
 
 @Serializable
 data object NavReactionGame: Screen
@@ -118,3 +134,54 @@ data object NavStyleGuide: Screen
 
 @Serializable
 data object NavInfo: Screen
+
+fun Screen.isList(): Boolean = when (this) {
+    is NavCalendar -> true
+    is NavDriverStandings -> true
+    is NavTeamStandings -> true
+    is NavPaddock -> true
+    is NavSettings -> true
+
+    is NavRss -> true
+    is NavReactionGame -> true
+    is NavSearch -> true
+
+    is NavCircuits -> true
+    is NavLineup -> true
+    is NavGlossary -> true
+    is NavStyleGuide -> true
+    is NavInfo -> true
+
+    is NavAbout -> false
+    is NavWeekend -> false
+    is NavCircuit -> false
+    is NavDriver -> false
+    is NavTeam -> false
+    is NavDriverComparison -> false
+    is NavWebpage -> false
+    is NavGlossaryDetail -> false
+    is NavSettingsDarkMode -> false
+    is NavSettingsTheme -> false
+    is NavSettingsLayoutHome -> false
+    is NavSettingsLayoutRace -> false
+    is NavSettingsRssConfigure -> false
+    is NavSettingsInAppBrowser -> false
+    is NavSettingsNotificationResults -> false
+    is NavSettingsNotificationUpcoming -> false
+    is NavSettingsWidgets -> false
+    is NavSettingsPrivacy -> false
+    is NavPrivacyPolicy -> false
+}
+
+fun Screen.requiresPaddock(): Boolean = when (this) {
+    is NavRss,
+    is NavReactionGame,
+    is NavSearch -> true
+    else -> false
+}
+
+fun Screen.requiresSettings(): Boolean = when (this) {
+    is NavAbout -> true
+    else -> false
+}
+

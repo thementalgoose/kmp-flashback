@@ -12,42 +12,60 @@ fun NavBackStack<NavKey>.removeDetail() {
     this.removeAll { key -> !key.isList() }
 }
 
-inline fun <reified T: Screen> NavBackStack<NavKey>.replaceList(with: T) {
+inline fun <reified T: Screen> NavBackStack<NavKey>.addList(vararg with: T) {
+    this.removeDetail()
+    for (x in with) {
+        if (x.requiresPaddock() && !this.contains(NavPaddock)) {
+            this.add(NavPaddock)
+        }
+        if (x.requiresSettings() && !this.contains(NavSettings)) {
+            this.add(NavSettings)
+        }
+        if (this.lastOrNull() != x) {
+            this.add(x)
+        }
+    }
+}
+
+inline fun <reified T: Screen> NavBackStack<NavKey>.replaceList(vararg with: T) {
     this.clear()
-    this.add(with)
+    for (x in with) {
+        if (x.requiresPaddock() && !this.contains(NavPaddock)) {
+            this.add(NavPaddock)
+        }
+        if (x.requiresSettings() && !this.contains(NavSettings)) {
+            this.add(NavSettings)
+        }
+        this.add(x)
+    }
+}
+
+fun NavBackStack<NavKey>.pop(): Boolean {
+    if (this.isEmpty()) return false
+    val last = this.lastOrNull() ?: return false
+    return if (!last.isList()) {
+        this.removeDetail()
+        true
+    } else if (this.size > 1) {
+        this.removeAt(this.lastIndex)
+        true
+    } else {
+        false
+    }
+}
+
+fun NavBackStack<NavKey>.popList(): Boolean {
+    this.removeDetail()
+    return if (this.size > 1) {
+        this.removeAt(this.lastIndex)
+        true
+    } else {
+        false
+    }
 }
 
 fun NavKey.isList(): Boolean = (this as? Screen)?.isList() ?: true
 
-fun Screen.isList(): Boolean = when (this) {
-    is NavCalendar -> true
-    is NavDriverStandings -> true
-    is NavTeamStandings -> true
-    is NavCircuits -> true
-    is NavWeekend -> false
-    is NavCircuit -> false
-    is NavDriver -> false
-    is NavTeam -> false
-    is NavDriverComparison -> false
-    is NavRss -> true
-    is NavGlossary -> true
-    is NavWebpage -> false
-    is NavReactionGame -> true
-    is NavSettings -> true
-    is NavLineup -> true
-    is NavSettingsDarkMode -> false
-    is NavSettingsTheme -> false
-    is NavSettingsLayoutHome -> false
-    is NavSettingsLayoutRace -> false
-    is NavSettingsRssConfigure -> false
-    is NavSettingsInAppBrowser -> false
-    is NavSettingsNotificationResults -> false
-    is NavSettingsNotificationUpcoming -> false
-    is NavSettingsWidgets -> false
-    is NavSettingsPrivacy -> false
-    is NavPrivacyPolicy -> false
-    is NavGlossaryDetail -> false
-    is NavAbout -> true
-    is NavStyleGuide -> true
-    is NavInfo -> true
-}
+fun NavKey.requiresPaddock(): Boolean = (this as? Screen)?.requiresPaddock() ?: false
+
+fun NavKey.requiresSettings(): Boolean = (this as? Screen)?.requiresSettings() ?: false

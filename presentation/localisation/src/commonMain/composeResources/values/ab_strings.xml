@@ -14,6 +14,7 @@
     <string name="ab_close">Close</string>
     <string name="ab_back">Back</string>
     <string name="ab_hide">Hide</string>
+    <string name="ab_clear_filters">Clear filters</string>
 
     <string name="ab_points">Points</string>
     <string name="ab_status">Status</string>

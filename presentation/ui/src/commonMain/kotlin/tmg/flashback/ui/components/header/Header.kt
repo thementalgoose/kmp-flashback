@@ -42,7 +42,7 @@ import tmg.flashback.style.text.TextHeadline1
 
 @Composable
 fun Header(
-    actionUpClicked: () -> Unit,
+    actionUpClicked: (() -> Unit)? = null,
     modifier: Modifier = Modifier,
     topInset: Dp = 0.dp,
     scrim: Boolean = false,
@@ -51,7 +51,8 @@ fun Header(
     actionModifier: Modifier = Modifier,
     overrideIcons: @Composable RowScope.(Modifier) -> Unit = { },
     contentSpacing: Dp = 0.dp,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable RowScope.() -> Unit,
+    subContent: @Composable RowScope.() -> Unit = { },
 ) {
 
     val scrimModifier = when (scrim) {
@@ -72,7 +73,9 @@ fun Header(
             Row {
                 IconButton(
                     modifier = actionModifier,
-                    onClick = actionUpClicked,
+                    onClick = {
+                        actionUpClicked?.invoke()
+                    },
                 ) {
                     Icon(
                         painter = painterResource(resource = action.icon),
@@ -85,8 +88,7 @@ fun Header(
             }
         }
         Spacer(Modifier.height(contentSpacing))
-        Box {
-
+        Column {
             Row(
                 verticalAlignment = Alignment.Top
             ) {
@@ -101,6 +103,9 @@ fun Header(
                     }
                 }
             }
+            Row {
+                subContent()
+            }
         }
     }
 }
@@ -108,7 +113,7 @@ fun Header(
 @Composable
 fun Header(
     text: String,
-    actionUpClicked: () -> Unit,
+    actionUpClicked: (() -> Unit)? = null,
     topInset: Dp = 0.dp,
     scrim: Boolean = false,
     scrimColour: Color = AppTheme.colors.surface,
@@ -117,6 +122,7 @@ fun Header(
     actionModifier: Modifier = Modifier,
     contentSpacing: Dp = 0.dp,
     overrideIcons: @Composable RowScope.(Modifier) -> Unit = { },
+    horizontalPadding: Boolean = true,
 ) {
     Header(
         actionUpClicked = actionUpClicked,
@@ -135,8 +141,8 @@ fun Header(
                     .semantics { heading() }
                     .weight(1f)
                     .padding(
-                        start = AppTheme.dimens.medium,
-                        end = AppTheme.dimens.medium,
+                        start = AppTheme.dimens.medium.takeIf { horizontalPadding } ?: 0.dp,
+                        end = AppTheme.dimens.medium.takeIf { horizontalPadding } ?: 0.dp,
                         top = AppTheme.dimens.medium,
                         bottom = AppTheme.dimens.medium
                     )
