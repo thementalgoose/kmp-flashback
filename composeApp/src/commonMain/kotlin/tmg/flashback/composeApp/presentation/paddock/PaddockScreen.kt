@@ -1,5 +1,6 @@
 package tmg.flashback.composeApp.presentation.paddock
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -14,58 +15,36 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.FlashOn
+import androidx.compose.material.icons.filled.RssFeed
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.FlashOn
-import androidx.compose.material.icons.filled.Light
-import androidx.compose.material.icons.filled.Lightbulb
-import androidx.compose.material.icons.filled.NetworkCell
-import androidx.compose.material.icons.filled.RssFeed
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Web
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import flashback.presentation.localisation.generated.resources.Res.string
-import flashback.presentation.localisation.generated.resources.about_this_app_dependency_rss
 import flashback.presentation.localisation.generated.resources.nav_paddock
-import flashback.presentation.localisation.generated.resources.nav_rss
-import flashback.presentation.localisation.generated.resources.nav_search
 import flashback.presentation.localisation.generated.resources.paddock_directory_description
 import flashback.presentation.localisation.generated.resources.paddock_directory_title
 import flashback.presentation.localisation.generated.resources.paddock_reaction_game_description
 import flashback.presentation.localisation.generated.resources.paddock_reaction_game_title
 import flashback.presentation.localisation.generated.resources.paddock_rss_description
 import flashback.presentation.localisation.generated.resources.paddock_rss_title
-import flashback.presentation.localisation.generated.resources.reaction_screen_subtitle
-import flashback.presentation.localisation.generated.resources.reaction_screen_title
-import flashback.presentation.localisation.generated.resources.title_rss
-import flashback.presentation.ui.generated.resources.Res
-import flashback.presentation.ui.generated.resources.arrow_more
-import org.jetbrains.compose.resources.painterResource
+import flashback.presentation.localisation.generated.resources.search_category_circuits
+import flashback.presentation.localisation.generated.resources.search_category_constructors
+import flashback.presentation.localisation.generated.resources.search_category_driver
+import flashback.presentation.localisation.generated.resources.search_category_races
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.navigation.NavReactionGame
@@ -77,13 +56,9 @@ import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.badge.BadgeView
 import tmg.flashback.style.buttons.ButtonPrimary
 import tmg.flashback.style.buttons.ButtonSecondary
-import tmg.flashback.style.buttons.ButtonTertiary
 import tmg.flashback.style.preview.PreviewTheme
-import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
-import tmg.flashback.style.text.TextHeadline2
 import tmg.flashback.style.text.TextHeadline3
-import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.navigation.appBarMaximumHeight
 
@@ -211,7 +186,23 @@ private fun Search(
                 tint = AppTheme.colors.primary
             )
         },
-        content = { }
+        content = {
+            FlowRow(
+                modifier = Modifier.padding(top = AppTheme.dimens.small),
+                verticalArrangement = Arrangement.spacedBy(0.dp),
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                BadgeView(
+                    label = stringResource(string.search_category_driver),
+                )
+                BadgeView(
+                    label = stringResource(string.search_category_constructors),
+                )
+                BadgeView(
+                    label = stringResource(string.search_category_circuits),
+                )
+            }
+        }
     )
 }
 
