@@ -5,7 +5,7 @@
     <!-- Splash -->
     <string name="splash_title">Ciao</string>
     <string name="splash_continue">Continua</string>
-    <string name="splash_sync_info">Dato che è la prima volta che apri l\'app, stiamo recuperando alcuni dati relativi al mondo della Formula 1 per metterti al passo…</string>
+    <string name="splash_sync_info">Dato che è la prima volta che apri l'app, stiamo recuperando alcuni dati relativi al mondo della Formula 1 per metterti al passo…</string>
     <string name="splash_sync_try_again">Riprova</string>
     <string name="splash_sync_required_failed">Dobbiamo sincronizzare alcune informazioni per continuare. Assicurati di avere una connessione internet attiva e riprova (dovrai farlo solo una volta)</string>
     <string name="splash_sync_config">Configurazione…</string>
@@ -250,12 +250,12 @@
     <string name="permissions_rationale_confirm">Conferma</string>
     <string name="permissions_rationale_cancel">Non ora</string>
     <plurals name="permissions_rationale_permissions_denied">
-        <item quantity="one">Permesso negato, controlla le impostazioni dell\'app</item>
-        <item quantity="many">%1$d permessi negati, controlla le impostazioni dell\'app</item>
-        <item quantity="other">%1$d permessi negati, controlla le impostazioni dell\'app</item>
+        <item quantity="one">Permesso negato, controlla le impostazioni dell'app</item>
+        <item quantity="many">%1$d permessi negati, controlla le impostazioni dell'app</item>
+        <item quantity="other">%1$d permessi negati, controlla le impostazioni dell'app</item>
     </plurals>
-    <string name="permissions_rationale_permission_denied">Permesso negato, controlla le impostazioni dell\'app</string>
-    <string name="permissions_rationale_runtime_notifications_description">Per ricevere notifiche dal team di Flashback sulla disponibilità dei risultati di gara o sull\'inizio degli eventi del weekend di F1, abbiamo bisogno del permesso di inviarti notifiche</string>
+    <string name="permissions_rationale_permission_denied">Permesso negato, controlla le impostazioni dell'app</string>
+    <string name="permissions_rationale_runtime_notifications_description">Per ricevere notifiche dal team di Flashback sulla disponibilità dei risultati di gara o sull'inizio degli eventi del weekend di F1, abbiamo bisogno del permesso di inviarti notifiche</string>
     <string name="permissions_rationale_exact_alarms_description">Per notificarti con precisione prima di una gara, abbiamo bisogno del permesso di programmare questi promemoria a un orario specifico</string>
 
     <!-- Adverts -->
@@ -298,11 +298,11 @@
     <string name="settings_pref_empty_week_title">Mostra le settimane vuote</string>
     <string name="settings_pref_empty_week_description">Mostra un piccolo indicatore di spaziatura tra le gare per evidenziare i doppi e i tripli header nella stagione imminente</string>
     <string name="settings_pref_recent_highlights_title">Momenti salienti recenti</string>
-    <string name="settings_pref_recent_highlights_description">Mostra il banner con i contenuti in evidenza recenti nella home page, se connessi a Internet. Di solito contiene link a notizie significative dell\'ultima settimana circa.</string>
+    <string name="settings_pref_recent_highlights_description">Mostra il banner con i contenuti in evidenza recenti nella home page, se connessi a Internet. Di solito contiene link a notizie significative dell'ultima settimana circa.</string>
     <string name="settings_pref_remember_season_change_title">Ricorda il cambio di stagione</string>
-    <string name="settings_pref_remember_season_change_description">Ricorda l\'ultima stagione visualizzata tra un riavvio e l\'altro dell\'app</string>
+    <string name="settings_pref_remember_season_change_description">Ricorda l'ultima stagione visualizzata tra un riavvio e l'altro dell'app</string>
     <string name="settings_section_rss_configure_title">Configura</string>
-    <string name="settings_section_rss_configure_description">Configura le fonti RSS o personalizza l\'aspetto</string>
+    <string name="settings_section_rss_configure_description">Configura le fonti RSS o personalizza l'aspetto</string>
     <string name="settings_section_web_browser_title">Browser in-app</string>
     <string name="settings_section_web_browser_description">Personalizza o disabilita il browser in-app</string>
     <string name="settings_header_in_app_browser">Browser in-app</string>
@@ -314,7 +314,7 @@
     <string name="settings_switch_toolbar_location_description">Quando abilitato, il pannello di controllo sarà in alto. Altrimenti, sarà in basso</string>
     <string name="settings_help_adverts_title">Annunci</string>
     <string name="settings_help_adverts_description">Vuoi che gli annunci vengano visualizzati? Ogni sviluppatore apprezza il tuo supporto lasciando gli annunci abilitati</string>
-    <string name="settings_help_adverts_long_description">Personalizza il modo in cui gli annunci vengono visualizzati nell\'app</string>
+    <string name="settings_help_adverts_long_description">Personalizza il modo in cui gli annunci vengono visualizzati nell'app</string>
     <string name="settings_section_notifications_upcoming_title">Gare imminenti</string>
     <string name="settings_section_notifications_upcoming_description">Ricevi notifiche per le gare imminenti</string>
     <string name="settings_section_notifications_results_title">Risultati delle gare</string>
@@ -325,11 +325,11 @@
     <string name="settings_pref_notification_permission_description">Concedi il permesso a Flashback di inviarti notifiche</string>
     <string name="settings_pref_notification_manage_title">Impostazioni di notifica</string>
     <string name="settings_pref_notification_manage_description">Personalizza le tue impostazioni di notifica</string>
-    <string name="settings_pref_notification_system_settings">Gestisci le tue notifiche nelle impostazioni dell\'app</string>
+    <string name="settings_pref_notification_system_settings">Gestisci le tue notifiche nelle impostazioni dell'app</string>
     <string name="settings_pref_schedule_exact_alarm_title">Tempi esatti</string>
     <string name="settings_pref_schedule_exact_alarm_description">Autorizza Flashback a inviarti promemoria a orari specifici. In caso contrario, le notifiche devono essere inviate entro 10 minuti dal periodo di preavviso prima dell'inizio dell'evento.</string>
     <string name="settings_pref_notification_notice_period_title">Avviso</string>
-    <string name="settings_pref_notification_notice_period_description">Scegli tra 15, 30 o 60 minuti prima dell\'inizio di uno degli eventi sopra elencati</string>
+    <string name="settings_pref_notification_notice_period_description">Scegli tra 15, 30 o 60 minuti prima dell'inizio di uno degli eventi sopra elencati</string>
     <string name="settings_switch_notification_upcoming_fp_title">Prove libere</string>
     <string name="settings_switch_notification_upcoming_qualifying_title">Qualifiche</string>
     <string name="settings_switch_notification_upcoming_sprint_title">Sprint</string>
@@ -348,7 +348,7 @@
     <string name="settings_section_widgets_add_description">Aggiungi il widget alla schermata iniziale</string>
     <string name="settings_section_widgets_show_background_title">Mostra lo sfondo?</string>
     <string name="settings_section_widgets_show_background_description">Mostra uno sfondo solido anziché trasparente</string>
-    <string name="settings_section_widgets_deeplink_event_title">Collegamento all\'evento?</string>
+    <string name="settings_section_widgets_deeplink_event_title">Collegamento all'evento?</string>
     <string name="settings_section_widgets_deeplink_event_description">Facendo clic sul widget verrai indirizzato alla gara specifica, anziché alla pagina iniziale</string>
     <string name="settings_section_widgets_show_weather_title">Mostrare il meteo?</string>
     <string name="settings_section_widgets_show_weather_description">Mostra le condizioni meteorologiche per l'evento. Visibile solo nei layout widget più grandi</string>
@@ -366,25 +366,25 @@
     <string name="settings_section_privacy_description">Crashlytics, Analytics, Informativa sulla privacy</string>
     <string name="settings_header_legal">Legale</string>
     <string name="settings_pref_privacy_policy_title">Informativa sulla privacy</string>
-    <string name="settings_pref_privacy_policy_description">Informativa sulla privacy dell\'app</string>
+    <string name="settings_pref_privacy_policy_description">Informativa sulla privacy dell'app</string>
     <string name="settings_header_device_info">Informazioni sul dispositivo</string>
     <string name="settings_pref_crash_reporting_title">Segnalazione arresti anomali</string>
-    <string name="settings_pref_crash_reporting_description">Consenti l\'invio di rapporti sugli arresti anomali allo sviluppatore quando si verifica un problema</string>
+    <string name="settings_pref_crash_reporting_description">Consenti l'invio di rapporti sugli arresti anomali allo sviluppatore quando si verifica un problema</string>
     <string name="settings_pref_analytics_title">Analisi anonime</string>
-    <string name="settings_pref_analytics_description">Invia dati analitici anonimi sulla tua esperienza con l\'app. Ciò può anche aiutare la segnalazione degli arresti anomali</string>
+    <string name="settings_pref_analytics_description">Invia dati analitici anonimi sulla tua esperienza con l'app. Ciò può anche aiutare la segnalazione degli arresti anomali</string>
     <string name="settings_pref_disclaimer_title">Disclaimer</string>
-    <string name="settings_pref_disclaimer_description">Tutti i dati inviati per l\'analisi e la segnalazione di arresti anomali sono anonimi e non collegati in alcun modo all\'utente</string>
+    <string name="settings_pref_disclaimer_description">Tutti i dati inviati per l'analisi e la segnalazione di arresti anomali sono anonimi e non collegati in alcun modo all'utente</string>
     <string name="settings_section_about_title">Informazioni</string>
     <string name="settings_section_about_description">Informazioni su questa app</string>
     <string name="settings_header_about">Informazioni</string>
     <string name="settings_switch_about_this_app_title">Informazioni su questa app</string>
-    <string name="settings_switch_about_this_app_description">Informazioni sull\'app, sugli sviluppatori e sulle dipendenze</string>
+    <string name="settings_switch_about_this_app_description">Informazioni sull'app, sugli sviluppatori e sulle dipendenze</string>
     <string name="settings_switch_review_title">Recensione</string>
-    <string name="settings_switch_review_description">Recensisci l\'app sul app store</string>
+    <string name="settings_switch_review_description">Recensisci l'app sul app store</string>
     <string name="settings_switch_changelog_title">Changelog</string>
     <string name="settings_switch_changelog_description">Visualizza i changelog delle versioni</string>
     <string name="settings_switch_feedback_title">Feedback</string>
-    <string name="settings_switch_feedback_description">Invia un\'email allo sviluppatore con feedback o suggerimenti per migliorare questa app</string>
+    <string name="settings_switch_feedback_description">Invia un'email allo sviluppatore con feedback o suggerimenti per migliorare questa app</string>
     <string name="settings_header_reset">Ripristina</string>
     <string name="settings_pref_reset_title">Sincronizzazione iniziale</string>
     <string name="settings_pref_reset_description">Esegui nuovamente la sincronizzazione iniziale. Questo aggiornerà tutti i piloti, i costruttori, le gare e i circuiti.</string>
@@ -393,17 +393,17 @@
     <string name="settings_pref_shake_to_report_description">Scuoti lo schermo per fornire feedback o segnalazioni di bug allo sviluppatore</string>
     <string name="settings_theme_title">Personalizzazione</string>
     <string name="settings_theme_nightmode_title">Modalità scura</string>
-    <string name="settings_theme_nightmode_description">Scegli la tua preferenza per la modalità scura del tema dell\'app</string>
+    <string name="settings_theme_nightmode_description">Scegli la tua preferenza per la modalità scura del tema dell'app</string>
     <string name="settings_theme_nightmode_follow_system">Segui le preferenze di sistema</string>
     <string name="settings_theme_nightmode_light">Modalità chiara</string>
     <string name="settings_theme_nightmode_dark">Modalità scura</string>
-    <string name="settings_theme_theme_title">Tema dell\'app</string>
-    <string name="settings_theme_theme_description">Scegli gli schemi di colori dell\'app</string>
+    <string name="settings_theme_theme_title">Tema dell'app</string>
+    <string name="settings_theme_theme_description">Scegli gli schemi di colori dell'app</string>
     <string name="settings_theme_theme_default">Predefinito</string>
     <string name="settings_theme_theme_material_you">Material You</string>
-    <string name="settings_theme_theme_applied_later">Il tema verrà applicato dopo aver riavviato l\'app</string>
-    <string name="settings_theme_animation_speed_title">Velocità dell\'animazione</string>
-    <string name="settings_theme_animation_speed_description">Scegli la velocità delle viste animate in tutta l\'app.</string>
+    <string name="settings_theme_theme_applied_later">Il tema verrà applicato dopo aver riavviato l'app</string>
+    <string name="settings_theme_animation_speed_title">Velocità dell'animazione</string>
+    <string name="settings_theme_animation_speed_description">Scegli la velocità delle viste animate in tutta l'app.</string>
     <string name="settings_home">Home</string>
     <string name="settings_statistics">Statistiche</string>
     <string name="settings_default_season_title">Ripristina la stagione predefinita</string>
@@ -415,31 +415,31 @@
     <string name="settings_customisation_season_favourited_expanded_description">Espandi la sezione Preferiti nel menu per impostazione predefinita</string>
     <string name="settings_information_title">Informazioni</string>
     <string name="settings_information_at_top_title">Mostra fornito da in alto</string>
-    <string name="settings_information_at_top_description">Mostra l\'opzione "Dati forniti da" nella parte superiore di ogni schermata. Altrimenti verrà visualizzato in basso</string>
+    <string name="settings_information_at_top_description">Mostra l'opzione "Dati forniti da" nella parte superiore di ogni schermata. Altrimenti verrà visualizzato in basso</string>
     <string name="settings_dashboard_title">Dashboard</string>
-    <string name="settings_dashboard_default_to_schedule_title">Scheda Programma all\'avvio</string>
-    <string name="settings_dashboard_default_to_schedule_description">Quando apri l\'app, vai alla scheda Programma per impostazione predefinita. Se disabilitato, la scheda Calendario verrà caricata per prima</string>
+    <string name="settings_dashboard_default_to_schedule_title">Scheda Programma all'avvio</string>
+    <string name="settings_dashboard_default_to_schedule_description">Quando apri l'app, vai alla scheda Programma per impostazione predefinita. Se disabilitato, la scheda Calendario verrà caricata per prima</string>
     <string name="settings_dashboard_autoscroll_title">Scorrimento automatico</string>
-    <string name="settings_dashboard_autoscroll_description">Scorri automaticamente alla gara successiva quando carichi l\'app mentre stai visualizzando la stagione corrente</string>
+    <string name="settings_dashboard_autoscroll_description">Scorri automaticamente alla gara successiva quando carichi l'app mentre stai visualizzando la stagione corrente</string>
     <string name="settings_notifications_runtime_enabled">Permessi</string>
     <string name="settings_notifications_runtime_title">Abilita le notifiche</string>
     <string name="settings_notifications_runtime_description">Concedi il permesso a Flashback di inviarti notifiche</string>
     <string name="settings_notifications_title">Notifiche</string>
     <string name="settings_notifications_channel_qualifying_title">Qualifiche</string>
-    <string name="settings_notifications_channel_qualifying_description">Ricevi notifiche 30 minuti prima dell\'inizio delle qualifiche. Configurale qui</string>
+    <string name="settings_notifications_channel_qualifying_description">Ricevi notifiche 30 minuti prima dell'inizio delle qualifiche. Configurale qui</string>
     <string name="settings_notifications_channel_race_title">Gara</string>
-    <string name="settings_notifications_channel_race_description">Ricevi notifiche 30 minuti prima dell\'inizio di una gara. Configurale qui</string>
+    <string name="settings_notifications_channel_race_description">Ricevi notifiche 30 minuti prima dell'inizio di una gara. Configurale qui</string>
     <string name="settings_notifications_nonchannel_title">Notifiche</string>
-    <string name="settings_notifications_nonchannel_description">Disattiva le notifiche dell\'app disattivandole nelle impostazioni</string>
+    <string name="settings_notifications_nonchannel_description">Disattiva le notifiche dell'app disattivandole nelle impostazioni</string>
     <string name="settings_up_next_category_title">Categorie</string>
     <string name="settings_up_next_category_race_title">Gara</string>
-    <string name="settings_up_next_category_race_descrition">Ricevi notifiche prima dell\'inizio della gara o delle sprint</string>
+    <string name="settings_up_next_category_race_descrition">Ricevi notifiche prima dell'inizio della gara o delle sprint</string>
     <string name="settings_up_next_category_qualifying_title">Qualifiche</string>
-    <string name="settings_up_next_category_qualifying_descrition">Ricevi notifiche prima dell\'inizio delle qualifiche</string>
+    <string name="settings_up_next_category_qualifying_descrition">Ricevi notifiche prima dell'inizio delle qualifiche</string>
     <string name="settings_up_next_category_free_practice_title">Prove libere</string>
-    <string name="settings_up_next_category_free_practice_descrition">Ricevi notifiche prima dell\'inizio delle prove libere</string>
+    <string name="settings_up_next_category_free_practice_descrition">Ricevi notifiche prima dell'inizio delle prove libere</string>
     <string name="settings_up_next_category_other_title">Altro</string>
-    <string name="settings_up_next_category_other_descrition">Ricevi notifiche prima dell\'inizio di altri eventi di F1 (ad es. test invernali)</string>
+    <string name="settings_up_next_category_other_descrition">Ricevi notifiche prima dell'inizio di altri eventi di F1 (ad es. test invernali)</string>
     <string name="settings_up_next_results_available_title">Risultati disponibili</string>
     <string name="settings_up_next_results_qualifying_title">Qualifiche</string>
     <string name="settings_up_next_results_qualifying_descrition">Ricevi notifiche quando i risultati delle qualifiche sono disponibili</string>
@@ -457,13 +457,13 @@
     <string name="settings_web_browser_in_app_description">Apri qualsiasi collegamento o pagina web nel browser del dispositivo invece di quello integrato</string>
     <string name="settings_web_browser_javascript_title">Abilitare Javascript?</string>
     <string name="settings_web_browser_javascript_description">Abilita javascript nel browser integrato. Ciò può aiutare a caricare le pagine web più rapidamente, ma potrebbe influire sulla funzionalità della pagina</string>
-    <string name="settings_restart_app_required">La modifica avrà effetto al riavvio dell\'app</string>
+    <string name="settings_restart_app_required">La modifica avrà effetto al riavvio dell'app</string>
     <string name="settings_experimental">Sperimentale</string>
     <string name="settings_experimental_description">Questa funzione è in fase beta e come tale potrebbe non funzionare correttamente.</string>
     <string name="settings_rss_title">RSS</string>
     <string name="settings_rss_appearance_title">Layout</string>
     <string name="settings_rss_show_description_title">Mostra descrizione</string>
-    <string name="settings_rss_show_description_description">Mostra la descrizione dell\'articolo insieme alla fonte RSS se ne ha una</string>
+    <string name="settings_rss_show_description_description">Mostra la descrizione dell'articolo insieme alla fonte RSS se ne ha una</string>
     <string name="settings_rss_configure">La tua lista</string>
     <string name="settings_rss_configure_sources_title">Configura le fonti</string>
     <string name="settings_rss_configure_sources_description">Imposta i feed RSS a cui desideri iscriverti</string>
@@ -503,13 +503,13 @@
     <string name="rss_configure_header_add">Aggiungi personalizzato</string>
     <string name="rss_configure_header_add_subtitle">Aggiungi il tuo link o feed RSS per curare le tue notizie di Formula 1.</string>
     <string name="rss_configure_header_quick_add">Collegamenti rapidi</string>
-    <string name="rss_configure_header_quick_add_subtitle">Collegamenti rapidi per alcune fonti di notizie popolari per la Formula 1. Flashback non è in alcun modo affiliato a nessuna delle fonti elencate, puoi visitare i siti web e le informazioni di contatto di queste fonti cliccando sul link del sito web accanto a ciascun elemento sottostante. Se desideri includere un altro feed RSS in questo elenco, inviaci un\'e-mail!</string>
-    <string name="rss_configure_malformed_url">Errore nell\'URL</string>
+    <string name="rss_configure_header_quick_add_subtitle">Collegamenti rapidi per alcune fonti di notizie popolari per la Formula 1. Flashback non è in alcun modo affiliato a nessuna delle fonti elencate, puoi visitare i siti web e le informazioni di contatto di queste fonti cliccando sul link del sito web accanto a ciascun elemento sottostante. Se desideri includere un altro feed RSS in questo elenco, inviaci un'e-mail!</string>
+    <string name="rss_configure_malformed_url">Errore nell'URL</string>
     <string name="rss_configure_hint">www.formula1.com/link/to/rss</string>
     <string name="rss_configure_valid_url">URL valido richiesto</string>
     <string name="rss_configure_visit_website">Sito web</string>
     <string name="rss_configure_cannot_open_page">Impossibile aprire il sito web</string>
-    <string name="rss_configure_cannot_open_page_action">Copia l\'URL negli appunti</string>
+    <string name="rss_configure_cannot_open_page_action">Copia l'URL negli appunti</string>
 
     <!-- Notifiche -->
     <string name="notification_content_title" formatted="false">%1$s inizia tra %2$s</string>
@@ -548,7 +548,7 @@
     <string name="about_name">Flashback</string>
     <string name="about_desc">Informazioni di contatto</string>
     <string name="about_this_app_dependency_rss">Fonte RSS: %1$s</string>
-    <string name="dependency_thank_you">Le statistiche di Formula 1 in questa app provengono dal team Flashback. Un ringraziamento speciale a Ergast API per i contenuti fino al 2023. Non possiamo garantire l\'accuratezza dei dati forniti (faccelo sapere comunque se noti un problema inviandoci un\'e-mail con il link sopra)\n\nUn grande grazie a tutti quelli elencati di seguito per aver reso possibile questa app! Fai clic su uno qualsiasi degli elementi nell\'elenco sottostante per trovare maggiori informazioni sulle librerie e i servizi utilizzati nell\'app.</string>
+    <string name="dependency_thank_you">Le statistiche di Formula 1 in questa app provengono dal team Flashback. Un ringraziamento speciale a Ergast API per i contenuti fino al 2023. Non possiamo garantire l'accuratezza dei dati forniti (faccelo sapere comunque se noti un problema inviandoci un'e-mail con il link sopra)\n\nUn grande grazie a tutti quelli elencati di seguito per aver reso possibile questa app! Fai clic su uno qualsiasi degli elementi nell'elenco sottostante per trovare maggiori informazioni sulle librerie e i servizi utilizzati nell'app.</string>
     <string name="about_additional">Un ringraziamento speciale a tutti quelli sopra! Se abbiamo dimenticato qualcuno o qualcosa, faccelo sapere!</string>
     <string name="app_version_placeholder">Versione app: %1$s</string>
     <string name="app_version">Versione app</string>
@@ -594,7 +594,7 @@
     <string name="choose_browser">Apri nel browser</string>
     <string name="choose_share">Condividi con</string>
     <string name="copy_to_clipboard">URL copiato negli appunti</string>
-    <string name="unable_to_open_url">Impossibile aprire l\'URL</string>
+    <string name="unable_to_open_url">Impossibile aprire l'URL</string>
     <string name="home_last_updated">Ultimo aggiornamento %1$s</string>
 
     <!-- Informativa sulla privacy -->
@@ -631,8 +631,8 @@
     <!-- Easter Eggs -->
     <string name="easter_egg_menu_new_years">Felice anno nuovo!</string>
     <string name="easter_egg_menu_chinese_new_year">Felice anno nuovo cinese!</string>
-    <string name="easter_egg_menu_bonfire_night">Goditi i fuochi d\'artificio della serata del falò!</string>
-    <string name="easter_egg_menu_independence_day">Buon Giorno dell\'Indipendenza</string>
+    <string name="easter_egg_menu_bonfire_night">Goditi i fuochi d'artificio della serata del falò!</string>
+    <string name="easter_egg_menu_independence_day">Buon Giorno dell'Indipendenza</string>
     <string name="easter_egg_menu_valentines">Buon San Valentino!</string>
     <string name="easter_egg_menu_st_patricks_day">Buon giorno di San Patrizio!</string>
     <string name="easter_egg_menu_easter">Buona Pasqua!</string>
