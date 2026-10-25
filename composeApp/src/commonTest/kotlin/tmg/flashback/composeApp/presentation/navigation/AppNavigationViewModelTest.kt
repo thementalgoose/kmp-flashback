@@ -37,7 +37,6 @@ internal class AppNavigationViewModelTest {
     private val mockIsUkraineEnabledUseCase: IsUkraineEnabledUseCase = mock(autofill)
     private val mockRequiresSyncUseCase: RequiresSyncUseCase = mock(autofill)
     private val mockMaintenanceRepository: MaintenanceRepository = mock(autofill)
-    private val mockNavRepository: NavRepository = mock(autofill)
     private val mockOpenWebpageUseCase: OpenWebpageUseCase = mock(autoUnit)
     private val mockOpenStorePageUseCase: OpenStorePageUseCase = mock(autoUnit)
 
@@ -68,7 +67,6 @@ internal class AppNavigationViewModelTest {
             isUkraineEnabledUseCase = mockIsUkraineEnabledUseCase,
             requiresSyncUseCase = mockRequiresSyncUseCase,
             maintenanceRepository = mockMaintenanceRepository,
-            navRepository = mockNavRepository,
             openWebpageUseCase = mockOpenWebpageUseCase,
             openStorePageUseCase = mockOpenStorePageUseCase
         )
