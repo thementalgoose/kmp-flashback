@@ -59,7 +59,7 @@ fun generateNavSecondaryItems(
 ): List<NavigationItem> = listOfNotNull(
     Rss.toNavigationItem(currentlySelectedScreen == NavRss).takeIf { showRss },
     ReactionGame.toNavigationItem(currentlySelectedScreen == NavReactionGame),
-    Search.toNavigationItem(currentlySelectedScreen == NavSearch),
+    Search.toNavigationItem(currentlySelectedScreen is NavSearch),
     Settings.toNavigationItem(currentlySelectedScreen == NavSettings),
     Contact.toNavigationItem(currentlySelectedScreen == NavAbout)
 )
