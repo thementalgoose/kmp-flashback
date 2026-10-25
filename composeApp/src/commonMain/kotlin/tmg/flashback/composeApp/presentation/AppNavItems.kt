@@ -27,7 +27,7 @@ import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.navigation.Screen
 import tmg.flashback.ui.navigation.NavigationItem
 
-val floatingNavItems = listOf(
+val floatingNavItems = listOf<Screen>(
     NavCalendar,
     NavDriverStandings,
     NavTeamStandings,
