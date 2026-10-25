@@ -77,69 +77,95 @@ private fun AllSettingsScreen(
                 action = HeaderAction.MENU.takeIf { showMenu }
             )
         }
-        PrefHeader(string.settings_header_appearance)
-        PrefCategory(
-            item = Settings.DarkModeCategory,
-            itemClicked = { navigateToSubScreen(NavSettingsDarkMode) }
+        PrefSection(
+            title = string.settings_header_appearance,
+            content = {
+                SettingCategory(
+                    item = Settings.DarkModeCategory,
+                    itemClicked = { navigateToSubScreen(NavSettingsDarkMode) }
+                )
+                if (uiState.isThemeChangeSupported) {
+                    SettingCategory(
+                        item = Settings.ThemeCategory,
+                        itemClicked = { navigateToSubScreen(NavSettingsTheme) }
+                    )
+                }
+            }
         )
-        if (uiState.isThemeChangeSupported) {
-            PrefCategory(
-                item = Settings.ThemeCategory,
-                itemClicked = { navigateToSubScreen(NavSettingsTheme) }
-            )
-        }
-        PrefHeader(string.settings_header_data)
-        PrefCategory(
-            item = Settings.LayoutHomeCategory,
-            itemClicked = { navigateToSubScreen(NavSettingsLayoutHome)  }
-        )
-        PrefCategory(
-            item = Settings.LayoutRaceCategory,
-            itemClicked = { navigateToSubScreen(NavSettingsLayoutRace)  }
-        )
-        if (uiState.isRssEnabled) {
-            PrefHeader(string.settings_header_rss_feed)
-            PrefCategory(
-                item = Settings.RssCategory,
-                itemClicked = { navigateToSubScreen(NavSettingsRssConfigure) }
-            )
-            if (uiState.isInAppBrowserSupported) {
-                PrefCategory(
-                    item = Settings.WebBrowserCategory,
-                    itemClicked = { navigateToSubScreen(NavSettingsInAppBrowser)  }
+
+        PrefSection(
+            title = string.settings_header_data,
+            content = {
+                SettingCategory(
+                    item = Settings.LayoutHomeCategory,
+                    itemClicked = { navigateToSubScreen(NavSettingsLayoutHome)  }
+                )
+                SettingCategory(
+                    item = Settings.LayoutRaceCategory,
+                    itemClicked = { navigateToSubScreen(NavSettingsLayoutRace)  }
                 )
             }
+        )
+
+        if (uiState.isRssEnabled) {
+            PrefSection(
+                title = string.settings_header_rss_feed,
+                content = {
+                    SettingCategory(
+                        item = Settings.RssCategory,
+                        itemClicked = { navigateToSubScreen(NavSettingsRssConfigure) }
+                    )
+                    if (uiState.isInAppBrowserSupported) {
+                        SettingCategory(
+                            item = Settings.WebBrowserCategory,
+                            itemClicked = { navigateToSubScreen(NavSettingsInAppBrowser) }
+                        )
+                    }
+                }
+            )
         }
         if (Device.platform == Platform.Android || Device.platform == Platform.IOS) {
-            PrefHeader(string.settings_header_notifications)
-            PrefCategory(
-                item = Settings.NotificationsResultCategory,
-                itemClicked = { navigateToSubScreen(NavSettingsNotificationResults) },
-            )
-            PrefCategory(
-                item = Settings.NotificationsUpcomingCategory,
-                itemClicked = { navigateToSubScreen(NavSettingsNotificationUpcoming) },
+            PrefSection(
+                title = string.settings_header_notifications,
+                content = {
+                    SettingCategory(
+                        item = Settings.NotificationsResultCategory,
+                        itemClicked = { navigateToSubScreen(NavSettingsNotificationResults) },
+                    )
+                    SettingCategory(
+                        item = Settings.NotificationsUpcomingCategory,
+                        itemClicked = { navigateToSubScreen(NavSettingsNotificationUpcoming) },
+                    )
+                }
             )
         }
         if (uiState.isWidgetsSupported) {
-            PrefHeader(string.settings_header_widgets)
-            PrefCategory(
-                item = Settings.WidgetCategory,
-                itemClicked = { navigateToSubScreen(NavSettingsWidgets) }
+            PrefSection(
+                title = string.settings_header_widgets,
+                content = {
+                    SettingCategory(
+                        item = Settings.WidgetCategory,
+                        itemClicked = { navigateToSubScreen(NavSettingsWidgets) }
+                    )
+                }
             )
         }
-        PrefHeader(string.settings_header_other)
-        PrefCategory(
-            item = Settings.PrivacyCategory,
-            itemClicked = { navigateToSubScreen(NavSettingsPrivacy) }
-        )
-        PrefCategory(
-            item = Settings.PrivacyPolicy,
-            itemClicked = { navigateToSubScreen(NavPrivacyPolicy) }
-        )
-        PrefCategory(
-            item = Settings.AboutCategory,
-            itemClicked = { navigateTo(NavAbout) }
+        PrefSection(
+            title = string.settings_header_other,
+            content = {
+                SettingCategory(
+                    item = Settings.PrivacyCategory,
+                    itemClicked = { navigateToSubScreen(NavSettingsPrivacy) }
+                )
+                SettingCategory(
+                    item = Settings.PrivacyPolicy,
+                    itemClicked = { navigateToSubScreen(NavPrivacyPolicy) }
+                )
+                SettingCategory(
+                    item = Settings.AboutCategory,
+                    itemClicked = { navigateTo(NavAbout) }
+                )
+            }
         )
     }
 }

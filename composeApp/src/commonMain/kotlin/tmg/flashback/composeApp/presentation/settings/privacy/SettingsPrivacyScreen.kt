@@ -12,9 +12,9 @@ import flashback.presentation.localisation.generated.resources.settings_section_
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
-import tmg.flashback.composeApp.presentation.settings.PrefHeader
-import tmg.flashback.composeApp.presentation.settings.PrefLink
-import tmg.flashback.composeApp.presentation.settings.PrefSwitch
+import tmg.flashback.composeApp.presentation.settings.PrefSection
+import tmg.flashback.composeApp.presentation.settings.SettingLink
+import tmg.flashback.composeApp.presentation.settings.SettingSwitch
 import tmg.flashback.composeApp.presentation.settings.Settings
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
@@ -59,23 +59,27 @@ private fun SettingsPrivacyScreen(
                 action = HeaderAction.BACK.takeIf { showBack }
             )
         }
-        PrefHeader(string.settings_header_device_info)
-        PrefLink(
-            item = Settings.Privacy.Disclaimer,
-            itemClicked = { }
-        )
-        PrefSwitch(
-            item = Settings.Privacy.CrashReporting,
-            isChecked = uiState.crashReportingEnabled,
-            itemClicked = {
-                crashReportingEnabled(!uiState.crashReportingEnabled)
-            }
-        )
-        PrefSwitch(
-            item = Settings.Privacy.Analytics,
-            isChecked = uiState.analyticsEnabled,
-            itemClicked = {
-                analyticsEnabled(!uiState.analyticsEnabled)
+        PrefSection(
+            title = string.settings_header_device_info,
+            content = {
+                SettingLink(
+                    item = Settings.Privacy.Disclaimer,
+                    itemClicked = { }
+                )
+                SettingSwitch(
+                    item = Settings.Privacy.CrashReporting,
+                    isChecked = uiState.crashReportingEnabled,
+                    itemClicked = {
+                        crashReportingEnabled(!uiState.crashReportingEnabled)
+                    }
+                )
+                SettingSwitch(
+                    item = Settings.Privacy.Analytics,
+                    isChecked = uiState.analyticsEnabled,
+                    itemClicked = {
+                        analyticsEnabled(!uiState.analyticsEnabled)
+                    }
+                )
             }
         )
     }

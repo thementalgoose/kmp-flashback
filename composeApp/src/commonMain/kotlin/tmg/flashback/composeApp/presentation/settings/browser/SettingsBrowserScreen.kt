@@ -11,7 +11,8 @@ import flashback.presentation.localisation.generated.resources.settings_header_i
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
-import tmg.flashback.composeApp.presentation.settings.PrefSwitch
+import tmg.flashback.composeApp.presentation.settings.PrefSection
+import tmg.flashback.composeApp.presentation.settings.SettingSwitch
 import tmg.flashback.composeApp.presentation.settings.Settings
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
@@ -58,22 +59,27 @@ private fun SettingsBrowserScreen(
                 action = HeaderAction.BACK.takeIf { showBack }
             )
         }
-        PrefSwitch(
-            item = Settings.WebBrowser.Enabled,
-            itemClicked = { updateEnabled(!uiState.enabled) },
-            isChecked = uiState.enabled
-        )
-        PrefSwitch(
-            item = Settings.WebBrowser.EnableJavascript,
-            itemClicked = { updateEnableJavascript(!uiState.enableJavascript) },
-            isChecked = uiState.enableJavascript,
-            isEnabled = uiState.enabled
-        )
-        PrefSwitch(
-            item = Settings.WebBrowser.ToolbarTop,
-            itemClicked = { updateToolbarTop(!uiState.toolbarAtTop) },
-            isChecked = uiState.toolbarAtTop,
-            isEnabled = uiState.enabled
+        PrefSection(
+            title = string.settings_header_in_app_browser,
+            content = {
+                SettingSwitch(
+                    item = Settings.WebBrowser.Enabled,
+                    itemClicked = { updateEnabled(!uiState.enabled) },
+                    isChecked = uiState.enabled
+                )
+                SettingSwitch(
+                    item = Settings.WebBrowser.EnableJavascript,
+                    itemClicked = { updateEnableJavascript(!uiState.enableJavascript) },
+                    isChecked = uiState.enableJavascript,
+                    isEnabled = uiState.enabled
+                )
+                SettingSwitch(
+                    item = Settings.WebBrowser.ToolbarTop,
+                    itemClicked = { updateToolbarTop(!uiState.toolbarAtTop) },
+                    isChecked = uiState.toolbarAtTop,
+                    isEnabled = uiState.enabled
+                )
+            }
         )
     }
 }

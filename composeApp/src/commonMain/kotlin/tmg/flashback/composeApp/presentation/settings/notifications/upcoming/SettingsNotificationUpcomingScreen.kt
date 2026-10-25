@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.Lifecycle
@@ -19,6 +18,11 @@ import flashback.presentation.localisation.generated.resources.settings_section_
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
+import tmg.flashback.composeApp.presentation.settings.PrefSection
+import tmg.flashback.composeApp.presentation.settings.SettingLink
+import tmg.flashback.composeApp.presentation.settings.SettingRadio
+import tmg.flashback.composeApp.presentation.settings.SettingSwitch
+import tmg.flashback.composeApp.presentation.settings.Settings
 import tmg.flashback.feature.notifications.model.NotificationReminder
 import tmg.flashback.feature.notifications.model.NotificationReminder.MINUTES_15
 import tmg.flashback.feature.notifications.model.NotificationReminder.MINUTES_30
@@ -31,12 +35,6 @@ import tmg.flashback.feature.notifications.model.NotificationUpcoming.SPRINT
 import tmg.flashback.feature.notifications.model.NotificationUpcoming.SPRINT_QUALIFYING
 import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.infrastructure.device.Platform
-import tmg.flashback.composeApp.presentation.settings.PrefHeader
-import tmg.flashback.composeApp.presentation.settings.PrefLink
-import tmg.flashback.composeApp.presentation.settings.PrefRadio
-import tmg.flashback.composeApp.presentation.settings.PrefSwitch
-import tmg.flashback.composeApp.presentation.settings.Settings
-import tmg.flashback.composeApp.presentation.settings.notifications.ManageInSettings
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.permissions.PermissionState
@@ -96,94 +94,112 @@ private fun SettingsNotificationUpcomingScreen(
             )
         }
 
-        PrefHeader(string.settings_header_permissions)
-        if (permissionState == PermissionState.NotGranted || permissionState == PermissionState.NotDetermined) {
-            PrefLink(
-                item = Settings.NotificationsUpcoming.PermissionEnable,
-                itemClicked = { requestPermission() }
-            )
-        } else {
-            PrefLink(
-                item = Settings.NotificationsUpcoming.PermissionManage,
-                itemClicked = { goToSettings() }
-            )
-        }
+        PrefSection(
+            title = string.settings_header_permissions,
+            content = {
+                if (permissionState == PermissionState.NotGranted || permissionState == PermissionState.NotDetermined) {
+                    SettingLink(
+                        item = Settings.NotificationsUpcoming.PermissionEnable,
+                        itemClicked = { requestPermission() }
+                    )
+                } else {
+                    SettingLink(
+                        item = Settings.NotificationsUpcoming.PermissionManage,
+                        itemClicked = { goToSettings() }
+                    )
+                }
+            }
+        )
 
         if (Device.platform == Platform.IOS) {
-            PrefHeader(string.settings_section_notifications_upcoming_description)
-            PrefSwitch(
-                item = Settings.NotificationsUpcoming.FreePractice,
-                itemClicked = {
-                    notificationUpcomingClicked(
-                        FREE_PRACTICE,
-                        !uiState.enabled.contains(FREE_PRACTICE)
+            PrefSection(
+                title = string.settings_section_notifications_upcoming_description,
+                content = {
+                    SettingSwitch(
+                        item = Settings.NotificationsUpcoming.FreePractice,
+                        itemClicked = {
+                            notificationUpcomingClicked(
+                                FREE_PRACTICE,
+                                !uiState.enabled.contains(FREE_PRACTICE)
+                            )
+                        },
+                        isChecked = uiState.enabled.contains(FREE_PRACTICE),
+                        isEnabled = permissionState == PermissionState.Granted
                     )
-                },
-                isChecked = uiState.enabled.contains(FREE_PRACTICE),
-                isEnabled = permissionState == PermissionState.Granted
-            )
-            PrefSwitch(
-                item = Settings.NotificationsUpcoming.SprintQualifying,
-                itemClicked = {
-                    notificationUpcomingClicked(
-                        SPRINT_QUALIFYING,
-                        !uiState.enabled.contains(SPRINT_QUALIFYING)
+                    SettingSwitch(
+                        item = Settings.NotificationsUpcoming.SprintQualifying,
+                        itemClicked = {
+                            notificationUpcomingClicked(
+                                SPRINT_QUALIFYING,
+                                !uiState.enabled.contains(SPRINT_QUALIFYING)
+                            )
+                        },
+                        isChecked = uiState.enabled.contains(SPRINT_QUALIFYING),
+                        isEnabled = permissionState == PermissionState.Granted
                     )
-                },
-                isChecked = uiState.enabled.contains(SPRINT_QUALIFYING),
-                isEnabled = permissionState == PermissionState.Granted
+                    SettingSwitch(
+                        item = Settings.NotificationsUpcoming.SprintRace,
+                        itemClicked = {
+                            notificationUpcomingClicked(SPRINT, !uiState.enabled.contains(SPRINT))
+                        },
+                        isChecked = uiState.enabled.contains(SPRINT),
+                        isEnabled = permissionState == PermissionState.Granted
+                    )
+                    SettingSwitch(
+                        item = Settings.NotificationsUpcoming.Qualifying,
+                        itemClicked = {
+                            notificationUpcomingClicked(QUALIFYING, !uiState.enabled.contains(QUALIFYING))
+                        },
+                        isChecked = uiState.enabled.contains(QUALIFYING),
+                        isEnabled = permissionState == PermissionState.Granted
+                    )
+                    SettingSwitch(
+                        item = Settings.NotificationsUpcoming.Race,
+                        itemClicked = {
+                            notificationUpcomingClicked(RACE, !uiState.enabled.contains(RACE))
+                        },
+                        isChecked = uiState.enabled.contains(RACE),
+                        isEnabled = permissionState == PermissionState.Granted
+                    )
+                }
             )
-            PrefSwitch(
-                item = Settings.NotificationsUpcoming.SprintRace,
-                itemClicked = {
-                    notificationUpcomingClicked(SPRINT, !uiState.enabled.contains(SPRINT))
-                },
-                isChecked = uiState.enabled.contains(SPRINT),
-                isEnabled = permissionState == PermissionState.Granted
-            )
-            PrefSwitch(
-                item = Settings.NotificationsUpcoming.Qualifying,
-                itemClicked = {
-                    notificationUpcomingClicked(QUALIFYING, !uiState.enabled.contains(QUALIFYING))
-                },
-                isChecked = uiState.enabled.contains(QUALIFYING),
-                isEnabled = permissionState == PermissionState.Granted
-            )
-            PrefSwitch(
-                item = Settings.NotificationsUpcoming.Race,
-                itemClicked = {
-                    notificationUpcomingClicked(RACE, !uiState.enabled.contains(RACE))
-                },
-                isChecked = uiState.enabled.contains(RACE),
-                isEnabled = permissionState == PermissionState.Granted
-            )
+
         }
 
         if (Device.platform == Platform.Android) {
-            PrefHeader(string.settings_pref_schedule_exact_alarm_title)
-            PrefLink(
-                item = Settings.NotificationsNotice.ExactAlarm,
-                itemClicked = { goToAlarmSettings() }
+            PrefSection(
+                title = string.settings_pref_schedule_exact_alarm_title,
+                content = {
+                    SettingLink(
+                        item = Settings.NotificationsNotice.ExactAlarm,
+                        itemClicked = { goToAlarmSettings() }
+                    )
+                }
             )
         }
-        PrefHeader(string.notification_onboarding_title_howlong)
-        PrefRadio(
-            item = Settings.NotificationsNotice.Minutes15,
-            itemClicked = { notificationReminderClicked(MINUTES_15) },
-            isChecked = uiState.reminder == MINUTES_15,
-            isEnabled = uiState.reminderEnabled
-        )
-        PrefRadio(
-            item = Settings.NotificationsNotice.Minutes30,
-            itemClicked = { notificationReminderClicked(MINUTES_30) },
-            isChecked = uiState.reminder == MINUTES_30,
-            isEnabled = uiState.reminderEnabled
-        )
-        PrefRadio(
-            item = Settings.NotificationsNotice.Minutes60,
-            itemClicked = { notificationReminderClicked(MINUTES_60) },
-            isChecked = uiState.reminder == MINUTES_60,
-            isEnabled = uiState.reminderEnabled
+
+        PrefSection(
+            title = string.notification_onboarding_title_howlong,
+            content = {
+                SettingRadio(
+                    item = Settings.NotificationsNotice.Minutes15,
+                    itemClicked = { notificationReminderClicked(MINUTES_15) },
+                    isChecked = uiState.reminder == MINUTES_15,
+                    isEnabled = uiState.reminderEnabled
+                )
+                SettingRadio(
+                    item = Settings.NotificationsNotice.Minutes30,
+                    itemClicked = { notificationReminderClicked(MINUTES_30) },
+                    isChecked = uiState.reminder == MINUTES_30,
+                    isEnabled = uiState.reminderEnabled
+                )
+                SettingRadio(
+                    item = Settings.NotificationsNotice.Minutes60,
+                    itemClicked = { notificationReminderClicked(MINUTES_60) },
+                    isChecked = uiState.reminder == MINUTES_60,
+                    isEnabled = uiState.reminderEnabled
+                )
+            }
         )
     }
 }

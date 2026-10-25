@@ -11,7 +11,8 @@ import flashback.presentation.localisation.generated.resources.settings_theme_ni
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
-import tmg.flashback.composeApp.presentation.settings.PrefRadio
+import tmg.flashback.composeApp.presentation.settings.PrefSection
+import tmg.flashback.composeApp.presentation.settings.SettingRadio
 import tmg.flashback.composeApp.presentation.settings.Settings
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
@@ -58,26 +59,31 @@ private fun SettingsDarkModeScreen(
                 action = HeaderAction.BACK.takeIf { showBack }
             )
         }
-        PrefRadio(
-            item = Settings.DarkMode.DarkModeAuto,
-            itemClicked = {
-                clickNightMode(DEFAULT)
-            },
-            isChecked = uiState.nightMode == DEFAULT
-        )
-        PrefRadio(
-            item = Settings.DarkMode.DarkModeLight,
-            itemClicked = {
-                clickNightMode(DAY)
-            },
-            isChecked = uiState.nightMode == DAY
-        )
-        PrefRadio(
-            item = Settings.DarkMode.DarkModeDark,
-            itemClicked = {
-                clickNightMode(NIGHT)
-            },
-            isChecked = uiState.nightMode == NIGHT
+        PrefSection(
+            title = string.settings_theme_nightmode_dark,
+            content = {
+                SettingRadio(
+                    item = Settings.DarkMode.DarkModeAuto,
+                    itemClicked = {
+                        clickNightMode(DEFAULT)
+                    },
+                    isChecked = uiState.nightMode == DEFAULT
+                )
+                SettingRadio(
+                    item = Settings.DarkMode.DarkModeLight,
+                    itemClicked = {
+                        clickNightMode(DAY)
+                    },
+                    isChecked = uiState.nightMode == DAY
+                )
+                SettingRadio(
+                    item = Settings.DarkMode.DarkModeDark,
+                    itemClicked = {
+                        clickNightMode(NIGHT)
+                    },
+                    isChecked = uiState.nightMode == NIGHT
+                )
+            }
         )
     }
 }

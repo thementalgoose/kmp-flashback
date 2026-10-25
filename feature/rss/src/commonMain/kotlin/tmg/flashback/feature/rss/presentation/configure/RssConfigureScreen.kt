@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -42,6 +43,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.feature.rss.models.SupportedSource
 import tmg.flashback.feature.rss.presentation.configure.component.Source
+import tmg.flashback.feature.rss.presentation.configure.component.settingsModifier
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.buttons.ButtonPrimary
@@ -103,19 +105,17 @@ fun RssConfigureScreen(
             }
             item("show_description") {
                 Column(modifier = Modifier.animateItem()) {
-                    SettingHeader(
-                        title = string.settings_rss_show_description_title
-                    )
-                    ShowDescription(
-                        isChecked = uiState.showDescription,
-                        modifier = Modifier
-                            .clickable {
-                                updateShowDescription(!uiState.showDescription)
-                            }
-                            .padding(
-                                horizontal = AppTheme.dimens.medium,
-                                vertical = AppTheme.dimens.small
+                    SettingSection(
+                        title = string.settings_rss_show_description_title,
+                        content = {
+                            ShowDescription(
+                                isChecked = uiState.showDescription,
+                                modifier = Modifier
+                                    .clickable {
+                                        updateShowDescription(!uiState.showDescription)
+                                    }
                             )
+                        }
                     )
                 }
             }
@@ -123,18 +123,16 @@ fun RssConfigureScreen(
             if (uiState.showAddCustom) {
                 item("add-custom") {
                     Column(modifier = Modifier.animateItem()) {
-                        SettingHeader(
-                            title = string.settings_rss_add_title
-                        )
-                        AddCustom(
-                            modifier = Modifier
-                                .clickable {
-                                    showAddDialog.value = true
-                                }
-                                .padding(
-                                    horizontal = AppTheme.dimens.medium,
-                                    vertical = AppTheme.dimens.small
+                        SettingSection(
+                            title = string.settings_rss_add_title,
+                            content = {
+                                AddCustom(
+                                    modifier = Modifier
+                                        .clickable {
+                                            showAddDialog.value = true
+                                        }
                                 )
+                            }
                         )
                     }
                 }
@@ -142,19 +140,21 @@ fun RssConfigureScreen(
 
             item("source_header") {
                 Column(modifier = Modifier.animateItem()) {
-                    SettingHeader(
-                        title = string.settings_rss_configure
+                    SettingSection(
+                        title = string.settings_rss_configure,
+                        content = {
+                            for (it in uiState.sources) {
+                                Source(
+                                    modifier = Modifier.animateItem(),
+                                    model = it,
+                                    sourceAdded = { updateSource(it.rssLink, true) },
+                                    sourceRemoved = { updateSource(it.rssLink, false) },
+                                    contactLink = { openContactLink(it) }
+                                )
+                            }
+                        }
                     )
                 }
-            }
-            items(uiState.sources, key = { it.article.rssLink }) {
-                Source(
-                    modifier = Modifier.animateItem(),
-                    model = it,
-                    sourceAdded = { updateSource(it.rssLink, true) },
-                    sourceRemoved = { updateSource(it.rssLink, false) },
-                    contactLink = { openContactLink(it) }
-                )
             }
         }
     )
@@ -177,18 +177,34 @@ fun RssConfigureScreen(
 
 
 @Composable
-fun SettingHeader(
+fun SettingSection(
     title: StringResource,
-    modifier: Modifier = Modifier.padding(
-        vertical = AppTheme.dimens.nsmall,
-        horizontal = AppTheme.dimens.medium
-    ),
+    content: @Composable ColumnScope.() -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    Box(modifier = modifier) {
+    Column(
+        modifier = modifier.padding(
+            start = AppTheme.dimens.medium,
+            end = AppTheme.dimens.medium,
+            bottom = AppTheme.dimens.small
+        ),
+        verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
+    ) {
         TextSection(
             brand = true,
-            text = stringResource(title)
+            text = stringResource(title),
+            modifier = Modifier
+                .padding(
+                    vertical = AppTheme.dimens.small
+                )
         )
+        Column(
+            modifier = Modifier
+                .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium)),
+            verticalArrangement = Arrangement.spacedBy(1.dp)
+        ) {
+            content()
+        }
     }
 }
 
@@ -198,7 +214,8 @@ private fun ShowDescription(
     isChecked: Boolean,
 ) {
     Row(
-        modifier = modifier,
+        modifier = modifier
+            .then(settingsModifier),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(
@@ -226,7 +243,8 @@ private fun AddCustom(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier,
+        modifier = Modifier
+            .then(settingsModifier),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(

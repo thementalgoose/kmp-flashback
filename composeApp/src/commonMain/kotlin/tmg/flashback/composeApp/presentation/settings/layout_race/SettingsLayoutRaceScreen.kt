@@ -12,8 +12,9 @@ import kotlinx.datetime.TimeZone
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
-import tmg.flashback.composeApp.presentation.settings.PrefLink
-import tmg.flashback.composeApp.presentation.settings.PrefSwitch
+import tmg.flashback.composeApp.presentation.settings.PrefSection
+import tmg.flashback.composeApp.presentation.settings.SettingLink
+import tmg.flashback.composeApp.presentation.settings.SettingSwitch
 import tmg.flashback.composeApp.presentation.settings.Settings
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
@@ -60,24 +61,29 @@ private fun SettingsLayoutRaceScreen(
                 action = HeaderAction.BACK.takeIf { showBack }
             )
         }
-        PrefLink(
-            item = Settings.LayoutRace.Timezone(TimeZone.currentSystemDefault().id),
-            itemClicked = { },
-        )
-        PrefSwitch(
-            item = Settings.LayoutRace.WeatherDetails,
-            isChecked = uiState.weatherDetails,
-            itemClicked = { updateWeatherPref(!uiState.weatherDetails) },
-        )
-        PrefSwitch(
-            item = Settings.LayoutRace.TemperatureUnit,
-            isChecked = uiState.temperatureMetrics,
-            itemClicked = { temperatureMetricEnabled(!uiState.temperatureMetrics) },
-        )
-        PrefSwitch(
-            item = Settings.LayoutRace.WindSpeed,
-            isChecked = uiState.windSpeedMetrics,
-            itemClicked = { windspeedMetricEnabled(!uiState.windSpeedMetrics) },
+        PrefSection(
+            title = string.settings_section_race_title,
+            content = {
+                SettingLink(
+                    item = Settings.LayoutRace.Timezone(TimeZone.currentSystemDefault().id),
+                    itemClicked = { },
+                )
+                SettingSwitch(
+                    item = Settings.LayoutRace.WeatherDetails,
+                    isChecked = uiState.weatherDetails,
+                    itemClicked = { updateWeatherPref(!uiState.weatherDetails) },
+                )
+                SettingSwitch(
+                    item = Settings.LayoutRace.TemperatureUnit,
+                    isChecked = uiState.temperatureMetrics,
+                    itemClicked = { temperatureMetricEnabled(!uiState.temperatureMetrics) },
+                )
+                SettingSwitch(
+                    item = Settings.LayoutRace.WindSpeed,
+                    isChecked = uiState.windSpeedMetrics,
+                    itemClicked = { windspeedMetricEnabled(!uiState.windSpeedMetrics) },
+                )
+            }
         )
     }
 }

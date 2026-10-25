@@ -7,13 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import flashback.presentation.localisation.generated.resources.Res.string
-import flashback.presentation.localisation.generated.resources.settings_header_weather
 import flashback.presentation.localisation.generated.resources.settings_header_widgets
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
-import tmg.flashback.composeApp.presentation.settings.PrefLink
-import tmg.flashback.composeApp.presentation.settings.PrefSwitch
+import tmg.flashback.composeApp.presentation.settings.PrefSection
+import tmg.flashback.composeApp.presentation.settings.SettingLink
+import tmg.flashback.composeApp.presentation.settings.SettingSwitch
 import tmg.flashback.composeApp.presentation.settings.Settings
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
@@ -62,26 +62,31 @@ private fun SettingsWidgetScreen(
                 action = HeaderAction.BACK.takeIf { showBack }
             )
         }
-        if (uiState.isAddWidgetSupported) {
-            PrefLink(
-                item = Settings.Widgets.AddWidget,
-                itemClicked = { addWidget() }
-            )
-        }
-        PrefSwitch(
-            item = Settings.Widgets.ShowBackground,
-            itemClicked = { updateShowBackground(!uiState.showBackground) },
-            isChecked = uiState.showBackground
+        PrefSection(
+            title = string.settings_header_widgets,
+            content = {
+                if (uiState.isAddWidgetSupported) {
+                    SettingLink(
+                        item = Settings.Widgets.AddWidget,
+                        itemClicked = { addWidget() }
+                    )
+                }
+                SettingSwitch(
+                    item = Settings.Widgets.ShowBackground,
+                    itemClicked = { updateShowBackground(!uiState.showBackground) },
+                    isChecked = uiState.showBackground
+                )
+                SettingSwitch(
+                    item = Settings.Widgets.DeeplinkToEvent,
+                    itemClicked = { updateDeeplinkToEvent(!uiState.linkToEvent) },
+                    isChecked = uiState.linkToEvent
+                )
+//                SettingSwitch(
+//                    item = Settings.Widgets.ShowWeather,
+//                    itemClicked = { updateShowWeather(!uiState.showWeather) },
+//                    isChecked = uiState.showWeather
+//                )
+            }
         )
-        PrefSwitch(
-            item = Settings.Widgets.DeeplinkToEvent,
-            itemClicked = { updateDeeplinkToEvent(!uiState.linkToEvent) },
-            isChecked = uiState.linkToEvent
-        )
-//        PrefSwitch(
-//            item = Settings.Widgets.ShowWeather,
-//            itemClicked = { updateShowWeather(!uiState.showWeather) },
-//            isChecked = uiState.showWeather
-//        )
     }
 }

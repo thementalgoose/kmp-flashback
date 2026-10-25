@@ -13,8 +13,8 @@ import flashback.presentation.localisation.generated.resources.settings_pref_res
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
-import tmg.flashback.composeApp.presentation.settings.PrefHeader
-import tmg.flashback.composeApp.presentation.settings.PrefLink
+import tmg.flashback.composeApp.presentation.settings.PrefSection
+import tmg.flashback.composeApp.presentation.settings.SettingLink
 import tmg.flashback.composeApp.presentation.settings.Settings
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
@@ -66,39 +66,51 @@ private fun SettingsAboutScreen(
                 action = HeaderAction.BACK.takeIf { showBack }
             )
         }
-        PrefHeader(string.settings_header_about)
-        PrefLink(
-            item = Settings.About.AboutThisApp,
-            itemClicked = {
-                actionUpClicked()
-                navigateToAboutThisApp()
+        PrefSection(
+            title = string.settings_header_about,
+            content = {
+                SettingLink(
+                    item = Settings.About.AboutThisApp,
+                    itemClicked = {
+                        actionUpClicked()
+                        navigateToAboutThisApp()
+                    }
+                )
+                SettingLink(
+                    item = Settings.About.Review,
+                    itemClicked = { openReview() }
+                )
+                SettingLink(
+                    item = Settings.About.Feedback,
+                    itemClicked = { openFeedback() }
+                )
+                SettingLink(
+                    item = Settings.About.Changelog,
+                    itemClicked = { openChangelog() }
+                )
             }
         )
-        PrefLink(
-            item = Settings.About.Review,
-            itemClicked = { openReview() }
+        PrefSection(
+            title = string.settings_pref_reset_title,
+            content = {
+                SettingLink(
+                    item = Settings.About.FirstTimeSync,
+                    itemClicked = { firstTimeSync() }
+                )
+            }
         )
-        PrefLink(
-            item = Settings.About.Feedback,
-            itemClicked = { openFeedback() }
-        )
-        PrefLink(
-            item = Settings.About.Changelog,
-            itemClicked = { openChangelog() }
-        )
-        PrefHeader(string.settings_pref_reset_title)
-        PrefLink(
-            item = Settings.About.FirstTimeSync,
-            itemClicked = { firstTimeSync() }
-        )
-        PrefHeader(string.settings_header_device_info)
-        PrefLink(
-            item = Settings.About.BuildVersion,
-            itemClicked = { }
-        )
-        PrefLink(
-            item = Settings.About.DeviceInfo,
-            itemClicked = { }
+        PrefSection(
+            title = string.settings_header_device_info,
+            content = {
+                SettingLink(
+                    item = Settings.About.BuildVersion,
+                    itemClicked = { }
+                )
+                SettingLink(
+                    item = Settings.About.DeviceInfo,
+                    itemClicked = { }
+                )
+            }
         )
     }
 }
