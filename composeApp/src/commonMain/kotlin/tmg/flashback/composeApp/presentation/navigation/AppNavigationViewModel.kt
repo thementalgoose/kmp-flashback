@@ -23,7 +23,6 @@ import tmg.flashback.navigation.isList
 
 class AppNavigationViewModel(
     isRssEnabledUseCase: IsRssEnabledUseCase,
-    isMenuIconEnabledUseCase: IsMenuIconEnabledUseCase,
     isSnowEnabledUseCase: IsSnowEnabledUseCase,
     isSummerEnabledUseCase: IsSummerEnabledUseCase,
     requiresSyncUseCase: RequiresSyncUseCase,
@@ -33,7 +32,6 @@ class AppNavigationViewModel(
 ): ViewModel() {
 
     val easterEggs = AppNavigationEasterEggs(
-        menuIcon = isMenuIconEnabledUseCase(),
         snow = isSnowEnabledUseCase(),
         summer = isSummerEnabledUseCase(),
     )
@@ -78,9 +76,6 @@ class AppNavigationViewModel(
 internal val previewAppNavigationViewModel = AppNavigationViewModel(
     isRssEnabledUseCase = object : IsRssEnabledUseCase {
         override fun invoke(): Boolean = true
-    },
-    isMenuIconEnabledUseCase = object : IsMenuIconEnabledUseCase {
-        override fun invoke(): MenuIcons? = null
     },
     isSnowEnabledUseCase = object : IsSnowEnabledUseCase {
         override fun invoke(): Boolean = false

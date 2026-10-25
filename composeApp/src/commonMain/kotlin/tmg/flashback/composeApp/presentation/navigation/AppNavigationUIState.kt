@@ -14,7 +14,6 @@ data class AppNavigationUIState(
 )
 
 data class AppNavigationEasterEggs(
-    val menuIcon: MenuIcons?,
     val snow: Boolean,
     val summer: Boolean,
 )

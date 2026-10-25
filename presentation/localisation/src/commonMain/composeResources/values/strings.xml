@@ -670,11 +670,12 @@
     <!-- Easter Eggs -->
     <string name="easter_egg_slava_ukraine" translatable="false">Slava Ukraini 🇺🇦</string>
     <string name="easter_egg_menu_new_years">Happy New Year!</string>
+    <string name="easter_egg_menu_bonfire_night">Enjoy the bonfire night fireworks!</string>
     <string name="easter_egg_menu_chinese_new_year">Happy Chinese New Year!</string>
     <string name="easter_egg_menu_valentines">Happy Valentines Day!</string>
     <string name="easter_egg_menu_easter">Happy Easter!</string>
     <string name="easter_egg_menu_halloween">Happy Halloween!</string>
-    <string name="easter_egg_menu_diwali">Happy Diwali!!</string>
+    <string name="easter_egg_menu_diwali">Happy Diwali!</string>
     <string name="easter_egg_menu_christmas">Merry Christmas!</string>
 
     <!-- Reaction screen -->

@@ -48,7 +48,7 @@ enum class MenuIcons(
         key = "bonfire",
         startResolver = { LocalDate(year, 11, 4) },
         endResolver = { LocalDate(year, 11, 5) },
-        label = null
+        label = string.easter_egg_menu_bonfire_night
     ),
     DIWALI(
         key = "diwali",

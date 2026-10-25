@@ -631,6 +631,7 @@
     <!-- Easter Eggs -->
     <string name="easter_egg_menu_new_years">Felice anno nuovo!</string>
     <string name="easter_egg_menu_chinese_new_year">Felice anno nuovo cinese!</string>
+    <string name="easter_egg_menu_bonfire_night">Goditi i fuochi d\'artificio della serata del falò!</string>
     <string name="easter_egg_menu_valentines">Buon San Valentino!</string>
     <string name="easter_egg_menu_easter">Buona Pasqua!</string>
     <string name="easter_egg_menu_halloween">Buon Halloween!</string>

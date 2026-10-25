@@ -30,7 +30,6 @@ internal class AppNavigationViewModelTest {
     private lateinit var underTest: AppNavigationViewModel
 
     private val mockIsRssEnabledUseCase: IsRssEnabledUseCase = mock(autofill)
-    private val mockIsMenuIconEnabledUseCase: IsMenuIconEnabledUseCase = mock(autofill)
     private val mockIsSnowEnabledUseCase: IsSnowEnabledUseCase = mock(autofill)
     private val mockIsSummerEnabledUseCase: IsSummerEnabledUseCase = mock(autofill)
     private val mockRequiresSyncUseCase: RequiresSyncUseCase = mock(autofill)
@@ -40,14 +39,12 @@ internal class AppNavigationViewModelTest {
 
     private fun initUnderTest(
         isRss: Boolean = true,
-        menuIcon: MenuIcons? = null,
         snow: Boolean = false,
         summer: Boolean = false,
         sync: Boolean = false,
         softUpgrade: Boolean = false,
     ) {
         every { mockIsRssEnabledUseCase.invoke() } returns isRss
-        every { mockIsMenuIconEnabledUseCase.invoke() } returns menuIcon
         every { mockIsSnowEnabledUseCase.invoke() } returns snow
         every { mockIsSummerEnabledUseCase.invoke() } returns summer
         every { mockRequiresSyncUseCase.invoke() } returns sync
@@ -55,7 +52,6 @@ internal class AppNavigationViewModelTest {
 
         underTest = AppNavigationViewModel(
             isRssEnabledUseCase = mockIsRssEnabledUseCase,
-            isMenuIconEnabledUseCase = mockIsMenuIconEnabledUseCase,
             isSnowEnabledUseCase = mockIsSnowEnabledUseCase,
             isSummerEnabledUseCase = mockIsSummerEnabledUseCase,
             requiresSyncUseCase = mockRequiresSyncUseCase,
@@ -69,10 +65,8 @@ internal class AppNavigationViewModelTest {
     fun `initial uiState populates from dependencies`() = runTest {
         initUnderTest(
             isRss = true,
-            menuIcon = null,
             snow = false,
             summer = true,
-            ukraine = false,
             sync = true,
             softUpgrade = false,
         )
@@ -84,10 +78,8 @@ internal class AppNavigationViewModelTest {
             assertFalse(state.promptSoftUpgrade)
             assertNull(state.screen)
             assertFalse(state.intoSubNavigation)
-            assertNull(state.easterEggs.menuIcon)
             assertEquals(false, state.easterEggs.snow)
             assertEquals(true, state.easterEggs.summer)
-            assertEquals(false, state.easterEggs.ukraine)
         }
     }
 

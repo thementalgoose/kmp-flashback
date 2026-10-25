@@ -1,5 +1,6 @@
 package tmg.flashback.feature.season.presentation.calendar
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,12 +14,20 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.PlainTooltip
+import androidx.compose.material3.Text
+import androidx.compose.material3.TooltipAnchorPosition
+import androidx.compose.material3.TooltipBox
+import androidx.compose.material3.TooltipDefaults
+import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -30,11 +39,13 @@ import flashback.domain.formula1.generated.resources.Res.drawable
 import flashback.domain.formula1.generated.resources.ic_tyre
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.ab_refresh
+import flashback.presentation.localisation.generated.resources.app_name
 import flashback.presentation.localisation.generated.resources.search_title
 import flashback.presentation.localisation.generated.resources.tyres_label
 import flashback.presentation.ui.generated.resources.Res
 import flashback.presentation.ui.generated.resources.ic_refresh
 import flashback.presentation.ui.generated.resources.ic_search
+import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.format.MonthNames
 import org.jetbrains.compose.resources.painterResource
@@ -42,6 +53,8 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
 import tmg.flashback.analytics.presentation.ScreenView
+import tmg.flashback.eastereggs.model.MenuIcons
+import tmg.flashback.eastereggs.presentation.drawable
 import tmg.flashback.feature.highlights.presentation.HighlightBanner
 import tmg.flashback.feature.notifications.presentation.NotificationPrompt
 import tmg.flashback.feature.season.presentation.calendar.components.CollapsableList
@@ -124,6 +137,7 @@ fun CalendarScreen(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CalendarScreen(
     paddingValues: PaddingValues,
@@ -146,6 +160,15 @@ fun CalendarScreen(
         onRefresh = refresh,
         windowSizeClass = windowSizeClass
     ) {
+        val tooltipState = rememberTooltipState(
+            isPersistent = true
+        )
+        val scope = rememberCoroutineScope()
+        val labelText = uiState.menuIcon?.label?.let { stringResource(it) } ?: stringResource(string.app_name)
+        val tooltip = TooltipDefaults.rememberTooltipPositionProvider(
+            positioning = TooltipAnchorPosition.Below,
+            spacingBetweenTooltipAndAnchor = 0.dp
+        )
         LazyColumn(
             contentPadding = paddingValues,
             content = {
@@ -159,6 +182,33 @@ fun CalendarScreen(
                         },
                         action = null,
                         overrideIcons = {
+                            if (uiState.menuIcon != null) {
+                                TooltipBox(
+                                    positionProvider = tooltip,
+                                    tooltip = {
+                                        PlainTooltip {
+                                            Text(labelText)
+                                        }
+                                    },
+                                    state = tooltipState,
+                                    modifier = Modifier,
+                                    content = {
+                                        IconButton(
+                                            onClick = {
+                                                scope.launch {
+                                                    tooltipState.show()
+                                                }
+                                            },
+                                            content = {
+                                                Image(
+                                                    painter = painterResource(uiState.menuIcon.drawable),
+                                                    contentDescription = uiState.menuIcon.label?.let { stringResource(it) },
+                                                )
+                                            }
+                                        )
+                                    }
+                                )
+                            }
                             Refresh(onClick = refresh)
                             IconButton(
                                 onClick = goToSearch,
@@ -170,6 +220,7 @@ fun CalendarScreen(
                                     )
                                 }
                             )
+
                         }
                     )
                 }

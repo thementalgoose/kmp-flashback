@@ -659,6 +659,7 @@
 
     <!-- Easter Eggs -->
     <string name="easter_egg_menu_new_years">Καλή Χρονιά!</string>
+    <string name="easter_egg_menu_bonfire_night">Απολαύστε τα πυροτεχνήματα της βραδιάς της φωτιάς!</string>
     <string name="easter_egg_menu_chinese_new_year">Καλή Κινέζικη Πρωτοχρονιά!</string>
     <string name="easter_egg_menu_valentines">Καλή Ημέρα του Αγίου Βαλεντίνου!</string>
     <string name="easter_egg_menu_easter">Καλό Πάσχα!</string>

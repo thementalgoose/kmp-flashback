@@ -625,6 +625,7 @@
     <!-- Easter Eggs -->
     <string name="easter_egg_menu_new_years">新年快乐！</string>
     <string name="easter_egg_menu_chinese_new_year">春节快乐！</string>
+    <string name="easter_egg_menu_bonfire_night">尽情欣赏篝火之夜的烟火吧！</string>
     <string name="easter_egg_menu_valentines">情人节快乐！</string>
     <string name="easter_egg_menu_easter">复活节快乐！</string>
     <string name="easter_egg_menu_halloween">万圣节快乐！</string>
