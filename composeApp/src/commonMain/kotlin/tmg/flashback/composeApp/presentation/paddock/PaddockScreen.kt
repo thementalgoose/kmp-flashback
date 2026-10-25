@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.DriveFileRenameOutline
 import androidx.compose.material.icons.filled.FlashOn
 import androidx.compose.material.icons.filled.RssFeed
 import androidx.compose.material.icons.filled.Search
@@ -37,6 +38,8 @@ import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.nav_paddock
 import flashback.presentation.localisation.generated.resources.paddock_directory_description
 import flashback.presentation.localisation.generated.resources.paddock_directory_title
+import flashback.presentation.localisation.generated.resources.paddock_lineup_description
+import flashback.presentation.localisation.generated.resources.paddock_lineup_title
 import flashback.presentation.localisation.generated.resources.paddock_reaction_game_description
 import flashback.presentation.localisation.generated.resources.paddock_reaction_game_title
 import flashback.presentation.localisation.generated.resources.paddock_rss_description
@@ -47,6 +50,7 @@ import flashback.presentation.localisation.generated.resources.search_category_d
 import flashback.presentation.localisation.generated.resources.search_category_races
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
 import tmg.flashback.navigation.NavSearch
@@ -109,6 +113,13 @@ fun PaddockScreen(
                 action = null
             )
         }
+        item(key = "lineup") {
+            Lineup(
+                modifier = Modifier.clickable(
+                    onClick = { navigateTo(NavLineup) }
+                )
+            )
+        }
         if (uiState.isRssEnabled) {
             item(key = "rss") {
                 RSS(
@@ -146,6 +157,24 @@ private fun RSS(
         icon = {
             Icon(
                 imageVector = Icons.Default.RssFeed,
+                contentDescription = null,
+                tint = AppTheme.colors.primary,
+            )
+        },
+    )
+}
+
+@Composable
+private fun Lineup(
+    modifier: Modifier = Modifier,
+) {
+    Container(
+        modifier = modifier,
+        title = stringResource(string.paddock_lineup_title),
+        subtitle = stringResource(string.paddock_lineup_description),
+        icon = {
+            Icon(
+                imageVector = Icons.Default.DriveFileRenameOutline,
                 contentDescription = null,
                 tint = AppTheme.colors.primary,
             )
