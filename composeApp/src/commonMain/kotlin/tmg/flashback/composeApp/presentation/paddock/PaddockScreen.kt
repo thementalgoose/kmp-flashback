@@ -24,6 +24,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.DriveFileRenameOutline
 import androidx.compose.material.icons.filled.FlashOn
+import androidx.compose.material.icons.filled.Link
 import androidx.compose.material.icons.filled.RssFeed
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
@@ -97,6 +98,9 @@ fun PaddockScreen(
         paddingValues = insets,
         windowSizeClass = windowSizeClass,
         navigateTo = navigateTo,
+        openUrl = {
+            viewModel.openUrl(it.url, it.name)
+        },
         uiState = uiState.value
     )
 }
@@ -106,6 +110,7 @@ fun PaddockScreen(
     paddingValues: PaddingValues,
     windowSizeClass: WindowSizeClass,
     navigateTo: (Screen) -> Unit,
+    openUrl: (NavLink.Url) -> Unit,
     uiState: PaddockUiState
 ) {
     LazyVerticalGrid(
@@ -156,7 +161,7 @@ fun PaddockScreen(
                     Links(
                         navLink = it,
                         modifier = Modifier.clickable(
-                            onClick = { }
+                            onClick = { openUrl(it) }
                         )
                     )
                 }
@@ -245,7 +250,14 @@ private fun Links(
     Container(
         modifier = modifier,
         title = navLink.name,
-        subtitle = null
+        subtitle = navLink.url,
+        icon = {
+            Icon(
+                imageVector = Icons.Default.Link,
+                contentDescription = null,
+                tint = AppTheme.colors.primary
+            )
+        }
     )
 }
 
@@ -310,6 +322,7 @@ private fun Preview() {
             paddingValues = PaddingValues(0.dp),
             windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass,
             navigateTo = { },
+            openUrl = { },
             uiState = PaddockUiState(
                 isRssEnabled = true,
                 navLinks = listOf(

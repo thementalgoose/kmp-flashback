@@ -144,7 +144,7 @@ internal fun module() = module {
     single<StoreFirebaseInstallationIdUseCase> { StoreFirebaseInstallationIdUseCaseImpl(get(), get()) }
     single<RequiresSyncUseCase> { RequiresSyncUseCaseImpl(get(), get()) }
 
-    viewModel { PaddockViewModel(get(), get()) }
+    viewModel { PaddockViewModel(get(), get(), get()) }
 
     viewModel { InfoViewModel(get()) }
 
