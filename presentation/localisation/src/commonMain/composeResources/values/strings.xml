@@ -56,6 +56,8 @@
 
     <!-- Paddock -->
     <string name="paddock_title">Paddock</string>
+    <string name="paddock_lineup_title">Driver Lineup</string>
+    <string name="paddock_lineup_description">See which drivers are confirmed for future seasons</string>
     <string name="paddock_rss_title">RSS Feed</string>
     <string name="paddock_rss_description">Latest updates &amp; team updates from a variety of sources</string>
     <string name="paddock_reaction_game_title">Reaction Game</string>

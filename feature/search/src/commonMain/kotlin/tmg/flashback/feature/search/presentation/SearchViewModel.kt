@@ -25,17 +25,15 @@ class SearchViewModel(
 ): ViewModel() {
 
     private val searchUiState = SearchUiState(
-        categories = Category.entries.sorted(),
+        selectedCategory = null,
         searchTerm = "",
         isLoading = false,
-        resultsDrivers = emptyList(),
-        resultsConstructors = emptyList(),
-        resultsCircuits = emptyList()
+        results = emptyList()
     )
 
     private val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
     private val searchTerm: MutableStateFlow<String> = MutableStateFlow("")
-    private val filtering: MutableStateFlow<List<Category>> = MutableStateFlow(emptyList())
+    private val filtering: MutableStateFlow<Category?> = MutableStateFlow(null)
 
     val uiState: StateFlow<SearchUiState> =
         combine(
@@ -56,24 +54,29 @@ class SearchViewModel(
             val drivers = arr[1] as List<Result.ResultDriver>
             val constructors = arr[2] as List<Result.ResultTeam>
             val search = arr[3] as String
-            val filtering = arr[4] as List<Category>
+            val filtering = arr[4] as? Category?
             val isLoading = arr[5] as Boolean
+
+            val resultsDrivers = when (filtering == Category.Drivers) {
+                true -> drivers.filter(search)
+                false -> emptyList()
+            }
+            val resultsCircuits = when (filtering == Category.Circuits) {
+                true -> circuits.filter(search)
+                false -> emptyList()
+            }
+            val resultsConstructors = when (filtering == Category.Teams) {
+                true -> constructors.filter(search)
+                false -> emptyList()
+            }
+
+            val results = resultsDrivers + resultsConstructors + resultsCircuits
+
             SearchUiState(
-                categories = filtering.sorted(),
+                selectedCategory = filtering,
                 searchTerm = search,
                 isLoading = isLoading,
-                resultsDrivers = when (filtering.contains(Category.Drivers)) {
-                    true -> drivers.filter(search)
-                    false -> emptyList()
-                },
-                resultsCircuits = when (filtering.contains(Category.Circuits)) {
-                    true -> circuits.filter(search)
-                    false -> emptyList()
-                },
-                resultsConstructors = when (filtering.contains(Category.Teams)) {
-                    true -> constructors.filter(search)
-                    false -> emptyList()
-                },
+                results = results
             )
         }
         .stateIn(viewModelScope, SharingStarted.Lazily, searchUiState)
@@ -82,12 +85,8 @@ class SearchViewModel(
         this.searchTerm.update { search }
     }
 
-    fun applyFilters(categories: List<Category>) {
-        if (categories.isEmpty()) {
-            this.filtering.update { Category.entries }
-        } else {
-            this.filtering.update { categories }
-        }
+    fun applyFilter(category: Category?) {
+        this.filtering.update { category }
     }
 
     fun refresh() {

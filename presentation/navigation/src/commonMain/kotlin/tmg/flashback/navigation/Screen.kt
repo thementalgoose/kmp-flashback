@@ -68,17 +68,15 @@ data class NavWebpage(
 
 @Serializable
 data class NavSearch(
-    val filter: List<NavSearchFilter>?
-): Screen {
-    constructor(vararg filters: NavSearchFilter): this(filter = filters.toList())
-}
+    val filter: NavSearchFilter? = null,
+): Screen
 
 @Serializable
 enum class NavSearchFilter {
     Drivers,
     Teams,
-    Circuits,
-    Races;
+    Circuits
+//    Races;
 }
 
 @Serializable

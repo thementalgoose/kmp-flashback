@@ -1,17 +1,20 @@
 package tmg.flashback.feature.search.presentation
 
+import flashback.domain.formula1.generated.resources.Res
+import flashback.domain.formula1.generated.resources.ic_driver
+import flashback.domain.formula1.generated.resources.ic_team
+import flashback.domain.formula1.generated.resources.ic_track
+import org.jetbrains.compose.resources.DrawableResource
 import tmg.flashback.formula1.model.Circuit
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.formula1.model.Driver
 import tmg.flashback.formula1.model.OverviewRace
 
 data class SearchUiState(
-    val categories: List<Category>,
+    val selectedCategory: Category?,
     val searchTerm: String,
     val isLoading: Boolean,
-    val resultsDrivers: List<Result.ResultDriver>,
-    val resultsConstructors: List<Result.ResultTeam>,
-    val resultsCircuits: List<Result.ResultCircuit>,
+    val results: List<Result>,
 )
 
 sealed interface Result {
@@ -75,10 +78,20 @@ sealed interface Result {
 }
 
 enum class Category(
-    val key: String
+    val key: String,
+    val icon: DrawableResource,
 ) {
-    Drivers(key = "Drivers"),
-    Teams(key = "Teams"),
-    Circuits(key = "Circuits"),
-    Races(key = "Races");
+    Drivers(
+        key = "Drivers",
+        icon = Res.drawable.ic_driver
+    ),
+    Teams(
+        key = "Teams",
+        icon = Res.drawable.ic_team
+    ),
+    Circuits(
+        key = "Circuits",
+        icon = Res.drawable.ic_track
+    ),
+//    Races(key = "Races");
 }

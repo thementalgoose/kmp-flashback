@@ -196,7 +196,7 @@ internal val Category.label: StringResource
             Category.Drivers -> string.search_category_driver
             Category.Teams -> string.search_category_constructors
             Category.Circuits -> string.search_category_circuits
-            Category.Races -> string.search_category_races
+//            Category.Races -> string.search_category_races
         }
     }
 

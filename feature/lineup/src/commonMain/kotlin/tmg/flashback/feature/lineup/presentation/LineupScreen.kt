@@ -67,12 +67,6 @@ fun LineupScreen(
     )
 }
 
-enum class HorizontalScrollDirection {
-    IDLE,
-    LEFT,
-    RIGHT
-}
-
 @Composable
 private fun LineupScreen(
     paddingValues: PaddingValues,
@@ -118,7 +112,7 @@ private fun LineupScreen(
                                 text = stringResource(string.driver_lineup_title),
                                 action = when (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
                                     true -> null
-                                    false -> HeaderAction.MENU
+                                    false -> HeaderAction.BACK
                                 },
                                 actionUpClicked = actionUpClicked,
                                 overrideIcons = {

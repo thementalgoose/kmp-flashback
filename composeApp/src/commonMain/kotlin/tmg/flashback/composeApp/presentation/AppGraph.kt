@@ -270,7 +270,7 @@ fun AppGraph(
                     navigateTo = {
                         backStack.replaceDetail(it)
                     },
-                    filtering = it.filter ?: emptyList()
+                    filtering = it.filter
                 )
             }
 

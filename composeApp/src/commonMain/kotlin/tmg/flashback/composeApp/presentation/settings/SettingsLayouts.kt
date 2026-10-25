@@ -207,7 +207,8 @@ private fun SettingLink(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 TextTitle(
-                    text = stringResource(resource = item.title)
+                    text = stringResource(resource = item.title),
+                    bold = true
                 )
                 if (item.isBeta) {
                     Spacer(Modifier.width(AppTheme.dimens.small))
@@ -278,7 +279,8 @@ fun SettingCategory(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 TextTitle(
-                    text = stringResource(resource = item.title)
+                    text = stringResource(resource = item.title),
+                    bold = true
                 )
                 if (item.isBeta) {
                     Spacer(Modifier.width(AppTheme.dimens.small))
