@@ -122,6 +122,7 @@ fun Header(
     actionModifier: Modifier = Modifier,
     contentSpacing: Dp = 0.dp,
     overrideIcons: @Composable RowScope.(Modifier) -> Unit = { },
+    horizontalPadding: Boolean = true,
 ) {
     Header(
         actionUpClicked = actionUpClicked,
@@ -140,8 +141,8 @@ fun Header(
                     .semantics { heading() }
                     .weight(1f)
                     .padding(
-                        start = AppTheme.dimens.medium,
-                        end = AppTheme.dimens.medium,
+                        start = AppTheme.dimens.medium.takeIf { horizontalPadding } ?: 0.dp,
+                        end = AppTheme.dimens.medium.takeIf { horizontalPadding } ?: 0.dp,
                         top = AppTheme.dimens.medium,
                         bottom = AppTheme.dimens.medium
                     )

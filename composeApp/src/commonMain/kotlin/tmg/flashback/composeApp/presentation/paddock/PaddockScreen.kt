@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.plus
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
@@ -81,18 +82,12 @@ fun PaddockScreen(
     viewModel: PaddockViewModel = koinViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsState()
-    val insets = when (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
-        true -> paddingValues
-        false -> {
-            val direction = LocalLayoutDirection.current
-            PaddingValues(
-                top = paddingValues.calculateTopPadding(),
-                bottom = paddingValues.calculateBottomPadding() + appBarMaximumHeight,
-                start = paddingValues.calculateStartPadding(direction),
-                end = paddingValues.calculateEndPadding(direction)
-            )
-        }
-    }
+    val insets = paddingValues + PaddingValues(
+        top = 0.dp,
+        bottom = if (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) appBarMaximumHeight else 0.dp,
+        start = AppTheme.dimens.medium,
+        end = AppTheme.dimens.medium
+    )
 
     PaddockScreen(
         paddingValues = insets,
@@ -117,12 +112,14 @@ fun PaddockScreen(
         modifier = Modifier.fillMaxSize(),
         contentPadding = paddingValues,
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small),
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.small),
         columns = GridCells.Adaptive(250.dp),
     ) {
         item(key = "header", span = { GridItemSpan(maxLineSpan) }) {
             Header(
                 text = stringResource(string.nav_paddock),
-                action = null
+                action = null,
+                horizontalPadding = false
             )
         }
         item(key = "lineup") {
@@ -271,10 +268,6 @@ private fun Container(
 ) {
     Column(
         modifier = modifier
-            .padding(
-                horizontal = AppTheme.dimens.medium,
-                vertical = AppTheme.dimens.xxsmall
-            )
             .clip(RoundedCornerShape(6.dp))
             .background(AppTheme.colors.surfaceContainer3)
             .padding(

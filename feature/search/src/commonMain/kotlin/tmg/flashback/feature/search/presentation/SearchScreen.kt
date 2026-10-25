@@ -1,5 +1,6 @@
 package tmg.flashback.feature.search.presentation
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
@@ -129,20 +130,23 @@ private fun SearchScreen(
                     text = stringResource(uiState.selectedCategory?.label ?: string.search_title),
                     overrideIcons = {
                         Refresh(onClick = refresh)
-                        if (clearFilter) {
-                            IconButton(
-                                onClick = {
-                                    applyFilter(null)
-                                },
-                                content = {
-                                    Icon(
-                                        imageVector = Icons.Default.LayersClear,
-                                        contentDescription = stringResource(string.ab_clear_filters),
-                                        tint = AppTheme.colors.onSurface
-                                    )
-                                }
-                            )
-                        }
+                        AnimatedVisibility(
+                            visible = clearFilter && uiState.selectedCategory != null,
+                            content = {
+                                IconButton(
+                                    onClick = {
+                                        applyFilter(null)
+                                    },
+                                    content = {
+                                        Icon(
+                                            imageVector = Icons.Default.LayersClear,
+                                            contentDescription = stringResource(string.ab_clear_filters),
+                                            tint = AppTheme.colors.onSurface
+                                        )
+                                    }
+                                )
+                            }
+                        )
                     }
                 )
             }
