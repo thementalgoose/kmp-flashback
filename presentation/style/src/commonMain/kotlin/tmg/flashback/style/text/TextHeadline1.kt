@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.drawscope.DrawStyle
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
@@ -32,6 +33,7 @@ fun TextHeadline1(
 @Composable
 fun TextHeadline1Inline(
     text: String,
+    bold: Boolean = false,
     modifier: Modifier = Modifier,
     brand: Boolean = false
 ) {
@@ -42,7 +44,8 @@ fun TextHeadline1Inline(
             color = when (brand) {
                 true -> AppTheme.colors.primary
                 false -> AppTheme.colors.onSurface
-            }
+            },
+            fontWeight = if (bold) FontWeight.Black else FontWeight.Bold
         )
     )
 }

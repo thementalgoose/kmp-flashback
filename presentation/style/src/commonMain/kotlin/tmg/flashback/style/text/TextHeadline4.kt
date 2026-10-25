@@ -25,17 +25,17 @@ fun TextHeadline4(
     val style = when (colourType) {
         ColourType.DEFAULT -> AppTheme.typography.h4.copy(
             color = AppTheme.colors.onSurface,
-            fontWeight = if (bold) FontWeight.Black else null,
+            fontWeight = if (bold) FontWeight.Black else FontWeight.SemiBold,
             fontStyle = if (italic) FontStyle.Italic else FontStyle.Normal
         )
         ColourType.BRAND -> AppTheme.typography.h4.copy(
             color = AppTheme.colors.primary,
-            fontWeight = if (bold) FontWeight.Black else null,
+            fontWeight = if (bold) FontWeight.Black else FontWeight.SemiBold,
             fontStyle = if (italic) FontStyle.Italic else FontStyle.Normal
         )
         ColourType.RAINBOW -> AppTheme.typography.h4.copy(
             brush = Brush.horizontalGradient(RainbowColors),
-            fontWeight = if (bold) FontWeight.Black else null,
+            fontWeight = if (bold) FontWeight.Black else FontWeight.SemiBold,
             fontStyle = if (italic) FontStyle.Italic else FontStyle.Normal
         )
     }
@@ -51,8 +51,8 @@ fun TextHeadline4(
 @Composable
 private fun Preview() {
     ApplicationThemePreview {
-        TextHeadline3(
-            text = "Headline 3"
+        TextHeadline4(
+            text = "Headline 4"
         )
     }
 }
@@ -61,8 +61,8 @@ private fun Preview() {
 @Composable
 private fun PreviewRainbow() {
     ApplicationThemePreview {
-        TextHeadline3(
-            text = "Headline 3",
+        TextHeadline4(
+            text = "Headline 4",
             colourType = ColourType.RAINBOW
         )
     }
@@ -72,8 +72,8 @@ private fun PreviewRainbow() {
 @Composable
 private fun PreviewBrand() {
     ApplicationThemePreview {
-        TextHeadline3(
-            text = "Headline 3",
+        TextHeadline4(
+            text = "Headline 4",
             colourType = ColourType.BRAND
         )
     }
