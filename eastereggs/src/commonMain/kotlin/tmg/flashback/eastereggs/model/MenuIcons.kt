@@ -31,7 +31,7 @@ enum class MenuIcons(
     val key: String,
     val dateRanges: List<Pair<LocalDate, LocalDate>>,
     val label: StringResource?,
-    val drawableResource: DrawableResource,
+    val drawable: DrawableResource,
 ) {
     CHRISTMAS(
         key = "christmas",
@@ -39,7 +39,7 @@ enum class MenuIcons(
             LocalDate(year, 12, 21) to LocalDate(year, 12, 25)
         ),
         label = string.easter_egg_menu_christmas,
-        drawableResource = Res.drawable.ic_easteregg_christmas,
+        drawable = Res.drawable.ic_easteregg_christmas,
     ),
     NEW_YEARS(
         key = "new_year",
@@ -47,7 +47,7 @@ enum class MenuIcons(
             LocalDate(year, 1, 1) to LocalDate(year, 1, 2)
         ),
         label = string.easter_egg_menu_new_years,
-        drawableResource = Res.drawable.ic_easteregg_newyears
+        drawable = Res.drawable.ic_easteregg_newyears
     ),
     CHINESE_NEW_YEAR(
         key = "new_year",
@@ -58,7 +58,7 @@ enum class MenuIcons(
             LocalDate(2030, 2, 3) to LocalDate(2030, 2, 4),
         ),
         label = string.easter_egg_menu_chinese_new_year,
-        drawableResource = Res.drawable.ic_easteregg_newyears
+        drawable = Res.drawable.ic_easteregg_newyears
     ),
     NEW_YEARS_EVE(
         key = "new_year_eve",
@@ -66,7 +66,7 @@ enum class MenuIcons(
             LocalDate(year, 12, 31) to LocalDate(year, 12, 31)
         ),
         label = string.easter_egg_menu_new_years,
-        drawableResource = Res.drawable.ic_easteregg_newyears
+        drawable = Res.drawable.ic_easteregg_newyears
     ),
     EASTER(
         key = "easter",
@@ -77,7 +77,7 @@ enum class MenuIcons(
             LocalDate(2030, 4, 19) to LocalDate(2030, 4, 21)
         ),
         label = string.easter_egg_menu_easter,
-        drawableResource = Res.drawable.ic_easteregg_easter
+        drawable = Res.drawable.ic_easteregg_easter
     ),
     DIWALI(
         key = "diwali",
@@ -89,7 +89,7 @@ enum class MenuIcons(
             LocalDate(2030, 10, 24) to LocalDate(2030, 10, 26)
         ),
         label = string.easter_egg_menu_diwali,
-        drawableResource = Res.drawable.ic_easteregg_diwali
+        drawable = Res.drawable.ic_easteregg_diwali
     ),
     HALLOWEEN(
         key = "halloween",
@@ -97,7 +97,7 @@ enum class MenuIcons(
             LocalDate(year, 10, 30) to LocalDate(year, 10, 31)
         ),
         label = string.easter_egg_menu_halloween,
-        drawableResource = Res.drawable.ic_easteregg_halloween
+        drawable = Res.drawable.ic_easteregg_halloween
     ),
     VALENTINES_DAY(
         key = "valentines",
@@ -105,7 +105,7 @@ enum class MenuIcons(
             LocalDate(year, 2, 13) to LocalDate(year, 2, 14)
         ),
         label = string.easter_egg_menu_valentines,
-        drawableResource = Res.drawable.ic_easteregg_valentines
+        drawable = Res.drawable.ic_easteregg_valentines
     ),
     ST_PATRICKS_DAY(
         key = "st_patricks_day",
@@ -113,7 +113,7 @@ enum class MenuIcons(
             LocalDate(year, 3, 17) to LocalDate(year, 3, 17)
         ),
         label = string.easter_egg_menu_st_patricks_day,
-        drawableResource = Res.drawable.ic_easteregg_st_patricks_day
+        drawable = Res.drawable.ic_easteregg_st_patricks_day
     ),
     INDEPENDENCE_DAY(
         key = "independence_day",
@@ -121,7 +121,7 @@ enum class MenuIcons(
             LocalDate(year, 7, 4) to LocalDate(year, 7, 4)
         ),
         label = string.easter_egg_menu_independence_day,
-        drawableResource = Res.drawable.ic_easteregg_bonfire
+        drawable = Res.drawable.ic_easteregg_bonfire
     ),
     BONFIRE(
         key = "bonfire",
@@ -129,7 +129,7 @@ enum class MenuIcons(
             LocalDate(year, 11, 4) to LocalDate(year, 11, 5)
         ),
         label = string.easter_egg_menu_bonfire_night,
-        drawableResource = Res.drawable.ic_easteregg_bonfire
+        drawable = Res.drawable.ic_easteregg_bonfire
     );
 
     fun isNow(now: LocalDate = LocalDate.now()): Boolean {

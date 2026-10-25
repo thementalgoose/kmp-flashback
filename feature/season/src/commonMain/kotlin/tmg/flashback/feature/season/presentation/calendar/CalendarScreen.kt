@@ -25,7 +25,6 @@ import androidx.compose.material3.TooltipDefaults
 import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -35,15 +34,10 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
-import flashback.domain.formula1.generated.resources.Res.drawable
-import flashback.domain.formula1.generated.resources.ic_tyre
 import flashback.presentation.localisation.generated.resources.Res.string
-import flashback.presentation.localisation.generated.resources.ab_refresh
 import flashback.presentation.localisation.generated.resources.app_name
 import flashback.presentation.localisation.generated.resources.search_title
-import flashback.presentation.localisation.generated.resources.tyres_label
 import flashback.presentation.ui.generated.resources.Res
-import flashback.presentation.ui.generated.resources.ic_refresh
 import flashback.presentation.ui.generated.resources.ic_search
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
@@ -53,8 +47,6 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
 import tmg.flashback.analytics.presentation.ScreenView
-import tmg.flashback.eastereggs.model.MenuIcons
-import tmg.flashback.eastereggs.presentation.drawable
 import tmg.flashback.feature.highlights.presentation.HighlightBanner
 import tmg.flashback.feature.notifications.presentation.NotificationPrompt
 import tmg.flashback.feature.season.presentation.calendar.components.CollapsableList
@@ -62,9 +54,6 @@ import tmg.flashback.feature.season.presentation.calendar.components.RaceWeekCar
 import tmg.flashback.feature.season.presentation.shared.device_time.DeviceTimePrompt
 import tmg.flashback.feature.season.presentation.shared.providedby.ProvidedBy
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.ResultsSeasonPicker
-import tmg.flashback.formula1.enums.SeasonTyres
-import tmg.flashback.formula1.enums.getBySeason
-import tmg.flashback.formula1.enums.hasEntryForSeason
 import tmg.flashback.formula1.extensions.icon
 import tmg.flashback.formula1.extensions.label
 import tmg.flashback.infrastructure.datetime.displayDate
@@ -77,15 +66,11 @@ import tmg.flashback.navigation.Screen
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
-import tmg.flashback.style.text.TextHeadline1
 import tmg.flashback.ui.components.Refresh
 import tmg.flashback.ui.components.header.Header
-import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.loading.SkeletonViewList
 import tmg.flashback.ui.components.now.Now
 import tmg.flashback.ui.components.swiperefresh.SwipeRefresh
-import tmg.flashback.ui.components.tyres.TyreBottomSheet
-import tmg.flashback.ui.components.tyres.TyreInfo
 import tmg.flashback.ui.navigation.appBarMaximumHeight
 
 private const val listAlpha = 0.6f
