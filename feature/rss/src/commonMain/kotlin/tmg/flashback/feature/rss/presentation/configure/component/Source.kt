@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -37,6 +38,16 @@ import tmg.flashback.style.text.TextTitle
 
 private val badgeSize: Dp = 42.dp
 
+internal val settingsModifier: Modifier
+    @Composable
+    get() = Modifier
+        .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
+        .background(AppTheme.colors.surfaceContainer3)
+        .padding(
+            horizontal = AppTheme.dimens.medium,
+            vertical = AppTheme.dimens.nsmall
+        )
+
 @Composable
 internal fun Source(
     model: ConfiguredSupportedSource,
@@ -54,10 +65,7 @@ internal fun Source(
                 sourceAdded(model.article)
             }
         })
-        .padding(
-            vertical = AppTheme.dimens.small,
-            horizontal = AppTheme.dimens.medium
-        )
+        .then(settingsModifier)
     ) {
         SourceBadge(
             title = model.article.sourceShort,
@@ -67,7 +75,7 @@ internal fun Source(
         Column(
             modifier = Modifier
                 .weight(1f)
-                .padding(horizontal = AppTheme.dimens.medium)
+                .padding(horizontal = AppTheme.dimens.small)
         ) {
             TextTitle(
                 text = model.article.source
