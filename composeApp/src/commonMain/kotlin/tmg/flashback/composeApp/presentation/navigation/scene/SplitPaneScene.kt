@@ -64,7 +64,7 @@ class SplitPaneScene<T : Any>(
                 Box(Modifier
                     .fillMaxSize()
                     .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-                    .background(AppTheme.colors.surfaceContainer1)
+//                    .background(AppTheme.colors.surfaceContainer1)
                 ) {
                     listEntry.Content()
                 }
@@ -78,7 +78,7 @@ class SplitPaneScene<T : Any>(
                     Box(Modifier
                         .fillMaxSize()
                         .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-                        .background(AppTheme.colors.surfaceContainer1)
+//                        .background(AppTheme.colors.surfaceContainer1)
                     ) {
                         detailEntry.Content()
                     }

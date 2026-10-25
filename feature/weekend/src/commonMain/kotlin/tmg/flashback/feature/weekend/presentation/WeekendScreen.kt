@@ -173,7 +173,7 @@ fun WeekendScreenTab(
                 )
                 val painterState: State<AsyncImagePainter.State> = painter.state.collectAsState()
                 val scrimColor = when (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
-                    true -> AppTheme.colors.surfaceContainer1
+                    true -> AppTheme.colors.surface
                     false -> AppTheme.colors.surface
                 }
 

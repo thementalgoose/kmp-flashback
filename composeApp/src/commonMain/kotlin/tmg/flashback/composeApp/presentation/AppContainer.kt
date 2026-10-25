@@ -92,9 +92,7 @@ fun AppContainer(
                 },
                 backStack = backStack,
                 appNavigationViewModel = appNavigationViewModel,
-                insetPadding = paddingValues.only(
-                    vertical = true
-                ),
+                insetPadding = paddingValues,
                 windowAdaptiveInfo = windowAdaptiveInfo,
             )
         }
