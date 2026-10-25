@@ -25,13 +25,11 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.settings_experimental
+import flashback.presentation.localisation.generated.resources.settings_header_about
 import flashback.presentation.localisation.generated.resources.settings_header_appearance
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import flashback.presentation.localisation.generated.resources.settings_header_about
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.badge.Badge
@@ -63,11 +61,24 @@ private val defaultHeaderModifier: Modifier
             vertical = AppTheme.dimens.small
         )
 
+
 fun LazyListScope.PrefSection(
     title: StringResource,
     content: @Composable ColumnScope.() -> Unit
 ) {
-    item(title.key) {
+    this.PrefSection(
+        title = title,
+        key = title.key,
+        content = content
+    )
+}
+
+fun LazyListScope.PrefSection(
+    title: StringResource? = null,
+    key: String,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    item(key) {
         Column(
             modifier = Modifier.padding(
                 start = AppTheme.dimens.medium,
@@ -76,7 +87,9 @@ fun LazyListScope.PrefSection(
             ),
             verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
         ) {
-            SettingHeader(title = title)
+            if (title != null) {
+                SettingHeader(title = title)
+            }
             Column(
                 modifier = Modifier
                     .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium)),
