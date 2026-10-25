@@ -21,4 +21,6 @@ internal class EasterEggsRepositoryImpl(
 
     override val isSummerEnabled: Boolean
         get() = configManager.getBoolean(keySummer)
+
+
 }

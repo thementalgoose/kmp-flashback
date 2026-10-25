@@ -632,7 +632,9 @@
     <string name="easter_egg_menu_new_years">Felice anno nuovo!</string>
     <string name="easter_egg_menu_chinese_new_year">Felice anno nuovo cinese!</string>
     <string name="easter_egg_menu_bonfire_night">Goditi i fuochi d\'artificio della serata del falò!</string>
+    <string name="easter_egg_menu_independence_day">Buon Giorno dell\'Indipendenza</string>
     <string name="easter_egg_menu_valentines">Buon San Valentino!</string>
+    <string name="easter_egg_menu_st_patricks_day">Buon giorno di San Patrizio!</string>
     <string name="easter_egg_menu_easter">Buona Pasqua!</string>
     <string name="easter_egg_menu_halloween">Buon Halloween!</string>
     <string name="easter_egg_menu_diwali">Buon Diwali!</string>

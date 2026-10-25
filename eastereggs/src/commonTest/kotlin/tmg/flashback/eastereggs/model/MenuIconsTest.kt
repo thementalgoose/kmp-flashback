@@ -11,10 +11,13 @@ internal class MenuIconsTest {
     @Test
     fun `update required for easter eggs`() {
         val currentYear = LocalDate.now().year
-        val minYear = MenuIcons.entries
-            .map { min(it.start.year, it.end.year) }
-            .minBy { it }
+        val typesNeeded = MenuIcons.entries
+            .filter {
+                it.dateRanges.none { (start, end) ->
+                    start.year == currentYear || end.year == currentYear
+                }
+            }
 
-        assertTrue(minYear <= currentYear, "Menu icons for easter eggs require updated date ranges, minYear found = $minYear, currentYear = $currentYear")
+        assertTrue(typesNeeded.isNotEmpty(), "Menu icons for easter eggs require updated date ranges. Types needed = ${typesNeeded.joinToString { it.key }}")
     }
 }
