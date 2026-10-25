@@ -109,7 +109,6 @@ internal fun AppNavigationDrawer(
                             top = AppTheme.dimens.nsmall
                         ),
                         menuIcons = appNavigationUiState.easterEggs.menuIcon,
-                        showUkraine = appNavigationUiState.easterEggs.ukraine
                     )
                 }
                 item("header_div") {
@@ -304,7 +303,7 @@ private fun Preview() {
         AppNavigationDrawer(
             appNavigationUiState = AppNavigationUIState(
                 showRss = true,
-                easterEggs = AppNavigationEasterEggs(MenuIcons.HALLOWEEN, false, false, false),
+                easterEggs = AppNavigationEasterEggs(MenuIcons.HALLOWEEN, false, false),
                 screen = NavCalendar,
                 intoSubNavigation = false,
                 promptContentSync = false,

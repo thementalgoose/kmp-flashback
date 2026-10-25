@@ -48,7 +48,6 @@ private val MenuIcons.drawable: DrawableResource get() = when (this) {
 @Composable
 internal fun DashboardHero(
     menuIcons: MenuIcons?,
-    showUkraine: Boolean,
     modifier: Modifier = Modifier,
     rainbow: Boolean = false,
 ) {
@@ -81,14 +80,6 @@ internal fun DashboardHero(
             text = stringResource(resource = string.app_subtitle),
             maxLines = 1
         )
-        if (showUkraine) {
-            TextCaption(
-                modifier = Modifier.padding(top = 4.dp),
-                fontStyle = FontStyle.Italic,
-                text = stringResource(resource = string.easter_egg_slava_ukraine),
-                maxLines = 1
-            )
-        }
     }
 }
 
@@ -98,7 +89,6 @@ private fun Preview() {
     ApplicationThemePreview {
         DashboardHero(
             menuIcons = null,
-            showUkraine = false
         )
     }
 }
@@ -109,7 +99,6 @@ private fun PreviewValentinesDay() {
     ApplicationThemePreview {
         DashboardHero(
             menuIcons = MenuIcons.VALENTINES_DAY,
-            showUkraine = false
         )
     }
 }
@@ -120,18 +109,6 @@ private fun PreviewChristmas() {
     ApplicationThemePreview {
         DashboardHero(
             menuIcons = MenuIcons.CHRISTMAS,
-            showUkraine = false
-        )
-    }
-}
-
-@PreviewTheme
-@Composable
-private fun PreviewUkraine() {
-    ApplicationThemePreview {
-        DashboardHero(
-            menuIcons = null,
-            showUkraine = true
         )
     }
 }
@@ -142,7 +119,6 @@ private fun PreviewPride() {
     ApplicationThemePreview {
         DashboardHero(
             menuIcons = null,
-            showUkraine = false,
             rainbow = true
         )
     }
