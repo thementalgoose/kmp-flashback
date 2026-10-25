@@ -16,7 +16,6 @@ import tmg.flashback.eastereggs.model.MenuIcons
 import tmg.flashback.eastereggs.usecases.IsMenuIconEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSnowEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSummerEnabledUseCase
-import tmg.flashback.eastereggs.usecases.IsUkraineEnabledUseCase
 import tmg.flashback.feature.maintenance.repository.MaintenanceRepository
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
 import tmg.flashback.navigation.Screen
@@ -27,7 +26,6 @@ class AppNavigationViewModel(
     isMenuIconEnabledUseCase: IsMenuIconEnabledUseCase,
     isSnowEnabledUseCase: IsSnowEnabledUseCase,
     isSummerEnabledUseCase: IsSummerEnabledUseCase,
-    isUkraineEnabledUseCase: IsUkraineEnabledUseCase,
     requiresSyncUseCase: RequiresSyncUseCase,
     maintenanceRepository: MaintenanceRepository,
     private val openWebpageUseCase: OpenWebpageUseCase,
@@ -38,7 +36,6 @@ class AppNavigationViewModel(
         menuIcon = isMenuIconEnabledUseCase(),
         snow = isSnowEnabledUseCase(),
         summer = isSummerEnabledUseCase(),
-        ukraine = isUkraineEnabledUseCase()
     )
 
     private val _uiState: MutableStateFlow<AppNavigationUIState> = MutableStateFlow(AppNavigationUIState(
@@ -89,9 +86,6 @@ internal val previewAppNavigationViewModel = AppNavigationViewModel(
         override fun invoke(): Boolean = false
     },
     isSummerEnabledUseCase = object : IsSummerEnabledUseCase {
-        override fun invoke(): Boolean = false
-    },
-    isUkraineEnabledUseCase = object : IsUkraineEnabledUseCase {
         override fun invoke(): Boolean = false
     },
     requiresSyncUseCase = object : RequiresSyncUseCase {

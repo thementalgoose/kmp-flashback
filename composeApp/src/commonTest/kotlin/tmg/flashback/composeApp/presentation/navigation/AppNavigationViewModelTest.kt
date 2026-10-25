@@ -17,7 +17,6 @@ import tmg.flashback.eastereggs.model.MenuIcons
 import tmg.flashback.eastereggs.usecases.IsMenuIconEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSnowEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSummerEnabledUseCase
-import tmg.flashback.eastereggs.usecases.IsUkraineEnabledUseCase
 import tmg.flashback.feature.maintenance.repository.MaintenanceRepository
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
 import kotlin.test.Test
@@ -34,7 +33,6 @@ internal class AppNavigationViewModelTest {
     private val mockIsMenuIconEnabledUseCase: IsMenuIconEnabledUseCase = mock(autofill)
     private val mockIsSnowEnabledUseCase: IsSnowEnabledUseCase = mock(autofill)
     private val mockIsSummerEnabledUseCase: IsSummerEnabledUseCase = mock(autofill)
-    private val mockIsUkraineEnabledUseCase: IsUkraineEnabledUseCase = mock(autofill)
     private val mockRequiresSyncUseCase: RequiresSyncUseCase = mock(autofill)
     private val mockMaintenanceRepository: MaintenanceRepository = mock(autofill)
     private val mockOpenWebpageUseCase: OpenWebpageUseCase = mock(autoUnit)
@@ -45,7 +43,6 @@ internal class AppNavigationViewModelTest {
         menuIcon: MenuIcons? = null,
         snow: Boolean = false,
         summer: Boolean = false,
-        ukraine: Boolean = false,
         sync: Boolean = false,
         softUpgrade: Boolean = false,
     ) {
@@ -53,7 +50,6 @@ internal class AppNavigationViewModelTest {
         every { mockIsMenuIconEnabledUseCase.invoke() } returns menuIcon
         every { mockIsSnowEnabledUseCase.invoke() } returns snow
         every { mockIsSummerEnabledUseCase.invoke() } returns summer
-        every { mockIsUkraineEnabledUseCase.invoke() } returns ukraine
         every { mockRequiresSyncUseCase.invoke() } returns sync
         every { mockMaintenanceRepository.softUpgrade } returns softUpgrade
 
@@ -62,7 +58,6 @@ internal class AppNavigationViewModelTest {
             isMenuIconEnabledUseCase = mockIsMenuIconEnabledUseCase,
             isSnowEnabledUseCase = mockIsSnowEnabledUseCase,
             isSummerEnabledUseCase = mockIsSummerEnabledUseCase,
-            isUkraineEnabledUseCase = mockIsUkraineEnabledUseCase,
             requiresSyncUseCase = mockRequiresSyncUseCase,
             maintenanceRepository = mockMaintenanceRepository,
             openWebpageUseCase = mockOpenWebpageUseCase,

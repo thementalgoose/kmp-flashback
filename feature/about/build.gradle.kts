@@ -27,6 +27,7 @@ kotlin {
             implementation(projects.core.notifications)
             implementation(projects.core.metrics.analytics)
             implementation(projects.core.metrics.crashlytics)
+            implementation(projects.eastereggs)
             implementation(projects.infrastructure)
             implementation(projects.presentation.ui)
             implementation(projects.presentation.style)
