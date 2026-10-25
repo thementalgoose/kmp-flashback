@@ -69,8 +69,8 @@ internal fun Source(
     ) {
         SourceBadge(
             title = model.article.sourceShort,
-            textColour = model.article.textColour.toColourInt()?.let { Color(it) } ?: Color.White,
-            colour = model.article.colour.toColourInt()?.let { Color(it) } ?: AppTheme.colors.primary
+            textColour = model.article.textColour.toColourInt().let { Color(it) } ?: Color.White,
+            colour = model.article.colour.toColourInt().let { Color(it) } ?: AppTheme.colors.primary
         )
         Column(
             modifier = Modifier

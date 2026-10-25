@@ -44,7 +44,7 @@ import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextSection
 import tmg.flashback.style.text.TextTitle
 
-private val categoryIconSize: Dp = 36.dp
+private val categoryIconSize: Dp = 32.dp
 
 private val defaultSettingModifier: Modifier
     @Composable
@@ -259,7 +259,7 @@ fun SettingCategory(
         } else {
             Spacer(Modifier.size(categoryIconSize))
         }
-        Spacer(Modifier.width(AppTheme.dimens.medium))
+        Spacer(Modifier.width(AppTheme.dimens.small))
         Column(Modifier.fillMaxWidth()) {
             Row(
                 verticalAlignment = Alignment.CenterVertically

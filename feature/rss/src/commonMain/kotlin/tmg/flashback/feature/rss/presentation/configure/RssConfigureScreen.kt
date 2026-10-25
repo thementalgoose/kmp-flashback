@@ -192,7 +192,11 @@ fun SettingSection(
     ) {
         TextSection(
             brand = true,
-            text = stringResource(title)
+            text = stringResource(title),
+            modifier = Modifier
+                .padding(
+                    vertical = AppTheme.dimens.small
+                )
         )
         Column(
             modifier = Modifier
