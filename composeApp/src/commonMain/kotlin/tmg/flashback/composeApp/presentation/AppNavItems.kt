@@ -4,6 +4,7 @@ import tmg.flashback.composeApp.presentation.MenuItem.Calendar
 import tmg.flashback.composeApp.presentation.MenuItem.Contact
 import tmg.flashback.composeApp.presentation.MenuItem.DriversStandings
 import tmg.flashback.composeApp.presentation.MenuItem.Info
+import tmg.flashback.composeApp.presentation.MenuItem.Lineup
 import tmg.flashback.composeApp.presentation.MenuItem.Paddock
 import tmg.flashback.composeApp.presentation.MenuItem.ReactionGame
 import tmg.flashback.composeApp.presentation.MenuItem.Rss
@@ -17,6 +18,7 @@ import tmg.flashback.navigation.NavAbout
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavDriverStandings
 import tmg.flashback.navigation.NavInfo
+import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavPaddock
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
@@ -27,6 +29,7 @@ import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.navigation.Screen
 import tmg.flashback.ui.navigation.NavigationItem
 
+@Suppress("RemoveExplicitTypeArguments") // Needed for wasmJs
 val floatingNavItems = listOf<Screen>(
     NavCalendar,
     NavDriverStandings,
@@ -57,6 +60,7 @@ fun generateNavSecondaryItems(
     currentlySelectedScreen: Screen?,
     showRss: Boolean
 ): List<NavigationItem> = listOfNotNull(
+    Lineup.toNavigationItem(currentlySelectedScreen == NavLineup),
     Rss.toNavigationItem(currentlySelectedScreen == NavRss).takeIf { showRss },
     ReactionGame.toNavigationItem(currentlySelectedScreen == NavReactionGame),
     Search.toNavigationItem(currentlySelectedScreen is NavSearch),
