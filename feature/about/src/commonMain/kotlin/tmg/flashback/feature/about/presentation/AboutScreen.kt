@@ -46,6 +46,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
+import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_EXPANDED_LOWER_BOUND
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import coil3.compose.AsyncImage
 import flashback.presentation.localisation.generated.resources.Res.string
@@ -90,7 +91,7 @@ fun AboutScreen(
 
     val uiState = viewModel.uiState.collectAsState()
     BoxWithConstraints {
-        if (maxWidth <= WIDTH_DP_MEDIUM_LOWER_BOUND.dp) {
+        if (maxWidth <= WIDTH_DP_EXPANDED_LOWER_BOUND.dp) {
             AboutListScreen(
                 icon = appIcon,
                 paddingValues = paddingValues,

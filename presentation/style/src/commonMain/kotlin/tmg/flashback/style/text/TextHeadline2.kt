@@ -23,17 +23,17 @@ fun TextHeadline2(
     val style = when (colourType) {
         ColourType.DEFAULT -> AppTheme.typography.h2.copy(
             color = AppTheme.colors.onSurface,
-            fontWeight = if (bold) FontWeight.Black else null,
+            fontWeight = if (bold) FontWeight.Black else FontWeight.SemiBold,
             fontStyle = if (italic) FontStyle.Italic else FontStyle.Normal
         )
         ColourType.BRAND -> AppTheme.typography.h2.copy(
             color = AppTheme.colors.primary,
-            fontWeight = if (bold) FontWeight.Black else null,
+            fontWeight = if (bold) FontWeight.Black else FontWeight.SemiBold,
             fontStyle = if (italic) FontStyle.Italic else FontStyle.Normal
         )
         ColourType.RAINBOW -> AppTheme.typography.h2.copy(
             brush = Brush.horizontalGradient(RainbowColors),
-            fontWeight = if (bold) FontWeight.Black else null,
+            fontWeight = if (bold) FontWeight.Black else FontWeight.SemiBold,
             fontStyle = if (italic) FontStyle.Italic else FontStyle.Normal
         )
     }

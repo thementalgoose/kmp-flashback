@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
@@ -64,7 +66,8 @@ class SplitPaneScene<T : Any>(
                 Box(Modifier
                     .fillMaxSize()
                     .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-                    .background(AppTheme.colors.surfaceContainer1)
+                    .consumeWindowInsets(WindowInsets.safeDrawing.only(WindowInsetsSides.End))
+//                    .background(AppTheme.colors.surfaceContainer1)
                 ) {
                     listEntry.Content()
                 }
@@ -78,7 +81,8 @@ class SplitPaneScene<T : Any>(
                     Box(Modifier
                         .fillMaxSize()
                         .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-                        .background(AppTheme.colors.surfaceContainer1)
+                        .consumeWindowInsets(WindowInsets.safeDrawing.only(WindowInsetsSides.Start))
+//                        .background(AppTheme.colors.surfaceContainer1)
                     ) {
                         detailEntry.Content()
                     }

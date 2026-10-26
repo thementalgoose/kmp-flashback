@@ -64,7 +64,7 @@ actual object Device: KoinComponent {
                 || Build.PRODUCT.contains("simulator")
 
     actual val isDebug: Boolean
-        get() = applicationId.contains(".sandbox")
+        get() = false // applicationId.contains(".sandbox")
 
     actual val platform: Platform
         get() = Platform.Android

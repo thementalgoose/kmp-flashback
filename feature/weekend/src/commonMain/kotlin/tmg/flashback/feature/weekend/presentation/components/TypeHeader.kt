@@ -44,6 +44,8 @@ import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.badge.BadgeView
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextHeadline2
+import tmg.flashback.style.text.TextHeadline3
+import tmg.flashback.style.text.TextHeadline4
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.season.Picker
 import tmg.flashback.ui.components.season.PickerItem
@@ -62,8 +64,9 @@ internal fun TypeHeader(
             ),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        TextHeadline2(
+        TextHeadline4(
             text = stringResource(resource),
+            bold = false,
             modifier = Modifier
                 .semantics { heading() }
                 .weight(1f)
@@ -91,7 +94,8 @@ internal fun <E: Enum<E>> TypeHeader(
             ),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        TextHeadline2(
+        TextHeadline4(
+            bold = false,
             text = stringResource(resource),
             modifier = Modifier
                 .semantics { heading() }

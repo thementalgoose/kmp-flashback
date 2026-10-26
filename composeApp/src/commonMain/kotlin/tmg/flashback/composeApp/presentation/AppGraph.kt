@@ -111,21 +111,17 @@ fun AppGraph(
 
     val isCompact = !windowAdaptiveInfo.windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)
     val isExpanded = windowAdaptiveInfo.windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_EXPANDED_LOWER_BOUND)
-    val navDisplayModifier = when (!isCompact && !isExpanded) {
-        true -> Modifier
-            .fillMaxSize()
-            .padding(insetPadding)
-            .padding(end = AppTheme.dimens.medium)
-            .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-            .background(AppTheme.colors.surfaceContainer1)
-        false -> Modifier
-            .fillMaxSize()
-            .background(AppTheme.colors.surfaceContainer1)
-    }
-    val insetPadding = when (isCompact) {
-        true -> insetPadding
-        false -> insetPadding.only(vertical = true)
-    }
+
+    val navDisplayModifier = Modifier
+        .fillMaxSize()
+        .background(AppTheme.colors.surface)
+
+    val insetPadding = insetPadding.only(
+        start = isCompact,
+        end = true,
+        top = true,
+        bottom = true,
+    )
 
     NavDisplay(
         backStack = backStack,

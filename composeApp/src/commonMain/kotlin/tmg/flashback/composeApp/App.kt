@@ -146,7 +146,7 @@ fun AppContent(
     Box(
         modifier = Modifier
             .testTag("App")
-            .background(AppTheme.colors.surfaceContainer1)
+            .background(AppTheme.colors.surface)
             .summer(appNavigationUiState.value.easterEggs.summer)
             .snow(appNavigationUiState.value.easterEggs.snow)
     ) {
@@ -176,7 +176,8 @@ fun AppContent(
                 paddingValues = WindowInsets.safeDrawing.asPaddingValues(),
                 appNavigationViewModel = appNavigationViewModel,
                 backStack = backStack,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
             )
         }
 
