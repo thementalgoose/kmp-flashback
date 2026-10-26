@@ -165,7 +165,6 @@ fun AppContent(
             AppContainer(
                 windowAdaptiveInfo = windowAdaptiveInfo,
                 windowSizeClass = windowSizeClass,
-                paddingValues = WindowInsets.safeDrawing.asPaddingValues(),
                 appNavigationViewModel = appNavigationViewModel,
                 backStack = backStack,
                 modifier = Modifier

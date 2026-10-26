@@ -33,7 +33,6 @@ fun AppContainer(
     windowAdaptiveInfo: WindowAdaptiveInfo,
     windowSizeClass: WindowSizeClass,
     backStack: NavBackStack<NavKey>,
-    paddingValues: PaddingValues,
     appNavigationViewModel: AppNavigationViewModel,
 ) {
     Box(
@@ -55,7 +54,6 @@ fun AppContainer(
             AppGraph(
                 backStack = backStack,
                 appNavigationViewModel = appNavigationViewModel,
-                insetPadding = paddingValues,
                 windowAdaptiveInfo = windowAdaptiveInfo,
             )
         }
@@ -70,7 +68,6 @@ private fun Preview() {
             windowAdaptiveInfo = currentWindowAdaptiveInfoV2(),
             windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass,
             backStack = rememberNavBackStack(saveStateConfiguration, NavCalendar),
-            paddingValues = PaddingValues(0.dp),
             appNavigationViewModel = previewAppNavigationViewModel
         )
     }
