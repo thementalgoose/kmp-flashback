@@ -83,9 +83,10 @@ fun NavigationColumn(
     itemClicked: (NavigationItem) -> Unit,
     modifier: Modifier = Modifier,
     padding: PaddingValues = PaddingValues(0.dp),
+    initiallyExpanded: Boolean = true,
     lockExpanded: Boolean = false,
 ) {
-    val expanded = remember { mutableStateOf(lockExpanded) }
+    val expanded = remember { mutableStateOf(initiallyExpanded) }
     val width = animateDpAsState(targetValue = when (expanded.value) {
         true -> columnWidthExpanded
         false -> columnWidthCollapsed

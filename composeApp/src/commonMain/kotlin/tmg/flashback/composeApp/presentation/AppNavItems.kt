@@ -64,8 +64,6 @@ fun generateNavSecondaryItems(
     Rss.toNavigationItem(currentlySelectedScreen == NavRss).takeIf { showRss },
     ReactionGame.toNavigationItem(currentlySelectedScreen == NavReactionGame),
     Search.toNavigationItem(currentlySelectedScreen is NavSearch),
-    Settings.toNavigationItem(currentlySelectedScreen == NavSettings),
-    Contact.toNavigationItem(currentlySelectedScreen == NavAbout)
 )
 
 fun generateNavTertiaryItems(
@@ -73,6 +71,8 @@ fun generateNavTertiaryItems(
     showXr: Boolean,
     isXrSelected: Boolean
 ): List<NavigationItem> = listOfNotNull(
+    Settings.toNavigationItem(currentlySelectedScreen == NavSettings),
+    Contact.toNavigationItem(currentlySelectedScreen == NavAbout),
     StyleGuide.toNavigationItem(currentlySelectedScreen == NavStyleGuide).takeIf { Device.isDebug },
     Info.toNavigationItem(currentlySelectedScreen == NavInfo).takeIf { Device.isDebug },
     XR_Spacial.toNavigationItem(isXrSelected).takeIf { showXr }
