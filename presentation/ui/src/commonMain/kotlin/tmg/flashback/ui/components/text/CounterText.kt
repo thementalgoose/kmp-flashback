@@ -44,7 +44,6 @@ fun CounterText(
                     }
                 ) { digit ->
                     TextHeadline1Inline(
-                        bold = true,
                         text = "${digit.digitChar}"
                     )
                 }
