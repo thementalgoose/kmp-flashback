@@ -4,6 +4,10 @@
 <dict>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>CFBundleShortVersionString</key>
+	<string>1.69.0</string>
+	<key>CFBundleVersion</key>
+	<string>2</string>
 	<key>FirebaseAutomaticScreenReportingEnabled</key>
 	<false/>
 	<key>NSAllowsLocalNetworking</key>
