@@ -39,6 +39,7 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextHeadline1
+import tmg.flashback.style.text.TextHeadline2
 
 @Composable
 fun Header(
@@ -66,7 +67,10 @@ fun Header(
         modifier = modifier
             .fillMaxWidth()
             .then(scrimModifier)
-            .padding(top = AppTheme.dimens.xsmall)
+            .padding(
+                top = AppTheme.dimens.small,
+                bottom = AppTheme.dimens.nsmall
+            )
     ) {
         Spacer(Modifier.height(topInset))
         if (action != null) {
@@ -92,7 +96,10 @@ fun Header(
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(Modifier.weight(1f)) {
+                Row(
+                    modifier = Modifier.weight(1f),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     content()
                 }
                 if (action == null) {
@@ -139,12 +146,9 @@ fun Header(
                 text = text,
                 modifier = Modifier
                     .semantics { heading() }
-                    .weight(1f)
                     .padding(
                         start = AppTheme.dimens.medium.takeIf { horizontalPadding } ?: 0.dp,
-                        end = AppTheme.dimens.medium.takeIf { horizontalPadding } ?: 0.dp,
-                        top = AppTheme.dimens.medium,
-                        bottom = AppTheme.dimens.medium
+                        end = AppTheme.dimens.medium.takeIf { horizontalPadding } ?: 0.dp
                     )
             )
         }
@@ -259,6 +263,31 @@ private fun PreviewNoIconWithOverride() {
     ApplicationThemePreview {
         Header(
             text = "2022",
+            action = null,
+            actionUpClicked = { },
+            overrideIcons = {
+                IconButton(onClick = { }) {
+                    Icon(
+                        painter = painterResource(resource = Res.drawable.ic_close),
+                        contentDescription = stringResource(resource = string.tyres_label),
+                        tint = AppTheme.colors.onSurfaceVariant
+                    )
+                }
+            }
+        )
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewNoIconWithContentWithOverride() {
+    ApplicationThemePreview {
+        Header(
+            content = {
+                TextHeadline2(
+                    text = "Info"
+                )
+            },
             action = null,
             actionUpClicked = { },
             overrideIcons = {

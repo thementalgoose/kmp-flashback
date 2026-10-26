@@ -57,7 +57,11 @@ private fun ResultsSeasonPicker(
         Picker(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = AppTheme.dimens.medium),
+                .padding(
+                    top = AppTheme.dimens.xsmall,
+                    start = AppTheme.dimens.medium,
+                    end = AppTheme.dimens.medium
+                ),
             option = PickerItem.Text(currentSeason.toString()),
             optionsToShow = seasons,
             optionUpdated = {

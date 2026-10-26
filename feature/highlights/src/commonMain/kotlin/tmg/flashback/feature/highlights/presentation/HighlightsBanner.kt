@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -22,9 +23,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
+import coil3.compose.AsyncImage
 import flashback.presentation.ui.generated.resources.Res
 import flashback.presentation.ui.generated.resources.ic_link
 import kotlinx.datetime.LocalDate
@@ -77,7 +80,7 @@ private fun HighlightBanner(
                 SkeletonView(
                     modifier = Modifier.padding(
                         horizontal = AppTheme.dimens.medium,
-                        vertical = AppTheme.dimens.small
+                        vertical = AppTheme.dimens.xsmall
                     )
                 )
             }
@@ -89,7 +92,7 @@ private fun HighlightBanner(
                         clickItem = clickItem,
                         modifier = Modifier.padding(
                             horizontal = AppTheme.dimens.medium,
-                            vertical = AppTheme.dimens.small
+                            vertical = AppTheme.dimens.xsmall
                         )
                     )
                 }
@@ -98,9 +101,9 @@ private fun HighlightBanner(
                 LazyRow(
                     contentPadding = PaddingValues(
                         horizontal = AppTheme.dimens.medium,
-                        vertical = AppTheme.dimens.small
+                        vertical = AppTheme.dimens.xsmall
                     ),
-                    horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
+                    horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
                 ) {
                     items(uiState.news) {
                         NewsCard(
@@ -149,31 +152,47 @@ private fun NewsCard(
                 }
             )
             .padding(
-                horizontal = AppTheme.dimens.nsmall,
-                vertical = AppTheme.dimens.small
+                start = AppTheme.dimens.nsmall,
+                end = AppTheme.dimens.medium,
+                top = AppTheme.dimens.small,
+                bottom = AppTheme.dimens.small
             ),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(
             modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             TextBody1(
                 text = newsItem.message,
                 textColor = AppTheme.colors.onTertiaryContainer
             )
             TextCaption(
-                modifier = Modifier.padding(top = 3.dp),
                 text = newsItem.date.displayDate(
                     weekdays = DayOfWeekNames.ENGLISH_ABBREVIATED,
                     includeYear = false
                 ).uppercase(),
                 textColor = AppTheme.colors.onTertiaryContainer
             )
+            if (newsItem.image != null) {
+                AsyncImage(
+                    model = newsItem.image,
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(80.dp)
+                        .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
+                        .background(AppTheme.colors.onPrimaryContainer
+                            .copy(alpha = 0.2f))
+                )
+            }
         }
         if (newsItem.link != null) {
             Icon(
-                modifier = Modifier.size(16.dp),
+                modifier = Modifier
+                    .size(16.dp),
                 painter = painterResource(Res.drawable.ic_link),
                 contentDescription = null,
                 tint = AppTheme.colors.onTertiaryContainer,
@@ -189,6 +208,24 @@ private fun Preview() {
         HighlightBanner(
             uiState = HighlightsUiState(
                 news = listOf(fakeNewsItem()),
+                show = true
+            ),
+            clickItem = { },
+            close = { }
+        )
+    }
+}
+
+
+@PreviewTheme
+@Composable
+private fun PreviewWithImage() {
+    ApplicationThemePreview {
+        HighlightBanner(
+            uiState = HighlightsUiState(
+                news = listOf(
+                    fakeNewsItem(image = true)
+                ),
                 show = true
             ),
             clickItem = { },
@@ -229,6 +266,24 @@ private fun PreviewMultiple() {
 
 @PreviewTheme
 @Composable
+private fun PreviewMultipleWithImage() {
+    ApplicationThemePreview {
+        HighlightBanner(
+            uiState = HighlightsUiState(
+                news = listOf(
+                    fakeNewsItem(image = true),
+                    fakeNewsItem()
+                ),
+                show = true
+            ),
+            clickItem = { },
+            close = { }
+        )
+    }
+}
+
+@PreviewTheme
+@Composable
 private fun PreviewHidden() {
     ApplicationThemePreview {
         HighlightBanner(
@@ -242,9 +297,11 @@ private fun PreviewHidden() {
     }
 }
 
-private fun fakeNewsItem(): NewsItem = NewsItem(
+private fun fakeNewsItem(
+    image: Boolean = false
+): NewsItem = NewsItem(
     message = "Some kind of breaking news has happened",
     link = "https://www.google.com",
-    image = null,
+    image = if (image) "https://www.google.com" else null,
     date = LocalDate.now()
 )

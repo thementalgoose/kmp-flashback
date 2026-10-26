@@ -139,8 +139,7 @@ internal fun DriverStandingsScreen(
                 item(key = "header") {
                     Header(
                         modifier = Modifier
-                            .animateItem()
-                            .padding(vertical = AppTheme.dimens.medium),
+                            .animateItem(),
                         content = {
                             ResultsSeasonPicker()
                         },
