@@ -36,6 +36,13 @@ import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
+import flashback.composeapp.generated.resources.Res
+import flashback.composeapp.generated.resources.dashboard_info
+import flashback.composeapp.generated.resources.dashboard_nav_lineup
+import flashback.composeapp.generated.resources.dashboard_reaction
+import flashback.composeapp.generated.resources.dashboard_rss
+import flashback.composeapp.generated.resources.dashboard_search
+import flashback.composeapp.generated.resources.dashboard_style_guide
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.nav_info
 import flashback.presentation.localisation.generated.resources.nav_paddock
@@ -48,6 +55,7 @@ import flashback.presentation.localisation.generated.resources.paddock_reaction_
 import flashback.presentation.localisation.generated.resources.paddock_reaction_game_title
 import flashback.presentation.localisation.generated.resources.paddock_rss_description
 import flashback.presentation.localisation.generated.resources.paddock_rss_title
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
@@ -190,7 +198,7 @@ private fun RSS(
         subtitle = stringResource(string.paddock_rss_description),
         icon = {
             Icon(
-                imageVector = Icons.Default.RssFeed,
+                painter = painterResource(Res.drawable.dashboard_rss),
                 contentDescription = null,
                 tint = AppTheme.colors.primary,
             )
@@ -208,7 +216,7 @@ private fun Lineup(
         subtitle = stringResource(string.paddock_lineup_description),
         icon = {
             Icon(
-                imageVector = Icons.Default.DriveFileRenameOutline,
+                painter = painterResource(Res.drawable.dashboard_nav_lineup),
                 contentDescription = null,
                 tint = AppTheme.colors.primary,
             )
@@ -226,7 +234,7 @@ private fun ReactionGame(
         subtitle = stringResource(string.paddock_reaction_game_description),
         icon = {
             Icon(
-                imageVector = Icons.Default.FlashOn,
+                painter = painterResource(Res.drawable.dashboard_reaction),
                 contentDescription = null,
                 tint = AppTheme.colors.primary
             )
@@ -244,7 +252,7 @@ private fun Search(
         subtitle = stringResource(string.paddock_directory_description),
         icon = {
             Icon(
-                imageVector = Icons.Default.Search,
+                painter = painterResource(Res.drawable.dashboard_search),
                 contentDescription = null,
                 tint = AppTheme.colors.primary
             )
@@ -281,7 +289,7 @@ private fun DebugStyleGuide(
         subtitle = stringResource(string.nav_style_guide),
         icon = {
             Icon(
-                imageVector = Icons.Default.FormatPaint,
+                painter = painterResource(Res.drawable.dashboard_style_guide),
                 contentDescription = null,
                 tint = AppTheme.colors.primary
             )
@@ -300,7 +308,7 @@ private fun DebugInfo(
         subtitle = stringResource(string.nav_info),
         icon = {
             Icon(
-                imageVector = Icons.Default.BugReport,
+                painter = painterResource(Res.drawable.dashboard_info),
                 contentDescription = null,
                 tint = AppTheme.colors.primary
             )
