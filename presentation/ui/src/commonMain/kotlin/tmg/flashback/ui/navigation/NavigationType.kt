@@ -17,9 +17,13 @@ private val sideNavThreshold = 72.dp
 
 enum class NavigationType {
     BottomNav,
-    SideNav,
+    StartNav,
+    EndNav,
     NavRail,
     NavOrbiter;
+
+    val isSides: Boolean
+        get() = this == StartNav || this == EndNav
 }
 
 @Composable

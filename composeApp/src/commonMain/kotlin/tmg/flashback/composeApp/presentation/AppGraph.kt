@@ -5,7 +5,12 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.material3.adaptive.WindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,11 +19,11 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_EXPANDED_LOWER_BOUND
-import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
 import flashback.composeapp.generated.resources.Res
 import flashback.composeapp.generated.resources.logo
 import tmg.flashback.composeApp.presentation.info.InfoScreen
 import tmg.flashback.composeApp.presentation.navigation.AppNavigationViewModel
+import tmg.flashback.composeApp.presentation.navigation.scene.LocalConsumedInsets
 import tmg.flashback.composeApp.presentation.navigation.scene.SplitPaneScene
 import tmg.flashback.composeApp.presentation.navigation.scene.rememberSplitPaneSceneStrategy
 import tmg.flashback.composeApp.presentation.paddock.PaddockScreen
@@ -88,30 +93,25 @@ import tmg.flashback.navigation.replaceDetail
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.styleguide.StyleGuideScreen
 import tmg.flashback.ui.extensions.only
+import tmg.flashback.ui.navigation.NavigationType
 import tmg.flashback.webbrowser.presentation.WebScreen
 
 @Composable
 fun AppGraph(
     appNavigationViewModel: AppNavigationViewModel,
-    insetPadding: PaddingValues,
     windowAdaptiveInfo: WindowAdaptiveInfo,
     backStack: NavBackStack<NavKey>,
+    navigationType: NavigationType,
 ) {
-    val listDetailStrategy = rememberSplitPaneSceneStrategy<NavKey>()
+    val listDetailStrategy = rememberSplitPaneSceneStrategy<NavKey>(navigationType)
 
-    val isCompact = !windowAdaptiveInfo.windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)
     val isExpanded = windowAdaptiveInfo.windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_EXPANDED_LOWER_BOUND)
 
     val navDisplayModifier = Modifier
         .fillMaxSize()
         .background(AppTheme.colors.surface)
 
-    val insetPadding = insetPadding.only(
-        start = isCompact,
-        end = true,
-        top = true,
-        bottom = true,
-    )
+    val insetPadding = WindowInsets.safeDrawing
 
     NavDisplay(
         backStack = backStack,
@@ -130,7 +130,7 @@ fun AppGraph(
         entryProvider = entryProvider {
             entry<NavCalendar>(metadata = SplitPaneScene.listPane()) {
                 CalendarScreen(
-                    paddingValues = insetPadding,
+                    paddingValues = entryPadding(insetPadding),
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
                         backStack.replaceDetail(it)
@@ -139,7 +139,7 @@ fun AppGraph(
             }
             entry<NavDriverStandings>(metadata = SplitPaneScene.listPane()) {
                 DriverStandingsScreen(
-                    paddingValues = insetPadding,
+                    paddingValues = entryPadding(insetPadding),
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
                         backStack.replaceDetail(it)
@@ -148,7 +148,7 @@ fun AppGraph(
             }
             entry<NavTeamStandings>(metadata = SplitPaneScene.listPane()) {
                 TeamStandingsScreen(
-                    paddingValues = insetPadding,
+                    paddingValues = entryPadding(insetPadding),
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
                         backStack.replaceDetail(it)
@@ -157,7 +157,7 @@ fun AppGraph(
             }
             entry<NavPaddock>(metadata = SplitPaneScene.listPane()) {
                 PaddockScreen(
-                    paddingValues = insetPadding,
+                    paddingValues = entryPadding(insetPadding),
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
                         backStack.appendMaster(it)
@@ -168,7 +168,7 @@ fun AppGraph(
             entry<NavWeekend>(metadata = SplitPaneScene.detailPane()) {
                 WeekendScreen(
                     data = it,
-                    paddingValues = insetPadding,
+                    paddingValues = entryPadding(insetPadding),
                     showBack = !isExpanded,
                     actionUpClicked = { backStack.removeDetail() },
                     navigateTo = { backStack.replaceDetail(it) },
@@ -177,7 +177,7 @@ fun AppGraph(
             }
             entry<NavLineup>(metadata = SplitPaneScene.listPane()) {
                 LineupScreen(
-                    paddingValues = insetPadding,
+                    paddingValues = entryPadding(insetPadding),
                     actionUpClicked = { backStack.popMaster() },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
@@ -187,7 +187,7 @@ fun AppGraph(
             entry<NavCircuit>(metadata = SplitPaneScene.detailPane()) {
                 CircuitScreen(
                     data = it,
-                    paddingValues = insetPadding,
+                    paddingValues = entryPadding(insetPadding),
                     actionUpClicked = { backStack.removeDetail() },
                     showBack = !isExpanded,
                     navigateTo = { backStack.replaceDetail(it) },
@@ -197,7 +197,7 @@ fun AppGraph(
             entry<NavDriver>(metadata = SplitPaneScene.detailPane()) {
                 DriverStatsScreen(
                     data = it,
-                    paddingValues = insetPadding,
+                    paddingValues = entryPadding(insetPadding),
                     actionUpClicked = { backStack.removeDetail() },
                     showBack = !isExpanded,
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
@@ -206,7 +206,7 @@ fun AppGraph(
             entry<NavTeam>(metadata = SplitPaneScene.detailPane()) {
                 ConstructorStatsScreen(
                     data = it,
-                    paddingValues = insetPadding,
+                    paddingValues = entryPadding(insetPadding),
                     actionUpClicked = { backStack.removeDetail() },
                     showBack = !isExpanded,
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
@@ -215,7 +215,7 @@ fun AppGraph(
             entry<NavDriverComparison>(metadata = SplitPaneScene.detailPane()) {
                 DriverComparisonScreen(
                     season = it.season,
-                    paddingValues = insetPadding,
+                    paddingValues = entryPadding(insetPadding),
                     actionUpClicked = { backStack.removeDetail() },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                 )
@@ -223,7 +223,7 @@ fun AppGraph(
 
             entry<NavRss>(metadata = SplitPaneScene.listPane()) {
                 RSSScreen(
-                    paddingValues = insetPadding,
+                    paddingValues = entryPadding(insetPadding),
                     actionUpClicked = { backStack.popMaster() },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
@@ -234,13 +234,13 @@ fun AppGraph(
             entry<NavWebpage>(metadata = SplitPaneScene.detailPane()) {
                 WebScreen(
                     url = it.url,
-                    paddingValues = insetPadding,
+                    paddingValues = entryPadding(insetPadding),
                     actionUpClicked = { backStack.removeDetail() }
                 )
             }
             entry<NavSearch>(metadata = SplitPaneScene.listPane()) {
                 SearchScreen(
-                    paddingValues = insetPadding,
+                    paddingValues = entryPadding(insetPadding),
                     actionUpClicked = { backStack.popMaster() },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
@@ -252,7 +252,7 @@ fun AppGraph(
 
             entry<NavReactionGame>(metadata = SplitPaneScene.listPane()) {
                 ReactionGameScreen(
-                    paddingValues = insetPadding,
+                    paddingValues = entryPadding(insetPadding),
                     actionUpClicked = { backStack.popMaster() },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
@@ -260,7 +260,7 @@ fun AppGraph(
 
             entry<NavGlossary>(metadata = SplitPaneScene.listPane()) {
                 GlossaryScreen(
-                    paddingValues = insetPadding,
+                    paddingValues = entryPadding(insetPadding),
                     actionUpClicked = { backStack.popMaster() },
                     navigateTo = {
                         backStack.replaceDetail(it)
@@ -272,7 +272,7 @@ fun AppGraph(
             entry<NavGlossaryDetail>(metadata = SplitPaneScene.detailPane()) {
                 GlossaryDetailScreen(
                     data = it,
-                    paddingValues = insetPadding,
+                    paddingValues = entryPadding(insetPadding),
                     showBack = !isExpanded,
                     actionUpClicked = { backStack.removeDetail() },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
@@ -286,82 +286,82 @@ fun AppGraph(
                         backStack.appendMaster(it)
                     },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
-                    paddingValues = insetPadding
+                    paddingValues = entryPadding(insetPadding)
                 )
             }
             entry<NavSettingsDarkMode>(metadata = SplitPaneScene.detailPane()) {
                 SettingsDarkModeScreen(
                     actionUpClicked = { backStack.removeDetail() },
-                    insetPadding = insetPadding,
+                    insetPadding = entryPadding(insetPadding),
                     showBack = !isExpanded
                 )
             }
             entry<NavSettingsTheme>(metadata = SplitPaneScene.detailPane()) {
                 SettingsThemeScreen(
                     actionUpClicked = { backStack.removeDetail() },
-                    insetPadding = insetPadding,
+                    insetPadding = entryPadding(insetPadding),
                     showBack = !isExpanded
                 )
             }
             entry<NavSettingsLayoutHome>(metadata = SplitPaneScene.detailPane()) {
                 SettingsLayoutHomeScreen(
                     actionUpClicked = { backStack.removeDetail() },
-                    insetPadding = insetPadding,
+                    insetPadding = entryPadding(insetPadding),
                     showBack = !isExpanded
                 )
             }
             entry<NavSettingsLayoutRace>(metadata = SplitPaneScene.detailPane()) {
                 SettingsLayoutRaceScreen(
                     actionUpClicked = { backStack.removeDetail() },
-                    insetPadding = insetPadding,
+                    insetPadding = entryPadding(insetPadding),
                     showBack = !isExpanded
                 )
             }
             entry<NavSettingsRssConfigure>(metadata = SplitPaneScene.detailPane()) {
                 RssConfigureScreen(
                     actionUpClicked = { backStack.removeDetail() },
-                    insetPadding = insetPadding,
+                    insetPadding = entryPadding(insetPadding),
                     showBack = !isExpanded
                 )
             }
             entry<NavSettingsInAppBrowser>(metadata = SplitPaneScene.detailPane()) {
                 SettingsBrowserScreen(
                     actionUpClicked = { backStack.removeDetail() },
-                    insetPadding = insetPadding,
+                    insetPadding = entryPadding(insetPadding),
                     showBack = !isExpanded
                 )
             }
             entry<NavSettingsNotificationResults>(metadata = SplitPaneScene.detailPane()) {
                 SettingsNotificationResultsScreen(
                     actionUpClicked = { backStack.removeDetail() },
-                    insetPadding = insetPadding,
+                    insetPadding = entryPadding(insetPadding),
                     showBack = !isExpanded
                 )
             }
             entry<NavSettingsNotificationUpcoming>(metadata = SplitPaneScene.detailPane()) {
                 SettingsNotificationUpcomingScreen(
                     actionUpClicked = { backStack.removeDetail() },
-                    insetPadding = insetPadding,
+                    insetPadding = entryPadding(insetPadding),
                     showBack = !isExpanded
                 )
             }
             entry<NavSettingsWidgets>(metadata = SplitPaneScene.detailPane()) {
                 SettingsWidgetScreen(
                     actionUpClicked = { backStack.removeDetail() },
-                    insetPadding = insetPadding,
+                    insetPadding = entryPadding(insetPadding),
                     showBack = !isExpanded
                 )
             }
             entry<NavSettingsPrivacy>(metadata = SplitPaneScene.detailPane()) {
                 SettingsPrivacyScreen(
                     actionUpClicked = { backStack.removeDetail() },
-                    insetPadding = insetPadding,
+                    insetPadding = entryPadding(insetPadding),
                     showBack = !isExpanded
                 )
             }
             entry<NavPrivacyPolicy>(metadata = SplitPaneScene.detailPane()) {
                 PrivacyPolicyScreen(
-                    paddingValues = insetPadding,
+                    paddingValues = entryPadding(insetPadding),
                     actionUpClicked = {
                         backStack.appendMaster(NavSettings)
                     }
@@ -371,7 +371,7 @@ fun AppGraph(
             entry<NavAbout>(metadata = SplitPaneScene.detailPane()) {
                 AboutScreen(
                     appIcon = Res.drawable.logo,
-                    paddingValues = insetPadding,
+                    paddingValues = entryPadding(insetPadding),
                     actionUpClicked = {
                         backStack.removeDetail()
                     },
@@ -382,17 +382,21 @@ fun AppGraph(
             entry<NavStyleGuide>(metadata = SplitPaneScene.listPane()) {
                 StyleGuideScreen(
                     actionUpClicked = { backStack.popMaster() },
-                    paddingValues = insetPadding
+                    paddingValues = entryPadding(insetPadding)
                 )
             }
 
             entry<NavInfo>(metadata = SplitPaneScene.listPane()) {
                 InfoScreen(
                     actionUpClicked = { backStack.popMaster() },
-                    paddingValues = insetPadding,
+                    paddingValues = entryPadding(insetPadding),
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
             }
         }
     )
 }
+
+@Composable
+private fun entryPadding(base: WindowInsets): PaddingValues =
+    base.exclude(LocalConsumedInsets.current).asPaddingValues()

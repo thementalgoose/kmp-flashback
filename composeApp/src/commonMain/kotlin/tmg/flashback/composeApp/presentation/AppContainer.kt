@@ -25,6 +25,7 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewDevicePixel
 import tmg.flashback.style.text.TextBody1
+import tmg.flashback.ui.navigation.NavigationType
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -32,8 +33,8 @@ fun AppContainer(
     modifier: Modifier = Modifier,
     windowAdaptiveInfo: WindowAdaptiveInfo,
     windowSizeClass: WindowSizeClass,
+    navigationType: NavigationType,
     backStack: NavBackStack<NavKey>,
-    paddingValues: PaddingValues,
     appNavigationViewModel: AppNavigationViewModel,
 ) {
     Box(
@@ -55,8 +56,8 @@ fun AppContainer(
             AppGraph(
                 backStack = backStack,
                 appNavigationViewModel = appNavigationViewModel,
-                insetPadding = paddingValues,
                 windowAdaptiveInfo = windowAdaptiveInfo,
+                navigationType = navigationType,
             )
         }
     }
@@ -69,8 +70,8 @@ private fun Preview() {
         AppContainer(
             windowAdaptiveInfo = currentWindowAdaptiveInfoV2(),
             windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass,
+            navigationType = NavigationType.BottomNav,
             backStack = rememberNavBackStack(saveStateConfiguration, NavCalendar),
-            paddingValues = PaddingValues(0.dp),
             appNavigationViewModel = previewAppNavigationViewModel
         )
     }
