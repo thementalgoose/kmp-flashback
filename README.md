@@ -68,6 +68,13 @@ This used to be an android only application. See the old repository [here](https
 | <img src="resources/ios/screenshots/ipadpro13/screenshot1.png" width="140" /> | <img src="resources/ios/screenshots/ipadpro13/screenshot2.png" width="140" /> | <img src="resources/ios/screenshots/ipadpro13/screenshot3.png" width="140" /> | <img src="resources/ios/screenshots/ipadpro13/screenshot4.png" width="140" /> | <img src="resources/ios/screenshots/ipadpro13/screenshot5.png" width="140" /> |
 
 </details>
+<details><summary>Duo</summary>
+
+|                                                                         |                                                                         |                                                                         |                                                                         |
+|-------------------------------------------------------------------------|-------------------------------------------------------------------------|-------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| <img src="resources/ios/screenshots/duo/screenshot1.png" width="140" /> | <img src="resources/ios/screenshots/duo/screenshot2.png" width="140" /> | <img src="resources/ios/screenshots/duo/screenshot3.png" width="140" /> | <img src="resources/ios/screenshots/duo/screenshot4.png" width="140" /> |
+
+</details>
 
 ## Play Store
 
