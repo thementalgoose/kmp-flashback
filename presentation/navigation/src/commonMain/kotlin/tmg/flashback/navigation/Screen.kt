@@ -143,7 +143,6 @@ fun Screen.isList(): Boolean = when (this) {
     is NavReactionGame -> true
     is NavSearch -> true
 
-    is NavCircuits -> true
     is NavLineup -> true
     is NavGlossary -> true
     is NavStyleGuide -> true
