@@ -126,8 +126,7 @@ internal fun TeamStandingsScreen(
                 item(key = "header") {
                     Header(
                         modifier = Modifier
-                            .animateItem()
-                            .padding(vertical = AppTheme.dimens.medium),
+                            .animateItem(),
                         content = {
                             ResultsSeasonPicker()
                         },

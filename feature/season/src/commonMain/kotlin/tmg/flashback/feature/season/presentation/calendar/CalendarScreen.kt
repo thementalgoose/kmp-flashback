@@ -22,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TooltipAnchorPosition
 import androidx.compose.material3.TooltipBox
 import androidx.compose.material3.TooltipDefaults
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -30,6 +31,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
@@ -47,6 +50,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
 import tmg.flashback.analytics.presentation.ScreenView
+import tmg.flashback.eastereggs.model.MenuIcons
 import tmg.flashback.feature.highlights.presentation.HighlightBanner
 import tmg.flashback.feature.notifications.presentation.NotificationPrompt
 import tmg.flashback.feature.season.presentation.calendar.components.CollapsableList
@@ -64,6 +68,9 @@ import tmg.flashback.navigation.NavSearchFilter
 import tmg.flashback.navigation.NavWeekend
 import tmg.flashback.navigation.Screen
 import tmg.flashback.style.AppTheme
+import tmg.flashback.style.ApplicationThemePreview
+import tmg.flashback.style.preview.PreviewDevices
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.ui.components.Refresh
@@ -83,6 +90,9 @@ fun CalendarScreen(
     viewModel: CalendarScreenViewModel = koinViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsState()
+    ScreenView(screenName = "Calendar", updateKey = uiState.value.season, args = mapOf(
+        analyticsSeason to uiState.value.season.toString()
+    ))
 
     // Add custom padding for nav bar
     val insets = when (windowSizeClass.isWidthAtLeastBreakpoint(WIDTH_DP_MEDIUM_LOWER_BOUND)) {
@@ -133,10 +143,6 @@ fun CalendarScreen(
     goToSearch: () -> Unit,
     goToWeekend: (CalendarItem.RaceWeek, String?) -> Unit,
 ) {
-    ScreenView(screenName = "Calendar", updateKey = uiState.season, args = mapOf(
-        analyticsSeason to uiState.season.toString()
-    ))
-
     val now = LocalDate.now()
     val eventsRef = remember(now.toEpochDays()) { LocalDate.now() }
 
@@ -160,8 +166,7 @@ fun CalendarScreen(
                 item(key = "header") {
                     Header(
                         modifier = Modifier
-                            .animateItem()
-                            .padding(vertical = AppTheme.dimens.medium),
+                            .animateItem(),
                         content = {
                             ResultsSeasonPicker()
                         },
@@ -229,7 +234,6 @@ fun CalendarScreen(
                         modifier = Modifier
                             .animateItem()
                             .padding(
-                                vertical = AppTheme.dimens.xsmall,
                                 horizontal = AppTheme.dimens.medium
                             )
                     )
@@ -352,6 +356,28 @@ private fun Event(
                 month = MonthNames.ENGLISH_FULL,
                 includeYear = false
             ),
+        )
+    }
+}
+
+@PreviewDevices
+@Composable
+private fun Preview() {
+    ApplicationThemePreview {
+        CalendarScreen(
+            paddingValues = PaddingValues(0.dp),
+            windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass,
+            uiState = CalendarScreenState(
+                season = 2026,
+                items = emptyList(),
+                isLoading = false,
+                showEvents = false,
+                menuIcon = MenuIcons.BONFIRE
+            ),
+            refresh = { },
+            expandGroupedRaces = { },
+            goToSearch = { },
+            goToWeekend = { _, _ -> }
         )
     }
 }
