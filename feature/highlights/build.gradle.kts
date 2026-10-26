@@ -19,6 +19,7 @@ kotlin {
             implementation(libs.bundles.kotlin)
             implementation(libs.bundles.compose)
             implementation(libs.compose.resources)
+            implementation(libs.bundles.coil)
 
             implementation(libs.androidx.lifecycle.runtime.compose)
 
