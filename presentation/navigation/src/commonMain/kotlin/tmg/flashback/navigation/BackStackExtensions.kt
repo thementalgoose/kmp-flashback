@@ -12,6 +12,31 @@ fun NavBackStack<NavKey>.removeDetail() {
     this.removeAll { key -> !key.isList() }
 }
 
+inline fun <reified T: Screen> NavBackStack<NavKey>.addOrMoveToTopList(vararg with: T) {
+    this.removeDetail()
+    for (x in with) {
+        if (x is NavCalendar) {
+            this.clear()
+            this.add(NavCalendar)
+            return
+        }
+        if (x.requiresPaddock()) {
+            if (this.contains(NavPaddock)) {
+                this.remove(NavPaddock)
+            }
+            this.add(NavPaddock)
+        }
+        if (x.requiresSettings()) {
+            if (this.contains(NavSettings)) {
+                this.remove(NavSettings)
+            }
+            this.add(NavSettings)
+        }
+        this.removeAll { it::class == x::class }
+        this.add(x)
+    }
+}
+
 inline fun <reified T: Screen> NavBackStack<NavKey>.addList(vararg with: T) {
     this.removeDetail()
     for (x in with) {

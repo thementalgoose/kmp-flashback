@@ -81,6 +81,7 @@ import tmg.flashback.navigation.NavTeamStandings
 import tmg.flashback.navigation.NavWebpage
 import tmg.flashback.navigation.NavWeekend
 import tmg.flashback.navigation.addList
+import tmg.flashback.navigation.addOrMoveToTopList
 import tmg.flashback.navigation.pop
 import tmg.flashback.navigation.popList
 import tmg.flashback.navigation.removeDetail
@@ -161,7 +162,7 @@ fun AppGraph(
                     paddingValues = insetPadding,
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
-                        backStack.addList(it)
+                        backStack.addOrMoveToTopList(it)
                     }
                 )
             }
@@ -284,7 +285,7 @@ fun AppGraph(
                 AllSettingsScreen(
                     navigateToSubScreen = { backStack.replaceDetail(it) },
                     navigateTo = {
-                        backStack.replaceList(it)
+                        backStack.addOrMoveToTopList(it)
                     },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     paddingValues = insetPadding
@@ -364,7 +365,7 @@ fun AppGraph(
                 PrivacyPolicyScreen(
                     paddingValues = insetPadding,
                     actionUpClicked = {
-                        backStack.replaceList(NavSettings)
+                        backStack.addOrMoveToTopList(NavSettings)
                     }
                 )
             }
