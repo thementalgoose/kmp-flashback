@@ -90,7 +90,7 @@ fun Header(
         Spacer(Modifier.height(contentSpacing))
         Column {
             Row(
-                verticalAlignment = Alignment.Top
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Row(Modifier.weight(1f)) {
                     content()
