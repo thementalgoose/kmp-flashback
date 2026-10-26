@@ -11,6 +11,8 @@ import flashback.composeapp.generated.resources.dashboard_nav_constructor
 import flashback.composeapp.generated.resources.dashboard_nav_constructor_selected
 import flashback.composeapp.generated.resources.dashboard_nav_drivers
 import flashback.composeapp.generated.resources.dashboard_nav_drivers_selected
+import flashback.composeapp.generated.resources.dashboard_nav_lineup
+import flashback.composeapp.generated.resources.dashboard_nav_lineup_selected
 import flashback.composeapp.generated.resources.dashboard_nav_paddock
 import flashback.composeapp.generated.resources.dashboard_nav_paddock_selected
 import flashback.composeapp.generated.resources.dashboard_reaction
@@ -31,6 +33,7 @@ import flashback.presentation.localisation.generated.resources.nav_constructors
 import flashback.presentation.localisation.generated.resources.nav_contact
 import flashback.presentation.localisation.generated.resources.nav_drivers
 import flashback.presentation.localisation.generated.resources.nav_info
+import flashback.presentation.localisation.generated.resources.nav_lineup
 import flashback.presentation.localisation.generated.resources.nav_paddock
 import flashback.presentation.localisation.generated.resources.nav_reaction_game
 import flashback.presentation.localisation.generated.resources.nav_rss
@@ -44,6 +47,7 @@ import tmg.flashback.navigation.NavAbout
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.NavDriverStandings
 import tmg.flashback.navigation.NavInfo
+import tmg.flashback.navigation.NavLineup
 import tmg.flashback.navigation.NavPaddock
 import tmg.flashback.navigation.NavReactionGame
 import tmg.flashback.navigation.NavRss
@@ -65,6 +69,7 @@ enum class MenuItem(
     Settings(key = "Settings"),
 
     // Extra options
+    Lineup(key = "Lineup"),
     Rss(key = "RSS"),
     ReactionGame(key = "Reaction Game"),
     Search(key = "Search"),
@@ -84,6 +89,7 @@ val MenuItem.label: StringResource
         MenuItem.Paddock -> string.nav_paddock
         MenuItem.Settings -> string.nav_settings
 
+        MenuItem.Lineup -> string.nav_lineup
         MenuItem.Rss -> string.nav_rss
         MenuItem.ReactionGame -> string.nav_reaction_game
         MenuItem.Search -> string.nav_search
@@ -102,6 +108,7 @@ val MenuItem.icon: DrawableResource
         MenuItem.Paddock -> Res.drawable.dashboard_nav_paddock
         MenuItem.Settings -> Res.drawable.dashboard_settings
 
+        MenuItem.Lineup -> Res.drawable.dashboard_nav_lineup
         MenuItem.Rss -> Res.drawable.dashboard_rss
         MenuItem.ReactionGame -> Res.drawable.dashboard_reaction
         MenuItem.Search -> Res.drawable.dashboard_search
@@ -120,6 +127,7 @@ val MenuItem.selectedIcon: DrawableResource
         MenuItem.Paddock -> Res.drawable.dashboard_nav_paddock_selected
         MenuItem.Settings -> Res.drawable.dashboard_settings_selected
 
+        MenuItem.Lineup -> Res.drawable.dashboard_nav_lineup_selected
         MenuItem.Rss -> Res.drawable.dashboard_rss_selected
         MenuItem.ReactionGame -> Res.drawable.dashboard_reaction_selected
         MenuItem.Search -> Res.drawable.dashboard_search_selected
@@ -148,6 +156,7 @@ fun MenuItem.toScreen(): Screen? {
         MenuItem.Paddock -> NavPaddock
         MenuItem.Settings -> NavSettings
 
+        MenuItem.Lineup -> NavLineup
         MenuItem.Rss -> NavRss
         MenuItem.ReactionGame -> NavReactionGame
         MenuItem.Search -> NavSearch()

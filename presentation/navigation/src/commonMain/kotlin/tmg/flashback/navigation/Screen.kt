@@ -18,9 +18,6 @@ data object NavTeamStandings: Screen
 data object NavPaddock: Screen
 
 @Serializable
-data object NavCircuits: Screen
-
-@Serializable
 data class NavWeekend(
     val season: Int,
     val round: Int,
@@ -146,7 +143,6 @@ fun Screen.isList(): Boolean = when (this) {
     is NavReactionGame -> true
     is NavSearch -> true
 
-    is NavCircuits -> true
     is NavLineup -> true
     is NavGlossary -> true
     is NavStyleGuide -> true

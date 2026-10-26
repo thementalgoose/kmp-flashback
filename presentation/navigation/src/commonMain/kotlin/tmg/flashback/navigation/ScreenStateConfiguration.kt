@@ -10,7 +10,6 @@ private fun PolymorphicModuleBuilder<Screen>.registerScreens() {
     subclass(NavCalendar::class, NavCalendar.serializer())
     subclass(NavDriverStandings::class, NavDriverStandings.serializer())
     subclass(NavTeamStandings::class, NavTeamStandings.serializer())
-    subclass(NavCircuits::class, NavCircuits.serializer())
 
     subclass(NavWeekend::class, NavWeekend.serializer())
     subclass(NavCircuit::class, NavCircuit.serializer())
