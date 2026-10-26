@@ -63,7 +63,6 @@ import tmg.flashback.xr.LocalXR
 @Composable
 fun AppContainer(
     modifier: Modifier = Modifier,
-    openPanel: () -> Unit,
     windowAdaptiveInfo: WindowAdaptiveInfo,
     windowSizeClass: WindowSizeClass,
     backStack: NavBackStack<NavKey>,
@@ -87,9 +86,6 @@ fun AppContainer(
             }
         } else {
             AppGraph(
-                openPanel = {
-                    openPanel()
-                },
                 backStack = backStack,
                 appNavigationViewModel = appNavigationViewModel,
                 insetPadding = paddingValues,

@@ -123,7 +123,6 @@ fun AppContent(
         return@DisposableEffect onDispose {  }
     }
 
-    val panelsState = rememberOverlappingPanelsState(OverlappingPanelsValue.Closed)
     val coroutineScope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -168,9 +167,6 @@ fun AppContent(
 
             // App Content
             AppContainer(
-                openPanel = {
-                    coroutineScope.launch { panelsState.openStartPanel() }
-                },
                 windowAdaptiveInfo = windowAdaptiveInfo,
                 windowSizeClass = windowSizeClass,
                 paddingValues = WindowInsets.safeDrawing.asPaddingValues(),

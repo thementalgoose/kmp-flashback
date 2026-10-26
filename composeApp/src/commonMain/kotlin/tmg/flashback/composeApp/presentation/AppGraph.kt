@@ -101,7 +101,6 @@ import tmg.flashback.webbrowser.presentation.WebScreen
 
 @Composable
 fun AppGraph(
-    openPanel: () -> Unit,
     appNavigationViewModel: AppNavigationViewModel,
     insetPadding: PaddingValues,
     windowAdaptiveInfo: WindowAdaptiveInfo,
@@ -174,16 +173,6 @@ fun AppGraph(
                     }
                 )
             }
-            entry<NavCircuits>(metadata = SplitPaneScene.listPane()) {
-                AllCircuitsScreen(
-                    paddingValues = insetPadding,
-                    actionUpClicked = openPanel,
-                    windowSizeClass = windowAdaptiveInfo.windowSizeClass,
-                    navigateTo = {
-                        backStack.replaceDetail(it)
-                    }
-                )
-            }
 
             entry<NavWeekend>(metadata = SplitPaneScene.detailPane()) {
                 WeekendScreen(
@@ -198,7 +187,7 @@ fun AppGraph(
             entry<NavLineup>(metadata = SplitPaneScene.listPane()) {
                 LineupScreen(
                     paddingValues = insetPadding,
-                    actionUpClicked = openPanel,
+                    actionUpClicked = { backStack.popList() },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
                         backStack.replaceDetail(it)
@@ -244,7 +233,7 @@ fun AppGraph(
             entry<NavRss>(metadata = SplitPaneScene.listPane()) {
                 RSSScreen(
                     paddingValues = insetPadding,
-                    actionUpClicked = { if (!backStack.popList()) openPanel() },
+                    actionUpClicked = { backStack.popList() },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
                         backStack.replaceDetail(it)
@@ -261,7 +250,7 @@ fun AppGraph(
             entry<NavSearch>(metadata = SplitPaneScene.listPane()) {
                 SearchScreen(
                     paddingValues = insetPadding,
-                    actionUpClicked = { if (!backStack.popList()) openPanel() },
+                    actionUpClicked = { backStack.popList() },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass,
                     navigateTo = {
                         backStack.replaceDetail(it)
@@ -273,7 +262,7 @@ fun AppGraph(
             entry<NavReactionGame>(metadata = SplitPaneScene.listPane()) {
                 ReactionGameScreen(
                     paddingValues = insetPadding,
-                    actionUpClicked = { if (!backStack.popList()) openPanel() },
+                    actionUpClicked = { backStack.popList() },
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )
             }
@@ -281,7 +270,7 @@ fun AppGraph(
             entry<NavGlossary>(metadata = SplitPaneScene.listPane()) {
                 GlossaryScreen(
                     paddingValues = insetPadding,
-                    actionUpClicked = openPanel,
+                    actionUpClicked = { backStack.popList() },
                     navigateTo = {
                         backStack.replaceDetail(it)
                     },
@@ -401,14 +390,14 @@ fun AppGraph(
 
             entry<NavStyleGuide>(metadata = SplitPaneScene.listPane()) {
                 StyleGuideScreen(
-                    actionUpClicked = openPanel,
+                    actionUpClicked = { backStack.popList() },
                     paddingValues = insetPadding
                 )
             }
 
             entry<NavInfo>(metadata = SplitPaneScene.listPane()) {
                 InfoScreen(
-                    actionUpClicked = openPanel,
+                    actionUpClicked = { backStack.popList() },
                     paddingValues = insetPadding,
                     windowSizeClass = windowAdaptiveInfo.windowSizeClass
                 )

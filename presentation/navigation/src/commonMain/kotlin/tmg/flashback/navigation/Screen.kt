@@ -18,9 +18,6 @@ data object NavTeamStandings: Screen
 data object NavPaddock: Screen
 
 @Serializable
-data object NavCircuits: Screen
-
-@Serializable
 data class NavWeekend(
     val season: Int,
     val round: Int,
