@@ -12,7 +12,7 @@ fun NavBackStack<NavKey>.removeDetail() {
     this.removeAll { key -> !key.isList() }
 }
 
-inline fun <reified T: Screen> NavBackStack<NavKey>.addOrMoveToTopList(vararg with: T) {
+inline fun <reified T: Screen> NavBackStack<NavKey>.appendMaster(vararg with: T) {
     this.removeDetail()
     for (x in with) {
         if (x is NavCalendar) {
@@ -37,7 +37,7 @@ inline fun <reified T: Screen> NavBackStack<NavKey>.addOrMoveToTopList(vararg wi
     }
 }
 
-inline fun <reified T: Screen> NavBackStack<NavKey>.addList(vararg with: T) {
+inline fun <reified T: Screen> NavBackStack<NavKey>.addMaster(vararg with: T) {
     this.removeDetail()
     for (x in with) {
         if (x.requiresPaddock() && !this.contains(NavPaddock)) {
@@ -52,7 +52,7 @@ inline fun <reified T: Screen> NavBackStack<NavKey>.addList(vararg with: T) {
     }
 }
 
-inline fun <reified T: Screen> NavBackStack<NavKey>.replaceList(vararg with: T) {
+inline fun <reified T: Screen> NavBackStack<NavKey>.replaceMaster(vararg with: T) {
     this.clear()
     for (x in with) {
         if (x.requiresPaddock() && !this.contains(NavPaddock)) {
@@ -79,7 +79,7 @@ fun NavBackStack<NavKey>.pop(): Boolean {
     }
 }
 
-fun NavBackStack<NavKey>.popList(): Boolean {
+fun NavBackStack<NavKey>.popMaster(): Boolean {
     this.removeDetail()
     return if (this.size > 1) {
         this.removeAt(this.lastIndex)

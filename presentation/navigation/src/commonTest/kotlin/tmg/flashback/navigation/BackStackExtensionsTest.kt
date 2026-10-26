@@ -22,15 +22,15 @@ class BackStackExtensionsTest {
         assertEquals(listOf<NavKey>(NavCalendar), backStack.toList())
 
         // Step 2: Click "Drivers", tabHistory = Calendar, Drivers
-        backStack.addOrMoveToTopList(NavDriverStandings)
+        backStack.appendMaster(NavDriverStandings)
         assertEquals(listOf<NavKey>(NavCalendar, NavDriverStandings), backStack.toList())
 
         // Step 3: Click "Teams", tabHistory = Calendar, Drivers, Teams
-        backStack.addOrMoveToTopList(NavTeamStandings)
+        backStack.appendMaster(NavTeamStandings)
         assertEquals(listOf<NavKey>(NavCalendar, NavDriverStandings, NavTeamStandings), backStack.toList())
 
         // Step 4: Rotate device, click "Search" on navigation rail, tabHistory = Calendar, Drivers, Teams, Paddock, Search
-        backStack.addOrMoveToTopList(NavSearch())
+        backStack.appendMaster(NavSearch())
         assertEquals(
             listOf<NavKey>(NavCalendar, NavDriverStandings, NavTeamStandings, NavPaddock, NavSearch()),
             backStack.toList()
@@ -44,14 +44,14 @@ class BackStackExtensionsTest {
         )
 
         // Step 6: Click Drivers -> tabHistory = Calendar, Teams, Paddock, Drivers
-        backStack.addOrMoveToTopList(NavDriverStandings)
+        backStack.appendMaster(NavDriverStandings)
         assertEquals(
             listOf<NavKey>(NavCalendar, NavTeamStandings, NavPaddock, NavDriverStandings),
             backStack.toList()
         )
 
         // Step 7: Click Teams -> tabHistory = Calendar, Paddock, Drivers, Teams
-        backStack.addOrMoveToTopList(NavTeamStandings)
+        backStack.appendMaster(NavTeamStandings)
         assertEquals(
             listOf<NavKey>(NavCalendar, NavPaddock, NavDriverStandings, NavTeamStandings),
             backStack.toList()
@@ -72,14 +72,14 @@ class BackStackExtensionsTest {
         )
 
         // Step 10: Click Teams -> tabHistory = Calendar, Paddock, Teams
-        backStack.addOrMoveToTopList(NavTeamStandings)
+        backStack.appendMaster(NavTeamStandings)
         assertEquals(
             listOf<NavKey>(NavCalendar, NavPaddock, NavTeamStandings),
             backStack.toList()
         )
 
         // Step 11: Click Calendar -> tabHistory = Calendar
-        backStack.addOrMoveToTopList(NavCalendar)
+        backStack.appendMaster(NavCalendar)
         assertEquals(listOf<NavKey>(NavCalendar), backStack.toList())
     }
 
@@ -90,35 +90,35 @@ class BackStackExtensionsTest {
         assertEquals(3, backStack.size)
 
         // Reselecting current active tab
-        backStack.addOrMoveToTopList(NavDriverStandings)
+        backStack.appendMaster(NavDriverStandings)
         assertEquals(listOf<NavKey>(NavCalendar, NavDriverStandings), backStack.toList())
     }
 
     @Test
     fun addOrMoveToTopList_withRequiresSettings_includesNavSettings() {
         val backStack = createBackStack(NavCalendar)
-        backStack.addOrMoveToTopList(NavAbout)
+        backStack.appendMaster(NavAbout)
         assertEquals(listOf<NavKey>(NavCalendar, NavSettings, NavAbout), backStack.toList())
     }
 
     @Test
     fun addOrMoveToTopList_withRequiresPaddock_movesExistingPaddockBeforeTarget() {
         val backStack = createBackStack(NavCalendar, NavPaddock, NavDriverStandings)
-        backStack.addOrMoveToTopList(NavSearch())
+        backStack.appendMaster(NavSearch())
         assertEquals(listOf<NavKey>(NavCalendar, NavDriverStandings, NavPaddock, NavSearch()), backStack.toList())
     }
 
     @Test
     fun replaceList_clearsStackAndSetsTarget() {
         val backStack = createBackStack(NavCalendar, NavDriverStandings)
-        backStack.replaceList(NavTeamStandings)
+        backStack.replaceMaster(NavTeamStandings)
         assertEquals(listOf<NavKey>(NavTeamStandings), backStack.toList())
     }
 
     @Test
     fun addList_appendsListScreensOntoStack() {
         val backStack = createBackStack(NavCalendar)
-        backStack.addList(NavDriverStandings)
+        backStack.addMaster(NavDriverStandings)
         assertEquals(listOf<NavKey>(NavCalendar, NavDriverStandings), backStack.toList())
     }
 
@@ -147,7 +147,7 @@ class BackStackExtensionsTest {
         backStack.replaceDetail(NavDriver(season = 2024, id = "norris", name = "Lando Norris"))
         assertEquals(3, backStack.size)
 
-        val result = backStack.popList()
+        val result = backStack.popMaster()
         assertTrue(result)
         assertEquals(listOf<NavKey>(NavCalendar), backStack.toList())
     }

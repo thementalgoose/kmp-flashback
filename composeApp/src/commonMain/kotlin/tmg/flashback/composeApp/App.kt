@@ -63,7 +63,7 @@ import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.navigation.NavCalendar
 import tmg.flashback.navigation.Screen
-import tmg.flashback.navigation.addOrMoveToTopList
+import tmg.flashback.navigation.appendMaster
 import tmg.flashback.navigation.saveStateConfiguration
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationTheme
@@ -152,7 +152,7 @@ fun AppContent(
                     modifier = Modifier.fillMaxHeight(),
                     appNavigationUiState = appNavigationUiState.value,
                     navigationItemClicked = {
-                        backStack.addOrMoveToTopList(it)
+                        backStack.appendMaster(it)
                     },
                     windowSizeClass = windowSizeClass,
                     insetPadding = WindowInsets.safeDrawing.asPaddingValues().only(
@@ -191,7 +191,7 @@ fun AppContent(
             easterEggs = appNavigationUiState.value.easterEggs,
             screen = appNavigationUiState.value.screen,
             itemClicked = {
-                backStack.addOrMoveToTopList(it)
+                backStack.appendMaster(it)
             }
         )
 
@@ -201,7 +201,7 @@ fun AppContent(
             showFloatingBar = showFloatingBar,
             screen = appNavigationUiState.value.screen,
             itemClicked = {
-                backStack.addOrMoveToTopList(it)
+                backStack.appendMaster(it)
             }
         )
 
@@ -227,7 +227,7 @@ fun AppContent(
         AppNavigationOrbiter(
             appNavigationUiState = appNavigationUiState.value,
             navigationItemClicked = {
-                backStack.addOrMoveToTopList(it)
+                backStack.appendMaster(it)
             }
         )
     }
