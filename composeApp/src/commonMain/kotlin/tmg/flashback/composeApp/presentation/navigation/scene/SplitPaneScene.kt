@@ -21,6 +21,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -36,6 +38,11 @@ import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOW
 import tmg.flashback.composeApp.presentation.navigation.scene.SplitPaneScene.Companion.DETAIL_KEY
 import tmg.flashback.composeApp.presentation.navigation.scene.SplitPaneScene.Companion.LIST_KEY
 import tmg.flashback.style.AppTheme
+import tmg.flashback.ui.navigation.NavigationType
+
+val LocalConsumedInsets = compositionLocalOf<WindowInsets> {
+    WindowInsets(0, 0, 0, 0)
+}
 
 private val spacingPadding = AppTheme.dimens.xsmall
 
@@ -44,6 +51,7 @@ class SplitPaneScene<T : Any>(
     override val previousEntries: List<NavEntry<T>>,
     val listEntry: NavEntry<T>,
     val detailEntry: NavEntry<T>?,
+    val navigationType: NavigationType,
 ) : Scene<T> {
     override val entries: List<NavEntry<T>> = listOfNotNull(listEntry, detailEntry)
     override val content: @Composable (() -> Unit) = {
@@ -59,6 +67,23 @@ class SplitPaneScene<T : Any>(
             )
             val detailWidth = (maxWidth / 2f)
 
+            val listConsumed = when {
+                detailEntry != null -> {
+                    if (navigationType.isSides) {
+                        WindowInsets.safeDrawing.only(WindowInsetsSides.End)
+                    } else {
+                        WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal)
+                    }
+                }
+                else -> {
+                    if (navigationType.isSides) {
+                        WindowInsets(0, 0, 0, 0)
+                    } else {
+                        WindowInsets.safeDrawing.only(WindowInsetsSides.Start)
+                    }
+                }
+            }
+
             Box(Modifier
                 .width(listWidth.value)
                 .fillMaxHeight()
@@ -66,13 +91,15 @@ class SplitPaneScene<T : Any>(
                 Box(Modifier
                     .fillMaxSize()
                     .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-                    .consumeWindowInsets(WindowInsets.safeDrawing.only(WindowInsetsSides.End))
-//                    .background(AppTheme.colors.surfaceContainer1)
+                    .consumeWindowInsets(listConsumed)
                 ) {
-                    listEntry.Content()
+                    CompositionLocalProvider(LocalConsumedInsets provides listConsumed) {
+                        listEntry.Content()
+                    }
                 }
             }
             if (detailEntry != null) {
+                val detailConsumed = WindowInsets.safeDrawing.only(WindowInsetsSides.Start)
                 Box(Modifier
                     .width(detailWidth)
                     .fillMaxHeight()
@@ -81,10 +108,11 @@ class SplitPaneScene<T : Any>(
                     Box(Modifier
                         .fillMaxSize()
                         .clip(RoundedCornerShape(AppTheme.dimens.radiusMedium))
-                        .consumeWindowInsets(WindowInsets.safeDrawing.only(WindowInsetsSides.Start))
-//                        .background(AppTheme.colors.surfaceContainer1)
+                        .consumeWindowInsets(detailConsumed)
                     ) {
-                        detailEntry.Content()
+                        CompositionLocalProvider(LocalConsumedInsets provides detailConsumed) {
+                            detailEntry.Content()
+                        }
                     }
                 }
             }
@@ -101,15 +129,18 @@ class SplitPaneScene<T : Any>(
 }
 
 @Composable
-fun <T : Any> rememberSplitPaneSceneStrategy(): ListDetailSceneStrategy<T> {
+fun <T : Any> rememberSplitPaneSceneStrategy(navigationType: NavigationType): ListDetailSceneStrategy<T> {
     val windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass
 
-    return remember(windowSizeClass) {
-        ListDetailSceneStrategy(windowSizeClass)
+    return remember(windowSizeClass, navigationType) {
+        ListDetailSceneStrategy(windowSizeClass, navigationType)
     }
 }
 
-class ListDetailSceneStrategy<T : Any>(val windowSizeClass: WindowSizeClass) : SceneStrategy<T> {
+class ListDetailSceneStrategy<T : Any>(
+    val windowSizeClass: WindowSizeClass,
+    val navigationType: NavigationType,
+) : SceneStrategy<T> {
 
     override fun SceneStrategyScope<T>.calculateScene(entries: List<NavEntry<T>>): Scene<T>? {
 
@@ -126,6 +157,7 @@ class ListDetailSceneStrategy<T : Any>(val windowSizeClass: WindowSizeClass) : S
             previousEntries = entries.dropLast(1),
             listEntry = listEntry,
             detailEntry = detailEntry,
+            navigationType = navigationType,
         )
     }
 }

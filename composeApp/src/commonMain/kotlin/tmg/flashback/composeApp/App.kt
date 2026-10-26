@@ -71,13 +71,10 @@ import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewDevices
 import tmg.flashback.ui.extensions.only
 import tmg.flashback.ui.navigation.FloatingHorizontalNavigationBar
-import tmg.flashback.ui.navigation.FloatingVerticalNavigationBar
 import tmg.flashback.ui.navigation.NavigationType
 import tmg.flashback.ui.navigation.NavigationType.BottomNav
 import tmg.flashback.ui.navigation.NavigationType.NavOrbiter
-import tmg.flashback.ui.navigation.NavigationType.SideNav
 import tmg.flashback.ui.navigation.floatingHorizontalNavHeight
-import tmg.flashback.ui.navigation.floatingVerticalAppWidth
 import tmg.flashback.ui.navigation.rememberNavigationLayoutType
 import tmg.flashback.ui.toasts.ToastManager
 import tmg.flashback.xr.LocalXR
@@ -134,7 +131,7 @@ fun AppContent(
         showXr = LocalXR.current.isSpatialUiEnabled
     )
     val isSubNavigation = appNavigationUiState.value.intoSubNavigation
-    val showFloatingBar = (navigationType == BottomNav || navigationType == SideNav) &&
+    val showFloatingBar = (navigationType == BottomNav) &&
             appNavigationUiState.value.screen in floatingNavItems &&
             !isSubNavigation
 
@@ -165,6 +162,7 @@ fun AppContent(
             AppContainer(
                 windowAdaptiveInfo = windowAdaptiveInfo,
                 windowSizeClass = windowSizeClass,
+                navigationType = navigationType,
                 appNavigationViewModel = appNavigationViewModel,
                 backStack = backStack,
                 modifier = Modifier
@@ -195,14 +193,14 @@ fun AppContent(
         )
 
         // Right Nav
-        RightNav(
-            navigationType = navigationType,
-            showFloatingBar = showFloatingBar,
-            screen = appNavigationUiState.value.screen,
-            itemClicked = {
-                backStack.appendMaster(it)
-            }
-        )
+//        RightNav(
+//            navigationType = navigationType,
+//            showFloatingBar = showFloatingBar,
+//            screen = appNavigationUiState.value.screen,
+//            itemClicked = {
+//                backStack.appendMaster(it)
+//            }
+//        )
 
         // Snackbar
         SnackbarHost(
@@ -264,43 +262,6 @@ private fun BoxScope.BottomNav(
             itemClicked = { item ->
                 val menuItem = item.id.toEnum<MenuItem> { it.key } ?: return@FloatingHorizontalNavigationBar
                 val screen = menuItem.toScreen() ?: return@FloatingHorizontalNavigationBar
-                itemClicked(screen)
-            }
-        )
-    }
-}
-
-@Composable
-private fun BoxScope.RightNav(
-    navigationType: NavigationType,
-    showFloatingBar: Boolean,
-    screen: Screen?,
-    itemClicked: (Screen) -> Unit
-) {
-    val rightNavPadding = AppTheme.dimens.medium
-    val systemNavigationBarHeight = WindowInsets.safeDrawing.asPaddingValues().calculateBottomPadding()
-    // Floating Nav from right
-    val rightNavPosition = animateDpAsState(
-        targetValue = when ((navigationType == SideNav) && showFloatingBar) {
-            true -> 0.dp
-            false -> floatingVerticalAppWidth + rightNavPadding
-        },
-        label = "SideNavPosition"
-    )
-    if (navigationType == SideNav) {
-        val screen = screen
-        val items = generateFloatingNavItems(screen)
-        FloatingVerticalNavigationBar(
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .offset(x = rightNavPosition.value)
-                .background(Brush.verticalGradient(listOf(Color.Transparent, AppTheme.colors.surface)))
-                .padding(end = rightNavPadding)
-                .padding(bottom = systemNavigationBarHeight + AppTheme.dimens.medium),
-            list = items,
-            itemClicked = { item ->
-                val menuItem = item.id.toEnum<MenuItem> { it.key } ?: return@FloatingVerticalNavigationBar
-                val screen = menuItem.toScreen() ?: return@FloatingVerticalNavigationBar
                 itemClicked(screen)
             }
         )
