@@ -69,7 +69,7 @@ fun Header(
             .then(scrimModifier)
             .padding(
                 top = AppTheme.dimens.small,
-                bottom = AppTheme.dimens.small
+                bottom = AppTheme.dimens.nsmall
             )
     ) {
         Spacer(Modifier.height(topInset))
