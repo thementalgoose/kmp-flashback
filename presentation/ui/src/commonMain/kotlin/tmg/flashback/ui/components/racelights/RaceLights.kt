@@ -1,4 +1,4 @@
-package tmg.flashback.feature.reactiongame.presentation
+package tmg.flashback.ui.components.racelights
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -23,13 +23,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
-
 
 private val columnColor: Color = Color(0xFF383838)
 private val panelBarColor: Color = Color(0xFF0A0A0A)
@@ -41,6 +38,7 @@ private val panelBarHeight = 16.dp
 sealed class StartLightState {
     data object AbortedStart: StartLightState()
     data object Ready: StartLightState()
+    data object Go: StartLightState()
     data class StartSequence(
         val redLights: Int
     ): StartLightState()
@@ -53,7 +51,7 @@ enum class LightPanel {
 }
 
 @Composable
-internal fun RaceStartLights(
+fun RaceStartLights(
     modifier: Modifier = Modifier,
     state: StartLightState,
     panelType: LightPanel = LightPanel.FULL_HEIGHT
@@ -301,7 +299,7 @@ private fun PreviewReady() {
 
 @PreviewTheme
 @Composable
-private fun Preview10() {
+private fun Preview1() {
     ApplicationThemePreview {
         PreviewLights(StartLightState.StartSequence(1))
     }
@@ -309,7 +307,7 @@ private fun Preview10() {
 
 @PreviewTheme
 @Composable
-private fun Preview20() {
+private fun Preview2() {
     ApplicationThemePreview {
         PreviewLights(StartLightState.StartSequence(2))
     }
@@ -317,7 +315,7 @@ private fun Preview20() {
 
 @PreviewTheme
 @Composable
-private fun Preview30() {
+private fun Preview3() {
     ApplicationThemePreview {
         PreviewLights(StartLightState.StartSequence(3))
     }
@@ -325,7 +323,7 @@ private fun Preview30() {
 
 @PreviewTheme
 @Composable
-private fun Preview40() {
+private fun Preview4() {
     ApplicationThemePreview {
         PreviewLights(StartLightState.StartSequence(4))
     }
@@ -333,9 +331,17 @@ private fun Preview40() {
 
 @PreviewTheme
 @Composable
-private fun Preview50() {
+private fun Preview5() {
     ApplicationThemePreview {
         PreviewLights(StartLightState.StartSequence(5))
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewGo() {
+    ApplicationThemePreview {
+        PreviewLights(StartLightState.Go)
     }
 }
 

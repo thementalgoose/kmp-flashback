@@ -59,6 +59,9 @@ import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
 import tmg.flashback.ui.components.progressbar.ProgressBar
+import tmg.flashback.ui.components.racelights.LightPanel
+import tmg.flashback.ui.components.racelights.RaceStartLights
+import tmg.flashback.ui.components.racelights.StartLightState
 
 const val fadeTransitionDurationMs = 300
 
