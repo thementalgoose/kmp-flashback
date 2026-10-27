@@ -211,7 +211,7 @@ fun AppContent(
         )
 
         // Initial sync
-        val isOpen = remember { mutableStateOf(Device.isDebug || appNavigationUiState.value.promptContentSync) }
+        val isOpen = remember { mutableStateOf(appNavigationUiState.value.promptContentSync) }
         if (isOpen.value) {
             SyncBottomSheet(
                 hide = { isOpen.value = false },
