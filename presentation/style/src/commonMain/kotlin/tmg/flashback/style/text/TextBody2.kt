@@ -8,6 +8,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -23,6 +24,7 @@ fun TextBody2(
     bold: Boolean = false,
     italic: Boolean = false,
     textColor: Color? = null,
+    textDecoration: TextDecoration? = null,
     maxLines: Int? = null
 ) {
     TextBody2(
@@ -32,8 +34,8 @@ fun TextBody2(
         bold = bold,
         italic = italic,
         textColor = textColor,
+        textDecoration = textDecoration,
         maxLines = maxLines,
-
     )
 }
 
@@ -45,6 +47,7 @@ fun TextBody2(
     bold: Boolean = false,
     italic: Boolean = false,
     textColor: Color? = null,
+    textDecoration: TextDecoration? = null,
     maxLines: Int? = null
 ) {
     Text(
@@ -60,6 +63,7 @@ fun TextBody2(
             },
             color = textColor ?: AppTheme.colors.onSurfaceVariant
         ),
+        textDecoration = textDecoration,
         fontStyle = if (italic) FontStyle.Italic else FontStyle.Normal
     )
 }
@@ -70,6 +74,17 @@ private fun Preview() {
     ApplicationThemePreview {
         TextBody2(
             text = "Body 2"
+        )
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewUnderlined() {
+    ApplicationThemePreview {
+        TextBody2(
+            text = "Body 2",
+            textDecoration = TextDecoration.Underline
         )
     }
 }

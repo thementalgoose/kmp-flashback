@@ -228,6 +228,12 @@
     <string name="feature_banner_device_time">All times will be displayed in your current timezone (%1$s)</string>
 
 
+    <string name="force_upgrade_title">Time to update</string>
+    <string name="force_upgrade_subtitle">A new version of this app is available to download, please update to the new app version to continue</string>
+    <string name="force_upgrade_upgrade">Go to the Play Store</string>
+    <string name="force_upgrade_validate">I have updated</string>
+
+
     <!-- Errors -->
     <string name="network_error_network">A network error occurred. Please make sure you are connected to the internet and try again</string>
     <string name="network_error_internal">A unknown error occurred</string>

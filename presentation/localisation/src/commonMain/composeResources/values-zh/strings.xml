@@ -205,6 +205,13 @@
     <string name="feature_banner_soft_upgrade_prompt">升级</string>
     <string name="feature_banner_device_time">所有时间都将以您当前的时区 (%1$s) 显示</string>
 
+
+    <string name="force_upgrade_title">是时候更新了</string>
+    <string name="force_upgrade_subtitle">此应用有新版本可供下载，请更新到新版本以继续使用</string>
+    <string name="force_upgrade_upgrade">前往 Play 商店</string>
+    <string name="force_upgrade_validate">我已更新</string>
+
+
     <!-- Errors -->
     <string name="network_error_network">发生网络错误。请确保您已连接到互联网，然后重试</string>
     <string name="network_error_internal">发生未知错误</string>

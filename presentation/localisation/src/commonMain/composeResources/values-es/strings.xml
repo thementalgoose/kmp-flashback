@@ -207,6 +207,13 @@
     <string name="feature_banner_soft_upgrade_prompt">Mejora</string>
     <string name="feature_banner_device_time">Todas las horas se mostrarán en tu zona horaria actual (%1$s)</string>
 
+
+    <string name="force_upgrade_title">Hora de actualizar</string>
+    <string name="force_upgrade_subtitle">Una nueva versión de esta aplicación está disponible para descargar, por favor actualiza a la nueva versión de la aplicación para continuar</string>
+    <string name="force_upgrade_upgrade">Ir a Play Store</string>
+    <string name="force_upgrade_validate">He actualizado</string>
+
+
     <!-- Errors -->
     <string name="network_error_network">Se produjo un error de red. Asegúrate de estar conectado a Internet y vuelve a intentarlo</string>
     <string name="network_error_internal">Se produjo un error desconocido</string>

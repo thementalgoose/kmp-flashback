@@ -24,6 +24,7 @@ import tmg.flashback.composeApp.presentation.sync.SyncState.LOADING
 import tmg.flashback.composeApp.repositories.OnboardingRepository
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
+import kotlin.time.Duration.Companion.milliseconds
 
 class SyncViewModel(
     private val circuitRepository: CircuitRepository,
@@ -94,7 +95,7 @@ class SyncViewModel(
 
         _configState.value = LOADING
         viewModelScope.launch(coroutineContext) {
-            delay(DELAY_CONFIG_SYNC_MS)
+            delay(DELAY_CONFIG_SYNC_MS.milliseconds)
             resetConfigUseCase.ensureReset()
 
             fetchConfigRepository.fetchAndApply()
@@ -107,7 +108,7 @@ class SyncViewModel(
         if (_driversState.value != DONE) {
             _driversState.value = LOADING
             viewModelScope.launch(coroutineContext) {
-                delay(DELAY_SYNC_DRIVERS)
+                delay(DELAY_SYNC_DRIVERS.milliseconds)
                 _driversState.value = when (driverRepository.populateDrivers()) {
                     Response.Successful -> DONE
                     else -> FAILED
@@ -120,7 +121,7 @@ class SyncViewModel(
         if (_constructorsState.value != DONE) {
             _constructorsState.value = LOADING
             viewModelScope.launch(coroutineContext) {
-                delay(DELAY_SYNC_TEAMS)
+                delay(DELAY_SYNC_TEAMS.milliseconds)
                 _constructorsState.value = when (constructorRepository.populateConstructors()) {
                     Response.Successful -> DONE
                     else -> FAILED
@@ -133,7 +134,7 @@ class SyncViewModel(
         if (_circuitsState.value != DONE) {
             _circuitsState.value = LOADING
             viewModelScope.launch(coroutineContext) {
-                delay(DELAY_SYNC_CIRCUITS)
+                delay(DELAY_SYNC_CIRCUITS.milliseconds)
                 _circuitsState.value = when (circuitRepository.populateCircuits()) {
                     Response.Successful -> DONE
                     else -> FAILED
@@ -146,7 +147,7 @@ class SyncViewModel(
         if (_racesState.value != DONE) {
             _racesState.value = LOADING
             viewModelScope.launch(coroutineContext) {
-                delay(DELAY_SYNC_RACES)
+                delay(DELAY_SYNC_RACES.milliseconds)
                 _racesState.value = when (overviewRepository.populateOverview()) {
                     Response.Successful -> DONE
                     else -> FAILED
@@ -157,10 +158,10 @@ class SyncViewModel(
     }
 
     companion object {
-        private val DELAY_SYNC_DRIVERS = 200L
-        private val DELAY_SYNC_TEAMS = 400L
-        private val DELAY_SYNC_CIRCUITS = 600L
-        private val DELAY_SYNC_RACES = 800L
-        private val DELAY_CONFIG_SYNC_MS = 1000L
+        private const val DELAY_SYNC_DRIVERS = 200L
+        private const val DELAY_SYNC_TEAMS = 400L
+        private const val DELAY_SYNC_CIRCUITS = 600L
+        private const val DELAY_SYNC_RACES = 800L
+        private const val DELAY_CONFIG_SYNC_MS = 1000L
     }
 }

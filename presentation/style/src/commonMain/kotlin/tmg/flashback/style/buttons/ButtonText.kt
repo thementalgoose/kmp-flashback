@@ -1,0 +1,125 @@
+package tmg.flashback.style.buttons
+
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.dp
+import flashback.presentation.style.generated.resources.Res
+import flashback.presentation.style.generated.resources.ic_preview_icon
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import tmg.flashback.style.AppTheme
+
+import tmg.flashback.style.AppTheme.disabledAlpha
+import tmg.flashback.style.ApplicationThemePreview
+import tmg.flashback.style.preview.PreviewTheme
+import tmg.flashback.style.text.TextBody2
+
+@Composable
+fun ButtonText(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    icon: DrawableResource? = null,
+    enabled: Boolean = true,
+) {
+    TextButton(
+        modifier = modifier
+            .focusable(true)
+            .wrapContentHeight(Alignment.CenterVertically)
+            .padding(0.dp)
+            .defaultMinSize(1.dp, 1.dp)
+            .alpha(if (enabled) 1f else disabledAlpha),
+        colors = ButtonDefaults.textButtonColors(
+            containerColor = AppTheme.colors.tertiaryContainer.copy(alpha = 0.3f),
+            contentColor = AppTheme.colors.onTertiaryContainer,
+            disabledContainerColor = AppTheme.colors.tertiaryContainer.copy(alpha = 0.3f),
+            disabledContentColor = AppTheme.colors.onTertiaryContainer
+        ),
+        enabled = enabled,
+        shape = RoundedCornerShape(AppTheme.dimens.radiusMedium),
+        onClick = onClick
+    ) {
+        TextBody2(
+            text,
+            bold = true,
+            textDecoration = TextDecoration.Underline,
+            textColor = AppTheme.colors.onTertiaryContainer,
+            modifier = Modifier
+                .padding(
+                    vertical = AppTheme.dimens.xsmall,
+                    horizontal = AppTheme.dimens.medium,
+                )
+        )
+        if (icon != null) {
+            Icon(
+                modifier = Modifier.size(16.dp),
+                painter = painterResource(resource = icon),
+                contentDescription = null,
+                tint = AppTheme.colors.onTertiaryContainer
+            )
+            Spacer(Modifier.width(AppTheme.dimens.nsmall))
+        }
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun Preview() {
+    ApplicationThemePreview {
+        Box(Modifier.padding(16.dp)) {
+            ButtonText(
+                text = "Text Button",
+                onClick = { }
+            )
+        }
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewWithIcon() {
+    ApplicationThemePreview {
+        Box(Modifier.padding(16.dp)) {
+            ButtonText(
+                text = "Text Button",
+                onClick = { },
+                icon = Res.drawable.ic_preview_icon
+            )
+        }
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewDisabled() {
+    ApplicationThemePreview {
+        Box(Modifier.padding(16.dp)) {
+            ButtonText(
+                text = "Text Button",
+                onClick = { },
+                enabled = false
+            )
+        }
+    }
+}

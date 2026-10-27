@@ -59,6 +59,7 @@ import tmg.flashback.composeApp.presentation.sync.SyncBottomSheet
 import tmg.flashback.composeApp.presentation.toScreen
 import tmg.flashback.eastereggs.presentation.snow
 import tmg.flashback.eastereggs.presentation.summer
+import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.navigation.NavCalendar

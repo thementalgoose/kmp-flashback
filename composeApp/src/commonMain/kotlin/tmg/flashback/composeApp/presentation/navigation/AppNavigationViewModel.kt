@@ -88,6 +88,7 @@ internal val previewAppNavigationViewModel = AppNavigationViewModel(
     },
     maintenanceRepository = object : MaintenanceRepository {
         override val softUpgrade: Boolean get() = false
+        override val forceUpgrade: Boolean get() = false
     },
     openWebpageUseCase = object : OpenWebpageUseCase {
         override fun invoke(url: String, title: String) {
