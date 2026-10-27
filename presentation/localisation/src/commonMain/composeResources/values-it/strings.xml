@@ -207,6 +207,13 @@
     <string name="feature_banner_soft_upgrade_prompt">Aggiornamento</string>
     <string name="feature_banner_device_time">Tutti gli orari verranno visualizzati nel tuo fuso orario corrente (%1$s)</string>
 
+
+    <string name="force_upgrade_title">È ora di aggiornare</string>
+    <string name="force_upgrade_subtitle">Una nuova versione di questa app è disponibile per il download, per favore aggiorna alla nuova versione dell'app per continuare</string>
+    <string name="force_upgrade_upgrade">Vai al Play Store</string>
+    <string name="force_upgrade_validate">Ho aggiornato</string>
+
+
     <!-- Errors -->
     <string name="network_error_network">Si è verificato un errore di rete. Assicurati di essere connesso a internet e riprova</string>
     <string name="network_error_internal">Si è verificato un errore sconosciuto</string>

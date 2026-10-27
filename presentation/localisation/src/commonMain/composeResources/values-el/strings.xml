@@ -223,6 +223,12 @@
     <string name="feature_banner_device_time">Όλες οι ώρες θα εμφανίζονται στην τρέχουσα ζώνη ώρας σας (%1$s)</string>
 
 
+    <string name="force_upgrade_title">Ώρα για ενημέρωση</string>
+    <string name="force_upgrade_subtitle">Μια νέα έκδοση αυτής της εφαρμογής είναι διαθέσιμη για λήψη, παρακαλούμε ενημερώστε στη νέα έκδοση της εφαρμογής για να συνεχίσετε</string>
+    <string name="force_upgrade_upgrade">Μετάβαση στο Play Store</string>
+    <string name="force_upgrade_validate">Έχω ενημερώσει</string>
+
+
     <!-- Errors -->
     <string name="network_error_network">Παρουσιάστηκε σφάλμα δικτύου. Βεβαιωθείτε ότι είστε συνδεδεμένοι στο διαδίκτυο και δοκιμάστε ξανά</string>
     <string name="network_error_internal">Παρουσιάστηκε άγνωστο σφάλμα</string>
