@@ -142,7 +142,7 @@ internal class AboutViewModelTest {
 
         verify {
             mockLogEventUseCase.logEvent("view_github")
-            mockOpenWebpageUseCase.invoke("github")
+            mockOpenWebpageUseCase.invoke("github/releases")
         }
     }
 
