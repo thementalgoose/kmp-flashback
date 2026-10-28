@@ -40,42 +40,39 @@ class SyncViewModel(
 ): ViewModel() {
 
     private val _circuitsState: MutableStateFlow<SyncState> = MutableStateFlow(LOADING)
-    val circuits: StateFlow<SyncState> = _circuitsState
 
     private val _constructorsState: MutableStateFlow<SyncState> = MutableStateFlow(LOADING)
-    val constructors: StateFlow<SyncState> = _constructorsState
 
     private val _driversState: MutableStateFlow<SyncState> = MutableStateFlow(LOADING)
-    val drivers: StateFlow<SyncState> = _driversState
 
     private val _racesState: MutableStateFlow<SyncState> = MutableStateFlow(LOADING)
-    val races: StateFlow<SyncState> = _racesState
 
     private val _configState: MutableStateFlow<SyncState> = MutableStateFlow(LOADING)
-    val config: StateFlow<SyncState> = _configState
 
-    val overall: StateFlow<SyncState> = combine(
-        circuits,
-        constructors,
-        drivers,
-        races,
-        config
+    val overall: StateFlow<OverallSyncState> = combine(
+        _circuitsState,
+        _constructorsState,
+        _driversState,
+        _racesState,
+        _configState
     ) { circuits, constructors, drivers, races, config ->
         val all = listOf(circuits, constructors, drivers, races, config)
         if (all.all { it == DONE }) {
             onboardingRepository.initialSyncCompleted = true
-            return@combine DONE
+            return@combine OverallSyncState.Successful
         }
         if (all.all { it != LOADING }) {
             if (all.any { it == FAILED }) {
-                return@combine FAILED
+                return@combine OverallSyncState.Failed
             }
         }
-        return@combine LOADING
+
+        val isLoading = all.count { it == DONE }
+        return@combine OverallSyncState.InProgress(isLoading.toFloat() / 5f)
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Lazily,
-        initialValue = LOADING
+        initialValue = OverallSyncState.InProgress(0f)
     )
 
     fun startInitialSync() {
@@ -158,10 +155,10 @@ class SyncViewModel(
     }
 
     companion object {
-        private const val DELAY_SYNC_DRIVERS = 200L
-        private const val DELAY_SYNC_TEAMS = 400L
-        private const val DELAY_SYNC_CIRCUITS = 600L
-        private const val DELAY_SYNC_RACES = 800L
+        private const val DELAY_SYNC_DRIVERS = 1000L
+        private const val DELAY_SYNC_TEAMS = 1000L
+        private const val DELAY_SYNC_CIRCUITS = 1000L
+        private const val DELAY_SYNC_RACES = 1000L
         private const val DELAY_CONFIG_SYNC_MS = 1000L
     }
 }
