@@ -5,7 +5,6 @@ import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.settings_pref_reset_toast
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import tmg.flashback.device.GITHUB_RELEASE_LINK
 import tmg.flashback.device.repositories.DeviceRepository
 import tmg.flashback.device.usecases.OpenEmailUseCase
 import tmg.flashback.device.usecases.OpenStorePageUseCase
@@ -41,7 +40,7 @@ class SettingsAboutViewModel(
     }
 
     fun openChangelog() {
-        openWebpageUseCase.invoke(GITHUB_RELEASE_LINK)
+        openWebpageUseCase.invoke(deviceRepository.githubReleaseLink)
     }
 
     fun firstTimeSync() {

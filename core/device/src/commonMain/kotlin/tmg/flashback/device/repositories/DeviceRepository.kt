@@ -1,8 +1,6 @@
 package tmg.flashback.device.repositories
 
 import tmg.flashback.configuration.manager.ConfigManager
-import tmg.flashback.device.GITHUB_LINK
-import tmg.flashback.device.PLAY_STORE_LINK
 import tmg.flashback.preferences.manager.PreferenceManager
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid

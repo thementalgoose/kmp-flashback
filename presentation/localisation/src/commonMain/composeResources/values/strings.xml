@@ -231,7 +231,7 @@
 
     <string name="force_upgrade_title">Time to update</string>
     <string name="force_upgrade_subtitle">A new version of this app is available to download, please update to continue using Flashback</string>
-    <string name="force_upgrade_upgrade">Go to the Play Store</string>
+    <string name="force_upgrade_upgrade">Go to the app store</string>
     <string name="force_upgrade_validate">I have updated</string>
 
 
