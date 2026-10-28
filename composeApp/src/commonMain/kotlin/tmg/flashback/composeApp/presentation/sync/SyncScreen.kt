@@ -1,11 +1,18 @@
 package tmg.flashback.composeApp.presentation.sync
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,12 +21,24 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DoneAll
+import androidx.compose.material.icons.filled.Replay
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.ModalBottomSheetProperties
@@ -29,12 +48,16 @@ import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -60,16 +83,26 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import flashback.presentation.localisation.generated.resources.app_name
+import flashback.presentation.localisation.generated.resources.error_data_not_available_try_again
+import flashback.presentation.localisation.generated.resources.splash_loading
+import flashback.presentation.localisation.generated.resources.splash_sync_required_failed
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
+import tmg.flashback.composeApp.presentation.sync.SyncState.DONE
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.buttons.ButtonPrimary
 import tmg.flashback.style.buttons.ButtonSecondary
+import tmg.flashback.style.buttons.ButtonText
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
+import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextHeadline1
+import kotlin.time.Duration.Companion.milliseconds
+
+private val progressBarHeight = 24.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -102,15 +135,14 @@ fun SyncBottomSheet(
         ) {
             SyncScreen(
                 windowSizeClass = windowSizeClass,
-                dismiss = {
+                unlockAndDismiss = {
+                    lockBottomSheetOnScreen.value = false
                     coroutineScope.launch {
+                        delay(1000.milliseconds)
                         sheetState.hide()
                         hide()
                     }
-                },
-                unlock = {
-                    lockBottomSheetOnScreen.value = false
-                },
+                }
             )
         }
     }
@@ -118,36 +150,23 @@ fun SyncBottomSheet(
 
 @Composable
 fun SyncScreen(
-    unlock: () -> Unit,
-    dismiss: () -> Unit,
+    unlockAndDismiss: () -> Unit,
     windowSizeClass: WindowSizeClass,
     viewModel: SyncViewModel = koinViewModel()
 ) {
     ScreenView(screenName = "Sync")
 
-    val stateRaces = viewModel.races.collectAsState()
-    val stateDrivers = viewModel.drivers.collectAsState()
-    val stateConstructors = viewModel.constructors.collectAsState()
-    val stateCircuits = viewModel.circuits.collectAsState()
-    val stateConfig = viewModel.config.collectAsState()
-
     val overall = viewModel.overall.collectAsState()
 
     SyncScreen(
         windowSizeClass = windowSizeClass,
-        drivers = stateDrivers.value,
-        circuits = stateCircuits.value,
-        constructors = stateConstructors.value,
-        races = stateRaces.value,
-        config = stateConfig.value,
         overall = overall.value,
-        continueClicked = dismiss,
         tryAgainClicked = viewModel::startInitialSync
     )
 
     LaunchedEffect(overall.value) {
-        if (overall.value == SyncState.DONE) {
-            unlock()
+        if (overall.value == OverallSyncState.Successful) {
+            unlockAndDismiss()
         }
     }
 
@@ -159,14 +178,8 @@ fun SyncScreen(
 @Composable
 fun SyncScreen(
     windowSizeClass: WindowSizeClass,
-    drivers: SyncState,
-    circuits: SyncState,
-    config: SyncState,
-    constructors: SyncState,
-    races: SyncState,
-    overall: SyncState,
+    overall: OverallSyncState,
     tryAgainClicked: () -> Unit,
-    continueClicked: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -198,141 +211,140 @@ fun SyncScreen(
             )
         )
 
-        Breakdown(
-            label = string.splash_sync_drivers,
-            syncState = drivers
+        LoadingProgress(
+            state = overall
         )
-        Breakdown(
-            label = string.splash_sync_constructors,
-            syncState = constructors
-        )
-        Breakdown(
-            label = string.splash_sync_circuits,
-            syncState = circuits
-        )
-        Breakdown(
-            label = string.splash_sync_races,
-            syncState = races
-        )
-        Breakdown(
-            label = string.splash_sync_config,
-            syncState = config
-        )
+        Spinner()
 
-        Column(
+        Spacer(Modifier.height(AppTheme.dimens.medium))
+
+        Controls(
+            enableRetry = overall == OverallSyncState.Failed,
+            tryAgainClicked = tryAgainClicked,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = AppTheme.dimens.xsmall)
-                .defaultMinSize(minHeight = 100.dp),
-            horizontalAlignment = Alignment.End
-        ) {
-            AnimatedContent(overall) {
-                when (it) {
-                    SyncState.LOADING -> { }
-                    SyncState.DONE -> {
-                        ButtonPrimary(
-                            modifier = Modifier.fillMaxWidth(),
-                            text = stringResource(string.splash_continue),
-                            onClick = continueClicked
-                        )
-                    }
-                    SyncState.FAILED -> {
-                        ButtonSecondary(
-                            modifier = Modifier.fillMaxWidth(),
-                            text = stringResource(string.splash_sync_try_again),
-                            onClick = tryAgainClicked
-                        )
-                    }
-                }
-            }
-        }
+                .heightIn(min = 80.dp)
+        )
 
         val navigationBarHeight = WindowInsets.safeDrawing.asPaddingValues().calculateBottomPadding()
         Spacer(Modifier.height(navigationBarHeight))
     }
 }
 
-private val progressBarHeight = 24.dp
+@Composable
+private fun Spinner(
+    modifier: Modifier = Modifier,
+    intervalMillis: Long = 2000L,
+    repeat: Boolean = false
+) {
+    val messages = listOf(
+        stringResource(string.splash_sync_races),
+        stringResource(string.splash_sync_circuits),
+        stringResource(string.splash_sync_drivers),
+        stringResource(string.splash_sync_constructors),
+        stringResource(string.app_name),
+    )
+    var currentIndex by remember { mutableIntStateOf(0) }
+
+    LaunchedEffect(messages, repeat) {
+        if (messages.isEmpty()) return@LaunchedEffect
+
+        while (true) {
+            delay(intervalMillis.milliseconds)
+            if (currentIndex < messages.lastIndex) {
+                currentIndex++
+            } else if (repeat) {
+                currentIndex = 0
+            } else {
+                break
+            }
+        }
+    }
+
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(2.dp)
+    ) {
+        TextBody2(stringResource(string.splash_loading))
+        AnimatedContent(
+            targetState = currentIndex,
+            transitionSpec = {
+                // Incoming text slides up from below while fading in;
+                // outgoing text slides up and fades out
+                (slideInVertically { height -> height / 2 } + fadeIn()) togetherWith
+                        (slideOutVertically { height -> -height / 2 } + fadeOut())
+            },
+            label = "SequentialLoadingTextAnimation"
+        ) { targetIndex ->
+            TextBody2(messages.getOrElse(targetIndex) { "" })
+        }
+        TextBody2("...")
+    }
+}
+
 
 @Composable
-private fun Breakdown(
-    label: StringResource,
-    syncState: SyncState
+private fun Controls(
+    enableRetry: Boolean,
+    tryAgainClicked: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-    val colour = animateColorAsState(
-        targetValue = when (syncState) {
-            SyncState.LOADING -> AppTheme.colors.primary
-            SyncState.DONE -> AppTheme.colors.f1DeltaNegative
-            SyncState.FAILED -> AppTheme.colors.f1DeltaPositive
-        },
-        animationSpec = tween(durationMillis = 400)
-    )
-    val progress = animateFloatAsState(
-        targetValue = when (syncState) {
-            SyncState.LOADING -> 0f
-            SyncState.DONE -> 1f
-            SyncState.FAILED -> 1f
-        },
-        animationSpec = tween(durationMillis = 400)
-    )
-    val textColor = animateColorAsState(
-        targetValue = when (syncState) {
-            SyncState.LOADING -> AppTheme.colors.onPrimaryContainer
-            SyncState.DONE -> Color(0xFF383838)
-            SyncState.FAILED -> Color(0xFFF8F8F8)
-        },
-        animationSpec = tween(durationMillis = 400)
-    )
-
-    Column(modifier = Modifier
-        .fillMaxWidth()
+    Box(
+        modifier = modifier
     ) {
-        Box(Modifier.fillMaxWidth()) {
-            LinearProgressIndicator(
-                color = colour.value,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(progressBarHeight)
-                    .alpha(0.5f)
-            )
-            LinearProgressIndicator(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(progressBarHeight),
-                color = colour.value,
-                trackColor = AppTheme.colors.primaryContainer,
-                progress = { progress.value }
-            )
-            BreakdownLabel(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.CenterStart)
-                    .padding(horizontal = AppTheme.dimens.small),
-                text = stringResource(resource = label).uppercase(),
-                textColor = textColor.value
-            )
-        }
-
+        AnimatedVisibility(
+            visible = enableRetry,
+            content = {
+                Column(
+                    modifier = Modifier,
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    TextBody1(
+                        text = stringResource(string.splash_sync_required_failed)
+                    )
+                    ButtonPrimary(
+                        text = stringResource(string.splash_sync_try_again),
+                        onClick = tryAgainClicked,
+                        enabled = enableRetry,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+            }
+        )
     }
 }
 
 @Composable
-private fun BreakdownLabel(
-    text: String,
-    textColor: Color,
-    modifier: Modifier = Modifier
+private fun LoadingProgress(
+    state: OverallSyncState,
+    modifier: Modifier = Modifier,
 ) {
-    Text(
-        text,
-        letterSpacing = 2.sp,
-        maxLines = 1,
-        modifier = modifier,
-        style = AppTheme.typography.block.copy(
-            fontStyle = FontStyle.Normal,
-            fontWeight = FontWeight.W900,
-            color = textColor
-        )
+    val colour = animateColorAsState(
+        targetValue = when (state) {
+            is OverallSyncState.InProgress -> AppTheme.colors.primary
+            OverallSyncState.Successful -> AppTheme.colors.f1DeltaNegative
+            OverallSyncState.Failed -> AppTheme.colors.f1DeltaPositive
+        },
+        animationSpec = tween(durationMillis = 400)
     )
+    val progress = animateFloatAsState(
+        targetValue = when (state) {
+            is OverallSyncState.InProgress -> state.progress
+            OverallSyncState.Successful -> 1f
+            OverallSyncState.Failed -> 1f
+        },
+        animationSpec = tween(durationMillis = 400)
+    )
+    Box(modifier = modifier) {
+        LinearProgressIndicator(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(progressBarHeight),
+            color = colour.value,
+            trackColor = AppTheme.colors.primaryContainer,
+            progress = { progress.value }
+        )
+    }
 }
 
 @PreviewTheme
@@ -340,13 +352,7 @@ private fun BreakdownLabel(
 private fun PreviewLoading() {
     ApplicationThemePreview {
         SyncScreen(
-            drivers = SyncState.LOADING,
-            circuits = SyncState.LOADING,
-            config = SyncState.DONE,
-            constructors = SyncState.DONE,
-            races = SyncState.LOADING,
-            overall = SyncState.LOADING,
-            continueClicked = { },
+            overall = OverallSyncState.InProgress(0.3f),
             tryAgainClicked = { },
             windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass
         )
@@ -358,13 +364,7 @@ private fun PreviewLoading() {
 private fun PreviewDone() {
     ApplicationThemePreview {
         SyncScreen(
-            drivers = SyncState.DONE,
-            circuits = SyncState.DONE,
-            config = SyncState.DONE,
-            constructors = SyncState.DONE,
-            races = SyncState.DONE,
-            overall = SyncState.DONE,
-            continueClicked = { },
+            overall = OverallSyncState.Successful,
             tryAgainClicked = { },
             windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass
         )
@@ -376,13 +376,7 @@ private fun PreviewDone() {
 private fun PreviewFailed() {
     ApplicationThemePreview {
         SyncScreen(
-            drivers = SyncState.DONE,
-            circuits = SyncState.LOADING,
-            config = SyncState.FAILED,
-            constructors = SyncState.LOADING,
-            races = SyncState.LOADING,
-            overall = SyncState.FAILED,
-            continueClicked = { },
+            overall = OverallSyncState.Failed,
             tryAgainClicked = { },
             windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass
         )

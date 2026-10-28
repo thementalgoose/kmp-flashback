@@ -11,15 +11,21 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
 import org.koin.compose.viewmodel.koinViewModel
+import tmg.flashback.composeApp.presentation.sync.SyncBottomSheet
+import tmg.flashback.feature.maintenance.presentation.forceupgrade.ForceUpgradeBottomSheet
 import tmg.flashback.style.AppTheme
+import tmg.flashback.style.buttons.ButtonPrimary
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextHeadline1
@@ -94,6 +100,52 @@ internal fun InfoScreen(
                 ) {
                     TextTitle("Config URL")
                     TextBody1(uiState.baseUrl)
+                }
+            }
+            item("div1") { HorizontalDivider() }
+            item("sync-sheet") {
+                Column(
+                    modifier = Modifier
+                        .padding(horizontal = AppTheme.dimens.medium),
+                    verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
+                ) {
+                    TextTitle("Sync sheet")
+                    val openSyncSheet = remember { mutableStateOf(false) }
+                    ButtonPrimary(
+                        text = "Open",
+                        onClick = { openSyncSheet.value = true }
+                    )
+                    if (openSyncSheet.value) {
+                        SyncBottomSheet(
+                            hide = {
+                                openSyncSheet.value = false
+                            },
+                            windowSizeClass = windowSizeClass
+                        )
+                    }
+                }
+            }
+            item("div2") { HorizontalDivider() }
+            item("force-upgrade") {
+                Column(
+                    modifier = Modifier
+                        .padding(horizontal = AppTheme.dimens.medium),
+                    verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.xsmall)
+                ) {
+                    TextTitle("Force Upgrade")
+                    val openSyncSheet = remember { mutableStateOf(false) }
+                    ButtonPrimary(
+                        text = "Open",
+                        onClick = { openSyncSheet.value = true }
+                    )
+                    if (openSyncSheet.value) {
+                        ForceUpgradeBottomSheet(
+                            hide = {
+                                openSyncSheet.value = false
+                            },
+                            windowSizeClass = windowSizeClass
+                        )
+                    }
                 }
             }
         }

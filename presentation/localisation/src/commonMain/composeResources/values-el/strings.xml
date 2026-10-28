@@ -5,14 +5,15 @@
     <!-- Splash -->
     <string name="splash_title">Γεια</string>
     <string name="splash_continue">Συνέχεια</string>
+    <string name="splash_loading">Φόρτωση</string>
     <string name="splash_sync_info">Καθώς αυτή είναι η πρώτη φορά που ανοίγετε την εφαρμογή, συλλέγουμε ορισμένα δεδομένα σχετικά με τον κόσμο της Formula 1 για να σας ενημερώσουμε…</string>
     <string name="splash_sync_try_again">Δοκιμάστε ξανά</string>
     <string name="splash_sync_required_failed">Πρέπει να συγχρονίσουμε ορισμένες πληροφορίες για να συνεχίσουμε. Βεβαιωθείτε ότι έχετε ενεργή σύνδεση στο διαδίκτυο και δοκιμάστε ξανά (θα χρειαστεί να το κάνετε αυτό μόνο μία φορά)</string>
-    <string name="splash_sync_config">Διαμόρφωση…</string>
-    <string name="splash_sync_races">Αγώνες…</string>
-    <string name="splash_sync_constructors">Ομάδες…</string>
-    <string name="splash_sync_drivers">Οδηγοί…</string>
-    <string name="splash_sync_circuits">Πίστες…</string>
+    <string name="splash_sync_config">Διαμόρφωση</string>
+    <string name="splash_sync_races">Αγώνες</string>
+    <string name="splash_sync_constructors">Ομάδες</string>
+    <string name="splash_sync_drivers">Οδηγοί</string>
+    <string name="splash_sync_circuits">Πίστες</string>
 
 
     <!-- Search -->
