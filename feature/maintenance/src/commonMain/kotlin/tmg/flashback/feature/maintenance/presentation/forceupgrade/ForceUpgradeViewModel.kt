@@ -31,4 +31,8 @@ class ForceUpgradeViewModel(
             _uiState.update { maintenanceRepository.getState() }
         }
     }
+
+    fun goToStore() {
+
+    }
 }

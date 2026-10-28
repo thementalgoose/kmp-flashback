@@ -52,6 +52,7 @@ import tmg.flashback.style.ApplicationTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.buttons.ButtonPrimary
 import tmg.flashback.style.buttons.ButtonTertiary
+import tmg.flashback.style.buttons.ButtonText
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextHeadline1
@@ -116,33 +117,15 @@ fun ForceUpgradeScreen(
             )
         )
 
-        AnimatedContent(
-            targetState = uiState,
-            content = {
-                when (it) {
-                    LOCKED -> {
-                        LinearProgressIndicator(
-                            color = AppTheme.colors.primaryContainer,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(progressBarHeight)
-                        )
-                    }
-                    VALIDATING -> {
-                        Box(modifier = Modifier.height(progressBarHeight)) { }
-                    }
-                    UNLOCKED -> {
-                        Box(modifier = Modifier.height(progressBarHeight)) { }
-                    }
-                }
+        ButtonPrimary(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(string.force_upgrade_upgrade),
+            onClick = {
+
             }
         )
-
-        ButtonPrimary(
-            text = stringResource(string.force_upgrade_upgrade),
-            onClick = { }
-        )
-        ButtonTertiary(
+        ButtonText(
+            modifier = Modifier.fillMaxWidth(),
             text = stringResource(string.force_upgrade_validate),
             onClick = { }
         )
