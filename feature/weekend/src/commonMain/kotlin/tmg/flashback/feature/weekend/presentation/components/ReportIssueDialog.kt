@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.BasicAlertDialog
@@ -23,8 +24,11 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.buttons.ButtonPrimary
 import tmg.flashback.style.buttons.ButtonSecondary
+import tmg.flashback.style.buttons.ButtonText
 import tmg.flashback.style.preview.PreviewTheme
+import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
+import tmg.flashback.style.text.TextHeadline4
 import tmg.flashback.style.text.TextTitle
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -58,19 +62,20 @@ private fun ReportIssueDialogContent(
             .padding(AppTheme.dimens.medium),
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.nsmall)
     ) {
-        TextTitle(
+        TextHeadline4(
             text = stringResource(string.report_issue_dialog_title),
             bold = true
         )
-        TextBody2(
+        TextBody1(
             text = stringResource(string.report_issue_dialog_message)
         )
+        Spacer(Modifier.height(AppTheme.dimens.small))
         ButtonPrimary(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(string.report_issue_dialog_confirm),
             onClick = onConfirm
         )
-        ButtonSecondary(
+        ButtonText(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(string.report_issue_dialog_cancel),
             onClick = onDismiss
