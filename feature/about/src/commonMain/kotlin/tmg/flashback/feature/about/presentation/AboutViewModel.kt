@@ -4,20 +4,14 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import tmg.flashback.analytics.usecases.LogEventUseCase
-import tmg.flashback.device.API_LINK
-import tmg.flashback.device.APPLE_STORE_LINK
-import tmg.flashback.device.GITHUB_LINK
-import tmg.flashback.device.PLAY_STORE_LINK
 import tmg.flashback.device.repositories.DeviceRepository
 import tmg.flashback.device.usecases.CopyToClipboardUseCase
 import tmg.flashback.device.usecases.OpenEmailUseCase
-import tmg.flashback.device.usecases.OpenStorePageUseCase
 import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.infrastructure.device.Platform
 import tmg.flashback.infrastructure.device.string
 import tmg.flashback.notifications.repositories.NotificationRepository
-import kotlin.math.log
 
 class AboutViewModel(
     private val deviceRepository: DeviceRepository,
@@ -59,11 +53,11 @@ class AboutViewModel(
         when (aboutButtons) {
             AboutButtons.Play -> {
                 logEventUseCase.logEvent("view_google_store")
-                openWebpageUseCase(PLAY_STORE_LINK)
+                openWebpageUseCase(deviceRepository.playStoreLink)
             }
             AboutButtons.Apple -> {
                 logEventUseCase.logEvent("view_apple_store")
-                openWebpageUseCase(APPLE_STORE_LINK)
+                openWebpageUseCase(deviceRepository.appleAppStoreLink)
             }
             AboutButtons.Email -> {
                 logEventUseCase.logEvent("view_email")
@@ -92,11 +86,11 @@ class AboutViewModel(
             }
             AboutButtons.Github -> {
                 logEventUseCase.logEvent("view_github")
-                openWebpageUseCase(GITHUB_LINK)
+                openWebpageUseCase(deviceRepository.githubReleaseLink)
             }
             AboutButtons.Api -> {
                 logEventUseCase.logEvent("view_api")
-                openWebpageUseCase(API_LINK)
+                openWebpageUseCase(deviceRepository.websiteLink)
             }
         }
     }
