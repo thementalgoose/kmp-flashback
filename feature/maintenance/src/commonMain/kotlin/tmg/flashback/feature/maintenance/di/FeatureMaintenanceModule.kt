@@ -9,7 +9,7 @@ import tmg.flashback.feature.maintenance.repository.MaintenanceRepositoryImpl
 val featureMaintenanceModule = listOf(module())
 
 internal fun module() = module {
-    viewModel { ForceUpgradeViewModel(get(), get()) }
+    viewModel { ForceUpgradeViewModel(get(), get(), get()) }
 
     single<MaintenanceRepository> { MaintenanceRepositoryImpl(get()) }
 }
