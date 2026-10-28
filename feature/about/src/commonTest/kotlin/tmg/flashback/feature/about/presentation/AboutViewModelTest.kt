@@ -9,10 +9,6 @@ import dev.mokkery.mock
 import dev.mokkery.verify
 import kotlinx.coroutines.test.runTest
 import tmg.flashback.analytics.usecases.LogEventUseCase
-import tmg.flashback.device.API_LINK
-import tmg.flashback.device.APPLE_STORE_LINK
-import tmg.flashback.device.GITHUB_LINK
-import tmg.flashback.device.PLAY_STORE_LINK
 import tmg.flashback.device.repositories.DeviceRepository
 import tmg.flashback.device.usecases.CopyToClipboardUseCase
 import tmg.flashback.device.usecases.OpenEmailUseCase
@@ -36,11 +32,20 @@ internal class AboutViewModelTest {
     private fun initUnderTest(
         udid: String = "test-udid",
         installationId: String = "test-iid",
-        email: String = "test@example.com"
+        email: String = "test@example.com",
+        play: String = "play",
+        apple: String = "apple",
+        github: String = "github",
+        website: String = "website"
     ) {
         every { mockDeviceRepository.deviceUdid } returns udid
         every { mockDeviceRepository.installationId } returns installationId
         every { mockDeviceRepository.contactEmail } returns email
+
+        every { mockDeviceRepository.playStoreLink } returns play
+        every { mockDeviceRepository.appleAppStoreLink } returns apple
+        every { mockDeviceRepository.githubLink } returns github
+        every { mockDeviceRepository.websiteLink } returns website
 
         underTest = AboutViewModel(
             deviceRepository = mockDeviceRepository,
@@ -102,7 +107,7 @@ internal class AboutViewModelTest {
 
         verify {
             mockLogEventUseCase.logEvent("view_google_store")
-            mockOpenWebpageUseCase.invoke(PLAY_STORE_LINK)
+            mockOpenWebpageUseCase.invoke("play")
         }
     }
 
@@ -114,7 +119,7 @@ internal class AboutViewModelTest {
 
         verify {
             mockLogEventUseCase.logEvent("view_apple_store")
-            mockOpenWebpageUseCase.invoke(APPLE_STORE_LINK)
+            mockOpenWebpageUseCase.invoke("apple")
         }
     }
 
@@ -137,7 +142,7 @@ internal class AboutViewModelTest {
 
         verify {
             mockLogEventUseCase.logEvent("view_github")
-            mockOpenWebpageUseCase.invoke(GITHUB_LINK)
+            mockOpenWebpageUseCase.invoke("github")
         }
     }
 
@@ -149,7 +154,7 @@ internal class AboutViewModelTest {
 
         verify {
             mockLogEventUseCase.logEvent("view_api")
-            mockOpenWebpageUseCase.invoke(API_LINK)
+            mockOpenWebpageUseCase.invoke("website")
         }
     }
 }
