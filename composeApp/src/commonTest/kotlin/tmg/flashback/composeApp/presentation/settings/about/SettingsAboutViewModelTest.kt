@@ -1,6 +1,8 @@
 package tmg.flashback.composeApp.presentation.settings.about
 
 import dev.mokkery.MockMode.autoUnit
+import dev.mokkery.answering.returns
+import dev.mokkery.every
 import dev.mokkery.mock
 import dev.mokkery.verify
 import flashback.presentation.localisation.generated.resources.Res.string
@@ -24,7 +26,11 @@ internal class SettingsAboutViewModelTest {
     private val mockDeviceRepository: DeviceRepository = mock(autoUnit)
     private val mockToastManager: ToastManager = mock(autoUnit)
 
-    private fun initUnderTest() {
+    private fun initUnderTest(
+        releaseLink: String = RELEASES_LINK
+    ) {
+        every { mockDeviceRepository.githubReleaseLink } returns releaseLink
+
         underTest = SettingsAboutViewModel(
             openStorePageUseCase = mockOpenStorePageUseCase,
             openEmailUseCase = mockOpenEmailUseCase,
