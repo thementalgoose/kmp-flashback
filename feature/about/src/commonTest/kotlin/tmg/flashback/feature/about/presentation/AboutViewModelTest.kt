@@ -36,6 +36,7 @@ internal class AboutViewModelTest {
         play: String = "play",
         apple: String = "apple",
         github: String = "github",
+        githubRelease: String = "github/releases",
         website: String = "website"
     ) {
         every { mockDeviceRepository.deviceUdid } returns udid
@@ -45,6 +46,7 @@ internal class AboutViewModelTest {
         every { mockDeviceRepository.playStoreLink } returns play
         every { mockDeviceRepository.appleAppStoreLink } returns apple
         every { mockDeviceRepository.githubLink } returns github
+        every { mockDeviceRepository.githubReleaseLink } returns githubRelease
         every { mockDeviceRepository.websiteLink } returns website
 
         underTest = AboutViewModel(
