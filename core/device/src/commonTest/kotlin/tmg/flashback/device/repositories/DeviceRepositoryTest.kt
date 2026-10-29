@@ -98,9 +98,58 @@ internal class DeviceRepositoryTest {
         assertEquals("test", underTest.contactEmail)
     }
 
+    @Test
+    fun `play store link gets from prefs`() {
+        every { mockConfigManager.getString(expectedKeyLinkGooglePlayStore) } returns "test"
+
+        initUnderTest()
+
+        assertEquals("test", underTest.playStoreLink)
+    }
+
+    @Test
+    fun `apple app store gets from prefs`() {
+        every { mockConfigManager.getString(expectedKeyLinkAppleAppStore) } returns "test"
+
+        initUnderTest()
+
+        assertEquals("test", underTest.appleAppStoreLink)
+    }
+
+    @Test
+    fun `github gets from prefs`() {
+        every { mockConfigManager.getString(expectedKeyLinkGithub) } returns "test"
+
+        initUnderTest()
+
+        assertEquals("test", underTest.githubLink)
+    }
+
+    @Test
+    fun `github releases gets from prefs`() {
+        every { mockConfigManager.getString(expectedKeyLinkGithub) } returns "test"
+
+        initUnderTest()
+
+        assertEquals("test/releases", underTest.githubReleaseLink)
+    }
+
+    @Test
+    fun `github website gets from prefs`() {
+        every { mockConfigManager.getString(expectedKeyLinkWebsite) } returns "test"
+
+        initUnderTest()
+
+        assertEquals("test", underTest.websiteLink)
+    }
+
     companion object {
         private const val expectedKeyContactEmail: String = "email"
 
+        private const val expectedKeyLinkAppleAppStore: String = "link_apple_appstore"
+        private const val expectedKeyLinkGooglePlayStore: String = "link_google_playstore"
+        private const val expectedKeyLinkGithub: String = "link_github"
+        private const val expectedKeyLinkWebsite: String = "config_url"
         private const val expectedKeyDeviceUdid: String = "UDID"
         private const val expectedKeyInstallationId: String = "INSTALLATION_ID"
     }

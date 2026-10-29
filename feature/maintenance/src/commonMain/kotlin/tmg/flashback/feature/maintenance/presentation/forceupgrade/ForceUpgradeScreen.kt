@@ -1,63 +1,56 @@
 package tmg.flashback.feature.maintenance.presentation.forceupgrade
 
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.ModalBottomSheetProperties
-import androidx.compose.material3.SheetValue
+import androidx.compose.material3.Icon
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
 import flashback.feature.maintenance.generated.resources.Res
+import flashback.feature.maintenance.generated.resources.force_upgrade_apple
+import flashback.feature.maintenance.generated.resources.force_upgrade_github
+import flashback.feature.maintenance.generated.resources.force_upgrade_play
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.button_apple_app
+import flashback.presentation.localisation.generated.resources.button_github
+import flashback.presentation.localisation.generated.resources.button_play
 import flashback.presentation.localisation.generated.resources.force_upgrade_subtitle
 import flashback.presentation.localisation.generated.resources.force_upgrade_title
 import flashback.presentation.localisation.generated.resources.force_upgrade_upgrade
 import flashback.presentation.localisation.generated.resources.force_upgrade_validate
-import flashback.presentation.localisation.generated.resources.splash_sync_info
-import flashback.presentation.localisation.generated.resources.splash_title
-import flashback.presentation.ui.generated.resources.ic_details_issue
 import flashback.presentation.ui.generated.resources.unknown_avatar
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.feature.maintenance.presentation.forceupgrade.ForceUpgradeUiState.LOCKED
 import tmg.flashback.feature.maintenance.presentation.forceupgrade.ForceUpgradeUiState.UNLOCKED
 import tmg.flashback.feature.maintenance.presentation.forceupgrade.ForceUpgradeUiState.VALIDATING
+import tmg.flashback.infrastructure.device.Device
+import tmg.flashback.infrastructure.device.Platform
 import tmg.flashback.style.AppTheme
-import tmg.flashback.style.ApplicationTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.buttons.ButtonPrimary
-import tmg.flashback.style.buttons.ButtonTertiary
+import tmg.flashback.style.buttons.ButtonText
 import tmg.flashback.style.preview.PreviewTheme
-import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextHeadline1
 import tmg.flashback.style.text.TextTitle
-
-private val progressBarHeight: Dp = 36.dp
 
 @Composable
 fun ForceUpgradeScreen(
@@ -68,7 +61,8 @@ fun ForceUpgradeScreen(
     val uiState = viewModel.uiState.collectAsState()
 
     ForceUpgradeScreen(
-        unlockAndDismiss = unlockAndDismiss,
+        refreshConfig = viewModel::validate,
+        openStore = viewModel::goToStore,
         windowSizeClass = windowSizeClass,
         uiState = uiState.value
     )
@@ -82,7 +76,8 @@ fun ForceUpgradeScreen(
 
 @Composable
 fun ForceUpgradeScreen(
-    unlockAndDismiss: () -> Unit,
+    openStore: () -> Unit,
+    refreshConfig: () -> Unit,
     windowSizeClass: WindowSizeClass,
     uiState: ForceUpgradeUiState
 ) {
@@ -116,35 +111,44 @@ fun ForceUpgradeScreen(
             )
         )
 
-        AnimatedContent(
-            targetState = uiState,
-            content = {
-                when (it) {
-                    LOCKED -> {
-                        LinearProgressIndicator(
-                            color = AppTheme.colors.primaryContainer,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(progressBarHeight)
-                        )
-                    }
-                    VALIDATING -> {
-                        Box(modifier = Modifier.height(progressBarHeight)) { }
-                    }
-                    UNLOCKED -> {
-                        Box(modifier = Modifier.height(progressBarHeight)) { }
-                    }
-                }
-            }
+        val icon = when (Device.platform) {
+            Platform.Android -> Res.drawable.force_upgrade_play
+            Platform.IOS -> Res.drawable.force_upgrade_apple
+            Platform.Desktop -> Res.drawable.force_upgrade_github
+            Platform.WasmJs -> Res.drawable.force_upgrade_github
+        }
+        val label = when (Device.platform) {
+            Platform.Android -> stringResource(string.button_play)
+            Platform.IOS -> stringResource(string.button_apple_app)
+            Platform.Desktop -> stringResource(string.button_github)
+            Platform.WasmJs -> stringResource(string.button_github)
+        }
+
+        Image(
+            painter = painterResource(icon),
+            contentDescription = label,
+            modifier = Modifier
+                .size(80.dp)
+                .align(Alignment.CenterHorizontally),
         )
 
+        Spacer(modifier = Modifier.height(AppTheme.dimens.large))
+
         ButtonPrimary(
+            modifier = Modifier.fillMaxWidth(),
             text = stringResource(string.force_upgrade_upgrade),
-            onClick = { }
+            onClick = openStore
         )
-        ButtonTertiary(
+        ButtonText(
+            modifier = Modifier.fillMaxWidth(),
             text = stringResource(string.force_upgrade_validate),
-            onClick = { }
+            onClick = refreshConfig
+        )
+
+        Spacer(modifier = Modifier
+            .height(
+                WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding() + AppTheme.dimens.medlarge
+            )
         )
     }
 }
@@ -154,7 +158,8 @@ fun ForceUpgradeScreen(
 private fun PreviewLocked() {
     ApplicationThemePreview {
         ForceUpgradeScreen(
-            unlockAndDismiss = { },
+            openStore = { },
+            refreshConfig = { },
             windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass,
             uiState = LOCKED
         )
@@ -166,7 +171,8 @@ private fun PreviewLocked() {
 private fun PreviewLoading() {
     ApplicationThemePreview {
         ForceUpgradeScreen(
-            unlockAndDismiss = { },
+            openStore = { },
+            refreshConfig = { },
             windowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass,
             uiState = VALIDATING
         )

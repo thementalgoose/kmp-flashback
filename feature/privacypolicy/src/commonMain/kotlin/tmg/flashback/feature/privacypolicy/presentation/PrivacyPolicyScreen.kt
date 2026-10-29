@@ -33,7 +33,6 @@ import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
-import tmg.flashback.style.buttons.ButtonTertiary
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2

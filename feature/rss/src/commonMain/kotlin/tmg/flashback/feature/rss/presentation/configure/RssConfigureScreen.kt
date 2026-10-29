@@ -48,9 +48,12 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.buttons.ButtonPrimary
 import tmg.flashback.style.buttons.ButtonSecondary
+import tmg.flashback.style.buttons.ButtonText
 import tmg.flashback.style.input.InputSwitch
 import tmg.flashback.style.preview.PreviewTheme
+import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
+import tmg.flashback.style.text.TextHeadline4
 import tmg.flashback.style.text.TextSection
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.style.textinput.TextInput
@@ -282,31 +285,33 @@ private fun CustomSourceDialog(
             ),
         verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
     ) {
-        TextTitle(
+        TextHeadline4(
             text = stringResource(string.settings_rss_add_title),
             bold = true,
         )
-        TextBody2(
+        TextBody1(
             text = stringResource(string.settings_rss_add_description)
         )
         TextInput(
             text = input,
             placeholder = "https://.....",
+            modifier = Modifier.padding(vertical = AppTheme.dimens.nsmall),
         )
-        Row(
+        Column(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
+            verticalArrangement = Arrangement.spacedBy(AppTheme.dimens.small)
         ) {
-            Spacer(Modifier.weight(1f))
-            ButtonSecondary(
-                text = stringResource(string.settings_rss_add_cancel),
-                onClick = { onDismissClicked() }
-            )
             ButtonPrimary(
+                modifier = Modifier.fillMaxWidth(),
                 text = stringResource(string.settings_rss_add_confirm),
                 onClick = {
                     addCustomSource(input.value.text)
                 }
+            )
+            ButtonText(
+                modifier = Modifier.fillMaxWidth(),
+                text = stringResource(string.settings_rss_add_cancel),
+                onClick = { onDismissClicked() }
             )
         }
     }

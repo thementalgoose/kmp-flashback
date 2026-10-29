@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import tmg.flashback.configuration.usecases.FetchConfigUseCase
+import tmg.flashback.device.usecases.OpenStorePageUseCase
 import tmg.flashback.feature.maintenance.presentation.forceupgrade.ForceUpgradeUiState.LOCKED
 import tmg.flashback.feature.maintenance.presentation.forceupgrade.ForceUpgradeUiState.UNLOCKED
 import tmg.flashback.feature.maintenance.presentation.forceupgrade.ForceUpgradeUiState.VALIDATING
@@ -14,7 +15,8 @@ import tmg.flashback.feature.maintenance.repository.MaintenanceRepository
 
 class ForceUpgradeViewModel(
     private val fetchConfigUseCase: FetchConfigUseCase,
-    private val maintenanceRepository: MaintenanceRepository
+    private val maintenanceRepository: MaintenanceRepository,
+    private val openStoreUseCase: OpenStorePageUseCase
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<ForceUpgradeUiState> = MutableStateFlow(maintenanceRepository.getState())
@@ -30,5 +32,9 @@ class ForceUpgradeViewModel(
             fetchConfigUseCase.fetchAndApply()
             _uiState.update { maintenanceRepository.getState() }
         }
+    }
+
+    fun goToStore() {
+        openStoreUseCase()
     }
 }

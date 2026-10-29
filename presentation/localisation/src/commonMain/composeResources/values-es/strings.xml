@@ -211,7 +211,7 @@
 
     <string name="force_upgrade_title">Hora de actualizar</string>
     <string name="force_upgrade_subtitle">Una nueva versión de esta aplicación está disponible para descargar, por favor actualiza a la nueva versión de la aplicación para continuar</string>
-    <string name="force_upgrade_upgrade">Ir a Play Store</string>
+    <string name="force_upgrade_upgrade">Ir a app store</string>
     <string name="force_upgrade_validate">He actualizado</string>
 
 

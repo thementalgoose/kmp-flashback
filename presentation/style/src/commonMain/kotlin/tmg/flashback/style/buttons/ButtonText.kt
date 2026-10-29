@@ -51,9 +51,9 @@ fun ButtonText(
             .defaultMinSize(1.dp, 1.dp)
             .alpha(if (enabled) 1f else disabledAlpha),
         colors = ButtonDefaults.textButtonColors(
-            containerColor = AppTheme.colors.tertiaryContainer.copy(alpha = 0.3f),
+            containerColor = AppTheme.colors.tertiaryContainer.copy(alpha = 0.4f),
             contentColor = AppTheme.colors.onTertiaryContainer,
-            disabledContainerColor = AppTheme.colors.tertiaryContainer.copy(alpha = 0.3f),
+            disabledContainerColor = AppTheme.colors.tertiaryContainer.copy(alpha = 0.4f),
             disabledContentColor = AppTheme.colors.onTertiaryContainer
         ),
         enabled = enabled,
