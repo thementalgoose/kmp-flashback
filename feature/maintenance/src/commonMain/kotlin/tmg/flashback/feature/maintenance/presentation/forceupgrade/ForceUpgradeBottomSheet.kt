@@ -24,11 +24,7 @@ fun ForceUpgradeBottomSheet(
     val sheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = true,
         confirmValueChange = {
-            if (it == SheetValue.Hidden) {
-                !lockBottomSheetOnScreen.value
-            } else {
-                true
-            }
+            it != SheetValue.Hidden || !lockBottomSheetOnScreen.value
         },
     )
     val coroutineScope = rememberCoroutineScope()

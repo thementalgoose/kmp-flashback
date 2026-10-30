@@ -15,6 +15,7 @@ object RemoteConfigDefaults {
         "easteregg_summer" to false,
         "easteregg_ukraine" to false,
         "email" to "flashback@thementalgoose.com",
+        "force_upgrade" to false,
         "link_apple_appstore" to "https://apps.apple.com/us/app/flashback-formula-results/id6748612648",
         "link_google_playstore" to "https://play.google.com/store/apps/details?id=tmg.flashback",
         "link_github" to "https://github.com/thementalgoose/kmp-flashback",

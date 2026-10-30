@@ -1,8 +1,11 @@
 package tmg.flashback.feature.maintenance.presentation.forceupgrade
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,6 +17,7 @@ import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -137,12 +141,30 @@ fun ForceUpgradeScreen(
         ButtonPrimary(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(string.force_upgrade_upgrade),
-            onClick = openStore
+            onClick = openStore,
+            enabled = uiState == LOCKED
         )
+
         ButtonText(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(string.force_upgrade_validate),
-            onClick = refreshConfig
+            onClick = refreshConfig,
+            enabled = uiState == LOCKED
+        )
+
+        AnimatedContent(
+            targetState = uiState,
+            content = {
+                when (it) {
+                    VALIDATING -> LinearProgressIndicator(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(12.dp)
+                    )
+                    LOCKED,
+                    UNLOCKED -> Box(Modifier.height(12.dp))
+                }
+            }
         )
 
         Spacer(modifier = Modifier

@@ -288,6 +288,7 @@ private fun Preview() {
                 intoSubNavigation = false,
                 promptContentSync = false,
                 promptSoftUpgrade = false,
+                promptForceUpgrade = false
             ),
             navigationItemClicked = { },
             closeMenu = { },

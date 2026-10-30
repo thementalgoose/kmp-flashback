@@ -43,6 +43,7 @@ class AppNavigationViewModel(
         intoSubNavigation = false,
         promptContentSync = requiresSyncUseCase(),
         promptSoftUpgrade = maintenanceRepository.softUpgrade,
+        promptForceUpgrade = maintenanceRepository.forceUpgrade
     ))
     val uiState: StateFlow<AppNavigationUIState> = _uiState
 
