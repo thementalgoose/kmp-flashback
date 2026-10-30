@@ -59,6 +59,7 @@ import tmg.flashback.composeApp.presentation.sync.SyncBottomSheet
 import tmg.flashback.composeApp.presentation.toScreen
 import tmg.flashback.eastereggs.presentation.snow
 import tmg.flashback.eastereggs.presentation.summer
+import tmg.flashback.feature.maintenance.presentation.forceupgrade.ForceUpgradeBottomSheet
 import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.infrastructure.log.logDebug
@@ -215,6 +216,15 @@ fun AppContent(
         if (isOpen.value) {
             SyncBottomSheet(
                 hide = { isOpen.value = false },
+                windowSizeClass = windowSizeClass
+            )
+        }
+
+        // Force upgrade
+        val forceUpgrade = remember { mutableStateOf(appNavigationUiState.value.promptForceUpgrade) }
+        if (forceUpgrade.value) {
+            ForceUpgradeBottomSheet(
+                hide = { forceUpgrade.value = false },
                 windowSizeClass = windowSizeClass
             )
         }

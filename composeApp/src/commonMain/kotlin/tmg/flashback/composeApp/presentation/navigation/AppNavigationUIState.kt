@@ -1,7 +1,5 @@
 package tmg.flashback.composeApp.presentation.navigation
 
-import tmg.flashback.composeApp.repositories.model.NavLink
-import tmg.flashback.eastereggs.model.MenuIcons
 import tmg.flashback.navigation.Screen
 
 data class AppNavigationUIState(
@@ -11,6 +9,7 @@ data class AppNavigationUIState(
     val intoSubNavigation: Boolean,
     val promptContentSync: Boolean,
     val promptSoftUpgrade: Boolean,
+    val promptForceUpgrade: Boolean,
 )
 
 data class AppNavigationEasterEggs(
