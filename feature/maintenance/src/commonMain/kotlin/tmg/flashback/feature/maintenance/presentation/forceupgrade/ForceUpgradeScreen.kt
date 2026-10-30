@@ -141,13 +141,15 @@ fun ForceUpgradeScreen(
         ButtonPrimary(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(string.force_upgrade_upgrade),
-            onClick = openStore
+            onClick = openStore,
+            enabled = uiState == LOCKED
         )
 
         ButtonText(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(string.force_upgrade_validate),
-            onClick = refreshConfig
+            onClick = refreshConfig,
+            enabled = uiState == LOCKED
         )
 
         AnimatedContent(
