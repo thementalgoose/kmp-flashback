@@ -5,7 +5,9 @@ import dev.mokkery.MockMode.autoUnit
 import dev.mokkery.answering.returns
 import dev.mokkery.every
 import dev.mokkery.mock
+import dev.mokkery.verify
 import kotlinx.coroutines.runBlocking
+import tmg.flashback.device.usecases.OpenStorePageUseCase
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
 import tmg.flashback.webbrowser.usecases.IsInAppBrowserEnabledUseCase
 import tmg.flashback.widgets.upnext.usecases.IsWidgetsEnabledUseCase
@@ -18,13 +20,15 @@ internal class AllSettingsViewModelTest {
 
     private val mockIsWidgetEnabledUseCase: IsWidgetsEnabledUseCase = mock(autoUnit)
     private val mockIsRssEnabledUseCase: IsRssEnabledUseCase = mock(autoUnit)
+    private val mockOpenStorePageUseCase: OpenStorePageUseCase = mock(autoUnit)
     private val mockIsInAppBrowserEnabledUseCase: IsInAppBrowserEnabledUseCase = mock(autoUnit)
 
     private fun initUnderTest() {
         underTest = AllSettingsViewModel(
             isWidgetsEnabledUseCase = mockIsWidgetEnabledUseCase,
             isRssEnabledUseCase = mockIsRssEnabledUseCase,
-            isInAppBrowserEnabledUseCase = mockIsInAppBrowserEnabledUseCase
+            isInAppBrowserEnabledUseCase = mockIsInAppBrowserEnabledUseCase,
+            openStorePageUseCase = mockOpenStorePageUseCase
         )
     }
 
@@ -58,6 +62,21 @@ internal class AllSettingsViewModelTest {
         initUnderTest()
         underTest.uiState.test {
             assertEquals(true, awaitItem().isInAppBrowserSupported)
+        }
+    }
+
+    @Test
+    fun `open store calls use case`() {
+        every { mockOpenStorePageUseCase.invoke() } returns Unit
+        every { mockIsWidgetEnabledUseCase.invoke() } returns false
+        every { mockIsRssEnabledUseCase.invoke() } returns false
+        every { mockIsInAppBrowserEnabledUseCase.invoke() } returns false
+        initUnderTest()
+
+        underTest.openStore()
+
+        verify {
+            mockOpenStorePageUseCase()
         }
     }
 }

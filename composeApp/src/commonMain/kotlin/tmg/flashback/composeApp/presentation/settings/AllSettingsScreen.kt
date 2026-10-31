@@ -65,6 +65,7 @@ internal fun AllSettingsScreen(
     }
 
     AllSettingsScreen(
+        openStore = viewModel::openStore,
         navigateToSubScreen = navigateToSubScreen,
         uiState = uiState.value,
         paddingValues = insets
@@ -74,6 +75,7 @@ internal fun AllSettingsScreen(
 @Composable
 private fun AllSettingsScreen(
     navigateToSubScreen: (Screen) -> Unit,
+    openStore: () -> Unit,
     uiState: AllSettingsUiState,
     paddingValues: PaddingValues,
 ) {
@@ -164,16 +166,20 @@ private fun AllSettingsScreen(
             title = string.settings_header_other,
             content = {
                 SettingCategory(
+                    item = Settings.AboutCategory,
+                    itemClicked = { navigateToSubScreen(NavAbout) }
+                )
+                SettingCategory(
+                    item = Settings.Rate,
+                    itemClicked = { openStore() }
+                )
+                SettingCategory(
                     item = Settings.PrivacyCategory,
                     itemClicked = { navigateToSubScreen(NavSettingsPrivacy) }
                 )
                 SettingCategory(
                     item = Settings.PrivacyPolicy,
                     itemClicked = { navigateToSubScreen(NavPrivacyPolicy) }
-                )
-                SettingCategory(
-                    item = Settings.AboutCategory,
-                    itemClicked = { navigateToSubScreen(NavAbout) }
                 )
             }
         )
