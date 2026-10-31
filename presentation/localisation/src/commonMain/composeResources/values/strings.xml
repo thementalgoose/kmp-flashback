@@ -363,7 +363,7 @@
 
     <string name="settings_section_notifications_upcoming_title">Upcoming races</string>
     <string name="settings_section_notifications_upcoming_description">Get notified for upcoming races</string>
-    <string name="settings_section_notifications_breaking_title">Breaking news</string>
+    <string name="settings_section_notifications_breaking_title">News stories</string>
     <string name="settings_section_notifications_breaking_description">Get notified for breaking news stories</string>
     <string name="settings_section_notifications_results_title">Race results</string>
     <string name="settings_section_notifications_results_description">Get notified when race results are available</string>
