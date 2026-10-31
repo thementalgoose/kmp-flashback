@@ -21,6 +21,7 @@ import androidx.compose.material.icons.filled.BugReport
 import androidx.compose.material.icons.filled.DriveFileRenameOutline
 import androidx.compose.material.icons.filled.FlashOn
 import androidx.compose.material.icons.filled.FormatPaint
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Link
 import androidx.compose.material.icons.filled.RssFeed
 import androidx.compose.material.icons.filled.Search
@@ -183,6 +184,13 @@ fun PaddockScreen(
                         )
                     )
                 }
+
+                is NavLink.Info -> {
+                    Info(
+                        navLink = it,
+                        modifier = Modifier
+                    )
+                }
             }
         }
     }
@@ -268,10 +276,30 @@ private fun Links(
     Container(
         modifier = modifier,
         title = navLink.name,
-        subtitle = navLink.url,
+        subtitle = navLink.description ?: navLink.url,
         icon = {
             Icon(
                 imageVector = Icons.Default.Link,
+                contentDescription = null,
+                tint = AppTheme.colors.primary
+            )
+        }
+    )
+}
+
+@Composable
+private fun Info(
+    navLink: NavLink.Info,
+    modifier: Modifier = Modifier,
+) {
+    Container(
+        modifier = modifier,
+        title = navLink.name,
+        subtitle = navLink.description,
+        showArrow = false,
+        icon = {
+            Icon(
+                imageVector = Icons.Default.Info,
                 contentDescription = null,
                 tint = AppTheme.colors.primary
             )
@@ -321,6 +349,7 @@ private fun Container(
     title: String,
     subtitle: String?,
     modifier: Modifier = Modifier,
+    showArrow: Boolean = true,
     icon: (@Composable () -> Unit)? = null,
     content: @Composable () -> Unit = { },
 ) {
@@ -355,11 +384,13 @@ private fun Container(
                     TextBody2(subtitle)
                 }
             }
-            Icon(
-                imageVector = Icons.AutoMirrored.Default.ArrowForward,
-                contentDescription = null,
-                tint = AppTheme.colors.onSurface
-            )
+            if (showArrow) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Default.ArrowForward,
+                    contentDescription = null,
+                    tint = AppTheme.colors.onSurface
+                )
+            }
         }
         content()
     }
@@ -377,9 +408,27 @@ private fun Preview() {
             uiState = PaddockUiState(
                 isRssEnabled = true,
                 navLinks = listOf(
-                    NavLink.Url("formula1", "https://formula1.com")
+                    NavLink.Url("formula1", null, "https://formula1.com"),
                 )
             )
         )
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewExtraLinks() {
+    ApplicationThemePreview {
+        Column(
+            modifier = Modifier
+                .padding(all = 4.dp)
+                .background(AppTheme.colors.surface),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            Links(navLink = NavLink.Url(name = "URL", description = "with description", url = "https://www.google.com"))
+            Links(navLink = NavLink.Url(name = "URL", description = null, url = "https://www.google.com"))
+            Info(navLink = NavLink.Info(name = "INFO", description = "with description"))
+            Info(navLink = NavLink.Info(name = "INFO", description = null))
+        }
     }
 }

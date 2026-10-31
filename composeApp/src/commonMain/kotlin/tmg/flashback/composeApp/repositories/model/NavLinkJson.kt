@@ -17,4 +17,6 @@ internal data class NavLinkJson(
     val name: String? = null,
     @SerialName("url")
     val url: String? = null,
+    @SerialName("description")
+    val description: String? = null,
 )

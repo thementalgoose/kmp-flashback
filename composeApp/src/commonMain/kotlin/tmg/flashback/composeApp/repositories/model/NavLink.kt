@@ -6,7 +6,14 @@ sealed interface NavLink {
 
     data class Url(
         val name: String,
+        val description: String?,
         val url: String,
         override val id: String = "url_${url.hashCode()}"
+    ): NavLink
+
+    data class Info(
+        val name: String,
+        val description: String?,
+        override val id: String = "info_${name.hashCode()}"
     ): NavLink
 }
