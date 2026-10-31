@@ -137,7 +137,7 @@ fun WeekendScreenTab(
     clickWeekendTab: (WeekendTabs) -> Unit,
     openLink: (String) -> Unit,
     openMap: (Location, String) -> Unit,
-    clickReportIssue: (Int, Int) -> Unit,
+    clickReportIssue: (Int, Int, String) -> Unit,
     windowSizeClass: WindowSizeClass,
     uiState: WeekendUiState,
     selectResultType: (ResultType) -> Unit,
@@ -216,7 +216,7 @@ fun WeekendScreenTab(
                     tmg.flashback.feature.weekend.presentation.components.ReportIssueDialog(
                         onConfirm = {
                             showReportIssueDialog.value = false
-                            clickReportIssue(uiState.season, uiState.info.round)
+                            clickReportIssue(uiState.season, uiState.info.round, uiState.tab.id)
                         },
                         onDismiss = {
                             showReportIssueDialog.value = false

@@ -40,6 +40,7 @@ import tmg.flashback.formula1.model.QualifyingType
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.ui.toasts.ToastManager
 import org.koin.core.annotation.KoinViewModel
+import tmg.flashback.crashlytics.manager.CrashlyticsManager
 
 @KoinViewModel
 class WeekendViewModel(
@@ -53,7 +54,7 @@ class WeekendViewModel(
     private val openWebpageUseCase: OpenWebpageUseCase,
     private val openLocationUseCase: OpenLocationUseCase,
     private val getPreviousRaceUseCase: GetPreviousRaceUseCase,
-    private val analyticsManager: AnalyticsManager,
+    private val crashlyticsManager: CrashlyticsManager,
     private val toastManager: ToastManager,
     coroutineScope: CoroutineScope? = null
 ): ViewModel() {
@@ -164,11 +165,12 @@ class WeekendViewModel(
         )
     }
 
-    fun reportIssue(season: Int, round: Int) {
+    fun reportIssue(season: Int, round: Int, tab: String) {
         scope.launch {
-            analyticsManager.logEvent("report_issue", mapOf(
-                analyticsSeason to season.toString(),
-                analyticsRound to round.toString()
+            crashlyticsManager.logException(WeekendDataIncorrectException(
+                round = round,
+                season = season,
+                tab = tab
             ))
             toastManager.showMessage(string.report_issue_thanks)
         }
@@ -192,3 +194,11 @@ class WeekendViewModel(
         }
     }
 }
+
+class WeekendDataIncorrectException(
+    val round: Int,
+    val season: Int,
+    val tab: String
+): IllegalStateException(
+    "Issue reported with $season, round $round ($tab) data"
+)

@@ -10,6 +10,7 @@ import dev.mokkery.mock
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import tmg.flashback.analytics.manager.AnalyticsManager
+import tmg.flashback.crashlytics.manager.CrashlyticsManager
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
 import tmg.flashback.device.usecases.OpenLocationUseCase
@@ -44,7 +45,7 @@ class WeekendViewModelTest {
     private val mockOpenWebpageUseCase: OpenWebpageUseCase = mock(autoUnit)
     private val mockOpenLocationUseCase: OpenLocationUseCase = mock(autoUnit)
     private val mockGetPreviousRaceUseCase: GetPreviousRaceUseCase = mock(autoUnit)
-    private val mockAnalyticsManager: AnalyticsManager = mock(autoUnit)
+    private val mockCrashlyticsManager: CrashlyticsManager = mock(autoUnit)
     private val mockToastManager: ToastManager = mock(autoUnit)
 
     private fun kotlinx.coroutines.test.TestScope.createViewModel(): WeekendViewModel {
@@ -59,7 +60,7 @@ class WeekendViewModelTest {
             openWebpageUseCase = mockOpenWebpageUseCase,
             openLocationUseCase = mockOpenLocationUseCase,
             getPreviousRaceUseCase = mockGetPreviousRaceUseCase,
-            analyticsManager = mockAnalyticsManager,
+            crashlyticsManager = mockCrashlyticsManager,
             toastManager = mockToastManager,
             coroutineScope = backgroundScope
         )
