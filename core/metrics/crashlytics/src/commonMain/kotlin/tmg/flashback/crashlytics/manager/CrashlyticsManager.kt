@@ -23,7 +23,7 @@ internal class CrashlyticsManagerImpl(
     }
 
     override fun logException(exception: Exception, msg: String?) {
-        firebaseCrashlyticsService.logError(msg ?: exception.message ?: "Error Occured")
+        firebaseCrashlyticsService.logError(msg ?: exception.message ?: "Error Occurred")
         firebaseCrashlyticsService.recordException(exception)
     }
 }
