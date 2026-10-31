@@ -199,4 +199,6 @@ class WeekendDataIncorrectException(
     val round: Int,
     val season: Int,
     val tab: String
-): IllegalStateException(message = "Issue reported with $season, round $round ($tab) data")
+): IllegalStateException(
+    "Issue reported with $season, round $round ($tab) data"
+)
