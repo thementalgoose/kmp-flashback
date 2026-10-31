@@ -1,5 +1,6 @@
 package tmg.flashback.composeApp.presentation.navigation
 
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -21,6 +22,9 @@ import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
 import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.navigation.Screen
 import tmg.flashback.navigation.isList
+import tmg.flashback.ui.toasts.Duration
+import tmg.flashback.ui.toasts.ToastManager
+import org.jetbrains.compose.resources.StringResource
 
 @KoinViewModel
 class AppNavigationViewModel(
@@ -31,7 +35,13 @@ class AppNavigationViewModel(
     maintenanceRepository: MaintenanceRepository,
     private val openWebpageUseCase: OpenWebpageUseCase,
     private val openStorePageUseCase: OpenStorePageUseCase,
+    private val toastManager: ToastManager,
 ): ViewModel() {
+
+    fun updateToastColors(background: Color, foreground: Color) {
+        toastManager.backgroundColor = background
+        toastManager.foregroundColor = foreground
+    }
 
     val easterEggs = AppNavigationEasterEggs(
         snow = isSnowEnabledUseCase(),
@@ -102,5 +112,11 @@ internal val previewAppNavigationViewModel = AppNavigationViewModel(
         override fun invoke() {
             // No-op
         }
+    },
+    toastManager = object : ToastManager {
+        override var backgroundColor: Color = Color.Unspecified
+        override var foregroundColor: Color = Color.Unspecified
+        override fun showMessage(message: String, duration: Duration) {}
+        override fun showMessage(resourceId: StringResource, duration: Duration) {}
     },
 )

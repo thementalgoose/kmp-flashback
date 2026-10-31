@@ -3,7 +3,6 @@ package tmg.flashback.composeApp
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.koin.mp.KoinPlatform
-import tmg.flashback.feature.notifications.usecases.SubscribeResultNotificationsUseCase
 
 /**
  * Called from the iOS App Delegate after a device token is retrieved
@@ -12,7 +11,7 @@ import tmg.flashback.feature.notifications.usecases.SubscribeResultNotifications
  */
 fun doSubscribe() {
     GlobalScope.launch {
-        val subscribeResultNotificationsUseCase = KoinPlatform.getKoinOrNull()?.get<SubscribeResultNotificationsUseCase>()
-        subscribeResultNotificationsUseCase?.invoke()
+        val startup = KoinPlatform.getKoinOrNull()?.get<FlashbackIOSStartup>()
+        startup?.subscribeNotifications()
     }
 }
