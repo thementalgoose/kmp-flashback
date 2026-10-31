@@ -17,11 +17,13 @@ import tmg.flashback.notifications.manager.NotificationManager
 import tmg.flashback.notifications.repositories.NotificationRepository
 import tmg.flashback.notifications.usecases.LocalNotificationsCancelUseCase
 import tmg.flashback.notifications.usecases.LocalNotificationsScheduleUseCase
+import org.koin.core.annotation.Single
 
 interface ScheduleUpcomingNotificationsUseCase {
     suspend operator fun invoke(force: Boolean = false): ScheduleResult
 }
 
+@Single
 internal class ScheduleUpcomingNotificationsUseCaseImpl(
     private val overviewRepository: OverviewRepository,
     private val notificationRepository: NotificationRepository,

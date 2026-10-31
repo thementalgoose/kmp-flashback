@@ -1,11 +1,10 @@
 package tmg.flashback.feature.circuits.di
 
-import org.koin.core.module.dsl.viewModel
-import org.koin.dsl.module
-import tmg.flashback.feature.circuits.presentation.circuit.CircuitViewModel
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Configuration
+import org.koin.core.annotation.Module
 
-val featureCircuitsModule = listOf(module())
-
-internal fun module() = module {
-    viewModel { CircuitViewModel(get(), get(), get())  }
-}
+@Module
+@ComponentScan("tmg.flashback.feature.circuits")
+@Configuration
+class FeatureCircuitsModule

@@ -3,8 +3,10 @@ package tmg.flashback.widgets.upnext.usecases
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
+import org.koin.core.annotation.Single
 import tmg.flashback.widgets.upnext.presentation.UpNextWidgetReceiver
 
+@Single
 internal class HasUpNextWidgetsUseCaseImpl(
     private val applicationContext: Context
 ): HasUpNextWidgetsUseCase {

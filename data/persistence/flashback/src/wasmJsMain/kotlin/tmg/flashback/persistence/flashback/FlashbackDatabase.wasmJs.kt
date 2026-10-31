@@ -6,11 +6,13 @@ import androidx.sqlite.SQLiteDriver
 import androidx.sqlite.driver.web.WebWorkerSQLiteDriver
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import org.koin.core.annotation.Single
 import org.w3c.dom.Worker
 
 @OptIn(ExperimentalWasmJsInterop::class)
 private fun createSqliteWorker(): Worker = js("""new Worker(new URL("sqlite-wasm-worker/worker.js", import.meta.url))""")
 
+@Single
 actual class FlashbackDatabaseFactory {
     actual fun createDatabase(): RoomDatabase.Builder<FlashbackDatabase> =
         Room.inMemoryDatabaseBuilder()

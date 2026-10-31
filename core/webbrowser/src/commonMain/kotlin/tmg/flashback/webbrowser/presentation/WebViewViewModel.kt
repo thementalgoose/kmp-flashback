@@ -3,6 +3,7 @@ package tmg.flashback.webbrowser.presentation
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.device.usecases.ShareWebpageUseCase
 import tmg.flashback.webbrowser.repository.WebRepository
@@ -11,6 +12,7 @@ data class WebViewUiState(
     val toolbarAtTop: Boolean
 )
 
+@KoinViewModel
 class WebViewViewModel(
     webRepository: WebRepository,
     private val shareWebpageUseCase: ShareWebpageUseCase,

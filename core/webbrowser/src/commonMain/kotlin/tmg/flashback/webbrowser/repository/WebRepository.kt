@@ -1,5 +1,6 @@
 package tmg.flashback.webbrowser.repository
 
+import org.koin.core.annotation.Single
 import tmg.flashback.preferences.manager.PreferenceManager
 
 interface WebRepository {
@@ -8,6 +9,7 @@ interface WebRepository {
     var toolbarAtTop: Boolean
 }
 
+@Single
 internal class WebRepositoryImpl(
     private val preferenceManager: PreferenceManager
 ): WebRepository {

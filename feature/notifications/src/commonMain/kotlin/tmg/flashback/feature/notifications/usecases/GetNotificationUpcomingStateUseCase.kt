@@ -2,11 +2,13 @@ package tmg.flashback.feature.notifications.usecases
 
 import tmg.flashback.feature.notifications.model.NotificationUpcoming
 import tmg.flashback.feature.notifications.model.NotificationUpcomingState
+import org.koin.core.annotation.Single
 
 interface GetNotificationUpcomingStateUseCase {
     operator fun invoke(): NotificationUpcomingState
 }
 
+@Single
 internal class GetNotificationUpcomingStateUseCaseImpl(
     private val isNotificationEnabledUseCase: IsNotificationEnabledUseCase,
 ): GetNotificationUpcomingStateUseCase {

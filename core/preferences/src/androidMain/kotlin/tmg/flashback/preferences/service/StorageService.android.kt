@@ -3,9 +3,11 @@ package tmg.flashback.preferences.service
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import org.koin.core.annotation.Single
 
 internal const val prefsKey = "Flashback"
 
+@Single
 actual class StorageService(
     private val context: Application
 ) {

@@ -4,9 +4,11 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.feature.weekend.repositories.WeatherRepository
 import tmg.flashback.feature.weekend.repositories.WeekendRepository
 
+@KoinViewModel
 class SettingsLayoutRaceViewModel(
     private val weekendRepository: WeekendRepository,
     private val weatherRepository: WeatherRepository,

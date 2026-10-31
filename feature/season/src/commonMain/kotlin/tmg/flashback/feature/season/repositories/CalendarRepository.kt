@@ -1,6 +1,7 @@
 package tmg.flashback.feature.season.repositories
 
 import tmg.flashback.preferences.manager.PreferenceManager
+import org.koin.core.annotation.Single
 
 interface CalendarRepository {
     var viewedSeasons: Set<Int>
@@ -11,6 +12,7 @@ interface CalendarRepository {
     var seenDatePrompt: Boolean
 }
 
+@Single
 internal class CalendarRepositoryImpl(
     private val preferenceManager: PreferenceManager,
 ): CalendarRepository {

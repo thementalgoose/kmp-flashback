@@ -4,10 +4,12 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.analytics.usecases.LogEventUseCase
 import tmg.flashback.style.theme.NightMode
 import tmg.flashback.style.theme.ThemeManager
 
+@KoinViewModel
 class SettingsDarkModeViewModel(
     private val themeManager: ThemeManager,
     private val logEventUseCase: LogEventUseCase

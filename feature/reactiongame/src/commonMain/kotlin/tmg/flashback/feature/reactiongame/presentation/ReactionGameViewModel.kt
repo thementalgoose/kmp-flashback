@@ -13,7 +13,9 @@ import kotlinx.coroutines.launch
 import tmg.flashback.analytics.usecases.LogEventUseCase
 import tmg.flashback.feature.reactiongame.manager.LightsOutDelayProvider
 import tmg.flashback.infrastructure.datetime.TimeManager
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class ReactionGameViewModel(
     private val lightsOutDelayProvider: LightsOutDelayProvider,
     private val timeManager: TimeManager,

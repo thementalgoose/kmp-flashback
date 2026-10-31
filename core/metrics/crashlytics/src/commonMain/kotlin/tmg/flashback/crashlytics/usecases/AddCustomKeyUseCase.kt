@@ -1,5 +1,6 @@
 package tmg.flashback.crashlytics.usecases
 
+import org.koin.core.annotation.Single
 import tmg.flashback.crashlytics.firebase.FirebaseCrashlyticsService
 import tmg.flashback.crashlytics.model.FirebaseKey
 
@@ -8,6 +9,7 @@ interface AddCustomKeyUseCase {
     fun invoke(key: FirebaseKey, value: Boolean)
 }
 
+@Single
 internal class AddCustomKeyUseCaseImpl(
     private val firebaseCrashlyticsService: FirebaseCrashlyticsService
 ): AddCustomKeyUseCase {

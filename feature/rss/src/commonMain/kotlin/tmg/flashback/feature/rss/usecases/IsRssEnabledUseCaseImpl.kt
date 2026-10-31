@@ -1,7 +1,9 @@
 package tmg.flashback.feature.rss.usecases
 
 import tmg.flashback.feature.rss.repositories.RssRepository
+import org.koin.core.annotation.Single
 
+@Single
 internal class IsRssEnabledUseCaseImpl(
     private val rssRepository: RssRepository
 ): IsRssEnabledUseCase {

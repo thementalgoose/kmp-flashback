@@ -1,10 +1,12 @@
 package tmg.flashback.data.repo.mappers.network
 
+import org.koin.core.annotation.Single
 import tmg.flashback.persistence.flashback.models.drivers.DriverSeason
 import tmg.flashback.persistence.flashback.models.drivers.DriverSeasonRace
 import tmg.flashback.flashbackapi.api.models.drivers.DriverHistoryStanding
 import tmg.flashback.flashbackapi.api.models.drivers.DriverHistoryStandingRace
 
+@Single
 class NetworkDriverMapper {
 
     @Throws(RuntimeException::class)

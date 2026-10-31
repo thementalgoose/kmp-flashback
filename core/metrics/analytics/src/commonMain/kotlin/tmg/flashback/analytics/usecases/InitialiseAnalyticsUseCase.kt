@@ -9,6 +9,7 @@ import tmg.flashback.analytics.model.UserProperty.DEVICE_MANUFACTURER
 import tmg.flashback.analytics.model.UserProperty.DEVICE_MODEL
 import tmg.flashback.analytics.model.UserProperty.OS_VERSION
 import tmg.flashback.analytics.model.UserProperty.PLATFORM
+import org.koin.core.annotation.Single
 import tmg.flashback.analytics.repositories.AnalyticsRepository
 import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.infrastructure.device.Platform
@@ -17,6 +18,7 @@ interface InitialiseAnalyticsUseCase {
     fun initialise(userId: String)
 }
 
+@Single
 internal class InitialiseAnalyticsUseCaseImpl(
     private val firebaseAnalyticsService: FirebaseAnalyticsService,
     private val analyticsRepository: AnalyticsRepository

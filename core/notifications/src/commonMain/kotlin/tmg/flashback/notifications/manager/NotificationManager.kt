@@ -1,6 +1,7 @@
 package tmg.flashback.notifications.manager
 
 import kotlinx.datetime.LocalDateTime
+import org.koin.core.annotation.Single
 
 interface NotificationManager {
     fun schedule(
@@ -23,6 +24,7 @@ interface NotificationManager {
     fun isChannelActive(channelId: String): Boolean
 }
 
+@Single(binds = [NotificationManager::class])
 expect class NotificationManagerImpl(): NotificationManager {
     override fun schedule(
         uuid: Int,

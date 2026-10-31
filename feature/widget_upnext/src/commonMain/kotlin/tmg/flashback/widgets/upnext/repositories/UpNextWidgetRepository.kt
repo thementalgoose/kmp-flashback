@@ -1,6 +1,7 @@
 package tmg.flashback.widgets.upnext.repositories
 
 import tmg.flashback.preferences.manager.PreferenceManager
+import org.koin.core.annotation.Single
 
 interface UpNextWidgetRepository {
     var showBackground: Boolean
@@ -8,6 +9,7 @@ interface UpNextWidgetRepository {
     var showWeather: Boolean
 }
 
+@Single
 internal class UpNextWidgetRepositoryImpl(
     private val preferenceManager: PreferenceManager
 ): UpNextWidgetRepository {

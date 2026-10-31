@@ -1,9 +1,11 @@
 package tmg.flashback.data.repo.mappers.network
 
+import org.koin.core.annotation.Single
 import tmg.flashback.persistence.flashback.models.standings.DriverStanding
 import tmg.flashback.persistence.flashback.models.standings.DriverStandingConstructor
 import tmg.flashback.flashbackapi.api.models.races.DriverStandings
 
+@Single
 class NetworkDriverStandingMapper {
 
     @Throws(RuntimeException::class)

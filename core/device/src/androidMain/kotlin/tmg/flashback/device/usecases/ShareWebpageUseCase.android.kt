@@ -3,9 +3,11 @@ package tmg.flashback.device.usecases
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import org.koin.core.annotation.Single
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
+@Single(binds = [ShareWebpageUseCase::class])
 actual class ShareWebpageUseCaseImpl actual constructor() : ShareWebpageUseCase, KoinComponent {
 
     private val copyToClipboardUseCase: CopyToClipboardUseCase by inject()

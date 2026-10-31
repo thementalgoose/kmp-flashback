@@ -2,6 +2,7 @@ package tmg.flashback.data.repo.repository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import org.koin.core.annotation.Single
 import tmg.flashback.data.repo.mappers.app.DriverDataMapper
 import tmg.flashback.data.repo.mappers.app.DriverMapper
 import tmg.flashback.data.repo.mappers.network.NetworkCircuitDataMapper
@@ -22,6 +23,7 @@ interface DriverRepository {
     fun getDrivers(): Flow<List<tmg.flashback.formula1.model.Driver>>
 }
 
+@Single
 internal class DriverRepositoryImpl(
     private val api: FlashbackApi,
     private val persistence: FlashbackDatabase,

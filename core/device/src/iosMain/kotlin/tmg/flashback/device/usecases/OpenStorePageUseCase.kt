@@ -1,5 +1,6 @@
 package tmg.flashback.device.usecases
 
+import org.koin.core.annotation.Single
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import platform.Foundation.NSURL
@@ -9,6 +10,7 @@ import tmg.flashback.device.manager.UiManager
 import tmg.flashback.device.repositories.DeviceRepository
 import kotlin.getValue
 
+@Single(binds = [OpenStorePageUseCase::class])
 actual class OpenStorePageUseCaseImpl actual constructor(): OpenStorePageUseCase, KoinComponent {
 
     private val uiManager: UiManager by inject()

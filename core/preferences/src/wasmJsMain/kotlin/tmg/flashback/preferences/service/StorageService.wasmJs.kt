@@ -1,5 +1,8 @@
 package tmg.flashback.preferences.service
 
+import org.koin.core.annotation.Single
+
+@Single
 actual class StorageService {
 
     val memoryCache: MutableMap<String, Any> = mutableMapOf()

@@ -1,9 +1,11 @@
 package tmg.flashback.data.repo.mappers.network
 
+import org.koin.core.annotation.Single
 import tmg.flashback.persistence.flashback.models.overview.Schedule
 import tmg.flashback.flashbackapi.api.models.overview.OverviewRace
 import tmg.flashback.flashbackapi.api.models.races.Race
 
+@Single
 class NetworkScheduleMapper {
 
     @Throws(RuntimeException::class)

@@ -1,5 +1,6 @@
 package tmg.flashback.device.usecases
 
+import org.koin.core.annotation.Single
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import platform.Foundation.NSURL
@@ -12,6 +13,7 @@ import tmg.flashback.infrastructure.log.logInfo
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.email_copy_to_clipboard
 
+@Single(binds = [OpenEmailUseCase::class])
 actual class OpenEmailUseCaseImpl actual constructor(): OpenEmailUseCase, KoinComponent {
 
     private val uiManager: UiManager by inject()

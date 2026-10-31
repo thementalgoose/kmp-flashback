@@ -1,10 +1,12 @@
 package tmg.flashback.composeApp.firebase
 
+import org.koin.core.annotation.Single
 import tmg.flashback.analytics.firebase.FirebaseAnalyticsService
 import tmg.flashback.configuration.firebase.FirebaseRemoteConfigService
 import tmg.flashback.crashlytics.firebase.FirebaseCrashlyticsService
 import tmg.flashback.notifications.firebase.FirebaseMessagingService
 
+@Single
 internal actual class FirebaseAnalyticsServiceImpl actual constructor() : FirebaseAnalyticsService {
     actual override fun setUserId(userId: String) { }
     actual override fun setAnalyticsCollectionEnabled(enabled: Boolean) { }
@@ -13,6 +15,7 @@ internal actual class FirebaseAnalyticsServiceImpl actual constructor() : Fireba
     actual override fun logViewScreen(screenName: String, params: Map<String, String>, clazz: kotlin.reflect.KClass<*>?) { }
 }
 
+@Single
 internal actual class FirebaseCrashlyticsServiceImpl actual constructor() : FirebaseCrashlyticsService {
     actual override fun setCrashlyticsCollectionEnabled(enabled: Boolean) { }
     actual override fun setCustomKey(key: String, value: String) { }
@@ -23,15 +26,18 @@ internal actual class FirebaseCrashlyticsServiceImpl actual constructor() : Fire
     actual override fun recordException(error: Exception) { }
 }
 
+@Single
 internal actual class FirebaseInstallationServiceImpl actual constructor() : FirebaseInstallationService {
     actual override suspend fun getInstallationId(): String? = null
 }
 
+@Single
 internal actual class FirebaseMessagingServiceImpl actual constructor() : FirebaseMessagingService {
     actual override suspend fun subscribeToTopic(topicId: String): Boolean = false
     actual override suspend fun unsubscribeFromTopic(topicId: String): Boolean = false
 }
 
+@Single
 internal actual class FirebaseRemoteConfigServiceImpl actual constructor() : FirebaseRemoteConfigService {
     actual override suspend fun activate(): Boolean = false
     actual override suspend fun reset() { }

@@ -5,9 +5,11 @@ import android.content.Intent
 import androidx.core.net.toUri
 import android.os.Build
 import android.provider.Settings
+import org.koin.core.annotation.Single
 import org.koin.java.KoinJavaComponent
 import tmg.flashback.infrastructure.device.Device
 
+@Single(binds = [OpenSettingsUseCase::class])
 actual class OpenSettingsUseCaseImpl actual constructor(): OpenSettingsUseCase {
 
     private fun getApplicationContext(): Context {

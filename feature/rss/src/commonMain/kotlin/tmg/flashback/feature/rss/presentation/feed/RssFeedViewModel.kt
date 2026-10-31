@@ -20,7 +20,9 @@ import tmg.flashback.webbrowser.usecases.IsInAppBrowserEnabledUseCase
 import kotlin.Boolean
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class RSSFeedViewModel(
     private val rssRepository: RssRepository,
     private val openWebpageUseCase: OpenWebpageUseCase,

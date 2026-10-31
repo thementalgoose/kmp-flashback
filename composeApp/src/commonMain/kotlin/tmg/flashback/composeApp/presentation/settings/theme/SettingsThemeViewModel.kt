@@ -7,10 +7,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import tmg.flashback.analytics.usecases.LogEventUseCase
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.style.theme.Theme
 import tmg.flashback.style.theme.ThemeManager
 import tmg.flashback.ui.toasts.ToastManager
 
+@KoinViewModel
 class SettingsThemeViewModel(
     private val themeManager: ThemeManager,
     private val toastManager: ToastManager,

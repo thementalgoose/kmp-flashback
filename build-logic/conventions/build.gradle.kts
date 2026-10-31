@@ -5,6 +5,7 @@ plugins {
 dependencies {
     compileOnly(libs.kotlin.gradle.plugin)
     compileOnly(libs.android.gradle.plugin)
+    compileOnly(libs.koin.compiler.gradle.plugin)
 }
 
 tasks {

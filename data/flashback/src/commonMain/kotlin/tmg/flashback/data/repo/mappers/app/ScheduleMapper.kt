@@ -1,11 +1,13 @@
 package tmg.flashback.data.repo.mappers.app
 
+import org.koin.core.annotation.Single
 import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.ScheduleWeather
 import tmg.flashback.formula1.model.WeatherType
 import tmg.flashback.infrastructure.datetime.fromDate
 import tmg.flashback.infrastructure.datetime.fromTime
 
+@Single
 class ScheduleMapper() {
 
     fun mapSchedule(schedule: tmg.flashback.persistence.flashback.models.overview.Schedule?): Schedule? {

@@ -10,9 +10,11 @@ import tmg.flashback.device.usecases.OpenEmailUseCase
 import tmg.flashback.device.usecases.OpenStorePageUseCase
 import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.infrastructure.device.Device
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.composeApp.repositories.OnboardingRepository
 import tmg.flashback.ui.toasts.ToastManager
 
+@KoinViewModel
 class SettingsAboutViewModel(
     private val openStorePageUseCase: OpenStorePageUseCase,
     private val openEmailUseCase: OpenEmailUseCase,

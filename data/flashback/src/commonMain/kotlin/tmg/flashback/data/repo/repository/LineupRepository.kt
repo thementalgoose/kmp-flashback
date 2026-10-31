@@ -2,6 +2,7 @@ package tmg.flashback.data.repo.repository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import org.koin.core.annotation.Single
 import tmg.flashback.data.repo.mappers.app.LineupMapper
 import tmg.flashback.data.repo.mappers.network.NetworkConstructorDataMapper
 import tmg.flashback.data.repo.mappers.network.NetworkDriverDataMapper
@@ -21,6 +22,7 @@ interface LineupRepository {
     fun getLineup(): Flow<List<LineupSeason>?>
 }
 
+@Single
 internal class LineupRepositoryImpl(
     private val api: FlashbackApi,
     private val persistence: FlashbackDatabase,

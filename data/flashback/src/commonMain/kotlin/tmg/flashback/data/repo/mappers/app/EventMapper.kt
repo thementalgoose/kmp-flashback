@@ -1,10 +1,12 @@
 package tmg.flashback.data.repo.mappers.app
 
+import org.koin.core.annotation.Single
 import tmg.flashback.formula1.enums.EventType
 import tmg.flashback.formula1.model.Event
 import tmg.flashback.infrastructure.datetime.fromDate
 import tmg.flashback.infrastructure.extensions.toEnum
 
+@Single
 class EventMapper() {
 
     fun mapEvent(model: tmg.flashback.persistence.flashback.models.overview.Event): Event? {

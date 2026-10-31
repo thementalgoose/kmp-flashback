@@ -3,6 +3,7 @@ package tmg.flashback.composeApp
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.Single
 import tmg.flashback.analytics.usecases.InitialiseAnalyticsUseCase
 import tmg.flashback.configuration.manager.ConfigManager
 import tmg.flashback.configuration.usecases.FetchConfigUseCase
@@ -26,6 +27,7 @@ import tmg.flashback.composeApp.usecases.StoreFirebaseInstallationIdUseCase
  * Called on all platforms right at the end of koin initialisation
  */
 @OptIn(DelicateCoroutinesApi::class)
+@Single
 class AppStartup(
     private val initialiseConfigUseCase: InitialiseConfigUseCase,
     private val fetchConfigUseCase: FetchConfigUseCase,

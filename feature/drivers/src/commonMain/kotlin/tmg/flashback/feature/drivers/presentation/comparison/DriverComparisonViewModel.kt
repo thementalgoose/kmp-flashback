@@ -16,7 +16,9 @@ import tmg.flashback.formula1.model.Season
 import tmg.flashback.formula1.model.SeasonDriverStandings
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class DriverComparisonViewModel(
     private val standingsRepository: StandingsRepository,
     private val seasonRepository: SeasonRepository,

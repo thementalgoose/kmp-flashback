@@ -1,13 +1,10 @@
 package tmg.flashback.feature.glossary.di
 
-import org.koin.core.module.dsl.viewModel
-import org.koin.dsl.module
-import tmg.flashback.feature.glossary.presentation.all.GlossaryViewModel
-import tmg.flashback.feature.glossary.presentation.details.GlossaryDetailViewModel
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Configuration
+import org.koin.core.annotation.Module
 
-val featureGlossaryModule = listOf(module())
-
-internal fun module() = module {
-    viewModel { GlossaryViewModel() }
-    viewModel { GlossaryDetailViewModel() }
-}
+@Module
+@ComponentScan("tmg.flashback.feature.glossary")
+@Configuration
+class FeatureGlossaryModule

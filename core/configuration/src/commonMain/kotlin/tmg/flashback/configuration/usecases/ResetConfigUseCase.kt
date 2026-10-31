@@ -1,5 +1,6 @@
 package tmg.flashback.configuration.usecases
 
+import org.koin.core.annotation.Single
 import tmg.flashback.configuration.Migrations
 import tmg.flashback.configuration.manager.ConfigManager
 import tmg.flashback.configuration.repositories.ConfigRepository
@@ -9,6 +10,7 @@ interface ResetConfigUseCase {
     suspend fun ensureReset(): Boolean
 }
 
+@Single
 internal class ResetConfigUseCaseImpl(
     private val configManager: ConfigManager,
     private val configRepository: ConfigRepository

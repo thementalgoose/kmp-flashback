@@ -9,6 +9,11 @@ class KotlinMultiplatformConventionPlugin : Plugin<Project> {
         val libs = getLibs()
         plugins.apply(libs.findPlugin("kotlinMultiplatform").get().get().pluginId)
         plugins.apply(libs.findPlugin("androidKotlinMultiplatformLibrary").get().get().pluginId)
+        plugins.apply(libs.findPlugin("koinCompiler").get().get().pluginId)
+
+        extensions.configure<org.koin.compiler.plugin.KoinGradleExtension> {
+            compileSafety.set(true)
+        }
 
         extensions.configure<KotlinMultiplatformExtension> {
 
@@ -55,6 +60,7 @@ class KotlinMultiplatformConventionPlugin : Plugin<Project> {
                 when (name) {
                     "commonMain" -> dependencies {
                         implementation(libs.findLibrary("koin.core").get().get())
+                        implementation(libs.findLibrary("koin.annotations").get().get())
                     }
                     "commonTest" -> dependencies {
                         implementation(kotlin("test"))

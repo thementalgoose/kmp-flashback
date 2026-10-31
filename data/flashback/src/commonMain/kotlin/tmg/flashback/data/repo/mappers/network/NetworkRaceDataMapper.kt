@@ -1,8 +1,10 @@
 package tmg.flashback.data.repo.mappers.network
 
+import org.koin.core.annotation.Single
 import tmg.flashback.persistence.flashback.models.race.RaceInfo
 import tmg.flashback.flashbackapi.api.models.races.RaceData
 
+@Single
 class NetworkRaceDataMapper {
 
     @Throws(RuntimeException::class)

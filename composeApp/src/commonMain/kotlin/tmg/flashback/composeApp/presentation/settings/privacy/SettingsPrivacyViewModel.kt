@@ -6,10 +6,12 @@ import flashback.presentation.localisation.generated.resources.settings_restart_
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.analytics.repositories.AnalyticsRepository
 import tmg.flashback.crashlytics.repositories.CrashlyticsRepository
 import tmg.flashback.ui.toasts.ToastManager
 
+@KoinViewModel
 class SettingsPrivacyViewModel(
     private val crashlyticsRepository: CrashlyticsRepository,
     private val analyticsRepository: AnalyticsRepository,

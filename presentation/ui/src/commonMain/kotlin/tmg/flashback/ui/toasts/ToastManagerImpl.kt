@@ -10,8 +10,10 @@ import multiplatform.network.cmptoast.ToastGravity
 import multiplatform.network.cmptoast.showToast
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.getString
+import org.koin.core.annotation.Single
 import tmg.flashback.infrastructure.coroutines.ioDispatcher
 
+@Single
 class ToastManagerImpl: ToastManager {
 
     private val scope = CoroutineScope(Dispatchers.Main)

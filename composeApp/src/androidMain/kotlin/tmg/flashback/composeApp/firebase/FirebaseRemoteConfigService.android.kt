@@ -3,8 +3,10 @@ package tmg.flashback.composeApp.firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import kotlinx.coroutines.tasks.await
+import org.koin.core.annotation.Single
 import tmg.flashback.configuration.firebase.FirebaseRemoteConfigService
 
+@Single
 internal actual class FirebaseRemoteConfigServiceImpl actual constructor(): FirebaseRemoteConfigService {
 
     private val remoteConfig = FirebaseRemoteConfig.getInstance()

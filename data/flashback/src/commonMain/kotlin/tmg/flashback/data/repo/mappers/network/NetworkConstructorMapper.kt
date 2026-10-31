@@ -1,10 +1,12 @@
 package tmg.flashback.data.repo.mappers.network
 
+import org.koin.core.annotation.Single
 import tmg.flashback.persistence.flashback.models.constructors.ConstructorSeason
 import tmg.flashback.persistence.flashback.models.constructors.ConstructorSeasonDriver
 import tmg.flashback.flashbackapi.api.models.constructors.ConstructorHistoryStanding
 import tmg.flashback.flashbackapi.api.models.constructors.ConstructorHistoryStandingDriver
 
+@Single
 class NetworkConstructorMapper  {
 
     @Throws(RuntimeException::class)

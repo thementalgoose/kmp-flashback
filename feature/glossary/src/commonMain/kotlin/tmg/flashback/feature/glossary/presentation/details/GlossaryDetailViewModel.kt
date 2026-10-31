@@ -7,7 +7,9 @@ import kotlinx.coroutines.flow.update
 import tmg.flashback.infrastructure.extensions.toEnum
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class GlossaryDetailViewModel(
     private val coroutineContext: CoroutineContext = EmptyCoroutineContext
 ): ViewModel() {

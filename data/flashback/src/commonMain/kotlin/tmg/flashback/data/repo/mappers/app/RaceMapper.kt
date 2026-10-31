@@ -1,5 +1,6 @@
 package tmg.flashback.data.repo.mappers.app
 
+import org.koin.core.annotation.Single
 import tmg.flashback.persistence.flashback.models.race.QualifyingDriverResult
 import tmg.flashback.persistence.flashback.models.race.RaceDriverResult
 import tmg.flashback.persistence.flashback.models.race.RaceInfoWithCircuit
@@ -26,6 +27,7 @@ import tmg.flashback.formula1.utils.toLapTime
 import tmg.flashback.infrastructure.datetime.fromTime
 import tmg.flashback.infrastructure.datetime.requireFromDate
 
+@Single
 class RaceMapper(
     private val circuitMapper: CircuitMapper,
     private val driverDataMapper: DriverDataMapper,

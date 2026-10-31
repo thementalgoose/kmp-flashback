@@ -1,5 +1,6 @@
 package tmg.flashback.crashlytics.manager
 
+import org.koin.core.annotation.Single
 import tmg.flashback.crashlytics.firebase.FirebaseCrashlyticsService
 
 interface CrashlyticsManager {
@@ -8,6 +9,7 @@ interface CrashlyticsManager {
     fun logException(exception: Exception, msg: String? = null)
 }
 
+@Single
 internal class CrashlyticsManagerImpl(
     private val firebaseCrashlyticsService: FirebaseCrashlyticsService
 ): CrashlyticsManager {
