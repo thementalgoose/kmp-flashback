@@ -4,6 +4,7 @@ import dev.mokkery.MockMode.autoUnit
 import dev.mokkery.answering.returns
 import dev.mokkery.every
 import dev.mokkery.mock
+import tmg.flashback.feature.notifications.model.NotificationNews
 import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
 import tmg.flashback.feature.notifications.model.NotificationUpcoming
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
@@ -98,6 +99,47 @@ internal class IsNotificationEnabledUseCaseTest {
         every { mockNotificationManager.isChannelActive(NotificationResultsAvailable.RACE.channelId) } returns false
 
         val result = underTest(NotificationResultsAvailable.RACE)
+
+        assertFalse(result)
+    }
+    @Test
+    fun `news available returns true when setting enabled and channel is active`() {
+        every { mockNotificationSettingsRepository.notificationNewsEnabled } returns setOf(
+            NotificationNews.BREAKING_NEWS)
+        every { mockNotificationManager.isChannelActive(NotificationNews.BREAKING_NEWS.channelId) } returns true
+
+        val result = underTest(NotificationNews.BREAKING_NEWS)
+
+        assertTrue(result)
+    }
+
+    @Test
+    fun `news available returns false when setting disabled and channel is active`() {
+        every { mockNotificationSettingsRepository.notificationNewsEnabled } returns emptySet()
+        every { mockNotificationManager.isChannelActive(NotificationNews.BREAKING_NEWS.channelId) } returns true
+
+        val result = underTest(NotificationNews.BREAKING_NEWS)
+
+        assertFalse(result)
+    }
+
+    @Test
+    fun `news available returns false when setting enabled but channel is inactive`() {
+        every { mockNotificationSettingsRepository.notificationNewsEnabled } returns setOf(
+            NotificationNews.BREAKING_NEWS)
+        every { mockNotificationManager.isChannelActive(NotificationNews.BREAKING_NEWS.channelId) } returns false
+
+        val result = underTest(NotificationNews.BREAKING_NEWS)
+
+        assertFalse(result)
+    }
+
+    @Test
+    fun `news available returns false when setting disabled and channel is inactive`() {
+        every { mockNotificationSettingsRepository.notificationNewsEnabled } returns emptySet()
+        every { mockNotificationManager.isChannelActive(NotificationNews.BREAKING_NEWS.channelId) } returns false
+
+        val result = underTest(NotificationNews.BREAKING_NEWS)
 
         assertFalse(result)
     }

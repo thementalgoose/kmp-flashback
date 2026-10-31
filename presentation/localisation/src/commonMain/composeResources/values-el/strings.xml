@@ -334,6 +334,11 @@
     <string name="settings_pref_remember_season_change_title">Διατήρηση τελευταίας σεζόν</string>
     <string name="settings_pref_remember_season_change_description">Συνέχιση από τη σεζόν που προβλήθηκε τελευταία</string>
 
+    <string name="settings_section_race_title">Αγώνας</string>
+    <string name="settings_section_race_description">Προσαρμόστε την οθόνη του αγώνα</string>
+    <string name="settings_pref_weather_details_title">Εμφάνιση λεπτομερειών καιρού</string>
+    <string name="settings_pref_weather_details_description">Εμφάνιση βροχής, θερμοκρασίας και ανέμου από προεπιλογή στην οθόνη λεπτομερειών αγώνα. Μπορείτε να πατήσετε στις κάρτες για εμφάνιση ανά πάσα στιγμή.</string>
+
     <string name="settings_section_rss_configure_title">Διαμόρφωση</string>
     <string name="settings_section_rss_configure_description">Ρύθμιση πηγών RSS ή προσαρμογή εμφάνισης</string>
 
@@ -353,6 +358,8 @@
 
     <string name="settings_section_notifications_upcoming_title">Επερχόμενοι αγώνες</string>
     <string name="settings_section_notifications_upcoming_description">Λάβετε ειδοποιήσεις για επερχόμενους αγώνες</string>
+    <string name="settings_section_notifications_breaking_title">Έκτακτες ειδήσεις</string>
+    <string name="settings_section_notifications_breaking_description">Λάβετε ειδοποιήσεις για έκτακτες ειδήσεις</string>
     <string name="settings_section_notifications_results_title">Αποτελέσματα αγώνων</string>
     <string name="settings_section_notifications_results_description">Λάβετε ειδοποιήσεις όταν τα αποτελέσματα αγώνων είναι διαθέσιμα</string>
     <string name="settings_header_notice">Ειδοποίηση</string>
@@ -404,6 +411,9 @@
     <string name="settings_header_legal">Νομικά</string>
     <string name="settings_pref_privacy_policy_title">Πολιτική Απορρήτου</string>
     <string name="settings_pref_privacy_policy_description">Η πολιτική απορρήτου της εφαρμογής</string>
+    <string name="settings_pref_rate_title">Αξιολόγηση</string>
+    <string name="settings_pref_rate_description_google_play">Αξιολογήστε αυτήν την εφαρμογή στο Google Play Store</string>
+    <string name="settings_pref_rate_description_apple_appstore">Αξιολογήστε αυτήν την εφαρμογή στο Apple App Store</string>
     <string name="settings_header_device_info">Πληροφορίες Συσκευής</string>
     <string name="settings_pref_crash_reporting_title">Αναφορά Σφαλμάτων</string>
     <string name="settings_pref_crash_reporting_description">Επιτρέψτε την αποστολή αναφορών σφαλμάτων στον προγραμματιστή όταν προκύπτει πρόβλημα.</string>
@@ -580,6 +590,7 @@
 
     <string name="notification_channel_title_upcoming">Επερχόμενες υπενθυμίσεις</string>
     <string name="notification_channel_title_results">Διαθέσιμα αποτελέσματα</string>
+    <string name="notification_channel_title_news">Ειδήσεις</string>
     <string name="notification_channel_race">Αγώνας</string>
     <string name="notification_channel_sprint">Sprint</string>
     <string name="notification_channel_sprint_qualifying">Κατατακτήριες Sprint</string>
@@ -590,6 +601,7 @@
     <string name="notification_channel_sprint_qualifying_notify">Κατατακτήριες Sprint</string>
     <string name="notification_channel_qualifying_notify">Κατατακτήριες</string>
     <string name="notification_channel_info">Πληροφορίες σεζόν</string>
+    <string name="notification_channel_breaking_news">Έκτακτες ειδήσεις</string>
 
 
     <!-- App Shortcuts -->
@@ -706,4 +718,79 @@
 
     <string name="driver_lineup_title">Σύνθεση οδηγών</string>
     <string name="driver_lineup_subtitle">Δείτε τους οδηγούς που έχουν επιβεβαιωμένα συμβόλαια για τις μελλοντικές σεζόν στις ομάδες της Formula 1</string>
+
+    <string name="glossary_active_aero">Ενεργή αεροδυναμική</string>
+    <string name="glossary_active_aero_desc">-</string>
+    <string name="glossary_atr">ATR (Περιορισμοί αεροδυναμικών δοκιμών)</string>
+    <string name="glossary_atr_desc">-</string>
+    <string name="glossary_apex">Κορυφή στροφής (Apex)</string>
+    <string name="glossary_apex_desc">-</string>
+    <string name="glossary_barge_boards">Bargeboards</string>
+    <string name="glossary_barge_boards_desc">-</string>
+    <string name="glossary_box">Box</string>
+    <string name="glossary_box_desc">-</string>
+    <string name="glossary_clipping">Clipping</string>
+    <string name="glossary_clipping_desc">-</string>
+    <string name="glossary_cost_cap">Όριο προϋπολογισμού (Cost Cap)</string>
+    <string name="glossary_cost_cap_desc">-</string>
+    <string name="glossary_das">(DAS) Σύστημα διεύθυνσης διπλού άξονα</string>
+    <string name="glossary_das_desc">-</string>
+    <string name="glossary_delta">Δέλτα (Delta)</string>
+    <string name="glossary_delta_desc">-</string>
+    <string name="glossary_dirty_air">Ακάθαρτος αέρας</string>
+    <string name="glossary_dirty_air_desc">-</string>
+    <string name="glossary_ers">(ERS) Σύστημα ανάκτησης ενέργειας</string>
+    <string name="glossary_ers_desc">-</string>
+    <string name="glossary_es">(ES) Αποθήκη ενέργειας</string>
+    <string name="glossary_es_desc">-</string>
+    <string name="glossary_fcy">(FCY) Κίτρινη σημαία σε όλη την πίστα</string>
+    <string name="glossary_fcy_desc">-</string>
+    <string name="glossary_graining">Graining</string>
+    <string name="glossary_graining_desc">-</string>
+    <string name="glossary_ground_effect">Φαινόμενο εδάφους (Ground Effect)</string>
+    <string name="glossary_ground_effect_desc">-</string>
+    <string name="glossary_halo">Halo</string>
+    <string name="glossary_halo_desc">-</string>
+    <string name="glossary_hans_device">Σύστημα HANS</string>
+    <string name="glossary_hans_device_desc">-</string>
+    <string name="glossary_ice">(ICE) Κινητήρας εσωτερικής καύσης</string>
+    <string name="glossary_ice_desc">-</string>
+    <string name="glossary_kers">(KERS) Σύστημα ανάκτησης κινητικής ενέργειας</string>
+    <string name="glossary_kers_desc">-</string>
+    <string name="glossary_lico">(LICO) Lift And Coast</string>
+    <string name="glossary_lico_desc">-</string>
+    <string name="glossary_mgu_k">(MGU-K) Μονάδα κινητήρα γεννήτριας - Κινητική</string>
+    <string name="glossary_mgu_k_desc">-</string>
+    <string name="glossary_mgu_h">(MGU-H) Μονάδα κινητήρα γεννήτριας - Θερμική</string>
+    <string name="glossary_mgu_h_desc">-</string>
+    <string name="glossary_monocoque">Μονοκόκ (Monocoque)</string>
+    <string name="glossary_monocoque_desc">-</string>
+    <string name="glossary_overcut">Overcut</string>
+    <string name="glossary_overcut_desc">-</string>
+    <string name="glossary_overtake_mode">Λειτουργία προσπεράσματος</string>
+    <string name="glossary_overtake_mode_desc">-</string>
+    <string name="glossary_parc_ferme">Parc Fermé</string>
+    <string name="glossary_parc_ferme_desc">-</string>
+    <string name="glossary_plank">Πλακέτα δαπέδου (Plank)</string>
+    <string name="glossary_plank_desc">-</string>
+    <string name="glossary_porpoising">Porpoising</string>
+    <string name="glossary_porpoising_desc">-</string>
+    <string name="glossary_pu">(PU) Μονάδα ισχύος</string>
+    <string name="glossary_pu_desc">-</string>
+    <string name="glossary_rake">Γωνία Rake</string>
+    <string name="glossary_rake_desc">-</string>
+    <string name="glossary_recharge_mode">Λειτουργία επαναφόρτισης</string>
+    <string name="glossary_recharge_mode_desc">-</string>
+    <string name="glossary_sprint">Sprint</string>
+    <string name="glossary_sprint_desc">-</string>
+    <string name="glossary_straight_corner_mode">Λειτουργία ευθείας / Λειτουργία στροφής</string>
+    <string name="glossary_straight_corner_mode_desc">-</string>
+    <string name="glossary_super_clipping">Super Clipping</string>
+    <string name="glossary_super_clipping_desc">-</string>
+    <string name="glossary_survival_cell">Κυψέλη επιβίωσης</string>
+    <string name="glossary_survival_cell_desc">-</string>
+    <string name="glossary_undercut">Undercut</string>
+    <string name="glossary_undercut_desc">-</string>
+    <string name="glossary_vsc">(VSC) Εικονικό αυτοκίνητο ασφαλείας</string>
+    <string name="glossary_vsc_desc">-</string>
 </resources>

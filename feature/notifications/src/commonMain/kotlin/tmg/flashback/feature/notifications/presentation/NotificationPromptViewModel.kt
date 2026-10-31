@@ -17,12 +17,14 @@ import tmg.flashback.ui.permissions.PermissionState.NotDetermined
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 import org.koin.core.annotation.KoinViewModel
+import tmg.flashback.feature.notifications.usecases.SubscribeNewsNotificationsUseCase
 
 @KoinViewModel
 class NotificationPromptViewModel(
     private val notificationSettingsRepository: NotificationSettingsRepository,
     private val scheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase,
     private val subscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase,
+    private val subscribeNewsNotificationsUseCase: SubscribeNewsNotificationsUseCase,
     private val permissionManager: PermissionManager,
     private val openSettingsUseCase: OpenSettingsUseCase,
     private val coroutineContext: CoroutineContext = EmptyCoroutineContext
@@ -48,6 +50,7 @@ class NotificationPromptViewModel(
             } else {
                 scheduleUpcomingNotificationsUseCase()
                 subscribeResultNotificationsUseCase()
+                subscribeNewsNotificationsUseCase()
             }
         }
     }

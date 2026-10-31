@@ -13,6 +13,7 @@
     <string name="ab_close">Cerrar</string>
     <string name="ab_back">Atrás</string>
     <string name="ab_hide">Ocultar</string>
+    <string name="ab_clear_filters">Borrar filtros</string>
 
     <string name="ab_points">Puntos</string>
     <string name="ab_status">Estado</string>

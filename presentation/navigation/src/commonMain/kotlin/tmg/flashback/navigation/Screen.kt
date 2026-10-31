@@ -115,6 +115,9 @@ data object NavSettingsNotificationResults: Screen
 data object NavSettingsNotificationUpcoming: Screen
 
 @Serializable
+data object NavSettingsNotificationNews: Screen
+
+@Serializable
 data object NavSettingsWidgets: Screen
 
 @Serializable
@@ -164,6 +167,7 @@ fun Screen.isList(): Boolean = when (this) {
     is NavSettingsInAppBrowser -> false
     is NavSettingsNotificationResults -> false
     is NavSettingsNotificationUpcoming -> false
+    is NavSettingsNotificationNews -> false
     is NavSettingsWidgets -> false
     is NavSettingsPrivacy -> false
     is NavPrivacyPolicy -> false

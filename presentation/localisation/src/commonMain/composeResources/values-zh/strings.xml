@@ -77,6 +77,9 @@
     <string name="qualifying_penalty_starts">从第 %1$s 位发车</string>
     <string name="qualifying_penalty">维修区发车</string>
     <string name="qualifying_penalty_starts_sprint">从第 %1$s 位发车</string>
+    <string name="qualifying_visualisation_subtitle">在排位赛中查看排位差距</string>
+    <string name="qualifying_visualisation_title">排位差距</string>
+    <string name="qualifying_visualisation_not_found">没有可供查看的排位赛数据</string>
 
     <!-- Results -->
     <string name="weekend_race_round">第 %1$d 轮</string>
@@ -306,6 +309,11 @@
     <string name="settings_pref_recent_highlights_description">如果已连接互联网，则在首页显示“近期精选”横幅。该横幅通常包含指向过去一周左右重要报道的链接。</string>
     <string name="settings_pref_remember_season_change_title">记住季节变化</string>
     <string name="settings_pref_remember_season_change_description">记住应用重启期间观看的最后一个季节</string>
+
+    <string name="settings_section_race_title">正赛</string>
+    <string name="settings_section_race_description">自定义比赛界面</string>
+    <string name="settings_pref_weather_details_title">显示天气详情</string>
+    <string name="settings_pref_weather_details_description">默认在比赛详情界面显示降雨、温度和风力情况。您可以随时点击卡片显示这些信息。</string>
     <string name="settings_section_rss_configure_title">配置</string>
     <string name="settings_section_rss_configure_description">设置 RSS 源或自定义外观</string>
     <string name="settings_section_web_browser_title">应用内浏览器</string>
@@ -322,6 +330,8 @@
     <string name="settings_help_adverts_long_description">自定义广告在整个应用中的显示方式</string>
     <string name="settings_section_notifications_upcoming_title">即将举行的比赛</string>
     <string name="settings_section_notifications_upcoming_description">获取即将举行的比赛的通知</string>
+    <string name="settings_section_notifications_breaking_title">突发新闻</string>
+    <string name="settings_section_notifications_breaking_description">接收突发新闻通知</string>
     <string name="settings_section_notifications_results_title">比赛结果</string>
     <string name="settings_section_notifications_results_description">在比赛结果可用时获取通知</string>
     <string name="settings_header_notice">通知</string>
@@ -372,6 +382,9 @@
     <string name="settings_header_legal">法律</string>
     <string name="settings_pref_privacy_policy_title">隐私政策</string>
     <string name="settings_pref_privacy_policy_description">应用的隐私政策</string>
+    <string name="settings_pref_rate_title">评分</string>
+    <string name="settings_pref_rate_description_google_play">在 Google Play 商店评价此应用</string>
+    <string name="settings_pref_rate_description_apple_appstore">在 Apple App Store 评价此应用</string>
     <string name="settings_header_device_info">设备信息</string>
     <string name="settings_pref_crash_reporting_title">崩溃报告</string>
     <string name="settings_pref_crash_reporting_description">允许在发生问题时将崩溃报告发送给开发人员</string>
@@ -405,7 +418,9 @@
     <string name="settings_theme_theme_title">应用主题</string>
     <string name="settings_theme_theme_description">选择您的应用配色方案</string>
     <string name="settings_theme_theme_default">默认</string>
+    <string name="settings_theme_theme_default_desc">默认（需要重启应用）</string>
     <string name="settings_theme_theme_material_you">Material You</string>
+    <string name="settings_theme_theme_material_you_desc">Material You（需要重启应用）</string>
     <string name="settings_theme_theme_applied_later">您的主题将在您重新启动应用后应用</string>
     <string name="settings_theme_animation_speed_title">动画速度</string>
     <string name="settings_theme_animation_speed_description">选择整个应用中动画视图的速度</string>
@@ -531,6 +546,7 @@
 
     <string name="notification_channel_title_upcoming">即将到来的提醒</string>
     <string name="notification_channel_title_results">结果可用</string>
+    <string name="notification_channel_title_news">新闻</string>
     <string name="notification_channel_race">比赛</string>
     <string name="notification_channel_sprint">冲刺赛</string>
     <string name="notification_channel_sprint_qualifying">冲刺赛资格赛</string>
@@ -541,6 +557,7 @@
     <string name="notification_channel_sprint_qualifying_notify">冲刺赛资格赛</string>
     <string name="notification_channel_qualifying_notify">排位赛</string>
     <string name="notification_channel_info">赛季信息</string>
+    <string name="notification_channel_breaking_news">突发新闻</string>
 
     <!-- 应用快捷方式 -->
     <string name="app_shortcut_search_shorttitle">搜索</string>
@@ -595,7 +612,8 @@
     <!-- 网络浏览器 -->
     <string name="choose_browser">在浏览器中打开</string>
     <string name="choose_share">分享到</string>
-    <string name="copy_to_clipboard">URL 已复制到剪贴板</string>
+    <string name="url_copy_to_clipboard">链接已复制到剪贴板</string>
+    <string name="email_copy_to_clipboard">电子邮件已复制到剪贴板</string>
     <string name="unable_to_open_url">无法打开 URL</string>
     <string name="home_last_updated">上次更新 %1$s</string>
 
@@ -644,4 +662,79 @@
 
     <string name="driver_lineup_title">车手阵容</string>
     <string name="driver_lineup_subtitle">查看已确认获得未来赛季一级方程式（F1）车队席位的车手名单。</string>
+
+    <string name="glossary_active_aero">主动空气动力学</string>
+    <string name="glossary_active_aero_desc">-</string>
+    <string name="glossary_atr">ATR（空气动力学测试限制）</string>
+    <string name="glossary_atr_desc">-</string>
+    <string name="glossary_apex">弯心 (Apex)</string>
+    <string name="glossary_apex_desc">-</string>
+    <string name="glossary_barge_boards">侧箱导流板</string>
+    <string name="glossary_barge_boards_desc">-</string>
+    <string name="glossary_box">进站 (Box)</string>
+    <string name="glossary_box_desc">-</string>
+    <string name="glossary_clipping">电能耗尽 (Clipping)</string>
+    <string name="glossary_clipping_desc">-</string>
+    <string name="glossary_cost_cap">预算帽 (Cost Cap)</string>
+    <string name="glossary_cost_cap_desc">-</string>
+    <string name="glossary_das">(DAS) 双轴转向系统</string>
+    <string name="glossary_das_desc">-</string>
+    <string name="glossary_delta">时间差 (Delta)</string>
+    <string name="glossary_delta_desc">-</string>
+    <string name="glossary_dirty_air">脏空气 (Dirty Air)</string>
+    <string name="glossary_dirty_air_desc">-</string>
+    <string name="glossary_ers">(ERS) 能量回收系统</string>
+    <string name="glossary_ers_desc">-</string>
+    <string name="glossary_es">(ES) 储能单元</string>
+    <string name="glossary_es_desc">-</string>
+    <string name="glossary_fcy">(FCY) 全场黄旗</string>
+    <string name="glossary_fcy_desc">-</string>
+    <string name="glossary_graining">颗粒化 (Graining)</string>
+    <string name="glossary_graining_desc">-</string>
+    <string name="glossary_ground_effect">地面效应</string>
+    <string name="glossary_ground_effect_desc">-</string>
+    <string name="glossary_halo">Halo 安全系统</string>
+    <string name="glossary_halo_desc">-</string>
+    <string name="glossary_hans_device">HANS 颈部保护装置</string>
+    <string name="glossary_hans_device_desc">-</string>
+    <string name="glossary_ice">(ICE) 内燃机</string>
+    <string name="glossary_ice_desc">-</string>
+    <string name="glossary_kers">(KERS) 动能回收系统</string>
+    <string name="glossary_kers_desc">-</string>
+    <string name="glossary_lico">(LICO) 抬油门滑行</string>
+    <string name="glossary_lico_desc">-</string>
+    <string name="glossary_mgu_k">(MGU-K) 动能电机单元</string>
+    <string name="glossary_mgu_k_desc">-</string>
+    <string name="glossary_mgu_h">(MGU-H) 热能电机单元</string>
+    <string name="glossary_mgu_h_desc">-</string>
+    <string name="glossary_monocoque">单体壳 (Monocoque)</string>
+    <string name="glossary_monocoque_desc">-</string>
+    <string name="glossary_overcut">进站延后 (Overcut)</string>
+    <string name="glossary_overcut_desc">-</string>
+    <string name="glossary_overtake_mode">超车模式</string>
+    <string name="glossary_overtake_mode_desc">-</string>
+    <string name="glossary_parc_ferme">封闭车检区 (Parc Fermé)</string>
+    <string name="glossary_parc_ferme_desc">-</string>
+    <string name="glossary_plank">底板滑块 (Plank)</string>
+    <string name="glossary_plank_desc">-</string>
+    <string name="glossary_porpoising">海豚跳 (Porpoising)</string>
+    <string name="glossary_porpoising_desc">-</string>
+    <string name="glossary_pu">(PU) 动力单元</string>
+    <string name="glossary_pu_desc">-</string>
+    <string name="glossary_rake">前倾角 (Rake)</string>
+    <string name="glossary_rake_desc">-</string>
+    <string name="glossary_recharge_mode">充电模式</string>
+    <string name="glossary_recharge_mode_desc">-</string>
+    <string name="glossary_sprint">冲刺赛</string>
+    <string name="glossary_sprint_desc">-</string>
+    <string name="glossary_straight_corner_mode">直道模式 / 弯道模式</string>
+    <string name="glossary_straight_corner_mode_desc">-</string>
+    <string name="glossary_super_clipping">过度电能耗尽 (Super Clipping)</string>
+    <string name="glossary_super_clipping_desc">-</string>
+    <string name="glossary_survival_cell">安全生存舱 (Survival Cell)</string>
+    <string name="glossary_survival_cell_desc">-</string>
+    <string name="glossary_undercut">进站提前 (Undercut)</string>
+    <string name="glossary_undercut_desc">-</string>
+    <string name="glossary_vsc">(VSC) 虚拟安全车</string>
+    <string name="glossary_vsc_desc">-</string>
 </resources>

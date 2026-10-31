@@ -11,6 +11,7 @@
     <string name="ab_close">Chiudi</string>
     <string name="ab_back">Indietro</string>
     <string name="ab_hide">Nascondi</string>
+    <string name="ab_clear_filters">Cancella filtri</string>
     <string name="ab_points">Punti</string>
     <string name="ab_status">Stato</string>
     <string name="ab_result_race_overview">%1$s, %2$s, alla guida per %3$s</string>

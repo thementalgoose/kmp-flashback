@@ -128,7 +128,7 @@ private fun SettingsNotificationResultsScreen(
                         isEnabled = permissionState == PermissionState.Granted
                     )
                     SettingSwitch(
-                        item = Settings.NotificationsUpcoming.Race,
+                        item = Settings.NotificationsResults.Race,
                         itemClicked = {
                             notificationResultsClicked(RACE, !uiState.enabled.contains(RACE))
                         },

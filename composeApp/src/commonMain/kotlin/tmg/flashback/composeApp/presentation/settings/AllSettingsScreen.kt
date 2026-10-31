@@ -36,6 +36,7 @@ import tmg.flashback.navigation.NavSettingsPrivacy
 import tmg.flashback.navigation.NavSettingsRssConfigure
 import tmg.flashback.navigation.NavSettingsTheme
 import tmg.flashback.navigation.NavSettingsLayoutRace
+import tmg.flashback.navigation.NavSettingsNotificationNews
 import tmg.flashback.navigation.NavSettingsWidgets
 import tmg.flashback.ui.components.header.Header
 import tmg.flashback.ui.components.header.HeaderAction
@@ -147,6 +148,10 @@ private fun AllSettingsScreen(
                     SettingCategory(
                         item = Settings.NotificationsUpcomingCategory,
                         itemClicked = { navigateToSubScreen(NavSettingsNotificationUpcoming) },
+                    )
+                    SettingCategory(
+                        item = Settings.NotificationsBreakingNews,
+                        itemClicked = { navigateToSubScreen(NavSettingsNotificationNews) },
                     )
                 }
             )

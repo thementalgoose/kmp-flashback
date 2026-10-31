@@ -5,6 +5,7 @@ import flashback.composeapp.generated.resources.Res
 import flashback.composeapp.generated.resources.ic_settings_about
 import flashback.composeapp.generated.resources.ic_settings_dark_mode
 import flashback.composeapp.generated.resources.ic_settings_home
+import flashback.composeapp.generated.resources.ic_settings_notifications_breaking_news
 import flashback.composeapp.generated.resources.ic_settings_notifications_results
 import flashback.composeapp.generated.resources.ic_settings_notifications_upcoming
 import flashback.composeapp.generated.resources.ic_settings_privacy
@@ -60,6 +61,8 @@ import flashback.presentation.localisation.generated.resources.settings_section_
 import flashback.presentation.localisation.generated.resources.settings_section_dark_mode_title
 import flashback.presentation.localisation.generated.resources.settings_section_home_description
 import flashback.presentation.localisation.generated.resources.settings_section_home_title
+import flashback.presentation.localisation.generated.resources.settings_section_notifications_breaking_description
+import flashback.presentation.localisation.generated.resources.settings_section_notifications_breaking_title
 import flashback.presentation.localisation.generated.resources.settings_section_notifications_results_description
 import flashback.presentation.localisation.generated.resources.settings_section_notifications_results_title
 import flashback.presentation.localisation.generated.resources.settings_section_notifications_upcoming_description
@@ -363,6 +366,30 @@ object Settings {
             _id = "notification_exact_alarm",
             title = string.settings_pref_schedule_exact_alarm_title,
             subtitle = string.settings_pref_schedule_exact_alarm_description
+        )
+    }
+
+    val NotificationsBreakingNews = Setting.Category(
+        _id = "notifications_breaking_news",
+        title = string.settings_section_notifications_breaking_title,
+        subtitle = string.settings_section_notifications_breaking_description,
+        icon = Res.drawable.ic_settings_notifications_breaking_news,
+        isBeta = true
+    )
+    object NotificationsBreaking {
+        val PermissionEnable = Setting.Pref(
+            _id = "notifications_permissions",
+            title = string.settings_pref_notification_permission_title,
+            subtitle = string.settings_pref_notification_permission_description
+        )
+        val PermissionManage = Setting.Pref(
+            _id = "notifications_manage",
+            title = string.settings_pref_notification_manage_title,
+            subtitle = string.settings_pref_notification_manage_description
+        )
+        val NewsStories = Setting.Pref(
+            _id = "news_stories",
+            title = string.settings_section_notifications_breaking_title
         )
     }
 

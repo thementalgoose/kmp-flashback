@@ -118,6 +118,7 @@ internal class NotificationSettingsRepositoryTest {
         private const val expectedKeyPromptNotifications: String = "RUNTIME_NOTIFICATION_PROMPT"
         private const val expectedKeyNotificationUpcoming: String = "NOTIFICATION_UPCOMING_CATEGORIES"
         private const val expectedKeyNotificationResult: String = "NOTIFICATION_RESULT_AVAILABLE_CATEGORIES"
+        private const val expectedKeyNotificationNews: String = "NOTIFICATION_NEWS_AVAILABLE_CATEGORIES"
 
         private const val expectedKeyNotificationReminder: String = "UP_NEXT_NOTIFICATION_REMINDER"
     }

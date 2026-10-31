@@ -15,6 +15,7 @@ import kotlinx.coroutines.test.runTest
 import tmg.flashback.device.usecases.OpenSettingsUseCase
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
 import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
+import tmg.flashback.feature.notifications.usecases.SubscribeNewsNotificationsUseCase
 import tmg.flashback.feature.notifications.usecases.SubscribeResultNotificationsUseCase
 import tmg.flashback.ui.permissions.Permission
 import tmg.flashback.ui.permissions.PermissionManager
@@ -31,6 +32,7 @@ internal class NotificationPromptViewModelTest {
     private val mockOpenSettingsUseCase: OpenSettingsUseCase = mock(autofill)
     private val mockScheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase = mock(autofill)
     private val mockSubscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase = mock(autofill)
+    private val mockSubscribeNewsNotificationsUseCase: SubscribeNewsNotificationsUseCase = mock(autofill)
 
     private lateinit var underTest: NotificationPromptViewModel
 
@@ -41,6 +43,7 @@ internal class NotificationPromptViewModelTest {
             openSettingsUseCase = mockOpenSettingsUseCase,
             scheduleUpcomingNotificationsUseCase = mockScheduleUpcomingNotificationsUseCase,
             subscribeResultNotificationsUseCase = mockSubscribeResultNotificationsUseCase,
+            subscribeNewsNotificationsUseCase = mockSubscribeNewsNotificationsUseCase,
             coroutineContext = Dispatchers.Unconfined
         )
     }
@@ -110,6 +113,7 @@ internal class NotificationPromptViewModelTest {
         verifySuspend {
             mockScheduleUpcomingNotificationsUseCase.invoke()
             mockSubscribeResultNotificationsUseCase.invoke()
+            mockSubscribeNewsNotificationsUseCase.invoke()
             mockPermissionManager.requestPermission(any())
             mockNotificationSettingsRepository.notificationPromptSeen = true
         }
