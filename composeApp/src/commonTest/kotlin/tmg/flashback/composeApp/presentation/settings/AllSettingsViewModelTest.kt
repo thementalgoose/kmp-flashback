@@ -68,6 +68,9 @@ internal class AllSettingsViewModelTest {
     @Test
     fun `open store calls use case`() {
         every { mockOpenStorePageUseCase.invoke() } returns Unit
+        every { mockIsWidgetEnabledUseCase.invoke() } returns false
+        every { mockIsRssEnabledUseCase.invoke() } returns false
+        every { mockIsInAppBrowserEnabledUseCase.invoke() } returns false
         initUnderTest()
 
         underTest.openStore()
