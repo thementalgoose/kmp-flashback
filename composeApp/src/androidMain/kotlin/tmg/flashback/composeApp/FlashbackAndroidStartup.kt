@@ -99,7 +99,7 @@ class FlashbackAndroidStartup(
                 )
             }
             .forEach {
-                it.group = resultsGroupId
+                it.group = newsGroupId
                 notificationManager.createNotificationChannel(it)
             }
     }

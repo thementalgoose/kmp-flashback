@@ -9,5 +9,5 @@ enum class NotificationNews(
     val channelLabel: StringResource,
     val remoteSubscriptionTopic: String = channelId
 ) {
-    BREAKING_NEWS("notify_news", string.notification_channel_breaking_news)
+    BREAKING_NEWS("notify_breaking_news", string.notification_channel_breaking_news)
 }
