@@ -10,6 +10,7 @@ import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.device.usecases.OpenSettingsUseCase
 import tmg.flashback.feature.notifications.model.NotificationNews
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
+import tmg.flashback.feature.notifications.usecases.SubscribeNewsNotificationsUseCase
 import tmg.flashback.feature.notifications.usecases.SubscribeResultNotificationsUseCase
 import tmg.flashback.ui.permissions.Permission.Notifications
 import tmg.flashback.ui.permissions.PermissionManager
@@ -21,7 +22,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 @KoinViewModel
 class SettingsNotificationNewsViewModel(
     private val notificationSettingsRepository: NotificationSettingsRepository,
-    private val subscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase,
+    private val subscribeNewsNotificationsUseCase: SubscribeNewsNotificationsUseCase,
     private val permissionManager: PermissionManager,
     private val openSettingsUseCase: OpenSettingsUseCase,
     private val coroutineContext: CoroutineContext = EmptyCoroutineContext
@@ -72,7 +73,7 @@ class SettingsNotificationNewsViewModel(
         }
     }
     private suspend fun reschedule() {
-        subscribeResultNotificationsUseCase()
+        subscribeNewsNotificationsUseCase()
         _permissionState.value = permissionManager.getPermissionState(Notifications)
     }
 
