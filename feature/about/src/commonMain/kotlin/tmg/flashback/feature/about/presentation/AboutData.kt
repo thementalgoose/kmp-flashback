@@ -1,18 +1,16 @@
 package tmg.flashback.feature.about.presentation
 
-import flashback.feature.about.generated.resources.Res
-import flashback.feature.about.generated.resources.ic_util_icon_api
-import flashback.feature.about.generated.resources.ic_util_icon_apple
-import flashback.feature.about.generated.resources.ic_util_icon_email
-import flashback.feature.about.generated.resources.ic_util_icon_github
-import flashback.feature.about.generated.resources.ic_util_icon_play
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.button_api
 import flashback.presentation.localisation.generated.resources.button_apple_app
 import flashback.presentation.localisation.generated.resources.button_email
 import flashback.presentation.localisation.generated.resources.button_github
 import flashback.presentation.localisation.generated.resources.button_play
-import flashback.presentation.localisation.generated.resources.settings_header_appearance
+import flashback.presentation.ui.generated.resources.ic_util_icon_api
+import flashback.presentation.ui.generated.resources.ic_util_icon_apple
+import flashback.presentation.ui.generated.resources.ic_util_icon_email
+import flashback.presentation.ui.generated.resources.ic_util_icon_github
+import flashback.presentation.ui.generated.resources.ic_util_icon_play
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 
@@ -31,27 +29,27 @@ enum class AboutButtons(
 ) {
     Play(
         key = "play",
-        icon = Res.drawable.ic_util_icon_play,
+        icon = flashback.presentation.ui.generated.resources.Res.drawable.ic_util_icon_play,
         label = string.button_play,
     ),
     Apple(
         key = "apple",
-        icon = Res.drawable.ic_util_icon_apple,
+        icon = flashback.presentation.ui.generated.resources.Res.drawable.ic_util_icon_apple,
         label = string.button_apple_app,
     ),
     Email(
         key = "email",
-        icon = Res.drawable.ic_util_icon_email,
+        icon = flashback.presentation.ui.generated.resources.Res.drawable.ic_util_icon_email,
         label = string.button_email,
     ),
     Github(
         key = "github",
-        icon = Res.drawable.ic_util_icon_github,
+        icon = flashback.presentation.ui.generated.resources.Res.drawable.ic_util_icon_github,
         label = string.button_github,
     ),
     Api(
         key = "api",
-        icon = Res.drawable.ic_util_icon_api,
+        icon = flashback.presentation.ui.generated.resources.Res.drawable.ic_util_icon_api,
         label = string.button_api,
     )
 }

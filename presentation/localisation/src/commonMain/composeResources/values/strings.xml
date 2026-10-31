@@ -414,6 +414,9 @@
     <string name="settings_header_legal">Legal</string>
     <string name="settings_pref_privacy_policy_title">Privacy Policy</string>
     <string name="settings_pref_privacy_policy_description">The apps privacy policy</string>
+    <string name="settings_pref_rate_title">Rate</string>
+    <string name="settings_pref_rate_description_google_play">Rate this app on the Google Play Store</string>
+    <string name="settings_pref_rate_description_apple_appstore">Rate this app on the Apple App Store</string>
     <string name="settings_header_device_info">Device Info</string>
     <string name="settings_pref_crash_reporting_title">Crash Reporting</string>
     <string name="settings_pref_crash_reporting_description">Allow crash reports to be sent to the developer when an issue occurs.</string>

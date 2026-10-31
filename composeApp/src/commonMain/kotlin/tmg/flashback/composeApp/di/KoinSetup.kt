@@ -148,7 +148,7 @@ internal fun module() = module {
 
     viewModel { InfoViewModel(get()) }
 
-    viewModel { AllSettingsViewModel(get(), get(), get()) }
+    viewModel { AllSettingsViewModel(get(), get(), get(), get()) }
     viewModel { SettingsDarkModeViewModel(get(), get()) }
     viewModel { SettingsThemeViewModel(get(), get(), get()) }
     viewModel { SettingsLayoutHomeViewModel(get(), get()) }

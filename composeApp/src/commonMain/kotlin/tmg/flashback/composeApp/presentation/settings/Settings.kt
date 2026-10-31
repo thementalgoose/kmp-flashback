@@ -37,6 +37,9 @@ import flashback.presentation.localisation.generated.resources.settings_pref_not
 import flashback.presentation.localisation.generated.resources.settings_pref_notification_permission_title
 import flashback.presentation.localisation.generated.resources.settings_pref_privacy_policy_description
 import flashback.presentation.localisation.generated.resources.settings_pref_privacy_policy_title
+import flashback.presentation.localisation.generated.resources.settings_pref_rate_description_apple_appstore
+import flashback.presentation.localisation.generated.resources.settings_pref_rate_description_google_play
+import flashback.presentation.localisation.generated.resources.settings_pref_rate_title
 import flashback.presentation.localisation.generated.resources.settings_pref_recent_highlights_description
 import flashback.presentation.localisation.generated.resources.settings_pref_recent_highlights_title
 import flashback.presentation.localisation.generated.resources.settings_pref_remember_season_change_description
@@ -115,10 +118,13 @@ import flashback.presentation.localisation.generated.resources.settings_theme_th
 import flashback.presentation.localisation.generated.resources.settings_theme_theme_material_you
 import flashback.presentation.localisation.generated.resources.settings_theme_theme_material_you_desc
 import flashback.presentation.localisation.generated.resources.settings_theme_theme_title
+import flashback.presentation.ui.generated.resources.ic_util_icon_apple
+import flashback.presentation.ui.generated.resources.ic_util_icon_play
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.infrastructure.device.Device
+import tmg.flashback.infrastructure.device.Platform
 
 object Settings {
     val DarkModeCategory = Setting.Category(
@@ -396,35 +402,6 @@ object Settings {
         )
     }
 
-    val PrivacyCategory = Setting.Category(
-        _id = "privacy",
-        title = string.settings_section_privacy_title,
-        subtitle = string.settings_section_privacy_description,
-        icon = Res.drawable.ic_settings_privacy
-    )
-    object Privacy {
-        val CrashReporting = Setting.Pref(
-            _id = "crash_reporting",
-            title = string.settings_pref_crash_reporting_title,
-            subtitle = string.settings_pref_crash_reporting_description
-        )
-        val Analytics = Setting.Pref(
-            _id = "analytics",
-            title = string.settings_pref_analytics_title,
-            subtitle = string.settings_pref_analytics_description
-        )
-        val Disclaimer = Setting.Pref(
-            _id = "disclaimer",
-            title = string.settings_pref_disclaimer_title,
-            subtitle = string.settings_pref_disclaimer_description
-        )
-    }
-    val PrivacyPolicy = Setting.Category(
-        _id = "privacy_policy",
-        title = string.settings_pref_privacy_policy_title,
-        subtitle = string.settings_pref_privacy_policy_description
-    )
-
     val AboutCategory = Setting.Category(
         _id = "about",
         title = string.settings_section_about_title,
@@ -468,6 +445,52 @@ object Settings {
             subtitle = string.settings_pref_reset_description
         )
     }
+
+    val Rate = Setting.Category(
+        _id = "about_rate",
+        title = string.settings_pref_rate_title,
+        subtitle = when (Device.platform) {
+            Platform.Android -> string.settings_pref_rate_description_google_play
+            Platform.IOS -> string.settings_pref_rate_description_apple_appstore
+            Platform.Desktop -> string.settings_pref_rate_title
+            Platform.WasmJs -> string.settings_pref_rate_title
+        },
+        icon = when (Device.platform) {
+            Platform.Android -> flashback.presentation.ui.generated.resources.Res.drawable.ic_util_icon_play
+            Platform.IOS -> flashback.presentation.ui.generated.resources.Res.drawable.ic_util_icon_apple
+            Platform.Desktop -> null
+            Platform.WasmJs -> null
+        }
+    )
+
+    val PrivacyCategory = Setting.Category(
+        _id = "privacy",
+        title = string.settings_section_privacy_title,
+        subtitle = string.settings_section_privacy_description,
+        icon = Res.drawable.ic_settings_privacy
+    )
+    object Privacy {
+        val CrashReporting = Setting.Pref(
+            _id = "crash_reporting",
+            title = string.settings_pref_crash_reporting_title,
+            subtitle = string.settings_pref_crash_reporting_description
+        )
+        val Analytics = Setting.Pref(
+            _id = "analytics",
+            title = string.settings_pref_analytics_title,
+            subtitle = string.settings_pref_analytics_description
+        )
+        val Disclaimer = Setting.Pref(
+            _id = "disclaimer",
+            title = string.settings_pref_disclaimer_title,
+            subtitle = string.settings_pref_disclaimer_description
+        )
+    }
+    val PrivacyPolicy = Setting.Category(
+        _id = "privacy_policy",
+        title = string.settings_pref_privacy_policy_title,
+        subtitle = string.settings_pref_privacy_policy_description
+    )
 }
 
 sealed class Setting(
