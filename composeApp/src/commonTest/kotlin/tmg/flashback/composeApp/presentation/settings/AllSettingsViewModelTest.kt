@@ -72,7 +72,7 @@ internal class AllSettingsViewModelTest {
         underTest.openStore()
 
         verify {
-            mockOpenStorePageUseCase.invoke()
+            mockOpenStorePageUseCase()
         }
     }
 }
