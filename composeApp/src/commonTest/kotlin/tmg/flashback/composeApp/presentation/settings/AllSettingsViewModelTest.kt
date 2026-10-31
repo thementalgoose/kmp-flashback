@@ -67,6 +67,7 @@ internal class AllSettingsViewModelTest {
 
     @Test
     fun `open store calls use case`() {
+        every { mockOpenStorePageUseCase.invoke() } returns Unit
         initUnderTest()
 
         underTest.openStore()
