@@ -149,7 +149,7 @@ fun ForceUpgradeScreen(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(string.force_upgrade_validate),
             onClick = refreshConfig,
-            enabled = true
+            enabled = uiState != VALIDATING
         )
 
         AnimatedContent(
