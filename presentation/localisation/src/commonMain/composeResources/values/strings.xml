@@ -363,6 +363,8 @@
 
     <string name="settings_section_notifications_upcoming_title">Upcoming races</string>
     <string name="settings_section_notifications_upcoming_description">Get notified for upcoming races</string>
+    <string name="settings_section_notifications_breaking_title">Breaking news</string>
+    <string name="settings_section_notifications_breaking_description">Get notified for breaking news stories</string>
     <string name="settings_section_notifications_results_title">Race results</string>
     <string name="settings_section_notifications_results_description">Get notified when race results are available</string>
     <string name="settings_header_notice">Notice</string>
@@ -593,6 +595,7 @@
 
     <string name="notification_channel_title_upcoming">Upcoming reminders</string>
     <string name="notification_channel_title_results">Results available</string>
+    <string name="notification_channel_title_news">News</string>
     <string name="notification_channel_race">Race</string>
     <string name="notification_channel_sprint">Sprint</string>
     <string name="notification_channel_sprint_qualifying">Sprint Qualifying</string>
@@ -603,6 +606,7 @@
     <string name="notification_channel_sprint_qualifying_notify">Sprint Qualifying</string>
     <string name="notification_channel_qualifying_notify">Qualifying</string>
     <string name="notification_channel_info">Season information</string>
+    <string name="notification_channel_breaking_news">Breaking news</string>
 
 
     <!-- App Shortcuts -->

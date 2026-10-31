@@ -5,10 +5,12 @@ import tmg.flashback.feature.notifications.model.NotificationUpcoming
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
 import tmg.flashback.notifications.manager.NotificationManager
 import org.koin.core.annotation.Single
+import tmg.flashback.feature.notifications.model.NotificationNews
 
 interface IsNotificationEnabledUseCase {
     operator fun invoke(upcoming: NotificationUpcoming): Boolean
     operator fun invoke(resultsAvailable: NotificationResultsAvailable): Boolean
+    operator fun invoke(news: NotificationNews): Boolean
 }
 
 @Single
@@ -25,6 +27,12 @@ internal class IsNotificationEnabledUseCaseImpl(
     override fun invoke(resultsAvailable: NotificationResultsAvailable): Boolean {
         val isSettingEnabled = notificationSettingsRepository.notificationResultsEnabled.contains(resultsAvailable)
         val isChannelEnabled = notificationManager.isChannelActive(resultsAvailable.channelId)
+        return isSettingEnabled && isChannelEnabled
+    }
+
+    override fun invoke(news: NotificationNews): Boolean {
+        val isSettingEnabled = notificationSettingsRepository.notificationNewsEnabled.contains(news)
+        val isChannelEnabled = notificationManager.isChannelActive(news.channelId)
         return isSettingEnabled && isChannelEnabled
     }
 }

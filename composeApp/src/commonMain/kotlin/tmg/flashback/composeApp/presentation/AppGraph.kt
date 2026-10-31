@@ -32,6 +32,7 @@ import tmg.flashback.composeApp.presentation.settings.browser.SettingsBrowserScr
 import tmg.flashback.composeApp.presentation.settings.darkmode.SettingsDarkModeScreen
 import tmg.flashback.composeApp.presentation.settings.layout_home.SettingsLayoutHomeScreen
 import tmg.flashback.composeApp.presentation.settings.layout_race.SettingsLayoutRaceScreen
+import tmg.flashback.composeApp.presentation.settings.notifications.news.SettingsNotificationNewsScreen
 import tmg.flashback.composeApp.presentation.settings.notifications.results.SettingsNotificationResultsScreen
 import tmg.flashback.composeApp.presentation.settings.notifications.upcoming.SettingsNotificationUpcomingScreen
 import tmg.flashback.composeApp.presentation.settings.privacy.SettingsPrivacyScreen
@@ -74,6 +75,7 @@ import tmg.flashback.navigation.NavSettingsDarkMode
 import tmg.flashback.navigation.NavSettingsInAppBrowser
 import tmg.flashback.navigation.NavSettingsLayoutHome
 import tmg.flashback.navigation.NavSettingsLayoutRace
+import tmg.flashback.navigation.NavSettingsNotificationNews
 import tmg.flashback.navigation.NavSettingsNotificationResults
 import tmg.flashback.navigation.NavSettingsNotificationUpcoming
 import tmg.flashback.navigation.NavSettingsPrivacy
@@ -340,6 +342,13 @@ fun AppGraph(
             }
             entry<NavSettingsNotificationUpcoming>(metadata = SplitPaneScene.detailPane()) {
                 SettingsNotificationUpcomingScreen(
+                    actionUpClicked = { backStack.removeDetail() },
+                    insetPadding = entryPadding(insetPadding),
+                    showBack = !isExpanded
+                )
+            }
+            entry<NavSettingsNotificationNews>(metadata = SplitPaneScene.detailPane()) {
+                SettingsNotificationNewsScreen(
                     actionUpClicked = { backStack.removeDetail() },
                     insetPadding = entryPadding(insetPadding),
                     showBack = !isExpanded

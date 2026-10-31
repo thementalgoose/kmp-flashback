@@ -8,11 +8,13 @@ import tmg.flashback.feature.notifications.model.NotificationUpcoming
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.preferences.manager.PreferenceManager
 import org.koin.core.annotation.Single
+import tmg.flashback.feature.notifications.model.NotificationNews
 
 interface NotificationSettingsRepository {
     var notificationReminderPeriod: NotificationReminder
     var notificationUpcomingEnabled: Set<NotificationUpcoming>
     var notificationResultsEnabled: Set<NotificationResultsAvailable>
+    var notificationNewsEnabled: Set<NotificationNews>
     var notificationPromptSeen: Boolean
 }
 
@@ -47,6 +49,14 @@ internal class NotificationSettingsRepositoryImpl(
             .toSet()
         set(value) = preferenceManager.save(keyNotificationUpcoming, value.map { it.saveKey }.toSet())
 
+    override var notificationNewsEnabled: Set<NotificationNews>
+        get() = preferenceManager
+            .getSet(keyNotificationNews, NotificationNews.entries.map { it.saveKey }.toSet())
+            .mapNotNull { key -> key.toEnum<NotificationNews> { it.saveKey } }
+            .distinct()
+            .toSet()
+        set(value) = preferenceManager.save(keyNotificationNews, value.map { it.saveKey }.toSet())
+
     companion object {
 
         internal val NotificationUpcoming.saveKey: String
@@ -67,10 +77,17 @@ internal class NotificationSettingsRepositoryImpl(
                 NotificationResultsAvailable.QUALIFYING -> "qualifying"
             }
 
+        internal val NotificationNews.saveKey: String
+            get() = when (this) {
+                NotificationNews.BREAKING_NEWS -> "breaking_news"
+            }
+
 
         private const val keyPromptNotifications: String = "RUNTIME_NOTIFICATION_PROMPT"
         private const val keyNotificationUpcoming: String = "NOTIFICATION_UPCOMING_CATEGORIES"
         private const val keyNotificationResult: String = "NOTIFICATION_RESULT_AVAILABLE_CATEGORIES"
+
+        private const val keyNotificationNews: String = "NOTIFICATION_NEWS_AVAILABLE_CATEGORIES"
 
         private const val keyNotificationReminder: String = "UP_NEXT_NOTIFICATION_REMINDER"
     }

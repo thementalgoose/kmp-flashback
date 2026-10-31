@@ -38,6 +38,7 @@ private fun PolymorphicModuleBuilder<Screen>.registerScreens() {
     subclass(NavSettingsInAppBrowser::class, NavSettingsInAppBrowser.serializer())
     subclass(NavSettingsNotificationResults::class, NavSettingsNotificationResults.serializer())
     subclass(NavSettingsNotificationUpcoming::class, NavSettingsNotificationUpcoming.serializer())
+    subclass(NavSettingsNotificationNews::class, NavSettingsNotificationNews.serializer())
     subclass(NavSettingsWidgets::class, NavSettingsWidgets.serializer())
     subclass(NavSettingsPrivacy::class, NavSettingsPrivacy.serializer())
     subclass(NavPrivacyPolicy::class, NavPrivacyPolicy.serializer())
