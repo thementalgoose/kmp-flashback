@@ -7,6 +7,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.notification_channel_breaking_news
 import flashback.presentation.localisation.generated.resources.notification_channel_free_practice
 import flashback.presentation.localisation.generated.resources.notification_channel_info
 import flashback.presentation.localisation.generated.resources.notification_channel_qualifying
@@ -23,14 +24,17 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.compose.resources.getString
 import org.koin.core.annotation.Single
+import tmg.flashback.feature.notifications.model.NotificationNews
 import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
 import tmg.flashback.feature.notifications.model.NotificationUpcoming
+import tmg.flashback.feature.notifications.usecases.SubscribeNewsNotificationsUseCase
 import tmg.flashback.feature.notifications.usecases.SubscribeResultNotificationsUseCase
 import tmg.flashback.widgets.upnext.usecases.RefreshWidgetsUseCase
 
 @Single
 class FlashbackAndroidStartup(
     private val subscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase,
+    private val subscribeNewsNotificationsUseCase: SubscribeNewsNotificationsUseCase,
     private val refreshWidgetsUseCase: RefreshWidgetsUseCase
 ) {
     fun startup(application: Application) {
@@ -65,11 +69,28 @@ class FlashbackAndroidStartup(
                 notificationManager.createNotificationChannel(it)
             }
 
-        // Upcoming
+        // Results
         val resultsGroupId = "results"
         val resultsGroup = NotificationChannelGroup(resultsGroupId, "Results Available")
         notificationManager.createNotificationChannelGroup(resultsGroup)
         NotificationResultsAvailable.entries
+            .map {
+                NotificationChannel(
+                    it.channelId,
+                    it.labelId(),
+                    NotificationManager.IMPORTANCE_HIGH
+                )
+            }
+            .forEach {
+                it.group = resultsGroupId
+                notificationManager.createNotificationChannel(it)
+            }
+
+        // News
+        val newsGroupId = "news"
+        val newsGroup = NotificationChannelGroup(newsGroupId, "News")
+        notificationManager.createNotificationChannelGroup(newsGroup)
+        NotificationNews.entries
             .map {
                 NotificationChannel(
                     it.channelId,
@@ -91,6 +112,7 @@ class FlashbackAndroidStartup(
     private fun Application.setupResultNotifications() {
         GlobalScope.launch {
             subscribeResultNotificationsUseCase.invoke()
+            subscribeNewsNotificationsUseCase.invoke()
         }
     }
 
@@ -104,6 +126,13 @@ class FlashbackAndroidStartup(
             NotificationUpcoming.OTHER -> runBlocking { getString(string.notification_channel_info) }
         }
     }
+
+    private fun NotificationNews.labelId(): String {
+        return when (this) {
+            NotificationNews.BREAKING_NEWS -> runBlocking { getString(string.notification_channel_breaking_news) }
+        }
+    }
+
     private fun NotificationResultsAvailable.labelId(): String {
         return when (this) {
             NotificationResultsAvailable.RACE -> runBlocking { getString(string.notification_channel_race_notify) }
