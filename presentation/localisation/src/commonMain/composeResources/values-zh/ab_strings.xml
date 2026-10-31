@@ -12,6 +12,7 @@
     <string name="ab_close">关闭</string>
     <string name="ab_back">返回</string>
     <string name="ab_hide">隐藏</string>
+    <string name="ab_clear_filters">清除筛选</string>
     <string name="ab_points">积分</string>
     <string name="ab_status">状态</string>
     <string name="ab_result_race_overview">%1$s，%2$s，驾驶 %3$s</string>

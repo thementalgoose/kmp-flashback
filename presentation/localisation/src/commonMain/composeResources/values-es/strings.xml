@@ -79,6 +79,9 @@
     <string name="qualifying_penalty_starts">Comienza %1$s</string>
     <string name="qualifying_penalty">Comienza en el pit lane</string>
     <string name="qualifying_penalty_starts_sprint">Comienza el sprint %1$s</string>
+    <string name="qualifying_visualisation_subtitle">Visualiza las diferencias en la sesión de clasificación</string>
+    <string name="qualifying_visualisation_title">Diferencias de clasificación</string>
+    <string name="qualifying_visualisation_not_found">No hay datos de clasificación disponibles para visualizar</string>
 
     <!-- Results -->
     <string name="weekend_race_round">Ronda %1$d</string>
@@ -309,6 +312,11 @@
     <string name="settings_pref_recent_highlights_description">Mostrar el banner de noticias destacadas recientes en la página de inicio si hay conexión a Internet. Por lo general, contiene enlaces a historias relevantes de la última semana, aproximadamente.</string>
     <string name="settings_pref_remember_season_change_title">Recordar cambio de temporada</string>
     <string name="settings_pref_remember_season_change_description">Recordar la última temporada vista entre reinicios de la aplicación</string>
+
+    <string name="settings_section_race_title">Carrera</string>
+    <string name="settings_section_race_description">Personaliza la pantalla de carrera</string>
+    <string name="settings_pref_weather_details_title">Mostrar detalles del clima</string>
+    <string name="settings_pref_weather_details_description">Muestra la lluvia, temperatura y viento de forma predeterminada en la pantalla de detalles de la carrera. Puedes tocar las tarjetas para mostrar esto en cualquier momento.</string>
     <string name="settings_section_rss_configure_title">Configurar</string>
     <string name="settings_section_rss_configure_description">Configurar fuentes RSS o personalizar la apariencia</string>
     <string name="settings_section_web_browser_title">Navegador en la aplicación</string>
@@ -325,6 +333,8 @@
     <string name="settings_help_adverts_long_description">Personaliza cómo se muestran los anuncios en la aplicación</string>
     <string name="settings_section_notifications_upcoming_title">Próximas carreras</string>
     <string name="settings_section_notifications_upcoming_description">Recibir notificaciones de las próximas carreras</string>
+    <string name="settings_section_notifications_breaking_title">Últimas noticias</string>
+    <string name="settings_section_notifications_breaking_description">Recibe notificaciones sobre noticias de última hora</string>
     <string name="settings_section_notifications_results_title">Resultados de la carrera</string>
     <string name="settings_section_notifications_results_description">Recibir notificaciones cuando los resultados de la carrera estén disponibles</string>
     <string name="settings_header_notice">Aviso</string>
@@ -376,6 +386,9 @@
     <string name="settings_header_legal">Legal</string>
     <string name="settings_pref_privacy_policy_title">Política de privacidad</string>
     <string name="settings_pref_privacy_policy_description">La política de privacidad de la aplicación</string>
+    <string name="settings_pref_rate_title">Valorar</string>
+    <string name="settings_pref_rate_description_google_play">Valora esta aplicación en Google Play Store</string>
+    <string name="settings_pref_rate_description_apple_appstore">Valora esta aplicación en Apple App Store</string>
     <string name="settings_header_device_info">Información del dispositivo</string>
     <string name="settings_pref_crash_reporting_title">Informes de fallos</string>
     <string name="settings_pref_crash_reporting_description">Permitir que se envíen informes de fallos al desarrollador cuando se produzca un problema</string>
@@ -409,7 +422,9 @@
     <string name="settings_theme_theme_title">Tema de la aplicación</string>
     <string name="settings_theme_theme_description">Elige los esquemas de color de tu aplicación</string>
     <string name="settings_theme_theme_default">Predeterminado</string>
+    <string name="settings_theme_theme_default_desc">Predeterminado (requiere reiniciar la aplicación)</string>
     <string name="settings_theme_theme_material_you">Material You</string>
+    <string name="settings_theme_theme_material_you_desc">Material You (requiere reiniciar la aplicación)</string>
     <string name="settings_theme_theme_applied_later">Tu tema se aplicará después de reiniciar la aplicación</string>
     <string name="settings_theme_animation_speed_title">Velocidad de animación</string>
     <string name="settings_theme_animation_speed_description">Elige la velocidad de las vistas animadas en toda la aplicación.</string>
@@ -536,6 +551,7 @@
     <string name="notification_onboarding_description">Recibe notificaciones justo antes de que empiecen los próximos eventos de carrera, clasificación, entrenamientos libres o pruebas de Fórmula 1. Puedes cambiarlas en cualquier momento en los ajustes, así como cuánto tiempo antes deseas que se te notifique</string>
     <string name="notification_channel_title_upcoming">Próximos recordatorios</string>
     <string name="notification_channel_title_results">Resultados disponibles</string>
+    <string name="notification_channel_title_news">Noticias</string>
     <string name="notification_channel_race">Carrera</string>
     <string name="notification_channel_sprint">Sprint</string>
     <string name="notification_channel_sprint_qualifying">Clasificación de sprint</string>
@@ -546,6 +562,7 @@
     <string name="notification_channel_sprint_qualifying_notify">Clasificación de sprint</string>
     <string name="notification_channel_qualifying_notify">Clasificación</string>
     <string name="notification_channel_info">Información de la temporada</string>
+    <string name="notification_channel_breaking_news">Últimas noticias</string>
 
     <!-- Accesos directos de la aplicación -->
     <string name="app_shortcut_search_shorttitle">Buscar</string>
@@ -602,7 +619,8 @@
     <!-- Navegador web -->
     <string name="choose_browser">Abrir en el navegador</string>
     <string name="choose_share">Compartir con</string>
-    <string name="copy_to_clipboard">URL copiada al portapapeles</string>
+    <string name="url_copy_to_clipboard">URL copiada al portapapeles</string>
+    <string name="email_copy_to_clipboard">Correo electrónico copiado al portapapeles</string>
     <string name="unable_to_open_url">No se puede abrir la URL</string>
     <string name="home_last_updated">Última actualización %1$s</string>
     <!-- Política de privacidad -->
@@ -651,4 +669,78 @@
     <string name="driver_lineup_title">Alineación de pilotos</string>
     <string name="driver_lineup_subtitle">Consulta los pilotos que tienen contratos confirmados para futuras temporadas en los equipos de Fórmula 1</string>
 
+    <string name="glossary_active_aero">Aerodinámica activa</string>
+    <string name="glossary_active_aero_desc">-</string>
+    <string name="glossary_atr">ATR (Restricciones de pruebas aerodinámicas)</string>
+    <string name="glossary_atr_desc">-</string>
+    <string name="glossary_apex">Ápex (Punto de cuerda)</string>
+    <string name="glossary_apex_desc">-</string>
+    <string name="glossary_barge_boards">Bargeboards</string>
+    <string name="glossary_barge_boards_desc">-</string>
+    <string name="glossary_box">Box</string>
+    <string name="glossary_box_desc">-</string>
+    <string name="glossary_clipping">Clipping</string>
+    <string name="glossary_clipping_desc">-</string>
+    <string name="glossary_cost_cap">Límite presupuestario (Cost Cap)</string>
+    <string name="glossary_cost_cap_desc">-</string>
+    <string name="glossary_das">(DAS) Dirección de doble eje</string>
+    <string name="glossary_das_desc">-</string>
+    <string name="glossary_delta">Delta</string>
+    <string name="glossary_delta_desc">-</string>
+    <string name="glossary_dirty_air">Aire sucio</string>
+    <string name="glossary_dirty_air_desc">-</string>
+    <string name="glossary_ers">(ERS) Sistema de recuperación de energía</string>
+    <string name="glossary_ers_desc">-</string>
+    <string name="glossary_es">(ES) Almacén de energía (Energy Store)</string>
+    <string name="glossary_es_desc">-</string>
+    <string name="glossary_fcy">(FCY) Bandera amarilla en toda la pista</string>
+    <string name="glossary_fcy_desc">-</string>
+    <string name="glossary_graining">Graining</string>
+    <string name="glossary_graining_desc">-</string>
+    <string name="glossary_ground_effect">Efecto suelo</string>
+    <string name="glossary_ground_effect_desc">-</string>
+    <string name="glossary_halo">Halo</string>
+    <string name="glossary_halo_desc">-</string>
+    <string name="glossary_hans_device">Dispositivo HANS</string>
+    <string name="glossary_hans_device_desc">-</string>
+    <string name="glossary_ice">(ICE) Motor de combustión interna</string>
+    <string name="glossary_ice_desc">-</string>
+    <string name="glossary_kers">(KERS) Sistema de recuperación de energía cinética</string>
+    <string name="glossary_kers_desc">-</string>
+    <string name="glossary_lico">(LICO) Lift And Coast</string>
+    <string name="glossary_lico_desc">-</string>
+    <string name="glossary_mgu_k">(MGU-K) Unidad motorgenerador - Cinética</string>
+    <string name="glossary_mgu_k_desc">-</string>
+    <string name="glossary_mgu_h">(MGU-H) Unidad motorgenerador - Térmica</string>
+    <string name="glossary_mgu_h_desc">-</string>
+    <string name="glossary_monocoque">Monocasco</string>
+    <string name="glossary_monocoque_desc">-</string>
+    <string name="glossary_overcut">Overcut</string>
+    <string name="glossary_overcut_desc">-</string>
+    <string name="glossary_overtake_mode">Modo adelantamiento</string>
+    <string name="glossary_overtake_mode_desc">-</string>
+    <string name="glossary_parc_ferme">Parque cerrado (Parc Fermé)</string>
+    <string name="glossary_parc_ferme_desc">-</string>
+    <string name="glossary_plank">Plancha del fondo (Plank)</string>
+    <string name="glossary_plank_desc">-</string>
+    <string name="glossary_porpoising">Porpoising</string>
+    <string name="glossary_porpoising_desc">-</string>
+    <string name="glossary_pu">(PU) Unidad de potencia (Power Unit)</string>
+    <string name="glossary_pu_desc">-</string>
+    <string name="glossary_rake">Ángulo Rake</string>
+    <string name="glossary_rake_desc">-</string>
+    <string name="glossary_recharge_mode">Modo recarga</string>
+    <string name="glossary_recharge_mode_desc">-</string>
+    <string name="glossary_sprint">Sprint</string>
+    <string name="glossary_sprint_desc">-</string>
+    <string name="glossary_straight_corner_mode">Modo recta / Modo curva</string>
+    <string name="glossary_straight_corner_mode_desc">-</string>
+    <string name="glossary_super_clipping">Super Clipping</string>
+    <string name="glossary_super_clipping_desc">-</string>
+    <string name="glossary_survival_cell">Célula de supervivencia</string>
+    <string name="glossary_survival_cell_desc">-</string>
+    <string name="glossary_undercut">Undercut</string>
+    <string name="glossary_undercut_desc">-</string>
+    <string name="glossary_vsc">(VSC) Coche de seguridad virtual</string>
+    <string name="glossary_vsc_desc">-</string>
 </resources>

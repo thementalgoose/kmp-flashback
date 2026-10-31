@@ -14,6 +14,7 @@
     <string name="ab_close">Κλείσιμο</string>
     <string name="ab_back">Πίσω</string>
     <string name="ab_hide">Απόκρυψη</string>
+    <string name="ab_clear_filters">Εκκαθάριση φίλτρων</string>
 
     <string name="ab_points">Βαθμοί</string>
     <string name="ab_status">Κατάσταση</string>
