@@ -13,7 +13,9 @@ import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.data.repo.repository.RaceRepository
 import tmg.flashback.data.repo.repository.StandingsRepository
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class DriverStandingsViewModel(
     private val standingsRepository: StandingsRepository,
     private val overviewRepository: OverviewRepository,

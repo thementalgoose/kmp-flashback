@@ -2,11 +2,13 @@ package tmg.flashback.feature.weekend.presentation.data.qualifying
 
 import tmg.flashback.formula1.model.QualifyingType
 import tmg.flashback.formula1.model.Race
+import org.koin.core.annotation.Single
 
 interface QualifyingDataMapper {
     operator fun invoke(race: Race): List<QualifyingModel>
 }
 
+@Single
 class QualifyingDataMapperImpl: QualifyingDataMapper {
     override fun invoke(race: Race): List<QualifyingModel> {
         return when {

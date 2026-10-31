@@ -1,7 +1,9 @@
 package tmg.flashback.notifications.manager
 
 import kotlinx.datetime.LocalDateTime
+import org.koin.core.annotation.Single
 
+@Single(binds = [NotificationManager::class])
 actual class NotificationManagerImpl actual constructor() : NotificationManager {
     actual override fun schedule(
         uuid: Int,

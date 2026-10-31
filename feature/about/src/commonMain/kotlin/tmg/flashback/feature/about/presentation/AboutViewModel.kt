@@ -12,7 +12,9 @@ import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.infrastructure.device.Platform
 import tmg.flashback.infrastructure.device.string
 import tmg.flashback.notifications.repositories.NotificationRepository
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class AboutViewModel(
     private val deviceRepository: DeviceRepository,
     private val notificationRepository: NotificationRepository,

@@ -18,9 +18,11 @@ import tmg.flashback.eastereggs.usecases.IsSnowEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSummerEnabledUseCase
 import tmg.flashback.feature.maintenance.repository.MaintenanceRepository
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.navigation.Screen
 import tmg.flashback.navigation.isList
 
+@KoinViewModel
 class AppNavigationViewModel(
     isRssEnabledUseCase: IsRssEnabledUseCase,
     isSnowEnabledUseCase: IsSnowEnabledUseCase,

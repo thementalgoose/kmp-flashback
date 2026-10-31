@@ -16,7 +16,9 @@ import tmg.flashback.ui.permissions.PermissionState
 import tmg.flashback.ui.permissions.PermissionState.NotDetermined
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class NotificationPromptViewModel(
     private val notificationSettingsRepository: NotificationSettingsRepository,
     private val scheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase,

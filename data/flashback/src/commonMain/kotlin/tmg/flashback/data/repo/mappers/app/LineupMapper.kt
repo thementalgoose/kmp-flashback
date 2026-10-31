@@ -1,7 +1,9 @@
 package tmg.flashback.data.repo.mappers.app
 
+import org.koin.core.annotation.Single
 import tmg.flashback.formula1.model.LineupSeason
 
+@Single
 class LineupMapper(
     private val driverDataMapper: DriverDataMapper,
     private val constructorDataMapper: ConstructorDataMapper

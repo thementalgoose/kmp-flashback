@@ -5,6 +5,7 @@ import tmg.flashback.feature.rss.models.SupportedSource
 import tmg.flashback.feature.rss.repositories.mapper.convert
 import tmg.flashback.feature.rss.repositories.model.SupportedSourcesJson
 import tmg.flashback.preferences.manager.PreferenceManager
+import org.koin.core.annotation.Single
 
 interface RssRepository {
     val isEnabled: Boolean
@@ -14,6 +15,7 @@ interface RssRepository {
     var rssShowDescription: Boolean
 }
 
+@Single
 internal class RssRepositoryImpl(
     private val configManager: ConfigManager,
     private val preferenceManager: PreferenceManager

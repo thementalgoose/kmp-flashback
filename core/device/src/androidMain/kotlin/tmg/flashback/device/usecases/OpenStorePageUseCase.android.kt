@@ -5,10 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import androidx.core.net.toUri
+import org.koin.core.annotation.Single
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import tmg.flashback.device.repositories.DeviceRepository
 
+@Single(binds = [OpenStorePageUseCase::class])
 actual class OpenStorePageUseCaseImpl actual constructor(): OpenStorePageUseCase, KoinComponent {
 
     private val copyToClipboardUseCase: CopyToClipboardUseCase by inject()

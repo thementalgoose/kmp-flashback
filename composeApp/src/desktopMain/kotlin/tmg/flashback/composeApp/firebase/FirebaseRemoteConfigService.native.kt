@@ -1,7 +1,9 @@
 package tmg.flashback.composeApp.firebase
 
+import org.koin.core.annotation.Single
 import tmg.flashback.configuration.firebase.FirebaseRemoteConfigService
 
+@Single
 internal actual class FirebaseRemoteConfigServiceImpl actual constructor(): FirebaseRemoteConfigService {
 
     @Throws(Exception::class)

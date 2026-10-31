@@ -17,7 +17,9 @@ import kotlin.to
 
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class LineupViewModel(
     private val lineupRepository: LineupRepository,
     private val coroutineContext: CoroutineContext = EmptyCoroutineContext

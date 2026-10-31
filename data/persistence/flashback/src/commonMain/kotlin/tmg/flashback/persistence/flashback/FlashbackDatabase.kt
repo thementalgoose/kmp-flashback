@@ -7,6 +7,7 @@ import androidx.room3.RoomDatabaseConstructor
 import androidx.sqlite.SQLiteDriver
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import org.koin.core.annotation.Single
 import tmg.flashback.persistence.flashback.dao.CircuitDao
 import tmg.flashback.persistence.flashback.dao.ConstructorDao
 import tmg.flashback.persistence.flashback.dao.DriverDao
@@ -41,6 +42,7 @@ import tmg.flashback.persistence.flashback.models.standings.DriverStandingConstr
 
 internal val DB_NAME = "flashback-database"
 
+@Single
 expect class FlashbackDatabaseFactory {
     fun createDatabase(): RoomDatabase.Builder<FlashbackDatabase>
     fun getSQLiteDriver(): SQLiteDriver

@@ -2,8 +2,10 @@ package tmg.flashback.composeApp.firebase
 
 import com.google.firebase.installations.FirebaseInstallations
 import kotlinx.coroutines.tasks.await
+import org.koin.core.annotation.Single
 import tmg.flashback.infrastructure.log.logException
 
+@Single
 internal actual class FirebaseInstallationServiceImpl actual constructor() : FirebaseInstallationService {
 
     private val instance: FirebaseInstallations

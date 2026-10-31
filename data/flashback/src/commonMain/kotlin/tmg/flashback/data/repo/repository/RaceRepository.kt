@@ -3,6 +3,7 @@ package tmg.flashback.data.repo.repository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
+import org.koin.core.annotation.Single
 import tmg.flashback.data.repo.extensions.valueList
 import tmg.flashback.data.repo.mappers.app.RaceMapper
 import tmg.flashback.data.repo.mappers.network.NetworkConstructorDataMapper
@@ -29,6 +30,7 @@ interface RaceRepository {
     suspend fun hasAnyRaces(season: Int): Boolean
 }
 
+@Single
 internal class RaceRepositoryImpl(
     private val api: FlashbackApi,
     private val persistence: FlashbackDatabase,

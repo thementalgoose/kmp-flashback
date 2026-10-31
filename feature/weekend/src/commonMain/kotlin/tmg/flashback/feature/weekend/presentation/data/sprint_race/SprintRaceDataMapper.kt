@@ -2,11 +2,13 @@ package tmg.flashback.feature.weekend.presentation.data.sprint_race
 
 import tmg.flashback.feature.weekend.presentation.data.ResultType
 import tmg.flashback.formula1.model.Race
+import org.koin.core.annotation.Single
 
 interface SprintRaceDataMapper {
     operator fun invoke(race: Race, resultType: ResultType): List<SprintRaceModel>
 }
 
+@Single
 internal class SprintRaceDataMapperImpl(): SprintRaceDataMapper {
     override fun invoke(race: Race, resultType: ResultType): List<SprintRaceModel> {
         return when (resultType) {

@@ -19,6 +19,7 @@ import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.network.rss.models.Item
 import tmg.flashback.network.rss.models.RssFeed
+import org.koin.core.annotation.Single
 
 const val RSS_DESC_LENGTH = 500
 
@@ -30,6 +31,7 @@ interface RssXMLMapper {
     ): List<Article>
 }
 
+@Single
 internal class RssXMLMapperImpl(
     private val supportedSourceMapper: SupportedSourceMapper
 ): RssXMLMapper {

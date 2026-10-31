@@ -2,6 +2,7 @@ package tmg.flashback.data.repo.repository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import org.koin.core.annotation.Single
 import tmg.flashback.data.repo.mappers.app.ConstructorDataMapper
 import tmg.flashback.data.repo.mappers.app.ConstructorMapper
 import tmg.flashback.data.repo.mappers.network.NetworkConstructorDataMapper
@@ -21,6 +22,7 @@ interface ConstructorRepository {
     fun getConstructors(): Flow<List<tmg.flashback.formula1.model.Constructor>>
 }
 
+@Single
 internal class ConstructorRepositoryImpl(
     private val api: FlashbackApi,
     private val persistence: FlashbackDatabase,

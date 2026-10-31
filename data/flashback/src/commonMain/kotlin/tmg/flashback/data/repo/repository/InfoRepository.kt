@@ -1,6 +1,7 @@
 package tmg.flashback.data.repo.repository
 
 import kotlinx.datetime.LocalDate
+import org.koin.core.annotation.Single
 import tmg.flashback.configuration.manager.ConfigManager
 import tmg.flashback.data.repo.mappers.config.convert
 import tmg.flashback.data.repo.mappers.config.toModel
@@ -16,6 +17,7 @@ interface InfoRepository {
     val infoBanners: List<Banner>
 }
 
+@Single
 internal class InfoRepositoryImpl(
     private val configManager: ConfigManager
 ): InfoRepository {

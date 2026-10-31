@@ -7,6 +7,7 @@ import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
 import tmg.flashback.feature.notifications.model.NotificationUpcoming
 import tmg.flashback.infrastructure.extensions.toEnum
 import tmg.flashback.preferences.manager.PreferenceManager
+import org.koin.core.annotation.Single
 
 interface NotificationSettingsRepository {
     var notificationReminderPeriod: NotificationReminder
@@ -15,6 +16,7 @@ interface NotificationSettingsRepository {
     var notificationPromptSeen: Boolean
 }
 
+@Single
 internal class NotificationSettingsRepositoryImpl(
     private val preferenceManager: PreferenceManager
 ): NotificationSettingsRepository {

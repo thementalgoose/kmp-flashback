@@ -2,6 +2,7 @@ package tmg.flashback.data.repo.repository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import org.koin.core.annotation.Single
 import tmg.flashback.data.repo.mappers.app.CircuitMapper
 import tmg.flashback.data.repo.mappers.network.NetworkCircuitDataMapper
 import tmg.flashback.data.repo.mappers.network.NetworkCircuitMapper
@@ -22,6 +23,7 @@ interface CircuitRepository {
     fun getCircuit(circuitId: String): Flow<Circuit?>
 }
 
+@Single
 internal class CircuitRepositoryImpl(
     private val api: FlashbackApi,
     private val persistence: FlashbackDatabase,

@@ -8,6 +8,7 @@ import tmg.flashback.feature.season.repositories.CalendarRepository
 import tmg.flashback.feature.season.usecases.DefaultSeasonUseCase
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.log.logInfo
+import org.koin.core.annotation.Single
 
 interface CurrentSeasonHolder {
     val currentSeasonFlow: StateFlow<Int>
@@ -22,6 +23,7 @@ interface CurrentSeasonHolder {
     fun refresh()
 }
 
+@Single
 class CurrentSeasonHolderImpl(
     private val defaultSeasonUseCase: DefaultSeasonUseCase,
     private val calendarRepository: CalendarRepository,

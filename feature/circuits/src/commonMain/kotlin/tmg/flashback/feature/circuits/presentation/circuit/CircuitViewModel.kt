@@ -16,7 +16,9 @@ import tmg.flashback.formula1.model.Location
 import tmg.flashback.infrastructure.datetime.now
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class CircuitViewModel(
     private val circuitRepository: CircuitRepository,
     private val openWebpageUseCase: OpenWebpageUseCase,

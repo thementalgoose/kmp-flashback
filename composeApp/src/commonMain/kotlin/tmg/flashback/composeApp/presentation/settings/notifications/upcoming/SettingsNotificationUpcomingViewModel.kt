@@ -14,10 +14,12 @@ import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotification
 import tmg.flashback.notifications.manager.NotificationManager
 import tmg.flashback.ui.permissions.Permission
 import tmg.flashback.ui.permissions.PermissionManager
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.ui.permissions.PermissionState
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
+@KoinViewModel
 class SettingsNotificationUpcomingViewModel(
     private val notificationSettingsRepository: NotificationSettingsRepository,
     private val scheduleUpcomingNotificationsUseCase: ScheduleUpcomingNotificationsUseCase,

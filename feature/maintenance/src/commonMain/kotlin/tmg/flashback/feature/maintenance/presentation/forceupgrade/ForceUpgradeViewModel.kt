@@ -12,7 +12,9 @@ import tmg.flashback.feature.maintenance.presentation.forceupgrade.ForceUpgradeU
 import tmg.flashback.feature.maintenance.presentation.forceupgrade.ForceUpgradeUiState.UNLOCKED
 import tmg.flashback.feature.maintenance.presentation.forceupgrade.ForceUpgradeUiState.VALIDATING
 import tmg.flashback.feature.maintenance.repository.MaintenanceRepository
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class ForceUpgradeViewModel(
     private val fetchConfigUseCase: FetchConfigUseCase,
     private val maintenanceRepository: MaintenanceRepository,

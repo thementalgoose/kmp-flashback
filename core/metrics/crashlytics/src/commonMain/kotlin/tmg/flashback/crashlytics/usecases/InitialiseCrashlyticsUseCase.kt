@@ -1,5 +1,6 @@
 package tmg.flashback.crashlytics.usecases
 
+import org.koin.core.annotation.Single
 import tmg.flashback.crashlytics.firebase.FirebaseCrashlyticsService
 import tmg.flashback.crashlytics.model.FirebaseKey
 import tmg.flashback.infrastructure.device.Device
@@ -9,6 +10,7 @@ interface InitialiseCrashlyticsUseCase {
     fun initialise(deviceUuid: String, extraKeys: Map<FirebaseKey, String>)
 }
 
+@Single
 internal class InitialiseCrashlyticsUseCaseImpl(
     private val firebaseCrashlyticsService: FirebaseCrashlyticsService,
 ): InitialiseCrashlyticsUseCase {

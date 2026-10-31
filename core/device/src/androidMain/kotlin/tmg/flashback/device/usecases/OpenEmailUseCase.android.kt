@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
 import android.os.Build
+import org.koin.core.annotation.Single
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.java.KoinJavaComponent
@@ -18,6 +19,7 @@ import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.email_copy_to_clipboard
 
 
+@Single(binds = [OpenEmailUseCase::class])
 actual class OpenEmailUseCaseImpl actual constructor(): OpenEmailUseCase, KoinComponent {
 
     private val copyToClipboardUseCase: CopyToClipboardUseCase by inject()

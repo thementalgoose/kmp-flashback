@@ -7,7 +7,9 @@ import tmg.flashback.feature.rss.mapper.RssXMLMapper
 import tmg.flashback.feature.rss.repositories.RssRepository
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.network.rss.api.RssApi
+import org.koin.core.annotation.Single
 
+@Single
 class GetRssArticlesUseCaseImpl(
     private val rssRepository: RssRepository,
     private val rssApi: RssApi,

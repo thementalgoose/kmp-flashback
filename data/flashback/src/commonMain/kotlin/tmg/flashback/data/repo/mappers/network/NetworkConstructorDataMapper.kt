@@ -1,7 +1,9 @@
 package tmg.flashback.data.repo.mappers.network
 
+import org.koin.core.annotation.Single
 import tmg.flashback.persistence.flashback.models.constructors.Constructor
 
+@Single
 class NetworkConstructorDataMapper {
 
     @Throws(RuntimeException::class)

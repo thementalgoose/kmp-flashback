@@ -6,11 +6,15 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
 import kotlinx.io.IOException
 import kotlinx.serialization.builtins.serializer
+import org.koin.core.annotation.Named
+import org.koin.core.annotation.Single
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.network.rss.client.xml
 import tmg.flashback.network.rss.models.RssFeed
 
+@Single
 class RssApiImpl(
+    @Named("rss")
     private val httpClient: HttpClient
 ): RssApi {
 

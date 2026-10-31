@@ -1,11 +1,10 @@
 package tmg.flashback.feature.lineup.di
 
-import org.koin.core.module.dsl.viewModel
-import org.koin.dsl.module
-import tmg.flashback.feature.lineup.presentation.LineupViewModel
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Configuration
+import org.koin.core.annotation.Module
 
-val featureLineupModule = listOf(module())
-
-internal fun module() = module {
-    viewModel { LineupViewModel(get() )}
-}
+@Module
+@ComponentScan("tmg.flashback.feature.lineup")
+@Configuration
+class FeatureLineupModule

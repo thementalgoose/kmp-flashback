@@ -1,5 +1,6 @@
 package tmg.flashback.data.repo.mappers.app
 
+import org.koin.core.annotation.Single
 import tmg.flashback.persistence.flashback.models.drivers.DriverSeasonRaceWithConstructor
 import tmg.flashback.persistence.flashback.models.drivers.DriverSeasonWithRaces
 import tmg.flashback.formula1.enums.RaceStatus
@@ -7,6 +8,7 @@ import tmg.flashback.formula1.model.DriverHistory
 import tmg.flashback.formula1.model.DriverHistorySeason
 import tmg.flashback.formula1.model.DriverHistorySeasonRace
 
+@Single
 class DriverMapper(
     private val driverDataMapper: DriverDataMapper,
     private val constructorDataMapper: ConstructorDataMapper,

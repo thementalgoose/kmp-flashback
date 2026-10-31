@@ -6,13 +6,17 @@ import io.ktor.client.request.headers
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
 import kotlinx.io.IOException
+import org.koin.core.annotation.Named
+import org.koin.core.annotation.Single
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.news.client.json
 import tmg.flashback.news.models.MetadataWrapper
 import tmg.flashback.news.models.news.News
 import tmg.flashback.news.repositories.NewsRepository
 
+@Single
 internal class FlashbackNewsApiImpl(
+    @Named("flashback_news")
     private val httpClient: HttpClient,
     private val newsRepository: NewsRepository
 ): FlashbackNewsApi {

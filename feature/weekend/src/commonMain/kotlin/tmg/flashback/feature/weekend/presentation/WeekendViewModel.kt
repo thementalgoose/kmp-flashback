@@ -39,7 +39,9 @@ import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.QualifyingType
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.ui.toasts.ToastManager
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class WeekendViewModel(
     private val racesRepository: RaceRepository,
     private val overviewRepository: OverviewRepository,

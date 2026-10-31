@@ -3,10 +3,12 @@ package tmg.flashback.composeApp.presentation.paddock
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.composeApp.repositories.NavRepository
 import tmg.flashback.device.usecases.OpenWebpageUseCase
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
 
+@KoinViewModel
 class PaddockViewModel(
     private val isRssEnabledUseCase: IsRssEnabledUseCase,
     private val navRepository: NavRepository,
