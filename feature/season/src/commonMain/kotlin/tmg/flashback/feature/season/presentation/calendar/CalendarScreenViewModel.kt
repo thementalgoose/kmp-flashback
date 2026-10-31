@@ -21,7 +21,9 @@ import tmg.flashback.feature.season.presentation.calendar.ScheduleBuilder.genera
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
 import tmg.flashback.feature.season.repositories.CalendarRepository
 import tmg.flashback.ui.toasts.ToastManager
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class CalendarScreenViewModel(
     private val overviewRepository: OverviewRepository,
     private val raceRepository: RaceRepository,

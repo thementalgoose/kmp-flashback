@@ -3,12 +3,14 @@ package tmg.flashback.feature.season.usecases
 import tmg.flashback.data.repo.repository.InfoRepository
 import tmg.flashback.feature.season.repositories.CalendarRepository
 import tmg.flashback.formula1.constants.Formula1
+import org.koin.core.annotation.Single
 
 interface DefaultSeasonUseCase {
     val defaultSeason: Int
     val serverDefaultSeason: Int
 }
 
+@Single
 internal class DefaultSeasonUseCaseImpl(
     private val infoRepository: InfoRepository,
     private val calendarRepository: CalendarRepository

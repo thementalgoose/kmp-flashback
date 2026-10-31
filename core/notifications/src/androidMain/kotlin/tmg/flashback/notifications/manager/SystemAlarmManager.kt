@@ -11,9 +11,11 @@ import androidx.core.app.AlarmManagerCompat
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
+import org.koin.core.annotation.Single
 import org.koin.java.KoinJavaComponent
 import tmg.flashback.notifications.receivers.LocalNotificationBroadcastReceiver
 
+@Single
 class SystemAlarmManager {
 
     private val applicationContext: Context

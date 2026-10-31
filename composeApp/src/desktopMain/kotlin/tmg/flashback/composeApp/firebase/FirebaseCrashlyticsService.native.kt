@@ -1,7 +1,9 @@
 package tmg.flashback.composeApp.firebase
 
+import org.koin.core.annotation.Single
 import tmg.flashback.crashlytics.firebase.FirebaseCrashlyticsService
 
+@Single
 internal actual class FirebaseCrashlyticsServiceImpl actual constructor(): FirebaseCrashlyticsService {
 
     companion object {

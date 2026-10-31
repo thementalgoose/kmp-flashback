@@ -1,15 +1,10 @@
 package tmg.flashback.feature.search.di
 
-import org.koin.core.module.dsl.viewModel
-import org.koin.dsl.module
-import tmg.flashback.feature.search.presentation.SearchViewModel
-import tmg.flashback.feature.search.usecases.IsSearchEnabledUseCase
-import tmg.flashback.feature.search.usecases.IsSearchEnabledUseCseImpl
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Configuration
+import org.koin.core.annotation.Module
 
-val featureSearchModule = listOf(module())
-
-internal fun module() = module {
-    single<IsSearchEnabledUseCase> { IsSearchEnabledUseCseImpl() }
-
-    viewModel { SearchViewModel(get(), get(), get()) }
-}
+@Module
+@ComponentScan("tmg.flashback.feature.search")
+@Configuration
+class FeatureSearchModule

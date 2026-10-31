@@ -5,10 +5,12 @@ import platform.AppTrackingTransparency.ATTrackingManagerAuthorizationStatusAuth
 import platform.AppTrackingTransparency.ATTrackingManagerAuthorizationStatusDenied
 import platform.AppTrackingTransparency.ATTrackingManagerAuthorizationStatusNotDetermined
 import platform.AppTrackingTransparency.ATTrackingManagerAuthorizationStatusRestricted
+import org.koin.core.annotation.Single
 import tmg.flashback.tracking.models.TrackingState
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
+@Single
 actual class TrackingManagerImpl actual constructor(): TrackingManager {
 
     private fun initialise() {

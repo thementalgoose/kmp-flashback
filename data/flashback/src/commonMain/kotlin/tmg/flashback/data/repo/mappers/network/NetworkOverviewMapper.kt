@@ -1,8 +1,10 @@
 package tmg.flashback.data.repo.mappers.network
 
+import org.koin.core.annotation.Single
 import tmg.flashback.persistence.flashback.models.overview.Overview
 import tmg.flashback.flashbackapi.api.models.overview.OverviewRace
 
+@Single
 class NetworkOverviewMapper {
     @Throws(RuntimeException::class)
     fun mapOverview(overview: OverviewRace?): Overview? {

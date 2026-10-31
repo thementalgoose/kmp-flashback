@@ -1,8 +1,10 @@
 package tmg.flashback.data.repo.mappers.app
 
+import org.koin.core.annotation.Single
 import tmg.flashback.formula1.model.Constructor
 import tmg.flashback.infrastructure.extensions.toColourInt
 
+@Single
 class ConstructorDataMapper {
 
     fun mapConstructorData(constructor: tmg.flashback.persistence.flashback.models.constructors.Constructor): Constructor {

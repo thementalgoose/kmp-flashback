@@ -4,9 +4,11 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.feature.highlights.repositories.HighlightsRepository
 import tmg.flashback.feature.season.repositories.CalendarRepository
 
+@KoinViewModel
 class SettingsLayoutHomeViewModel(
     private val calendarRepository: CalendarRepository,
     private val highlightsRepository: HighlightsRepository

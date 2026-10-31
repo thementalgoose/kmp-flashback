@@ -6,9 +6,11 @@ import platform.UserNotifications.UNAuthorizationOptionBadge
 import platform.UserNotifications.UNAuthorizationStatusAuthorized
 import platform.UserNotifications.UNAuthorizationStatusDenied
 import platform.UserNotifications.UNAuthorizationStatusNotDetermined
+import org.koin.core.annotation.Single
 import platform.UserNotifications.UNUserNotificationCenter
 import kotlin.coroutines.suspendCoroutine
 
+@Single(binds = [PermissionManager::class])
 actual class PermissionManagerImpl actual constructor(): PermissionManager {
 
     actual override suspend fun requestPermission(permission: Permission): CompletableDeferred<PermissionState> {

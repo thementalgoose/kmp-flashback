@@ -4,6 +4,11 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.googleServices)
     alias(libs.plugins.crashlytics)
+    alias(libs.plugins.koinCompiler)
+}
+
+koinCompiler {
+    compileSafety.set(true)
 }
 
 val versionCodeProperty: Int = try {
@@ -113,9 +118,12 @@ dependencies {
     implementation(projects.feature.circuits)
     implementation(projects.feature.constructors)
     implementation(projects.feature.drivers)
+    implementation(projects.feature.glossary)
     implementation(projects.feature.highlights)
+    implementation(projects.feature.lineup)
     implementation(projects.feature.maintenance)
     implementation(projects.feature.notifications)
+    implementation(projects.feature.paddock)
     implementation(projects.feature.privacypolicy)
     implementation(projects.feature.reactiongame)
     implementation(projects.feature.rss)
@@ -160,6 +168,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.koin.core)
+    implementation(libs.koin.annotations)
     implementation(libs.bundles.koin.compose)
     implementation(libs.ksoup)
 

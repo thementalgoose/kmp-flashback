@@ -6,11 +6,13 @@ import tmg.flashback.feature.rss.extensions.stripWWW
 import tmg.flashback.feature.rss.models.ArticleSource
 import tmg.flashback.feature.rss.models.SupportedSource
 import tmg.flashback.feature.rss.repositories.RssRepository
+import org.koin.core.annotation.Single
 
 interface SupportedSourceMapper {
     operator fun invoke(rssLink: String?): ArticleSource?
 }
 
+@Single
 internal class SupportedSourceMapperImpl(
     private val rssRepository: RssRepository
 ): SupportedSourceMapper {

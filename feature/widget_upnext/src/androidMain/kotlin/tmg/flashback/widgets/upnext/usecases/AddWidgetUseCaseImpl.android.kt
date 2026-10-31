@@ -3,10 +3,12 @@ package tmg.flashback.widgets.upnext.usecases
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
+import org.koin.core.annotation.Single
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import tmg.flashback.widgets.upnext.presentation.UpNextWidgetReceiver
 
+@Single(binds = [AddWidgetUseCase::class])
 actual class AddWidgetUseCaseImpl actual constructor() : AddWidgetUseCase, KoinComponent {
 
     private val applicationContext: Context by inject()

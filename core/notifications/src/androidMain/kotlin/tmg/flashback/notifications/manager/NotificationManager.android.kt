@@ -9,11 +9,13 @@ import android.content.Context
 import android.os.Build
 import androidx.core.app.AlarmManagerCompat
 import kotlinx.datetime.LocalDateTime
+import org.koin.core.annotation.Single
 import org.koin.core.component.KoinComponent
 import org.koin.java.KoinJavaComponent
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.notifications.receivers.LocalNotificationBroadcastReceiver
 
+@Single(binds = [NotificationManager::class])
 actual class NotificationManagerImpl actual constructor(): NotificationManager, KoinComponent {
 
     private val applicationContext: Context

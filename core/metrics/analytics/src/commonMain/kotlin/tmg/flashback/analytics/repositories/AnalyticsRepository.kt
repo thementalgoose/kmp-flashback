@@ -1,11 +1,13 @@
 package tmg.flashback.analytics.repositories
 
+import org.koin.core.annotation.Single
 import tmg.flashback.preferences.manager.PreferenceManager
 
 interface AnalyticsRepository {
     var analyticsEnabled: Boolean
 }
 
+@Single
 internal class AnalyticsRepositoryImpl(
     private val preferenceManager: PreferenceManager
 ): AnalyticsRepository {

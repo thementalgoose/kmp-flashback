@@ -3,10 +3,12 @@ package tmg.flashback.configuration.manager
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
+import org.koin.core.annotation.Single
 import tmg.flashback.configuration.firebase.FirebaseRemoteConfigService
 import tmg.flashback.configuration.firebase.FirebaseSettings
 import tmg.flashback.infrastructure.log.logDebug
 
+@Single
 internal class ConfigManagerImpl(
     private val firebaseRemoteConfigService: FirebaseRemoteConfigService
 ): ConfigManager {

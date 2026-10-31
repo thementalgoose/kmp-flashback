@@ -1,12 +1,14 @@
 package tmg.flashback.feature.weekend.repositories
 
 import tmg.flashback.preferences.manager.PreferenceManager
+import org.koin.core.annotation.Single
 
 interface WeatherRepository {
     var weatherTemperatureMetric: Boolean
     var weatherWindspeedMetric: Boolean
 }
 
+@Single
 class WeatherRepositoryImpl(
     private val preferenceManager: PreferenceManager
 ): WeatherRepository {

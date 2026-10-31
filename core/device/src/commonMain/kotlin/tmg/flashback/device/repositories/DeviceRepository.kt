@@ -1,5 +1,6 @@
 package tmg.flashback.device.repositories
 
+import org.koin.core.annotation.Single
 import tmg.flashback.configuration.manager.ConfigManager
 import tmg.flashback.preferences.manager.PreferenceManager
 import kotlin.uuid.ExperimentalUuidApi
@@ -17,6 +18,7 @@ interface DeviceRepository {
 }
 
 @OptIn(ExperimentalUuidApi::class)
+@Single
 internal class DeviceRepositoryImpl(
     private val preferenceManager: PreferenceManager,
     private val configManager: ConfigManager

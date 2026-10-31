@@ -1,5 +1,6 @@
 package tmg.flashback.device.usecases
 
+import org.koin.core.annotation.Single
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import platform.Foundation.NSURL
@@ -8,6 +9,7 @@ import platform.UIKit.UIPasteboard
 import tmg.flashback.device.manager.UiManager
 import kotlin.getValue
 
+@Single(binds = [ShareWebpageUseCase::class])
 actual class ShareWebpageUseCaseImpl actual constructor() : ShareWebpageUseCase, KoinComponent {
 
     private val uiManager: UiManager by inject()

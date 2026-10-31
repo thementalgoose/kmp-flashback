@@ -1,11 +1,13 @@
 package tmg.flashback.data.repo.mappers.network
 
+import org.koin.core.annotation.Single
 import tmg.flashback.persistence.flashback.models.race.FastestLap
 import tmg.flashback.persistence.flashback.models.race.QualifyingResult
 import tmg.flashback.persistence.flashback.models.race.RaceResult
 import tmg.flashback.persistence.flashback.models.race.SprintQualifyingResult
 import tmg.flashback.persistence.flashback.models.race.SprintRaceResult
 
+@Single
 class NetworkRaceMapper {
 
     @Throws(RuntimeException::class)

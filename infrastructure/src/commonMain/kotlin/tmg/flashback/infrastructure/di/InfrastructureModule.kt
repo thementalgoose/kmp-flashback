@@ -1,11 +1,10 @@
 package tmg.flashback.infrastructure.di
 
-import org.koin.dsl.module
-import tmg.flashback.infrastructure.datetime.TimeManager
-import tmg.flashback.infrastructure.datetime.TimeManagerImpl
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Configuration
+import org.koin.core.annotation.Module
 
-val infrastructureModule = listOf(module())
-
-internal fun module() = module {
-    single<TimeManager> { TimeManagerImpl() }
-}
+@Module
+@ComponentScan("tmg.flashback.infrastructure")
+@Configuration
+class InfrastructureModule

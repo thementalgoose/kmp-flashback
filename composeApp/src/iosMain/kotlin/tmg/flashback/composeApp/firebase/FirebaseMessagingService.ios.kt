@@ -2,12 +2,14 @@ package tmg.flashback.composeApp.firebase
 
 import cocoapods.FirebaseMessaging.FIRMessaging
 import kotlinx.cinterop.ExperimentalForeignApi
+import org.koin.core.annotation.Single
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.infrastructure.log.logInfo
 import tmg.flashback.notifications.firebase.FirebaseMessagingService
 import kotlin.coroutines.suspendCoroutine
 
 @OptIn(ExperimentalForeignApi::class)
+@Single
 internal actual class FirebaseMessagingServiceImpl actual constructor() : FirebaseMessagingService {
     actual override suspend fun subscribeToTopic(topicId: String) = suspendCoroutine { continuation ->
         FIRMessaging.messaging().subscribeToTopic(topic = topicId) { error ->

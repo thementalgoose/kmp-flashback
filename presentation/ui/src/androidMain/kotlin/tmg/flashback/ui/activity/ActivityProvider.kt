@@ -5,8 +5,10 @@ import android.app.Application
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import org.koin.core.annotation.Single
 import java.lang.ref.WeakReference
 
+@Single(binds = [ActivityProvider::class])
 class ActivityProvider: Application.ActivityLifecycleCallbacks {
 
     private var _activity: WeakReference<Activity>? = null

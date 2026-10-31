@@ -1,5 +1,6 @@
 package tmg.flashback.preferences.manager
 
+import org.koin.core.annotation.Single
 import tmg.flashback.preferences.service.StorageService
 
 interface PreferenceManager {
@@ -17,6 +18,7 @@ interface PreferenceManager {
     fun getSet(key: String, value: Set<String>): MutableSet<String>
 }
 
+@Single
 internal class PreferenceManagerImpl(
     private val storageService: StorageService
 ): PreferenceManager {

@@ -1,10 +1,12 @@
 package tmg.flashback.device.usecases
 
+import org.koin.core.annotation.Single
 import platform.UIKit.UIApplication
 import platform.UIKit.UIApplicationOpenSettingsURLString
 import platform.UIKit.UIApplicationOpenNotificationSettingsURLString
 import platform.Foundation.NSURL
 
+@Single(binds = [OpenSettingsUseCase::class])
 actual class OpenSettingsUseCaseImpl actual constructor(): OpenSettingsUseCase {
     actual override fun openNotificationSettings() {
         val url = NSURL(string = UIApplicationOpenNotificationSettingsURLString)

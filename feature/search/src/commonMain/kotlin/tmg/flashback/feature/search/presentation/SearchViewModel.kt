@@ -17,7 +17,9 @@ import kotlinx.coroutines.launch
 import tmg.flashback.data.repo.repository.CircuitRepository
 import tmg.flashback.data.repo.repository.ConstructorRepository
 import tmg.flashback.data.repo.repository.DriverRepository
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class SearchViewModel(
     private val circuitRepository: CircuitRepository,
     private val driversRepository: DriverRepository,

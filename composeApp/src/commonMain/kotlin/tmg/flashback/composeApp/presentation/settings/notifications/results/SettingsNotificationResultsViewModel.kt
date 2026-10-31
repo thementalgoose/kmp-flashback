@@ -13,10 +13,12 @@ import tmg.flashback.feature.notifications.usecases.SubscribeResultNotifications
 import tmg.flashback.ui.permissions.Permission.Notifications
 import tmg.flashback.ui.permissions.PermissionManager
 import tmg.flashback.ui.permissions.PermissionState
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.ui.permissions.PermissionState.NotDetermined
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
+@KoinViewModel
 class SettingsNotificationResultsViewModel(
     private val notificationSettingsRepository: NotificationSettingsRepository,
     private val subscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase,

@@ -4,9 +4,11 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.widgets.upnext.repositories.UpNextWidgetRepository
 import tmg.flashback.widgets.upnext.usecases.AddWidgetUseCase
 
+@KoinViewModel
 class SettingsWidgetsViewModel(
     private val widgetsRepository: UpNextWidgetRepository,
     private val addWidgetUseCase: AddWidgetUseCase,

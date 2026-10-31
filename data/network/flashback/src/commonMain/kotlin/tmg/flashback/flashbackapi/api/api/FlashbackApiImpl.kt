@@ -6,6 +6,8 @@ import io.ktor.client.request.headers
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
 import kotlinx.io.IOException
+import org.koin.core.annotation.Named
+import org.koin.core.annotation.Single
 import tmg.flashback.flashbackapi.api.client.json
 import tmg.flashback.flashbackapi.api.models.MetadataWrapper
 import tmg.flashback.flashbackapi.api.models.circuits.AllCircuits
@@ -25,7 +27,9 @@ import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.infrastructure.device.Platform
 import tmg.flashback.infrastructure.log.logInfo
 
+@Single
 class FlashbackApiImpl(
+    @Named("flashback")
     private val httpClient: HttpClient,
     private val networkConfigRepository: NetworkConfigRepository
 ): FlashbackApi {

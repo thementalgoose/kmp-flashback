@@ -3,11 +3,13 @@ package tmg.flashback.composeApp.firebase
 import cocoapods.FirebaseRemoteConfig.FIRRemoteConfig
 import cocoapods.FirebaseRemoteConfig.FIRRemoteConfigSettings
 import kotlinx.cinterop.ExperimentalForeignApi
+import org.koin.core.annotation.Single
 import tmg.flashback.configuration.firebase.FirebaseRemoteConfigService
 import tmg.flashback.infrastructure.log.logInfo
 import kotlin.coroutines.suspendCoroutine
 
 @OptIn(ExperimentalForeignApi::class)
+@Single
 internal actual class FirebaseRemoteConfigServiceImpl actual constructor(): FirebaseRemoteConfigService {
 
     private val remoteConfig: FIRRemoteConfig by lazy {

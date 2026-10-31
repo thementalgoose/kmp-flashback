@@ -1,11 +1,13 @@
 package tmg.flashback.crashlytics.repositories
 
+import org.koin.core.annotation.Single
 import tmg.flashback.preferences.manager.PreferenceManager
 
 interface CrashlyticsRepository {
     var crashlyticsEnabled: Boolean
 }
 
+@Single
 internal class CrashlyticsRepositoryImpl(
     private val preferenceManager: PreferenceManager
 ): CrashlyticsRepository {

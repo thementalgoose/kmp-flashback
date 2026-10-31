@@ -3,11 +3,13 @@ package tmg.flashback.feature.weekend.usecases
 import kotlinx.coroutines.flow.firstOrNull
 import tmg.flashback.data.repo.repository.OverviewRepository
 import tmg.flashback.formula1.model.OverviewRace
+import org.koin.core.annotation.Single
 
 interface GetPreviousRaceUseCase {
     suspend operator fun invoke(season: Int, round: Int): OverviewRace?
 }
 
+@Single
 internal class GetPreviousRaceUseCaseImpl(
     private val overviewRepository: OverviewRepository
 ): GetPreviousRaceUseCase {

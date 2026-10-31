@@ -4,10 +4,12 @@ import cocoapods.FirebaseAnalytics.FIRAnalytics
 import cocoapods.FirebaseAnalytics.kFIRParameterScreenClass
 import cocoapods.FirebaseAnalytics.kFIRParameterScreenName
 import kotlinx.cinterop.ExperimentalForeignApi
+import org.koin.core.annotation.Single
 import tmg.flashback.analytics.firebase.FirebaseAnalyticsService
 import kotlin.reflect.KClass
 
 @OptIn(ExperimentalForeignApi::class)
+@Single
 internal actual class FirebaseAnalyticsServiceImpl actual constructor(): FirebaseAnalyticsService {
 
     actual override fun setUserId(userId: String) {

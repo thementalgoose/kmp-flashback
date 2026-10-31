@@ -18,7 +18,9 @@ import tmg.flashback.formula1.model.ConstructorHistory
 import tmg.flashback.formula1.model.ConstructorHistorySeason
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class ConstructorStatsViewModel(
     private val constructorRepository: ConstructorRepository,
     private val coroutineContext: CoroutineContext = EmptyCoroutineContext

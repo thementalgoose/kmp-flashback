@@ -21,7 +21,9 @@ import tmg.flashback.formula1.model.DriverHistory
 import tmg.flashback.formula1.model.DriverHistorySeason
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class DriverStatsViewModel(
     private val driverRepository: DriverRepository,
     private val coroutineContext: CoroutineContext = EmptyCoroutineContext

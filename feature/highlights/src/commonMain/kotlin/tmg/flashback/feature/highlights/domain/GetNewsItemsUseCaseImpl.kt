@@ -5,7 +5,9 @@ import tmg.flashback.infrastructure.datetime.requireFromDate
 import tmg.flashback.infrastructure.log.logException
 import tmg.flashback.news.api.FlashbackNewsApi
 import tmg.flashback.news.models.news.News
+import org.koin.core.annotation.Single
 
+@Single
 class GetNewsItemsUseCaseImpl(
     private val flashbackNewsApi: FlashbackNewsApi
 ): GetNewsItemsUseCase {

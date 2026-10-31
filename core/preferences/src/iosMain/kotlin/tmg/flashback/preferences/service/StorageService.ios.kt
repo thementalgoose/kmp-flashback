@@ -1,9 +1,11 @@
 package tmg.flashback.preferences.service
 
+import org.koin.core.annotation.Single
 import platform.Foundation.NSUserDefaults
 import tmg.flashback.infrastructure.log.logDebug
 import tmg.flashback.infrastructure.log.logInfo
 
+@Single
 actual class StorageService {
     actual fun save(key: String, value: Int) {
         NSUserDefaults.standardUserDefaults.setInteger(value.toLong(), forKey = key)

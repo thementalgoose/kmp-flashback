@@ -1,8 +1,10 @@
 package tmg.flashback.data.repo.mappers.app
 
+import org.koin.core.annotation.Single
 import tmg.flashback.persistence.flashback.models.overview.Event
 import tmg.flashback.formula1.model.Season
 
+@Single
 class SeasonMapper(
     private val raceMapper: RaceMapper,
     private val eventMapper: EventMapper

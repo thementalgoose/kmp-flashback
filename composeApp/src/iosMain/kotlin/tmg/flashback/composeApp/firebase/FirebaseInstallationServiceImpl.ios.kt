@@ -2,9 +2,11 @@ package tmg.flashback.composeApp.firebase
 
 import cocoapods.FirebaseInstallations.FIRInstallations
 import kotlinx.cinterop.ExperimentalForeignApi
+import org.koin.core.annotation.Single
 import kotlin.coroutines.suspendCoroutine
 
 @OptIn(ExperimentalForeignApi::class)
+@Single
 internal actual class FirebaseInstallationServiceImpl actual constructor() : FirebaseInstallationService {
 
     private val instance: FIRInstallations

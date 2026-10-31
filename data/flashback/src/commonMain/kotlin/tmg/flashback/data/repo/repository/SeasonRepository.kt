@@ -3,6 +3,7 @@ package tmg.flashback.data.repo.repository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
+import org.koin.core.annotation.Single
 import tmg.flashback.data.repo.mappers.app.ConstructorStandingMapper
 import tmg.flashback.data.repo.mappers.app.DriverStandingMapper
 import tmg.flashback.data.repo.mappers.app.SeasonMapper
@@ -15,6 +16,7 @@ interface SeasonRepository {
     fun getSeason(season: Int): Flow<Season?>
 }
 
+@Single
 internal class SeasonRepositoryImpl(
     private val flashbackDatabase: FlashbackDatabase,
     private val seasonMapper: SeasonMapper

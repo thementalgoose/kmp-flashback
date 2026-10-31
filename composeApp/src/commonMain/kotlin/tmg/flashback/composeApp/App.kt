@@ -44,7 +44,6 @@ import flashback.presentation.localisation.generated.resources.feature_banner_so
 import flashback.presentation.localisation.generated.resources.feature_banner_soft_upgrade_prompt
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
-import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.composeApp.presentation.AppContainer
 import tmg.flashback.composeApp.presentation.MenuItem
@@ -78,7 +77,6 @@ import tmg.flashback.ui.navigation.NavigationType.BottomNav
 import tmg.flashback.ui.navigation.NavigationType.NavOrbiter
 import tmg.flashback.ui.navigation.floatingHorizontalNavHeight
 import tmg.flashback.ui.navigation.rememberNavigationLayoutType
-import tmg.flashback.ui.toasts.ToastManager
 import tmg.flashback.xr.LocalXR
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -86,12 +84,10 @@ import tmg.flashback.xr.LocalXR
 fun App() {
     val appNavigationViewModel: AppNavigationViewModel = koinViewModel()
 
-    val toastManager: ToastManager = koinInject()
     val toastBackground: Color = AppTheme.colors.primaryContainer
     val toastForeground: Color = AppTheme.colors.onPrimaryContainer
     LaunchedEffect(toastBackground, toastForeground) {
-        toastManager.backgroundColor = toastBackground
-        toastManager.foregroundColor = toastForeground
+        appNavigationViewModel.updateToastColors(toastBackground, toastForeground)
     }
 
     ApplicationTheme {

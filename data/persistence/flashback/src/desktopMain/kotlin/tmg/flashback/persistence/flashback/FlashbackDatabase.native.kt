@@ -7,7 +7,9 @@ import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
+import org.koin.core.annotation.Single
 
+@Single
 actual class FlashbackDatabaseFactory() {
     actual fun createDatabase(): RoomDatabase.Builder<FlashbackDatabase> {
 

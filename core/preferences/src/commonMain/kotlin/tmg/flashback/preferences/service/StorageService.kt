@@ -1,5 +1,8 @@
 package tmg.flashback.preferences.service
 
+import org.koin.core.annotation.Single
+
+@Single
 expect class StorageService {
     fun save(key: String, value: Int)
     fun save(key: String, value: String)

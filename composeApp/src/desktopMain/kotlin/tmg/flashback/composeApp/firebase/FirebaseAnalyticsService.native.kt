@@ -1,8 +1,10 @@
 package tmg.flashback.composeApp.firebase
 
+import org.koin.core.annotation.Single
 import tmg.flashback.analytics.firebase.FirebaseAnalyticsService
 import kotlin.reflect.KClass
 
+@Single
 internal actual class FirebaseAnalyticsServiceImpl actual constructor(): FirebaseAnalyticsService {
 
     actual override fun setUserId(userId: String) { }

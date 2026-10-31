@@ -22,10 +22,12 @@ import tmg.flashback.composeApp.presentation.sync.SyncState.DONE
 import tmg.flashback.composeApp.presentation.sync.SyncState.FAILED
 import tmg.flashback.composeApp.presentation.sync.SyncState.LOADING
 import tmg.flashback.composeApp.repositories.OnboardingRepository
+import org.koin.core.annotation.KoinViewModel
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.time.Duration.Companion.milliseconds
 
+@KoinViewModel
 class SyncViewModel(
     private val circuitRepository: CircuitRepository,
     private val constructorRepository: ConstructorRepository,

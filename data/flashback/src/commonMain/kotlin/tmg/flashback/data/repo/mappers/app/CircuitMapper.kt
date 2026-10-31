@@ -1,11 +1,13 @@
 package tmg.flashback.data.repo.mappers.app
 
+import org.koin.core.annotation.Single
 import tmg.flashback.persistence.flashback.models.circuit.CircuitRoundResultWithDriverConstructor
 import tmg.flashback.persistence.flashback.models.circuit.CircuitRoundWithResults
 import tmg.flashback.formula1.model.*
 import tmg.flashback.infrastructure.datetime.fromTime
 import tmg.flashback.infrastructure.datetime.requireFromDate
 
+@Single
 class CircuitMapper(
     private val driverMapper: DriverDataMapper,
     private val constructorMapper: ConstructorDataMapper

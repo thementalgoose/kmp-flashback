@@ -2,6 +2,7 @@ package tmg.flashback.data.repo.repository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import org.koin.core.annotation.Single
 import tmg.flashback.data.repo.mappers.app.ConstructorStandingMapper
 import tmg.flashback.data.repo.mappers.app.DriverStandingMapper
 import tmg.flashback.data.repo.mappers.network.NetworkConstructorDataMapper
@@ -25,6 +26,7 @@ interface StandingsRepository {
     fun getConstructorStandings(season: Int): Flow<SeasonConstructorStandings?>
 }
 
+@Single
 internal class StandingsRepositoryImpl(
     private val api: FlashbackApi,
     private val persistence: FlashbackDatabase,

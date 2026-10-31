@@ -1,6 +1,7 @@
 package tmg.flashback.notifications.usecases
 
 import kotlinx.datetime.LocalDateTime
+import org.koin.core.annotation.Single
 import tmg.flashback.notifications.manager.NotificationManager
 
 interface LocalNotificationsScheduleUseCase {
@@ -13,6 +14,7 @@ interface LocalNotificationsScheduleUseCase {
     )
 }
 
+@Single
 internal class LocalNotificationsScheduleUseCaseImpl(
     private val notificationManager: NotificationManager
 ): LocalNotificationsScheduleUseCase {

@@ -10,11 +10,13 @@ import tmg.flashback.notifications.usecases.RemoteNotificationsUnsubscribeUseCas
 import tmg.flashback.ui.permissions.Permission
 import tmg.flashback.ui.permissions.PermissionManager
 import tmg.flashback.ui.permissions.PermissionState
+import org.koin.core.annotation.Single
 
 interface SubscribeResultNotificationsUseCase {
     suspend operator fun invoke()
 }
 
+@Single
 internal class SubscribeResultNotificationsUseCaseImpl(
     private val notificationSettingsRepository: NotificationSettingsRepository,
     private val subscribeUseCase: RemoteNotificationsSubscribeUseCase,

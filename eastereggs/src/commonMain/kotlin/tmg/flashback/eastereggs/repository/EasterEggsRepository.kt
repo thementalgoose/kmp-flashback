@@ -1,5 +1,6 @@
 package tmg.flashback.eastereggs.repository
 
+import org.koin.core.annotation.Single
 import tmg.flashback.configuration.manager.ConfigManager
 
 internal interface EasterEggsRepository {
@@ -7,6 +8,7 @@ internal interface EasterEggsRepository {
     val isSummerEnabled: Boolean
 }
 
+@Single
 internal class EasterEggsRepositoryImpl(
     private val configManager: ConfigManager
 ): EasterEggsRepository {

@@ -9,7 +9,9 @@ import tmg.flashback.feature.rss.models.SupportedSource
 import tmg.flashback.feature.rss.repositories.RssRepository
 import tmg.flashback.feature.rss.usecases.GetSourcesUseCase
 import tmg.flashback.infrastructure.log.logInfo
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class RssConfigureViewModel(
     private val rssRepository: RssRepository,
     private val getSourcesUseCase: GetSourcesUseCase,

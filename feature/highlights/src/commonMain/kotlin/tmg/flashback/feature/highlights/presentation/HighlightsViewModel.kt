@@ -12,7 +12,9 @@ import tmg.flashback.feature.highlights.domain.GetNewsItemsUseCase
 import tmg.flashback.feature.highlights.repositories.HighlightsRepository
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class HighlightsViewModel(
     private val getNewsItemsUseCase: GetNewsItemsUseCase,
     private val highlightsRepository: HighlightsRepository,

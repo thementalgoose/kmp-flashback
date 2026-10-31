@@ -6,7 +6,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.datetime.TimeZone
 import tmg.flashback.feature.season.repositories.CalendarRepository
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class DeviceTimeViewModel(
     private val calendarRepository: CalendarRepository
 ): ViewModel() {

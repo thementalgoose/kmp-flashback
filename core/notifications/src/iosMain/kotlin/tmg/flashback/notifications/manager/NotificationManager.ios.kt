@@ -8,10 +8,12 @@ import platform.UserNotifications.UNCalendarNotificationTrigger
 import platform.UserNotifications.UNMutableNotificationContent
 import platform.UserNotifications.UNNotificationRequest
 import platform.UserNotifications.UNTimeIntervalNotificationTrigger
+import org.koin.core.annotation.Single
 import platform.UserNotifications.UNUserNotificationCenter
 import tmg.flashback.infrastructure.log.logInfo
 import kotlin.time.Clock
 
+@Single(binds = [NotificationManager::class])
 actual class NotificationManagerImpl actual constructor(): NotificationManager {
 
     actual override fun schedule(

@@ -22,11 +22,13 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.compose.resources.getString
+import org.koin.core.annotation.Single
 import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
 import tmg.flashback.feature.notifications.model.NotificationUpcoming
 import tmg.flashback.feature.notifications.usecases.SubscribeResultNotificationsUseCase
 import tmg.flashback.widgets.upnext.usecases.RefreshWidgetsUseCase
 
+@Single
 class FlashbackAndroidStartup(
     private val subscribeResultNotificationsUseCase: SubscribeResultNotificationsUseCase,
     private val refreshWidgetsUseCase: RefreshWidgetsUseCase

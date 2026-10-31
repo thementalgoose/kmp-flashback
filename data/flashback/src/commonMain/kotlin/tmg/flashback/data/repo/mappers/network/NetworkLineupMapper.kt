@@ -1,7 +1,9 @@
 package tmg.flashback.data.repo.mappers.network
 
+import org.koin.core.annotation.Single
 import tmg.flashback.persistence.flashback.models.lineup.Lineup
 
+@Single
 class NetworkLineupMapper {
 
     private fun mapLineup(model: tmg.flashback.flashbackapi.api.models.lineup.LineupSeason): List<Lineup> {

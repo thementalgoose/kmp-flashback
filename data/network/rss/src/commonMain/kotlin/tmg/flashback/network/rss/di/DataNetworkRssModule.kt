@@ -1,14 +1,18 @@
 package tmg.flashback.network.rss.di
 
-import org.koin.core.module.dsl.singleOf
-import org.koin.dsl.module
-import tmg.flashback.network.rss.api.RssApi
-import tmg.flashback.network.rss.api.RssApiImpl
+import io.ktor.client.HttpClient
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Configuration
+import org.koin.core.annotation.Module
+import org.koin.core.annotation.Named
+import org.koin.core.annotation.Single
 import tmg.flashback.network.rss.client.KtorClient
 
-val dataNetworkRssModule = listOf(module())
-
-internal fun module() = module {
-    singleOf(::KtorClient)
-    single<RssApi> { RssApiImpl(get()) }
+@Module
+@ComponentScan("tmg.flashback.network.rss")
+@Configuration
+class DataNetworkRssModule {
+    @Single
+    @Named("rss")
+    fun provideHttpClient(): HttpClient = KtorClient
 }

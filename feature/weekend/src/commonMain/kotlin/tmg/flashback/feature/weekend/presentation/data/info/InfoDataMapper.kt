@@ -6,10 +6,12 @@ import tmg.flashback.feature.weekend.repositories.WeekendRepository
 import tmg.flashback.formula1.enums.TrackLayout
 import tmg.flashback.formula1.model.Race
 import tmg.flashback.formula1.model.Schedule
+import org.koin.core.annotation.Single
 
 interface InfoDataMapper {
     operator fun invoke(race: Race): InfoModel
 }
+@Single
 internal class InfoDataMapperImpl(
     private val weatherRepository: WeatherRepository,
     private val weekendRepository: WeekendRepository

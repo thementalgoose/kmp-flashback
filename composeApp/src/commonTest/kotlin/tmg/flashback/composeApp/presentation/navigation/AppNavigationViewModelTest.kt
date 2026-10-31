@@ -19,6 +19,8 @@ import tmg.flashback.eastereggs.usecases.IsSnowEnabledUseCase
 import tmg.flashback.eastereggs.usecases.IsSummerEnabledUseCase
 import tmg.flashback.feature.maintenance.repository.MaintenanceRepository
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
+import tmg.flashback.ui.toasts.ToastManager
+import androidx.compose.ui.graphics.Color
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -36,6 +38,7 @@ internal class AppNavigationViewModelTest {
     private val mockMaintenanceRepository: MaintenanceRepository = mock(autofill)
     private val mockOpenWebpageUseCase: OpenWebpageUseCase = mock(autoUnit)
     private val mockOpenStorePageUseCase: OpenStorePageUseCase = mock(autoUnit)
+    private val mockToastManager: ToastManager = mock(autoUnit)
 
     private fun initUnderTest(
         isRss: Boolean = true,
@@ -57,7 +60,8 @@ internal class AppNavigationViewModelTest {
             requiresSyncUseCase = mockRequiresSyncUseCase,
             maintenanceRepository = mockMaintenanceRepository,
             openWebpageUseCase = mockOpenWebpageUseCase,
-            openStorePageUseCase = mockOpenStorePageUseCase
+            openStorePageUseCase = mockOpenStorePageUseCase,
+            toastManager = mockToastManager
         )
     }
 
@@ -131,6 +135,18 @@ internal class AppNavigationViewModelTest {
 
         verify {
             mockOpenWebpageUseCase.invoke("https://example.com")
+        }
+    }
+
+    @Test
+    fun `updateToastColors sets toastManager colors`() {
+        initUnderTest()
+
+        underTest.updateToastColors(Color.Red, Color.Green)
+
+        verify {
+            mockToastManager.backgroundColor = Color.Red
+            mockToastManager.foregroundColor = Color.Green
         }
     }
 }

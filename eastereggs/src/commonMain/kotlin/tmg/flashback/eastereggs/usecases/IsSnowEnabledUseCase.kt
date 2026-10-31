@@ -1,6 +1,7 @@
 package tmg.flashback.eastereggs.usecases
 
 import kotlinx.datetime.format
+import org.koin.core.annotation.Single
 import tmg.flashback.eastereggs.repository.EasterEggsRepository
 import tmg.flashback.infrastructure.datetime.TimeManager
 import tmg.flashback.infrastructure.datetime.dateFormatMMDD
@@ -9,6 +10,7 @@ interface IsSnowEnabledUseCase {
     operator fun invoke(): Boolean
 }
 
+@Single
 internal class IsSnowEnabledUseCaseImpl(
     private val easterEggsRepository: EasterEggsRepository,
     private val timeManager: TimeManager

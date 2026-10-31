@@ -2,6 +2,7 @@ package tmg.flashback.data.repo.repository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import org.koin.core.annotation.Single
 import tmg.flashback.data.repo.mappers.app.EventMapper
 import tmg.flashback.data.repo.mappers.network.NetworkEventMapper
 import tmg.flashback.data.repo.model.Response
@@ -15,6 +16,7 @@ interface EventRepository {
     fun getEvents(season: Int): Flow<List<Event>>
 }
 
+@Single
 internal class EventRepositoryImpl(
     private val api: FlashbackApi,
     private val persistence: FlashbackDatabase,

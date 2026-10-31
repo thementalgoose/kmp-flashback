@@ -1,10 +1,12 @@
 package tmg.flashback.data.repo.mappers.app
 
+import org.koin.core.annotation.Single
 import tmg.flashback.persistence.flashback.models.overview.OverviewWithCircuit
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.infrastructure.datetime.fromTime
 import tmg.flashback.infrastructure.datetime.requireFromDate
 
+@Single
 class OverviewMapper(
     private val scheduleMapper: ScheduleMapper
 ) {

@@ -1,9 +1,11 @@
 package tmg.flashback.data.repo.mappers.network
 
+import org.koin.core.annotation.Single
 import tmg.flashback.persistence.flashback.models.circuit.*
 import tmg.flashback.flashbackapi.api.models.circuits.CircuitPreviewPosition
 import tmg.flashback.flashbackapi.api.models.circuits.CircuitResult
 
+@Single
 class NetworkCircuitMapper {
 
     @Throws(RuntimeException::class)

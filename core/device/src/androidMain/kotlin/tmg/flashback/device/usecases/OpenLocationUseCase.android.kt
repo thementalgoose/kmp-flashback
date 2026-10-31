@@ -5,10 +5,12 @@ import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.content.pm.PackageManager
 import android.net.Uri
+import org.koin.core.annotation.Single
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import tmg.flashback.infrastructure.log.logInfo
 
+@Single(binds = [OpenLocationUseCase::class])
 actual class OpenLocationUseCaseImpl actual constructor(): OpenLocationUseCase, KoinComponent {
 
     private val applicationContext: Context by inject()

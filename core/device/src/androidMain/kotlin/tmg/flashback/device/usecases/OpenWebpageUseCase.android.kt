@@ -10,12 +10,14 @@ import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
 import android.os.Build
 import android.widget.Toast
+import org.koin.core.annotation.Single
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.java.KoinJavaComponent
 import tmg.flashback.device.manager.UiManager
 import java.net.MalformedURLException
 
+@Single(binds = [OpenWebpageUseCase::class])
 actual class OpenWebpageUseCaseImpl actual constructor(): OpenWebpageUseCase, KoinComponent {
 
     private val copyToClipboardUseCase: CopyToClipboardUseCase by inject()

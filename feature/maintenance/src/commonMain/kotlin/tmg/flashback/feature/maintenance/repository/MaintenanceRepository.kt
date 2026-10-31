@@ -1,12 +1,14 @@
 package tmg.flashback.feature.maintenance.repository
 
 import tmg.flashback.configuration.manager.ConfigManager
+import org.koin.core.annotation.Single
 
 interface MaintenanceRepository {
     val softUpgrade: Boolean
     val forceUpgrade: Boolean
 }
 
+@Single
 internal class MaintenanceRepositoryImpl(
     private val configManager: ConfigManager
 ): MaintenanceRepository {

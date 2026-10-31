@@ -7,9 +7,11 @@ import tmg.flashback.device.usecases.OpenStorePageUseCase
 import tmg.flashback.feature.rss.usecases.IsRssEnabledUseCase
 import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.infrastructure.device.Platform
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.webbrowser.usecases.IsInAppBrowserEnabledUseCase
 import tmg.flashback.widgets.upnext.usecases.IsWidgetsEnabledUseCase
 
+@KoinViewModel
 class AllSettingsViewModel(
     isWidgetsEnabledUseCase: IsWidgetsEnabledUseCase,
     isRssEnabledUseCase: IsRssEnabledUseCase,

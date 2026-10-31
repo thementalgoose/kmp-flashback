@@ -4,10 +4,12 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import org.koin.core.annotation.Single
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import tmg.flashback.widgets.upnext.presentation.UpNextWidgetReceiver
 
+@Single(binds = [RefreshWidgetsUseCase::class])
 actual class RefreshWidgetsUseCaseImpl actual constructor() : RefreshWidgetsUseCase, KoinComponent {
 
     private val applicationContext: Context by inject()
