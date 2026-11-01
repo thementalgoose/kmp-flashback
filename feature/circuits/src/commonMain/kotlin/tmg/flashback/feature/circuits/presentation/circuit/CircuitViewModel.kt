@@ -68,6 +68,7 @@ class CircuitViewModel(
                 circuit = history?.data,
                 trackLayout = TrackLayout.getTrack(circuitId),
                 races = (history?.results ?: emptyList())
+                    .filter { it.preview.isNotEmpty() }
                     .map {
                         CircuitEvent(
                             race = it,
