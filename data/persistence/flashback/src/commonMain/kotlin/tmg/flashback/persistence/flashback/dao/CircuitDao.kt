@@ -6,6 +6,7 @@ import tmg.flashback.persistence.flashback.models.circuit.Circuit
 import tmg.flashback.persistence.flashback.models.circuit.CircuitHistory
 import tmg.flashback.persistence.flashback.models.circuit.CircuitRound
 import tmg.flashback.persistence.flashback.models.circuit.CircuitRoundResult
+import tmg.flashback.persistence.flashback.models.overview.Schedule
 
 @Dao
 interface CircuitDao {
@@ -25,6 +26,19 @@ interface CircuitDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCircuit(circuit: List<Circuit>)
+
+
+    @Transaction
+    suspend fun replaceAllForCircuit(
+        circuitId: String,
+        rounds: List<CircuitRound>
+    ) {
+        deleteRoundsForCircuit(circuitId)
+        insertCircuitRounds(rounds)
+    }
+
+    @Query("DELETE FROM CircuitRound WHERE circuit_id == :circuitId")
+    suspend fun deleteRoundsForCircuit(circuitId: String)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCircuitRounds(rounds: List<CircuitRound>)
