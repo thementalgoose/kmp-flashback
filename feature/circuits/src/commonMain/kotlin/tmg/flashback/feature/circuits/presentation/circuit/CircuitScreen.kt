@@ -26,6 +26,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
@@ -59,6 +60,7 @@ import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.Refresh
+import tmg.flashback.ui.components.driver.DriverName
 import tmg.flashback.ui.components.edgeFade
 import tmg.flashback.ui.components.flag.Flag
 import tmg.flashback.ui.components.header.Header
@@ -283,28 +285,30 @@ private fun Event(
                 text = "#${model.race.round}"
             )
         }
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    top = AppTheme.dimens.xsmall
-                )
-                .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
-                .background(AppTheme.colors.surfaceContainer5)
-                .padding(
-                    horizontal = AppTheme.dimens.xsmall,
-                    vertical = AppTheme.dimens.xsmall
-                ),
-            verticalArrangement = Arrangement.spacedBy(3.dp)
-        ) {
-            if (model.first != null) {
-                Result(model.first)
-            }
-            if (model.second != null) {
-                Result(model.second)
-            }
-            if (model.third != null) {
-                Result(model.third)
+        if (model.anyResults) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        top = AppTheme.dimens.xsmall
+                    )
+                    .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
+                    .background(AppTheme.colors.surfaceContainer5)
+                    .padding(
+                        horizontal = AppTheme.dimens.xsmall,
+                        vertical = AppTheme.dimens.xsmall
+                    ),
+                verticalArrangement = Arrangement.spacedBy(3.dp)
+            ) {
+                if (model.first != null) {
+                    Result(model.first)
+                }
+                if (model.second != null) {
+                    Result(model.second)
+                }
+                if (model.third != null) {
+                    Result(model.third)
+                }
             }
         }
     }
@@ -316,7 +320,8 @@ private fun Result(
 ) {
     Row(
         modifier = Modifier.height(IntrinsicSize.Min),
-        horizontalArrangement = Arrangement.spacedBy(4.dp)
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Box(modifier = Modifier
             .width(6.dp)
@@ -329,8 +334,12 @@ private fun Result(
             bold = true
         )
 
+        DriverName(
+            model.driver.firstName,
+            model.driver.lastName
+        )
         TextBody2(
-            text = "${model.driver.name} (${model.constructor.name})"
+            text = "(${model.constructor.name})"
         )
     }
 }
@@ -365,6 +374,12 @@ private fun Preview() {
                 circuit = Circuit.preview(),
                 trackLayout = TrackLayout.ALBERT_PARK,
                 races = listOf(
+                    CircuitEvent(
+                        CircuitHistoryRace.preview(),
+                        null,
+                        null,
+                        null,
+                    ),
                     CircuitEvent(
                         CircuitHistoryRace.preview(),
                         CircuitHistoryRaceResult.preview(1),

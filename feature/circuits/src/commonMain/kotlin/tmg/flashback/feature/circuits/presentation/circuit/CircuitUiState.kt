@@ -17,4 +17,8 @@ data class CircuitEvent(
     val first: CircuitHistoryRaceResult?,
     val second: CircuitHistoryRaceResult?,
     val third: CircuitHistoryRaceResult?,
-)
+) {
+    val anyResults: Boolean by lazy {
+        first != null || second != null || third != null
+    }
+}
