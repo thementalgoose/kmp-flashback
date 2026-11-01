@@ -26,6 +26,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
@@ -36,6 +37,14 @@ import flashback.presentation.localisation.generated.resources.details_link_wiki
 import flashback.presentation.ui.generated.resources.Res
 import flashback.presentation.ui.generated.resources.ic_details_maps
 import flashback.presentation.ui.generated.resources.ic_details_wikipedia
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.format
+import kotlinx.datetime.format.DateTimeFormat
+import kotlinx.datetime.format.MonthNames
+import kotlinx.datetime.format.MonthNames.Companion.ENGLISH_ABBREVIATED
+import kotlinx.datetime.format.Padding
+import kotlinx.datetime.format.char
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.navigation.Screen
@@ -49,6 +58,8 @@ import tmg.flashback.formula1.model.CircuitHistoryRace
 import tmg.flashback.formula1.model.CircuitHistoryRaceResult
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.preview.preview
+import tmg.flashback.infrastructure.datetime.displayDate
+import tmg.flashback.infrastructure.datetime.displayTime
 import tmg.flashback.navigation.NavCircuit
 import tmg.flashback.navigation.NavWeekend
 import tmg.flashback.style.AppTheme
@@ -59,6 +70,7 @@ import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.Refresh
+import tmg.flashback.ui.components.driver.DriverName
 import tmg.flashback.ui.components.edgeFade
 import tmg.flashback.ui.components.flag.Flag
 import tmg.flashback.ui.components.header.Header
@@ -292,19 +304,30 @@ private fun Event(
                 .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
                 .background(AppTheme.colors.surfaceContainer5)
                 .padding(
-                    horizontal = AppTheme.dimens.xsmall,
-                    vertical = AppTheme.dimens.xsmall
-                ),
-            verticalArrangement = Arrangement.spacedBy(3.dp)
+                    horizontal = AppTheme.dimens.small,
+                    vertical = AppTheme.dimens.small
+                )
         ) {
-            if (model.first != null) {
-                Result(model.first)
+            if (model.anyResults) {
+                if (model.first != null) {
+                    Result(model.first)
+                }
+                if (model.second != null) {
+                    Result(model.second)
+                }
+                if (model.third != null) {
+                    Result(model.third)
+                }
             }
-            if (model.second != null) {
-                Result(model.second)
-            }
-            if (model.third != null) {
-                Result(model.third)
+            else {
+                val string = listOfNotNull(
+                    model.race.time?.displayTime(),
+                    model.race.date.displayDate(
+                        month = MonthNames.ENGLISH_FULL,
+                        includeYear = false
+                    )
+                ).joinToString(separator = " - ")
+                TextBody1(string)
             }
         }
     }
@@ -316,22 +339,32 @@ private fun Result(
 ) {
     Row(
         modifier = Modifier.height(IntrinsicSize.Min),
-        horizontalArrangement = Arrangement.spacedBy(4.dp)
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Box(modifier = Modifier
             .width(6.dp)
-            .clip(RoundedCornerShape(2.dp))
             .fillMaxHeight()
             .background(model.constructor.colour))
 
-        TextBody2(
-            text = "${model.position} -",
-            bold = true
-        )
+        Row(
+            modifier = Modifier.padding(vertical = 2.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            TextBody2(
+                text = "${model.position} -",
+                bold = true
+            )
 
-        TextBody2(
-            text = "${model.driver.name} (${model.constructor.name})"
-        )
+            DriverName(
+                model.driver.firstName,
+                model.driver.lastName
+            )
+            TextBody2(
+                text = "(${model.constructor.name})"
+            )
+        }
     }
 }
 
@@ -365,6 +398,12 @@ private fun Preview() {
                 circuit = Circuit.preview(),
                 trackLayout = TrackLayout.ALBERT_PARK,
                 races = listOf(
+                    CircuitEvent(
+                        CircuitHistoryRace.preview(),
+                        null,
+                        null,
+                        null,
+                    ),
                     CircuitEvent(
                         CircuitHistoryRace.preview(),
                         CircuitHistoryRaceResult.preview(1),

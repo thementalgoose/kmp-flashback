@@ -56,33 +56,26 @@ internal class CircuitRepositoryImpl(
 
             // Drivers
             val drivers = (data.results?.values ?: emptyList())
-                .map {
-                    it.preview?.map { it.driver } ?: emptyList()
-                }
-                .flatten()
+                .flatMap { it.preview?.map { it.driver } ?: emptyList() }
                 .distinctBy { it.id }
                 .map { networkDriverDataMapper.mapDriverData(it) }
             persistence.driverDao().insertAll(drivers)
 
             // Constructors
             val constructors = (data.results?.values ?: emptyList())
-                .map {
-                    it.preview?.map { it.constructor } ?: emptyList()
-                }
-                .flatten()
+                .flatMap { it.preview?.map { it.constructor } ?: emptyList() }
                 .distinctBy { it.id }
                 .map { networkConstructorDataMapper.mapConstructorData(it) }
             persistence.constructorDao().insertAll(constructors)
 
             // Circuit results
             val results = (data.results?.values ?: emptyList())
-                .map {
+                .flatMap {
                     networkCircuitMapper.mapCircuitPreviews(it)
                 }
-                .flatten()
 
-            persistence.circuitDao().insertCircuitRounds(circuitRounds)
             persistence.circuitDao().insertCircuit(listOf(circuit))
+            persistence.circuitDao().replaceAllForCircuit(circuit.id, circuitRounds)
             persistence.circuitDao().insertCircuitRoundResults(results)
 
             return@makeRequest true
