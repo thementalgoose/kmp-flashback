@@ -24,12 +24,17 @@ import flashback.presentation.localisation.generated.resources.constructor_overv
 import flashback.presentation.localisation.generated.resources.constructor_overview_stat_qualifying_poles
 import flashback.presentation.localisation.generated.resources.constructor_overview_stat_race_podiums
 import flashback.presentation.localisation.generated.resources.constructor_overview_stat_race_wins
+import flashback.presentation.localisation.generated.resources.constructor_overview_stat_races
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.formula1.model.ConstructorHistorySeasonDriver
+import tmg.flashback.formula1.model.DriverEntry
+import tmg.flashback.formula1.preview.preview
 import tmg.flashback.infrastructure.extensions.ordinalAbbreviation
 import tmg.flashback.infrastructure.extensions.roundToHalf
 import tmg.flashback.style.AppTheme
+import tmg.flashback.style.ApplicationThemePreview
+import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.style.text.TextTitle
 import tmg.flashback.ui.components.driver.DriverIcon
@@ -72,6 +77,18 @@ internal fun ConstructorDriver(
                 value = model.championshipStanding?.ordinalAbbreviation ?: "-"
             )
             DriverStat(
+                label = string.constructor_overview_stat_races,
+                value = model.races.toString()
+            )
+            DriverStat(
+                label = string.constructor_overview_stat_points_finishes,
+                value = model.finishesInPoints.toString()
+            )
+            DriverStat(
+                label = string.constructor_overview_stat_points,
+                value = model.points.roundToHalf()
+            )
+            DriverStat(
                 label = string.constructor_overview_stat_race_wins,
                 value = model.wins.toString()
             )
@@ -82,14 +99,6 @@ internal fun ConstructorDriver(
             DriverStat(
                 label = string.constructor_overview_stat_qualifying_poles,
                 value = model.polePosition.toString()
-            )
-            DriverStat(
-                label = string.constructor_overview_stat_points,
-                value = model.points.roundToHalf()
-            )
-            DriverStat(
-                label = string.constructor_overview_stat_points_finishes,
-                value = model.finishesInPoints.toString()
             )
         }
         DriverIcon(
@@ -118,6 +127,25 @@ private fun DriverStat(
         TextBody2(
             text = value,
             bold = true
+        )
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun Preview() {
+    ApplicationThemePreview {
+        ConstructorDriver(
+            model = ConstructorHistorySeasonDriver(
+                driver = DriverEntry.preview("driverId"),
+                points = 1.0,
+                wins = 1,
+                races = 2,
+                podiums = 3,
+                polePosition = 4,
+                championshipStanding = 1,
+                finishesInPoints = 3
+            )
         )
     }
 }
