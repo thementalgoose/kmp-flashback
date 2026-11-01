@@ -32,6 +32,14 @@ fun LocalDate.displayDate(
     })
 }
 
+fun LocalTime.displayTime(): String {
+    return this.format(LocalTime.Format {
+        hour(padding = Padding.ZERO)
+        char(':')
+        minute()
+    })
+}
+
 private val Int.ordinalAbbreviation: String
     get() {
         val label = when (this) {

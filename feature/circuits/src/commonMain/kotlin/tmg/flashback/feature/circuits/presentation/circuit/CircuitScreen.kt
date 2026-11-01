@@ -37,6 +37,14 @@ import flashback.presentation.localisation.generated.resources.details_link_wiki
 import flashback.presentation.ui.generated.resources.Res
 import flashback.presentation.ui.generated.resources.ic_details_maps
 import flashback.presentation.ui.generated.resources.ic_details_wikipedia
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.format
+import kotlinx.datetime.format.DateTimeFormat
+import kotlinx.datetime.format.MonthNames
+import kotlinx.datetime.format.MonthNames.Companion.ENGLISH_ABBREVIATED
+import kotlinx.datetime.format.Padding
+import kotlinx.datetime.format.char
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.navigation.Screen
@@ -50,6 +58,8 @@ import tmg.flashback.formula1.model.CircuitHistoryRace
 import tmg.flashback.formula1.model.CircuitHistoryRaceResult
 import tmg.flashback.formula1.model.Location
 import tmg.flashback.formula1.preview.preview
+import tmg.flashback.infrastructure.datetime.displayDate
+import tmg.flashback.infrastructure.datetime.displayTime
 import tmg.flashback.navigation.NavCircuit
 import tmg.flashback.navigation.NavWeekend
 import tmg.flashback.style.AppTheme
@@ -285,21 +295,20 @@ private fun Event(
                 text = "#${model.race.round}"
             )
         }
-        if (model.anyResults) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        top = AppTheme.dimens.xsmall
-                    )
-                    .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
-                    .background(AppTheme.colors.surfaceContainer5)
-                    .padding(
-                        horizontal = AppTheme.dimens.xsmall,
-                        vertical = AppTheme.dimens.xsmall
-                    ),
-                verticalArrangement = Arrangement.spacedBy(3.dp)
-            ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    top = AppTheme.dimens.xsmall
+                )
+                .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
+                .background(AppTheme.colors.surfaceContainer5)
+                .padding(
+                    horizontal = AppTheme.dimens.small,
+                    vertical = AppTheme.dimens.small
+                )
+        ) {
+            if (model.anyResults) {
                 if (model.first != null) {
                     Result(model.first)
                 }
@@ -309,6 +318,16 @@ private fun Event(
                 if (model.third != null) {
                     Result(model.third)
                 }
+            }
+            else {
+                val string = listOfNotNull(
+                    model.race.time?.displayTime(),
+                    model.race.date.displayDate(
+                        month = MonthNames.ENGLISH_FULL,
+                        includeYear = false
+                    )
+                ).joinToString(separator = " - ")
+                TextBody1(string)
             }
         }
     }
@@ -320,27 +339,32 @@ private fun Result(
 ) {
     Row(
         modifier = Modifier.height(IntrinsicSize.Min),
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(modifier = Modifier
             .width(6.dp)
-            .clip(RoundedCornerShape(2.dp))
             .fillMaxHeight()
             .background(model.constructor.colour))
 
-        TextBody2(
-            text = "${model.position} -",
-            bold = true
-        )
+        Row(
+            modifier = Modifier.padding(vertical = 2.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            TextBody2(
+                text = "${model.position} -",
+                bold = true
+            )
 
-        DriverName(
-            model.driver.firstName,
-            model.driver.lastName
-        )
-        TextBody2(
-            text = "(${model.constructor.name})"
-        )
+            DriverName(
+                model.driver.firstName,
+                model.driver.lastName
+            )
+            TextBody2(
+                text = "(${model.constructor.name})"
+            )
+        }
     }
 }
 
