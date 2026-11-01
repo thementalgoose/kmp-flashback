@@ -15,6 +15,7 @@ import tmg.flashback.data.repo.repository.SeasonRepository
 import tmg.flashback.data.repo.repository.StandingsRepository
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
 import org.koin.core.annotation.KoinViewModel
+import tmg.flashback.feature.season.presentation.driver_standings.DriverStandingsStateInProgress
 
 @KoinViewModel
 class TeamStandingsViewModel(
@@ -61,10 +62,23 @@ class TeamStandingsViewModel(
     private suspend fun populate(): Boolean {
         val currentStandings = standingsRepository.getConstructorStandings(season).firstOrNull()?.standings ?: emptyList()
         val maxPoints = currentStandings.maxOfOrNull { it.points } ?: 800.0
+
+        val raceName = currentStandings.firstOrNull()?.inProgressName
+        val round = currentStandings.firstOrNull()?.inProgressRound
+        val inProgressContent = if (currentStandings.any { it.inProgress } && raceName != null && round != null) {
+            TeamStandingsStateInProgress(
+                raceName = raceName,
+                round = round,
+                championSecured = currentStandings.count { it.inProgressMaxPosition == 1 } == 1
+            )
+        } else {
+            null
+        }
+
         _uiState.value = _uiState.value.copy(
             standings = currentStandings,
             maxPoints = maxPoints,
-            inProgress = currentStandings.firstOrNull()?.inProgressContent,
+            inProgress = inProgressContent,
             isLoading = false
         )
 
