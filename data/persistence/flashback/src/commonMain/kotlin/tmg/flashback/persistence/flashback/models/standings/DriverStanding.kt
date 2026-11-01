@@ -20,6 +20,8 @@ data class DriverStanding(
     val inProgressName: String?,
     @ColumnInfo(name = "in_progress_round")
     val inProgressRound: Int?,
+    @ColumnInfo(name = "in_progress_max_position")
+    val inProgressMaxPosition: Int?,
     @ColumnInfo(name = "races")
     val races: Int,
     @PrimaryKey

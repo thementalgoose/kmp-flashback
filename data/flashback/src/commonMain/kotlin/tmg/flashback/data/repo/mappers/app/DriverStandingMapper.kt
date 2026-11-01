@@ -6,6 +6,7 @@ import tmg.flashback.persistence.flashback.models.standings.DriverStandingWithCo
 import tmg.flashback.formula1.model.SeasonDriverStandingSeason
 import tmg.flashback.formula1.model.SeasonDriverStandingSeasonConstructor
 import tmg.flashback.formula1.model.SeasonDriverStandings
+import kotlin.Int
 
 @Single
 class DriverStandingMapper(
@@ -30,6 +31,7 @@ class DriverStandingMapper(
             inProgress = data.standing.inProgress,
             inProgressName = data.standing.inProgressName,
             inProgressRound = data.standing.inProgressRound,
+            inProgressMaxPosition = data.standing.inProgressMaxPosition,
             races = data.standing.races,
             championshipPosition = data.standing.position,
             constructors = data.constructors.map {

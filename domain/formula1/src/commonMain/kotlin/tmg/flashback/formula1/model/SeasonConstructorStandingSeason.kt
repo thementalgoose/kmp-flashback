@@ -7,6 +7,7 @@ data class SeasonConstructorStandingSeason(
     val inProgress: Boolean,
     val inProgressName: String?,
     val inProgressRound: Int?,
+    val inProgressMaxPosition: Int?,
     val races: Int,
     val championshipPosition: Int?,
     val drivers: List<SeasonConstructorStandingSeasonDriver>

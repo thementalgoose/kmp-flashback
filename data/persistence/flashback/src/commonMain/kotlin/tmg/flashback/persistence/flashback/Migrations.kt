@@ -174,5 +174,11 @@ enum class Migrations(
                     ")"
             )
         }
+    }),
+    MIGRATION_14_15(object : Migration(14, 15) {
+        override suspend fun migrate(connection: SQLiteConnection) {
+            connection.execSQL("ALTER TABLE ConstructorStanding ADD COLUMN in_progress_max_position INTEGER DEFAULT NULL")
+            connection.execSQL("ALTER TABLE DriverStanding ADD COLUMN in_progress_max_position INTEGER DEFAULT NULL")
+        }
     })
 }

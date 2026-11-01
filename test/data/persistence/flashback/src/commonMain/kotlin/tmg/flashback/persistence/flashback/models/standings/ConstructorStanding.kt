@@ -8,6 +8,7 @@ fun ConstructorStanding.Companion.model(
     inProgress: Boolean = true,
     inProgressName: String? = "name",
     inProgressRound: Int? = 1,
+    inProgressMaxPosition: Int? = 1,
     races: Int = 1,
 ): ConstructorStanding = ConstructorStanding(
     constructorId = constructorId,
@@ -17,5 +18,6 @@ fun ConstructorStanding.Companion.model(
     inProgress = inProgress,
     inProgressName = inProgressName,
     inProgressRound = inProgressRound,
+    inProgressMaxPosition = inProgressMaxPosition,
     races = races
 )
