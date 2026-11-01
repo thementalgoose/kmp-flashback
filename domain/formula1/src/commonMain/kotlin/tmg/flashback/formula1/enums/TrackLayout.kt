@@ -494,7 +494,28 @@ enum class TrackLayout(
     ),
     ZOLDER(
         circuitId = "zolder",
-        icon = Res.drawable.circuit_zolder
+        icon = Res.drawable.circuit_zolder,
+        breakdown = TrackBreakdown.ZOLDER,
+        overrides = listOf(
+            Configuration.Range(
+                min = 1975,
+                max = 1986,
+                _icon = Res.drawable.circuit_zolder_1975_1986,
+                _breakdown = TrackBreakdown.ZOLDER_1975_1986
+            ),
+            Configuration.Range(
+                min = 1973,
+                max = 1974,
+                _icon = Res.drawable.circuit_zolder_1973_1974,
+                _breakdown = TrackBreakdown.ZOLDER_1973_1974
+            ),
+            Configuration.Range(
+                min = 1963,
+                max = 1972,
+                _icon = Res.drawable.circuit_zolder_1963_1972,
+                _breakdown = TrackBreakdown.ZOLDER_1963_1973
+            )
+        )
     );
 
     fun getDefaultIcon(): DrawableResource {
