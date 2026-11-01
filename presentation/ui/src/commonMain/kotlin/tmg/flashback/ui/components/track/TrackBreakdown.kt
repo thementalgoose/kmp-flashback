@@ -38,9 +38,9 @@ private val singleSectorColor: Color
 @Composable
 fun TrackBreakdown(
     trackBreakdownInfo: TrackBreakdownInfo,
+    modifier: Modifier = Modifier,
     showDrs: Boolean = false,
     showOvertake: Boolean = false,
-    modifier: Modifier = Modifier,
     s1Color: Color = if (trackBreakdownInfo.differentColorSectors) AppTheme.colors.f1Sector1 else singleSectorColor,
     s2Color: Color = if (trackBreakdownInfo.differentColorSectors) AppTheme.colors.f1Sector2 else singleSectorColor,
     s3Color: Color = if (trackBreakdownInfo.differentColorSectors) AppTheme.colors.f1Sector3 else singleSectorColor,
