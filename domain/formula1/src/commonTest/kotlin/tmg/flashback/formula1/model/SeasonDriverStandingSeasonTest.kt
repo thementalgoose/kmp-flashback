@@ -20,28 +20,6 @@ internal class SeasonDriverStandingSeasonTest {
         assertEquals(testCase.expectedResult, model.hasValidChampionshipPosition)
     }
 
-    @Test
-    fun `in progress content returns value when round is in progress`() {
-        val model = SeasonDriverStandingSeason.model(
-            inProgress = true,
-            inProgressName = "PROGRESS",
-            inProgressRound = 1
-        )
-
-        assertEquals(Pair("PROGRESS", 1), model.inProgressContent)
-    }
-
-    @Test
-    fun `in progress content returns null when in progress is false`() {
-        val model = SeasonDriverStandingSeason.model(
-            inProgress = false,
-            inProgressName = "PROGRESS",
-            inProgressRound = 1
-        )
-
-        assertNull(model.inProgressContent)
-    }
-
     companion object {
         @JvmStatic
         fun testCases() = listOf(

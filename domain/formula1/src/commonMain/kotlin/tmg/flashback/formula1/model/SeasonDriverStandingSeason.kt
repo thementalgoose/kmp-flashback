@@ -21,13 +21,5 @@ data class SeasonDriverStandingSeason(
         }
     }
 
-    val inProgressContent: Pair<String, Int>? by lazy {
-        if (inProgress && inProgressName != null && inProgressRound != null) {
-            Pair(inProgressName, inProgressRound)
-        } else {
-            null
-        }
-    }
-
     companion object
 }

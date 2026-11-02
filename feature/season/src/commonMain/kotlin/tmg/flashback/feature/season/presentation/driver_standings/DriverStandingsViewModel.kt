@@ -14,6 +14,7 @@ import tmg.flashback.data.repo.repository.RaceRepository
 import tmg.flashback.data.repo.repository.StandingsRepository
 import tmg.flashback.feature.season.presentation.shared.seasonpicker.CurrentSeasonHolder
 import org.koin.core.annotation.KoinViewModel
+import kotlin.math.round
 
 @KoinViewModel
 class DriverStandingsViewModel(
@@ -60,10 +61,22 @@ class DriverStandingsViewModel(
         val currentStandings = standingsRepository.getDriverStandings(season).firstOrNull()?.standings ?: emptyList()
         val maxPoints = currentStandings.maxOfOrNull { it.points } ?: 850.0
 
+        val raceName = currentStandings.firstOrNull()?.inProgressName
+        val round = currentStandings.firstOrNull()?.inProgressRound
+        val inProgressContent = if (currentStandings.any { it.inProgress } && raceName != null && round != null) {
+            DriverStandingsStateInProgress(
+                raceName = raceName,
+                round = round,
+                championSecured = currentStandings.count { it.inProgressMaxPosition == 1 } == 1
+            )
+        } else {
+            null
+        }
+
         _uiState.value = _uiState.value.copy(
             standings = currentStandings,
             maxPoints = maxPoints,
-            inProgress = currentStandings.firstOrNull()?.inProgressContent,
+            inProgress = inProgressContent,
             isLoading = false
         )
 

@@ -201,6 +201,7 @@ internal fun DriverStandingsScreen(
                         modifier = Modifier.animateItem(),
                         model = it,
                         itemClicked = driverClicked,
+                        inProgressInfo = uiState.inProgress,
                         maxPoints = uiState.maxPoints
                     )
                 }
@@ -220,10 +221,12 @@ private fun DriverStandings(
     model: SeasonDriverStandingSeason,
     itemClicked: (SeasonDriverStandingSeason) -> Unit,
     maxPoints: Double,
+    inProgressInfo: DriverStandingsStateInProgress?,
     modifier: Modifier = Modifier,
 ) {
     val backgroundColor = when {
-        model.inProgressContent == null && model.championshipPosition == 1 -> AppTheme.colors.f1ChampionshipHighlight
+        inProgressInfo == null && model.championshipPosition == 1 -> AppTheme.colors.f1ChampionshipHighlight
+        inProgressInfo != null && inProgressInfo.championSecured && model.championshipPosition == 1 -> AppTheme.colors.f1ChampionshipHighlight
         else -> Transparent
     }
     val constructorColor =
