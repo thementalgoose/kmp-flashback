@@ -8,7 +8,9 @@ data class InProgressInfo(
     @SerialName("name")
     val name: String,
     @SerialName("round")
-    val round: Int
+    val round: Int,
+    @SerialName("maxPosition")
+    val maxPosition: Int?
 ) {
     companion object
 }

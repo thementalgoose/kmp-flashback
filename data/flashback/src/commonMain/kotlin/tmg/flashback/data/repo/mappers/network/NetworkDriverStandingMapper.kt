@@ -18,6 +18,7 @@ class NetworkDriverStandingMapper {
             inProgress = data.inProgress ?: false,
             inProgressName = data.inProgressInfo?.name,
             inProgressRound = data.inProgressInfo?.round,
+            inProgressMaxPosition = data.inProgressInfo?.maxPosition,
             races = data.races
         )
     }
