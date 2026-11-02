@@ -355,8 +355,8 @@ private fun DateCard(
         .clickable { itemClicked() }
         .padding(
             bottom = AppTheme.dimens.nsmall,
-            start = AppTheme.dimens.nsmall,
-            end = AppTheme.dimens.nsmall
+            start = AppTheme.dimens.small,
+            end = AppTheme.dimens.small
         )
     ) {
         Row(modifier = Modifier
