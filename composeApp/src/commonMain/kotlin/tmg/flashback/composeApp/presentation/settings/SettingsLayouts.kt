@@ -21,6 +21,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res.string
@@ -126,6 +128,7 @@ fun SettingLink(
         isEnabled = isEnabled,
         modifier = modifier
             .clickable(
+                role = Role.Button,
                 enabled = isEnabled,
                 onClick = {
                     itemClicked(item)
@@ -150,6 +153,7 @@ fun SettingRadio(
         modifier = modifier
             .toggleable(
                 value = isChecked,
+                role = Role.RadioButton,
                 onValueChange = { itemClicked(item) },
                 enabled = isEnabled
             )
@@ -176,6 +180,7 @@ fun SettingSwitch(
         modifier = modifier
             .toggleable(
                 value = isChecked,
+                role = Role.Switch,
                 onValueChange = { itemClicked(item) },
                 enabled = isEnabled
             )
@@ -196,7 +201,8 @@ private fun SettingLink(
     content: @Composable () -> Unit = { }
 ) {
     Row(modifier = modifier
-        .appearDisabled(isEnabled),
+        .appearDisabled(isEnabled)
+        .semantics(mergeDescendants = true) { },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(
@@ -253,6 +259,7 @@ fun SettingCategory(
 ) {
     Row(modifier = modifier
         .clickable(
+            role = Role.Button,
             enabled = isEnabled,
             onClick = {
                 itemClicked(item)
@@ -260,6 +267,7 @@ fun SettingCategory(
         )
         .then(defaultSettingModifier)
         .appearDisabled(isEnabled)
+        .semantics(mergeDescendants = true) { }
     ) {
         if (item.icon != null) {
             Icon(

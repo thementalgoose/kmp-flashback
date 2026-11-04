@@ -16,7 +16,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
@@ -147,7 +147,7 @@ internal fun SprintQualifying(
             Column(Modifier.weight(1f)) {
                 DriverLabel(
                     modifier = Modifier
-                        .clickable(onClick = { driverClicked(model.driver.driver) }),
+                        .clickable(role = Role.Button, onClick = { driverClicked(model.driver.driver) }),
                     driver = model.driver,
                     qualifyingPosition = model.qualified,
                     grid = model.grid
@@ -190,14 +190,15 @@ private fun DriverLabel(
         stringResource(
             string.ab_result_qualifying_overview,
             driver.driver.name,
-            driver.driver.name,
+            driver.constructor.name,
             qualifyingPosition.toString()
         )
     }
     Row(modifier = modifier
         .edgeBar(driver.constructor.colour)
-        .semantics(mergeDescendants = true) { }
-        .clearAndSetSemantics { this.contentDescription = contentDescription }
+        .semantics(mergeDescendants = true) {
+            this.contentDescription = contentDescription
+        }
     ) {
         Position(label = qualifyingPosition?.toString() ?: "-")
         Column(Modifier.fillMaxWidth()) {

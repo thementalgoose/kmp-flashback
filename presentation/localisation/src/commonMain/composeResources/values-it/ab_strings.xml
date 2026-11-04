@@ -34,7 +34,8 @@
     <string name="ab_no_race_results">Risultati della gara non ancora disponibili</string>
     <string name="ab_positions_gained">Partito %1$s, arrivato %2$s, guadagnato %3$d posizioni</string>
     <string name="ab_positions_neutral">Partito %1$s, arrivato %2$s</string>
-    <string name="ab_positions_lost">Partito %1$s, guadagnato %2$d, perso %3$d posizioni</string>
+    <string name="ab_positions_lost">Partito %1$s, arrivato %2$s, perso %3$d posizioni</string>
+    <string name="ab_positions_unknown_grid">Arrivato %1$s</string>
     <string name="ab_fastest_lap">Giro più veloce</string>
     <string name="ab_constructor_logo">Logo %1$s</string>
     <string name="ab_preseason_events">Eventi di preseason</string>
@@ -46,4 +47,14 @@
     <string name="ab_change_of_rain">Probabilità di pioggia</string>
     <string name="ab_action_jump_to_latest_season">Passa all'ultima stagione</string>
     <string name="ab_action_copy_debug_ids">Copia identificatori di debug</string>
+
+    <string name="ab_clear_text">Cancella testo</string>
+    <string name="ab_state_expanded">Espanso</string>
+    <string name="ab_state_collapsed">Compresso</string>
+    <string name="ab_action_expand">Espandi</string>
+    <string name="ab_action_collapse">Comprimi</string>
+    <string name="ab_current">Attuale</string>
+    <string name="ab_action_open_menu">Apri menu</string>
+    <string name="ab_action_close_menu">Chiudi menu</string>
+    <string name="ab_action_open">Apri</string>
 </resources>

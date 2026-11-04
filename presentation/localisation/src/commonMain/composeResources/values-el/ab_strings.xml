@@ -44,7 +44,8 @@
 
     <string name="ab_positions_gained">Εκκίνησε %1$s, τερμάτισε %2$s, κέρδισε %3$d θέσεις</string>
     <string name="ab_positions_neutral">Εκκίνησε %1$s, τερμάτισε %2$s</string>
-    <string name="ab_positions_lost">Εκκίνησε %1$s, κέρδισε %2$d, έχασε %3$d θέσεις</string>
+    <string name="ab_positions_lost">Εκκίνησε %1$s, τερμάτισε %2$s, έχασε %3$d θέσεις</string>
+    <string name="ab_positions_unknown_grid">Τερμάτισε %1$s</string>
 
     <string name="ab_fastest_lap">Ταχύτερος Γύρος</string>
 
@@ -62,4 +63,14 @@
     <string name="ab_change_of_rain">Πιθανότητα βροχής</string>
     <string name="ab_action_jump_to_latest_season">Μετάβαση στην πιο πρόσφατη σεζόν</string>
     <string name="ab_action_copy_debug_ids">Αντιγραφή αναγνωριστικών εντοπισμού σφαλμάτων</string>
+
+    <string name="ab_clear_text">Εκκαθάριση κειμένου</string>
+    <string name="ab_state_expanded">Ανεπτυγμένο</string>
+    <string name="ab_state_collapsed">Συμπτυγμένο</string>
+    <string name="ab_action_expand">Ανάπτυξη</string>
+    <string name="ab_action_collapse">Σύμπτυξη</string>
+    <string name="ab_current">Τρέχον</string>
+    <string name="ab_action_open_menu">Άνοιγμα μενού</string>
+    <string name="ab_action_close_menu">Κλείσιμο μενού</string>
+    <string name="ab_action_open">Άνοιγμα</string>
 </resources>

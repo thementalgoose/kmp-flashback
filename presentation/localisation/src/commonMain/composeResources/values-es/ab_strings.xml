@@ -43,7 +43,8 @@
 
     <string name="ab_positions_gained">Comenzó %1$s, terminó %2$s, ganó %3$d puestos</string>
     <string name="ab_positions_neutral">Comenzó %1$s, terminó %2$s</string>
-    <string name="ab_positions_lost">Comenzó %1$s, ganó %2$d, perdió %3$d puestos</string>
+    <string name="ab_positions_lost">Comenzó %1$s, terminó %2$s, perdió %3$d puestos</string>
+    <string name="ab_positions_unknown_grid">Terminó %1$s</string>
 
     <string name="ab_fastest_lap">Vuelta más rápida</string>
 
@@ -61,4 +62,14 @@
     <string name="ab_change_of_rain">Probabilidad de lluvia</string>
     <string name="ab_action_jump_to_latest_season">Saltar a la última temporada</string>
     <string name="ab_action_copy_debug_ids">Copiar identificadores de depuración</string>
+
+    <string name="ab_clear_text">Borrar texto</string>
+    <string name="ab_state_expanded">Desplegado</string>
+    <string name="ab_state_collapsed">Plegado</string>
+    <string name="ab_action_expand">Desplegar</string>
+    <string name="ab_action_collapse">Plegar</string>
+    <string name="ab_current">Actual</string>
+    <string name="ab_action_open_menu">Abrir menú</string>
+    <string name="ab_action_close_menu">Cerrar menú</string>
+    <string name="ab_action_open">Abrir</string>
 </resources>

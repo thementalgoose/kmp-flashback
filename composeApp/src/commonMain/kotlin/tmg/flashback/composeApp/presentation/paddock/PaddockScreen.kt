@@ -34,6 +34,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowSizeClass.Companion.WIDTH_DP_MEDIUM_LOWER_BOUND
@@ -131,6 +133,7 @@ fun PaddockScreen(
         item(key = "lineup") {
             Lineup(
                 modifier = Modifier.clickable(
+                    role = Role.Button,
                     onClick = { navigateTo(NavLineup) }
                 )
             )
@@ -139,6 +142,7 @@ fun PaddockScreen(
             item(key = "rss") {
                 RSS(
                     modifier = Modifier.clickable(
+                        role = Role.Button,
                         onClick = { navigateTo(NavRss) }
                     )
                 )
@@ -147,6 +151,7 @@ fun PaddockScreen(
         item(key = "reaction_game") {
             ReactionGame(
                 modifier = Modifier.clickable(
+                    role = Role.Button,
                     onClick = { navigateTo(NavReactionGame) }
                 )
             )
@@ -154,6 +159,7 @@ fun PaddockScreen(
         item(key = "search") {
             Search(
                 modifier = Modifier.clickable(
+                    role = Role.Button,
                     onClick = { navigateTo(NavSearch()) }
                 )
             )
@@ -162,6 +168,7 @@ fun PaddockScreen(
             item(key = "debug_style_guide") {
                 DebugStyleGuide(
                     modifier = Modifier.clickable(
+                        role = Role.Button,
                         onClick = { navigateTo(NavStyleGuide) }
                     )
                 )
@@ -169,6 +176,7 @@ fun PaddockScreen(
             item(key = "debug_info") {
                 DebugInfo(
                     modifier = Modifier.clickable(
+                        role = Role.Button,
                         onClick = { navigateTo(NavInfo) }
                     )
                 )
@@ -180,6 +188,7 @@ fun PaddockScreen(
                     Links(
                         navLink = it,
                         modifier = Modifier.clickable(
+                            role = Role.Button,
                             onClick = { openUrl(it) }
                         )
                     )
@@ -355,6 +364,7 @@ private fun Container(
 ) {
     Column(
         modifier = modifier
+            .semantics(mergeDescendants = true) { }
             .clip(RoundedCornerShape(6.dp))
             .background(AppTheme.colors.surfaceContainer3)
             .padding(

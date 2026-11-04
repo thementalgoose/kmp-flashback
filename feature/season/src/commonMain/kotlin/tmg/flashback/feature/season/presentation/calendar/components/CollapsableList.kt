@@ -16,14 +16,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import flashback.feature.season.generated.resources.Res
 import flashback.feature.season.generated.resources.ic_collapsible_icon_bottom
 import flashback.feature.season.generated.resources.ic_collapsible_icon_top
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.ab_action_expand
 import flashback.presentation.localisation.generated.resources.ab_collapsed_section
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -50,11 +52,17 @@ internal fun CollapsableList(
         model.last?.raceName ?: model.first.raceName,
         model.last?.round ?: model.first.round
     )
+    val expandActionLabel = stringResource(resource = string.ab_action_expand)
     Row(modifier = modifier
         .height(IntrinsicSize.Min)
-        .clickable { itemClicked(model) }
-        .semantics(mergeDescendants = true) { }
-        .clearAndSetSemantics { this.stateDescription = contentDescription }
+        .clickable(
+            role = Role.Button,
+            onClickLabel = expandActionLabel
+        ) { itemClicked(model) }
+        .semantics(mergeDescendants = true) {
+            this.contentDescription = contentDescription
+            this.role = Role.Button
+        }
         .padding(
             start = AppTheme.dimens.small,
             end = AppTheme.dimens.small,

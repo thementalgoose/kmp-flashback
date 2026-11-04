@@ -28,8 +28,10 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalInspectionMode
-import androidx.compose.ui.semantics.clearAndSetSemantics
-import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import flashback.presentation.localisation.generated.resources.Res
 import flashback.presentation.localisation.generated.resources.app_version_placeholder
@@ -214,7 +216,14 @@ private fun NavItem(
             )
         )
         .background(backgroundColor.value)
-        .clickable(onClick = onClick)
+        .clickable(
+            role = Role.Tab,
+            onClick = onClick
+        )
+        .semantics(mergeDescendants = true) {
+            role = Role.Tab
+            selected = isSelected
+        }
         .padding(
             top = AppTheme.dimens.nsmall,
             bottom = AppTheme.dimens.nsmall,
@@ -223,9 +232,6 @@ private fun NavItem(
         )
     ) {
         Box(modifier = Modifier
-            .clearAndSetSemantics {
-                this.contentDescription = label
-            }
             .size(24.dp)
         ) {
             Icon(

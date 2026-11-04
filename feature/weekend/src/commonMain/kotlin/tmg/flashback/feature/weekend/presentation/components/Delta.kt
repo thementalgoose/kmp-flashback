@@ -9,13 +9,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.dp
 import flashback.feature.weekend.generated.resources.Res
 import flashback.feature.weekend.generated.resources.ic_pos_down
 import flashback.feature.weekend.generated.resources.ic_pos_neutral
 import flashback.feature.weekend.generated.resources.ic_pos_up
+import flashback.presentation.localisation.generated.resources.Res as LocRes
+import flashback.presentation.localisation.generated.resources.ab_positions_gained
+import flashback.presentation.localisation.generated.resources.ab_positions_lost
+import flashback.presentation.localisation.generated.resources.ab_positions_neutral
+import flashback.presentation.localisation.generated.resources.ab_positions_unknown_grid
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
@@ -30,13 +38,22 @@ fun Delta(
 ) {
     val diff = (grid ?: 0) - finish
     when {
-        diff == 0 || grid == null -> { // Equal
+        grid == null -> {
             Delta(
                 modifier = modifier,
                 diff = diff,
                 color = AppTheme.colors.f1DeltaNeutral,
                 icon = Res.drawable.ic_pos_neutral,
-                contentDescription = "" // stringResource(id = R.string.ab_positions_neutral, model.grid ?: "unknown", model.finish)
+                contentDescription = stringResource(LocRes.string.ab_positions_unknown_grid, finish.toString())
+            )
+        }
+        diff == 0 -> { // Equal
+            Delta(
+                modifier = modifier,
+                diff = diff,
+                color = AppTheme.colors.f1DeltaNeutral,
+                icon = Res.drawable.ic_pos_neutral,
+                contentDescription = stringResource(LocRes.string.ab_positions_neutral, grid.toString(), finish.toString())
             )
         }
         diff > 0 -> { // Gained
@@ -45,7 +62,7 @@ fun Delta(
                 diff = diff,
                 color = AppTheme.colors.f1DeltaNegative,
                 icon = Res.drawable.ic_pos_up,
-                contentDescription = "" // stringResource(id = R.string.ab_positions_gained, model.grid ?: "unknown", model.finish, abs(diff))
+                contentDescription = stringResource(LocRes.string.ab_positions_gained, grid.toString(), finish.toString(), abs(diff))
             )
         }
         else -> { // Lost
@@ -54,7 +71,7 @@ fun Delta(
                 diff = diff,
                 color = AppTheme.colors.f1DeltaPositive,
                 icon = Res.drawable.ic_pos_down,
-                contentDescription = "" // stringResource(id = R.string.ab_positions_lost, model.grid ?: "unknown", model.finish, abs(diff))
+                contentDescription = stringResource(LocRes.string.ab_positions_lost, grid.toString(), finish.toString(), abs(diff))
             )
         }
     }
@@ -69,13 +86,15 @@ private fun Delta(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier,
+        modifier = modifier.clearAndSetSemantics {
+            this.contentDescription = contentDescription
+        },
         horizontalArrangement = Arrangement.Center
     ) {
         Icon(
             painter = painterResource(resource = icon),
             modifier = Modifier.align(Alignment.CenterVertically),
-            contentDescription = contentDescription,
+            contentDescription = null,
             tint = color,
         )
         TextBody2(
