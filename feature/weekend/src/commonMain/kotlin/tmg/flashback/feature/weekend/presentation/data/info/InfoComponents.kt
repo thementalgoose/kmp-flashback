@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import flashback.domain.formula1.generated.resources.ic_drs
 import flashback.domain.formula1.generated.resources.ic_straight_mode
@@ -119,7 +120,7 @@ internal fun RaceDetails(
             TrackBreakdown(
                 trackBreakdownInfo = trackBreakdownInfo,
                 modifier = Modifier
-                    .clickable(onClick = showTrackBreakdown)
+                    .clickable(role = Role.Button, onClick = showTrackBreakdown)
                     .then(sizeModifier)
             )
         }
@@ -172,7 +173,7 @@ internal fun RaceLinks(
 
             if (drsZones > 0 && model.season in Formula1.drs) {
                 BadgeView(
-                    modifier = Modifier.clickable {
+                    modifier = Modifier.clickable(role = Role.Button) {
                         zonesClicked()
                     },
                     icon = flashback.domain.formula1.generated.resources.Res.drawable.ic_drs,
@@ -199,7 +200,7 @@ internal fun RaceLinks(
                 )
 
                 BadgeView(
-                    modifier = Modifier.clickable {
+                    modifier = Modifier.clickable(role = Role.Button) {
                         zonesClicked()
                     },
                     iconModifier = Modifier.rotate(rotationAngle),
@@ -210,7 +211,7 @@ internal fun RaceLinks(
         }
         if (model.tyres != null) {
             BadgeView(
-                modifier = Modifier.clickable {
+                modifier = Modifier.clickable(role = Role.Button) {
                     tyresClicked()
                 },
                 icons = model.tyres.tyres.map { it.tyre.icon },
@@ -220,7 +221,7 @@ internal fun RaceLinks(
         }
         if (previousRace != null) {
             BadgeView(
-                modifier = Modifier.clickable {
+                modifier = Modifier.clickable(role = Role.Button) {
                     previousRaceClicked(previousRace)
                 },
                 icon = Res.drawable.ic_details_previous_race,
@@ -229,7 +230,7 @@ internal fun RaceLinks(
         }
         if (model.youtubeUrl != null) {
             BadgeView(
-                modifier = Modifier.clickable {
+                modifier = Modifier.clickable(role = Role.Button) {
                     youtubeClicked(model.youtubeUrl)
                 },
                 label = stringResource(string.details_link_youtube),
@@ -238,7 +239,7 @@ internal fun RaceLinks(
         }
         if (model.circuit.location != null) {
             BadgeView(
-                modifier = Modifier.clickable {
+                modifier = Modifier.clickable(role = Role.Button) {
                     mapsClicked(model.circuit.location!!, model.circuit.name)
                 },
                 label = stringResource(string.details_link_map),
@@ -247,7 +248,7 @@ internal fun RaceLinks(
         }
         if (model.wikipediaUrl != null) {
             BadgeView(
-                modifier = Modifier.clickable {
+                modifier = Modifier.clickable(role = Role.Button) {
                     wikipediaClicked(model.wikipediaUrl)
                 },
                 label = stringResource(string.details_link_wikipedia),

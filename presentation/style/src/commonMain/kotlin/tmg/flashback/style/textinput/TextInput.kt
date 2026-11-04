@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
@@ -17,6 +18,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -26,12 +28,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import flashback.presentation.localisation.generated.resources.Res
+import flashback.presentation.localisation.generated.resources.ab_clear_text
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import tmg.flashback.style.AppTheme
@@ -118,11 +124,12 @@ fun TextInput(
             Icon(
                 imageVector = Icons.Default.Clear,
                 tint = AppTheme.colors.onSurfaceVariant,
-                contentDescription = null,
+                contentDescription = stringResource(Res.string.ab_clear_text),
                 modifier = Modifier
                     .align(Alignment.CenterEnd)
                     .padding(end = AppTheme.dimens.medium)
-                    .clickable {
+                    .clip(CircleShape)
+                    .clickable(role = Role.Button) {
                         text.value = TextFieldValue("")
                         clear()
                         keyboardController?.hide()

@@ -44,7 +44,8 @@
 
     <string name="ab_positions_gained">Started %1$s, finished %2$s, gained %3$d places</string>
     <string name="ab_positions_neutral">Started %1$s, finished %2$s</string>
-    <string name="ab_positions_lost">Started %1$s, gained %2$d, lost %3$d places</string>
+    <string name="ab_positions_lost">Started %1$s, finished %2$s, lost %3$d places</string>
+    <string name="ab_positions_unknown_grid">Finished %1$s</string>
 
     <string name="ab_fastest_lap">Fastest Lap</string>
 
@@ -62,4 +63,14 @@
     <string name="ab_change_of_rain">Chance of rain</string>
     <string name="ab_action_jump_to_latest_season">Jump to latest season</string>
     <string name="ab_action_copy_debug_ids">Copy debug identifiers</string>
+
+    <string name="ab_clear_text">Clear text</string>
+    <string name="ab_state_expanded">Expanded</string>
+    <string name="ab_state_collapsed">Collapsed</string>
+    <string name="ab_action_expand">Expand</string>
+    <string name="ab_action_collapse">Collapse</string>
+    <string name="ab_current">Current</string>
+    <string name="ab_action_open_menu">Open menu</string>
+    <string name="ab_action_close_menu">Close menu</string>
+    <string name="ab_action_open">Open</string>
 </resources>

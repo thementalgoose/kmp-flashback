@@ -15,7 +15,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
@@ -170,13 +170,15 @@ internal fun RaceConstructorResult(
     Row(
         modifier = modifier
             .edgeBar(colour = model.constructor.colour)
-            .semantics(mergeDescendants = true) { }
-            .clearAndSetSemantics {
+            .clickable(
+                role = Role.Button,
+                onClick = {
+                    itemClicked(model.constructor)
+                }
+            )
+            .semantics(mergeDescendants = true) {
                 this.contentDescription = contentDescription + drivers
-            }
-            .clickable(onClick = {
-                itemClicked(model.constructor)
-            }),
+            },
         verticalAlignment = Alignment.Top,
     ) {
         Box(Modifier.size(finishingPositionWidth, driverIconSize)) {

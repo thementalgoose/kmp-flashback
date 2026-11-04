@@ -17,11 +17,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import flashback.feature.weekend.generated.resources.Res
 import flashback.feature.weekend.generated.resources.ic_tick
+import flashback.presentation.localisation.generated.resources.Res as LocRes
+import flashback.presentation.localisation.generated.resources.ab_action_collapse
+import flashback.presentation.localisation.generated.resources.ab_action_expand
+import flashback.presentation.localisation.generated.resources.ab_state_collapsed
+import flashback.presentation.localisation.generated.resources.ab_state_expanded
 import flashback.presentation.ui.generated.resources.arrow_down
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.text.TextTitle
@@ -37,6 +47,11 @@ fun CollapsibleBox(
         targetValue = if (isExpanded.value) 0.dp else AppTheme.dimens.radiusMedium,
         label = "rotation"
     )
+    val expandedLabel = stringResource(LocRes.string.ab_state_expanded)
+    val collapsedLabel = stringResource(LocRes.string.ab_state_collapsed)
+    val expandActionLabel = stringResource(LocRes.string.ab_action_expand)
+    val collapseActionLabel = stringResource(LocRes.string.ab_action_collapse)
+
     Column(
         modifier = modifier
             .padding(
@@ -57,7 +72,14 @@ fun CollapsibleBox(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable {
+                .semantics {
+                    role = Role.Button
+                    stateDescription = if (isExpanded.value) expandedLabel else collapsedLabel
+                }
+                .clickable(
+                    role = Role.Button,
+                    onClickLabel = if (isExpanded.value) collapseActionLabel else expandActionLabel
+                ) {
                     isExpanded.value = !isExpanded.value
                 }
                 .padding(

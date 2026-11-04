@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
@@ -68,12 +68,14 @@ fun DriverInfoWithIcon(
 
     Row(modifier = modifier
         .edgeBar(entry.constructor.colour)
-        .semantics(mergeDescendants = true) { }
         .clickable(
+            role = Role.Button,
             enabled = true,
             onClick = { driverClicked(entry) }
         )
-        .clearAndSetSemantics { this.contentDescription = contentDescription }
+        .semantics(mergeDescendants = true) {
+            this.contentDescription = contentDescription
+        }
         .padding(vertical = AppTheme.dimens.xsmall)
     ) {
         Box(Modifier.size(positionWidth, driverIconSize)) {

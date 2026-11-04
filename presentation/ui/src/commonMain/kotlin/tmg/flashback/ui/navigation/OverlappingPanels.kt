@@ -11,6 +11,7 @@ import androidx.compose.material.SwipeableState
 import androidx.compose.material.swipeable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -20,11 +21,19 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.customActions
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
+import flashback.presentation.localisation.generated.resources.Res as LocRes
+import flashback.presentation.localisation.generated.resources.ab_action_close_menu
+import flashback.presentation.localisation.generated.resources.ab_action_open_menu
+import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
@@ -194,9 +203,28 @@ fun OverlappingPanels(
             0f to OverlappingPanelsValue.Closed
         )
 
+        val coroutineScope = rememberCoroutineScope()
+        val openMenuLabel = stringResource(LocRes.string.ab_action_open_menu)
+        val closeMenuLabel = stringResource(LocRes.string.ab_action_close_menu)
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                .semantics {
+                    customActions = listOf(
+                        if (panelsState.isPanelsClosed) {
+                            CustomAccessibilityAction(openMenuLabel) {
+                                coroutineScope.launch { panelsState.openStartPanel() }
+                                true
+                            }
+                        } else {
+                            CustomAccessibilityAction(closeMenuLabel) {
+                                coroutineScope.launch { panelsState.closePanels() }
+                                true
+                            }
+                        }
+                    )
+                }
                 .swipeable(
                     state = panelsState.swipeableState,
                     orientation = Orientation.Horizontal,

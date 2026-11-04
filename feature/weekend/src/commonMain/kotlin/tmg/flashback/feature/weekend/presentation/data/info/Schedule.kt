@@ -27,6 +27,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -131,6 +132,8 @@ internal fun Schedule(
                                     windspeedMetric = model.windspeedMetric,
                                     showNotificationBell = isNotificationSet,
                                     modifier = Modifier.clickable(
+                                        role = Role.Button,
+                                        enabled = !model.showWeatherDetails,
                                         onClick = {
                                             if (!model.showWeatherDetails) {
                                                 showWeatherDetails.value = !showWeatherDetails.value

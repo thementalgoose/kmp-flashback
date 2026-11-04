@@ -35,7 +35,8 @@
     <string name="ab_no_race_results">正赛结果尚未出炉</string>
     <string name="ab_positions_gained">从第 %1$s 发车，以第 %2$s 完赛，上升 %3$d 位</string>
     <string name="ab_positions_neutral">从第 %1$s 发车，以第 %2$s 完赛</string>
-    <string name="ab_positions_lost">从第 %1$s 发车，上升 %2$d 位，下降 %3$d 位</string>
+    <string name="ab_positions_lost">从第 %1$s 发车，以第 %2$s 完赛，下降 %3$d 位</string>
+    <string name="ab_positions_unknown_grid">以第 %1$s 完赛</string>
     <string name="ab_fastest_lap">最快圈速</string>
     <string name="ab_constructor_logo">%1$s 标志</string>
     <string name="ab_preseason_events">季前赛</string>
@@ -47,4 +48,14 @@
     <string name="ab_change_of_rain">降雨概率</string>
     <string name="ab_action_jump_to_latest_season">跳转到最新赛季</string>
     <string name="ab_action_copy_debug_ids">复制调试标识符</string>
+
+    <string name="ab_clear_text">清除文本</string>
+    <string name="ab_state_expanded">已展开</string>
+    <string name="ab_state_collapsed">已折叠</string>
+    <string name="ab_action_expand">展开</string>
+    <string name="ab_action_collapse">折叠</string>
+    <string name="ab_current">当前</string>
+    <string name="ab_action_open_menu">打开菜单</string>
+    <string name="ab_action_close_menu">关闭菜单</string>
+    <string name="ab_action_open">打开</string>
 </resources>
