@@ -1,6 +1,7 @@
 package tmg.flashback.eastereggs.model
 
 import flashback.eastereggs.generated.resources.Res
+import flashback.eastereggs.generated.resources.ic_easteregg_america
 import flashback.eastereggs.generated.resources.ic_easteregg_bonfire
 import flashback.eastereggs.generated.resources.ic_easteregg_christmas
 import flashback.eastereggs.generated.resources.ic_easteregg_diwali
@@ -121,7 +122,7 @@ enum class MenuIcons(
             LocalDate(year, 7, 4) to LocalDate(year, 7, 4)
         ),
         label = string.easter_egg_menu_independence_day,
-        drawable = Res.drawable.ic_easteregg_bonfire
+        drawable = Res.drawable.ic_easteregg_america
     ),
     BONFIRE(
         key = "bonfire",
