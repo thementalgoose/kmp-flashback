@@ -1,5 +1,6 @@
 package tmg.flashback
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -50,6 +51,11 @@ class MainActivity : BaseActivity(), SplashScreen.KeepOnScreenCondition {
         setContent {
             App()
         }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
     }
 
     override fun shouldKeepOnScreen(): Boolean = false
