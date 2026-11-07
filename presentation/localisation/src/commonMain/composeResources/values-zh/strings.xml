@@ -630,6 +630,8 @@
     <string name="reaction_screen_action_react">反应</string>
     <string name="reaction_screen_instructions">灯熄灭时点击任意位置…</string>
 
+    <string name="reaction_screen_history_title">历史记录</string>
+
     <string name="reaction_screen_miss_title">错过了！</string>
     <string name="reaction_screen_miss_subtitle">记住，当你注意到灯熄灭时，点击屏幕上的任意位置</string>
     <string name="reaction_screen_jump_title">抢跑！</string>

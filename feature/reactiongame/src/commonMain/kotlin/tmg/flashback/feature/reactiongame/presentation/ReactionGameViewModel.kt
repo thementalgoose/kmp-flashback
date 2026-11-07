@@ -10,16 +10,23 @@ import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.datetime.LocalDateTime
 import tmg.flashback.analytics.usecases.LogEventUseCase
 import tmg.flashback.feature.reactiongame.manager.LightsOutDelayProvider
 import tmg.flashback.infrastructure.datetime.TimeManager
 import org.koin.core.annotation.KoinViewModel
+import tmg.flashback.feature.reactiongame.repositories.ReactionGameEntry
+import tmg.flashback.feature.reactiongame.repositories.ReactionGameRepository
+import tmg.flashback.feature.reactiongame.repositories.ReactionResultTier
+import tmg.flashback.infrastructure.datetime.now
+import kotlin.time.Duration.Companion.milliseconds
 
 @KoinViewModel
 class ReactionGameViewModel(
     private val lightsOutDelayProvider: LightsOutDelayProvider,
     private val timeManager: TimeManager,
     private val logEventUseCase: LogEventUseCase,
+    private val reactionGameRepository: ReactionGameRepository,
     private val ioDispatcher: CoroutineDispatcher = tmg.flashback.infrastructure.coroutines.ioDispatcher
 ): ViewModel() {
 
@@ -50,11 +57,11 @@ class ReactionGameViewModel(
                 _uiState.value = ReactionUiState.Game(
                     lights = i
                 )
-                delay(TIME_BETWEEN_LIGHTS)
+                delay(TIME_BETWEEN_LIGHTS.milliseconds)
             }
 
             // Hold delay
-            delay(lightsOutDelay)
+            delay(lightsOutDelay.milliseconds)
             setLightsOutTime()
             _uiState.value = ReactionUiState.Game(
                 lights = 0,
@@ -62,7 +69,7 @@ class ReactionGameViewModel(
             )
 
             ensureActive()
-            delay(TEST_TIMEOUT)
+            delay(TEST_TIMEOUT.milliseconds)
 
             ensureActive()
             _uiState.value = ReactionUiState.Missed
@@ -78,8 +85,13 @@ class ReactionGameViewModel(
         val reactionTime = clickedTime - lightsOutTime
         job.cancel()
 
+
         // Clicked before lights out. Jump start
         if (this.lightsOutTime == 0L || reactionTime < 0L) {
+            reactionGameRepository.results += ReactionGameEntry(
+                timeMillis = -1,
+                date = LocalDateTime.now()
+            )
             logEventUseCase.logEvent("reaction_game", mapOf("result" to "n/a"))
             _uiState.value = ReactionUiState.JumpStart
             return
@@ -89,6 +101,10 @@ class ReactionGameViewModel(
             timeMillis = reactionTime,
             tier = ReactionResultTier.toTier(reactionTime),
             percentage = (reactionTime / 500f).coerceIn(0f, 1f)
+        )
+        reactionGameRepository.results += ReactionGameEntry(
+            timeMillis = reactionTime.toInt(),
+            date = LocalDateTime.now()
         )
         logEventUseCase.logEvent("reaction_game", mapOf("result" to "$reactionTime"))
         this.lightsOutTime = 0L

@@ -704,6 +704,8 @@
     <string name="reaction_screen_action_react">React</string>
     <string name="reaction_screen_instructions">Tap anywhere when the lights go out…</string>
 
+    <string name="reaction_screen_history_title">History</string>
+
     <string name="reaction_screen_miss_title">Missed!</string>
     <string name="reaction_screen_miss_subtitle">Remember to tap on the screen anywhere when you notice the lights go out</string>
     <string name="reaction_screen_jump_title">Jump start!</string>

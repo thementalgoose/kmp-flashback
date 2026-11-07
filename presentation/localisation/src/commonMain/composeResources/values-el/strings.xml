@@ -698,6 +698,8 @@
     <string name="reaction_screen_action_react">Αντιδράστε</string>
     <string name="reaction_screen_instructions">Πατήστε οπουδήποτε όταν σβήσουν τα φώτα…</string>
 
+    <string name="reaction_screen_history_title">Ιστορικό</string>
+
     <string name="reaction_screen_miss_title">Χάσατε!</string>
     <string name="reaction_screen_miss_subtitle">Θυμηθείτε να πατήσετε οπουδήποτε στην οθόνη όταν δείτε τα φώτα να σβήνουν</string>
     <string name="reaction_screen_jump_title">Άκυρη εκκίνηση!</string>

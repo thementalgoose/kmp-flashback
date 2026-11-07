@@ -4,7 +4,9 @@ import app.cash.turbine.test
 import dev.mokkery.MockMode.autoUnit
 import dev.mokkery.answering.returns
 import dev.mokkery.every
+import dev.mokkery.matcher.any
 import dev.mokkery.mock
+import dev.mokkery.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestDispatcher
@@ -12,6 +14,8 @@ import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runTest
 import tmg.flashback.analytics.usecases.LogEventUseCase
 import tmg.flashback.feature.reactiongame.manager.LightsOutDelayProvider
+import tmg.flashback.feature.reactiongame.repositories.ReactionGameRepository
+import tmg.flashback.feature.reactiongame.repositories.ReactionResultTier
 import tmg.flashback.infrastructure.datetime.TimeManager
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
@@ -19,21 +23,24 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 @ExperimentalCoroutinesApi
-internal class ReactionViewModelTest {
+internal class ReactionGameViewModelTest {
 
     private val mockLightsOutDelayProvider: LightsOutDelayProvider = mock(autoUnit)
     private val mockTimeManager: TimeManager = mock(autoUnit)
     private val mockLogEventUseCase: LogEventUseCase = mock(autoUnit)
+    private val mockReactionGameRepository: ReactionGameRepository = mock(autoUnit)
     private val testDispatcher: TestDispatcher = StandardTestDispatcher()
 
     private lateinit var underTest: ReactionGameViewModel
 
     private fun initUnderTest() {
         every { mockLightsOutDelayProvider.getDelay() } returns LIGHTS_OUT_DELAY
+        every { mockReactionGameRepository.results } returns emptyList()
         underTest = ReactionGameViewModel(
             lightsOutDelayProvider = mockLightsOutDelayProvider,
             timeManager = mockTimeManager,
             logEventUseCase = mockLogEventUseCase,
+            reactionGameRepository = mockReactionGameRepository,
             ioDispatcher = testDispatcher
         )
     }
@@ -81,6 +88,11 @@ internal class ReactionViewModelTest {
 
             expectNoEvents()
         }
+
+        verify {
+            mockReactionGameRepository.results = any()
+            mockLogEventUseCase.logEvent("reaction_game", mapOf("result" to "250"))
+        }
     }
 
     @Test
@@ -104,6 +116,11 @@ internal class ReactionViewModelTest {
             underTest.react()
 
             assertEquals(ReactionUiState.JumpStart, awaitItem())
+        }
+
+        verify {
+            mockReactionGameRepository.results = any()
+            mockLogEventUseCase.logEvent("reaction_game", mapOf("result" to "n/a"))
         }
     }
 
