@@ -636,6 +636,8 @@
     <string name="reaction_screen_action_react">Reagisci</string>
     <string name="reaction_screen_instructions">Tocca ovunque quando le luci si spengono…</string>
 
+    <string name="reaction_screen_history_title">Cronologia</string>
+
     <string name="reaction_screen_miss_title">Mancato!</string>
     <string name="reaction_screen_miss_subtitle">Ricordati di toccare lo schermo in qualsiasi punto quando noti che le luci si spengono</string>
     <string name="reaction_screen_jump_title">Falsa partenza!</string>

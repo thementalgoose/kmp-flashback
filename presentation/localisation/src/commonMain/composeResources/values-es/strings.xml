@@ -636,6 +636,8 @@
     <string name="reaction_screen_action_react">Reaccionar</string>
     <string name="reaction_screen_instructions">Toca en cualquier lugar cuando se apaguen las luces…</string>
 
+    <string name="reaction_screen_history_title">Historial</string>
+
     <string name="reaction_screen_miss_title">¡Perdido!</string>
     <string name="reaction_screen_miss_subtitle">Recuerda tocar la pantalla en cualquier lugar cuando notes que las luces se apagan</string>
     <string name="reaction_screen_jump_title">¡Salida en falso!</string>
