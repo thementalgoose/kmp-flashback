@@ -24,9 +24,13 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -41,6 +45,7 @@ import flashback.presentation.localisation.generated.resources.reaction_screen_a
 import flashback.presentation.localisation.generated.resources.reaction_screen_action_reset
 import flashback.presentation.localisation.generated.resources.reaction_screen_action_start
 import flashback.presentation.localisation.generated.resources.reaction_screen_heading
+import flashback.presentation.localisation.generated.resources.reaction_screen_history_title
 import flashback.presentation.localisation.generated.resources.reaction_screen_instructions
 import flashback.presentation.localisation.generated.resources.reaction_screen_jump_subtitle
 import flashback.presentation.localisation.generated.resources.reaction_screen_jump_title
@@ -48,9 +53,27 @@ import flashback.presentation.localisation.generated.resources.reaction_screen_m
 import flashback.presentation.localisation.generated.resources.reaction_screen_miss_title
 import flashback.presentation.localisation.generated.resources.reaction_screen_subtitle
 import flashback.presentation.localisation.generated.resources.reaction_screen_title
+import flashback.presentation.localisation.generated.resources.reaction_tier_average
+import flashback.presentation.localisation.generated.resources.reaction_tier_average_desc
+import flashback.presentation.localisation.generated.resources.reaction_tier_good
+import flashback.presentation.localisation.generated.resources.reaction_tier_good_desc
+import flashback.presentation.localisation.generated.resources.reaction_tier_great
+import flashback.presentation.localisation.generated.resources.reaction_tier_great_desc
+import flashback.presentation.localisation.generated.resources.reaction_tier_not_good
+import flashback.presentation.localisation.generated.resources.reaction_tier_not_good_desc
+import flashback.presentation.localisation.generated.resources.reaction_tier_poor
+import flashback.presentation.localisation.generated.resources.reaction_tier_poor_desc
+import flashback.presentation.localisation.generated.resources.reaction_tier_superhuman
+import flashback.presentation.localisation.generated.resources.reaction_tier_superhuman_desc
+import flashback.presentation.ui.generated.resources.Res
+import flashback.presentation.ui.generated.resources.ic_history
+import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.analytics.presentation.ScreenView
+import tmg.flashback.feature.reactiongame.presentation.history.ReactionGameHistoryBottomSheet
+import tmg.flashback.feature.reactiongame.repositories.ReactionResultTier
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.buttons.ButtonPrimary
 import tmg.flashback.style.text.TextBody1
@@ -102,6 +125,9 @@ private fun ReactionScreen(
     reset: () -> Unit,
     react: () -> Unit,
 ) {
+
+    val showHistory = remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -126,7 +152,21 @@ private fun ReactionScreen(
             } else {
                 HeaderAction.BACK
             },
-            actionUpClicked = actionUpClicked
+            actionUpClicked = actionUpClicked,
+            overrideIcons = {
+                IconButton(
+                    onClick = {
+                        showHistory.value = true
+                    },
+                    content = {
+                        Icon(
+                            painter = painterResource(Res.drawable.ic_history),
+                            contentDescription = stringResource(string.reaction_screen_history_title),
+                            tint = AppTheme.colors.onSurface
+                        )
+                    }
+                )
+            }
         )
         Box(
             modifier = Modifier
@@ -227,6 +267,12 @@ private fun ReactionScreen(
                 }
             }
         }
+    }
+
+    if (showHistory.value) {
+        ReactionGameHistoryBottomSheet(
+            show = showHistory
+        )
     }
 }
 
@@ -372,3 +418,23 @@ private fun RaceStartLights(
         panelType = LightPanel.HALF_HEIGHT
     )
 }
+
+private val ReactionResultTier.label: StringResource
+    get() = when (this) {
+        ReactionResultTier.SUPERHUMAN -> string.reaction_tier_superhuman
+        ReactionResultTier.EXCEPTIONAL -> string.reaction_tier_great
+        ReactionResultTier.GOOD -> string.reaction_tier_good
+        ReactionResultTier.AVERAGE -> string.reaction_tier_average
+        ReactionResultTier.NOT_GOOD -> string.reaction_tier_not_good
+        ReactionResultTier.POOR -> string.reaction_tier_poor
+    }
+
+private val ReactionResultTier.desc: StringResource
+    get() = when (this) {
+        ReactionResultTier.SUPERHUMAN -> string.reaction_tier_superhuman_desc
+        ReactionResultTier.EXCEPTIONAL -> string.reaction_tier_great_desc
+        ReactionResultTier.GOOD -> string.reaction_tier_good_desc
+        ReactionResultTier.AVERAGE -> string.reaction_tier_average_desc
+        ReactionResultTier.NOT_GOOD -> string.reaction_tier_not_good_desc
+        ReactionResultTier.POOR -> string.reaction_tier_poor_desc
+    }
