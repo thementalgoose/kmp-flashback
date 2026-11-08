@@ -244,11 +244,10 @@ private fun Stat(
     ) {
         Icon(
             modifier = Modifier
-                .clip(CircleShape)
                 .size(16.dp),
             painter = painterResource(model.icon),
             contentDescription = null,
-            tint = AppTheme.colors.onSurface
+            tint = if (model.tintGold) AppTheme.colors.f1Championship else AppTheme.colors.onSurface
         )
         TextBody2(
             modifier = Modifier.weight(1f),
@@ -277,7 +276,7 @@ private fun PreviewAll() {
                 driver = Driver.preview(),
                 selection = DriverFilter.Overview,
                 availableSeasons = listOf(2020, 2019),
-                stats = listOf(DriverStat(string.dashboard_all_title, flashback.presentation.ui.generated.resources.Res.drawable.ic_menu_drivers, "value")),
+                stats = listOf(DriverStat(string.dashboard_all_title, flashback.presentation.ui.generated.resources.Res.drawable.ic_menu_drivers, true,"value")),
                 data = DriverStatsData.Overview(
                     teams = listOf(
                         DriverStatTeamOverview(season = 2020, teams = listOf(Constructor.preview()), standing = 2),
@@ -306,7 +305,7 @@ private fun PreviewSeason() {
                 driver = Driver.preview(),
                 selection = DriverFilter.Season(2020),
                 availableSeasons = listOf(2020, 2019),
-                stats = listOf(DriverStat(string.dashboard_all_title, flashback.presentation.ui.generated.resources.Res.drawable.ic_menu_drivers, "value")),
+                stats = listOf(DriverStat(string.dashboard_all_title, flashback.presentation.ui.generated.resources.Res.drawable.ic_menu_drivers, true, "value")),
                 data = DriverStatsData.Season(
                     races = listOf(
                         DriverSeasonFeed.TeamHeader(

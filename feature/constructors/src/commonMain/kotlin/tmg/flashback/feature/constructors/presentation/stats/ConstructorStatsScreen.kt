@@ -202,11 +202,10 @@ private fun Stat(
     ) {
         Icon(
             modifier = Modifier
-                .clip(CircleShape)
                 .size(16.dp),
             painter = painterResource(model.icon),
             contentDescription = null,
-            tint = AppTheme.colors.onSurface
+            tint = if (model.tintGold) AppTheme.colors.f1Championship else AppTheme.colors.onSurface
         )
         TextBody2(
             modifier = Modifier.weight(1f),
@@ -237,7 +236,7 @@ private fun PreviewAll() {
                 constructor = Constructor.preview(),
                 selection = ConstructorFilter.Overview,
                 availableSeasons = listOf(2020, 2019),
-                stats = listOf(ConstructorStat(string.dashboard_all_title, flashback.presentation.ui.generated.resources.Res.drawable.ic_menu_drivers, "value")),
+                stats = listOf(ConstructorStat(string.dashboard_all_title, flashback.presentation.ui.generated.resources.Res.drawable.ic_menu_drivers, false, "value")),
                 data = ConstructorStatsData.Overview(
                     items = listOf(
                         ConstructorStatSeasonOverview(
@@ -269,7 +268,7 @@ private fun PreviewSeason() {
                 constructor = Constructor.preview(),
                 selection = ConstructorFilter.Season(2020),
                 availableSeasons = listOf(2020, 2019),
-                stats = listOf(ConstructorStat(string.dashboard_all_title, flashback.presentation.ui.generated.resources.Res.drawable.ic_menu_drivers, "value")),
+                stats = listOf(ConstructorStat(string.dashboard_all_title, flashback.presentation.ui.generated.resources.Res.drawable.ic_menu_drivers, true, "value")),
                 data = ConstructorStatsData.Season(
                     drivers = List(3) {
                         ConstructorHistorySeasonDriver(
@@ -306,7 +305,7 @@ private fun PreviewOverview() {
                 constructor = Constructor.preview(),
                 selection = ConstructorFilter.Season(2020),
                 availableSeasons = listOf(2020, 2019),
-                stats = listOf(ConstructorStat(string.dashboard_all_title, flashback.presentation.ui.generated.resources.Res.drawable.ic_menu_drivers, "value")),
+                stats = listOf(ConstructorStat(string.dashboard_all_title, flashback.presentation.ui.generated.resources.Res.drawable.ic_menu_drivers, false, "value")),
                 data = ConstructorStatsData.Overview(
                     items = listOf(
                         ConstructorStatSeasonOverview(
