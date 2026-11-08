@@ -3,6 +3,8 @@ package tmg.flashback.formula1.model
 data class ConstructorHistorySeason(
     val drivers: Map<String, ConstructorHistorySeasonDriver>,
     val isInProgress: Boolean,
+    val inProgressMaxPosition: Int?,
+    val inProgressMinPosition: Int?,
     val championshipStanding: Int?,
     val points: Double,
     val season: Int,

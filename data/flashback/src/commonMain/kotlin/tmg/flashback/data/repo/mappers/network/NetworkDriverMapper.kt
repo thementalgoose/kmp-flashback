@@ -16,7 +16,9 @@ class NetworkDriverMapper {
             season = driver.season,
             championshipStanding = driver.championshipPosition,
             points = driver.points,
-            inProgress = driver.inProgress
+            inProgress = driver.inProgress,
+            inProgressMinPosition = driver.inProgressMinPosition,
+            inProgressMaxPosition = driver.inProgressMaxPosition
         )
     }
 

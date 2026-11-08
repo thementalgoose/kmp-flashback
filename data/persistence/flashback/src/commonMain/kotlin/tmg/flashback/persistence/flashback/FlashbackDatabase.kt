@@ -49,7 +49,7 @@ expect class FlashbackDatabaseFactory {
 }
 
 @Database(
-    version = 15,
+    version = 16,
     entities = [
         Circuit::class,
         CircuitRound::class,

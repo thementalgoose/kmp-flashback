@@ -8,6 +8,7 @@ fun DriverStanding.Companion.model(
     inProgress: Boolean = true,
     inProgressName: String? = "name",
     inProgressRound: Int? = 1,
+    inProgressMinPosition: Int? = 1,
     inProgressMaxPosition: Int? = 1,
     races: Int = 1,
 ): DriverStanding = DriverStanding(
@@ -18,6 +19,7 @@ fun DriverStanding.Companion.model(
     inProgress = inProgress,
     inProgressName = inProgressName,
     inProgressRound = inProgressRound,
+    inProgressMinPosition = inProgressMinPosition,
     inProgressMaxPosition = inProgressMaxPosition,
     races = races
 )

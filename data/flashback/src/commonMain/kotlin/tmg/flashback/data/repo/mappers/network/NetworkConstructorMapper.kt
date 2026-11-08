@@ -17,6 +17,8 @@ class NetworkConstructorMapper  {
             championshipStanding = constructor.championshipPosition,
             points = constructor.points ?: 0.0,
             inProgress = constructor.inProgress,
+            inProgressMinPosition = constructor.inProgressMinPosition,
+            inProgressMaxPosition = constructor.inProgressMaxPosition,
             races = constructor.races ?: 0
         )
     }

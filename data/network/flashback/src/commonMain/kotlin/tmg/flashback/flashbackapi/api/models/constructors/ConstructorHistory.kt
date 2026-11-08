@@ -24,6 +24,10 @@ data class ConstructorHistoryStanding(
     val points: Double? = 0.0,
     @SerialName("inProgress")
     val inProgress: Boolean,
+    @SerialName("inProgressMaxPosition")
+    val inProgressMaxPosition: Int? = null,
+    @SerialName("inProgressMinPosition")
+    val inProgressMinPosition: Int? = null,
     @SerialName("races")
     val races: Int? = 0,
     @SerialName("drivers")

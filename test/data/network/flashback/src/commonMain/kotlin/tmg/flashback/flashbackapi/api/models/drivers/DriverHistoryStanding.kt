@@ -7,11 +7,15 @@ fun DriverHistoryStanding.Companion.model(
         "r1" to DriverHistoryStandingRace.model()
     ),
     points: Double = 1.0,
-    inProgress: Boolean = true
+    inProgress: Boolean = true,
+    inProgressMinPosition: Int = 1,
+    inProgressMaxPosition: Int = 1,
 ): DriverHistoryStanding = DriverHistoryStanding(
     season = season,
     championshipPosition = championshipPosition,
     races = races,
     points = points,
-    inProgress = inProgress
+    inProgress = inProgress,
+    inProgressMinPosition = inProgressMinPosition,
+    inProgressMaxPosition = inProgressMaxPosition
 )

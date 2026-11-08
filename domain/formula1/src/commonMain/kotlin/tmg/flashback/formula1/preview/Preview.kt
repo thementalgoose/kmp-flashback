@@ -243,6 +243,8 @@ fun DriverHistorySeason.Companion.preview(
 ) = DriverHistorySeason(
     championshipStanding = 1,
     isInProgress = false,
+    inProgressMinPosition = 1,
+    inProgressMaxPosition = 1,
     points = 25.0,
     season = 2020,
     constructors = constructors,
