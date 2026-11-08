@@ -1,6 +1,5 @@
 package tmg.flashback.feature.drivers.presentation.stats
 
-import androidx.compose.runtime.isTraceInProgress
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,16 +11,15 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.KoinViewModel
 import tmg.flashback.data.repo.repository.DriverRepository
 import tmg.flashback.feature.drivers.presentation.stats.DriverStatBuilder.getOverallStats
 import tmg.flashback.feature.drivers.presentation.stats.DriverStatBuilder.getSeasonStats
 import tmg.flashback.formula1.model.Constructor
-import tmg.flashback.formula1.model.DriverEntry
 import tmg.flashback.formula1.model.DriverHistory
 import tmg.flashback.formula1.model.DriverHistorySeason
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
-import org.koin.core.annotation.KoinViewModel
 
 @KoinViewModel
 class DriverStatsViewModel(
@@ -104,7 +102,9 @@ class DriverStatsViewModel(
                     DriverStatTeamOverview(
                         season = model.season,
                         teams = model.constructors,
-                        standing = model.championshipStanding.takeIf { !model.isInProgress }
+                        standing = model.championshipStanding.takeIf {
+                            !model.isInProgress || (model.inProgressMinPosition != null && model.inProgressMinPosition == model.championshipStanding )
+                        }
                     )
                 }
         )
