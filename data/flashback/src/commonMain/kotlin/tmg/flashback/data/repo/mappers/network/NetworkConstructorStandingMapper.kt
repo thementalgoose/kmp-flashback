@@ -19,6 +19,7 @@ class NetworkConstructorStandingMapper {
             inProgressName = data.inProgressInfo?.name,
             inProgressRound = data.inProgressInfo?.round,
             inProgressMaxPosition = data.inProgressInfo?.maxPosition,
+            inProgressMinPosition = data.inProgressInfo?.minPosition,
             races = data.races
         )
     }
