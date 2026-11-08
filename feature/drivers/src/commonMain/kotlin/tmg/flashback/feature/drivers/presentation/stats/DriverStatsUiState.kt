@@ -62,6 +62,7 @@ data class DriverStatTeamOverview(
 data class DriverStat(
     val string: StringResource,
     val icon: DrawableResource,
+    val tintGold: Boolean = false,
     val value: String,
     val id: String = string.key
 )
