@@ -102,7 +102,9 @@ class ConstructorStatsViewModel(
                         drivers = model.drivers.values
                             .sortedBy { it.championshipStanding }
                             .associate { it.championshipStanding to it.driver.driver },
-                        standing = model.championshipStanding.takeIf { !model.isInProgress }
+                        standing = model.championshipStanding.takeIf {
+                            !model.isInProgress || (model.inProgressMinPosition != null && model.inProgressMinPosition == model.championshipStanding)
+                        }
                     )
                 }
         )
