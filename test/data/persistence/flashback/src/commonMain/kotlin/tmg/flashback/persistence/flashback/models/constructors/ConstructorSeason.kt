@@ -6,6 +6,8 @@ fun ConstructorSeason.Companion.model(
     championshipStanding: Int? = 1,
     points: Double = 1.0,
     inProgress: Boolean = true,
+    inProgressMinPosition: Int? = 1,
+    inProgressMaxPosition: Int? = 1,
     races: Int = 1,
 ): ConstructorSeason = ConstructorSeason(
     constructorId = constructorId,
@@ -13,5 +15,7 @@ fun ConstructorSeason.Companion.model(
     championshipStanding = championshipStanding,
     points = points,
     inProgress = inProgress,
+    inProgressMinPosition = inProgressMinPosition,
+    inProgressMaxPosition = inProgressMaxPosition,
     races = races,
 )
