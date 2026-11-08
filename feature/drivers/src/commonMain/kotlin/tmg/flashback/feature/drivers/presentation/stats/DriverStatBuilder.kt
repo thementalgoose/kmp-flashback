@@ -193,7 +193,6 @@ object DriverStatBuilder {
                 DriverStat(
                     icon = Res.drawable.ic_qualifying_pole,
                     string = string.driver_overview_stat_career_qualifying_pole,
-                    tintGold = this@getSeasonStats.qualifyingPoles > 0,
                     value = this@getSeasonStats.qualifyingPoles.toString()
                 )
             )

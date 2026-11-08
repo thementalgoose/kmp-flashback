@@ -8,6 +8,7 @@ import flashback.domain.formula1.generated.resources.ic_qualifying_pole
 import flashback.domain.formula1.generated.resources.ic_race_grid
 import flashback.domain.formula1.generated.resources.ic_race_points
 import flashback.domain.formula1.generated.resources.ic_standings
+import flashback.domain.formula1.generated.resources.ic_star_filled_coloured
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.constructor_overview_stat_best_championship_position
 import flashback.presentation.localisation.generated.resources.constructor_overview_stat_championship_standing
@@ -20,6 +21,8 @@ import flashback.presentation.localisation.generated.resources.constructor_overv
 import flashback.presentation.localisation.generated.resources.constructor_overview_stat_race_wins
 import flashback.presentation.localisation.generated.resources.constructor_overview_stat_races
 import flashback.presentation.localisation.generated.resources.constructor_overview_stat_titles
+import flashback.presentation.localisation.generated.resources.driver_overview_stat_career_championship_standing
+import flashback.presentation.localisation.generated.resources.driver_overview_stat_career_championship_standing_so_far
 import flashback.presentation.ui.generated.resources.Res
 import flashback.presentation.ui.generated.resources.ic_menu_constructors
 import flashback.presentation.ui.generated.resources.ic_menu_drivers
@@ -36,6 +39,7 @@ object ConstructorStatBuilder {
             add(ConstructorStat(
                 icon = Res.drawable.ic_menu_constructors,
                 string = string.constructor_overview_stat_titles,
+                tintGold = this@getOverallStats.championshipWins > 0,
                 value = this@getOverallStats.championshipWins.toString()
             ))
 
@@ -50,6 +54,7 @@ object ConstructorStatBuilder {
             add(ConstructorStat(
                 icon = Res.drawable.ic_menu_drivers,
                 string = string.constructor_overview_stat_drivers_titles,
+                tintGold = this@getOverallStats.driversChampionships > 0,
                 value = this@getOverallStats.driversChampionships.toString()
             ))
 
@@ -61,6 +66,7 @@ object ConstructorStatBuilder {
             add(ConstructorStat(
                 icon = drawable.ic_standings,
                 string = string.constructor_overview_stat_race_wins,
+                tintGold = this@getOverallStats.totalWins > 0,
                 value = this@getOverallStats.totalWins.toString()
             ))
             add(ConstructorStat(
@@ -90,17 +96,21 @@ object ConstructorStatBuilder {
         if (this == null) return emptyList()
 
         return buildList {
-            if (this@getSeasonStats.isInProgress) {
+            if (championshipStanding == 1) {
+                val inProgress = isInProgress && inProgressMinPosition != null && inProgressMinPosition!! > 1
                 add(ConstructorStat(
+                    string = if (inProgress) string.constructor_overview_stat_championship_standing_so_far else string.constructor_overview_stat_championship_standing,
                     icon = Res.drawable.ic_menu_constructors,
-                    string = string.constructor_overview_stat_championship_standing_so_far,
-                    value = this@getSeasonStats.championshipStanding?.ordinalAbbreviation ?: ""
+                    tintGold = true,
+                    value = this@getSeasonStats.championshipStanding?.ordinalAbbreviation
+                        ?: "N/A"
                 ))
             } else {
                 add(ConstructorStat(
+                    string = if (isInProgress) string.constructor_overview_stat_championship_standing_so_far else string.constructor_overview_stat_championship_standing,
                     icon = Res.drawable.ic_menu_constructors,
-                    string = string.constructor_overview_stat_championship_standing,
-                    value = this@getSeasonStats.championshipStanding?.ordinalAbbreviation ?: ""
+                    value = this@getSeasonStats.championshipStanding?.ordinalAbbreviation
+                        ?: "N/A"
                 ))
             }
 
@@ -112,6 +122,7 @@ object ConstructorStatBuilder {
             add(ConstructorStat(
                 icon = drawable.ic_standings,
                 string = string.constructor_overview_stat_race_wins,
+                tintGold = this@getSeasonStats.wins > 0,
                 value = this@getSeasonStats.wins.toString()
             ))
             add(ConstructorStat(
