@@ -31,6 +31,7 @@ class ConstructorStandingMapper(
             inProgressName = data.standing.inProgressName,
             inProgressRound = data.standing.inProgressRound,
             inProgressMaxPosition = data.standing.inProgressMaxPosition,
+            inProgressMinPosition = data.standing.inProgressMinPosition,
             races = data.standing.races,
             championshipPosition = data.standing.position,
             drivers = data.drivers

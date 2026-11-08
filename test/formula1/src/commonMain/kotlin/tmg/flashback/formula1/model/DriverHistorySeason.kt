@@ -3,6 +3,8 @@ package tmg.flashback.formula1.model
 fun DriverHistorySeason.Companion.model(
     championshipStanding: Int? = 1,
     isInProgress: Boolean = true,
+    inProgressMinPosition: Int? = 1,
+    inProgressMaxPosition: Int? = 1,
     points: Double = 1.0,
     season: Int = 2020,
     constructors: List<Constructor> = listOf(
@@ -14,6 +16,8 @@ fun DriverHistorySeason.Companion.model(
 ): DriverHistorySeason = DriverHistorySeason(
     championshipStanding = championshipStanding,
     isInProgress = isInProgress,
+    inProgressMinPosition = inProgressMinPosition,
+    inProgressMaxPosition = inProgressMaxPosition,
     points = points,
     season = season,
     constructors = constructors,

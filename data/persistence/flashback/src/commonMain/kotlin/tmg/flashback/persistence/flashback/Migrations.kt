@@ -180,5 +180,15 @@ enum class Migrations(
             connection.execSQL("ALTER TABLE ConstructorStanding ADD COLUMN in_progress_max_position INTEGER DEFAULT NULL")
             connection.execSQL("ALTER TABLE DriverStanding ADD COLUMN in_progress_max_position INTEGER DEFAULT NULL")
         }
+    }),
+    MIGRATION_15_16(object : Migration(15, 16) {
+        override suspend fun migrate(connection: SQLiteConnection) {
+            connection.execSQL("ALTER TABLE ConstructorStanding ADD COLUMN in_progress_min_position INTEGER DEFAULT NULL")
+            connection.execSQL("ALTER TABLE DriverStanding ADD COLUMN in_progress_min_position INTEGER DEFAULT NULL")
+            connection.execSQL("ALTER TABLE DriverSeason ADD COLUMN in_progress_max_position INTEGER DEFAULT NULL")
+            connection.execSQL("ALTER TABLE DriverSeason ADD COLUMN in_progress_min_position INTEGER DEFAULT NULL")
+            connection.execSQL("ALTER TABLE ConstructorSeason ADD COLUMN in_progress_max_position INTEGER DEFAULT NULL")
+            connection.execSQL("ALTER TABLE ConstructorSeason ADD COLUMN in_progress_min_position INTEGER DEFAULT NULL")
+        }
     })
 }

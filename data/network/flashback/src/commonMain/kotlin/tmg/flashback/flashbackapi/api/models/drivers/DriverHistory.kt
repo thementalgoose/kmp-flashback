@@ -25,6 +25,10 @@ data class DriverHistoryStanding(
     val points: Double,
     @SerialName("inProgress")
     val inProgress: Boolean,
+    @SerialName("inProgressMaxPosition")
+    val inProgressMaxPosition: Int? = null,
+    @SerialName("inProgressMinPosition")
+    val inProgressMinPosition: Int? = null,
     @SerialName("races")
     val races: Map<String, DriverHistoryStandingRace>
 ) {

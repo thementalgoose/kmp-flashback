@@ -5,6 +5,8 @@ import tmg.flashback.formula1.enums.isStatusFinished
 data class DriverHistorySeason(
     val championshipStanding: Int?,
     val isInProgress: Boolean,
+    val inProgressMaxPosition: Int?,
+    val inProgressMinPosition: Int?,
     val points: Double,
     val season: Int,
     val constructors: List<Constructor>,

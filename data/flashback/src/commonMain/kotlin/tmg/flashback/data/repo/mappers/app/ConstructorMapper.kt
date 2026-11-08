@@ -28,6 +28,8 @@ class ConstructorMapper(
     private fun mapConstructorSeason(constructor: Constructor, data: ConstructorSeasonWithDrivers): ConstructorHistorySeason {
         return ConstructorHistorySeason(
             isInProgress = data.constructorSeason.inProgress,
+            inProgressMaxPosition = data.constructorSeason.inProgressMaxPosition,
+            inProgressMinPosition = data.constructorSeason.inProgressMinPosition,
             championshipStanding = data.constructorSeason.championshipStanding,
             points = data.constructorSeason.points,
             season = data.constructorSeason.season,

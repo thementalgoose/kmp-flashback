@@ -29,6 +29,8 @@ class DriverMapper(
         return DriverHistorySeason(
             championshipStanding = data.driverSeason.championshipStanding,
             isInProgress = data.driverSeason.inProgress,
+            inProgressMinPosition = data.driverSeason.inProgressMinPosition,
+            inProgressMaxPosition = data.driverSeason.inProgressMaxPosition,
             points = data.driverSeason.points,
             season = data.driverSeason.season,
             constructors = data.races

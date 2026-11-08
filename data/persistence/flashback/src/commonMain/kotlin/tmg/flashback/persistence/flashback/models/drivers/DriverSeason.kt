@@ -16,6 +16,10 @@ data class DriverSeason(
     val points: Double,
     @ColumnInfo(name = "in_progress")
     val inProgress: Boolean,
+    @ColumnInfo(name = "in_progress_max_position")
+    val inProgressMaxPosition: Int?,
+    @ColumnInfo(name = "in_progress_min_position")
+    val inProgressMinPosition: Int?,
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: String = "${driverId}_${season}"
