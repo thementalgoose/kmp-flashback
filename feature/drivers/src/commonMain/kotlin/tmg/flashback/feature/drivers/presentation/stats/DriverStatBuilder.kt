@@ -115,23 +115,18 @@ object DriverStatBuilder {
         if (this == null) return emptyList()
 
         return buildList {
-            if (championshipStanding == 1) {
-                val inProgress = isInProgress && inProgressMinPosition != null && inProgressMinPosition!! > 1
-                add(DriverStat(
-                    string = if (inProgress) string.driver_overview_stat_career_championship_standing_so_far else string.driver_overview_stat_career_championship_standing,
-                    icon = Res.drawable.ic_star_filled_coloured,
-                    tintGold = true,
-                    value = this@getSeasonStats.championshipStanding?.ordinalAbbreviation
-                        ?: "N/A"
-                ))
-            } else {
-                add(DriverStat(
-                    string = if (isInProgress) string.driver_overview_stat_career_championship_standing_so_far else string.driver_overview_stat_career_championship_standing,
-                    icon = Res.drawable.ic_championship_order,
-                    value = this@getSeasonStats.championshipStanding?.ordinalAbbreviation
-                        ?: "N/A"
-                ))
+            val standingSecured = when (isInProgress) {
+                false -> true
+                true -> championshipStanding != null && inProgressMinPosition != null && inProgressMaxPosition != null &&
+                        inProgressMinPosition == championshipStanding && inProgressMaxPosition == championshipStanding
             }
+            add(DriverStat(
+                string = if (standingSecured) string.driver_overview_stat_career_championship_standing else string.driver_overview_stat_career_championship_standing_so_far,
+                icon = if (championshipStanding == 1) Res.drawable.ic_star_filled_coloured else Res.drawable.ic_championship_order,
+                tintGold = championshipStanding == 1 && standingSecured,
+                value = this@getSeasonStats.championshipStanding?.ordinalAbbreviation
+                    ?: "N/A"
+            ))
             add(
                 DriverStat(
                     icon = Res.drawable.ic_standings,

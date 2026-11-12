@@ -96,24 +96,18 @@ object ConstructorStatBuilder {
         if (this == null) return emptyList()
 
         return buildList {
-            if (championshipStanding == 1) {
-                val inProgress = isInProgress && inProgressMinPosition != null && inProgressMinPosition!! > 1
-                add(ConstructorStat(
-                    string = if (inProgress) string.constructor_overview_stat_championship_standing_so_far else string.constructor_overview_stat_championship_standing,
-                    icon = Res.drawable.ic_menu_constructors,
-                    tintGold = true,
-                    value = this@getSeasonStats.championshipStanding?.ordinalAbbreviation
-                        ?: "N/A"
-                ))
-            } else {
-                add(ConstructorStat(
-                    string = if (isInProgress) string.constructor_overview_stat_championship_standing_so_far else string.constructor_overview_stat_championship_standing,
-                    icon = Res.drawable.ic_menu_constructors,
-                    value = this@getSeasonStats.championshipStanding?.ordinalAbbreviation
-                        ?: "N/A"
-                ))
+            val standingSecured = when (isInProgress) {
+                false -> true
+                true -> championshipStanding != null && inProgressMinPosition != null && inProgressMaxPosition != null &&
+                        inProgressMinPosition == championshipStanding && inProgressMaxPosition == championshipStanding
             }
-
+            add(ConstructorStat(
+                string = if (standingSecured) string.constructor_overview_stat_championship_standing else string.constructor_overview_stat_championship_standing_so_far,
+                icon = if (championshipStanding == 1) drawable.ic_star_filled_coloured else Res.drawable.ic_menu_constructors,
+                tintGold = championshipStanding == 1 && standingSecured,
+                value = this@getSeasonStats.championshipStanding?.ordinalAbbreviation
+                    ?: "N/A"
+            ))
             add(ConstructorStat(
                 icon = drawable.ic_race_grid,
                 string = string.constructor_overview_stat_races,
