@@ -98,8 +98,9 @@ object ConstructorStatBuilder {
         return buildList {
             val standingSecured = when (isInProgress) {
                 false -> true
-                true -> championshipStanding != null && inProgressMinPosition != null && inProgressMaxPosition != null &&
-                        inProgressMinPosition == championshipStanding && inProgressMaxPosition == championshipStanding
+                true -> championshipStanding != null &&
+                        inProgressMinPosition == championshipStanding &&
+                        inProgressMaxPosition == championshipStanding
             }
             add(ConstructorStat(
                 string = if (standingSecured) string.constructor_overview_stat_championship_standing else string.constructor_overview_stat_championship_standing_so_far,
