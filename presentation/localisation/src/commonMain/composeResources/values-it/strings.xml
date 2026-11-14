@@ -745,4 +745,11 @@
     <string name="glossary_undercut_desc">-</string>
     <string name="glossary_vsc">(VSC) Virtual Safety Car</string>
     <string name="glossary_vsc_desc">-</string>
+
+    <string name="countdown_days">Giorni</string>
+    <string name="countdown_hours">Ore</string>
+    <string name="countdown_minutes">Minuti</string>
+    <string name="countdown_seconds">Secondi</string>
+    <string name="countdown_live_now">In diretta ora</string>
+
 </resources>

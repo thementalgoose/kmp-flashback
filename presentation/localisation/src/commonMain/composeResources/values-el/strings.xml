@@ -795,4 +795,11 @@
     <string name="glossary_undercut_desc">-</string>
     <string name="glossary_vsc">(VSC) Εικονικό αυτοκίνητο ασφαλείας</string>
     <string name="glossary_vsc_desc">-</string>
+
+    <string name="countdown_days">Ημέρες</string>
+    <string name="countdown_hours">Ώρες</string>
+    <string name="countdown_minutes">Λεπτά</string>
+    <string name="countdown_seconds">Δευτερόλεπτα</string>
+    <string name="countdown_live_now">Ζωντανά τώρα</string>
+
 </resources>

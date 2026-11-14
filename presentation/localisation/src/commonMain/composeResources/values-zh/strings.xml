@@ -739,4 +739,11 @@
     <string name="glossary_undercut_desc">-</string>
     <string name="glossary_vsc">(VSC) 虚拟安全车</string>
     <string name="glossary_vsc_desc">-</string>
+
+    <string name="countdown_days">天</string>
+    <string name="countdown_hours">小时</string>
+    <string name="countdown_minutes">分钟</string>
+    <string name="countdown_seconds">秒</string>
+    <string name="countdown_live_now">正在直播</string>
+
 </resources>
