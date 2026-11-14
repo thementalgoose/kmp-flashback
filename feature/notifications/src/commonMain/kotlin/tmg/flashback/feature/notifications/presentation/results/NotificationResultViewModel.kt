@@ -35,7 +35,7 @@ class NotificationResultViewModel(
     val promptNotification: StateFlow<Boolean> = _promptNotification
 
     fun forResult(resultsAvailable: NotificationResultsAvailable) {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineContext) {
             val isPermissionEnabled = isNotificationEnabledUseCase.invoke(resultsAvailable)
             _promptNotification.value = !notificationSettingsRepository.notificationPromptResultAvailableSeen.contains(resultsAvailable)
                     && !isPermissionEnabled

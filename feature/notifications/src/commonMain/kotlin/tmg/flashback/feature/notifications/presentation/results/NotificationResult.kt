@@ -11,7 +11,6 @@ import flashback.presentation.localisation.generated.resources.settings_notifica
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
-import tmg.flashback.feature.notifications.presentation.global.NotificationPrompt
 import tmg.flashback.infrastructure.device.Device
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme

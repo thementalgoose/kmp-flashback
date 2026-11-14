@@ -22,6 +22,8 @@ kotlin {
 
             implementation(libs.compose.resources)
 
+            implementation(projects.feature.notifications)
+
             implementation(projects.core.configuration)
             implementation(projects.core.metrics.analytics)
             implementation(projects.core.metrics.crashlytics)
