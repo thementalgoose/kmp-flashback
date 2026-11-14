@@ -1,11 +1,6 @@
 package tmg.flashback.ui.components.timer
 
 import androidx.compose.animation.Crossfade
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -13,10 +8,6 @@ import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.style.TextAlign
-import flashback.presentation.localisation.generated.resources.Res.string
-import flashback.presentation.localisation.generated.resources.countdown_live_now
 import kotlinx.coroutines.delay
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
@@ -24,15 +15,12 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.atTime
 import kotlinx.datetime.plus
-import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.infrastructure.datetime.between
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.plusMinutes
 import tmg.flashback.infrastructure.datetime.toMillis
-import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
-import tmg.flashback.style.text.TextCaption
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -40,7 +28,8 @@ import kotlin.time.Duration.Companion.milliseconds
 fun Timer(
     targetDate: LocalDate,
     targetTime: LocalTime,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onFinishedContent: @Composable () -> Unit = { }
 ) {
     Timer(
         targetDate = targetDate,
@@ -54,23 +43,7 @@ fun Timer(
                 seconds = s
             )
         },
-        onFinishedContent = {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
-                    .background(AppTheme.colors.surfaceContainer5)
-                    .padding(
-                        horizontal = AppTheme.dimens.medium,
-                        vertical = AppTheme.dimens.small
-                    )
-            ) {
-                TextCaption(
-                    text = stringResource(string.countdown_live_now).uppercase(),
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
+        onFinishedContent = onFinishedContent
     )
 }
 
@@ -79,8 +52,8 @@ fun Timer(
     targetDate: LocalDate,
     targetTime: LocalTime,
     modifier: Modifier = Modifier,
+    onFinishedContent: @Composable () -> Unit = { },
     countdownContent: @Composable (days: Long, hours: Long, minutes: Long, seconds: Long) -> Unit,
-    onFinishedContent: @Composable () -> Unit
 ) {
     Timer(
         targetDateTime = targetDate.atTime(targetTime),

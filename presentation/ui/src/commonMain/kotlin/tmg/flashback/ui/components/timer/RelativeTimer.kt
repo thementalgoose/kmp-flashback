@@ -12,9 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import flashback.presentation.localisation.generated.resources.Res
 import flashback.presentation.localisation.generated.resources.Res.string
 import flashback.presentation.localisation.generated.resources.countdown_days
 import flashback.presentation.localisation.generated.resources.countdown_hours
@@ -25,15 +25,18 @@ import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextCaption
+import tmg.flashback.style.text.TextHeadline3
+import tmg.flashback.style.text.TextHeadline4
 import tmg.flashback.style.text.TextTitle
 
 @Composable
-internal fun RelativeTimer(
+fun RelativeTimer(
     days: Long,
     hours: Long,
     minutes: Long,
     seconds: Long,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    cardBackground: Color = AppTheme.colors.surfaceContainer3
 ) {
     Row(
         modifier = modifier,
@@ -43,24 +46,28 @@ internal fun RelativeTimer(
         TimerCard(
             modifier = Modifier.weight(1f),
             value = days.toString(),
+            cardBackground = cardBackground,
             label = stringResource(string.countdown_days),
         )
         TextTitle(":")
         TimerCard(
             modifier = Modifier.weight(1f),
             value = hours.toString(),
+            cardBackground = cardBackground,
             label = stringResource(string.countdown_hours),
         )
         TextTitle(":")
         TimerCard(
             modifier = Modifier.weight(1f),
             value = minutes.toString(),
+            cardBackground = cardBackground,
             label = stringResource(string.countdown_minutes),
         )
         TextTitle(":")
         TimerCard(
             modifier = Modifier.weight(1f),
             value = seconds.toString(),
+            cardBackground = cardBackground,
             label = stringResource(string.countdown_seconds),
         )
     }
@@ -69,6 +76,7 @@ internal fun RelativeTimer(
 @Composable
 private fun TimerCard(
     modifier: Modifier = Modifier,
+    cardBackground: Color,
     value: String,
     label: String
 ) {
@@ -80,16 +88,18 @@ private fun TimerCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
-                .background(AppTheme.colors.surfaceContainer5)
+                .background(cardBackground)
                 .padding(
                     horizontal = AppTheme.dimens.medium,
-                    vertical = AppTheme.dimens.small
-                )
+                    vertical = AppTheme.dimens.nsmall
+                ),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            TextTitle(
+            TextHeadline3(
                 text = value.padStart(2, padChar = '0'),
                 modifier = Modifier.fillMaxWidth(),
                 mono = true,
+                bold = true,
                 maxLines = 1,
                 textAlign = TextAlign.Center
             )

@@ -91,6 +91,7 @@
 
 
     <!-- Results -->
+    <string name="weekend_starts_in">This event starts in</string>
     <string name="weekend_race_round">Round %1$d</string>
     <string name="weekend_race_round_season" formatted="false">Round %1$d, %1$d</string>
     <string name="world_champion">World Champion</string>
@@ -808,8 +809,8 @@
 
     <string name="countdown_days">Days</string>
     <string name="countdown_hours">Hours</string>
-    <string name="countdown_minutes">Minutes</string>
-    <string name="countdown_seconds">Seconds</string>
+    <string name="countdown_minutes">Mins</string>
+    <string name="countdown_seconds">Secs</string>
     <string name="countdown_live_now">Live now</string>
 
 </resources>
