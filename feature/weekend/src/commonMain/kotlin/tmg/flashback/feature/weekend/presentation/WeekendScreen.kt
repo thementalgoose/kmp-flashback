@@ -272,6 +272,12 @@ fun WeekendScreenTab(
                         )
                         addSchedule(
                             info = uiState.info,
+                            eventClicked = {
+                                val tab = it?.toWeekendTab(season = uiState.season)
+                                if (tab != null) {
+                                    clickWeekendTab(tab)
+                                }
+                            },
                             backgroundColor = scrimColor
                         )
 
@@ -485,11 +491,13 @@ fun LazyListScope.addLinks(
 
 fun LazyListScope.addSchedule(
     info: InfoModel,
+    eventClicked: (String?) -> Unit,
     backgroundColor: Color,
 ) {
     item("schedule") {
         Schedule(
             modifier = Modifier.animateItem(),
+            eventClicked = eventClicked,
             backgroundColor = backgroundColor,
             model = info
         )

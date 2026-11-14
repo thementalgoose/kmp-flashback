@@ -82,6 +82,7 @@ private val weatherMetadataIconSize: Dp = 20.dp
 @Composable
 internal fun Schedule(
     model: InfoModel,
+    eventClicked: (String?) -> Unit,
     backgroundColor: Color,
     modifier: Modifier = Modifier
 ) {
@@ -135,6 +136,7 @@ internal fun Schedule(
                                         role = Role.Button,
                                         enabled = !model.showWeatherDetails,
                                         onClick = {
+                                            eventClicked(schedule.label)
                                             if (!model.showWeatherDetails) {
                                                 showWeatherDetails.value = !showWeatherDetails.value
                                             }
@@ -340,6 +342,7 @@ private fun PreviewSchedule() {
         Column {
             Schedule(
                 model = InfoModel.preview(),
+                eventClicked = { },
                 backgroundColor = Color.Red
             )
         }
@@ -355,6 +358,7 @@ private fun PreviewScheduleWithWeather() {
                 model = InfoModel.preview(
                     weather = ScheduleWeather.preview()
                 ),
+                eventClicked = { },
                 backgroundColor = Color.Red
             )
         }
