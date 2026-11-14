@@ -33,7 +33,6 @@ fun DataPending(
     notification: NotificationResultsAvailable,
     tabName: String,
     modifier: Modifier = Modifier,
-    isNotificationPending: Boolean = false,
 ) {
     Timer(
         targetDate = eventDate,
@@ -80,8 +79,7 @@ fun DataPending(
                 NotificationResult(
                     result = notification,
                     modifier = Modifier.padding(
-                        horizontal = AppTheme.dimens.medium,
-                        vertical = AppTheme.dimens.medium
+                        vertical = AppTheme.dimens.small
                     )
                 )
             }
