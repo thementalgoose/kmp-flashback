@@ -14,6 +14,7 @@ import tmg.flashback.feature.notifications.model.NotificationUpcoming.QUALIFYING
 import tmg.flashback.feature.notifications.model.NotificationUpcoming.RACE
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepositoryImpl.Companion.saveKey
 import tmg.flashback.preferences.manager.PreferenceManager
+import kotlin.collections.emptySet
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -113,9 +114,29 @@ internal class NotificationSettingsRepositoryTest {
         }
     }
 
+    @Test
+    fun `notification prompt results defaults to all options`() {
+        every { mockPreferenceManager.getSet(expectedKeyPromptNotificationsResult, emptySet()) } returns mutableSetOf()
+
+        initUnderTest()
+        assertEquals(emptySet(), underTest.notificationPromptResultAvailableSeen)
+
+    }
+
+    @Test
+    fun `notification prompt result setting option saves to prefs`() {
+        initUnderTest()
+
+        underTest.notificationPromptResultAvailableSeen = setOf(SPRINT_QUALIFYING, SPRINT)
+        verify {
+            mockPreferenceManager.save(expectedKeyPromptNotificationsResult, setOf(SPRINT_QUALIFYING.saveKey, SPRINT.saveKey))
+        }
+    }
+
     companion object {
 
         private const val expectedKeyPromptNotifications: String = "RUNTIME_NOTIFICATION_PROMPT"
+        private const val expectedKeyPromptNotificationsResult: String = "RUNTIME_NOTIFICATION_RESULT_PROMPT"
         private const val expectedKeyNotificationUpcoming: String = "NOTIFICATION_UPCOMING_CATEGORIES"
         private const val expectedKeyNotificationResult: String = "NOTIFICATION_RESULT_AVAILABLE_CATEGORIES"
         private const val expectedKeyNotificationNews: String = "NOTIFICATION_NEWS_AVAILABLE_CATEGORIES"

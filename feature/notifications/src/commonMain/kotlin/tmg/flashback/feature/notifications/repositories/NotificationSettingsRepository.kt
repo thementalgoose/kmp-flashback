@@ -16,6 +16,7 @@ interface NotificationSettingsRepository {
     var notificationResultsEnabled: Set<NotificationResultsAvailable>
     var notificationNewsEnabled: Set<NotificationNews>
     var notificationPromptSeen: Boolean
+    var notificationPromptResultAvailableSeen: Set<NotificationResultsAvailable>
 }
 
 @Single
@@ -57,6 +58,14 @@ internal class NotificationSettingsRepositoryImpl(
             .toSet()
         set(value) = preferenceManager.save(keyNotificationNews, value.map { it.saveKey }.toSet())
 
+    override var notificationPromptResultAvailableSeen: Set<NotificationResultsAvailable>
+        get() = preferenceManager
+            .getSet(keyPromptNotificationsResult, emptySet())
+            .mapNotNull { key -> key.toEnum<NotificationResultsAvailable> { it.saveKey } }
+            .distinct()
+            .toSet()
+        set(value) = preferenceManager.save(keyPromptNotificationsResult, value.map { it.saveKey }.toSet())
+
     companion object {
 
         internal val NotificationUpcoming.saveKey: String
@@ -84,6 +93,7 @@ internal class NotificationSettingsRepositoryImpl(
 
 
         private const val keyPromptNotifications: String = "RUNTIME_NOTIFICATION_PROMPT"
+        private const val keyPromptNotificationsResult: String = "RUNTIME_NOTIFICATION_RESULT_PROMPT"
         private const val keyNotificationUpcoming: String = "NOTIFICATION_UPCOMING_CATEGORIES"
         private const val keyNotificationResult: String = "NOTIFICATION_RESULT_AVAILABLE_CATEGORIES"
 
