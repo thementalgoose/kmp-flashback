@@ -31,8 +31,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.window.core.layout.WindowSizeClass
@@ -52,7 +50,7 @@ import tmg.flashback.analytics.constants.AnalyticsConstants.analyticsSeason
 import tmg.flashback.analytics.presentation.ScreenView
 import tmg.flashback.eastereggs.model.MenuIcons
 import tmg.flashback.feature.highlights.presentation.HighlightBanner
-import tmg.flashback.feature.notifications.presentation.NotificationPrompt
+import tmg.flashback.feature.notifications.presentation.global.NotificationPrompt
 import tmg.flashback.feature.season.presentation.calendar.components.CollapsableList
 import tmg.flashback.feature.season.presentation.calendar.components.RaceWeekCard
 import tmg.flashback.feature.season.presentation.shared.device_time.DeviceTimePrompt
@@ -70,7 +68,6 @@ import tmg.flashback.navigation.Screen
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewDevices
-import tmg.flashback.style.preview.PreviewTheme
 import tmg.flashback.style.text.TextBody1
 import tmg.flashback.style.text.TextBody2
 import tmg.flashback.ui.components.Refresh

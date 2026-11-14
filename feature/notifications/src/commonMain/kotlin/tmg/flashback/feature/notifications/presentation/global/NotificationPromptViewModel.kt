@@ -1,4 +1,4 @@
-package tmg.flashback.feature.notifications.presentation
+package tmg.flashback.feature.notifications.presentation.global
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,7 +9,6 @@ import tmg.flashback.device.usecases.OpenSettingsUseCase
 import tmg.flashback.feature.notifications.repositories.NotificationSettingsRepository
 import tmg.flashback.feature.notifications.usecases.ScheduleUpcomingNotificationsUseCase
 import tmg.flashback.feature.notifications.usecases.SubscribeResultNotificationsUseCase
-import tmg.flashback.ui.permissions.Permission
 import tmg.flashback.ui.permissions.Permission.Notifications
 import tmg.flashback.ui.permissions.PermissionManager
 import tmg.flashback.ui.permissions.PermissionState

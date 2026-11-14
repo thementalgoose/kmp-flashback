@@ -1,4 +1,4 @@
-package tmg.flashback.feature.notifications.presentation
+package tmg.flashback.feature.notifications.presentation.results
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,7 +16,6 @@ import tmg.flashback.feature.notifications.usecases.SubscribeResultNotifications
 import tmg.flashback.ui.permissions.Permission.Notifications
 import tmg.flashback.ui.permissions.PermissionManager
 import tmg.flashback.ui.permissions.PermissionState
-import tmg.flashback.ui.permissions.PermissionState.NotDetermined
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
@@ -48,6 +47,11 @@ class NotificationResultViewModel(
             val result = permissionManager.requestPermission(Notifications).await()
             _promptNotification.value = false
             notificationSettingsRepository.notificationPromptResultAvailableSeen += resultsAvailable
+            if (result == PermissionState.Granted) {
+                scheduleUpcomingNotificationsUseCase()
+                subscribeResultNotificationsUseCase()
+                subscribeNewsNotificationsUseCase()
+            }
             openSettingsUseCase.openNotificationSettings()
         }
     }

@@ -1,4 +1,4 @@
-package tmg.flashback.feature.notifications.presentation
+package tmg.flashback.feature.notifications.presentation.global
 
 import app.cash.turbine.test
 import dev.mokkery.MockMode.autofill
