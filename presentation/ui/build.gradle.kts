@@ -24,6 +24,7 @@ kotlin {
             implementation(libs.bundles.compose)
             implementation(libs.bundles.koin.compose)
             implementation(libs.bundles.coil)
+            implementation(libs.bundles.kotlin)
 
             implementation(projects.core.preferences)
 
