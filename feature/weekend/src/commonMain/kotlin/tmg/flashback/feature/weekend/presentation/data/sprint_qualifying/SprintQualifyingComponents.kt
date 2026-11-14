@@ -37,6 +37,7 @@ import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import flashback.presentation.localisation.generated.resources.nav_qualifying
+import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
 import tmg.flashback.feature.weekend.presentation.WeekendTabs
 import tmg.flashback.feature.weekend.presentation.WeekendUiState.Data
 import tmg.flashback.feature.weekend.presentation.components.DataMissing
@@ -85,6 +86,7 @@ fun LazyListScope.addSprintQualifyingData(
                         DataPending(
                             eventDate = schedule.date,
                             eventTime = schedule.time,
+                            notification = NotificationResultsAvailable.SPRINT_QUALIFYING,
                             tabName = stringResource(string.nav_sprint_qualifying),
                             modifier = Modifier.animateItem()
                         )

@@ -14,6 +14,8 @@ import flashback.presentation.localisation.generated.resources.weekend_starts_in
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalTime
 import org.jetbrains.compose.resources.stringResource
+import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
+import tmg.flashback.feature.notifications.presentation.results.NotificationResult
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.plusMinutes
 import tmg.flashback.style.AppTheme
@@ -28,6 +30,7 @@ import tmg.flashback.ui.components.timer.Timer
 fun DataPending(
     eventDate: LocalDate,
     eventTime: LocalTime,
+    notification: NotificationResultsAvailable,
     tabName: String,
     modifier: Modifier = Modifier,
     isNotificationPending: Boolean = false,
@@ -74,11 +77,13 @@ fun DataPending(
                         text = stringResource(string.error_weekend_pending, tabName.lowercase(), tabName.lowercase())
                     )
                 }
-//                if (isNotificationPending) {
-//                    TextBody1(
-//                        text = stringResource(string.error_weekend_notification_prompt)
-//                    )
-//                }
+                NotificationResult(
+                    result = notification,
+                    modifier = Modifier.padding(
+                        horizontal = AppTheme.dimens.medium,
+                        vertical = AppTheme.dimens.medium
+                    )
+                )
             }
         }
     )
@@ -90,7 +95,7 @@ private fun PreviewEvent() {
     ApplicationThemePreview {
         DataPending(
             tabName = "Qualifying",
-            isNotificationPending = false,
+            notification = NotificationResultsAvailable.RACE,
             eventDate = LocalDate.now(),
             eventTime = LocalTime.now().plusMinutes(5)
         )
@@ -103,7 +108,7 @@ private fun PreviewEventPending() {
     ApplicationThemePreview {
         DataPending(
             tabName = "Qualifying",
-            isNotificationPending = true,
+            notification = NotificationResultsAvailable.RACE,
             eventDate = LocalDate.now(),
             eventTime = LocalTime.now().plusMinutes(-5)
         )

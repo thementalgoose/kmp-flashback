@@ -26,6 +26,7 @@ import flashback.presentation.localisation.generated.resources.ab_scored
 import flashback.presentation.localisation.generated.resources.nav_qualifying
 import flashback.presentation.localisation.generated.resources.nav_race
 import org.jetbrains.compose.resources.stringResource
+import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
 import tmg.flashback.feature.weekend.presentation.WeekendTabs
 import tmg.flashback.feature.weekend.presentation.WeekendUiState.Data
 import tmg.flashback.feature.weekend.presentation.components.DataMissing
@@ -86,6 +87,7 @@ fun LazyListScope.addRaceData(
                         DataPending(
                             eventDate = schedule.date,
                             eventTime = schedule.time,
+                            notification = NotificationResultsAvailable.RACE,
                             tabName = stringResource(string.nav_race),
                             modifier = Modifier.animateItem()
                         )

@@ -37,6 +37,7 @@ import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.minus
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
+import tmg.flashback.feature.notifications.model.NotificationResultsAvailable
 import tmg.flashback.feature.weekend.presentation.WeekendTabs
 import tmg.flashback.feature.weekend.presentation.WeekendUiState.Data
 import tmg.flashback.feature.weekend.presentation.components.DataMissing
@@ -102,6 +103,7 @@ fun LazyListScope.addQualifyingData(
                         DataPending(
                             eventDate = schedule.date,
                             eventTime = schedule.time,
+                            notification = NotificationResultsAvailable.QUALIFYING,
                             tabName = stringResource(string.nav_qualifying),
                             modifier = Modifier.animateItem()
                         )
