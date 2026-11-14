@@ -225,6 +225,7 @@
     <string name="error_weekend_cancelled">Questo evento è stato annullato e non avrà luogo</string>
     <string name="error_data_not_available_try_again">Si è verificato un errore durante il recupero di questi risultati. Controlla la tua connessione internet e riprova</string>
     <string name="error_weekend_not_available_yet">Non abbiamo ancora questi risultati, riprova dopo la gara. I risultati di solito compaiono 2–12 ore dopo ogni evento del weekend</string>
+    <string name="error_weekend_notification_prompt">Ricevi una notifica quando questi risultati saranno disponibili qui</string>
     <string name="error_search_not_found">Nessun risultato trovato</string>
     <string name="rss_internal_error">Si è verificato un errore di rete e non siamo riusciti a trovare alcun articolo. Controlla la tua connessione internet o riprova più tardi</string>
     <string name="rss_network_error">Si è verificato un errore di rete! Controlla di aver aggiunto un set valido di fonti RSS e di essere connesso a internet, quindi riprova. </string>
