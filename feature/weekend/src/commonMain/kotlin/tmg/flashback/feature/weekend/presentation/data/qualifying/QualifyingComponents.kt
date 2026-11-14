@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
@@ -32,10 +33,14 @@ import flashback.presentation.localisation.generated.resources.qualifying_header
 import flashback.presentation.localisation.generated.resources.qualifying_penalty
 import flashback.presentation.localisation.generated.resources.qualifying_penalty_starts
 import flashback.presentation.localisation.generated.resources.qualifying_penalty_starts_sprint
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.minus
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
+import tmg.flashback.feature.weekend.presentation.WeekendTabs
 import tmg.flashback.feature.weekend.presentation.WeekendUiState.Data
 import tmg.flashback.feature.weekend.presentation.components.DataMissing
+import tmg.flashback.feature.weekend.presentation.components.DataPending
 import tmg.flashback.feature.weekend.presentation.components.DataUnavailable
 import tmg.flashback.feature.weekend.presentation.components.EventCancelled
 import tmg.flashback.feature.weekend.presentation.components.Position
@@ -87,12 +92,22 @@ fun LazyListScope.addQualifyingData(
     }
     if (uiState.qualifyingResults.isEmpty()) {
         item("qualifying_not_found") {
+            val schedule = remember(uiState) { uiState.getScheduleFor(WeekendTabs.Qualifying) }
             when {
                 uiState.cancelled -> {
                     EventCancelled(Modifier.animateItem())
                 }
-                Formula1.currentSeasonYear == uiState.season -> {
-                    DataMissing(Modifier.animateItem())
+                Formula1.currentSeasonYear <= uiState.season -> {
+                    if (schedule != null) {
+                        DataPending(
+                            eventDate = schedule.date,
+                            eventTime = schedule.time,
+                            tabName = stringResource(string.nav_qualifying),
+                            modifier = Modifier.animateItem()
+                        )
+                    } else {
+                        DataMissing(Modifier.animateItem())
+                    }
                 }
                 else -> {
                     DataUnavailable(Modifier.animateItem())

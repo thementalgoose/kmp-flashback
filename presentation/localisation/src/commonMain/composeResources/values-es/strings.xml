@@ -225,6 +225,7 @@
     <string name="error_weekend_cancelled">Este evento ha sido cancelado y no se llevará a cabo</string>
     <string name="error_data_not_available_try_again">Se produjo un error al obtener estos resultados. Comprueba tu conexión a Internet y vuelve a intentarlo</string>
     <string name="error_weekend_not_available_yet">Todavía no tenemos estos resultados, vuelve a consultar después de la carrera. Los resultados suelen aparecer entre 2 y 12 horas después de cada evento de fin de semana</string>
+    <string name="error_weekend_notification_prompt">Recibe una notificación cuando estos resultados estén disponibles aquí</string>
     <string name="error_search_not_found">No se encontraron resultados</string>
     <string name="rss_internal_error">Se produjo un error de red y no pudimos encontrar ningún artículo. Comprueba tu conexión a Internet o inténtalo de nuevo más tarde</string>
     <string name="rss_network_error">¡Se produjo un error de red! Comprueba que has añadido un conjunto válido de fuentes RSS y que estás conectado a Internet y vuelve a intentarlo.</string>
@@ -745,4 +746,11 @@
     <string name="glossary_undercut_desc">-</string>
     <string name="glossary_vsc">(VSC) Coche de seguridad virtual</string>
     <string name="glossary_vsc_desc">-</string>
+
+    <string name="countdown_days">Días</string>
+    <string name="countdown_hours">Horas</string>
+    <string name="countdown_minutes">Minutos</string>
+    <string name="countdown_seconds">Segundos</string>
+    <string name="countdown_live_now">En directo ahora</string>
+
 </resources>

@@ -91,6 +91,7 @@
 
 
     <!-- Results -->
+    <string name="weekend_starts_in">This event starts in</string>
     <string name="weekend_race_round">Round %1$d</string>
     <string name="weekend_race_round_season" formatted="false">Round %1$d, %1$d</string>
     <string name="world_champion">World Champion</string>
@@ -242,6 +243,8 @@
     <string name="error_weekend_cancelled">This event has been cancelled and will not take place</string>
     <string name="error_data_not_available_try_again">An error occurred while getting these results. Please check your internet connection and try again</string>
     <string name="error_weekend_not_available_yet">We don't have these results just yet, please check back after the race. Results usually appear 2–12 hours after every weekend event</string>
+    <string name="error_weekend_pending">We don't have %1$s results just yet, please check back after %2$s has finished. Results usually appear 2-12 hours after the event</string>
+    <string name="error_weekend_notification_prompt">Get notified for when these results are available here</string>
     <string name="error_search_not_found">No results found</string>
     <string name="rss_internal_error">A network error occurred and we weren't able to find any articles. Please check your internet connection or try again later</string>
     <string name="rss_network_error">A network error occurred! Please check you have added a valid set of RSS sources and you are connected to the internet and try again. </string>
@@ -805,5 +808,11 @@
     <string name="glossary_undercut_desc">-</string>
     <string name="glossary_vsc">(VSC) Virtual Safety Car</string>
     <string name="glossary_vsc_desc">-</string>
+
+    <string name="countdown_days">Days</string>
+    <string name="countdown_hours">Hours</string>
+    <string name="countdown_minutes">Mins</string>
+    <string name="countdown_seconds">Secs</string>
+    <string name="countdown_live_now">Live now</string>
 
 </resources>

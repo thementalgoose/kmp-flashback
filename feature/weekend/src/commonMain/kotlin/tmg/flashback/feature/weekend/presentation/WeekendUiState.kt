@@ -25,6 +25,7 @@ import tmg.flashback.feature.weekend.presentation.data.sprint_qualifying.SprintQ
 import tmg.flashback.feature.weekend.presentation.data.sprint_race.SprintRaceModel
 import tmg.flashback.formula1.model.OverviewRace
 import tmg.flashback.formula1.model.QualifyingType
+import tmg.flashback.formula1.model.Schedule
 import tmg.flashback.formula1.model.SprintQualifyingType
 
 sealed class WeekendUiState {
@@ -45,7 +46,17 @@ sealed class WeekendUiState {
         val raceResults: List<RaceModel>,
         val sprintQualifyingResults: List<SprintQualifyingModel>,
         val sprintRaceResults: List<SprintRaceModel>,
-    ): WeekendUiState()
+    ): WeekendUiState() {
+
+        fun getScheduleFor(tab: WeekendTabs): Schedule? {
+            return info.days
+                .flatMap { (day, schedules) -> schedules }
+                .map { (schedule, date) -> schedule }
+                .firstOrNull {
+                    it.label.toWeekendTab(season = season) == tab
+                }
+        }
+    }
 }
 
 enum class WeekendTabs(

@@ -5,6 +5,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,6 +19,7 @@ import tmg.flashback.style.preview.PreviewTheme
 fun TextTitle(
     text: String,
     modifier: Modifier = Modifier,
+    mono: Boolean = false,
     textAlign: TextAlign = TextAlign.Start,
     textColor: Color? = null,
     maxLines: Int? = null,
@@ -29,6 +31,7 @@ fun TextTitle(
         textAlign = textAlign,
         maxLines = maxLines ?: Int.MAX_VALUE,
         style = AppTheme.typography.title.copy(
+            fontFamily = if (mono) FontFamily.Monospace else null,
             fontWeight = when (bold) {
                 true -> FontWeight.Bold
                 false -> FontWeight.Normal
