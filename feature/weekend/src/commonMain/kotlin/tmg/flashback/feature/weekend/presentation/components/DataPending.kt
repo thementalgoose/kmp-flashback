@@ -69,7 +69,7 @@ fun DataPending(
                 ) {
                     AnimatedHourglassIcon()
                     TextBody1(
-                        text = stringResource(string.error_weekend_pending, tabName.lowercase())
+                        text = stringResource(string.error_weekend_pending, tabName.lowercase(), tabName.lowercase())
                     )
                 }
             }
