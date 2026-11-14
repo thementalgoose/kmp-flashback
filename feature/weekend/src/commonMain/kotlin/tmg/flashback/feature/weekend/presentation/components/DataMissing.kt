@@ -12,6 +12,7 @@ import flashback.presentation.localisation.generated.resources.error_weekend_not
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import flashback.presentation.localisation.generated.resources.error_weekend_not_available
 import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
@@ -35,7 +36,7 @@ fun DataMissing(
             text = ":("
         )
         TextBody2(
-            text = stringResource(string.error_weekend_not_available_yet)
+            text = stringResource(string.error_weekend_not_available)
         )
     }
 }
