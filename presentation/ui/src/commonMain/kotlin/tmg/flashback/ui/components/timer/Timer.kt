@@ -1,6 +1,11 @@
 package tmg.flashback.ui.components.timer
 
 import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -8,18 +13,82 @@ import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.style.TextAlign
+import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.countdown_live_now
 import kotlinx.coroutines.delay
 import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.LocalTime
+import kotlinx.datetime.atTime
+import kotlinx.datetime.plus
+import org.jetbrains.compose.resources.stringResource
 import tmg.flashback.infrastructure.datetime.between
 import tmg.flashback.infrastructure.datetime.now
-import tmg.flashback.infrastructure.datetime.plus
+import tmg.flashback.infrastructure.datetime.plusMinutes
 import tmg.flashback.infrastructure.datetime.toMillis
+import tmg.flashback.style.AppTheme
 import tmg.flashback.style.ApplicationThemePreview
 import tmg.flashback.style.preview.PreviewTheme
-import tmg.flashback.style.text.TextBody2
+import tmg.flashback.style.text.TextCaption
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
+
+@Composable
+fun Timer(
+    targetDate: LocalDate,
+    targetTime: LocalTime,
+    modifier: Modifier = Modifier
+) {
+    Timer(
+        targetDate = targetDate,
+        targetTime = targetTime,
+        modifier = modifier,
+        countdownContent = { d, h, m, s ->
+            RelativeTimer(
+                days = d,
+                hours = h,
+                minutes = m,
+                seconds = s
+            )
+        },
+        onFinishedContent = {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(AppTheme.dimens.radiusSmall))
+                    .background(AppTheme.colors.surfaceContainer5)
+                    .padding(
+                        horizontal = AppTheme.dimens.medium,
+                        vertical = AppTheme.dimens.small
+                    )
+            ) {
+                TextCaption(
+                    text = stringResource(string.countdown_live_now).uppercase(),
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+    )
+}
+
+@Composable
+fun Timer(
+    targetDate: LocalDate,
+    targetTime: LocalTime,
+    modifier: Modifier = Modifier,
+    countdownContent: @Composable (days: Long, hours: Long, minutes: Long, seconds: Long) -> Unit,
+    onFinishedContent: @Composable () -> Unit
+) {
+    Timer(
+        targetDateTime = targetDate.atTime(targetTime),
+        modifier = modifier,
+        countdownContent = countdownContent,
+        onFinishedContent = onFinishedContent
+    )
+}
 
 @Composable
 fun Timer(
@@ -73,20 +142,26 @@ fun Timer(
 
 @PreviewTheme
 @Composable
-private fun Preview() {
+private fun PreviewInPast() {
     ApplicationThemePreview {
         Timer(
-            targetDateTime = LocalDateTime.now()
-                .plus(2, DateTimeUnit.SECOND)
-                .plus(3, DateTimeUnit.MINUTE)
-                .plus(4, DateTimeUnit.HOUR)
+            targetDate = LocalDate.now()
+                .plus(-5, DateTimeUnit.DAY),
+            targetTime = LocalTime.now()
+                .plusMinutes(3)
+        )
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun PreviewInFuture() {
+    ApplicationThemePreview {
+        Timer(
+            targetDate = LocalDate.now()
                 .plus(5, DateTimeUnit.DAY),
-            countdownContent = { days, hours, minutes, seconds ->
-                TextBody2("Days: $days, Hours: $hours, Minutes: $minutes, Seconds: $seconds")
-            },
-            onFinishedContent = {
-                TextBody2("Finished")
-            }
+            targetTime = LocalTime.now()
+                .plusMinutes(3)
         )
     }
 }

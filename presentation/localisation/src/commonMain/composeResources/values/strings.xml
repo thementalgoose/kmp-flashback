@@ -806,4 +806,10 @@
     <string name="glossary_vsc">(VSC) Virtual Safety Car</string>
     <string name="glossary_vsc_desc">-</string>
 
+    <string name="countdown_days">Days</string>
+    <string name="countdown_hours">Hours</string>
+    <string name="countdown_minutes">Minutes</string>
+    <string name="countdown_seconds">Seconds</string>
+    <string name="countdown_live_now">Live now</string>
+
 </resources>
