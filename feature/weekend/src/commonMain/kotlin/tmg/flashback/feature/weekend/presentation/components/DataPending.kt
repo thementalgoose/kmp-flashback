@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import flashback.presentation.localisation.generated.resources.Res.string
+import flashback.presentation.localisation.generated.resources.error_weekend_notification_prompt
 import flashback.presentation.localisation.generated.resources.error_weekend_pending
 import flashback.presentation.localisation.generated.resources.weekend_starts_in
 import kotlinx.datetime.LocalDate
@@ -29,6 +30,7 @@ fun DataPending(
     eventTime: LocalTime,
     tabName: String,
     modifier: Modifier = Modifier,
+    isNotificationPending: Boolean = false,
 ) {
     Timer(
         targetDate = eventDate,
@@ -72,6 +74,11 @@ fun DataPending(
                         text = stringResource(string.error_weekend_pending, tabName.lowercase(), tabName.lowercase())
                     )
                 }
+//                if (isNotificationPending) {
+//                    TextBody1(
+//                        text = stringResource(string.error_weekend_notification_prompt)
+//                    )
+//                }
             }
         }
     )
@@ -83,6 +90,7 @@ private fun PreviewEvent() {
     ApplicationThemePreview {
         DataPending(
             tabName = "Qualifying",
+            isNotificationPending = false,
             eventDate = LocalDate.now(),
             eventTime = LocalTime.now().plusMinutes(5)
         )
@@ -95,6 +103,7 @@ private fun PreviewEventPending() {
     ApplicationThemePreview {
         DataPending(
             tabName = "Qualifying",
+            isNotificationPending = true,
             eventDate = LocalDate.now(),
             eventTime = LocalTime.now().plusMinutes(-5)
         )
