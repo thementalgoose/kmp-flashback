@@ -74,6 +74,7 @@ import tmg.flashback.ui.components.flag.Flag
 import tmg.flashback.ui.components.indicators.IndicatorDot
 import tmg.flashback.ui.components.indicators.stateBorder
 import tmg.flashback.ui.components.now.Now
+import tmg.flashback.ui.components.timer.Timer
 
 private val countryBadgeSize = 32.dp
 private const val pastScheduleAlpha = 0.2f
@@ -252,7 +253,7 @@ private fun RowScope.IconResult(
 }
 
 @Composable
-private fun Dates(
+private fun ColumnScope.Dates(
     scheduleList: List<Schedule>,
     notificationSchedule: NotificationUpcomingState,
     eventClicked: (String?) -> Unit,
@@ -267,6 +268,7 @@ private fun Dates(
         initialFirstVisibleItemIndex = (targetIndex.takeIf { it != -1 } ?: (schedule.size - 1)).coerceIn(0, schedule.size - 1)
     )
 
+    val countryStartWidth = countryBadgeSize + (AppTheme.dimens.nsmall + AppTheme.dimens.medium)
     val showWeather = schedule.values.map { it }.flatten().all { it.weather != null }
 
     LazyRow(
@@ -274,7 +276,7 @@ private fun Dates(
         state = scrollState,
         content = {
             item {
-                Spacer(Modifier.width(countryBadgeSize + (AppTheme.dimens.nsmall + AppTheme.dimens.medium)))
+                Spacer(Modifier.width(countryStartWidth))
             }
             for ((date, list) in schedule) {
                 val alpha = if (date < LocalDate.now() || list.all { it.timestamp.isInPast }) pastScheduleAlpha else 1f

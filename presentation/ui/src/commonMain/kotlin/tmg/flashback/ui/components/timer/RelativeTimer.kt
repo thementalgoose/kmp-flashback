@@ -90,9 +90,11 @@ private fun TimerCard(
                 text = value.padStart(2, padChar = '0'),
                 modifier = Modifier.fillMaxWidth(),
                 mono = true,
+                maxLines = 1,
                 textAlign = TextAlign.Center
             )
             TextCaption(
+                maxLines = 1,
                 modifier = Modifier.fillMaxWidth(),
                 text = label.uppercase(),
                 textAlign = TextAlign.Center
