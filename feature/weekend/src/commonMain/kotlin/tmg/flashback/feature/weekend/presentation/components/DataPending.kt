@@ -12,8 +12,10 @@ import flashback.presentation.localisation.generated.resources.error_weekend_not
 import flashback.presentation.localisation.generated.resources.error_weekend_pending
 import flashback.presentation.localisation.generated.resources.weekend_starts_in
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
 import org.jetbrains.compose.resources.stringResource
+import tmg.flashback.formula1.model.Timestamp
 import tmg.flashback.infrastructure.datetime.now
 import tmg.flashback.infrastructure.datetime.plusMinutes
 import tmg.flashback.style.AppTheme
@@ -26,15 +28,13 @@ import tmg.flashback.ui.components.timer.Timer
 
 @Composable
 fun DataPending(
-    eventDate: LocalDate,
-    eventTime: LocalTime,
+    timestamp: Timestamp,
     tabName: String,
     modifier: Modifier = Modifier,
     isNotificationPending: Boolean = false,
 ) {
     Timer(
-        targetDate = eventDate,
-        targetTime = eventTime,
+        targetDateTime = timestamp.deviceLocalDateTime,
         countdownContent = { d, h, m, s ->
             Column(
                 modifier = modifier
@@ -91,8 +91,7 @@ private fun PreviewEvent() {
         DataPending(
             tabName = "Qualifying",
             isNotificationPending = false,
-            eventDate = LocalDate.now(),
-            eventTime = LocalTime.now().plusMinutes(5)
+            timestamp = Timestamp(originalDate = LocalDate.now(), originalTime = LocalTime.now()),
         )
     }
 }
@@ -104,8 +103,7 @@ private fun PreviewEventPending() {
         DataPending(
             tabName = "Qualifying",
             isNotificationPending = true,
-            eventDate = LocalDate.now(),
-            eventTime = LocalTime.now().plusMinutes(-5)
+            timestamp = Timestamp(originalDate = LocalDate.now(), originalTime = LocalTime.now().plusMinutes(-5)),
         )
     }
 }
