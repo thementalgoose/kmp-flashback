@@ -83,8 +83,7 @@ fun LazyListScope.addSprintQualifyingData(
                 Formula1.currentSeasonYear <= uiState.season -> {
                     if (schedule != null) {
                         DataPending(
-                            eventDate = schedule.date,
-                            eventTime = schedule.time,
+                            timestamp = schedule.timestamp,
                             tabName = stringResource(string.nav_sprint_qualifying),
                             modifier = Modifier.animateItem()
                         )
