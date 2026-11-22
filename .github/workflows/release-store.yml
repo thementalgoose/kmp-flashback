@@ -60,7 +60,7 @@ jobs:
           fetch-depth: 0
 
       - name: Notify discord of success
-        uses: sarisia/actions-status-discord@v1.16.0
+        uses: sarisia/actions-status-discord@v1.16.1
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
@@ -84,7 +84,7 @@ jobs:
           fetch-depth: 0
 
       - name: Notify discord of failure
-        uses: sarisia/actions-status-discord@v1.16.0
+        uses: sarisia/actions-status-discord@v1.16.1
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
